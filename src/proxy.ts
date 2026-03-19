@@ -29,7 +29,7 @@ function getLocaleFromBrowser(acceptLang: string): string | null {
     return null;
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     let locale = request.cookies.get('ktrip_lang')?.value;
     let needsSetting = false;
 
