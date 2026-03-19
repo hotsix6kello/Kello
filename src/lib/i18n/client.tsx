@@ -46,7 +46,8 @@ const resources = {
 };
 
 // Always initialize with "en" so SSR and the first client render
-// produce identical HTML. The real user locale is applied after hydration.
+// produce identical HTML. The real user locale is applied after hydration
+// in LanguageInitializer via initClientLanguage.
 if (!i18n.isInitialized) {
     i18n.use(initReactI18next).init({
         resources,
@@ -61,12 +62,19 @@ if (!i18n.isInitialized) {
 
 export default i18n;
 
-export function initClientLanguage() {
+// serverLocale: locale hint passed from the server (via LanguageInitializer prop).
+// Priority: localStorage (explicit user choice) > serverLocale > navigator.language > DEFAULT_CLIENT_LOCALE
+export function initClientLanguage(serverLocale?: string) {
     if (typeof window === "undefined") return;
 
     const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
     if (stored) {
         applyLanguage(stored);
+        return;
+    }
+
+    if (serverLocale) {
+        applyLanguage(serverLocale);
         return;
     }
 

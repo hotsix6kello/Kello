@@ -21,15 +21,27 @@ export interface ItineraryItem {
     badges?: string[];
 }
 
+export interface SharedLocation {
+    name: string;
+    lat: number;
+    lng: number;
+}
+
 interface TripContextType {
     tripStatus: TripMode;
     tripDays: number;
     itinerary: ItineraryItem[];
+    selectedCategory: string | null;
+    searchQuery: string;
+    destinationInfo: SharedLocation | null;
     setTripStatus: (status: TripMode) => void;
     setTripDays: (days: number) => void;
     addItineraryItem: (item: ItineraryItem) => void;
     removeItineraryItem: (id: string) => void;
     setItinerary: (items: ItineraryItem[]) => void;
+    setSelectedCategory: (category: string | null) => void;
+    setSearchQuery: (query: string) => void;
+    setDestinationInfo: (info: SharedLocation | null) => void;
 }
 
 const TripContext = createContext<TripContextType | undefined>(undefined);
@@ -38,16 +50,55 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
     const [tripStatus, setTripStatus] = useState<TripMode>('idle');
     const [tripDays, setTripDays] = useState<number>(3);
     const [itinerary, setItinerary] = useState<ItineraryItem[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [destinationInfo, setDestinationInfo] = useState<SharedLocation | null>(null);
 
     useEffect(() => {
-        const savedItinerary = localStorage.getItem('trip_itinerary');
-        if (savedItinerary) {
-            setItinerary(JSON.parse(savedItinerary));
+        try {
+            const savedItinerary = localStorage.getItem('trip_itinerary');
+            if (savedItinerary) {
+                const parsed = JSON.parse(savedItinerary);
+                if (Array.isArray(parsed)) {
+                    setItinerary(parsed);
+                }
+            }
+        } catch (e) {
+            console.error('Failed to parse saved itinerary', e);
         }
 
-        const savedDays = localStorage.getItem('trip_days');
-        if (savedDays) {
-            setTripDays(parseInt(savedDays));
+        try {
+            const savedDays = localStorage.getItem('trip_days');
+            if (savedDays) {
+                const parsedDays = parseInt(savedDays);
+                if (!isNaN(parsedDays)) {
+                    setTripDays(parsedDays);
+                }
+            }
+        } catch (e) {
+            console.error('Failed to parse saved trip days', e);
+        }
+
+        const savedCategory = localStorage.getItem('trip_category');
+        if (savedCategory) {
+            setSelectedCategory(savedCategory);
+        }
+
+        const savedSearch = localStorage.getItem('trip_search_query');
+        if (savedSearch) {
+            setSearchQuery(savedSearch);
+        }
+
+        try {
+            const savedDest = localStorage.getItem('trip_destination_info');
+            if (savedDest) {
+                const parsedDest = JSON.parse(savedDest);
+                if (parsedDest && typeof parsedDest.lat === 'number') {
+                    setDestinationInfo(parsedDest);
+                }
+            }
+        } catch (e) {
+            console.error('Failed to parse saved destination info', e);
         }
     }, []);
 
@@ -62,6 +113,26 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('trip_days', tripDays.toString());
     }, [tripDays]);
 
+    useEffect(() => {
+        if (selectedCategory) {
+            localStorage.setItem('trip_category', selectedCategory);
+        } else {
+            localStorage.removeItem('trip_category');
+        }
+    }, [selectedCategory]);
+
+    useEffect(() => {
+        localStorage.setItem('trip_search_query', searchQuery);
+    }, [searchQuery]);
+
+    useEffect(() => {
+        if (destinationInfo) {
+            localStorage.setItem('trip_destination_info', JSON.stringify(destinationInfo));
+        } else {
+            localStorage.removeItem('trip_destination_info');
+        }
+    }, [destinationInfo]);
+
     const addItineraryItem = (item: ItineraryItem) => {
         setItinerary(prev => [...prev, item]);
     };
@@ -75,11 +146,17 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
             tripStatus,
             tripDays,
             itinerary,
+            selectedCategory,
+            searchQuery,
+            destinationInfo,
             setTripStatus,
             setTripDays,
             addItineraryItem,
             removeItineraryItem,
-            setItinerary
+            setItinerary,
+            setSelectedCategory,
+            setSearchQuery,
+            setDestinationInfo
         }}>
             {children}
         </TripContext.Provider>

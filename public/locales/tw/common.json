@@ -615,7 +615,7 @@
                 "interests_plan": "Fallback signal from your current planner draft.",
                 "interests_empty": "Save places or build a plan to surface interest signals here.",
                 "language": "Language",
-                "language_hint": "This follows the existing app language picker and ktrip_lang value.",
+                "language_hint": "This follows the existing app language picker and kello_lang value.",
                 "region": "Preferred region / city",
                 "style": "Travel style",
                 "interests": "Interest categories",

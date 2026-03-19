@@ -104,6 +104,35 @@
   border-color: var(--accent-deep);
 }
 
+.navBtn {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  background: rgba(109, 83, 63, 0.05);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(109, 83, 63, 0.08);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.navBtn:hover {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.navBtnPrimary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.navBtnPrimary:hover {
+  background: var(--accent-deep);
+  color: #fff;
+}
+
 .flagIcon {
   width: 24px;
   height: 16px;
@@ -356,6 +385,19 @@
   border-radius: 20px;
   min-width: 100px;
   text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.featuredCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.customPlanCard {
+  background: var(--surface-strong);
+  border: 2px dashed var(--accent-soft);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -380,6 +422,23 @@
   font-weight: 800;
 }
 
+.interpreterEyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.interpreterDescription {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .secondaryBtn {
   margin-top: 18px;
   width: 100%;
@@ -390,6 +449,35 @@
   border-radius: 18px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.assuranceGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.assuranceCard {
+  background: var(--surface-strong);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(109, 83, 63, 0.08);
+  border-radius: 20px;
+  padding: 18px;
+  transition: all 0.2s;
+}
+
+.assuranceTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.assuranceDescription {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -463,6 +551,7 @@
 .navAuthWrap {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 .navLinkBtn {
@@ -485,4 +574,344 @@
   .categoryGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   SELECTION PANEL / CTA (ADDED FOR HOMEBOOKINGSECTION)
+   ────────────────────────────────────────────────────────────────────────── */
+.selectionPanel {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+.selectionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.selectionTagRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.selectionTag {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.selectionEmpty {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  padding: 12px;
+}
+
+.ctaSection {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.ctaHint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.mainCtaBtn {
+  width: 100%;
+  min-height: 56px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.mainCtaBtn:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.mainCtaBtn:hover:not(:disabled) {
+  background: var(--accent-deep);
+  transform: translateY(-2px);
+}
+
+.inputClear {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 16px;
+}
+
+.sectionDescription {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ctaBtn {
+  background: var(--accent-soft);
+  border: none;
+  color: var(--accent-deep);
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.suggestText {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.suggestSub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.daysSliderInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daysLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.selectionEyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.selectionTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.selectionDescription {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.navLinkBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.bottomSpacer {
+  height: 96px;
+}
+
+@media (min-width: 720px) {
+  .categoryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   SELECTION PANEL / CTA (ADDED FOR HOMEBOOKINGSECTION)
+   ────────────────────────────────────────────────────────────────────────── */
+.selectionPanel {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+.selectionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.selectionTagRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.selectionTag {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.selectionEmpty {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  padding: 12px;
+}
+
+.ctaSection {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.ctaHint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.mainCtaBtn {
+  width: 100%;
+  min-height: 56px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.mainCtaBtn:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.mainCtaBtn:hover:not(:disabled) {
+  background: var(--accent-deep);
+  transform: translateY(-2px);
+}
+
+.inputClear {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 16px;
+}
+
+.sectionDescription {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ctaBtn {
+  background: var(--accent-soft);
+  border: none;
+  color: var(--accent-deep);
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.suggestText {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.suggestSub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.daysSliderInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daysLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.selectionEyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.selectionTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.selectionDescription {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
 }

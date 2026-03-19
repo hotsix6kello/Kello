@@ -7,7 +7,7 @@ Prevent merge conflicts through clear ownership and process.
 Make Antigravity Agent outputs deterministic and reviewable.
 Scope
 
-This guide applies to k-trip and any similar team web-app projects.
+This guide applies to kello and any similar team web-app projects.
 Branching, PR, and merge rules are mandatory for all members and agents.
 0) GitHub Workflow Overview
 Use this branch model:
@@ -149,7 +149,7 @@ Test plan with pass/fail criteria
 Conflict risk (same files as others? yes/no)
 Rollback note
 7.3 Example Agent prompt
-Implement duplicate reservation prevention for k-trip. Use branch feature/reserve/dup-guard-219. Update: backend booking API, unit tests for race condition, and OpenAPI schema only in /backend/src/reserve. Add tests for retry case and add one QA note in PR description.
+Implement duplicate reservation prevention for kello. Use branch feature/reserve/dup-guard-219. Update: backend booking API, unit tests for race condition, and OpenAPI schema only in /backend/src/reserve. Add tests for retry case and add one QA note in PR description.
 
 8) Daily operating rhythm (6 members)
 Daily 5-minute sync:

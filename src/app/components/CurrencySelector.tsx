@@ -42,16 +42,16 @@ export default function CurrencySelector() {
 
     // Load from local storage
     useEffect(() => {
-        const saved = localStorage.getItem('ktrip_currency');
+        const saved = localStorage.getItem('kello_currency');
         if (saved) setSelected(saved);
     }, []);
 
     const handleSelect = (code: string) => {
         setSelected(code);
-        localStorage.setItem('ktrip_currency', code);
+        localStorage.setItem('kello_currency', code);
         setIsOpen(false);
         // Dispatch an event to notify other components if needed
-        window.dispatchEvent(new CustomEvent('ktrip_currency_change', { detail: code }));
+        window.dispatchEvent(new CustomEvent('kello_currency_change', { detail: code }));
     };
 
     return (

@@ -1,20 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import BottomNav from "./components/BottomNav";
-import KRideGlobalFAB from "./components/KRideGlobalFAB";
 import LanguageInitializer from "./components/LanguageInitializer";
-import GlobalLangButton from "./components/GlobalLangButton";
+import { TripProvider } from "@/lib/contexts/TripContext";
+import ClientChrome from "./components/ClientChrome";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Kello | Korea Travel OS",
@@ -30,30 +20,24 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-import { TripProvider } from "@/lib/contexts/TripContext";
-import { headers, cookies } from "next/headers";
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const reqHeaders = await headers();
-  const reqCookies = await cookies();
-  const locale = reqHeaders.get('x-resolved-locale') || reqCookies.get('ktrip_lang')?.value || "ko";
+  const locale = "ko"; // Static default for initial HTML shell
 
   return (
     <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         <TripProvider>
-          <LanguageInitializer />
+          <LanguageInitializer locale={locale} />
           <div className="mobile-wrapper">
-            <GlobalLangButton />
             <main className="scroll-container">
               {children}
             </main>
-            <BottomNav />
-            <KRideGlobalFAB />
+            {/* Contains GlobalLangButton, BottomNav, KRideGlobalFAB - gated to client mount */}
+            <ClientChrome />
           </div>
         </TripProvider>
       </body>

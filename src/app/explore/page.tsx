@@ -777,12 +777,22 @@ export default function MyExplorePage() {
     const unit = t('beauty_explore.label_booking_unit');
     return i18n.language === 'ko' ? `${formatted}${unit}` : `${unit} ${formatted}`;
   }
-  const { addItineraryItem } = useTrip();
+  const { 
+    addItineraryItem, 
+    selectedCategory: globalCategory, 
+    setSelectedCategory: setGlobalCategory,
+    searchQuery: globalSearchQuery,
+    setSearchQuery: setGlobalSearchQuery,
+    destinationInfo,
+    setDestinationInfo
+  } = useTrip();
   const categoryParam = searchParams.get('category');
   const beautyCategoryParam = searchParams.get('beautyCategory');
   const isBeautyExplore = categoryParam === 'beauty';
   const beautyCategoryFilter = isBeautyCategoryId(beautyCategoryParam)
     ? beautyCategoryParam
+    : isBeautyCategoryId(globalCategory)
+    ? globalCategory
     : null;
 
   const bookingDateOptions = useMemo(() => createBookingDateOptions(t), [t]);
@@ -804,7 +814,7 @@ export default function MyExplorePage() {
   const [currentCity, setCurrentCity] = useState<CityId>('seoul');
 
   const [currentCategory, setCurrentCategory] = useState<string>('all');
-  const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(null);
+  const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(destinationInfo);
   const [radius, setRadius] = useState<number>(1000);
   const [nearbyItems, setNearbyItems] = useState<ServiceItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -813,8 +823,8 @@ export default function MyExplorePage() {
   const [selectedItemForPlan, setSelectedItemForPlan] = useState<ServiceItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
-  const [searchTerm, setSearchTerm] = useState('');
-  const [appliedSearchTerm, setAppliedSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(globalSearchQuery);
+  const [appliedSearchTerm, setAppliedSearchTerm] = useState(globalSearchQuery);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
   const [selectedBeautyStoreId, setSelectedBeautyStoreId] = useState<string | null>(null);
   const [selectedBeautyStoreName, setSelectedBeautyStoreName] = useState<string | null>(null);

@@ -158,7 +158,7 @@ export default function MySettingsPage() {
         if (typeof window === "undefined") return;
 
         setLanguageCode(
-            resolveCanonicalLocale(localStorage.getItem("ktrip_lang") || i18n.language || "en")
+            resolveCanonicalLocale(localStorage.getItem("kello_lang") || i18n.language || "en")
         );
         setSavedPlaceIds(readSavedItemIds());
     }, [i18n.language]);

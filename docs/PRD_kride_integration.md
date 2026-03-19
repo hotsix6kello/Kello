@@ -179,7 +179,7 @@ function getDepartureTime(scheduleStartISO: string, travelMinutes: number, buffe
   "body": "다음 예약 [{place_name}] 까지 이동 시간 {travel_min}분",
   "data": {
     "type": "DEPART_ALERT",
-    "deeplink": "ktrip://navigation?action=kride_open",
+    "deeplink": "kello://navigation?action=kride_open",
     "schedule_id": "uuid",
     "dest_lat": 37.551,
     "dest_lng": 126.988
@@ -191,8 +191,8 @@ function getDepartureTime(scheduleStartISO: string, travelMinutes: number, buffe
 
 ```
 인앱 딥링크:
-  ktrip://navigation             → 오늘 화면
-  ktrip://navigation?action=kride_open  → 오늘 화면 + k.ride 액션 시트 자동 오픈
+  kello://navigation             → 오늘 화면
+  kello://navigation?action=kride_open  → 오늘 화면 + k.ride 액션 시트 자동 오픈
 
 k.ride 딥링크:
   kride://route?dest_lat=37.5&dest_lng=126.9&dest_name=홍대입구역

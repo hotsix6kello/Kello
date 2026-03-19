@@ -39,7 +39,7 @@ Legacy values are still accepted and resolved to canonical codes:
 
 ## Storage And Runtime Rule
 
-- `ktrip_lang` should now store canonical locale codes
+- `kello_lang` should now store canonical locale codes
 - `i18n.changeLanguage()` should resolve any alias to canonical before applying
 - browser language detection should also resolve into canonical codes
 
@@ -75,7 +75,7 @@ Implemented in product:
 
 - canonical locale resolution helper
 - legacy alias compatibility for `jp/cn/tw/hk`
-- canonical storage in `ktrip_lang`
+- canonical storage in `kello_lang`
 - canonical `i18n.language` values
 - resource lookup mapped back to existing legacy folder names
 

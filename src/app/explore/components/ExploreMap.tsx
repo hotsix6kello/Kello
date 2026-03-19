@@ -32,7 +32,7 @@ export default function ExploreMap(props: ExploreMapProps) {
 
     useEffect(() => {
         // Map i18n codes back to valid Google Maps language codes if necessary
-        const stored = localStorage.getItem('ktrip_lang') || 'ko';
+        const stored = localStorage.getItem('kello_lang') || 'ko';
         const googleMapLanguageMapping: Record<string, string> = {
             'jp': 'ja',
             'cn': 'zh-CN',

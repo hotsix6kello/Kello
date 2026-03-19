@@ -68,7 +68,7 @@ export default function SignupPage() {
         //    In that case the user is already logged in — save to localStorage and go home.
         if (data.session) {
             localStorage.setItem('user', JSON.stringify({ name, email }));
-            localStorage.setItem('ktrip_lang', i18nKey);
+            localStorage.setItem('kello_lang', i18nKey);
             setLoading(false);
             router.push('/');
             return;

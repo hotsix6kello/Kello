@@ -28,7 +28,7 @@ export type CanonicalLocaleCode = (typeof CANONICAL_SUPPORTED_LOCALES)[number];
 
 export const DEFAULT_LOCALE: CanonicalLocaleCode = "en";
 export const DEFAULT_CLIENT_LOCALE: CanonicalLocaleCode = "ko";
-export const LOCALE_STORAGE_KEY = "ktrip_lang";
+export const LOCALE_STORAGE_KEY = "kello_lang";
 
 export const LEGACY_LOCALE_ALIASES: Record<string, CanonicalLocaleCode> = {
     jp: "ja",

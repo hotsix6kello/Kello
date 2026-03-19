@@ -9,7 +9,8 @@
       "eyebrow": "Beauty Booking Concierge",
       "title": "What kind of booking do you want?",
       "subtitle": "Select your beauty service first and move directly to the booking step. We have designed it for fast mobile selection followed by shop comparison and reservation requests.",
-      "welcome": "Welcome {{name}}, please select a service today."
+      "welcome": "Welcome {{name}}, please select a service today.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
       "step": "Step 1",
@@ -82,6 +83,25 @@
           "desc": "Increased conversion with card-type buttons easy to select with one hand and large CTAs."
         }
       ]
+    },
+    "interpreter_entry": {
+      "title": "Real-time Interpreter",
+      "description": "Communicate easily with staff at any shop",
+      "cta": "Start Interpreter"
+    },
+    "modals": {
+      "card_title": "🗺️ Please go to this address",
+      "copy": "Copy Address",
+      "copy_done": "Copied!",
+      "close": "Cancel"
+    },
+    "location_sheet": {
+      "search_title": "Search Results",
+      "search_result_count": "{{count}} results for '{{query}}'",
+      "view_location": "View Location",
+      "view_location_desc": "Check exact location on map",
+      "call_taxi": "Call a Taxi",
+      "google_maps_desc": "Multilingual guide for global users"
     }
   },
   "interpreter_ui": {
@@ -400,6 +420,7 @@
       "pescatarian": "Pescatarian"
     },
     "community_nav": "Community",
+    "help_nav": "Help",
     "loading": "Loading...",
     "actions": {
       "view_all": "View All",
@@ -848,7 +869,7 @@
         "interests_plan": "Fallback signal from your current planner draft.",
         "interests_empty": "Save places or build a plan to surface interest signals here.",
         "language": "Language",
-        "language_hint": "This follows the existing app language picker and ktrip_lang value.",
+        "language_hint": "This follows the existing app language picker and kello_lang value.",
         "region": "Preferred region / city",
         "style": "Travel style",
         "interests": "Interest categories",

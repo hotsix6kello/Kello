@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 
 const service = new InShopInterpreterService();
 
-export async function handleInterpreterSessionPost(
+async function handleInterpreterSessionPost(
   request: Request,
   routeService = service,
 ) {

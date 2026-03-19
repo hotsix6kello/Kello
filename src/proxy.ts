@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const SUPPORTED = ["ko", "en", "ja", "zh-CN", "zh-HK", "vi", "th", "id", "ms"];
+const SUPPORTED = ["ko", "en", "ja", "zh-CN", "zh-HK", "vi", "th", "id", "ms", "es", "fr", "de", "ar", "pt", "ru"];
 
 function getLocaleFromCountry(country: string): string {
     const c = country.toUpperCase();
     const map: Record<string, string> = {
         'KR': 'ko', 'US': 'en', 'JP': 'ja', 'CN': 'zh-CN', 'HK': 'zh-HK',
-        'VN': 'vi', 'TH': 'th', 'ID': 'id', 'MY': 'ms'
+        'VN': 'vi', 'TH': 'th', 'ID': 'id', 'MY': 'ms',
+        'ES': 'es', 'FR': 'fr', 'DE': 'de', 'SA': 'ar', 'PT': 'pt', 'RU': 'ru'
     };
     return map[c] || 'ko';
 }
@@ -25,12 +26,18 @@ function getLocaleFromBrowser(acceptLang: string): string | null {
         if (l === 'id' || l.startsWith('id-')) return 'id';
         if (l === 'ms' || l.startsWith('ms-')) return 'ms';
         if (l === 'en' || l.startsWith('en-')) return 'en';
+        if (l === 'es' || l.startsWith('es-')) return 'es';
+        if (l === 'fr' || l.startsWith('fr-')) return 'fr';
+        if (l === 'de' || l.startsWith('de-')) return 'de';
+        if (l === 'ar' || l.startsWith('ar-')) return 'ar';
+        if (l === 'pt' || l.startsWith('pt-')) return 'pt';
+        if (l === 'ru' || l.startsWith('ru-')) return 'ru';
     }
     return null;
 }
 
 export function proxy(request: NextRequest) {
-    let locale = request.cookies.get('ktrip_lang')?.value;
+    let locale = request.cookies.get('kello_lang')?.value;
     let needsSetting = false;
 
     if (!locale || !SUPPORTED.includes(locale)) {
@@ -67,7 +74,7 @@ export function proxy(request: NextRequest) {
     });
 
     if (needsSetting) {
-        response.cookies.set('ktrip_lang', locale, {
+        response.cookies.set('kello_lang', locale, {
             path: '/',
             httpOnly: false,
             secure: process.env.NODE_ENV === 'production',

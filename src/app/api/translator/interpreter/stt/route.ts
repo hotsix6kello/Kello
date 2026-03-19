@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 
 const service = new InterpreterSttService();
 
-export async function handleInterpreterSttPost(
+async function handleInterpreterSttPost(
   request: Request,
   routeService = service,
 ) {
