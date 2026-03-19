@@ -15,6 +15,7 @@ import type { TranslationProviderResult } from "../../translation/types.ts";
 
 class FailingTranslationProvider implements TranslationProvider {
   async translateText(_request: TranslationTextRequest): Promise<TranslationProviderResult> {
+    void _request;
     throw new Error("translation_provider_down");
   }
 }

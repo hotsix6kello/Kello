@@ -9,6 +9,7 @@ import { getSalonQuickPhraseGroups, getSalonQuickPhraseTexts } from "../../trans
 
 class FailingProvider implements TranslationProvider {
   async translateText(_request: TranslationTextRequest): Promise<TranslationProviderResult> {
+    void _request;
     throw new Error("provider_failed");
   }
 }
