@@ -1,0 +1,130 @@
+.container {
+    padding-bottom: 24px;
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.reviewTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.sort {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+/* Trust Score Badge (Verified) */
+.trustBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(60, 180, 74, 0.1);
+    color: #3cb44a;
+    border: 1px solid rgba(60, 180, 74, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Individual Review Card */
+.reviewCard {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.userHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #333;
+    margin-right: 12px;
+    border: 1px solid var(--gray-500);
+}
+
+.userInfo h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.userMeta {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+.ratingStars {
+    color: #ffb400;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+}
+
+.reviewText {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.photoGrid {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+}
+
+.reviewPhoto {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    background: #222;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.reviewTag {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+}
+
+.helpfulBtn {
+    background: none;
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.helpfulBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}

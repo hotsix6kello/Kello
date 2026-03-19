@@ -1,0 +1,212 @@
+/* Route Page Layout */
+.container {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header (Origin -> Dest) */
+.routeHeader {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.backButton {
+    background: none;
+    border: none;
+    color: var(--gray-light);
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.routeSummary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stationName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.stationSub {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: var(--gray-400);
+    margin: 0 16px;
+}
+
+/* Real-time Status Card */
+.statusCard {
+    margin: 20px;
+    background: linear-gradient(135deg, rgba(60, 180, 74, 0.1) 0%, rgba(60, 180, 74, 0.05) 100%);
+    border: 1px solid rgba(60, 180, 74, 0.3);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.statusText {
+    color: #3cb44a;
+    /* Line 2 Green */
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.statusSub {
+    color: var(--gray-light);
+    font-size: 0.8rem;
+}
+
+/* Timeline (Vertical Route) */
+.timelineContainer {
+    padding: 0 24px 100px 24px;
+    position: relative;
+}
+
+.timelineTrack {
+    position: absolute;
+    left: 44px;
+    top: 20px;
+    bottom: 0;
+    width: 4px;
+    background: var(--gray-200);
+    z-index: 0;
+}
+
+.timelineTrackActive {
+    position: absolute;
+    left: 44px;
+    top: 20px;
+    height: 40%;
+    /* Mock progress */
+    width: 4px;
+    background: #3cb44a;
+    /* Line 2 Green */
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(60, 180, 74, 0.5);
+}
+
+.stationItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 2;
+    opacity: 0.5;
+    /* Default inactive */
+}
+
+.stationItem.active {
+    opacity: 1;
+}
+
+.stationItem.past {
+    opacity: 0.3;
+}
+
+.stationDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--background);
+    border: 2px solid var(--gray-400);
+    margin-right: 16px;
+    margin-left: 16px;
+    /* Align with track */
+}
+
+.stationItem.active .stationDot {
+    width: 16px;
+    height: 16px;
+    background: #3cb44a;
+    border: 2px solid white;
+    box-shadow: 0 0 15px #3cb44a;
+    margin-left: 14px;
+    /* Adjust for size diff */
+}
+
+.stationInfo h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.stationInfo p {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+/* Floating Alarm Toggle */
+.alarmToggle {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    background: rgba(20, 20, 20, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--gray-200);
+    border-radius: 30px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 432px;
+    /* Mobile constraints */
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.toggleLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.toggleSwitch {
+    width: 50px;
+    height: 28px;
+    background: var(--gray-200);
+    border-radius: 14px;
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.toggleSwitch.on {
+    background: var(--primary);
+}
+
+.toggleKnob {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggleSwitch.on .toggleKnob {
+    transform: translateX(22px);
+}

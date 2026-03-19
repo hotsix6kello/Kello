@@ -1,0 +1,315 @@
+/* ============================================
+   My Bookings Page — CSS Module
+   ============================================ */
+
+.container {
+    padding: 20px 16px;
+    background: var(--background);
+    min-height: 100vh;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--foreground);
+    letter-spacing: -1px;
+}
+
+.summary {
+    display: flex;
+    gap: 12px;
+}
+
+.summaryItem {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    font-weight: 600;
+}
+
+.summaryCount {
+    color: var(--primary);
+    font-weight: 800;
+    margin-left: 2px;
+}
+
+/* ── Tabs ── */
+.tabContainer {
+    display: flex;
+    background: var(--gray-100);
+    padding: 4px;
+    border-radius: 14px;
+    border: 1px solid var(--gray-light);
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 4px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gray-500);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+}
+
+.activeTab {
+    background: #fff;
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Booking List ── */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Booking Card (Ticket Style) ── */
+.bookingCard {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--gray-light);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.cardTop {
+    padding: 16px;
+    border-bottom: 1px dashed var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.category {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    letter-spacing: 0.5px;
+}
+
+.statusBadge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-top: 2px;
+    background: var(--gray-100);
+    color: var(--gray-500);
+}
+
+.statusUpcoming {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+}
+
+.statusCompleted {
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--success);
+}
+
+.statusCancelled {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+}
+
+.qrIcon {
+    width: 44px;
+    height: 44px;
+    background: var(--gray-100);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 1px solid var(--gray-200);
+}
+
+.cardBody {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.placeTitle {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--foreground);
+    line-height: 1.2;
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+.metaIcon {
+    font-size: 0.9rem;
+}
+
+.priceRow {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.priceLabel {
+    font-size: 0.7rem;
+    color: var(--gray-400);
+    font-weight: 600;
+}
+
+.priceValue {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--foreground);
+}
+
+.cardFooter {
+    padding: 12px 16px;
+    background: var(--gray-100);
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.actionBtn {
+    flex: 1 1 140px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.actionBtn:active {
+    transform: scale(0.96);
+}
+
+.primaryAction {
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid var(--primary);
+}
+
+.primaryAction:active {
+    background: #1d4ed8;
+}
+
+.secondaryAction {
+    background: #fff;
+    color: var(--foreground);
+    border: 1px solid var(--gray-light);
+}
+
+.secondaryAction:active {
+    background: var(--gray-100);
+}
+
+.softAction {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+.softAction:active {
+    background: rgba(37, 99, 235, 0.14);
+}
+
+.bookingId {
+    font-size: 0.65rem;
+    color: var(--gray-300);
+    font-family: monospace;
+    text-align: center;
+    margin-top: -4px;
+    letter-spacing: 1px;
+}
+
+/* ── Empty State ── */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.emptyIcon {
+    font-size: 3rem;
+    margin-bottom: 8px;
+}
+
+.emptyTitle {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--foreground);
+}
+
+.emptyDesc {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    line-height: 1.5;
+    max-width: 200px;
+}
+
+.exploreBtn {
+    margin-top: 8px;
+    padding: 12px 32px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 24px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.exploreBtn:active {
+    opacity: 0.9;
+}

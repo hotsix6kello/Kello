@@ -1,0 +1,336 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Premium Light Theme Variables (White & Blue) */
+  --background: #ffffff;
+  --foreground: #1e293b;
+
+  --primary: #2563eb;
+  /* Royal Blue */
+  --primary-glow: rgba(37, 99, 235, 0.15);
+  --secondary: #3b82f6;
+  /* Lighter Blue */
+  --secondary-glow: rgba(59, 130, 246, 0.15);
+  --success: #10b981;
+  /* Seoul Subway Green */
+  --warning: #f59e0b;
+
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 1);
+
+  --gray-100: #f8fafc;
+  --gray-200: #f1f5f9;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-light: #e2e8f0;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --radius-xl: 100px;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Z-Index Layers */
+  --z-bg: 0;
+  --z-content: 10;
+  --z-nav: 1000;
+  --z-modal: 2000;
+
+  /* Layout Constants */
+  --nav-height: 72px;
+  --safe-area-bottom: env(safe-area-inset-bottom, 12px);
+  --total-nav-height: 72px;
+  /* BottomNav.module.css calculates this */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-main);
+  max-width: 100vw;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  /* Prevent pull-to-refresh on mobile web */
+  /* Fix for mobile browsers with dynamic toolbars */
+  height: 100%;
+}
+
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Mobile Wrapper */
+.mobile-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  /* 100dvh = dynamic viewport height (주소창 제외한 실제 높이) */
+  height: 100vh;
+  height: 100dvh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--background);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  /* Base padding */
+}
+
+
+/* Typography Utilities */
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-md {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.text-xl {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.text-2xl {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.text-gray {
+  color: var(--gray-500);
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-purple {
+  color: var(--primary);
+}
+
+.text-blue {
+  color: var(--secondary);
+}
+
+/* Layout Utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-1 {
+  gap: 4px;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-3 {
+  gap: 12px;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Glass Components */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  padding: 10px 16px;
+  border-radius: var(--radius-xl);
+  color: white;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.glass-btn:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Status Indicators */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-live {
+  background: #ff0000;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.status-subway {
+  background: #3cb44a;
+  color: white;
+}
+
+.status-highlight {
+  background: var(--primary);
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Mobile Specific Optimizations */
+@media (max-width: 480px) {
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+    /* Prevent iOS zoom */
+  }
+
+  .glass-panel {
+    border-radius: var(--radius-md);
+  }
+}
+
+.touch-none {
+  touch-action: none;
+}
+
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
+
+.safe-bottom {
+  padding-bottom: var(--safe-area-bottom);
+}

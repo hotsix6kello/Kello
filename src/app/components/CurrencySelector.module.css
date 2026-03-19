@@ -1,0 +1,95 @@
+.wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--foreground);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--gray-100);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-200);
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.trigger:hover {
+    background: var(--gray-200);
+}
+
+.arrow {
+    font-size: 8px;
+    color: var(--gray-400);
+    margin-left: 2px;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    color: #444;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+}
+
+.item:hover {
+    background: #f4f4f4;
+    color: #000;
+}
+
+.item.active {
+    color: #7c3aed;
+    /* Blue-Purple theme */
+    background: #fdf2ff;
+}
+
+.code {
+    font-weight: 800;
+    min-width: 40px;
+}
+
+.symbol {
+    color: #999;
+}
+
+.rate {
+    margin-left: auto;
+    font-size: 10px;
+    color: #888;
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+}

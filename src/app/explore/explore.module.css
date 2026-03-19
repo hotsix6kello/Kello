@@ -1,0 +1,2023 @@
+/* Global Vars (assuming globals.css defines --primary, --text-color, etc.) */
+.container {
+    padding-bottom: 80px;
+    /* Space for bottom nav */
+    background: var(--background);
+    min-height: 100vh;
+    color: var(--foreground);
+}
+
+/* Header */
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 16px;
+}
+
+.headerTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cityPill {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cityPill:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdownArrow {
+    font-size: 10px;
+    color: var(--gray-500);
+}
+
+.searchContainer {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.searchWrapper {
+    flex: 1;
+    position: relative;
+    background: rgba(0, 0, 0, 0.08);
+    /* slightly lighter for input bg */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.searchIcon {
+    margin-right: 8px;
+    opacity: 0.5;
+}
+
+.searchInput {
+    background: transparent;
+    border: none;
+    color: var(--foreground);
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    outline: none;
+}
+
+.searchInput::placeholder {
+    color: var(--gray-400);
+}
+
+.searchMapBtn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.searchMapBtn:hover {
+    transform: scale(1.15);
+}
+
+.filterBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.08);
+    /* Consistent with search bar */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.filterBadge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ff4d4d;
+    /* Red badge */
+    color: white;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Category Tabs */
+.categoryScroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.categoryScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.categoryChip {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--gray-500);
+}
+
+.categoryChip.active {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    border-color: var(--primary);
+}
+
+/* Modals & Sheets */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Bottom sheet default */
+}
+
+/* For center modal */
+.modalContent {
+    background: #fff;
+    width: 80%;
+    max-width: 320px;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: auto;
+    /* Push to center vertically if flex-end */
+    margin-top: auto;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.modalTitle {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.cityGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.cityOption {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    background: #2a2a2a;
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.cityOption.selected {
+    border-color: var(--primary, #9d4edd);
+    /* Fallback purple */
+    background: rgba(157, 78, 221, 0.2);
+}
+
+/* Bottom Sheet */
+.bottomSheet {
+    background: #fff;
+    width: 100%;
+    max-width: 600px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    padding: 24px 20px 40px 20px;
+    /* Extra bottom padding */
+    max-height: 80vh;
+    animation: slideUp 0.3s ease-out;
+    border-top: 1px solid var(--gray-200);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.sheetHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sheetContent {
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.sheetSubTitle {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--gray-500);
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: var(--foreground);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dayList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dayOption {
+    padding: 16px;
+    border-radius: 12px;
+    background: #2a2a2a;
+    border: 1px solid #333;
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dayOption:active {
+    background: #333;
+}
+
+.dayIcon {
+    font-size: 20px;
+}
+
+/* Service Card */
+.card {
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.cardThumbnail {
+    height: 160px;
+    background-color: #333;
+    position: relative;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.eventOverlay {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: var(--foreground);
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.saveBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    border: none;
+    color: var(--foreground);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.saveBtn.saved {
+    color: #ff4d4d;
+}
+
+.cardContent {
+    padding: 16px;
+}
+
+.cardTitle {
+    font-size: 18px;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+}
+
+.cardMeta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-bottom: 12px;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.badge {
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--gray-500);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.veganBadge {
+    background: rgba(0, 255, 0, 0.1);
+    color: #cfc;
+    border-color: rgba(0, 255, 0, 0.2);
+}
+
+.foodTags,
+.festivalInfo,
+.beautyInfo,
+.attractionInfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+}
+
+.ingredientTag {
+    color: #aaa;
+}
+
+.cardActions {
+    padding: 0 16px 16px 16px;
+}
+
+.addToPlanBtn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.addToPlanBtn:active {
+    opacity: 0.8;
+}
+
+/* Animation */
+.slideUp {
+    animation: slideUp 0.3s ease-out;
+}
+
+.emptyState {
+    padding: 60px 24px;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.emptyState p:first-child {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 8px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-weight: 700;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    z-index: 300;
+    animation: slideUpToast 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpToast {
+    from {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+/* Router 2 UX Additions */
+.hotelSearchWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.hotelSearchInputBox {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.hotelSearchInputBox input {
+    background: transparent;
+    border: none;
+    color: var(--foreground);
+    width: 100%;
+    outline: none;
+    font-size: 15px;
+}
+
+.suggestionsList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    margin-top: 8px;
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.suggestionsList li {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.suggestionsList li:last-child {
+    border-bottom: none;
+}
+
+.suggestionsList li:hover {
+    background: var(--gray-100);
+}
+
+.headerActions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.radiusSelect {
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--foreground);
+    padding: 0 8px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+.distance {
+    color: #9d4edd;
+    font-weight: bold;
+}
+
+.rating {
+    font-size: 13px;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.loadingState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 16px;
+    color: #888;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--gray-200);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Map InfoWindow Actions ── */
+.infoWindow {
+    padding: 8px 4px;
+    min-width: 180px;
+    color: #333;
+}
+
+.infoTitle {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.infoArea {
+    margin: 0 0 12px;
+    font-size: 12px;
+    color: #666;
+}
+
+.infoActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.infoActionBtn {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid #ddd;
+    background: #fdfdfd;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: #333;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.infoActionBtn:active {
+    transform: scale(0.96);
+    background: var(--gray-100);
+}
+
+.infoActionBtn:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+}
+
+.infoActionKride {
+    background: #fff8e1;
+    border-color: #ffc107;
+    color: #ff8f00;
+}
+
+.infoActionTransit {
+    background: #e3f2fd;
+    border-color: #2196f3;
+    color: #1565c0;
+}
+
+.infoActionMap {
+    background: #f1f8e9;
+    border-color: #8bc34a;
+    color: #33691e;
+}
+
+/* ── Route Overlay ── */
+.routeOverlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 14px 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    border: 1px solid var(--gray-100);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.routeHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.routeIcon {
+    font-size: 24px;
+}
+
+.routeInfo {
+    flex: 1;
+}
+
+.routeTitle {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--foreground);
+    margin-bottom: 2px;
+}
+
+.routeStats {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.transitLines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.transitBadge {
+    padding: 2px 6px;
+    background: var(--primary);
+    color: white;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+
+.modeSelector {
+    display: flex;
+    gap: 8px;
+}
+
+.modeBtn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--gray-100);
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.modeBtn.active {
+    background: var(--primary-glow);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.beautyExplorePage {
+    min-height: 100vh;
+    padding: 24px 16px 96px;
+    background:
+        radial-gradient(circle at top left, rgba(236, 219, 210, 0.85), transparent 34%),
+        linear-gradient(180deg, #fcf8f4 0%, #f4ede7 100%);
+    color: #231d19;
+}
+
+.beautyHero,
+.beautyFiltersSection,
+.beautySelectionNotice,
+.beautyStoreSection {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+}
+
+.beautyHero {
+    display: grid;
+    gap: 14px;
+}
+
+.beautyEyebrow,
+.beautySectionEyebrow,
+.beautySelectionEyebrow {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 32px;
+    align-items: center;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(109, 83, 63, 0.1);
+    color: #8d6157;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.beautyHeaderRow {
+    display: grid;
+    gap: 16px;
+}
+
+.beautyTitle {
+    margin: 0;
+    font-family: "Iowan Old Style", "Georgia", serif;
+    font-size: clamp(2rem, 7vw, 3.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.04em;
+}
+
+.beautySubtitle {
+    margin: 10px 0 0;
+    color: #6e6259;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 600;
+}
+
+.beautyCategoryBadgeWrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    min-height: 54px;
+    padding: 0 16px;
+    border-radius: 18px;
+    background: rgba(255, 250, 246, 0.95);
+    border: 1px solid rgba(109, 83, 63, 0.1);
+    box-shadow: 0 16px 34px rgba(73, 48, 33, 0.08);
+}
+
+.beautyCategoryBadgeCode {
+    min-width: 48px;
+    min-height: 30px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(234, 216, 207, 0.92);
+    color: #7f4f46;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.beautyCategoryBadgeLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3d2f28;
+}
+
+.beautyDescription {
+    margin: 0;
+    max-width: 42rem;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.beautyHeroFlow {
+    display: grid;
+    gap: 10px;
+}
+
+.beautyHeroFlowItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.76);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+}
+
+.beautyHeroFlowNumber {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: rgba(127, 79, 70, 0.12);
+    color: #7f4f46;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.beautyHeroFlowText {
+    color: #3d2f28;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.beautyGuideCard,
+.beautySelectionNotice {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.76);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    box-shadow: 0 16px 34px rgba(73, 48, 33, 0.06);
+}
+
+.beautyGuideCard {
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 600;
+}
+
+.beautyFiltersSection {
+    margin-top: 28px;
+    padding: 22px 18px;
+    border-radius: 28px;
+    background: rgba(255, 252, 249, 0.86);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+}
+
+.beautySectionHeader {
+    display: grid;
+    gap: 12px;
+}
+
+.beautySectionTitle {
+    margin: 8px 0 0;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.beautyStoreCount {
+    color: #8d6157;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.beautyRegionChipRow {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.beautyRegionChipRow::-webkit-scrollbar {
+    display: none;
+}
+
+.beautyRegionChip {
+    min-height: 42px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(109, 83, 63, 0.12);
+    background: rgba(255, 255, 255, 0.74);
+    color: #5d5148;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.beautyRegionChip:active {
+    transform: scale(0.98);
+}
+
+.beautyRegionChipActive {
+    background: linear-gradient(135deg, #7f4f46 0%, #b28070 100%);
+    border-color: #7f4f46;
+    color: #fff9f5;
+    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.18);
+}
+
+.beautySelectionTitle {
+    display: block;
+    margin-top: 10px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.beautySelectionText {
+    margin: 10px 0 0;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyStoreSection {
+    margin-top: 18px;
+}
+
+.beautyStoreGrid {
+    display: grid;
+    gap: 14px;
+}
+
+.beautyStoreCard {
+    padding: 20px 18px;
+    border-radius: 24px;
+    background: rgba(255, 252, 249, 0.92);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    box-shadow: 0 18px 36px rgba(73, 48, 33, 0.06);
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.beautyStoreCardSelected {
+    border-color: rgba(127, 79, 70, 0.28);
+    box-shadow: 0 22px 42px rgba(127, 79, 70, 0.12);
+}
+
+.beautyStoreTopRow,
+.beautyStoreMeta,
+.beautyStoreTagRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.beautyStoreCategoryPill,
+.beautyStoreRegionPill,
+.beautyStoreTag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.beautyStoreCategoryPill {
+    background: rgba(234, 216, 207, 0.9);
+    color: #7f4f46;
+}
+
+.beautyStoreRegionPill {
+    background: rgba(244, 237, 231, 0.9);
+    color: #5d5148;
+}
+
+.beautyStoreTitle {
+    margin: 14px 0 8px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.beautyStoreMeta {
+    color: #6e6259;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.beautyStoreRating {
+    color: #b2732e;
+    font-weight: 800;
+}
+
+.beautyStorePrice {
+    margin-top: 14px;
+    color: #7f4f46;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.beautyStoreDescription {
+    margin: 10px 0 0;
+    color: #5d5148;
+    font-size: 14px;
+    line-height: 1.72;
+}
+
+.beautyStoreTagRow {
+    margin-top: 16px;
+}
+
+.beautyStoreTag {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    color: #5d5148;
+}
+
+.beautyStoreCta {
+    margin-top: 18px;
+    width: 100%;
+    min-height: 52px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
+    color: #fff9f5;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+}
+
+.beautyStoreCta:active {
+    transform: scale(0.985);
+}
+
+.beautyEmptyState {
+    padding: 56px 20px;
+    text-align: center;
+    border-radius: 24px;
+    background: rgba(255, 252, 249, 0.92);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    box-shadow: 0 18px 36px rgba(73, 48, 33, 0.06);
+}
+
+.beautyEmptyTitle {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #231d19;
+}
+
+.beautyEmptyText {
+    margin: 10px 0 0;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyBookingPanel {
+    width: min(1120px, 100%);
+    margin: 20px auto 0;
+    padding: 22px 18px;
+    scroll-margin-top: 16px;
+    border-radius: 28px;
+    background: rgba(255, 252, 249, 0.92);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+}
+
+.beautyBookingHeader {
+    display: grid;
+    gap: 10px;
+}
+
+.beautyBookingTitle {
+    margin: 10px 0 0;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+}
+
+.beautyBookingDescription {
+    margin: 8px 0 0;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyStepIndicator {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 0;
+    padding: 0 0 4px;
+    list-style: none;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.beautyStepIndicator::-webkit-scrollbar {
+    display: none;
+}
+
+.beautyStepItem {
+    min-width: 92px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    background: rgba(255, 255, 255, 0.78);
+    color: #7c6e64;
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+}
+
+.beautyStepItemCurrent {
+    border-color: rgba(127, 79, 70, 0.22);
+    background: rgba(255, 247, 242, 0.96);
+    color: #231d19;
+    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.08);
+}
+
+.beautyStepItemDone {
+    border-color: rgba(127, 79, 70, 0.12);
+    background: rgba(251, 246, 242, 0.94);
+    color: #5a4b43;
+}
+
+.beautyStepBullet {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgba(35, 29, 25, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.beautyStepItemCurrent .beautyStepBullet,
+.beautyStepItemDone .beautyStepBullet {
+    background: rgba(127, 79, 70, 0.12);
+    color: #7f4f46;
+}
+
+.beautyStepText {
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
+.beautyBookingLayout {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.beautyBookingBlock,
+.beautyBookingSummary,
+.beautyBookingEmpty {
+    padding: 18px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+}
+
+.beautyBookingBlockTitle {
+    margin: 0 0 14px;
+    font-size: 17px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.beautyDateChipRow {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.beautyDateChipRow::-webkit-scrollbar {
+    display: none;
+}
+
+.beautyDateChip {
+    min-width: 104px;
+    min-height: 74px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(109, 83, 63, 0.12);
+    background: rgba(255, 255, 255, 0.86);
+    color: #3d2f28;
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.beautyDateChip:active,
+.beautyTimeSlot:active,
+.beautyBookingCta:active {
+    transform: scale(0.985);
+}
+
+.beautyDateChipActive {
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
+    border-color: #7f4f46;
+    color: #fff9f5;
+    box-shadow: 0 16px 30px rgba(127, 79, 70, 0.18);
+}
+
+.beautyDateChipPrimary {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.beautyDateChipSecondary {
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: 0.82;
+}
+
+.beautyTimeSlotGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.beautyTimeSlot {
+    min-height: 48px;
+    border-radius: 14px;
+    border: 1px solid rgba(109, 83, 63, 0.12);
+    background: rgba(255, 255, 255, 0.9);
+    color: #3d2f28;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.beautyTimeSlotActive {
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
+    border-color: #7f4f46;
+    color: #fff9f5;
+    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.16);
+}
+
+.beautyBookingInlineEmpty,
+.beautyBookingEmptyText,
+.beautyBookingHint {
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyBookingEmptyTitle {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #231d19;
+}
+
+.beautyBookingEmptyText {
+    margin: 10px 0 0;
+}
+
+.beautySummaryList {
+    display: grid;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.beautySummaryItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(109, 83, 63, 0.08);
+}
+
+.beautySummaryItem:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.beautySummaryLabel {
+    color: #7c6e64;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.beautySummaryValue {
+    color: #231d19;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: right;
+}
+
+.beautyBookingHint {
+    margin: 14px 0 0;
+}
+
+.beautyBookingCta {
+    margin-top: 16px;
+    width: 100%;
+    min-height: 54px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
+    color: #fff9f5;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+}
+
+.beautyBookingCta:disabled {
+    opacity: 0.42;
+    cursor: not-allowed;
+    box-shadow: none;
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.42) 0%, rgba(187, 138, 120, 0.4) 100%);
+}
+
+.beautyConfirmPanel {
+    width: min(1120px, 100%);
+    margin: 20px auto 0;
+    padding: 22px 18px;
+    scroll-margin-top: 16px;
+    border-radius: 28px;
+    background: rgba(255, 250, 246, 0.94);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+}
+
+.beautyConfirmHeader {
+    display: grid;
+    gap: 10px;
+}
+
+.beautyConfirmTitle {
+    margin: 10px 0 0;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+}
+
+.beautyConfirmDescription {
+    margin: 8px 0 0;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyConfirmEmpty,
+.beautyConfirmSummaryCard,
+.beautyConfirmCard,
+.beautyAssistCard,
+.beautyPriceCard,
+.beautyAgreementCard,
+.beautyCompletionCard {
+    padding: 18px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+}
+
+.beautyConfirmEmpty {
+    margin-top: 18px;
+}
+
+.beautyConfirmEmptyTitle {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #231d19;
+}
+
+.beautyConfirmEmptyText {
+    margin: 10px 0 0;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyConfirmLayout {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.beautyConfirmSummaryCard {
+    display: grid;
+    gap: 12px;
+}
+
+.beautyConfirmCard,
+.beautyAssistCard,
+.beautyPriceCard,
+.beautyAgreementCard {
+    display: grid;
+    gap: 16px;
+}
+
+.beautyAssistSection {
+    display: grid;
+    gap: 12px;
+}
+
+.beautyAssistChipRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.beautyAssistChip {
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(109, 83, 63, 0.12);
+    background: rgba(255, 252, 249, 0.96);
+    color: #3d2f28;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.beautyAssistChipActive {
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
+    border-color: #7f4f46;
+    color: #fff9f5;
+    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.16);
+}
+
+.beautyAssistChip:active {
+    transform: scale(0.985);
+}
+
+.beautyAssistChipBadge {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: rgba(35, 29, 25, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+.beautyAssistChipActive .beautyAssistChipBadge {
+    background: rgba(255, 249, 245, 0.18);
+}
+
+.beautyAssistMessageGrid {
+    display: grid;
+    gap: 12px;
+}
+
+.beautyAssistMessageCard {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(109, 83, 63, 0.1);
+    background: rgba(255, 252, 249, 0.92);
+}
+
+.beautyAssistMessageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.beautyAssistMessageLabel {
+    color: #231d19;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.beautyAssistMessageBox {
+    color: #3d2f28;
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.beautyAssistTextarea {
+    width: 100%;
+    min-height: 132px;
+    border-radius: 16px;
+    border: 1px solid rgba(109, 83, 63, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    color: #231d19;
+    font: inherit;
+    line-height: 1.7;
+    padding: 14px 16px;
+    resize: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.beautyAssistTextarea:focus {
+    outline: none;
+}
+
+.beautyTextInput[aria-invalid='true'] {
+    border-color: rgba(176, 77, 66, 0.42);
+    box-shadow: 0 0 0 4px rgba(176, 77, 66, 0.12);
+    background: rgba(255, 249, 248, 0.98);
+}
+
+.beautyAssistAction {
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(127, 79, 70, 0.16);
+    background: rgba(255, 252, 249, 0.94);
+    color: #7f4f46;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.beautyAssistAction:active {
+    transform: scale(0.985);
+}
+
+.beautyOptionSection {
+    display: grid;
+    gap: 12px;
+}
+
+.beautyOptionSectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.beautyOptionSectionTitle {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #231d19;
+}
+
+.beautyOptionSectionMeta {
+    color: #7c6e64;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.beautyOptionGrid {
+    display: grid;
+    gap: 10px;
+}
+
+.beautyOptionCard {
+    width: 100%;
+    padding: 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(109, 83, 63, 0.12);
+    background: rgba(255, 252, 249, 0.96);
+    color: #231d19;
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.beautyOptionCardActive {
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
+    border-color: #7f4f46;
+    color: #fff9f5;
+    box-shadow: 0 16px 30px rgba(127, 79, 70, 0.16);
+}
+
+.beautyOptionCard:active {
+    transform: scale(0.985);
+}
+
+.beautyOptionTitle {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.beautyOptionMeta {
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.86;
+}
+
+.beautyOptionDescription {
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.92;
+}
+
+.beautyOptionPrice {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
+.beautyOptionHint {
+    margin: 0;
+    color: #6e6259;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.beautyFormGrid {
+    display: grid;
+    gap: 14px;
+}
+
+.beautyFormField {
+    display: grid;
+    gap: 8px;
+}
+
+.beautyFormLabel {
+    color: #3d2f28;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.beautyTextInput,
+.beautyTextarea {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid rgba(109, 83, 63, 0.14);
+    background: rgba(255, 252, 249, 0.96);
+    color: #231d19;
+    font: inherit;
+    padding: 14px 16px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.beautyTextInput {
+    min-height: 52px;
+}
+
+.beautyTextarea {
+    min-height: 112px;
+    resize: vertical;
+}
+
+.beautyTextInput:focus,
+.beautyTextarea:focus {
+    outline: none;
+    border-color: rgba(127, 79, 70, 0.48);
+    box-shadow: 0 0 0 4px rgba(187, 138, 120, 0.14);
+    background: #fff;
+}
+
+.beautyFieldError,
+.beautyAgreementError {
+    margin: 0;
+    color: #b04d42;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.beautyAgreementList {
+    display: grid;
+    gap: 12px;
+}
+
+.beautyAgreementItem {
+    display: grid;
+    gap: 8px;
+}
+
+.beautyAgreementRow {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+}
+
+.beautyAgreementCheckbox {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #7f4f46;
+}
+
+.beautyAgreementTextWrap {
+    display: grid;
+    gap: 4px;
+}
+
+.beautyAgreementTitle {
+    color: #231d19;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 800;
+}
+
+.beautyAgreementText {
+    color: #6e6259;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.beautyFinalCta,
+.beautySecondaryAction {
+    min-height: 54px;
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: 800;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.beautyFinalCta {
+    width: 100%;
+    border: none;
+    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
+    color: #fff9f5;
+    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+    cursor: pointer;
+}
+
+.beautyFinalCta:disabled {
+    opacity: 0.42;
+    cursor: not-allowed;
+    box-shadow: none;
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.42) 0%, rgba(187, 138, 120, 0.4) 100%);
+}
+
+.beautySecondaryAction {
+    min-width: 180px;
+    padding: 0 18px;
+    border: 1px solid rgba(127, 79, 70, 0.18);
+    background: rgba(255, 252, 249, 0.94);
+    color: #7f4f46;
+    cursor: pointer;
+}
+
+.beautyFinalCta:active,
+.beautySecondaryAction:active {
+    transform: scale(0.985);
+}
+
+.beautyCompletionCard {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+    scroll-margin-top: 16px;
+}
+
+.beautyCompletionTitle {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    color: #231d19;
+}
+
+.beautyCompletionText {
+    margin: 0;
+    color: #6e6259;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.beautyCompletionHero {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(127, 79, 70, 0.1) 0%, rgba(234, 216, 207, 0.28) 100%);
+    border: 1px solid rgba(127, 79, 70, 0.1);
+}
+
+.beautyCompletionHeroBlock,
+.beautyCompletionPriceBox,
+.beautyCompletionSection {
+    display: grid;
+    gap: 8px;
+}
+
+.beautyCompletionHeroLabel {
+    color: #8d6157;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.beautyCompletionHeroTitle {
+    color: #231d19;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+}
+
+.beautyCompletionHeroMeta {
+    color: #5d5148;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 700;
+}
+
+.beautyCompletionPriceBox {
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.beautyCompletionPrice {
+    color: #7f4f46;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.beautyCompletionGrid {
+    display: grid;
+    gap: 12px;
+}
+
+.beautyCompletionSection {
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(255, 252, 249, 0.88);
+    border: 1px solid rgba(109, 83, 63, 0.08);
+}
+
+.beautyCompletionSectionTitle {
+    margin: 0;
+    color: #231d19;
+    font-size: 16px;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+}
+
+.beautyCompletionActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.beautyRegionChip:focus-visible,
+.beautyStoreCta:focus-visible,
+.beautyDateChip:focus-visible,
+.beautyTimeSlot:focus-visible,
+.beautyBookingCta:focus-visible,
+.beautyOptionCard:focus-visible,
+.beautyAssistChip:focus-visible,
+.beautyAssistAction:focus-visible,
+.beautyFinalCta:focus-visible,
+.beautySecondaryAction:focus-visible,
+.beautyAgreementCheckbox:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(187, 138, 120, 0.2);
+}
+
+@media (min-width: 768px) {
+    .beautyExplorePage {
+        padding: 36px 24px 120px;
+    }
+
+    .beautyHeaderRow,
+    .beautySectionHeader {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+    }
+
+    .beautySelectionNotice {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .beautyHeroFlow {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .beautyStoreGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .beautyBookingLayout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .beautyBookingSummary {
+        grid-column: 1 / -1;
+    }
+
+    .beautyTimeSlotGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .beautyConfirmLayout {
+        grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .beautyStepItem {
+        min-width: 112px;
+    }
+
+    .beautyOptionGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .beautyAssistMessageGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .beautyAssistCard,
+    .beautyPriceCard,
+    .beautyAgreementCard {
+        grid-column: 1 / -1;
+    }
+
+    .beautyCompletionHero {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+    }
+
+    .beautyCompletionGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1100px) {
+    .beautyStoreGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}

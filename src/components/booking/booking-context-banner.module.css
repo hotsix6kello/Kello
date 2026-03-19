@@ -1,0 +1,150 @@
+.card {
+    border-radius: 18px;
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    background:
+        linear-gradient(180deg, rgba(37, 99, 235, 0.06), rgba(37, 99, 235, 0.02)),
+        #fff;
+    padding: 14px 15px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+
+.description,
+.detailText {
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.description {
+    margin-top: 4px;
+    color: #475569;
+}
+
+.detailText {
+    margin-top: 10px;
+    color: #334155;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    color: #475569;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.primaryButton,
+.secondaryButton,
+.softButton {
+    min-height: 40px;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primaryButton:active,
+.secondaryButton:active,
+.softButton:active {
+    transform: scale(0.98);
+}
+
+.primaryButton {
+    grid-column: 1 / -1;
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid var(--primary);
+}
+
+.secondaryButton {
+    background: #fff;
+    color: var(--foreground);
+    border: 1px solid var(--gray-light);
+}
+
+.softButton {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+@media (max-width: 430px) {
+    .card {
+        padding: 13px 14px;
+        border-radius: 16px;
+    }
+
+    .header {
+        gap: 10px;
+    }
+
+    .detailText {
+        margin-top: 8px;
+    }
+
+    .chips {
+        margin-top: 10px;
+    }
+
+    .actions {
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .actions > :last-child:nth-child(4) {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 720px) {
+    .actions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .primaryButton {
+        grid-column: auto;
+    }
+}

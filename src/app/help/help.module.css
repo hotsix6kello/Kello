@@ -1,0 +1,162 @@
+.container {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding-bottom: 100px;
+}
+
+.header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+    padding: 48px 24px 36px;
+    text-align: center;
+    color: white;
+}
+
+.headerBadge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    margin: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 20px 20px 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    border-radius: 20px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card:active {
+    transform: scale(0.96);
+}
+
+.cardIcon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.cardTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.cardDesc {
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.section {
+    padding: 24px 20px 0;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 12px;
+}
+
+.numberList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.numberCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: white;
+    border-radius: 14px;
+    padding: 14px 16px;
+    border-left: 4px solid;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+}
+
+.numberIcon {
+    font-size: 1.4rem;
+}
+
+.numberValue {
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.numberLabel {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.callIcon {
+    margin-left: auto;
+    font-size: 1.2rem;
+}
+
+.fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.fabBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 18px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s;
+}
+
+.fabBtn:active {
+    transform: scale(0.95);
+}

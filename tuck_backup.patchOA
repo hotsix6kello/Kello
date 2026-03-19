@@ -1,0 +1,64 @@
+warning: in the working copy of 'public/locales/id/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/locales/ms/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/locales/th/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/locales/tw/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/locales/vi/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/locales/zh-CN/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/locales/zh-HK/common.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/interpreter/translate/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/components/LanguagePicker.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/components/home-translator/HomeTranslatorHub.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/components/home-translator/interpreter/LanguageSelectorRow.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/components/home-translator/interpreter/QuickPhrasePanel.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/explore/explore.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/explore/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/home.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/interpreter/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/my/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/i18n/client.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/interpreter/transcriber.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/supabaseServer.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translation/config.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translation/providers.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/catalog.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/interpreterRouteHandlers.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/interpreterTranslator.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/parser.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/salonGlossary.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/stt.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/translator/types.ts', LF will be replaced by CRLF the next time Git touches it
+public/locales/en/common.json
+public/locales/id/common.json
+public/locales/ko/common.json
+public/locales/ms/common.json
+public/locales/th/common.json
+public/locales/tw/common.json
+public/locales/vi/common.json
+public/locales/zh-CN/common.json
+public/locales/zh-HK/common.json
+src/app/admin/page.tsx
+src/app/api/interpreter/translate/route.ts
+src/app/components/LanguagePicker.tsx
+src/app/components/home-translator/HomeTranslatorHub.tsx
+src/app/components/home-translator/interpreter/LanguageSelectorRow.tsx
+src/app/components/home-translator/interpreter/QuickPhrasePanel.tsx
+src/app/explore/explore.module.css
+src/app/explore/page.tsx
+src/app/home.module.css
+src/app/interpreter/page.tsx
+src/app/my/page.tsx
+src/app/page.tsx
+src/lib/i18n/client.tsx
+src/lib/interpreter/transcriber.ts
+src/lib/supabaseServer.ts
+src/lib/translation/config.ts
+src/lib/translation/providers.ts
+src/lib/translator/catalog.ts
+src/lib/translator/interpreterRouteHandlers.ts
+src/lib/translator/interpreterTranslator.ts
+src/lib/translator/parser.ts
+src/lib/translator/salonGlossary.ts
+src/lib/translator/stt.ts
+src/lib/translator/types.ts

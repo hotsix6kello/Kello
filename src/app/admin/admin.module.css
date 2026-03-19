@@ -1,0 +1,309 @@
+/* Admin Layout Styles - shared */
+.container {
+    min-height: 100vh;
+    background: var(--background);
+    padding-bottom: 80px;
+}
+
+.header {
+    padding: 20px 20px 14px;
+    position: sticky;
+    top: 0;
+    background: var(--background);
+    z-index: 10;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.headerTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.adminBadge {
+    margin-left: auto;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+}
+
+.content {
+    padding: 16px 20px;
+}
+
+/* Dashboard Cards */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.statCard {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--gray-100);
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.statIcon {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.statValue {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.statLabel {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+}
+
+.menuCard {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--gray-100);
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.menuCard:active {
+    transform: scale(0.98);
+}
+
+.menuIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.menuInfo {
+    flex: 1;
+}
+
+.menuTitle {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.menuDesc {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+}
+
+.menuArrow {
+    color: var(--gray-300);
+    font-size: 1rem;
+}
+
+/* User list */
+.card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--gray-100);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.userInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.userName {
+    font-weight: 600;
+    font-size: 0.92rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.userEmail {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-Space: nowrap;
+}
+
+.adminToggle {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+
+.adminOn {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+}
+
+.adminOff {
+    background: var(--gray-100);
+    color: var(--gray-500);
+    border: 1.5px solid var(--gray-200);
+}
+
+.tabBar {
+    display: flex;
+    gap: 8px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.tab {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1.5px solid var(--gray-200);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    transition: all 0.18s;
+}
+
+.tabActive {
+    background: var(--foreground);
+    color: var(--background);
+    border-color: var(--foreground);
+}
+
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-400);
+    font-size: 0.9rem;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    color: var(--foreground);
+    outline: none;
+}
+
+.confirmModal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+}
+
+.confirmSheet {
+    background: white;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 20px 40px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.confirmTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.confirmDesc {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.confirmBtn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.confirmGrant {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+}
+
+.confirmRevoke {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.cancelBtn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1.5px solid var(--gray-200);
+    background: transparent;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--gray-500);
+}

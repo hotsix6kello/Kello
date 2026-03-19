@@ -1,0 +1,130 @@
+/* Transport Navigation */
+.container {
+    padding: 24px;
+    background: var(--background);
+    min-height: 100vh;
+}
+
+.mapContainer {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 35vh;
+    background: #111;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-500);
+}
+
+.routePanel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 55vh;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    z-index: 10;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.pathContainer {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    margin: 24px 0;
+    position: relative;
+}
+
+.pathLine {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 9px;
+    width: 2px;
+    background: var(--gray-200);
+    z-index: 0;
+}
+
+.stationNode {
+    display: flex;
+    gap: 16px;
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--background);
+    border: 3px solid var(--gray-400);
+    position: relative;
+    z-index: 1;
+}
+
+.dot.active {
+    border-color: var(--success);
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+}
+
+.dot.end {
+    border-color: var(--primary);
+    background: var(--primary);
+}
+
+.stationInfo {
+    flex: 1;
+}
+
+.stationName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.stationTime {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+.exitAlert {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: #ff4d4d;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.actionBtn {
+    background: var(--success);
+    color: white;
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(60, 180, 74, 0.4);
+}

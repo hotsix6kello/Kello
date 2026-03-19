@@ -1,0 +1,352 @@
+.container {
+    min-height: 100vh;
+    padding: 20px 16px 100px;
+    background: var(--background);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.backLink {
+    width: fit-content;
+    color: var(--primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.headerRow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--foreground);
+    letter-spacing: -0.04em;
+}
+
+.subtitle {
+    margin-top: 6px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--gray-500);
+    max-width: 34ch;
+}
+
+.headerButton,
+.summaryCard,
+.tabButton,
+.primaryButton,
+.secondaryButton,
+.softButton {
+    transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+}
+
+.headerButton {
+    width: fit-content;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.14);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.summarySection,
+.section {
+    background: #fff;
+    border: 1px solid var(--gray-light);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.summaryCard {
+    padding: 14px 12px;
+    border-radius: 16px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summaryLabel {
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: var(--gray-500);
+}
+
+.summaryValue {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--foreground);
+}
+
+.summaryHint {
+    margin-top: 12px;
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: var(--gray-500);
+}
+
+.tabBar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.tabButton {
+    min-height: 46px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--gray-light);
+    background: var(--gray-100);
+    color: var(--gray-500);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.activeTab {
+    background: #fff;
+    color: var(--primary);
+    border-color: rgba(37, 99, 235, 0.18);
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+.sectionHeader,
+.cardTop,
+.metaRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--foreground);
+}
+
+.sectionText {
+    margin-top: 4px;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--gray-500);
+    max-width: 36ch;
+}
+
+.countPill,
+.typeBadge,
+.metaChip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.countPill,
+.typeBadge {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+}
+
+.metaChip {
+    background: var(--gray-100);
+    color: var(--gray-500);
+}
+
+.metaText {
+    font-size: 0.72rem;
+    color: var(--gray-400);
+    font-weight: 700;
+}
+
+.cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.savedCard {
+    border-radius: 18px;
+    border: 1px solid var(--gray-200);
+    background: #fff;
+    padding: 14px;
+}
+
+.cardTitle {
+    margin-top: 10px;
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: var(--foreground);
+    line-height: 1.35;
+}
+
+.cardText {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--gray-500);
+}
+
+.metaRow {
+    margin-top: 12px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.cardActions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.primaryButton,
+.secondaryButton,
+.softButton {
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primaryButton {
+    flex: 1 1 140px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.secondaryButton {
+    flex: 1 1 140px;
+    background: #fff;
+    color: var(--foreground);
+    border: 1px solid var(--gray-light);
+}
+
+.softButton {
+    flex: 1 1 140px;
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+.softButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.emptyState {
+    margin-top: 14px;
+    padding: 28px 18px;
+    border-radius: 18px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    text-align: center;
+}
+
+.emptyIcon {
+    width: fit-content;
+    margin: 0 auto 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.emptyTitle {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--foreground);
+}
+
+.emptyText {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--gray-500);
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 96px;
+    transform: translateX(-50%);
+    min-width: 240px;
+    max-width: calc(100vw - 32px);
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.92);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.2);
+}
+
+.bottomSpacer {
+    height: 12px;
+}
+
+.headerButton:active,
+.summaryCard:active,
+.tabButton:active,
+.primaryButton:active,
+.secondaryButton:active,
+.softButton:active,
+.backLink:active {
+    transform: scale(0.98);
+}
+
+@media (min-width: 420px) {
+    .headerRow {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .subtitle {
+        max-width: 42ch;
+    }
+}
