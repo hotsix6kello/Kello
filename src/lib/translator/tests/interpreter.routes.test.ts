@@ -10,9 +10,11 @@ import { TranslationService } from "../../translation/service.ts";
 import { InMemoryTranslationRepository } from "../../translation/repository.ts";
 import { InMemoryHomeTranslatorRepository } from "../repository.ts";
 import { InShopInterpreterService } from "../interpreterService.ts";
+import type { TranslationProvider } from "../../translation/providers.ts";
+import type { TranslationProviderResult } from "../../translation/types.ts";
 
-class FailingTranslationProvider {
-  async translateText(_request: TranslationTextRequest) {
+class FailingTranslationProvider implements TranslationProvider {
+  async translateText(_request: TranslationTextRequest): Promise<TranslationProviderResult> {
     throw new Error("translation_provider_down");
   }
 }
@@ -72,6 +74,11 @@ await run("interpreter session route validates unsupported locales", async () =>
         staffLocale: "ko",
       }),
     }),
+    {
+      async createSession() {
+        return {};
+      },
+    },
   );
 
   assert.equal(response.status, 400);

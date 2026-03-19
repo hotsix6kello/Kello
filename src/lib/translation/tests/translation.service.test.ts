@@ -4,11 +4,11 @@ import { runBatchTranslateJob } from "../jobs/batchTranslate.ts";
 import { MockTranslationProvider, type TranslationProvider } from "../providers.ts";
 import { InMemoryTranslationRepository } from "../repository.ts";
 import { createContentHash, TranslationService } from "../service.ts";
-import type { TranslationTextRequest } from "../types.ts";
+import type { TranslationProviderResult, TranslationTextRequest } from "../types.ts";
 import { getSalonQuickPhraseGroups, getSalonQuickPhraseTexts } from "../../translator/salonGlossary.ts";
 
 class FailingProvider implements TranslationProvider {
-  async translateText(_request: TranslationTextRequest) {
+  async translateText(_request: TranslationTextRequest): Promise<TranslationProviderResult> {
     throw new Error("provider_failed");
   }
 }
