@@ -37,7 +37,6 @@ export default function HomeModals({
               <button className={styles.mapCloseBtn} onClick={onMapClose}>✕</button>
             </div>
             <div className={styles.mapContainer}>
-              {/* @ts-ignore */}
               <ExploreMap
                 items={[]}
                 center={{ lat: destInfo.lat, lng: destInfo.lng, name: destInfo.nameKo }}
