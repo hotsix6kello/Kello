@@ -1,0 +1,685 @@
+{
+  "header": {
+    "view_app": "在APP中查看",
+    "faq": "常見問題",
+    "recent": "最近瀏覽"
+  },
+  "common": {
+    "welcome": "歡迎，旅行者。",
+    "greeting": "早安",
+    "login": "登入",
+    "signup": "註冊",
+    "today": "今天",
+    "move": "移動",
+    "book": "預約",
+    "chat": "諮詢",
+    "my": "我的",
+    "min_unit": "分鐘",
+    "current_operation": "目前行程",
+    "live": "直播",
+    "recommended": "周邊推薦",
+    "based_on_location": "基於目前位置",
+    "start_nav": "開始導航",
+    "delay_10m": "延遲10分鐘",
+    "confirmed": "預約確認",
+    "payment_completed": "支付完成",
+    "weather_clear": "晴朗",
+    "back": "返回",
+    "select_language": "選擇語言",
+    "home_nav": "首頁",
+    "explore_nav": "探索",
+    "planner_nav": "行程",
+    "today_nav": "今日",
+    "my_nav": "我的",
+    "day_unit": "日",
+    "locale": "zh-TW",
+    "cities": {
+      "seoul": "首爾",
+      "busan": "釜山",
+      "jeju": "濟州",
+      "gyeongju": "慶州"
+    },
+    "categories": {
+      "all": "全部",
+      "food": "美食",
+      "beauty": "美容",
+      "event": "演出",
+      "festival": "慶典",
+      "attraction": "景點",
+      "transport": "交通"
+    },
+    "badges": {
+      "english_friendly": "英語友善",
+      "vegan_certified": "純素認證",
+      "michelin": "米其林",
+      "wait_free": "免排隊",
+      "local_experience": "在地體驗",
+      "k_idol_style": "K-Idol風格",
+      "tax_refund": "退稅",
+      "summer_must_go": "夏季必選",
+      "non_verbal": "非語言秀",
+      "family": "家庭親子",
+      "night_view": "夜景",
+      "photo_spot": "打卡點",
+      "hanbok_free_entry": "韓服免費入場",
+      "history": "歷史",
+      "city_view": "城市景觀"
+    },
+    "ingredients": {
+      "vegetables": "蔬菜",
+      "soy": "豆類",
+      "pork": "豬肉",
+      "kimchi": "泡菜",
+      "seafood": "海鮮"
+    },
+    "diet": {
+      "vegan": "純素",
+      "gluten_free": "無麩質",
+      "meat_lover": "肉食愛好者",
+      "pescatarian": "魚素"
+    },
+    "community_nav": "社區",
+    "help_nav": "幫助",
+    "greeting_morning": "早晨",
+    "greeting_afternoon": "下午好",
+    "greeting_evening": "晚安",
+    "search_results": "搜尋結果",
+    "search_results_for": "'{{query}}'的{{count}}個結果",
+    "view_map": "查看位置",
+    "view_map_desc": "在地圖上查看詳細位置",
+    "taxi_call": "呼叫的士",
+    "route_nav": "路徑指引",
+    "transit_nav_desc": "公共交通導航",
+    "copy_address": "複製地址",
+    "copied": "已複製！"
+  },
+  "transport": {
+    "moving_to": "正在前往 {{dest}}",
+    "remaining": "剩餘",
+    "line_2_direction": "2號線 • 往市廳方向",
+    "departed": "已出發",
+    "passing_now": "正在經過...",
+    "current": "目前",
+    "get_off_at": "下車出口:",
+    "exit_3": "3號出口",
+    "getting_off_here": "在這裡下車",
+    "stations": {
+      "samseong": "三成",
+      "seolleung": "宣陵",
+      "yeoksam": "驛三",
+      "gangnam": "江南",
+      "gyodae": "教大",
+      "seocho": "瑞草",
+      "seongsu": "聖水"
+    }
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Beauty Booking Concierge",
+      "title": "您想預約什麼服務？",
+      "subtitle": "首先選擇您想要的美容服務，然後直接進入預約步驟。我們專為手機快速選擇而設計，隨後是店舖對比和預約請求。",
+      "welcome": "{{name}}，請選擇您今天需要的服務。"
+    },
+    "booking": {
+      "step": "Step 1",
+      "title": "請選擇您想要的美容服務",
+      "description": "選擇類別後，您可以在下一步中根據該服務開始探索預約。"
+    },
+    "categories": {
+      "hair": {
+        "label": "美髮",
+        "note": "剪髮、燙髮、染髮、吹風",
+        "summary": "從改變髮型到輕便修整，可以最快開始預約。"
+      },
+      "nail": {
+        "label": "美甲",
+        "note": "凝膠美甲、護理、延長",
+        "summary": "確定想要的心情和設計，輕鬆進入預約階段。"
+      },
+      "esthetic": {
+        "label": "皮膚管理",
+        "note": "皮膚護理、輪廓、鎮靜護理",
+        "summary": "根據皮膚狀況和管理目的，對比店舖並進行預約。"
+      },
+      "waxing": {
+        "label": "脫毛",
+        "note": "面部、身體、比基尼",
+        "summary": "快速找到適合部位和日程的店舖並進入預約流程。"
+      },
+      "makeup": {
+        "label": "化妝",
+        "note": "日常、拍攝、婚禮",
+        "summary": "選擇適合活動日程的化妝服務，立即開始預約。"
+      },
+      "lash": {
+        "label": "美睫",
+        "note": "嫁接、燙睫毛、下睫毛",
+        "summary": "從自然嫁接到濃密造型，直接連接到您想要的面單。"
+      }
+    },
+    "selection": {
+      "eyebrow": "Selected Category",
+      "tags": {
+        "mobile": "手機預約",
+        "comparison": "店舖對比",
+        "inquiry": "實時諮詢"
+      },
+      "empty": "請先選擇一個類別。選擇後將激活開始預約按鈕。"
+    },
+    "cta": {
+      "hint": "在下一個螢幕上根據所選類別探索可用的美容服務。",
+      "button": "開始預約"
+    },
+    "interpreter": {
+      "eyebrow": "Language Support",
+      "title": "如果需要外語預約，請使用翻譯助手",
+      "description": "擔心預約前諮詢或進店溝通？可以透過實時翻譯功能直接聯繫。",
+      "button": "開啟翻譯助手"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "一目了然的選擇類別",
+          "desc": "在第一個螢幕上先選好服務，直接進入預約流程。"
+        },
+        {
+          "title": "無語言擔憂的預約",
+          "desc": "必要時透過實時翻譯助手與店舖自然溝通。"
+        },
+        {
+          "title": "移動優先的預約流程",
+          "desc": "卡片式按鈕和大型 CTA 使單手操作更輕鬆，提高轉換率。"
+        }
+      ]
+    }
+  },
+  "interpreter_ui": {
+    "customer_speaks": "顧客語言",
+    "staff_speaks": "店舖語言",
+    "customer_language": "顧客使用語言",
+    "staff_language": "店舖使用語言",
+    "session": "會話",
+    "expires": "到期"
+  },
+  "home": {
+    "presets": {
+      "beauty_tour": "美容之旅",
+      "foodie": "美食探秘",
+      "heritage": "傳統文化",
+      "k_pop": "K-POP"
+    },
+    "badge": "Kello",
+    "title": "代辦預約 · 自動整理行程 · 實時導航",
+    "subtitle": "",
+    "create_trip_cta": "開始策劃旅行",
+    "how_it_works": {
+      "title": "使用方法",
+      "step1": "請求",
+      "step1_desc": "選擇心儀的美容/美食",
+      "step2": "進行中",
+      "step2_desc": "透過當地管道代辦預約",
+      "step3": "確認",
+      "step3_desc": "自動同步到行程表"
+    },
+    "input_label": "您想去哪裡旅行？",
+    "input_placeholder": "城市、地區、酒店名稱",
+    "days_label": "旅行時間",
+    "value_props": {
+      "itinerary": {
+        "title": "自動整理行程",
+        "desc": "AI構築最佳路徑"
+      },
+      "booking": {
+        "title": "代辦預約",
+        "desc": "美容店、水療等代辦預約"
+      },
+      "navigation": {
+        "title": "實時移動導航",
+        "desc": "無語言障礙的路徑指引"
+      }
+    },
+    "recommended_plans": "推薦旅行方案",
+    "plans": {
+      "2d": {
+        "title": "2日：首爾核心之旅",
+        "label": "2日方案"
+      },
+      "3d": {
+        "title": "3日：K-文化與潮流",
+        "label": "3日方案"
+      },
+      "5d": {
+        "title": "5日：韓國全境遊",
+        "label": "5日方案"
+      },
+      "request_custom_label": "定製",
+      "request_custom_title": "申請 {{days}} 日定製方案",
+      "request_custom_toast": "已申請 {{days}} 日定製方案！我們的禮賓人員將盡快與您聯繫。"
+    }
+  },
+  "explore_page": {
+    "title": "探索",
+    "city_changed": "城市已更改為 {{city}}",
+    "added_to": "已添加到第 {{day}} 天行程",
+    "no_items": "在 {{city}} 未找到項目",
+    "try_changing": "請嘗試更改類別或城市。",
+    "add_to_plan": "+ 添加到行程",
+    "today": "今天",
+    "tonight": "今晚",
+    "starts_from": "₩{{price}} 起",
+    "indoor": "室內",
+    "outdoor": "室外",
+    "badges": {
+      "vegan_only": "僅限純素",
+      "vegan_option": "純素可選"
+    },
+    "filters_title": "篩選",
+    "apply": "應用",
+    "reset": "重置",
+    "adding_item_to": "正在將 <strong>{{title}}</strong> 添加到:",
+    "no_specific_filters": "此類別沒有特定的篩選條件。",
+    "filters": {
+      "show": "類別",
+      "price": "價格",
+      "diet": "飲食",
+      "ingredients": "食材",
+      "date": "日期",
+      "type": "類型",
+      "options": {
+        "skin_care": "皮膚護理",
+        "hair_makeup": "美髮/化妝",
+        "spa": "水療",
+        "nails": "美甲",
+        "vegan": "純素",
+        "vegetarian": "素食",
+        "no_pork": "無豬肉",
+        "halal": "清真",
+        "beef": "牛肉",
+        "pork": "豬肉",
+        "chicken": "雞肉",
+        "seafood": "海鮮",
+        "dairy": "乳製品",
+        "egg": "蛋類",
+        "today": "今天",
+        "weekend": "本週末",
+        "select": "選擇日期",
+        "concert": "演唱會",
+        "show": "演出",
+        "popup": "快閃店",
+        "club": "俱樂部",
+        "exhibition": "展覽"
+      }
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "仁川機場到達",
+    "hotel_checkin": "入住酒店",
+    "f1": {
+      "title": "Plant Cafe Seoul",
+      "area": "梨泰院",
+      "desc": "使用新鮮蔬菜和健康食材製作的100%純素料理",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "金豬食堂",
+      "area": "藥水",
+      "desc": "入選米其林指南的韓國頂級五花肉美食店",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "札嘎其市場 生魚片套餐",
+      "area": "南浦",
+      "desc": "可以感受釜山大海新鮮感的豐盛生魚片套餐",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "Jenny House 清潭",
+      "area": "清潭",
+      "desc": "K-Pop偶像們經常光顧的高端美髮化妝沙龍",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "PPEUM Clinic 江南",
+      "area": "江南",
+      "desc": "外國人訪問量最大、性價比最高的美容診所",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY 潑水秀 2024",
+      "area": "蠶室體育場",
+      "desc": "PSY清涼激情的演出，帶走夏日酷暑",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "亂打秀 明洞",
+      "area": "明洞",
+      "desc": "融合了韓國傳統節奏與現代表演的非語言類演出",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "首爾燈會",
+      "area": "光化門",
+      "desc": "點綴光化門廣場的絢麗精美的花燈盛宴",
+      "price": "免費"
+    },
+    "fs2": {
+      "title": "電影節",
+      "area": "Centum City",
+      "desc": "亞洲最大規模的電影節，全球電影人的聚會",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "景福宮",
+      "area": "鍾路",
+      "desc": "作為朝鮮王朝的正宮，珍藏著韓國歷史與美學的地方",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "樂天世界塔",
+      "area": "蠶室",
+      "desc": "可以將首爾幻麗夜景盡收眼底的韓國最高建築",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "往釜山 KTX",
+      "area": "首爾站",
+      "desc": "從首爾前往釜山最快最便捷的方式",
+      "price": "59,800"
+    }
+  },
+  "fab": {
+    "idle": "創建行程",
+    "pre_trip": "後天出發",
+    "on_trip": "下一站去哪？",
+    "near_deadline": "遲到風險！",
+    "to": "往 {{dest}}",
+    "kride": "呼叫 K.Ride",
+    "kride_sub": "{{mins}}分鐘後到達",
+    "transit": "公共交通指南",
+    "transit_sub": "最快路線指引",
+    "copy": "複製地址",
+    "copy_done": "複製成功！",
+    "card": "給司機看",
+    "card_sub": "計程車司機用卡片",
+    "card_modal_title": "🗺️ 請前往這個地址",
+    "cancel": "關閉"
+  },
+  "today_page": {
+    "title": "今日日程",
+    "active_now": "進行中",
+    "navigate": "路線指引",
+    "booking_ref": "訂單號: {{ref}}",
+    "next_up": "下一項日程",
+    "minutes_left": "{{mins}}分鐘後開始",
+    "depart_early": "現在出發",
+    "timeline": "時間軸",
+    "empty": {
+      "title": "今日暫無日程",
+      "desc": "去探索想要去的地方並添加吧！",
+      "cta": "探索地點"
+    }
+  },
+  "booking_detail": {
+    "select_date": "選擇日期",
+    "select_time": "選擇時間",
+    "total_price": "總金額",
+    "request_booking": "提交預訂請求"
+  },
+  "navigation_page": {
+    "title": "今日行程",
+    "status": {
+      "on_trip": "旅行中",
+      "pre_trip": "準備中",
+      "idle": "暫無行程"
+    },
+    "countdown": {
+      "today": "今天",
+      "starts_in": "{{mins}}分鐘後開始",
+      "traveling_to": "正在前往 {{dest}}"
+    },
+    "empty": {
+      "title": "今天沒有行程",
+      "subtitle": "探索想去的地方並添加到行程中！",
+      "cta": "探索地點"
+    },
+    "actions": {
+      "directions": "查找路線",
+      "booking": "查看預約",
+      "late_risk": "有遲到風險！",
+      "booking_ref": "預約號: {{ref}}",
+      "departure_warning": "⚠️ {{title}} 將在 {{mins}}分鐘內開始 — 請立即出發！"
+    }
+  },
+  "beauty_bookings": {
+    "hero_eyebrow": "My Beauty Booking",
+    "hero_title": "一站式查看預約申請與備註。",
+    "hero_text": "最新預約優先顯示，可快速切換進行中和已完成。",
+    "login_title": "登錄後可查看預約記錄。",
+    "login_text": "登錄後可在一處查看所有美容預約申請和員工備註。",
+    "login_action": "前往登錄",
+    "back_to_my": "返回我的頁面",
+    "deeplink_toast": "已打開您選擇的預約。✨",
+    "tab_all": "全部",
+    "tab_active": "進行中",
+    "tab_completed": "已完成",
+    "tab_canceled": "已取消",
+    "tab_aria": "預約狀態篩選",
+    "status_requested": "待確認",
+    "status_confirmed": "已確認",
+    "status_completed": "已完成",
+    "status_canceled": "已取消",
+    "status_failed": "需關注",
+    "status_change_requested": "變更申請中",
+    "status_desc_requested": "店舖正在確認預約可用性。",
+    "status_desc_confirmed": "預約時間已確認。",
+    "status_desc_completed": "您的到訪已完成。",
+    "status_desc_canceled": "預約已取消。",
+    "status_desc_failed": "預約申請需要關注。",
+    "status_desc_change_requested": "正在申請更改日程或服務。",
+    "category_hair": "美髮",
+    "category_nail": "美甲",
+    "category_esthetic": "皮膚管理",
+    "category_waxing": "脫毛",
+    "category_makeup": "化妝",
+    "category_lash": "美睫",
+    "lang_ko": "韓語",
+    "lang_en": "英語",
+    "lang_ja": "日語",
+    "lang_zh_cn": "中文(簡體)",
+    "lang_zh_hk": "中文(繁體)",
+    "lang_vi": "越南語",
+    "lang_th": "泰語",
+    "lang_id": "印尼語",
+    "lang_ms": "馬來語",
+    "intent_booking_confirm": "預約確認",
+    "intent_service_request": "服務請求",
+    "intent_allergy_notice": "過敏/敏感通知",
+    "intent_style_consultation": "風格諮詢",
+    "card_primary_service": "主要服務",
+    "card_estimated_price": "預估價格",
+    "loading": "正在加載預約...",
+    "empty": "暫無美容預約記錄。",
+    "select_prompt": "選擇預約以查看詳情。",
+    "detail_category": "類別",
+    "detail_designer": "設計師",
+    "detail_requested_at": "申請時間",
+    "detail_status": "目前狀態",
+    "detail_designer_default": "店舖推薦",
+    "timeline_title": "預約進度",
+    "change_request_title": "變更申請信息",
+    "change_request_hint": "工作人員正在審核您的申請，請稍候。",
+    "change_request_time": "申請時間",
+    "change_request_reason": "變更原因",
+    "change_request_reason_empty": "未提供原因",
+    "change_request_time_empty": "確認中",
+    "change_result_title": "最新變更申請結果",
+    "change_result_status": "處理狀態",
+    "change_result_approved": "✅ 已批准",
+    "change_result_rejected": "❌ 已拒絕",
+    "change_result_review_time": "審核時間",
+    "alt_offer_title": "新日程建議",
+    "alt_offer_desc": "您申請的時段已滿，店舖提供了以下備選日程，請選擇。",
+    "alt_offer_admin_label": "店舖說明",
+    "alt_offer_accept": "接受並更新預約",
+    "alt_offer_reject": "拒絕建議",
+    "alt_offer_processing": "處理中...",
+    "alt_offer_response_title": "建議回覆結果",
+    "alt_offer_accepted_result": "您已接受此建議。",
+    "alt_offer_rejected_result": "您已拒絕此建議。",
+    "alt_response_accepted": "已接受建議，預約日程已更新。",
+    "alt_response_rejected": "已拒絕建議。",
+    "alt_slot_select_error": "請選擇一個建議時段。",
+    "service_info_title": "服務信息",
+    "service_primary": "主要服務",
+    "service_addons": "附加選項",
+    "service_region": "預約地區",
+    "service_addons_empty": "未選擇附加選項",
+    "price_title": "價格匯總",
+    "price_base": "基本價格",
+    "price_addon": "附加選項價格",
+    "price_surcharge": "設計師附加費",
+    "price_total": "預估總價",
+    "request_title": "我的請求",
+    "request_memo": "請求備註",
+    "request_memo_empty": "無特殊請求。",
+    "delivery_title": "傳達信息",
+    "delivery_lang": "語言",
+    "delivery_intent": "目的",
+    "message_korean": "給店舖看的韓語備註",
+    "message_localized": "所選語言備註",
+    "manage_title": "管理預約",
+    "manage_desc": "待確認或已確認狀態下可直接取消。取消後不可撤銷。",
+    "manage_disabled": "目前狀態無法管理此預約。",
+    "action_change": "申請變更",
+    "action_cancel": "取消預約",
+    "cancel_panel_title": "取消預約",
+    "cancel_reason_schedule": "日程變更",
+    "cancel_reason_other_shop": "選擇了其他店舖",
+    "cancel_reason_mistake": "誤操作預約",
+    "cancel_reason_etc": "其他",
+    "cancel_details_placeholder": "如有其他取消原因請填寫。",
+    "cancel_confirm": "確認取消",
+    "cancel_processing": "取消中...",
+    "cancel_close": "關閉",
+    "cancel_success": "預約已取消。",
+    "cancel_info_title": "取消信息",
+    "cancel_time": "取消時間",
+    "cancel_time_empty": "確認中",
+    "cancel_by": "取消方",
+    "cancel_by_customer": "顧客",
+    "cancel_by_admin": "店舖",
+    "cancel_by_unknown": "未知",
+    "cancel_reason_label": "原因",
+    "cancel_reason_empty": "未提供原因",
+    "change_panel_title": "申請變更",
+    "change_placeholder": "例：希望改約3月20日下午2點 / 想更改服務項目",
+    "change_submit": "發送變更申請",
+    "change_processing": "發送中...",
+    "change_close": "關閉",
+    "change_success": "變更申請已發送。",
+    "error_login": "請確認登錄狀態。",
+    "error_load_401": "請登錄後查看預約。",
+    "error_load": "無法加載預約。",
+    "error_cancel_400": "目前無法取消此預約。",
+    "error_cancel_403": "只能取消自己的預約。",
+    "error_cancel": "無法取消預約，請稍後重試。",
+    "error_cancel_reason": "請選擇或輸入取消原因。",
+    "error_change_reason": "請輸入您想變更的内容。",
+    "error_change": "無法發送變更申請，請稍後重試。",
+    "error_alt": "操作失敗，請稍後重試。"
+  },
+  "notifications": {
+    "page_title": "通知中心",
+    "back": "← 我的頁面",
+    "loading": "正在加載通知...",
+    "empty": "暫無新通知。",
+    "empty_cta": "預約美容服務",
+    "booking_link": "查看預約詳情 →",
+    "event_booking_created": "預約申請",
+    "event_booking_confirmed": "預約確認",
+    "event_booking_canceled_by_customer": "預約取消",
+    "event_booking_change_requested": "變更申請",
+    "event_booking_change_approved": "變更批准",
+    "event_booking_change_rejected": "變更拒絕",
+    "event_booking_completed": "服務完成",
+    "event_default": "通知"
+  },
+  "beauty_explore": {
+    "hero_title": "探索美容預約",
+    "hero_desc": "先選擇類別可以獲得更準確的結果。現在您可以瀏覽所有美容店舖。",
+    "category_all": "全部",
+    "region_all": "查看全部",
+    "step_1": "選擇店舖",
+    "step_2": "選擇時間",
+    "step_3": "確認詳情",
+    "step_4": "填寫信息",
+    "step_5": "完成",
+    "form_name": "姓名",
+    "form_name_placeholder": "請輸入您的姓名",
+    "form_phone": "聯繫電話",
+    "form_phone_placeholder": "例如: 010-1234-5678",
+    "form_request": "備註要求",
+    "form_request_placeholder": "請輸入任何髮型偏好或特別要求",
+    "agreement_confirm": "我已確認所選的預約信息。",
+    "agreement_confirm_desc": "我確認信息無误，並了解店舖可能會根據實際情況調整時間。",
+    "agreement_privacy": "我同意接收與預約相關的聯繫和指引。",
+    "agreement_privacy_desc": "請同意提供您的聯繫方式以便接收預約確認和變更通知。",
+    "toast_addon_limit": "您最多只能選擇2個附加選項。",
+    "toast_copy_hint": "長按 {{label}} 內容可以進行複製。",
+    "toast_select_time": "請選擇預約時間：",
+    "toast_check_info": "請再次檢查您的預約信息。",
+    "toast_submit_error": "無法保存您的預約請求。請稍後再試。",
+    "label_designer_default": "店舖推薦",
+    "label_service_default": "未選擇",
+    "label_addon_default": "無",
+    "label_select_prompt": "選擇預約以查看詳情。",
+    "label_price_from": "起",
+    "label_today": "今天",
+    "label_tomorrow": "明天",
+    "label_booking_unit": "韓元",
+    "btn_continue": "繼續預約",
+    "btn_submit": "發送預約請求",
+    "btn_reset": "修改預約",
+    "btn_close": "關閉",
+    "completion_title": "預約請求已發送！",
+    "completion_desc1": "店舖將確認預約情況並盡快通知您。",
+    "completion_desc2": "請注意，在收到確認前，預약尚未正式生效。",
+    "completion_desc3": "您可以隨時在“我的預約”菜單中查看進度。",
+    "label_rating": "評分",
+    "label_review": "評價",
+    "btn_select_time": "選擇預約時間",
+    "btn_reselect_time": "重新選擇時間",
+    "empty_store_title": "暫無符合條件的店舖。",
+    "empty_store_desc": "請嘗試選擇其他地區或檢查類別設置。",
+    "booking_panel_title": "請選擇預約日期和時間",
+    "booking_panel_desc": "在所選店舖中選擇可用時段，並進入確認步驟。",
+    "booking_empty_title": "請先選擇一家店舖。",
+    "booking_empty_desc": "點擊上方店舖卡片中的“選擇預約時間”來選取時段。",
+    "booking_not_found_title": "未找到可用預約時間。",
+    "booking_not_found_desc": "請嘗試選擇其他店舖或刷新可用時間。",
+    "booking_date_label": "預約日期",
+    "booking_time_label": "預約時間",
+    "booking_no_date": "暫無可預約日期。",
+    "booking_no_time_wait": "請先選擇日期。",
+    "booking_no_slots": "該日期已約滿，請嘗試選擇其他日期。",
+    "summary_category": "類別",
+    "summary_store": "店舖名稱",
+    "summary_region": "地區",
+    "summary_date": "已選日期",
+    "summary_time": "已選時間",
+    "summary_hint": "選擇日期和時間即可進入下一步。",
+    "summary_btn": "確認預約信息",
+    "confirm_title": "確認預約信息並填寫個人資料",
+    "confirm_desc": "填寫完成所需信息後，即可直接生成一份方便向店員展示的預約申請卡。",
+    "btn_edit": "修改預約內容",
+    "confirm_empty_title": "下一步暫不可用。",
+    "confirm_empty_desc": "選好日期和時間後，點擊“確認預約信息”即可在此繼續填寫。",
+    "confirm_review_error_title": "請再次確認預約信息。",
+    "confirm_review_error_desc": "必須選好店舖、日期和時間方可進行下一步。",
+    "confirm_price_hint": "預估金額僅供參考，實際金額以到店確認後為準。",
+    "label_no_surcharge": "無額外費用",
+    "label_no_designer": "該店舖目前無可預約的設計師。",
+    "label_designer_hint": "建議選擇設計師，若不選擇將由店舖隨機指派。",
+    "label_addon_limit": "最多可選2個"
+  }
+}

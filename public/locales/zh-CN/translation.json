@@ -1,0 +1,32 @@
+{
+  "glossary": {
+    "title": "翻译术语表",
+    "subtitle": "优先应用美业术语的管理员词典。",
+    "domain": "分类",
+    "target_locale": "目标语言",
+    "source_term": "原文术语",
+    "target_term": "译文术语",
+    "priority": "优先级",
+    "version": "版本",
+    "notes": "备注",
+    "active": "启用",
+    "inactive": "停用",
+    "save": "保存",
+    "create": "新增",
+    "delete": "删除",
+    "editing": "编辑中",
+    "empty": "还没有术语。",
+    "loading": "正在加载术语表。",
+    "admin_only": "仅管理员可访问。",
+    "helper": "请先登记睫毛、玻尿酸、修剪线等固定美容术语。",
+    "domains": {
+      "beauty": "美业",
+      "restaurant": "餐饮"
+    },
+    "locales": {
+      "en": "英语",
+      "ja": "日语",
+      "zh-CN": "简体中文"
+    }
+  }
+}

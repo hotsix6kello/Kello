@@ -1,0 +1,139 @@
+{
+    "common": {
+        "welcome": "Bem-vindo, Viajante.",
+        "greeting": "Bom dia",
+        "login": "Entrar",
+        "today": "Hoje",
+        "move": "Ir",
+        "book": "Reservar",
+        "chat": "Chat",
+        "my": "Minha conta",
+        "current_operation": "Em operação",
+        "live": "AO VIVO",
+        "recommended": "Próximo a você",
+        "based_on_location": "Com base na sua localização",
+        "start_nav": "Iniciar Navegação",
+        "delay_10m": "Atraso +10 min",
+        "confirmed": "Confirmado",
+        "payment_completed": "Pagamento concluído",
+        "weather_clear": "Limpo",
+        "back": "Voltar",
+        "select_language": "Selecionar idioma",
+        "home_nav": "Início",
+        "explore_nav": "Explorar",
+        "planner_nav": "Itinerário",
+        "today_nav": "Hoje",
+        "my_nav": "Minha conta",
+        "day_unit": "d",
+        "locale": "pt-PT",
+        "community_nav": "Comunidade"
+    },
+    "transport": {
+        "moving_to": "Indo para {{dest}}",
+        "remaining": "Restando",
+        "line_2_direction": "Linha 2 • Direção City Hall",
+        "departed": "partiu",
+        "passing_now": "Passando agora...",
+        "current": "Atual",
+        "get_off_at": "Descer em",
+        "exit_3": "Saída 3",
+        "getting_off_here": "Estou saindo aqui",
+        "stations": {
+            "samseong": "Samseong",
+            "seolleung": "Seolleung",
+            "yeoksam": "Yeoksam",
+            "gangnam": "Gangnam",
+            "gyodae": "Gyodae",
+            "seocho": "Seocho",
+            "seongsu": "Seongsu"
+        }
+    },
+    "home": {
+        "title_korea": "Coreia Hoje",
+        "title": "Viagem para Coreia, entendida em 3 segundos",
+        "subtitle": "Reservas de Concierge · Itinerário Automático · Navegação",
+        "create_trip_cta": "Começar Planejamento",
+        "input_label": "Para onde você vai viajar?",
+        "input_placeholder": "Cidade, área ou nome do hotel",
+        "days_label": "Período da viagem",
+        "recommended_plans": "Planos de viagem recomendados",
+        "plans": {
+            "2d": {
+                "title": "2 Dias: O Essencial de Seul",
+                "label": "Plano de 2 Dias"
+            },
+            "3d": {
+                "title": "3 Dias: K-Cultura e Estilo",
+                "label": "Plano de 3 Dias"
+            },
+            "5d": {
+                "title": "5 Dias: O Grande Tour",
+                "label": "Plano de 5 Dias"
+            },
+            "request_custom_label": "Sob medida",
+            "request_custom_title": "Solicitar plano de {{days}} dias",
+            "request_custom_toast": "Solicitado plano de {{days}} dias personalizado! Nosso concierge entrará em contato."
+        }
+    },
+    "explore_items": {
+        "airport_arrival": "Chegada no Aeroporto de Incheon",
+        "hotel_checkin": "Check-in no Hotel / Estadia"
+    },
+    "my_page": {
+        "bookings": {
+            "title": "Minhas Reservas",
+            "date_time": "Data / Hora",
+            "area": "Área",
+            "price": "Preço",
+            "new_added": "Nova reserva adicionada!"
+        },
+        "community": {
+            "title": "Minhas Postagens",
+            "empty": "Nenhuma postagem escrita ainda."
+        }
+    },
+    "community_page": {
+        "title": "Community",
+        "subtitle": "Connect with locals & travelers",
+        "filter_all": "All",
+        "filter_meetup": "Food & Meetup",
+        "filter_travel": "Travel Mate",
+        "filter_help": "Local Help",
+        "comments": "Comments",
+        "message": "Message",
+        "type": {
+            "MEETUP": "MEETUP",
+            "TRAVEL": "TRAVEL",
+            "HELP": "HELP",
+            "REVIEW": "REVIEW"
+        },
+        "post": {
+            "1": {
+                "author": "Mika (Japan)",
+                "time": "10 mins ago",
+                "title": "Samgyeopsal Meetup 🥓",
+                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+            },
+            "2": {
+                "author": "John (US)",
+                "time": "1 hour ago",
+                "title": "Hongdae Street Performance 🎸",
+                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+            },
+            "3": {
+                "author": "Jihoon (Korea)",
+                "time": "2 hours ago",
+                "title": "Need help with subway directions? 🚇",
+                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+            },
+            "4": {
+                "author": "Li Wei (China)",
+                "time": "3 hours ago",
+                "title": "K-Beauty Shopping 💄",
+                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+            }
+        },
+        "filter_review": "Reviews",
+        "detail": "Detalhes da Postagem"
+    }
+}

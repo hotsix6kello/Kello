@@ -1,0 +1,833 @@
+{
+  "header": {
+    "view_app": "在APP中查看",
+    "faq": "常见问题",
+    "recent": "最近浏览"
+  },
+  "common": {
+    "welcome": "欢迎，旅行者。",
+    "greeting": "早上好",
+    "login": "登录",
+    "signup": "注册",
+    "today": "今天",
+    "move": "移动",
+    "book": "预约",
+    "chat": "咨询",
+    "my": "我的",
+    "min_unit": "分钟",
+    "current_operation": "当前行程",
+    "live": "直播",
+    "recommended": "周边推荐",
+    "based_on_location": "基于当前位置",
+    "start_nav": "开始导航",
+    "delay_10m": "延迟10分钟",
+    "confirmed": "预约确认",
+    "payment_completed": "支付完成",
+    "weather_clear": "晴朗",
+    "back": "返回",
+    "select_language": "选择语言",
+    "home_nav": "首页",
+    "explore_nav": "探索",
+    "planner_nav": "行程",
+    "today_nav": "今日",
+    "my_nav": "我的",
+    "day_unit": "日",
+    "locale": "zh-CN",
+    "cities": {
+      "seoul": "首尔",
+      "busan": "釜山",
+      "jeju": "济州",
+      "gyeongju": "庆州"
+    },
+    "categories": {
+      "all": "全部",
+      "food": "美食",
+      "beauty": "美容",
+      "event": "演出",
+      "festival": "庆典",
+      "attraction": "景点",
+      "transport": "交通"
+    },
+    "badges": {
+      "english_friendly": "英语友好",
+      "vegan_certified": "纯素认证",
+      "michelin": "米其林",
+      "wait_free": "免排队",
+      "local_experience": "当地体验",
+      "k_idol_style": "K-Idol风格",
+      "tax_refund": "退税",
+      "summer_must_go": "夏季必选",
+      "non_verbal": "非语言秀",
+      "family": "家庭亲子",
+      "night_view": "夜景",
+      "photo_spot": "打卡点",
+      "hanbok_free_entry": "韩服免费入场",
+      "history": "历史",
+      "city_view": "城市景观"
+    },
+    "ingredients": {
+      "vegetables": "蔬菜",
+      "soy": "豆类",
+      "pork": "猪肉",
+      "kimchi": "泡菜",
+      "seafood": "海鲜"
+    },
+    "diet": {
+      "vegan": "纯素",
+      "gluten_free": "无麸质",
+      "meat_lover": "肉食爱好者",
+      "pescatarian": "鱼素"
+    },
+    "community_nav": "社区",
+    "help_nav": "帮助",
+    "greeting_morning": "早上好",
+    "greeting_afternoon": "下午好",
+    "greeting_evening": "晚上好",
+    "search_results": "搜索结果",
+    "search_results_for": "'{{query}}'的{{count}}个结果",
+    "view_map": "查看位置",
+    "view_map_desc": "在地图上查看详细位置",
+    "taxi_call": "呼叫出租车",
+    "route_nav": "路径指引",
+    "transit_nav_desc": "公共交通导航",
+    "copy_address": "复制地址",
+    "copied": "已复制！"
+  },
+  "transport": {
+    "moving_to": "正在前往 {{dest}}",
+    "remaining": "剩余",
+    "line_2_direction": "2号线 • 往市厅方向",
+    "departed": "已出发",
+    "passing_now": "正在经过...",
+    "current": "当前",
+    "get_off_at": "下车出口:",
+    "exit_3": "3号出口",
+    "getting_off_here": "在这里下车",
+    "stations": {
+      "samseong": "三成",
+      "seolleung": "宣陵",
+      "yeoksam": "驿三",
+      "gangnam": "江南",
+      "gyodae": "教大",
+      "seocho": "瑞草",
+      "seongsu": "圣水"
+    }
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Beauty Booking Concierge",
+      "title": "您想预约什么服务？",
+      "subtitle": "首先选择您想要的美容服务，然后直接进入预约步骤。我们专为手机快速选择而设计，随后是店铺对比和预约请求。",
+      "welcome": "{{name}}，请选择您今天需要的服务。"
+    },
+    "booking": {
+      "step": "Step 1",
+      "title": "请选择您想要的美容服务",
+      "description": "选择类别后，您可以在下一步中根据该服务开始探索预约。"
+    },
+    "categories": {
+      "hair": {
+        "label": "美发",
+        "note": "剪发、烫发、染发、吹风",
+        "summary": "从改变发型到轻便修整，可以最快开始预约。"
+      },
+      "nail": {
+        "label": "美甲",
+        "note": "凝胶美甲、护理、延长",
+        "summary": "确定想要的心情和设计，轻松进入预约阶段。"
+      },
+      "esthetic": {
+        "label": "皮肤管理",
+        "note": "皮肤护理、轮廓、镇静护理",
+        "summary": "根据皮肤状况和管理目的，对比店铺并进行预约。"
+      },
+      "waxing": {
+        "label": "脱毛",
+        "note": "面部、身体、比基尼",
+        "summary": "快速找到适合部位和日程的店铺并进入预约流程。"
+      },
+      "makeup": {
+        "label": "化妆",
+        "note": "日常、拍摄、婚礼",
+        "summary": "选择适合活动日程的化妆服务，立即开始预约。"
+      },
+      "lash": {
+        "label": "美睫",
+        "note": "嫁接、烫睫毛、下睫毛",
+        "summary": "从自然嫁接到浓密造型，直接连接到您想要的菜单。"
+      }
+    },
+    "selection": {
+      "eyebrow": "Selected Category",
+      "tags": {
+        "mobile": "手机预约",
+        "comparison": "店铺对比",
+        "inquiry": "实时咨询"
+      },
+      "empty": "请先选择一个类别。选择后将激活开始预约按钮。"
+    },
+    "cta": {
+      "hint": "在下一个屏幕上根据所选类别探索可用的美容服务。",
+      "button": "开始预约"
+    },
+    "interpreter": {
+      "eyebrow": "Language Support",
+      "title": "如果需要外语预约，请使用翻译助手",
+      "description": "担心预约前咨询或进店沟通？可以通过实时翻译功能直接联系。",
+      "button": "开启翻译助手"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "一目了然的选择类别",
+          "desc": "在第一个屏幕上先选好服务，直接进入预约流程。"
+        },
+        {
+          "title": "无语言担忧的预约",
+          "desc": "必要时通过实时翻译助手与店铺自然沟通。"
+        },
+        {
+          "title": "移动优先的预约流程",
+          "desc": "卡片式按钮和大型 CTA 使单手操作更轻松，提高转化率。"
+        }
+      ]
+    }
+  },
+  "interpreter_ui": {
+    "customer_speaks": "顾客语言",
+    "staff_speaks": "店铺语言",
+    "customer_language": "顾客使用语言",
+    "staff_language": "店铺使用语言",
+    "session": "会话",
+    "expires": "到期"
+  },
+  "home": {
+    "presets": {
+      "beauty_tour": "美容之旅",
+      "foodie": "美食探秘",
+      "heritage": "传统文化",
+      "k_pop": "K-POP"
+    },
+    "badge": "Kello",
+    "title": "代办预约 · 自动整理行程 · 实时导航",
+    "subtitle": "",
+    "create_trip_cta": "开始策划旅行",
+    "how_it_works": {
+      "title": "使用方法",
+      "step1": "请求",
+      "step1_desc": "选择心仪的美容/美食",
+      "step2": "进行中",
+      "step2_desc": "通过当地渠道代办预约",
+      "step3": "确认",
+      "step3_desc": "自动同步到行程表"
+    },
+    "input_label": "您想去哪里旅行？",
+    "input_placeholder": "城市、地区、酒店名称",
+    "days_label": "旅行时间",
+    "value_props": {
+      "itinerary": {
+        "title": "自动整理行程",
+        "desc": "AI构筑最佳路径"
+      },
+      "booking": {
+        "title": "代办预约",
+        "desc": "美容店、水疗等代办预约"
+      },
+      "navigation": {
+        "title": "实时移动导航",
+        "desc": "无语言障碍的路径指引"
+      }
+    },
+    "recommended_plans": "推荐旅行方案",
+    "plans": {
+      "2d": {
+        "title": "2日：首尔核心之旅",
+        "label": "2日方案"
+      },
+      "3d": {
+        "title": "3日：K-文化与潮流",
+        "label": "3日方案"
+      },
+      "5d": {
+        "title": "5日：韩国全境游",
+        "label": "5日方案"
+      },
+      "request_custom_label": "定制",
+      "request_custom_title": "申请 {{days}} 日定制方案",
+      "request_custom_toast": "已申请 {{days}} 日定制方案！我们的礼宾人员将尽快与您联系。"
+    }
+  },
+  "explore_page": {
+    "title": "探索",
+    "city_changed": "城市已更改为 {{city}}",
+    "added_to": "已添加到第 {{day}} 天行程",
+    "no_items": "在 {{city}} 未找到项目",
+    "try_changing": "请尝试更改类别或城市。",
+    "add_to_plan": "+ 添加到行程",
+    "today": "今天",
+    "tonight": "今晚",
+    "starts_from": "₩{{price}} 起",
+    "indoor": "室内",
+    "outdoor": "室外",
+    "badges": {
+      "vegan_only": "仅限纯素",
+      "vegan_option": "纯素可选"
+    },
+    "filters_title": "筛选",
+    "apply": "应用",
+    "reset": "重置",
+    "adding_item_to": "正在将 <strong>{{title}}</strong> 添加到:",
+    "no_specific_filters": "此类别没有特定的筛选条件。",
+    "filters": {
+      "show": "类别",
+      "price": "价格",
+      "diet": "饮食",
+      "ingredients": "食材",
+      "date": "日期",
+      "type": "类型",
+      "options": {
+        "skin_care": "皮肤护理",
+        "hair_makeup": "美发/化妆",
+        "spa": "水疗",
+        "nails": "美甲",
+        "vegan": "纯素",
+        "vegetarian": "素食",
+        "no_pork": "无猪肉",
+        "halal": "清真",
+        "beef": "牛肉",
+        "pork": "猪肉",
+        "chicken": "鸡肉",
+        "seafood": "海鲜",
+        "dairy": "乳制品",
+        "egg": "蛋类",
+        "today": "今天",
+        "weekend": "本周末",
+        "select": "选择日期",
+        "concert": "演唱会",
+        "show": "演出",
+        "popup": "快闪店",
+        "club": "俱乐部",
+        "exhibition": "展览"
+      }
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "仁川机场到达",
+    "hotel_checkin": "入住酒店",
+    "f1": {
+      "title": "Plant Cafe Seoul",
+      "area": "梨泰院",
+      "desc": "使用新鲜蔬菜和健康食材制作的100%纯素料理",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "金猪食堂",
+      "area": "药水",
+      "desc": "入选米其林指南的韩国顶级五花肉美食店",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "札嘎其市场 生鱼片套餐",
+      "area": "南浦",
+      "desc": "可以感受釜山大海新鲜感的丰盛生鱼片套餐",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "Jenny House 清潭",
+      "area": "清潭",
+      "desc": "K-Pop偶像们经常光顾的高端美发化妆沙龙",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "PPEUM Clinic 江南",
+      "area": "江南",
+      "desc": "外国人访问量最大、性价比最高的美容诊所",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY 泼水秀 2024",
+      "area": "蚕室体育场",
+      "desc": "PSY清凉激情的演出，带走夏日酷暑",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "乱打秀 明洞",
+      "area": "明洞",
+      "desc": "融合了韩国传统节奏与现代表演的非语言类演出",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "首尔灯会",
+      "area": "光化门",
+      "desc": "点缀光化门广场的绚丽精美的花灯盛宴",
+      "price": "免费"
+    },
+    "fs2": {
+      "title": "电影节",
+      "area": "Centum City",
+      "desc": "亚洲最大规模的电影节，全球电影人的聚会",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "景福宫",
+      "area": "钟路",
+      "desc": "作为朝鲜王朝的正宫，珍藏着韩国历史与美学的地方",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "乐天世界塔",
+      "area": "蚕室",
+      "desc": "可以将首尔幻丽夜景尽收眼底的韩国最高建筑",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "往釜山 KTX",
+      "area": "首尔站",
+      "desc": "从首尔前往釜山最快最便捷的方式",
+      "price": "59,800"
+    }
+  },
+  "fab": {
+    "idle": "创建行程",
+    "pre_trip": "后天出发",
+    "on_trip": "下一站去哪？",
+    "near_deadline": "迟到风险！",
+    "to": "往 {{dest}}",
+    "kride": "呼叫 K.Ride",
+    "kride_sub": "{{mins}}分钟后到达",
+    "transit": "公共交通指南",
+    "transit_sub": "最快路线指引",
+    "copy": "复制地址",
+    "copy_done": "复制成功！",
+    "card": "给司机看",
+    "card_sub": "出租车司机用卡片",
+    "card_modal_title": "🗺️ 请前往这个地址",
+    "cancel": "关闭"
+  },
+  "today_page": {
+    "title": "今日日程",
+    "active_now": "进行中",
+    "navigate": "路线指引",
+    "booking_ref": "订单号: {{ref}}",
+    "next_up": "下一项日程",
+    "minutes_left": "{{mins}}分钟后开始",
+    "depart_early": "现在出发",
+    "timeline": "时间轴",
+    "empty": {
+      "title": "今日暂无日程",
+      "desc": "去探索想要去的地方并添加吧！",
+      "cta": "探索地点"
+    }
+  },
+  "booking_detail": {
+    "select_date": "选择日期",
+    "select_time": "选择时间",
+    "total_price": "总金额",
+    "request_booking": "提交预订请求"
+  },
+  "navigation_page": {
+    "title": "今日行程",
+    "status": {
+      "on_trip": "旅行中",
+      "pre_trip": "准备中",
+      "idle": "暂无行程"
+    },
+    "countdown": {
+      "today": "今天",
+      "starts_in": "{{mins}}分钟后开始",
+      "traveling_to": "正在前往 {{dest}}"
+    },
+    "empty": {
+      "title": "今天没有行程",
+      "subtitle": "探索想去的地方并添加到行程中！",
+      "cta": "探索地点"
+    },
+    "actions": {
+      "directions": "查找路线",
+      "booking": "查看预约",
+      "late_risk": "有迟到风险！",
+      "booking_ref": "预约号: {{ref}}",
+      "departure_warning": "⚠️ {{title}} 将在 {{mins}}分钟内开始 — 请立即出发！"
+    }
+  },
+  "planner_page": {
+    "title": "行程表",
+    "day": "第 {{n}} 天",
+    "add_from_discover": "🔍 添加地点",
+    "auto_build": "✨ 自动完成",
+    "add_to": "添加到 {{slot}}",
+    "book_all": "🎫 请求代办预约",
+    "booking_modal": {
+      "title": "预约请求",
+      "date": "日期",
+      "people": "人数",
+      "people_count": "{{n}} 人",
+      "notes": "特别要求 (选填)",
+      "submit": "提交请求",
+      "submitting": "正在提交...",
+      "success_title": "已收到请求！",
+      "success_desc": "我们的礼宾人员将在24小时内联系您。",
+      "unavailable_title": "该时段不可预约",
+      "unavailable_desc": "我们为您推荐以下替代方案：",
+      "view_status": "查看状态"
+    },
+    "status": {
+      "draft": "草稿",
+      "submitted": "已提交",
+      "confirmed": "已确认",
+      "unavailable": "不可预约",
+      "completed": "已完成"
+    },
+    "slots": {
+      "am": "上午",
+      "pm": "下午",
+      "night": "晚上"
+    }
+  },
+  "my_page": {
+    "profile": {
+      "trust_score": "💎 信任分数",
+      "trust_level_excellent": "极好"
+    },
+    "passport": {
+      "title": "我的护照",
+      "view_all": "查看全部",
+      "seoul": "首尔",
+      "beauty": "美容",
+      "jeju": "济州"
+    },
+    "bookings": {
+      "title": "我的预约",
+      "date_time": "日期 / 时间",
+      "area": "区域",
+      "price": "价格",
+      "today_time": "今天, {{time}}",
+      "tomorrow_time": "明天, {{time}}",
+      "next_week_time": "下周, {{time}}",
+      "new_added": "新预约已添加！"
+    },
+    "community": {
+      "title": "我的社区动态",
+      "empty": "还没有撰写任何社区动态。"
+    }
+  },
+  "community_page": {
+    "title": "社区",
+    "subtitle": "与当地人和旅行者交流",
+    "filter_all": "全部",
+    "filter_meetup": "美食与聚会",
+    "filter_travel": "旅行伙伴",
+    "filter_help": "当地帮助",
+    "comments": "评论",
+    "message": "发信息",
+    "type": {
+      "MEETUP": "聚会",
+      "TRAVEL": "旅行",
+      "HELP": "帮助",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (日本)",
+        "time": "10分钟前",
+        "title": "一起吃五花肉 🥓",
+        "desc": "今晚7点在金猪食堂有人想一起吃五花肉吗？"
+      },
+      "2": {
+        "author": "John (美国)",
+        "time": "1小时前",
+        "title": "弘大街头表演 🎸",
+        "desc": "我正要去弘大看独立乐队表演，一起来吧！"
+      },
+      "3": {
+        "author": "Jihoon (韩国)",
+        "time": "2小时前",
+        "title": "需要地铁方向的帮助吗？ 🚇",
+        "desc": "我住在明洞附近，如果您迷路了，我可以帮您翻译或指路。随时给我发信息！"
+      },
+      "4": {
+        "author": "Li Wei (中国)",
+        "time": "3小时前",
+        "title": "K-Beauty 化妆品购物 💄",
+        "desc": "找个在明洞Olive Young一起购物的伙伴。我知道很多好用的牌子！"
+      }
+    },
+    "filter_review": "Reviews",
+    "detail": "帖子详情"
+  },
+  "home_new": {
+    "hero_title": "韩国旅行，从行程到预订一站式完成",
+    "hero_subtitle": "从行程推荐到预订支持，快速开启。即使是韩国旅行初学者也能轻松使用的伙伴。",
+    "features": {
+      "booking": "一站式预订",
+      "ai_plan": "AI完成行程",
+      "navi": "无需担心迷路"
+    },
+    "input": {
+      "where": "去哪里？",
+      "where_placeholder": "首尔, 釜山, 济州...",
+      "when": "停留多久？",
+      "days_suffix": "天",
+      "who": "和谁一起去？",
+      "who_options": {
+        "solo": "独自一人",
+        "couple": "情侣",
+        "friends": "和朋友",
+        "family": "和家人"
+      },
+      "interests": "想要什么样的主题？",
+      "interests_options": {
+        "food": "美食探访",
+        "shopping": "购物",
+        "beauty": "K-美容",
+        "sightseeing": "观光景点",
+        "night": "夜生活",
+        "experience": "独特体验"
+      }
+    },
+    "cta_helper": "1分钟内获得专属旅行路线",
+    "cta_btn": "开始创建行程",
+    "trust": {
+      "title": "与 Kello 一起的安心旅行",
+      "items": [
+        "韩国旅行专业应用",
+        "AI个性化方案",
+        "无语言障碍导航",
+        "协助预订困难地点"
+      ]
+    }
+  },
+  "beauty_bookings": {
+    "page_title": "我的美容预约",
+    "hero_eyebrow": "My Beauty Booking",
+    "hero_title": "一站式查看预约申请与备注。",
+    "hero_text": "最新预约优先显示，可快速切换进行中和已完成。",
+    "login_title": "登录后可查看预约记录。",
+    "login_text": "登录后可在一处查看所有美容预约申请和员工备注。",
+    "login_action": "前往登录",
+    "back_to_my": "返回我的页面",
+    "deeplink_toast": "已打开您选择的预约。✨",
+    "tab_all": "全部",
+    "tab_active": "进行中",
+    "tab_completed": "已完成",
+    "tab_canceled": "已取消",
+    "tab_aria": "预约状态筛选",
+    "status_requested": "待确认",
+    "status_confirmed": "已确认",
+    "status_completed": "已完成",
+    "status_canceled": "已取消",
+    "status_failed": "需关注",
+    "status_change_requested": "变更申请中",
+    "status_desc_requested": "店铺正在确认预约可用性。",
+    "status_desc_confirmed": "预约时间已确认。",
+    "status_desc_completed": "您的到访已完成。",
+    "status_desc_canceled": "预约已取消。",
+    "status_desc_failed": "预约申请需要关注。",
+    "status_desc_change_requested": "正在申请更改日程或服务。",
+    "category_hair": "美发",
+    "category_nail": "美甲",
+    "category_esthetic": "皮肤管理",
+    "category_waxing": "脱毛",
+    "category_makeup": "化妆",
+    "category_lash": "美睫",
+    "lang_ko": "韩语",
+    "lang_en": "英语",
+    "lang_ja": "日语",
+    "lang_zh_cn": "中文(简体)",
+    "lang_zh_hk": "中文(繁体)",
+    "lang_vi": "越南语",
+    "lang_th": "泰语",
+    "lang_id": "印尼语",
+    "lang_ms": "马来语",
+    "intent_booking_confirm": "预约确认",
+    "intent_service_request": "服务请求",
+    "intent_allergy_notice": "过敏/敏感通知",
+    "intent_style_consultation": "风格咨询",
+    "card_primary_service": "主要服务",
+    "card_estimated_price": "预估价格",
+    "loading": "正在加载预约...",
+    "empty": "暂无美容预约记录。",
+    "select_prompt": "选择预约以查看详情。",
+    "detail_category": "类别",
+    "detail_designer": "设计师",
+    "detail_requested_at": "申请时间",
+    "detail_status": "当前状态",
+    "detail_designer_default": "店铺推荐",
+    "timeline_title": "预约进度",
+    "change_request_title": "变更申请信息",
+    "change_request_hint": "工作人员正在审核您的申请，请稍候。",
+    "change_request_time": "申请时间",
+    "change_request_reason": "变更原因",
+    "change_request_reason_empty": "未提供原因",
+    "change_request_time_empty": "确认中",
+    "change_result_title": "最新变更申请结果",
+    "change_result_status": "处理状态",
+    "change_result_approved": "✅ 已批准",
+    "change_result_rejected": "❌ 已拒绝",
+    "change_result_review_time": "审核时间",
+    "alt_offer_title": "新日程建议",
+    "alt_offer_desc": "您申请的时段已满，店铺提供了以下备选日程，请选择。",
+    "alt_offer_admin_label": "店铺说明",
+    "alt_offer_accept": "接受并更新预约",
+    "alt_offer_reject": "拒绝建议",
+    "alt_offer_processing": "处理中...",
+    "alt_offer_response_title": "建议回复结果",
+    "alt_offer_accepted_result": "您已接受此建议。",
+    "alt_offer_rejected_result": "您已拒绝此建议。",
+    "alt_response_accepted": "已接受建议，预约日程已更新。",
+    "alt_response_rejected": "已拒绝建议。",
+    "alt_slot_select_error": "请选择一个建议时段。",
+    "service_info_title": "服务信息",
+    "service_primary": "主要服务",
+    "service_addons": "附加选项",
+    "service_region": "预约地区",
+    "service_addons_empty": "未选择附加选项",
+    "price_title": "价格汇总",
+    "price_base": "基本价格",
+    "price_addon": "附加选项价格",
+    "price_surcharge": "设计师附加费",
+    "price_total": "预估总价",
+    "request_title": "我的请求",
+    "request_memo": "请求备注",
+    "request_memo_empty": "无特殊请求。",
+    "delivery_title": "传达信息",
+    "delivery_lang": "语言",
+    "delivery_intent": "目的",
+    "message_korean": "给店铺看的韩语备注",
+    "message_localized": "所选语言备注",
+    "manage_title": "管理预约",
+    "manage_desc": "待确认或已确认状态下可直接取消。取消后不可撤销。",
+    "manage_disabled": "当前状态无法管理此预约。",
+    "action_change": "申请变更",
+    "action_cancel": "取消预约",
+    "cancel_panel_title": "取消预约",
+    "cancel_reason_schedule": "日程变更",
+    "cancel_reason_other_shop": "选择了其他店铺",
+    "cancel_reason_mistake": "误操作预约",
+    "cancel_reason_etc": "其他",
+    "cancel_details_placeholder": "如有其他取消原因请填写。",
+    "cancel_confirm": "确认取消",
+    "cancel_processing": "取消中...",
+    "cancel_close": "关闭",
+    "cancel_success": "预约已取消。",
+    "cancel_info_title": "取消信息",
+    "cancel_time": "取消时间",
+    "cancel_time_empty": "确认中",
+    "cancel_by": "取消方",
+    "cancel_by_customer": "顾客",
+    "cancel_by_admin": "店铺",
+    "cancel_by_unknown": "未知",
+    "cancel_reason_label": "原因",
+    "cancel_reason_empty": "未提供原因",
+    "change_panel_title": "申请变更",
+    "change_placeholder": "例：希望改约3月20日下午2点 / 想更改服务项目",
+    "change_submit": "发送变更申请",
+    "change_processing": "发送中...",
+    "change_close": "关闭",
+    "change_success": "变更申请已发送。",
+    "error_login": "请确认登录状态。",
+    "error_load_401": "请登录后查看预约。",
+    "error_load": "无法加载预约。",
+    "error_cancel_400": "当前无法取消此预约。",
+    "error_cancel_403": "只能取消自己的预约。",
+    "error_cancel": "无法取消预约，请稍后重试。",
+    "error_cancel_reason": "请选择或输入取消原因。",
+    "error_change_reason": "请输入您想变更的内容。",
+    "error_change": "无法发送变更申请，请稍后重试。",
+    "error_alt": "操作失败，请稍后重试。"
+  },
+  "notifications": {
+    "page_title": "通知中心",
+    "back": "← 我的页面",
+    "loading": "正在加载通知...",
+    "empty": "暂无新通知。",
+    "empty_cta": "预约美容服务",
+    "booking_link": "查看预约详情 →",
+    "event_booking_created": "预约申请",
+    "event_booking_confirmed": "预约确认",
+    "event_booking_canceled_by_customer": "预约取消",
+    "event_booking_change_requested": "变更申请",
+    "event_booking_change_approved": "变更批准",
+    "event_booking_change_rejected": "变更拒绝",
+    "event_booking_completed": "服务完成",
+    "event_default": "通知"
+  },
+  "beauty_explore": {
+    "hero_title": "探索美容预约",
+    "hero_desc": "先选择类别可以获得更准确的结果。现在您可以浏览所有美容店铺。",
+    "category_all": "全部",
+    "region_all": "查看全部",
+    "step_1": "选择店铺",
+    "step_2": "选择时间",
+    "step_3": "确认详情",
+    "step_4": "填写信息",
+    "step_5": "完成",
+    "form_name": "姓名",
+    "form_name_placeholder": "请输入您的姓名",
+    "form_phone": "联系电话",
+    "form_phone_placeholder": "例如: 010-1234-5678",
+    "form_request": "备注要求",
+    "form_request_placeholder": "请输入任何发型偏好或特别要求",
+    "agreement_confirm": "我已确认所选的预约信息。",
+    "agreement_confirm_desc": "我确认信息无误，并了解店铺可能会根据实际情况调整时间。",
+    "agreement_privacy": "我同意接收与预约相关的联系和指引。",
+    "agreement_privacy_desc": "请同意提供您的联系方式以便接收预约确认和变更通知。",
+    "toast_addon_limit": "您最多只能选择2个附加选项。",
+    "toast_copy_hint": "长按 {{label}} 内容可以进行复制。",
+    "toast_select_time": "请选择预约时间：",
+    "toast_check_info": "请再次检查您的预约信息。",
+    "toast_submit_error": "无法保存您的预约请求。请稍后再试。",
+    "label_designer_default": "店铺推荐",
+    "label_service_default": "未选择",
+    "label_addon_default": "无",
+    "label_select_prompt": "选择预约以查看详情。",
+    "label_price_from": "起",
+    "label_today": "今天",
+    "label_tomorrow": "明天",
+    "label_booking_unit": "韩元",
+    "btn_continue": "继续预约",
+    "btn_submit": "发送预约请求",
+    "btn_reset": "修改预约",
+    "btn_close": "关闭",
+    "completion_title": "预约请求已发送！",
+    "completion_desc1": "店铺将确认预约情况并尽快通知您。",
+    "completion_desc2": "请注意，在收到确认前，预约尚未正式生效。",
+    "completion_desc3": "您可以随时在“我的预约”菜单中查看进度。",
+    "label_rating": "评分",
+    "label_review": "评价",
+    "btn_select_time": "选择预约时间",
+    "btn_reselect_time": "重新选择时间",
+    "empty_store_title": "暂无符合条件的店铺。",
+    "empty_store_desc": "请尝试选择其他地区或检查类别设置。",
+    "booking_panel_title": "请选择预约日期和时间",
+    "booking_panel_desc": "在所选店铺中选择可用时段，并进入确认步骤。",
+    "booking_empty_title": "请先选择一家店铺。",
+    "booking_empty_desc": "点击上方店铺卡片中的“选择预约时间”来选取时段。",
+    "booking_not_found_title": "未找到可用预约时间。",
+    "booking_not_found_desc": "请尝试选择其他店铺或刷新可用时间。",
+    "booking_date_label": "预约日期",
+    "booking_time_label": "预约时间",
+    "booking_no_date": "暂无可预约日期。",
+    "booking_no_time_wait": "请先选择日期。",
+    "booking_no_slots": "该日期已约满，请尝试选择其他日期。",
+    "summary_category": "类别",
+    "summary_store": "店铺名称",
+    "summary_region": "地区",
+    "summary_date": "已选日期",
+    "summary_time": "已选时间",
+    "summary_hint": "选择日期和时间即可进入下一步。",
+    "summary_btn": "确认预约信息",
+    "confirm_title": "确认预约信息并填写个人资料",
+    "confirm_desc": "填写完成所需信息后，即可直接生成一份方便向店员展示的预约申请卡。",
+    "btn_edit": "修改预约内容",
+    "confirm_empty_title": "下一步暂不可用。",
+    "confirm_empty_desc": "选好日期和时间后，点击“确认预约信息”即可在此继续填写。",
+    "confirm_review_error_title": "请再次确认预约信息。",
+    "confirm_review_error_desc": "必须选好店铺、日期和时间方可进行下一步。",
+    "confirm_price_hint": "预估金额仅供参考，实际金额以到店确认后为准。",
+    "label_no_surcharge": "无额外费用",
+    "label_no_designer": "该店铺目前无可预约的设计师。",
+    "label_designer_hint": "建议选择设计师，若不选择将由店铺随机指派。",
+    "label_addon_limit": "最多可选2个"
+  }
+}

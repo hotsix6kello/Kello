@@ -1,0 +1,659 @@
+{
+  "common": {
+    "welcome": "Selamat Datang, Pelancong.",
+    "greeting": "Selamat Pagi",
+    "login": "Log Masuk",
+    "today": "Hari Ini",
+    "move": "Pergi",
+    "book": "Tempah",
+    "chat": "Sembang",
+    "my": "Saya",
+    "current_operation": "Sedang Beroperasi",
+    "live": "LANGSUNG",
+    "recommended": "Cadangan Berdekatan",
+    "based_on_location": "Berdasarkan lokasi anda",
+    "start_nav": "Mulakan Navigasi",
+    "delay_10m": "Lewat +10 min",
+    "confirmed": "Disahkan",
+    "payment_completed": "Pembayaran Selesai",
+    "weather_clear": "Cerah",
+    "back": "Kembali",
+    "select_language": "Pilih Bahasa",
+    "home_nav": "Utama",
+    "explore_nav": "Teroka",
+    "planner_nav": "Jadual",
+    "today_nav": "Hari Ini",
+    "my_nav": "Saya",
+    "day_unit": "h",
+    "locale": "ms-MY",
+    "cities": {
+      "seoul": "Seoul",
+      "busan": "Busan",
+      "jeju": "Jeju",
+      "gyeongju": "Gyeongju"
+    },
+    "categories": {
+      "all": "Semua",
+      "food": "Makanan",
+      "beauty": "Kecantikan",
+      "event": "Acara",
+      "festival": "Festival",
+      "attraction": "Tarikan",
+      "transport": "Pengangkutan"
+    },
+    "community_nav": "Community",
+    "view_map": "Lihat Lokasi",
+    "view_map_desc": "Lihat lokasi terperinci pada peta",
+    "taxi_call": "Panggil Teksi",
+    "route_nav": "Panduan Laluan",
+    "transit_nav_desc": "Navigasi pengangkutan awam",
+    "copy_address": "Salin Alamat",
+    "copied": "Disalin!"
+  },
+  "categories": {
+    "all": "Semua",
+    "food": "Makanan",
+    "beauty": "Kecantikan",
+    "event": "Acara",
+    "festival": "Festival",
+    "attraction": "Tarikan",
+    "transport": "Pengangkutan"
+  },
+  "community_nav": "Community",
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Beauty Booking Concierge",
+      "title": "Apakah perkhidmatan yang ingin anda tempah?",
+      "subtitle": "Pilih perkhidmatan kecantikan yang anda inginkan terlebih dahulu, kemudian terus ke langkah tempahan. Kami telah mereka bentuk skrin ini untuk pemilihan pantas di telefon bimbit, diikuti dengan perbandingan kedai dan permintaan tempahan.",
+      "welcome": "{{name}}, sila pilih perkhidmatan yang anda perlukan hari ini."
+    },
+    "booking": {
+      "step": "Langkah 1",
+      "title": "Sila pilih perkhidmatan kecantikan yang anda inginkan",
+      "description": "Selepas memilih kategori, anda boleh mula meneroka tempahan berdasarkan perkhidmatan tersebut pada langkah seterusnya."
+    },
+    "categories": {
+      "hair": {
+        "label": "Rambut",
+        "note": "Gunting, Perm, Warna, Dry",
+        "summary": "Mulakan tempahan dengan pantas daripada pertukaran gaya rambut kepada penjagaan ringan."
+      },
+      "nail": {
+        "label": "Kuku",
+        "note": "Gel Nail, Penjagaan, Sambungan",
+        "summary": "Tentukan mood dan reka bentuk yang diinginkan, kemudian teruskan ke fasa tempahan dengan mudah."
+      },
+      "esthetic": {
+        "label": "Estetik",
+        "note": "Skincare, Kontur, Penjagaan Menenangkan",
+        "summary": "Bandingkan kedai dan buat tempahan mengikut keadaan kulit dan tujuan penjagaan anda."
+      },
+      "waxing": {
+        "label": "Waxing",
+        "note": "Muka, Badan, Brazilian",
+        "summary": "Cari dan tempah kedai yang sesuai dengan bahagian badan dan jadual anda dengan cepat."
+      },
+      "makeup": {
+        "label": "Makeup",
+        "note": "Harian, Penggambaran, Perkahwinan",
+        "summary": "Pilih perkhidmatan makeup yang sesuai dengan jadual acara anda dan mulakan tempahan segera."
+      },
+      "lash": {
+        "label": "Bulu Mata",
+        "note": "Sambungan, Perm, Underlash",
+        "summary": "Terhubung terus dengan menu yang diinginkan, daripada sambungan asli kepada gaya bervolume."
+      }
+    },
+    "selection": {
+      "eyebrow": "Kategori Terpilih",
+      "tags": {
+        "mobile": "Tempahan Telefon",
+        "comparison": "Perbandingan Kedai",
+        "inquiry": "Pertanyaan Masa Nyata"
+      },
+      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pilihan dibuat."
+    },
+    "cta": {
+      "hint": "Teroka perkhidmatan kecantikan yang tersedia berdasarkan kategori terpilih pada skrin seterusnya.",
+      "button": "Mula Tempahan"
+    },
+    "interpreter": {
+      "eyebrow": "Sokongan Bahasa",
+      "title": "Perlukan tempahan dalam bahasa asing? Gunakan Pembantu Terjemahan",
+      "description": "Jika anda bimbang tentang komunikasi semasa rundingan sebelum menempah atau semasa di kedai, anda boleh berhubung terus dengan penterjemah masa nyata.",
+      "button": "Buka Pembantu Terjemahan"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "Pilihan Kategori Sekilas Pandang",
+          "desc": "Pilih perkhidmatan anda pada skrin pertama dan masuk ke aliran tempahan secara segera."
+        },
+        {
+          "title": "Tempahan Tanpa Bimbang Bahasa",
+          "desc": "Bercakap secara semula jadi dengan kedai menggunakan penterjemah masa nyata apabila diperlukan."
+        },
+        {
+          "title": "Aliran Tempahan Mobile-First",
+          "desc": "Tingkatkan penukaran dengan butang berbentuk kad dan CTA besar yang mudah dipilih dengan sebelah tangan."
+        }
+      ]
+    }
+  },
+  "interpreter_ui": {
+    "customer_speaks": "Bahasa Pelanggan",
+    "staff_speaks": "Bahasa Kedai",
+    "customer_language": "Bahasa yang Digunakan Pelanggan",
+    "staff_language": "Bahasa yang Digunakan Kedai",
+    "session": "Sesi",
+    "expires": "Tamat Tempoh"
+  },
+  "transport": {
+    "moving_to": "Menuju {{dest}}",
+    "remaining": "Berbaki",
+    "line_2_direction": "Laluan 2 • Hala City Hall",
+    "departed": "telah bertolak",
+    "passing_now": "Sedang melalui...",
+    "current": "Semasa",
+    "get_off_at": "Turun di",
+    "exit_3": "Pintu keluar 3",
+    "getting_off_here": "Saya turun di sini",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
+    }
+  },
+  "home": {
+    "title_korea": "Korea Hari Ini",
+    "title": "Percutian Korea, Difahami dalam 3 Saat",
+    "subtitle": "Tempahan Concierge · Jadual Automatik · Navigasi",
+    "create_trip_cta": "Mula Merancang",
+    "input_label": "Ke mana anda melancong?",
+    "input_placeholder": "Bandar, kawasan, nama hotel",
+    "days_label": "Tempoh Percutian",
+    "recommended_plans": "Cadangan Jadual Percutian",
+    "plans": {
+      "2d": {
+        "title": "2 Hari: Inti Pati Seoul",
+        "label": "Jadual 2 Hari"
+      },
+      "3d": {
+        "title": "3 Hari: K-Kultur & Gaya",
+        "label": "Jadual 3 Hari"
+      },
+      "5d": {
+        "title": "5 Hari: Jelajah Hebat",
+        "label": "Jadual 5 Hari"
+      },
+      "request_custom_label": "Tersuai",
+      "request_custom_title": "Mohon Jadual {{days}} Hari",
+      "request_custom_toast": "Memohon jadual {{days}} hari tersuai! Concierge kami akan menghubungi anda."
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "Ketibaan Lapangan Terbang Incheon",
+    "hotel_checkin": "Daftar Masuk Hotel / Menginap"
+  },
+  "explore_page": {
+    "title": "Teroka",
+    "select_city": "Pilih Bandar"
+  },
+  "planner_page": {
+    "title": "Jadual",
+    "day": "Hari {{n}}"
+  },
+  "today_page": {
+    "title": "Hari Ini",
+    "active_now": "Sedang Berlangsung",
+    "navigate": "Navigasi",
+    "booking_ref": "Ref Tempahan: {{ref}}",
+    "next_up": "Seterusnya",
+    "minutes_left": "Bermula dalam {{mins}}m",
+    "depart_early": "Bertolak Sekarang",
+    "timeline": "Timeline",
+    "empty": {
+      "title": "Tiada jadual untuk hari ini",
+      "desc": "Teroka tempat dan tambahkan ke percutian anda!",
+      "cta": "Teroka Tempat"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Pilih Tarikh",
+    "select_time": "Pilih Masa",
+    "total_price": "Jumlah Harga",
+    "request_booking": "Mohon Tempahan"
+  },
+  "navigation_page": {
+    "title": "Hari Ini"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Tempahan Saya",
+      "date_time": "Tarikh / Masa",
+      "area": "Kawasan",
+      "price": "Harga",
+      "new_added": "Tempahan baru ditambah!"
+    },
+    "community": {
+      "title": "Kiriman Komuniti Saya",
+      "empty": "Belum ada kiriman komuniti."
+    }
+  },
+  "community_page": {
+    "title": "Community",
+    "subtitle": "Connect with locals & travelers",
+    "filter_all": "All",
+    "filter_meetup": "Food & Meetup",
+    "filter_travel": "Travel Mate",
+    "filter_help": "Local Help",
+    "comments": "Comments",
+    "message": "Message",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Reviews",
+    "detail": "Butiran Kiriman",
+    "meetup_info": "Maklumat lawatan",
+    "write_post": "Tulis ulasan",
+    "edit": "Edit ulasan",
+    "posting": "Sedang siar...",
+    "hero": {
+      "title": "Komuniti yang mengutamakan ulasan beauty selepas tempahan",
+      "subtitle": "Mulakan dengan ulasan salon beauty, kemudian sambung ke makanan, lawatan dan acara.",
+      "search_placeholder": "Cari nama salon, pengalaman rawatan atau ulasan tempahan"
+    },
+    "categories": {
+      "all": "Semua",
+      "beauty_review": "Ulasan salon beauty",
+      "food_review": "Ulasan makanan",
+      "travel_review": "Ulasan tempat lawatan",
+      "meetup": "Acara",
+      "help": "Soalan"
+    },
+    "sub_filters": {
+      "all": "Semua",
+      "saved": "⭐ Disimpan",
+      "reacted": "💬 Saya sertai",
+      "mine": "👤 Tulisan saya",
+      "recruiting": "📢 Masih dibuka",
+      "active_reactions": "🔥 Banyak respons",
+      "open_meetup": "🤝 Buka ajakan bersama",
+      "weekend": "📅 Hujung minggu ini",
+      "fresh": "✨ Baru dikemas kini"
+    },
+    "states": {
+      "fetch_failed_title": "Tidak dapat memuatkan pos",
+      "fetch_failed_desc": "Sila cuba semula sebentar lagi.",
+      "fetch_failed_tip": "Buka semula halaman ini untuk memuatkan pos terkini.",
+      "empty_title": "Belum ada pos",
+      "empty_desc": "Jadilah orang pertama berkongsi ulasan beauty.",
+      "empty_tip": "Nama salon, pengalaman rawatan dan aliran tempahan sangat membantu orang lain.",
+      "no_results_title": "Tiada pos yang sepadan",
+      "no_results_desc": "Cuba kata kunci atau penapis lain.",
+      "cta_write": "Tulis ulasan",
+      "cta_all": "Lihat semua"
+    },
+    "form": {
+      "category_label": "Kategori",
+      "region_label": "Kawasan",
+      "region_placeholder": "Contoh: Gangnam, Mapo",
+      "vibe_label": "Pilih suasana",
+      "meetup_toggle_title": "Buka ajakan bersama",
+      "meetup_toggle_desc": "Terima isyarat minat daripada orang lain.",
+      "safety_title": "🔒 Panduan keselamatan",
+      "safety_item_1": "• Jangan terus kongsi maklumat hubungan peribadi. Semak reaksi dalam komen dahulu.",
+      "safety_item_2": "• Disyorkan untuk merancang janji di tempat awam.",
+      "image": {
+        "label": "Tambah imej",
+        "title": "Anda boleh memuat naik sehingga {{count}} imej.",
+        "file_only_alert": "Hanya fail imej boleh ditambah.",
+        "limit_alert": "Anda boleh memuat naik sehingga {{count}} imej.",
+        "load_failed_alert": "Imej tidak dapat dimuatkan.",
+        "button_loading": "Sedang menyediakan imej...",
+        "button_limit": "{{count}} imej telah dipilih",
+        "button_add_more": "Tambah lagi imej",
+        "button_select": "Pilih imej",
+        "preview_alt": "Pratonton muat naik {{index}}",
+        "preview_name": "Imej dipilih {{index}}",
+        "preview_desc": "Ini imej ke-{{index}}. Semak pratonton sebelum menghantar.",
+        "remove": "Buang",
+        "saved_name": "Imej dimuat naik {{index}}",
+        "guides": {
+          "beauty_review": "Tambah gambar hasil rawatan atau suasana salon jika ada.",
+          "food_review": "Tambah foto makanan atau suasana kedai untuk beri gambaran lebih jelas.",
+          "travel_review": "Rakam suasana tempat atau titik yang paling berkesan.",
+          "meetup": "Kongsi suasana acara atau sebab seronok pergi bersama.",
+          "help": "Jika ada imej rujukan, muat naik sekali."
+        }
+      },
+      "summary_title": "Ringkasan pos",
+      "summary_region_type": "Kawasan / jenis",
+      "summary_point": "Poin",
+      "summary_meetup": "Pergi bersama",
+      "summary_enabled": "Aktif",
+      "summary_disabled": "Tidak aktif",
+      "submit_with_reactions": "Siarkan ulasan dan kumpul respons",
+      "submit_beauty": "Kongsi ulasan beauty",
+      "submit_default": "Kongsi ulasan"
+    },
+    "quick_entry": {
+      "beauty": {
+        "label": "Ulasan beauty",
+        "sub": "Tempahan · layanan · kepuasan"
+      },
+      "food": {
+        "label": "Ulasan makanan",
+        "sub": "Sambungan hari beauty"
+      },
+      "travel": {
+        "label": "Ulasan lawatan",
+        "sub": "Laluan sebelum dan selepas rawatan"
+      },
+      "write": {
+        "label": "Tulis ulasan",
+        "sub": "Kongsi pengalaman beauty"
+      }
+    },
+    "activity": {
+      "label": "Aktiviti saya:",
+      "summary": "Simpan {{saved}}, sertai {{reacted}}",
+      "new_updates": "✨ Ada kemas kini baru!"
+    },
+    "sort": {
+      "latest": "Terbaharu",
+      "reactions": "Paling banyak respons",
+      "draft": "Pembentukan pelan"
+    },
+    "defaults": {
+      "region": "Seoul"
+    },
+    "fab": {
+      "beauty": "Tulis ulasan beauty",
+      "meetup": "Tulis pos acara"
+    },
+    "report": {
+      "modal_title": "Pilih sebab laporan",
+      "report_action": "Laporkan",
+      "cancel": "Batal",
+      "item_post": "pos",
+      "item_comment": "komen",
+      "submitted_alert": "{{item}} telah dilaporkan.\nSebab: {{reason}}\nKami akan menyemaknya secepat mungkin.",
+      "reasons": {
+        "ad_spam": "Nampak seperti iklan",
+        "offensive": "Ada ungkapan yang tidak menyenangkan",
+        "contact": "Terlalu memaksa untuk hubungi secara peribadi",
+        "unsafe": "Kelihatan tidak selamat",
+        "other": "Lain-lain"
+      }
+    },
+    "detail_page": {
+      "loading": "Sedang memuatkan pos...",
+      "hidden_post": "Pos ini disembunyikan.",
+      "show_hidden": "Tunjuk semula",
+      "not_found": "Pos tidak ditemui.",
+      "hide_post": "Sembunyikan pos ini",
+      "hide_comment": "Sembunyikan",
+      "save_post_aria": "Simpan pos",
+      "body_title": "Butiran",
+      "comments_title": "Komen & pergi bersama",
+      "empty_comments": "Belum ada komen.",
+      "signal_tag": "Isyarat pergi bersama",
+      "comment_input": {
+        "default": "Tulis komen...",
+        "optional": "Mesej tambahan (pilihan)",
+        "send": "Hantar"
+      },
+      "signal_intents": {
+        "interested": "Saya pun mahu pergi",
+        "available_this_week": "Saya lapang minggu ini",
+        "join_if_schedule_fits": "Saya ikut jika masa sesuai",
+        "thanks": "Terima kasih atas maklumat",
+        "question": "Saya ada soalan"
+      },
+      "signal_times": {
+        "this_week": "Minggu ini",
+        "this_weekend": "Hujung minggu ini",
+        "next_week": "Minggu depan",
+        "schedule_coordination": "Selaras tarikh"
+      },
+      "related": {
+        "this_region": "kawasan ini"
+      },
+      "save": {
+        "default": "☆ Simpan",
+        "saved": "⭐ Disimpan"
+      }
+    }
+  },
+  "home_new": {
+    "hero_title": "Percutian Korea, dari jadual hingga tempahan semua dalam satu",
+    "hero_subtitle": "Dari cadangan jadual perjalanan hingga sokongan tempahan dengan pantas. Rakan kongsi yang mudah digunakan walaupun untuk pemula di Korea.",
+    "features": {
+      "booking": "Tempahan serentak",
+      "ai_plan": "Jadual siap dengan AI",
+      "navi": "Tanpa risau sesat jalan"
+    },
+    "input": {
+      "where": "Hendak ke mana?",
+      "where_placeholder": "Seoul, Busan, Jeju...",
+      "when": "Berapa lama menginap?",
+      "days_suffix": " Hari",
+      "who": "Pergi dengan siapa?",
+      "who_options": {
+        "solo": "Bersendirian",
+        "couple": "Pasangan",
+        "friends": "Bersama kawan",
+        "family": "Bersama keluarga"
+      },
+      "interests": "Tema apa yang anda mahukan?",
+      "interests_options": {
+        "food": "Jelajah Makanan",
+        "shopping": "Membeli-belah",
+        "beauty": "K-Beauty",
+        "sightseeing": "Tempat Tarikan",
+        "night": "Kehidupan Malam",
+        "experience": "Pengalaman Unik"
+      }
+    },
+    "cta_helper": "Dapatkan laluan pelancongan yang sesuai dalam 1 minit",
+    "cta_btn": "Mula buat jadual",
+    "trust": {
+      "title": "Percutian Tenang bersama Kello",
+      "items": [
+        "Aplikasi khusus pelancongan Korea",
+        "Cadangan jadual AI yang diperibadikan",
+        "Panduan arah tanpa halangan bahasa",
+        "Sokongan tempahan di tempat yang sukar"
+      ]
+    }
+  },
+  "beauty_bookings": {
+    "page_title": "My Beauty Bookings",
+    "hero_eyebrow": "My Beauty Booking",
+    "hero_title": "Track your booking requests and notes all in one place.",
+    "hero_text": "Your most recent bookings appear first. Quickly filter between active and completed bookings.",
+    "login_title": "Sign in to view your booking history.",
+    "login_text": "Once logged in, you can see all your beauty booking requests and staff notes in one place.",
+    "login_action": "Go to Sign In",
+    "back_to_my": "Back to My Page",
+    "deeplink_toast": "We opened your selected booking. ✨",
+    "tab_all": "All",
+    "tab_active": "Active",
+    "tab_completed": "Completed",
+    "tab_canceled": "Canceled",
+    "tab_aria": "Booking status filter",
+    "status_requested": "Pending Confirmation",
+    "status_confirmed": "Confirmed",
+    "status_completed": "Completed",
+    "status_canceled": "Canceled",
+    "status_failed": "Needs Attention",
+    "status_change_requested": "Change Requested",
+    "status_desc_requested": "The salon is checking availability.",
+    "status_desc_confirmed": "Your appointment time is confirmed.",
+    "status_desc_completed": "Your visit has been completed.",
+    "status_desc_canceled": "Your booking has been canceled.",
+    "status_desc_failed": "Your booking request needs attention.",
+    "status_desc_change_requested": "A change to your schedule or service is being requested.",
+    "category_hair": "Hair",
+    "category_nail": "Nail",
+    "category_esthetic": "Esthetic",
+    "category_waxing": "Waxing",
+    "category_makeup": "Makeup",
+    "category_lash": "Lash",
+    "lang_ko": "Korean",
+    "lang_en": "English",
+    "lang_ja": "Japanese",
+    "lang_zh_cn": "Chinese (Simplified)",
+    "lang_zh_hk": "Chinese (Traditional)",
+    "lang_vi": "Vietnamese",
+    "lang_th": "Thai",
+    "lang_id": "Indonesian",
+    "lang_ms": "Malay",
+    "intent_booking_confirm": "Booking Confirmation",
+    "intent_service_request": "Service Request",
+    "intent_allergy_notice": "Allergy/Sensitivity Notice",
+    "intent_style_consultation": "Style Consultation",
+    "card_primary_service": "Primary Service",
+    "card_estimated_price": "Est. Price",
+    "loading": "Loading your bookings...",
+    "empty": "No beauty bookings yet. Once you complete a booking, it will appear here.",
+    "select_prompt": "Select a booking to view its details.",
+    "detail_category": "Category",
+    "detail_designer": "Designer",
+    "detail_requested_at": "Requested",
+    "detail_status": "Current Status",
+    "detail_designer_default": "Shop's Choice",
+    "timeline_title": "Booking Progress",
+    "change_request_title": "Change Request Info",
+    "change_request_hint": "Our team is reviewing your request. Please wait a moment.",
+    "change_request_time": "Requested At",
+    "change_request_reason": "Reason",
+    "change_request_reason_empty": "No reason provided",
+    "change_request_time_empty": "Checking",
+    "change_result_title": "Latest Change Request Result",
+    "change_result_status": "Status",
+    "change_result_approved": "✅ Approved",
+    "change_result_rejected": "❌ Rejected",
+    "change_result_review_time": "Reviewed At",
+    "alt_offer_title": "New Schedule Offered",
+    "alt_offer_desc": "Your requested time is no longer available. The salon has suggested the options below — please select one.",
+    "alt_offer_admin_label": "Shop Note",
+    "alt_offer_accept": "Accept & Update Booking",
+    "alt_offer_reject": "Decline Offer",
+    "alt_offer_processing": "Processing...",
+    "alt_offer_response_title": "Offer Response Result",
+    "alt_offer_accepted_result": "You have already accepted this offer.",
+    "alt_offer_rejected_result": "You have already declined this offer.",
+    "alt_response_accepted": "Offer accepted. Your booking schedule has been updated.",
+    "alt_response_rejected": "Offer declined.",
+    "alt_slot_select_error": "Please select one of the offered slots.",
+    "service_info_title": "Service Info",
+    "service_primary": "Primary Service",
+    "service_addons": "Add-ons",
+    "service_region": "Booking Region",
+    "service_addons_empty": "No add-ons selected",
+    "price_title": "Price Summary",
+    "price_base": "Base Price",
+    "price_addon": "Add-on Price",
+    "price_surcharge": "Designer Surcharge",
+    "price_total": "Estimated Total",
+    "request_title": "My Requests",
+    "request_memo": "Request Note",
+    "request_memo_empty": "No special requests.",
+    "delivery_title": "Delivery Info",
+    "delivery_lang": "Language",
+    "delivery_intent": "Purpose",
+    "message_korean": "Korean Note for the Salon",
+    "message_localized": "Note in Selected Language",
+    "manage_title": "Manage Booking",
+    "manage_desc": "You can cancel directly when the booking is pending or confirmed. This cannot be undone.",
+    "manage_disabled": "This booking cannot be managed at its current status.",
+    "action_change": "Request Change",
+    "action_cancel": "Cancel Booking",
+    "cancel_panel_title": "Cancel Booking",
+    "cancel_reason_schedule": "Schedule change",
+    "cancel_reason_other_shop": "Chose another salon",
+    "cancel_reason_mistake": "Booked by mistake",
+    "cancel_reason_etc": "Other",
+    "cancel_details_placeholder": "Any additional reason you'd like to share?",
+    "cancel_confirm": "Confirm Cancellation",
+    "cancel_processing": "Canceling...",
+    "cancel_close": "Close",
+    "cancel_success": "Your booking has been canceled.",
+    "cancel_info_title": "Cancellation Info",
+    "cancel_time": "Canceled At",
+    "cancel_time_empty": "Checking",
+    "cancel_by": "Canceled By",
+    "cancel_by_customer": "Customer",
+    "cancel_by_admin": "Salon",
+    "cancel_by_unknown": "Unknown",
+    "cancel_reason_label": "Reason",
+    "cancel_reason_empty": "No reason provided",
+    "change_panel_title": "Request a Change",
+    "change_placeholder": "e.g. I'd like to change to March 20 at 2pm. / I'd like to change my service.",
+    "change_submit": "Send Change Request",
+    "change_processing": "Sending...",
+    "change_close": "Close",
+    "change_success": "Your change request has been sent.",
+    "error_login": "Please check your login status.",
+    "error_load_401": "Sign in to view your bookings.",
+    "error_load": "Could not load your bookings.",
+    "error_cancel_400": "This booking cannot be canceled right now.",
+    "error_cancel_403": "You can only cancel your own bookings.",
+    "error_cancel": "Could not cancel your booking. Please try again later.",
+    "error_cancel_reason": "Please select or enter a cancellation reason.",
+    "error_change_reason": "Please enter what you'd like to change.",
+    "error_change": "Could not send your change request. Please try again later.",
+    "error_alt": "Something went wrong. Please try again later."
+  },
+  "notifications": {
+    "page_title": "Notification Center",
+    "back": "← My Page",
+    "loading": "Loading notifications...",
+    "empty": "No new notifications.",
+    "empty_cta": "Book a Beauty Service",
+    "booking_link": "View Booking Details →",
+    "event_booking_created": "Booking Requested",
+    "event_booking_confirmed": "Booking Confirmed",
+    "event_booking_canceled_by_customer": "Booking Canceled",
+    "event_booking_change_requested": "Change Requested",
+    "event_booking_change_approved": "Change Approved",
+    "event_booking_change_rejected": "Change Declined",
+    "event_booking_completed": "Service Completed",
+    "event_default": "Notification"
+  }
+}

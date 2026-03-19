@@ -1,0 +1,511 @@
+{
+  "common": {
+    "welcome": "ยินดีต้อนรับนักเดินทาง",
+    "greeting": "อรุณสวัสดิ์",
+    "login": "เข้าสู่ระบบ",
+    "today": "วันนี้",
+    "move": "เดินทาง",
+    "book": "จอง",
+    "chat": "แชท",
+    "my": "ของฉัน",
+    "current_operation": "กำลังดำเนินการ",
+    "live": "สด",
+    "recommended": "แนะนำใกล้เคียง",
+    "based_on_location": "ตามตำแหน่งของคุณ",
+    "start_nav": "เริ่มนำทาง",
+    "delay_10m": "ล่าช้า +10 นาที",
+    "confirmed": "ยืนยันแล้ว",
+    "payment_completed": "ชำระเงินสำเร็จ",
+    "weather_clear": "แจ่มใส",
+    "back": "ย้อนกลับ",
+    "select_language": "เลือกภาษา",
+    "home_nav": "หน้าแรก",
+    "explore_nav": "สำรวจ",
+    "planner_nav": "ตารางเวลา",
+    "today_nav": "วันนี้",
+    "my_nav": "ของฉัน",
+    "day_unit": "ว",
+    "locale": "th-TH",
+    "cities": {
+      "seoul": "โซล",
+      "busan": "ปูซาน",
+      "jeju": "เจจู",
+      "gyeongju": "คยองจู"
+    },
+    "categories": {
+      "all": "ทั้งหมด",
+      "food": "อาหาร",
+      "beauty": "บิวตี้",
+      "event": "อีเวนต์",
+      "festival": "เทศกาล",
+      "attraction": "สถานที่",
+      "transport": "การเดินทาง"
+    },
+    "community_nav": "ชุมชน",
+    "help_nav": "ช่วยเหลือ",
+    "greeting_morning": "สวัสดีตอนเช้า",
+    "greeting_afternoon": "สวัสดีตอนบ่าย",
+    "greeting_evening": "สวัสดีตอนเย็น",
+    "search_results": "ผลลัพธ์การค้นหา",
+    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'",
+    "view_map": "ดูตำแหน่ง",
+    "view_map_desc": "ตรวจสอบตำแหน่งโดยละเอียดบนแผนที่",
+    "taxi_call": "เรียกแท็กซี่",
+    "route_nav": "แนะนำเส้นทาง",
+    "transit_nav_desc": "นำทางด้วยขนส่งสาธารณะ",
+    "copy_address": "คัดลอกที่อยู่",
+    "copied": "คัดลอกแล้ว!"
+  },
+  "transport": {
+    "moving_to": "กำลังไปที่ {{dest}}",
+    "remaining": "เหลือ",
+    "line_2_direction": "สาย 2 • มุ่งหน้า City Hall",
+    "departed": "ออกเดินทางแล้ว",
+    "passing_now": "กำลังผ่าน...",
+    "current": "ปัจจุบัน",
+    "get_off_at": "ลงที่",
+    "exit_3": "ทางออก 3",
+    "getting_off_here": "ฉันลงที่นี่",
+    "stations": {
+      "samseong": "ซัมซอง",
+      "seolleung": "ซอลลึง",
+      "yeoksam": "ยอกซัม",
+      "gangnam": "คังนัม",
+      "gyodae": "เคียวแด",
+      "seocho": "ซอโช",
+      "seongsu": "ซองซู"
+    }
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Beauty Booking Concierge",
+      "title": "คุณต้องการจองบริการแบบไหน?",
+      "subtitle": "เลือกบริการความงามที่คุณต้องการก่อน แล้วเข้าสู่ขั้นตอนการจองได้ทันที เราออกแบบมาเพื่อให้เลือกผ่านมือถือได้อย่างรวดเร็ว ตามด้วยการเปรียบเทียบร้านและส่งคำขอจอง",
+      "welcome": "คุณ {{name}} ลองเลือกบริการที่ต้องการในวันนี้ดูสิ"
+    },
+    "booking": {
+      "step": "Step 1",
+      "title": "กรุณาเลือกบริการความงามที่คุณต้องการ",
+      "description": "เมื่อเลือกหมวดหมู่แล้ว คุณสามารถเริ่มสำรวจการจองตามบริการนั้นได้ในขั้นตอนถัดไป"
+    },
+    "categories": {
+      "hair": {
+        "label": "ทำผม",
+        "note": "ตัด, ดัด, ทำสี, ไดร์",
+        "summary": "เริ่มจองได้อย่างรวดเร็ว ตั้งแต่การเปลี่ยนสไตล์ไปจนถึงการจัดแต่งทรงผมเบาๆ"
+      },
+      "nail": {
+        "label": "ทำเล็บ",
+        "note": "เล็บเจล, ดูแลเล็บ, ต่อเล็บ",
+        "summary": "เลือกอารมณ์และดีไซน์ที่ต้องการ แล้วเข้าสู่ขั้นตอนการจองได้อย่างง่ายดาย"
+      },
+      "esthetic": {
+        "label": "นวดหน้า",
+        "note": "ดูแลผิว, ปรับรูปหน้า, ปลอบประโลมผิว",
+        "summary": "เปรียบเทียบร้านและทำการจองตามสภาพผิวและเป้าหมายการรักษาของคุณ"
+      },
+      "waxing": {
+        "label": "แว็กซ์",
+        "note": "ใบหน้า, ตัว, บราซิลเลียน",
+        "summary": "ค้นหาและจองร้านที่เหมาะกับส่วนต่างๆ และตารางเวลาของคุณได้อย่างรวดเร็ว"
+      },
+      "makeup": {
+        "label": "แต่งหน้า",
+        "note": "ทั่วไป, ถ่ายแบบ, งานแต่งงาน",
+        "summary": "เลือกบริการแต่งหน้าที่เหมาะกับตารางงานของคุณและเริ่มจองได้ทันที"
+      },
+      "lash": {
+        "label": "ทำขนตา",
+        "note": "ต่อขนตา, ดัดขนตา, ขนตาล่าง",
+        "summary": "เชื่อมต่อกับเมนูที่ต้องการโดยตรง ตั้งแต่การต่อแบบธรรมชาติไปจนถึงสไตล์หนา"
+      }
+    },
+    "selection": {
+      "eyebrow": "Selected Category",
+      "tags": {
+        "mobile": "จองผ่านมือถือ",
+        "comparison": "เปรียบเทียบร้าน",
+        "inquiry": "สอบถามแบบเรียลไทม์"
+      },
+      "empty": "กรุณาเลือกหมวดหมู่ก่อน ปุ่มเริ่มการจองจะเปิดใช้งานหลังจากเลือกแล้ว"
+    },
+    "cta": {
+      "hint": "สำรวจบริการความงามที่มีตามหมวดหมู่ที่คุณเลือกในหน้าถัดไป",
+      "button": "เริ่มการจอง"
+    },
+    "interpreter": {
+      "eyebrow": "Language Support",
+      "title": "ต้องการจองเป็นภาษาต่างประเทศ? ใช้ผู้ช่วยแปลภาษา",
+      "description": "หากคุณกังวลเรื่องการสื่อสารระหว่างปรึกษาก่อนจองหรือตอนไปที่ร้าน คุณสามารถเชื่อมต่อกับล่ามแบบเรียลไทม์ได้โดยตรง",
+      "button": "เปิดผู้ช่วยแปลภาษา"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "เลือกหมวดหมู่ง่ายๆ",
+          "desc": "เลือกบริการของคุณในหน้าแรกและเข้าสู่ขั้นตอนการจองได้ทันที"
+        },
+        {
+          "title": "ไร้กังวลเรื่องภาษา",
+          "desc": "พูดคุยกับทางร้านได้อย่างเป็นธรรมชาติด้วยล่ามแบบเรียลไทม์เมื่อจำเป็น"
+        },
+        {
+          "title": "ดีไซน์สำหรับมือถือ",
+          "desc": "เพิ่มความสะดวกด้วยปุ่มสไตล์การ์ดและปุ่ม CTA ขนาดใหญ่ที่เลือกได้ง่ายด้วยมือเดียว"
+        }
+      ]
+    }
+  },
+  "interpreter_ui": {
+    "customer_speaks": "ลูกค้าพูด",
+    "staff_speaks": "พนักงานพูด",
+    "customer_language": "ภาษาของลูกค้า",
+    "staff_language": "ภาษาของร้าน",
+    "session": "เซสชัน",
+    "expires": "หมดอายุ"
+  },
+  "home": {
+    "title_korea": "เกาหลีวันนี้",
+    "title": "ทริปเกาหลี เข้าใจภายใน 3 วินาที",
+    "subtitle": "จองผ่านคอนเซียร์จ · จัดตารางอัตโนมัติ · นำทาง",
+    "create_trip_cta": "เริ่มจัดตารางเวลา",
+    "input_label": "คุณกำลังจะไปเที่ยวที่ไหน?",
+    "input_placeholder": "เมือง, ย่าน, ชื่อโรงแรม",
+    "days_label": "ระยะเวลาการเดินทาง",
+    "recommended_plans": "แผนการเดินทางที่แนะนำ",
+    "plans": {
+      "2d": {
+        "title": "2 วัน: โซลที่ต้องไป",
+        "label": "แผน 2 วัน"
+      },
+      "3d": {
+        "title": "3 วัน: เค-คัลเจอร์และสไตล์",
+        "label": "แผน 3 วัน"
+      },
+      "5d": {
+        "title": "5 วัน: ทัวร์เกาหลีแบบจัดเต็ม",
+        "label": "แผน 5 วัน"
+      },
+      "request_custom_label": "กำหนดเอง",
+      "request_custom_title": "ขอแผนการเดินทางแบบ {{days}} วัน",
+      "request_custom_toast": "ขอแผนการเดินทางแบบ {{days}} วันที่กำหนดเองแล้ว! คอนเซียร์จของเราจะติดต่อกลับหาคุณ"
+    }
+  },
+  "explore_page": {
+    "title": "สำรวจ",
+    "select_city": "เลือกเมือง"
+  },
+  "planner_page": {
+    "title": "ตารางเวลา",
+    "day": "วันที่ {{n}}"
+  },
+  "today_page": {
+    "title": "วันนี้",
+    "active_now": "กำลังดำเนินการ",
+    "navigate": "นำทาง",
+    "booking_ref": "รหัสการจอง: {{ref}}",
+    "next_up": "ถัดไป",
+    "minutes_left": "เริ่มในอีก {{mins}} นาที",
+    "depart_early": "ออกเดินทางเลย",
+    "timeline": "ไทม์ไลน์",
+    "empty": {
+      "title": "ไม่มีตารางเวลาสำหรับวันนี้",
+      "desc": "สำรวจสถานที่และเพิ่มลงในทริปของคุณ!",
+      "cta": "สำรวจสถานที่"
+    }
+  },
+  "booking_detail": {
+    "select_date": "เลือกวันที่",
+    "select_time": "เลือกเวลา",
+    "total_price": "ราคารวม",
+    "request_booking": "ขอจอง"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "การจองของฉัน",
+      "date_time": "วันที่ / เวลา",
+      "area": "ย่าน",
+      "price": "ราคา",
+      "new_added": "เพิ่มหน้าการจองใหม่แล้ว!"
+    },
+    "community": {
+      "title": "โพสต์ของฉัน",
+      "empty": "ยังไม่มีโพสต์ในชุมชน"
+    }
+  },
+  "community_page": {
+    "title": "Community",
+    "subtitle": "Connect with locals & travelers",
+    "filter_all": "All",
+    "filter_meetup": "Food & Meetup",
+    "filter_travel": "Travel Mate",
+    "filter_help": "Local Help",
+    "comments": "Comments",
+    "message": "Message",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Reviews",
+    "detail": "รายละเอียดโพสต์"
+  },
+  "explore_items": {
+    "airport_arrival": "ถึงสนามบินอินชอน",
+    "hotel_checkin": "เช็คอินโรงแรม/ที่พัก",
+    "f1": {
+      "title": "Plant Cafe Seoul"
+    },
+    "f2": {
+      "title": "Gold Pig BBQ"
+    },
+    "f3": {
+      "title": "ตลาดอาหารทะเล"
+    },
+    "b1": {
+      "title": "Jenny House Beauty"
+    },
+    "b2": {
+      "title": "PPEUM Clinic Gangnam"
+    },
+    "e1": {
+      "title": "PSY Water Show"
+    },
+    "e2": {
+      "title": "Nanta Show Myeongdong"
+    },
+    "fs1": {
+      "title": "เทศกาลโคมไฟโซล"
+    },
+    "a1": {
+      "title": "พระราชวังเคียงบกกุง"
+    },
+    "a2": {
+      "title": "Lotte World Tower"
+    }
+  },
+  "home_new": {
+    "hero_title": "เที่ยวเกาหลี ครบจบในที่เดียวตั้งแต่แผนการเดินทางไปจนถึงการจอง",
+    "hero_subtitle": "ตั้งแต่การแนะนำแผนการเดินทางไปจนถึงการสนับสนุนการจองอย่างรวดเร็ว คู่หูที่ใช้งานง่ายแม้สำหรับมือใหม่เที่ยวเกาหลี",
+    "features": {
+      "booking": "จองครบในที่เดียว",
+      "ai_plan": "สร้างแผนด้วย AI",
+      "navi": "ไม่ต้องกังวลเรื่องหลงทาง"
+    },
+    "input": {
+      "where": "จะไปที่ไหน?",
+      "where_placeholder": "โซล, ปูซาน, เชจู...",
+      "when": "อยู่นานเท่าไหร่?",
+      "days_suffix": " วัน",
+      "who": "ไปกับใคร?",
+      "who_options": {
+        "solo": "ไปคนเดียว",
+        "couple": "คู่รัก",
+        "friends": "กับเพื่อน",
+        "family": "กับครอบครัว"
+      },
+      "interests": "ต้องการธีมแบบไหน?",
+      "interests_options": {
+        "food": "ตะลุยของอร่อย",
+        "shopping": "ช้อปปิ้ง",
+        "beauty": "K-Beauty",
+        "sightseeing": "สถานที่ท่องเที่ยว",
+        "night": "ไนท์ไลฟ์",
+        "experience": "ประสบการณ์พิเศษ"
+      }
+    },
+    "cta_helper": "รับคอร์สเที่ยวที่ใช่ภายใน 1 นาที",
+    "cta_btn": "เริ่มสร้างแผนการเดินทาง",
+    "trust": {
+      "title": "เที่ยวอย่างสบายใจไปกับ Kello",
+      "items": [
+        "แอปพลิเคชันสำหรับเที่ยวเกาหลีโดยเฉพาะ",
+        "แนะนำแผนการเดินทางเฉพาะบุคคลด้วย AI",
+        "นำทางแบบไร้อุปสรรคทางภาษา",
+        "สนับสนุนการจองในสถานที่ที่จองยาก"
+      ]
+    }
+  },
+  "beauty_bookings": {
+    "page_title": "My Beauty Bookings",
+    "hero_eyebrow": "My Beauty Booking",
+    "hero_title": "Track your booking requests and notes all in one place.",
+    "hero_text": "Your most recent bookings appear first. Quickly filter between active and completed bookings.",
+    "login_title": "Sign in to view your booking history.",
+    "login_text": "Once logged in, you can see all your beauty booking requests and staff notes in one place.",
+    "login_action": "Go to Sign In",
+    "back_to_my": "Back to My Page",
+    "deeplink_toast": "We opened your selected booking. ✨",
+    "tab_all": "All",
+    "tab_active": "Active",
+    "tab_completed": "Completed",
+    "tab_canceled": "Canceled",
+    "tab_aria": "Booking status filter",
+    "status_requested": "Pending Confirmation",
+    "status_confirmed": "Confirmed",
+    "status_completed": "Completed",
+    "status_canceled": "Canceled",
+    "status_failed": "Needs Attention",
+    "status_change_requested": "Change Requested",
+    "status_desc_requested": "The salon is checking availability.",
+    "status_desc_confirmed": "Your appointment time is confirmed.",
+    "status_desc_completed": "Your visit has been completed.",
+    "status_desc_canceled": "Your booking has been canceled.",
+    "status_desc_failed": "Your booking request needs attention.",
+    "status_desc_change_requested": "A change to your schedule or service is being requested.",
+    "category_hair": "Hair",
+    "category_nail": "Nail",
+    "category_esthetic": "Esthetic",
+    "category_waxing": "Waxing",
+    "category_makeup": "Makeup",
+    "category_lash": "Lash",
+    "lang_ko": "Korean",
+    "lang_en": "English",
+    "lang_ja": "Japanese",
+    "lang_zh_cn": "Chinese (Simplified)",
+    "lang_zh_hk": "Chinese (Traditional)",
+    "lang_vi": "Vietnamese",
+    "lang_th": "Thai",
+    "lang_id": "Indonesian",
+    "lang_ms": "Malay",
+    "intent_booking_confirm": "Booking Confirmation",
+    "intent_service_request": "Service Request",
+    "intent_allergy_notice": "Allergy/Sensitivity Notice",
+    "intent_style_consultation": "Style Consultation",
+    "card_primary_service": "Primary Service",
+    "card_estimated_price": "Est. Price",
+    "loading": "Loading your bookings...",
+    "empty": "No beauty bookings yet. Once you complete a booking, it will appear here.",
+    "select_prompt": "Select a booking to view its details.",
+    "detail_category": "Category",
+    "detail_designer": "Designer",
+    "detail_requested_at": "Requested",
+    "detail_status": "Current Status",
+    "detail_designer_default": "Shop's Choice",
+    "timeline_title": "Booking Progress",
+    "change_request_title": "Change Request Info",
+    "change_request_hint": "Our team is reviewing your request. Please wait a moment.",
+    "change_request_time": "Requested At",
+    "change_request_reason": "Reason",
+    "change_request_reason_empty": "No reason provided",
+    "change_request_time_empty": "Checking",
+    "change_result_title": "Latest Change Request Result",
+    "change_result_status": "Status",
+    "change_result_approved": "✅ Approved",
+    "change_result_rejected": "❌ Rejected",
+    "change_result_review_time": "Reviewed At",
+    "alt_offer_title": "New Schedule Offered",
+    "alt_offer_desc": "Your requested time is no longer available. The salon has suggested the options below — please select one.",
+    "alt_offer_admin_label": "Shop Note",
+    "alt_offer_accept": "Accept & Update Booking",
+    "alt_offer_reject": "Decline Offer",
+    "alt_offer_processing": "Processing...",
+    "alt_offer_response_title": "Offer Response Result",
+    "alt_offer_accepted_result": "You have already accepted this offer.",
+    "alt_offer_rejected_result": "You have already declined this offer.",
+    "alt_response_accepted": "Offer accepted. Your booking schedule has been updated.",
+    "alt_response_rejected": "Offer declined.",
+    "alt_slot_select_error": "Please select one of the offered slots.",
+    "service_info_title": "Service Info",
+    "service_primary": "Primary Service",
+    "service_addons": "Add-ons",
+    "service_region": "Booking Region",
+    "service_addons_empty": "No add-ons selected",
+    "price_title": "Price Summary",
+    "price_base": "Base Price",
+    "price_addon": "Add-on Price",
+    "price_surcharge": "Designer Surcharge",
+    "price_total": "Estimated Total",
+    "request_title": "My Requests",
+    "request_memo": "Request Note",
+    "request_memo_empty": "No special requests.",
+    "delivery_title": "Delivery Info",
+    "delivery_lang": "Language",
+    "delivery_intent": "Purpose",
+    "message_korean": "Korean Note for the Salon",
+    "message_localized": "Note in Selected Language",
+    "manage_title": "Manage Booking",
+    "manage_desc": "You can cancel directly when the booking is pending or confirmed. This cannot be undone.",
+    "manage_disabled": "This booking cannot be managed at its current status.",
+    "action_change": "Request Change",
+    "action_cancel": "Cancel Booking",
+    "cancel_panel_title": "Cancel Booking",
+    "cancel_reason_schedule": "Schedule change",
+    "cancel_reason_other_shop": "Chose another salon",
+    "cancel_reason_mistake": "Booked by mistake",
+    "cancel_reason_etc": "Other",
+    "cancel_details_placeholder": "Any additional reason you'd like to share?",
+    "cancel_confirm": "Confirm Cancellation",
+    "cancel_processing": "Canceling...",
+    "cancel_close": "Close",
+    "cancel_success": "Your booking has been canceled.",
+    "cancel_info_title": "Cancellation Info",
+    "cancel_time": "Canceled At",
+    "cancel_time_empty": "Checking",
+    "cancel_by": "Canceled By",
+    "cancel_by_customer": "Customer",
+    "cancel_by_admin": "Salon",
+    "cancel_by_unknown": "Unknown",
+    "cancel_reason_label": "Reason",
+    "cancel_reason_empty": "No reason provided",
+    "change_panel_title": "Request a Change",
+    "change_placeholder": "e.g. I'd like to change to March 20 at 2pm. / I'd like to change my service.",
+    "change_submit": "Send Change Request",
+    "change_processing": "Sending...",
+    "change_close": "Close",
+    "change_success": "Your change request has been sent.",
+    "error_login": "Please check your login status.",
+    "error_load_401": "Sign in to view your bookings.",
+    "error_load": "Could not load your bookings.",
+    "error_cancel_400": "This booking cannot be canceled right now.",
+    "error_cancel_403": "You can only cancel your own bookings.",
+    "error_cancel": "Could not cancel your booking. Please try again later.",
+    "error_cancel_reason": "Please select or enter a cancellation reason.",
+    "error_change_reason": "Please enter what you'd like to change.",
+    "error_change": "Could not send your change request. Please try again later.",
+    "error_alt": "Something went wrong. Please try again later."
+  },
+  "notifications": {
+    "page_title": "Notification Center",
+    "back": "← My Page",
+    "loading": "Loading notifications...",
+    "empty": "No new notifications.",
+    "empty_cta": "Book a Beauty Service",
+    "booking_link": "View Booking Details →",
+    "event_booking_created": "Booking Requested",
+    "event_booking_confirmed": "Booking Confirmed",
+    "event_booking_canceled_by_customer": "Booking Canceled",
+    "event_booking_change_requested": "Change Requested",
+    "event_booking_change_approved": "Change Approved",
+    "event_booking_change_rejected": "Change Declined",
+    "event_booking_completed": "Service Completed",
+    "event_default": "Notification"
+  }
+}

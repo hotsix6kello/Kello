@@ -1,0 +1,32 @@
+{
+  "glossary": {
+    "title": "번역 용어집",
+    "subtitle": "뷰티 용어를 우선 적용하는 관리자 사전입니다.",
+    "domain": "카테고리",
+    "target_locale": "대상 언어",
+    "source_term": "원문 용어",
+    "target_term": "번역 용어",
+    "priority": "우선순위",
+    "version": "버전",
+    "notes": "메모",
+    "active": "활성",
+    "inactive": "비활성",
+    "save": "저장",
+    "create": "신규 등록",
+    "delete": "삭제",
+    "editing": "수정 중",
+    "empty": "등록된 용어가 없습니다.",
+    "loading": "용어집을 불러오는 중입니다.",
+    "admin_only": "관리자만 접근할 수 있습니다.",
+    "helper": "속눈썹, 필러, 컷트라인 같은 고정 번역어를 먼저 등록하세요.",
+    "domains": {
+      "beauty": "뷰티",
+      "restaurant": "레스토랑"
+    },
+    "locales": {
+      "en": "영어",
+      "ja": "일본어",
+      "zh-CN": "중국어 간체"
+    }
+  }
+}

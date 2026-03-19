@@ -44,3 +44,5 @@ yarn-error.log*
 !package-lock.json
 !tsconfig.json
 !eslint.config.mjs
+!public/locales/**/*.json
+!src/**/*.json

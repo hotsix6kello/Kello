@@ -1,0 +1,1689 @@
+{
+  "common": {
+    "welcome": "Chào mừng, Lữ khách.",
+    "greeting": "Chào buổi sáng",
+    "login": "Đăng nhập",
+    "today": "Hôm nay",
+    "move": "Di chuyển",
+    "book": "Đặt chỗ",
+    "chat": "Chat",
+    "my": "Của tôi",
+    "current_operation": "Đang hoạt động",
+    "live": "Trực tiếp",
+    "recommended": "Gần đây",
+    "based_on_location": "Dựa trên vị trí của bạn",
+    "start_nav": "Bắt đầu dẫn đường",
+    "delay_10m": "Trễ +10 phút",
+    "confirmed": "Đã xác nhận",
+    "payment_completed": "Thanh toán thành công",
+    "weather_clear": "Trời quang",
+    "back": "Quay lại",
+    "select_language": "Chọn ngôn ngữ",
+    "home_nav": "Trang chủ",
+    "explore_nav": "Khám phá",
+    "planner_nav": "Lịch trình",
+    "today_nav": "Hôm nay",
+    "my_nav": "Của tôi",
+    "day_unit": "n",
+    "locale": "vi-VN",
+    "loading": "Đang tải...",
+    "cities": {
+      "seoul": "Seoul",
+      "busan": "Busan",
+      "jeju": "Jeju",
+      "gyeongju": "Gyeongju"
+    },
+    "categories": {
+      "all": "Tất cả",
+      "food": "Ẩm thực",
+      "beauty": "Làm đẹp",
+      "event": "Sự kiện",
+      "festival": "Lễ hội",
+      "attraction": "Địa điểm",
+      "transport": "Giao thông"
+    },
+    "community_nav": "Community",
+    "actions": {
+      "apply_again": "N?p l?i",
+      "apply_as_partner": "??ng k? ??i t?c",
+      "booking_help": "H? tr? ??t ch?",
+      "call_112": "G?i 112",
+      "call_119": "G?i 119",
+      "call_1330": "G?i 1330",
+      "close": "??ng",
+      "contact_support": "Li?n h? h? tr?",
+      "copied": "?? sao ch?p",
+      "copy": "Sao ch?p",
+      "emergency_help": "H? tr? kh?n c?p",
+      "explore_places": "Kh?m ph? ??a ?i?m",
+      "general_help": "H? tr? chung",
+      "get_help": "Nh?n h? tr?",
+      "go_to_reviews": "?i t?i ??nh gi?",
+      "interpreter_for_booking": "H? tr? phi?n d?ch cho ??t ch? n?y",
+      "interpreter_help": "H? tr? phi?n d?ch",
+      "large_view": "Xem l?n",
+      "my_bookings": "??t ch? c?a t?i",
+      "open_admin_console": "M? trang qu?n tr?",
+      "open_help_center": "M? trung t?m tr? gi?p",
+      "open_support": "M? h? tr?",
+      "partner_inquiry": "Li?n h? ??i t?c",
+      "report_issue": "B?o c?o s? c?",
+      "save": "L?u",
+      "saved": "?? l?u",
+      "show_booking_phrases": "Hi?n th? c?u cho ??t ch?",
+      "show_in_korean": "Hi?n th? b?ng ti?ng H?n",
+      "support": "H? tr?",
+      "travel_phrasebook": "S? c?u du l?ch",
+      "travel_phrases": "C?u du l?ch",
+      "view_booking": "Xem ??t ch?",
+      "view_bookings": "Xem c?c ??t ch?",
+      "add_to_plan": "Th?m v?o k? ho?ch",
+      "back_to_booking_support": "Quay l?i h? tr? ??t ch?",
+      "browse_community": "Xem c?ng ??ng",
+      "browse_meetups": "Xem meetup",
+      "call_clinic": "G?i ph?ng kh?m",
+      "continue_editing": "Ti?p t?c ch?nh s?a",
+      "create_plan": "T?o k? ho?ch",
+      "explore": "Kh?m ph?",
+      "manage": "Qu?n l?",
+      "open": "M?",
+      "open_my_support": "M? My Support",
+      "open_route": "M? l? tr?nh",
+      "show_emergency_phrases": "Xem c?u kh?n c?p",
+      "use_this_plan": "D?ng k? ho?ch n?y",
+      "view": "Xem",
+      "view_place_details": "Xem chi ti?t ??a ?i?m",
+      "view_plan": "Xem k? ho?ch",
+      "write_review": "Vi?t ??nh gi?"
+    },
+    "states": {
+      "active": "?ang ho?t ??ng",
+      "approved": "?? duy?t",
+      "favorites": "Y?u th?ch",
+      "frequent": "Th??ng d?ng",
+      "needs_review": "C?n xem x?t",
+      "needs_update": "C?n c?p nh?t",
+      "not_available_yet": "Ch?a kh? d?ng",
+      "not_connected": "Ch?a k?t n?i",
+      "not_joined": "Ch?a tham gia",
+      "not_set": "Ch?a thi?t l?p",
+      "not_set_yet": "Ch?a thi?t l?p",
+      "not_verified": "Ch?a x?c minh",
+      "pending_review": "?ang ch? duy?t",
+      "read_only": "Ch? xem",
+      "recent": "G?n ??y",
+      "sign_in_required": "C?n ??ng nh?p",
+      "standard_account": "T?i kho?n ti?u chu?n",
+      "verified": "?? x?c minh",
+      "current_trip_plan": "K? ho?ch chuy?n ?i hi?n t?i",
+      "details_unavailable": "Ch?a c? chi ti?t",
+      "meetups": "Meetup",
+      "planner_draft": "B?n nh?p Planner",
+      "posts": "B?i vi?t",
+      "recently_viewed": "?? xem g?n ??y",
+      "reviews": "??nh gi?",
+      "saved_locally": "?? l?u tr?n thi?t b? n?y"
+    },
+    "runtime": {
+      "counts": {
+        "stops_zero": "{{count}} ?i?m d?ng",
+        "stops_one": "{{count}} ?i?m d?ng",
+        "stops_other": "{{count}} ?i?m d?ng",
+        "days_zero": "{{count}} ng?y",
+        "days_one": "{{count}} ng?y",
+        "days_other": "{{count}} ng?y"
+      }
+    }
+  },
+  "transport": {
+    "moving_to": "Đang đến {{dest}}",
+    "remaining": "Còn lại",
+    "line_2_direction": "Tuyến 2 • Hướng City Hall",
+    "departed": "đã khởi hành",
+    "passing_now": "Đang đi qua...",
+    "current": "Hiện tại",
+    "get_off_at": "Xuống tại",
+    "exit_3": "Cửa 3",
+    "getting_off_here": "Tôi xuống ở đây",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
+    }
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Beauty Booking Concierge",
+      "title": "Bạn muốn đặt dịch vụ nào?",
+      "subtitle": "Chọn dịch vụ làm đẹp mong muốn trước, sau đó tiến thẳng đến bước đặt chỗ. Chúng tôi thiết kế để chọn nhanh trên di động, sau đó là so sánh shop và yêu cầu đặt lịch.",
+      "welcome": "{{name}} ơi, hãy chọn dịch vụ bạn cần hôm nay."
+    },
+    "booking": {
+      "step": "Bước 1",
+      "title": "Vui lòng chọn dịch vụ làm đẹp mong muốn",
+      "description": "Sau khi chọn danh mục, bạn có thể bắt đầu khám phá các lịch đặt dựa trên dịch vụ đó ở bước tiếp theo."
+    },
+    "categories": {
+      "hair": {
+        "label": "Tóc",
+        "note": "Cắt, Uốn, Nhuộm, Sấy",
+        "summary": "Bắt đầu đặt chỗ nhanh chóng từ thay đổi kiểu tóc đến chăm sóc nhẹ nhàng."
+      },
+      "nail": {
+        "label": "Móng",
+        "note": "Sơn gel, Chăm sóc, Nối móng",
+        "summary": "Chọn tâm trạng và thiết kế mong muốn, sau đó dễ dàng chuyển sang giai đoạn đặt chỗ."
+      },
+      "esthetic": {
+        "label": "Thẩm mỹ",
+        "note": "Chăm sóc da, Tạo hình, Chăm sóc làm dịu",
+        "summary": "So sánh các shop và đặt chỗ theo tình trạng da và mục tiêu trị liệu của bạn."
+      },
+      "waxing": {
+        "label": "Waxing",
+        "note": "Mặt, Toàn thân, Brazilian",
+        "summary": "Nhanh chóng tìm và đặt shop phù hợp với vùng da và lịch trình của bạn."
+      },
+      "makeup": {
+        "label": "Trang điểm",
+        "note": "Hàng ngày, Chụp ảnh, Đám cưới",
+        "summary": "Chọn dịch vụ trang điểm phù hợp với lịch trình sự kiện và bắt đầu đặt chỗ ngay."
+      },
+      "lash": {
+        "label": "Lông mi",
+        "note": "Nối mi, Uốn mi, Mi dưới",
+        "summary": "Kết nối trực tiếp với menu mong muốn, từ nối mi tự nhiên đến tạo kiểu dày."
+      }
+    },
+    "selection": {
+      "eyebrow": "Danh mục đã chọn",
+      "tags": {
+        "mobile": "Đặt chỗ di động",
+        "comparison": "So sánh shop",
+        "inquiry": "Hỏi đáp thời gian thực"
+      },
+      "empty": "Vui lòng chọn danh mục trước. Nút bắt đầu đặt chỗ sẽ được kích hoạt sau khi chọn."
+    },
+    "cta": {
+      "hint": "Khám phá các dịch vụ làm đẹp có sẵn dựa trên danh mục đã chọn ở màn hình tiếp theo.",
+      "button": "Bắt đầu đặt chỗ"
+    },
+    "interpreter": {
+      "eyebrow": "Hỗ trợ ngôn ngữ",
+      "title": "Cần đặt chỗ bằng tiếng nước ngoài? Hãy dùng Trợ lý Phiên dịch",
+      "description": "Nếu bạn lo lắng về việc giao tiếp khi tư vấn trước khi đặt hoặc khi đến shop, bạn có thể kết nối trực tiếp với phiên dịch thời gian thực.",
+      "button": "Mở Trợ lý Phiên dịch"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "Chọn danh mục dễ dàng",
+          "desc": "Chọn dịch vụ của bạn ở màn hình đầu tiên và vào luồng đặt chỗ ngay lập tức."
+        },
+        {
+          "title": "Ngôn ngữ không còn là trở ngại",
+          "desc": "Nói chuyện tự nhiên với các shop bằng phiên dịch thời gian thực khi cần thiết."
+        },
+        {
+          "title": "Thiết kế ưu tiên di động",
+          "desc": "Cải thiện chuyển đổi với các nút dạng thẻ và CTA lớn dễ chọn bằng một tay."
+        }
+      ]
+    }
+  },
+  "interpreter_ui": {
+    "customer_speaks": "Khách nói",
+    "staff_speaks": "Nhân viên nói",
+    "customer_language": "Ngôn ngữ của khách",
+    "staff_language": "Ngôn ngữ của shop",
+    "session": "Phiên",
+    "expires": "Hết hạn"
+  },
+  "home": {
+    "title_korea": "Hàn Quốc hôm nay",
+    "title": "Du lịch Hàn Quốc, hiểu trong 3 giây",
+    "subtitle": "Đặt lịch qua Concierge · Lịch trình tự động · Dẫn đường",
+    "create_trip_cta": "Bắt đầu lập kế hoạch",
+    "input_label": "Bạn định đi đâu du lịch?",
+    "input_placeholder": "Thành phố, khu vực, tên khách sạn",
+    "days_label": "Thời gian chuyến đi",
+    "recommended_plans": "Kế hoạch du lịch được đề xuất",
+    "plans": {
+      "2d": {
+        "title": "2 Ngày: Seoul Tinh Hoa",
+        "label": "Kế hoạch 2 Ngày"
+      },
+      "3d": {
+        "title": "3 Ngày: Văn hóa & Phong cách K",
+        "label": "Kế hoạch 3 Ngày"
+      },
+      "5d": {
+        "title": "5 Ngày: Khám phá Toàn diện",
+        "label": "Kế hoạch 5 Ngày"
+      },
+      "request_custom_label": "Tùy chỉnh",
+      "request_custom_title": "Yêu cầu kế hoạch {{days}} ngày",
+      "request_custom_toast": "Đã yêu cầu kế hoạch {{days}} ngày tùy chỉnh! Concierge của chúng tôi sẽ liên hệ với bạn."
+    }
+  },
+  "explore_page": {
+    "title": "Khám phá",
+    "select_city": "Chọn thành phố"
+  },
+  "planner_page": {
+    "title": "Lịch trình",
+    "day": "Ngày {{n}}",
+    "add_from_discover": "Th?m t? Discover",
+    "add_to": "Th?m v?o",
+    "auto_build": "T?o t? ??ng",
+    "book_all": "??t t?t c?",
+    "status": {
+      "completed": "Ho?n th?nh"
+    },
+    "slots": {
+      "morning": "Bu?i s?ng",
+      "afternoon": "Bu?i chi?u",
+      "evening": "Bu?i t?i"
+    },
+    "booking_modal": {
+      "title": "Y?u c?u ??t ch?",
+      "date": "Ng?y",
+      "notes": "Ghi ch?",
+      "people": "S? ng??i",
+      "people_count": "{{count}} ng??i",
+      "submit": "G?i y?u c?u",
+      "submitting": "?ang g?i...",
+      "success_title": "?? g?i y?u c?u",
+      "success_desc": "Y?u c?u ??t ch? ?? ???c g?i. Vui l?ng ch? x?c nh?n.",
+      "view_status": "Xem booking"
+    },
+    "focus": {
+      "title": "Booking ?ang ???c l?m n?i b?t",
+      "desc": "D?ng c?c l?i t?t n?y cho booking ?ang ???c nh?n m?nh trong k? ho?ch c?a b?n."
+    }
+  },
+  "today_page": {
+    "title": "Hôm nay",
+    "active_now": "Đang diễn ra",
+    "navigate": "Dẫn đường",
+    "booking_ref": "Mã đặt: {{ref}}",
+    "next_up": "Tiếp theo",
+    "minutes_left": "Bắt đầu sau {{mins}}p",
+    "depart_early": "Khởi hành ngay",
+    "timeline": "Timeline",
+    "empty": {
+      "title": "Không có lịch trình hôm nay",
+      "desc": "Khám phá địa điểm và thêm vào chuyến đi!",
+      "cta": "Khám phá địa điểm"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Chọn ngày",
+    "select_time": "Chọn giờ",
+    "total_price": "Tổng giá",
+    "request_booking": "Yêu cầu đặt chỗ"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Lịch đặt của tôi",
+      "date_time": "Ngày / Giờ",
+      "area": "Khu vực",
+      "price": "Giá",
+      "new_added": "Đã thêm đơn đặt mới!"
+    },
+    "community": {
+      "title": "Bài viết Của Tôi",
+      "empty": "Chưa có bài viết nào được tạo."
+    },
+    "support": {
+      "short": "H? tr?",
+      "eyebrow": "Trung t?m h? tr?",
+      "title": "H? tr? c?a t?i",
+      "header_cta": "M? trung t?m tr? gi?p",
+      "tabs": {
+        "booking": "H? tr? ??t ch?",
+        "general": "H? tr? chung",
+        "faq": "FAQ / H??ng d?n nhanh",
+        "emergency": "Kh?n c?p / Phi?n d?ch"
+      },
+      "summary": {
+        "booking": {
+          "label": "H? tr? ??t ch?",
+          "desc": "Xem c?c ??t ch? g?n ??y, b?o c?o s? c? v? b??c ti?p theo."
+        },
+        "categories": {
+          "all": "Tất cả",
+          "food": "Ẩm thực",
+          "beauty": "Làm đẹp",
+          "event": "Sự kiện",
+          "festival": "Lễ hội",
+          "attraction": "Địa điểm",
+          "transport": "Giao thông"
+        },
+        "community_nav": "Community",
+        "actions": {
+          "apply_again": "N?p l?i",
+          "apply_as_partner": "??ng k? ??i t?c",
+          "booking_help": "H? tr? ??t ch?",
+          "call_112": "G?i 112",
+          "call_119": "G?i 119",
+          "call_1330": "G?i 1330",
+          "close": "??ng",
+          "contact_support": "Li?n h? h? tr?",
+          "copied": "?? sao ch?p",
+          "copy": "Sao ch?p",
+          "emergency_help": "H? tr? kh?n c?p",
+          "explore_places": "Kh?m ph? ??a ?i?m",
+          "general_help": "H? tr? chung",
+          "get_help": "Nh?n h? tr?",
+          "go_to_reviews": "?i t?i ??nh gi?",
+          "interpreter_for_booking": "H? tr? phi?n d?ch cho ??t ch? n?y",
+          "interpreter_help": "H? tr? phi?n d?ch",
+          "large_view": "Xem l?n",
+          "my_bookings": "??t ch? c?a t?i",
+          "open_admin_console": "M? trang qu?n tr?",
+          "open_help_center": "M? trung t?m tr? gi?p",
+          "open_support": "M? h? tr?",
+          "partner_inquiry": "Li?n h? ??i t?c",
+          "report_issue": "B?o c?o s? c?",
+          "save": "L?u",
+          "saved": "?? l?u",
+          "show_booking_phrases": "Hi?n th? c?u cho ??t ch?",
+          "show_in_korean": "Hi?n th? b?ng ti?ng H?n",
+          "support": "H? tr?",
+          "travel_phrasebook": "S? c?u du l?ch",
+          "travel_phrases": "C?u du l?ch",
+          "view_booking": "Xem ??t ch?",
+          "view_bookings": "Xem c?c ??t ch?",
+          "add_to_plan": "Th?m v?o k? ho?ch",
+          "back_to_booking_support": "Quay l?i h? tr? ??t ch?",
+          "browse_community": "Xem c?ng ??ng",
+          "browse_meetups": "Xem meetup",
+          "call_clinic": "G?i ph?ng kh?m",
+          "continue_editing": "Ti?p t?c ch?nh s?a",
+          "create_plan": "T?o k? ho?ch",
+          "explore": "Kh?m ph?",
+          "manage": "Qu?n l?",
+          "open": "M?",
+          "open_my_support": "M? My Support",
+          "open_route": "M? l? tr?nh",
+          "show_emergency_phrases": "Xem c?u kh?n c?p",
+          "use_this_plan": "D?ng k? ho?ch n?y",
+          "view": "Xem",
+          "view_place_details": "Xem chi ti?t ??a ?i?m",
+          "view_plan": "Xem k? ho?ch",
+          "write_review": "Vi?t ??nh gi?"
+        },
+        "states": {
+          "active": "?ang ho?t ??ng",
+          "approved": "?? duy?t",
+          "favorites": "Y?u th?ch",
+          "frequent": "Th??ng d?ng",
+          "needs_review": "C?n xem x?t",
+          "needs_update": "C?n c?p nh?t",
+          "not_available_yet": "Ch?a kh? d?ng",
+          "not_connected": "Ch?a k?t n?i",
+          "not_joined": "Ch?a tham gia",
+          "not_set": "Ch?a thi?t l?p",
+          "not_set_yet": "Ch?a thi?t l?p",
+          "not_verified": "Ch?a x?c minh",
+          "pending_review": "?ang ch? duy?t",
+          "read_only": "Ch? xem",
+          "recent": "G?n ??y",
+          "sign_in_required": "C?n ??ng nh?p",
+          "standard_account": "T?i kho?n ti?u chu?n",
+          "verified": "?? x?c minh",
+          "current_trip_plan": "K? ho?ch chuy?n ?i hi?n t?i",
+          "details_unavailable": "Ch?a c? chi ti?t",
+          "meetups": "Meetup",
+          "planner_draft": "B?n nh?p Planner",
+          "posts": "B?i vi?t",
+          "recently_viewed": "?? xem g?n ??y",
+          "reviews": "??nh gi?",
+          "saved_locally": "?? l?u tr?n thi?t b? n?y"
+        },
+        "runtime": {
+          "counts": {
+            "stops_zero": "{{count}} ?i?m d?ng",
+            "stops_one": "{{count}} ?i?m d?ng",
+            "stops_other": "{{count}} ?i?m d?ng",
+            "days_zero": "{{count}} ng?y",
+            "days_one": "{{count}} ng?y",
+            "days_other": "{{count}} ng?y"
+          }
+        },
+        "view_map": "Xem vị trí",
+        "view_map_desc": "Xem vị trí chi tiết trên bản đồ",
+        "taxi_call": "Gọi taxi",
+        "route_nav": "Chỉ đường",
+        "transit_nav_desc": "Dẫn đường phương tiện công cộng",
+        "copy_address": "Sao chép địa chỉ",
+        "copied": "Đã sao chép!"
+      },
+      "transport": {
+        "moving_to": "Đang đến {{dest}}",
+        "remaining": "Còn lại",
+        "line_2_direction": "Tuyến 2 • Hướng City Hall",
+        "departed": "đã khởi hành",
+        "passing_now": "Đang đi qua...",
+        "current": "Hiện tại",
+        "get_off_at": "Xuống tại",
+        "exit_3": "Cửa 3",
+        "getting_off_here": "Tôi xuống ở đây",
+        "stations": {
+          "samseong": "Samseong",
+          "seolleung": "Seolleung",
+          "yeoksam": "Yeoksam",
+          "gangnam": "Gangnam",
+          "gyodae": "Gyodae",
+          "seocho": "Seocho",
+          "seongsu": "Seongsu"
+        }
+      },
+      "home": {
+        "title_korea": "Hàn Quốc hôm nay",
+        "title": "Du lịch Hàn Quốc, hiểu trong 3 giây",
+        "subtitle": "Đặt lịch qua Concierge · Lịch trình tự động · Dẫn đường",
+        "create_trip_cta": "Bắt đầu lập kế hoạch",
+        "input_label": "Bạn định đi đâu du lịch?",
+        "input_placeholder": "Thành phố, khu vực, tên khách sạn",
+        "days_label": "Thời gian chuyến đi",
+        "recommended_plans": "Kế hoạch du lịch được đề xuất",
+        "plans": {
+          "2d": {
+            "title": "2 Ngày: Seoul Tinh Hoa",
+            "label": "Kế hoạch 2 Ngày"
+          },
+          "3d": {
+            "title": "3 Ngày: Văn hóa & Phong cách K",
+            "label": "Kế hoạch 3 Ngày"
+          },
+          "5d": {
+            "title": "5 Ngày: Khám phá Toàn diện",
+            "label": "Kế hoạch 5 Ngày"
+          },
+          "request_custom_label": "Tùy chỉnh",
+          "request_custom_title": "Yêu cầu kế hoạch {{days}} ngày",
+          "request_custom_toast": "Đã yêu cầu kế hoạch {{days}} ngày tùy chỉnh! Concierge của chúng tôi sẽ liên hệ với bạn."
+        }
+      },
+      "explore_page": {
+        "title": "Khám phá",
+        "select_city": "Chọn thành phố"
+      },
+      "planner_page": {
+        "title": "Lịch trình",
+        "day": "Ngày {{n}}",
+        "add_from_discover": "Th?m t? Discover",
+        "add_to": "Th?m v?o",
+        "auto_build": "T?o t? ??ng",
+        "book_all": "??t t?t c?",
+        "status": {
+          "completed": "Ho?n th?nh"
+        },
+        "slots": {
+          "morning": "Bu?i s?ng",
+          "afternoon": "Bu?i chi?u",
+          "evening": "Bu?i t?i"
+        },
+        "booking_modal": {
+          "title": "Y?u c?u ??t ch?",
+          "date": "Ng?y",
+          "notes": "Ghi ch?",
+          "people": "S? ng??i",
+          "people_count": "{{count}} ng??i",
+          "submit": "G?i y?u c?u",
+          "submitting": "?ang g?i...",
+          "success_title": "?? g?i y?u c?u",
+          "success_desc": "Y?u c?u ??t ch? ?? ???c g?i. Vui l?ng ch? x?c nh?n.",
+          "view_status": "Xem booking"
+        },
+        "focus": {
+          "title": "Booking ?ang ???c l?m n?i b?t",
+          "desc": "D?ng c?c l?i t?t n?y cho booking ?ang ???c nh?n m?nh trong k? ho?ch c?a b?n."
+        }
+      },
+      "today_page": {
+        "title": "Hôm nay",
+        "active_now": "Đang diễn ra",
+        "navigate": "Dẫn đường",
+        "booking_ref": "Mã đặt: {{ref}}",
+        "next_up": "Tiếp theo",
+        "minutes_left": "Bắt đầu sau {{mins}}p",
+        "depart_early": "Khởi hành ngay",
+        "timeline": "Timeline",
+        "empty": {
+          "title": "Không có lịch trình hôm nay",
+          "desc": "Khám phá địa điểm và thêm vào chuyến đi!",
+          "cta": "Khám phá địa điểm"
+        }
+      },
+      "booking_detail": {
+        "select_date": "Chọn ngày",
+        "select_time": "Chọn giờ",
+        "total_price": "Tổng giá",
+        "request_booking": "Yêu cầu đặt chỗ"
+      },
+      "my_page": {
+        "bookings": {
+          "title": "Lịch đặt của tôi",
+          "date_time": "Ngày / Giờ",
+          "area": "Khu vực",
+          "price": "Giá",
+          "new_added": "Đã thêm đơn đặt mới!"
+        },
+        "community": {
+          "title": "Bài viết Của Tôi",
+          "empty": "Chưa có bài viết nào được tạo."
+        },
+        "support": {
+          "short": "H? tr?",
+          "eyebrow": "Trung t?m h? tr?",
+          "title": "H? tr? c?a t?i",
+          "header_cta": "M? trung t?m tr? gi?p",
+          "tabs": {
+            "booking": "H? tr? ??t ch?",
+            "general": "H? tr? chung",
+            "faq": "FAQ / H??ng d?n nhanh",
+            "emergency": "Kh?n c?p / Phi?n d?ch"
+          },
+          "summary": {
+            "booking": {
+              "label": "H? tr? ??t ch?",
+              "desc": "Xem c?c ??t ch? g?n ??y, b?o c?o s? c? v? b??c ti?p theo."
+            },
+            "general": {
+              "label": "H? tr? chung",
+              "desc": "M? trung t?m tr? gi?p, c?c l?i h? tr? v? l?i an to?n c?ng ??ng."
+            },
+            "emergency": {
+              "label": "Kh?n c?p & Phi?n d?ch",
+              "desc": "B?t ??u t? hub n?y r?i m? trang chi ti?t y t?, c?nh s?t ho?c phi?n d?ch ph? h?p v?i t?nh hu?ng."
+            }
+          },
+          "guides": {
+            "find_booking": {
+              "q": "T?i kh?ng t?m th?y ??a ?i?m ??t ch?.",
+              "a": "H?y ki?m tra b?n ?? v? khu v?c tr?n th? ??t ch? tr??c. N?u v?n kh?ng t?m th?y, h?y m? H? tr? phi?n d?ch ho?c Trung t?m tr? gi?p ?? nh?n h? tr? t?i ch?."
+            },
+            "staff_talk": {
+              "q": "T?i kh? n?i chuy?n v?i nh?n vi?n.",
+              "a": "D?ng H? tr? phi?n d?ch ?? m? nhanh c?ng c? d?ch v? hotline. N?u t?nh hu?ng kh?n c?p, h?y chuy?n th?ng sang H? tr? kh?n c?p."
+            },
+            "change_time": {
+              "q": "T?i mu?n ??i gi? ??t ch?.",
+              "a": "?ng d?ng hi?n ch?a h? tr? ??i gi? tr?c ti?p. H?y b?t ??u t? H? tr? ??t ch? ?? x?c ??nh b??c ti?p theo an to?n nh?t tr??c khi t?i ??a ?i?m."
+            },
+            "cancel_refund": {
+              "q": "T?i h?y ho?c h?i ho?n ti?n ? ??u?",
+              "a": "?ng d?ng hi?n ch?a h? tr? x? l? h?y v? ho?n ti?n. H?y d?ng Trung t?m tr? gi?p ho?c H? tr? ??t ch? ?? ki?m tra h??ng h? tr? ph? h?p v?i tr??ng h?p c?a b?n."
+            },
+            "write_review": {
+              "q": "Sau chuy?n ?i t?i vi?t ??nh gi? nh? th? n?o?",
+              "a": "C?c ??t ch? ?? ho?n t?t c? th? d?n b?n t?i My Community > Reviews. N?u bi?u m?u ??nh gi? ri?ng ch?a s?n s?ng, h?y d?ng tr?nh so?n b?i c?ng ??ng hi?n c?."
+            },
+            "community_safety": {
+              "q": "M?t bu?i meetup ho?c t?nh hu?ng c?ng ??ng khi?n t?i th?y kh?ng an to?n.",
+              "a": "Ng?ng chia s? th?ng tin c? nh?n v? n?u c?n h?y chuy?n sang h? tr? c?nh s?t ho?c kh?n c?p tr??c. Kh? n?ng b?o c?o ri?ng cho c?ng ??ng hi?n c?n h?n ch?, v? v?y h?y d?ng l? tr?nh an to?n ph? h?p v?i t?nh hu?ng.",
+              "cta": "H? tr? an to?n"
+            }
+          },
+          "general": {
+            "help_center": {
+              "label": "Trung t?m tr? gi?p",
+              "desc": "M? c?c trang tr? gi?p chi ti?t cho y t?, c?nh s?t, phi?n d?ch, ?? th?t l?c v? li?n h? kh?n c?p hi?n c? trong ?ng d?ng."
+            },
+            "booking_cancel": {
+              "label": "H? tr? ??t ch? & h?y",
+              "desc": "H?y b?t ??u ? ??y cho vi?c ??i gi?, c?u h?i v? t?nh tr?ng ch? tr?ng v? h??ng d?n b?o c?o s? c?.",
+              "cta": "M? h? tr? ??t ch?"
+            },
+            "community_safety": {
+              "label": "An to?n c?ng ??ng",
+              "desc": "N?u meetup khi?n b?n th?y kh?ng an to?n ho?c kh?ng tho?i m?i, h?y chuy?n sang l? tr?nh an to?n tr??c.",
+              "cta": "M? h? tr? an to?n"
+            },
+            "partner": {
+              "label": "Li?n h? ??i t?c",
+              "desc": "C?c lu?ng d?nh cho doanh nghi?p v? ??i t?c c? th? ti?p t?c t? trang ??ng k? ??i t?c."
+            },
+            "title": "H? tr? chung",
+            "desc": "D?ng c?c l?i v?o n?y khi b?n ch?a ch?c n?n ?i ??u ti?p theo.",
+            "report_notice": "Hi?n ch?a c? ticket tr?c ti?p trong ?ng d?ng. V?i c?u h?i v? ??t ch?, h?y d?ng c?c l?i h? tr? b?n d??i."
+          },
+          "emergency": {
+            "overview": {
+              "label": "H? tr? kh?n c?p",
+              "desc": "M? trang h? tr? ch?nh cho y t?, c?nh s?t, ?? th?t l?c v? phi?n d?ch.",
+              "cta": "M? h? tr? kh?n c?p"
+            },
+            "interp": {
+              "label": "H? tr? phi?n d?ch",
+              "desc": "D?ng c?ng c? d?ch v? li?n k?t hotline khi b?n kh? trao ??i v?i nh?n vi?n t?i ??a ?i?m.",
+              "cta": "M? h? tr? phi?n d?ch",
+              "booking_desc": "Mang theo ng? c?nh ??t ch? n?y sang trang phi?n d?ch ?? nh?n vi?n hi?u b?n ?ang n?i v? ??t ch? n?o."
+            },
+            "phrases": {
+              "label": "C?u kh?n c?p",
+              "desc": "M? c?c c?u ti?ng H?n c? l?n ?? cho nh?n vi?n, t?i x? ho?c qu?y h? tr? xem tr?c ti?p.",
+              "cta": "M? c?u du l?ch",
+              "booking_label": "C?u cho ??t ch?",
+              "booking_desc": "H?y m? c?u cho ??t ch? tr??c n?u b?n c?n gi?i th?ch v? ??t ch?, vi?c ??n mu?n ho?c t?nh tr?ng check-in cho nh?n vi?n."
+            },
+            "medical": {
+              "label": "H? tr? y t?",
+              "desc": "N?u b?n c?n ph?ng kh?m ho?c h? tr? y t? kh?n c?p, h?y m? ngay l? tr?nh y t?.",
+              "cta": "H? tr? y t?"
+            },
+            "police": {
+              "label": "C?nh s?t / An to?n",
+              "desc": "D?ng l? tr?nh an to?n cho li?n h? c?nh s?t, h??ng d?n x? l? s? c? ho?c t?nh hu?ng nguy hi?m.",
+              "cta": "M? h? tr? an to?n"
+            },
+            "title": "Kh?n c?p / Phi?n d?ch",
+            "desc": "My Support l? hub trung t?m. H?y d?ng c?c trang chi ti?t b?n d??i khi t?nh hu?ng kh?n c?p ho?c vi?c giao ti?p tr? n?n kh? kh?n.",
+            "interpreter_notice": "C?c li?n k?t phi?n d?ch c? ? b?n d??i. M?t s? t?y ch?n c? th? m? m?n h?nh g?i ho?c trang d?ch b?n ngo?i.",
+            "hub_notice": "D?ng hub n?y ?? ch?n ??ng trang chi ti?t. C?c trang /help/* gi?i th?ch s?u h?n t?ng l? tr?nh, c?n Travel Phrasebook d?nh cho c?c c?u ti?ng H?n c? th? ??a cho ng??i kh?c xem."
+          },
+          "booking": {
+            "banner_report": "B?n ?ang b?o c?o s? c? cho {{bookingName}}. H?y ch?n l? tr?nh h? tr? ph? h?p v?i v?n ?? n?y.",
+            "banner_interpreter": "C?n h? tr? ng?n ng? cho {{bookingName}}? Li?n k?t phi?n d?ch v? kh?n c?p ?? s?n s?ng ? b?n d??i.",
+            "banner_default": "C?n h? tr? cho {{bookingName}}? H?y b?t ??u v?i th? ??t ch? b?n d??i.",
+            "banner_fallback": "C?n h? tr? cho m?t ??t ch?? H?y b?t ??u v?i ??t ch? g?n nh?t b?n d??i.",
+            "title": "H? tr? ??t ch?",
+            "desc": "D?ng c?c ??t ch? g?n ??y nh? c?ch nhanh nh?t ?? t?m ??ng l? tr?nh h? tr?.",
+            "empty": {
+              "title": "Hi?n kh?ng c? ??t ch? n?o ?? h?i v?.",
+              "desc": "H?y ki?m tra l?i My Bookings sau ho?c kh?m ph? ??a ?i?m ?? b?t ??u k? ho?ch chuy?n ?i c?a b?n."
+            },
+            "context_title": "H? tr? cho ??t ch? n?y",
+            "context_desc": "Gi? ng? c?nh ??t ch? n?y hi?n th? khi b?n chuy?n gi?a h? tr? ??t ch?, h? tr? phi?n d?ch v? c?u ng?n."
+          },
+          "subtitle": "T?m ??ng l?i h? tr? cho ??t ch?, c?u h?i v? c?c t?nh hu?ng du l?ch kh?n c?p.",
+          "faq": {
+            "title": "FAQ / H??ng d?n nhanh",
+            "desc": "H??ng d?n ng?n g?n v? an to?n cho c?c c?u h?i du l?ch ph? bi?n trong ph?m vi ?ng d?ng hi?n t?i."
+          }
+        },
+        "settings": {
+          "short": "C?i ??t",
+          "support_short": "H? tr?",
+          "eyebrow": "C?i ??t & h? s?",
+          "title": "C?i ??t c?a t?i",
+          "subtitle": "Xem t?i kho?n, ng?n ng?, tr?ng th?i ??i t?c v? c?c hub mypage li?n quan t? m?t n?i.",
+          "summary": {
+            "saved": "??a ?i?m ?? l?u",
+            "stops": "?i?m d?ng k? ho?ch",
+            "days": "S? ng?y chuy?n ?i"
+          },
+          "preferences": {
+            "region_empty": "Hi?n ch?a c? thi?t l?p v?ng ri?ng. ?i?u n?y c? th? ???c suy ra sau khi b?n t?o k? ho?ch chuy?n ?i.",
+            "region_hint": "D?a tr?n c?c khu v?c trong b?n nh?p planner hi?n t?i.",
+            "style_empty": "Hi?n ch?a c? phong c?ch du l?ch ???c l?u. M?c n?y s? gi? ? ch? ?? ch? ??c cho ??n khi t?y ch?n t?i kho?n ???c k?t n?i.",
+            "style_hint": "Suy ra t? danh m?c trong planner hi?n t?i.",
+            "interests_saved": "Suy ra t? danh m?c ??a ?i?m trong danh s?ch saved_items c?a b?n.",
+            "interests_plan": "T?n hi?u d? ph?ng t? b?n nh?p planner hi?n t?i.",
+            "interests_empty": "H?y l?u ??a ?i?m ho?c t?o k? ho?ch ?? hi?n t?n hi?u s? th?ch t?i ??y.",
+            "language": "Ng?n ng?",
+            "language_hint": "M?c n?y theo b? ch?n ng?n ng? hi?n c? v? gi? tr? ktrip_lang.",
+            "region": "V?ng / th?nh ph? ?u ti?n",
+            "style": "Phong c?ch du l?ch",
+            "interests": "Danh m?c s? th?ch",
+            "title": "T?y ch?n",
+            "desc": "Ng?n ng? d?ng gi? tr? ?? l?u th?c t?. C?c h?ng c?n l?i gi? ? ch? ?? ch? ??c v? ch? ph?n ?nh t?n hi?u t? planner ho?c m?c ?? l?u khi c? d? li?u."
+          },
+          "verification": {
+            "email": "Email",
+            "email_ready": "?? x?c nh?n trong phi?n x?c th?c hi?n t?i.",
+            "email_missing": "Kh?ng ph?t hi?n x?c nh?n email t? Supabase auth.",
+            "phone": "?i?n tho?i",
+            "phone_ready": "X?c minh s? ?i?n tho?i kh? d?ng tr?n t?i kho?n n?y.",
+            "phone_partial": "C? gi? tr? s? ?i?n tho?i nh?ng kh?ng ph?t hi?n x?c minh.",
+            "phone_empty": "B?n build n?y ch?a k?t n?i x?c minh s? ?i?n tho?i.",
+            "provider": "Ph??ng th?c ??ng nh?p",
+            "provider_hint": "??c t? phi?n Supabase auth ?ang ho?t ??ng.",
+            "title": "X?c minh / An to?n",
+            "desc": "Ch? c?c t?n hi?u x?c minh ?? t?n t?i trong phi?n x?c th?c hi?n t?i m?i ???c hi?n th? ? ??y.",
+            "identity_note": "Ki?m tra gi?y t? t?y th?n v? ch?m ?i?m ho?n thi?n h? s? hi?n ch?a ???c k?t n?i trong codebase hi?n t?i.",
+            "email_provider": "Email"
+          },
+          "links": {
+            "support_desc": "M? h? tr? ??t ch?, h? tr? kh?n c?p v? c?u h?i th??ng g?p.",
+            "phrases_desc": "Gi? s?n c?c c?u ti?ng H?n h?u ?ch ?? d?ng nhanh khi di chuy?n.",
+            "saved": "Hub ?? l?u",
+            "saved_desc": "Xem l?i c?c ??a ?i?m ?? l?u, k? ho?ch hi?n t?i v? c?c m?c g?n ??y.",
+            "bookings": "??t ch?",
+            "bookings_desc": "Ki?m tra c?c ??t ch? s?p t?i v? lu?ng h? tr? li?n quan.",
+            "community": "C?ng ??ng",
+            "community_desc": "Xem l?i b?i vi?t, ??nh gi? v? ho?t ??ng meetup c?a b?n.",
+            "title": "C?i ??t ?ng d?ng / Li?n k?t nhanh",
+            "desc": "??y l? c?c trang hi?n c? m? b?n ?? c? th? qu?n l? ho?c xem l?i trong ?ng d?ng hi?n t?i.",
+            "placeholder_title": "Th?ng b?o v? quy?n ri?ng t?",
+            "placeholder_desc": "C?c ?i?u khi?n th?ng b?o v? quy?n ri?ng t? ri?ng bi?t ch?a ???c n?i trong b?n build n?y, n?n hi?n v?n ch? l? placeholder ch? ??c ? ??y."
+          },
+          "partner": {
+            "title": "Tr?ng th?i ??i t?c",
+            "approved_desc": "??n ??ng k? ??i t?c c?a b?n ?? ???c duy?t. Hi?n t?i c?c y?u c?u li?n quan c? th? ti?p t?c th?ng qua h? tr?.",
+            "pending_desc": "Y?u c?u ??i t?c c?a b?n ?ang ???c xem x?t. B?n build n?y ch?a c? trung t?m ??i t?c ri?ng.",
+            "rejected_desc": "??n tr??c ?? ch?a ???c ch?p thu?n. B?n c? th? g?i l?i lu?ng ??ng k? ??i t?c khi ?? s?n s?ng th?ng tin.",
+            "none_desc": "Hi?n b?n ?ang d?ng t?i kho?n du kh?ch. Ch? ??ng k? n?u mu?n ??a doanh nghi?p ho?c d?ch v? l?n h? th?ng."
+          },
+          "admin": {
+            "enabled": "Qu?n tr? vi?n",
+            "enabled_desc": "T?i kho?n n?y c? th? v?o trang qu?n tr? v? xem x?t y?u c?u ??i t?c.",
+            "disabled_desc": "Quy?n qu?n tr? ch?a ???c b?t cho h? s? n?y.",
+            "title": "Trang qu?n tr?",
+            "source": "profiles.is_admin = true",
+            "source_none": "Kh?ng c? c? qu?n tr? tr?n h? s? n?y"
+          },
+          "hero": {
+            "email_ready": "Email ?? x?c minh",
+            "email_pending": "Email ch?a x?c minh"
+          },
+          "account": {
+            "sign_in_title": "??ng nh?p ?? qu?n l? th?ng tin t?i kho?n",
+            "sign_in_desc": "Hub n?y ch? c? th? ??c c?c tr??ng t?i kho?n v? h? s? ?? ???c x?c minh t? phi?n Supabase hi?n t?i.",
+            "title": "T?i kho?n / H? s?",
+            "desc": "C?c tr??ng n?y l?y t? ng??i d?ng auth hi?n t?i, nickname h? s? v? metadata t?i kho?n c? b?n.",
+            "display_name": "T?n hi?n th?",
+            "display_name_hint": "?u ti?n nickname, sau ?? l? auth metadata, cu?i c?ng l? ph?n t?n trong email c?a b?n.",
+            "email": "Email / ??ng nh?p",
+            "email_hint": "??c t? ng??i d?ng Supabase auth hi?n t?i.",
+            "joined": "Ng?y tham gia",
+            "joined_hint": "D?ng gi? tr? profile.created_at n?u c?, n?u kh?ng s? d?ng auth.created_at.",
+            "last_seen": "L?n ??ng nh?p g?n nh?t",
+            "last_seen_hint": "Ch? ??c t? phi?n auth.",
+            "read_only": "Ch?nh s?a h? s? ch?a ???c k?t n?i trong b?n build n?y. H?y d?ng h? tr? n?u c?n tr? gi?p th? c?ng cho th?ng tin t?i kho?n.",
+            "default_name": "Du kh?ch"
+          },
+          "partner_admin": {
+            "title": "??i t?c / Qu?n tr?",
+            "desc": "Quy?n ??i t?c v? qu?n tr? d?ng l?i c?ng tr?ng th?i ??i t?c v? ki?m tra admin ?? c? tr?n b?ng ?i?u khi?n my."
+          }
+        },
+        "phrases": {
+          "quick": "C?u",
+          "title": "S? c?u du l?ch",
+          "eyebrow": "Trung t?m d?ch thu?t",
+          "favorites": {
+            "title": "Y?u th?ch",
+            "desc": "L?u c?c c?u b?n d? ki?n s? c?n cho ng??i kh?c xem nhi?u nh?t trong chuy?n ?i.",
+            "empty": "H?y l?u v?i c?u th??ng d?ng ?? m? l?i nhanh h?n."
+          },
+          "recent": {
+            "title": "G?n ??y",
+            "desc": "Nh?ng c?u v?a m? ho?c sao ch?p s? ???c gi? ? ??y ?? truy c?p nhanh."
+          },
+          "subtitle": "H?y cho nh?n vi?n, t?i x? ho?c c?a h?ng ? H?n Qu?c xem nh?ng c?u n?y khi b?n c?n c?u tr? l?i nhanh ngay t?i ch?.",
+          "hero": {
+            "badge": "C?u ti?ng H?n so?n s?n",
+            "count": "c?u"
+          },
+          "context": {
+            "title": "Ng? c?nh hi?n t?i",
+            "interpreter": "C?c c?u kh?n c?p ?? s?n s?ng n?u b?n c?n gi?i th?ch t?nh hu?ng th?t nhanh.",
+            "support": "H?y d?ng s? c?u n?y c?ng hub h? tr? khi b?n g?p kh? kh?n khi n?i chuy?n v?i nh?n vi?n ??a ph??ng.",
+            "booking": "C?c c?u cho ??t ch? n?y ?? s?n s?ng."
+          },
+          "category": {
+            "title": "C?u {{category}}"
+          },
+          "empty": {
+            "title": "Hi?n ch?a c? c?u n?o kh? d?ng.",
+            "desc": "H?y th? danh m?c kh?c ho?c d?ng Support n?u b?n c?n tr? gi?p ngay l?p t?c."
+          }
+        },
+        "saved": {
+          "title": "M?c ?? l?u",
+          "eyebrow": "Trung t?m l?u",
+          "header_cta": "Kh?m ph? th?m",
+          "subtitle": "Xem l?i ??a ?i?m, b?n nh?p Planner v? c?c m?c g?n ??y b?n mu?n m? l?i sau.",
+          "summary": {
+            "places": "??a ?i?m",
+            "plans": "K? ho?ch",
+            "recent": "G?n ??y"
+          },
+          "tabs": {
+            "places": "??a ?i?m",
+            "plans": "K? ho?ch",
+            "recent": "G?n ??y"
+          },
+          "summary_hint": "??a ?i?m l?y t? id Explore ?? l?u, k? ho?ch l?y t? b?n nh?p Planner hi?n t?i, v? m?c g?n ??y ???c l?u tr?n thi?t b? n?y.",
+          "places": {
+            "source_plan": "Kh?p v?i Planner hi?n t?i",
+            "source_saved": "L?u t? Explore",
+            "source_fallback": "L?u t? Explore",
+            "source_id_only": "ID m?c ?? l?u",
+            "added": "?? th?m v?o Planner. B?n c? th? ch?nh th?i gian trong Planner.",
+            "title": "??a ?i?m ?? l?u",
+            "desc": "M? l?i c?c ??a ?i?m b?n ?? ??nh d?u trong Explore. Khi id l?u c? ?t d? li?u, hub n?y ch? hi?n th? th? t?i thi?u thay v? ?o?n th?m th?ng tin.",
+            "empty": {
+              "title": "Ch?a c? ??a ?i?m ?? l?u.",
+              "desc": "C?c ??a ?i?m n?i b?t b?n l?u trong Explore s? xu?t hi?n ? ??y ?? l?n k? ho?ch nhanh sau n?y.",
+              "cta": "Xem ??a ?i?m"
+            },
+            "fallback_title": "??a ?i?m ?? l?u {{id}}"
+          },
+          "plans": {
+            "synced": "D?a tr?n b?n nh?p Planner hi?n t?i",
+            "title": "K? ho?ch ?? l?u",
+            "desc": "Tab n?y ph?n ?nh b?n nh?p Planner hi?n t?i. N? kh?ng t?o m?u ?? l?u ri?ng hay b?n ghi k? ho?ch ph?a m?y ch?.",
+            "empty": {
+              "title": "Ch?a c? k? ho?ch ?? l?u.",
+              "desc": "Khi b?n b?t ??u t?o l?ch tr?nh trong Planner, b?n nh?p hi?n t?i s? xu?t hi?n ? ??y."
+            },
+            "current": "K? ho?ch chuy?n ?i hi?n t?i"
+          },
+          "recent": {
+            "title": "G?n ??y",
+            "desc": "??a ?i?m, k? ho?ch v? b?i vi?t c?ng ??ng ?? xem g?n ??y ???c gi? tr?n thi?t b? n?y ?? m? l?i nhanh.",
+            "empty": {
+              "title": "Ch?a c? m?c g?n ??y.",
+              "desc": "M?c g?n ??y s? xu?t hi?n ? ??y sau khi b?n m? trang chi ti?t ??a ?i?m, Planner ho?c c?ng ??ng.",
+              "fallback": "Khi local storage kh? d?ng, m?c g?n ??y s? ???c gi? tr?n thi?t b? n?y.",
+              "cta": "Xem Explore"
+            },
+            "type": {
+              "place": "??a ?i?m",
+              "plan": "K? ho?ch",
+              "community": "C?ng ??ng"
+            }
+          }
+        },
+        "community_hub": {
+          "eyebrow": "Trung t?m ho?t ??ng",
+          "title": "My Community",
+          "subtitle": "Theo d?i b?i vi?t, ??nh gi? v? k? ho?ch b?n ?? t?o c?ng c?ng ??ng ? m?t n?i.",
+          "browse": "Xem c?ng ??ng",
+          "summary": {
+            "posts": "B?i vi?t",
+            "reviews": "??nh gi?",
+            "meetups": "Meetup"
+          },
+          "tabs": {
+            "posts": "B?i vi?t",
+            "reviews": "??nh gi?",
+            "meetups": "Meetup"
+          },
+          "empty": {
+            "reviews": {
+              "title": "B?n ch?a vi?t ??nh gi? n?o.",
+              "desc": "H?y b?t ??u t? m?t booking ?? ho?n th?nh v? chia s? ?i?u g? h?u ?ch cho chuy?n ?i c?a b?n.",
+              "no_completed": "H?y ho?n th?nh m?t booking tr??c r?i quay l?i ??y ?? vi?t ??nh gi? h?u ?ch.",
+              "cta": "Xem booking ?? ho?n th?nh"
+            },
+            "meetups": {
+              "title": "Ch?a c? ho?t ??ng meetup.",
+              "desc": "Xem c?c b?i c?ng ??ng ki?u meetup v? ti?p t?c k? ho?ch ti?p theo c?a b?n ? ??y."
+            },
+            "posts": {
+              "title": "Ch?a c? b?i vi?t n?o trong hub c?a b?n.",
+              "desc": "Xem c?ng ??ng, ??t c?u h?i ho?c chia s? m?o h?u ?ch cho kh?ch du l?ch kh?c."
+            }
+          },
+          "summary_hint": "S? l??ng ???c t?nh theo b?i c?ng ??ng b?n ?? ??ng v? booking ?? ho?n th?nh.",
+          "sync_error": "Hi?n kh?ng th? l?m m?i b?i c?ng ??ng. Tr?ng th?i tr?ng ?ang ???c d?ng thay th?.",
+          "review_prompts": {
+            "title": "Vi?t t? booking ?? ho?n th?nh",
+            "desc": "M? Community ?? vi?t ??nh gi? v? ch?n lo?i Review trong tr?nh so?n hi?n c?."
+          },
+          "posts_desc": "Xem l?i ho?c qu?n l? c?c b?i c?ng ??ng th?ng th??ng do b?n t?o.",
+          "reviews_desc": "Xem c?c b?i ??nh gi? b?n ?? ??ng, c?ng l?i t?t quay l?i l?ch s? booking.",
+          "meetups_desc": "Xem ho?t ??ng ki?u meetup t? c?c b?i c?ng ??ng c?a b?n, bao g?m k? ho?ch t?m b?n ??ng h?nh.",
+          "loading": "?ang t?i ho?t ??ng c?a b?n...",
+          "no_comments": "Ch?a c? b?nh lu?n",
+          "type": {
+            "travel": "B?n ??ng h?nh",
+            "meetup": "Meetup"
+          }
+        }
+      },
+      "community_page": {
+        "title": "Community",
+        "subtitle": "Connect with locals & travelers",
+        "filter_all": "All",
+        "filter_meetup": "Food & Meetup",
+        "filter_travel": "Travel Mate",
+        "filter_help": "Local Help",
+        "comments": "Comments",
+        "message": "Message",
+        "type": {
+          "MEETUP": "MEETUP",
+          "TRAVEL": "TRAVEL",
+          "HELP": "HELP",
+          "REVIEW": "REVIEW"
+        },
+        "post": {
+          "1": {
+            "author": "Mika (Japan)",
+            "time": "10 mins ago",
+            "title": "Samgyeopsal Meetup 🥓",
+            "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+          },
+          "2": {
+            "author": "John (US)",
+            "time": "1 hour ago",
+            "title": "Hongdae Street Performance 🎸",
+            "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+          },
+          "3": {
+            "author": "Jihoon (Korea)",
+            "time": "2 hours ago",
+            "title": "Need help with subway directions? 🚇",
+            "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+          },
+          "4": {
+            "author": "Li Wei (China)",
+            "time": "3 hours ago",
+            "title": "K-Beauty Shopping 💄",
+            "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+          }
+        },
+        "filter_review": "Reviews",
+        "detail": "Chi tiết Bài viết",
+        "meetup_info": "Thong tin dia diem",
+        "write_post": "Viet danh gia",
+        "edit": "Sua danh gia",
+        "posting": "Dang dang...",
+        "hero": {
+          "title": "Cong dong uu tien review sau khi dat lich beauty",
+          "subtitle": "Bat dau tu review trai nghiem tai beauty salon, sau do xem them an uong, tham quan va su kien.",
+          "search_placeholder": "Tim ten salon, trai nghiem dich vu hoac review dat lich"
+        },
+        "categories": {
+          "all": "Tat ca",
+          "beauty_review": "Review beauty salon",
+          "food_review": "Review am thuc",
+          "travel_review": "Review diem tham quan",
+          "meetup": "Su kien",
+          "help": "Cau hoi"
+        },
+        "sub_filters": {
+          "all": "Tat ca",
+          "saved": "⭐ Da luu",
+          "reacted": "💬 Bai da tham gia",
+          "mine": "👤 Bai cua toi",
+          "recruiting": "📢 Dang mo",
+          "active_reactions": "🔥 Tuong tac cao",
+          "open_meetup": "🤝 Mo di cung",
+          "weekend": "📅 Cuoi tuan nay",
+          "fresh": "✨ Moi cap nhat"
+        },
+        "states": {
+          "fetch_failed_title": "Khong the tai bai viet",
+          "fetch_failed_desc": "Vui long thu lai sau.",
+          "fetch_failed_tip": "Mo lai trang de tai bai moi nhat.",
+          "empty_title": "Chua co bai viet",
+          "empty_desc": "Hay de lai review beauty dau tien.",
+          "empty_tip": "Ten salon, trai nghiem dich vu va quy trinh dat lich se giup nguoi khac nhieu hon.",
+          "no_results_title": "Khong co bai phu hop",
+          "no_results_desc": "Thu doi tu khoa hoac bo loc.",
+          "cta_write": "Viet review",
+          "cta_all": "Xem tat ca"
+        },
+        "form": {
+          "category_label": "Danh muc",
+          "region_label": "Khu vuc",
+          "region_placeholder": "Vi du: Gangnam, Mapo",
+          "vibe_label": "Chon khong khi",
+          "meetup_toggle_title": "Mo di cung",
+          "meetup_toggle_desc": "Nhan tin hieu tham gia tu nguoi khac.",
+          "safety_title": "🔒 Huong dan an toan",
+          "safety_item_1": "• Khong chia se lien he ca nhan ngay. Hay xem phan hoi trong binh luan truoc.",
+          "safety_item_2": "• Nen hen gap o dia diem cong khai.",
+          "image": {
+            "label": "Them anh",
+            "title": "Ban co the tai len toi da {{count}} anh.",
+            "file_only_alert": "Chi co the them tep hinh anh.",
+            "limit_alert": "Ban co the tai len toi da {{count}} anh.",
+            "load_failed_alert": "Khong the tai anh.",
+            "button_loading": "Dang chuan bi anh...",
+            "button_limit": "Da chon toi da {{count}} anh",
+            "button_add_more": "Them anh",
+            "button_select": "Chon anh",
+            "preview_alt": "Xem truoc anh tai len {{index}}",
+            "preview_name": "Anh da chon {{index}}",
+            "preview_desc": "Day la anh thu {{index}}. Hay kiem tra truoc khi dang.",
+            "remove": "Xoa",
+            "saved_name": "Anh da tai len {{index}}",
+            "guides": {
+              "beauty_review": "Hay them anh ket qua dich vu hoac khong gian salon neu co.",
+              "food_review": "Ban co the them anh mon an hoac khong gian cua quan.",
+              "travel_review": "Hay chup lai khong khi cua dia diem hoac diem nhan dang nho.",
+              "meetup": "Hay chia se khong khi su kien hoac ly do nen di cung.",
+              "help": "Neu co anh tham khao, ban cung co the tai len."
+            }
+          },
+          "summary_title": "Tom tat bai viet",
+          "summary_region_type": "Khu vuc / loai",
+          "summary_point": "Diem nhan",
+          "summary_meetup": "Di cung",
+          "summary_enabled": "Bat",
+          "summary_disabled": "Tat",
+          "submit_with_reactions": "Dang review va nhan phan hoi",
+          "submit_beauty": "Chia se review beauty",
+          "submit_default": "Chia se review"
+        },
+        "quick_entry": {
+          "beauty": {
+            "label": "Review beauty",
+            "sub": "Dat lich · phuc vu · hai long"
+          },
+          "food": {
+            "label": "Review am thuc",
+            "sub": "Mo rong lich beauty"
+          },
+          "travel": {
+            "label": "Review tham quan",
+            "sub": "Lo trinh truoc va sau"
+          },
+          "write": {
+            "label": "Viet review",
+            "sub": "Chia se trai nghiem beauty"
+          }
+        },
+        "activity": {
+          "label": "Hoat dong cua toi:",
+          "summary": "Luu {{saved}}, tham gia {{reacted}}",
+          "new_updates": "✨ Co tin moi!"
+        },
+        "sort": {
+          "latest": "Moi nhat",
+          "reactions": "Nhieu phan hoi",
+          "draft": "Muc do hinh thanh"
+        },
+        "defaults": {
+          "region": "Seoul"
+        },
+        "fab": {
+          "beauty": "Viet review beauty",
+          "meetup": "Viet bai su kien"
+        },
+        "report": {
+          "modal_title": "Chon ly do bao cao",
+          "report_action": "Bao cao",
+          "cancel": "Huy",
+          "item_post": "bai viet",
+          "item_comment": "binh luan",
+          "submitted_alert": "Da bao cao {{item}}.\nLy do: {{reason}}\nChung toi se xem xet som.",
+          "reasons": {
+            "ad_spam": "Co ve la quang cao",
+            "offensive": "Co cach dien dat gay kho chiu",
+            "contact": "Du doi lien lac rieng tu",
+            "unsafe": "Cam thay khong an toan",
+            "other": "Khac"
+          }
+        },
+        "detail_page": {
+          "loading": "Dang tai bai viet...",
+          "hidden_post": "Bai viet nay da bi an.",
+          "show_hidden": "Bo an",
+          "not_found": "Khong tim thay bai viet.",
+          "hide_post": "An bai viet nay",
+          "hide_comment": "An",
+          "save_post_aria": "Luu bai viet",
+          "body_title": "Noi dung chi tiet",
+          "comments_title": "Binh luan va di cung",
+          "empty_comments": "Chua co binh luan.",
+          "signal_tag": "Tin hieu di cung",
+          "comment_input": {
+            "default": "Viet binh luan...",
+            "optional": "Tin nhan bo sung (tuy chon)",
+            "send": "Gui"
+          },
+          "signal_intents": {
+            "interested": "Toi cung muon di",
+            "available_this_week": "Tuan nay toi ranh",
+            "join_if_schedule_fits": "Neu hop lich toi se tham gia",
+            "thanks": "Cam on thong tin",
+            "question": "Toi co cau hoi"
+          },
+          "signal_times": {
+            "this_week": "Tuan nay",
+            "this_weekend": "Cuoi tuan nay",
+            "next_week": "Tuan sau",
+            "schedule_coordination": "Dieu chinh lich"
+          },
+          "related": {
+            "this_region": "khu vuc nay"
+          },
+          "save": {
+            "default": "☆ Luu",
+            "saved": "⭐ Da luu"
+          }
+        }
+      },
+      "explore_items": {
+        "airport_arrival": "Đến sân bay Incheon",
+        "hotel_checkin": "Nhận phòng khách sạn",
+        "f1": {
+          "title": "Plant Cafe Seoul"
+        },
+        "f2": {
+          "title": "Gold Pig BBQ"
+        },
+        "f3": {
+          "title": "Chợ hải sản"
+        },
+        "b1": {
+          "title": "Jenny House Beauty"
+        },
+        "b2": {
+          "title": "PPEUM Clinic Gangnam"
+        },
+        "e1": {
+          "title": "PSY Water Show"
+        },
+        "e2": {
+          "title": "Nanta Show Myeongdong"
+        },
+        "fs1": {
+          "title": "Lễ hội đèn lồng Seoul"
+        },
+        "a1": {
+          "title": "Cung điện Gyeongbokgung"
+        },
+        "a2": {
+          "title": "Lotte World Tower"
+        }
+      },
+      "help_page": {
+        "title": "Trung t?m tr? gi?p",
+        "badge": "Trung t?m tr? gi?p",
+        "numbers_title": "S? kh?n c?p",
+        "medical_title": "H? tr? y t?",
+        "medical_desc": "Ph?ng kh?m g?n ??y v? th? tri?u ch?ng",
+        "lost_title": "?? th?t l?c",
+        "lost_desc": "H??ng d?n t?ng b??c",
+        "police_title": "C?nh s?t / T?i ph?m",
+        "police_desc": "B?o c?o v? nh?n h? tr?",
+        "interp_title": "H? tr? phi?n d?ch",
+        "interp_desc": "???ng d?y 1330 v? ?ng d?ng d?ch",
+        "symptom_title": "Th? c?u m? t? tri?u ch?ng",
+        "symptom_hint": "Ch?m v?o tri?u ch?ng ?? hi?n c?u ti?ng H?n cho b?c s? xem.",
+        "clinic_title": "Ph?ng kh?m qu?c t? & c?p c?u",
+        "med_title": "Thu?c t?i c?a h?ng ti?n l?i",
+        "med_hint": "C? t?i GS25, CU, 7-Eleven 24/7",
+        "lost_step1": "B??c 1: B?n l?m m?t ? ??u?",
+        "lost_step1_hint": "Ch?n ??a ?i?m ?? xem c?c b??c l?y l?i.",
+        "quick_links": "Li?n k?t nhanh",
+        "go_lost112": "M? trang Lost112 ch?nh th?c",
+        "police_contacts": "Li?n h? quan tr?ng",
+        "police_phrases": "C?u kh?n c?p",
+        "interp_services": "D?ch v? d?ch",
+        "interp_phrases": "C?u h?u ?ch",
+        "emergency_call": "Kh?n c?p?",
+        "emergency_hint": "G?i 119 ngay",
+        "taxi": "Taxi",
+        "subway": "T?u ?i?n ng?m",
+        "airport": "S?n bay",
+        "street": "???ng ph?",
+        "lost_in": "L?m m?t t?i:",
+        "hub_subtitle": "D?ng My Support l?m trung t?m, m? trang tr? gi?p chi ti?t ph? h?p v?i t?nh hu?ng, v? chu?n b? s?n Emergency Phrases khi c?n cho ng??i kh?c xem ti?ng H?n.",
+        "support_hub_title": "My Support",
+        "support_hub_desc": "??y l? trung t?m ch?nh khi b?n c?n tr? gi?p nh?ng ch?a ch?c n?n m? trang chi ti?t n?o.",
+        "support_hub_meta": "Trung t?m cho booking, h? tr? chung, FAQ v? kh?n c?p",
+        "phrases_title": "C?u kh?n c?p",
+        "phrases_desc": "M? c?c c?u ti?ng H?n c? l?n ?? ??a tr?c ti?p cho nh?n vi?n, t?i x?, c?nh s?t ho?c nh?n vi?n y t? xem.",
+        "phrases_meta": "B? c?u d?ng t?i hi?n tr??ng",
+        "call1330_title": "G?i 1330",
+        "call1330_desc": "Khi c?n h? tr? ng?n ng?, ???ng d?y du l?ch th??ng l? ?i?m b?t ??u nhanh nh?t.",
+        "call1330_meta": "???ng d?y du l?ch",
+        "main_119": "Kh?n c?p c?u th??ng / c?u h?a",
+        "main_112": "Kh?n c?p c?nh s?t",
+        "main_1330": "???ng d?y du l?ch",
+        "main_120": "T?ng ??i Dasan Seoul 120",
+        "role_title": "C?c trang n?y ho?t ??ng th? n?o",
+        "role_text": "My Support l? trung t?m. M?i trang /help gi?i th?ch chi ti?t m?t l? tr?nh. Travel Phrasebook d?ng ?? hi?n th? ch? H?n c? l?n trong t?nh hu?ng th?c t?.",
+        "quick_actions_title": "Thao t?c nhanh",
+        "quick_actions_desc": "??y l? c?c l?i v?o an to?n v? nhanh nh?t khi b?n c?n tr? gi?p ngay b?y gi?.",
+        "routes_title": "L? tr?nh tr? gi?p chi ti?t",
+        "routes_desc": "Ch?n trang ph? h?p nh?t v?i t?nh hu?ng. M?i l? tr?nh v?n gi? c?c c?ng c? v? li?n h? hi?n c? trong ?ng d?ng.",
+        "numbers_desc": "Ch? d?ng c?c s? n?y khi ph? h?p v?i t?nh hu?ng. C?c trang chi ti?t b?n d??i s? b? sung ng? c?nh v? h? tr? b?ng c?u m?u.",
+        "interp_detail_subtitle": "D?ng trang n?y khi giao ti?p kh? kh?n. Trang s? d?n b?n t?i c?u m?u, hotline v? c?c c?ng c? d?ch ??n gi?n ?? c? trong ?ng d?ng.",
+        "interp_when_title": "Khi n?o d?ng trang n?y",
+        "interp_when_desc": "D?ng khi b?n c?n tr? gi?p ?? n?i chuy?n v?i nh?n vi?n, t?i x?, c?nh s?t ho?c nh?n vi?n y t?. N?u t?nh hu?ng li?n quan ??n an to?n ho?c s?c kh?e, h?y m? th?m trang tr? gi?p chi ti?t t??ng ?ng.",
+        "interp_services_desc": "C?c l?a ch?n n?y c? th? m? cu?c g?i ho?c trang d?ch b?n ngo?i. Kh?ng c? d?ch v? phi?n d?ch m?i trong ?ng d?ng ? ??y.",
+        "interp_phrases_desc": "??y l? ph?n xem nhanh. ?? hi?n th? c?u l?n h?n v? c? th?m c?u kh?n c?p, h?y m? Travel Phrasebook.",
+        "interp_show_more": "Xem th?m c?u kh?n c?p",
+        "interp_next_title": "C?n l? tr?nh chi ti?t kh?c?",
+        "interp_next_desc": "H? tr? phi?n d?ch kh?ng thay th? h??ng d?n c?a c?nh s?t hay y t?. N?u v?n ?? li?n quan t?i an to?n ho?c s?c kh?e, h?y m? th?m trang t??ng ?ng.",
+        "interp_medical_bridge": "Chuy?n sang Medical Help n?u t?nh hu?ng li?n quan ??n tri?u ch?ng, ch?n th??ng ho?c ?i?u tr? kh?n c?p.",
+        "interp_medical_cta": "M? Medical Help",
+        "interp_police_bridge": "Chuy?n sang Police Help n?u b?n c?m th?y kh?ng an to?n ho?c c?n h??ng d?n an to?n ch?nh th?c.",
+        "interp_police_cta": "M? Police Help",
+        "police_detail_subtitle": "D?ng trang n?y khi b?n c?n li?n h? c?nh s?t, th?ng tin c?nh s?t du l?ch ho?c b??c ti?p theo an to?n h?n.",
+        "police_when_title": "Khi n?o d?ng trang n?y",
+        "police_when_desc": "D?ng khi b?n c?m th?y kh?ng an to?n, c?n th?ng tin li?n h? c?nh s?t ho?c mu?n c? l? tr?nh an to?n r? r?ng h?n.",
+        "police_contacts_desc": "H?y d?ng c?c s? g?i ho?c trang web hi?n c? b?n d??i khi c?n.",
+        "police_info": {
+          "tourist_info": "C?nh s?t du l?ch c? m?t t?i khu Myeongdong, Insadong v? Itaewon.",
+          "crime_label": "Kh?n c?p c?nh s?t",
+          "crime_note": "D?ng khi b?n c?n c?nh s?t ph?n h?i ngay ho?c c?m th?y t?nh hu?ng kh?ng an to?n.",
+          "tourist_label": "H? tr? an to?n qua ???ng d?y du l?ch",
+          "tourist_note": "D?ng khi b?n c?n tr? gi?p ?? hi?u c?c l?a ch?n an to?n ho?c li?n h? c?nh s?t.",
+          "station_label": "Trang web ch?nh th?c c?a c?nh s?t"
+        },
+        "police_phrase_desc": "C?c c?u nhanh n?y gi?p b?n gi?i th?ch t?nh hu?ng tr??c khi m? phrasebook ??y ??.",
+        "police_bridge_title": "C?n nhi?u h?n m?t l? tr?nh?",
+        "police_bridge_desc": "N?u giao ti?p kh? kh?n, h?y m? th?m Interpreter Help. N?u c? ch?n th??ng ho?c tri?u ch?ng kh?n c?p, h?y m? th?m Medical Help.",
+        "police_interp_bridge": "M? Interpreter Help khi b?n c?n h? tr? gi?i th?ch t?nh hu?ng v?i c?nh s?t ho?c nh?n vi?n.",
+        "police_medical_bridge": "M? Medical Help khi t?nh hu?ng c?n li?n quan ??n ch?n th??ng, b?nh ho?c nhu c?u c?p c?u.",
+        "medical_detail_subtitle": "D?ng trang n?y cho li?n h? y t?, c?u m? t? tri?u ch?ng v? th?ng tin ph?ng kh?m t?nh ?? c? trong d? ?n. Trang n?y kh?ng t?o d?ch v? ch?n ?o?n hay ??t b?nh vi?n m?i.",
+        "medical_notice_title": "N?u t?nh hu?ng c? v? kh?n c?p",
+        "medical_notice_text": "H?y g?i 119 tr??c n?u c? tri?u ch?ng c?p, ch?n th??ng n?ng ho?c kh? th?. D?ng phrasebook v? l? tr?nh phi?n d?ch ?? gi?i th?ch r? h?n.",
+        "clinic_desc": "??y l? c?c m?c ph?ng kh?m v? b?nh vi?n m?u t?nh ?? c? trong ?ng d?ng. H?y g?i tr??c n?u c? th?.",
+        "medical_bridge_title": "C?n th?m l? tr?nh h? tr? kh?c?",
+        "medical_bridge_desc": "M? Interpreter Help n?u giao ti?p kh? kh?n. M? Police Help c?ng n?u nhu c?u y t? li?n quan ??n m?t s? c? m?t an to?n.",
+        "medical_interp_bridge": "?i t?i Interpreter Help khi b?n c?n c?ch r? r?ng h?n ?? m? t? tri?u ch?ng ho?c c?u h?i ?i?u tr?.",
+        "medical_police_bridge": "?i t?i Police Help khi v?n ?? y t? li?n quan ??n t?i ph?m, tai n?n ho?c nguy c? an to?n.",
+        "lost_quick_desc": "D?ng l? tr?nh ch?nh th?c ho?c ???ng d?y ph? h?p n?u b?n c?n h? tr? tr?c ti?p cho ?? th?t l?c.",
+        "lost112_desc": "L? tr?nh th?t l?c ch?nh th?c cho nhi?u tr??ng h?p c?ng c?ng ? H?n Qu?c.",
+        "embassy_desc": "D?ng khi b?n l?m m?t h? chi?u ho?c gi?y t? t?y th?n v? c?n h? tr? t? ??i s? qu?n.",
+        "lost_1330_desc": "D?ng khi b?n c?n ???c gi?i th?ch b??c ti?p theo ho?c gi?p m? t? t?nh hu?ng.",
+        "lost_steps_desc": "H?y l?m theo l? tr?nh ph? h?p b?n d??i. D?ng Support ho?c Phrasebook n?u b?n c?n th?m tr? gi?p ?? n?i chuy?n v?i nh?n vi?n.",
+        "interp_badge": "H? tr? phi?n d?ch",
+        "police_badge": "L? tr?nh an to?n",
+        "medical_badge": "L? tr?nh y t?",
+        "lost_badge": "L? tr?nh th?t l?c",
+        "interp_actions": {
+          "open_papago": "M? Papago",
+          "open_google_translate": "M? Google D?ch"
+        },
+        "interp_booking_title": "Phi?n d?ch cho booking n?y",
+        "interp_booking_desc": "B?n ?? m? h? tr? phi?n d?ch cho m?t booking. H?y gi? t?n ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi trao ??i v?i nh?n vi?n.",
+        "booking_phrases_desc": "H?y m? c?u cho booking tr??c khi b?n c?n gi?i th?ch vi?c ??t ch?, b? tr? ho?c t?nh hu?ng check-in v?i nh?n vi?n.",
+        "booking_context_title": "Tr? gi?p cho booking n?y",
+        "booking_context_desc": "B?n m? trang tr? gi?p n?y khi ?ang xem m?t booking. H?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi ch?n l? tr?nh h? tr? ti?p theo.",
+        "police_booking_desc": "B?n m? h? tr? an to?n khi ?ang xem m?t booking. H?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi ch?n b??c an to?n ti?p theo.",
+        "medical_booking_desc": "B?n m? h? tr? y t? khi ?ang xem m?t booking. H?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi ch?n l? tr?nh y t? ho?c phi?n d?ch ti?p theo.",
+        "lost_booking_desc": "N?u b?n ?ang tr?n ???ng t?i m?t booking, h?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi h?i ???ng ho?c xin h? tr?.",
+        "interp": {
+          "hotline_title": "???ng d?y du l?ch 1330",
+          "hotline_desc": "??y l? ???ng d?y ch?nh th?c nhanh nh?t khi b?n c?n h? tr? ng?n ng? ho?c gi?i th?ch v?n ?? du l?ch.",
+          "papago_title": "Papago",
+          "papago_desc": "M? Naver Papago khi c?n d?ch nhanh ho?c h? tr? v?n b?n.",
+          "google_title": "Google Translate",
+          "google_desc": "M? Google D?ch khi b?n c?n th?m m?t l?a ch?n d?ch nhanh kh?c.",
+          "dasan_title": "T?ng ??i Dasan 120",
+          "dasan_desc": "???ng d?y c?a th?nh ph? Seoul cho th?ng tin c?ng c?ng v? h??ng d?n chung."
+        },
+        "lost112_title": "Lost112",
+        "embassy_title": "T?m ??i s? qu?n",
+        "lost_1330_title": "???ng d?y du l?ch 1330",
+        "lost": {
+          "taxi_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? tr?n taxi.",
+          "subway_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? tr?n t?u ?i?n ho?c t?i nh? ga.",
+          "airport_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? ? s?n bay ho?c khi ?ang di chuy?n.",
+          "street_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? ngo?i ???ng ho?c n?i c?ng c?ng."
+        }
+      },
+      "home_new": {
+        "hero_title": "Du lịch Hàn Quốc, từ lịch trình đến đặt chỗ tất cả trong một",
+        "hero_subtitle": "Từ đề xuất lịch trình đến hỗ trợ đặt chỗ nhanh chóng. Đối tác dễ sử dụng ngay cả với người mới đến Hàn Quốc.",
+        "features": {
+          "booking": "Đặt chỗ trọn gói",
+          "ai_plan": "Hoàn thành lịch trình bằng AI",
+          "navi": "Không lo lạc đường"
+        },
+        "input": {
+          "where": "Bạn đi đâu?",
+          "where_placeholder": "Seoul, Busan, Jeju...",
+          "when": "Bạn ở lại bao lâu?",
+          "days_suffix": " Ngày",
+          "who": "Bạn đi cùng ai?",
+          "who_options": {
+            "solo": "Đi một mình",
+            "couple": "Cặp đôi",
+            "friends": "Cùng bạn bè",
+            "family": "Cùng gia đình"
+          },
+          "interests": "Bạn muốn chủ đề gì?",
+          "interests_options": {
+            "food": "Khám phá ẩm thực",
+            "shopping": "Mua sắm",
+            "beauty": "K-Beauty",
+            "sightseeing": "Danh lam thắng cảnh",
+            "night": "Đời sống về đêm",
+            "experience": "Trải nghiệm độc đáo"
+          }
+        },
+        "cta_helper": "Nhận lộ trình du lịch phù hợp trong 1 phút",
+        "cta_btn": "Bắt đầu tạo lịch trình",
+        "trust": {
+          "title": "Du lịch an tâm cùng Kello",
+          "items": [
+            "Ứng dụng chuyên biệt cho du lịch Hàn Quốc",
+            "Đề xuất lịch trình AI cá nhân hóa",
+            "Chỉ đường không rào cản ngôn ngữ",
+            "Hỗ trợ đặt chỗ ở những nơi khó khăn"
+          ]
+        }
+      }
+    },
+    "explore_items": {
+      "airport_arrival": "Đến sân bay Incheon",
+      "hotel_checkin": "Nhận phòng khách sạn",
+      "f1": {
+        "title": "Plant Cafe Seoul"
+      },
+      "f2": {
+        "title": "Gold Pig BBQ"
+      },
+      "f3": {
+        "title": "Chợ hải sản"
+      },
+      "b1": {
+        "title": "Jenny House Beauty"
+      },
+      "b2": {
+        "title": "PPEUM Clinic Gangnam"
+      },
+      "e1": {
+        "title": "PSY Water Show"
+      },
+      "e2": {
+        "title": "Nanta Show Myeongdong"
+      },
+      "fs1": {
+        "title": "Lễ hội đèn lồng Seoul"
+      },
+      "a1": {
+        "title": "Cung điện Gyeongbokgung"
+      },
+      "a2": {
+        "title": "Lotte World Tower"
+      }
+    },
+    "help_page": {
+      "title": "Trung t?m tr? gi?p",
+      "badge": "Trung t?m tr? gi?p",
+      "numbers_title": "S? kh?n c?p",
+      "medical_title": "H? tr? y t?",
+      "medical_desc": "Ph?ng kh?m g?n ??y v? th? tri?u ch?ng",
+      "lost_title": "?? th?t l?c",
+      "lost_desc": "H??ng d?n t?ng b??c",
+      "police_title": "C?nh s?t / T?i ph?m",
+      "police_desc": "B?o c?o v? nh?n h? tr?",
+      "interp_title": "H? tr? phi?n d?ch",
+      "interp_desc": "???ng d?y 1330 v? ?ng d?ng d?ch",
+      "symptom_title": "Th? c?u m? t? tri?u ch?ng",
+      "symptom_hint": "Ch?m v?o tri?u ch?ng ?? hi?n c?u ti?ng H?n cho b?c s? xem.",
+      "clinic_title": "Ph?ng kh?m qu?c t? & c?p c?u",
+      "med_title": "Thu?c t?i c?a h?ng ti?n l?i",
+      "med_hint": "C? t?i GS25, CU, 7-Eleven 24/7",
+      "lost_step1": "B??c 1: B?n l?m m?t ? ??u?",
+      "lost_step1_hint": "Ch?n ??a ?i?m ?? xem c?c b??c l?y l?i.",
+      "quick_links": "Li?n k?t nhanh",
+      "go_lost112": "M? trang Lost112 ch?nh th?c",
+      "police_contacts": "Li?n h? quan tr?ng",
+      "police_phrases": "C?u kh?n c?p",
+      "interp_services": "D?ch v? d?ch",
+      "interp_phrases": "C?u h?u ?ch",
+      "emergency_call": "Kh?n c?p?",
+      "emergency_hint": "G?i 119 ngay",
+      "taxi": "Taxi",
+      "subway": "T?u ?i?n ng?m",
+      "airport": "S?n bay",
+      "street": "???ng ph?",
+      "lost_in": "L?m m?t t?i:",
+      "hub_subtitle": "D?ng My Support l?m trung t?m, m? trang tr? gi?p chi ti?t ph? h?p v?i t?nh hu?ng, v? chu?n b? s?n Emergency Phrases khi c?n cho ng??i kh?c xem ti?ng H?n.",
+      "support_hub_title": "My Support",
+      "support_hub_desc": "??y l? trung t?m ch?nh khi b?n c?n tr? gi?p nh?ng ch?a ch?c n?n m? trang chi ti?t n?o.",
+      "support_hub_meta": "Trung t?m cho booking, h? tr? chung, FAQ v? kh?n c?p",
+      "phrases_title": "C?u kh?n c?p",
+      "phrases_desc": "M? c?c c?u ti?ng H?n c? l?n ?? ??a tr?c ti?p cho nh?n vi?n, t?i x?, c?nh s?t ho?c nh?n vi?n y t? xem.",
+      "phrases_meta": "B? c?u d?ng t?i hi?n tr??ng",
+      "call1330_title": "G?i 1330",
+      "call1330_desc": "Khi c?n h? tr? ng?n ng?, ???ng d?y du l?ch th??ng l? ?i?m b?t ??u nhanh nh?t.",
+      "call1330_meta": "???ng d?y du l?ch",
+      "main_119": "Kh?n c?p c?u th??ng / c?u h?a",
+      "main_112": "Kh?n c?p c?nh s?t",
+      "main_1330": "???ng d?y du l?ch",
+      "main_120": "T?ng ??i Dasan Seoul 120",
+      "role_title": "C?c trang n?y ho?t ??ng th? n?o",
+      "role_text": "My Support l? trung t?m. M?i trang /help gi?i th?ch chi ti?t m?t l? tr?nh. Travel Phrasebook d?ng ?? hi?n th? ch? H?n c? l?n trong t?nh hu?ng th?c t?.",
+      "quick_actions_title": "Thao t?c nhanh",
+      "quick_actions_desc": "??y l? c?c l?i v?o an to?n v? nhanh nh?t khi b?n c?n tr? gi?p ngay b?y gi?.",
+      "routes_title": "L? tr?nh tr? gi?p chi ti?t",
+      "routes_desc": "Ch?n trang ph? h?p nh?t v?i t?nh hu?ng. M?i l? tr?nh v?n gi? c?c c?ng c? v? li?n h? hi?n c? trong ?ng d?ng.",
+      "numbers_desc": "Ch? d?ng c?c s? n?y khi ph? h?p v?i t?nh hu?ng. C?c trang chi ti?t b?n d??i s? b? sung ng? c?nh v? h? tr? b?ng c?u m?u.",
+      "interp_detail_subtitle": "D?ng trang n?y khi giao ti?p kh? kh?n. Trang s? d?n b?n t?i c?u m?u, hotline v? c?c c?ng c? d?ch ??n gi?n ?? c? trong ?ng d?ng.",
+      "interp_when_title": "Khi n?o d?ng trang n?y",
+      "interp_when_desc": "D?ng khi b?n c?n tr? gi?p ?? n?i chuy?n v?i nh?n vi?n, t?i x?, c?nh s?t ho?c nh?n vi?n y t?. N?u t?nh hu?ng li?n quan ??n an to?n ho?c s?c kh?e, h?y m? th?m trang tr? gi?p chi ti?t t??ng ?ng.",
+      "interp_services_desc": "C?c l?a ch?n n?y c? th? m? cu?c g?i ho?c trang d?ch b?n ngo?i. Kh?ng c? d?ch v? phi?n d?ch m?i trong ?ng d?ng ? ??y.",
+      "interp_phrases_desc": "??y l? ph?n xem nhanh. ?? hi?n th? c?u l?n h?n v? c? th?m c?u kh?n c?p, h?y m? Travel Phrasebook.",
+      "interp_show_more": "Xem th?m c?u kh?n c?p",
+      "interp_next_title": "C?n l? tr?nh chi ti?t kh?c?",
+      "interp_next_desc": "H? tr? phi?n d?ch kh?ng thay th? h??ng d?n c?a c?nh s?t hay y t?. N?u v?n ?? li?n quan t?i an to?n ho?c s?c kh?e, h?y m? th?m trang t??ng ?ng.",
+      "interp_medical_bridge": "Chuy?n sang Medical Help n?u t?nh hu?ng li?n quan ??n tri?u ch?ng, ch?n th??ng ho?c ?i?u tr? kh?n c?p.",
+      "interp_medical_cta": "M? Medical Help",
+      "interp_police_bridge": "Chuy?n sang Police Help n?u b?n c?m th?y kh?ng an to?n ho?c c?n h??ng d?n an to?n ch?nh th?c.",
+      "interp_police_cta": "M? Police Help",
+      "police_detail_subtitle": "D?ng trang n?y khi b?n c?n li?n h? c?nh s?t, th?ng tin c?nh s?t du l?ch ho?c b??c ti?p theo an to?n h?n.",
+      "police_when_title": "Khi n?o d?ng trang n?y",
+      "police_when_desc": "D?ng khi b?n c?m th?y kh?ng an to?n, c?n th?ng tin li?n h? c?nh s?t ho?c mu?n c? l? tr?nh an to?n r? r?ng h?n.",
+      "police_contacts_desc": "H?y d?ng c?c s? g?i ho?c trang web hi?n c? b?n d??i khi c?n.",
+      "police_info": {
+        "tourist_info": "C?nh s?t du l?ch c? m?t t?i khu Myeongdong, Insadong v? Itaewon.",
+        "crime_label": "Kh?n c?p c?nh s?t",
+        "crime_note": "D?ng khi b?n c?n c?nh s?t ph?n h?i ngay ho?c c?m th?y t?nh hu?ng kh?ng an to?n.",
+        "tourist_label": "H? tr? an to?n qua ???ng d?y du l?ch",
+        "tourist_note": "D?ng khi b?n c?n tr? gi?p ?? hi?u c?c l?a ch?n an to?n ho?c li?n h? c?nh s?t.",
+        "station_label": "Trang web ch?nh th?c c?a c?nh s?t"
+      },
+      "police_phrase_desc": "C?c c?u nhanh n?y gi?p b?n gi?i th?ch t?nh hu?ng tr??c khi m? phrasebook ??y ??.",
+      "police_bridge_title": "C?n nhi?u h?n m?t l? tr?nh?",
+      "police_bridge_desc": "N?u giao ti?p kh? kh?n, h?y m? th?m Interpreter Help. N?u c? ch?n th??ng ho?c tri?u ch?ng kh?n c?p, h?y m? th?m Medical Help.",
+      "police_interp_bridge": "M? Interpreter Help khi b?n c?n h? tr? gi?i th?ch t?nh hu?ng v?i c?nh s?t ho?c nh?n vi?n.",
+      "police_medical_bridge": "M? Medical Help khi t?nh hu?ng c?n li?n quan ??n ch?n th??ng, b?nh ho?c nhu c?u c?p c?u.",
+      "medical_detail_subtitle": "D?ng trang n?y cho li?n h? y t?, c?u m? t? tri?u ch?ng v? th?ng tin ph?ng kh?m t?nh ?? c? trong d? ?n. Trang n?y kh?ng t?o d?ch v? ch?n ?o?n hay ??t b?nh vi?n m?i.",
+      "medical_notice_title": "N?u t?nh hu?ng c? v? kh?n c?p",
+      "medical_notice_text": "H?y g?i 119 tr??c n?u c? tri?u ch?ng c?p, ch?n th??ng n?ng ho?c kh? th?. D?ng phrasebook v? l? tr?nh phi?n d?ch ?? gi?i th?ch r? h?n.",
+      "clinic_desc": "??y l? c?c m?c ph?ng kh?m v? b?nh vi?n m?u t?nh ?? c? trong ?ng d?ng. H?y g?i tr??c n?u c? th?.",
+      "medical_bridge_title": "C?n th?m l? tr?nh h? tr? kh?c?",
+      "medical_bridge_desc": "M? Interpreter Help n?u giao ti?p kh? kh?n. M? Police Help c?ng n?u nhu c?u y t? li?n quan ??n m?t s? c? m?t an to?n.",
+      "medical_interp_bridge": "?i t?i Interpreter Help khi b?n c?n c?ch r? r?ng h?n ?? m? t? tri?u ch?ng ho?c c?u h?i ?i?u tr?.",
+      "medical_police_bridge": "?i t?i Police Help khi v?n ?? y t? li?n quan ??n t?i ph?m, tai n?n ho?c nguy c? an to?n.",
+      "lost_quick_desc": "D?ng l? tr?nh ch?nh th?c ho?c ???ng d?y ph? h?p n?u b?n c?n h? tr? tr?c ti?p cho ?? th?t l?c.",
+      "lost112_desc": "L? tr?nh th?t l?c ch?nh th?c cho nhi?u tr??ng h?p c?ng c?ng ? H?n Qu?c.",
+      "embassy_desc": "D?ng khi b?n l?m m?t h? chi?u ho?c gi?y t? t?y th?n v? c?n h? tr? t? ??i s? qu?n.",
+      "lost_1330_desc": "D?ng khi b?n c?n ???c gi?i th?ch b??c ti?p theo ho?c gi?p m? t? t?nh hu?ng.",
+      "lost_steps_desc": "H?y l?m theo l? tr?nh ph? h?p b?n d??i. D?ng Support ho?c Phrasebook n?u b?n c?n th?m tr? gi?p ?? n?i chuy?n v?i nh?n vi?n.",
+      "interp_badge": "H? tr? phi?n d?ch",
+      "police_badge": "L? tr?nh an to?n",
+      "medical_badge": "L? tr?nh y t?",
+      "lost_badge": "L? tr?nh th?t l?c",
+      "interp_actions": {
+        "open_papago": "M? Papago",
+        "open_google_translate": "M? Google D?ch"
+      },
+      "interp_booking_title": "Phi?n d?ch cho booking n?y",
+      "interp_booking_desc": "B?n ?? m? h? tr? phi?n d?ch cho m?t booking. H?y gi? t?n ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi trao ??i v?i nh?n vi?n.",
+      "booking_phrases_desc": "H?y m? c?u cho booking tr??c khi b?n c?n gi?i th?ch vi?c ??t ch?, b? tr? ho?c t?nh hu?ng check-in v?i nh?n vi?n.",
+      "booking_context_title": "Tr? gi?p cho booking n?y",
+      "booking_context_desc": "B?n m? trang tr? gi?p n?y khi ?ang xem m?t booking. H?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi ch?n l? tr?nh h? tr? ti?p theo.",
+      "police_booking_desc": "B?n m? h? tr? an to?n khi ?ang xem m?t booking. H?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi ch?n b??c an to?n ti?p theo.",
+      "medical_booking_desc": "B?n m? h? tr? y t? khi ?ang xem m?t booking. H?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi ch?n l? tr?nh y t? ho?c phi?n d?ch ti?p theo.",
+      "lost_booking_desc": "N?u b?n ?ang tr?n ???ng t?i m?t booking, h?y gi? ??a ?i?m, th?i gian v? tr?ng th?i booking hi?n th? khi h?i ???ng ho?c xin h? tr?.",
+      "interp": {
+        "hotline_title": "???ng d?y du l?ch 1330",
+        "hotline_desc": "??y l? ???ng d?y ch?nh th?c nhanh nh?t khi b?n c?n h? tr? ng?n ng? ho?c gi?i th?ch v?n ?? du l?ch.",
+        "papago_title": "Papago",
+        "papago_desc": "M? Naver Papago khi c?n d?ch nhanh ho?c h? tr? v?n b?n.",
+        "google_title": "Google Translate",
+        "google_desc": "M? Google D?ch khi b?n c?n th?m m?t l?a ch?n d?ch nhanh kh?c.",
+        "dasan_title": "T?ng ??i Dasan 120",
+        "dasan_desc": "???ng d?y c?a th?nh ph? Seoul cho th?ng tin c?ng c?ng v? h??ng d?n chung."
+      },
+      "lost112_title": "Lost112",
+      "embassy_title": "T?m ??i s? qu?n",
+      "lost_1330_title": "???ng d?y du l?ch 1330",
+      "lost": {
+        "taxi_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? tr?n taxi.",
+        "subway_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? tr?n t?u ?i?n ho?c t?i nh? ga.",
+        "airport_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? ? s?n bay ho?c khi ?ang di chuy?n.",
+        "street_hint": "M? c?c b??c cho tr??ng h?p l?m m?t ?? ngo?i ???ng ho?c n?i c?ng c?ng."
+      }
+    },
+    "beauty_bookings": {
+      "page_title": "My Beauty Bookings",
+      "hero_eyebrow": "My Beauty Booking",
+      "hero_title": "Track your booking requests and notes all in one place.",
+      "hero_text": "Your most recent bookings appear first. Quickly filter between active and completed bookings.",
+      "login_title": "Sign in to view your booking history.",
+      "login_text": "Once logged in, you can see all your beauty booking requests and staff notes in one place.",
+      "login_action": "Go to Sign In",
+      "back_to_my": "Back to My Page",
+      "deeplink_toast": "We opened your selected booking. ✨",
+      "tab_all": "All",
+      "tab_active": "Active",
+      "tab_completed": "Completed",
+      "tab_canceled": "Canceled",
+      "tab_aria": "Booking status filter",
+      "status_requested": "Pending Confirmation",
+      "status_confirmed": "Confirmed",
+      "status_completed": "Completed",
+      "status_canceled": "Canceled",
+      "status_failed": "Needs Attention",
+      "status_change_requested": "Change Requested",
+      "status_desc_requested": "The salon is checking availability.",
+      "status_desc_confirmed": "Your appointment time is confirmed.",
+      "status_desc_completed": "Your visit has been completed.",
+      "status_desc_canceled": "Your booking has been canceled.",
+      "status_desc_failed": "Your booking request needs attention.",
+      "status_desc_change_requested": "A change to your schedule or service is being requested.",
+      "category_hair": "Hair",
+      "category_nail": "Nail",
+      "category_esthetic": "Esthetic",
+      "category_waxing": "Waxing",
+      "category_makeup": "Makeup",
+      "category_lash": "Lash",
+      "lang_ko": "Korean",
+      "lang_en": "English",
+      "lang_ja": "Japanese",
+      "lang_zh_cn": "Chinese (Simplified)",
+      "lang_zh_hk": "Chinese (Traditional)",
+      "lang_vi": "Vietnamese",
+      "lang_th": "Thai",
+      "lang_id": "Indonesian",
+      "lang_ms": "Malay",
+      "intent_booking_confirm": "Booking Confirmation",
+      "intent_service_request": "Service Request",
+      "intent_allergy_notice": "Allergy/Sensitivity Notice",
+      "intent_style_consultation": "Style Consultation",
+      "card_primary_service": "Primary Service",
+      "card_estimated_price": "Est. Price",
+      "loading": "Loading your bookings...",
+      "empty": "No beauty bookings yet. Once you complete a booking, it will appear here.",
+      "select_prompt": "Select a booking to view its details.",
+      "detail_category": "Category",
+      "detail_designer": "Designer",
+      "detail_requested_at": "Requested",
+      "detail_status": "Current Status",
+      "detail_designer_default": "Shop's Choice",
+      "timeline_title": "Booking Progress",
+      "change_request_title": "Change Request Info",
+      "change_request_hint": "Our team is reviewing your request. Please wait a moment.",
+      "change_request_time": "Requested At",
+      "change_request_reason": "Reason",
+      "change_request_reason_empty": "No reason provided",
+      "change_request_time_empty": "Checking",
+      "change_result_title": "Latest Change Request Result",
+      "change_result_status": "Status",
+      "change_result_approved": "✅ Approved",
+      "change_result_rejected": "❌ Rejected",
+      "change_result_review_time": "Reviewed At",
+      "alt_offer_title": "New Schedule Offered",
+      "alt_offer_desc": "Your requested time is no longer available. The salon has suggested the options below — please select one.",
+      "alt_offer_admin_label": "Shop Note",
+      "alt_offer_accept": "Accept & Update Booking",
+      "alt_offer_reject": "Decline Offer",
+      "alt_offer_processing": "Processing...",
+      "alt_offer_response_title": "Offer Response Result",
+      "alt_offer_accepted_result": "You have already accepted this offer.",
+      "alt_offer_rejected_result": "You have already declined this offer.",
+      "alt_response_accepted": "Offer accepted. Your booking schedule has been updated.",
+      "alt_response_rejected": "Offer declined.",
+      "alt_slot_select_error": "Please select one of the offered slots.",
+      "service_info_title": "Service Info",
+      "service_primary": "Primary Service",
+      "service_addons": "Add-ons",
+      "service_region": "Booking Region",
+      "service_addons_empty": "No add-ons selected",
+      "price_title": "Price Summary",
+      "price_base": "Base Price",
+      "price_addon": "Add-on Price",
+      "price_surcharge": "Designer Surcharge",
+      "price_total": "Estimated Total",
+      "request_title": "My Requests",
+      "request_memo": "Request Note",
+      "request_memo_empty": "No special requests.",
+      "delivery_title": "Delivery Info",
+      "delivery_lang": "Language",
+      "delivery_intent": "Purpose",
+      "message_korean": "Korean Note for the Salon",
+      "message_localized": "Note in Selected Language",
+      "manage_title": "Manage Booking",
+      "manage_desc": "You can cancel directly when the booking is pending or confirmed. This cannot be undone.",
+      "manage_disabled": "This booking cannot be managed at its current status.",
+      "action_change": "Request Change",
+      "action_cancel": "Cancel Booking",
+      "cancel_panel_title": "Cancel Booking",
+      "cancel_reason_schedule": "Schedule change",
+      "cancel_reason_other_shop": "Chose another salon",
+      "cancel_reason_mistake": "Booked by mistake",
+      "cancel_reason_etc": "Other",
+      "cancel_details_placeholder": "Any additional reason you'd like to share?",
+      "cancel_confirm": "Confirm Cancellation",
+      "cancel_processing": "Canceling...",
+      "cancel_close": "Close",
+      "cancel_success": "Your booking has been canceled.",
+      "cancel_info_title": "Cancellation Info",
+      "cancel_time": "Canceled At",
+      "cancel_time_empty": "Checking",
+      "cancel_by": "Canceled By",
+      "cancel_by_customer": "Customer",
+      "cancel_by_admin": "Salon",
+      "cancel_by_unknown": "Unknown",
+      "cancel_reason_label": "Reason",
+      "cancel_reason_empty": "No reason provided",
+      "change_panel_title": "Request a Change",
+      "change_placeholder": "e.g. I'd like to change to March 20 at 2pm. / I'd like to change my service.",
+      "change_submit": "Send Change Request",
+      "change_processing": "Sending...",
+      "change_close": "Close",
+      "change_success": "Your change request has been sent.",
+      "error_login": "Please check your login status.",
+      "error_load_401": "Sign in to view your bookings.",
+      "error_load": "Could not load your bookings.",
+      "error_cancel_400": "This booking cannot be canceled right now.",
+      "error_cancel_403": "You can only cancel your own bookings.",
+      "error_cancel": "Could not cancel your booking. Please try again later.",
+      "error_cancel_reason": "Please select or enter a cancellation reason.",
+      "error_change_reason": "Please enter what you'd like to change.",
+      "error_change": "Could not send your change request. Please try again later.",
+      "error_alt": "Something went wrong. Please try again later."
+    },
+    "notifications": {
+      "page_title": "Notification Center",
+      "back": "← My Page",
+      "loading": "Loading notifications...",
+      "empty": "No new notifications.",
+      "empty_cta": "Book a Beauty Service",
+      "booking_link": "View Booking Details →",
+      "event_booking_created": "Booking Requested",
+      "event_booking_confirmed": "Booking Confirmed",
+      "event_booking_canceled_by_customer": "Booking Canceled",
+      "event_booking_change_requested": "Change Requested",
+      "event_booking_change_approved": "Change Approved",
+      "event_booking_change_rejected": "Change Declined",
+      "event_booking_completed": "Service Completed",
+      "event_default": "Notification"
+    }
+  }
+}

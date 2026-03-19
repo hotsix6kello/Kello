@@ -1,0 +1,186 @@
+{
+    "common": {
+        "welcome": "Bienvenue, Voyageur.",
+        "greeting": "Bonjour",
+        "login": "Connexion",
+        "today": "Aujourd'hui",
+        "move": "Déplacer",
+        "book": "Réserver",
+        "chat": "Discuter",
+        "my": "Mon Info",
+        "current_operation": "Opération Actuelle",
+        "live": "EN DIRECT",
+        "recommended": "Recommandé à Proximité",
+        "based_on_location": "Basé sur votre position",
+        "start_nav": "Lancer Navigation",
+        "delay_10m": "Retard +10m",
+        "confirmed": "Confirmé",
+        "payment_completed": "Paiement Terminé",
+        "weather_clear": "Clair",
+        "back": "Retour",
+        "select_language": "Changer de langue",
+        "home_nav": "Accueil",
+        "explore_nav": "Explorer",
+        "planner_nav": "Itinéraire",
+        "today_nav": "Aujourd'hui",
+        "my_nav": "Mon Info",
+        "day_unit": "j",
+        "locale": "fr-FR",
+        "cities": {
+            "seoul": "Séoul",
+            "busan": "Busan",
+            "jeju": "Jeju",
+            "gyeongju": "Gyeongju"
+        },
+        "categories": {
+            "all": "Tout",
+            "food": "Gastronomie",
+            "beauty": "Beauté",
+            "event": "Événements",
+            "festival": "Festivals",
+            "attraction": "Attractions",
+            "transport": "Transport"
+        },
+        "community_nav": "Community"
+    },
+    "transport": {
+        "moving_to": "En route vers {{dest}}",
+        "remaining": "Restant",
+        "line_2_direction": "Ligne 2 • Direction Hôtel de Ville",
+        "departed": "parti",
+        "passing_now": "Passe maintenant...",
+        "current": "Actuel",
+        "get_off_at": "Descendre à",
+        "exit_3": "Sortie 3",
+        "getting_off_here": "Je descends ici",
+        "stations": {
+            "samseong": "Samseong",
+            "seolleung": "Seolleung",
+            "yeoksam": "Yeoksam",
+            "gangnam": "Gangnam",
+            "gyodae": "Gyodae",
+            "seocho": "Seocho",
+            "seongsu": "Seongsu"
+        }
+    },
+    "home": {
+        "title_korea": "Aujourd'hui en Corée",
+        "title": "Voyage en Corée, compris en 3 secondes",
+        "subtitle": "Réservations de conciergerie · Itinéraire automatique · Navigation",
+        "create_trip_cta": "Commencer le planning",
+        "input_label": "Où voyagez-vous ?",
+        "input_placeholder": "Ville, quartier, nom de l'hôtel",
+        "days_label": "Période du voyage",
+        "recommended_plans": "Plans de voyage recommandés",
+        "plans": {
+            "2d": {
+                "title": "2 Jours : L'Essentiel de Séoul",
+                "label": "Plan 2 Jours"
+            },
+            "3d": {
+                "title": "3 Jours : K-Culture & Style",
+                "label": "Plan 3 Jours"
+            },
+            "5d": {
+                "title": "5 Jours : Le Grand Tour",
+                "label": "Plan 5 Jours"
+            },
+            "request_custom_label": "Sur mesure",
+            "request_custom_title": "Demander un plan de {{days}} jours",
+            "request_custom_toast": "Plan de {{days}} jours personnalisé demandé ! Notre concierge vous contactera."
+        }
+    },
+    "explore_items": {
+        "airport_arrival": "Arrivée à l'aéroport d'Incheon",
+        "hotel_checkin": "Enregistrement à l'hôtel / Séjour"
+    },
+    "explore_page": {
+        "title": "Explorer",
+        "select_city": "Choisir une ville"
+    },
+    "planner_page": {
+        "title": "Itinéraire",
+        "day": "Jour {{n}}"
+    },
+    "today_page": {
+        "title": "Aujourd'hui",
+        "active_now": "Actif",
+        "navigate": "Naviguer",
+        "booking_ref": "Réf booking: {{ref}}",
+        "next_up": "À suivre",
+        "minutes_left": "Commence dans {{mins}}m",
+        "depart_early": "Partir maintenant",
+        "timeline": "Timeline",
+        "empty": {
+            "title": "Pas de planning aujourd'hui",
+            "desc": "Explorez des lieux et ajoutez-les !",
+            "cta": "Explorer des lieux"
+        }
+    },
+    "booking_detail": {
+        "select_date": "Choisir une date",
+        "select_time": "Choisir une heure",
+        "total_price": "Prix total",
+        "request_booking": "Demander la réservation"
+    },
+    "navigation_page": {
+        "title": "Aujourd'hui"
+    },
+    "my_page": {
+        "bookings": {
+            "title": "Mes réservations",
+            "date_time": "Date / Heure",
+            "area": "Zone",
+            "price": "Prix",
+            "new_added": "Nouvelle réservation ajoutée !"
+        },
+        "community": {
+            "title": "Mes Posts de la Communauté",
+            "empty": "Aucun post n'a encore été écrit."
+        }
+    },
+    "community_page": {
+        "title": "Communauté",
+        "subtitle": "Connectez-vous avec les locaux et les voyageurs",
+        "filter_all": "Tout",
+        "filter_meetup": "Cuisine & Rencontres",
+        "filter_travel": "Compagnon de voyage",
+        "filter_help": "Aide Locale",
+        "filter_review": "Avis",
+        "comments": "Commentaires",
+        "message": "Message",
+        "type": {
+            "MEETUP": "RENCONTRE",
+            "TRAVEL": "VOYAGE",
+            "HELP": "AIDE",
+            "REVIEW": "AVIS"
+        },
+        "post": {
+            "1": {
+                "author": "Mika (Japon)",
+                "time": "il y a 10 min",
+                "title": "Rencontre Samgyeopsal 🥓",
+                "desc": "Quelqu'un veut manger du Samgyeopsal ce soir à 19h ?"
+            },
+            "2": {
+                "author": "John (États-Unis)",
+                "time": "il y a 1 h",
+                "title": "Spectacle de Rue à Hongdae 🎸",
+                "desc": "Je vais à Hongdae pour voir les groupes indés. Rejoignez-moi !"
+            },
+            "3": {
+                "author": "Jihoon (Corée)",
+                "time": "il y a 2 h",
+                "title": "Besoin d'aide pour le métro ? 🚇",
+                "desc": "J'habite près de Myeongdong et je peux vous aider à traduire ou vous guider."
+            },
+            "4": {
+                "author": "Li Wei (Chine)",
+                "time": "il y a 3 h",
+                "title": "Shopping K-Beauty 💄",
+                "desc": "Je cherche un partenaire de shopping à Olive Young Myeongdong !"
+            }
+        },
+        "detail": "Détail de la publication"
+    }
+}

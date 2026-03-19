@@ -1,0 +1,32 @@
+{
+  "glossary": {
+    "title": "翻訳用語集",
+    "subtitle": "美容用語を優先適用する管理者辞書です。",
+    "domain": "カテゴリ",
+    "target_locale": "対象言語",
+    "source_term": "原文用語",
+    "target_term": "翻訳用語",
+    "priority": "優先度",
+    "version": "バージョン",
+    "notes": "メモ",
+    "active": "有効",
+    "inactive": "無効",
+    "save": "保存",
+    "create": "新規登録",
+    "delete": "削除",
+    "editing": "編集中",
+    "empty": "登録された用語がありません。",
+    "loading": "用語集を読み込んでいます。",
+    "admin_only": "管理者のみアクセスできます。",
+    "helper": "まつげ、フィラー、カットラインのような固定訳語を先に登録してください。",
+    "domains": {
+      "beauty": "ビューティー",
+      "restaurant": "レストラン"
+    },
+    "locales": {
+      "en": "英語",
+      "ja": "日本語",
+      "zh-CN": "中国語簡体字"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "glossary": {
+    "title": "Translation Glossary",
+    "subtitle": "Admin dictionary for beauty-first terminology.",
+    "domain": "Category",
+    "target_locale": "Target Locale",
+    "source_term": "Source Term",
+    "target_term": "Translated Term",
+    "priority": "Priority",
+    "version": "Version",
+    "notes": "Notes",
+    "active": "Active",
+    "inactive": "Inactive",
+    "save": "Save",
+    "create": "Create",
+    "delete": "Delete",
+    "editing": "Editing",
+    "empty": "No glossary entries yet.",
+    "loading": "Loading glossary entries.",
+    "admin_only": "Admin access required.",
+    "helper": "Register fixed beauty terms like eyelash, filler, and cut line first.",
+    "domains": {
+      "beauty": "Beauty",
+      "restaurant": "Restaurant"
+    },
+    "locales": {
+      "en": "English",
+      "ja": "Japanese",
+      "zh-CN": "Simplified Chinese"
+    }
+  }
+}

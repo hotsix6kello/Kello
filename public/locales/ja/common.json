@@ -1,0 +1,512 @@
+{
+    "header": {
+        "view_app": "アプリで見る",
+        "faq": "FAQ",
+        "recent": "最近見たアク티ビティ"
+    },
+    "common": {
+        "welcome": "ようこそ、旅行者様。",
+        "greeting": "おはようございます",
+        "login": "ログイン",
+        "signup": "新規登録",
+        "today": "今日",
+        "move": "移動",
+        "book": "予約",
+        "chat": "相談",
+        "my": "MY",
+        "min_unit": "分",
+        "current_operation": "現在のスケジュール",
+        "live": "LIVE",
+        "recommended": "周辺のおすすめ",
+        "based_on_location": "現在地に基づく",
+        "start_nav": "ルート案内開始",
+        "delay_10m": "10分遅らせる",
+        "confirmed": "予約確定",
+        "payment_completed": "支払い完了",
+        "weather_clear": "晴れ",
+        "back": "戻る",
+        "select_language": "言語選択",
+        "home_nav": "ホーム",
+        "explore_nav": "探索",
+        "planner_nav": "日程表",
+        "today_nav": "今日",
+        "my_nav": "マイ情報",
+        "day_unit": "日",
+        "locale": "ja-JP",
+        "cities": {
+            "seoul": "ソウル",
+            "busan": "釜山",
+            "jeju": "済州",
+            "gyeongju": "慶州"
+        },
+        "categories": {
+            "all": "すべて",
+            "food": "グルメ",
+            "beauty": "ビューティー",
+            "event": "公演",
+            "festival": "お祭り",
+            "attraction": "名所",
+            "transport": "交通"
+        },
+        "badges": {
+            "english_friendly": "英語対応",
+            "vegan_certified": "ビーガン認証",
+            "michelin": "ミシュラン",
+            "wait_free": "待ち時間なし",
+            "local_experience": "現地体験",
+            "k_idol_style": "K-IDOLスタイル",
+            "tax_refund": "免税",
+            "summer_must_go": "夏のおすすめ",
+            "non_verbal": "ノンバーバル",
+            "family": "家族連れ",
+            "night_view": "夜景",
+            "photo_spot": "フォトスポット",
+            "hanbok_free_entry": "韓服無料入場",
+            "history": "歴史",
+            "city_view": "シティビュー"
+        },
+        "ingredients": {
+            "vegetables": "野菜",
+            "soy": "豆",
+            "pork": "豚肉",
+            "kimchi": "キムチ",
+            "seafood": "海鮮"
+        },
+        "diet": {
+            "vegan": "ビーガン",
+            "gluten_free": "グルテンフリー",
+            "meat_lover": "お肉好き",
+            "pescatarian": "ペスカタリアン"
+        },
+        "community_nav": "コミュニティ",
+        "help_nav": "ヘルプ",
+        "greeting_morning": "おはようございます",
+        "greeting_afternoon": "こんにちは",
+        "greeting_evening": "こんばんは",
+        "search_results": "検索結果",
+        "search_results_for": "'{{query}}'の結果 {{count}}件",
+        "view_map": "場所を確認",
+        "view_map_desc": "地図で詳細位置を確認",
+        "taxi_call": "タクシーを呼ぶ",
+        "route_nav": "ルート案内",
+        "transit_nav_desc": "公共交通機関ルート",
+        "copy_address": "住所をコピー",
+        "copied": "コピーしました！"
+    },
+    "transport": {
+        "moving_to": "{{dest}}へ移動中",
+        "remaining": "残り",
+        "line_2_direction": "2号線 • 市庁方面",
+        "departed": "出発済み",
+        "passing_now": "通過中...",
+        "current": "現在",
+        "get_off_at": "下車出口:",
+        "exit_3": "3番出口",
+        "getting_off_here": "ここで降ります",
+        "stations": {
+            "samseong": "サムソン",
+            "seolleung": "ソンルン",
+            "yeoksam": "ヨクサム",
+            "gangnam": "カンナム",
+            "gyodae": "キョデ",
+            "seocho": "ソチョ",
+            "seongsu": "ソンス"
+        }
+    },
+    "home": {
+        "presets": {
+            "beauty_tour": "ビューティー",
+            "foodie": "グルメ探検",
+            "heritage": "伝統文化",
+            "k_pop": "K-POP"
+        },
+        "badge": "Kello",
+        "title": "予約代行 · スケジュール自動整理 · ナビゲーション",
+        "subtitle": "",
+        "create_trip_cta": "旅行計画を始める",
+        "how_it_works": {
+            "title": "利用方法",
+            "step1": "リクエスト",
+            "step1_desc": "お好みの美容・グルメを選択",
+            "step2": "進行中",
+            "step2_desc": "現地チャネルで代理予約",
+            "step3": "確定",
+            "step3_desc": "スケジュールに自動同期"
+        },
+        "input_label": "どこへ旅行されますか？",
+        "input_placeholder": "都市、地域、ホテル名",
+        "days_label": "旅行期間",
+        "value_props": {
+            "itinerary": {
+                "title": "スケジュール自動整理",
+                "desc": "AIが最適なルートを構成"
+            },
+            "booking": {
+                "title": "予約代行",
+                "desc": "管理ショップ、スパなどを代行予約"
+            },
+            "navigation": {
+                "title": "リアルタイム移動案内",
+                "desc": "言語の壁がないルート案内"
+            }
+        },
+        "recommended_plans": "おすすめの旅行プラン",
+        "plans": {
+            "2d": {
+                "title": "2日：ソウル必須ツアー",
+                "label": "2日間プラン"
+            },
+            "3d": {
+                "title": "3日：K-カルチャー＆スタイル",
+                "label": "3日間プラン"
+            },
+            "5d": {
+                "title": "5日：韓国完全制覇ツアー",
+                "label": "5日間プラン"
+            },
+            "request_custom_label": "カスタム",
+            "request_custom_title": "{{days}}日間のプランをリクエスト",
+            "request_custom_toast": "{{days}}日間のカスタムプランをリクエストしました！コンシェルジュからご連絡いたします。"
+        }
+    },
+    "explore_page": {
+        "title": "探索",
+        "city_changed": "都市が{{city}}に変更されました",
+        "added_to": "{{day}}日目の予定に追加されました",
+        "no_items": "{{city}}で見つかりませんでした",
+        "try_changing": "カテゴリーや都市を変更してみてください。",
+        "add_to_plan": "+ 予定に追加",
+        "today": "今日",
+        "tonight": "今夜",
+        "starts_from": "₩{{price}} から",
+        "indoor": "屋内",
+        "outdoor": "屋外",
+        "badges": {
+            "vegan_only": "ビーガン専用",
+            "vegan_option": "ビーガン選択可"
+        },
+        "filters_title": "フィルター",
+        "apply": "適用",
+        "reset": "リセット",
+        "adding_item_to": "<strong>{{title}}</strong> を次の日程に追加:",
+        "no_specific_filters": "このカテゴリーには特定のフィルターがありません。",
+        "filters": {
+            "show": "種類",
+            "price": "価格",
+            "diet": "食生活",
+            "ingredients": "材料",
+            "date": "日付",
+            "type": "タイプ",
+            "options": {
+                "skin_care": "スキンケア",
+                "hair_makeup": "ヘア/メイク",
+                "spa": "スパ",
+                "nails": "ネイル",
+                "vegan": "ビーガン",
+                "vegetarian": "ベジタリアン",
+                "no_pork": "豚肉なし",
+                "halal": "ハラール",
+                "beef": "牛肉",
+                "pork": "豚肉",
+                "chicken": "鶏肉",
+                "seafood": "海鮮",
+                "dairy": "乳製品",
+                "egg": "卵",
+                "today": "今日",
+                "weekend": "今週末",
+                "select": "日付を選択",
+                "concert": "コンサート",
+                "show": "公演",
+                "popup": "ポップアップ",
+                "club": "クラブ",
+                "exhibition": "展示会"
+            }
+        }
+    },
+    "explore_items": {
+        "airport_arrival": "仁川空港到着",
+        "hotel_checkin": "ホテルチェックイン/滞在",
+        "f1": {
+            "title": "プラントカフェ ソウル",
+            "area": "梨泰院",
+            "desc": "新鮮な野菜と健康的な食材で作られた100％ビーガン料理",
+            "price": "15,000"
+        },
+        "f2": {
+            "title": "金豚食堂",
+            "area": "薬水",
+            "desc": "ミシュランガイドに選ばれた韓国最高のサムギョプサル店",
+            "price": "20,000"
+        },
+        "f3": {
+            "title": "チャガルチ市場 刺身定食",
+            "area": "南浦",
+            "desc": "釜山の海の新鮮さを感じられるボリューム満点の刺身コース",
+            "price": "40,000"
+        },
+        "b1": {
+            "title": "ジェニーハウス 清潭",
+            "area": "清潭",
+            "desc": "K-POPアイドル御用達のプレミアムヘア＆メイクショップ",
+            "price": "150,000"
+        },
+        "b2": {
+            "title": "プムクリニック プレミアム江南",
+            "area": "江南",
+            "desc": "外国人に最も人気のあるコスパ最高の美容クリニック",
+            "price": "50,000"
+        },
+        "e1": {
+            "title": "PSY びっしょりショー 2024",
+            "area": "蚕室スタジアム",
+            "desc": "夏の暑さを吹き飛ばすPSYのクールで情熱的なライブパフォーマンス",
+            "price": "140,000"
+        },
+        "e2": {
+            "title": "ナンタ公演 明洞",
+            "area": "明洞",
+            "desc": "韓国の伝統的なリズムと現代的なパフォーマンスを組み合わせたノンバーバル公演",
+            "price": "40,000"
+        },
+        "fs1": {
+            "title": "ソウルランタンフェスティバル",
+            "area": "光化門",
+            "desc": "光化門広場を彩る華やかで美しいランタンの饗宴",
+            "price": "無料"
+        },
+        "fs2": {
+            "title": "映画祭",
+            "area": "センタムシティ",
+            "desc": "アジア最大級の映画祭、世界中の映画人が集まる場所",
+            "price": "10,000"
+        },
+        "a1": {
+            "title": "景福宮",
+            "area": "鍾路",
+            "desc": "朝鮮王朝の正宮として韓国の歴史と美しさを伝える場所",
+            "price": "3,000"
+        },
+        "a2": {
+            "title": "ロッテワールドタワー",
+            "area": "蚕室",
+            "desc": "ソウルの幻想的な夜景を一望できる韓国最高層ビル",
+            "price": "27,000"
+        },
+        "t1": {
+            "title": "釜山行き KTX",
+            "area": "ソウル駅",
+            "desc": "ソウルから釜山まで最も速く快適に移動する方法",
+            "price": "59,800"
+        }
+    },
+    "fab": {
+        "idle": "旅行を作る",
+        "pre_trip": "明後日出発します",
+        "on_trip": "次はどこ？",
+        "near_deadline": "遅延の危険！",
+        "to": "{{dest}} へ",
+        "kride": "K.Rideを呼ぶ",
+        "kride_sub": "{{mins}}分後に到着",
+        "transit": "公共交通案内",
+        "transit_sub": "最短ルート案内",
+        "copy": "住所をコピー",
+        "copy_done": "コピー完了！",
+        "card": "ドライバーに見せる",
+        "card_sub": "タクシー運転手用カード",
+        "card_modal_title": "🗺️ この住所に行ってください",
+        "cancel": "閉じる"
+    },
+    "today_page": {
+        "title": "今日の日程",
+        "active_now": "進行中",
+        "navigate": "道探し",
+        "booking_ref": "予約番号: {{ref}}",
+        "next_up": "次の日程",
+        "minutes_left": "{{mins}}分後に開始",
+        "depart_early": "今すぐ出発",
+        "timeline": "タイムライン",
+        "empty": {
+            "title": "今日の日程がありません",
+            "desc": "行きたい場所を探して追加してみましょう！",
+            "cta": "場所を探す"
+        }
+    },
+    "booking_detail": {
+        "select_date": "日付選択",
+        "select_time": "時間選択",
+        "total_price": "合計金額",
+        "request_booking": "予約をリクエスト"
+    },
+    "navigation_page": {
+        "title": "今日の予定",
+        "status": {
+            "on_trip": "旅行中",
+            "pre_trip": "準備中",
+            "idle": "予定がありません"
+        },
+        "countdown": {
+            "today": "今日",
+            "starts_in": "{{mins}}分後に開始",
+            "traveling_to": "{{dest}}へ移動中"
+        },
+        "empty": {
+            "title": "今日の予定がありません",
+            "subtitle": "行きたい場所を探して追加してみましょう！",
+            "cta": "場所を探す"
+        },
+        "actions": {
+            "directions": "ルート案内",
+            "booking": "予約を見る",
+            "late_risk": "遅延の危険！",
+            "booking_ref": "予約番号: {{ref}}",
+            "departure_warning": "⚠️ {{title}} 開始 {{mins}}分前 — 今すぐ出発してください！"
+        }
+    },
+    "planner_page": {
+        "title": "予定表",
+        "day": "{{n}}日目",
+        "add_from_discover": "🔍 場所を追加",
+        "auto_build": "✨ 自動生成",
+        "add_to": "{{slot}}に追加",
+        "book_all": "🎫 予約をリクエスト",
+        "booking_modal": {
+            "title": "予約リクエスト",
+            "date": "日付",
+            "people": "人数",
+            "people_count": "{{n}}人",
+            "notes": "要望事項 (任意)",
+            "submit": "リクエストを送信",
+            "submitting": "送信中...",
+            "success_title": "リクエストを受け付けました！",
+            "success_desc": "24時間以内に担当者からご連絡いたします。",
+            "unavailable_title": "予約不可",
+            "unavailable_desc": "次の場所をおすすめします：",
+            "view_status": "状況を確認"
+        },
+        "status": {
+            "draft": "下書き",
+            "submitted": "リクエスト済み",
+            "confirmed": "確定済み",
+            "unavailable": "不可",
+            "completed": "完了"
+        },
+        "slots": {
+            "am": "午前",
+            "pm": "午後",
+            "night": "夜"
+        }
+    },
+    "my_page": {
+        "profile": {
+            "trust_score": "💎 信頼スコア",
+            "trust_level_excellent": "優秀"
+        },
+        "passport": {
+            "title": "マイパスポート",
+            "view_all": "すべて見る",
+            "seoul": "ソウル",
+            "beauty": "美容",
+            "jeju": "済州"
+        },
+        "bookings": {
+            "title": "予約履歴",
+            "date_time": "日付 / 時間",
+            "area": "エリア",
+            "price": "価格",
+            "today_time": "今日, {{time}}",
+            "tomorrow_time": "明日, {{time}}",
+            "next_week_time": "来週, {{time}}",
+            "new_added": "新しい予約が追加されました！"
+        },
+        "community": {
+            "title": "マイコミュニティ投稿",
+            "empty": "まだコミュニティの投稿がありません。"
+        }
+    },
+    "community_page": {
+        "title": "コミュニティ",
+        "subtitle": "地元の人や旅行者と繋がる",
+        "filter_all": "すべて",
+        "filter_meetup": "食事＆集まり",
+        "filter_travel": "旅行仲間",
+        "filter_help": "ローカルヘルプ",
+        "comments": "コメント",
+        "message": "メッセージ",
+        "type": {
+            "MEETUP": "集まり",
+            "TRAVEL": "旅行",
+            "HELP": "ヘルプ",
+            "REVIEW": "REVIEW"
+        },
+        "post": {
+            "1": {
+                "author": "ミカ (日本)",
+                "time": "10分前",
+                "title": "サムギョプサル集まり 🥓",
+                "desc": "今夜7時に金豚食堂で一緒にサムギョプサル食べませんか？"
+            },
+            "2": {
+                "author": "ジョン (米国)",
+                "time": "1時間前",
+                "title": "弘大路上ライブ 🎸",
+                "desc": "インディーズバンドを見に弘大に向かっています。一緒にどうですか！"
+            },
+            "3": {
+                "author": "ジフン (韓国)",
+                "time": "2時間前",
+                "title": "地下鉄の案内が必要ですか？ 🚇",
+                "desc": "明洞の近くに住んでいるので、道に迷ったら通訳や案内ができますよ。お気軽にメッセージください！"
+            },
+            "4": {
+                "author": "リウェイ (中国)",
+                "time": "3時間前",
+                "title": "K-Beauty コスメショッピング 💄",
+                "desc": "明洞のオリーブヤングで一緒に買い物する友達を探しています。いいブランドたくさん知ってます！"
+            }
+        },
+        "filter_review": "Reviews",
+        "detail": "投稿の詳細"
+    },
+    "home_new": {
+        "hero_title": "韓国旅行、プランから予約までこれ一つで",
+        "hero_subtitle": "旅行プランの提案から予約サポートまでスピーディーに。韓国旅行初心者でも安心의 파트너.",
+        "features": {
+            "booking": "予約まで一括で",
+            "ai_plan": "AIでプラン完成",
+            "navi": "道に迷う心配なし"
+        },
+        "input": {
+            "where": "どこへ行きますか？",
+            "where_placeholder": "ソウル、釜山、済州...",
+            "when": "何日間滞在しますか？",
+            "days_suffix": "日間",
+            "who": "誰と行きますか？",
+            "who_options": {
+                "solo": "一人で",
+                "couple": "カップル",
+                "friends": "友達と",
+                "family": "家族と"
+            },
+            "interests": "どんなテーマをご希望ですか？",
+            "interests_options": {
+                "food": "グルメ探検",
+                "shopping": "ショッピング",
+                "beauty": "K-ビューティー",
+                "sightseeing": "観光名所",
+                "night": "ナイトライフ",
+                "experience": "特別な体験"
+            }
+        },
+        "cta_helper": "1分であなたにぴったりの旅行コースを提案",
+        "cta_btn": "プラン作成を始める",
+        "trust": {
+            "title": "Kelloと共にする安心の韓国旅行",
+            "items": [
+                "韓国旅行特化の専門アプリ",
+                "AIによるパーソナライズされたプラン",
+                "言語の壁がないルート案内",
+                "予約困難な場所もサポート"
+            ]
+        }
+    }
+}
