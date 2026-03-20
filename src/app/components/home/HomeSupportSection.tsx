@@ -1,9 +1,10 @@
+import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 
 interface HomeSupportSectionProps {
-  assuranceItems: any[];
+  assuranceItems: unknown[];
   onOpenInterpreter: () => void;
-  t: (key: string, options?: any) => string;
+  t: TFunction;
 }
 
 export default function HomeSupportSection({

@@ -1,11 +1,12 @@
+import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 
 interface HomeRecommendedPlansProps {
-  plans: any[];
+  plans: Array<{ id: string; label: string; title: string; duration: number; items: unknown[] }>;
   days: number;
-  onApplyPlan: (plan: any) => void;
+  onApplyPlan: (plan: { id: string; duration: number; items: unknown[] }) => void;
   onCreateCustomPlan: () => void;
-  t: (key: string, options?: any) => any;
+  t: TFunction;
 }
 
 export default function HomeRecommendedPlans({

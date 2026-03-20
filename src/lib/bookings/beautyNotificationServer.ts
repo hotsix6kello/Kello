@@ -1,5 +1,4 @@
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "@/lib/supabaseServer.ts";
-import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
 
 export type BeautyBookingNotificationEventType =
   | "booking_created"
@@ -58,13 +57,13 @@ export interface BeautyBookingNotificationContent {
  */
 export function getBeautyBookingNotificationTemplate(
   eventType: BeautyBookingNotificationEventType,
-  metadata: Record<string, any>,
+  metadata: Record<string, unknown>,
   bookingId?: string
 ): BeautyBookingNotificationContent {
-  const storeName = metadata.storeName || "매장";
-  const date = metadata.bookingDate || "";
-  const time = metadata.bookingTime || "";
-  const service = metadata.primaryServiceName || "시술";
+  const storeName = (metadata.storeName as string) || "매장";
+  const date = (metadata.bookingDate as string) || "";
+  const time = (metadata.bookingTime as string) || "";
+  const service = (metadata.primaryServiceName as string) || "시술";
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const myBookingUrl = bookingId 
@@ -367,11 +366,13 @@ export async function resendBeautyBookingNotification(notificationId: string, ad
   const client = getSupabaseServerClient();
   
   // 1. Fetch original notification
-  const { data: original, error: fetchError } = await client
+  const { data: originalResult, error: fetchError } = await client
     .from(BEAUTY_NOTIFICATION_TABLE)
     .select("*")
     .eq("id", notificationId)
     .single();
+
+  const original = originalResult as BeautyBookingNotificationRecord | null;
 
   if (fetchError || !original) {
     throw new Error(`Notification not found: ${notificationId}`);

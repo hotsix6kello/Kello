@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import styles from '../explore.module.css';
-import { CategoryId } from '../mock/data';
+// No imports needed from mock/data here if not used
 
 interface FilterSheetProps {
     isOpen: boolean;

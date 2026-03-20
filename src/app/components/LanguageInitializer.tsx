@@ -13,7 +13,7 @@ import { initClientLanguage } from '@/lib/i18n/client';
 export default function LanguageInitializer({ locale }: { locale?: string }) {
     useEffect(() => {
         initClientLanguage(locale);
-    }, []);
+    }, [locale]);
 
     return null; // This component doesn't render anything
 }

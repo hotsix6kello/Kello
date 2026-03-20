@@ -1,8 +1,9 @@
+import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 
 interface HomeInterpreterEntryProps {
   onOpenInterpreter: () => void;
-  t: (key: string) => any;
+  t: TFunction;
 }
 
 export default function HomeInterpreterEntry({

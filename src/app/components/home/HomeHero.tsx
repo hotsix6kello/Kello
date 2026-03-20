@@ -1,10 +1,11 @@
+import { TFunction } from 'i18next';
 import Image from 'next/image';
 import styles from '../../home.module.css';
 
 interface HomeHeroProps {
   userName: string | null;
   greeting: string;
-  t: (key: string, options?: any) => string;
+  t: TFunction;
 }
 
 export default function HomeHero({ userName, greeting, t }: HomeHeroProps) {

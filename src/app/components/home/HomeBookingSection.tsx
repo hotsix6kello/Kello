@@ -1,9 +1,11 @@
+import { TFunction } from 'i18next';
+import { BeautyCategoryOption, BeautyCategoryId } from './constants';
 import styles from '../../home.module.css';
 
 interface HomeBookingSectionProps {
-  categories: any[];
-  selectedCategory: string | null;
-  onSelectCategory: (id: any) => void;
+  categories: BeautyCategoryOption[];
+  selectedCategory: BeautyCategoryId | null;
+  onSelectCategory: (id: BeautyCategoryId) => void;
   input: string;
   onInputChange: (val: string) => void;
   onInputClear: () => void;
@@ -12,10 +14,10 @@ interface HomeBookingSectionProps {
   onDaysChange: (val: number) => void;
   onStartBooking: () => void;
   showSuggestions: boolean;
-  suggestions: any[];
-  onSelectPlace: (place: any) => void;
-  selectedOption: any;
-  t: (key: any, options?: any) => any;
+  suggestions: Array<{ title: string; area: string; [key: string]: unknown }>;
+  onSelectPlace: (place: { title: string; area: string; [key: string]: unknown }) => void;
+  selectedOption: BeautyCategoryOption | null;
+  t: TFunction;
 }
 
 export default function HomeBookingSection({
@@ -74,6 +76,9 @@ export default function HomeBookingSection({
               placeholder={t('explore_page.search_placeholders.beauty')}
               value={input}
               onChange={e => onInputChange(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter') onStart();
+              }}
             />
             {input && <button className={styles.inputClear} onClick={onInputClear}>✕</button>}
 
