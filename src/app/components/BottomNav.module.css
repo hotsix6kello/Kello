@@ -1,10 +1,11 @@
 /* Bottom Navigation */
 .navBar {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 480px;
     height: 72px;
     /* Reduced from 80px */
     background: var(--background);
@@ -15,13 +16,6 @@
     padding-bottom: env(safe-area-inset-bottom, 12px);
     z-index: 1000;
     transition: transform 0.3s ease;
-}
-
-/* Hide on Desktop (md and up) */
-@media (min-width: 768px) {
-    .navBar {
-        display: none;
-    }
 }
 
 .navItem {
