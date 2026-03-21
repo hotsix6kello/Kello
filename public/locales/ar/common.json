@@ -1,27 +1,9 @@
 {
-  "beauty_explore": {
-    "form_name": "الاسم",
-    "form_name_placeholder": "أدخل اسمك",
-    "form_phone": "وسيلة التواصل (أو معرف SNS)",
-    "form_phone_placeholder": "رقم الهاتف أو معرف SNS",
-    "form_request": "الطلبات",
-    "form_request_placeholder": "الحساسية أو النمط المطلوب",
-    "agreement_confirm": "تأكيد التفاصيل",
-    "agreement_confirm_desc": "أؤكد الاختيار.",
-    "agreement_privacy": "الموافقة على الخصوصية",
-    "agreement_privacy_desc": "أوافق على تقديم المعلومات.",
-    "region_all": "كل المناطق",
-    "label_today": "اليوم",
-    "label_tomorrow": "غداً",
-    "label_booking_unit": "وون",
-    "booking_confirmation_title": "تم طلب الحجز!",
-    "booking_confirmation_desc": "سنقوم بإشعارك قريباً.",
-    "booking_confirmation_cta": "حجوزاتي"
-  },
   "common": {
     "welcome": "مرحباً أيها المسافر",
     "greeting": "صباح الخير",
     "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
     "today": "اليوم",
     "move": "تنقل",
     "book": "حجز",
@@ -37,10 +19,13 @@
     "payment_completed": "اكتملت الدفعة",
     "weather_clear": "صافٍ",
     "back": "رجوع",
-    "community_nav": "Community",
-    "morning": "صباح الخير",
-    "afternoon": "مساء الخير",
-    "evening": "مساء الخير"
+    "community_nav": "المجتمع",
+    "today_nav": "مسار الرحلة",
+    "my_nav": "حسابي",
+    "home_nav": "الرئيسية",
+    "explore_nav": "استكشاف",
+    "planner_nav": "المخطط",
+    "help_nav": "مركز المساعدة"
   },
   "transport": {
     "moving_to": "متجه إلى {{dest}}",
@@ -59,8 +44,100 @@
       "gangnam": "كانغنام",
       "gyodae": "كيوداي",
       "seocho": "سيوتشو",
-      "seongsu": "سيونغسو"
+      "seongsu": "سيونغسو",
+      "hongdae": "هونغداي",
+      "jamsil": "جامسيل",
+      "konkuk": "جامعة كونكوك",
+      "pangyo": "بانغيو"
     }
+  },
+  "beauty_explore": {
+    "hero_title": "استكشاف حجوزات التجميل",
+    "hero_desc": "اختر فئة لاستكشاف أدق للحجوزات. يمكنك الآن التحقق من جميع صالونات التجميل.",
+    "hero_title_with_category": "ابدأ حجز {{category}} الآن",
+    "hero_subtitle_desc": "اختر المنطقة والمتجر والوقت للمتابعة.",
+    "hero_guide_no_category": "اختيار فئة من الصفحة الرئيسية يؤدي إلى أفضل تدفق للحجز. أنت تشاهد حالياً جميع صالونات التجميل.",
+    "hero_flow_step_category": "تحقق من الفئة",
+    "hero_flow_step_region": "اختر المنطقة",
+    "hero_flow_step_store": "اختر المتجر",
+    "hero_flow_step_time": "تأكيد الوقت",
+    "hero_flow_aria_label": "دليل الحجز السريع",
+    "region_filter_title": "اختر منطقتك المفضلة",
+    "region_all": "كل المناطق",
+    "step_indicator_label": "خطوات حجز التجميل",
+    "step_1": "اختيار المتجر",
+    "step_2": "اختيار الوقت",
+    "step_3": "تأكيد",
+    "step_4": "إدخال المعلومات",
+    "step_5": "مكتمل",
+    "form_name": "الاسم",
+    "form_name_placeholder": "برجاء إدخال اسمك",
+    "form_phone": "وسيلة الاتصال",
+    "form_phone_placeholder": "على سبيل المثال: 010-1234-5678",
+    "form_request": "طلب",
+    "form_request_placeholder": "اذكر النمط المطلوب أو أي طلبات خاصة",
+    "agreement_confirm": "لقد راجعت معلومات الحجز المختارة.",
+    "agreement_confirm_desc": "أفهم أنه قد يتم تعديل الأوقات بناءً على توفر المتجر.",
+    "agreement_privacy": "أوافق على تلقي جهات اتصال الدليل للحجز.",
+    "agreement_privacy_desc": "أوافق على تقديم معلومات الاتصال للتأكيد والتغييرات.",
+    "toast_addon_limit": "يمكن اختيار خيارين إضافيين كحد أقصى.",
+    "toast_copy_hint": "اضغط لفترة طويلة على {{label}} للنسخ.",
+    "toast_select_time": "اختر وقتاً لـ ",
+    "toast_check_info": "تحقق من معلومات الحجز مرة أخرى.",
+    "toast_submit_error": "فشل في حفظ الحجز. حاول مرة أخرى.",
+    "label_designer_default": "خيار المتجر",
+    "label_service_default": "قبل الاختيار",
+    "label_addon_default": "بدون اختيار",
+    "label_select_prompt": "اختر حجزاً لمشاهدة التفاصيل.",
+    "label_price_from": "من",
+    "label_today": "اليوم",
+    "label_tomorrow": "غداً",
+    "label_booking_unit": "وون",
+    "btn_continue": "احجز الآن",
+    "btn_submit": "إرسال الطلب",
+    "btn_reset": "تعديل الحجز",
+    "btn_close": "إغلاق",
+    "completion_title": "تم إرسال طلب الحجز!",
+    "completion_desc1": "سنخطرك بعد أن يتحقق المتجر من التوفر.",
+    "completion_desc2": "يرجى ملاحظة أنه لم يتم تأكيده حتى تتلقى إشعار تأكيد.",
+    "completion_desc3": "تتبع التقدم في أي وقت في قائمة حجوزاتي.",
+    "label_rating": "التقييم",
+    "label_review": "المراجعات",
+    "btn_select_time": "اختر وقت الحجز",
+    "btn_reselect_time": "إعادة اختيار وقت الحجز",
+    "empty_store_title": "لا توجد متاجر تطابق المعايير.",
+    "empty_store_desc": "جرب منطقة أخرى أو فئة مختلفة.",
+    "booking_panel_title": "اختر التاريخ والوقت",
+    "booking_panel_desc": "اختر وقتاً للمتجر وتابع للتأكيد.",
+    "booking_empty_title": "اختر متجراً أولاً.",
+    "booking_empty_desc": "اضغط على `اختر وقت الحجز` في بطاقة المتجر أعلاه.",
+    "booking_not_found_title": "لم يتم العثور على أوقات متاحة.",
+    "booking_not_found_desc": "اختر متجراً آخر أو أعد تحميل الأوقات.",
+    "booking_date_label": "التاريخ",
+    "booking_time_label": "الوقت",
+    "booking_no_date": "لا توجد تواريخ قابلة للاختيار بعد.",
+    "booking_no_time_wait": "اختر تاريخاً أولاً.",
+    "booking_no_slots": "لا توجد أوقات متاحة لهذا التاريخ.",
+    "summary_category": "الفئة",
+    "summary_store": "المتجر",
+    "summary_region": "المنطقة",
+    "summary_date": "التاريخ",
+    "summary_time": "الوقت",
+    "summary_hint": "اختر التاريخ والوقت للمتابعة.",
+    "summary_btn": "تحقق من معلومات الحجز",
+    "confirm_title": "تأكيد المعلومات وإدخال التفاصيل",
+    "confirm_desc": "املأ التفاصيل للحصول على بطاقة طلب جاهزة للعرض.",
+    "btn_edit": "تعديل معلومات الحجز",
+    "confirm_empty_title": "الخطوة التالية لم تفتح بعد.",
+    "confirm_empty_desc": "اضغط على `تحقق من معلومات الحجز` after picking date/time.",
+    "confirm_review_error_title": "تحقق من معلومات الحجز مرة أخرى.",
+    "confirm_review_error_desc": "يتطلب المتجر والتاريخ والوقت.",
+    "confirm_price_hint": "السعر المقدر هو للعرض فقط. قد يختلف الدفع النهائي.",
+    "label_no_surcharge": "بدون رسوم إضافية",
+    "label_no_designer": "لا توجد معلومات عن المصمم حالياً.",
+    "label_designer_hint": "اختيار المصمم اختياري. اختيار المتجر هو البديل.",
+    "label_addon_limit": "الحد الأقصى 2",
+    "selected_confirmation": "التاريخ المختار: {{date}}"
   },
   "home": {
     "title_korea": "كوريا اليوم",
@@ -82,98 +159,35 @@
       "request_custom_title": "طلب خطة لـ {{days}} أيام",
       "request_custom_toast": "تم طلب خطة مخصصة لـ {{days}} أيام! سيتواصل معك فريق الاستقبال قريباً."
     },
-    "badge": "اختبر جمال كوريا"
-  },
-  "my_page": {
-    "bookings": {
-      "title": "حجوزاتي",
-      "date_time": "التاريخ / الوقت",
-      "area": "المنطقة",
-      "price": "السعر",
-      "new_added": "تم إضافة حجز جديد!"
+    "badge": "اختبر جمال كوريا",
+    "categories": {
+      "all": "الكل",
+      "beauty": "تجميل",
+      "food": "طعام",
+      "attraction": "معالم",
+      "event": "فعاليات",
+      "festival": "مهرجانات"
     },
-    "community": {
-      "title": "مشاركاتي في المجتمع",
-      "empty": "لم تتم كتابة مشاركات بعد."
+    "cities": {
+      "seoul": "سيول",
+      "busan": "بوسان",
+      "jeju": "جيجو",
+      "incheon": "إنشيون",
+      "gyeongju": "كيونغجو"
     }
   },
-  "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
+  "explore_page": {
+    "title": "استكشاف",
+    "select_city": "اختر مدينة",
+    "search_placeholders": {
+      "all": "ابحث عن التجميل، الطعام...",
+      "beauty": "ابحث عن الع이밥، الصالونات...",
+      "food": "ابحث عن المطاعم، الأطباق...",
+      "attraction": "ابحث عن القصور، المنتزهات...",
+      "event": "ابحث عن الحفلات، العروض...",
+      "festival": "ابحث عن المهرجانات..."
     },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-      },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-      },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-      },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-      }
-    },
-    "filter_review": "Reviews",
-    "detail": "تفاصيل المشاركة"
-  },
-  "explore_items": {
-    "airport_arrival": "الوصول إلى مطار إنتشون",
-    "hotel_checkin": "تسجيل الوصول في الفندق",
-    "f1": {
-      "title": "Plant Cafe Seoul"
-    },
-    "f2": {
-      "title": "Gold Pig BBQ"
-    },
-    "f3": {
-      "title": "سوق المأكولات البحرية"
-    },
-    "b1": {
-      "title": "Jenny House Beauty"
-    },
-    "b2": {
-      "title": "PPEUM Clinic Gangnam"
-    },
-    "e1": {
-      "title": "PSY Water Show"
-    },
-    "e2": {
-      "title": "Nanta Show Myeongdong"
-    },
-    "fs1": {
-      "title": "مهرجان الفوانيس في سيول"
-    },
-    "a1": {
-      "title": "قصر جيونج بوكجونج"
-    },
-    "a2": {
-      "title": "Lotte World Tower"
-    }
+    "distance_label": "المسافة:"
   },
   "help_page": {
     "title": "دعم الطوارئ",
@@ -200,7 +214,7 @@
     "police_contacts": "جهات الاتصال الرئيسية",
     "police_phrases": "عبارات الطوارئ",
     "interp_services": "خدمات الترجمة",
-    "interp_phrases": "عبارات مفيدة",
+    "interp_phrases": "عبارات مفيد",
     "emergency_call": "طوارئ؟",
     "emergency_hint": "اتصل بـ 119 فوراً",
     "taxi": "تاكسي",
@@ -222,7 +236,7 @@
       "intl": "مركز العيادات الدولية"
     },
     "medicines": {
-      "tylenol_use": "مسكن للألم / خافض للحرارة",
+      "tylenol_use": "مسكن للأمام / خافض للحرارة",
       "tylenol_note": "متوفر في جميع المتاجر (GS25, CU, 7-Eleven)",
       "benadryl_use": "مضاد للهيستامين / الحساسية",
       "benadryl_note": "متوفر في الصيدليات",
@@ -243,17 +257,17 @@
       "subway_s1_t": "1. الذهاب إلى مكتب المفقودات",
       "subway_s1_d": "كل خط مترو لديه مكتب مفقودات في المحطات الرئيسية.",
       "subway_s2_t": "2. موقع مفقودات مترو سيول",
-      "subway_s2_d": "زيارة: lost112.go.kr أو الاتصال على 1577-1234.",
+      "subway_s2_d": "زيارة: lost112.go.kr 또는 الاتصال على 1577-1234.",
       "subway_s3_t": "3. تقديم تقرير إلكتروني",
       "subway_s3_d": "يمكنك تقديم تقرير بالإنجليزية على الموقع الرسمي lost112.",
       "airport_s1_t": "1. مكتب المفقودات مطار إنشيون",
       "airport_s1_d": "المبنى 1: 032-741-3110 / المبنى 2: 032-741-3119. مفتوح 24 ساعة.",
       "airport_s2_t": "2. مطار كيمبو",
-      "airport_s2_d": "الاتصال: 02-2660-2536. الموقع: B1F (داخلي) / 3F (دولي).",
+      "airport_s2_d": "الاتصال: 02-2660-2536. الموقع: B1F (내국인) / 3F (외국인).",
       "airport_s3_t": "3. تقرير لشرطة المطار",
       "airport_s3_d": "شرطة المطار متاحة 24 ساعة. الكاونتر في صالة الوصول.",
       "street_s1_t": "1. أعد تتبع خطواتك",
-      "street_s1_d": "معظم المتاجر تحتفظ بالأشياء المُجدة. اسأل أقرب متجر.",
+      "street_s1_d": "معظم المتاجر تحتفظ بالأشياء الماجدة. اسأل أقرب متجر.",
       "street_s2_t": "2. الإبلاغ لأقرب مركز شرطة",
       "street_s2_d": "(파출소) — الضباط لديهم مترجمون.",
       "street_s3_t": "3. الاتصال على 112",
@@ -351,6 +365,75 @@
       "title": "مترجم فوري",
       "description": "تواصل بسهولة مع الموظفين",
       "cta": "فتح المترجم"
+    }
+  },
+  "today_page": {
+    "title": "جدول اليوم",
+    "active_now": "جارٍ الآن",
+    "navigate": "الاتجاهات",
+    "booking_ref": "رقم الحجز: {{ref}}",
+    "next_up": "التالي",
+    "minutes_left": "يبدأ خلال {{mins}} دقيقة",
+    "depart_early": "الانطلاق الآن",
+    "timeline": "الجدول الزمني",
+    "departure_warning": "⚠️ يبدأ {{title}} خلال {{mins}} دقيقة — انطلق الآن!",
+    "empty": {
+      "title": "لا يوجد جدول لليوم",
+      "desc": "استكشف الأماكن لإضافتها إلى جدولك!",
+      "cta": "استكشاف الأماكن"
+    }
+  },
+  "my_page": {
+    "saved": {
+      "eyebrow": "محفوظاتي",
+      "title": "العناصر المحفوظة",
+      "subtitle": "عرض وإدارة الأماكن وخطط الرحلات المحفوظة.",
+      "header_cta": "استكشاف الأماكن",
+      "summary": {
+        "places": "أماكن",
+        "plans": "خطط",
+        "recent": "الأحدث"
+      },
+      "summary_hint": "يتم حفظ العناصر محلياً على هذا الجهاز.",
+      "tabs": {
+        "places": "أماكن",
+        "plans": "خطط",
+        "recent": "الأحدث"
+      },
+      "places": {
+        "title": "الأماكن المحفوظة",
+        "desc": "تحقق من الأماكن التي قمت بحفظها أثناء الاستكشاف.",
+        "fallback_title": "مكان {{id}}",
+        "source_plan": "من خطة الرحلة",
+        "source_saved": "العناصر المحفوظة",
+        "source_fallback": "بيانات تجريبية",
+        "source_id_only": "المعرف فقط",
+        "added": "تمت الإضافة إلى جدولك!"
+      },
+      "plans": {
+        "title": "الخطط المحفوظة",
+        "desc": "عرض جداول رحلاتك الحالية والسابقة.",
+        "synced": "متزامن مع السحابة",
+        "empty": {
+          "title": "لا توجد خطط بعد",
+          "desc": "ابدأ في بناء رحلتك في المخطط."
+        }
+      },
+      "recent": {
+        "title": "شوهد مؤخراً",
+        "desc": "الأماكن والخطط التيقمت بالتحقق منها مؤخراً.",
+        "type": {
+          "place": "مكان",
+          "plan": "خطة",
+          "community": "منشور"
+        },
+        "empty": {
+          "title": "لا يوجد سجل مؤخراً",
+          "desc": "العناصر التي تشاهدها ستظهر هنا.",
+          "fallback": "السجل غير متاح على هذا الجهاز.",
+          "cta": "ابدأ التصفح"
+        }
+      }
     }
   }
 }

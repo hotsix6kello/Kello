@@ -4,6 +4,295 @@
     "faq": "FAQ",
     "recent": "Recent Activities"
   },
+  "common": {
+    "welcome": "Welcome, Traveler.",
+    "greeting": "Good Morning",
+    "login": "Login",
+    "signup": "Sign Up",
+    "today": "Today",
+    "move": "Move",
+    "book": "Book",
+    "chat": "Chat",
+    "my": "My",
+    "back": "Back",
+    "select_language": "Change Language",
+    "home_nav": "Home",
+    "explore_nav": "Explore",
+    "planner_nav": "Planner",
+    "itinerary_nav": "Itinerary",
+    "today_nav": "Itinerary",
+    "my_nav": "My Info",
+    "community_nav": "Community",
+    "help_nav": "Help",
+    "loading": "Loading...",
+    "min_unit": "min",
+    "current_operation": "Current Operation",
+    "live": "LIVE",
+    "recommended": "Recommended Nearby",
+    "based_on_location": "Based on your location",
+    "start_nav": "Start Navigation",
+    "delay_10m": "Delay +10m",
+    "confirmed": "Confirmed",
+    "payment_completed": "Payment Completed",
+    "weather_clear": "Clear",
+    "day_unit": "d",
+    "locale": "en-US",
+    "cities": {
+      "seoul": "Seoul",
+      "busan": "Busan",
+      "jeju": "Jeju",
+      "gyeongju": "Gyeongju"
+    },
+    "categories": {
+      "all": "All",
+      "food": "Food",
+      "beauty": "Beauty",
+      "event": "Events",
+      "festival": "Festivals",
+      "attraction": "Attractions",
+      "transport": "Transport"
+    },
+    "badges": {
+      "english_friendly": "English-friendly",
+      "vegan_certified": "Vegan-certified",
+      "michelin": "Michelin",
+      "wait_free": "Wait-free",
+      "local_experience": "Local Experience",
+      "k_idol_style": "K-Idol Style",
+      "tax_refund": "Tax Refund",
+      "summer_must_go": "Summer Must-go",
+      "non_verbal": "Non-verbal",
+      "family": "Family",
+      "night_view": "Night view",
+      "photo_spot": "Photo spot",
+      "hanbok_free_entry": "Hanbok Free Entry",
+      "history": "History",
+      "city_view": "City view"
+    },
+    "ingredients": {
+      "vegetables": "Vegetables",
+      "soy": "Soy",
+      "pork": "Pork",
+      "kimchi": "Kimchi",
+      "seafood": "Seafood"
+    },
+    "diet": {
+      "vegan": "Vegan",
+      "gluten_free": "Gluten-free",
+      "meat_lover": "Meat-lover",
+      "pescatarian": "Pescatarian"
+    },
+    "actions": {
+      "view_all": "View All",
+      "view": "View",
+      "manage": "Manage",
+      "details": "Details",
+      "view_details": "View Details",
+      "view_place_details": "View place details",
+      "support": "Support",
+      "open_support": "Open Support",
+      "open_my_support": "Open My Support",
+      "open_help_center": "Open Help Center",
+      "interpreter_help": "Interpreter Help",
+      "booking_help": "Booking Help",
+      "emergency_help": "Emergency Help",
+      "general_help": "General Help",
+      "emergency_phrases": "Emergency Phrases",
+      "show_emergency_phrases": "Show Emergency Phrases",
+      "travel_phrasebook": "Travel Phrasebook",
+      "travel_phrases": "Travel Phrases",
+      "write_review": "Write Review",
+      "get_help": "Get Help",
+      "report_issue": "Report Issue",
+      "explore": "Explore",
+      "explore_places": "Explore Places",
+      "browse_places": "Browse Places",
+      "browse_community": "Browse Community",
+      "browse_meetups": "Browse Meetups",
+      "browse_explore": "Browse Explore",
+      "explore_more": "Explore More",
+      "open_hub": "Open Hub",
+      "view_booking": "View Booking",
+      "view_in_plan": "View in Plan",
+      "view_bookings": "View Bookings",
+      "my_bookings": "My Bookings",
+      "go_to_reviews": "Go to Reviews",
+      "add_to_plan": "+ Add to Plan",
+      "create_plan": "Create Plan",
+      "view_plan": "View Plan",
+      "continue_editing": "Continue Editing",
+      "use_this_plan": "Use This Plan",
+      "view_again": "View Again",
+      "map": "Map",
+      "call_112": "Call 112",
+      "call_119": "Call 119",
+      "call_120": "Call 120",
+      "call_1330": "Call 1330",
+      "call_clinic": "Call Clinic",
+      "copy": "Copy",
+      "copied": "Copied",
+      "save": "Save",
+      "saved": "Saved",
+      "large_view": "Large View",
+      "close": "Close",
+      "show_in_korean": "Show this in Korean",
+      "contact_support": "Contact Support",
+      "partner_inquiry": "Partner Inquiry",
+      "open_route": "Open Route",
+      "open": "Open",
+      "apply_again": "Apply Again",
+      "apply_as_partner": "Apply as Partner",
+      "open_admin_console": "Open Admin Console",
+      "interpreter_for_booking": "Interpreter for this booking",
+      "show_booking_phrases": "Show booking phrases",
+      "back_to_booking_support": "Back to booking support"
+    },
+    "states": {
+      "sign_in_required": "Sign in required",
+      "not_set_yet": "Not set yet",
+      "not_set": "Not set",
+      "not_connected": "Not connected",
+      "not_connected_yet": "Not connected yet",
+      "not_available_yet": "Not available yet",
+      "details_unavailable": "Details unavailable",
+      "saved_locally": "Saved locally",
+      "current_trip_plan": "Current Trip Plan",
+      "planner_draft": "Planner Draft",
+      "recently_viewed": "Recently viewed",
+      "read_only": "Read-only",
+      "active": "Active",
+      "verified": "Verified",
+      "not_verified": "Not verified",
+      "needs_review": "Needs review",
+      "approved": "Approved",
+      "pending_review": "Pending review",
+      "needs_update": "Needs update",
+      "not_joined": "Not joined",
+      "standard_account": "Standard account",
+      "frequent": "Frequent",
+      "favorites": "Favorites",
+      "recent": "Recent",
+      "posts": "Posts",
+      "reviews": "Reviews",
+      "meetups": "Meetups",
+      "places": "Places",
+      "plans": "Plans",
+      "saved_places": "Saved Places",
+      "saved_plans": "Saved Plans",
+      "trip_days": "Trip days",
+      "plan_stops": "Plan stops",
+      "done": "Done",
+      "draft": "Draft",
+      "unavailable": "Unavailable",
+      "in_progress": "In Progress",
+      "canceled": "Cancelled",
+      "loading": "Loading..."
+    },
+    "runtime": {
+      "relative": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}}m ago",
+        "hours_ago": "{{count}}h ago",
+        "days_ago": "{{count}}d ago"
+      },
+      "trip": {
+        "day_label": "Day {{day}}",
+        "day_time_dot": "Day {{day}} · {{time}}",
+        "day_time_dash": "Day {{day}} - {{time}}"
+      },
+      "counts": {
+        "comments": "{{count}} comments",
+        "stops": "{{count}} stops",
+        "days": "{{count}} days"
+      }
+    }
+  },
+  "home": {
+    "places": {
+      "lotte_main": { "title": "Lotte Dept. Store", "area": "81 Namdaemun-ro, Jung-gu, Seoul" },
+      "lotte_tower": { "title": "Lotte World Tower", "area": "300 Olympic-ro, Songpa-gu, Seoul" },
+      "lotte_world": { "title": "Lotte World Adventure", "area": "240 Olympic-ro, Songpa-gu, Seoul" },
+      "lotte_hotel": { "title": "Lotte Hotel Seoul", "area": "30 Eulji-ro, Jung-gu, Seoul" },
+      "namsan": { "title": "N Seoul Tower", "area": "105 Namsangongwon-gil, Yongsan-gu, Seoul" },
+      "namdaemun": { "title": "Namdaemun Market", "area": "21 Namdaemunsijang 4-gil, Jung-gu, Seoul" },
+      "gyeongbokgung": { "title": "Gyeongbokgung Palace", "area": "161 Sajik-ro, Jongno-gu, Seoul" },
+      "myeongdong": { "title": "Myeongdong Theater", "area": "35 Myeongdong-gil, Jung-gu, Seoul" }
+    },
+    "presets": {
+      "beauty_tour": "Beauty Tour",
+      "foodie": "Foodie",
+      "heritage": "Heritage",
+      "k_pop": "K-pop"
+    },
+    "badge": "Kello",
+    "title": "Concierge Booking · Auto Itinerary · Navigation",
+    "subtitle": "",
+    "create_trip_cta": "Start Creating Itinerary",
+    "input_label": "Where are you traveling to?",
+    "input_placeholder": "City, Area, or Accommodation",
+    "days_label": "Duration",
+    "value_props": {
+      "itinerary": {
+        "title": "Auto Itinerary",
+        "desc": "AI optimizes your route"
+      },
+      "booking": {
+        "title": "Concierge Booking",
+        "desc": "Clinics, Spas, and more"
+      },
+      "navigation": {
+        "title": "Real-time Nav",
+        "desc": "Zero language barrier"
+      }
+    },
+    "recommended_plans": "Kello's Recommended Travels",
+    "plans": {
+      "2d": {
+        "title": "2 Days: Seoul Essential",
+        "label": "2 Days Plan"
+      },
+      "3d": {
+        "title": "3 Days: K-Culture & Style",
+        "label": "3 Days Plan"
+      },
+      "5d": {
+        "title": "5 Days: The Grand Tour",
+        "label": "5 Days Plan"
+      },
+      "request_custom_label": "Custom",
+      "request_custom_title": "Create My Own {{days}}-Day Plan",
+      "request_custom_toast": "Requested a customized {{days}}-day plan! Our concierge will contact you soon."
+    }
+  },
+  "planner_page": {
+    "status": {
+      "draft": "Draft",
+      "booked": "Booked",
+      "completed": "Completed"
+    },
+    "slots": {
+      "am": "Morning",
+      "pm": "Afternoon",
+      "night": "Night"
+    },
+    "add_to": "Add to {{slot}}",
+    "day": "Day {{n}}",
+    "add_from_discover": "Add from Discover",
+    "auto_build": "Auto-build",
+    "book_all": "Book All Selected Items",
+    "booking_modal": {
+      "title": "Book Your Trip Items",
+      "date": "Date",
+      "people": "People",
+      "people_count": "{{n}}",
+      "notes": "Notes",
+      "submit": "Submit Booking Request",
+      "submitting": "Submitting...",
+      "success_title": "Booking Request Received",
+      "success_desc": "We have sent your plan to the relevant shops. Check status in My Bookings.",
+      "view_status": "Check Booking Status"
+    }
+  },
   "home_beauty": {
     "hero": {
       "eyebrow": "Beauty Booking Concierge",
@@ -49,6 +338,16 @@
         "summary": "Connect directly to the menu for everything from natural extensions to volume styling."
       }
     },
+    "transport": {
+      "stations": {
+        "gangnam": "Gangnam",
+        "hongdae": "Hongdae",
+        "seongsu": "Seongsu",
+        "jamsil": "Jamsil",
+        "konkuk": "Konkuk Univ.",
+        "pangyo": "Pangyo"
+      }
+    },
     "selection": {
       "eyebrow": "Selected Category",
       "tags": {
@@ -72,10 +371,103 @@
     "empty_cta": "Write a Review"
   },
   "beauty_explore": {
-    "title": "Explore Beauty",
-    "subtitle": "Find the perfect shop and service for you.",
-    "search": {
-      "placeholder": "Search salon names or treatments...",
+    "hero_title": "Explore Beauty Bookings",
+    "hero_desc": "Select a category for more accurate exploration. You can now check all beauty shops.",
+    "hero_title_with_category": "Start Your {{category}} Booking Now",
+    "hero_subtitle_desc": "Pick a region, select a shop, and set the time to continue.",
+    "hero_guide_no_category": "Selecting a category from Home leads to a better flow. You are currently viewing all beauty shops.",
+    "hero_flow_step_category": "Check Category",
+    "hero_flow_step_region": "Select Region",
+    "hero_flow_step_store": "Pick Store",
+    "hero_flow_step_time": "Confirm Time",
+    "hero_flow_aria_label": "Quick Booking Guide",
+    "region_filter_title": "Pick Your Desired Region",
+    "category_all": "All",
+    "region_all": "All Regions",
+    "step_indicator_label": "Beauty Booking Steps",
+    "step_1": "Select Shop",
+    "step_2": "Select Time",
+    "step_3": "Confirm",
+    "step_4": "Enter Info",
+    "step_5": "Done",
+    "form_name": "Name",
+    "form_name_placeholder": "Please enter your name",
+    "form_phone": "Contact",
+    "form_phone_placeholder": "e.g. 010-1234-5678",
+    "form_request": "Request",
+    "form_request_placeholder": "Mention desired style or any special requests",
+    "agreement_confirm": "I have checked the selected booking information.",
+    "agreement_confirm_desc": "I understand times may be adjusted based on shop availability.",
+    "agreement_privacy": "I agree to receive guide contacts for booking.",
+    "agreement_privacy_desc": "Agree to provide contact info for confirmation and changes.",
+    "toast_addon_limit": "Maximum 2 add-on options can be selected.",
+    "toast_copy_hint": "Long press {{label}} to copy.",
+    "toast_select_time": "Select a time for ",
+    "toast_check_info": "Check booking info again.",
+    "toast_submit_error": "Failed to save booking. Try again.",
+    "label_designer_default": "Shop Choice",
+    "label_service_default": "Before choice",
+    "label_addon_default": "No selection",
+    "label_select_prompt": "Select a booking to see details.",
+    "label_price_from": "from",
+    "label_today": "Today",
+    "label_tomorrow": "Tomorrow",
+    "label_booking_unit": "KRW",
+    "btn_continue": "Book Now",
+    "btn_submit": "Send Request",
+    "btn_reset": "Edit Booking",
+    "btn_close": "Close",
+    "completion_title": "Booking request sent!",
+    "completion_desc1": "We will notify you after the shop checks availability.",
+    "completion_desc2": "Please note it's not confirmed until you receive a confirmation notice.",
+    "completion_desc3": "Track progress anytime in My Bookings menu.",
+    "label_rating": "Rating",
+    "label_review": "Reviews",
+    "btn_select_time": "Select Booking Time",
+    "btn_reselect_time": "Reselect Booking Time",
+    "empty_store_title": "No shops match criteria.",
+    "empty_store_desc": "Try another area or category.",
+    "booking_panel_title": "Select Date and Time",
+    "booking_panel_desc": "Pick a time for the shop and continue to confirmation.",
+    "booking_empty_title": "Pick a shop first.",
+    "booking_empty_desc": "Tap `Select Booking Time` on a shop card above.",
+    "booking_not_found_title": "No available times found.",
+    "booking_not_found_desc": "Pick another shop or reload times.",
+    "booking_date_label": "Date",
+    "booking_time_label": "Time",
+    "booking_no_date": "No selectable dates yet.",
+    "booking_no_time_wait": "Select a date first.",
+    "booking_no_slots": "No times available for this date.",
+    "summary_category": "Category",
+    "summary_store": "Shop",
+    "summary_region": "Area",
+    "summary_date": "Date",
+    "summary_time": "Time",
+    "summary_hint": "Pick date and time to continue.",
+    "summary_btn": "Check Booking Info",
+    "confirm_title": "Confirm Info and Enter Details",
+    "confirm_desc": "Fill in the details for a ready-to-show request card.",
+    "btn_edit": "Edit Booking Info",
+    "confirm_empty_title": "Next step not open yet.",
+    "confirm_empty_desc": "Tap `Check Booking Info` after picking date/time.",
+    "confirm_review_error_title": "Check booking info again.",
+    "confirm_review_error_desc": "Needs shop, date, and time.",
+    "confirm_price_hint": "Estimated price is for mock. Final payment may vary.",
+    "label_no_surcharge": "No surcharge",
+    "label_no_designer": "No designer info currently.",
+    "label_designer_hint": "Designer choice is optional. Shop choice is fallback.",
+    "label_addon_limit": "Max 2",
+    "selected_confirmation": "Selected Date: {{date}}"
+  },
+  "explore_page": {
+    "distance_label": "Distance:",
+    "title": "Explore",
+    "city_changed": "City changed to {{city}}",
+    "added_to": "Added to Day {{day}}",
+    "no_items": "No items found in {{city}}",
+    "try_changing": "Try changing the category or city.",
+    "select_city": "Select City",
+    "search_placeholders": {
       "all": "Search for beauty, food...",
       "beauty": "Search clinics, salons...",
       "event": "Search concerts, shows...",
@@ -207,6 +599,57 @@
     }
   },
   "my_page": {
+    "saved": {
+      "eyebrow": "MY SAVED",
+      "title": "Saved Items",
+      "subtitle": "View and manage your saved places and trip plans.",
+      "header_cta": "Explore Places",
+      "summary": {
+        "places": "Places",
+        "plans": "Plans",
+        "recent": "Recent"
+      },
+      "summary_hint": "Items are saved locally on this device.",
+      "tabs": {
+        "places": "Places",
+        "plans": "Plans",
+        "recent": "Recent"
+      },
+      "places": {
+        "title": "Saved Places",
+        "desc": "Check the places you've bookmarked while exploring.",
+        "fallback_title": "PLACE {{id}}",
+        "source_plan": "From Trip Plan",
+        "source_saved": "Saved Items",
+        "source_fallback": "Mock Data",
+        "source_id_only": "ID Only",
+        "added": "Added to your itinerary!"
+      },
+      "plans": {
+        "title": "Saved Plans",
+        "desc": "View your current and previous trip itineraries.",
+        "synced": "Synced with cloud",
+        "empty": {
+          "title": "No plans yet",
+          "desc": "Start building your journey in the Planner."
+        }
+      },
+      "recent": {
+        "title": "Recently Viewed",
+        "desc": "Places and plans you've checked out lately.",
+        "type": {
+          "place": "Place",
+          "plan": "Plan",
+          "community": "Post"
+        },
+        "empty": {
+          "title": "No recent history",
+          "desc": "Items you view will appear here.",
+          "fallback": "History is not available on this device.",
+          "cta": "Start Browsing"
+        }
+      }
+    },
     "profile": {
       "trust_score": "💎 Trust Score",
       "trust_level_excellent": "Excellent",
@@ -313,6 +756,8 @@
     "event_default": "Notification"
   },
   "community_page": {
+    "title": "kello Community",
+    "subtitle": "Connect with locals & travelers",
     "edit_btn": "Edit Post",
     "post_btn": "Post to Community",
     "form_category": "Category",
@@ -335,6 +780,24 @@
       "secondary_title": "kello Community 👋",
       "secondary_body": "Browse reviews and plan meetups."
     },
+    "quick_entry": {
+      "beauty": {
+        "label": "Salon Review",
+        "sub": "Booking · Service · Satisfaction"
+      },
+      "food": {
+        "label": "Dining Review",
+        "sub": "Post-Beauty Course"
+      },
+      "travel": {
+        "label": "Sightseeing Review",
+        "sub": "Around the Salon"
+      },
+      "write": {
+        "label": "Write a Review",
+        "sub": "Share Your Experience"
+      }
+    },
     "categories": {
       "all": "All",
       "beauty_review": "Salon Review",
@@ -353,6 +816,13 @@
       "open_meetup": "🤝 Joinable",
       "weekend": "📅 Weekend",
       "fresh": "✨ Fresh"
+    },
+    "nav_summary": {
+      "all": "Showing all community stories."
+    },
+    "sort": {
+      "latest": "Latest",
+      "reactions": "Top Reacted"
     },
     "states": {
       "fetch_failed_title": "Failed to load posts",
@@ -554,5 +1024,21 @@
     "translated_status": "Translated",
     "source_only_status": "Original Text",
     "voice_too_short_error": "Please speak a bit longer. Recognition is difficult if the voice is too short."
+  },
+  "today_page": {
+    "title": "Today's Itinerary",
+    "active_now": "Active Now",
+    "navigate": "Navigate",
+    "booking_ref": "Booking Ref: {{ref}}",
+    "next_up": "Next Up",
+    "minutes_left": "Starts in {{mins}}m",
+    "depart_early": "Depart Now",
+    "timeline": "Timeline",
+    "departure_warning": "⚠️ {{title}} starts in {{mins}}m — Depart now!",
+    "empty": {
+      "title": "No plans for today",
+      "desc": "Explore places to add to your schedule!",
+      "cta": "Explore Places"
+    }
   }
 }

@@ -476,3 +476,43 @@ button {
   padding-left: var(--spacing-content);
   padding-right: var(--spacing-content);
 }
+/* Responsive Element Wrappers (Chips, Tabs, Buttons) */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 14px;
+  border-radius: var(--radius-xl);
+  font-size: 0.875rem;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.tab-group {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tab {
+  flex-shrink: 0;
+  white-space: normal;
+  text-align: center;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure long text doesn't break global layout */
+.text-wrap-safe {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}

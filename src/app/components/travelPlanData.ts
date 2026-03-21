@@ -492,7 +492,9 @@ export const TRAVEL_PLAN_TEMPLATES: Record<string, PlanTemplate[]> = {
   ],
 };
 
+import { toResourceLocaleCode } from "@/lib/i18n/locales";
+
 export const getTravelPlanTemplatesByLanguage = (lang: string = 'ko') => {
-  const baseLang = lang.split('-')[0];
-  return TRAVEL_PLAN_TEMPLATES[baseLang] || TRAVEL_PLAN_TEMPLATES['en'];
+  const resourceCode = toResourceLocaleCode(lang);
+  return TRAVEL_PLAN_TEMPLATES[resourceCode] || TRAVEL_PLAN_TEMPLATES['en'];
 };
