@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const filePath = 'c:\\Users\\KumA\\Desktop\\Kello\\src\\app\\explore\\page.tsx';
 const lines = fs.readFileSync(filePath, 'utf8').split('\n');
