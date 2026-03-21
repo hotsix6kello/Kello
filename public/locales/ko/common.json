@@ -13,7 +13,9 @@
       "welcome_user": "{{greeting}}, {{name}}님! 👋"
     },
     "booking": {
-      "title": "원하시는 뷰티 서비스를 선택해 주세요"
+      "step": "STEP. 01",
+      "title": "원하시는 뷰티 서비스를 선택해 주세요",
+      "description": "가장 정확한 탐색을 위해 카테고리를 먼저 선택해 주세요."
     },
     "categories": {
       "hair": {
@@ -48,11 +50,13 @@
       }
     },
     "selection": {
+      "eyebrow": "선택한 카테고리",
       "tags": {
         "mobile": "모바일 예약",
         "comparison": "샵 비교",
         "inquiry": "실시간 문의"
-      }
+      },
+      "empty": "먼저 카테고리를 선택해 주세요. 선택 후 예약 시작 버튼이 활성화됩니다."
     },
     "transport": {
       "stations": {
@@ -65,12 +69,27 @@
       }
     },
     "cta": {
+      "hint": "카테고리를 선택하면 예약이 시작됩니다",
       "button": "예약 시작하기"
     },
     "interpreter_entry": {
       "title": "실시간 통역 도우미",
       "description": "매장에서 직원과 손쉽게 대화해보세요",
       "cta": "통역기 시작하기"
+    },
+    "location_sheet": {
+      "search_title": "위치 정보 검색",
+      "search_result_count": "{{query}} 검색 결과 {{count}}건",
+      "view_location": "위치 보기",
+      "view_location_desc": "지도에서 상세 위치를 확인합니다",
+      "call_taxi": "K.Ride 호출하기",
+      "google_maps_desc": "구글 지도로 대중교통 경로를 확인합니다"
+    },
+    "modals": {
+      "card_title": "📍 이 주소로 이동해 주세요",
+      "copy": "주소 복사",
+      "copy_done": "복사 완료!",
+      "close": "닫기"
     }
   },
   "interpreter_ui": {

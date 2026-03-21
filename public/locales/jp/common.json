@@ -1133,7 +1133,9 @@
       "welcome_user": "{{greeting}}、{{name}}様！👋"
     },
     "booking": {
-      "title": "ご希望のサービスをお選びください"
+      "step": "STEP. 01",
+      "title": "ご希望のサービスをお選びください",
+      "description": "正確な検索のために、まずカテゴリーを選択してください。"
     },
     "categories": {
       "hair": {
@@ -1168,13 +1170,16 @@
       }
     },
     "selection": {
+      "eyebrow": "選択したカテゴリー",
       "tags": {
         "mobile": "モバイル予約",
         "comparison": "サロン比較",
         "inquiry": "リアルタイム問合せ"
-      }
+      },
+      "empty": "まずカテゴリーを選択してください。選択後、予約開始ボタンが有効になります。"
     },
     "cta": {
+      "hint": "カテゴリーを選択すると予約が始まります",
       "button": "予約を始める"
     },
     "interpreter": {
@@ -1203,6 +1208,20 @@
       "title": "リアルタイム通訳",
       "description": "店舗スタッフとの会話を支援します",
       "cta": "通訳を開始する"
+    },
+    "location_sheet": {
+      "search_title": "位置情報検索",
+      "search_result_count": "{{query}} の検索結果 {{count}}件",
+      "view_location": "位置を表示",
+      "view_location_desc": "地図で詳細な位置を確認します",
+      "call_taxi": "K.Rideを呼ぶ",
+      "google_maps_desc": "Googleマップで公共交通機関を確認します"
+    },
+    "modals": {
+      "card_title": "📍 この住所に行ってください",
+      "copy": "住所をコピー",
+      "copy_done": "コピー完了！",
+      "close": "閉じる"
     }
   },
   "interpreter_page": {

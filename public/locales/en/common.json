@@ -357,7 +357,30 @@
       },
       "empty": "Please select a category first. The start booking button will activate after selection."
     },
+    "cta": {
+      "hint": "Select a category to start your booking",
+      "button": "Start Booking"
+    },
     "start_btn": "Start Booking",
+    "interpreter_entry": {
+      "title": "Real-time Interpreter Assistant",
+      "description": "Communicate easily with staff at the shop",
+      "cta": "Start Interpretation"
+    },
+    "location_sheet": {
+      "search_title": "Search Location",
+      "search_result_count": "{{count}} results for \"{{query}}\"",
+      "view_location": "View Location",
+      "view_location_desc": "Check detailed location on map",
+      "call_taxi": "Call K.Ride",
+      "google_maps_desc": "Check transit routes on Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Please go to this address",
+      "copy": "Copy Address",
+      "copy_done": "Copied!",
+      "close": "Close"
+    },
     "footer": {
       "help": "Not sure which service to pick?",
       "support": "Need support?"

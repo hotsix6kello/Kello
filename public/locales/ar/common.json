@@ -317,7 +317,9 @@
       "welcome_user": "{{greeting}}، {{name}}! 👋"
     },
     "booking": {
-      "title": "يرجى اختيار خدمة التجميل المطلوبة"
+      "step": "الخطوة الأولية",
+      "title": "يرجى اختيار خدمة التجميل المطلوبة",
+      "description": "يرجى اختيار فئة أولاً لاستكشاف أدق."
     },
     "categories": {
       "hair": {
@@ -352,19 +354,36 @@
       }
     },
     "selection": {
+      "eyebrow": "كافة الفئات المختارة",
       "tags": {
         "mobile": "حجز عبر الجوال",
         "comparison": "مقارنة الصالونات",
         "inquiry": "استفسار فوري"
-      }
+      },
+      "empty": "يرجى اختيار فئة أولاً. سيتم تفعيل زر بدء الحجز بعد الاختيار."
     },
     "cta": {
+      "hint": "اختر فئة لبدء الحجز",
       "button": "ابدأ الحجز"
     },
     "interpreter_entry": {
       "title": "مترجم فوري",
       "description": "تواصل بسهولة مع الموظفين",
       "cta": "فتح المترجم"
+    },
+    "location_sheet": {
+      "search_title": "ابحث في موقعك",
+      "search_result_count": "{{count}} نتائج لـ \"{{query}}\"",
+      "view_location": "عرض الموقع",
+      "view_location_desc": "تحقق من الموقع التفصيلي على الخريطة",
+      "call_taxi": "اتصل بـ K.Ride",
+      "google_maps_desc": "تحقق من مسارات العبور على خرائط جوجل"
+    },
+    "modals": {
+      "card_title": "📍 يرجى الذهاب إلى هذا العنوان",
+      "copy": "نسخ العنوان",
+      "copy_done": "تم النسخ!",
+      "close": "إغلاق"
     }
   },
   "today_page": {
