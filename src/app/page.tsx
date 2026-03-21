@@ -50,9 +50,7 @@ export default function HomePage() {
   const { t, i18n } = useTranslation('common');
   const { 
     itinerary, 
-    setItinerary, 
     tripDays: days,
-    setTripDays: setDays,
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
@@ -376,6 +374,21 @@ export default function HomePage() {
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
+        input={input}
+        onInputChange={setInput}
+        onInputClear={() => setInput('')}
+        onStart={handleStart}
+        days={days}
+        onDaysChange={() => {}} 
+        onStartBooking={() => {
+          if (selectedCategory) {
+            router.push(`/explore?category=beauty&beautyCategory=${selectedCategory}`);
+          }
+        }}
+        showSuggestions={showSuggestions}
+        suggestions={sheetSearchResults}
+        onSelectPlace={handleSelectPlace}
+        selectedOption={selectedOption}
         t={t}
       />
 
