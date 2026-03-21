@@ -1,0 +1,19 @@
+{
+  "form_name": "الاسم",
+  "form_name_placeholder": "أدخل اسمك",
+  "form_phone": "وسيلة التواصل (أو معرف SNS)",
+  "form_phone_placeholder": "رقم الهاتف أو معرف SNS",
+  "form_request": "الطلبات",
+  "form_request_placeholder": "الحساسية أو النمط المطلوب",
+  "agreement_confirm": "تأكيد التفاصيل",
+  "agreement_confirm_desc": "أؤكد الاختيار.",
+  "agreement_privacy": "الموافقة على الخصوصية",
+  "agreement_privacy_desc": "أوافق على تقديم المعلومات.",
+  "region_all": "كل المناطق",
+  "label_today": "اليوم",
+  "label_tomorrow": "غداً",
+  "label_booking_unit": "وون",
+  "booking_confirmation_title": "تم طلب الحجز!",
+  "booking_confirmation_desc": "سنقوم بإشعارك قريباً.",
+  "booking_confirmation_cta": "حجوزاتي"
+}

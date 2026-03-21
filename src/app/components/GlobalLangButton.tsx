@@ -1,23 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import LanguagePicker from './LanguagePicker';
 import styles from './GlobalLangButton.module.css';
 
 /**
- * Floating language selector — visible on all pages.
- * Also responsible for calling initClientLanguage() after hydration
- * so SSR and client render start with the same language ("en"),
- * then switch to the user's saved language after mount.
+ * Floating language selector for routes that do not provide
+ * their own local language entry point.
  */
 export default function GlobalLangButton() {
     const pathname = usePathname();
+    const SHOW_FLOATING_LANG_BUTTON_PATHS = new Set<string>([]);
 
-    // Language persistence is handled by LanguageInitializer in RootLayout
-
-    // auth 페이지 및 홈 페이지(헤더 통합)에선 숨김
-    if (pathname.startsWith('/auth') || pathname === '/') return null;
+    // Home keeps its existing top-left language control in HomeTopNav.
+    // Sub pages should not render the floating top-right language button.
+    if (pathname.startsWith('/auth')) return null;
+    if (!SHOW_FLOATING_LANG_BUTTON_PATHS.has(pathname)) return null;
 
     return (
         <div className={styles.floatWrap}>

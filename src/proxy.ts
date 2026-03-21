@@ -1,100 +1,122 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const SUPPORTED = ["ko", "en", "ja", "zh-CN", "zh-HK", "vi", "th", "id", "ms", "es", "fr", "de", "ar", "pt", "ru"];
+import {
+  CANONICAL_SUPPORTED_LOCALES,
+  DEFAULT_CLIENT_LOCALE,
+  LOCALE_STORAGE_KEY,
+  resolveCanonicalLocale,
+} from '@/lib/i18n/locales';
+
+const SUPPORTED_LOCALES = new Set<string>(CANONICAL_SUPPORTED_LOCALES);
 
 function getLocaleFromCountry(country: string): string {
-    const c = country.toUpperCase();
-    const map: Record<string, string> = {
-        'KR': 'ko', 'US': 'en', 'JP': 'ja', 'CN': 'zh-CN', 'HK': 'zh-HK',
-        'VN': 'vi', 'TH': 'th', 'ID': 'id', 'MY': 'ms',
-        'ES': 'es', 'FR': 'fr', 'DE': 'de', 'SA': 'ar', 'PT': 'pt', 'RU': 'ru'
-    };
-    return map[c] || 'ko';
+  const normalizedCountry = country.trim().toUpperCase();
+
+  const localeByCountry: Record<string, string> = {
+    KR: 'ko',
+    US: 'en',
+    JP: 'ja',
+    CN: 'zh-CN',
+    HK: 'zh-HK',
+    VN: 'vi',
+    TH: 'th',
+    ID: 'id',
+    MY: 'ms',
+    ES: 'es',
+    FR: 'fr',
+    DE: 'de',
+    SA: 'ar',
+    PT: 'pt',
+    RU: 'ru',
+  };
+
+  return localeByCountry[normalizedCountry] ?? DEFAULT_CLIENT_LOCALE;
 }
 
-function getLocaleFromBrowser(acceptLang: string): string | null {
-    const langs = acceptLang.split(',').map(s => s.split(';')[0].trim().toLowerCase());
-    for (const l of langs) {
-        if (l === 'ko' || l.startsWith('ko-')) return 'ko';
-        if (l === 'ja' || l.startsWith('ja-')) return 'ja';
-        if (l === 'zh-cn' || l === 'zh-sg' || l === 'zh-hans') return 'zh-CN';
-        if (l === 'zh-tw' || l === 'zh-hk' || l === 'zh-mo' || l === 'zh-hant') return 'zh-HK';
-        if (l === 'zh') return 'zh-CN';
-        if (l === 'vi' || l.startsWith('vi-')) return 'vi';
-        if (l === 'th' || l.startsWith('th-')) return 'th';
-        if (l === 'id' || l.startsWith('id-')) return 'id';
-        if (l === 'ms' || l.startsWith('ms-')) return 'ms';
-        if (l === 'en' || l.startsWith('en-')) return 'en';
-        if (l === 'es' || l.startsWith('es-')) return 'es';
-        if (l === 'fr' || l.startsWith('fr-')) return 'fr';
-        if (l === 'de' || l.startsWith('de-')) return 'de';
-        if (l === 'ar' || l.startsWith('ar-')) return 'ar';
-        if (l === 'pt' || l.startsWith('pt-')) return 'pt';
-        if (l === 'ru' || l.startsWith('ru-')) return 'ru';
+function getLocaleFromAcceptLanguage(acceptLanguage: string): string | null {
+  const candidates = acceptLanguage
+    .split(',')
+    .map((entry) => entry.split(';')[0]?.trim())
+    .filter(Boolean);
+
+  for (const candidate of candidates) {
+    const resolved = resolveCanonicalLocale(candidate, DEFAULT_CLIENT_LOCALE);
+    if (SUPPORTED_LOCALES.has(resolved)) {
+      return resolved;
     }
-    return null;
+  }
+
+  return null;
+}
+
+function getResolvedRequestLocale(request: NextRequest) {
+  const cookieLocale = request.cookies.get(LOCALE_STORAGE_KEY)?.value ?? null;
+  const headerLocale = request.headers.get('x-resolved-locale');
+  const acceptLanguage = request.headers.get('accept-language');
+  const countryHeader = request.headers.get('x-vercel-ip-country') || request.headers.get('cf-ipcountry');
+
+  const cookieResolved =
+    cookieLocale && SUPPORTED_LOCALES.has(resolveCanonicalLocale(cookieLocale, DEFAULT_CLIENT_LOCALE))
+      ? resolveCanonicalLocale(cookieLocale, DEFAULT_CLIENT_LOCALE)
+      : null;
+
+  if (cookieResolved) {
+    return { locale: cookieResolved, source: 'cookie' as const, shouldRefreshCookie: cookieResolved !== cookieLocale };
+  }
+
+  const headerResolved =
+    headerLocale && SUPPORTED_LOCALES.has(resolveCanonicalLocale(headerLocale, DEFAULT_CLIENT_LOCALE))
+      ? resolveCanonicalLocale(headerLocale, DEFAULT_CLIENT_LOCALE)
+      : null;
+
+  if (headerResolved) {
+    return { locale: headerResolved, source: 'header' as const, shouldRefreshCookie: true };
+  }
+
+  const browserResolved = acceptLanguage ? getLocaleFromAcceptLanguage(acceptLanguage) : null;
+  if (browserResolved) {
+    return { locale: browserResolved, source: 'accept-language' as const, shouldRefreshCookie: true };
+  }
+
+  const countryResolved = countryHeader ? getLocaleFromCountry(countryHeader) : DEFAULT_CLIENT_LOCALE;
+  return { locale: countryResolved, source: 'country' as const, shouldRefreshCookie: true };
 }
 
 export function proxy(request: NextRequest) {
-    let locale = request.cookies.get('kello_lang')?.value;
-    let needsSetting = false;
+  const { locale, shouldRefreshCookie } = getResolvedRequestLocale(request);
 
-    if (!locale || !SUPPORTED.includes(locale)) {
-        needsSetting = true;
-        
-        // 1. Browser Accept-Language
-        const acceptLang = request.headers.get('accept-language');
-        if (acceptLang) {
-            const browserLocale = getLocaleFromBrowser(acceptLang);
-            if (browserLocale && SUPPORTED.includes(browserLocale)) {
-                locale = browserLocale;
-            }
-        }
+  // Only forward a normalized locale header. We do not redirect here, which avoids
+  // loops on client navigations and keeps API/static exclusions simple via matcher.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-resolved-locale', locale);
 
-        // 2. Country header fallback
-        if (!locale) {
-            const country = request.headers.get('x-vercel-ip-country') || request.headers.get('cf-ipcountry');
-            if (country) locale = getLocaleFromCountry(country);
-        }
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 
-        // 3. Default fallback
-        if (!locale) locale = 'ko';
-    }
+  // Mirror the resolved locale to the response header for easier debugging and to keep
+  // downstream consumers aligned without mutating routing behavior.
+  response.headers.set('x-resolved-locale', locale);
+  response.headers.set('Vary', 'Accept-Language, Cookie');
 
-    // Pass the locale in headers so Server Components can read the resolved value directly 
-    // without needing to duplicate parsing logic if the cookie was just set
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-resolved-locale', locale);
-
-    const response = NextResponse.next({
-        request: {
-            headers: requestHeaders,
-        },
+  if (shouldRefreshCookie) {
+    response.cookies.set(LOCALE_STORAGE_KEY, locale, {
+      path: '/',
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 365,
     });
+  }
 
-    if (needsSetting) {
-        response.cookies.set('kello_lang', locale, {
-            path: '/',
-            httpOnly: false,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 24 * 365,
-        });
-    }
-
-    return response;
+  return response;
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

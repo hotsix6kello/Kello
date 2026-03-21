@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import styles from './HomeTranslatorHub.module.css';
 import { getLocaleLabel, INTERPRETER_SUPPORTED_LOCALES } from '@/lib/translator/catalog.ts';
+import { useTranslation } from 'react-i18next';
 import type {
   ConciergeLocale,
   ConciergeResponse,
@@ -14,16 +15,16 @@ import { InShopInterpreterMvp } from './interpreter';
 type TranslatorMode = 'booking' | 'interpreter';
 
 export default function HomeTranslatorHub() {
+  const { t } = useTranslation('common');
   const [mode, setMode] = useState<TranslatorMode>('interpreter');
 
   return (
     <section className={styles.section}>
-      <div className={styles.eyebrow}>Home Translator Hub</div>
+      <div className={styles.eyebrow}>{t('translator_hub.eyebrow')}</div>
       <div className={styles.headerGrid}>
-        <h2 className={styles.title}>추천 플랜 아래에서 바로 예약 번역과 매장 통역을 시작합니다.</h2>
+        <h2 className={styles.title}>{t('translator_hub.title')}</h2>
         <p className={styles.subtitle}>
-          Booking concierge mode는 예약 문의와 생성·변경·취소를 구조화해서 처리하고,
-          in-shop interpreter mode는 push-to-talk와 text fallback을 함께 제공해 현장에서 바로 테스트할 수 있습니다.
+          {t('translator_hub.subtitle')}
         </p>
       </div>
 
@@ -32,18 +33,18 @@ export default function HomeTranslatorHub() {
           className={`${styles.modeButton} ${mode === 'booking' ? styles.modeButtonActive : ''}`}
           onClick={() => setMode('booking')}
         >
-          <span className={styles.modeButtonTitle}>1. Booking Concierge Mode</span>
+          <span className={styles.modeButtonTitle}>{t('translator_hub.mode_booking_title')}</span>
           <span className={styles.modeButtonDesc}>
-            예약 문의, availability 확인, 예약 생성·변경·취소, structured output 저장
+            {t('translator_hub.mode_booking_desc')}
           </span>
         </button>
         <button
           className={`${styles.modeButton} ${mode === 'interpreter' ? styles.modeButtonActive : ''}`}
           onClick={() => setMode('interpreter')}
         >
-          <span className={styles.modeButtonTitle}>2. In-Shop Interpreter MVP</span>
+          <span className={styles.modeButtonTitle}>{t('translator_hub.mode_interpreter_title')}</span>
           <span className={styles.modeButtonDesc}>
-            push-to-talk, server STT, server translation, 원문/번역 동시 표시, text fallback
+            {t('translator_hub.mode_interpreter_desc')}
           </span>
         </button>
       </div>
@@ -54,6 +55,7 @@ export default function HomeTranslatorHub() {
 }
 
 function BookingConciergePanel() {
+  const { t } = useTranslation('common');
   const [sessionId, setSessionId] = useState<string | undefined>();
   const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>('en');
   const [message, setMessage] = useState(
@@ -97,15 +99,14 @@ function BookingConciergePanel() {
   return (
     <div className={styles.panel}>
       <div className={styles.panelCard}>
-        <h3 className={styles.cardTitle}>고객 문의 입력</h3>
+        <h3 className={styles.cardTitle}>{t('interpreter_ui_v2.customer_input_title')}</h3>
         <p className={styles.cardDesc}>
-          한국어, 영어, 일본어, 중국어 간체/번체, 베트남어, 태국어, 인도네시아어, 말레이어로 문의할 수 있습니다.
-          예약 가능 여부는 서버에서 availability tool을 먼저 호출합니다.
+          {t('interpreter_ui_v2.customer_input_desc')}
         </p>
 
         <div className={styles.grid2}>
           <div className={styles.field}>
-            <label>고객 언어</label>
+            <label>{t('interpreter_ui.customer_language')}</label>
             <select
               className={styles.select}
               value={customerLocale}
@@ -119,13 +120,13 @@ function BookingConciergePanel() {
             </select>
           </div>
           <div className={styles.field}>
-            <label>세션 ID</label>
-            <input className={styles.input} value={sessionId ?? '신규 세션'} readOnly />
+            <label>{t('interpreter_ui_v2.session_id')}</label>
+            <input className={styles.input} value={sessionId ?? t('interpreter_ui_v2.new_session')} readOnly />
           </div>
         </div>
 
         <div className={styles.field}>
-          <label>문의 내용</label>
+          <label>{t('interpreter_ui_v2.inquiry_content')}</label>
           <textarea
             className={styles.textarea}
             value={message}
@@ -135,34 +136,34 @@ function BookingConciergePanel() {
 
         <div className={styles.quickRow}>
           <button className={styles.quickChip} onClick={() => void handleSubmit('How much is scalp care?')}>
-            가격 문의
+            {t('interpreter_ui_v2.quick_chips.price')}
           </button>
           <button className={styles.quickChip} onClick={() => void handleSubmit('Can I book lash extension on 2026-03-18 at 14:00?')}>
-            예약 가능 여부
+            {t('interpreter_ui_v2.quick_chips.availability')}
           </button>
           <button className={styles.quickChip} onClick={() => void handleSubmit('Please change my booking to 2026-03-19 16:00')}>
-            예약 변경
+            {t('interpreter_ui_v2.quick_chips.change')}
           </button>
           <button className={styles.quickChip} onClick={() => void handleSubmit('Please cancel my booking')}>
-            예약 취소
+            {t('interpreter_ui_v2.quick_chips.cancel')}
           </button>
         </div>
 
         <div className={styles.actions}>
           <button className={styles.primaryBtn} onClick={() => void handleSubmit()} disabled={loading}>
-            {loading ? '처리 중...' : 'Concierge 실행'}
+            {loading ? t('interpreter_ui_v2.status.processing') : 'Concierge 실행'}
           </button>
         </div>
       </div>
 
       <div className={styles.panelCard}>
-        <h3 className={styles.cardTitle}>도구 기반 응답</h3>
+        <h3 className={styles.cardTitle}>{t('interpreter_ui_v2.tool_response_title')}</h3>
         <p className={styles.cardDesc}>
-          응답은 availability / booking tool 결과를 바탕으로 생성되고, structured output과 함께 저장됩니다.
+          {t('interpreter_ui_v2.tool_response_desc')}
         </p>
 
         {!result ? (
-          <div className={styles.notice}>아직 응답이 없습니다. 좌측에서 문의를 보내 주세요.</div>
+          <div className={styles.notice}>{t('interpreter_ui_v2.no_response')}</div>
         ) : (
           <div className={styles.responseCard}>
             <div className={styles.responseBubble}>

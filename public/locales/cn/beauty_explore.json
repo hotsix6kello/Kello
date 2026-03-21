@@ -1,0 +1,19 @@
+{
+  "form_name": "姓名",
+  "form_name_placeholder": "请输入姓名",
+  "form_phone": "联系方式（或 SNS ID）",
+  "form_phone_placeholder": "手机号或 SNS ID",
+  "form_request": "需求说明",
+  "form_request_placeholder": "过敏信息或想要的风格",
+  "agreement_confirm": "确认内容",
+  "agreement_confirm_desc": "我已确认所选内容。",
+  "agreement_privacy": "隐私同意",
+  "agreement_privacy_desc": "我同意提供相关信息。",
+  "region_all": "全部地区",
+  "label_today": "今天",
+  "label_tomorrow": "明天",
+  "label_booking_unit": "韩元",
+  "booking_confirmation_title": "预约申请已提交！",
+  "booking_confirmation_desc": "我们会尽快通知您。",
+  "booking_confirmation_cta": "我的预约"
+}
