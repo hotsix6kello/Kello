@@ -16,10 +16,9 @@ export default function HomeHero({ userName, greeting, t }: HomeHeroProps) {
         <div className={styles.orbBlue} />
       </div>
 
-      <section className={styles.heroSection}>
-        <Image src="/kello-logo.png" alt={t('home.badge')} width={124} height={28} className={styles.heroLogo} priority />
-        <div className={styles.heroEyebrow}>{t('home_beauty.hero.eyebrow')}</div>
-        <h1 className={styles.heroTitle}>
+      <section className={`${styles.heroSection} h-auto`}>
+        <Image src="/kello-logo.png" alt={t('home.badge')} width={800} height={180} className={styles.heroLogo} priority />
+        <h1 className={`${styles.heroTitle} whitespace-normal break-keep h-auto`}>
           {userName ? (
             <span suppressHydrationWarning>
               {t('home_beauty.hero.welcome_user', { greeting, name: userName })}
@@ -28,9 +27,6 @@ export default function HomeHero({ userName, greeting, t }: HomeHeroProps) {
             t('home_beauty.hero.title')
           )}
         </h1>
-        <p className={styles.heroSubtitle}>
-          {t('home_beauty.hero.subtitle')}
-        </p>
       </section>
     </>
   );

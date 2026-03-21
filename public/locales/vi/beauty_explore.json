@@ -1,0 +1,19 @@
+{
+  "form_name": "Tên",
+  "form_name_placeholder": "Nhập tên của bạn",
+  "form_phone": "Liên hệ (hoặc SNS ID)",
+  "form_phone_placeholder": "Số điện thoại hoặc SNS ID",
+  "form_request": "Yêu cầu",
+  "form_request_placeholder": "Dị ứng hoặc kiểu dáng mong muốn",
+  "agreement_confirm": "Xác nhận thông tin",
+  "agreement_confirm_desc": "Tôi xác nhận lựa chọn này.",
+  "agreement_privacy": "Thỏa thuận quyền riêng tư",
+  "agreement_privacy_desc": "Tôi đồng ý cung cấp thông tin.",
+  "region_all": "Tất cả khu vực",
+  "label_today": "Hôm nay",
+  "label_tomorrow": "Ngày mai",
+  "label_booking_unit": "KRW",
+  "booking_confirmation_title": "Đã gửi yêu cầu đặt lịch!",
+  "booking_confirmation_desc": "Chúng tôi sẽ sớm thông báo cho bạn.",
+  "booking_confirmation_cta": "Lịch hẹn của tôi"
+}

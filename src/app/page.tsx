@@ -36,7 +36,6 @@ import HomeTopNav from './components/home/HomeTopNav';
 import HomeHero from './components/home/HomeHero';
 import HomeBookingSection from './components/home/HomeBookingSection';
 import HomeRecommendedPlans from './components/home/HomeRecommendedPlans';
-import HomeSupportSection from './components/home/HomeSupportSection';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
@@ -44,7 +43,6 @@ import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
 import { 
   BEAUTY_CATEGORY_OPTIONS, 
   MOCK_PLACES, 
-  ASSURANCE_ITEMS,
   BeautyCategoryId
 } from './components/home/constants';
 
@@ -72,6 +70,7 @@ export default function HomePage() {
   );
 
   const [userName, setUserName] = useState<string | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   // Navigation Sheet States
   const [openNavSheet, setOpenNavSheet] = useState(false);
@@ -243,9 +242,9 @@ export default function HomePage() {
     }
   ], [t]);
 
-  const filteredPlans = useMemo(() => {
-    return RECOMMENDED_PLANS.filter(p => p.duration === days);
-  }, [RECOMMENDED_PLANS, days]);
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -279,9 +278,9 @@ export default function HomePage() {
     }
   };
 
-  const handleStartBooking = () => {
-    if (!selectedCategory) return;
-    router.push(`/explore?category=beauty&beautyCategory=${selectedCategory}`);
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategory(categoryId as BeautyCategoryId);
+    router.push(`/explore?category=beauty&beautyCategory=${categoryId}`);
   };
 
   const handleOpenInterpreter = () => {
@@ -289,9 +288,6 @@ export default function HomePage() {
   };
 
   const selectedOption = BEAUTY_CATEGORY_OPTIONS.find((option) => option.id === selectedCategory) ?? null;
-
-  // homeTrans was unused and contained any/returnObjects: true warning potential
-
   useEffect(() => {
     if (openNavSheet || isMapOpen) {
       document.body.style.overflow = 'hidden';
@@ -364,10 +360,9 @@ export default function HomePage() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    const isKo = i18n.language?.startsWith('ko');
-    if (hour < 12) return isKo ? '좋은 아침입니다' : 'Good morning';
-    if (hour < 18) return isKo ? '좋은 오후입니다' : 'Good afternoon';
-    return isKo ? '좋은 저녁입니다' : 'Good evening';
+    if (hour < 12) return t('common.morning');
+    if (hour < 18) return t('common.afternoon');
+    return t('common.evening');
   };
 
   const handleStart = async () => {
@@ -416,17 +411,16 @@ export default function HomePage() {
     router.push('/planner');
   };
 
-  const handleCreateCustomPlan = () => {
-    setDays(days);
-    setItinerary([]);
-    router.push('/planner');
-  };
+  if (!isHydrated) {
+    return <main className={styles.main} suppressHydrationWarning />;
+  }
 
   return (
     <main className={styles.main}>
       <HomeTopNav 
         userName={userName} 
         onSignOut={handleSignOut} 
+        greeting={getGreeting()}
         t={t} 
       />
 
@@ -439,34 +433,19 @@ export default function HomePage() {
       <HomeBookingSection 
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-        input={input}
-        onInputChange={setInput}
-        onInputClear={() => setInput('')}
-        onStart={handleStart}
-        days={days}
-        onDaysChange={setDays}
-        onStartBooking={handleStartBooking}
-        showSuggestions={showSuggestions}
-        suggestions={[]} // Suggestions disabled as per original code effect
-        onSelectPlace={handleSelectPlace}
-        selectedOption={selectedOption}
+        onSelectCategory={handleCategorySelect}
         t={t}
       />
 
       <HomeRecommendedPlans 
-        plans={filteredPlans}
+        plans={RECOMMENDED_PLANS}
         days={days}
         onApplyPlan={handleApplyPlan}
-        onCreateCustomPlan={handleCreateCustomPlan}
+        onCreateCustomPlan={() => router.push('/planner')}
         t={t}
       />
 
-      <HomeSupportSection 
-        assuranceItems={ASSURANCE_ITEMS}
-        onOpenInterpreter={handleOpenInterpreter}
-        t={t}
-      />
+
 
       <HomeLocationSheet 
         isOpen={openNavSheet}
@@ -500,13 +479,13 @@ export default function HomePage() {
         t={t}
       />
 
+
       {loadingNav && (
         <div className={styles.toast} style={{ bottom: '120px', background: 'var(--primary)', color: 'white' }}>
           {t('home.fetching_location', { defaultValue: 'Fetching location...' })}
         </div>
       )}
 
-      <div style={{ height: 100 }} />
     </main>
   );
 }

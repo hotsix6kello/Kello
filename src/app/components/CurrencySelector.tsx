@@ -12,12 +12,15 @@ const SUPPORTED_CURRENCIES = [
     { code: 'USD', symbol: '$' },
     { code: 'JPY', symbol: '¥' },
     { code: 'CNY', symbol: '¥' },
+    { code: 'HKD', symbol: '$' },
     { code: 'EUR', symbol: '€' },
     { code: 'GBP', symbol: '£' },
     { code: 'THB', symbol: '฿' },
     { code: 'VND', symbol: '₫' },
     { code: 'PHP', symbol: '₱' },
     { code: 'SGD', symbol: '$' },
+    { code: 'IDR', symbol: 'Rp' },
+    { code: 'MYR', symbol: 'RM' },
 ];
 
 export default function CurrencySelector() {

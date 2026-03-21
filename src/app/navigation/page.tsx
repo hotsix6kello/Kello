@@ -203,7 +203,6 @@ export default function TodayPage() {
                     </div>
                 )}
 
-                <div style={{ height: 100 }} />
             </div>
         );
     };

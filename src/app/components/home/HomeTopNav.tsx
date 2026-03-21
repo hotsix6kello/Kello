@@ -7,10 +7,11 @@ import styles from '../../home.module.css';
 interface HomeTopNavProps {
   userName: string | null;
   onSignOut: () => void;
-  t: (key: string) => string;
+  greeting: string;
+  t: (key: string, options?: any) => string;
 }
 
-export default function HomeTopNav({ userName, onSignOut, t }: HomeTopNavProps) {
+export default function HomeTopNav({ userName, onSignOut, greeting, t }: HomeTopNavProps) {
   const router = useRouter();
 
   return (
@@ -26,7 +27,7 @@ export default function HomeTopNav({ userName, onSignOut, t }: HomeTopNavProps) 
         </div>
       ) : (
         <button className={styles.navBtn} onClick={onSignOut}>
-          {userName}님 👋
+          {t('home_beauty.hero.welcome_user', { name: userName, greeting })}
         </button>
       )}
     </div>
