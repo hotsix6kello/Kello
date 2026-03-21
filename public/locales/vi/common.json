@@ -186,7 +186,9 @@
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "title": "Vui lòng chọn dịch vụ làm đẹp"
+      "step": "BƯỚC. 01",
+      "title": "Vui lòng chọn dịch vụ làm đẹp",
+      "description": "Vui lòng chọn danh mục trước để khám phá chính xác nhất."
     },
     "categories": {
       "hair": {
@@ -221,19 +223,36 @@
       }
     },
     "selection": {
+      "eyebrow": "Danh mục đã chọn",
       "tags": {
         "mobile": "Đặt qua điện thoại",
         "comparison": "So sánh salon",
         "inquiry": "Hỏi đáp trực tuyến"
-      }
+      },
+      "empty": "Vui lòng chọn danh mục trước. Nút bắt đầu đặt lịch sẽ hoạt động sau khi chọn."
     },
     "cta": {
+      "hint": "Chọn danh mục để bắt đầu đặt lịch",
       "button": "Bắt đầu đặt lịch"
     },
     "interpreter_entry": {
       "title": "Phiên dịch trực tuyến",
       "description": "Giao tiếp dễ dàng với nhân viên",
       "cta": "Mở phiên dịch"
+    },
+    "location_sheet": {
+      "search_title": "Tìm kiếm vị trí",
+      "search_result_count": "{{count}} kết quả cho \"{{query}}\"",
+      "view_location": "Xem vị trí",
+      "view_location_desc": "Xem vị trí chi tiết trên bản đồ",
+      "call_taxi": "Gọi taxi",
+      "google_maps_desc": "Xem chỉ đường phương tiện công cộng trên Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Vui lòng đến địa chỉ này",
+      "copy": "Sao chép địa chỉ",
+      "copy_done": "Đã sao chép!",
+      "close": "Đóng"
     }
   },
   "interpreter_ui": {

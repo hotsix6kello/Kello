@@ -168,7 +168,9 @@
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "title": "Selecione o serviço de beleza desejado"
+      "step": "PASSO. 01",
+      "title": "Selecione o serviço de beleza desejado",
+      "description": "Selecione primeiro uma categoria para uma exploração mais precisa."
     },
     "categories": {
       "hair": {
@@ -192,7 +194,7 @@
         "summary": "Encontre rapidamente o salão adequado."
       },
       "makeup": {
-        "label": "Maquiagem",
+        "label": "Maquilhagem",
         "note": "Diário, ensaio, casamento",
         "summary": "Selecione maquiagem para seu evento."
       },
@@ -203,19 +205,36 @@
       }
     },
     "selection": {
+      "eyebrow": "Categoria selecionada",
       "tags": {
         "mobile": "Reserva móvel",
         "comparison": "Comparar salões",
         "inquiry": "Consulta em tempo real"
-      }
+      },
+      "empty": "Selecione primeiro uma categoria. O botão para iniciar a reserva será ativado após a seleção."
     },
     "cta": {
+      "hint": "Selecione uma categoria para iniciar a reserva",
       "button": "Iniciar reserva"
     },
     "interpreter_entry": {
       "title": "Intérprete em tempo real",
       "description": "Comunique-se facilmente com a equipe",
       "cta": "Abrir intérprete"
+    },
+    "location_sheet": {
+      "search_title": "Procurar localização",
+      "search_result_count": "{{count}} resultados para \"{{query}}\"",
+      "view_location": "Ver localização",
+      "view_location_desc": "Consulte a localização detalhada no mapa",
+      "call_taxi": "Chamar táxi",
+      "google_maps_desc": "Consultar rotas de transporte público no Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Por favor, dirija-se a este endereço",
+      "copy": "Copiar endereço",
+      "copy_done": "Copiado!",
+      "close": "Fechar"
     }
   }
 }

@@ -1294,7 +1294,9 @@
       "welcome_user": "{{greeting}}，{{name}}！👋"
     },
     "booking": {
-      "title": "请选择您想要的美容服务"
+      "step": "STEP. 01",
+      "title": "请选择您想要的美容服务",
+      "description": "为了进行最准确的探索，请先选择类别。"
     },
     "categories": {
       "hair": {
@@ -1329,19 +1331,36 @@
       }
     },
     "selection": {
+      "eyebrow": "已选择类别",
       "tags": {
         "mobile": "手机预约",
         "comparison": "店铺比较",
         "inquiry": "实时咨询"
-      }
+      },
+      "empty": "请先选择类别。选择后预约开始按钮将会启用。"
     },
     "cta": {
+      "hint": "选择类别后即可开始预约",
       "button": "开始预约"
     },
     "interpreter_entry": {
       "title": "实时翻译助手",
       "description": "与店铺员工轻松沟通",
       "cta": "开启翻译"
+    },
+    "location_sheet": {
+      "search_title": "查找搜索结果",
+      "search_result_count": "{{query}} 的搜索结果 {{count}}条",
+      "view_location": "查看位置",
+      "view_location_desc": "在地图上查看详细位置",
+      "call_taxi": "呼叫 K.Ride",
+      "google_maps_desc": "使用谷歌地图查看公交路线"
+    },
+    "modals": {
+      "card_title": "📍 请前往这个地址",
+      "copy": "复制地址",
+      "copy_done": "复制成功！",
+      "close": "关闭"
     }
   },
   "interpreter_page": {
