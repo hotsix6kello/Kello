@@ -215,7 +215,9 @@
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "title": "Bitte wählen Sie Ihren gewünschten Service"
+      "step": "SCHRITT. 01",
+      "title": "Bitte wählen Sie Ihren gewünschten Service",
+      "description": "Bitte wählen Sie zuerst eine Kategorie für eine genauere Erkundung."
     },
     "categories": {
       "hair": {
@@ -250,19 +252,36 @@
       }
     },
     "selection": {
+      "eyebrow": "Ausgewählte Kategorien",
       "tags": {
         "mobile": "Mobile Buchung",
         "comparison": "Salon-Vergleich",
         "inquiry": "Echtzeit-Anfrage"
-      }
+      },
+      "empty": "Bitte wählen Sie zuerst eine Kategorie aus. Der Button zum Starten der Buchung wird nach der Auswahl aktiviert."
     },
     "cta": {
+      "hint": "Wählen Sie eine Kategorie, um die Buchung zu starten",
       "button": "Buchung starten"
     },
     "interpreter_entry": {
       "title": "Echtzeit-Dolmetscher",
       "description": "Kommunizieren Sie einfach mit dem Personal",
       "cta": "Dolmetscher öffnen"
+    },
+    "location_sheet": {
+      "search_title": "Standortsuche",
+      "search_result_count": "{{count}} Ergebnisse für \"{{query}}\"",
+      "view_location": "Standort anzeigen",
+      "view_location_desc": "Detaillierten Standort auf der Karte prüfen",
+      "call_taxi": "Taxi rufen",
+      "google_maps_desc": "Öffentliche Verkehrsmittel in Google Maps prüfen"
+    },
+    "modals": {
+      "card_title": "📍 Bitte fahren Sie zu dieser Adresse",
+      "copy": "Adresse kopieren",
+      "copy_done": "Kopiert!",
+      "close": "Schließen"
     }
   }
 }

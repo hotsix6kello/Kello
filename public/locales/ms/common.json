@@ -91,7 +91,9 @@
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "title": "Sila pilih perkhidmatan kecantikan"
+      "step": "LANGKAH. 01",
+      "title": "Sila pilih perkhidmatan kecantikan",
+      "description": "Sila pilih kategori terlebih dahulu untuk penjelajahan yang paling tepat."
     },
     "categories": {
       "hair": {
@@ -126,19 +128,36 @@
       }
     },
     "selection": {
+      "eyebrow": "Kategori yang Dipilih",
       "tags": {
         "mobile": "Tempahan mudah alih",
         "comparison": "Bandingkan salon",
         "inquiry": "Pertanyaan masa nyata"
-      }
+      },
+      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pemilihan."
     },
     "cta": {
+      "hint": "Pilih kategori untuk mula tempahan",
       "button": "Mula Tempahan"
     },
     "interpreter_entry": {
       "title": "Penterjemah Masa Nyata",
       "description": "Berkomunikasi dengan mudah dengan kakitangan",
       "cta": "Buka Penterjemah"
+    },
+    "location_sheet": {
+      "search_title": "Cari Lokasi",
+      "search_result_count": "{{count}} hasil untuk \"{{query}}\"",
+      "view_location": "Lihat Lokasi",
+      "view_location_desc": "Lihat lokasi terperinci pada peta",
+      "call_taxi": "Panggil Teksi",
+      "google_maps_desc": "Semak laluan pengangkutan awam di Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Sila pergi ke alamat ini",
+      "copy": "Salin Alamat",
+      "copy_done": "Berjaya disalin!",
+      "close": "Tutup"
     }
   },
   "interpreter_ui": {

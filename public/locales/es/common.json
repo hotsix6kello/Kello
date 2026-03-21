@@ -200,7 +200,9 @@
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "title": "Selecciona el servicio que deseas"
+      "step": "PASO. 01",
+      "title": "Selecciona el servicio que deseas",
+      "description": "Seleccione primero una categoría para una exploración más precisa."
     },
     "categories": {
       "hair": {
@@ -235,19 +237,36 @@
       }
     },
     "selection": {
+      "eyebrow": "Categoría seleccionada",
       "tags": {
         "mobile": "Reserva móvil",
         "comparison": "Comparar salones",
         "inquiry": "Consulta en tiempo real"
-      }
+      },
+      "empty": "Seleccione primero una categoría. El botón para iniciar la reserva se activará tras la selección."
     },
     "cta": {
+      "hint": "Selecciona una categoría para iniciar la reserva",
       "button": "Comenzar reserva"
     },
     "interpreter_entry": {
       "title": "Intérprete en tiempo real",
       "description": "Comunícate fácilmente con el personal",
       "cta": "Iniciar intérprete"
+    },
+    "location_sheet": {
+      "search_title": "Buscar ubicación",
+      "search_result_count": "{{count}} resultados para \"{{query}}\"",
+      "view_location": "Ver ubicación",
+      "view_location_desc": "Consulta la ubicación detallada en el mapa",
+      "call_taxi": "Llamar taxi",
+      "google_maps_desc": "Consultar rutas de transporte público en Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Por favor, diríjase a esta dirección",
+      "copy": "Copiar dirección",
+      "copy_done": "¡Copiado!",
+      "close": "Cerrar"
     }
   }
 }

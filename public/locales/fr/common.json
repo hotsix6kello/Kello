@@ -215,7 +215,9 @@
       "welcome_user": "{{greeting}}, {{name}} ! 👋"
     },
     "booking": {
-      "title": "Veuillez choisir votre service beauté"
+      "step": "ÉTAPE. 01",
+      "title": "Veuillez choisir votre service beauté",
+      "description": "Veuillez d'abord choisir une catégorie pour une exploration plus précise."
     },
     "categories": {
       "hair": {
@@ -250,19 +252,36 @@
       }
     },
     "selection": {
+      "eyebrow": "Catégorie sélectionnée",
       "tags": {
         "mobile": "Réservation mobile",
         "comparison": "Comparer les salons",
         "inquiry": "Demande en temps réel"
-      }
+      },
+      "empty": "Veuillez d'abord choisir une catégorie. Le bouton de réservation sera activé après votre choix."
     },
     "cta": {
+      "hint": "Choisissez une catégorie pour commencer la réservation",
       "button": "Commencer la réservation"
     },
     "interpreter_entry": {
       "title": "Interprète en temps réel",
       "description": "Communiquez facilement avec le personnel",
-      "cta": "Ouvrir l interprète"
+      "cta": "Ouvrir l'interprète"
+    },
+    "location_sheet": {
+      "search_title": "Recherche d'emplacement",
+      "search_result_count": "{{count}} résultats pour \"{{query}}\"",
+      "view_location": "Voir l'emplacement",
+      "view_location_desc": "Consulter l'emplacement détaillé sur la carte",
+      "call_taxi": "Appeler un taxi",
+      "google_maps_desc": "Consulter les itinéraires de transport en commun sur Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Veuillez vous rendre à cette adresse",
+      "copy": "Copier l'adresse",
+      "copy_done": "Copié !",
+      "close": "Fermer"
     }
   }
 }

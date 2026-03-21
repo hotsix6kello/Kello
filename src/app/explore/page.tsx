@@ -525,6 +525,7 @@ const BEAUTY_CATEGORY_META: (t: (key: string) => string) => Record<
 
 const BEAUTY_REGIONS: (t: any, tBeauty: any) => Array<{ id: BeautyRegionId; label: string }> = (t, tBeauty) => [
   { id: 'all', label: tBeauty('region_all') },
+  { id: 'jongno', label: t('transport.stations.jongno') || '종로' },
   { id: 'gangnam', label: t('transport.stations.gangnam') },
   { id: 'hongdae', label: t('transport.stations.hongdae') || '홍대' },
   { id: 'seongsu', label: t('transport.stations.seongsu') },
