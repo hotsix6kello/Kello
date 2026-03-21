@@ -50,13 +50,19 @@ export default function HomePage() {
   const { t, i18n } = useTranslation('common');
   const { 
     itinerary, 
-    tripDays: days,
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
     setSearchQuery: setInput,
     setDestinationInfo
   } = useTrip();
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return t('common.morning');
+    if (hour < 18) return t('common.afternoon');
+    return t('common.evening');
+  };
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
   const setSelectedCategory = setGlobalCategory as (category: BeautyCategoryId | null) => void;
@@ -235,7 +241,6 @@ export default function HomePage() {
     router.push('/interpreter');
   };
 
-  const selectedOption = BEAUTY_CATEGORY_OPTIONS.find((option) => option.id === selectedCategory) ?? null;
   useEffect(() => {
     if (openNavSheet || isMapOpen) {
       document.body.style.overflow = 'hidden';
@@ -306,51 +311,6 @@ export default function HomePage() {
     setTimeout(() => setCopied(false), 2000);
   }, [destInfo]);
 
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return t('common.morning');
-    if (hour < 18) return t('common.afternoon');
-    return t('common.evening');
-  };
-
-  const handleStart = async () => {
-    const trimmedInput = input.trim();
-    if (!trimmedInput) { router.push('/explore'); return; }
-    setLoadingNav(true);
-    const localFiltered = ALL_SEARCH_ITEMS.filter(p => {
-      const q = trimmedInput.toLowerCase();
-      return (p.title?.toLowerCase().includes(q)) || (p.area?.toLowerCase().includes(q)) || (p.searchTerms?.includes(q));
-    });
-    let results = [...localFiltered];
-    try {
-      const lang = i18n.language || 'en';
-      const res = await fetch('/api/places/autocomplete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input: trimmedInput, language: lang }),
-      });
-      const data = await res.json();
-      const googleResults = (data.suggestions || []).map((s: GooglePrediction) => ({
-        title: s.placePrediction.structuredFormat.mainText.text,
-        area: s.placePrediction.structuredFormat.secondaryText?.text || '',
-        placeId: s.placePrediction.placeId,
-        isGoogle: true
-      }));
-      results = [...results, ...googleResults];
-    } catch (err) { console.error('Google Search failed', err); }
-    setLoadingNav(false);
-    if (results.length > 0) {
-      setSheetSearchResults(results);
-      setIsSearchingInSheet(true);
-      setOpenNavSheet(true);
-      setSelectedDest(null);
-    } else {
-      router.push(`/explore?city=${encodeURIComponent(trimmedInput)}&days=${days}`);
-    }
-  };
-
-
-
   if (!isHydrated) {
     return <main className={styles.main} suppressHydrationWarning />;
   }
@@ -374,21 +334,11 @@ export default function HomePage() {
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
-        input={input}
-        onInputChange={setInput}
-        onInputClear={() => setInput('')}
-        onStart={handleStart}
-        days={days}
-        onDaysChange={() => {}} 
         onStartBooking={() => {
           if (selectedCategory) {
             router.push(`/explore?category=beauty&beautyCategory=${selectedCategory}`);
           }
         }}
-        showSuggestions={showSuggestions}
-        suggestions={sheetSearchResults}
-        onSelectPlace={handleSelectPlace}
-        selectedOption={selectedOption}
         t={t}
       />
 
