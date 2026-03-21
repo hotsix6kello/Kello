@@ -1,0 +1,19 @@
+{
+  "form_name": "Nombre",
+  "form_name_placeholder": "Ingresa tu nombre",
+  "form_phone": "Contacto (o ID de SNS)",
+  "form_phone_placeholder": "Teléfono o ID de SNS",
+  "form_request": "Solicitudes",
+  "form_request_placeholder": "Alergias o estilo deseado",
+  "agreement_confirm": "Confirmar detalles",
+  "agreement_confirm_desc": "Confirmo la selección.",
+  "agreement_privacy": "Acuerdo de privacidad",
+  "agreement_privacy_desc": "Acepto proporcionar la información.",
+  "region_all": "Todas las zonas",
+  "label_today": "Hoy",
+  "label_tomorrow": "Mañana",
+  "label_booking_unit": "KRW",
+  "booking_confirmation_title": "¡Reserva solicitada!",
+  "booking_confirmation_desc": "Te avisaremos pronto.",
+  "booking_confirmation_cta": "Mis reservas"
+}

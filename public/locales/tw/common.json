@@ -1,288 +1,308 @@
 {
-    "header": {
-        "view_app": "View in App",
-        "faq": "FAQ",
-        "recent": "Recent Activities"
+  "header": {
+    "view_app": "View in App",
+    "faq": "FAQ",
+    "recent": "Recent Activities"
+  },
+  "beauty_explore": {
+    "form_name": "姓名",
+    "form_name_placeholder": "請輸入姓名",
+    "form_phone": "聯絡方式（或 SNS ID）",
+    "form_phone_placeholder": "手機號碼或 SNS ID",
+    "form_request": "需求說明",
+    "form_request_placeholder": "過敏資訊或想要的風格",
+    "agreement_confirm": "確認內容",
+    "agreement_confirm_desc": "我已確認所選內容。",
+    "agreement_privacy": "隱私同意",
+    "agreement_privacy_desc": "我同意提供相關資訊。",
+    "region_all": "全部地區",
+    "label_today": "今天",
+    "label_tomorrow": "明天",
+    "label_booking_unit": "韓元",
+    "booking_confirmation_title": "已送出預約申請！",
+    "booking_confirmation_desc": "我們會很快通知您。",
+    "booking_confirmation_cta": "我的預約"
+  },
+  "common": {
+    "welcome": "Welcome, Traveler.",
+    "greeting": "Good Morning",
+    "login": "Login",
+    "signup": "Sign Up",
+    "today": "Today",
+    "move": "Move",
+    "book": "Book",
+    "chat": "Chat",
+    "my": "My",
+    "min_unit": "min",
+    "current_operation": "Current Operation",
+    "live": "LIVE",
+    "recommended": "Recommended Nearby",
+    "based_on_location": "Based on your location",
+    "start_nav": "Start Navigation",
+    "delay_10m": "Delay +10m",
+    "confirmed": "Confirmed",
+    "payment_completed": "Payment Completed",
+    "weather_clear": "Clear",
+    "back": "Back",
+    "select_language": "Change Language",
+    "home_nav": "Home",
+    "explore_nav": "Explore",
+    "planner_nav": "Planner",
+    "today_nav": "Itinerary",
+    "my_nav": "My Info",
+    "day_unit": "d",
+    "locale": "en-US",
+    "cities": {
+      "seoul": "Seoul",
+      "busan": "Busan",
+      "jeju": "Jeju",
+      "gyeongju": "Gyeongju"
     },
-    "common": {
-        "welcome": "Welcome, Traveler.",
-        "greeting": "Good Morning",
-        "login": "Login",
-        "signup": "Sign Up",
-        "today": "Today",
-        "move": "Move",
-        "book": "Book",
-        "chat": "Chat",
-        "my": "My",
-        "min_unit": "min",
-        "current_operation": "Current Operation",
-        "live": "LIVE",
-        "recommended": "Recommended Nearby",
-        "based_on_location": "Based on your location",
-        "start_nav": "Start Navigation",
-        "delay_10m": "Delay +10m",
-        "confirmed": "Confirmed",
-        "payment_completed": "Payment Completed",
-        "weather_clear": "Clear",
-        "back": "Back",
-        "select_language": "Change Language",
-        "home_nav": "Home",
-        "explore_nav": "Explore",
-        "planner_nav": "Planner",
-        "today_nav": "Itinerary",
-        "my_nav": "My Info",
-        "day_unit": "d",
-        "locale": "en-US",
-        "cities": {
-            "seoul": "Seoul",
-            "busan": "Busan",
-            "jeju": "Jeju",
-            "gyeongju": "Gyeongju"
-        },
-        "categories": {
-            "all": "All",
-            "food": "Food",
-            "beauty": "Beauty",
-            "event": "Events",
-            "festival": "Festivals",
-            "attraction": "Attractions",
-            "transport": "Transport"
-        },
-        "badges": {
-            "english_friendly": "English-friendly",
-            "vegan_certified": "Vegan-certified",
-            "michelin": "Michelin",
-            "wait_free": "Wait-free",
-            "local_experience": "Local Experience",
-            "k_idol_style": "K-Idol Style",
-            "tax_refund": "Tax Refund",
-            "summer_must_go": "Summer Must-go",
-            "non_verbal": "Non-verbal",
-            "family": "Family",
-            "night_view": "Night view",
-            "photo_spot": "Photo spot",
-            "hanbok_free_entry": "Hanbok Free Entry",
-            "history": "History",
-            "city_view": "City view"
-        },
-        "ingredients": {
-            "vegetables": "Vegetables",
-            "soy": "Soy",
-            "pork": "Pork",
-            "kimchi": "Kimchi",
-            "seafood": "Seafood"
-        },
-        "diet": {
-            "vegan": "Vegan",
-            "gluten_free": "Gluten-free",
-            "meat_lover": "Meat-lover",
-            "pescatarian": "Pescatarian"
-        },
-        "community_nav": "Community",
-        "loading": "Loading...",
-        "actions": {
-            "view_all": "View All",
-            "view": "View",
-            "manage": "Manage",
-            "details": "Details",
-            "view_details": "View Details",
-            "view_place_details": "View place details",
-            "support": "Support",
-            "open_support": "Open Support",
-            "open_my_support": "Open My Support",
-            "open_help_center": "Open Help Center",
-            "interpreter_help": "Interpreter Help",
-            "booking_help": "Booking Help",
-            "emergency_help": "Emergency Help",
-            "general_help": "General Help",
-            "emergency_phrases": "Emergency Phrases",
-            "show_emergency_phrases": "Show Emergency Phrases",
-            "travel_phrasebook": "Travel Phrasebook",
-            "travel_phrases": "Travel Phrases",
-            "write_review": "Write Review",
-            "get_help": "Get Help",
-            "report_issue": "Report Issue",
-            "explore": "Explore",
-            "explore_places": "Explore Places",
-            "browse_places": "Browse Places",
-            "browse_community": "Browse Community",
-            "browse_meetups": "Browse Meetups",
-            "browse_explore": "Browse Explore",
-            "explore_more": "Explore More",
-            "open_hub": "Open Hub",
-            "view_booking": "View Booking",
-            "view_in_plan": "View in Plan",
-            "view_bookings": "View Bookings",
-            "my_bookings": "My Bookings",
-            "go_to_reviews": "Go to Reviews",
-            "add_to_plan": "Add to Plan",
-            "create_plan": "Create a Plan",
-            "view_plan": "View Plan",
-            "continue_editing": "Continue Editing",
-            "use_this_plan": "Use This Plan",
-            "view_again": "View Again",
-            "map": "Map",
-            "call_112": "Call 112",
-            "call_119": "Call 119",
-            "call_120": "Call 120",
-            "call_1330": "Call 1330",
-            "call_clinic": "Call Clinic",
-            "copy": "Copy",
-            "copied": "Copied",
-            "save": "Save",
-            "saved": "Saved",
-            "large_view": "Large View",
-            "close": "Close",
-            "show_in_korean": "Show this in Korean",
-            "contact_support": "Contact Support",
-            "partner_inquiry": "Partner Inquiry",
-            "open_route": "Open Route",
-            "open": "Open",
-            "apply_again": "Apply Again",
-            "apply_as_partner": "Apply as Partner",
-            "open_admin_console": "Open Admin Console",
-            "interpreter_for_booking": "Interpreter for this booking",
-            "show_booking_phrases": "Show booking phrases",
-            "back_to_booking_support": "Back to booking support"
-        },
-        "states": {
-            "sign_in_required": "Sign in required",
-            "not_set_yet": "Not set yet",
-            "not_set": "Not set",
-            "not_connected": "Not connected",
-            "not_connected_yet": "Not connected yet",
-            "not_available_yet": "Not available yet",
-            "details_unavailable": "Details unavailable",
-            "saved_locally": "Saved locally",
-            "current_trip_plan": "Current Trip Plan",
-            "planner_draft": "Planner Draft",
-            "recently_viewed": "Recently viewed",
-            "read_only": "Read-only",
-            "active": "Active",
-            "verified": "Verified",
-            "not_verified": "Not verified",
-            "needs_review": "Needs review",
-            "approved": "Approved",
-            "pending_review": "Pending review",
-            "needs_update": "Needs update",
-            "not_joined": "Not joined",
-            "standard_account": "Standard account",
-            "frequent": "Frequent",
-            "favorites": "Favorites",
-            "recent": "Recent",
-            "posts": "Posts",
-            "reviews": "Reviews",
-            "meetups": "Meetups",
-            "places": "Places",
-            "plans": "Plans",
-            "saved_places": "Saved Places",
-            "saved_plans": "Saved Plans",
-            "trip_days": "Trip days",
-            "plan_stops": "Plan stops",
-            "done": "Done",
-            "draft": "Draft",
-            "unavailable": "Unavailable",
-            "in_progress": "In Progress",
-            "canceled": "Cancelled",
-            "loading": "Loading..."
-        },
-        "runtime": {
-            "relative": {
-                "just_now": "Just now",
-                "minutes_ago": "{{count}}m ago",
-                "hours_ago": "{{count}}h ago",
-                "days_ago": "{{count}}d ago"
-            },
-            "trip": {
-                "day_label": "Day {{day}}",
-                "day_time_dot": "Day {{day}} ? {{time}}",
-                "day_time_dash": "Day {{day}} - {{time}}"
-            },
-            "counts": {
-                "comments": "{{count}} comments",
-                "stops": "{{count}} stops",
-                "days": "{{count}} days"
-            }
-        }
+    "categories": {
+      "all": "All",
+      "food": "Food",
+      "beauty": "Beauty",
+      "event": "Events",
+      "festival": "Festivals",
+      "attraction": "Attractions",
+      "transport": "Transport"
     },
+    "badges": {
+      "english_friendly": "English-friendly",
+      "vegan_certified": "Vegan-certified",
+      "michelin": "Michelin",
+      "wait_free": "Wait-free",
+      "local_experience": "Local Experience",
+      "k_idol_style": "K-Idol Style",
+      "tax_refund": "Tax Refund",
+      "summer_must_go": "Summer Must-go",
+      "non_verbal": "Non-verbal",
+      "family": "Family",
+      "night_view": "Night view",
+      "photo_spot": "Photo spot",
+      "hanbok_free_entry": "Hanbok Free Entry",
+      "history": "History",
+      "city_view": "City view"
+    },
+    "ingredients": {
+      "vegetables": "Vegetables",
+      "soy": "Soy",
+      "pork": "Pork",
+      "kimchi": "Kimchi",
+      "seafood": "Seafood"
+    },
+    "diet": {
+      "vegan": "Vegan",
+      "gluten_free": "Gluten-free",
+      "meat_lover": "Meat-lover",
+      "pescatarian": "Pescatarian"
+    },
+    "community_nav": "Community",
+    "loading": "Loading...",
+    "actions": {
+      "view_all": "View All",
+      "view": "View",
+      "manage": "Manage",
+      "details": "Details",
+      "view_details": "View Details",
+      "view_place_details": "View place details",
+      "support": "Support",
+      "open_support": "Open Support",
+      "open_my_support": "Open My Support",
+      "open_help_center": "Open Help Center",
+      "interpreter_help": "Interpreter Help",
+      "booking_help": "Booking Help",
+      "emergency_help": "Emergency Help",
+      "general_help": "General Help",
+      "emergency_phrases": "Emergency Phrases",
+      "show_emergency_phrases": "Show Emergency Phrases",
+      "travel_phrasebook": "Travel Phrasebook",
+      "travel_phrases": "Travel Phrases",
+      "write_review": "Write Review",
+      "get_help": "Get Help",
+      "report_issue": "Report Issue",
+      "explore": "Explore",
+      "explore_places": "Explore Places",
+      "browse_places": "Browse Places",
+      "browse_community": "Browse Community",
+      "browse_meetups": "Browse Meetups",
+      "browse_explore": "Browse Explore",
+      "explore_more": "Explore More",
+      "open_hub": "Open Hub",
+      "view_booking": "View Booking",
+      "view_in_plan": "View in Plan",
+      "view_bookings": "View Bookings",
+      "my_bookings": "My Bookings",
+      "go_to_reviews": "Go to Reviews",
+      "add_to_plan": "Add to Plan",
+      "create_plan": "Create a Plan",
+      "view_plan": "View Plan",
+      "continue_editing": "Continue Editing",
+      "use_this_plan": "Use This Plan",
+      "view_again": "View Again",
+      "map": "Map",
+      "call_112": "Call 112",
+      "call_119": "Call 119",
+      "call_120": "Call 120",
+      "call_1330": "Call 1330",
+      "call_clinic": "Call Clinic",
+      "copy": "Copy",
+      "copied": "Copied",
+      "save": "Save",
+      "saved": "Saved",
+      "large_view": "Large View",
+      "close": "Close",
+      "show_in_korean": "Show this in Korean",
+      "contact_support": "Contact Support",
+      "partner_inquiry": "Partner Inquiry",
+      "open_route": "Open Route",
+      "open": "Open",
+      "apply_again": "Apply Again",
+      "apply_as_partner": "Apply as Partner",
+      "open_admin_console": "Open Admin Console",
+      "interpreter_for_booking": "Interpreter for this booking",
+      "show_booking_phrases": "Show booking phrases",
+      "back_to_booking_support": "Back to booking support"
+    },
+    "states": {
+      "sign_in_required": "Sign in required",
+      "not_set_yet": "Not set yet",
+      "not_set": "Not set",
+      "not_connected": "Not connected",
+      "not_connected_yet": "Not connected yet",
+      "not_available_yet": "Not available yet",
+      "details_unavailable": "Details unavailable",
+      "saved_locally": "Saved locally",
+      "current_trip_plan": "Current Trip Plan",
+      "planner_draft": "Planner Draft",
+      "recently_viewed": "Recently viewed",
+      "read_only": "Read-only",
+      "active": "Active",
+      "verified": "Verified",
+      "not_verified": "Not verified",
+      "needs_review": "Needs review",
+      "approved": "Approved",
+      "pending_review": "Pending review",
+      "needs_update": "Needs update",
+      "not_joined": "Not joined",
+      "standard_account": "Standard account",
+      "frequent": "Frequent",
+      "favorites": "Favorites",
+      "recent": "Recent",
+      "posts": "Posts",
+      "reviews": "Reviews",
+      "meetups": "Meetups",
+      "places": "Places",
+      "plans": "Plans",
+      "saved_places": "Saved Places",
+      "saved_plans": "Saved Plans",
+      "trip_days": "Trip days",
+      "plan_stops": "Plan stops",
+      "done": "Done",
+      "draft": "Draft",
+      "unavailable": "Unavailable",
+      "in_progress": "In Progress",
+      "canceled": "Cancelled",
+      "loading": "Loading..."
+    },
+    "runtime": {
+      "relative": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}}m ago",
+        "hours_ago": "{{count}}h ago",
+        "days_ago": "{{count}}d ago"
+      },
+      "trip": {
+        "day_label": "Day {{day}}",
+        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dash": "Day {{day}} - {{time}}"
+      },
+      "counts": {
+        "comments": "{{count}} comments",
+        "stops": "{{count}} stops",
+        "days": "{{count}} days"
+      }
+    },
+    "morning": "早安",
+    "afternoon": "午安",
+    "evening": "晚安"
+  },
   "home_beauty": {
     "hero": {
-      "eyebrow": "Beauty Booking Concierge",
+      "eyebrow": "美容預約管家",
       "title": "您想預約什麼服務？",
-      "subtitle": "首先選擇您想要的美容服務，然後直接進入預約步驟。我們專為手機快速選擇而設計，隨後是店舖對比和預約請求。",
-      "welcome": "{{name}}，請選擇您今天需要的服務。"
+      "subtitle": "選擇您想要的美容服務，直接進入預約步驟。",
+      "welcome": "{{name}}，請選擇今天的服務。",
+      "welcome_user": "{{greeting}}，{{name}}！👋"
     },
     "booking": {
-      "step": "Step 1",
+      "step": "STEP. 01",
       "title": "請選擇您想要的美容服務",
-      "description": "選擇類別後，您可以在下一步中根據該服務開始探索預約。"
+      "description": "為了進行最準확的探索，請先選擇類別。"
     },
     "categories": {
       "hair": {
         "label": "美髮",
-        "note": "剪髮、燙髮、染髮、吹風",
-        "summary": "從改變髮型到輕便修整，可以最快開始預約。"
+        "note": "剪髮、燙髮、染髮",
+        "summary": "從髮型改變到快速修剪，快速預約。"
       },
       "nail": {
         "label": "美甲",
-        "note": "凝膠美甲、護理、延長",
-        "summary": "確定想要的心情和設計，輕鬆進入預約階段。"
+        "note": "凝膠、護理、延長",
+        "summary": "選擇心儀的美甲設計後進入預約。"
       },
       "esthetic": {
-        "label": "皮膚管理",
-        "note": "皮膚護理、輪廓、鎮靜護理",
-        "summary": "根據皮膚狀況和管理目的，對比店舖並進行預約。"
+        "label": "美容",
+        "note": "皮膚護理、輪廓、舒緩",
+        "summary": "根據您的膚質比較店鋪並預約。"
       },
       "waxing": {
         "label": "脫毛",
-        "note": "面部、身體、比基尼",
-        "summary": "快速找到適合部位和日程的店舖並進入預約流程。"
+        "note": "面部、身體、巴西式",
+        "summary": "快速找到符合您需求的脫毛店鋪。"
       },
       "makeup": {
         "label": "化妝",
         "note": "日常、拍攝、婚禮",
-        "summary": "選擇適合活動日程的化妝服務，立即開始預約。"
+        "summary": "為您的活動選擇化妝服務並預約。"
       },
       "lash": {
-        "label": "美睫",
+        "label": "睫毛",
         "note": "嫁接、燙睫毛、下睫毛",
-        "summary": "從自然嫁接到濃密造型，直接連接到您想要的選單。"
+        "summary": "從自然款到濃密款，按需選擇。"
       }
     },
     "selection": {
-      "eyebrow": "Selected Category",
+      "eyebrow": "已選擇類別",
       "tags": {
         "mobile": "手機預約",
-        "comparison": "店舖對比",
-        "inquiry": "實時諮詢"
+        "comparison": "店鋪比較",
+        "inquiry": "即時諮詢"
       },
-      "empty": "請先選擇一個類別。選擇後將激活開始預約按鈕。"
+      "empty": "請先選擇類別。選擇後預約開始按鈕將會啟用。"
     },
     "cta": {
-      "hint": "在下一個螢幕上根據所選類別探索可用的美容服務。",
+      "hint": "選擇類별後即可開始預約",
       "button": "開始預約"
     },
-    "interpreter": {
-      "eyebrow": "Language Support",
-      "title": "如果需要外語預約，請使用翻譯助手",
-      "description": "擔心預約前諮詢或進店溝通？可以透過實時翻譯功能直接聯繫。",
-      "button": "開啟翻譯助手"
+    "interpreter_entry": {
+      "title": "即時翻譯助手",
+      "description": "與店鋪員工輕鬆溝通",
+      "cta": "開啟翻譯"
     },
-    "assurance": {
-      "items": [
-        {
-          "title": "一目了然的選擇類別",
-          "desc": "在第一個螢幕上先選好服務，直接進入預約流程。"
-        },
-        {
-          "title": "無語言擔憂的預約",
-          "desc": "必要時透過實時翻譯助手與店舖自然溝通。"
-        },
-        {
-          "title": "移動優先的預約流程",
-          "desc": "卡片式按鈕和大型 CTA 使單手操作更輕鬆，提高轉換率。"
-        }
-      ]
+    "location_sheet": {
+      "search_title": "查找搜尋結果",
+      "search_result_count": "{{query}} 的搜尋結果 {{count}}條",
+      "view_location": "查看位置",
+      "view_location_desc": "在地圖上查看詳細位置",
+      "call_taxi": "呼叫 K.Ride",
+      "google_maps_desc": "使用谷歌地圖查看公車路線"
+    },
+    "modals": {
+      "card_title": "📍 請前往這個地址",
+      "copy": "複製地址",
+      "copy_done": "複製成功！",
+      "close": "關閉"
     }
   },
   "interpreter_ui": {
@@ -293,1440 +313,1440 @@
     "session": "對話",
     "expires": "到期"
   },
-    "home": {
-        "presets": {
-            "beauty_tour": "Beauty Tour",
-            "foodie": "Foodie",
-            "heritage": "Heritage",
-            "k_pop": "K-pop"
-        },
-        "badge": "Kello",
-        "title": "Concierge Booking · Auto Itinerary · Navigation",
-        "subtitle": "",
-        "create_trip_cta": "Start Creating Itinerary",
-        "input_label": "Where are you traveling to?",
-        "input_placeholder": "City, Area, or Accommodation",
-        "days_label": "Duration",
-        "value_props": {
-            "itinerary": {
-                "title": "Auto Itinerary",
-                "desc": "AI optimizes your route"
-            },
-            "booking": {
-                "title": "Concierge Booking",
-                "desc": "Clinics, Spas, and more"
-            },
-            "navigation": {
-                "title": "Real-time Nav",
-                "desc": "Zero language barrier"
-            }
-        },
-        "recommended_plans": "Recommended Trip Plans",
-        "plans": {
-            "2d": {
-                "title": "2 Days: Seoul Essential",
-                "label": "2 Days Plan"
-            },
-            "3d": {
-                "title": "3 Days: K-Culture & Style",
-                "label": "3 Days Plan"
-            },
-            "5d": {
-                "title": "5 Days: The Grand Tour",
-                "label": "5 Days Plan"
-            },
-            "request_custom_label": "Custom",
-            "request_custom_title": "Create My Own {{days}}-Day Plan",
-            "request_custom_toast": "Requested a customized {{days}}-day plan! Our concierge will contact you soon."
-        }
+  "home": {
+    "presets": {
+      "beauty_tour": "Beauty Tour",
+      "foodie": "Foodie",
+      "heritage": "Heritage",
+      "k_pop": "K-pop"
     },
-    "explore_page": {
-        "title": "Explore",
-        "city_changed": "City changed to {{city}}",
-        "added_to": "Added to Day {{day}}",
-        "no_items": "No items found in {{city}}",
-        "try_changing": "Try changing the category or city.",
-        "select_city": "Select City",
-        "search_placeholders": {
-            "all": "Search for beauty, food...",
-            "beauty": "Search clinics, salons...",
-            "event": "Search concerts, shows...",
-            "food": "Search restaurants, dishes...",
-            "festival": "Search festivals...",
-            "attraction": "Search palaces, parks..."
-        },
-        "add_to_plan": "+ Add to Plan",
+    "badge": "感受韓國之美",
+    "title": "Concierge Booking · Auto Itinerary · Navigation",
+    "subtitle": "",
+    "create_trip_cta": "Start Creating Itinerary",
+    "input_label": "Where are you traveling to?",
+    "input_placeholder": "City, Area, or Accommodation",
+    "days_label": "Duration",
+    "value_props": {
+      "itinerary": {
+        "title": "Auto Itinerary",
+        "desc": "AI optimizes your route"
+      },
+      "booking": {
+        "title": "Concierge Booking",
+        "desc": "Clinics, Spas, and more"
+      },
+      "navigation": {
+        "title": "Real-time Nav",
+        "desc": "Zero language barrier"
+      }
+    },
+    "recommended_plans": "推薦旅行方案",
+    "plans": {
+      "2d": {
+        "title": "2日：首爾核心之旅",
+        "label": "2日方案"
+      },
+      "3d": {
+        "title": "3日：K-文化與潮流",
+        "label": "3日方案"
+      },
+      "5d": {
+        "title": "5日：韓國全境遊",
+        "label": "5日方案"
+      },
+      "request_custom_label": "客製化",
+      "request_custom_title": "申請 {{days}} 日客製化方案",
+      "request_custom_toast": "已申請 {{days}} 日客製化方案！我們的禮賓人員將盡快與您聯繫。"
+    }
+  },
+  "explore_page": {
+    "title": "Explore",
+    "city_changed": "City changed to {{city}}",
+    "added_to": "Added to Day {{day}}",
+    "no_items": "No items found in {{city}}",
+    "try_changing": "Try changing the category or city.",
+    "select_city": "Select City",
+    "search_placeholders": {
+      "all": "Search for beauty, food...",
+      "beauty": "Search clinics, salons...",
+      "event": "Search concerts, shows...",
+      "food": "Search restaurants, dishes...",
+      "festival": "Search festivals...",
+      "attraction": "Search palaces, parks..."
+    },
+    "add_to_plan": "+ Add to Plan",
+    "today": "Today",
+    "tonight": "Tonight",
+    "starts_from": "Starts from ₩{{price}}",
+    "indoor": "Indoor",
+    "outdoor": "Outdoor",
+    "badges": {
+      "vegan_only": "Vegan Only",
+      "vegan_option": "Vegan Option"
+    },
+    "filters_title": "Filters",
+    "apply": "Apply",
+    "reset": "Reset",
+    "adding_item_to": "Adding <strong>{{title}}</strong> to...",
+    "no_specific_filters": "No specific filters for this category.",
+    "filters": {
+      "show": "Show",
+      "price": "Price",
+      "diet": "Diet",
+      "ingredients": "Ingredients",
+      "date": "Date",
+      "type": "Type",
+      "options": {
+        "skin_care": "Skin Care",
+        "hair_makeup": "Hair & Makeup",
+        "spa": "Spa",
+        "nails": "Nails",
+        "vegan": "Vegan",
+        "vegetarian": "Vegetarian",
+        "no_pork": "No Pork",
+        "halal": "Halal",
+        "beef": "Beef",
+        "pork": "Pork",
+        "chicken": "Chicken",
+        "seafood": "Seafood",
+        "dairy": "Dairy",
+        "egg": "Egg",
         "today": "Today",
-        "tonight": "Tonight",
-        "starts_from": "Starts from ₩{{price}}",
-        "indoor": "Indoor",
-        "outdoor": "Outdoor",
-        "badges": {
-            "vegan_only": "Vegan Only",
-            "vegan_option": "Vegan Option"
+        "weekend": "This Weekend",
+        "select": "Select Date",
+        "concert": "Concert",
+        "show": "Show",
+        "popup": "Popup",
+        "club": "Club",
+        "exhibition": "Exhibition"
+      }
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "Incheon Airport Arrival",
+    "hotel_checkin": "Hotel Check-in/Stay",
+    "f1": {
+      "title": "Plant Cafe Seoul",
+      "area": "Itaewon",
+      "desc": "100% vegan cuisine made with fresh vegetables and healthy ingredients",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "Gold Pig BBQ",
+      "area": "Yaksu",
+      "desc": "The best samgyeopsal restaurant in Korea, selected by the Michelin Guide",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "Jagalchi Fish Market",
+      "area": "Nampo",
+      "desc": "A hearty sashimi course where you can feel the freshness of the Busan sea",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "Jenny House Cheongdam",
+      "area": "Cheongdam",
+      "desc": "Premium hair & makeup shop frequented by K-idols",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "PPEUM Clinic Gangnam",
+      "area": "Gangnam",
+      "desc": "The best value-for-money beauty clinic most visited by foreigners",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY Water Show 2024",
+      "area": "Jamsil Stadium",
+      "desc": "PSY's cool and passionate performance to blow away the summer heat",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "Nanta Show Myeongdong",
+      "area": "Myeongdong",
+      "desc": "A non-verbal performance combining traditional Korean rhythms with modern performance",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "Seoul Lantern Festival",
+      "area": "Gwanghwamun",
+      "desc": "A feast of colorful and beautiful lanterns embroidering Gwanghwamun Square",
+      "price": "Free"
+    },
+    "fs2": {
+      "title": "Film Festival",
+      "area": "Centum City",
+      "desc": "Asia's largest film festival, a meeting of film professionals from around the world",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "Gyeongbokgung",
+      "area": "Jongno",
+      "desc": "A place that preserves the history and beauty of Korea as the main palace of the Joseon Dynasty",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "Lotte World Tower",
+      "area": "Jamsil",
+      "desc": "Korea's tallest building where you can see the fantastic night view of Seoul at a glance",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "KTX to Busan",
+      "area": "Seoul Station",
+      "desc": "The fastest and most convenient way to travel from Seoul to Busan",
+      "price": "59,800"
+    }
+  },
+  "today_page": {
+    "title": "Today's Schedule",
+    "active_now": "Active Now",
+    "navigate": "Navigate",
+    "booking_ref": "Booking Ref: {{ref}}",
+    "next_up": "Next Up",
+    "minutes_left": "Starts in {{mins}}m",
+    "depart_early": "Depart Now",
+    "timeline": "Timeline",
+    "empty": {
+      "title": "No schedule for today",
+      "desc": "Explore places and add them to your trip!",
+      "cta": "Explore Places"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Select Date",
+    "select_time": "Select Time",
+    "total_price": "Total Price",
+    "request_booking": "Request Booking",
+    "unavailable_title": "This place detail is not available right now",
+    "unavailable_desc": "This link does not match a supported explore detail yet. Return to Explore to browse available places."
+  },
+  "navigation_page": {
+    "title": "Today's Schedule",
+    "status": {
+      "on_trip": "Traveling",
+      "pre_trip": "Preparing",
+      "idle": "No Schedule"
+    },
+    "countdown": {
+      "today": "Today",
+      "starts_in": "Starts in {{mins}}m",
+      "traveling_to": "Traveling to {{dest}}"
+    },
+    "empty": {
+      "title": "No schedule today",
+      "subtitle": "Plan your day in Explore or Itinerary",
+      "cta": "Explore Places"
+    },
+    "actions": {
+      "directions": "Navigate",
+      "booking": "View Booking",
+      "late_risk": "Late Risk!",
+      "booking_ref": "Booking Ref: {{ref}}",
+      "departure_warning": "⚠️ {{title}} starts in {{mins}}m — Please depart now!"
+    }
+  },
+  "planner_page": {
+    "title": "Itinerary",
+    "day": "Day {{n}}",
+    "focus": {
+      "title": "Focused booking",
+      "desc": "Use these shortcuts for the booking currently highlighted in your plan."
+    },
+    "add_from_discover": "🔍 Add from Discover",
+    "auto_build": "✨ Auto-build",
+    "add_to": "Add to {{slot}}",
+    "book_all": "🎫 Request Reservation",
+    "booking_modal": {
+      "title": "Booking Request",
+      "date": "Date",
+      "people": "People",
+      "people_count": "{{n}} Person",
+      "notes": "Special Requests (Optional)",
+      "submit": "Submit Request",
+      "submitting": "Submitting...",
+      "success_title": "Request Received!",
+      "success_desc": "Our concierge will contact you within 24 hours.",
+      "unavailable_title": "Time Slot Unavailable",
+      "unavailable_desc": "We recommend these alternatives:",
+      "view_status": "View Status"
+    },
+    "status": {
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "confirmed": "Confirmed",
+      "unavailable": "Unavailable",
+      "completed": "Completed"
+    },
+    "slots": {
+      "am": "AM",
+      "pm": "PM",
+      "night": "Night"
+    }
+  },
+  "my_page": {
+    "profile": {
+      "trust_score": "Trust Score",
+      "trust_level_excellent": "Excellent",
+      "account_hint": "Account & preferences",
+      "level_badge": "Lv.{{level}}",
+      "badge_korea_travel": "Korea Travel",
+      "badge_verified": "Verified"
+    },
+    "passport": {
+      "title": "My Passport",
+      "view_all": "View All",
+      "seoul": "Seoul",
+      "beauty": "Beauty",
+      "jeju": "Jeju"
+    },
+    "bookings": {
+      "title": "My Bookings",
+      "today_time": "Today, {{time}}",
+      "tomorrow_time": "Tomorrow, {{time}}",
+      "next_week_time": "Next Week, {{time}}",
+      "new_added": "New Booking Added!",
+      "date_time": "Date / Time",
+      "area": "Area",
+      "price": "Price"
+    },
+    "community": {
+      "title": "My Community Posts",
+      "empty": "No community posts written yet."
+    },
+    "settings": {
+      "short": "Settings",
+      "support_short": "Support",
+      "eyebrow": "Settings & profile",
+      "title": "My Settings",
+      "subtitle": "Review your account, language, partner status, and connected mypage hubs from one place.",
+      "summary": {
+        "saved": "Saved places",
+        "stops": "Plan stops",
+        "days": "Trip days"
+      },
+      "preferences": {
+        "region_empty": "No dedicated region preference exists yet. This can be inferred after you build a trip plan.",
+        "region_hint": "Based on areas in your current planner draft.",
+        "style_empty": "No stored travel style exists yet. It will stay read-only until account preferences are connected.",
+        "style_hint": "Inferred from your current planner categories.",
+        "interests_saved": "Derived from the place categories in your saved_items list.",
+        "interests_plan": "Fallback signal from your current planner draft.",
+        "interests_empty": "Save places or build a plan to surface interest signals here.",
+        "language": "Language",
+        "language_hint": "This follows the existing app language picker and kello_lang value.",
+        "region": "Preferred region / city",
+        "style": "Travel style",
+        "interests": "Interest categories",
+        "title": "Preferences",
+        "desc": "Language uses an actual stored value. The other rows stay read-only and only reflect planner or saved-item signals when they exist."
+      },
+      "verification": {
+        "email": "Email",
+        "email_ready": "Confirmed in your current auth session.",
+        "email_missing": "Email confirmation was not detected from Supabase auth.",
+        "phone": "Phone",
+        "phone_ready": "Phone verification is available on this account.",
+        "phone_partial": "A phone value exists, but verification was not detected.",
+        "phone_empty": "Phone verification is not connected yet in this build.",
+        "provider": "Sign-in method",
+        "provider_hint": "Read from the active Supabase auth session.",
+        "title": "Verification / Safety",
+        "desc": "Only verification signals that already exist in the current auth session are shown here.",
+        "identity_note": "Identity document checks and profile completion scoring are not connected in the current codebase yet.",
+        "email_provider": "Email"
+      },
+      "links": {
+        "support_desc": "Open booking help, emergency support, and FAQs.",
+        "phrases_desc": "Keep useful Korean phrases ready for on-the-go help.",
+        "saved": "Saved Hub",
+        "saved_desc": "Review saved places, your current plan, and recent items.",
+        "bookings": "Bookings",
+        "bookings_desc": "Check upcoming reservations and related support flows.",
+        "community": "Community",
+        "community_desc": "Revisit your posts, reviews, and meetup activity.",
+        "title": "App Settings / Quick Links",
+        "desc": "These are the existing pages you can already manage or revisit from the current app.",
+        "placeholder_title": "Notifications and privacy",
+        "placeholder_desc": "Dedicated notification and privacy controls are not wired in this build yet, so they remain read-only placeholders here."
+      },
+      "partner": {
+        "title": "Partner Status",
+        "approved_desc": "Your partner application is approved. Ongoing partner requests can continue through support for now.",
+        "pending_desc": "Your partner request is under review. There is no separate partner center route in this build yet.",
+        "rejected_desc": "The previous application was not approved. You can submit the partner signup flow again when details are ready.",
+        "none_desc": "You are browsing as a traveler account. Apply only if you want to onboard a business or service."
+      },
+      "admin": {
+        "enabled": "Admin",
+        "enabled_desc": "This account can access the admin console and review partner requests.",
+        "disabled_desc": "Admin access is not enabled on this profile.",
+        "title": "Admin Console",
+        "source": "profiles.is_admin = true",
+        "source_none": "No admin flag on this profile"
+      },
+      "hero": {
+        "email_ready": "Email verified",
+        "email_pending": "Email not verified"
+      },
+      "account": {
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
+        "default_name": "Traveler"
+      },
+      "partner_admin": {
+        "title": "Partner / Admin",
+        "desc": "Partner and admin access reuse the same partner status and profile admin checks that already exist on the my dashboard."
+      }
+    },
+    "support": {
+      "short": "Support",
+      "eyebrow": "Support hub",
+      "title": "My Support",
+      "header_cta": "Open Help Center",
+      "tabs": {
+        "booking": "Booking Help",
+        "general": "General Help",
+        "faq": "FAQ / Quick Guide",
+        "emergency": "Emergency / Interpreter Help"
+      },
+      "summary": {
+        "booking": {
+          "label": "Booking Help",
+          "desc": "Recent reservations, issue reporting, and next-step help."
         },
-        "filters_title": "Filters",
-        "apply": "Apply",
-        "reset": "Reset",
-        "adding_item_to": "Adding <strong>{{title}}</strong> to...",
-        "no_specific_filters": "No specific filters for this category.",
-        "filters": {
-            "show": "Show",
-            "price": "Price",
-            "diet": "Diet",
-            "ingredients": "Ingredients",
-            "date": "Date",
-            "type": "Type",
-            "options": {
-                "skin_care": "Skin Care",
-                "hair_makeup": "Hair & Makeup",
-                "spa": "Spa",
-                "nails": "Nails",
-                "vegan": "Vegan",
-                "vegetarian": "Vegetarian",
-                "no_pork": "No Pork",
-                "halal": "Halal",
-                "beef": "Beef",
-                "pork": "Pork",
-                "chicken": "Chicken",
-                "seafood": "Seafood",
-                "dairy": "Dairy",
-                "egg": "Egg",
-                "today": "Today",
-                "weekend": "This Weekend",
-                "select": "Select Date",
-                "concert": "Concert",
-                "show": "Show",
-                "popup": "Popup",
-                "club": "Club",
-                "exhibition": "Exhibition"
-            }
+        "general": {
+          "label": "General Help",
+          "desc": "Help Center, support paths, and community safety entry points."
+        },
+        "emergency": {
+          "label": "Emergency & Interpreter",
+          "desc": "Use this hub first, then open the medical, police, or interpreter detail page that fits the situation."
         }
-    },
-    "explore_items": {
-        "airport_arrival": "Incheon Airport Arrival",
-        "hotel_checkin": "Hotel Check-in/Stay",
-        "f1": {
-            "title": "Plant Cafe Seoul",
-            "area": "Itaewon",
-            "desc": "100% vegan cuisine made with fresh vegetables and healthy ingredients",
-            "price": "15,000"
+      },
+      "guides": {
+        "find_booking": {
+          "q": "I cannot find my booking place.",
+          "a": "Check the map and area shown on your booking first. If you still cannot locate it, open Translation Help or the Help Center for local assistance."
         },
-        "f2": {
-            "title": "Gold Pig BBQ",
-            "area": "Yaksu",
-            "desc": "The best samgyeopsal restaurant in Korea, selected by the Michelin Guide",
-            "price": "20,000"
+        "staff_talk": {
+          "q": "It is hard to talk with staff.",
+          "a": "Use Interpreter Help for quick translation tools and hotline access. If the situation feels urgent, move to Emergency Help right away."
         },
-        "f3": {
-            "title": "Jagalchi Fish Market",
-            "area": "Nampo",
-            "desc": "A hearty sashimi course where you can feel the freshness of the Busan sea",
-            "price": "40,000"
+        "change_time": {
+          "q": "I want to change my booking time.",
+          "a": "Direct booking changes are not available in the app yet. Start from Booking Help so you can choose the safest next step before heading to the venue."
         },
-        "b1": {
-            "title": "Jenny House Cheongdam",
-            "area": "Cheongdam",
-            "desc": "Premium hair & makeup shop frequented by K-idols",
-            "price": "150,000"
+        "cancel_refund": {
+          "q": "Where do I cancel or ask about refunds?",
+          "a": "In-app cancellation and refund handling are not available yet. Use Help Center or Booking Help to confirm what support path is available for your case."
         },
-        "b2": {
-            "title": "PPEUM Clinic Gangnam",
-            "area": "Gangnam",
-            "desc": "The best value-for-money beauty clinic most visited by foreigners",
-            "price": "50,000"
+        "write_review": {
+          "q": "How do I write a review after my visit?",
+          "a": "Completed bookings can send you to My Community > Reviews. If a dedicated review form is not ready yet, use the existing Community composer."
         },
-        "e1": {
-            "title": "PSY Water Show 2024",
-            "area": "Jamsil Stadium",
-            "desc": "PSY's cool and passionate performance to blow away the summer heat",
-            "price": "140,000"
-        },
-        "e2": {
-            "title": "Nanta Show Myeongdong",
-            "area": "Myeongdong",
-            "desc": "A non-verbal performance combining traditional Korean rhythms with modern performance",
-            "price": "40,000"
-        },
-        "fs1": {
-            "title": "Seoul Lantern Festival",
-            "area": "Gwanghwamun",
-            "desc": "A feast of colorful and beautiful lanterns embroidering Gwanghwamun Square",
-            "price": "Free"
-        },
-        "fs2": {
-            "title": "Film Festival",
-            "area": "Centum City",
-            "desc": "Asia's largest film festival, a meeting of film professionals from around the world",
-            "price": "10,000"
-        },
-        "a1": {
-            "title": "Gyeongbokgung",
-            "area": "Jongno",
-            "desc": "A place that preserves the history and beauty of Korea as the main palace of the Joseon Dynasty",
-            "price": "3,000"
-        },
-        "a2": {
-            "title": "Lotte World Tower",
-            "area": "Jamsil",
-            "desc": "Korea's tallest building where you can see the fantastic night view of Seoul at a glance",
-            "price": "27,000"
-        },
-        "t1": {
-            "title": "KTX to Busan",
-            "area": "Seoul Station",
-            "desc": "The fastest and most convenient way to travel from Seoul to Busan",
-            "price": "59,800"
+        "community_safety": {
+          "q": "A meetup or community situation feels unsafe.",
+          "a": "Stop sharing personal details and move to police or emergency help first if needed. Community-specific report handling is limited right now, so use the safety route that fits the situation.",
+          "cta": "Safety Help"
         }
-    },
-    "today_page": {
-        "title": "Today's Schedule",
-        "active_now": "Active Now",
-        "navigate": "Navigate",
-        "booking_ref": "Booking Ref: {{ref}}",
-        "next_up": "Next Up",
-        "minutes_left": "Starts in {{mins}}m",
-        "depart_early": "Depart Now",
-        "timeline": "Timeline",
-        "empty": {
-            "title": "No schedule for today",
-            "desc": "Explore places and add them to your trip!",
-            "cta": "Explore Places"
-        }
-    },
-    "booking_detail": {
-        "select_date": "Select Date",
-        "select_time": "Select Time",
-        "total_price": "Total Price",
-        "request_booking": "Request Booking",
-        "unavailable_title": "This place detail is not available right now",
-        "unavailable_desc": "This link does not match a supported explore detail yet. Return to Explore to browse available places."
-    },
-    "navigation_page": {
-        "title": "Today's Schedule",
-        "status": {
-            "on_trip": "Traveling",
-            "pre_trip": "Preparing",
-            "idle": "No Schedule"
+      },
+      "general": {
+        "help_center": {
+          "label": "Help Center",
+          "desc": "Open the detailed help pages for medical, police, interpreter, lost item, and emergency contacts already available in the app."
         },
-        "countdown": {
-            "today": "Today",
-            "starts_in": "Starts in {{mins}}m",
-            "traveling_to": "Traveling to {{dest}}"
+        "booking_cancel": {
+          "label": "Booking & cancellation help",
+          "desc": "Use this first for time changes, availability questions, and issue-report guidance.",
+          "cta": "Open Booking Help"
         },
-        "empty": {
-            "title": "No schedule today",
-            "subtitle": "Plan your day in Explore or Itinerary",
-            "cta": "Explore Places"
+        "community_safety": {
+          "label": "Community safety",
+          "desc": "For unsafe meetups or uncomfortable situations, move to the safety route first.",
+          "cta": "Open Safety Help"
         },
-        "actions": {
-            "directions": "Navigate",
-            "booking": "View Booking",
-            "late_risk": "Late Risk!",
-            "booking_ref": "Booking Ref: {{ref}}",
-            "departure_warning": "⚠️ {{title}} starts in {{mins}}m — Please depart now!"
-        }
-    },
-    "planner_page": {
-        "title": "Itinerary",
-        "day": "Day {{n}}",
-        "focus": {
-            "title": "Focused booking",
-            "desc": "Use these shortcuts for the booking currently highlighted in your plan."
+        "partner": {
+          "label": "Partner inquiry",
+          "desc": "Business and partner-related onboarding can continue from the partner signup flow."
         },
-        "add_from_discover": "🔍 Add from Discover",
-        "auto_build": "✨ Auto-build",
-        "add_to": "Add to {{slot}}",
-        "book_all": "🎫 Request Reservation",
-        "booking_modal": {
-            "title": "Booking Request",
-            "date": "Date",
-            "people": "People",
-            "people_count": "{{n}} Person",
-            "notes": "Special Requests (Optional)",
-            "submit": "Submit Request",
-            "submitting": "Submitting...",
-            "success_title": "Request Received!",
-            "success_desc": "Our concierge will contact you within 24 hours.",
-            "unavailable_title": "Time Slot Unavailable",
-            "unavailable_desc": "We recommend these alternatives:",
-            "view_status": "View Status"
+        "title": "General Help",
+        "desc": "Use these entry points when you are not sure where to go next.",
+        "report_notice": "Direct issue tickets are not available yet. Use the help paths below for your booking question."
+      },
+      "emergency": {
+        "overview": {
+          "label": "Emergency Support",
+          "desc": "Open the main emergency help page for medical, police, lost item, and interpreter access.",
+          "cta": "Open Emergency Help"
         },
-        "status": {
-            "draft": "Draft",
-            "submitted": "Submitted",
-            "confirmed": "Confirmed",
-            "unavailable": "Unavailable",
-            "completed": "Completed"
-        },
-        "slots": {
-            "am": "AM",
-            "pm": "PM",
-            "night": "Night"
-        }
-    },
-    "my_page": {
-        "profile": {
-            "trust_score": "Trust Score",
-            "trust_level_excellent": "Excellent",
-            "account_hint": "Account & preferences",
-            "level_badge": "Lv.{{level}}",
-            "badge_korea_travel": "Korea Travel",
-            "badge_verified": "Verified"
-        },
-        "passport": {
-            "title": "My Passport",
-            "view_all": "View All",
-            "seoul": "Seoul",
-            "beauty": "Beauty",
-            "jeju": "Jeju"
-        },
-        "bookings": {
-            "title": "My Bookings",
-            "today_time": "Today, {{time}}",
-            "tomorrow_time": "Tomorrow, {{time}}",
-            "next_week_time": "Next Week, {{time}}",
-            "new_added": "New Booking Added!",
-            "date_time": "Date / Time",
-            "area": "Area",
-            "price": "Price"
-        },
-        "community": {
-            "title": "My Community Posts",
-            "empty": "No community posts written yet."
-        },
-        "settings": {
-            "short": "Settings",
-            "support_short": "Support",
-            "eyebrow": "Settings & profile",
-            "title": "My Settings",
-            "subtitle": "Review your account, language, partner status, and connected mypage hubs from one place.",
-            "summary": {
-                "saved": "Saved places",
-                "stops": "Plan stops",
-                "days": "Trip days"
-            },
-            "preferences": {
-                "region_empty": "No dedicated region preference exists yet. This can be inferred after you build a trip plan.",
-                "region_hint": "Based on areas in your current planner draft.",
-                "style_empty": "No stored travel style exists yet. It will stay read-only until account preferences are connected.",
-                "style_hint": "Inferred from your current planner categories.",
-                "interests_saved": "Derived from the place categories in your saved_items list.",
-                "interests_plan": "Fallback signal from your current planner draft.",
-                "interests_empty": "Save places or build a plan to surface interest signals here.",
-                "language": "Language",
-                "language_hint": "This follows the existing app language picker and kello_lang value.",
-                "region": "Preferred region / city",
-                "style": "Travel style",
-                "interests": "Interest categories",
-                "title": "Preferences",
-                "desc": "Language uses an actual stored value. The other rows stay read-only and only reflect planner or saved-item signals when they exist."
-            },
-            "verification": {
-                "email": "Email",
-                "email_ready": "Confirmed in your current auth session.",
-                "email_missing": "Email confirmation was not detected from Supabase auth.",
-                "phone": "Phone",
-                "phone_ready": "Phone verification is available on this account.",
-                "phone_partial": "A phone value exists, but verification was not detected.",
-                "phone_empty": "Phone verification is not connected yet in this build.",
-                "provider": "Sign-in method",
-                "provider_hint": "Read from the active Supabase auth session.",
-                "title": "Verification / Safety",
-                "desc": "Only verification signals that already exist in the current auth session are shown here.",
-                "identity_note": "Identity document checks and profile completion scoring are not connected in the current codebase yet.",
-                "email_provider": "Email"
-            },
-            "links": {
-                "support_desc": "Open booking help, emergency support, and FAQs.",
-                "phrases_desc": "Keep useful Korean phrases ready for on-the-go help.",
-                "saved": "Saved Hub",
-                "saved_desc": "Review saved places, your current plan, and recent items.",
-                "bookings": "Bookings",
-                "bookings_desc": "Check upcoming reservations and related support flows.",
-                "community": "Community",
-                "community_desc": "Revisit your posts, reviews, and meetup activity.",
-                "title": "App Settings / Quick Links",
-                "desc": "These are the existing pages you can already manage or revisit from the current app.",
-                "placeholder_title": "Notifications and privacy",
-                "placeholder_desc": "Dedicated notification and privacy controls are not wired in this build yet, so they remain read-only placeholders here."
-            },
-            "partner": {
-                "title": "Partner Status",
-                "approved_desc": "Your partner application is approved. Ongoing partner requests can continue through support for now.",
-                "pending_desc": "Your partner request is under review. There is no separate partner center route in this build yet.",
-                "rejected_desc": "The previous application was not approved. You can submit the partner signup flow again when details are ready.",
-                "none_desc": "You are browsing as a traveler account. Apply only if you want to onboard a business or service."
-            },
-            "admin": {
-                "enabled": "Admin",
-                "enabled_desc": "This account can access the admin console and review partner requests.",
-                "disabled_desc": "Admin access is not enabled on this profile.",
-                "title": "Admin Console",
-                "source": "profiles.is_admin = true",
-                "source_none": "No admin flag on this profile"
-            },
-            "hero": {
-                "email_ready": "Email verified",
-                "email_pending": "Email not verified"
-            },
-            "account": {
-                "sign_in_title": "Sign in to manage account details",
-                "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
-                "title": "Account / Profile",
-                "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
-                "display_name": "Display name",
-                "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
-                "email": "Email / login",
-                "email_hint": "Read from the active Supabase auth user.",
-                "joined": "Joined",
-                "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
-                "last_seen": "Last sign-in",
-                "last_seen_hint": "Read-only from the auth session.",
-                "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-                "default_name": "Traveler"
-            },
-            "partner_admin": {
-                "title": "Partner / Admin",
-                "desc": "Partner and admin access reuse the same partner status and profile admin checks that already exist on the my dashboard."
-            }
-        },
-        "support": {
-            "short": "Support",
-            "eyebrow": "Support hub",
-            "title": "My Support",
-            "header_cta": "Open Help Center",
-            "tabs": {
-                "booking": "Booking Help",
-                "general": "General Help",
-                "faq": "FAQ / Quick Guide",
-                "emergency": "Emergency / Interpreter Help"
-            },
-            "summary": {
-                "booking": {
-                    "label": "Booking Help",
-                    "desc": "Recent reservations, issue reporting, and next-step help."
-                },
-                "general": {
-                    "label": "General Help",
-                    "desc": "Help Center, support paths, and community safety entry points."
-                },
-                "emergency": {
-                    "label": "Emergency & Interpreter",
-                    "desc": "Use this hub first, then open the medical, police, or interpreter detail page that fits the situation."
-                }
-            },
-            "guides": {
-                "find_booking": {
-                    "q": "I cannot find my booking place.",
-                    "a": "Check the map and area shown on your booking first. If you still cannot locate it, open Translation Help or the Help Center for local assistance."
-                },
-                "staff_talk": {
-                    "q": "It is hard to talk with staff.",
-                    "a": "Use Interpreter Help for quick translation tools and hotline access. If the situation feels urgent, move to Emergency Help right away."
-                },
-                "change_time": {
-                    "q": "I want to change my booking time.",
-                    "a": "Direct booking changes are not available in the app yet. Start from Booking Help so you can choose the safest next step before heading to the venue."
-                },
-                "cancel_refund": {
-                    "q": "Where do I cancel or ask about refunds?",
-                    "a": "In-app cancellation and refund handling are not available yet. Use Help Center or Booking Help to confirm what support path is available for your case."
-                },
-                "write_review": {
-                    "q": "How do I write a review after my visit?",
-                    "a": "Completed bookings can send you to My Community > Reviews. If a dedicated review form is not ready yet, use the existing Community composer."
-                },
-                "community_safety": {
-                    "q": "A meetup or community situation feels unsafe.",
-                    "a": "Stop sharing personal details and move to police or emergency help first if needed. Community-specific report handling is limited right now, so use the safety route that fits the situation.",
-                    "cta": "Safety Help"
-                }
-            },
-            "general": {
-                "help_center": {
-                    "label": "Help Center",
-                    "desc": "Open the detailed help pages for medical, police, interpreter, lost item, and emergency contacts already available in the app."
-                },
-                "booking_cancel": {
-                    "label": "Booking & cancellation help",
-                    "desc": "Use this first for time changes, availability questions, and issue-report guidance.",
-                    "cta": "Open Booking Help"
-                },
-                "community_safety": {
-                    "label": "Community safety",
-                    "desc": "For unsafe meetups or uncomfortable situations, move to the safety route first.",
-                    "cta": "Open Safety Help"
-                },
-                "partner": {
-                    "label": "Partner inquiry",
-                    "desc": "Business and partner-related onboarding can continue from the partner signup flow."
-                },
-                "title": "General Help",
-                "desc": "Use these entry points when you are not sure where to go next.",
-                "report_notice": "Direct issue tickets are not available yet. Use the help paths below for your booking question."
-            },
-            "emergency": {
-                "overview": {
-                    "label": "Emergency Support",
-                    "desc": "Open the main emergency help page for medical, police, lost item, and interpreter access.",
-                    "cta": "Open Emergency Help"
-                },
-                "interp": {
-                    "label": "Interpreter Help",
-                    "desc": "Use translation tools and hotline links when speaking with venue staff is difficult.",
-                    "cta": "Open Interpreter Help",
-                    "booking_desc": "Carry this booking context into the interpreter route so staff can understand which reservation you mean."
-                },
-                "phrases": {
-                    "label": "Emergency Phrases",
-                    "desc": "Open large Korean phrases you can show directly to nearby staff, drivers, or help desks.",
-                    "cta": "Open Travel Phrases",
-                    "booking_label": "Booking Phrases",
-                    "booking_desc": "Open booking phrases first when you need to explain the reservation, delay, or check-in situation to staff."
-                },
-                "medical": {
-                    "label": "Medical Help",
-                    "desc": "Need clinic or emergency medical support? Open the medical help path directly.",
-                    "cta": "Medical Help"
-                },
-                "police": {
-                    "label": "Police / Safety Help",
-                    "desc": "Use the safety route for police contact, incident guidance, or a risky situation.",
-                    "cta": "Open Safety Help"
-                },
-                "title": "Emergency / Interpreter Help",
-                "desc": "My Support is the hub. Use the detailed help pages below when the situation is urgent or communication is difficult.",
-                "interpreter_notice": "Interpreter links are available below. Some options may open a call screen or an external translation page.",
-                "hub_notice": "Use this hub to choose the right detailed page. /help/* pages explain one route in more depth, and Travel Phrasebook is for showable Korean text."
-            },
-            "booking": {
-                "banner_report": "Reporting an issue for {{bookingName}}. Choose the support route that matches the problem.",
-                "banner_interpreter": "Need language help for {{bookingName}}? Interpreter and emergency links are ready below.",
-                "banner_default": "Need help with {{bookingName}}? Start with the booking card below.",
-                "banner_fallback": "Need help with a booking? Start with the closest reservation below.",
-                "title": "Booking Help",
-                "desc": "Use your recent bookings as the fastest way to find the right support path.",
-                "empty": {
-                    "title": "There is no booking to ask about right now.",
-                    "desc": "Check My Bookings again later or explore places to start planning your trip."
-                },
-                "context_title": "Help for this booking",
-                "context_desc": "Keep this reservation context visible while you move between booking help, interpreter help, and phrases."
-            },
-            "subtitle": "Find the right help path for bookings, questions, and urgent travel situations.",
-            "faq": {
-                "title": "FAQ / Quick Guide",
-                "desc": "Short, safe guidance for common travel questions inside the current app scope."
-            }
+        "interp": {
+          "label": "Interpreter Help",
+          "desc": "Use translation tools and hotline links when speaking with venue staff is difficult.",
+          "cta": "Open Interpreter Help",
+          "booking_desc": "Carry this booking context into the interpreter route so staff can understand which reservation you mean."
         },
         "phrases": {
-            "quick": "Phrases",
-            "title": "Travel Phrasebook",
-            "eyebrow": "Translation hub",
-            "favorites": {
-                "title": "Favorites",
-                "desc": "Save the phrases you expect to show most often during your trip.",
-                "empty": "Save a few frequent phrases so they stay easy to reopen."
-            },
-            "recent": {
-                "title": "Recent",
-                "desc": "Recently opened or copied phrases stay here for quick access."
-            },
-            "subtitle": "Show these phrases to staff, drivers, or shop teams in Korea when you need a fast answer on the spot.",
-            "hero": {
-                "badge": "Ready-made Korean phrases",
-                "count": "phrases"
-            },
-            "context": {
-                "title": "Current context",
-                "interpreter": "Emergency phrases are ready if you need to explain a situation quickly.",
-                "support": "Use this phrasebook with the support hub when speaking with local staff is difficult.",
-                "booking": "Booking phrases are ready for this reservation."
-            },
-            "categories": {
-                "booking": {
-                    "label": "Booking",
-                    "description": "Reservation check-in, delays, and option requests.",
-                    "helper": "Best for front desks, tour desks, and venue staff."
-                },
-                "transport": {
-                    "label": "Transport",
-                    "description": "Taxi, station, and route support for moving around Korea.",
-                    "helper": "Useful for drivers, station staff, and route questions."
-                },
-                "restaurant": {
-                    "label": "Restaurant",
-                    "description": "Ordering help, allergy notes, and menu questions.",
-                    "helper": "Show these before ordering when timing is tight."
-                },
-                "beauty": {
-                    "label": "Beauty",
-                    "description": "Salon, spa, and treatment requests in simple Korean.",
-                    "helper": "Helpful for consultations and price checks before treatment."
-                },
-                "emergency": {
-                    "label": "Emergency",
-                    "description": "Urgent help phrases and interpreter-related requests.",
-                    "helper": "Use with nearby staff, help desks, or emergency support lines."
-                }
-            },
-            "category": {
-                "title": "{{category}} phrases"
-            },
-            "empty": {
-                "title": "No phrases available right now.",
-                "desc": "Try another category or use Support if you need help right away."
-            }
+          "label": "Emergency Phrases",
+          "desc": "Open large Korean phrases you can show directly to nearby staff, drivers, or help desks.",
+          "cta": "Open Travel Phrases",
+          "booking_label": "Booking Phrases",
+          "booking_desc": "Open booking phrases first when you need to explain the reservation, delay, or check-in situation to staff."
         },
-        "saved": {
-            "title": "My Saved",
-            "view_all": "Open Hub",
-            "eyebrow": "Saved hub",
-            "header_cta": "Explore More",
-            "dashboard_title": "Saved & Recent",
-            "dashboard_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
-            "summary": {
-                "places": "Places",
-                "plans": "Plans",
-                "recent": "Recent"
-            },
-            "tabs": {
-                "places": "Places",
-                "plans": "Plans",
-                "recent": "Recent"
-            },
-            "places": {
-                "source_plan": "Matched with current planner",
-                "source_saved": "Saved from Explore",
-                "source_fallback": "Saved from Explore",
-                "source_id_only": "Saved item id",
-                "added": "Added to your planner. You can adjust the time in Planner.",
-                "title": "Saved Places",
-                "desc": "Reopen the places you bookmarked from Explore. When a saved id has limited metadata, this hub shows a minimal fallback card instead of guessing extra details.",
-                "empty": {
-                    "title": "No saved places yet.",
-                    "desc": "Popular places you save in Explore will be collected here for quick planning later.",
-                    "cta": "Browse Places"
-                },
-                "fallback_title": "Saved place {{id}}"
-            },
-            "plans": {
-                "synced": "Based on your current planner draft",
-                "title": "Saved Plans",
-                "desc": "This tab reflects your current planner draft. It does not create separate saved templates or server-side plan records.",
-                "empty": {
-                    "title": "No saved plans yet.",
-                    "desc": "Start building your itinerary in Planner and your current draft will appear here."
-                },
-                "current": "Current Trip Plan"
-            },
-            "subtitle": "Find the places, planner drafts, and recently viewed items you want to revisit later.",
-            "summary_hint": "Places come from your saved explore item ids, plans come from your current planner draft, and recent items stay on this device.",
-            "recent": {
-                "title": "Recent",
-                "desc": "Recently viewed places, plans, and community posts stay here on this device for quick return visits.",
-                "empty": {
-                    "title": "No recent items yet.",
-                    "desc": "Recent items will show up here after you open a place, planner, or community detail page.",
-                    "fallback": "Recent items will be kept here on this device when local storage is available.",
-                    "cta": "Browse Explore"
-                },
-                "type": {
-                    "place": "Place",
-                    "plan": "Plan",
-                    "community": "Community"
-                }
-            }
+        "medical": {
+          "label": "Medical Help",
+          "desc": "Need clinic or emergency medical support? Open the medical help path directly.",
+          "cta": "Medical Help"
         },
-        "community_hub": {
-            "eyebrow": "My activity hub",
-            "title": "My Community",
-            "subtitle": "Track what you posted, reviewed, and planned with the community in one place.",
-            "browse": "Browse Community",
-            "summary": {
-                "posts": "Posts",
-                "reviews": "Reviews",
-                "meetups": "Meetups"
-            },
-            "tabs": {
-                "posts": "Posts",
-                "reviews": "Reviews",
-                "meetups": "Meetups"
-            },
-            "empty": {
-                "reviews": {
-                    "title": "You have not written any reviews yet.",
-                    "desc": "Start with a completed booking and share what helped your trip.",
-                    "no_completed": "Finish a booking first, then come back here to leave a helpful review.",
-                    "cta": "See Completed Bookings"
-                },
-                "meetups": {
-                    "title": "No meetup activity yet.",
-                    "desc": "Browse meetup-style community posts and keep your next plan here."
-                },
-                "posts": {
-                    "title": "No posts saved in your hub yet.",
-                    "desc": "Browse the community, ask a question, or leave a helpful tip for other travelers."
-                }
-            },
-            "summary_hint": "Counts are based on your authored community posts and your completed bookings.",
-            "sync_error": "Community posts could not be refreshed right now. Empty states are shown as a fallback.",
-            "review_prompts": {
-                "title": "Write from your completed bookings",
-                "desc": "Open Community to write a review and choose the Review type in the existing composer."
-            },
-            "posts_desc": "General community posts you created, ready to revisit or manage.",
-            "reviews_desc": "Review posts you already published, plus a quick path back to booking history.",
-            "meetups_desc": "Meetup-style activity from your community posts, including travel mate plans.",
-            "loading": "Loading your activity...",
-            "no_comments": "No comments yet",
-            "type": {
-                "travel": "Travel Mate",
-                "meetup": "Meetup"
-            }
+        "police": {
+          "label": "Police / Safety Help",
+          "desc": "Use the safety route for police contact, incident guidance, or a risky situation.",
+          "cta": "Open Safety Help"
         },
-        "bookings_hub": {
-            "title": "My Bookings",
-            "summary": {
-                "upcoming": "Upcoming",
-                "history": "History"
-            },
-            "tabs": {
-                "upcoming": "Upcoming",
-                "completed": "Completed",
-                "other": "Other"
-            },
-            "meta": {
-                "time": "Time",
-                "area": "Area",
-                "total_price": "Total Price",
-                "reference": "Reference"
-            },
-            "empty": {
-                "upcoming": {
-                    "title": "No upcoming bookings",
-                    "desc": "Explore top-rated spots and start planning your next stop."
-                },
-                "completed": {
-                    "title": "No completed bookings yet",
-                    "desc": "Places you finish will be saved here, ready for a review."
-                },
-                "other": {
-                    "title": "No other records",
-                    "desc": "Cancelled or unavailable requests will appear here."
-                }
-            }
+        "title": "Emergency / Interpreter Help",
+        "desc": "My Support is the hub. Use the detailed help pages below when the situation is urgent or communication is difficult.",
+        "interpreter_notice": "Interpreter links are available below. Some options may open a call screen or an external translation page.",
+        "hub_notice": "Use this hub to choose the right detailed page. /help/* pages explain one route in more depth, and Travel Phrasebook is for showable Korean text."
+      },
+      "booking": {
+        "banner_report": "Reporting an issue for {{bookingName}}. Choose the support route that matches the problem.",
+        "banner_interpreter": "Need language help for {{bookingName}}? Interpreter and emergency links are ready below.",
+        "banner_default": "Need help with {{bookingName}}? Start with the booking card below.",
+        "banner_fallback": "Need help with a booking? Start with the closest reservation below.",
+        "title": "Booking Help",
+        "desc": "Use your recent bookings as the fastest way to find the right support path.",
+        "empty": {
+          "title": "There is no booking to ask about right now.",
+          "desc": "Check My Bookings again later or explore places to start planning your trip."
         },
-        "dashboard": {
-            "bookings_empty": "No confirmed bookings yet",
-            "saved_recent_title": "Saved & Recent",
-            "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
-            "admin_title": "Admin Console",
-            "admin_desc": "Dashboard and partner management",
-            "partner": {
-                "none_title": "Apply as Partner",
-                "none_desc": "Join Kello as a partner and introduce your service to more travelers.",
-                "none_cta": "Apply",
-                "pending_title": "Partner review in progress",
-                "pending_desc": "Your request is under review. We will update you after the admin check.",
-                "approved_title": "Partner approved",
-                "approved_desc": "Your Kello partner registration is complete.",
-                "rejected_title": "Partner request needs update",
-                "rejected_desc": "Update the details and apply again.",
-                "rejected_cta": "Apply Again"
-            }
+        "context_title": "Help for this booking",
+        "context_desc": "Keep this reservation context visible while you move between booking help, interpreter help, and phrases."
+      },
+      "subtitle": "Find the right help path for bookings, questions, and urgent travel situations.",
+      "faq": {
+        "title": "FAQ / Quick Guide",
+        "desc": "Short, safe guidance for common travel questions inside the current app scope."
+      }
+    },
+    "phrases": {
+      "quick": "Phrases",
+      "title": "Travel Phrasebook",
+      "eyebrow": "Translation hub",
+      "favorites": {
+        "title": "Favorites",
+        "desc": "Save the phrases you expect to show most often during your trip.",
+        "empty": "Save a few frequent phrases so they stay easy to reopen."
+      },
+      "recent": {
+        "title": "Recent",
+        "desc": "Recently opened or copied phrases stay here for quick access."
+      },
+      "subtitle": "Show these phrases to staff, drivers, or shop teams in Korea when you need a fast answer on the spot.",
+      "hero": {
+        "badge": "Ready-made Korean phrases",
+        "count": "phrases"
+      },
+      "context": {
+        "title": "Current context",
+        "interpreter": "Emergency phrases are ready if you need to explain a situation quickly.",
+        "support": "Use this phrasebook with the support hub when speaking with local staff is difficult.",
+        "booking": "Booking phrases are ready for this reservation."
+      },
+      "categories": {
+        "booking": {
+          "label": "Booking",
+          "description": "Reservation check-in, delays, and option requests.",
+          "helper": "Best for front desks, tour desks, and venue staff."
+        },
+        "transport": {
+          "label": "Transport",
+          "description": "Taxi, station, and route support for moving around Korea.",
+          "helper": "Useful for drivers, station staff, and route questions."
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "description": "Ordering help, allergy notes, and menu questions.",
+          "helper": "Show these before ordering when timing is tight."
+        },
+        "beauty": {
+          "label": "Beauty",
+          "description": "Salon, spa, and treatment requests in simple Korean.",
+          "helper": "Helpful for consultations and price checks before treatment."
+        },
+        "emergency": {
+          "label": "Emergency",
+          "description": "Urgent help phrases and interpreter-related requests.",
+          "helper": "Use with nearby staff, help desks, or emergency support lines."
         }
+      },
+      "category": {
+        "title": "{{category}} phrases"
+      },
+      "empty": {
+        "title": "No phrases available right now.",
+        "desc": "Try another category or use Support if you need help right away."
+      }
+    },
+    "saved": {
+      "title": "My Saved",
+      "view_all": "Open Hub",
+      "eyebrow": "Saved hub",
+      "header_cta": "Explore More",
+      "dashboard_title": "Saved & Recent",
+      "dashboard_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
+      "summary": {
+        "places": "Places",
+        "plans": "Plans",
+        "recent": "Recent"
+      },
+      "tabs": {
+        "places": "Places",
+        "plans": "Plans",
+        "recent": "Recent"
+      },
+      "places": {
+        "source_plan": "Matched with current planner",
+        "source_saved": "Saved from Explore",
+        "source_fallback": "Saved from Explore",
+        "source_id_only": "Saved item id",
+        "added": "Added to your planner. You can adjust the time in Planner.",
+        "title": "Saved Places",
+        "desc": "Reopen the places you bookmarked from Explore. When a saved id has limited metadata, this hub shows a minimal fallback card instead of guessing extra details.",
+        "empty": {
+          "title": "No saved places yet.",
+          "desc": "Popular places you save in Explore will be collected here for quick planning later.",
+          "cta": "Browse Places"
+        },
+        "fallback_title": "Saved place {{id}}"
+      },
+      "plans": {
+        "synced": "Based on your current planner draft",
+        "title": "Saved Plans",
+        "desc": "This tab reflects your current planner draft. It does not create separate saved templates or server-side plan records.",
+        "empty": {
+          "title": "No saved plans yet.",
+          "desc": "Start building your itinerary in Planner and your current draft will appear here."
+        },
+        "current": "Current Trip Plan"
+      },
+      "subtitle": "Find the places, planner drafts, and recently viewed items you want to revisit later.",
+      "summary_hint": "Places come from your saved explore item ids, plans come from your current planner draft, and recent items stay on this device.",
+      "recent": {
+        "title": "Recent",
+        "desc": "Recently viewed places, plans, and community posts stay here on this device for quick return visits.",
+        "empty": {
+          "title": "No recent items yet.",
+          "desc": "Recent items will show up here after you open a place, planner, or community detail page.",
+          "fallback": "Recent items will be kept here on this device when local storage is available.",
+          "cta": "Browse Explore"
+        },
+        "type": {
+          "place": "Place",
+          "plan": "Plan",
+          "community": "Community"
+        }
+      }
+    },
+    "community_hub": {
+      "eyebrow": "My activity hub",
+      "title": "My Community",
+      "subtitle": "Track what you posted, reviewed, and planned with the community in one place.",
+      "browse": "Browse Community",
+      "summary": {
+        "posts": "Posts",
+        "reviews": "Reviews",
+        "meetups": "Meetups"
+      },
+      "tabs": {
+        "posts": "Posts",
+        "reviews": "Reviews",
+        "meetups": "Meetups"
+      },
+      "empty": {
+        "reviews": {
+          "title": "You have not written any reviews yet.",
+          "desc": "Start with a completed booking and share what helped your trip.",
+          "no_completed": "Finish a booking first, then come back here to leave a helpful review.",
+          "cta": "See Completed Bookings"
+        },
+        "meetups": {
+          "title": "No meetup activity yet.",
+          "desc": "Browse meetup-style community posts and keep your next plan here."
+        },
+        "posts": {
+          "title": "No posts saved in your hub yet.",
+          "desc": "Browse the community, ask a question, or leave a helpful tip for other travelers."
+        }
+      },
+      "summary_hint": "Counts are based on your authored community posts and your completed bookings.",
+      "sync_error": "Community posts could not be refreshed right now. Empty states are shown as a fallback.",
+      "review_prompts": {
+        "title": "Write from your completed bookings",
+        "desc": "Open Community to write a review and choose the Review type in the existing composer."
+      },
+      "posts_desc": "General community posts you created, ready to revisit or manage.",
+      "reviews_desc": "Review posts you already published, plus a quick path back to booking history.",
+      "meetups_desc": "Meetup-style activity from your community posts, including travel mate plans.",
+      "loading": "Loading your activity...",
+      "no_comments": "No comments yet",
+      "type": {
+        "travel": "Travel Mate",
+        "meetup": "Meetup"
+      }
+    },
+    "bookings_hub": {
+      "title": "My Bookings",
+      "summary": {
+        "upcoming": "Upcoming",
+        "history": "History"
+      },
+      "tabs": {
+        "upcoming": "Upcoming",
+        "completed": "Completed",
+        "other": "Other"
+      },
+      "meta": {
+        "time": "Time",
+        "area": "Area",
+        "total_price": "Total Price",
+        "reference": "Reference"
+      },
+      "empty": {
+        "upcoming": {
+          "title": "No upcoming bookings",
+          "desc": "Explore top-rated spots and start planning your next stop."
+        },
+        "completed": {
+          "title": "No completed bookings yet",
+          "desc": "Places you finish will be saved here, ready for a review."
+        },
+        "other": {
+          "title": "No other records",
+          "desc": "Cancelled or unavailable requests will appear here."
+        }
+      }
+    },
+    "dashboard": {
+      "bookings_empty": "No confirmed bookings yet",
+      "saved_recent_title": "Saved & Recent",
+      "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "partner": {
+        "none_title": "Apply as Partner",
+        "none_desc": "Join Kello as a partner and introduce your service to more travelers.",
+        "none_cta": "Apply",
+        "pending_title": "Partner review in progress",
+        "pending_desc": "Your request is under review. We will update you after the admin check.",
+        "approved_title": "Partner approved",
+        "approved_desc": "Your Kello partner registration is complete.",
+        "rejected_title": "Partner request needs update",
+        "rejected_desc": "Update the details and apply again.",
+        "rejected_cta": "Apply Again"
+      }
+    }
+  },
+  "fab": {
+    "idle": "Plan Trip",
+    "pre_trip": "Departure Soon",
+    "on_trip": "Next Place?",
+    "near_deadline": "Late Risk!",
+    "to": "to {{dest}}",
+    "kride": "Call K.Ride",
+    "kride_sub": "Arrives in {{mins}}m",
+    "transit": "Transit Guide",
+    "transit_sub": "Fastest route",
+    "copy": "Copy Address",
+    "copy_done": "Copied!",
+    "card": "For Driver Card",
+    "card_sub": "Show this to driver",
+    "card_modal_title": "🗺️ Please go to this address",
+    "cancel": "Cancel"
+  },
+  "transport": {
+    "moving_to": "Moving to {{dest}}",
+    "remaining": "Remaining",
+    "line_2_direction": "Line 2 • Headed to City Hall direction",
+    "departed": "departed",
+    "passing_now": "Passing now...",
+    "current": "Current",
+    "get_off_at": "Get off at",
+    "exit_3": "Exit 3",
+    "getting_off_here": "I'm Getting Off Here",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
+    }
+  },
+  "community_page": {
+    "title": "Community",
+    "subtitle": "Connect with locals & travelers",
+    "filter_all": "All",
+    "filter_meetup": "Food & Meetup",
+    "filter_travel": "Travel Mate",
+    "filter_help": "Local Help",
+    "comments": "Comments",
+    "message": "Message",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Reviews",
+    "detail": "Post Detail",
+    "meetup_info": "Visit details",
+    "write_post": "Write review",
+    "edit": "Edit review",
+    "posting": "Posting...",
+    "hero": {
+      "title": "Beauty booking reviews come first here",
+      "subtitle": "Start with salon visit reviews, then continue into food, sightseeing, and event follow-ups.",
+      "search_placeholder": "Search salon names, treatment experiences, or booking reviews"
+    },
+    "banner": {
+      "title": "kello Beauty Review Board ✨",
+      "body": "Check real post-booking salon experiences first and compare service quality, satisfaction, and revisit intent.",
+      "secondary_title": "kello Community Board 👋",
+      "secondary_body": "Browse reviews for places you may want to visit together and line up plans."
+    },
+    "categories": {
+      "all": "All",
+      "beauty_review": "Beauty salon review",
+      "food_review": "Food review",
+      "travel_review": "Sightseeing review",
+      "meetup": "Shows & events",
+      "help": "Questions"
+    },
+    "sub_filters": {
+      "all": "All",
+      "saved": "⭐ Saved posts",
+      "reacted": "💬 Joined posts",
+      "mine": "👤 My posts",
+      "recruiting": "📢 Open only",
+      "active_reactions": "🔥 Hot reactions",
+      "open_meetup": "🤝 Go-together open",
+      "weekend": "📅 This weekend",
+      "fresh": "✨ Recently updated"
+    },
+    "tags": {
+      "solo_friendly": "Good solo",
+      "friends_friendly": "Good with friends",
+      "photo_spot": "Photo spot",
+      "waiting": "Has wait",
+      "foreigner_friendly": "Foreigner-friendly"
+    },
+    "quality_signals": {
+      "organized": "✨ Detailed review",
+      "active": "🔥 High engagement",
+      "asset": "💜 Follow-up tips",
+      "mate": "🤝 Meetup active"
+    },
+    "nav_summary": {
+      "all": "You are viewing every story in {{tab}}.",
+      "active_reactions": "These {{tab}} posts are getting the hottest reactions.",
+      "open_meetup": "These {{tab}} posts are open for going together.",
+      "weekend": "Check {{tab}} ideas that fit this weekend.",
+      "default": "Showing {{sub}} {{tab}} posts first."
+    },
+    "next_actions": {
+      "mine_result": {
+        "badge": "Add follow-up tip",
+        "desc": "Have you visited already? Leave a short tip for the next person.",
+        "cta": "Add tip"
+      },
+      "mine_active": {
+        "badge": "Reactions surging",
+        "desc": "A lot of people are paying attention to your post. Take a look.",
+        "cta": "View reactions"
+      },
+      "reacted_survey": {
+        "badge": "Need input",
+        "desc": "People are coordinating opinions. Share a day or time that works for you.",
+        "cta": "Leave input"
+      },
+      "saved_result": {
+        "badge": "Updated",
+        "desc": "A saved post now has a new tip.",
+        "cta": "Check it"
+      }
+    },
+    "actions": {
+      "delete_confirm": "Delete this post?"
+    },
+    "errors": {
+      "update_failed": "Could not update the review. Please try again.",
+      "post_failed": "Could not publish the review. {{message}}"
+    },
+    "states": {
+      "fetch_failed_title": "Could not load posts",
+      "fetch_failed_desc": "Please try again in a moment.",
+      "fetch_failed_tip": "Open the page again to refresh the latest posts.",
+      "empty_title": "No posts yet",
+      "empty_desc": "Be the first to share a beauty salon review.",
+      "empty_tip": "Adding the salon name, treatment, booking flow, and service quality helps others decide faster.",
+      "no_results_title": "No posts match this view",
+      "no_results_desc": "Try another keyword or a lighter filter.",
+      "cta_write": "Write a review",
+      "cta_all": "View all"
+    },
+    "form": {
+      "category_hints": {
+        "beauty_review": "💡 Include the salon name, treatment experience, booking and service flow, foreigner support, and revisit intent.",
+        "food_review": "💡 Leave the menu, atmosphere, and wait time that fit before or after a beauty booking.",
+        "travel_review": "💡 Focus on routes, photo points, and how easy it was to visit before or after treatment.",
+        "meetup": "💡 Summarize the show time, ticket information, and why it is fun to go together.",
+        "help": "💡 Explain your booking, visit, or service question as clearly as possible."
+      },
+      "category_label": "Category",
+      "write_guide_title": {
+        "beauty_review": "Start with a beauty salon review",
+        "food_review": "Share a food spot that fits a beauty schedule",
+        "travel_review": "Share a sightseeing route that worked well before or after treatment",
+        "meetup": "Summarize the show or event briefly",
+        "help": "Ask a booking or visit question clearly"
+      },
+      "write_guide_body": {
+        "beauty_review": "The salon name, treatment experience, booking flow, service quality, foreigner support, and revisit intent help a lot before booking.",
+        "food_review": "Menu, atmosphere, and wait time make it easier to connect food reviews to a beauty day.",
+        "travel_review": "Photo points, travel time, and quick-stop reasons help the follow-up flow stay useful.",
+        "meetup": "Keep the show time, ticket details, and on-site mood short and clear.",
+        "help": "Describe your booking, service, or pre-visit question with enough detail to get a useful answer."
+      },
+      "title_label": {
+        "beauty_review": "Salon name or review title",
+        "default": "Place name or review title"
+      },
+      "title_placeholder": {
+        "beauty_review": "e.g. Lash perm review at OO Beauty in Gangnam",
+        "food_review": "e.g. Brunch cafe that worked well after treatment",
+        "travel_review": "e.g. Seongsu walk I enjoyed before and after treatment",
+        "meetup": "e.g. Let us go to this weekend exhibition together",
+        "help": "e.g. Please recommend a salon with good foreigner support"
+      },
+      "point_label": {
+        "beauty_review": "One-line satisfaction point",
+        "default": "One-line recommendation point"
+      },
+      "point_placeholder": {
+        "beauty_review": "e.g. Fast booking replies and comfortable guidance for foreigners",
+        "food_review": "e.g. Short wait and a clean meal",
+        "travel_review": "e.g. Easy to visit within an hour before or after treatment",
+        "meetup": "e.g. More fun to see together than alone",
+        "help": "e.g. I want to know if English consultation is available"
+      },
+      "desc_label": {
+        "beauty_review": "Treatment review",
+        "default": "Detailed review"
+      },
+      "desc_placeholder": {
+        "beauty_review": "Describe the treatment, booking flow, service, satisfaction, foreigner support, and whether you would revisit.",
+        "food_review": "Describe the menu, mood, wait time, and why it matched your beauty day well.",
+        "travel_review": "Describe the route, photo spots, travel time, and why it worked well before or after treatment.",
+        "meetup": "Describe the event and why you want to go together.",
+        "help": "Describe your question and current situation clearly."
+      },
+      "place_label": {
+        "beauty_review": "Salon location (optional)",
+        "default": "Place (optional)"
+      },
+      "place_placeholder": {
+        "beauty_review": "e.g. 3F, OO Beauty, Gangnam Station",
+        "default": "e.g. Exit 11, Gangnam Station"
+      },
+      "place_help": {
+        "beauty_review": "Adding the salon location makes the booking route easier to understand.",
+        "default": "A map view is attached together."
+      },
+      "region_label": "Area",
+      "region_placeholder": "e.g. Gangnam, Mapo",
+      "vibe_label": "Pick vibes",
+      "meetup_toggle_title": "Open for going together",
+      "meetup_toggle_desc": "Receive interest signals from other people.",
+      "safety_title": "🔒 Safety guide",
+      "safety_item_1": "• Do not share personal contact info right away. Check reactions in comments first.",
+      "safety_item_2": "• We recommend arranging plans around public places.",
+      "image": {
+        "label": "Add images",
+        "title": "You can upload up to {{count}} images.",
+        "file_only_alert": "Only image files can be added.",
+        "limit_alert": "You can upload up to {{count}} images.",
+        "load_failed_alert": "Couldn't load the image.",
+        "button_loading": "Preparing images...",
+        "button_limit": "{{count}} selected",
+        "button_add_more": "Add more images",
+        "button_select": "Select images",
+        "preview_alt": "Upload preview {{index}}",
+        "preview_name": "Selected image {{index}}",
+        "preview_desc": "Image {{index}}. Check the preview before posting.",
+        "remove": "Remove",
+        "saved_name": "Uploaded image {{index}}",
+        "guides": {
+          "beauty_review": "Share treatment results or the salon atmosphere if you can.",
+          "food_review": "Add food shots or a photo of the place if it helps.",
+          "travel_review": "Capture the mood of the place or a memorable point.",
+          "meetup": "Share the on-site atmosphere or why it would be fun together.",
+          "help": "Upload a reference image too if it helps explain."
+        }
+      },
+      "summary_title": "Review summary",
+      "summary_region_type": "Area / type",
+      "summary_point": "Point",
+      "summary_meetup": "Going together",
+      "summary_enabled": "Open",
+      "summary_disabled": "Closed",
+      "submit_with_reactions": "Post review and gather reactions",
+      "submit_beauty": "Share beauty review",
+      "submit_default": "Share review"
+    },
+    "quick_entry": {
+      "beauty": {
+        "label": "Beauty reviews",
+        "sub": "Booking, service, satisfaction"
+      },
+      "food": {
+        "label": "Food reviews",
+        "sub": "Beauty day add-on"
+      },
+      "travel": {
+        "label": "Sightseeing reviews",
+        "sub": "Before and after treatment route"
+      },
+      "write": {
+        "label": "Write review",
+        "sub": "Share beauty experience"
+      },
+      "browse": {
+        "label": "Browse",
+        "sub": "Popular spots now"
+      },
+      "recruiting": {
+        "label": "Open plans",
+        "sub": "Find company"
+      },
+      "weekend": {
+        "label": "Weekend plans",
+        "sub": "Active spots"
+      },
+      "record": {
+        "label": "Write",
+        "sub": "Share notes"
+      }
+    },
+    "activity": {
+      "label": "My activity:",
+      "summary": "Saved {{saved}}, joined {{reacted}}",
+      "new_updates": "✨ New updates!"
+    },
+    "sort": {
+      "latest": "Newest",
+      "reactions": "Most reactions",
+      "draft": "Draft activity"
+    },
+    "defaults": {
+      "region": "Seoul"
+    },
+    "status": {
+      "reviews": "Review live",
+      "reacting": "Getting reactions",
+      "surveying": "Gathering input",
+      "drafting": "Drafting plan",
+      "closed": "Closed"
+    },
+    "card": {
+      "title_prefix": {
+        "beauty_review": "[Beauty review]",
+        "food_review": "[Food review]",
+        "travel_review": "[Sightseeing review]"
+      },
+      "result_badge": "📝 Follow-up tip",
+      "default_vibe": "✨ Good vibe",
+      "open_meetup_badge": "🤝 Open to go together",
+      "fresh_badges": {
+        "comment": "💬 Active",
+        "update": "✨ Tip update"
+      },
+      "draft_status": {
+        "active": "🔥 Draft active",
+        "forming": "📝 Draft forming",
+        "preparing": "🤝 Draft starting"
+      },
+      "draft_desc": {
+        "active": "Reactions are clustering around times and dates.",
+        "forming": "A possible plan is starting to form.",
+        "preparing": "People are still split on timing."
+      },
+      "cta": {
+        "review": "Go together?",
+        "join": "Join"
+      },
+      "owner_reactions": {
+        "region": "📊 {{region}} / {{count}} reactions",
+        "join": "📊 {{count}} join signals"
+      },
+      "more_region": "📍 See other reviews and meetup posts in {{region}} →"
     },
     "fab": {
-        "idle": "Plan Trip",
-        "pre_trip": "Departure Soon",
-        "on_trip": "Next Place?",
-        "near_deadline": "Late Risk!",
-        "to": "to {{dest}}",
-        "kride": "Call K.Ride",
-        "kride_sub": "Arrives in {{mins}}m",
-        "transit": "Transit Guide",
-        "transit_sub": "Fastest route",
-        "copy": "Copy Address",
-        "copy_done": "Copied!",
-        "card": "For Driver Card",
-        "card_sub": "Show this to driver",
-        "card_modal_title": "🗺️ Please go to this address",
-        "cancel": "Cancel"
+      "beauty": "Write beauty review",
+      "meetup": "Write show/event post"
     },
-    "transport": {
-        "moving_to": "Moving to {{dest}}",
-        "remaining": "Remaining",
-        "line_2_direction": "Line 2 • Headed to City Hall direction",
-        "departed": "departed",
-        "passing_now": "Passing now...",
-        "current": "Current",
-        "get_off_at": "Get off at",
-        "exit_3": "Exit 3",
-        "getting_off_here": "I'm Getting Off Here",
-        "stations": {
-            "samseong": "Samseong",
-            "seolleung": "Seolleung",
-            "yeoksam": "Yeoksam",
-            "gangnam": "Gangnam",
-            "gyodae": "Gyodae",
-            "seocho": "Seocho",
-            "seongsu": "Seongsu"
-        }
+    "time": {
+      "just_now": "Just now"
     },
-    "community_page": {
-        "title": "Community",
-        "subtitle": "Connect with locals & travelers",
-        "filter_all": "All",
-        "filter_meetup": "Food & Meetup",
-        "filter_travel": "Travel Mate",
-        "filter_help": "Local Help",
-        "comments": "Comments",
-        "message": "Message",
-        "type": {
-            "MEETUP": "MEETUP",
-            "TRAVEL": "TRAVEL",
-            "HELP": "HELP",
-            "REVIEW": "REVIEW"
+    "toasts": {
+      "save_removed": "Saved post removed.",
+      "save_added": "Review saved! ⭐",
+      "deleted": "Post deleted.",
+      "updated": "Post updated.",
+      "created": "New review posted! 🎉",
+      "region_collected": "📍 Collected posts related to {{region}}."
+    },
+    "report": {
+      "modal_title": "Choose a report reason",
+      "report_action": "Report",
+      "cancel": "Cancel",
+      "item_post": "post",
+      "item_comment": "comment",
+      "submitted_alert": "The {{item}} was reported.\nReason: {{reason}}\nWe will review it shortly.",
+      "reasons": {
+        "ad_spam": "Looks like advertising or promotion",
+        "offensive": "Contains offensive wording",
+        "contact": "Pushes private contact too hard",
+        "unsafe": "Feels unsafe",
+        "other": "Other"
+      }
+    },
+    "detail_page": {
+      "loading": "Loading post...",
+      "hidden_post": "This post is hidden.",
+      "show_hidden": "Show again",
+      "not_found": "Post not found.",
+      "hide_post": "Hide this post",
+      "hide_comment": "Hide",
+      "save_post_aria": "Save post",
+      "freshness": {
+        "realtime": "🔥 Reactions from travelers are coming in right now.",
+        "updated": "✨ The author added new tips after visiting.",
+        "active": "💬 People are still actively discussing this post.",
+        "calm": "🍃 It is calm now, but still useful to come back to anytime."
+      },
+      "strengths": {
+        "title": "🎯 Key points of this post",
+        "organized": "✨ Detailed review",
+        "active": "🔥 Active reactions",
+        "visited_tip": "🧡 Real visit tip",
+        "new": "🌱 Fresh update"
+      },
+      "mini_signal_tag": "🤝 Looking for company",
+      "primary_action": {
+        "review": "💬 Leave feedback",
+        "join": "🤝 Join"
+      },
+      "save": {
+        "default": "☆ Save",
+        "saved": "⭐ Saved"
+      },
+      "checklist": {
+        "title": "💡 Before you go",
+        "recommended": "✅ Best for",
+        "required": "📌 Must check",
+        "comment_check": "Check comment reactions",
+        "read_details": "Read details carefully"
+      },
+      "meetup_safety": {
+        "title": "🛡️ Safe meetup guide",
+        "item_1": "Meet in public places such as cafes or restaurants.",
+        "item_2": "Talk enough in comments before sharing contact information."
+      },
+      "body_title": "Details",
+      "related": {
+        "bundle_title": "📍 More stories in {{region}}",
+        "this_region": "this area",
+        "more": "See more {{region}} reviews →",
+        "title": "✨ Similar reviews",
+        "meta": {
+          "review": "Review",
+          "gathering": "Plan"
         },
-        "post": {
-            "1": {
-                "author": "Mika (Japan)",
-                "time": "10 mins ago",
-                "title": "Samgyeopsal Meetup 🥓",
-                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-            },
-            "2": {
-                "author": "John (US)",
-                "time": "1 hour ago",
-                "title": "Hongdae Street Performance 🎸",
-                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-            },
-            "3": {
-                "author": "Jihoon (Korea)",
-                "time": "2 hours ago",
-                "title": "Need help with subway directions? 🚇",
-                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-            },
-            "4": {
-                "author": "Li Wei (China)",
-                "time": "3 hours ago",
-                "title": "K-Beauty Shopping 💄",
-                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-            }
+        "empty_line_1": "There are no other reviews in this area yet.",
+        "empty_line_2": "Why not leave the first related update?"
+      },
+      "comments_title": "Comments & go together",
+      "author_panel": {
+        "title": "📊 My post reaction report",
+        "badge": "Author only",
+        "stats": {
+          "total": "Total signals",
+          "total_value": "{{count}} people",
+          "time": "Top time",
+          "time_pending": "Coordinating",
+          "intent": "Top intent",
+          "recent": "Recent signals",
+          "recent_value": "+{{count}}"
         },
-        "filter_review": "Reviews",
-        "detail": "Post Detail",
-        "meetup_info": "Visit details",
-        "write_post": "Write review",
-        "edit": "Edit review",
-        "posting": "Posting...",
-        "hero": {
-            "title": "Beauty booking reviews come first here",
-            "subtitle": "Start with salon visit reviews, then continue into food, sightseeing, and event follow-ups.",
-            "search_placeholder": "Search salon names, treatment experiences, or booking reviews"
+        "guide": {
+          "weekend": "This weekend is getting the most reactions. Try suggesting a specific time.",
+          "vote": "Opinions are split. Offer a few date options and ask people to choose.",
+          "share": "People are starting to gather. Thank them and share the exact place once more."
         },
-        "banner": {
-            "title": "kello Beauty Review Board ✨",
-            "body": "Check real post-booking salon experiences first and compare service quality, satisfaction, and revisit intent.",
-            "secondary_title": "kello Community Board 👋",
-            "secondary_body": "Browse reviews for places you may want to visit together and line up plans."
+        "action": {
+          "weekend": "Coordinate weekend time",
+          "vote": "Start a date vote",
+          "share": "Thank & share place"
         },
-        "categories": {
-            "all": "All",
-            "beauty_review": "Beauty salon review",
-            "food_review": "Food review",
-            "travel_review": "Sightseeing review",
-            "meetup": "Shows & events",
-            "help": "Questions"
+        "draft": {
+          "weekend": "This weekend has the most interest. How does Saturday around 2 PM sound?",
+          "vote": "There are several options. Which works better this week, Saturday or Sunday?",
+          "share": "Thanks for the interest. I will share the exact location once more in the comments."
         },
-        "sub_filters": {
-            "all": "All",
-            "saved": "⭐ Saved posts",
-            "reacted": "💬 Joined posts",
-            "mine": "👤 My posts",
-            "recruiting": "📢 Open only",
-            "active_reactions": "🔥 Hot reactions",
-            "open_meetup": "🤝 Go-together open",
-            "weekend": "📅 This weekend",
-            "fresh": "✨ Recently updated"
-        },
-        "tags": {
-            "solo_friendly": "Good solo",
-            "friends_friendly": "Good with friends",
-            "photo_spot": "Photo spot",
-            "waiting": "Has wait",
-            "foreigner_friendly": "Foreigner-friendly"
-        },
-        "quality_signals": {
-            "organized": "✨ Detailed review",
-            "active": "🔥 High engagement",
-            "asset": "💜 Follow-up tips",
-            "mate": "🤝 Meetup active"
-        },
-        "nav_summary": {
-            "all": "You are viewing every story in {{tab}}.",
-            "active_reactions": "These {{tab}} posts are getting the hottest reactions.",
-            "open_meetup": "These {{tab}} posts are open for going together.",
-            "weekend": "Check {{tab}} ideas that fit this weekend.",
-            "default": "Showing {{sub}} {{tab}} posts first."
-        },
-        "next_actions": {
-            "mine_result": {
-                "badge": "Add follow-up tip",
-                "desc": "Have you visited already? Leave a short tip for the next person.",
-                "cta": "Add tip"
-            },
-            "mine_active": {
-                "badge": "Reactions surging",
-                "desc": "A lot of people are paying attention to your post. Take a look.",
-                "cta": "View reactions"
-            },
-            "reacted_survey": {
-                "badge": "Need input",
-                "desc": "People are coordinating opinions. Share a day or time that works for you.",
-                "cta": "Leave input"
-            },
-            "saved_result": {
-                "badge": "Updated",
-                "desc": "A saved post now has a new tip.",
-                "cta": "Check it"
-            }
-        },
-        "actions": {
-            "delete_confirm": "Delete this post?"
-        },
-        "errors": {
-            "update_failed": "Could not update the review. Please try again.",
-            "post_failed": "Could not publish the review. {{message}}"
-        },
-        "states": {
-            "fetch_failed_title": "Could not load posts",
-            "fetch_failed_desc": "Please try again in a moment.",
-            "fetch_failed_tip": "Open the page again to refresh the latest posts.",
-            "empty_title": "No posts yet",
-            "empty_desc": "Be the first to share a beauty salon review.",
-            "empty_tip": "Adding the salon name, treatment, booking flow, and service quality helps others decide faster.",
-            "no_results_title": "No posts match this view",
-            "no_results_desc": "Try another keyword or a lighter filter.",
-            "cta_write": "Write a review",
-            "cta_all": "View all"
-        },
-        "form": {
-            "category_hints": {
-                "beauty_review": "💡 Include the salon name, treatment experience, booking and service flow, foreigner support, and revisit intent.",
-                "food_review": "💡 Leave the menu, atmosphere, and wait time that fit before or after a beauty booking.",
-                "travel_review": "💡 Focus on routes, photo points, and how easy it was to visit before or after treatment.",
-                "meetup": "💡 Summarize the show time, ticket information, and why it is fun to go together.",
-                "help": "💡 Explain your booking, visit, or service question as clearly as possible."
-            },
-            "category_label": "Category",
-            "write_guide_title": {
-                "beauty_review": "Start with a beauty salon review",
-                "food_review": "Share a food spot that fits a beauty schedule",
-                "travel_review": "Share a sightseeing route that worked well before or after treatment",
-                "meetup": "Summarize the show or event briefly",
-                "help": "Ask a booking or visit question clearly"
-            },
-            "write_guide_body": {
-                "beauty_review": "The salon name, treatment experience, booking flow, service quality, foreigner support, and revisit intent help a lot before booking.",
-                "food_review": "Menu, atmosphere, and wait time make it easier to connect food reviews to a beauty day.",
-                "travel_review": "Photo points, travel time, and quick-stop reasons help the follow-up flow stay useful.",
-                "meetup": "Keep the show time, ticket details, and on-site mood short and clear.",
-                "help": "Describe your booking, service, or pre-visit question with enough detail to get a useful answer."
-            },
-            "title_label": {
-                "beauty_review": "Salon name or review title",
-                "default": "Place name or review title"
-            },
-            "title_placeholder": {
-                "beauty_review": "e.g. Lash perm review at OO Beauty in Gangnam",
-                "food_review": "e.g. Brunch cafe that worked well after treatment",
-                "travel_review": "e.g. Seongsu walk I enjoyed before and after treatment",
-                "meetup": "e.g. Let us go to this weekend exhibition together",
-                "help": "e.g. Please recommend a salon with good foreigner support"
-            },
-            "point_label": {
-                "beauty_review": "One-line satisfaction point",
-                "default": "One-line recommendation point"
-            },
-            "point_placeholder": {
-                "beauty_review": "e.g. Fast booking replies and comfortable guidance for foreigners",
-                "food_review": "e.g. Short wait and a clean meal",
-                "travel_review": "e.g. Easy to visit within an hour before or after treatment",
-                "meetup": "e.g. More fun to see together than alone",
-                "help": "e.g. I want to know if English consultation is available"
-            },
-            "desc_label": {
-                "beauty_review": "Treatment review",
-                "default": "Detailed review"
-            },
-            "desc_placeholder": {
-                "beauty_review": "Describe the treatment, booking flow, service, satisfaction, foreigner support, and whether you would revisit.",
-                "food_review": "Describe the menu, mood, wait time, and why it matched your beauty day well.",
-                "travel_review": "Describe the route, photo spots, travel time, and why it worked well before or after treatment.",
-                "meetup": "Describe the event and why you want to go together.",
-                "help": "Describe your question and current situation clearly."
-            },
-            "place_label": {
-                "beauty_review": "Salon location (optional)",
-                "default": "Place (optional)"
-            },
-            "place_placeholder": {
-                "beauty_review": "e.g. 3F, OO Beauty, Gangnam Station",
-                "default": "e.g. Exit 11, Gangnam Station"
-            },
-            "place_help": {
-                "beauty_review": "Adding the salon location makes the booking route easier to understand.",
-                "default": "A map view is attached together."
-            },
-            "region_label": "Area",
-            "region_placeholder": "e.g. Gangnam, Mapo",
-            "vibe_label": "Pick vibes",
-            "meetup_toggle_title": "Open for going together",
-            "meetup_toggle_desc": "Receive interest signals from other people.",
-            "safety_title": "🔒 Safety guide",
-            "safety_item_1": "• Do not share personal contact info right away. Check reactions in comments first.",
-            "safety_item_2": "• We recommend arranging plans around public places.",
-            "image": {
-                "label": "Add images",
-                "title": "You can upload up to {{count}} images.",
-                "file_only_alert": "Only image files can be added.",
-                "limit_alert": "You can upload up to {{count}} images.",
-                "load_failed_alert": "Couldn't load the image.",
-                "button_loading": "Preparing images...",
-                "button_limit": "{{count}} selected",
-                "button_add_more": "Add more images",
-                "button_select": "Select images",
-                "preview_alt": "Upload preview {{index}}",
-                "preview_name": "Selected image {{index}}",
-                "preview_desc": "Image {{index}}. Check the preview before posting.",
-                "remove": "Remove",
-                "saved_name": "Uploaded image {{index}}",
-                "guides": {
-                    "beauty_review": "Share treatment results or the salon atmosphere if you can.",
-                    "food_review": "Add food shots or a photo of the place if it helps.",
-                    "travel_review": "Capture the mood of the place or a memorable point.",
-                    "meetup": "Share the on-site atmosphere or why it would be fun together.",
-                    "help": "Upload a reference image too if it helps explain."
-                }
-            },
-            "summary_title": "Review summary",
-            "summary_region_type": "Area / type",
-            "summary_point": "Point",
-            "summary_meetup": "Going together",
-            "summary_enabled": "Open",
-            "summary_disabled": "Closed",
-            "submit_with_reactions": "Post review and gather reactions",
-            "submit_beauty": "Share beauty review",
-            "submit_default": "Share review"
-        },
-        "quick_entry": {
-            "beauty": {
-                "label": "Beauty reviews",
-                "sub": "Booking, service, satisfaction"
-            },
-            "food": {
-                "label": "Food reviews",
-                "sub": "Beauty day add-on"
-            },
-            "travel": {
-                "label": "Sightseeing reviews",
-                "sub": "Before and after treatment route"
-            },
-            "write": {
-                "label": "Write review",
-                "sub": "Share beauty experience"
-            },
-            "browse": {
-                "label": "Browse",
-                "sub": "Popular spots now"
-            },
-            "recruiting": {
-                "label": "Open plans",
-                "sub": "Find company"
-            },
-            "weekend": {
-                "label": "Weekend plans",
-                "sub": "Active spots"
-            },
-            "record": {
-                "label": "Write",
-                "sub": "Share notes"
-            }
-        },
-        "activity": {
-            "label": "My activity:",
-            "summary": "Saved {{saved}}, joined {{reacted}}",
-            "new_updates": "✨ New updates!"
-        },
-        "sort": {
-            "latest": "Newest",
-            "reactions": "Most reactions",
-            "draft": "Draft activity"
-        },
-        "defaults": {
-            "region": "Seoul"
-        },
+        "final_action": "Start final coordination in comments",
+        "final_draft": "Everyone, shall we finalize who is going this weekend in the comments?",
+        "footer": "This is not a confirmed meetup yet. Please keep coordinating in the comments."
+      },
+      "status_controls": {
+        "title": "⚙️ Change progress status"
+      },
+      "result": {
+        "title": "📝 Wrap-up after closing / visiting",
+        "help": "💡 A short wrap-up helps the next person a lot. Even one useful tip keeps this post valuable longer.",
+        "placeholder": "Did you actually go? Share how it went and what tip the next visitor should know.",
+        "save_visited": "✅ Visited & save result",
+        "save_only": "📋 Save result only",
+        "saved_alert": "Follow-up result saved!",
+        "tips_visited": "If you visit next, be sure to check the author tips.",
+        "tips_retry": "If plans changed, try opening the meetup again with a new schedule."
+      },
+      "author_safety": {
+        "title": "🛡️ Safety guide for authors",
+        "item_1": "For a first meetup, guide people to a public place such as a cafe or restaurant.",
+        "item_2": "Coordinate enough in public comments before sharing private contact information.",
+        "item_3": "If someone makes an uncomfortable request, use the report feature."
+      },
+      "signal_summary": {
+        "title": "📝 Tentative meetup draft",
         "status": {
-            "reviews": "Review live",
-            "reacting": "Getting reactions",
-            "surveying": "Gathering input",
-            "drafting": "Drafting plan",
-            "closed": "Closed"
+          "active": "Draft active",
+          "forming": "Draft forming",
+          "preparing": "Draft preparing"
         },
-        "card": {
-            "title_prefix": {
-                "beauty_review": "[Beauty review]",
-                "food_review": "[Food review]",
-                "travel_review": "[Sightseeing review]"
-            },
-            "result_badge": "📝 Follow-up tip",
-            "default_vibe": "✨ Good vibe",
-            "open_meetup_badge": "🤝 Open to go together",
-            "fresh_badges": {
-                "comment": "💬 Active",
-                "update": "✨ Tip update"
-            },
-            "draft_status": {
-                "active": "🔥 Draft active",
-                "forming": "📝 Draft forming",
-                "preparing": "🤝 Draft starting"
-            },
-            "draft_desc": {
-                "active": "Reactions are clustering around times and dates.",
-                "forming": "A possible plan is starting to form.",
-                "preparing": "People are still split on timing."
-            },
-            "cta": {
-                "review": "Go together?",
-                "join": "Join"
-            },
-            "owner_reactions": {
-                "region": "📊 {{region}} / {{count}} reactions",
-                "join": "📊 {{count}} join signals"
-            },
-            "more_region": "📍 See other reviews and meetup posts in {{region}} →"
-        },
-        "fab": {
-            "beauty": "Write beauty review",
-            "meetup": "Write show/event post"
-        },
-        "time": {
-            "just_now": "Just now"
-        },
-        "toasts": {
-            "save_removed": "Saved post removed.",
-            "save_added": "Review saved! ⭐",
-            "deleted": "Post deleted.",
-            "updated": "Post updated.",
-            "created": "New review posted! 🎉",
-            "region_collected": "📍 Collected posts related to {{region}}."
-        },
-        "report": {
-            "modal_title": "Choose a report reason",
-            "report_action": "Report",
-            "cancel": "Cancel",
-            "item_post": "post",
-            "item_comment": "comment",
-            "submitted_alert": "The {{item}} was reported.\nReason: {{reason}}\nWe will review it shortly.",
-            "reasons": {
-                "ad_spam": "Looks like advertising or promotion",
-                "offensive": "Contains offensive wording",
-                "contact": "Pushes private contact too hard",
-                "unsafe": "Feels unsafe",
-                "other": "Other"
-            }
-        },
-        "detail_page": {
-            "loading": "Loading post...",
-            "hidden_post": "This post is hidden.",
-            "show_hidden": "Show again",
-            "not_found": "Post not found.",
-            "hide_post": "Hide this post",
-            "hide_comment": "Hide",
-            "save_post_aria": "Save post",
-            "freshness": {
-                "realtime": "🔥 Reactions from travelers are coming in right now.",
-                "updated": "✨ The author added new tips after visiting.",
-                "active": "💬 People are still actively discussing this post.",
-                "calm": "🍃 It is calm now, but still useful to come back to anytime."
-            },
-            "strengths": {
-                "title": "🎯 Key points of this post",
-                "organized": "✨ Detailed review",
-                "active": "🔥 Active reactions",
-                "visited_tip": "🧡 Real visit tip",
-                "new": "🌱 Fresh update"
-            },
-            "mini_signal_tag": "🤝 Looking for company",
-            "primary_action": {
-                "review": "💬 Leave feedback",
-                "join": "🤝 Join"
-            },
-            "save": {
-                "default": "☆ Save",
-                "saved": "⭐ Saved"
-            },
-            "checklist": {
-                "title": "💡 Before you go",
-                "recommended": "✅ Best for",
-                "required": "📌 Must check",
-                "comment_check": "Check comment reactions",
-                "read_details": "Read details carefully"
-            },
-            "meetup_safety": {
-                "title": "🛡️ Safe meetup guide",
-                "item_1": "Meet in public places such as cafes or restaurants.",
-                "item_2": "Talk enough in comments before sharing contact information."
-            },
-            "body_title": "Details",
-            "related": {
-                "bundle_title": "📍 More stories in {{region}}",
-                "this_region": "this area",
-                "more": "See more {{region}} reviews →",
-                "title": "✨ Similar reviews",
-                "meta": {
-                    "review": "Review",
-                    "gathering": "Plan"
-                },
-                "empty_line_1": "There are no other reviews in this area yet.",
-                "empty_line_2": "Why not leave the first related update?"
-            },
-            "comments_title": "Comments & go together",
-            "author_panel": {
-                "title": "📊 My post reaction report",
-                "badge": "Author only",
-                "stats": {
-                    "total": "Total signals",
-                    "total_value": "{{count}} people",
-                    "time": "Top time",
-                    "time_pending": "Coordinating",
-                    "intent": "Top intent",
-                    "recent": "Recent signals",
-                    "recent_value": "+{{count}}"
-                },
-                "guide": {
-                    "weekend": "This weekend is getting the most reactions. Try suggesting a specific time.",
-                    "vote": "Opinions are split. Offer a few date options and ask people to choose.",
-                    "share": "People are starting to gather. Thank them and share the exact place once more."
-                },
-                "action": {
-                    "weekend": "Coordinate weekend time",
-                    "vote": "Start a date vote",
-                    "share": "Thank & share place"
-                },
-                "draft": {
-                    "weekend": "This weekend has the most interest. How does Saturday around 2 PM sound?",
-                    "vote": "There are several options. Which works better this week, Saturday or Sunday?",
-                    "share": "Thanks for the interest. I will share the exact location once more in the comments."
-                },
-                "final_action": "Start final coordination in comments",
-                "final_draft": "Everyone, shall we finalize who is going this weekend in the comments?",
-                "footer": "This is not a confirmed meetup yet. Please keep coordinating in the comments."
-            },
-            "status_controls": {
-                "title": "⚙️ Change progress status"
-            },
-            "result": {
-                "title": "📝 Wrap-up after closing / visiting",
-                "help": "💡 A short wrap-up helps the next person a lot. Even one useful tip keeps this post valuable longer.",
-                "placeholder": "Did you actually go? Share how it went and what tip the next visitor should know.",
-                "save_visited": "✅ Visited & save result",
-                "save_only": "📋 Save result only",
-                "saved_alert": "Follow-up result saved!",
-                "tips_visited": "If you visit next, be sure to check the author tips.",
-                "tips_retry": "If plans changed, try opening the meetup again with a new schedule."
-            },
-            "author_safety": {
-                "title": "🛡️ Safety guide for authors",
-                "item_1": "For a first meetup, guide people to a public place such as a cafe or restaurant.",
-                "item_2": "Coordinate enough in public comments before sharing private contact information.",
-                "item_3": "If someone makes an uncomfortable request, use the report feature."
-            },
-            "signal_summary": {
-                "title": "📝 Tentative meetup draft",
-                "status": {
-                    "active": "Draft active",
-                    "forming": "Draft forming",
-                    "preparing": "Draft preparing"
-                },
-                "time_split": "People are still split on timing, so more coordination is needed in comments.",
-                "time_focus": "A shared plan to go here on {{time}} is starting to form.",
-                "time_flexible": "Many reactions are still about coordinating the date, so the plan is flexible.",
-                "desc": "There are {{count}} reactions from people who want to go together for {{topic}}.",
-                "topic_review": "visiting this reviewed place",
-                "topic_outing": "this sightseeing or event plan",
-                "schedule_title": "📅 Schedule suggestions",
-                "preview_title": "👥 Signal preview (latest)",
-                "group_count": "{{count}} joining",
-                "reaction_fallback": "I want to join!",
-                "join_time": "Join the {{time}} plan",
-                "notice_1": "⚠️ This is not a confirmed meetup yet.",
-                "notice_2": "🗨️ Do not share private contact information. Talk in comments first.",
-                "join_cta": "Leave a signal for this draft"
-            },
-            "empty_comments": "No comments yet.",
-            "signal_tag": "Together signal",
-            "signal_content_default": "Shared an interest signal.",
-            "bottom_safety": {
-                "title": "🛡️ Safe meetup promise",
-                "item_1": "Do not share private contact information right away. Coordinate enough in comments first.",
-                "item_2": "We recommend a first meetup in public places such as cafes or galleries.",
-                "item_3": "Firmly refuse requests for money or personal information."
-            },
-            "comment_input": {
-                "default": "Write a comment...",
-                "optional": "Extra message (optional)",
-                "send": "Send"
-            },
-            "signal_intents": {
-                "interested": "I would like to go too",
-                "available_this_week": "I am free this week",
-                "join_if_schedule_fits": "I will join if the time works",
-                "thanks": "Thanks for the information",
-                "question": "I have a question"
-            },
-            "signal_times": {
-                "this_week": "This week",
-                "this_weekend": "This weekend",
-                "next_week": "Next week",
-                "schedule_coordination": "Coordinate date"
-            }
-        }
-    },
-    "help_page": {
-        "title": "Help Center",
-        "subtitle": "Find the right detailed help route for your situation in Korea.",
-        "badge": "Help Center",
-        "numbers_title": "Emergency Numbers",
-        "medical_title": "Medical Help",
-        "medical_desc": "Nearby clinics & symptom cards",
-        "lost_title": "Lost & Found",
-        "lost_desc": "Step-by-step recovery guide",
-        "police_title": "Police / Crime",
-        "police_desc": "Report & get assistance",
-        "interp_title": "Interpretation",
-        "interp_desc": "1330 helpline & translation apps",
-        "symptom_title": "Symptom Phrase Cards",
-        "symptom_hint": "Tap a symptom to show the Korean phrase to your doctor",
-        "clinic_title": "International Clinics & ER",
-        "med_title": "Convenience Store Medicines",
-        "med_hint": "Available 24/7 at GS25, CU, 7-Eleven",
-        "lost_step1": "Step 1: Where did you lose it?",
-        "lost_step1_hint": "Select the location to see recovery steps.",
-        "quick_links": "Quick Links",
-        "go_lost112": "Go to Lost112 Official Report Site",
-        "police_contacts": "Key Contacts",
-        "police_phrases": "Emergency Phrases",
-        "interp_services": "Translation Services",
-        "interp_phrases": "Useful Phrases",
-        "emergency_call": "Emergency?",
-        "emergency_hint": "Call 119 immediately",
-        "taxi": "Taxi",
-        "subway": "Subway",
-        "airport": "Airport",
-        "street": "Street",
-        "lost_in": "Lost item in:",
-        "hub_subtitle": "Use My Support as the hub, open a detailed help page for the situation, and keep Emergency Phrases ready when you need to show Korean on the spot.",
-        "support_hub_title": "My Support",
-        "support_hub_desc": "Use this as the main hub when you need help but are not sure which detailed page fits your situation.",
-        "support_hub_meta": "Hub for booking, general, FAQ, and emergency help",
-        "phrases_title": "Emergency Phrases",
-        "phrases_desc": "Open large Korean phrases you can show directly to staff, drivers, police, or medical teams.",
-        "phrases_meta": "Field-ready phrasebook",
-        "call1330_title": "Call 1330",
-        "call1330_desc": "Tourism Helpline support is often the fastest starting point when language support is needed.",
-        "call1330_meta": "Tourism helpline",
-        "main_119": "Fire / ambulance emergency",
-        "main_112": "Police emergency",
-        "main_1330": "Tourism Helpline",
-        "main_120": "Seoul Dasan call center",
-        "role_title": "How these pages work",
-        "role_text": "My Support is your hub. Each /help page explains one route in more detail. Travel Phrasebook is for large Korean text you can show during a real situation.",
-        "quick_actions_title": "Quick actions",
-        "quick_actions_desc": "These are the fastest safe entry points when you need help right now.",
-        "routes_title": "Detailed help routes",
-        "routes_desc": "Choose the page that best matches the situation. Each route keeps the existing tools and contact links available in the app.",
-        "routes_open": "Open route",
-        "numbers_desc": "Use these numbers only when the route fits the situation. Detailed pages below add more context and phrase support.",
-        "interp_detail_subtitle": "Use this page when communication is difficult. It points you to phrase support, hotlines, and simple translation tools that already exist in the app flow.",
-        "interp_when_title": "When to use this page",
-        "interp_when_desc": "Use this route when you need help speaking with staff, drivers, police, or medical teams. If the situation is dangerous or health-related, move to the matching detailed help page as well.",
-        "interp_services_desc": "These existing options may open a phone call or an external translation page. No new in-app interpreter service is created here.",
-        "interp_phrases_desc": "These are quick previews. For large showable text and more emergency phrases, move to Travel Phrasebook.",
-        "interp_show_more": "Show more emergency phrases",
-        "interp_next_title": "Need a different detailed route?",
-        "interp_next_desc": "Interpreter help does not replace police or medical guidance. If the problem is safety- or health-related, open the matching page below as well.",
-        "interp_medical_bridge": "Move to Medical Help if symptoms, injury, or urgent treatment are part of the situation.",
-        "interp_medical_cta": "Open Medical Help",
-        "interp_police_bridge": "Move to Police Help if the situation feels unsafe or you need official safety guidance.",
-        "interp_police_cta": "Open Police Help",
-        "police_detail_subtitle": "Use this page when you need police contact, tourist police guidance, or a safer next step. It keeps the existing routes and numbers already available in the project.",
-        "police_when_title": "When to use this page",
-        "police_when_desc": "Use this route if the situation feels unsafe, if you need police contact information, or if you need a clearer safety path. It does not replace direct emergency services when immediate action is needed.",
-        "police_contacts_desc": "Use the existing call or website routes below. Choose the number that best matches the situation.",
-        "police_info": {
-            "tourist_info": "Tourist Police officers are stationed at Myeongdong, Insadong, and Itaewon areas.",
-            "crime_label": "Police emergency",
-            "crime_note": "Use this for immediate police response or when the situation feels unsafe.",
-            "tourist_label": "Tourism helpline safety support",
-            "tourist_note": "Use this when you need help understanding police or tourist safety options.",
-            "station_label": "Official police website"
-        },
-        "police_phrase_desc": "These quick phrases help when you need to explain the situation before opening the full phrasebook.",
-        "police_bridge_title": "Need more than one route?",
-        "police_bridge_desc": "If communication is difficult, open Interpreter Help too. If the situation includes injury or urgent symptoms, open Medical Help as well.",
-        "police_interp_bridge": "Open Interpreter Help when you need help explaining the situation to officers or staff.",
-        "police_medical_bridge": "Open Medical Help when the situation also includes injury, illness, or emergency treatment needs.",
-        "medical_detail_subtitle": "Use this page for medical contact paths, symptom phrases, and static clinic guidance already included in the project. It does not create a new diagnosis or hospital booking service.",
-        "medical_notice_title": "If the situation feels urgent",
-        "medical_notice_text": "Call 119 first for urgent symptoms, severe injury, or breathing problems. Use the phrasebook and interpreter route to help explain the situation more clearly.",
-        "clinic_desc": "These are static example clinic and hospital entries already included in the app. Call ahead when possible.",
-        "medical_bridge_title": "Need another support route too?",
-        "medical_bridge_desc": "Open Interpreter Help if communication is difficult. Open Police Help as well if the medical need is connected to an unsafe incident.",
-        "medical_interp_bridge": "Move to Interpreter Help when you need a clearer way to explain symptoms or treatment questions.",
-        "medical_police_bridge": "Move to Police Help when the medical issue is connected to a crime, accident, or safety risk.",
-        "lost_quick_desc": "Use the matching official route or helpline if you need direct lost-item support.",
-        "lost112_desc": "Official lost and found route for many public cases in Korea.",
-        "embassy_desc": "Use this when a lost passport or identity document needs embassy support.",
-        "lost_1330_desc": "Use this when you need help understanding the next step or explaining the situation.",
-        "lost_steps_desc": "Follow the matching route below. Use Support or Phrasebook if you need extra help talking to staff.",
-        "interp_badge": "Interpreter Help",
-        "police_badge": "Safety Route",
-        "medical_badge": "Medical Route",
-        "lost_badge": "Lost Item Route",
-        "interp_actions": {
-            "open_papago": "Open Papago",
-            "open_google_translate": "Open Google Translate"
-        },
-        "interp_booking_title": "Interpreter for this booking",
-        "interp_booking_desc": "You opened interpretation help for a reservation. Keep the venue, time, and booking status visible while you talk to staff.",
-        "booking_phrases_desc": "Open booking phrases first when you need to explain the reservation, delay, or check-in situation to staff.",
-        "booking_context_title": "Help for this booking",
-        "booking_context_desc": "You opened this help page while checking a reservation. Keep the venue, time, and booking status visible while you choose the next support route.",
-        "police_booking_desc": "You opened safety help while checking a reservation. Keep the venue, time, and booking status visible while you choose the safest next route.",
-        "medical_booking_desc": "You opened medical help while checking a reservation. Keep the venue, time, and booking status visible while you choose the next medical or interpreter route.",
-        "lost_booking_desc": "If you were on the way to a reservation, keep the venue, time, and booking status visible while you ask for directions or support.",
-        "interp": {
-            "hotline_title": "1330 Tourism Helpline",
-            "hotline_desc": "Fastest official helpline when you need language support or help explaining a travel problem.",
-            "papago_title": "Papago",
-            "papago_desc": "Open Naver Papago for quick translation and text support.",
-            "google_title": "Google Translate",
-            "google_desc": "Open Google Translate when you need another quick translation option.",
-            "dasan_title": "120 Dasan Call Center",
-            "dasan_desc": "Seoul city helpline for local public information and general guidance."
-        },
-        "lost112_title": "Lost112",
-        "embassy_title": "Embassy Finder",
-        "lost_1330_title": "1330 Travel Helpline",
-        "lost": {
-            "taxi_hint": "Open the steps for items lost in a taxi.",
-            "subway_hint": "Open the steps for items lost in the subway or at a station.",
-            "airport_hint": "Open the steps for items lost at the airport or in transit.",
-            "street_hint": "Open the steps for items lost on the street or in a public area."
-        }
+        "time_split": "People are still split on timing, so more coordination is needed in comments.",
+        "time_focus": "A shared plan to go here on {{time}} is starting to form.",
+        "time_flexible": "Many reactions are still about coordinating the date, so the plan is flexible.",
+        "desc": "There are {{count}} reactions from people who want to go together for {{topic}}.",
+        "topic_review": "visiting this reviewed place",
+        "topic_outing": "this sightseeing or event plan",
+        "schedule_title": "📅 Schedule suggestions",
+        "preview_title": "👥 Signal preview (latest)",
+        "group_count": "{{count}} joining",
+        "reaction_fallback": "I want to join!",
+        "join_time": "Join the {{time}} plan",
+        "notice_1": "⚠️ This is not a confirmed meetup yet.",
+        "notice_2": "🗨️ Do not share private contact information. Talk in comments first.",
+        "join_cta": "Leave a signal for this draft"
+      },
+      "empty_comments": "No comments yet.",
+      "signal_tag": "Together signal",
+      "signal_content_default": "Shared an interest signal.",
+      "bottom_safety": {
+        "title": "🛡️ Safe meetup promise",
+        "item_1": "Do not share private contact information right away. Coordinate enough in comments first.",
+        "item_2": "We recommend a first meetup in public places such as cafes or galleries.",
+        "item_3": "Firmly refuse requests for money or personal information."
+      },
+      "comment_input": {
+        "default": "Write a comment...",
+        "optional": "Extra message (optional)",
+        "send": "Send"
+      },
+      "signal_intents": {
+        "interested": "I would like to go too",
+        "available_this_week": "I am free this week",
+        "join_if_schedule_fits": "I will join if the time works",
+        "thanks": "Thanks for the information",
+        "question": "I have a question"
+      },
+      "signal_times": {
+        "this_week": "This week",
+        "this_weekend": "This weekend",
+        "next_week": "Next week",
+        "schedule_coordination": "Coordinate date"
+      }
     }
+  },
+  "help_page": {
+    "title": "Help Center",
+    "subtitle": "Find the right detailed help route for your situation in Korea.",
+    "badge": "Help Center",
+    "numbers_title": "Emergency Numbers",
+    "medical_title": "Medical Help",
+    "medical_desc": "Nearby clinics & symptom cards",
+    "lost_title": "Lost & Found",
+    "lost_desc": "Step-by-step recovery guide",
+    "police_title": "Police / Crime",
+    "police_desc": "Report & get assistance",
+    "interp_title": "Interpretation",
+    "interp_desc": "1330 helpline & translation apps",
+    "symptom_title": "Symptom Phrase Cards",
+    "symptom_hint": "Tap a symptom to show the Korean phrase to your doctor",
+    "clinic_title": "International Clinics & ER",
+    "med_title": "Convenience Store Medicines",
+    "med_hint": "Available 24/7 at GS25, CU, 7-Eleven",
+    "lost_step1": "Step 1: Where did you lose it?",
+    "lost_step1_hint": "Select the location to see recovery steps.",
+    "quick_links": "Quick Links",
+    "go_lost112": "Go to Lost112 Official Report Site",
+    "police_contacts": "Key Contacts",
+    "police_phrases": "Emergency Phrases",
+    "interp_services": "Translation Services",
+    "interp_phrases": "Useful Phrases",
+    "emergency_call": "Emergency?",
+    "emergency_hint": "Call 119 immediately",
+    "taxi": "Taxi",
+    "subway": "Subway",
+    "airport": "Airport",
+    "street": "Street",
+    "lost_in": "Lost item in:",
+    "hub_subtitle": "Use My Support as the hub, open a detailed help page for the situation, and keep Emergency Phrases ready when you need to show Korean on the spot.",
+    "support_hub_title": "My Support",
+    "support_hub_desc": "Use this as the main hub when you need help but are not sure which detailed page fits your situation.",
+    "support_hub_meta": "Hub for booking, general, FAQ, and emergency help",
+    "phrases_title": "Emergency Phrases",
+    "phrases_desc": "Open large Korean phrases you can show directly to staff, drivers, police, or medical teams.",
+    "phrases_meta": "Field-ready phrasebook",
+    "call1330_title": "Call 1330",
+    "call1330_desc": "Tourism Helpline support is often the fastest starting point when language support is needed.",
+    "call1330_meta": "Tourism helpline",
+    "main_119": "Fire / ambulance emergency",
+    "main_112": "Police emergency",
+    "main_1330": "Tourism Helpline",
+    "main_120": "Seoul Dasan call center",
+    "role_title": "How these pages work",
+    "role_text": "My Support is your hub. Each /help page explains one route in more detail. Travel Phrasebook is for large Korean text you can show during a real situation.",
+    "quick_actions_title": "Quick actions",
+    "quick_actions_desc": "These are the fastest safe entry points when you need help right now.",
+    "routes_title": "Detailed help routes",
+    "routes_desc": "Choose the page that best matches the situation. Each route keeps the existing tools and contact links available in the app.",
+    "routes_open": "Open route",
+    "numbers_desc": "Use these numbers only when the route fits the situation. Detailed pages below add more context and phrase support.",
+    "interp_detail_subtitle": "Use this page when communication is difficult. It points you to phrase support, hotlines, and simple translation tools that already exist in the app flow.",
+    "interp_when_title": "When to use this page",
+    "interp_when_desc": "Use this route when you need help speaking with staff, drivers, police, or medical teams. If the situation is dangerous or health-related, move to the matching detailed help page as well.",
+    "interp_services_desc": "These existing options may open a phone call or an external translation page. No new in-app interpreter service is created here.",
+    "interp_phrases_desc": "These are quick previews. For large showable text and more emergency phrases, move to Travel Phrasebook.",
+    "interp_show_more": "Show more emergency phrases",
+    "interp_next_title": "Need a different detailed route?",
+    "interp_next_desc": "Interpreter help does not replace police or medical guidance. If the problem is safety- or health-related, open the matching page below as well.",
+    "interp_medical_bridge": "Move to Medical Help if symptoms, injury, or urgent treatment are part of the situation.",
+    "interp_medical_cta": "Open Medical Help",
+    "interp_police_bridge": "Move to Police Help if the situation feels unsafe or you need official safety guidance.",
+    "interp_police_cta": "Open Police Help",
+    "police_detail_subtitle": "Use this page when you need police contact, tourist police guidance, or a safer next step. It keeps the existing routes and numbers already available in the project.",
+    "police_when_title": "When to use this page",
+    "police_when_desc": "Use this route if the situation feels unsafe, if you need police contact information, or if you need a clearer safety path. It does not replace direct emergency services when immediate action is needed.",
+    "police_contacts_desc": "Use the existing call or website routes below. Choose the number that best matches the situation.",
+    "police_info": {
+      "tourist_info": "Tourist Police officers are stationed at Myeongdong, Insadong, and Itaewon areas.",
+      "crime_label": "Police emergency",
+      "crime_note": "Use this for immediate police response or when the situation feels unsafe.",
+      "tourist_label": "Tourism helpline safety support",
+      "tourist_note": "Use this when you need help understanding police or tourist safety options.",
+      "station_label": "Official police website"
+    },
+    "police_phrase_desc": "These quick phrases help when you need to explain the situation before opening the full phrasebook.",
+    "police_bridge_title": "Need more than one route?",
+    "police_bridge_desc": "If communication is difficult, open Interpreter Help too. If the situation includes injury or urgent symptoms, open Medical Help as well.",
+    "police_interp_bridge": "Open Interpreter Help when you need help explaining the situation to officers or staff.",
+    "police_medical_bridge": "Open Medical Help when the situation also includes injury, illness, or emergency treatment needs.",
+    "medical_detail_subtitle": "Use this page for medical contact paths, symptom phrases, and static clinic guidance already included in the project. It does not create a new diagnosis or hospital booking service.",
+    "medical_notice_title": "If the situation feels urgent",
+    "medical_notice_text": "Call 119 first for urgent symptoms, severe injury, or breathing problems. Use the phrasebook and interpreter route to help explain the situation more clearly.",
+    "clinic_desc": "These are static example clinic and hospital entries already included in the app. Call ahead when possible.",
+    "medical_bridge_title": "Need another support route too?",
+    "medical_bridge_desc": "Open Interpreter Help if communication is difficult. Open Police Help as well if the medical need is connected to an unsafe incident.",
+    "medical_interp_bridge": "Move to Interpreter Help when you need a clearer way to explain symptoms or treatment questions.",
+    "medical_police_bridge": "Move to Police Help when the medical issue is connected to a crime, accident, or safety risk.",
+    "lost_quick_desc": "Use the matching official route or helpline if you need direct lost-item support.",
+    "lost112_desc": "Official lost and found route for many public cases in Korea.",
+    "embassy_desc": "Use this when a lost passport or identity document needs embassy support.",
+    "lost_1330_desc": "Use this when you need help understanding the next step or explaining the situation.",
+    "lost_steps_desc": "Follow the matching route below. Use Support or Phrasebook if you need extra help talking to staff.",
+    "interp_badge": "Interpreter Help",
+    "police_badge": "Safety Route",
+    "medical_badge": "Medical Route",
+    "lost_badge": "Lost Item Route",
+    "interp_actions": {
+      "open_papago": "Open Papago",
+      "open_google_translate": "Open Google Translate"
+    },
+    "interp_booking_title": "Interpreter for this booking",
+    "interp_booking_desc": "You opened interpretation help for a reservation. Keep the venue, time, and booking status visible while you talk to staff.",
+    "booking_phrases_desc": "Open booking phrases first when you need to explain the reservation, delay, or check-in situation to staff.",
+    "booking_context_title": "Help for this booking",
+    "booking_context_desc": "You opened this help page while checking a reservation. Keep the venue, time, and booking status visible while you choose the next support route.",
+    "police_booking_desc": "You opened safety help while checking a reservation. Keep the venue, time, and booking status visible while you choose the safest next route.",
+    "medical_booking_desc": "You opened medical help while checking a reservation. Keep the venue, time, and booking status visible while you choose the next medical or interpreter route.",
+    "lost_booking_desc": "If you were on the way to a reservation, keep the venue, time, and booking status visible while you ask for directions or support.",
+    "interp": {
+      "hotline_title": "1330 Tourism Helpline",
+      "hotline_desc": "Fastest official helpline when you need language support or help explaining a travel problem.",
+      "papago_title": "Papago",
+      "papago_desc": "Open Naver Papago for quick translation and text support.",
+      "google_title": "Google Translate",
+      "google_desc": "Open Google Translate when you need another quick translation option.",
+      "dasan_title": "120 Dasan Call Center",
+      "dasan_desc": "Seoul city helpline for local public information and general guidance."
+    },
+    "lost112_title": "Lost112",
+    "embassy_title": "Embassy Finder",
+    "lost_1330_title": "1330 Travel Helpline",
+    "lost": {
+      "taxi_hint": "Open the steps for items lost in a taxi.",
+      "subway_hint": "Open the steps for items lost in the subway or at a station.",
+      "airport_hint": "Open the steps for items lost at the airport or in transit.",
+      "street_hint": "Open the steps for items lost on the street or in a public area."
+    }
+  }
 }

@@ -1,4 +1,23 @@
 {
+  "beauty_explore": {
+    "form_name": "Tên",
+    "form_name_placeholder": "Nhập tên của bạn",
+    "form_phone": "Liên hệ (hoặc SNS ID)",
+    "form_phone_placeholder": "Số điện thoại hoặc SNS ID",
+    "form_request": "Yêu cầu",
+    "form_request_placeholder": "Dị ứng hoặc kiểu dáng mong muốn",
+    "agreement_confirm": "Xác nhận thông tin",
+    "agreement_confirm_desc": "Tôi xác nhận lựa chọn này.",
+    "agreement_privacy": "Thỏa thuận quyền riêng tư",
+    "agreement_privacy_desc": "Tôi đồng ý cung cấp thông tin.",
+    "region_all": "Tất cả khu vực",
+    "label_today": "Hôm nay",
+    "label_tomorrow": "Ngày mai",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Đã gửi yêu cầu đặt lịch!",
+    "booking_confirmation_desc": "Chúng tôi sẽ sớm thông báo cho bạn.",
+    "booking_confirmation_cta": "Lịch hẹn của tôi"
+  },
   "common": {
     "welcome": "Chào mừng, Lữ khách.",
     "greeting": "Chào buổi sáng",
@@ -133,7 +152,10 @@
         "days_one": "{{count}} ng?y",
         "days_other": "{{count}} ng?y"
       }
-    }
+    },
+    "morning": "Chào buổi sáng",
+    "afternoon": "Chào buổi chiều",
+    "evening": "Chào buổi tối"
   },
   "transport": {
     "moving_to": "Đang đến {{dest}}",
@@ -157,82 +179,80 @@
   },
   "home_beauty": {
     "hero": {
-      "eyebrow": "Beauty Booking Concierge",
-      "title": "Bạn muốn đặt dịch vụ nào?",
-      "subtitle": "Chọn dịch vụ làm đẹp mong muốn trước, sau đó tiến thẳng đến bước đặt chỗ. Chúng tôi thiết kế để chọn nhanh trên di động, sau đó là so sánh shop và yêu cầu đặt lịch.",
-      "welcome": "{{name}} ơi, hãy chọn dịch vụ bạn cần hôm nay."
+      "eyebrow": "Dịch vụ đặt lịch làm đẹp",
+      "title": "Bạn muốn đặt dịch vụ gì?",
+      "subtitle": "Chọn dịch vụ làm đẹp và đặt lịch ngay.",
+      "welcome": "{{name}}, hãy chọn dịch vụ.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "step": "Bước 1",
-      "title": "Vui lòng chọn dịch vụ làm đẹp mong muốn",
-      "description": "Sau khi chọn danh mục, bạn có thể bắt đầu khám phá các lịch đặt dựa trên dịch vụ đó ở bước tiếp theo."
+      "step": "BƯỚC. 01",
+      "title": "Vui lòng chọn dịch vụ làm đẹp",
+      "description": "Vui lòng chọn danh mục trước để khám phá chính xác nhất."
     },
     "categories": {
       "hair": {
         "label": "Tóc",
-        "note": "Cắt, Uốn, Nhuộm, Sấy",
-        "summary": "Bắt đầu đặt chỗ nhanh chóng từ thay đổi kiểu tóc đến chăm sóc nhẹ nhàng."
+        "note": "Cắt, uốn, nhuộm",
+        "summary": "Đặt lịch từ thay đổi kiểu tóc."
       },
       "nail": {
         "label": "Móng",
-        "note": "Sơn gel, Chăm sóc, Nối móng",
-        "summary": "Chọn tâm trạng và thiết kế mong muốn, sau đó dễ dàng chuyển sang giai đoạn đặt chỗ."
+        "note": "Gel, chăm sóc, nối",
+        "summary": "Chọn thiết kế và đặt lịch."
       },
       "esthetic": {
         "label": "Thẩm mỹ",
-        "note": "Chăm sóc da, Tạo hình, Chăm sóc làm dịu",
-        "summary": "So sánh các shop và đặt chỗ theo tình trạng da và mục tiêu trị liệu của bạn."
+        "note": "Chăm sóc da, tạo hình",
+        "summary": "So sánh salon và đặt lịch."
       },
       "waxing": {
         "label": "Waxing",
-        "note": "Mặt, Toàn thân, Brazilian",
-        "summary": "Nhanh chóng tìm và đặt shop phù hợp với vùng da và lịch trình của bạn."
+        "note": "Mặt, toàn thân, Brazil",
+        "summary": "Tìm salon phù hợp nhanh chóng."
       },
       "makeup": {
         "label": "Trang điểm",
-        "note": "Hàng ngày, Chụp ảnh, Đám cưới",
-        "summary": "Chọn dịch vụ trang điểm phù hợp với lịch trình sự kiện và bắt đầu đặt chỗ ngay."
+        "note": "Hàng ngày, chụp ảnh, cưới",
+        "summary": "Chọn dịch vụ trang điểm cho sự kiện."
       },
       "lash": {
-        "label": "Lông mi",
-        "note": "Nối mi, Uốn mi, Mi dưới",
-        "summary": "Kết nối trực tiếp với menu mong muốn, từ nối mi tự nhiên đến tạo kiểu dày."
+        "label": "Mi",
+        "note": "Nối mi, uốn mi",
+        "summary": "Từ tự nhiên đến dày, tùy chọn."
       }
     },
     "selection": {
       "eyebrow": "Danh mục đã chọn",
       "tags": {
-        "mobile": "Đặt chỗ di động",
-        "comparison": "So sánh shop",
-        "inquiry": "Hỏi đáp thời gian thực"
+        "mobile": "Đặt qua điện thoại",
+        "comparison": "So sánh salon",
+        "inquiry": "Hỏi đáp trực tuyến"
       },
-      "empty": "Vui lòng chọn danh mục trước. Nút bắt đầu đặt chỗ sẽ được kích hoạt sau khi chọn."
+      "empty": "Vui lòng chọn danh mục trước. Nút bắt đầu đặt lịch sẽ hoạt động sau khi chọn."
     },
     "cta": {
-      "hint": "Khám phá các dịch vụ làm đẹp có sẵn dựa trên danh mục đã chọn ở màn hình tiếp theo.",
-      "button": "Bắt đầu đặt chỗ"
+      "hint": "Chọn danh mục để bắt đầu đặt lịch",
+      "button": "Bắt đầu đặt lịch"
     },
-    "interpreter": {
-      "eyebrow": "Hỗ trợ ngôn ngữ",
-      "title": "Cần đặt chỗ bằng tiếng nước ngoài? Hãy dùng Trợ lý Phiên dịch",
-      "description": "Nếu bạn lo lắng về việc giao tiếp khi tư vấn trước khi đặt hoặc khi đến shop, bạn có thể kết nối trực tiếp với phiên dịch thời gian thực.",
-      "button": "Mở Trợ lý Phiên dịch"
+    "interpreter_entry": {
+      "title": "Phiên dịch trực tuyến",
+      "description": "Giao tiếp dễ dàng với nhân viên",
+      "cta": "Mở phiên dịch"
     },
-    "assurance": {
-      "items": [
-        {
-          "title": "Chọn danh mục dễ dàng",
-          "desc": "Chọn dịch vụ của bạn ở màn hình đầu tiên và vào luồng đặt chỗ ngay lập tức."
-        },
-        {
-          "title": "Ngôn ngữ không còn là trở ngại",
-          "desc": "Nói chuyện tự nhiên với các shop bằng phiên dịch thời gian thực khi cần thiết."
-        },
-        {
-          "title": "Thiết kế ưu tiên di động",
-          "desc": "Cải thiện chuyển đổi với các nút dạng thẻ và CTA lớn dễ chọn bằng một tay."
-        }
-      ]
+    "location_sheet": {
+      "search_title": "Tìm kiếm vị trí",
+      "search_result_count": "{{count}} kết quả cho \"{{query}}\"",
+      "view_location": "Xem vị trí",
+      "view_location_desc": "Xem vị trí chi tiết trên bản đồ",
+      "call_taxi": "Gọi taxi",
+      "google_maps_desc": "Xem chỉ đường phương tiện công cộng trên Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Vui lòng đến địa chỉ này",
+      "copy": "Sao chép địa chỉ",
+      "copy_done": "Đã sao chép!",
+      "close": "Đóng"
     }
   },
   "interpreter_ui": {
@@ -268,7 +288,8 @@
       "request_custom_label": "Tùy chỉnh",
       "request_custom_title": "Yêu cầu kế hoạch {{days}} ngày",
       "request_custom_toast": "Đã yêu cầu kế hoạch {{days}} ngày tùy chỉnh! Concierge của chúng tôi sẽ liên hệ với bạn."
-    }
+    },
+    "badge": "Trải nghiệm vẻ đẹp Hàn Quốc"
   },
   "explore_page": {
     "title": "Khám phá",

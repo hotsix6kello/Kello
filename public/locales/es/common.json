@@ -1,171 +1,272 @@
 {
-    "common": {
-        "welcome": "Bienvenido, Viajero.",
-        "greeting": "Buenos días",
-        "login": "Entrar",
-        "today": "Hoy",
-        "move": "Mover",
-        "book": "Reservar",
-        "chat": "Chat",
-        "my": "Mi Info",
-        "current_operation": "Operación Actual",
-        "live": "EN VIVO",
-        "recommended": "Recomendado Cerca",
-        "based_on_location": "Basado en tu ubicación",
-        "start_nav": "Iniciar Navegación",
-        "delay_10m": "Retraso +10m",
-        "confirmed": "Confirmado",
-        "payment_completed": "Pago Completado",
-        "weather_clear": "Despejado",
-        "back": "Atrás",
-        "select_language": "Seleccionar Idioma",
-        "home_nav": "Inicio",
-        "explore_nav": "Explorar",
-        "planner_nav": "Itinerario",
-        "today_nav": "Hoy",
-        "my_nav": "Mi Info",
-        "day_unit": "d",
-        "locale": "es-ES",
-        "community_nav": "Community"
-    },
-    "transport": {
-        "moving_to": "Yendo a {{dest}}",
-        "remaining": "Restante",
-        "line_2_direction": "Línea 2 • Dirección Ayuntamiento",
-        "departed": "salió",
-        "passing_now": "Pasando ahora...",
-        "current": "Actual",
-        "get_off_at": "Bajar en",
-        "exit_3": "Salida 3",
-        "getting_off_here": "Me bajo aquí",
-        "stations": {
-            "samseong": "Samseong",
-            "seolleung": "Seolleung",
-            "yeoksam": "Yeoksam",
-            "gangnam": "Gangnam",
-            "gyodae": "Gyodae",
-            "seocho": "Seocho",
-            "seongsu": "Seongsu"
-        }
-    },
-    "home": {
-        "title_korea": "Hoy en Corea",
-        "title": "Viaje a Corea, comprendido en 3 segundos",
-        "subtitle": "Reservas de conserjería · Itinerario automático · Navegación",
-        "create_trip_cta": "Empezar a planificar",
-        "input_label": "¿A dónde viajas ?",
-        "input_placeholder": "Ciudad, área, nombre del hotel",
-        "days_label": "Periodo del viaje",
-        "recommended_plans": "Planes de viaje recomendados",
-        "plans": {
-            "2d": {
-                "title": "2 Días: Esencial de Seúl",
-                "label": "Plan de 2 días"
-            },
-            "3d": {
-                "title": "3 Días: K-Cultura y Estilo",
-                "label": "Plan de 3 días"
-            },
-            "5d": {
-                "title": "5 Días: El Gran Tour",
-                "label": "Plan de 5 días"
-            },
-            "request_custom_label": "A medida",
-            "request_custom_title": "Solicitar plan de {{days}} días",
-            "request_custom_toast": "¡Plan de {{days}} días personalizado solicitado! Nuestro conserje te contactará."
-        }
-    },
-    "explore_items": {
-        "airport_arrival": "Llegada al Aeropuerto de Incheon",
-        "hotel_checkin": "Check-in en el hotel / Estancia"
-    },
-    "explore_page": {
-        "title": "Explorar",
-        "select_city": "Seleccionar ciudad"
-    },
-    "planner_page": {
-        "title": "Itinerario",
-        "day": "Día {{n}}"
-    },
-    "today_page": {
-        "title": "Hoy",
-        "active_now": "Activo",
-        "navigate": "Navegar",
-        "booking_ref": "Ref reserva: {{ref}}",
-        "next_up": "Siguiente",
-        "minutes_left": "Empieza en {{mins}}m",
-        "depart_early": "Salir ahora",
-        "timeline": "Cronograma",
-        "empty": {
-            "title": "Sin agenda para hoy",
-            "desc": "¡Explora lugares y añadélos!",
-            "cta": "Explorar lugares"
-        }
-    },
-    "booking_detail": {
-        "select_date": "Seleccionar fecha",
-        "select_time": "Seleccionar hora",
-        "total_price": "Precio total",
-        "request_booking": "Solicitar reserva"
-    },
-    "navigation_page": {
-        "title": "Hoy"
-    },
-    "my_page": {
-        "bookings": {
-            "title": "Mis reservas",
-            "date_time": "Fecha / Hora",
-            "area": "Área",
-            "price": "Precio",
-            "new_added": "¡Nueva reserva añadida!"
-        },
-        "community": {
-            "title": "Mis Publicaciones de la Comunidad",
-            "empty": "Aún no se han escrito publicaciones."
-        }
-    },
-    "community_page": {
-        "title": "Community",
-        "subtitle": "Connect with locals & travelers",
-        "filter_all": "All",
-        "filter_meetup": "Food & Meetup",
-        "filter_travel": "Travel Mate",
-        "filter_help": "Local Help",
-        "comments": "Comments",
-        "message": "Message",
-        "type": {
-            "MEETUP": "MEETUP",
-            "TRAVEL": "TRAVEL",
-            "HELP": "HELP",
-            "REVIEW": "REVIEW"
-        },
-        "post": {
-            "1": {
-                "author": "Mika (Japan)",
-                "time": "10 mins ago",
-                "title": "Samgyeopsal Meetup 🥓",
-                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-            },
-            "2": {
-                "author": "John (US)",
-                "time": "1 hour ago",
-                "title": "Hongdae Street Performance 🎸",
-                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-            },
-            "3": {
-                "author": "Jihoon (Korea)",
-                "time": "2 hours ago",
-                "title": "Need help with subway directions? 🚇",
-                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-            },
-            "4": {
-                "author": "Li Wei (China)",
-                "time": "3 hours ago",
-                "title": "K-Beauty Shopping 💄",
-                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-            }
-        },
-        "filter_review": "Reviews",
-        "detail": "Detalle de la publicación"
+  "beauty_explore": {
+    "form_name": "Nombre",
+    "form_name_placeholder": "Ingresa tu nombre",
+    "form_phone": "Contacto (o ID de SNS)",
+    "form_phone_placeholder": "Teléfono o ID de SNS",
+    "form_request": "Solicitudes",
+    "form_request_placeholder": "Alergias o estilo deseado",
+    "agreement_confirm": "Confirmar detalles",
+    "agreement_confirm_desc": "Confirmo la selección.",
+    "agreement_privacy": "Acuerdo de privacidad",
+    "agreement_privacy_desc": "Acepto proporcionar la información.",
+    "region_all": "Todas las zonas",
+    "label_today": "Hoy",
+    "label_tomorrow": "Mañana",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "¡Reserva solicitada!",
+    "booking_confirmation_desc": "Te avisaremos pronto.",
+    "booking_confirmation_cta": "Mis reservas"
+  },
+  "common": {
+    "welcome": "Bienvenido, Viajero.",
+    "greeting": "Buenos días",
+    "login": "Entrar",
+    "today": "Hoy",
+    "move": "Mover",
+    "book": "Reservar",
+    "chat": "Chat",
+    "my": "Mi Info",
+    "current_operation": "Operación Actual",
+    "live": "EN VIVO",
+    "recommended": "Recomendado Cerca",
+    "based_on_location": "Basado en tu ubicación",
+    "start_nav": "Iniciar Navegación",
+    "delay_10m": "Retraso +10m",
+    "confirmed": "Confirmado",
+    "payment_completed": "Pago Completado",
+    "weather_clear": "Despejado",
+    "back": "Atrás",
+    "select_language": "Seleccionar Idioma",
+    "home_nav": "Inicio",
+    "explore_nav": "Explorar",
+    "planner_nav": "Itinerario",
+    "today_nav": "Hoy",
+    "my_nav": "Mi Info",
+    "day_unit": "d",
+    "locale": "es-ES",
+    "community_nav": "Community",
+    "morning": "Buenos días",
+    "afternoon": "Buenas tardes",
+    "evening": "Buenas noches"
+  },
+  "transport": {
+    "moving_to": "Yendo a {{dest}}",
+    "remaining": "Restante",
+    "line_2_direction": "Línea 2 • Dirección Ayuntamiento",
+    "departed": "salió",
+    "passing_now": "Pasando ahora...",
+    "current": "Actual",
+    "get_off_at": "Bajar en",
+    "exit_3": "Salida 3",
+    "getting_off_here": "Me bajo aquí",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
     }
+  },
+  "home": {
+    "title_korea": "Hoy en Corea",
+    "title": "Viaje a Corea, comprendido en 3 segundos",
+    "subtitle": "Reservas de conserjería · Itinerario automático · Navegación",
+    "create_trip_cta": "Empezar a planificar",
+    "input_label": "¿A dónde viajas ?",
+    "input_placeholder": "Ciudad, área, nombre del hotel",
+    "days_label": "Periodo del viaje",
+    "recommended_plans": "Planes de viaje recomendados",
+    "plans": {
+      "2d": {
+        "title": "2 Días: Esencial de Seúl",
+        "label": "Plan de 2 días"
+      },
+      "3d": {
+        "title": "3 Días: K-Cultura y Estilo",
+        "label": "Plan de 3 días"
+      },
+      "5d": {
+        "title": "5 Días: El Gran Tour",
+        "label": "Plan de 5 días"
+      },
+      "request_custom_label": "A medida",
+      "request_custom_title": "Solicitar plan de {{days}} días",
+      "request_custom_toast": "¡Plan de {{days}} días personalizado solicitado! Nuestro conserje te contactará."
+    },
+    "badge": "Vive la belleza de Corea"
+  },
+  "explore_items": {
+    "airport_arrival": "Llegada al Aeropuerto de Incheon",
+    "hotel_checkin": "Check-in en el hotel / Estancia"
+  },
+  "explore_page": {
+    "title": "Explorar",
+    "select_city": "Seleccionar ciudad"
+  },
+  "planner_page": {
+    "title": "Itinerario",
+    "day": "Día {{n}}"
+  },
+  "today_page": {
+    "title": "Hoy",
+    "active_now": "Activo",
+    "navigate": "Navegar",
+    "booking_ref": "Ref reserva: {{ref}}",
+    "next_up": "Siguiente",
+    "minutes_left": "Empieza en {{mins}}m",
+    "depart_early": "Salir ahora",
+    "timeline": "Cronograma",
+    "empty": {
+      "title": "Sin agenda para hoy",
+      "desc": "¡Explora lugares y añadélos!",
+      "cta": "Explorar lugares"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Seleccionar fecha",
+    "select_time": "Seleccionar hora",
+    "total_price": "Precio total",
+    "request_booking": "Solicitar reserva"
+  },
+  "navigation_page": {
+    "title": "Hoy"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Mis reservas",
+      "date_time": "Fecha / Hora",
+      "area": "Área",
+      "price": "Precio",
+      "new_added": "¡Nueva reserva añadida!"
+    },
+    "community": {
+      "title": "Mis Publicaciones de la Comunidad",
+      "empty": "Aún no se han escrito publicaciones."
+    }
+  },
+  "community_page": {
+    "title": "Community",
+    "subtitle": "Connect with locals & travelers",
+    "filter_all": "All",
+    "filter_meetup": "Food & Meetup",
+    "filter_travel": "Travel Mate",
+    "filter_help": "Local Help",
+    "comments": "Comments",
+    "message": "Message",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Reviews",
+    "detail": "Detalle de la publicación"
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Conserje de Reservas de Belleza",
+      "title": "Qué reserva necesitas?",
+      "subtitle": "Selecciona tu servicio de belleza y pasa directamente a reservar.",
+      "welcome": "{{name}}, selecciona un servicio.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
+    },
+    "booking": {
+      "step": "PASO. 01",
+      "title": "Selecciona el servicio que deseas",
+      "description": "Seleccione primero una categoría para una exploración más precisa."
+    },
+    "categories": {
+      "hair": {
+        "label": "Cabello",
+        "note": "Corte, permanente, color",
+        "summary": "Reserva desde cambios de estilo hasta recortes rápidos."
+      },
+      "nail": {
+        "label": "Uñas",
+        "note": "Gel, cuidado, extensión",
+        "summary": "Elige tu diseño y procede a reservar."
+      },
+      "esthetic": {
+        "label": "Estética",
+        "note": "Cuidado de piel, contorno",
+        "summary": "Compara salones y reserva según tu piel."
+      },
+      "waxing": {
+        "label": "Depilación",
+        "note": "Facial, corporal, brasileña",
+        "summary": "Encuentra rápidamente el salón adecuado."
+      },
+      "makeup": {
+        "label": "Maquillaje",
+        "note": "Diario, sesión, boda",
+        "summary": "Selecciona maquillaje para tu evento."
+      },
+      "lash": {
+        "label": "Pestañas",
+        "note": "Extensión, permanente",
+        "summary": "Desde natural hasta volumen, elige tu menú."
+      }
+    },
+    "selection": {
+      "eyebrow": "Categoría seleccionada",
+      "tags": {
+        "mobile": "Reserva móvil",
+        "comparison": "Comparar salones",
+        "inquiry": "Consulta en tiempo real"
+      },
+      "empty": "Seleccione primero una categoría. El botón para iniciar la reserva se activará tras la selección."
+    },
+    "cta": {
+      "hint": "Selecciona una categoría para iniciar la reserva",
+      "button": "Comenzar reserva"
+    },
+    "interpreter_entry": {
+      "title": "Intérprete en tiempo real",
+      "description": "Comunícate fácilmente con el personal",
+      "cta": "Iniciar intérprete"
+    },
+    "location_sheet": {
+      "search_title": "Buscar ubicación",
+      "search_result_count": "{{count}} resultados para \"{{query}}\"",
+      "view_location": "Ver ubicación",
+      "view_location_desc": "Consulta la ubicación detallada en el mapa",
+      "call_taxi": "Llamar taxi",
+      "google_maps_desc": "Consultar rutas de transporte público en Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Por favor, diríjase a esta dirección",
+      "copy": "Copiar dirección",
+      "copy_done": "¡Copiado!",
+      "close": "Cerrar"
+    }
+  }
 }

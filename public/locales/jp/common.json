@@ -1,1048 +1,1269 @@
 {
-    "header": {
-        "view_app": "アプリで見る",
-        "faq": "FAQ",
-        "recent": "最近見たアク티ビティ"
+  "header": {
+    "view_app": "アプリで見る",
+    "faq": "FAQ",
+    "recent": "最近見たアク티ビティ"
+  },
+  "beauty_explore": {
+    "hero_title": "ビューサービス予約",
+    "hero_desc": "エリアを選んで、サロンを比較して、希望の時間をすばやく確保できます。",
+    "step_1": "店舗を選択",
+    "step_2": "日時を選択",
+    "step_3": "内容を確認",
+    "step_4": "予約を送信",
+    "step_5": "完了",
+    "region_all": "すべてのエリア",
+    "label_today": "今日",
+    "label_tomorrow": "明日",
+    "label_booking_unit": "KRW",
+    "label_review": "レビュー",
+    "label_select_prompt": "下の予約パネルで希望の日付と時間を選択してください。",
+    "label_service_default": "未選択",
+    "label_designer_default": "デザイナー未選択",
+    "label_designer_hint": "必要な場合のみ担当デザイナーを選択してください。",
+    "label_no_designer": "現在選択できるデザイナーがありません。",
+    "label_no_surcharge": "追加料金なし",
+    "label_addon_default": "追加オプションなし",
+    "label_addon_limit": "追加オプションは最大2個まで選択できます。",
+    "booking_panel_title": "予約日時を選択",
+    "booking_panel_desc": "店舗を選択したら、利用可能な日付と時間を選んで次のステップへ進んでください。",
+    "booking_empty_title": "まず店舗を選択してください",
+    "booking_empty_desc": "上の店舗リストから希望の店舗を選択すると、予約可能な日付と時間が表示されます。",
+    "booking_not_found_title": "予約情報を読み込めませんでした",
+    "booking_not_found_desc": "この店舗の予約枠を取得できませんでした。別の店舗を選ぶか、もう一度お試しください。",
+    "booking_date_label": "予約日",
+    "booking_time_label": "予約時間",
+    "booking_no_date": "現在選択できる日付がありません。",
+    "booking_no_time_wait": "先に日付を選択してください。",
+    "booking_no_slots": "この日の予約可能時間がありません。",
+    "confirm_title": "予約内容を確認",
+    "confirm_desc": "選択した内容を確認し、必要な情報を入力して予約を送信してください。",
+    "confirm_empty_title": "確認する予約内容がありません",
+    "confirm_empty_desc": "店舗・日付・時間を選択すると、ここで予約内容を確認できます。",
+    "confirm_price_hint": "最終料金は店舗での相談内容に応じて変わる場合があります。",
+    "confirm_review_error_title": "確認項目を見直してください",
+    "confirm_review_error_desc": "未入力の必須項目または未同意の内容があります。",
+    "summary_category": "カテゴリ",
+    "summary_region": "エリア",
+    "summary_store": "店舗",
+    "summary_date": "日付",
+    "summary_time": "時間",
+    "summary_hint": "内容を確認してから次のステップへ進んでください。",
+    "summary_btn": "内容を確認する",
+    "btn_select_time": "この店舗を選ぶ",
+    "btn_reselect_time": "日時を再選択",
+    "btn_edit": "修正する",
+    "btn_submit": "予約を送信",
+    "completion_title": "予約リクエストを送信しました",
+    "completion_desc1": "店舗が予約内容を確認した後、確定結果をお知らせします。",
+    "completion_desc2": "料金、追加オプション、デザイナー料金をまとめて確認できます。",
+    "completion_desc3": "予約後はマイページで進行状況を確認できます。",
+    "form_name": "お名前",
+    "form_name_placeholder": "予約者のお名前を入力してください",
+    "form_phone": "連絡先（またはSNS ID）",
+    "form_phone_placeholder": "電話番号またはSNS IDを入力してください",
+    "form_request": "リクエスト",
+    "form_request_placeholder": "アレルギー、希望スタイル、伝えたい内容があれば入力してください",
+    "agreement_confirm": "予約内容を確認しました",
+    "agreement_confirm_desc": "選択した店舗、日時、サービス内容を確認しました。",
+    "agreement_privacy": "個人情報の提供に同意します",
+    "agreement_privacy_desc": "予約処理のために必要な情報を提供することに同意します。",
+    "empty_store_title": "条件に合う店舗が見つかりません",
+    "empty_store_desc": "エリアを変更するか、別のカテゴリを選択してください。",
+    "toast_select_time": " の予約可能時間を確認してください。",
+    "toast_check_info": "入力内容と同意項目を確認してください。",
+    "toast_submit_error": "予約送信中に問題が発生しました。もう一度お試しください。",
+    "toast_addon_limit": "追加オプションは2個まで選択できます。",
+    "toast_copy_hint": "{{label}} メッセージをコピーする準備ができました。",
+    "booking_confirmation_title": "予約リクエストを送信しました！",
+    "booking_confirmation_desc": "まもなくお知らせします。",
+    "booking_confirmation_cta": "予約を確認する"
+  },
+  "common": {
+    "welcome": "ようこそ、旅行者様。",
+    "greeting": "おはようございます",
+    "login": "ログイン",
+    "signup": "新規登録",
+    "today": "今日",
+    "move": "移動",
+    "book": "予約",
+    "chat": "相談",
+    "my": "MY",
+    "min_unit": "分",
+    "current_operation": "現在のスケジュール",
+    "live": "LIVE",
+    "recommended": "周辺のおすすめ",
+    "based_on_location": "現在地に基づく",
+    "start_nav": "ルート案内開始",
+    "delay_10m": "10分遅らせる",
+    "confirmed": "予約確定",
+    "payment_completed": "支払い完了",
+    "weather_clear": "晴れ",
+    "back": "戻る",
+    "select_language": "言語選択",
+    "home_nav": "ホーム",
+    "explore_nav": "探索",
+    "planner_nav": "日程表",
+    "today_nav": "今日",
+    "my_nav": "マイ情報",
+    "day_unit": "日",
+    "locale": "ja-JP",
+    "loading": "読み込み中...",
+    "cities": {
+      "seoul": "ソウル",
+      "busan": "釜山",
+      "jeju": "済州",
+      "gyeongju": "慶州"
     },
-    "common": {
-        "welcome": "ようこそ、旅行者様。",
-        "greeting": "おはようございます",
-        "login": "ログイン",
-        "signup": "新規登録",
+    "categories": {
+      "all": "すべて",
+      "food": "グルメ",
+      "beauty": "ビューティー",
+      "event": "公演",
+      "festival": "お祭り",
+      "attraction": "名所",
+      "transport": "交通"
+    },
+    "badges": {
+      "english_friendly": "英語対応",
+      "vegan_certified": "ビーガン認証",
+      "michelin": "ミシュラン",
+      "wait_free": "待ち時間なし",
+      "local_experience": "現地体験",
+      "k_idol_style": "K-IDOLスタイル",
+      "tax_refund": "免税",
+      "summer_must_go": "夏のおすすめ",
+      "non_verbal": "ノンバーバル",
+      "family": "家族連れ",
+      "night_view": "夜景",
+      "photo_spot": "フォトスポット",
+      "hanbok_free_entry": "韓服無料入場",
+      "history": "歴史",
+      "city_view": "シティビュー"
+    },
+    "ingredients": {
+      "vegetables": "野菜",
+      "soy": "豆",
+      "pork": "豚肉",
+      "kimchi": "キムチ",
+      "seafood": "海鮮"
+    },
+    "diet": {
+      "vegan": "ビーガン",
+      "gluten_free": "グルテンフリー",
+      "meat_lover": "お肉好き",
+      "pescatarian": "ペスカタリアン"
+    },
+    "community_nav": "コミュニティ",
+    "actions": {
+      "apply_again": "再申請",
+      "apply_as_partner": "パートナー申請",
+      "booking_help": "予約サポート",
+      "call_112": "112に通報",
+      "call_119": "119に通報",
+      "call_1330": "1330に通報",
+      "close": "閉じる",
+      "contact_support": "サポートに問い合わせ",
+      "copied": "コピーしました",
+      "copy": "コピー",
+      "emergency_help": "緊急サポート",
+      "explore_places": "場所を探索",
+      "general_help": "一般サポート",
+      "get_help": "サポートを受ける",
+      "go_to_reviews": "レビューへ",
+      "interpreter_for_booking": "予約の通訳サポート",
+      "interpreter_help": "通訳サポート",
+      "large_view": "拡大表示",
+      "my_bookings": "マイ予約",
+      "open_admin_console": "管理者コンソールを開く",
+      "open_help_center": "ヘルプセンターを開く",
+      "open_support": "サポートを開く",
+      "partner_inquiry": "パートナー問い合わせ",
+      "report_issue": "問題を報告",
+      "save": "保存",
+      "saved": "保存済み",
+      "show_booking_phrases": "予約フレーズを表示",
+      "show_in_korean": "韓国語で表示",
+      "support": "サポート",
+      "travel_phrasebook": "旅行フレーズ集",
+      "travel_phrases": "旅行フレーズ",
+      "view_booking": "予約を表示",
+      "view_bookings": "予約を表示",
+      "add_to_plan": "予定に追加",
+      "back_to_booking_support": "予約サポートに戻る",
+      "browse_community": "コミュニティを見る",
+      "browse_meetups": "ミートアップを見る",
+      "call_clinic": "クリニックに電話",
+      "continue_editing": "編集を続ける",
+      "create_plan": "予定を作成",
+      "explore": "探索",
+      "manage": "管理",
+      "open": "開く",
+      "open_my_support": "My Supportを開く",
+      "open_route": "ルートを開く",
+      "show_emergency_phrases": "緊急フレーズを表示",
+      "use_this_plan": "この予定を使用",
+      "view": "表示",
+      "view_place_details": "詳細を表示",
+      "view_plan": "予定を表示",
+      "write_review": "レビューを書く"
+    },
+    "states": {
+      "active": "アクティブ",
+      "approved": "承認済み",
+      "favorites": "お気に入り",
+      "frequent": "よく使う",
+      "needs_review": "レビューが必要",
+      "needs_update": "更新が必要",
+      "not_available_yet": "未対応",
+      "not_connected": "未接続",
+      "not_joined": "未加入",
+      "not_set": "未設定",
+      "not_set_yet": "未設定",
+      "not_verified": "未認証",
+      "pending_review": "審査待ち",
+      "read_only": "読み取り専用",
+      "recent": "最近",
+      "sign_in_required": "ログインが必要",
+      "standard_account": "標準アカウント",
+      "verified": "認証済み",
+      "current_trip_plan": "現在の旅行プラン",
+      "details_unavailable": "詳細なし",
+      "meetups": "ミートアップ",
+      "planner_draft": "プランナー下書き",
+      "posts": "投稿",
+      "recently_viewed": "最近見た項目",
+      "reviews": "レビュー",
+      "saved_locally": "保存済み"
+    },
+    "runtime": {
+      "counts": {
+        "stops_zero": "{{count}}箇所",
+        "stops_one": "{{count}}箇所",
+        "stops_other": "{{count}}箇所",
+        "days_zero": "{{count}}日",
+        "days_one": "{{count}}日",
+        "days_other": "{{count}}日"
+      }
+    },
+    "morning": "おはようございます",
+    "afternoon": "こんにちは",
+    "evening": "こんばんは"
+  },
+  "transport": {
+    "moving_to": "{{dest}}へ移動中",
+    "remaining": "残り",
+    "line_2_direction": "2号線 • 市庁方面",
+    "departed": "出発済み",
+    "passing_now": "通過中...",
+    "current": "現在",
+    "get_off_at": "下車出口:",
+    "exit_3": "3番出口",
+    "getting_off_here": "ここで降ります",
+    "stations": {
+      "samseong": "サムソン",
+      "seolleung": "ソンルン",
+      "yeoksam": "ヨクサム",
+      "gangnam": "カンナム",
+      "gyodae": "キョデ",
+      "seocho": "ソチョ",
+      "seongsu": "ソンス"
+    }
+  },
+  "home": {
+    "presets": {
+      "beauty_tour": "ビューティー",
+      "foodie": "グルメ探検",
+      "heritage": "伝統文化",
+      "k_pop": "K-POP"
+    },
+    "badge": "韓国の美しさを体験する",
+    "title": "予約代行 · スケジュール自動整理 · ナビゲーション",
+    "subtitle": "",
+    "create_trip_cta": "旅行計画を始める",
+    "how_it_works": {
+      "title": "利用方法",
+      "step1": "リクエスト",
+      "step1_desc": "お好みの美容・グルメを選択",
+      "step2": "進行中",
+      "step2_desc": "現地チャネルで代理予約",
+      "step3": "確定",
+      "step3_desc": "スケジュールに自動同期"
+    },
+    "input_label": "どこへ旅行されますか？",
+    "input_placeholder": "都市、地域、ホテル名",
+    "days_label": "旅行期間",
+    "value_props": {
+      "itinerary": {
+        "title": "スケジュール自動整理",
+        "desc": "AIが最適なルートを構成"
+      },
+      "focus": {
+        "title": "AI最適化プラン",
+        "desc": "あなたの好みに合わせた最適な経路と時間を計算しました。AIが提案するシームレスな体験をお楽しみください。"
+      },
+      "navigation": {
+        "title": "リアルタイム移動案内",
+        "desc": "言語の壁がないルート案内"
+      }
+    },
+    "recommended_plans": "おすすめの旅行プラン",
+    "plans": {
+      "2d": {
+        "title": "2日：ソウル必須ツアー",
+        "label": "2日間プラン"
+      },
+      "3d": {
+        "title": "3日：K-カルチャー＆スタイル",
+        "label": "3日間プラン"
+      },
+      "5d": {
+        "title": "5日：韓国完全制覇ツアー",
+        "label": "5日間プラン"
+      },
+      "request_custom_label": "カスタム",
+      "request_custom_title": "{{days}}日間のプランをリクエスト",
+      "request_custom_toast": "{{days}}日間のカスタムプランをリクエストしました！コンシェルジュからご連絡いたします。"
+    }
+  },
+  "explore_page": {
+    "title": "探索",
+    "city_changed": "都市が{{city}}に変更されました",
+    "added_to": "{{day}}日目の予定に追加されました",
+    "no_items": "{{city}}で見つかりませんでした",
+    "try_changing": "カテゴリーや都市を変更してみてください。",
+    "add_to_plan": "+ 予定に追加",
+    "today": "今日",
+    "tonight": "今夜",
+    "starts_from": "₩{{price}} から",
+    "indoor": "屋内",
+    "outdoor": "屋外",
+    "badges": {
+      "vegan_only": "ビーガン専用",
+      "vegan_option": "ビーガン選択可"
+    },
+    "filters_title": "フィルター",
+    "apply": "適用",
+    "reset": "リセット",
+    "adding_item_to": "<strong>{{title}}</strong> を次の日程に追加:",
+    "no_specific_filters": "このカテゴリーには特定のフィルターがありません。",
+    "filters": {
+      "show": "種類",
+      "price": "価格",
+      "diet": "食生活",
+      "ingredients": "材料",
+      "date": "日付",
+      "type": "タイプ",
+      "options": {
+        "skin_care": "スキンケア",
+        "hair_makeup": "ヘア/メイク",
+        "spa": "スパ",
+        "nails": "ネイル",
+        "vegan": "ビーガン",
+        "vegetarian": "ベジタリアン",
+        "no_pork": "豚肉なし",
+        "halal": "ハラール",
+        "beef": "牛肉",
+        "pork": "豚肉",
+        "chicken": "鶏肉",
+        "seafood": "海鮮",
+        "dairy": "乳製品",
+        "egg": "卵",
         "today": "今日",
-        "move": "移動",
-        "book": "予約",
-        "chat": "相談",
-        "my": "MY",
-        "min_unit": "分",
-        "current_operation": "現在のスケジュール",
-        "live": "LIVE",
-        "recommended": "周辺のおすすめ",
-        "based_on_location": "現在地に基づく",
-        "start_nav": "ルート案内開始",
-        "delay_10m": "10分遅らせる",
-        "confirmed": "予約確定",
-        "payment_completed": "支払い完了",
-        "weather_clear": "晴れ",
-        "back": "戻る",
-        "select_language": "言語選択",
-        "home_nav": "ホーム",
-        "explore_nav": "探索",
-        "planner_nav": "日程表",
-        "today_nav": "今日",
-        "my_nav": "マイ情報",
-        "day_unit": "日",
-        "locale": "ja-JP",
-        "loading": "読み込み中...",
-        "cities": {
-            "seoul": "ソウル",
-            "busan": "釜山",
-            "jeju": "済州",
-            "gyeongju": "慶州"
+        "weekend": "今週末",
+        "select": "日付を選択",
+        "concert": "コンサート",
+        "show": "公演",
+        "popup": "ポップアップ",
+        "club": "クラブ",
+        "exhibition": "展示会"
+      }
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "仁川空港到着",
+    "hotel_checkin": "ホテルチェックイン/滞在",
+    "f1": {
+      "title": "プラントカフェ ソウル",
+      "area": "梨泰院",
+      "desc": "新鮮な野菜と健康的な食材で作られた100％ビーガン料理",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "金豚食堂",
+      "area": "薬水",
+      "desc": "ミシュランガイドに選ばれた韓国最高のサムギョプサル店",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "チャガルチ市場 刺身定食",
+      "area": "南浦",
+      "desc": "釜山の海の新鮮さを感じられるボリューム満点の刺身コース",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "ジェニーハウス 清潭",
+      "area": "清潭",
+      "desc": "K-POPアイドル御用達のプレミアムヘア＆メイクショップ",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "プムクリニック プレミアム江南",
+      "area": "江南",
+      "desc": "外国人に最も人気のあるコスパ最高の美容クリニック",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY びっしょりショー 2024",
+      "area": "蚕室スタジアム",
+      "desc": "夏の暑さを吹き飛ばすPSYのクールで情熱的なライブパフォーマンス",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "ナンタ公演 明洞",
+      "area": "明洞",
+      "desc": "韓国の伝統的なリズムと現代的なパフォーマンスを組み合わせたノンバーバル公演",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "ソウルランタンフェスティバル",
+      "area": "光化門",
+      "desc": "光化門広場を彩る華やかで美しいランタンの饗宴",
+      "price": "無料"
+    },
+    "fs2": {
+      "title": "映画祭",
+      "area": "センタムシティ",
+      "desc": "アジア最大級の映画祭、世界中の映画人が集まる場所",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "景福宮",
+      "area": "鍾路",
+      "desc": "朝鮮王朝の正宮として韓国の歴史と美しさを伝える場所",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "ロッテワールドタワー",
+      "area": "蚕室",
+      "desc": "ソウルの幻想的な夜景を一望できる韓国最高層ビル",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "釜山行き KTX",
+      "area": "ソウル駅",
+      "desc": "ソウルから釜山まで最も速く快適に移動する方法",
+      "price": "59,800"
+    }
+  },
+  "fab": {
+    "idle": "旅行を作る",
+    "pre_trip": "明後日出発します",
+    "on_trip": "次はどこ？",
+    "near_deadline": "遅延の危険！",
+    "to": "{{dest}} へ",
+    "kride": "K.Rideを呼ぶ",
+    "kride_sub": "{{mins}}分後に到着",
+    "transit": "公共交通案内",
+    "transit_sub": "最短ルート案内",
+    "copy": "住所をコピー",
+    "copy_done": "コピー完了！",
+    "card": "ドライバーに見せる",
+    "card_sub": "タクシー運転手用カード",
+    "card_modal_title": "🗺️ この住所に行ってください",
+    "cancel": "閉じる"
+  },
+  "today_page": {
+    "title": "今日の日程",
+    "active_now": "進行中",
+    "navigate": "道探し",
+    "booking_ref": "予約番号: {{ref}}",
+    "next_up": "次の日程",
+    "minutes_left": "{{mins}}分後に開始",
+    "depart_early": "今すぐ出発",
+    "timeline": "タイムライン",
+    "empty": {
+      "title": "今日の日程がありません",
+      "desc": "行きたい場所を探して追加してみましょう！",
+      "cta": "場所を探す"
+    }
+  },
+  "booking_detail": {
+    "select_date": "日付選択",
+    "select_time": "時間選択",
+    "total_price": "合計金額",
+    "request_booking": "予約をリクエスト"
+  },
+  "navigation_page": {
+    "title": "今日の予定",
+    "status": {
+      "on_trip": "旅行中",
+      "pre_trip": "準備中",
+      "idle": "予定がありません"
+    },
+    "countdown": {
+      "today": "今日",
+      "starts_in": "{{mins}}分後に開始",
+      "traveling_to": "{{dest}}へ移動中"
+    },
+    "empty": {
+      "title": "今日の予定がありません",
+      "subtitle": "行きたい場所を探して追加してみましょう！",
+      "cta": "場所を探す"
+    },
+    "actions": {
+      "directions": "ルート案内",
+      "booking": "予約を見る",
+      "late_risk": "遅延の危険！",
+      "booking_ref": "予約番号: {{ref}}",
+      "departure_warning": "⚠️ {{title}} 開始 {{mins}}分前 — 今すぐ出発してください！"
+    }
+  },
+  "planner_page": {
+    "title": "予定表",
+    "day": "{{n}}日目",
+    "add_from_discover": "Discoverから追加",
+    "auto_build": "自動作成",
+    "add_to": "追加",
+    "book_all": "すべて予約",
+    "booking_modal": {
+      "title": "予約する",
+      "date": "日付",
+      "people": "人数",
+      "people_count": "{{count}}人",
+      "notes": "メモ",
+      "submit": "予約する",
+      "submitting": "送信中...",
+      "success_title": "予約成功",
+      "success_desc": "予約が完了しました。詳細はマイページで確認できます。",
+      "unavailable_title": "予約不可",
+      "unavailable_desc": "次の場所をおすすめします：",
+      "view_status": "ステータスを表示"
+    },
+    "status": {
+      "draft": "下書き",
+      "submitted": "リクエスト済み",
+      "confirmed": "確定済み",
+      "unavailable": "不可",
+      "completed": "完了"
+    },
+    "slots": {
+      "am": "午前",
+      "pm": "午後",
+      "night": "夜",
+      "morning": "早朝",
+      "afternoon": "昼",
+      "evening": "夕方"
+    },
+    "focus": {
+      "title": "今日の予定",
+      "desc": "今日予定されている場所を順番に確認しましょう。"
+    }
+  },
+  "my_page": {
+    "profile": {
+      "trust_score": "💎 信頼スコア",
+      "trust_level_excellent": "優秀"
+    },
+    "passport": {
+      "title": "マイパスポート",
+      "view_all": "すべて見る",
+      "seoul": "ソウル",
+      "beauty": "美容",
+      "jeju": "済州"
+    },
+    "bookings": {
+      "title": "予約履歴",
+      "date_time": "日付 / 時間",
+      "area": "エリア",
+      "price": "価格",
+      "today_time": "今日, {{time}}",
+      "tomorrow_time": "明日, {{time}}",
+      "next_week_time": "来週, {{time}}",
+      "new_added": "新しい予約が追加されました！"
+    },
+    "community": {
+      "title": "マイコミュニティ投稿",
+      "empty": "まだコミュニティの投稿がありません。"
+    },
+    "support": {
+      "short": "サポート",
+      "eyebrow": "Kello サポートセンター",
+      "title": "お困りですか？",
+      "header_cta": "サポートチームに問い合わせる",
+      "tabs": {
+        "booking": "予約サポート",
+        "general": "一般サポート",
+        "faq": "FAQ / ヘルプセンター",
+        "emergency": "緊急 / 事件事故"
+      },
+      "summary": {
+        "booking": {
+          "label": "予約サポート",
+          "desc": "最近の予約に関するサポートを提供します。"
         },
-        "categories": {
-            "all": "すべて",
-            "food": "グルメ",
-            "beauty": "ビューティー",
-            "event": "公演",
-            "festival": "お祭り",
-            "attraction": "名所",
-            "transport": "交通"
+        "general": {
+          "label": "一般サポート",
+          "desc": "よくある質問や一般的なお問い合わせはこちらから。"
         },
-        "badges": {
-            "english_friendly": "英語対応",
-            "vegan_certified": "ビーガン認証",
-            "michelin": "ミシュラン",
-            "wait_free": "待ち時間なし",
-            "local_experience": "現地体験",
-            "k_idol_style": "K-IDOLスタイル",
-            "tax_refund": "免税",
-            "summer_must_go": "夏のおすすめ",
-            "non_verbal": "ノンバーバル",
-            "family": "家族連れ",
-            "night_view": "夜景",
-            "photo_spot": "フォトスポット",
-            "hanbok_free_entry": "韓服無料入場",
-            "history": "歴史",
-            "city_view": "シティビュー"
-        },
-        "ingredients": {
-            "vegetables": "野菜",
-            "soy": "豆",
-            "pork": "豚肉",
-            "kimchi": "キムチ",
-            "seafood": "海鮮"
-        },
-        "diet": {
-            "vegan": "ビーガン",
-            "gluten_free": "グルテンフリー",
-            "meat_lover": "お肉好き",
-            "pescatarian": "ペスカタリアン"
-        },
-        "community_nav": "コミュニティ",
-        "actions": {
-            "apply_again": "?????",
-            "apply_as_partner": "???????",
-            "booking_help": "??????",
-            "call_112": "112???",
-            "call_119": "119???",
-            "call_1330": "1330???",
-            "close": "???",
-            "contact_support": "???????",
-            "copied": "?????",
-            "copy": "???",
-            "emergency_help": "??????",
-            "explore_places": "???????",
-            "general_help": "??????",
-            "get_help": "????????",
-            "go_to_reviews": "?????",
-            "interpreter_for_booking": "???????????",
-            "interpreter_help": "??????",
-            "large_view": "?????",
-            "my_bookings": "????",
-            "open_admin_console": "??????????",
-            "open_help_center": "??????????",
-            "open_support": "???????",
-            "partner_inquiry": "??????????",
-            "report_issue": "?????",
-            "save": "??",
-            "saved": "????",
-            "show_booking_phrases": "?????????",
-            "show_in_korean": "??????",
-            "support": "????",
-            "travel_phrasebook": "???????",
-            "travel_phrases": "??????",
-            "view_booking": "?????",
-            "view_bookings": "?????",
-            "add_to_plan": "??????",
-            "back_to_booking_support": "?????????",
-            "browse_community": "?????????",
-            "browse_meetups": "?????????",
-            "call_clinic": "?????",
-            "continue_editing": "??????",
-            "create_plan": "??????",
-            "explore": "??",
-            "manage": "??",
-            "open": "??",
-            "open_my_support": "My Support???",
-            "open_route": "??????",
-            "show_emergency_phrases": "?????????",
-            "use_this_plan": "????????",
-            "view": "??",
-            "view_place_details": "????????",
-            "view_plan": "??????",
-            "write_review": "???????"
-        },
-        "states": {
-            "active": "???",
-            "approved": "????",
-            "favorites": "?????",
-            "frequent": "????",
-            "needs_review": "?????",
-            "needs_update": "?????",
-            "not_available_yet": "?????????",
-            "not_connected": "???",
-            "not_joined": "???",
-            "not_set": "???",
-            "not_set_yet": "?????",
-            "not_verified": "???",
-            "pending_review": "???",
-            "read_only": "??????",
-            "recent": "??",
-            "sign_in_required": "?????????",
-            "standard_account": "???????",
-            "verified": "????",
-            "current_trip_plan": "????????",
-            "details_unavailable": "??????????",
-            "meetups": "??????",
-            "planner_draft": "????????",
-            "posts": "??",
-            "recently_viewed": "??????",
-            "reviews": "????",
-            "saved_locally": "?????????"
-        },
-        "runtime": {
-            "counts": {
-                "stops_zero": "{{count}}??",
-                "stops_one": "{{count}}??",
-                "stops_other": "{{count}}??",
-                "days_zero": "{{count}}?",
-                "days_one": "{{count}}?",
-                "days_other": "{{count}}?"
-            }
+        "emergency": {
+          "label": "緊急支援",
+          "desc": "緊急時の連絡先や警察・警察への相談案内です。"
         }
-    },
-    "transport": {
-        "moving_to": "{{dest}}へ移動中",
-        "remaining": "残り",
-        "line_2_direction": "2号線 • 市庁方面",
-        "departed": "出発済み",
-        "passing_now": "通過中...",
-        "current": "現在",
-        "get_off_at": "下車出口:",
-        "exit_3": "3番出口",
-        "getting_off_here": "ここで降ります",
-        "stations": {
-            "samseong": "サムソン",
-            "seolleung": "ソンルン",
-            "yeoksam": "ヨクサム",
-            "gangnam": "カンナム",
-            "gyodae": "キョデ",
-            "seocho": "ソチョ",
-            "seongsu": "ソンス"
+      },
+      "guides": {
+        "find_booking": {
+          "q": "予約場所が見つかりません。",
+          "a": "予約カードに表示されている地図と地域情報をまず確認してください。それでも見つからない場合は、通訳サポートやヘルプセンターを開いて現地サポート経路を確認してください。"
+        },
+        "staff_talk": {
+          "q": "スタッフとの会話が難しいです。",
+          "a": "素早い翻訳ツールやホットラインへの接続が必要な場合は、通訳サポートを利用してください。状況が差し迫っている場合は、すぐに緊急サポートへ移動してください。"
+        },
+        "change_time": {
+          "q": "予約時間を変更したいです。",
+          "a": "アプリ内ではまだ直接の予約変更をサポートしていません。店舗に向かう前に、最も安全な次のステップを選べるよう予約サポートから始めてください。"
+        },
+        "cancel_refund": {
+          "q": "キャンセルや払い戻しの問い合わせはどこでしますか？",
+          "a": "アプリ内でのキャンセル・払い戻し処理はまだ連携されていません。自分のケースでどのサポート経路が可能か確認するには、ヘルプセンターや予約サポートを利用してください。"
+        },
+        "write_review": {
+          "q": "訪問後のレビューはどう残しますか？",
+          "a": "完了した予約はマイコミュニティ > レビューから投稿できます。専用のレビューフォームがまだない場合は、既存のコミュニティ作成機能を使用してください。"
+        },
+        "community_safety": {
+          "q": "オフ会やコミュニティの状況が不安です。",
+          "a": "個人情報をこれ以上共有せず、必要ならまず警察または緊急サポートへ移動してください。コミュニティ専用の通報処理はまだ制限的なため、状況に合った安全経路を使用してください。",
+          "cta": "安全サポート"
         }
-    },
-    "home": {
-        "presets": {
-            "beauty_tour": "ビューティー",
-            "foodie": "グルメ探検",
-            "heritage": "伝統文化",
-            "k_pop": "K-POP"
+      },
+      "general": {
+        "help_center": {
+          "label": "ヘルプセンター",
+          "desc": "アプリにある医療、警察、通訳、紛失物、緊急連絡先の詳細ページを開きます。"
         },
-        "badge": "Kello",
-        "title": "予約代行 · スケジュール自動整理 · ナビゲーション",
-        "subtitle": "",
-        "create_trip_cta": "旅行計画を始める",
-        "how_it_works": {
-            "title": "利用方法",
-            "step1": "リクエスト",
-            "step1_desc": "お好みの美容・グルメを選択",
-            "step2": "進行中",
-            "step2_desc": "現地チャネルで代理予約",
-            "step3": "確定",
-            "step3_desc": "スケジュールに自動同期"
+        "booking_cancel": {
+          "label": "予約 / キャンセルサポート",
+          "desc": "時間の変更、空き状況の確認、問題の報告案内はこちらから始めてください。",
+          "cta": "予約サポートを開く"
         },
-        "input_label": "どこへ旅行されますか？",
-        "input_placeholder": "都市、地域、ホテル名",
-        "days_label": "旅行期間",
-        "value_props": {
-            "itinerary": {
-                "title": "スケジュール自動整理",
-                "desc": "AIが最適なルートを構成"
-            },
-            "booking": {
-                "title": "予約代行",
-                "desc": "管理ショップ、スパなどを代行予約"
-            },
-            "navigation": {
-                "title": "リアルタイム移動案内",
-                "desc": "言語の壁がないルート案内"
-            }
+        "community_safety": {
+          "label": "コミュニティの安全",
+          "desc": "不安な集まりや不快な状況であれば、まず安全経路へ移動してください。",
+          "cta": "安全サポートを開く"
         },
-        "recommended_plans": "おすすめの旅行プラン",
-        "plans": {
-            "2d": {
-                "title": "2日：ソウル必須ツアー",
-                "label": "2日間プラン"
-            },
-            "3d": {
-                "title": "3日：K-カルチャー＆スタイル",
-                "label": "3日間プラン"
-            },
-            "5d": {
-                "title": "5日：韓国完全制覇ツアー",
-                "label": "5日間プラン"
-            },
-            "request_custom_label": "カスタム",
-            "request_custom_title": "{{days}}日間のプランをリクエスト",
-            "request_custom_toast": "{{days}}日間のカスタムプランをリクエストしました！コンシェルジュからご連絡いたします。"
-        }
-    },
-    "explore_page": {
-        "title": "探索",
-        "city_changed": "都市が{{city}}に変更されました",
-        "added_to": "{{day}}日目の予定に追加されました",
-        "no_items": "{{city}}で見つかりませんでした",
-        "try_changing": "カテゴリーや都市を変更してみてください。",
-        "add_to_plan": "+ 予定に追加",
-        "today": "今日",
-        "tonight": "今夜",
-        "starts_from": "₩{{price}} から",
-        "indoor": "屋内",
-        "outdoor": "屋外",
-        "badges": {
-            "vegan_only": "ビーガン専用",
-            "vegan_option": "ビーガン選択可"
+        "partner": {
+          "label": "パートナー問い合わせ",
+          "desc": "ビジネス・パートナーの登録は、パートナー加入フローから進めることができます。"
         },
-        "filters_title": "フィルター",
-        "apply": "適用",
-        "reset": "リセット",
-        "adding_item_to": "<strong>{{title}}</strong> を次の日程に追加:",
-        "no_specific_filters": "このカテゴリーには特定のフィルターがありません。",
-        "filters": {
-            "show": "種類",
-            "price": "価格",
-            "diet": "食生活",
-            "ingredients": "材料",
-            "date": "日付",
-            "type": "タイプ",
-            "options": {
-                "skin_care": "スキンケア",
-                "hair_makeup": "ヘア/メイク",
-                "spa": "スパ",
-                "nails": "ネイル",
-                "vegan": "ビーガン",
-                "vegetarian": "ベジタリアン",
-                "no_pork": "豚肉なし",
-                "halal": "ハラール",
-                "beef": "牛肉",
-                "pork": "豚肉",
-                "chicken": "鶏肉",
-                "seafood": "海鮮",
-                "dairy": "乳製品",
-                "egg": "卵",
-                "today": "今日",
-                "weekend": "今週末",
-                "select": "日付を選択",
-                "concert": "コンサート",
-                "show": "公演",
-                "popup": "ポップアップ",
-                "club": "クラブ",
-                "exhibition": "展示会"
-            }
-        }
-    },
-    "explore_items": {
-        "airport_arrival": "仁川空港到着",
-        "hotel_checkin": "ホテルチェックイン/滞在",
-        "f1": {
-            "title": "プラントカフェ ソウル",
-            "area": "梨泰院",
-            "desc": "新鮮な野菜と健康的な食材で作られた100％ビーガン料理",
-            "price": "15,000"
+        "title": "一般サポート",
+        "desc": "どこへ行けばいいか確信が持てないときは、この入り口を使用してください。",
+        "report_notice": "まだ直接のチケット発行はサポートしていません。予約に関するお問い合わせは以下のサポート経路を利用してください。"
+      },
+      "emergency": {
+        "overview": {
+          "label": "緊急サポート",
+          "desc": "医療、警察、紛失物、通訳へのアクセスがあるメインの緊急用ヘルプページを開きます。",
+          "cta": "緊急サポートを開く"
         },
-        "f2": {
-            "title": "金豚食堂",
-            "area": "薬水",
-            "desc": "ミシュランガイドに選ばれた韓国最高のサムギョプサル店",
-            "price": "20,000"
-        },
-        "f3": {
-            "title": "チャガルチ市場 刺身定食",
-            "area": "南浦",
-            "desc": "釜山の海の新鮮さを感じられるボリューム満点の刺身コース",
-            "price": "40,000"
-        },
-        "b1": {
-            "title": "ジェニーハウス 清潭",
-            "area": "清潭",
-            "desc": "K-POPアイドル御用達のプレミアムヘア＆メイクショップ",
-            "price": "150,000"
-        },
-        "b2": {
-            "title": "プムクリニック プレミアム江南",
-            "area": "江南",
-            "desc": "外国人に最も人気のあるコスパ最高の美容クリニック",
-            "price": "50,000"
-        },
-        "e1": {
-            "title": "PSY びっしょりショー 2024",
-            "area": "蚕室スタジアム",
-            "desc": "夏の暑さを吹き飛ばすPSYのクールで情熱的なライブパフォーマンス",
-            "price": "140,000"
-        },
-        "e2": {
-            "title": "ナンタ公演 明洞",
-            "area": "明洞",
-            "desc": "韓国の伝統的なリズムと現代的なパフォーマンスを組み合わせたノンバーバル公演",
-            "price": "40,000"
-        },
-        "fs1": {
-            "title": "ソウルランタンフェスティバル",
-            "area": "光化門",
-            "desc": "光化門広場を彩る華やかで美しいランタンの饗宴",
-            "price": "無料"
-        },
-        "fs2": {
-            "title": "映画祭",
-            "area": "センタムシティ",
-            "desc": "アジア最大級の映画祭、世界中の映画人が集まる場所",
-            "price": "10,000"
-        },
-        "a1": {
-            "title": "景福宮",
-            "area": "鍾路",
-            "desc": "朝鮮王朝の正宮として韓国の歴史と美しさを伝える場所",
-            "price": "3,000"
-        },
-        "a2": {
-            "title": "ロッテワールドタワー",
-            "area": "蚕室",
-            "desc": "ソウルの幻想的な夜景を一望できる韓国最高層ビル",
-            "price": "27,000"
-        },
-        "t1": {
-            "title": "釜山行き KTX",
-            "area": "ソウル駅",
-            "desc": "ソウルから釜山まで最も速く快適に移動する方法",
-            "price": "59,800"
-        }
-    },
-    "fab": {
-        "idle": "旅行を作る",
-        "pre_trip": "明後日出発します",
-        "on_trip": "次はどこ？",
-        "near_deadline": "遅延の危険！",
-        "to": "{{dest}} へ",
-        "kride": "K.Rideを呼ぶ",
-        "kride_sub": "{{mins}}分後に到着",
-        "transit": "公共交通案内",
-        "transit_sub": "最短ルート案内",
-        "copy": "住所をコピー",
-        "copy_done": "コピー完了！",
-        "card": "ドライバーに見せる",
-        "card_sub": "タクシー運転手用カード",
-        "card_modal_title": "🗺️ この住所に行ってください",
-        "cancel": "閉じる"
-    },
-    "today_page": {
-        "title": "今日の日程",
-        "active_now": "進行中",
-        "navigate": "道探し",
-        "booking_ref": "予約番号: {{ref}}",
-        "next_up": "次の日程",
-        "minutes_left": "{{mins}}分後に開始",
-        "depart_early": "今すぐ出発",
-        "timeline": "タイムライン",
-        "empty": {
-            "title": "今日の日程がありません",
-            "desc": "行きたい場所を探して追加してみましょう！",
-            "cta": "場所を探す"
-        }
-    },
-    "booking_detail": {
-        "select_date": "日付選択",
-        "select_time": "時間選択",
-        "total_price": "合計金額",
-        "request_booking": "予約をリクエスト"
-    },
-    "navigation_page": {
-        "title": "今日の予定",
-        "status": {
-            "on_trip": "旅行中",
-            "pre_trip": "準備中",
-            "idle": "予定がありません"
-        },
-        "countdown": {
-            "today": "今日",
-            "starts_in": "{{mins}}分後に開始",
-            "traveling_to": "{{dest}}へ移動中"
-        },
-        "empty": {
-            "title": "今日の予定がありません",
-            "subtitle": "行きたい場所を探して追加してみましょう！",
-            "cta": "場所を探す"
-        },
-        "actions": {
-            "directions": "ルート案内",
-            "booking": "予約を見る",
-            "late_risk": "遅延の危険！",
-            "booking_ref": "予約番号: {{ref}}",
-            "departure_warning": "⚠️ {{title}} 開始 {{mins}}分前 — 今すぐ出発してください！"
-        }
-    },
-    "planner_page": {
-        "title": "予定表",
-        "day": "{{n}}日目",
-        "add_from_discover": "Discover????",
-        "auto_build": "????",
-        "add_to": "???",
-        "book_all": "??????",
-        "booking_modal": {
-            "title": "???????",
-            "date": "??",
-            "people": "??",
-            "people_count": "{{count}}?",
-            "notes": "??",
-            "submit": "?????",
-            "submitting": "???...",
-            "success_title": "?????????",
-            "success_desc": "??????????????????????????",
-            "unavailable_title": "予約不可",
-            "unavailable_desc": "次の場所をおすすめします：",
-            "view_status": "?????"
-        },
-        "status": {
-            "draft": "下書き",
-            "submitted": "リクエスト済み",
-            "confirmed": "確定済み",
-            "unavailable": "不可",
-            "completed": "??"
-        },
-        "slots": {
-            "am": "午前",
-            "pm": "午後",
-            "night": "夜",
-            "morning": "?",
-            "afternoon": "??",
-            "evening": "?"
-        },
-        "focus": {
-            "title": "?????",
-            "desc": "?????????????????????????????????"
-        }
-    },
-    "my_page": {
-        "profile": {
-            "trust_score": "💎 信頼スコア",
-            "trust_level_excellent": "優秀"
-        },
-        "passport": {
-            "title": "マイパスポート",
-            "view_all": "すべて見る",
-            "seoul": "ソウル",
-            "beauty": "美容",
-            "jeju": "済州"
-        },
-        "bookings": {
-            "title": "予約履歴",
-            "date_time": "日付 / 時間",
-            "area": "エリア",
-            "price": "価格",
-            "today_time": "今日, {{time}}",
-            "tomorrow_time": "明日, {{time}}",
-            "next_week_time": "来週, {{time}}",
-            "new_added": "新しい予約が追加されました！"
-        },
-        "community": {
-            "title": "マイコミュニティ投稿",
-            "empty": "まだコミュニティの投稿がありません。"
-        },
-        "support": {
-            "short": "????",
-            "eyebrow": "??????",
-            "title": "??????",
-            "header_cta": "??????????",
-            "tabs": {
-                "booking": "??????",
-                "general": "??????",
-                "faq": "FAQ / ???????",
-                "emergency": "?? / ??????"
-            },
-            "summary": {
-                "booking": {
-                    "label": "??????",
-                    "desc": "???????????????????????"
-                },
-                "general": {
-                    "label": "??????",
-                    "desc": "?????????????????????????????????"
-                },
-                "emergency": {
-                    "label": "?????",
-                    "desc": "???????????????????????????????????"
-                }
-            },
-            "guides": {
-                "find_booking": {
-                    "q": "?????????????",
-                    "a": "??????????????????????????????????????????????????????????????"
-                },
-                "staff_talk": {
-                    "q": "??????????????",
-                    "a": "??????????????????????????????????????????????????????????"
-                },
-                "change_time": {
-                    "q": "?????????????",
-                    "a": "??????????????????????????????????????????????????????????"
-                },
-                "cancel_refund": {
-                    "q": "??????????????????????",
-                    "a": "????????????????????????????????????????????????????????????????????"
-                },
-                "write_review": {
-                    "q": "?????????????????",
-                    "a": "???????? My Community > Reviews ????????????????????????????????????????"
-                },
-                "community_safety": {
-                    "q": "?????????????????????????",
-                    "a": "???????????????????????????????????????????????????????????????????????????????",
-                    "cta": "??????"
-                }
-            },
-            "general": {
-                "help_center": {
-                    "label": "???????",
-                    "desc": "??????????????????????????????????????"
-                },
-                "booking_cancel": {
-                    "label": "?? / ???????",
-                    "desc": "?????????????????????????????????",
-                    "cta": "?????????"
-                },
-                "community_safety": {
-                    "label": "????????",
-                    "desc": "??????????????????????????????????",
-                    "cta": "?????????"
-                },
-                "partner": {
-                    "label": "??????????",
-                    "desc": "?????????????????????????????????"
-                },
-                "title": "??????",
-                "desc": "???????????????????????????????",
-                "report_notice": "????????????????????????????????????????????"
-            },
-            "emergency": {
-                "overview": {
-                    "label": "??????",
-                    "desc": "?????????????????????????",
-                    "cta": "?????????"
-                },
-                "interp": {
-                    "label": "??????",
-                    "desc": "???????????????????????????????????",
-                    "cta": "?????????",
-                    "booking_desc": "???????????????????????????????????"
-                },
-                "phrases": {
-                    "label": "??????",
-                    "desc": "??????????????????????????????????????",
-                    "cta": "?????????",
-                    "booking_label": "??????",
-                    "booking_desc": "???????????????????????????????????????????"
-                },
-                "medical": {
-                    "label": "??????",
-                    "desc": "???????????????????????????????????",
-                    "cta": "??????"
-                },
-                "police": {
-                    "label": "?? / ??????",
-                    "desc": "???????????????????????????????",
-                    "cta": "?????????"
-                },
-                "title": "?? / ??????",
-                "desc": "My Support ???????????????????????????????????",
-                "interpreter_notice": "?????????????????????????????????????",
-                "hub_notice": "??????????????????????/help/* ????????????Travel Phrasebook ?????????????????"
-            },
-            "booking": {
-                "banner_report": "{{bookingName}} ???????????????????????????????",
-                "banner_interpreter": "{{bookingName}} ????????????????? ????????????????",
-                "banner_default": "{{bookingName}} ???????????? ???????????????????",
-                "banner_fallback": "?????????????? ????????????????????",
-                "title": "??????",
-                "desc": "????????????????????????????",
-                "empty": {
-                    "title": "?????????????????",
-                    "desc": "??????????????????????????????????????"
-                },
-                "context_title": "?????????",
-                "context_desc": "??????????????????????????????????????????"
-            },
-            "subtitle": "???????????????????????????????",
-            "faq": {
-                "title": "FAQ / ???????",
-                "desc": "??????????????????????????????????"
-            }
-        },
-        "settings": {
-            "short": "??",
-            "support_short": "????",
-            "eyebrow": "?????????",
-            "title": "????",
-            "subtitle": "?????????????????????????????????",
-            "summary": {
-                "saved": "????????",
-                "stops": "??????",
-                "days": "????"
-            },
-            "preferences": {
-                "region_empty": "??????????????????????????????????",
-                "region_hint": "??????????????????????",
-                "style_empty": "?????????????????????????????????????????????",
-                "style_hint": "??????????????????",
-                "interests_saved": "saved_items ???????????????????",
-                "interests_plan": "??????????????????????",
-                "interests_empty": "???????????????????????????????????",
-                "language": "??",
-                "language_hint": "?????????? kello_lang ???????",
-                "region": "????? / ??",
-                "style": "??????",
-                "interests": "??????",
-                "title": "??",
-                "desc": "????????????????????????????????????????????????????????"
-            },
-            "verification": {
-                "email": "???",
-                "email_ready": "??????????????????",
-                "email_missing": "Supabase ????????????????????",
-                "phone": "????",
-                "phone_ready": "????????????????????",
-                "phone_partial": "?????????????????????????",
-                "phone_empty": "????????????????????????",
-                "provider": "??????",
-                "provider_hint": "??? Supabase ????????????????",
-                "title": "?? / ??",
-                "desc": "????????????????????????????",
-                "identity_note": "??????????????????????????????",
-                "email_provider": "???"
-            },
-            "links": {
-                "support_desc": "??????????????FAQ ??????",
-                "phrases_desc": "??????????????????????????",
-                "saved": "????",
-                "saved_desc": "?????????????????????????????",
-                "bookings": "??",
-                "bookings_desc": "?????????????????????",
-                "community": "??????",
-                "community_desc": "????????????????????????",
-                "title": "????? / ???????",
-                "desc": "????????????????????????????",
-                "placeholder_title": "?????????",
-                "placeholder_desc": "??????????????????????????????????????????????????????????"
-            },
-            "partner": {
-                "title": "???????",
-                "approved_desc": "??????????????????????????????????????????",
-                "pending_desc": "???????????????????????????????????????",
-                "rejected_desc": "?????????????????????????????????????????????",
-                "none_desc": "?????????????????????????????????????????????????"
-            },
-            "admin": {
-                "enabled": "???",
-                "enabled_desc": "??????????????????????????????????",
-                "disabled_desc": "??????????????????????????",
-                "title": "???????",
-                "source": "profiles.is_admin = true",
-                "source_none": "?????????????????????"
-            },
-            "hero": {
-                "email_ready": "???????",
-                "email_pending": "??????"
-            },
-            "account": {
-                "sign_in_title": "????????????????",
-                "sign_in_desc": "?????????? Supabase ?????????????????????????????????????",
-                "title": "????? / ??????",
-                "desc": "?????????????????????????????????????????????",
-                "display_name": "???",
-                "display_name_hint": "????????????? auth ???????????????????",
-                "email": "??? / ????",
-                "email_hint": "??? Supabase ???????????????",
-                "joined": "???",
-                "joined_hint": "?????? profile.created_at ???????? auth.created_at ????????????",
-                "last_seen": "???????",
-                "last_seen_hint": "???????????????????",
-                "read_only": "?????????????????????????????????????????????????????",
-                "default_name": "???"
-            },
-            "partner_admin": {
-                "title": "????? / ???",
-                "desc": "????????????????????????????????????????? admin ??????????"
-            }
+        "interp": {
+          "label": "通訳サポート",
+          "desc": "スタッフとの会話が難しいとき、翻訳ツールとホットラインのリンクを使用してください。",
+          "cta": "通訳サポートを開く",
+          "booking_desc": "どの予約かスタッフが理解できるよう、この予約の文脈を通訳経路に一緒に伝えます。"
         },
         "phrases": {
-            "quick": "????",
-            "title": "???????",
-            "eyebrow": "????",
-            "favorites": {
-                "title": "?????",
-                "desc": "???????????????????????",
-                "empty": "???????????????????????????"
-            },
-            "recent": {
-                "title": "??",
-                "desc": "???????????????????????????"
-            },
-            "subtitle": "??????????????????????????????????",
-            "hero": {
-                "badge": "????????????",
-                "count": "????"
-            },
-            "context": {
-                "title": "?????",
-                "interpreter": "???????????????????????????",
-                "support": "????????????????????????????????????????????",
-                "booking": "???????????????????"
-            },
-            "category": {
-                "title": "{{category}} ????"
-            },
-            "empty": {
-                "title": "??????????????????",
-                "desc": "??????????????????????? Support ?????????"
-            }
+          "label": "緊急フレーズ",
+          "desc": "周囲のスタッフ、運転手、案内デスクにすぐ見せられる大きな韓国語フレーズを開きます。",
+          "cta": "旅行フレーズを開く",
+          "booking_label": "予約フレーズ",
+          "booking_desc": "予約、遅延、チェックインの状況を説明する必要がある場合は、まず予約フレーズを開いてください。"
         },
-        "saved": {
-            "title": "????",
-            "eyebrow": "????",
-            "header_cta": "?????",
-            "subtitle": "?????????????????????????????????????",
-            "summary": {
-                "places": "??",
-                "plans": "???",
-                "recent": "??"
-            },
-            "tabs": {
-                "places": "??",
-                "plans": "???",
-                "recent": "??"
-            },
-            "summary_hint": "???????Explore??ID????????Planner?????????????????????",
-            "places": {
-                "source_plan": "???????????",
-                "source_saved": "Explore????",
-                "source_fallback": "Explore????",
-                "source_id_only": "????ID",
-                "added": "????????????????Planner????????",
-                "title": "??????",
-                "desc": "Explore???????????????????ID??????????????????????????????????",
-                "empty": {
-                    "title": "???????????????",
-                    "desc": "Explore??????????????????????????????????",
-                    "cta": "?????"
-                },
-                "fallback_title": "?????? {{id}}"
-            },
-            "plans": {
-                "synced": "???Planner???????",
-                "title": "???????",
-                "desc": "????????Planner????????????????????????????????????????",
-                "empty": {
-                    "title": "????????????????",
-                    "desc": "Planner????????????????????????????"
-                },
-                "current": "????????"
-            },
-            "recent": {
-                "title": "??",
-                "desc": "???????????????????????????????????????",
-                "empty": {
-                    "title": "??????????????",
-                    "desc": "???Planner?????????????????????????????",
-                    "fallback": "??????????????????????????????????",
-                    "cta": "Explore???"
-                },
-                "type": {
-                    "place": "??",
-                    "plan": "???",
-                    "community": "??????"
-                }
-            }
+        "medical": {
+          "label": "医療サポート",
+          "desc": "病院や救急医療のサポートが必要な場合は、医療ヘルプ経路を直接開いてください。",
+          "cta": "医療サポート"
         },
-        "community_hub": {
-            "eyebrow": "??????????",
-            "title": "My Community",
-            "subtitle": "???????????????????????????1??????????",
-            "browse": "?????????",
-            "summary": {
-                "posts": "??",
-                "reviews": "????",
-                "meetups": "??????"
-            },
-            "tabs": {
-                "posts": "??",
-                "reviews": "????",
-                "meetups": "??????"
-            },
-            "empty": {
-                "reviews": {
-                    "title": "???????????????",
-                    "desc": "?????????????????????????????",
-                    "no_completed": "??????????????????????????????????",
-                    "cta": "?????????"
-                },
-                "meetups": {
-                    "title": "?????????????????",
-                    "desc": "??????????????????????????????"
-                },
-                "posts": {
-                    "title": "???????????????????",
-                    "desc": "???????????????????????????????????"
-                }
-            },
-            "summary_hint": "????????????????????????????????",
-            "sync_error": "???????????????????????????????????",
-            "review_prompts": {
-                "title": "?????????????",
-                "desc": "Community???????????????composer?Review????????????"
-            },
-            "posts_desc": "???????????????????????????",
-            "reviews_desc": "?????????????????????????????",
-            "meetups_desc": "??????????????????????????????",
-            "loading": "?????????????...",
-            "no_comments": "????????????",
-            "type": {
-                "travel": "????",
-                "meetup": "??????"
-            }
-        }
+        "police": {
+          "label": "警察 / 安全サポート",
+          "desc": "警察への連絡、事件案内、危険な状況には安全経路を使用してください。",
+          "cta": "安全サポートを開く"
+        },
+        "title": "緊急 / 通訳サポート",
+        "desc": "My Supportはハブです。状況が差し迫っている場合や、意思疎通が難しい場合は、以下の詳細ヘルプページを使用してください。",
+        "interpreter_notice": "以下の通訳リンクを使用できます。一部のオプションは通話画面や外部の翻訳ページを開くことがあります。",
+        "hub_notice": "このハブから自分に合った詳細ページを選んでください。/help/* ページは一つの経路をより詳しく説明し、旅行フレーズ集はすぐに見せられる韓国語の文言を提供します。"
+      },
+      "booking": {
+        "banner_report": "{{bookingName}} 予約に関する問題を報告しようとしています。状況に合ったサポート経路を選択してください。",
+        "banner_interpreter": "{{bookingName}} 予約に言語の助けが必要ですか？ 以下に通訳と緊急リンクが用意されています。",
+        "banner_default": "{{bookingName}} 予約の助けが必要ですか？ 以下の予約カードから始めてください。",
+        "banner_fallback": "予約の助けが必要ですか？ 最も近い予約カードから始めてください。",
+        "title": "予約サポート",
+        "desc": "最近の予約を基準に、最も適切なサポート経路を素早く見つけてください。",
+        "empty": {
+          "title": "現在、問い合わせる予約がありません。",
+          "desc": "後で自分の予約を再確認するか、場所を探索して旅行を計画してください。"
+        },
+        "context_title": "この予約に関するサポート",
+        "context_desc": "予約サポート、通訳サポート、フレーズ表示の間を移動する際、この予約の文脈を保持します。"
+      },
+      "subtitle": "予約、一般のお問い合わせ、緊急の旅行状況に合ったサポート経路を見つけてください。",
+      "faq": {
+        "title": "FAQ / クイック案内",
+        "desc": "現在のアプリの範囲内でよくある旅行の質問に対する短く安全な案内です。"
+      }
     },
-    "community_page": {
-        "title": "コミュニティ",
-        "subtitle": "地元の人や旅行者と繋がる",
-        "filter_all": "すべて",
-        "filter_meetup": "食事＆集まり",
-        "filter_travel": "旅行仲間",
-        "filter_help": "ローカルヘルプ",
-        "comments": "コメント",
-        "message": "メッセージ",
+    "settings": {
+      "short": "設定",
+      "support_short": "サポート",
+      "eyebrow": "マイプロフィール",
+      "title": "設定",
+      "subtitle": "お好みに合わせてアプリをカスタマイズしてください。",
+      "summary": {
+        "saved": "保存済み",
+        "stops": "場所",
+        "days": "日数"
+      },
+      "preferences": {
+        "region_empty": "地域が設定されていません。",
+        "region_hint": "関心のある地域を選択してください。",
+        "style_empty": "旅行スタイルが設定されていません。",
+        "style_hint": "お好みの旅行スタイルを選んでください。",
+        "interests_saved": "保存した項目からおすすめを表示します。",
+        "interests_plan": "現在のプランに合わせたおすすめ。",
+        "interests_empty": "関心事が設定されていません。",
+        "language": "言語",
+        "language_hint": "メイン言語を `${kello_lang}` に設定します。",
+        "region": "地域 / 都市",
+        "style": "旅行スタイル",
+        "interests": "関心事",
+        "title": "好み",
+        "desc": "あなたの好みに基づいてカスタマイズされたおすすめを提供します。"
+      },
+      "verification": {
+        "email": "メール",
+        "email_ready": "認証済み",
+        "email_missing": "認証が必要です",
+        "phone": "電話番号",
+        "phone_ready": "認証済み",
+        "phone_partial": "一部認証済み",
+        "phone_empty": "未設定",
+        "provider": "プロバイダー",
+        "provider_hint": "ログインに使用したアカウント。",
+        "title": "認証 / セキュリティ",
+        "desc": "アカウントのセキュリティと認証状態を管理します。",
+        "identity_note": "この情報は本人確認のみに使用されます。",
+        "email_provider": "メールアドレス"
+      },
+      "links": {
+        "support_desc": "サポートセンターとよくある質問。",
+        "phrases_desc": "現場で役立つ韓国語フレーズ集。",
+        "saved": "保存済み",
+        "saved_desc": "保存した場所とプランの確認。",
+        "bookings": "予約",
+        "bookings_desc": "予約の内訳を確認・管理。",
+        "community": "コミュニティ",
+        "community_desc": "自分の投稿と活動を確認。",
+        "title": "ショートカット / センター",
+        "desc": "必要なメニューに素早くアクセスしてください。",
+        "placeholder_title": "追加予定メニュー",
+        "placeholder_desc": "より多くの機能が間もなく追加される予定です。"
+      },
+      "partner": {
+        "title": "パートナー",
+        "approved_desc": "パートナー承認済み。サービスの管理が可能です。",
+        "pending_desc": "パートナー申請を審査中です。",
+        "rejected_desc": "申請が却下されました。情報を修正して再申請してください。",
+        "none_desc": "Kelloのパートナーになってサービスを紹介しましょう。"
+      },
+      "admin": {
+        "enabled": "有効",
+        "enabled_desc": "管理者権限が有効です。",
+        "disabled_desc": "管理者権限がありません。",
+        "title": "管理コンソール",
+        "source": "管理者としてログイン中",
+        "source_none": "一般ユーザーとしてログイン中"
+      },
+      "hero": {
+        "email_ready": "認証済み",
+        "email_pending": "承認待ち"
+      },
+      "account": {
+        "sign_in_title": "ログインが必要です",
+        "sign_in_desc": "より多くの機能を利用するためにログインしてください。",
+        "title": "アカウント / プロフィール",
+        "desc": "基本プロフィールとアカウント情報を確認します。",
+        "display_name": "表示名",
+        "display_name_hint": "アプリ内で表示される名前です。",
+        "email": "メール / ID",
+        "email_hint": "ログインに使用したメールアドレス。",
+        "joined": "加入日",
+        "joined_hint": "アプリを使い始めた日付です。",
+        "last_seen": "最終アクセス",
+        "last_seen_hint": "最後にアプリを利用した時間。",
+        "read_only": "この情報はSupabase認証を通じて管理されています。",
+        "default_name": "ユーザー"
+      },
+      "partner_admin": {
+        "title": "パートナー / 管理",
+        "desc": "パートナーのステータスと管理コンソールへのアクセス。"
+      }
+    },
+    "phrases": {
+      "quick": "フレーズ",
+      "title": "旅行フレーズ集",
+      "eyebrow": "翻訳ハブ",
+      "favorites": {
+        "title": "お気に入り",
+        "desc": "よく使うフレーズを保存してください。",
+        "empty": "フレーズを保存すると、ここからすぐに開けます。"
+      },
+      "recent": {
+        "title": "最近",
+        "desc": "最近確認またはコピーしたフレーズがここに表示されます。"
+      },
+      "subtitle": "現場でスタッフや運転手、店員にこれらのフレーズを見せてください。",
+      "hero": {
+        "badge": "すぐに見せる韓国語フレーズ",
+        "count": "フレーズ"
+      },
+      "context": {
+        "title": "現在の文脈",
+        "interpreter": "状況をすぐに説明する必要がある場合は緊急フレーズが用意されています。",
+        "support": "現地スタッフとの会話が難しい場合、フレーズ集をサポートハブと一緒に使用してください。",
+        "booking": "この予約に合った予約フレーズが用意されています。"
+      },
+      "category": {
+        "title": "{{category}} フレーズ"
+      },
+      "empty": {
+        "title": "現在、このカテゴリにフレーズはありません。",
+        "desc": "他のカテゴリを見るか、即時の助けが必要な場合はサポートへ移動してください。"
+      }
+    },
+    "saved": {
+      "title": "保存済み",
+      "eyebrow": "保存ハブ",
+      "header_cta": "もっと見る",
+      "subtitle": "後で見返したい場所、プランのドラフト、最近見た項目をまとめています。",
+      "summary": {
+        "places": "場所",
+        "plans": "プラン",
+        "recent": "履歴"
+      },
+      "tabs": {
+        "places": "場所",
+        "plans": "プラン",
+        "recent": "履歴"
+      },
+      "summary_hint": "場所は保存した探索アイテムから、プランは現在のスケジュールから、履歴はこの端末に保存されます。",
+      "places": {
+        "source_plan": "現在のスケジュールと連携中",
+        "source_saved": "探索から保存",
+        "source_fallback": "探索から保存",
+        "source_id_only": "保存アイテムID",
+        "added": "プランナーに追加されました。時間はPlannerで調整可能です。",
+        "title": "保存した場所",
+        "desc": "探索で保存した場所を再度開きます。",
+        "empty": {
+          "title": "保存した場所がまだありません。",
+          "desc": "探索で場所を保存すると、ここから素早く計画を立てられます。",
+          "cta": "場所を探索する"
+        },
+        "fallback_title": "保存した場所 {{id}}"
+      },
+      "plans": {
+        "synced": "現在のプランナーと同期中",
+        "title": "保存したプラン",
+        "desc": "このタブは現在のプランナードラフトを反映しています。",
+        "empty": {
+          "title": "保存したプランがまだありません。",
+          "desc": "Plannerで日程を作成すると、現在のドラフトがここに表示されます。"
+        },
+        "current": "現在の旅行プラン"
+      },
+      "recent": {
+        "title": "履歴",
+        "desc": "最近見た場所、プラン、コミュニティの投稿がここに保存されます。",
+        "empty": {
+          "title": "最近見た項目がまだありません。",
+          "desc": "場所、Planner、コミュニティの詳細を開くと、履歴がここに表示されます。",
+          "fallback": "ローカルストレージが使用可能な場合、履歴はこの端末に保存されます。",
+          "cta": "探索へ"
+        },
         "type": {
-            "MEETUP": "集まり",
-            "TRAVEL": "旅行",
-            "HELP": "ヘルプ",
-            "REVIEW": "REVIEW"
-        },
-        "post": {
-            "1": {
-                "author": "ミカ (日本)",
-                "time": "10分前",
-                "title": "サムギョプサル集まり 🥓",
-                "desc": "今夜7時に金豚食堂で一緒にサムギョプサル食べませんか？"
-            },
-            "2": {
-                "author": "ジョン (米国)",
-                "time": "1時間前",
-                "title": "弘大路上ライブ 🎸",
-                "desc": "インディーズバンドを見に弘大に向かっています。一緒にどうですか！"
-            },
-            "3": {
-                "author": "ジフン (韓国)",
-                "time": "2時間前",
-                "title": "地下鉄の案内が必要ですか？ 🚇",
-                "desc": "明洞の近くに住んでいるので、道に迷ったら通訳や案内ができますよ。お気軽にメッセージください！"
-            },
-            "4": {
-                "author": "リウェイ (中国)",
-                "time": "3時間前",
-                "title": "K-Beauty コスメショッピング 💄",
-                "desc": "明洞のオリーブヤングで一緒に買い物する友達を探しています。いいブランドたくさん知ってます！"
-            }
-        },
-        "filter_review": "Reviews",
-        "detail": "投稿の詳細"
-    },
-    "help_page": {
-        "title": "???????",
-        "badge": "???????",
-        "numbers_title": "?????",
-        "medical_title": "??????",
-        "medical_desc": "???????????",
-        "lost_title": "???",
-        "lost_desc": "?????????",
-        "police_title": "?? / ??",
-        "police_desc": "?????",
-        "interp_title": "??????",
-        "interp_desc": "1330????????",
-        "symptom_title": "?????????",
-        "symptom_hint": "??????????????????????????????",
-        "clinic_title": "??????? / ER",
-        "med_title": "????????",
-        "med_hint": "GS25?CU?7-Eleven?24??????",
-        "lost_step1": "??1: ???????????",
-        "lost_step1_hint": "??????????????????",
-        "quick_links": "???????",
-        "go_lost112": "Lost112????????",
-        "police_contacts": "?????",
-        "police_phrases": "??????",
-        "interp_services": "??????",
-        "interp_phrases": "???????",
-        "emergency_call": "??????",
-        "emergency_hint": "???119???",
-        "taxi": "????",
-        "subway": "???",
-        "airport": "??",
-        "street": "??",
-        "lost_in": "????:",
-        "hub_subtitle": "My Support?????????????????????????????????????????????????????",
-        "support_hub_title": "My Support",
-        "support_hub_desc": "???????????????????????????",
-        "support_hub_meta": "??????FAQ????????",
-        "phrases_title": "??????",
-        "phrases_desc": "????????????????????????????????????????????",
-        "phrases_meta": "?????????",
-        "call1330_title": "1330???",
-        "call1330_desc": "??????????????????????????????????",
-        "call1330_meta": "??????",
-        "main_119": "?? / ??",
-        "main_112": "????",
-        "main_1330": "??????",
-        "main_120": "???120???",
-        "role_title": "????????",
-        "role_text": "My Support???????/help????1???????????????Travel Phrasebook????????????????????",
-        "quick_actions_title": "?????????",
-        "quick_actions_desc": "???????????????????????????",
-        "routes_title": "????????",
-        "routes_desc": "?????????????????????????????????????????????",
-        "numbers_desc": "?????????????????????????????????????????????????",
-        "interp_detail_subtitle": "???????????????????????????????????????????????????",
-        "interp_when_title": "??????????",
-        "interp_when_desc": "???????????????????????????????????????????????????????????????",
-        "interp_services_desc": "?????????????????????????????????????????????",
-        "interp_phrases_desc": "?????????????????????????????????Travel Phrasebook?????????",
-        "interp_show_more": "????????????",
-        "interp_next_title": "??????????????",
-        "interp_next_desc": "?????????????????????????????????????????????????????",
-        "interp_medical_bridge": "??????????????????Medical Help?????????",
-        "interp_medical_cta": "Medical Help???",
-        "interp_police_bridge": "????????????????????????Police Help?????????",
-        "interp_police_cta": "Police Help???",
-        "police_detail_subtitle": "??????????????????????????????????",
-        "police_when_title": "??????????",
-        "police_when_desc": "????????????????????????????????????????????",
-        "police_contacts_desc": "???????????????????????????????",
-        "police_info": {
-            "tourist_info": "????????????????????????????",
-            "crime_label": "????",
-            "crime_note": "???????????????????????????????",
-            "tourist_label": "?????????",
-            "tourist_note": "?????????????????????????????",
-            "station_label": "???????"
-        },
-        "police_phrase_desc": "??phrasebook?????????????????????????",
-        "police_bridge_title": "?????????????",
-        "police_bridge_desc": "????????Interpreter Help???????????????Medical Help?????????",
-        "police_interp_bridge": "????????????????????????Interpreter Help?????????",
-        "police_medical_bridge": "??????????????????Medical Help?????????",
-        "medical_detail_subtitle": "??????????????????????????????????????????????????????????????",
-        "medical_notice_title": "?????????",
-        "medical_notice_text": "??????????????????119????????????????phrasebook?interpreter route??????????",
-        "clinic_desc": "?????????????????????????????????????????",
-        "medical_bridge_title": "??????????????",
-        "medical_bridge_desc": "????????Interpreter Help??????????????Police Help?????????",
-        "medical_interp_bridge": "??????????????????????Interpreter Help?????????",
-        "medical_police_bridge": "??????????????????????Police Help?????????",
-        "lost_quick_desc": "????????????????????????????????????????",
-        "lost112_desc": "??????????????????????????",
-        "embassy_desc": "????????????????????????????????",
-        "lost_1330_desc": "??????????????????????????????????",
-        "lost_steps_desc": "??????????????????????????Support???Phrasebook?????????",
-        "interp_badge": "??????",
-        "police_badge": "?????",
-        "medical_badge": "?????",
-        "lost_badge": "??????",
-        "interp_actions": {
-            "open_papago": "Papago???",
-            "open_google_translate": "Google?????"
-        },
-        "interp_booking_title": "???????????",
-        "interp_booking_desc": "???????????????????????????????????????????????????",
-        "booking_phrases_desc": "??????????????????????????????????????????????",
-        "booking_context_title": "?????????",
-        "booking_context_desc": "???????????????????????????????????????????????????????",
-        "police_booking_desc": "?????????????????????????????????????????????????????????",
-        "medical_booking_desc": "?????????????????????????????????????????????????????????????",
-        "lost_booking_desc": "?????????????????????????????????????????????????",
-        "interp": {
-            "hotline_title": "1330??????",
-            "hotline_desc": "??????????????????????????????????",
-            "papago_title": "Papago",
-            "papago_desc": "????????????????????Naver Papago??????",
-            "google_title": "Google??",
-            "google_desc": "?????????????Google????????",
-            "dasan_title": "120??????????",
-            "dasan_desc": "??????????????????????????"
-        },
-        "lost112_title": "Lost112",
-        "embassy_title": "?????",
-        "lost_1330_title": "1330????",
-        "lost": {
-            "taxi_hint": "????????????????????",
-            "subway_hint": "?????????????????????",
-            "airport_hint": "??????????????????????",
-            "street_hint": "????????????????????????"
+          "place": "場所",
+          "plan": "プラン",
+          "community": "コミュニティ"
         }
+      }
+    },
+    "community_hub": {
+      "eyebrow": "自分の活動",
+      "title": "マイコミュニティ",
+      "subtitle": "自分が作成した投稿、レビュー、活動を一箇所で確認してください。",
+      "browse": "コミュニティを見る",
+      "summary": {
+        "posts": "投稿",
+        "reviews": "レビュー",
+        "meetups": "集まり"
+      },
+      "tabs": {
+        "posts": "投稿",
+        "reviews": "レビュー",
+        "meetups": "集まり"
+      },
+      "empty": {
+        "reviews": {
+          "title": "まだ作成したレビューがありません。",
+          "desc": "完了した予約をもとに、旅行に役立つ情報を残してみてください。",
+          "no_completed": "まず予約を完了してから戻ってきてレビューを残してください。",
+          "cta": "完了した予約を見る"
+        },
+        "meetups": {
+          "title": "まだ集まりの活動がありません。",
+          "desc": "コミュニティの投稿をチェックして、次の計画を立ててみてください。"
+        },
+        "posts": {
+          "title": "まだ保存された投稿がありません。",
+          "desc": "コミュニティを探索して、質問を残したり他の旅行者に役立つヒントを共有してみてください。"
+        }
+      },
+      "summary_hint": "集計は作成したコミュニティ投稿と完了した予約に基づきます。",
+      "sync_error": "現在、コミュニティ投稿を更新できませんでした。代わりに空の状態を表示します。",
+      "review_prompts": {
+        "title": "完了した予約からレビューを書く",
+        "desc": "コミュニティを開き、Reviewを選択してレビューを作成してください。"
+      },
+      "posts_desc": "作成した一般コミュニティ投稿の確認・管理。",
+      "reviews_desc": "投稿済みのレビューと予約履歴への素早いアクセスを提供します。",
+      "meetups_desc": "一緒に旅行する人を探す集まり型の活動を含む自分の投稿です。",
+      "loading": "活動を読み込み中...",
+      "no_comments": "まだコメントはありません",
+      "type": {
+        "travel": "旅行仲間",
+        "meetup": "集まり"
+      }
     }
+  },
+  "community_page": {
+    "title": "コミュニティ",
+    "subtitle": "地元の人や旅行者と繋がる",
+    "filter_all": "すべて",
+    "filter_meetup": "食事＆集まり",
+    "filter_travel": "旅行仲間",
+    "filter_help": "ローカルヘルプ",
+    "comments": "コメント",
+    "message": "メッセージ",
+    "type": {
+      "MEETUP": "集まり",
+      "TRAVEL": "旅行",
+      "HELP": "ヘルプ",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "ミカ (日本)",
+        "time": "10分前",
+        "title": "サムギョプサル集まり 🥓",
+        "desc": "今夜7時に金豚食堂で一緒にサムギョプサル食べませんか？"
+      },
+      "2": {
+        "author": "ジョン (米国)",
+        "time": "1時間前",
+        "title": "弘大路上ライブ 🎸",
+        "desc": "インディーズバンドを見に弘大に向かっています。一緒にどうですか！"
+      },
+      "3": {
+        "author": "ジフン (韓国)",
+        "time": "2時間前",
+        "title": "地下鉄の案内が必要ですか？ 🚇",
+        "desc": "明洞の近くに住んでいるので、道に迷ったら通訳や案内ができますよ。お気軽にメッセージください！"
+      },
+      "4": {
+        "author": "リウェイ (中国)",
+        "time": "3時間前",
+        "title": "K-Beauty コスメショッピング 💄",
+        "desc": "明洞のオリーブヤングで一緒に買い物する友達を探しています。いいブランドたくさん知ってます！"
+      }
+    },
+    "filter_review": "Reviews",
+    "detail": "投稿の詳細"
+  },
+  "help_page": {
+    "title": "緊急支援",
+    "subtitle": "韓国での状況に合わせた助けを素早く見つけてください。",
+    "badge": "緊急",
+    "numbers_title": "緊急電話番号",
+    "medical_title": "医療サポート",
+    "medical_desc": "近隣の病院と症状フレーズカード",
+    "lost_title": "紛失物",
+    "lost_desc": "ステップ別紛失物探しガイド",
+    "police_title": "警察 / 事件",
+    "police_desc": "通報および安全サポート",
+    "interp_title": "通訳",
+    "interp_desc": "1330案内と翻訳アプリ",
+    "symptom_title": "症状フレーズカード",
+    "symptom_hint": "症状をタップすると、医師に見せるための韓国語フレーズが表示されます",
+    "clinic_title": "国際病院 / 救急室",
+    "med_title": "コンビニ常備薬",
+    "med_hint": "GS25, CU, 7-Elevenで24時間購入可能",
+    "lost_step1": "1段階：どこで失くしましたか？",
+    "lost_step1_hint": "場所を選択すると対応経路が表示されます。",
+    "quick_links": "クイックリンク",
+    "go_lost112": "Lost112公式通報サイトを開く",
+    "police_contacts": "主要連絡先",
+    "police_phrases": "緊急フレーズ",
+    "interp_services": "通訳 / 翻訳ツール",
+    "interp_phrases": "役立つフレーズ",
+    "emergency_call": "緊急事態ですか？",
+    "emergency_hint": "すぐに119に電話してください",
+    "taxi": "タクシー",
+    "subway": "地下鉄",
+    "airport": "空港",
+    "street": "路上",
+    "lost_in": "紛失場所:",
+    "hub_subtitle": "My Supportをハブとして使い、状況に合わせた詳細ヘルプページを開いた後、現場で韓国語を見せる必要がある場合は緊急フレーズを一緒に準備してください。",
+    "support_hub_title": "My Support",
+    "support_hub_desc": "どの詳細ページが適しているか確信が持てないとき、最初に開くサポートハブです。",
+    "support_hub_meta": "予約 / 一般 / FAQ / 緊急サポートハブ",
+    "phrases_title": "緊急フレーズ",
+    "phrases_desc": "スタッフ、運転手、警察、医療陣にすぐに見せられる大きな韓国語フレーズを開きます。",
+    "phrases_meta": "現場対応フレーズ集",
+    "call1330_title": "1330に電話",
+    "call1330_desc": "言語サポートが必要な際、最も早い開始点となることが多いです。",
+    "call1330_meta": "観光通訳案内",
+    "main_119": "火災 / 救急",
+    "main_112": "警察",
+    "main_1330": "観光通訳案内",
+    "main_120": "ソウルタサンコールセンター",
+    "role_title": "このページの使い方",
+    "role_text": "My Supportはハブであり、各 /help ページは状況別の詳細経路を説明します。旅行フレーズ集は現場で見せる大きな韓国語の文言用です。",
+    "quick_actions_title": "クイックアクション",
+    "quick_actions_desc": "今すぐ助けが必要なとき、最も安全で素早い入り口です。",
+    "routes_title": "詳細サポート経路",
+    "routes_desc": "状況に最も合ったページを選んでください。各経路は現在のアプリにあるツールや連絡先をそのまま使用します。",
+    "numbers_desc": "状況に合った番号のみ使用してください。以下の詳細ページには追加の説明とフレーズサポートがあります。",
+    "interp_detail_subtitle": "会話が難しいときに使うページです。現在のアプリフローに既にあるフレーズ、ホットライン、翻訳ツールに繋げます。",
+    "interp_when_title": "どんな時にこのページを使いますか？",
+    "interp_when_desc": "スタッフ、運転手、警察、医療陣との意思疎通が難しいときに使用してください。危険な状況や医療が必要な場合は、該当する詳細ページも一緒に開いてください。",
+    "interp_services_desc": "以下のオプションは電話や外部の翻訳ページを開きます。新しいアプリ内通訳サービスは作成しません。",
+    "interp_phrases_desc": "以下のフレーズはクイックプレビューです。大きく見せるフレーズやより多くの緊急フレーズは旅行フレーズ集で確認してください。",
+    "interp_show_more": "緊急フレーズをもっと見る",
+    "interp_next_title": "他のサポート経路が必要ですか？",
+    "interp_next_desc": "通訳サポートだけで警察/医療案内を代替することはできません。安全や健康の問題であれば、該当する詳細ページも一緒に開いてください。",
+    "interp_medical_bridge": "症状、負傷、応急処置が含まれる場合は医療サポートへ移動してください。",
+    "interp_medical_cta": "医療サポートを開く",
+    "interp_police_bridge": "状況が不安だったり公式な安全案内が必要な場合は、警察サポートへ移動してください。",
+    "interp_police_cta": "警察サポートを開く",
+    "police_detail_subtitle": "警察の連絡先、観光警察の案内、より安全な次の経路が必要なときに使うページです。プロジェクトに既にある番号と経路のみ使用します。",
+    "police_when_title": "どんな時にこのページを使いますか？",
+    "police_when_desc": "状況が不安に感じられたり、警察の連絡先が必要だったり、より明確な安全経路が必要なときに使用してください。即時の対応が必要な状況では、直接緊急サービスへ連絡する必要があります。",
+    "police_contacts_desc": "以下の既存の電話/サイト経路を使用してください。状況に最も合った番号を選択してください。",
+    "police_info": {
+      "tourist_info": "観光警察は明洞、仁寺洞、梨泰院一帯でサポートを提供しています。",
+      "crime_label": "警察緊急通報",
+      "crime_note": "即時の警察対応が必要だったり、状況が不安なときに使用してください。",
+      "tourist_label": "観光通訳 / 安全案内",
+      "tourist_note": "警察の手続きや観光安全の選択肢を理解するのに助けが必要なときに使用してください。",
+      "station_label": "警察庁公式サイト"
+    },
+    "police_phrase_desc": "状況を説明する必要があるとき、旅行フレーズ集を開く前に素早く見せられるフレーズです。",
+    "police_bridge_title": "他の経路も一緒に必要ですか？",
+    "police_bridge_desc": "会話が難しい場合は通訳サポートも一緒に開いてください。負傷や急な症状があれば医療サポートも一緒に開いてください。",
+    "police_interp_bridge": "警察やスタッフに状況を説明するのが難しい場合は通訳サポートを開いてください。",
+    "police_medical_bridge": "負傷、疾患、応急処置が一緒に必要な状況であれば医療サポートを開いてください。",
+    "medical_detail_subtitle": "医療連絡先経路、症状フレーズ、現在プロジェクトに含まれている静的な病院案内のためのページです。新しい診断や病院予約サービスを作るものではありません。",
+    "medical_notice_title": "差し迫っていると感じたら",
+    "medical_notice_text": "急性の症状、ひどい負傷、呼吸困難であれば、まず119に電話してください。状況説明にはフレーズ集と通訳経路を一緒に使用してください。",
+    "clinic_desc": "現在のアプリに含まれている静的な例示病院/クリニック情報です。可能な限り、まず電話で確認してください。",
+    "medical_bridge_title": "他のサポート経路も必要ですか？",
+    "medical_bridge_desc": "会話が難しい場合は通訳サポートを開いてください。医療状況が安全事故と繋がる場合は警察サポートも一緒に開いてください。",
+    "medical_interp_bridge": "症状や治療内容をより明確に説明する必要があれば通訳サポートへ移動してください。",
+    "medical_police_bridge": "犯罪、事故、安全問題と繋がる医療状況であれば警察サポートへ移動してください。",
+    "lost_quick_desc": "紛失物サポートがすぐに必要な場合は、以下の公式経路またはヘルプ番号を使用してください。",
+    "lost112_desc": "韓国の多くの公共の紛失物事例で使用する公式紛失物経路です。",
+    "embassy_desc": "パスポートや身分証の紛失で大使館のサポートが必要なときに使用してください。",
+    "lost_1330_desc": "次のステップがわからなかったり状況説明に助けが必要なときに使用してください。",
+    "lost_steps_desc": "以下の状況別経路に従ってください。スタッフに話すのが難しい場合はSupportや旅行フレーズ集を一緒に使ってください。",
+    "interp_badge": "通訳サポート",
+    "police_badge": "安全経路",
+    "medical_badge": "医療経路",
+    "lost_badge": "紛失物経路",
+    "interp_actions": {
+      "open_papago": "Papagoを開く",
+      "open_google_translate": "Google翻訳を開く"
+    },
+    "interp_booking_title": "この予約のための通訳サポート",
+    "interp_booking_desc": "予約関連の通訳サポートを開きました。スタッフと話している間、場所、時間、予約ステータスを一緒に確認してください。",
+    "booking_phrases_desc": "予約、遅延、チェックインの状況を説明する必要がある場合は、まず予約フレーズを開いてください。",
+    "booking_context_title": "この予約に関するサポート",
+    "booking_context_desc": "予約を確認している最中にこのヘルプページを開きました。次のサポート経路を選んでいる間、場所、時間、予約ステータスを一緒に確認してください。",
+    "police_booking_desc": "予約を確認している最中に安全サポートを開きました。最も安全な次の経路を選んでいる間、場所、時間、予約ステータスを一緒に確認してください。",
+    "medical_booking_desc": "予約を確認している最中に医療サポートを開きました。次の医療または通訳経路を選んでいる間、場所、時間、予約ステータスを一緒に確認してください。",
+    "lost_booking_desc": "予約場所へ移動中であれば、道を尋ねたり助けを受ける際、場所、時間、予約ステータスを一緒に確認してください。",
+    "interp": {
+      "hotline_title": "1330観光通訳案内",
+      "hotline_desc": "言語サポートや旅行問題の説明が必要な際、最も早い公式サポートです。",
+      "papago_title": "Papago",
+      "papago_desc": "素早い翻訳とテキストサポートのためにNaver Papagoを開きます。",
+      "google_title": "Google翻訳",
+      "google_desc": "他の素早い翻訳オプションが必要な場合、Google翻訳を開きます。",
+      "dasan_title": "120タ산コールセンター",
+      "dasan_desc": "ソウル市の生活情報と一般案内のためのヘルプラインです。"
+    },
+    "lost112_title": "Lost112",
+    "embassy_title": "大使館を探す",
+    "lost_1330_title": "1330旅行ヘルプライン",
+    "lost": {
+      "taxi_hint": "タクシーでの紛失物対応手続きを開きます。",
+      "subway_hint": "地下鉄や駅から紛失物対応手続きを開きます。",
+      "airport_hint": "公用または移動中の紛失物対応手続きを開きます。",
+      "street_hint": "路上や公共の場所での紛失物対応手続きを開きます。"
+    }
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "ビューティー予約コンシェルジュ",
+      "title": "どんな予約をご希望ですか？",
+      "subtitle": "ご希望のビューティーサービスを選んで、すぐに予約へ進みましょう。",
+      "welcome": "{{name}}様、サービスをお選びください。",
+      "welcome_user": "{{greeting}}、{{name}}様！👋"
+    },
+    "booking": {
+      "step": "STEP. 01",
+      "title": "ご希望のサービスをお選びください",
+      "description": "正確な検索のために、まずカテゴリーを選択してください。"
+    },
+    "categories": {
+      "hair": {
+        "label": "ヘア",
+        "note": "カット、パーマ、カラー",
+        "summary": "ヘアスタイルの変更からトリミングまで予約できます。"
+      },
+      "nail": {
+        "label": "ネイル",
+        "note": "ジェル、ケア、エクステ",
+        "summary": "デザインを選んで予約に進みましょう。"
+      },
+      "esthetic": {
+        "label": "エステ",
+        "note": "スキンケア、輪郭、鎮静",
+        "summary": "肌の状態に合わせてサロンを比較・予約できます。"
+      },
+      "waxing": {
+        "label": "ワックス",
+        "note": "顔、ボディ、ブラジリアン",
+        "summary": "部位に合ったサロンを素早く見つけられます。"
+      },
+      "makeup": {
+        "label": "メイク",
+        "note": "デイリー、撮影、ウェディング",
+        "summary": "イベントに合わせたメイクサービスを予約できます。"
+      },
+      "lash": {
+        "label": "まつげ",
+        "note": "エクステ、パーマ、下まつげ",
+        "summary": "ナチュラルからボリュームまでお好みのメニューへ。"
+      }
+    },
+    "selection": {
+      "eyebrow": "選択したカテゴリー",
+      "tags": {
+        "mobile": "モバイル予約",
+        "comparison": "サロン比較",
+        "inquiry": "リアルタイム問合せ"
+      },
+      "empty": "まずカテゴリーを選択してください。選択後、予約開始ボタンが有効になります。"
+    },
+    "cta": {
+      "hint": "カテゴリーを選択すると予約が始まります",
+      "button": "予約を始める"
+    },
+    "interpreter": {
+      "eyebrow": "通訳サポート",
+      "title": "コミュニケーション、もう怖くない",
+      "description": "お店のスタッフ、タクシー運転手、現地の人々との会話が必要なとき、ボタンひとつでリアルタイム通訳とお繋ぎします。",
+      "button": "通訳をリクエストする"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "一目でカテゴリー選択",
+          "desc": "最初の画面で希望のサービスを先に選んで、そのまま予約へ進めます。"
+        },
+        {
+          "title": "言語の心配がない予約",
+          "desc": "必要なときにリアルタイム通訳ヘルパーを通じて、お店と自然に対話できます。"
+        },
+        {
+          "title": "モバイル優先の予約導線",
+          "desc": "片手でも選択しやすいカード型ボタンと大きなCTAで予約の利便性を高めました。"
+        }
+      ]
+    },
+    "interpreter_entry": {
+      "title": "リアルタイム通訳",
+      "description": "店舗スタッフとの会話を支援します",
+      "cta": "通訳を開始する"
+    },
+    "location_sheet": {
+      "search_title": "位置情報検索",
+      "search_result_count": "{{query}} の検索結果 {{count}}件",
+      "view_location": "位置を表示",
+      "view_location_desc": "地図で詳細な位置を確認します",
+      "call_taxi": "K.Rideを呼ぶ",
+      "google_maps_desc": "Googleマップで公共交通機関を確認します"
+    },
+    "modals": {
+      "card_title": "📍 この住所に行ってください",
+      "copy": "住所をコピー",
+      "copy_done": "コピー完了！",
+      "close": "閉じる"
+    }
+  },
+  "interpreter_page": {
+    "back": "< 戻る",
+    "title": "リアルタイム通訳ドゥミ",
+    "subtitle": "観光客の言語は現在のアプリ言語に自動設定され、店舗の言語は韓国語に固定されます。",
+    "onboarding": "観光客가 입력하면 한국어(韓国語)로, 직원(スタッフ)이 한국어를 입력하면 관광객 언어로 바로 번역됩니다。",
+    "customer_lang": "観光客の言語",
+    "staff_lang": "店舗の言語",
+    "mic_preparing": "マイクを準備中",
+    "customer_transcribing": "お客様の音声を認識中",
+    "customer_recording": "お客様の録音中、再タップで終了",
+    "translating": "翻訳中",
+    "customer_speak_btn": "観光客の音声入力",
+    "staff_transcribing": "スタッフの音声を認識中",
+    "staff_recording": "スタッフの録音中、再タップで終了",
+    "staff_speak_btn": "スタッフの音声入力",
+    "customer_input_label": "観光客の入力",
+    "customer_placeholder": "観光客が話した内容を入力してください。",
+    "send": "送信",
+    "staff_input_label": "スタッフの入力",
+    "staff_placeholder": "スタッフが話した韓国語の内容を入力してください。",
+    "voice_supported_hint": "お話しボタンで録音するか、下の入力欄に直接文章を入力してください。",
+    "voice_not_supported_hint": "このブラウザでは音声入力を使用できません。テキスト入力で通訳を進めてください。",
+    "voice_recognizing": "音声を認識しています。",
+    "voice_unrecognized_error": "音声を認識できませんでした. もう少しはっきりと話し直してください。",
+    "voice_failed_error": "音声認識に失敗しました。テキスト入力でも続けることができます。",
+    "mic_permission_status": "マイクの権限を確認しています。",
+    "recording_status": "録音中です。最大 {{seconds}}秒まで可能です。",
+    "mic_unsupported_error": "マイクを使用できません。ブラウザの権限を確認するか、テキスト入力をご利用ください。",
+    "input_required_customer": "観光客の文章を先に入力해주세요。",
+    "input_required_staff": "スタッフの文章を先に入力してください。",
+    "translating_status": "翻訳文を準備しています。",
+    "translation_failed_error": "翻訳中に問題が発生しました。しばらくしてからもう一度お試しください。",
+    "empty_history_hint": "最初の文章を入力すると、通訳の記録がここに蓄積されます。",
+    "customer_role": "観光客",
+    "staff_role": "スタッフ",
+    "replay_btn_label": "翻訳音声をもう一度聴く",
+    "replay_not_supported_hint": "このブラウザでは音声再生がサポートされていません。",
+    "play": "再生",
+    "translated_status": "翻訳完了",
+    "source_only_status": "原文を表示",
+    "voice_too_short_error": "もう少し長くお話しください。音声が短すぎると認識が難しくなります。"
+  }
 }

@@ -519,27 +519,6 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
     );
 }
 
-function AdminShortcutCard() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    return (
-        <div className={styles.adminShortcut} onClick={() => router.push("/admin")}>
-            <div className={styles.adminShortcutLeft}>
-                <div className={styles.adminShortcutIcon}>ADMIN</div>
-                <div>
-                    <div className={styles.adminShortcutTitle}>
-                        {t("my_page.dashboard.admin_title")}
-                    </div>
-                    <div className={styles.adminShortcutDesc}>
-                        {t("my_page.dashboard.admin_desc")}
-                    </div>
-                </div>
-            </div>
-            <div className={styles.adminShortcutChevron}>{">"}</div>
-        </div>
-    );
-}
 
 function MyPageContent() {
     const { t } = useTranslation("common");
@@ -729,8 +708,7 @@ function MyPageContent() {
             <section style={{ padding: '0 20px', marginBottom: 28 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
                     <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div style={{ display: 'flex', gap: 6 }}>
-                        <button
+                    <div style={{ display: 'flex', gap: 6 }}>                        <button
                             onClick={() => router.push('/my/settings/notifications')}
                             style={{
                                 border: '1px solid #7c3aed33',
@@ -742,7 +720,7 @@ function MyPageContent() {
                                 fontWeight: 700,
                                 cursor: 'pointer'
                             }}
-                        >알림 설정</button>
+                        >{t('my_page.notifications.settings')}</button>
                         <button
                             onClick={() => router.push('/my/notifications')}
                             style={{
@@ -755,7 +733,7 @@ function MyPageContent() {
                                 fontWeight: 700,
                                 cursor: 'pointer'
                             }}
-                        >알림함</button>
+                        >{t('my_page.notifications.inbox')}</button>
                     </div>
                 </div>
 
@@ -783,9 +761,9 @@ function MyPageContent() {
                         fontSize: '1.4rem', flexShrink: 0
                     }}>💇</div>
                     <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>내 뷰티 예약 보기</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page.beauty_booking_link.title')}</div>
                         <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginTop: 2 }}>
-                            예약 상태 및 시술 내용을 한 화면에서 확인하세요.
+                            {t('my_page.beauty_booking_link.desc')}
                         </div>
                     </div>
                     <span style={{ color: '#ec4899', fontSize: '1.2rem' }}>›</span>

@@ -1,4 +1,23 @@
 {
+  "beauty_explore": {
+    "form_name": "Nama",
+    "form_name_placeholder": "Masukkan nama anda",
+    "form_phone": "Hubungan (atau ID SNS)",
+    "form_phone_placeholder": "Nombor telefon atau ID SNS",
+    "form_request": "Permintaan",
+    "form_request_placeholder": "Alergi atau gaya yang diingini",
+    "agreement_confirm": "Sahkan butiran",
+    "agreement_confirm_desc": "Saya mengesahkan pilihan ini.",
+    "agreement_privacy": "Persetujuan privasi",
+    "agreement_privacy_desc": "Saya setuju untuk memberikan maklumat.",
+    "region_all": "Semua kawasan",
+    "label_today": "Hari ini",
+    "label_tomorrow": "Esok",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Permintaan tempahan dihantar!",
+    "booking_confirmation_desc": "Kami akan memaklumkan anda tidak lama lagi.",
+    "booking_confirmation_cta": "Tempahan Saya"
+  },
   "common": {
     "welcome": "Selamat Datang, Pelancong.",
     "greeting": "Selamat Pagi",
@@ -48,7 +67,10 @@
     "route_nav": "Panduan Laluan",
     "transit_nav_desc": "Navigasi pengangkutan awam",
     "copy_address": "Salin Alamat",
-    "copied": "Disalin!"
+    "copied": "Disalin!",
+    "morning": "Selamat pagi",
+    "afternoon": "Selamat tengah hari",
+    "evening": "Selamat malam"
   },
   "categories": {
     "all": "Semua",
@@ -62,82 +84,80 @@
   "community_nav": "Community",
   "home_beauty": {
     "hero": {
-      "eyebrow": "Beauty Booking Concierge",
-      "title": "Apakah perkhidmatan yang ingin anda tempah?",
-      "subtitle": "Pilih perkhidmatan kecantikan yang anda inginkan terlebih dahulu, kemudian terus ke langkah tempahan. Kami telah mereka bentuk skrin ini untuk pemilihan pantas di telefon bimbit, diikuti dengan perbandingan kedai dan permintaan tempahan.",
-      "welcome": "{{name}}, sila pilih perkhidmatan yang anda perlukan hari ini."
+      "eyebrow": "Perkhidmatan Tempahan Kecantikan",
+      "title": "Tempahan apa yang anda perlukan?",
+      "subtitle": "Pilih perkhidmatan kecantikan dan terus tempah.",
+      "welcome": "{{name}}, sila pilih perkhidmatan.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "step": "Langkah 1",
-      "title": "Sila pilih perkhidmatan kecantikan yang anda inginkan",
-      "description": "Selepas memilih kategori, anda boleh mula meneroka tempahan berdasarkan perkhidmatan tersebut pada langkah seterusnya."
+      "step": "LANGKAH. 01",
+      "title": "Sila pilih perkhidmatan kecantikan",
+      "description": "Sila pilih kategori terlebih dahulu untuk penjelajahan yang paling tepat."
     },
     "categories": {
       "hair": {
         "label": "Rambut",
-        "note": "Gunting, Perm, Warna, Dry",
-        "summary": "Mulakan tempahan dengan pantas daripada pertukaran gaya rambut kepada penjagaan ringan."
+        "note": "Potong, perm, warna",
+        "summary": "Tempah perkhidmatan rambut dengan pantas."
       },
       "nail": {
         "label": "Kuku",
-        "note": "Gel Nail, Penjagaan, Sambungan",
-        "summary": "Tentukan mood dan reka bentuk yang diinginkan, kemudian teruskan ke fasa tempahan dengan mudah."
+        "note": "Gel, penjagaan, sambungan",
+        "summary": "Pilih reka bentuk dan terus tempah."
       },
       "esthetic": {
         "label": "Estetik",
-        "note": "Skincare, Kontur, Penjagaan Menenangkan",
-        "summary": "Bandingkan kedai dan buat tempahan mengikut keadaan kulit dan tujuan penjagaan anda."
+        "note": "Penjagaan kulit, kontur",
+        "summary": "Bandingkan salon dan tempah."
       },
       "waxing": {
         "label": "Waxing",
-        "note": "Muka, Badan, Brazilian",
-        "summary": "Cari dan tempah kedai yang sesuai dengan bahagian badan dan jadual anda dengan cepat."
+        "note": "Muka, badan, Brazilian",
+        "summary": "Cari salon yang sesuai dengan pantas."
       },
       "makeup": {
-        "label": "Makeup",
-        "note": "Harian, Penggambaran, Perkahwinan",
-        "summary": "Pilih perkhidmatan makeup yang sesuai dengan jadual acara anda dan mulakan tempahan segera."
+        "label": "Solekan",
+        "note": "Harian, penggambaran, perkahwinan",
+        "summary": "Pilih perkhidmatan solekan untuk acara anda."
       },
       "lash": {
         "label": "Bulu Mata",
-        "note": "Sambungan, Perm, Underlash",
-        "summary": "Terhubung terus dengan menu yang diinginkan, daripada sambungan asli kepada gaya bervolume."
+        "note": "Sambungan, perm",
+        "summary": "Dari semula jadi ke volum, pilih menu anda."
       }
     },
     "selection": {
-      "eyebrow": "Kategori Terpilih",
+      "eyebrow": "Kategori yang Dipilih",
       "tags": {
-        "mobile": "Tempahan Telefon",
-        "comparison": "Perbandingan Kedai",
-        "inquiry": "Pertanyaan Masa Nyata"
+        "mobile": "Tempahan mudah alih",
+        "comparison": "Bandingkan salon",
+        "inquiry": "Pertanyaan masa nyata"
       },
-      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pilihan dibuat."
+      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pemilihan."
     },
     "cta": {
-      "hint": "Teroka perkhidmatan kecantikan yang tersedia berdasarkan kategori terpilih pada skrin seterusnya.",
+      "hint": "Pilih kategori untuk mula tempahan",
       "button": "Mula Tempahan"
     },
-    "interpreter": {
-      "eyebrow": "Sokongan Bahasa",
-      "title": "Perlukan tempahan dalam bahasa asing? Gunakan Pembantu Terjemahan",
-      "description": "Jika anda bimbang tentang komunikasi semasa rundingan sebelum menempah atau semasa di kedai, anda boleh berhubung terus dengan penterjemah masa nyata.",
-      "button": "Buka Pembantu Terjemahan"
+    "interpreter_entry": {
+      "title": "Penterjemah Masa Nyata",
+      "description": "Berkomunikasi dengan mudah dengan kakitangan",
+      "cta": "Buka Penterjemah"
     },
-    "assurance": {
-      "items": [
-        {
-          "title": "Pilihan Kategori Sekilas Pandang",
-          "desc": "Pilih perkhidmatan anda pada skrin pertama dan masuk ke aliran tempahan secara segera."
-        },
-        {
-          "title": "Tempahan Tanpa Bimbang Bahasa",
-          "desc": "Bercakap secara semula jadi dengan kedai menggunakan penterjemah masa nyata apabila diperlukan."
-        },
-        {
-          "title": "Aliran Tempahan Mobile-First",
-          "desc": "Tingkatkan penukaran dengan butang berbentuk kad dan CTA besar yang mudah dipilih dengan sebelah tangan."
-        }
-      ]
+    "location_sheet": {
+      "search_title": "Cari Lokasi",
+      "search_result_count": "{{count}} hasil untuk \"{{query}}\"",
+      "view_location": "Lihat Lokasi",
+      "view_location_desc": "Lihat lokasi terperinci pada peta",
+      "call_taxi": "Panggil Teksi",
+      "google_maps_desc": "Semak laluan pengangkutan awam di Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Sila pergi ke alamat ini",
+      "copy": "Salin Alamat",
+      "copy_done": "Berjaya disalin!",
+      "close": "Tutup"
     }
   },
   "interpreter_ui": {
@@ -193,7 +213,8 @@
       "request_custom_label": "Tersuai",
       "request_custom_title": "Mohon Jadual {{days}} Hari",
       "request_custom_toast": "Memohon jadual {{days}} hari tersuai! Concierge kami akan menghubungi anda."
-    }
+    },
+    "badge": "Alami Kecantikan Korea"
   },
   "explore_items": {
     "airport_arrival": "Ketibaan Lapangan Terbang Incheon",

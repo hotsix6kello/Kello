@@ -13,9 +13,9 @@
       "welcome_user": "{{greeting}}, {{name}}님! 👋"
     },
     "booking": {
-      "step": "Step 1",
+      "step": "STEP. 01",
       "title": "원하시는 뷰티 서비스를 선택해 주세요",
-      "description": "카테고리를 고르면 다음 단계에서 해당 서비스 기준으로 예약 탐색을 시작할 수 있습니다."
+      "description": "가장 정확한 탐색을 위해 카테고리를 먼저 선택해 주세요."
     },
     "categories": {
       "hair": {
@@ -50,16 +50,26 @@
       }
     },
     "selection": {
-      "eyebrow": "Selected Category",
+      "eyebrow": "선택한 카테고리",
       "tags": {
         "mobile": "모바일 예약",
         "comparison": "매장 비교",
         "inquiry": "실시간 문의"
       },
-      "empty": "가장 먼저 원하는 카테고리를 선택해 주세요. 선택 후 바로 예약 시작 버튼이 활성화됩니다."
+      "empty": "먼저 카테고리를 선택해 주세요. 선택 후 예약 시작 버튼이 활성화됩니다."
+    },
+    "transport": {
+      "stations": {
+        "gangnam": "강남",
+        "hongdae": "홍대",
+        "seongsu": "성수",
+        "jamsil": "잠실",
+        "konkuk": "건대",
+        "pangyo": "판교"
+      }
     },
     "cta": {
-      "hint": "선택한 카테고리를 기준으로 다음 화면에서 예약 가능한 뷰티 서비스를 이어서 탐색합니다.",
+      "hint": "카테고리를 선택하면 예약이 시작됩니다",
       "button": "예약 시작하기"
     },
     "interpreter": {
@@ -89,19 +99,19 @@
       "description": "매장에서 직원과 손쉽게 대화해보세요",
       "cta": "통역기 시작하기"
     },
+    "location_sheet": {
+      "search_title": "위치 정보 검색",
+      "search_result_count": "{{query}} 검색 결과 {{count}}건",
+      "view_location": "위치 보기",
+      "view_location_desc": "지도에서 상세 위치를 확인합니다",
+      "call_taxi": "K.Ride 호출하기",
+      "google_maps_desc": "구글 지도로 대중교통 경로를 확인합니다"
+    },
     "modals": {
-      "card_title": "🗺️ 이 주소로 가주세요",
+      "card_title": "📍 이 주소로 이동해 주세요",
       "copy": "주소 복사",
       "copy_done": "복사 완료!",
       "close": "닫기"
-    },
-    "location_sheet": {
-      "search_title": "검색 결과",
-      "search_result_count": "'{{query}}'에 대한 {{count}}개의 결과",
-      "view_location": "위치 보기",
-      "view_location_desc": "지도에서 상세 위치 확인",
-      "call_taxi": "택시 호출하기",
-      "google_maps_desc": "글로벌 유저용 다국어 길찾기"
     }
   },
   "interpreter_ui": {
@@ -270,8 +280,18 @@
   "beauty_explore": {
     "hero_title": "뷰티 예약 탐색",
     "hero_desc": "원하는 카테고리를 먼저 고르면 더 정확한 예약 탐색이 가능해요. 지금은 전체 뷰티 매장을 확인할 수 있습니다.",
+    "hero_title_with_category": "{{category}} 예약을 바로 시작해 보세요",
+    "hero_subtitle_desc": "지역을 고르고 매장을 선택한 뒤, 시간만 정하면 다음 단계로 이어집니다.",
+    "hero_guide_no_category": "홈에서 카테고리를 먼저 고르면 더 잘 맞는 예약 흐름으로 바로 이어져요. 지금은 전체 뷰티 매장을 먼저 보고 있어요.",
+    "hero_flow_step_category": "카테고리 확인",
+    "hero_flow_step_region": "지역 선택",
+    "hero_flow_step_store": "매장 고르기",
+    "hero_flow_step_time": "시간 확인",
+    "hero_flow_aria_label": "빠른 예약 안내",
+    "region_filter_title": "원하는 지역을 골라보세요",
     "category_all": "전체",
     "region_all": "전체 보기",
+    "step_indicator_label": "뷰티 예약 단계",
     "step_1": "매장 선택",
     "step_2": "시간 선택",
     "step_3": "예약 확인",

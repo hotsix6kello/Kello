@@ -1,0 +1,19 @@
+{
+  "form_name": "姓名",
+  "form_name_placeholder": "請輸入姓名",
+  "form_phone": "聯絡方式（或 SNS ID）",
+  "form_phone_placeholder": "手機號碼或 SNS ID",
+  "form_request": "需求說明",
+  "form_request_placeholder": "過敏資訊或想要的風格",
+  "agreement_confirm": "確認內容",
+  "agreement_confirm_desc": "我已確認所選內容。",
+  "agreement_privacy": "隱私同意",
+  "agreement_privacy_desc": "我同意提供相關資訊。",
+  "region_all": "全部地區",
+  "label_today": "今天",
+  "label_tomorrow": "明天",
+  "label_booking_unit": "韓元",
+  "booking_confirmation_title": "已送出預約申請！",
+  "booking_confirmation_desc": "我們會很快通知您。",
+  "booking_confirmation_cta": "我的預約"
+}

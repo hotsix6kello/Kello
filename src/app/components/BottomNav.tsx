@@ -2,9 +2,22 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./BottomNav.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "./navigationConfig";
+
+interface NavItem {
+    id: string;
+    path: string;
+    icon: string;
+    labelKey: string;
+    defaultLabel: string;
+    activeKey: string;
+}
+
+interface LocalizedNavItem extends NavItem {
+    label: string;
+}
 
 export default function BottomNav() {
     const { t } = useTranslation('common');
@@ -12,25 +25,25 @@ export default function BottomNav() {
     const pathname = usePathname();
     const [activeTab, setActiveTab] = useState("/");
 
-    const localizedNavItems = navItems.map(item => ({
+    const localizedNavItems = useMemo<LocalizedNavItem[]>(() => (navItems as NavItem[]).map(item => ({
         ...item,
         label: t(item.labelKey, { defaultValue: item.defaultLabel })
-    }));
+    })), [t]);
 
     useEffect(() => {
-        const matched = localizedNavItems.find(item => {
+        const matched = localizedNavItems.find((item: LocalizedNavItem) => {
             if (item.activeKey === "/") return pathname === "/";
             return pathname.startsWith(item.activeKey);
         });
         setActiveTab(matched?.activeKey ?? "");
-    }, [pathname]);
+    }, [pathname, localizedNavItems]);
 
     // auth 페이지 및 lang-test에서는 숨김
     if (pathname.startsWith("/auth") || pathname.startsWith("/lang-test")) return null;
 
     return (
         <nav className={styles.navBar}>
-            {localizedNavItems.map((item) => {
+            {localizedNavItems.map((item: LocalizedNavItem) => {
                 const isActive = activeTab === item.activeKey;
                 return (
                     <div
