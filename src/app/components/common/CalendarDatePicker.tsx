@@ -3,8 +3,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format, isBefore, startOfToday } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { ko, enUS, ja, zhCN, zhHK, arSA, es, fr, de, th, vi, id, pt, ru } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 import 'react-day-picker/dist/style.css';
+
+const localeMap: Record<string, any> = {
+  ko, en: enUS, ja, "zh-CN": zhCN, "zh-HK": zhHK, ar: arSA, es, fr, de, th, vi, id, pt, ru
+};
 
 interface CalendarDatePickerProps {
   selectedDate: Date | undefined;
@@ -15,8 +20,11 @@ interface CalendarDatePickerProps {
 export default function CalendarDatePicker({
   selectedDate,
   onDateChange,
-  label = '예약 날짜 선택'
+  label
 }: CalendarDatePickerProps) {
+  const { t, i18n } = useTranslation('beauty_explore');
+  const currentLocale = localeMap[i18n.language] || enUS;
+  const displayLabel = label || t('select_date');
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const today = startOfToday();
@@ -40,7 +48,7 @@ export default function CalendarDatePicker({
   return (
     <div className="relative w-full" ref={containerRef}>
       <label className="block text-sm font-bold text-[#3d2f28] mb-2">
-        {label}
+        {displayLabel}
       </label>
       
       {/* Trigger Button */}
@@ -50,7 +58,7 @@ export default function CalendarDatePicker({
         className="w-full flex items-center justify-between px-4 py-3.5 bg-[#fffcf9] border border-[#6d533f]/10 rounded-2xl shadow-sm hover:border-[#7f4f46]/30 transition-all text-left"
       >
         <span className={selectedDate ? 'text-[#231d19] font-bold' : 'text-[#6e6259]'}>
-          {selectedDate ? format(selectedDate, 'yyyy년 MM월 dd일', { locale: ko }) : '날짜를 선택해주세요'}
+          {selectedDate ? format(selectedDate, 'PPP', { locale: currentLocale }) : t('label_select_prompt')}
         </span>
         <svg 
           className={`w-5 h-5 text-[#7f4f46] transition-transform ${isOpen ? 'rotate-180' : ''}`} 
@@ -69,7 +77,7 @@ export default function CalendarDatePicker({
             mode="single"
             selected={selectedDate}
             onSelect={handleDaySelect}
-            locale={ko}
+            locale={currentLocale}
             disabled={{ before: today }}
             modifiersClassNames={{
               selected: 'rdp-day_selected',

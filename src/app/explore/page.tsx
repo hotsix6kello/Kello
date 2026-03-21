@@ -356,12 +356,12 @@ function buildLocalizedBookingMessage(
 
 const DESIGNERS_BY_STORE: Record<string, BeautyDesigner[]> = {
   beauty_hair_1: [
-    createDesigner('designer_hair_1_a', '지아 디자이너', '레이어드 컷 · 컬러', '경력 9년', '상담이 꼼꼼하고 얼굴형 맞춤 컷이 강점이에요.', 15000),
-    createDesigner('designer_hair_1_b', '민서 원장', '프리미엄 펌 · 클리닉', '경력 14년', '손상도에 맞춘 시술 순서를 세심하게 잡아드려요.', 25000),
+    createDesigner('designer_hair_1_a', 'designers.jia', 'designers.jia_specialty', '경력 9년', 'designers.jia_desc', 15000),
+    createDesigner('designer_hair_1_b', 'designers.minseo', 'designers.minseo_specialty', '경력 14년', 'designers.minseo_desc', 25000),
   ],
   beauty_hair_2: [
-    createDesigner('designer_hair_2_a', '하린 디자이너', '볼륨 펌 · 중단발', '경력 8년', '자연스러운 볼륨과 얼굴선 정리를 잘해드려요.', 12000),
-    createDesigner('designer_hair_2_b', '윤아 실장', '컬러 체인지 · 케어', '경력 11년', '탈색 이력 상담과 컬러 톤 제안이 강점이에요.', 18000),
+    createDesigner('designer_hair_2_a', 'designers.harin', 'designers.harin_specialty', '경력 8년', 'designers.harin_desc', 12000),
+    createDesigner('designer_hair_2_b', 'designers.yuna', 'designers.yuna_specialty', '경력 11년', 'designers.yuna_desc', 18000),
   ],
   beauty_nail_1: [
     createDesigner('designer_nail_1_a', '서윤 아티스트', '젤 네일 · 시즌 아트', '경력 7년', '트렌디한 컬러 조합과 깔끔한 마감으로 유명해요.', 10000),
@@ -372,20 +372,20 @@ const DESIGNERS_BY_STORE: Record<string, BeautyDesigner[]> = {
     createDesigner('designer_nail_2_b', '다빈 아티스트', '시럽 네일 · 그라데이션', '경력 6년', '맑고 은은한 무드 연출을 잘해드려요.', 8000),
   ],
   beauty_esthetic_1: [
-    createDesigner('designer_esthetic_1_a', '유진 테라피스트', '진정 · 보습 관리', '경력 8년', '예민한 피부를 편안하게 케어해드려요.', 10000),
-    createDesigner('designer_esthetic_1_b', '소희 원장', '탄력 · 윤곽 관리', '경력 13년', '탄력 프로그램과 상담 만족도가 높은 편이에요.', 20000),
+    createDesigner('designer_esthetic_1_a', 'designers.yujin', 'designers.yujin_specialty', 'designers.yujin_experience', 'designers.yujin_desc', 10000),
+    createDesigner('designer_esthetic_1_b', 'designers.sohee', 'designers.sohee_specialty', 'designers.sohee_experience', 'designers.sohee_desc', 20000),
   ],
   beauty_esthetic_2: [
-    createDesigner('designer_esthetic_2_a', '가영 테라피스트', '여드름 · 민감성 케어', '경력 7년', '피부 상태에 따라 제품 구성을 유연하게 조정해드려요.', 8000),
-    createDesigner('designer_esthetic_2_b', '예린 실장', '탄력 · 광채 관리', '경력 9년', '중요한 일정 전 빠른 컨디션 회복을 도와드려요.', 12000),
+    createDesigner('designer_esthetic_2_a', 'designers.gayoung', 'designers.gayoung_specialty', 'designers.gayoung_experience', 'designers.gayoung_desc', 8000),
+    createDesigner('designer_esthetic_2_b', 'designers.yerin', 'designers.yerin_specialty', 'designers.yerin_experience', 'designers.yerin_desc', 12000),
   ],
   beauty_waxing_1: [
-    createDesigner('designer_waxing_1_a', '도연 매니저', '브라질리언 · 바디 왁싱', '경력 6년', '빠르고 깔끔한 시술 진행으로 재방문이 많아요.', 10000),
-    createDesigner('designer_waxing_1_b', '현아 원장', '민감부위 진정 케어', '경력 12년', '민감한 고객 상담과 사후 진정 가이드가 강점이에요.', 18000),
+    createDesigner('designer_waxing_1_a', 'designers.doyeon', 'designers.doyeon_specialty', 'designers.doyeon_experience', 'designers.doyeon_desc', 10000),
+    createDesigner('designer_waxing_1_b', 'designers.hyuna', 'designers.hyuna_specialty', 'designers.hyuna_experience', 'designers.hyuna_desc', 18000),
   ],
   beauty_waxing_2: [
-    createDesigner('designer_waxing_2_a', '시아 매니저', '팔 · 다리 왁싱', '경력 5년', '짧은 일정에서도 빠르게 시술을 마무리해드려요.', 6000),
-    createDesigner('designer_waxing_2_b', '주희 실장', '풀바디 · 진정 관리', '경력 9년', '통증을 줄이는 템포 조절이 강점이에요.', 12000),
+    createDesigner('designer_waxing_2_a', 'designers.sia', 'designers.sia_specialty', 'designers.sia_experience', 'designers.sia_desc', 6000),
+    createDesigner('designer_waxing_2_b', 'designers.juhee', 'designers.juhee_specialty', 'designers.juhee_experience', 'designers.juhee_desc', 12000),
   ],
   beauty_makeup_1: [
     createDesigner('designer_makeup_1_a', '보라 메이크업 아티스트', '데일리 · 촬영 메이크업', '경력 8년', '맑고 또렷한 피부 표현이 강점이에요.', 18000),
@@ -537,135 +537,135 @@ const BEAUTY_REGIONS: Array<{ id: BeautyRegionId; labelKey: string }> = [
 const BEAUTY_STORE_ITEMS: BeautyStore[] = [
   {
     id: 'beauty_hair_1',
-    name: '라프메종 헤어 강남',
+    name: 'stores.beauty_hair_1.name',
     category: 'hair',
     region: 'gangnam',
     rating: 4.9,
     reviewCount: 218,
-    priceLabel: '커트 55,000원~',
-    shortDescription: '레이어드 컷과 자연스러운 컬러 상담이 강점인 프리미엄 헤어 스튜디오입니다.',
-    tags: ['디자인 컷', '퍼스널 컬러', '두피 케어'],
+    priceLabel: 'stores.beauty_hair_1.priceLabel',
+    shortDescription: 'stores.beauty_hair_1.shortDescription',
+    tags: ['stores.beauty_hair_1.tags.0', 'stores.beauty_hair_1.tags.1', 'stores.beauty_hair_1.tags.2'],
   },
   {
     id: 'beauty_hair_2',
-    name: '아틀리에 성수 헤어룸',
+    name: 'stores.beauty_hair_2.name',
     category: 'hair',
     region: 'seongsu',
     rating: 4.8,
     reviewCount: 164,
-    priceLabel: '볼륨 펌 120,000원~',
-    shortDescription: '볼륨 펌과 스타일 체인지 상담을 차분하게 진행하는 프라이빗 헤어룸입니다.',
-    tags: ['볼륨 펌', '프라이빗', '스타일 상담'],
+    priceLabel: 'stores.beauty_hair_2.priceLabel',
+    shortDescription: 'stores.beauty_hair_2.shortDescription',
+    tags: ['stores.beauty_hair_2.tags.0', 'stores.beauty_hair_2.tags.1', 'stores.beauty_hair_2.tags.2'],
   },
   {
     id: 'beauty_nail_1',
-    name: '메종 네일 홍대',
+    name: 'stores.beauty_nail_1.name',
     category: 'nail',
     region: 'hongdae',
     rating: 4.8,
     reviewCount: 137,
-    priceLabel: '젤 네일 79,000원~',
-    shortDescription: '트렌디한 컬러 조합과 시즌 아트가 강한 네일 전문 스튜디오입니다.',
-    tags: ['이달의 아트', '젤 케어', '컬러 큐레이션'],
+    priceLabel: 'stores.beauty_nail_1.priceLabel',
+    shortDescription: 'stores.beauty_nail_1.shortDescription',
+    tags: ['stores.beauty_nail_1.tags.0', 'stores.beauty_nail_1.tags.1', 'stores.beauty_nail_1.tags.2'],
   },
   {
     id: 'beauty_nail_2',
-    name: '베이지 네일 종로',
+    name: 'stores.beauty_nail_2.name',
     category: 'nail',
     region: 'jongno',
     rating: 4.7,
     reviewCount: 102,
-    priceLabel: '네일 케어 45,000원~',
-    shortDescription: '깔끔한 오피스 네일부터 웨딩 전 손톱 케어까지 안정적으로 받을 수 있어요.',
-    tags: ['오피스 네일', '웨딩 준비', '손톱 케어'],
+    priceLabel: 'stores.beauty_nail_2.priceLabel',
+    shortDescription: 'stores.beauty_nail_2.shortDescription',
+    tags: ['stores.beauty_nail_2.tags.0', 'stores.beauty_nail_2.tags.1', 'stores.beauty_nail_2.tags.2'],
   },
   {
     id: 'beauty_esthetic_1',
-    name: '세린 스킨 라운지 강남',
+    name: 'stores.beauty_esthetic_1.name',
     category: 'esthetic',
     region: 'gangnam',
     rating: 4.9,
     reviewCount: 189,
-    priceLabel: '보습 관리 95,000원~',
-    shortDescription: '피부 진정과 탄력 케어를 조용한 공간에서 받을 수 있는 에스테틱 라운지입니다.',
-    tags: ['진정 케어', '탄력 관리', '프라이빗 룸'],
+    priceLabel: 'stores.beauty_esthetic_1.priceLabel',
+    shortDescription: 'stores.beauty_esthetic_1.shortDescription',
+    tags: ['stores.beauty_esthetic_1.tags.0', 'stores.beauty_esthetic_1.tags.1', 'stores.beauty_esthetic_1.tags.2'],
   },
   {
     id: 'beauty_esthetic_2',
-    name: '글로우 포뮬러 성수',
+    name: 'stores.beauty_esthetic_2.name',
     category: 'esthetic',
     region: 'seongsu',
     rating: 4.7,
     reviewCount: 121,
-    priceLabel: '수분 진정 케어 88,000원~',
-    shortDescription: '예민한 피부를 위한 맞춤 진정 프로그램과 홈케어 가이드가 강점입니다.',
-    tags: ['수분 관리', '예민 피부', '맞춤 상담'],
+    priceLabel: 'stores.beauty_esthetic_2.priceLabel',
+    shortDescription: 'stores.beauty_esthetic_2.shortDescription',
+    tags: ['stores.beauty_esthetic_2.tags.0', 'stores.beauty_esthetic_2.tags.1', 'stores.beauty_esthetic_2.tags.2'],
   },
   {
     id: 'beauty_waxing_1',
-    name: '베어 아틀리에 왁싱 강남',
+    name: 'stores.beauty_waxing_1.name',
     category: 'waxing',
     region: 'gangnam',
     rating: 4.8,
     reviewCount: 143,
-    priceLabel: '브라질리언 99,000원~',
-    shortDescription: '위생 관리와 세심한 사후 케어 안내로 재방문율이 높은 왁싱 전문점입니다.',
-    tags: ['위생 관리', '사후 케어', '민감 부위'],
+    priceLabel: 'stores.beauty_waxing_1.priceLabel',
+    shortDescription: 'stores.beauty_waxing_1.shortDescription',
+    tags: ['stores.beauty_waxing_1.tags.0', 'stores.beauty_waxing_1.tags.1', 'stores.beauty_waxing_1.tags.2'],
   },
   {
     id: 'beauty_waxing_2',
-    name: '소프트 스트립 홍대',
+    name: 'stores.beauty_waxing_2.name',
     category: 'waxing',
     region: 'hongdae',
     rating: 4.6,
     reviewCount: 96,
-    priceLabel: '팔 왁싱 55,000원~',
-    shortDescription: '짧은 일정에도 빠르게 예약할 수 있는 가벼운 왁싱 중심 스튜디오입니다.',
-    tags: ['팔 왁싱', '빠른 시술', '가벼운 방문'],
+    priceLabel: 'stores.beauty_waxing_2.priceLabel',
+    shortDescription: 'stores.beauty_waxing_2.shortDescription',
+    tags: ['stores.beauty_waxing_2.tags.0', 'stores.beauty_waxing_2.tags.1', 'stores.beauty_waxing_2.tags.2'],
   },
   {
     id: 'beauty_makeup_1',
-    name: '아틀리에 베일 메이크업 성수',
+    name: 'stores.beauty_makeup_1.name',
     category: 'makeup',
     region: 'seongsu',
     rating: 4.9,
     reviewCount: 176,
-    priceLabel: '데일리 메이크업 85,000원~',
-    shortDescription: '촬영과 행사 일정에 맞춘 피부 결 정돈과 베이스 표현으로 만족도가 높은 샵입니다.',
-    tags: ['촬영 메이크업', '데일리 룩', '퍼스널 무드'],
+    priceLabel: 'stores.beauty_makeup_1.priceLabel',
+    shortDescription: 'stores.beauty_makeup_1.shortDescription',
+    tags: ['stores.beauty_makeup_1.tags.0', 'stores.beauty_makeup_1.tags.1', 'stores.beauty_makeup_1.tags.2'],
   },
   {
     id: 'beauty_makeup_2',
-    name: '디어 뮤즈 메이크업 종로',
+    name: 'stores.beauty_makeup_2.name',
     category: 'makeup',
     region: 'jongno',
     rating: 4.8,
     reviewCount: 132,
-    priceLabel: '웨딩 하객 메이크업 132,000원~',
-    shortDescription: '웨딩과 중요한 일정 전 메이크업 상담을 촘촘하게 진행하는 프리미엄 샵입니다.',
-    tags: ['웨딩 준비', '1:1 상담', '헤어 연출'],
+    priceLabel: 'stores.beauty_makeup_2.priceLabel',
+    shortDescription: 'stores.beauty_makeup_2.shortDescription',
+    tags: ['stores.beauty_makeup_2.tags.0', 'stores.beauty_makeup_2.tags.1', 'stores.beauty_makeup_2.tags.2'],
   },
   {
     id: 'beauty_lash_1',
-    name: '블룸 래쉬 부티크 강남',
+    name: 'stores.beauty_lash_1.name',
     category: 'lash',
     region: 'gangnam',
     rating: 4.9,
     reviewCount: 204,
-    priceLabel: '속눈썹 연장 99,000원~',
-    shortDescription: '눈매에 맞춘 컬 디자인과 유지력 높은 시술로 인기 있는 속눈썹 전문샵입니다.',
-    tags: ['컬 디자인', '유지력', '자연스러운 연장'],
+    priceLabel: 'stores.beauty_lash_1.priceLabel',
+    shortDescription: 'stores.beauty_lash_1.shortDescription',
+    tags: ['stores.beauty_lash_1.tags.0', 'stores.beauty_lash_1.tags.1', 'stores.beauty_lash_1.tags.2'],
   },
   {
     id: 'beauty_lash_2',
-    name: '페더 래쉬 성수',
+    name: 'stores.beauty_lash_2.name',
     category: 'lash',
     region: 'seongsu',
     rating: 4.7,
     reviewCount: 114,
-    priceLabel: '속눈썹 펌 69,000원~',
-    shortDescription: '첫 방문 고객도 부담 없이 예약할 수 있는 속눈썹 펌 중심 매장입니다.',
-    tags: ['속눈썹 펌', '첫 방문 추천', '자연 컬'],
+    priceLabel: 'stores.beauty_lash_2.priceLabel',
+    shortDescription: 'stores.beauty_lash_2.shortDescription',
+    tags: ['stores.beauty_lash_2.tags.0', 'stores.beauty_lash_2.tags.1', 'stores.beauty_lash_2.tags.2'],
   },
 ];
 
@@ -1585,11 +1585,11 @@ export default function MyExplorePage() {
     ? bookingDateLabels[selectedBeautyDate] ?? selectedBeautyDate
     : tBeauty('label_service_default');
   const selectedDesignerLabel = selectedDesigner
-    ? `${selectedDesigner.name}${selectedDesigner.surcharge > 0 ? ` (+${formatPrice(selectedDesigner.surcharge)})` : ''}`
+    ? `${tBeauty(selectedDesigner.name)}${selectedDesigner.surcharge > 0 ? ` (+${formatPrice(selectedDesigner.surcharge)})` : ''}`
     : tBeauty('label_designer_default');
-  const selectedPrimaryServiceLabel = selectedPrimaryService ? selectedPrimaryService.name : tBeauty('label_service_default');
+  const selectedPrimaryServiceLabel = selectedPrimaryService ? tBeauty(selectedPrimaryService.name) : tBeauty('label_service_default');
   const selectedAddOnLabel = selectedAddOnOptions.length > 0
-    ? selectedAddOnOptions.map((option) => option.name).join(', ')
+    ? selectedAddOnOptions.map((option) => tBeauty(option.name)).join(', ')
     : tBeauty('label_addon_default');
   const selectedCommLangLabel = useMemo(() => commLangs.find(l => l.id === selectedCommunicationLanguage)?.label ?? selectedCommunicationLanguage, [commLangs, selectedCommunicationLanguage]);
   const selectedCommIntentLabel = useMemo(() => commIntents.find(i => i.id === selectedCommunicationIntent)?.label ?? selectedCommunicationIntent, [commIntents, selectedCommunicationIntent]);
@@ -1640,10 +1640,10 @@ export default function MyExplorePage() {
         <section className={styles.beautyFiltersSection}>
           <div className={styles.beautySectionHeader}>
             <div>
-              <span className={styles.beautySectionEyebrow}>Region Filter</span>
-              <h2 className={styles.beautySectionTitle}>원하는 지역을 골라보세요</h2>
+              <span className={styles.beautySectionEyebrow}>{tBeauty('filter_region_eyebrow', { defaultValue: 'Region Filter' })}</span>
+              <h2 className={styles.beautySectionTitle}>{tBeauty('filter_region_title')}</h2>
             </div>
-            <span className={styles.beautyStoreCount}>{filteredBeautyStores.length}개 매장</span>
+            <span className={styles.beautyStoreCount}>{filteredBeautyStores.length}{tBeauty('filter_store_count_suffix', { defaultValue: '개 매장' })}</span>
           </div>
 
           <BeautyRegionTabs
@@ -1687,7 +1687,7 @@ export default function MyExplorePage() {
                       {/* 업체명 + 평점 한 줄 표시 */}
                       <div className="flex items-center gap-1.5 min-w-0">
                         <h3 className="text-sm sm:text-base font-bold text-neutral-900 truncate">
-                          {store.name}
+                          {tBeauty(`stores.${store.id}.name`, { defaultValue: store.name })}
                         </h3>
                         <div className="flex items-center gap-0.5 text-[11px] font-bold text-neutral-800 shrink-0">
                           <span className="text-yellow-400 text-[12px]">⭐</span>
@@ -1698,14 +1698,12 @@ export default function MyExplorePage() {
 
                       {/* 위치/지역 정보만 단독 표기 (업체 소개 삭제) */}
                       <p className="mt-0.5 text-[11px] font-medium text-gray-500 truncate leading-tight">
-                        서울 {store.region === 'gangnam' ? '강남구' : store.region === 'hongdae' ? '마포구' : store.region === 'seongsu' ? '성동구' : '종로구'}
+                        {tBeauty(`region_${store.region}`)}
                       </p>
 
                       {/* 대표 서비스 및 가격 (가장 중요) */}
                       <p className="mt-1 text-[11px] sm:text-[12px] font-semibold text-neutral-800 leading-tight line-clamp-2">
-                        {store.category === 'hair' ? 'Cut 20,000원~ | Color 55,000원~ | Perm 60,000원~' : 
-                         store.category === 'nail' ? 'Gel Nails 35,000원~ | Pedi 45,000원~' : 
-                         store.category === 'makeup' ? 'Daily Makeup 60,000원~' : store.priceLabel}
+                        {tBeauty(store.priceLabel, { defaultValue: store.priceLabel })}
                       </p>
                     </div>
 
@@ -1718,7 +1716,7 @@ export default function MyExplorePage() {
                           e.stopPropagation();
                           handleBeautyStoreSelect(
                             store.id,
-                            store.name,
+                            tBeauty(store.name, { defaultValue: store.name }),
                             store.region,
                             store.category
                           );
@@ -1726,7 +1724,7 @@ export default function MyExplorePage() {
                           setIsIntegratedBookingMenuOpen(true);
                         }}
                       >
-                        {selectedBeautyStoreId === store.id ? '날짜/시간 변경' : '예약'}
+                        {selectedBeautyStoreId === store.id ? tBeauty('btn_change', { defaultValue: '날짜/시간 변경' }) : tBeauty('btn_select_time', { defaultValue: '예약' })}
                       </button>
                     </div>
                   </div>
@@ -1770,12 +1768,12 @@ export default function MyExplorePage() {
                 {selectedBeautyDate && selectedBeautyTime ? (
                   <div className="flex flex-col bg-[#fbf6f4] border border-[#bb8a78]/30 rounded-2xl p-5 gap-3">
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-[#bb8a78] text-lg">선택된 날짜 및 시간</span>
+                      <span className="font-bold text-[#bb8a78] text-lg">{tBeauty('label_selected_datetime', { defaultValue: '선택된 날짜 및 시간' })}</span>
                       <button 
                         onClick={() => setIsIntegratedBookingMenuOpen(true)}
                         className="text-sm font-semibold text-[#bb8a78] underline px-2 py-1"
                       >
-                        변경하기
+                        {tBeauty('btn_change', { defaultValue: '변경하기' })}
                       </button>
                     </div>
                     <div className="text-neutral-900 font-bold text-xl">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
@@ -1785,7 +1783,7 @@ export default function MyExplorePage() {
                     onClick={() => setIsIntegratedBookingMenuOpen(true)}
                     className="w-full bg-[#bb8a78] text-white py-5 px-6 rounded-2xl font-bold text-xl shadow-lg transition-transform active:scale-95 whitespace-nowrap overflow-hidden text-ellipsis"
                   >
-                    예약할 날짜 및 시간 고르기
+                    {tBeauty('btn_choose_datetime', { defaultValue: '예약할 날짜 및 시간 고르기' })}
                   </button>
                 )}
               </div>
