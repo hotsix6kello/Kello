@@ -550,11 +550,11 @@ const BEAUTY_CATEGORY_META: (t: any) => Record<
 const BEAUTY_REGIONS: (t: any) => Array<{ id: BeautyRegionId; label: string }> = (t) => [
   { id: 'all', label: t('beauty_explore.region_all') },
   { id: 'gangnam', label: t('transport.stations.gangnam') },
-  { id: 'hongdae', label: '홍대' },
+  { id: 'hongdae', label: t('transport.stations.hongdae') || '홍대' },
   { id: 'seongsu', label: t('transport.stations.seongsu') },
-  { id: 'jamsil', label: '잠실' },
-  { id: 'konkuk', label: '건대' },
-  { id: 'pangyo', label: '판교' },
+  { id: 'jamsil', label: t('transport.stations.jamsil') || '잠실' },
+  { id: 'konkuk', label: t('transport.stations.konkuk') || '건대' },
+  { id: 'pangyo', label: t('transport.stations.pangyo') || '판교' },
 ];
 
 const BEAUTY_STORE_ITEMS: BeautyStore[] = [
@@ -841,16 +841,25 @@ export default function MyExplorePage() {
       return null;
     }
     const availabilityByIndex = BEAUTY_AVAILABILITY_BY_STORE[selectedBeautyStoreId];
+    
+    const slotsByDate: Record<string, string[]> = {};
+    
     if (!availabilityByIndex) {
-      return null;
+      // Fallback: Provide a default schedule if no mock data exists for this store ID
+      bookingDateOptions.forEach((option) => {
+        slotsByDate[option.key] = SLOT_TEMPLATE_SET[0];
+      });
+    } else {
+      bookingDateOptions.forEach((option, index) => {
+        if (availabilityByIndex[index]) {
+          slotsByDate[option.key] = availabilityByIndex[index];
+        }
+      });
     }
 
-    const slotsByDate: Record<string, string[]> = {};
-    bookingDateOptions.forEach((option, index) => {
-      if (availabilityByIndex[index]) {
-        slotsByDate[option.key] = availabilityByIndex[index];
-      }
-    });
+    if (Object.keys(slotsByDate).length === 0) {
+      return null;
+    }
 
     return {
       availableDates: Object.keys(slotsByDate),
@@ -1341,9 +1350,7 @@ export default function MyExplorePage() {
     const nameError = validateCustomerField('name', customerForm.name);
     const phoneError = validateCustomerField('phone', customerForm.phone);
 
-    if (!selectedPrimaryService) {
-      nextErrors.primaryService = t('beauty_bookings.error_primary_service') || '대표 시술을 먼저 골라주세요.';
-    }
+    // Primary service is now optional
 
     if (nameError) {
       nextErrors.name = nameError;
@@ -1633,17 +1640,16 @@ export default function MyExplorePage() {
     t('beauty_explore.step_5')
   ];
   const beautyHeroFlow = beautyCategoryFilter
-    ? ['지역 선택', '매장 고르기', '시간 확인']
-    : ['카테고리 확인', '지역 선택', '매장 고르기'];
+    ? [t('beauty_explore.hero_flow_step_region'), t('beauty_explore.hero_flow_step_store'), t('beauty_explore.hero_flow_step_time')]
+    : [t('beauty_explore.hero_flow_step_category'), t('beauty_explore.hero_flow_step_region'), t('beauty_explore.hero_flow_step_store')];
   const isBeautyConfirmSubmitEnabled =
     Boolean(selectedBeautyStore && selectedBeautyDate && selectedBeautyTime) &&
-    Boolean(selectedPrimaryService) &&
     isCustomerNameValid &&
     isCustomerPhoneValid &&
     agreements.bookingConfirmed &&
     agreements.privacyConsent;
   const renderBeautyProgressIndicator = () => (
-    <ol className={styles.beautyStepIndicator} aria-label="뷰티 예약 단계">
+    <ol className={styles.beautyStepIndicator} aria-label={t('beauty_explore.step_indicator_label')}>
       {beautyFlowSteps.map((step, index) => {
         const isCurrent = index === beautyCurrentStepIndex;
         const isDone = index < beautyCurrentStepIndex;
@@ -1669,9 +1675,9 @@ export default function MyExplorePage() {
           <span className={styles.beautyEyebrow}>Beauty Booking</span>
           <div className={styles.beautyHeaderRow}>
             <div>
-              <h1 className={styles.beautyTitle}>{beautyCategoryLabel} 예약을 바로 시작해 보세요</h1>
+              <h1 className={styles.beautyTitle}>{t('beauty_explore.hero_title_with_category', { category: beautyCategoryLabel })}</h1>
               <p className={styles.beautySubtitle}>
-                지역을 고르고 매장을 선택한 뒤, 시간만 정하면 다음 단계로 이어집니다.
+                {t('beauty_explore.hero_subtitle_desc')}
               </p>
             </div>
             <div className={styles.beautyCategoryBadgeWrap}>
@@ -1682,7 +1688,7 @@ export default function MyExplorePage() {
             </div>
           </div>
           <p className={styles.beautyDescription}>{beautyDescription}</p>
-          <div className={styles.beautyHeroFlow} aria-label="빠른 예약 안내">
+          <div className={styles.beautyHeroFlow} aria-label={t('beauty_explore.hero_flow_aria_label')}>
             {beautyHeroFlow.map((step, index) => (
               <div key={step} className={styles.beautyHeroFlowItem}>
                 <span className={styles.beautyHeroFlowNumber}>{index + 1}</span>
@@ -1692,7 +1698,7 @@ export default function MyExplorePage() {
           </div>
           {!beautyCategoryFilter ? (
             <div className={styles.beautyGuideCard}>
-              홈에서 카테고리를 먼저 고르면 더 잘 맞는 예약 흐름으로 바로 이어져요. 지금은 전체 뷰티 매장을 먼저 보고 있어요.
+              {t('beauty_explore.hero_guide_no_category')}
             </div>
           ) : null}
         </section>
@@ -1701,7 +1707,7 @@ export default function MyExplorePage() {
           <div className={styles.beautySectionHeader}>
             <div>
               <span className={styles.beautySectionEyebrow}>Region Filter</span>
-              <h2 className={styles.beautySectionTitle}>원하는 지역을 골라보세요</h2>
+              <h2 className={styles.beautySectionTitle}>{t('beauty_explore.region_filter_title')}</h2>
             </div>
             <span className={styles.beautyStoreCount}>{filteredBeautyStores.length}개 매장</span>
           </div>

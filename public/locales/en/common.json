@@ -49,6 +49,16 @@
         "summary": "Connect directly to the menu for everything from natural extensions to volume styling."
       }
     },
+    "transport": {
+      "stations": {
+        "gangnam": "Gangnam",
+        "hongdae": "Hongdae",
+        "seongsu": "Seongsu",
+        "jamsil": "Jamsil",
+        "konkuk": "Konkuk Univ.",
+        "pangyo": "Pangyo"
+      }
+    },
     "selection": {
       "eyebrow": "Selected Category",
       "tags": {
@@ -270,8 +280,18 @@
   "beauty_explore": {
     "hero_title": "Explore Beauty Bookings",
     "hero_desc": "Select a category for more accurate exploration. You can now check all beauty shops.",
+    "hero_title_with_category": "Start Your {{category}} Booking Now",
+    "hero_subtitle_desc": "Pick a region, select a shop, and set the time to continue.",
+    "hero_guide_no_category": "Selecting a category from Home leads to a better flow. You are currently viewing all beauty shops.",
+    "hero_flow_step_category": "Check Category",
+    "hero_flow_step_region": "Select Region",
+    "hero_flow_step_store": "Pick Store",
+    "hero_flow_step_time": "Confirm Time",
+    "hero_flow_aria_label": "Quick Booking Guide",
+    "region_filter_title": "Pick Your Desired Region",
     "category_all": "All",
     "region_all": "All Regions",
+    "step_indicator_label": "Beauty Booking Steps",
     "step_1": "Select Shop",
     "step_2": "Select Time",
     "step_3": "Confirm",
