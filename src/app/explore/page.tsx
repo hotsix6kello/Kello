@@ -356,20 +356,20 @@ function buildLocalizedBookingMessage(
 
 const DESIGNERS_BY_STORE: Record<string, BeautyDesigner[]> = {
   beauty_hair_1: [
-    createDesigner('designer_hair_1_a', 'designers.jia', 'designers.jia_specialty', '경력 9년', 'designers.jia_desc', 15000),
-    createDesigner('designer_hair_1_b', 'designers.minseo', 'designers.minseo_specialty', '경력 14년', 'designers.minseo_desc', 25000),
+    createDesigner('designer_hair_1_a', 'designers.jia', 'designers.jia_specialty', 'designers.jia_experience', 'designers.jia_desc', 15000),
+    createDesigner('designer_hair_1_b', 'designers.minseo', 'designers.minseo_specialty', 'designers.minseo_experience', 'designers.minseo_desc', 25000),
   ],
   beauty_hair_2: [
-    createDesigner('designer_hair_2_a', 'designers.harin', 'designers.harin_specialty', '경력 8년', 'designers.harin_desc', 12000),
-    createDesigner('designer_hair_2_b', 'designers.yuna', 'designers.yuna_specialty', '경력 11년', 'designers.yuna_desc', 18000),
+    createDesigner('designer_hair_2_a', 'designers.harin', 'designers.harin_specialty', 'designers.harin_experience', 'designers.harin_desc', 12000),
+    createDesigner('designer_hair_2_b', 'designers.yuna', 'designers.yuna_specialty', 'designers.yuna_experience', 'designers.yuna_desc', 18000),
   ],
   beauty_nail_1: [
-    createDesigner('designer_nail_1_a', '서윤 아티스트', '젤 네일 · 시즌 아트', '경력 7년', '트렌디한 컬러 조합과 깔끔한 마감으로 유명해요.', 10000),
-    createDesigner('designer_nail_1_b', '채린 아티스트', '드로잉 아트 · 파츠', '경력 5년', '행사 전용 포인트 아트를 빠르게 제안해드려요.', 15000),
+    createDesigner('designer_nail_1_a', 'designers.seoyun', 'designers.seoyun_specialty', 'designers.seoyun_experience', 'designers.seoyun_desc', 10000),
+    createDesigner('designer_nail_1_b', 'designers.chaerin', 'designers.chaerin_specialty', 'designers.chaerin_experience', 'designers.chaerin_desc', 15000),
   ],
   beauty_nail_2: [
-    createDesigner('designer_nail_2_a', '나연 실장', '케어 · 웨딩 네일', '경력 10년', '웨딩과 촬영 일정에 맞춘 컬러 큐레이션이 강점이에요.', 12000),
-    createDesigner('designer_nail_2_b', '다빈 아티스트', '시럽 네일 · 그라데이션', '경력 6년', '맑고 은은한 무드 연출을 잘해드려요.', 8000),
+    createDesigner('designer_nail_2_a', 'designers.nayeon', 'designers.nayeon_specialty', 'designers.nayeon_experience', 'designers.nayeon_desc', 12000),
+    createDesigner('designer_nail_2_b', 'designers.dabin', 'designers.dabin_specialty', 'designers.dabin_experience', 'designers.dabin_desc', 8000),
   ],
   beauty_esthetic_1: [
     createDesigner('designer_esthetic_1_a', 'designers.yujin', 'designers.yujin_specialty', 'designers.yujin_experience', 'designers.yujin_desc', 10000),
@@ -388,87 +388,87 @@ const DESIGNERS_BY_STORE: Record<string, BeautyDesigner[]> = {
     createDesigner('designer_waxing_2_b', 'designers.juhee', 'designers.juhee_specialty', 'designers.juhee_experience', 'designers.juhee_desc', 12000),
   ],
   beauty_makeup_1: [
-    createDesigner('designer_makeup_1_a', '보라 메이크업 아티스트', '데일리 · 촬영 메이크업', '경력 8년', '맑고 또렷한 피부 표현이 강점이에요.', 18000),
-    createDesigner('designer_makeup_1_b', '수아 실장', '웨딩 하객 · 행사', '경력 11년', '사진발이 잘 받는 톤 정리를 잘해드려요.', 25000),
+    createDesigner('designer_makeup_1_a', 'designers.bora', 'designers.bora_specialty', 'designers.bora_experience', 'designers.bora_desc', 18000),
+    createDesigner('designer_makeup_1_b', 'designers.sua', 'designers.sua_specialty', 'designers.sua_experience', 'designers.sua_desc', 25000),
   ],
   beauty_makeup_2: [
-    createDesigner('designer_makeup_2_a', '지민 아티스트', '면접 · 방송 메이크업', '경력 7년', '선명하고 단정한 인상을 빠르게 잡아드려요.', 12000),
-    createDesigner('designer_makeup_2_b', '혜원 원장', '프리미엄 행사 메이크업', '경력 15년', '중요 일정 전 완성도 높은 스타일링을 제안해드려요.', 30000),
+    createDesigner('designer_makeup_2_a', 'designers.jimin', 'designers.jimin_specialty', 'designers.jimin_experience', 'designers.jimin_desc', 12000),
+    createDesigner('designer_makeup_2_b', 'designers.hyewon', 'designers.hyewon_specialty', 'designers.hyewon_experience', 'designers.hyewon_desc', 30000),
   ],
   beauty_lash_1: [
-    createDesigner('designer_lash_1_a', '소정 아티스트', '속눈썹 펌 · 틴팅', '경력 6년', '자연스러운 컬감과 유지력이 좋은 편이에요.', 10000),
-    createDesigner('designer_lash_1_b', '세아 실장', '연장 · 눈매 디자인', '경력 9년', '눈매에 맞춘 컬과 길이 추천이 꼼꼼해요.', 15000),
+    createDesigner('designer_lash_1_a', 'designers.sojung', 'designers.sojung_specialty', 'designers.sojung_experience', 'designers.sojung_desc', 10000),
+    createDesigner('designer_lash_1_b', 'designers.seah', 'designers.seah_specialty', 'designers.seah_experience', 'designers.seah_desc', 15000),
   ],
   beauty_lash_2: [
-    createDesigner('designer_lash_2_a', '다은 아티스트', '연장 · 리터치', '경력 5년', '풍성한 디자인도 가볍게 연출해드려요.', 8000),
-    createDesigner('designer_lash_2_b', '시은 원장', '펌 · 손상 케어', '경력 10년', '속눈썹 상태를 보고 시술 강도를 세심하게 조정해드려요.', 15000),
+    createDesigner('designer_lash_2_a', 'designers.daeun', 'designers.daeun_specialty', 'designers.daeun_experience', 'designers.daeun_desc', 8000),
+    createDesigner('designer_lash_2_b', 'designers.sieun', 'designers.sieun_specialty', 'designers.sieun_experience', 'designers.sieun_desc', 15000),
   ],
 };
 
 const PRIMARY_SERVICES_BY_CATEGORY: Record<BeautyCategoryId, BeautyServiceOption[]> = {
   hair: [
-    createServiceOption('hair_women_cut', '여성 컷', '길이 정리와 얼굴형 맞춤 커트', 55000),
-    createServiceOption('hair_men_cut', '남성 컷', '쉐입 정리와 스타일링 커트', 38000),
-    createServiceOption('hair_root_color', '뿌리염색', '자란 모발 위주 톤 보정', 89000),
-    createServiceOption('hair_clinic', '클리닉', '손상도 케어 중심 프로그램', 99000),
+    createServiceOption('hair_women_cut', 'services.women_cut', 'services.women_cut_desc', 55000),
+    createServiceOption('hair_men_cut', 'services.men_cut', 'services.men_cut_desc', 38000),
+    createServiceOption('hair_root_color', 'services.root_color', 'services.root_color_desc', 89000),
+    createServiceOption('hair_clinic', 'services.hair_clinic', 'services.hair_clinic_desc', 99000),
   ],
   nail: [
-    createServiceOption('nail_gel', '젤 네일', '기본 젤 컬러 시술', 79000),
-    createServiceOption('nail_care', '네일 케어', '큐티클 정리와 손톱 케어', 45000),
-    createServiceOption('nail_pedi', '젤 페디', '풋 케어 포함 젤 시술', 89000),
+    createServiceOption('nail_gel', 'services.nail_gel', 'services.nail_gel_desc', 79000),
+    createServiceOption('nail_care', 'services.nail_care', 'services.nail_care_desc', 45000),
+    createServiceOption('nail_pedi', 'services.nail_pedi', 'services.nail_pedi_desc', 89000),
   ],
   esthetic: [
-    createServiceOption('esthetic_calming', '진정 관리', '예민한 피부 진정 중심 프로그램', 88000),
-    createServiceOption('esthetic_moisture', '보습 관리', '건조한 피부 보습 충전 프로그램', 95000),
-    createServiceOption('esthetic_lifting', '탄력 관리', '탄력 개선 중심 케어', 118000),
+    createServiceOption('esthetic_calming', 'services.esthetic_calming', 'services.esthetic_calming_desc', 88000),
+    createServiceOption('esthetic_moisture', 'services.esthetic_moisture', 'services.esthetic_moisture_desc', 95000),
+    createServiceOption('esthetic_lifting', 'services.esthetic_lifting', 'services.esthetic_lifting_desc', 118000),
   ],
   waxing: [
-    createServiceOption('waxing_brazilian', '브라질리언', '민감부위 중심 왁싱', 99000),
-    createServiceOption('waxing_arm', '팔 왁싱', '양팔 전체 정리', 55000),
-    createServiceOption('waxing_leg', '다리 왁싱', '종아리 또는 하프 레그 기준', 69000),
+    createServiceOption('waxing_brazilian', 'services.waxing_brazilian', 'services.waxing_brazilian_desc', 99000),
+    createServiceOption('waxing_arm', 'services.waxing_arm', 'services.waxing_arm_desc', 55000),
+    createServiceOption('waxing_leg', 'services.waxing_leg', 'services.waxing_leg_desc', 69000),
   ],
   makeup: [
-    createServiceOption('makeup_daily', '데일리 메이크업', '가벼운 일정용 메이크업', 85000),
-    createServiceOption('makeup_interview', '면접 메이크업', '단정하고 선명한 인상 정리', 99000),
-    createServiceOption('makeup_guest', '웨딩 하객 메이크업', '행사 일정에 맞춘 스타일링', 132000),
+    createServiceOption('makeup_daily', 'services.makeup_daily', 'services.makeup_daily_desc', 85000),
+    createServiceOption('makeup_interview', 'services.makeup_interview', 'services.makeup_interview_desc', 99000),
+    createServiceOption('makeup_guest', 'services.makeup_guest', 'services.makeup_guest_desc', 132000),
   ],
   lash: [
-    createServiceOption('lash_perm', '속눈썹 펌', '컬 고정 중심 시술', 69000),
-    createServiceOption('lash_extension', '속눈썹 연장', '길이와 컬 선택형 연장 시술', 99000),
-    createServiceOption('lash_retouch', '리터치', '기존 연장 보완 시술', 59000),
+    createServiceOption('lash_perm', 'services.lash_perm', 'services.lash_perm_desc', 69000),
+    createServiceOption('lash_extension', 'services.lash_extension', 'services.lash_extension_desc', 99000),
+    createServiceOption('lash_retouch', 'services.lash_retouch', 'services.lash_retouch_desc', 59000),
   ],
 };
 
 const ADD_ONS_BY_CATEGORY: Record<BeautyCategoryId, BeautyServiceOption[]> = {
   hair: [
-    createServiceOption('hair_add_scalp', '두피 스케일링', '시술 전 두피 정리 케어', 25000),
-    createServiceOption('hair_add_blowdry', '스타일링 마무리', '드라이와 간단한 스타일링', 18000),
-    createServiceOption('hair_add_ampoule', '앰플 케어', '손상 부위 집중 영양 케어', 30000),
+    createServiceOption('hair_add_scalp', 'services.hair_add_scalp', 'services.hair_add_scalp_desc', 25000),
+    createServiceOption('hair_add_blowdry', 'services.hair_add_blowdry', 'services.hair_add_blowdry_desc', 18000),
+    createServiceOption('hair_add_ampoule', 'services.hair_add_ampoule', 'services.hair_add_ampoule_desc', 30000),
   ],
   nail: [
-    createServiceOption('nail_add_removal', '제거 포함', '기존 젤 제거 포함 진행', 15000),
-    createServiceOption('nail_add_art', '포인트 아트', '양손 기준 포인트 아트 추가', 22000),
-    createServiceOption('nail_add_strength', '강화 코팅', '유지력 보강 코팅', 12000),
+    createServiceOption('nail_add_removal', 'services.nail_add_removal', 'services.nail_add_removal_desc', 15000),
+    createServiceOption('nail_add_art', 'services.nail_add_art', 'services.nail_add_art_desc', 22000),
+    createServiceOption('nail_add_strength', 'services.nail_add_strength', 'services.nail_add_strength_desc', 12000),
   ],
   esthetic: [
-    createServiceOption('esthetic_add_modeling', '모델링 팩', '진정 마무리 팩 추가', 20000),
-    createServiceOption('esthetic_add_neck', '목 관리 추가', '목선 집중 케어', 18000),
-    createServiceOption('esthetic_add_led', 'LED 케어', '진정 보조 광 케어', 25000),
+    createServiceOption('esthetic_add_modeling', 'services.esthetic_add_modeling', 'services.esthetic_add_modeling_desc', 20000),
+    createServiceOption('esthetic_add_neck', 'services.esthetic_add_neck', 'services.esthetic_add_neck_desc', 18000),
+    createServiceOption('esthetic_add_led', 'services.esthetic_add_led', 'services.esthetic_add_led_desc', 25000),
   ],
   waxing: [
-    createServiceOption('waxing_add_care', '진정 케어', '시술 후 진정 젤 관리', 15000),
-    createServiceOption('waxing_add_pack', '수분 팩', '자극 완화용 팩 추가', 12000),
-    createServiceOption('waxing_add_trim', '트리밍 포함', '시술 전 정리 포함', 10000),
+    createServiceOption('waxing_add_care', 'services.waxing_add_care', 'services.waxing_add_care_desc', 15000),
+    createServiceOption('waxing_add_pack', 'services.waxing_add_pack', 'services.waxing_add_pack_desc', 12000),
+    createServiceOption('waxing_add_trim', 'services.waxing_add_trim', 'services.waxing_add_trim_desc', 10000),
   ],
   makeup: [
-    createServiceOption('makeup_add_hair', '헤어 드라이', '간단한 블로우 스타일링', 25000),
-    createServiceOption('makeup_add_lash', '속눈썹 부착', '부분 가닥 또는 포인트 래쉬', 18000),
-    createServiceOption('makeup_add_touchup', '현장 수정 키트', '간단한 수정용 키트 제공', 15000),
+    createServiceOption('makeup_add_hair', 'services.makeup_add_hair', 'services.makeup_add_hair_desc', 25000),
+    createServiceOption('makeup_add_lash', 'services.makeup_add_lash', 'services.makeup_add_lash_desc', 18000),
+    createServiceOption('makeup_add_touchup', 'services.makeup_add_touchup', 'services.makeup_add_touchup_desc', 15000),
   ],
   lash: [
-    createServiceOption('lash_add_remove', '제거 포함', '기존 연장 제거 포함', 15000),
-    createServiceOption('lash_add_tinting', '블랙 틴팅', '또렷한 컬러 보정', 12000),
-    createServiceOption('lash_add_coating', '영양 코팅', '유지력 보조 코팅', 10000),
+    createServiceOption('lash_add_remove', 'services.lash_add_remove', 'services.lash_add_remove_desc', 15000),
+    createServiceOption('lash_add_tinting', 'services.lash_add_tinting', 'services.lash_add_tinting_desc', 12000),
+    createServiceOption('lash_add_coating', 'services.lash_add_coating', 'services.lash_add_coating_desc', 10000),
   ],
 };
 
@@ -1494,7 +1494,7 @@ export default function MyExplorePage() {
         addItineraryItem({
           id: result.bookingId,
           sourceItemId: result.payload.storeId,
-          name: `[뷰티] ${result.payload.storeName}`,
+          name: `[${t('common.categories.beauty')}] ${result.payload.storeName}`,
           time: `${result.payload.bookingDate} ${result.payload.bookingTime}`,
           status: 'submitted',
           lat: destinationInfo?.lat ?? 37.521,
@@ -1667,7 +1667,7 @@ export default function MyExplorePage() {
                   router.back(); 
                 }}
                 className="absolute left-4 top-2 z-[50] flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md border border-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-50"
-                aria-label="돌아가기"
+                aria-label={t('common.back', { defaultValue: 'Back' })}
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -1683,7 +1683,7 @@ export default function MyExplorePage() {
             )}
 
             <section className={styles.beautyHero}>
-              <span className={styles.beautyEyebrow}>Beauty Booking</span>
+              <span className={styles.beautyEyebrow}>{tBeauty('hero_eyebrow', { defaultValue: 'Beauty Booking' })}</span>
               <div className={styles.beautyHeaderRow}>
                 <div>
                   <h1 className={styles.beautyTitle}>{t('beauty_explore.hero_title_with_category', { category: selectedBeautyCategoryLabel })}</h1>
@@ -1694,7 +1694,7 @@ export default function MyExplorePage() {
                 <div className={styles.beautyCategoryBadgeWrap}>
                   <span className={styles.beautyCategoryBadgeCode}>{selectedBeautyCategory ? beautyCategoryLabels[selectedBeautyCategory].badge : 'B'}</span>
                   <span className={styles.beautyCategoryBadgeLabel}>
-                    {selectedBeautyCategory ? beautyCategoryLabels[selectedBeautyCategory].english : 'Beauty'}
+                    {selectedBeautyCategory ? beautyCategoryLabels[selectedBeautyCategory].label : tBeauty('label_beauty')}
                   </span>
                 </div>
               </div>
@@ -1929,62 +1929,62 @@ export default function MyExplorePage() {
                 </div>
                 <div className={styles.beautyCompletionHero}>
                   <div className={styles.beautyCompletionHeroBlock}>
-                    <span className={styles.beautyCompletionHeroLabel}>예약 매장</span>
+                    <span className={styles.beautyCompletionHeroLabel}>{tBeauty('completion_store_label', { defaultValue: '예약 매장' })}</span>
                     <strong className={styles.beautyCompletionHeroTitle}>{submittedBooking.storeName}</strong>
                     <span className={styles.beautyCompletionHeroMeta}>
                       {submittedBooking.date} · {submittedBooking.time}
                     </span>
                   </div>
                   <div className={styles.beautyCompletionPriceBox}>
-                    <span className={styles.beautyCompletionHeroLabel}>예상 총 금액</span>
+                    <span className={styles.beautyCompletionHeroLabel}>{tBeauty('completion_total_label', { defaultValue: '예상 총 금액' })}</span>
                     <strong className={styles.beautyCompletionPrice}>{formatPrice(submittedBooking.estimatedTotal)}</strong>
                   </div>
                 </div>
                 <div className={styles.beautyCompletionGrid}>
                   <div className={styles.beautyCompletionSection}>
-                    <h4 className={styles.beautyCompletionSectionTitle}>예약 정보</h4>
+                    <h4 className={styles.beautyCompletionSectionTitle}>{tBeauty('completion_booking_info_title', { defaultValue: '예약 정보' })}</h4>
                     <div className={styles.beautySummaryList}>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>카테고리</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('summary_category')}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.category}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>지역</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('summary_region')}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.region}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>디자이너</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('completion_designer_label', { defaultValue: '디자이너' })}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.designerName}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>대표 시술</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('completion_primary_service_label', { defaultValue: '대표 시술' })}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.primaryServiceName}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>부가 옵션</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('completion_addon_label', { defaultValue: '부가 옵션' })}</span>
                         <strong className={styles.beautySummaryValue}>
-                          {submittedBooking.addOnNames.length > 0 ? submittedBooking.addOnNames.join(', ') : '선택 안 함'}
+                          {submittedBooking.addOnNames.length > 0 ? submittedBooking.addOnNames.join(', ') : tBeauty('label_addon_default')}
                         </strong>
                       </div>
                     </div>
                   </div>
                   <div className={styles.beautyCompletionSection}>
-                    <h4 className={styles.beautyCompletionSectionTitle}>고객 및 전달 정보</h4>
+                    <h4 className={styles.beautyCompletionSectionTitle}>{tBeauty('completion_customer_info_title', { defaultValue: '고객 및 전달 정보' })}</h4>
                     <div className={styles.beautySummaryList}>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>고객 이름</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('form_name')}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.customerName}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>연락처</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('form_phone')}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.customerPhone}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>전달 언어</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('completion_lang_label', { defaultValue: '전달 언어' })}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.communicationLanguageLabel}</strong>
                       </div>
                       <div className={styles.beautySummaryItem}>
-                        <span className={styles.beautySummaryLabel}>전달 목적</span>
+                        <span className={styles.beautySummaryLabel}>{tBeauty('completion_intent_label', { defaultValue: '전달 목적' })}</span>
                         <strong className={styles.beautySummaryValue}>{submittedBooking.communicationIntentLabel}</strong>
                       </div>
                       {submittedBooking.customerRequest ? (
@@ -2033,7 +2033,7 @@ export default function MyExplorePage() {
             ) : (
               <div className={styles.beautyConfirmLayout}>
                 <div className={styles.beautyConfirmSummaryCard}>
-                  <span className={styles.beautySectionEyebrow}>Booking Review</span>
+                  <span className={styles.beautySectionEyebrow}>{tBeauty('booking_review_eyebrow', { defaultValue: 'Booking Review' })}</span>
                   <div className={styles.beautySummaryList}>
                     <div className={styles.beautySummaryItem}>
                       <span className={styles.beautySummaryLabel}>{tBeauty('summary_category')}</span>
@@ -2059,7 +2059,7 @@ export default function MyExplorePage() {
                 </div>
 
                 <div className={styles.beautyConfirmCard}>
-                  <span className={styles.beautySectionEyebrow}>예약자</span>
+                  <span className={styles.beautySectionEyebrow}>{tBeauty('customer_details_eyebrow', { defaultValue: '예약자' })}</span>
                   <div className={styles.beautyFormGrid}>
                     {customerFormFields.map((field) => {
                       const inputId = `beauty-booking-${field.key}`;
@@ -2128,7 +2128,7 @@ export default function MyExplorePage() {
                     <div className={styles.beautyAssistSection} style={{ marginTop: '16px' }}>
                       <div className={styles.beautyOptionSectionHeader}>
                         <h3 className={styles.beautyOptionSectionTitle}>{tBeauty('form_request')}</h3>
-                        <span className={styles.beautyOptionSectionMeta}>선택하신 내용을 곁들여 자유롭게 적어주세요.</span>
+                        <span className={styles.beautyOptionSectionMeta}>{tBeauty('form_request_hint', { defaultValue: '선택하신 내용을 곁들여 자유롭게 적어주세요.' })}</span>
                       </div>
                       <textarea
                         className={styles.beautyAssistTextarea}
