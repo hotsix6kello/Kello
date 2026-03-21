@@ -68,8 +68,14 @@
     "staff_speaks": "매장 언어",
     "customer_language": "고객 사용 언어",
     "staff_language": "매장 사용 언어",
-    "session": "세션",
-    "expires": "만료"
+    "expires": "만료",
+    "badge": "긴급 도움"
+  },
+  "help_page_labels": {
+    "fire": "소방 및 구급차",
+    "police": "경찰",
+    "tourism": "관광 안내 (EN/JA/ZH)",
+    "clinic": "서울 외국인 진료소"
   },
   "beauty_bookings": {
     "lang_ko": "한국어",
@@ -475,6 +481,14 @@
     "community": {
       "title": "내 커뮤니티 활동",
       "empty": "작성하신 커뮤니티 게시글이 없습니다."
+    },
+    "notifications": {
+      "settings": "알림 설정",
+      "inbox": "알림함"
+    },
+    "beauty_booking_link": {
+      "title": "내 뷰티 예약 보기",
+      "desc": "예약 상태 및 시술 내용을 한 화면에서 확인하세요."
     },
     "settings": {
       "short": "설정",
@@ -1334,8 +1348,15 @@
       "save_added": "글을 저장했습니다! ⭐",
       "deleted": "게시글이 삭제되었습니다.",
       "updated": "게시글이 수정되었습니다.",
-      "created": "새 후기가 등록되었습니다! 🎉",
-      "region_collected": "📍 {{region}} 관련 소식들을 모았습니다."
+      "created": "게시글이 등록되었습니다.",
+      "region_collected": "{{region}} 관련 글을 모아 보여드립니다."
+    },
+    "today_page": {
+      "title": "오늘의 뷰티",
+      "subtitle": "지금 가장 인기 있는 뷰티 소식들을 만나보세요.",
+      "empty_title": "아직 오늘의 뷰티 소식이 없어요.",
+      "empty_desc": "새로운 뷰티 후기를 작성하고 첫 번째 소식을 만들어보세요!",
+      "empty_cta": "새 후기 작성하기"
     },
     "report": {
       "modal_title": "신고 사유 선택",

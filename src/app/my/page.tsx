@@ -708,8 +708,7 @@ function MyPageContent() {
             <section style={{ padding: '0 20px', marginBottom: 28 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
                     <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div style={{ display: 'flex', gap: 6 }}>
-                        <button
+                    <div style={{ display: 'flex', gap: 6 }}>                        <button
                             onClick={() => router.push('/my/settings/notifications')}
                             style={{
                                 border: '1px solid #7c3aed33',
@@ -721,7 +720,7 @@ function MyPageContent() {
                                 fontWeight: 700,
                                 cursor: 'pointer'
                             }}
-                        >{t('my_page_v2.dashboard.notifications')}</button>
+                        >{t('my_page.notifications.settings')}</button>
                         <button
                             onClick={() => router.push('/my/notifications')}
                             style={{
@@ -734,7 +733,7 @@ function MyPageContent() {
                                 fontWeight: 700,
                                 cursor: 'pointer'
                             }}
-                        >{t('my_page_v2.dashboard.notification_box')}</button>
+                        >{t('my_page.notifications.inbox')}</button>
                     </div>
                 </div>
 
@@ -762,9 +761,9 @@ function MyPageContent() {
                         fontSize: '1.4rem', flexShrink: 0
                     }}>💇</div>
                     <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page_v2.dashboard.view_beauty_bookings')}</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page.beauty_booking_link.title')}</div>
                         <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginTop: 2 }}>
-                            {t('my_page_v2.dashboard.beauty_bookings_desc')}
+                            {t('my_page.beauty_booking_link.desc')}
                         </div>
                     </div>
                     <span style={{ color: '#ec4899', fontSize: '1.2rem' }}>›</span>
