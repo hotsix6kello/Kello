@@ -83,7 +83,7 @@ function getResolvedRequestLocale(request: NextRequest) {
   return { locale: countryResolved, source: 'country' as const, shouldRefreshCookie: true };
 }
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const { locale, shouldRefreshCookie } = getResolvedRequestLocale(request);
 
   // Only forward a normalized locale header. We do not redirect here, which avoids

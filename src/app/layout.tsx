@@ -9,8 +9,8 @@ import { LOCALE_STORAGE_KEY, DEFAULT_CLIENT_LOCALE, isRtlLocale, resolveCanonica
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: "Kello | Korea Travel OS",
-  description: "Operating your Korea trip with AI. Not just searching.",
+  title: "Kello | Book Beauty Services in Korea",
+  description: "Booking and language support for beauty services in Korea for global travelers.",
   manifest: "/manifest.json",
 };
 

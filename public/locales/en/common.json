@@ -362,6 +362,28 @@
       "button": "Start Booking"
     },
     "start_btn": "Start Booking",
+    "interpreter": {
+      "eyebrow": "Language Support",
+      "title": "Use the Translation Helper if you need foreign language booking support",
+      "description": "Jump directly to real-time interpretation if you're worried about consultations before booking or conversations during your visit.",
+      "button": "Open Translation Helper"
+    },
+    "assurance": {
+      "items": [
+        {
+          "title": "Category Selection at a Glance",
+          "desc": "Pick your desired service on the first screen and enter the booking flow immediately."
+        },
+        {
+          "title": "Worry-free Language Support",
+          "desc": "Communicate naturally with the shop using the real-time translation helper whenever needed."
+        },
+        {
+          "title": "Mobile-First Booking Path",
+          "desc": "Increased conversion with card-type buttons easy to select with one hand and large CTAs."
+        }
+      ]
+    },
     "interpreter_entry": {
       "title": "Real-time Interpreter Assistant",
       "description": "Communicate easily with staff at the shop",
