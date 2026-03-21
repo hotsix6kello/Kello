@@ -753,7 +753,7 @@
 
 .beautyExplorePage {
     min-height: 100vh;
-    padding: 24px 16px 96px;
+    padding: 24px 16px 180px;
     background:
         radial-gradient(circle at top left, rgba(236, 219, 210, 0.85), transparent 34%),
         linear-gradient(180deg, #fcf8f4 0%, #f4ede7 100%);
@@ -769,7 +769,10 @@
 }
 
 .beautyHero {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 14px;
 }
 
@@ -792,8 +795,11 @@
 }
 
 .beautyHeaderRow {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
+    width: 100%;
 }
 
 .beautyTitle {
@@ -847,11 +853,12 @@
 }
 
 .beautyDescription {
-    margin: 0;
+    margin: 0 auto;
     max-width: 42rem;
     color: #6e6259;
     font-size: 14px;
     line-height: 1.75;
+    text-align: center;
 }
 
 .beautyHeroFlow {
@@ -1404,7 +1411,7 @@
 .beautyConfirmPanel {
     width: min(1120px, 100%);
     margin: 20px auto 0;
-    padding: 22px 18px;
+    padding: 22px 18px 32px;
     scroll-margin-top: 16px;
     border-radius: 28px;
     background: rgba(255, 250, 246, 0.94);
