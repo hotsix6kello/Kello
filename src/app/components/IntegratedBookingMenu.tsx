@@ -119,7 +119,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
 
   return (
     <div
-      dir="ltr"
+      dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
       className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-300 ease-in-out ${
         isAnimating ? 'opacity-100' : 'opacity-0'
       }`}
@@ -130,7 +130,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
       <div
         className={`relative w-[92vw] max-w-[420px] max-h-[85vh] bg-white rounded-3xl shadow-[0_24px_60px_rgba(0,0,0,0.18)] overflow-hidden flex flex-col transform transition-all duration-300 ease-out ${
           isAnimating ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'
-        }`}
+        } ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex-1 overflow-y-auto px-5 pt-5 pb-4">
