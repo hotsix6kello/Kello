@@ -81,10 +81,10 @@ export default function HelpPage() {
                 <h2 className={styles.sectionTitle}>📞 {t('help_page.numbers_title')}</h2>
                 <div className={styles.numberList}>
                     {[
-                        { number: '119', label: 'Fire & Ambulance', icon: '🚑', color: '#ef4444' },
-                        { number: '112', label: 'Police', icon: '🚔', color: '#3b82f6' },
-                        { number: '1330', label: 'Tourism Helpline (EN/JA/ZH)', icon: '🌐', color: '#8b5cf6' },
-                        { number: '021-2277', label: 'Seoul Foreign Clinic', icon: '🏥', color: '#10b981' },
+                        { id: 'fire', number: '119', label: 'Fire & Ambulance', icon: '🚑', color: '#ef4444' },
+                        { id: 'police', number: '112', label: 'Police', icon: '🚔', color: '#3b82f6' },
+                        { id: 'tourism', number: '1330', label: 'Tourism Helpline (EN/JA/ZH)', icon: '🌐', color: '#8b5cf6' },
+                        { id: 'clinic', number: '021-2277', label: 'Seoul Foreign Clinic', icon: '🏥', color: '#10b981' },
                     ].map((n) => (
                         <a
                             key={n.number}
@@ -95,7 +95,7 @@ export default function HelpPage() {
                             <span className={styles.numberIcon}>{n.icon}</span>
                             <div>
                                 <div className={styles.numberValue} style={{ color: n.color }}>{n.number}</div>
-                                <div className={styles.numberLabel}>{n.label}</div>
+                                <div className={styles.numberLabel}>{t(`help_page_labels.${n.id}`)}</div>
                             </div>
                             <span className={styles.callIcon}>📲</span>
                         </a>
