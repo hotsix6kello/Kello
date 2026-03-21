@@ -109,8 +109,14 @@
     "staff_speaks": "Staff Speaks",
     "customer_language": "Customer Language",
     "staff_language": "Staff Language",
-    "session": "Session",
-    "expires": "Expires"
+    "expires": "Expires",
+    "badge": "Emergency Help"
+  },
+  "help_page_labels": {
+    "fire": "Fire & Ambulance",
+    "police": "Police",
+    "tourism": "Tourism Helpline (EN/JA/ZH)",
+    "clinic": "Seoul Foreign Clinic"
   },
   "beauty_bookings": {
     "page_title": "My Beauty Bookings",
@@ -730,7 +736,9 @@
       "title": "KTX to Busan",
       "area": "Seoul Station",
       "desc": "The fastest and most convenient way to travel from Seoul to Busan",
-      "price": "59,800"
+      "updated": "Post updated.",
+      "created": "Post created.",
+      "region_collected": "Showing posts for {{region}}."
     }
   },
   "today_page": {
@@ -848,6 +856,14 @@
     "community": {
       "title": "My Community Posts",
       "empty": "No community posts written yet."
+    },
+    "notifications": {
+      "settings": "Notification Settings",
+      "inbox": "Inbox"
+    },
+    "beauty_booking_link": {
+      "title": "View My Beauty Bookings",
+      "desc": "Check booking status and service details at a glance."
     },
     "settings": {
       "short": "Settings",
