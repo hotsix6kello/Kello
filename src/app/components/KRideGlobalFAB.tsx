@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { usePathname } from 'next/navigation';
 import styles from './KRideGlobalFAB.module.css';
 
 import { useTrip } from '@/lib/contexts/TripContext';
@@ -14,7 +14,6 @@ export default function KRideGlobalFAB() {
     const { t, i18n } = useTranslation('common');
     const { tripStatus, itinerary } = useTrip();
     const pathname = usePathname();
-    const router = useRouter();
     const [open, setOpen] = useState(false);
     const [copied, setCopied] = useState(false);
     const [shrink, setShrink] = useState(false);
@@ -24,13 +23,16 @@ export default function KRideGlobalFAB() {
     const nextDest = itinerary.find(item => item.status === 'confirmed');
 
     // MOCK_NEXT_DEST mapping
-    const destInfo = nextDest ? {
-        name: nextDest.name,
-        nameKo: '서울특별시 성동구 성수이로 5', // Placeholder for Korean address
-        lat: nextDest.lat,
-        lng: nextDest.lng,
-        travelMinutes: 20
-    } : null;
+    const destInfo = useMemo(() => {
+        if (!nextDest) return null;
+        return {
+            name: nextDest.name,
+            nameKo: '서울특별시 성동구 성수이로 5', // Placeholder for Korean address
+            lat: nextDest.lat,
+            lng: nextDest.lng,
+            travelMinutes: 20
+        };
+    }, [nextDest]);
 
     useEffect(() => {
         let lastY = window.scrollY;

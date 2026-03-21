@@ -20,7 +20,8 @@
     font-weight: 600;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .trigger:hover {
@@ -44,10 +45,9 @@
 
 .langLabel {
     font-size: 13px;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* Removed text truncation properties to allow full text display */
+    white-space: normal;
+    word-break: break-word;
 }
 
 .chevron {
@@ -166,7 +166,7 @@
     transition: all 0.2s;
     border-radius: 12px;
     white-space: normal;
-    word-break: keep-all;
+    word-break: break-word;
 }
 
 .langItem:hover {
@@ -187,7 +187,7 @@
 .itemLabel {
     flex: 1;
     white-space: normal;
-    word-break: keep-all;
+    word-break: break-word;
     line-height: 1.4;
 }
 

@@ -519,27 +519,6 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
     );
 }
 
-function AdminShortcutCard() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    return (
-        <div className={styles.adminShortcut} onClick={() => router.push("/admin")}>
-            <div className={styles.adminShortcutLeft}>
-                <div className={styles.adminShortcutIcon}>ADMIN</div>
-                <div>
-                    <div className={styles.adminShortcutTitle}>
-                        {t("my_page.dashboard.admin_title")}
-                    </div>
-                    <div className={styles.adminShortcutDesc}>
-                        {t("my_page.dashboard.admin_desc")}
-                    </div>
-                </div>
-            </div>
-            <div className={styles.adminShortcutChevron}>{">"}</div>
-        </div>
-    );
-}
 
 function MyPageContent() {
     const { t } = useTranslation("common");
@@ -729,8 +708,7 @@ function MyPageContent() {
             <section style={{ padding: '0 20px', marginBottom: 28 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
                     <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div style={{ display: 'flex', gap: 6 }}>
-                        <button
+                    <div style={{ display: 'flex', gap: 6 }}>                        <button
                             onClick={() => router.push('/my/settings/notifications')}
                             style={{
                                 border: '1px solid #7c3aed33',

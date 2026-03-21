@@ -31,7 +31,6 @@ export default function ExploreMap(props: ExploreMapProps) {
     const [mapLang, setMapLang] = useState<string | null>(null);
 
     useEffect(() => {
-        // Map i18n codes back to valid Google Maps language codes if necessary
         const stored = localStorage.getItem('kello_lang') || 'ko';
         const googleMapLanguageMapping: Record<string, string> = {
             'jp': 'ja',
@@ -70,7 +69,6 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
     const { t, i18n } = useTranslation('common');
     const [selectedItem, setSelectedItem] = useState<ServiceItem | null>(null);
 
-    // Routing states
     const [currentLocation, setCurrentLocation] = useState<{ lat: number; lng: number } | null>(null);
     const [routePath, setRoutePath] = useState<{ lat: number; lng: number }[] | null>(null);
     const [routeInfo, setRouteInfo] = useState<{ distance: string; duration: string; transitLines?: string[] } | null>(null);
@@ -80,9 +78,9 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (pos) => setCurrentLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-                (err) => {
-                    console.log('Map location error, using fallback', err);
-                    setCurrentLocation({ lat: 37.5665, lng: 126.9780 }); // Fallback to a default center
+                (_err) => {
+                    console.log('Map location error, using fallback');
+                    setCurrentLocation({ lat: 37.5665, lng: 126.9780 });
                 },
                 { timeout: 3000 }
             );
@@ -91,7 +89,34 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
         }
     }, []);
 
-    // Fetch route from our API
+    const decodePolyline = useCallback((encoded: string) => {
+        const points = [];
+        let index = 0;
+        const len = encoded.length;
+        let lat = 0, lng = 0;
+        while (index < len) {
+            let b, shift = 0, result = 0;
+            do {
+                b = encoded.charCodeAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            const dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charCodeAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            const dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+            points.push({ lat: (lat / 1e5), lng: (lng / 1e5) });
+        }
+        return points;
+    }, []);
+
     useEffect(() => {
         if (!currentLocation || !center) return;
 
@@ -131,9 +156,7 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                     }
                 }
                 throw new Error('API failed or no routes');
-            } catch (err) {
-                // Fallback: Show a simple mock route for demonstration
-                console.log('Using mock route for demo');
+            } catch {
                 const mockPath = [
                     currentLocation,
                     { lat: (currentLocation.lat + center.lat) / 2 + 0.002, lng: (currentLocation.lng + center.lng) / 2 + 0.001 },
@@ -149,44 +172,14 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
         };
 
         fetchRoute();
-    }, [currentLocation, center, travelMode]);
+    }, [currentLocation, center, travelMode, decodePolyline]);
 
-    // Helper to decode polyline
-    const decodePolyline = (encoded: string) => {
-        const points = [];
-        let index = 0, len = encoded.length;
-        let lat = 0, lng = 0;
-        while (index < len) {
-            let b, shift = 0, result = 0;
-            do {
-                b = encoded.charCodeAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            const dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charCodeAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            const dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-            points.push({ lat: (lat / 1e5), lng: (lng / 1e5) });
-        }
-        return points;
-    };
-
-    const [map, setMap] = useState<google.maps.Map | null>(null);
-
-    const onLoad = useCallback(function callback(map: google.maps.Map) {
-        setMap(map);
+    const onLoad = useCallback(function callback(_map: google.maps.Map) {
+        // map instance available if needed
     }, []);
 
-    const onUnmount = useCallback(function callback(map: google.maps.Map) {
-        setMap(null);
+    const onUnmount = useCallback(function callback(_map: google.maps.Map) {
+        // cleanup if needed
     }, []);
 
     const handleKRide = (item: ServiceItem) => {
@@ -194,22 +187,14 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
         if (currentLocation) {
             deeplink += `&origin_lat=${currentLocation.lat}&origin_lng=${currentLocation.lng}&origin_name=${encodeURIComponent('My Location')}`;
         }
-
-        // Attempt to open the app
         window.location.href = deeplink;
-
-        // Fallback to store if app not opened
         setTimeout(() => {
             if (document.hidden) return;
             const ua = navigator.userAgent;
             const isiOS = ua.includes('iPhone') || ua.includes('iPad');
             const isAndroid = ua.includes('Android');
-
-            if (isiOS) {
-                window.open('https://apps.apple.com/app/k-ride/id6478148574', '_blank');
-            } else if (isAndroid) {
-                window.open('https://play.google.com/store/apps/details?id=com.kakaomobility.kride', '_blank');
-            }
+            if (isiOS) window.open('https://apps.apple.com/app/k-ride/id6478148574', '_blank');
+            else if (isAndroid) window.open('https://play.google.com/store/apps/details?id=com.kakaomobility.kride', '_blank');
         }, 2500);
     };
 
@@ -226,7 +211,7 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
     };
 
     const sortedItems = useMemo(() => {
-        return [...items].sort((a, b) => {
+        return [...items].sort((_a, _b) => {
             const priorityA = 0;
             const priorityB = 0;
             return priorityB - priorityA;
@@ -252,7 +237,6 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                 onUnmount={onUnmount}
                 options={OPTIONS}
             >
-                {/* Route logic via Polyline */}
                 {routePath && (
                     <Polyline
                         path={routePath}
@@ -263,24 +247,16 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                         }}
                     />
                 )}
-
-                {/* Current Location Marker */}
                 {currentLocation && (
                     <Marker
                         position={currentLocation}
-                        icon={{
-                            url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                        }}
+                        icon={{ url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png' }}
                         title="My Current Location"
                     />
                 )}
-
-                {/* Hotel/Base Marker */}
                 <Marker
                     position={center}
-                    icon={{
-                        url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                    }}
+                    icon={{ url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
                     title={center.name || "Hotel / Destination"}
                     onClick={() => {
                         const centerItem = {
@@ -294,10 +270,8 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                         setSelectedItem(centerItem);
                     }}
                 />
-
                 {sortedItems.map(item => {
                     if (!item.lat || !item.lng) return null;
-
                     return (
                         <Marker
                             key={item.id}
@@ -306,7 +280,6 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                         />
                     );
                 })}
-
                 {selectedItem && selectedItem.lat && selectedItem.lng && (
                     <InfoWindow
                         position={{ lat: selectedItem.lat, lng: selectedItem.lng }}
@@ -315,7 +288,6 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                         <div className={styles.infoWindow} onClick={(e) => e.stopPropagation()}>
                             <h3 className={styles.infoTitle}>{selectedItem.title}</h3>
                             <p className={styles.infoArea}>{selectedItem.area}</p>
-
                             <div className={styles.infoActions}>
                                 <button
                                     className={`${styles.infoActionBtn} ${styles.infoActionKride}`}
@@ -346,8 +318,6 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                     </InfoWindow>
                 )}
             </GoogleMap>
-
-            {/* Route Overlay Info */}
             {routeInfo && (
                 <div className={styles.routeOverlay}>
                     <div className={styles.routeHeader}>
@@ -360,9 +330,7 @@ function ExploreMapInner({ items, center, onItemClick, radius, zoom, lang }: Exp
                             {routeInfo.transitLines && (
                                 <div className={styles.transitLines}>
                                     {routeInfo.transitLines.map((line, idx) => (
-                                        <span key={idx} className={styles.transitBadge}>
-                                            {line}
-                                        </span>
+                                        <span key={idx} className={styles.transitBadge}>{line}</span>
                                     ))}
                                 </div>
                             )}

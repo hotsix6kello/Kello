@@ -6,7 +6,6 @@ import styles from './planner.module.css';
 import { useTrip } from '@/lib/contexts/TripContext';
 import { useTranslation } from 'react-i18next';
 import {
-    MOCK_TRIP_DAYS,
     SLOTS,
     TYPE_COLORS,
     SlotType,
@@ -94,7 +93,6 @@ export default function PlannerPage() {
     const router = useRouter();
 
     const [activeDay, setActiveDay] = useState(1);
-    const [targetSlot, setTargetSlot] = useState<SlotType | null>(null);
     const [toast, setToast] = useState<string | null>(null);
     const [bookingOpen, setBookingOpen] = useState(false);
     const [bookingStatus, setBookingStatus] = useState<'idle' | 'submitting' | 'accepted' | 'unavailable'>("idle");
@@ -106,7 +104,7 @@ export default function PlannerPage() {
         city_label: itinerary.find(item => item.day === i + 1)?.type === 'attraction' ? 'Dest' : 'Seoul'
     }));
 
-    const currentDay = daysList.find((d) => d.day === activeDay) || daysList[0];
+    const _currentDay = daysList.find((d) => d.day === activeDay) || daysList[0];
 
     const showToast = useCallback((msg: string) => {
         setToast(msg);
@@ -157,8 +155,7 @@ export default function PlannerPage() {
                         icon={icon}
                         cards={daySlots[type as SlotType] || []}
                         onRemove={(id: string) => removeItineraryItem(id)}
-                        onOpenDrawer={(slot: SlotType) => {
-                            setTargetSlot(slot);
+                        onOpenDrawer={(_slot: SlotType) => {
                             router.push('/explore');
                         }}
                     />

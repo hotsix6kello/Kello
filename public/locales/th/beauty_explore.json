@@ -1,0 +1,19 @@
+{
+  "form_name": "ชื่อ",
+  "form_name_placeholder": "กรอกชื่อของคุณ",
+  "form_phone": "ช่องทางติดต่อ (หรือ SNS ID)",
+  "form_phone_placeholder": "เบอร์โทรหรือ SNS ID",
+  "form_request": "คำขอเพิ่มเติม",
+  "form_request_placeholder": "อาการแพ้หรือสไตล์ที่ต้องการ",
+  "agreement_confirm": "ยืนยันรายละเอียด",
+  "agreement_confirm_desc": "ฉันยืนยันตัวเลือกนี้",
+  "agreement_privacy": "ข้อตกลงความเป็นส่วนตัว",
+  "agreement_privacy_desc": "ฉันยินยอมให้ข้อมูลที่จำเป็น",
+  "region_all": "ทุกพื้นที่",
+  "label_today": "วันนี้",
+  "label_tomorrow": "พรุ่งนี้",
+  "label_booking_unit": "วอน",
+  "booking_confirmation_title": "ส่งคำขอจองแล้ว!",
+  "booking_confirmation_desc": "เราจะแจ้งให้คุณทราบเร็ว ๆ นี้",
+  "booking_confirmation_cta": "การจองของฉัน"
+}

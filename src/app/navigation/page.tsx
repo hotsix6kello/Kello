@@ -4,57 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './today.module.css';
 
-// Mock today's schedule — 실제로는 planner state/DB에서 읽어옴
-const TODAY_SCHEDULE = [
-    {
-        id: 1,
-        time: '10:00',
-        endTime: '12:00',
-        title: '아모레스토어 성수 스파 예약',
-        location: '성수동 2가 273-12',
-        type: 'beauty',
-        status: 'confirmed',   // confirmed | pending | done
-        bookingRef: 'KT-2847',
-        lat: 37.5445,
-        lng: 127.0557,
-    },
-    {
-        id: 2,
-        time: '13:00',
-        endTime: '14:30',
-        title: '광장시장 먹거리 탐방',
-        location: '종로구 창경궁로 88',
-        type: 'food',
-        status: 'confirmed',
-        bookingRef: null,
-        lat: 37.5700,
-        lng: 126.9994,
-    },
-    {
-        id: 3,
-        time: '15:00',
-        endTime: '17:00',
-        title: '경복궁 관람',
-        location: '세종로 1-91',
-        type: 'attraction',
-        status: 'confirmed',
-        bookingRef: 'KT-2901',
-        lat: 37.5796,
-        lng: 126.9770,
-    },
-    {
-        id: 4,
-        time: '19:00',
-        endTime: '21:00',
-        title: '전통 한정식 저녁',
-        location: '종로구 북촌로 84',
-        type: 'food',
-        status: 'confirmed',
-        bookingRef: 'KT-2915',
-        lat: 37.5831,
-        lng: 126.9849,
-    },
-];
+
+// TYPE_META
 
 const TYPE_META: Record<string, { icon: string; color: string }> = {
     beauty: { icon: '💆', color: '#a78bfa' },
@@ -100,7 +51,7 @@ export default function TodayPage() {
         lng: item.lng
     })).sort((a, b) => getMinutes(a.time) - getMinutes(b.time));
 
-    const pastEvents = todaySchedule.filter(e => getMinutes(e.endTime) <= nowMinutes);
+    const _pastEvents = todaySchedule.filter(e => getMinutes(e.endTime) <= nowMinutes);
     const activeEvent = todaySchedule.find(
         e => getMinutes(e.time) <= nowMinutes && getMinutes(e.endTime) > nowMinutes
     );
@@ -252,7 +203,6 @@ export default function TodayPage() {
                     </div>
                 )}
 
-                <div style={{ height: 100 }} />
             </div>
         );
     };
