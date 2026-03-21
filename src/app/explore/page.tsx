@@ -1933,6 +1933,7 @@ export default function MyExplorePage() {
               data-booking-flow={submittedBookingPayload?.createdFrom.flow ?? undefined}
             >
               <p className={styles.beautyCompletionTitle}>{t('beauty_explore.completion_title')}</p>
+              <p className={styles.beautyCompletionSmall}>{t('beauty_explore.completion_flow_hint')}</p>
               <div className={styles.beautyCompletionMain}>
                 <p className={styles.beautyCompletionDesc}>
                   {t('beauty_explore.completion_desc1')}
@@ -2232,7 +2233,7 @@ export default function MyExplorePage() {
                   </div>
                 </div>
                 <p className={styles.beautyOptionHint}>
-                  {t('beauty_explore.completion_desc2')}
+                  {t('beauty_explore.price_estimate_hint')}
                 </p>
               </div>
 
@@ -2413,6 +2414,7 @@ export default function MyExplorePage() {
                     );
                   })}
                 </div>
+                <p className={styles.beautyOptionHint}>{t('beauty_explore.cancel_policy_hint')}</p>
                 <button
                   type="button"
                   className={styles.beautyFinalCta}
