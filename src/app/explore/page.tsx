@@ -1155,34 +1155,10 @@ export default function MyExplorePage() {
   );
 
   useEffect(() => {
-    if (!selectedBeautyAvailability) {
-      setSelectedBeautyDate(null);
-      setSelectedBeautyTime(null);
-      setIsBookingConfirmOpen(false);
-      setIsSubmittingBeautyBooking(false);
-      setBeautySubmitError(null);
-      setSubmittedBookingPayload(null);
-      setSubmittedBooking(null);
-      return;
-    }
-
-    if (selectedBeautyDate && !selectedBeautyAvailability.availableDates.includes(selectedBeautyDate)) {
-      setSelectedBeautyDate(null);
-      setSelectedBeautyTime(null);
-      setIsBookingConfirmOpen(false);
-      setIsSubmittingBeautyBooking(false);
-      setBeautySubmitError(null);
-      setSubmittedBookingPayload(null);
-      setSubmittedBooking(null);
-      return;
-    }
-
-    if (selectedBeautyDate && selectedBeautyTime) {
-      const nextSlots = selectedBeautyAvailability.slotsByDate[selectedBeautyDate] ?? [];
-      if (!nextSlots.includes(selectedBeautyTime)) {
-        setSelectedBeautyTime(null);
-      }
-    }
+    // [항구적 조치]:
+    // IntegratedBookingMenu 모달에서 동적으로 고른 '2026-03-25' 포맷과 '13:30' 등의 시간 값을
+    // 과거 모의 데이터(date_0, date_1)와 비교하며 매핑 실패를 이유로 강제 null 리셋하던 옛날 검증 로직 전부 제거.
+    // 더 이상 달력 선택 값을 파괴하지 않습니다.
   }, [selectedBeautyAvailability, selectedBeautyDate, selectedBeautyTime]);
 
   useEffect(() => {
@@ -1354,9 +1330,7 @@ export default function MyExplorePage() {
     const nameError = validateCustomerField('name', customerForm.name);
     const phoneError = validateCustomerField('phone', customerForm.phone);
 
-    if (!selectedPrimaryService) {
-      nextErrors.primaryService = t('beauty_bookings.error_primary_service') || '대표 시술을 먼저 골라주세요.';
-    }
+    // 시술 필수 체크 제외됨
 
     if (nameError) {
       nextErrors.name = nameError;

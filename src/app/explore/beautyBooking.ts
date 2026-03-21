@@ -128,16 +128,9 @@ export function buildBeautyBookingPayload(
     !hasRequiredText(input.storeName) ||
     !hasRequiredText(input.bookingDate) ||
     !hasRequiredText(input.bookingTime) ||
-    !hasRequiredText(input.primaryServiceId) ||
-    !hasRequiredText(input.primaryServiceName) ||
     !hasRequiredText(input.customer.name) ||
     !hasRequiredText(input.customer.phone) ||
-    !hasRequiredText(input.communication.language) ||
-    !hasRequiredText(input.communication.intent) ||
-    !isFiniteNumber(input.priceSummary.basePrice) ||
-    !isFiniteNumber(input.priceSummary.addOnPrice) ||
-    !isFiniteNumber(input.priceSummary.designerSurcharge) ||
-    !isFiniteNumber(input.priceSummary.totalPrice)
+    !isFiniteNumber(input.priceSummary.basePrice)
   ) {
     return null;
   }
@@ -152,8 +145,8 @@ export function buildBeautyBookingPayload(
     bookingTime: input.bookingTime,
     designerId: hasRequiredText(input.designerId) ? input.designerId : null,
     designerName: hasRequiredText(input.designerName) ? input.designerName.trim() : null,
-    primaryServiceId: input.primaryServiceId,
-    primaryServiceName: input.primaryServiceName.trim(),
+    primaryServiceId: input.primaryServiceId ?? 'none',
+    primaryServiceName: input.primaryServiceName ? input.primaryServiceName.trim() : '선택 안 함',
     addOnIds: input.addOnIds,
     addOnNames: input.addOnNames.map((name) => name.trim()).filter(Boolean),
     priceSummary: {
