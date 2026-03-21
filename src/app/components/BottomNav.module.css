@@ -5,7 +5,6 @@
     height: 72px;
     /* Reduced from 80px */
     background: var(--background);
-    border-top: 1px solid var(--gray-200);
     display: flex;
     justify-content: space-around;
     align-items: center;

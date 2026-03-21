@@ -71,17 +71,3 @@ export const MOCK_PLACES = [
   { title: '명동 예술극장', area: '서울특별시 중구 명동길 35', lat: 37.5645, lng: 126.9845 }
 ];
 
-export const ASSURANCE_ITEMS = [
-  {
-    title: '한눈에 카테고리 선택',
-    description: '첫 화면에서 원하는 서비스를 먼저 고르고 예약 흐름으로 바로 진입합니다.',
-  },
-  {
-    title: '언어 걱정 없는 예약',
-    description: '필요할 때 실시간 통역 도우미로 매장과 자연스럽게 대화할 수 있습니다.',
-  },
-  {
-    title: '모바일 우선 예약 동선',
-    description: '한 손으로도 선택하기 쉬운 카드형 버튼과 큰 CTA로 전환을 높였습니다.',
-  },
-];

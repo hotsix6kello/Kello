@@ -1,0 +1,19 @@
+{
+  "form_name": "Nama",
+  "form_name_placeholder": "Masukkan nama Anda",
+  "form_phone": "Kontak (atau ID SNS)",
+  "form_phone_placeholder": "Nomor telepon atau ID SNS",
+  "form_request": "Permintaan",
+  "form_request_placeholder": "Alergi atau gaya yang diinginkan",
+  "agreement_confirm": "Konfirmasi detail",
+  "agreement_confirm_desc": "Saya mengonfirmasi pilihan ini.",
+  "agreement_privacy": "Persetujuan privasi",
+  "agreement_privacy_desc": "Saya setuju memberikan informasi.",
+  "region_all": "Semua area",
+  "label_today": "Hari ini",
+  "label_tomorrow": "Besok",
+  "label_booking_unit": "KRW",
+  "booking_confirmation_title": "Permintaan booking terkirim!",
+  "booking_confirmation_desc": "Kami akan segera memberi tahu Anda.",
+  "booking_confirmation_cta": "Booking Saya"
+}

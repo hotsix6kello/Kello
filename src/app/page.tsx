@@ -13,8 +13,6 @@ import styles from './home.module.css';
 import HomeTopNav from './components/home/HomeTopNav';
 import HomeHero from './components/home/HomeHero';
 import HomeBookingSection from './components/home/HomeBookingSection';
-import HomeRecommendedPlans from './components/home/HomeRecommendedPlans';
-import HomeSupportSection from './components/home/HomeSupportSection';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
@@ -22,7 +20,6 @@ import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
 import { 
   BEAUTY_CATEGORY_OPTIONS, 
   MOCK_PLACES, 
-  ASSURANCE_ITEMS,
   BeautyCategoryId
 } from './components/home/constants';
 
@@ -52,6 +49,7 @@ export default function HomePage() {
   );
 
   const [userName, setUserName] = useState<string | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   // Navigation Sheet States
   const [openNavSheet, setOpenNavSheet] = useState(false);
@@ -165,61 +163,10 @@ export default function HomePage() {
     };
   }, [selectedDest, nextDest]);
 
-  const RECOMMENDED_PLANS = [
-    {
-      id: 'plan-2d',
-      duration: 2,
-      title: t('home.plans.2d.title', { defaultValue: '2 Days: Seoul Essential' }),
-      label: t('home.plans.2d.label', { defaultValue: '2 Days' }),
-      icon: '⚡',
-      items: [
-        { id: 'p1-1', name: t('explore_items.airport_arrival', { defaultValue: 'Incheon Airport Arrival' }), time: '10:00', lat: 37.4602, lng: 126.4407, day: 1, slot: 'am', status: 'confirmed', type: 'attraction', area: 'Incheon', price: '0', desc: 'Welcome to Korea' },
-        { id: 'p1-2', name: t('explore_items.hotel_checkin', { defaultValue: 'Conrad Seoul (Hotel)' }), time: '13:00', lat: 37.5252, lng: 126.9254, day: 1, slot: 'pm', status: 'confirmed', type: 'attraction', area: 'Yeouido', price: '300,000', desc: 'Luxury stay' },
-        { id: 'f2', name: t('explore_items.f2.title', { defaultValue: 'Gold Pig BBQ (Dinner)' }), time: '18:30', lat: 37.5540, lng: 127.0140, day: 1, slot: 'night', status: 'draft', type: 'food', area: 'Yaksu', price: '20,000' },
-        { id: 'a1', name: t('explore_items.a1.title', { defaultValue: 'Gyeongbokgung Palace' }), time: '10:00', lat: 37.5796, lng: 126.9770, day: 2, slot: 'am', status: 'draft', type: 'attraction', area: 'Jongno', price: '3,000' },
-        { id: 'b1', name: t('explore_items.b1.title', { defaultValue: 'Jenny House Beauty' }), time: '14:30', lat: 37.5240, lng: 127.0440, day: 2, slot: 'pm', status: 'draft', type: 'beauty', area: 'Cheongdam', price: '150,000' }
-      ]
-    },
-    {
-      id: 'plan-3d',
-      duration: 3,
-      title: t('home.plans.3d.title', { defaultValue: '3 Days: K-Culture & Style' }),
-      label: t('home.plans.3d.label', { defaultValue: '3 Days' }),
-      icon: '✨',
-      items: [
-        { id: 'p2-1', name: t('explore_items.airport_arrival', { defaultValue: 'Incheon Airport Arrival' }), time: '09:00', lat: 37.4602, lng: 126.4407, day: 1, slot: 'am', status: 'confirmed', type: 'attraction', area: 'Incheon', price: '0' },
-        { id: 'p2-2', name: t('explore_items.hotel_checkin', { defaultValue: 'Hotel in Myeongdong' }), time: '12:00', lat: 37.5635, lng: 126.9837, day: 1, slot: 'pm', status: 'confirmed', type: 'attraction', area: 'Myeongdong', price: '200,000' },
-        { id: 'f1', name: t('explore_items.f1.title', { defaultValue: 'Plant Cafe Seoul' }), time: '14:00', lat: 37.5340, lng: 126.9940, day: 1, slot: 'pm', status: 'draft', type: 'food', area: 'Itaewon', price: '15,000' },
-        { id: 'e2', name: t('explore_items.e2.title', { defaultValue: 'Nanta Show Myeongdong' }), time: '17:00', lat: 37.5645, lng: 126.9845, day: 1, slot: 'night', status: 'draft', type: 'event', area: 'Myeongdong', price: '40,000' },
-        { id: 'a1', name: t('explore_items.a1.title', { defaultValue: 'Gyeongbokgung Palace' }), time: '10:00', lat: 37.5796, lng: 126.9770, day: 2, slot: 'am', status: 'draft', type: 'attraction', area: 'Jongno', price: '3,000' },
-        { id: 'b2', name: t('explore_items.b2.title', { defaultValue: 'PPEUM Clinic Gangnam' }), time: '14:00', lat: 37.4980, lng: 127.0276, day: 2, slot: 'pm', status: 'draft', type: 'beauty', area: 'Gangnam', price: '50,000' },
-        { id: 'e1', name: t('explore_items.e1.title', { defaultValue: 'PSY Water Show' }), time: '19:00', lat: 37.5148, lng: 127.0736, day: 2, slot: 'night', status: 'draft', type: 'event', area: 'Jamsil', price: '140,000' },
-        { id: 'a2', name: t('explore_items.a2.title', { defaultValue: 'Lotte World Tower' }), time: '11:00', lat: 37.5125, lng: 127.1025, day: 3, slot: 'am', status: 'draft', type: 'attraction', area: 'Jamsil', price: '27,000' },
-        { id: 'f3', name: t('explore_items.f3.title', { defaultValue: 'Seafood Market' }), time: '14:00', lat: 37.5140, lng: 126.9240, day: 3, slot: 'pm', status: 'draft', type: 'food', area: 'Nampo', price: '40,000' }
-      ]
-    },
-    {
-      id: 'plan-5d',
-      duration: 5,
-      title: t('home.plans.5d.title', { defaultValue: '5 Days: The Grand Tour' }),
-      label: t('home.plans.5d.label', { defaultValue: '5 Days' }),
-      icon: '🏯',
-      items: [
-        { id: 'p3-1', name: t('explore_items.airport_arrival', { defaultValue: 'Incheon Airport Arrival' }), time: '10:00', lat: 37.4602, lng: 126.4407, day: 1, slot: 'am', status: 'confirmed', type: 'attraction', area: 'Incheon', price: '0' },
-        { id: 'p3-2', name: t('explore_items.hotel_checkin', { defaultValue: 'Stay in Hanok Village' }), time: '14:00', lat: 37.5826, lng: 126.9836, day: 1, slot: 'pm', status: 'confirmed', type: 'attraction', area: 'Jongno', price: '150,000' },
-        { id: 'a1', name: t('explore_items.a1.title', { defaultValue: 'Gyeongbokgung Palace' }), time: '10:00', lat: 37.5796, lng: 126.9770, day: 2, slot: 'am', status: 'draft', type: 'attraction', area: 'Jongno', price: '3,000' },
-        { id: 'fs1', name: t('explore_items.fs1.title', { defaultValue: 'Seoul Lantern Festival' }), time: '19:00', lat: 37.5724, lng: 126.9768, day: 2, slot: 'night', status: 'draft', type: 'festival', area: 'Gwanghwamun', price: 'Free' },
-        { id: 'b1', name: t('explore_items.b1.title', { defaultValue: 'Jenny House Beauty' }), time: '11:00', lat: 37.5240, lng: 127.0440, day: 3, slot: 'am', status: 'draft', type: 'beauty', area: 'Cheongdam', price: '150,000' },
-        { id: 'f2', name: t('explore_items.f2.title', { defaultValue: 'Gold Pig BBQ' }), time: '18:00', lat: 37.5540, lng: 127.0140, day: 3, slot: 'night', status: 'draft', type: 'food', area: 'Yaksu', price: '20,000' },
-        { id: 'a2', name: t('explore_items.a2.title', { defaultValue: 'Lotte World Tower' }), time: '14:30', lat: 37.5125, lng: 127.1025, day: 4, slot: 'pm', status: 'draft', type: 'attraction', area: 'Jamsil', price: '27,000' },
-        { id: 'f1', name: t('explore_items.f1.title', { defaultValue: 'Plant Cafe Seoul' }), time: '12:00', lat: 37.5340, lng: 126.9940, day: 5, slot: 'am', status: 'draft', type: 'food', area: 'Itaewon', price: '15,000' }
-      ]
-    }
-  ];
 
-  const filteredPlans = useMemo(() => {
-    return RECOMMENDED_PLANS.filter(p => p.duration === days);
-  }, [RECOMMENDED_PLANS, days]);
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -253,20 +200,13 @@ export default function HomePage() {
     }
   };
 
-  const handleStartBooking = () => {
-    if (!selectedCategory) return;
-    router.push(`/explore?category=beauty&beautyCategory=${selectedCategory}`);
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategory(categoryId as BeautyCategoryId);
+    router.push(`/explore?category=beauty&beautyCategory=${categoryId}`);
   };
 
   const handleOpenInterpreter = () => {
     router.push('/interpreter');
-  };
-
-  const selectedOption = BEAUTY_CATEGORY_OPTIONS.find((option) => option.id === selectedCategory) ?? null;
-
-  const homeTrans = (key: string, defaultValue?: string): any => {
-    const defaultVal = defaultValue || key;
-    return t(`home_new.${key}`, { defaultValue: defaultVal, returnObjects: true });
   };
 
   useEffect(() => {
@@ -341,10 +281,9 @@ export default function HomePage() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    const isKo = i18n.language?.startsWith('ko');
-    if (hour < 12) return isKo ? '좋은 아침입니다' : 'Good morning';
-    if (hour < 18) return isKo ? '좋은 오후입니다' : 'Good afternoon';
-    return isKo ? '좋은 저녁입니다' : 'Good evening';
+    if (hour < 12) return t('common.morning');
+    if (hour < 18) return t('common.afternoon');
+    return t('common.evening');
   };
 
   const handleStart = async () => {
@@ -383,24 +322,17 @@ export default function HomePage() {
     }
   };
 
-  const handleApplyPlan = (plan: any) => {
-    const formattedItems = plan.items.map((item: any) => ({ ...item, id: `${plan.id}_${item.id}_${Date.now()}` }));
-    setDays(plan.duration);
-    setItinerary(formattedItems);
-    router.push('/planner');
-  };
 
-  const handleCreateCustomPlan = () => {
-    setDays(days);
-    setItinerary([]);
-    router.push('/planner');
-  };
+  if (!isHydrated) {
+    return <main className={styles.main} suppressHydrationWarning />;
+  }
 
   return (
     <main className={styles.main}>
       <HomeTopNav 
         userName={userName} 
         onSignOut={handleSignOut} 
+        greeting={getGreeting()}
         t={t} 
       />
 
@@ -413,34 +345,11 @@ export default function HomePage() {
       <HomeBookingSection 
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-        input={input}
-        onInputChange={setInput}
-        onInputClear={() => setInput('')}
-        onStart={handleStart}
-        days={days}
-        onDaysChange={setDays}
-        onStartBooking={handleStartBooking}
-        showSuggestions={showSuggestions}
-        suggestions={[]} // Suggestions disabled as per original code effect
-        onSelectPlace={handleSelectPlace}
-        selectedOption={selectedOption}
+        onSelectCategory={handleCategorySelect}
         t={t}
       />
 
-      <HomeRecommendedPlans 
-        plans={filteredPlans}
-        days={days}
-        onApplyPlan={handleApplyPlan}
-        onCreateCustomPlan={handleCreateCustomPlan}
-        t={t}
-      />
 
-      <HomeSupportSection 
-        assuranceItems={ASSURANCE_ITEMS}
-        onOpenInterpreter={handleOpenInterpreter}
-        t={t}
-      />
 
       <HomeLocationSheet 
         isOpen={openNavSheet}
@@ -474,13 +383,13 @@ export default function HomePage() {
         t={t}
       />
 
+
       {loadingNav && (
         <div className={styles.toast} style={{ bottom: '120px', background: 'var(--primary)', color: 'white' }}>
           {t('home.fetching_location', { defaultValue: 'Fetching location...' })}
         </div>
       )}
 
-      <div style={{ height: 100 }} />
     </main>
   );
 }
