@@ -1,10 +1,12 @@
+import { TFunction } from 'i18next';
+import { BeautyCategoryOption, BeautyCategoryId } from './constants';
 import styles from '../../home.module.css';
 
 interface HomeBookingSectionProps {
-  categories: any[];
-  selectedCategory: string | null;
-  onSelectCategory: (id: any) => void;
-  t: (key: any, options?: any) => any;
+  categories: BeautyCategoryOption[];
+  selectedCategory: BeautyCategoryId | null;
+  onSelectCategory: (id: BeautyCategoryId) => void;
+  t: TFunction;
 }
 
 export default function HomeBookingSection({
@@ -35,6 +37,7 @@ export default function HomeBookingSection({
             );
           })}
         </div>
+
       </div>
     </section>
   );

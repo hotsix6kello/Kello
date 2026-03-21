@@ -4,15 +4,38 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
-import { useTrip } from '@/lib/contexts/TripContext';
+import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
 import { MOCK_ITEMS } from './explore/mock/data';
 
 import styles from './home.module.css';
+
+interface SheetSearchResult {
+  title: string;
+  area: string;
+  lat?: number;
+  lng?: number;
+  placeId?: string;
+  isGoogle?: boolean;
+  [key: string]: unknown;
+}
+
+interface GooglePrediction {
+  placePrediction: {
+    structuredFormat: {
+      mainText: { text: string };
+      secondaryText?: { text: string };
+    };
+    placeId: string;
+  };
+}
+
+import { RecommendedPlan } from './components/home/types';
 
 // Home Specific Components
 import HomeTopNav from './components/home/HomeTopNav';
 import HomeHero from './components/home/HomeHero';
 import HomeBookingSection from './components/home/HomeBookingSection';
+import HomeRecommendedPlans from './components/home/HomeRecommendedPlans';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
@@ -26,7 +49,6 @@ import {
 export default function HomePage() {
   const { t, i18n } = useTranslation('common');
   const { 
-    tripStatus, 
     itinerary, 
     setItinerary, 
     tripDays: days,
@@ -35,7 +57,6 @@ export default function HomePage() {
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
     setSearchQuery: setInput,
-    destinationInfo,
     setDestinationInfo
   } = useTrip();
 
@@ -57,11 +78,11 @@ export default function HomePage() {
   const [copied, setCopied] = useState(false);
 
   // Navigation Search States
-  const [selectedDest, setSelectedDest] = useState<any>(null);
+  const [selectedDest, setSelectedDest] = useState<{ title: string; area: string; lat: number; lng: number } | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
-  const [sheetSearchResults, setSheetSearchResults] = useState<any[]>([]);
+  const [sheetSearchResults, setSheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
 
   // Merge MOCK_PLACES with MOCK_ITEMS for broader search
@@ -93,7 +114,7 @@ export default function HomePage() {
     setShowSuggestions(false);
   }, [input]);
 
-  const handleSelectPlace = async (place: any) => {
+  const handleSelectPlace = async (place: { title: string; area: string; lat?: number; lng?: number; placeId?: string }) => {
     if (place.placeId && !place.lat) {
       setLoadingNav(true);
       try {
@@ -122,11 +143,17 @@ export default function HomePage() {
         setLoadingNav(false);
       }
     } else {
-      setSelectedDest(place);
+      const selected = {
+        title: place.title,
+        area: place.area,
+        lat: place.lat ?? 37.5665,
+        lng: place.lng ?? 126.9780
+      };
+      setSelectedDest(selected);
       setDestinationInfo({
-        name: place.title,
-        lat: place.lat,
-        lng: place.lng
+        name: selected.title,
+        lat: selected.lat,
+        lng: selected.lng
       });
       setIsSearchingInSheet(false);
       setOpenNavSheet(true);
@@ -148,7 +175,7 @@ export default function HomePage() {
     if (nextDest) {
       return {
         name: nextDest.name,
-        nameKo: (nextDest as any).location || nextDest.name,
+        nameKo: (nextDest as { location?: string; name: string }).location || nextDest.name,
         lat: nextDest.lat,
         lng: nextDest.lng,
         travelMinutes: 20
@@ -163,6 +190,57 @@ export default function HomePage() {
     };
   }, [selectedDest, nextDest]);
 
+  const RECOMMENDED_PLANS = useMemo<RecommendedPlan[]>(() => [
+    {
+      id: 'plan-2d',
+      duration: 2,
+      title: t('home.plans.2d.title', { defaultValue: '2 Days: Seoul Essential' }),
+      label: t('home.plans.2d.label', { defaultValue: '2 Days' }),
+      icon: '⚡',
+      items: [
+        { id: 'p1-1', name: t('explore_items.airport_arrival', { defaultValue: 'Incheon Airport Arrival' }), time: '10:00', lat: 37.4602, lng: 126.4407, day: 1, slot: 'am', status: 'confirmed' as const, type: 'attraction', area: 'Incheon', price: '0', desc: 'Welcome to Korea' },
+        { id: 'p1-2', name: t('explore_items.hotel_checkin', { defaultValue: 'Conrad Seoul (Hotel)' }), time: '13:00', lat: 37.5252, lng: 126.9254, day: 1, slot: 'pm', status: 'confirmed' as const, type: 'attraction', area: 'Yeouido', price: '300,000', desc: 'Luxury stay' },
+        { id: 'f2', name: t('explore_items.f2.title', { defaultValue: 'Gold Pig BBQ (Dinner)' }), time: '18:30', lat: 37.5540, lng: 127.0140, day: 1, slot: 'night', status: 'draft' as const, type: 'food', area: 'Yaksu', price: '20,000' },
+        { id: 'a1', name: t('explore_items.a1.title', { defaultValue: 'Gyeongbokgung Palace' }), time: '10:00', lat: 37.5796, lng: 126.9770, day: 2, slot: 'am', status: 'draft' as const, type: 'attraction', area: 'Jongno', price: '3,000' },
+        { id: 'b1', name: t('explore_items.b1.title', { defaultValue: 'Jenny House Beauty' }), time: '14:30', lat: 37.5240, lng: 127.0440, day: 2, slot: 'pm', status: 'draft' as const, type: 'beauty', area: 'Cheongdam', price: '150,000' }
+      ]
+    },
+    {
+      id: 'plan-3d',
+      duration: 3,
+      title: t('home.plans.3d.title', { defaultValue: '3 Days: K-Culture & Style' }),
+      label: t('home.plans.3d.label', { defaultValue: '3 Days' }),
+      icon: '✨',
+      items: [
+        { id: 'p2-1', name: t('explore_items.airport_arrival', { defaultValue: 'Incheon Airport Arrival' }), time: '09:00', lat: 37.4602, lng: 126.4407, day: 1, slot: 'am', status: 'confirmed' as const, type: 'attraction', area: 'Incheon', price: '0' },
+        { id: 'p2-2', name: t('explore_items.hotel_checkin', { defaultValue: 'Hotel in Myeongdong' }), time: '12:00', lat: 37.5635, lng: 126.9837, day: 1, slot: 'pm', status: 'confirmed' as const, type: 'attraction', area: 'Myeongdong', price: '200,000' },
+        { id: 'f1', name: t('explore_items.f1.title', { defaultValue: 'Plant Cafe Seoul' }), time: '14:00', lat: 37.5340, lng: 126.9940, day: 1, slot: 'pm', status: 'draft' as const, type: 'food', area: 'Itaewon', price: '15,000' },
+        { id: 'e2', name: t('explore_items.e2.title', { defaultValue: 'Nanta Show Myeongdong' }), time: '17:00', lat: 37.5645, lng: 126.9845, day: 1, slot: 'night', status: 'draft' as const, type: 'event', area: 'Myeongdong', price: '40,000' },
+        { id: 'a1', name: t('explore_items.a1.title', { defaultValue: 'Gyeongbokgung Palace' }), time: '10:00', lat: 37.5796, lng: 126.9770, day: 2, slot: 'am', status: 'draft' as const, type: 'attraction', area: 'Jongno', price: '3,000' },
+        { id: 'b2', name: t('explore_items.b2.title', { defaultValue: 'PPEUM Clinic Gangnam' }), time: '14:00', lat: 37.4980, lng: 127.0276, day: 2, slot: 'pm', status: 'draft' as const, type: 'beauty', area: 'Gangnam', price: '50,000' },
+        { id: 'e1', name: t('explore_items.e1.title', { defaultValue: 'PSY Water Show' }), time: '19:00', lat: 37.5148, lng: 127.0736, day: 2, slot: 'night', status: 'draft' as const, type: 'event', area: 'Jamsil', price: '140,000' },
+        { id: 'a2', name: t('explore_items.a2.title', { defaultValue: 'Lotte World Tower' }), time: '11:00', lat: 37.5125, lng: 127.1025, day: 3, slot: 'am', status: 'draft' as const, type: 'attraction', area: 'Jamsil', price: '27,000' },
+        { id: 'f3', name: t('explore_items.f3.title', { defaultValue: 'Seafood Market' }), time: '14:00', lat: 37.5140, lng: 126.9240, day: 3, slot: 'pm', status: 'draft' as const, type: 'food', area: 'Nampo', price: '40,000' }
+      ]
+    },
+    {
+      id: 'plan-5d',
+      duration: 5,
+      title: t('home.plans.5d.title', { defaultValue: '5 Days: The Grand Tour' }),
+      label: t('home.plans.5d.label', { defaultValue: '5 Days' }),
+      icon: '🏯',
+      items: [
+        { id: 'p3-1', name: t('explore_items.airport_arrival', { defaultValue: 'Incheon Airport Arrival' }), time: '10:00', lat: 37.4602, lng: 126.4407, day: 1, slot: 'am', status: 'confirmed' as const, type: 'attraction', area: 'Incheon', price: '0' },
+        { id: 'p3-2', name: t('explore_items.hotel_checkin', { defaultValue: 'Stay in Hanok Village' }), time: '14:00', lat: 37.5826, lng: 126.9836, day: 1, slot: 'pm', status: 'confirmed' as const, type: 'attraction', area: 'Jongno', price: '150,000' },
+        { id: 'a1', name: t('explore_items.a1.title', { defaultValue: 'Gyeongbokgung Palace' }), time: '10:00', lat: 37.5796, lng: 126.9770, day: 2, slot: 'am', status: 'draft' as const, type: 'attraction', area: 'Jongno', price: '3,000' },
+        { id: 'fs1', name: t('explore_items.fs1.title', { defaultValue: 'Seoul Lantern Festival' }), time: '19:00', lat: 37.5724, lng: 126.9768, day: 2, slot: 'night', status: 'draft' as const, type: 'festival', area: 'Gwanghwamun', price: 'Free' },
+        { id: 'b1', name: t('explore_items.b1.title', { defaultValue: 'Jenny House Beauty' }), time: '11:00', lat: 37.5240, lng: 127.0440, day: 3, slot: 'am', status: 'draft' as const, type: 'beauty', area: 'Cheongdam', price: '150,000' },
+        { id: 'f2', name: t('explore_items.f2.title', { defaultValue: 'Gold Pig BBQ' }), time: '18:00', lat: 37.5540, lng: 127.0140, day: 3, slot: 'night', status: 'draft' as const, type: 'food', area: 'Yaksu', price: '20,000' },
+        { id: 'a2', name: t('explore_items.a2.title', { defaultValue: 'Lotte World Tower' }), time: '14:30', lat: 37.5125, lng: 127.1025, day: 4, slot: 'pm', status: 'draft' as const, type: 'attraction', area: 'Jamsil', price: '27,000' },
+        { id: 'f1', name: t('explore_items.f1.title', { defaultValue: 'Plant Cafe Seoul' }), time: '12:00', lat: 37.5340, lng: 126.9940, day: 5, slot: 'am', status: 'draft' as const, type: 'food', area: 'Itaewon', price: '15,000' }
+      ]
+    }
+  ], [t]);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -175,7 +253,7 @@ export default function HomePage() {
         try {
           const parsed = JSON.parse(stored);
           setUserName(parsed.name);
-        } catch (e) { }
+        } catch { }
       }
     }
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -209,6 +287,7 @@ export default function HomePage() {
     router.push('/interpreter');
   };
 
+  const selectedOption = BEAUTY_CATEGORY_OPTIONS.find((option) => option.id === selectedCategory) ?? null;
   useEffect(() => {
     if (openNavSheet || isMapOpen) {
       document.body.style.overflow = 'hidden';
@@ -303,7 +382,7 @@ export default function HomePage() {
         body: JSON.stringify({ input: trimmedInput, language: lang }),
       });
       const data = await res.json();
-      const googleResults = (data.suggestions || []).map((s: any) => ({
+      const googleResults = (data.suggestions || []).map((s: GooglePrediction) => ({
         title: s.placePrediction.structuredFormat.mainText.text,
         area: s.placePrediction.structuredFormat.secondaryText?.text || '',
         placeId: s.placePrediction.placeId,
@@ -322,6 +401,15 @@ export default function HomePage() {
     }
   };
 
+  const handleApplyPlan = (plan: RecommendedPlan) => {
+    const formattedItems = plan.items.map((item) => ({ 
+      ...item, 
+      id: `${plan.id}_${item.id}_${Date.now()}` 
+    } as ItineraryItem));
+    setDays(plan.duration);
+    setItinerary(formattedItems);
+    router.push('/planner');
+  };
 
   if (!isHydrated) {
     return <main className={styles.main} suppressHydrationWarning />;
@@ -346,6 +434,14 @@ export default function HomePage() {
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
+        t={t}
+      />
+
+      <HomeRecommendedPlans 
+        plans={RECOMMENDED_PLANS}
+        days={days}
+        onApplyPlan={handleApplyPlan}
+        onCreateCustomPlan={() => router.push('/planner')}
         t={t}
       />
 

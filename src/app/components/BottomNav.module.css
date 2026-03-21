@@ -1,7 +1,11 @@
 /* Bottom Navigation */
 .navBar {
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 480px;
     height: 72px;
     /* Reduced from 80px */
     background: var(--background);
@@ -10,6 +14,7 @@
     align-items: center;
     padding-bottom: env(safe-area-inset-bottom, 12px);
     z-index: 1000;
+    transition: transform 0.3s ease;
 }
 
 .navItem {

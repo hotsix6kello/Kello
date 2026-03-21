@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "crypto";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
 
 import type { ConciergeLocale, InterpreterSttRequest, InterpreterSttResponse } from "./types.ts";
 
@@ -125,7 +125,7 @@ export class HttpInterpreterSttProvider implements InterpreterSttProvider {
 
 export class GeminiInterpreterSttProvider implements InterpreterSttProvider {
   private genAI: GoogleGenerativeAI;
-  private model: any;
+  private model: GenerativeModel;
 
   constructor(apiKey: string) {
     this.genAI = new GoogleGenerativeAI(apiKey);

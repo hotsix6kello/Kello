@@ -36,7 +36,7 @@ export default function WeatherWidget() {
                             icon: icon
                         });
                     }
-                } catch (err) {
+                } catch (_err) {
                     // Silently ignore or warn so the Next.js error overlay is not triggered
                     console.warn("Failed to fetch weather data, skipping widget.");
                 }

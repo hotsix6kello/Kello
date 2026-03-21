@@ -519,27 +519,6 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
     );
 }
 
-function AdminShortcutCard() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    return (
-        <div className={styles.adminShortcut} onClick={() => router.push("/admin")}>
-            <div className={styles.adminShortcutLeft}>
-                <div className={styles.adminShortcutIcon}>ADMIN</div>
-                <div>
-                    <div className={styles.adminShortcutTitle}>
-                        {t("my_page.dashboard.admin_title")}
-                    </div>
-                    <div className={styles.adminShortcutDesc}>
-                        {t("my_page.dashboard.admin_desc")}
-                    </div>
-                </div>
-            </div>
-            <div className={styles.adminShortcutChevron}>{">"}</div>
-        </div>
-    );
-}
 
 function MyPageContent() {
     const { t } = useTranslation("common");

@@ -1,3 +1,4 @@
+import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 import ExploreMap from '../../explore/components/ExploreMap';
 
@@ -6,10 +7,10 @@ interface HomeModalsProps {
   onMapClose: () => void;
   showCard: boolean;
   onCardClose: () => void;
-  destInfo: any;
+  destInfo: { name: string; nameKo: string; lat: number; lng: number };
   onCopy: () => void;
   copied: boolean;
-  t: (key: string, options?: any) => any;
+  t: TFunction;
 }
 
 export default function HomeModals({

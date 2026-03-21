@@ -2,16 +2,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 import styles from '../explore.module.css';
-import { useTranslation } from 'react-i18next';
 
 interface HotelSearchProps {
     onSelect: (location: { lat: number, lng: number, name: string, placeId: string }) => void;
 }
 
 export default function HotelSearch({ onSelect }: HotelSearchProps) {
-    const { t } = useTranslation('common');
     const [input, setInput] = useState('');
-    const [suggestions, setSuggestions] = useState<any[]>([]);
+    const [suggestions, setSuggestions] = useState<Array<{ placePrediction: { placeId: string; text: { text: string } } }>>([]);
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +43,7 @@ export default function HotelSearch({ onSelect }: HotelSearchProps) {
         }
     };
 
-    const handleSelect = async (suggestion: any) => {
+    const handleSelect = async (suggestion: { placePrediction: { placeId: string; text: { text: string } } }) => {
         const id = suggestion.placePrediction.placeId;
         const name = suggestion.placePrediction.text.text;
         setInput(name);

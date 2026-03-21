@@ -30,7 +30,7 @@ import { useTranslation } from 'react-i18next';
 
 type ActiveFilters = Record<string, string[]>;
 type BeautyCategoryId = 'hair' | 'nail' | 'esthetic' | 'waxing' | 'makeup' | 'lash';
-type BeautyRegionId = 'all' | 'jongno' | 'gangnam' | 'hongdae' | 'seongsu';
+type BeautyRegionId = 'all' | 'jongno' | 'gangnam' | 'hongdae' | 'seongsu' | 'jamsil' | 'konkuk' | 'pangyo';
 
 type BeautyStore = {
   id: string;
@@ -144,7 +144,7 @@ type CommunicationMessagePayload = {
   intent: CommunicationIntentId;
 };
 
-const CUSTOMER_FORM_FIELDS: (t: any) => CustomerFieldConfig[] = (t) => [
+const CUSTOMER_FORM_FIELDS: (t: (key: string) => string) => CustomerFieldConfig[] = (t) => [
   {
     key: 'name',
     label: t('form_name'),
@@ -159,7 +159,7 @@ const CUSTOMER_FORM_FIELDS: (t: any) => CustomerFieldConfig[] = (t) => [
   },
 ];
 
-const AGREEMENT_FIELDS: (t: any) => AgreementFieldConfig[] = (t) => [
+const AGREEMENT_FIELDS: (t: (key: string) => string) => AgreementFieldConfig[] = (t) => [
   {
     key: 'bookingConfirmed',
     label: t('agreement_confirm'),
@@ -183,14 +183,14 @@ const INITIAL_AGREEMENT_STATE: AgreementState = {
   privacyConsent: false,
 };
 
-const COMMUNICATION_LANGUAGES: (t: any) => CommunicationLanguageConfig[] = (t) => [
+const COMMUNICATION_LANGUAGES: (t: (key: string) => string) => CommunicationLanguageConfig[] = (t) => [
   { id: 'ko', label: t('beauty_bookings.lang_ko'), badge: 'KO' },
   { id: 'en', label: t('beauty_bookings.lang_en'), badge: 'EN' },
   { id: 'ja', label: t('beauty_bookings.lang_ja'), badge: 'JA' },
   { id: 'zh-CN', label: t('beauty_bookings.lang_zh_cn'), badge: 'ZH' },
 ];
 
-const COMMUNICATION_INTENTS: (t: any) => CommunicationIntentConfig[] = (t) => [
+const COMMUNICATION_INTENTS: (t: (key: string, options?: any) => string) => CommunicationIntentConfig[] = (t) => [
   {
     id: 'booking_confirm',
     label: t('beauty_bookings.intent_booking_confirm'),
@@ -212,20 +212,6 @@ const COMMUNICATION_INTENTS: (t: any) => CommunicationIntentConfig[] = (t) => [
     description: t('beauty_bookings.intent_style_consultation_desc') || '방문 전 스타일 상담 의도를 간단히 전달할 때 적합해요.',
   },
 ];
-
-const COMMUNICATION_LANGUAGE_LABELS: Record<CommunicationLanguageId, string> = {
-  ko: '한국어',
-  en: 'English',
-  ja: '日本語',
-  'zh-CN': '中文',
-};
-
-const COMMUNICATION_INTENT_LABELS: Record<CommunicationIntentId, string> = {
-  booking_confirm: '예약 확인',
-  service_request: '시술 요청 전달',
-  allergy_notice: '알레르기/민감 사항 전달',
-  style_consultation: '스타일 상담 도움',
-};
 
 function createDesigner(
   id: string,
@@ -506,7 +492,7 @@ const BEAUTY_CATEGORY_ORDER: BeautyCategoryId[] = [
   'lash',
 ];
 
-const BEAUTY_CATEGORY_META: (t: any) => Record<
+const BEAUTY_CATEGORY_META: (t: (key: string) => string) => Record<
   BeautyCategoryId,
   { label: string; english: string; badge: string; description: string }
 > = (t) => ({
@@ -554,6 +540,9 @@ const BEAUTY_REGIONS: Array<{ id: BeautyRegionId; labelKey: string }> = [
   { id: 'gangnam', labelKey: 'region_gangnam' },
   { id: 'hongdae', labelKey: 'region_hongdae' },
   { id: 'seongsu', labelKey: 'region_seongsu' },
+  { id: 'jamsil', labelKey: 'region_jamsil' },
+  { id: 'konkuk', labelKey: 'region_konkuk' },
+  { id: 'pangyo', labelKey: 'region_pangyo' },
 ];
 
 const BEAUTY_STORE_ITEMS: BeautyStore[] = [
@@ -780,11 +769,8 @@ export default function MyExplorePage() {
   const { 
     addItineraryItem, 
     selectedCategory: globalCategory, 
-    setSelectedCategory: setGlobalCategory,
     searchQuery: globalSearchQuery,
-    setSearchQuery: setGlobalSearchQuery,
     destinationInfo,
-    setDestinationInfo
   } = useTrip();
   const categoryParam = searchParams.get('category');
   const beautyCategoryParam = searchParams.get('beautyCategory');
@@ -814,7 +800,7 @@ export default function MyExplorePage() {
   const [currentCity, setCurrentCity] = useState<CityId>('seoul');
 
   const [currentCategory, setCurrentCategory] = useState<string>('all');
-  const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(destinationInfo);
+  const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(null);
   const [radius, setRadius] = useState<number>(1000);
   const [nearbyItems, setNearbyItems] = useState<ServiceItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -994,7 +980,7 @@ export default function MyExplorePage() {
     };
 
     void fetchNearby();
-  }, [currentCategory, hotelLocation, isBeautyExplore, radius]);
+  }, [currentCategory, currentCity, hotelLocation, isBeautyExplore, radius]);
 
   useEffect(() => {
     return () => {
