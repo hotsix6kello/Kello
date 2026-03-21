@@ -22,6 +22,7 @@
     "welcome": "مرحباً أيها المسافر",
     "greeting": "صباح الخير",
     "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
     "today": "اليوم",
     "move": "تنقل",
     "book": "حجز",
@@ -37,7 +38,13 @@
     "payment_completed": "اكتملت الدفعة",
     "weather_clear": "صافٍ",
     "back": "رجوع",
-    "community_nav": "Community",
+    "community_nav": "المجتمع",
+    "itinerary_nav": "مسار الرحلة",
+    "my_nav": "حسابي",
+    "home_nav": "الرئيسية",
+    "explore_nav": "استكشاف",
+    "planner_nav": "المخطط",
+    "help_nav": "مركز المساعدة",
     "morning": "صباح الخير",
     "afternoon": "مساء الخير",
     "evening": "مساء الخير"
@@ -84,7 +91,87 @@
     },
     "badge": "اختبر جمال كوريا"
   },
+  "planner_page": {
+    "status": {
+      "draft": "مسودة",
+      "booked": "تم الحجز",
+      "completed": "تمت الزيارة"
+    },
+    "slots": {
+      "am": "صباحاً",
+      "pm": "بعد الظهر",
+      "night": "مساءً"
+    },
+    "add_to": "أضف إلى {{slot}}",
+    "day": "يوم {{n}}",
+    "add_from_discover": "أضف من استكشاف",
+    "auto_build": "بناء تلقائي",
+    "book_all": "حجز جميع المختارات",
+    "booking_modal": {
+      "title": "حجز عناصر الرحلة",
+      "date": "التاريخ",
+      "people": "الأشخاص",
+      "people_count": "{{n}}",
+      "notes": "ملاحظات",
+      "submit": "إرسال طلب الحجز",
+      "submitting": "جاري الإرسال...",
+      "success_title": "تم استلام الطلب",
+      "success_desc": "أرسلنا خطتك للمحلات. يمكنك المتابعة في حجوزاتي.",
+      "view_status": "تحقق من حالة الحجز"
+    }
+  },
   "my_page": {
+    "saved": {
+      "eyebrow": "محفوظاتي",
+      "title": "العناصر المحفوظة",
+      "subtitle": "عرض وإدارة الأماكن والخطط المحفوظة.",
+      "header_cta": "استكشف الأماكن",
+      "summary": {
+        "places": "أماكن",
+        "plans": "خطط",
+        "recent": "حديث"
+      },
+      "summary_hint": "يتم حفظ العناصر محلياً على هذا الجهاز.",
+      "tabs": {
+        "places": "أماكن",
+        "plans": "خطط",
+        "recent": "حديث"
+      },
+      "places": {
+        "title": "الأماكن المحفوظة",
+        "desc": "تحقق من الأماكن التي قمت بحفظها أثناء الاستكشاف.",
+        "fallback_title": "مكان {{id}}",
+        "source_plan": "من خطة الرحلة",
+        "source_saved": "العناصر المحفوظة",
+        "source_fallback": "بيانات تجريبية",
+        "source_id_only": "المعرف فقط",
+        "added": "تمت الإضافة إلى المسار!"
+      },
+      "plans": {
+        "title": "الخطط المحفوظة",
+        "desc": "عرض مسارات رحلاتك الحالية والسابقة.",
+        "synced": "متزامن مع السحابة",
+        "empty": {
+          "title": "لا توجد خطط حتى الآن",
+          "desc": "ابدأ ببناء رحلتك في المخطط."
+        }
+      },
+      "recent": {
+        "title": "شوهد مؤخراً",
+        "desc": "الأماكن والخطط التي شاهدتها مؤخراً.",
+        "type": {
+          "place": "مكان",
+          "plan": "خطة",
+          "community": "مشاركة"
+        },
+        "empty": {
+          "title": "لا يوجد سجل مؤخراً",
+          "desc": "العناصر التي تشاهدها ستظهر هنا.",
+          "fallback": "السجل غير متاح على هذا الجهاز.",
+          "cta": "ابدأ التصفح"
+        }
+      }
+    },
     "bookings": {
       "title": "حجوزاتي",
       "date_time": "التاريخ / الوقت",
@@ -98,47 +185,57 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
+    "title": "مجتمع kello",
+    "subtitle": "تواصل مع السكان المحليين والمسافرين",
+    "hero": {
+      "title": "مجتمع مراجعات الجمال أولاً",
+      "subtitle": "مراجعات الصالونات، ثم الطعام والسفر والمزيد.",
+      "search_placeholder": "ابحث عن أسماء الصالونات أو المراجعات..."
     },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+    "quick_entry": {
+      "beauty": {
+        "label": "مراجعة صالون",
+        "sub": "الحجز · الاستجابة · الرضا"
       },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      "food": {
+        "label": "مراجعة مطعم",
+        "sub": "مسار رحلة الجمال"
       },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      "travel": {
+        "label": "مراجعة سفر",
+        "sub": "خطوات التنقل"
       },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      "write": {
+        "label": "كتابة مراجعة",
+        "sub": "مشاركة تجربتك"
       }
     },
-    "filter_review": "Reviews",
+    "categories": {
+      "all": "الكل",
+      "beauty_review": "مراجعة صالون",
+      "food_review": "مراجعة مطعم",
+      "travel_review": "مراجعة سفر",
+      "meetup": "فعاليات",
+      "help": "أسئلة"
+    },
+    "sub_filters": {
+      "all": "الكل",
+      "saved": "محفوظ",
+      "reacted": "متفاعل معه",
+      "mine": "مشاركاتي",
+      "recruiting": "توظيف",
+      "active_reactions": "رائج",
+      "open_meetup": "قابل للانضمام",
+      "weekend": "عطلة نهاية الأسبوع",
+      "fresh": "جديد"
+    },
+    "nav_summary": {
+      "all": "عرض جميع مراجعات المجتمع."
+    },
+    "sort": {
+      "latest": "الأحدث",
+      "reactions": "الأكثر تفاعلاً"
+    },
     "detail": "تفاصيل المشاركة"
   },
   "explore_items": {
@@ -351,6 +448,22 @@
       "title": "مترجم فوري",
       "description": "تواصل بسهولة مع الموظفين",
       "cta": "فتح المترجم"
+    }
+  },
+  "today_page": {
+    "title": "جدول اليوم",
+    "active_now": "جارٍ الآن",
+    "navigate": "الاتجاهات",
+    "booking_ref": "رقم الحجز: {{ref}}",
+    "next_up": "التالي",
+    "minutes_left": "يبدأ خلال {{mins}} دقيقة",
+    "depart_early": "الانطلاق الآن",
+    "timeline": "الجدول الزمني",
+    "departure_warning": "⚠️ يبدأ {{title}} خلال {{mins}} دقيقة — انطلق الآن!",
+    "empty": {
+      "title": "لا يوجد جدول لليوم",
+      "desc": "استكشف الأماكن لإضافتها إلى جدولك!",
+      "cta": "استكشاف الأماكن"
     }
   }
 }

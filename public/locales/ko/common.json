@@ -312,6 +312,16 @@
     }
   },
   "home": {
+    "places": {
+      "lotte_main": { "title": "롯데백화점 본점", "area": "서울특별시 중구 남대문로 81" },
+      "lotte_tower": { "title": "롯데월드타워", "area": "서울특별시 송파구 올림픽로 300" },
+      "lotte_world": { "title": "롯데월드 어드벤처", "area": "서울특별시 송파구 올림픽로 240" },
+      "lotte_hotel": { "title": "롯데호텔 서울", "area": "서울특별시 중구 을지로 30" },
+      "namsan": { "title": "N서울타워", "area": "서울특별시 용산구 남산공원길 105" },
+      "namdaemun": { "title": "남대문시장", "area": "서울특별시 중구 남대문시장4길 21" },
+      "gyeongbokgung": { "title": "경복궁", "area": "서울특별시 종로구 사직로 161" },
+      "myeongdong": { "title": "명동예술극장", "area": "서울특별시 중구 명동길 35" }
+    },
     "badge": "한국의 아름다움을 담다",
     "recommended_plans": "Kello의 추천 구성",
     "plans": {
@@ -456,6 +466,59 @@
     }
   },
   "my_page": {
+    "saved": {
+      "eyebrow": "MY SAVED",
+      "title": "저장된 항목",
+      "subtitle": "보관한 장소와 여행 계획을 한눈에 확인하세요.",
+      "dashboard_title": "저장 및 최근 항목",
+      "dashboard_desc": "저장한 장소, 플래너 초안, 최근 본 항목을 한 곳에서 다시 확인하세요.",
+      "header_cta": "장소 둘러보기",
+      "summary": {
+        "places": "장소",
+        "plans": "구성",
+        "recent": "전체"
+      },
+      "summary_hint": "이 기기의 로컬 저장소에 보관된 항목들입니다.",
+      "tabs": {
+        "places": "장소",
+        "plans": "구성",
+        "recent": "최근"
+      },
+      "places": {
+        "title": "저장한 장소",
+        "desc": "탐색 중에 북마크한 장소들을 확인하세요.",
+        "fallback_title": "장소 {{id}}",
+        "source_plan": "일정표에서",
+        "source_saved": "저장된 항목",
+        "source_fallback": "샘플 데이터",
+        "source_id_only": "ID 전용",
+        "added": "선택한 장소가 일정에 추가되었습니다!"
+      },
+      "plans": {
+        "title": "저장한 코스",
+        "desc": "그동한 구성한 여행 일정을 확인하세요.",
+        "synced": "클라우드 동기화 완료",
+        "empty": {
+          "title": "저장된 코스가 없습니다",
+          "desc": "플래너에서 나만의 첫 여행 코스를 짜보세요."
+        }
+      },
+      "recent": {
+        "title": "최근 본 항목",
+        "desc": "최근에 확인한 장소와 여행 계획입니다.",
+        "type": {
+          "place": "장소",
+          "plan": "코스",
+          "community": "게시물"
+        },
+        "empty": {
+          "title": "최근 기록이 없습니다",
+          "desc": "상세 내용을 확인하면 여기에 기록이 남습니다.",
+          "fallback": "이 기기에서는 기록 기능을 사용할 수 없습니다.",
+          "cta": "탐색 시작하기"
+        }
+      }
+    },
     "profile": {
       "trust_score": "💎 신뢰 점수",
       "trust_level_excellent": "최상",
@@ -774,66 +837,6 @@
         "desc": "다른 카테고리를 보거나 즉시 도움이 필요하면 지원으로 이동하세요."
       }
     },
-    "saved": {
-      "title": "내 저장함",
-      "view_all": "허브 열기",
-      "eyebrow": "저장 허브",
-      "header_cta": "더 둘러보기",
-      "dashboard_title": "저장 및 최근 항목",
-      "dashboard_desc": "저장한 장소, 플래너 초안, 최근 본 항목을 한 곳에서 다시 확인하세요.",
-      "summary": {
-        "places": "장소",
-        "plans": "플랜",
-        "recent": "최근"
-      },
-      "tabs": {
-        "places": "장소",
-        "plans": "플랜",
-        "recent": "최근"
-      },
-      "places": {
-        "source_plan": "현재 플래너와 연결됨",
-        "source_saved": "Explore에서 저장함",
-        "source_fallback": "Explore에서 저장함",
-        "source_id_only": "저장 항목 ID",
-        "added": "플래너에 추가되었습니다. 시간은 Planner에서 조정할 수 있습니다.",
-        "title": "저장한 장소",
-        "desc": "Explore에서 북마크한 장소를 다시 엽니다. 저장된 ID에 메타데이터가 부족한 경우에는 세부 정보를 추측하지 않고 최소한의 대체 카드만 보여 줍니다.",
-        "empty": {
-          "title": "저장한 장소가 아직 없습니다.",
-          "desc": "Explore에서 장소를 저장하면 나중에 빠르게 계획할 수 있도록 여기에 모입니다.",
-          "cta": "장소 둘러보기"
-        },
-        "fallback_title": "저장한 장소 {{id}}"
-      },
-      "plans": {
-        "synced": "현재 플래너 초안 기준",
-        "title": "저장한 플랜",
-        "desc": "이 탭은 현재 플래너 초안을 그대로 반영합니다. 별도 저장 템플릿이나 서버 플랜 레코드는 만들지 않습니다.",
-        "empty": {
-          "title": "저장한 플랜이 아직 없습니다.",
-          "desc": "Planner에서 일정을 만들면 현재 초안이 여기에 표시됩니다."
-        },
-        "current": "현재 여행 플랜"
-      },
-      "subtitle": "나중에 다시 보고 싶은 장소, 플래너 초안, 최근 본 항목을 모아 둡니다.",
-      "summary_hint": "장소는 저장한 explore item id에서, 플랜은 현재 planner 초안에서, 최근 항목은 이 기기에 저장됩니다.",
-      "recent": {
-        "title": "최근",
-        "desc": "최근에 본 장소, 플랜, 커뮤니티 게시글이 빠르게 다시 방문할 수 있도록 이 기기에 저장됩니다.",
-        "empty": {
-          "title": "최근 본 항목이 아직 없습니다.",
-          "desc": "장소, planner, 커뮤니티 상세를 열면 최근 항목이 여기에 표시됩니다.",
-          "fallback": "local storage를 사용할 수 있으면 최근 항목이 이 기기에 저장됩니다.",
-          "cta": "Explore 둘러보기"
-        },
-        "type": {
-          "place": "장소",
-          "plan": "플랜",
-          "community": "커뮤니티"
-        }
-      }
-    },
     "community_hub": {
       "eyebrow": "내 활동 허브",
       "title": "내 커뮤니티",
@@ -951,36 +954,34 @@
   },
   "planner_page": {
     "title": "일정표",
-    "day": "{{n}}일차",
-    "add_from_discover": "🔍 장소 추가",
-    "auto_build": "✨ 자동 완성",
+    "day": "Day {{n}}",
+    "add_from_discover": "추천 장소 둘러보기",
+    "auto_build": "자동 코스 추천",
     "add_to": "{{slot}}에 추가",
-    "book_all": "🎫 예약 요청하기",
+    "book_all": "담은 항목 일괄 예약하기",
     "booking_modal": {
-      "title": "예약 요청",
-      "date": "날짜",
+      "title": "담은 항목 한 번에 예약하기",
+      "date": "방문 날짜",
       "people": "인원",
-      "people_count": "{{n}}명",
-      "notes": "요청 사항 (선택)",
-      "submit": "요약 요청 제출",
-      "submitting": "제출 중...",
-      "success_title": "요청이 접수되었습니다!",
-      "success_desc": "24시간 내에 담당자가 연락드릴 예정입니다.",
-      "unavailable_title": "예약 불가",
-      "unavailable_desc": "다음 장소들을 추천드려요:",
-      "view_status": "상태 확인"
+      "people_count": "{{n}}",
+      "notes": "요청 사항",
+      "submit": "예약 요청 전송",
+      "submitting": "요청 중...",
+      "success_title": "일괄 예약 요청 완료",
+      "success_desc": "매장에 회원님의 일정을 전달했습니다. 내 예약에서 상태를 확인하세요.",
+      "view_status": "내 예약 확인하기"
     },
     "status": {
-      "draft": "가안",
+      "draft": "계획 중",
       "submitted": "요청됨",
       "confirmed": "확정됨",
       "unavailable": "불가",
-      "completed": "완료"
+      "completed": "방문 완료"
     },
     "slots": {
       "am": "오전",
       "pm": "오후",
-      "night": "밤"
+      "night": "저녁"
     },
     "focus": {
       "title": "✨✨ ✨",

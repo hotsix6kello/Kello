@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Props 인터페이스
 interface IntegratedBookingMenuProps {
@@ -12,12 +13,13 @@ interface IntegratedBookingMenuProps {
 }
 
 // 날짜 포맷 유틸
-function formatDateKR(date: Date): string {
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
-  const weekday = weekdays[date.getDay()];
-  return `${month}월 ${day}일 (${weekday})`;
+function formatDateLocalized(date: Date, lang: string, t: any): string {
+  const formatted = new Intl.DateTimeFormat(lang, { 
+    month: 'short', 
+    day: 'numeric', 
+    weekday: 'short' 
+  }).format(date);
+  return t('selected_confirmation', { date: formatted });
 }
 
 function toDateKey(date: Date): string {
@@ -32,6 +34,8 @@ function isSameDay(a: Date, b: Date): boolean {
 }
 
 export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, initialDate, initialTime }: IntegratedBookingMenuProps) {
+  const { t, i18n } = useTranslation('beauty_explore');
+  const lang = i18n.language || 'ko';
   const today = useMemo(() => new Date(), []);
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -89,7 +93,9 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
     return days;
   }, [viewYear, viewMonth]);
 
-  const monthLabel = `${viewYear}년 ${viewMonth + 1}월`;
+  const monthLabel = useMemo(() => {
+    return new Intl.DateTimeFormat(lang, { year: 'numeric', month: 'long' }).format(new Date(viewYear, viewMonth, 1));
+  }, [viewYear, viewMonth, lang]);
 
   const goToPrevMonth = () => {
     if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); }
@@ -129,14 +135,14 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
       >
         <div className="flex-1 overflow-y-auto px-5 pt-5 pb-4">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-extrabold text-[#1f2024] tracking-tight">날짜 및 시간 설정</h2>
+            <h2 className="text-xl font-extrabold text-[#1f2024] tracking-tight">{t('booking_panel_title')}</h2>
             <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500">
                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
             </button>
           </div>
 
           <div className="mb-6">
-            <h3 className="text-[15px] font-bold text-[#1f2024] mb-3">날짜 선택</h3>
+            <h3 className="text-[15px] font-bold text-[#1f2024] mb-3">{t('select_date')}</h3>
             <div className="flex items-center justify-between mb-3 px-1">
               <button onClick={goToPrevMonth} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
                 <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7l6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -147,8 +153,16 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
               </button>
             </div>
             <div className="grid grid-cols-7 gap-0 mb-1">
-              {['일', '월', '화', '수', '목', '금', '토'].map((d, i) => (
-                <div key={d} className={`text-center text-[12px] font-semibold py-1 ${i === 0 ? 'text-red-400' : i === 6 ? 'text-blue-400' : 'text-gray-400'}`}>{d}</div>
+              {[
+                t('weekdays.sun'), 
+                t('weekdays.mon'), 
+                t('weekdays.tue'), 
+                t('weekdays.wed'), 
+                t('weekdays.thu'), 
+                t('weekdays.fri'), 
+                t('weekdays.sat')
+              ].map((d, i) => (
+                <div key={i} className={`text-center text-[12px] font-semibold py-1 ${i === 0 ? 'text-red-400' : i === 6 ? 'text-blue-400' : 'text-gray-400'}`}>{d}</div>
               ))}
             </div>
             <div className="grid grid-cols-7 gap-0">
@@ -174,12 +188,12 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
               })}
             </div>
             {selectedDate && (
-              <div className="mt-3 text-center text-[13px] font-semibold text-[#bb8a78]">✓ {formatDateKR(selectedDate)} 선택됨</div>
+              <div className="mt-3 text-center text-[13px] font-semibold text-[#bb8a78]">{formatDateLocalized(selectedDate, lang, t)}</div>
             )}
           </div>
 
           <div className="mb-2">
-            <h3 className="text-[15px] font-bold text-[#1f2024] mb-3">시간 선택</h3>
+            <h3 className="text-[15px] font-bold text-[#1f2024] mb-3">{t('select_time')}</h3>
             <div className="grid grid-cols-4 gap-2">
               {timeSlots.map((time) => {
                 const isSelected = selectedTime === time;
@@ -210,7 +224,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
               selectedDate && selectedTime ? 'bg-[#bb8a78] text-white' : 'bg-gray-200 text-gray-400'
             }`}
           >
-            예약 완료
+            {t('btn_complete')}
           </button>
         </div>
       </div>

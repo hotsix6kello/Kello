@@ -4,6 +4,97 @@
     "faq": "FAQ",
     "recent": "Recent Activities"
   },
+  "common": {
+    "welcome": "Welcome, Traveler.",
+    "greeting": "Good morning",
+    "login": "Login",
+    "signup": "Sign Up",
+    "today": "Today",
+    "move": "Move",
+    "book": "Book",
+    "chat": "Chat",
+    "my": "MY",
+    "back": "Back",
+    "select_language": "Select Language",
+    "home_nav": "Home",
+    "explore_nav": "Explore",
+    "planner_nav": "Planner",
+    "itinerary_nav": "Itinerary",
+    "today_nav": "Today",
+    "my_nav": "MY",
+    "community_nav": "Community",
+    "help_nav": "Help",
+    "loading": "Loading...",
+    "states": {
+      "details_unavailable": "Details Unavailable",
+      "saved_locally": "Saved Locally",
+      "current_trip_plan": "Current Trip Plan",
+      "recently_viewed": "Recently Viewed",
+      "planner_draft": "Planner Draft"
+    },
+    "categories": {
+      "all": "All",
+      "food": "Dining",
+      "beauty": "Beauty",
+      "event": "Event",
+      "festival": "Festival",
+      "attraction": "Attraction",
+      "transport": "Transport",
+      "place": "Place"
+    },
+    "actions": {
+      "view_details": "View Details",
+      "explore_places": "Explore Places",
+      "add_to_plan": "Add to Plan",
+      "explore": "Explore",
+      "create_plan": "Create Plan",
+      "view_plan": "View Plan",
+      "continue_editing": "Continue Editing",
+      "use_this_plan": "Use This Plan",
+      "view_again": "View Again"
+    }
+  },
+  "home": {
+    "places": {
+      "lotte_main": { "title": "Lotte Dept. Store", "area": "81 Namdaemun-ro, Jung-gu, Seoul" },
+      "lotte_tower": { "title": "Lotte World Tower", "area": "300 Olympic-ro, Songpa-gu, Seoul" },
+      "lotte_world": { "title": "Lotte World Adventure", "area": "240 Olympic-ro, Songpa-gu, Seoul" },
+      "lotte_hotel": { "title": "Lotte Hotel Seoul", "area": "30 Eulji-ro, Jung-gu, Seoul" },
+      "namsan": { "title": "N Seoul Tower", "area": "105 Namsangongwon-gil, Yongsan-gu, Seoul" },
+      "namdaemun": { "title": "Namdaemun Market", "area": "21 Namdaemunsijang 4-gil, Jung-gu, Seoul" },
+      "gyeongbokgung": { "title": "Gyeongbokgung Palace", "area": "161 Sajik-ro, Jongno-gu, Seoul" },
+      "myeongdong": { "title": "Myeongdong Theater", "area": "35 Myeongdong-gil, Jung-gu, Seoul" }
+    }
+  },
+  "planner_page": {
+    "status": {
+      "draft": "Draft",
+      "booked": "Booked",
+      "completed": "Completed"
+    },
+    "slots": {
+      "am": "Morning",
+      "pm": "Afternoon",
+      "night": "Night"
+    },
+    "add_to": "Add to {{slot}}",
+    "day": "Day {{n}}",
+    "add_from_discover": "Add from Discover",
+    "auto_build": "Auto-build",
+    "book_all": "Book All Selected Items",
+    "booking_modal": {
+      "title": "Book Your Trip Items",
+      "date": "Date",
+      "people": "People",
+      "people_count": "{{n}}",
+      "notes": "Notes",
+      "submit": "Submit Booking Request",
+      "submitting": "Submitting...",
+      "success_title": "Booking Request Received",
+      "success_desc": "We have sent your plan to the relevant shops. Check status in My Bookings.",
+      "view_status": "Check Booking Status"
+    }
+  },
   "home_beauty": {
     "hero": {
       "eyebrow": "Beauty Booking Concierge",
@@ -207,6 +298,57 @@
     }
   },
   "my_page": {
+    "saved": {
+      "eyebrow": "MY SAVED",
+      "title": "Saved Items",
+      "subtitle": "View and manage your saved places and trip plans.",
+      "header_cta": "Explore Places",
+      "summary": {
+        "places": "Places",
+        "plans": "Plans",
+        "recent": "Recent"
+      },
+      "summary_hint": "Items are saved locally on this device.",
+      "tabs": {
+        "places": "Places",
+        "plans": "Plans",
+        "recent": "Recent"
+      },
+      "places": {
+        "title": "Saved Places",
+        "desc": "Check the places you've bookmarked while exploring.",
+        "fallback_title": "PLACE {{id}}",
+        "source_plan": "From Trip Plan",
+        "source_saved": "Saved Items",
+        "source_fallback": "Mock Data",
+        "source_id_only": "ID Only",
+        "added": "Added to your itinerary!"
+      },
+      "plans": {
+        "title": "Saved Plans",
+        "desc": "View your current and previous trip itineraries.",
+        "synced": "Synced with cloud",
+        "empty": {
+          "title": "No plans yet",
+          "desc": "Start building your journey in the Planner."
+        }
+      },
+      "recent": {
+        "title": "Recently Viewed",
+        "desc": "Places and plans you've checked out lately.",
+        "type": {
+          "place": "Place",
+          "plan": "Plan",
+          "community": "Post"
+        },
+        "empty": {
+          "title": "No recent history",
+          "desc": "Items you view will appear here.",
+          "fallback": "History is not available on this device.",
+          "cta": "Start Browsing"
+        }
+      }
+    },
     "profile": {
       "trust_score": "💎 Trust Score",
       "trust_level_excellent": "Excellent",
@@ -313,6 +455,8 @@
     "event_default": "Notification"
   },
   "community_page": {
+    "title": "kello Community",
+    "subtitle": "Connect with locals & travelers",
     "edit_btn": "Edit Post",
     "post_btn": "Post to Community",
     "form_category": "Category",
@@ -335,6 +479,24 @@
       "secondary_title": "kello Community 👋",
       "secondary_body": "Browse reviews and plan meetups."
     },
+    "quick_entry": {
+      "beauty": {
+        "label": "Salon Review",
+        "sub": "Booking · Service · Satisfaction"
+      },
+      "food": {
+        "label": "Dining Review",
+        "sub": "Post-Beauty Course"
+      },
+      "travel": {
+        "label": "Sightseeing Review",
+        "sub": "Around the Salon"
+      },
+      "write": {
+        "label": "Write a Review",
+        "sub": "Share Your Experience"
+      }
+    },
     "categories": {
       "all": "All",
       "beauty_review": "Salon Review",
@@ -353,6 +515,13 @@
       "open_meetup": "🤝 Joinable",
       "weekend": "📅 Weekend",
       "fresh": "✨ Fresh"
+    },
+    "nav_summary": {
+      "all": "Showing all community stories."
+    },
+    "sort": {
+      "latest": "Latest",
+      "reactions": "Top Reacted"
     },
     "states": {
       "fetch_failed_title": "Failed to load posts",
@@ -554,5 +723,21 @@
     "translated_status": "Translated",
     "source_only_status": "Original Text",
     "voice_too_short_error": "Please speak a bit longer. Recognition is difficult if the voice is too short."
+  },
+  "today_page": {
+    "title": "Today's Itinerary",
+    "active_now": "Active Now",
+    "navigate": "Navigate",
+    "booking_ref": "Booking Ref: {{ref}}",
+    "next_up": "Next Up",
+    "minutes_left": "Starts in {{mins}}m",
+    "depart_early": "Depart Now",
+    "timeline": "Timeline",
+    "departure_warning": "⚠️ {{title}} starts in {{mins}}m — Depart now!",
+    "empty": {
+      "title": "No plans for today",
+      "desc": "Explore places to add to your schedule!",
+      "cta": "Explore Places"
+    }
   }
 }
