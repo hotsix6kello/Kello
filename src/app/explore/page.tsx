@@ -16,13 +16,8 @@ import ExploreHeader from './components/ExploreHeader';
 import FilterSheet from './components/FilterSheet';
 import AddToPlanModal from './components/AddToPlanModal';
 import ExploreMap from './components/ExploreMap';
-import BeautyStoreViewportGrid from './components/BeautyStoreViewportGrid';
-import BeautyExploreTopBar from './components/BeautyExploreTopBar';
 import BeautyRegionTabs from './components/BeautyRegionTabs';
-import CalendarDatePicker from '../components/common/CalendarDatePicker';
 import IntegratedBookingMenu from '../components/IntegratedBookingMenu';
-import { parseISO, format } from 'date-fns';
-import { ko } from 'date-fns/locale';
 
 import { useTrip } from '@/lib/contexts/TripContext';
 import { supabase } from '@/lib/supabaseClient';
@@ -240,13 +235,7 @@ function createServiceOption(id: string, name: string, description: string, pric
   };
 }
 
-function truncatePreview(text: string, maxLength = 140): string {
-  if (text.length <= maxLength) {
-    return text;
-  }
 
-  return `${text.slice(0, maxLength).trim()}…`;
-}
 
 function joinItemsForLanguage(items: string[], language: CommunicationLanguageId): string {
   if (items.length === 0) {
