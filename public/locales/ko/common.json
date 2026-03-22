@@ -264,7 +264,8 @@
     "error_change": "변경 요청을 보내지 못했어요. 잠시 후 다시 시도해 주세요.",
     "error_alt": "처리에 실패했어요. 잠시 후 다시 시도해 주세요.",
     "open_interpreter": "현장 소통 통역기 열기",
-    "interpreter_visit_context": "{{storeName}} 방문 중 통역기를 사용하고 있습니다."
+    "interpreter_visit_context": "{{storeName}} 방문 중 통역기를 사용하고 있습니다.",
+    "interpreter_visit_service_context": "{{storeName}}에서 {{serviceName}} 상담 중입니다."
   },
   "notifications": {
     "page_title": "알림 센터",

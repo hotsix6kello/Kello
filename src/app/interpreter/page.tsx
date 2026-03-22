@@ -105,6 +105,7 @@ export default function InterpreterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName');
+  const serviceName = searchParams.get('serviceName');
   const { t, i18n } = useTranslation('common');
   const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>(() =>
     resolveCustomerLocale(i18n.resolvedLanguage ?? i18n.language),
@@ -632,7 +633,9 @@ export default function InterpreterPage() {
         <div className={styles.visitorContext}>
           <span style={{ fontSize: '1.2rem' }}>📍</span>
           <p style={{ margin: 0 }}>
-            {t('beauty_bookings.interpreter_visit_context', { storeName })}
+            {storeName && serviceName
+              ? t('beauty_bookings.interpreter_visit_service_context', { storeName, serviceName })
+              : t('beauty_bookings.interpreter_visit_context', { storeName })}
           </p>
         </div>
       )}
