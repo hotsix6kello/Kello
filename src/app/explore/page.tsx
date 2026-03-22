@@ -1751,12 +1751,12 @@ export default function MyExplorePage() {
                   >
                     <div className={styles.beautyStoreTopRow}>
                       <span className={styles.beautyStoreCategoryPill}>{categoryMeta.label}</span>
-                      <span className={styles.beautyStoreRegionPill}>{regionLabel}</span>
+                      <span className={styles.beautyStoreRegionPill}>📍 {regionLabel}</span>
                     </div>
                     <h3 className={styles.beautyStoreTitle}>{store.name}</h3>
                     <div className={styles.beautyStoreMeta}>
-                      <span className={styles.beautyStoreRating}>{t('beauty_explore.label_rating')} {store.rating.toFixed(1)}</span>
-                      <span>{t('beauty_explore.label_review')} {store.reviewCount}</span>
+                      <span className={styles.beautyStoreRating}>★ {store.rating.toFixed(1)}</span>
+                      <span className={styles.beautyStoreReviewCount}>({store.reviewCount})</span>
                     </div>
                     <div className={styles.beautyStorePrice}>{store.priceLabel}</div>
                     <p className={styles.beautyStoreDescription}>{store.shortDescription}</p>
