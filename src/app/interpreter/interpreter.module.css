@@ -229,6 +229,21 @@
     margin-right: 4px;
 }
 
+.visitorContext {
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1.5px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #166534;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(22, 101, 52, 0.05);
+}
+
 .contextSection {
     margin-bottom: 24px;
 }
