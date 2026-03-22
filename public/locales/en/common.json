@@ -252,7 +252,9 @@
     "error_cancel_reason": "Select or enter a reason.",
     "error_change_reason": "Enter what you want to change.",
     "error_change": "Change request failed.",
-    "error_alt": "Processing failed."
+    "error_alt": "Processing failed.",
+    "open_interpreter": "Open Interpreter",
+    "interpreter_visit_context": "Using interpreter for your visit to {{storeName}}."
   },
   "notifications": {
     "page_title": "Notification Center",
