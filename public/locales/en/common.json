@@ -49,16 +49,6 @@
         "summary": "Connect directly to the menu for everything from natural extensions to volume styling."
       }
     },
-    "transport": {
-      "stations": {
-        "gangnam": "Gangnam",
-        "hongdae": "Hongdae",
-        "seongsu": "Seongsu",
-        "jamsil": "Jamsil",
-        "konkuk": "Konkuk Univ.",
-        "pangyo": "Pangyo"
-      }
-    },
     "selection": {
       "eyebrow": "Selected Category",
       "tags": {
@@ -149,6 +139,7 @@
     "status_desc_canceled": "The booking was cancelled.",
     "status_desc_failed": "Confirmation is needed for this request.",
     "status_desc_change_requested": "A change of schedule or service is being requested.",
+    "status_guide_confirmed": "The booking is confirmed. Please double-check your date and time before visiting.",
     "category_hair": "Hair",
     "category_nail": "Nail",
     "category_esthetic": "Esthetic",
@@ -173,6 +164,7 @@
     "loading": "Loading your bookings...",
     "empty": "No beauty bookings to check yet. They will appear here once completed.",
     "select_prompt": "Select a booking to see details.",
+    "detail_booking_id": "Booking ID",
     "detail_category": "Category",
     "detail_designer": "Designer",
     "detail_requested_at": "Requested At",
@@ -225,6 +217,7 @@
     "manage_disabled": "Cannot manage in current status.",
     "action_change": "Change schedule/info",
     "action_cancel": "Cancel Booking",
+    "action_view_on_map": "Find on Map",
     "cancel_panel_title": "Cancel Booking",
     "cancel_reason_schedule": "Change of schedule",
     "cancel_reason_other_shop": "Using another shop",
@@ -259,7 +252,10 @@
     "error_cancel_reason": "Select or enter a reason.",
     "error_change_reason": "Enter what you want to change.",
     "error_change": "Change request failed.",
-    "error_alt": "Processing failed."
+    "error_alt": "Processing failed.",
+    "open_interpreter": "Open Interpreter",
+    "interpreter_visit_context": "Using interpreter for your visit to {{storeName}}.",
+    "interpreter_visit_service_context": "Using interpreter for your {{serviceName}} visit at {{storeName}}."
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -280,18 +276,8 @@
   "beauty_explore": {
     "hero_title": "Explore Beauty Bookings",
     "hero_desc": "Select a category for more accurate exploration. You can now check all beauty shops.",
-    "hero_title_with_category": "Start Your {{category}} Booking Now",
-    "hero_subtitle_desc": "Pick a region, select a shop, and set the time to continue.",
-    "hero_guide_no_category": "Selecting a category from Home leads to a better flow. You are currently viewing all beauty shops.",
-    "hero_flow_step_category": "Check Category",
-    "hero_flow_step_region": "Select Region",
-    "hero_flow_step_store": "Pick Store",
-    "hero_flow_step_time": "Confirm Time",
-    "hero_flow_aria_label": "Quick Booking Guide",
-    "region_filter_title": "Pick Your Desired Region",
     "category_all": "All",
     "region_all": "All Regions",
-    "step_indicator_label": "Beauty Booking Steps",
     "step_1": "Select Shop",
     "step_2": "Select Time",
     "step_3": "Confirm",
@@ -328,6 +314,9 @@
     "completion_desc1": "We will notify you after the shop checks availability.",
     "completion_desc2": "Please note it's not confirmed until you receive a confirmation notice.",
     "completion_desc3": "Track progress anytime in My Bookings menu.",
+    "completion_flow_hint": "Your booking request has been received. It will be confirmed after the shop reviews it. Check results via notification or My Bookings.",
+    "cancel_policy_hint": "You may cancel before confirmation. Cancellations after confirmation are subject to the shop's policy.",
+    "price_estimate_hint": "Prices shown are estimates. Final amounts may vary based on options or shop policy.",
     "label_rating": "Rating",
     "label_review": "Reviews",
     "btn_select_time": "Select Booking Time",
@@ -359,7 +348,7 @@
     "confirm_empty_desc": "Tap `Check Booking Info` after picking date/time.",
     "confirm_review_error_title": "Check booking info again.",
     "confirm_review_error_desc": "Needs shop, date, and time.",
-    "confirm_price_hint": "Estimated price is for mock. Final payment may vary.",
+    "confirm_price_hint": "Amounts shown are estimates. Final price may vary based on options or shop confirmation.",
     "label_no_surcharge": "No surcharge",
     "label_no_designer": "No designer info currently.",
     "label_designer_hint": "Designer choice is optional. Shop choice is fallback.",

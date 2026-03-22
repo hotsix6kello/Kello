@@ -19,6 +19,7 @@ import {
 } from "@/lib/supabaseServer.ts";
 import { 
   createBeautyBookingNotification,
+  notifyAdminNewBooking,
   type BeautyBookingNotificationEventType 
 } from "./beautyNotificationServer.ts";
 
@@ -372,6 +373,14 @@ export async function createBeautyBookingRequest(
       },
     }).catch(console.error);
   }
+
+  // Support for Admin Notification
+  void notifyAdminNewBooking(String(data.id), {
+    customerName: payload.customer.name,
+    storeName: data.store_name,
+    bookingDate: data.booking_date,
+    bookingTime: data.booking_time
+  }).catch((err) => console.warn("[beauty-booking] admin notification failed", err));
 
   return {
     bookingId: String(data.id),

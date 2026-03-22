@@ -773,15 +773,29 @@ function MyBeautyBookingsContent() {
               <article className={styles.detailCard}>
                 <div className={styles.detailHeader}>
                   <div>
-                    <p className={styles.eyebrow}>Booking Detail</p>
+                    <p className={styles.eyebrow}>
+                      {t('beauty_bookings.hero_eyebrow')} · {t('beauty_bookings.detail_booking_id')}: {selectedBooking.id.substring(0, 8).toUpperCase()}
+                    </p>
                     <h3 className={styles.detailTitle}>{selectedBooking.storeName}</h3>
                     <p className={styles.detailSub}>
                       {formatDateLabel(selectedBooking.bookingDate, i18n.language)} {selectedBooking.bookingTime}
                     </p>
                   </div>
-                  <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
-                    {STATUS_LABELS[selectedBooking.status]}
-                  </span>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+                    <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
+                      {STATUS_LABELS[selectedBooking.status]}
+                    </span>
+                    {selectedBooking.status === 'confirmed' && (
+                      <button
+                        type="button"
+                        className={styles.primaryActionButton}
+                        onClick={() => router.push(`/interpreter?storeName=${encodeURIComponent(selectedBooking.storeName)}&serviceName=${encodeURIComponent(selectedBooking.primaryServiceName)}`)}
+                        style={{ minHeight: '32px', height: '32px', padding: '0 10px', fontSize: '0.72rem', whiteSpace: 'nowrap' }}
+                      >
+                        🎙️ {t('beauty_bookings.open_interpreter')}
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 <div className={styles.summaryGrid}>
@@ -800,6 +814,30 @@ function MyBeautyBookingsContent() {
                    <div className={styles.summaryItem}>
                      <span>{t('beauty_bookings.detail_status')}</span>
                      <strong>{STATUS_DESCRIPTIONS[selectedBooking.status]}</strong>
+                     {selectedBooking.status === 'confirmed' && (
+                       <>
+                         <p className={styles.statusHint} style={{ marginTop: 4, color: '#1d4ed8', fontWeight: 600 }}>
+                           {t('beauty_bookings.status_guide_confirmed')}
+                         </p>
+                         <a
+                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedBooking.storeName} ${selectedBooking.region} Korea`)}`}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className={styles.secondaryActionButton}
+                           style={{ 
+                             display: 'inline-flex', 
+                             alignItems: 'center', 
+                             justifyContent: 'center', 
+                             marginTop: 10,
+                             textDecoration: 'none',
+                             width: 'auto',
+                             gap: 6
+                           }}
+                         >
+                           📍 {t('beauty_bookings.action_view_on_map')}
+                         </a>
+                       </>
+                     )}
                    </div>
                  </div>
 
