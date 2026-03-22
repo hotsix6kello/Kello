@@ -37,6 +37,7 @@ type BeautyStore = {
   priceLabel: string;
   shortDescription: string;
   tags: string[];
+  imageUrl?: string;
 };
 
 type NearbyPlacesResponse = {
@@ -524,14 +525,14 @@ const BEAUTY_CATEGORY_META: (t: (key: string) => string) => Record<
 });
 
 const BEAUTY_REGIONS: (t: any, tBeauty: any) => Array<{ id: BeautyRegionId; label: string }> = (t, tBeauty) => [
-  { id: 'all', label: tBeauty('region_all') },
-  { id: 'jongno', label: t('transport.stations.jongno') || '종로' },
-  { id: 'gangnam', label: t('transport.stations.gangnam') },
-  { id: 'hongdae', label: t('transport.stations.hongdae') || '홍대' },
-  { id: 'seongsu', label: t('transport.stations.seongsu') },
-  { id: 'jamsil', label: t('transport.stations.jamsil') || '잠실' },
-  { id: 'konkuk', label: t('transport.stations.konkuk') || '건대' },
-  { id: 'pangyo', label: t('transport.stations.pangyo') || '판교' },
+  { id: 'all', label: tBeauty('region_all', { defaultValue: '전체 지역' }) },
+  { id: 'jongno', label: tBeauty('regions.jongno', { defaultValue: '종로' }) },
+  { id: 'gangnam', label: tBeauty('regions.gangnam', { defaultValue: '강남' }) },
+  { id: 'hongdae', label: tBeauty('regions.hongdae', { defaultValue: '홍대' }) },
+  { id: 'seongsu', label: tBeauty('regions.seongsu', { defaultValue: '성수' }) },
+  { id: 'jamsil', label: tBeauty('regions.jamsil', { defaultValue: '잠실' }) },
+  { id: 'konkuk', label: tBeauty('regions.konkuk', { defaultValue: '건대' }) },
+  { id: 'pangyo', label: tBeauty('regions.pangyo', { defaultValue: '판교' }) },
 ];
 
 const BEAUTY_STORE_ITEMS: BeautyStore[] = [
@@ -1098,7 +1099,7 @@ export default function MyExplorePage() {
       selectedPrimaryService,
       beautyCategoryLabels,
       bookingDateLabels,
-      t,
+      tBeauty,
     ],
   );
   const generatedKoreanMessage = useMemo(
@@ -1371,45 +1372,9 @@ export default function MyExplorePage() {
     setSubmittedBooking(null);
   };
 
-  const handleDesignerSelect = (designerId: string) => {
-    setSelectedDesignerId((prev) => (prev === designerId ? null : designerId));
-    clearSubmittedBooking();
-  };
-
-  const handlePrimaryServiceSelect = (serviceId: string) => {
-    setSelectedPrimaryServiceId(serviceId);
-    clearFormError('primaryService');
-    clearSubmittedBooking();
-  };
-
-  const handleAddOnToggle = (optionId: string) => {
-    setSelectedAddOnIds((prev) => {
-      if (prev.includes(optionId)) {
-        return prev.filter((id) => id !== optionId);
-      }
-
-      if (prev.length >= 2) {
-        showToast(tBeauty('toast_addon_limit'));
-        return prev;
-      }
-
-      return [...prev, optionId];
-    });
-    clearSubmittedBooking();
-  };
-
-  const handleCommunicationLanguageSelect = (language: CommunicationLanguageId) => {
-    setSelectedCommunicationLanguage(language);
-    clearSubmittedBooking();
-  };
-
   const handleCommunicationIntentSelect = (intent: CommunicationIntentId) => {
     setSelectedCommunicationIntent(intent);
     clearSubmittedBooking();
-  };
-
-  const handlePrepareMessageCopy = (label: string) => {
-    showToast(tBeauty('toast_copy_hint', { label }));
   };
 
   const handleBeautyStoreSelect = (
@@ -1432,23 +1397,6 @@ export default function MyExplorePage() {
     clearFormError('primaryService');
     showToast(`${storeName}${tBeauty('toast_select_time')}`);
     scrollToBookingPanel();
-  };
-
-  const handleBeautyDateSelect = (dateKey: string | null) => {
-    setSelectedBeautyDate(dateKey);
-    setSelectedBeautyTime(null);
-    setIsBookingConfirmOpen(false);
-    clearSubmittedBooking();
-  };
-
-  const handleBeautyBookingContinue = () => {
-    if (!selectedBeautyStore || !selectedBeautyStoreName || !selectedBeautyDate || !selectedBeautyTime) {
-      return;
-    }
-
-    clearSubmittedBooking();
-    setIsBookingConfirmOpen(true);
-    scrollToConfirmSection();
   };
 
   const handleBeautyBookingSubmit = () => {
@@ -1580,13 +1528,6 @@ export default function MyExplorePage() {
   const selectedBeautyStore = selectedBeautyStoreId
     ? BEAUTY_STORE_ITEMS.find((store) => store.id === selectedBeautyStoreId) ?? null
     : null;
-  const selectedBeautyDateOptions = selectedBeautyAvailability
-    ? bookingDateOptions.filter((option) => selectedBeautyAvailability.availableDates.includes(option.key))
-    : [];
-  const selectedBeautySlots =
-    selectedBeautyDate && selectedBeautyAvailability
-      ? selectedBeautyAvailability.slotsByDate[selectedBeautyDate] ?? []
-      : [];
   const selectedBeautyCategoryLabel = selectedBeautyCategory
     ? beautyCategoryLabels[selectedBeautyCategory].label
     : tBeauty('label_service_default');
@@ -1596,13 +1537,6 @@ export default function MyExplorePage() {
   const selectedBeautyDateLabel = selectedBeautyDate
     ? bookingDateLabels[selectedBeautyDate] ?? selectedBeautyDate
     : tBeauty('label_service_default');
-  const selectedDesignerLabel = selectedDesigner
-    ? `${tBeauty(selectedDesigner.name)}${selectedDesigner.surcharge > 0 ? ` (+${formatPrice(selectedDesigner.surcharge)})` : ''}`
-    : tBeauty('label_designer_default');
-  const selectedPrimaryServiceLabel = selectedPrimaryService ? tBeauty(selectedPrimaryService.name) : tBeauty('label_service_default');
-  const selectedAddOnLabel = selectedAddOnOptions.length > 0
-    ? selectedAddOnOptions.map((option) => tBeauty(option.name)).join(', ')
-    : tBeauty('label_addon_default');
   const selectedCommLangLabel = useMemo(() => commLangs.find(l => l.id === selectedCommunicationLanguage)?.label ?? selectedCommunicationLanguage, [commLangs, selectedCommunicationLanguage]);
   const selectedCommIntentLabel = useMemo(() => commIntents.find(i => i.id === selectedCommunicationIntent)?.label ?? selectedCommunicationIntent, [commIntents, selectedCommunicationIntent]);
 
@@ -1610,22 +1544,6 @@ export default function MyExplorePage() {
 
   const isCustomerNameValid = validateCustomerField('name', customerForm.name) === '';
   const isCustomerPhoneValid = validateCustomerField('phone', customerForm.phone) === '';
-  const beautyCurrentStepIndex = submittedBooking
-    ? 4
-    : isBookingConfirmOpen
-      ? 3
-      : selectedBeautyDate && selectedBeautyTime
-        ? 2
-        : selectedBeautyStoreId
-          ? 1
-          : 0;
-  const beautyFlowSteps = [
-    t('beauty_explore.step_1'),
-    t('beauty_explore.step_2'),
-    t('beauty_explore.step_3'),
-    t('beauty_explore.step_4'),
-    t('beauty_explore.step_5')
-  ];
   const beautyHeroFlow = beautyCategoryFilter
     ? [t('beauty_explore.hero_flow_step_region'), t('beauty_explore.hero_flow_step_store'), t('beauty_explore.hero_flow_step_time')]
     : [t('beauty_explore.hero_flow_step_category'), t('beauty_explore.hero_flow_step_region'), t('beauty_explore.hero_flow_step_store')];
@@ -1635,30 +1553,11 @@ export default function MyExplorePage() {
     isCustomerPhoneValid &&
     agreements.bookingConfirmed &&
     agreements.privacyConsent;
-  const renderBeautyProgressIndicator = () => (
-    <ol className={styles.beautyStepIndicator} aria-label={t('beauty_explore.step_indicator_label')}>
-      {beautyFlowSteps.map((step, index) => {
-        const isCurrent = index === beautyCurrentStepIndex;
-        const isDone = index < beautyCurrentStepIndex;
-
-        return (
-          <li
-            key={step}
-            className={`${styles.beautyStepItem} ${isCurrent ? styles.beautyStepItemCurrent : ''} ${isDone ? styles.beautyStepItemDone : ''}`}
-            aria-current={isCurrent ? 'step' : undefined}
-          >
-            <span className={styles.beautyStepBullet}>{index + 1}</span>
-            <span className={styles.beautyStepText}>{step}</span>
-          </li>
-        );
-      })}
-    </ol>
-  );
 
   if (isBeautyExplore) {
     return (
       <>
-        <div className={styles.beautyExplorePage}>
+        <div className={styles.beautyExplorePage} style={{ flexShrink: 0 }}>
           <div className="relative w-full">
             {/* 뒤로 가기 (돌아가기) 버튼 */}
             {beautyCategoryFilter && (
@@ -1732,78 +1631,103 @@ export default function MyExplorePage() {
             />
           </section>
 
-          <section className={styles.beautyStoreSection}>
+
+
+          {/* 매장 리스트: 각 매장을 조밀하고 모던한 가로형 카드로 일렬 배치 */}
+          <section className={`${styles.beautyFiltersSection} mt-4 flex flex-col gap-3`}>
             {filteredBeautyStores.length > 0 ? (
-              <div className="flex w-full flex-col gap-3 pb-8 pt-4">
-                {filteredBeautyStores.map((store) => (
-                  <div
-                      key={store.id}
-                      className={`flex flex-row w-full items-center gap-3 overflow-hidden rounded-xl border ${
-                        selectedBeautyStoreId === store.id ? 'border-[#bb8a78] ring-1 ring-[#bb8a78] bg-[#fbf6f4]' : 'border-neutral-200 bg-white'
-                      } p-2.5 shadow-sm transition-all hover:border-[#bb8a78] hover:shadow-md cursor-pointer`}
-                      onClick={() => {
-                        handleBeautyStoreSelect(
-                          store.id,
-                          store.name,
-                          store.region,
-                          store.category
-                        );
-                      }}
-                    >
-                      <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-lg bg-neutral-100">
+              filteredBeautyStores.map((store) => {
+                const isSelected = selectedBeautyStoreId === store.id;
+                
+                return (
+                  <article
+                    key={store.id}
+                    className={`bg-white rounded-2xl transition-all duration-300 ${
+                      isSelected ? 'ring-2 ring-[#bb8a78] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100 hover:shadow-md'
+                    }`}
+                    style={{ 
+                      overflow: 'hidden',
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => {
+                      handleDetails(store.id);
+                    }}
+                  >
+                    <div className="flex flex-row w-full items-center p-3 gap-3">
+                      {/* 매장 이미지 영역 */}
+                      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0">
                         <img
-                          src={(store as any).imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=400&q=80'}
+                          src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'}
                           alt={store.name}
                           className="h-full w-full object-cover"
                         />
                       </div>
 
-                      <div className="flex flex-1 flex-col min-w-0 py-0.5">
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <h3 className="text-sm sm:text-base font-bold text-neutral-900 truncate">
+                      {/* 매장 상세 정보 영역 */}
+                      <div className="flex-1 flex flex-col justify-center min-w-0 py-1">
+                        <div className="flex items-center gap-2 mb-1 pl-1">
+                          <h3 className="text-[15px] sm:text-base font-bold text-neutral-900 truncate">
                             {tBeauty(`stores.${store.id}.name`, { defaultValue: store.name })}
                           </h3>
-                          <div className="flex items-center gap-0.5 text-[11px] font-bold text-neutral-800 shrink-0">
-                            <span className="text-yellow-400 text-[12px]">⭐</span>
-                            <span>{store.rating ? store.rating.toFixed(1) : '4.8'}</span>
-                            <span className="font-medium text-gray-400">({store.reviewCount || 120})</span>
+                          <div className="flex items-center gap-0.5 shrink-0">
+                            <span className="text-yellow-500 text-[12px]">★</span>
+                            <span className="text-[12px] font-bold text-neutral-700">{store.rating ? store.rating.toFixed(1) : '4.8'}</span>
+                            <span className="text-[11px] text-neutral-400">({store.reviewCount || 120})</span>
                           </div>
                         </div>
 
-                        <p className="mt-0.5 text-[11px] font-medium text-gray-500 truncate leading-tight">
+                        <p className="text-[12px] text-neutral-500 mb-0.5 pl-1">
                           {tBeauty(`region_${store.region}`)}
                         </p>
-
-                        <p className="mt-1 text-[11px] sm:text-[12px] font-semibold text-neutral-800 leading-tight line-clamp-2">
+                        
+                        <div className="text-[13px] font-semibold text-neutral-800 pl-1">
                           {tBeauty(store.priceLabel, { defaultValue: store.priceLabel })}
-                        </p>
+                        </div>
                       </div>
-
-                      <div className="flex flex-col items-center justify-center shrink-0 w-[52px] sm:w-[60px] gap-1.5">
+                      
+                      {/* 액션 버튼 그룹 */}
+                      <div className="shrink-0 flex flex-col gap-1.5 w-[72px] sm:w-[84px]">
                         <button
                           type="button"
-                          className="w-full rounded bg-[#bb8a78] py-1.5 text-[11px] font-bold text-white transition-colors hover:bg-[#a67969] text-center"
+                          className="w-full h-[34px] flex items-center justify-center rounded-lg font-bold text-[11px] text-[#8d6157] bg-[#fff5f0] border border-[#f0e0d8] hover:bg-[#ffece0] transition-all"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDetails(store.id);
+                          }}
+                        >
+                          {tBeauty('btn_view_details', { defaultValue: '상세보기' })}
+                        </button>
+                        <button
+                          type="button"
+                          className={`w-full h-[34px] flex items-center justify-center rounded-lg font-bold text-[11px] transition-all shadow-sm ${
+                            isSelected 
+                              ? 'bg-[#a67969] text-white' 
+                              : 'bg-[#bb8a78] text-white hover:bg-[#a67969]'
+                          }`}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleBeautyStoreSelect(
                               store.id,
-                              tBeauty(store.name, { defaultValue: store.name }),
+                              store.name,
                               store.region,
                               store.category
                             );
                             setIsIntegratedBookingMenuOpen(true);
                           }}
                         >
-                          {selectedBeautyStoreId === store.id ? tBeauty('btn_change', { defaultValue: '날짜/시간 변경' }) : tBeauty('btn_select_time', { defaultValue: '예약' })}
+                          {isSelected ? tBeauty('btn_selected', { defaultValue: '선택됨' }) : tBeauty('btn_select_salon', { defaultValue: '예약선택' })}
                         </button>
                       </div>
                     </div>
-                  ))}
-              </div>
+                  </article>
+                );
+              })
             ) : (
-              <div className={styles.beautyEmptyState}>
-                <p className={styles.beautyEmptyTitle}>{tBeauty('empty_store_title')}</p>
-                <p className={styles.beautyEmptyText}>{tBeauty('empty_store_desc')}</p>
+              <div className={styles.beautyStoreSection} style={{ marginTop: 0 }}>
+                <div className={styles.beautyEmptyState}>
+                  <p className={styles.beautyEmptyTitle}>{tBeauty('empty_store_title')}</p>
+                  <p className={styles.beautyEmptyText}>{tBeauty('empty_store_desc')}</p>
+                </div>
               </div>
             )}
           </section>
@@ -1856,43 +1780,6 @@ export default function MyExplorePage() {
                       {tBeauty('btn_choose_datetime', { defaultValue: '예약할 날짜 및 시간 고르기' })}
                     </button>
                   )}
-                </div>
-
-                <div className={styles.beautyBookingSummary}>
-                  <div className={styles.beautySummaryList}>
-                    <div className={styles.beautySummaryItem}>
-                      <span className={styles.beautySummaryLabel}>{tBeauty('summary_category')}</span>
-                      <strong className={styles.beautySummaryValue}>{selectedBeautyCategoryLabel}</strong>
-                    </div>
-                    <div className={styles.beautySummaryItem}>
-                      <span className={styles.beautySummaryLabel}>{tBeauty('summary_store')}</span>
-                      <strong className={styles.beautySummaryValue}>{selectedBeautyStoreName ?? tBeauty('label_service_default')}</strong>
-                    </div>
-                    <div className={styles.beautySummaryItem}>
-                      <span className={styles.beautySummaryLabel}>{tBeauty('summary_region')}</span>
-                      <strong className={styles.beautySummaryValue}>{selectedBeautyRegionLabel}</strong>
-                    </div>
-                    <div className={styles.beautySummaryItem}>
-                      <span className={styles.beautySummaryLabel}>{tBeauty('summary_date')}</span>
-                      <strong className={styles.beautySummaryValue}>{selectedBeautyDateLabel}</strong>
-                    </div>
-                    <div className={styles.beautySummaryItem}>
-                      <span className={styles.beautySummaryLabel}>{tBeauty('summary_time')}</span>
-                      <strong className={styles.beautySummaryValue}>{selectedBeautyTime ?? tBeauty('label_service_default')}</strong>
-                    </div>
-                  </div>
-                  <p className={styles.beautyBookingHint}>
-                    {tBeauty('summary_hint')}
-                  </p>
-                  <button
-                    type="button"
-                    className={styles.beautyBookingCta}
-                    disabled={!selectedBeautyDate || !selectedBeautyTime}
-                    aria-label={tBeauty('summary_btn')}
-                    onClick={handleBeautyBookingContinue}
-                  >
-                    {tBeauty('summary_btn')}
-                  </button>
                 </div>
               </div>
             )}
@@ -2145,7 +2032,7 @@ export default function MyExplorePage() {
 
                 <div className={styles.beautyAgreementCard}>
                   <div className={styles.beautyAgreementList}>
-                    {agreementFields.map((field: any) => {
+                    {agreementFields.map((field: AgreementFieldConfig) => {
                       const errorId = formErrors[field.key as FormErrorKey] ? `beauty-agreement-${field.key}-error` : undefined;
 
                       return (
@@ -2202,6 +2089,15 @@ export default function MyExplorePage() {
             setSelectedBeautyDate(date);
             setSelectedBeautyTime(time);
             setIsIntegratedBookingMenuOpen(false);
+            
+            // Skip "Continue" button step and go straight to confirmation
+            clearSubmittedBooking();
+            setIsBookingConfirmOpen(true);
+            
+            // Allow state to update and modal to close before scrolling
+            setTimeout(() => {
+              scrollToConfirmSection();
+            }, 300);
           }}
         />
 

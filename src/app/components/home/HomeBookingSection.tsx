@@ -21,7 +21,6 @@ export default function HomeBookingSection({
     <section className={styles.bookingShell}>
       <div className={styles.bookingCard}>
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionEyebrow}>{t('home_beauty.booking.step')}</span>
           <h2 className={styles.sectionTitle}>{t('home_beauty.booking.title')}</h2>
           <p className={styles.sectionDescription}>
             {t('home_beauty.booking.description')}
