@@ -285,7 +285,10 @@
 }
 
 .categoryButtonActive {
-  /* Placeholder for active state */
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(159, 109, 98, 0.12);
 }
 
 .categoryLabel {
