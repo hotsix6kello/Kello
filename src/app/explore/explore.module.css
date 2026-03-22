@@ -1046,8 +1046,9 @@
 }
 
 .beautyStoreRegionPill {
-    background: rgba(244, 237, 231, 0.9);
-    color: #5d5148;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(109, 83, 63, 0.14);
+    color: #493f39;
 }
 
 .beautyStoreTitle {
@@ -1064,15 +1065,22 @@
 }
 
 .beautyStoreRating {
-    color: #b2732e;
+    color: #ff9500;
     font-weight: 800;
 }
 
+.beautyStoreReviewCount {
+    color: #6e6259;
+    font-weight: 600;
+}
+
 .beautyStorePrice {
-    margin-top: 14px;
-    color: #7f4f46;
-    font-size: 16px;
+    margin-top: 18px;
+    color: #8d6157;
+    font-size: 18px;
+    line-height: 1.2;
     font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 .beautyStoreDescription {
