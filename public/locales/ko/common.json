@@ -21,7 +21,7 @@
       "hair": {
         "label": "헤어",
         "note": "커트, 펌, 염색, 드라이",
-        "summary": "스타일 체인지부터 가벼운 손질까지 가장 빠르게 예약을 시작할 수 있어요."
+        "summary": "스타일 체인지부터 가벼운 손질까지 빠르게 예약을 시작할 수 있어요."
       },
       "nail": {
         "label": "네일",
@@ -31,7 +31,7 @@
       "esthetic": {
         "label": "에스테틱",
         "note": "피부관리, 윤곽, 진정 케어",
-        "summary": "피부 상태와 원하는 관리 목적에 맞춰 매장을 비교하고 예약할 수 있어요."
+        "summary": "피부 상태와 원하는 관리 목적에 맞춰 매장을 비교, 예약 할 수 있어요."
       },
       "waxing": {
         "label": "왁싱",
@@ -166,9 +166,13 @@
     "lang_id": "Bahasa Indonesia",
     "lang_ms": "Bahasa Melayu",
     "intent_booking_confirm": "예약 확인",
+    "intent_booking_confirm_desc": "예약 시간과 시술 내용을 간단히 확인할 때 적합해요.",
     "intent_service_request": "시술 요청 전달",
+    "intent_service_request_desc": "원하는 시술과 부가 옵션을 미리 전달할 때 적합해요.",
     "intent_allergy_notice": "민감 사항 전달",
+    "intent_allergy_notice_desc": "민감한 피부나 주의사항을 미리 공유할 때 적합해요.",
     "intent_style_consultation": "스타일 상담 도움",
+    "intent_style_consultation_desc": "방문 전 스타일 상담 의도를 간단히 전달할 때 적합해요.",
     "card_primary_service": "대표 시술",
     "card_estimated_price": "예상 금액",
     "loading": "내 예약을 불러오는 중입니다.",
@@ -286,15 +290,15 @@
   "beauty_explore": {
     "hero_title": "뷰티 예약 탐색",
     "hero_desc": "원하는 카테고리를 먼저 고르면 더 정확한 예약 탐색이 가능해요. 지금은 전체 뷰티 매장을 확인할 수 있습니다.",
-    "hero_title_with_category": "{{category}} 예약을 바로 시작해 보세요",
-    "hero_subtitle_desc": "지역을 고르고 매장을 선택한 뒤, 시간만 정하면 다음 단계로 이어집니다.",
+    "hero_title_with_category": "예약을 바로 시작하세요",
+    "hero_subtitle_desc": "지역을 선택하고 매장을 선택한 뒤,\n시간을 선택 후 다음 단계로 이어집니다.",
     "hero_guide_no_category": "홈에서 카테고리를 먼저 고르면 더 잘 맞는 예약 흐름으로 바로 이어져요. 지금은 전체 뷰티 매장을 먼저 보고 있어요.",
     "hero_flow_step_category": "카테고리 확인",
     "hero_flow_step_region": "지역 선택",
     "hero_flow_step_store": "매장 고르기",
     "hero_flow_step_time": "시간 확인",
     "hero_flow_aria_label": "빠른 예약 안내",
-    "region_filter_title": "원하는 지역을 골라보세요",
+    "region_filter_title": "원하시는 지역을 선택하세요",
     "category_all": "전체",
     "region_all": "전체 보기",
     "step_indicator_label": "뷰티 예약 단계",
