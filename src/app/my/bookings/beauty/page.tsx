@@ -787,7 +787,7 @@ function MyBeautyBookingsContent() {
                       <button
                         type="button"
                         className={styles.primaryActionButton}
-                        onClick={() => router.push(`/interpreter?storeName=${encodeURIComponent(selectedBooking.storeName)}`)}
+                        onClick={() => router.push(`/interpreter?storeName=${encodeURIComponent(selectedBooking.storeName)}&serviceName=${encodeURIComponent(selectedBooking.primaryServiceName)}`)}
                         style={{ minHeight: '32px', height: '32px', padding: '0 10px', fontSize: '0.72rem', whiteSpace: 'nowrap' }}
                       >
                         🎙️ {t('beauty_bookings.open_interpreter')}

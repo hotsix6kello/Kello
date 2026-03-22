@@ -251,7 +251,8 @@
     "error_change": "Change request failed.",
     "error_alt": "Processing failed.",
     "open_interpreter": "Open Interpreter",
-    "interpreter_visit_context": "Using interpreter for your visit to {{storeName}}."
+    "interpreter_visit_context": "Using interpreter for your visit to {{storeName}}.",
+    "interpreter_visit_service_context": "Using interpreter for your {{serviceName}} visit at {{storeName}}."
   },
   "notifications": {
     "page_title": "Notification Center",
