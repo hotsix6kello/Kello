@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
 import styles from './interpreter.module.css';
@@ -103,6 +103,9 @@ function resolveCustomerLocale(appLocale?: string | null): ConciergeLocale {
 
 export default function InterpreterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const storeName = searchParams.get('storeName');
+  const serviceName = searchParams.get('serviceName');
   const { t, i18n } = useTranslation('common');
   const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>(() =>
     resolveCustomerLocale(i18n.resolvedLanguage ?? i18n.language),
@@ -625,6 +628,17 @@ export default function InterpreterPage() {
           {t('interpreter_page.back')}
         </button>
       </div>
+
+      {storeName && (
+        <div className={styles.visitorContext}>
+          <span style={{ fontSize: '1.2rem' }}>📍</span>
+          <p style={{ margin: 0 }}>
+            {storeName && serviceName
+              ? t('beauty_bookings.interpreter_visit_service_context', { storeName, serviceName })
+              : t('beauty_bookings.interpreter_visit_context', { storeName })}
+          </p>
+        </div>
+      )}
 
       <section className={styles.titleSection}>
         <h1 className={styles.title}>{t('interpreter_page.title')}</h1>
