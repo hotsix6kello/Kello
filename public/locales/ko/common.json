@@ -227,6 +227,7 @@
     "manage_disabled": "현재 상태에서는 관리할 수 없어요.",
     "action_change": "일정/내역 변경",
     "action_cancel": "예약 취소",
+    "action_view_on_map": "지도에서 찾기",
     "cancel_panel_title": "예약 취소",
     "cancel_reason_schedule": "일정 변경",
     "cancel_reason_other_shop": "다른 매장 이용",

@@ -803,9 +803,28 @@ function MyBeautyBookingsContent() {
                      <span>{t('beauty_bookings.detail_status')}</span>
                      <strong>{STATUS_DESCRIPTIONS[selectedBooking.status]}</strong>
                      {selectedBooking.status === 'confirmed' && (
-                       <p className={styles.statusHint} style={{ marginTop: 4, color: '#1d4ed8', fontWeight: 600 }}>
-                         {t('beauty_bookings.status_guide_confirmed')}
-                       </p>
+                       <>
+                         <p className={styles.statusHint} style={{ marginTop: 4, color: '#1d4ed8', fontWeight: 600 }}>
+                           {t('beauty_bookings.status_guide_confirmed')}
+                         </p>
+                         <a
+                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedBooking.storeName} ${selectedBooking.region} Korea`)}`}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className={styles.secondaryActionButton}
+                           style={{ 
+                             display: 'inline-flex', 
+                             alignItems: 'center', 
+                             justifyContent: 'center', 
+                             marginTop: 10,
+                             textDecoration: 'none',
+                             width: 'auto',
+                             gap: 6
+                           }}
+                         >
+                           📍 {t('beauty_bookings.action_view_on_map')}
+                         </a>
+                       </>
                      )}
                    </div>
                  </div>

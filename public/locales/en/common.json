@@ -217,6 +217,7 @@
     "manage_disabled": "Cannot manage in current status.",
     "action_change": "Change schedule/info",
     "action_cancel": "Cancel Booking",
+    "action_view_on_map": "Find on Map",
     "cancel_panel_title": "Cancel Booking",
     "cancel_reason_schedule": "Change of schedule",
     "cancel_reason_other_shop": "Using another shop",
