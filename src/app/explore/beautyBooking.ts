@@ -8,8 +8,8 @@ export type BeautyBookingPayload = {
   bookingTime: string;
   designerId: string | null;
   designerName: string | null;
-  primaryServiceId: string;
-  primaryServiceName: string;
+  primaryServiceId: string | null;
+  primaryServiceName: string | null;
   addOnIds: string[];
   addOnNames: string[];
   priceSummary: {
@@ -127,26 +127,23 @@ export function buildBeautyBookingPayload(
     !hasRequiredText(input.storeId) ||
     !hasRequiredText(input.storeName) ||
     !hasRequiredText(input.bookingDate) ||
-    !hasRequiredText(input.bookingTime) ||
-    !hasRequiredText(input.customer.name) ||
-    !hasRequiredText(input.customer.phone) ||
-    !isFiniteNumber(input.priceSummary.basePrice)
+    !hasRequiredText(input.bookingTime)
   ) {
     return null;
   }
 
   return {
     category: 'beauty',
-    beautyCategory: input.beautyCategory,
-    region: input.region,
-    storeId: input.storeId,
-    storeName: input.storeName.trim(),
-    bookingDate: input.bookingDate,
-    bookingTime: input.bookingTime,
+    beautyCategory: input.beautyCategory ?? '',
+    region: input.region ?? '',
+    storeId: input.storeId ?? '',
+    storeName: (input.storeName ?? '').trim(),
+    bookingDate: input.bookingDate ?? '',
+    bookingTime: input.bookingTime ?? '',
     designerId: hasRequiredText(input.designerId) ? input.designerId : null,
     designerName: hasRequiredText(input.designerName) ? input.designerName.trim() : null,
-    primaryServiceId: input.primaryServiceId ?? 'none',
-    primaryServiceName: input.primaryServiceName ? input.primaryServiceName.trim() : '선택 안 함',
+    primaryServiceId: input.primaryServiceId ?? null,
+    primaryServiceName: input.primaryServiceName ? input.primaryServiceName.trim() : null,
     addOnIds: input.addOnIds,
     addOnNames: input.addOnNames.map((name) => name.trim()).filter(Boolean),
     priceSummary: {
@@ -209,7 +206,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       ? (candidate.priceSummary as Record<string, unknown>)
       : {};
 
-  if (candidate.category !== 'beauty' || createdFrom.flow !== 'beauty-explore') {
+  if (candidate.category !== 'beauty') {
     return null;
   }
 

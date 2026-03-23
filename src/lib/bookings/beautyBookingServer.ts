@@ -47,8 +47,8 @@ type BeautyBookingInsertRow = {
   booking_time: string;
   designer_id: string | null;
   designer_name: string | null;
-  primary_service_id: string;
-  primary_service_name: string;
+  primary_service_id: string | null;
+  primary_service_name: string | null;
   add_on_ids: string[];
   add_on_names: string[];
   base_price: number;
@@ -114,8 +114,8 @@ type BeautyBookingAdminSelectRow = {
   shop_contacted: boolean;
   customer_contacted: boolean;
   follow_up_needed: boolean;
-  primary_service_id: string;
-  primary_service_name: string;
+  primary_service_id: string | null;
+  primary_service_name: string | null;
   add_on_ids: string[] | null;
   add_on_names: string[] | null;
   base_price: number;
@@ -201,8 +201,8 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     bookingTime: row.booking_time,
     designerId: row.designer_id,
     designerName: row.designer_name,
-    primaryServiceId: row.primary_service_id,
-    primaryServiceName: row.primary_service_name,
+    primaryServiceId: row.primary_service_id ?? null,
+    primaryServiceName: row.primary_service_name ?? null,
     addOnIds: row.add_on_ids ?? [],
     addOnNames: row.add_on_names ?? [],
     basePrice: row.base_price,
@@ -296,8 +296,8 @@ function mapBeautyBookingPayloadToRow(
     booking_time: payload.bookingTime,
     designer_id: payload.designerId,
     designer_name: payload.designerName,
-    primary_service_id: payload.primaryServiceId,
-    primary_service_name: payload.primaryServiceName,
+    primary_service_id: payload.primaryServiceId === 'none' ? null : payload.primaryServiceId,
+    primary_service_name: payload.primaryServiceName === '선택 안 함' ? null : payload.primaryServiceName,
     add_on_ids: payload.addOnIds,
     add_on_names: payload.addOnNames,
     base_price: payload.priceSummary.basePrice,
