@@ -164,13 +164,13 @@
   },
   "community_page": {
     "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "subtitle": "Vernetzen Sie sich mit Einheimischen & Reisenden",
+    "filter_all": "Alle",
+    "filter_meetup": "Essen & Treffen",
+    "filter_travel": "Reisepartner",
+    "filter_help": "Lokale Hilfe",
+    "comments": "Kommentare",
+    "message": "Nachricht",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -203,8 +203,8 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
-    "detail": "Beitrag Details"
+    "filter_review": "Bewertungen",
+    "detail": "Beitragsdetails"
   },
   "home_beauty": {
     "hero": {
@@ -283,5 +283,66 @@
       "copy_done": "Kopiert!",
       "close": "Schließen"
     }
+  },
+  "interpreter_page": {
+    "back": "< Zurück",
+    "title": "Echtzeit-Übersetzer",
+    "subtitle": "Besuchersprache ist App-Sprache; Ladensprache ist fest auf Koreanisch eingestellt.",
+    "onboarding": "Eingaben des Besuchers werden ins Koreanische übersetzt; Koreanisch des Personals in Ihre Sprache.",
+    "customer_lang": "Besuchersprache",
+    "staff_lang": "Ladensprache (Koreanisch)",
+    "mic_preparing": "Mikrofon wird vorbereitet",
+    "customer_transcribing": "Besuchersprache wird erkannt...",
+    "customer_recording": "Besucher wird aufgenommen... zum Beenden klicken",
+    "translating": "Wird übersetzt...",
+    "customer_speak_btn": "Spracheingabe Besucher",
+    "staff_transcribing": "Personalstimme wird erkannt...",
+    "staff_recording": "Personal wird aufgenommen... zum Beenden klicken",
+    "staff_speak_btn": "Spracheingabe Personal",
+    "customer_input_label": "Eingabe Besucher",
+    "customer_placeholder": "Tippen Sie, was der Besucher gesagt hat.",
+    "send": "Senden",
+    "staff_input_label": "Eingabe Personal",
+    "staff_placeholder": "Tippen Sie, was das Personal auf Koreanisch gesagt hat.",
+    "voice_supported_hint": "Über Mik aufnehmen oder Text unten eingeben.",
+    "voice_not_supported_hint": "Dieser Browser unterstützt keine Spracheingabe.",
+    "voice_recognizing": "Spracherkennung läuft.",
+    "voice_unrecognized_error": "Stimme konnte nicht erkannt werden.",
+    "voice_failed_error": "Spracherkennung fehlgeschlagen.",
+    "mic_permission_status": "Mikrofonberechtigung wird geprüft.",
+    "recording_status": "Aufnahme... max. {{seconds}}s.",
+    "mic_unsupported_error": "Mikrofon nicht zugänglich.",
+    "input_required_customer": "Geben Sie zuerst den Satz des Besuchers ein.",
+    "input_required_staff": "Geben Sie zuerst den Satz des Personals ein.",
+    "translating_status": "Übersetzung wird vorbereitet.",
+    "translation_failed_error": "Übersetzung fehlgeschlagen. Erneut versuchen.",
+    "empty_history_hint": "Der Verlauf wird hier angezeigt.",
+    "customer_role": "Besucher",
+    "staff_role": "Personal",
+    "replay_btn_label": "Übersetzung abspielen",
+    "replay_not_supported_hint": "Audiowiedergabe nicht unterstützt.",
+    "play": "Abspielen",
+    "translated_status": "Übersetzt",
+    "source_only_status": "Nur Quelle",
+    "voice_too_short_error": "Bitte sprechen Sie etwas länger."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Dolmetscher wird beim Besuch von {{storeName}} verwendet",
+    "interpreter_visit_service_context": "Dolmetscher wird für {{serviceName}} bei {{storeName}} verwendet",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }
