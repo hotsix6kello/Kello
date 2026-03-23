@@ -1594,7 +1594,7 @@ export default function MyExplorePage() {
     ? beautyCategoryLabels[selectedBeautyCategory].label
     : t('beauty_explore.label_service_default');
   const selectedBeautyRegionLabel = selectedBeautyRegion
-    ? beautyRegions.find((region: any) => region.id === selectedBeautyRegion)?.label ?? selectedBeautyRegion
+    ? beautyRegions.find((region) => region.id === selectedBeautyRegion)?.label ?? selectedBeautyRegion
     : t('beauty_explore.label_service_default');
   const selectedBeautyDateLabel = selectedBeautyDate
     ? bookingDateLabels[selectedBeautyDate] ?? selectedBeautyDate
@@ -2273,7 +2273,7 @@ export default function MyExplorePage() {
                     <span className={styles.beautyOptionSectionMeta}>{t('beauty_bookings.comm_lang_desc')}</span>
                   </div>
                   <div className={styles.beautyAssistChipRow} role="group" aria-label={t('beauty_bookings.comm_lang_title') + ' ' + t('common.select')}>
-                    {commLangs.map((language: any) => {
+                    {commLangs.map((language) => {
                       const isActive = selectedCommunicationLanguage === language.id;
 
                       return (
@@ -2298,7 +2298,7 @@ export default function MyExplorePage() {
                     <span className={styles.beautyOptionSectionMeta}>{t('beauty_bookings.comm_intent_desc')}</span>
                   </div>
                   <div className={styles.beautyOptionGrid} role="group" aria-label={t('beauty_bookings.comm_intent_title') + ' ' + t('common.select')}>
-                    {commIntents.map((intent: any) => {
+                    {commIntents.map((intent) => {
                       const isActive = selectedCommunicationIntent === intent.id;
 
                       return (
@@ -2372,7 +2372,7 @@ export default function MyExplorePage() {
               <div className={styles.beautyAgreementCard}>
                 <span className={styles.beautySectionEyebrow}>{t('beauty_bookings.section_agreement')}</span>
                 <div className={styles.beautyAgreementList}>
-                  {agreementFields.map((field: any) => {
+                  {agreementFields.map((field) => {
                     const errorId = formErrors[field.key as FormErrorKey] ? `beauty-agreement-${field.key}-error` : undefined;
 
                     return (
@@ -2438,6 +2438,8 @@ export default function MyExplorePage() {
           }}
         />
 
+        {/* 하단 패딩 확보를 위한 투명 스페이서 */}
+        <div style={{ height: '120px', width: '100%', pointerEvents: 'none' }} />
         {toastMessage ? <div className={styles.toast}>{toastMessage}</div> : null}
       </div>
     );

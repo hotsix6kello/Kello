@@ -6,7 +6,6 @@ interface HomeBookingSectionProps {
   categories: BeautyCategoryOption[];
   selectedCategory: BeautyCategoryId | null;
   onSelectCategory: (id: BeautyCategoryId) => void;
-  onStartBooking: () => void;
   t: TFunction;
 }
 
@@ -14,7 +13,6 @@ export default function HomeBookingSection({
   categories,
   selectedCategory,
   onSelectCategory,
-  onStartBooking,
   t
 }: HomeBookingSectionProps) {
   return (
@@ -46,19 +44,7 @@ export default function HomeBookingSection({
           })}
         </div>
 
-        <div className={styles.ctaSection} style={{ marginTop: '24px' }}>
-          <p className={styles.ctaHint}>
-            {t('home_beauty.cta.hint')}
-          </p>
-          <button
-            className={styles.mainCtaBtn}
-            type="button"
-            disabled={!selectedCategory}
-            onClick={onStartBooking}
-          >
-            {t('home_beauty.cta.button')}
-          </button>
-        </div>
+
       </div>
     </section>
   );
