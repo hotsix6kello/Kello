@@ -10,7 +10,9 @@
       "title": "What kind of booking do you want?",
       "subtitle": "Select your beauty service first and move directly to the booking step. We have designed it for fast mobile selection followed by shop comparison and reservation requests.",
       "welcome": "Welcome {{name}}, please select a service today.",
-      "welcome_user": "{{greeting}}, {{name}}! 👋"
+      "welcome_user": "{{greeting}}, {{name}}! 👋",
+      "welcome_header": "{{name}}! 👋",
+      "welcome_hero": "Welcome. {{name}}! 👋"
     },
     "booking": {
       "step": "Step 1",
@@ -356,6 +358,9 @@
   },
   "common": {
     "welcome": "Welcome, Traveler.",
+    "morning": "Good Morning",
+    "afternoon": "Good Afternoon",
+    "evening": "Good Evening",
     "greeting": "Good Morning",
     "login": "Login",
     "signup": "Sign Up",

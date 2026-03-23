@@ -21,7 +21,7 @@ export default function HomeHero({ userName, greeting, t }: HomeHeroProps) {
         <h1 className={`${styles.heroTitle} whitespace-normal break-keep h-auto`}>
           {userName ? (
             <span suppressHydrationWarning>
-              {t('home_beauty.hero.welcome_user', { greeting, name: userName })}
+              {t('home_beauty.hero.welcome_hero', { name: userName })}
             </span>
           ) : (
             t('home_beauty.hero.title')
