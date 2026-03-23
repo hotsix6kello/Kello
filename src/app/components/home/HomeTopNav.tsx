@@ -27,7 +27,7 @@ export default function HomeTopNav({ userName, onSignOut, greeting, t }: HomeTop
         </div>
       ) : (
         <button className={styles.navBtn} onClick={onSignOut}>
-          {t('home_beauty.hero.welcome_user', { name: userName, greeting })}
+          {t('home_beauty.hero.welcome_header', { name: userName })}
         </button>
       )}
     </div>
