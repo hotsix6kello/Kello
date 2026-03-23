@@ -93,6 +93,7 @@ export type BeautyBookingCompletionDisplayMeta = {
   communicationLanguageLabel: string;
   communicationIntentLabel: string;
   designerDefaultLabel: string;
+  primaryServiceDefaultLabel: string;
 };
 
 export type BeautyBookingSubmitResult = {
@@ -262,7 +263,7 @@ export function buildBeautyBookingCompletionDisplay(
     date: meta.dateLabel,
     time: payload.bookingTime,
     designerName: payload.designerName ?? meta.designerDefaultLabel,
-    primaryServiceName: payload.primaryServiceName,
+    primaryServiceName: payload.primaryServiceName ?? meta.primaryServiceDefaultLabel,
     addOnNames: payload.addOnNames,
     basePrice: payload.priceSummary.basePrice,
     addOnPrice: payload.priceSummary.addOnPrice,

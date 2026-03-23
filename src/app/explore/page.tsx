@@ -1564,6 +1564,7 @@ export default function MyExplorePage() {
             communicationLanguageLabel: selectedCommLangLabel,
             communicationIntentLabel: selectedCommIntentLabel,
             designerDefaultLabel: t('beauty_explore.label_designer_default'),
+            primaryServiceDefaultLabel: t('beauty_explore.label_service_default', { defaultValue: '미선택' }),
           }),
         );
         setIsBookingConfirmOpen(true);
@@ -2018,7 +2019,7 @@ export default function MyExplorePage() {
                 <button
                   type="button"
                   className={styles.beautyFinalCta}
-                  disabled={!agreements.bookingConfirmed || !agreements.privacyConsent || isSubmittingBeautyBooking}
+                  disabled={!isBeautyConfirmSubmitEnabled || isSubmittingBeautyBooking}
                   onClick={handleBeautyBookingSubmit}
                 >
                   {isSubmittingBeautyBooking ? t('my_bookings.status_preparing') : tBeauty('btn_submit', { defaultValue: '예약 신청하기' })}
