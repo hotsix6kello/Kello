@@ -79,6 +79,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html, body, .scroll-container {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);

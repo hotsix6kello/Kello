@@ -781,9 +781,21 @@ function MyBeautyBookingsContent() {
                       {formatDateLabel(selectedBooking.bookingDate, i18n.language)} {selectedBooking.bookingTime}
                     </p>
                   </div>
-                  <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
-                    {STATUS_LABELS[selectedBooking.status]}
-                  </span>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+                    <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
+                      {STATUS_LABELS[selectedBooking.status]}
+                    </span>
+                    {selectedBooking.status === 'confirmed' && (
+                      <button
+                        type="button"
+                        className={styles.primaryActionButton}
+                        onClick={() => router.push(`/interpreter?storeName=${encodeURIComponent(selectedBooking.storeName)}&serviceName=${encodeURIComponent(selectedBooking.primaryServiceName ?? '')}`)}
+                        style={{ minHeight: '32px', height: '32px', padding: '0 10px', fontSize: '0.72rem', whiteSpace: 'nowrap' }}
+                      >
+                        🎙️ {t('beauty_bookings.open_interpreter')}
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 <div className={styles.summaryGrid}>

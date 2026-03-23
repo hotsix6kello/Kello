@@ -101,7 +101,38 @@ function ProfileSummaryCard({
     );
 }
 
+function QuickActionBar() {
+    const router = useRouter();
+    const { t } = useTranslation("common");
 
+    const actions = [
+        {
+            icon: "S",
+            label: t("my_page.support.short"),
+            onClick: () => router.push("/my/support"),
+        },
+        {
+            icon: "KO",
+            label: t("my_page.phrases.quick"),
+            onClick: () => router.push("/my/phrases"),
+        },
+    ];
+
+    return (
+        <div className={styles.quickActionBar}>
+            {actions.map((action) => (
+                <button
+                    key={action.label}
+                    className={styles.quickActionBtn}
+                    onClick={action.onClick}
+                >
+                    <span className={styles.quickActionIcon}>{action.icon}</span>
+                    <span className={styles.quickActionLabel}>{action.label}</span>
+                </button>
+            ))}
+        </div>
+    );
+}
 
 function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
     const router = useRouter();
@@ -168,13 +199,6 @@ function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
                                 )}
                             </div>
 
-                            <div className={styles.ticketActions}>
-                                <button
-                                    className={styles.ticketActionBtn}
-                                    onClick={() => router.push("/planner")}
-                                >
-                                    {t("common.actions.details")}
-                                </button>
 
                                 {booking.lat && booking.lng && (
                                     <button
@@ -188,88 +212,13 @@ function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
                                     </button>
                                 )}
                             </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
+                        ))}
+                    </div>
+                )}
+            </section>
+        );
+    }
 
-function TodayPlanSection({ itinerary }: { itinerary: ItineraryItem[] }) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const todayItems = useMemo(() => {
-        return [...itinerary]
-            .sort((left, right) => {
-                const toMinutes = (value: string) => {
-                    const [hours, minutes] = value.split(":").map(Number);
-                    return hours * 60 + minutes;
-                };
-
-                return toMinutes(left.time) - toMinutes(right.time);
-            })
-            .slice(0, 4);
-    }, [itinerary]);
-
-    const typeIcon: Record<string, string> = {
-        beauty: "B",
-        food: "F",
-        attraction: "A",
-        transport: "T",
-        event: "E",
-    };
-
-    return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("today_page.title")}</h2>
-                <button
-                    className={styles.sectionMore}
-                    onClick={() => router.push("/navigation")}
-                >
-                    {t("today_page.timeline", { defaultValue: t("common.actions.view_all") })}
-                </button>
-            </div>
-
-            {todayItems.length === 0 ? (
-                <div className={styles.emptyCard}>
-                    <span className={styles.emptyIcon}>TODAY</span>
-                    <p className={styles.emptyText}>{t("today_page.empty.title")}</p>
-                    <button
-                        className={styles.emptyBtn}
-                        onClick={() => router.push("/explore")}
-                    >
-                        {t("today_page.empty.cta")}
-                    </button>
-                </div>
-            ) : (
-                <div className={styles.todayList}>
-                    {todayItems.map((item) => (
-                        <div key={item.id} className={styles.todayItem}>
-                            <div className={styles.todayTimeCol}>
-                                <span className={styles.todayTime}>{item.time}</span>
-                            </div>
-                            <div className={styles.todayDot} />
-                            <div className={styles.todayContent}>
-                                <span className={styles.todayIcon}>
-                                    {typeIcon[item.type || "attraction"] || "A"}
-                                </span>
-                                <div>
-                                    <div className={styles.todayTitle}>{item.name}</div>
-                                    <div className={styles.todayStatus}>
-                                        {formatItineraryStatusLabel(t, item.status)}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
 
 function CommunitySummarySection({ posts }: { posts: CommunityPost[] }) {
     const router = useRouter();
@@ -666,13 +615,76 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
+            <QuickActionBar />
 
+            {/* Special Beauty Section & Notification Hub Header */}
+            <section style={{ padding: '0 20px', marginBottom: 28 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                    <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
+                    <div style={{ display: 'flex', gap: 6 }}>                        <button
+                            onClick={() => router.push('/my/settings/notifications')}
+                            style={{
+                                border: '1px solid #7c3aed33',
+                                background: '#7c3aed11',
+                                color: '#7c3aed',
+                                borderRadius: 99,
+                                padding: '6px 12px',
+                                fontSize: '0.75rem',
+                                fontWeight: 700,
+                                cursor: 'pointer'
+                            }}
+                        >{t('my_page.notifications.settings')}</button>
+                        <button
+                            onClick={() => router.push('/my/notifications')}
+                            style={{
+                                border: '1px solid #9333ea33',
+                                background: '#9333ea11',
+                                color: '#9333ea',
+                                borderRadius: 99,
+                                padding: '6px 12px',
+                                fontSize: '0.75rem',
+                                fontWeight: 700,
+                                cursor: 'pointer'
+                            }}
+                        >{t('my_page.notifications.inbox')}</button>
+                    </div>
+                </div>
 
-
+                {/* Beauty Booking Quick Link */}
+                <div
+                    onClick={() => router.push('/my/bookings/beauty')}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                        background: 'linear-gradient(135deg, rgba(236,72,153,0.08), rgba(244,114,182,0.05))',
+                        border: '1.5px solid rgba(236,72,153,0.18)',
+                        borderRadius: 16,
+                        padding: '16px',
+                        cursor: 'pointer',
+                        transition: 'transform 0.1s'
+                    }}
+                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    <div style={{
+                        width: 44, height: 44, borderRadius: 12,
+                        background: 'rgba(236,72,153,0.12)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '1.4rem', flexShrink: 0
+                    }}>💇</div>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page.beauty_booking_link.title')}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginTop: 2 }}>
+                            {t('my_page.beauty_booking_link.desc')}
+                        </div>
+                    </div>
+                    <span style={{ color: '#ec4899', fontSize: '1.2rem' }}>›</span>
+                </div>
+            </section>
 
             <UpcomingBookingsSection bookings={realBookings} />
 
-            <TodayPlanSection itinerary={itinerary} />
 
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
@@ -734,8 +746,7 @@ function MyPageContent() {
                 </section>
             )}
 
-            {/* Bottom spacer to prevent navigation overlap */}
-            <div style={{ height: 120, flexShrink: 0 }} />
+            {!isAdmin && <div style={{ height: 40 }} />}
         </div>
     );
 }

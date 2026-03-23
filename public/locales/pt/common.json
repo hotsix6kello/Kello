@@ -116,14 +116,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "Comunidade",
+    "subtitle": "Conecte-se com locais e viajantes",
+    "filter_all": "Tudo",
+    "filter_meetup": "Comida e Encontros",
+    "filter_travel": "Parceiro de Viagem",
+    "filter_help": "Ajuda Local",
+    "comments": "Comentários",
+    "message": "Mensagem",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -156,8 +156,8 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
-    "detail": "Detalhes da Postagem"
+    "filter_review": "Avaliações",
+    "detail": "Detalhes da postagem"
   },
   "home_beauty": {
     "hero": {
@@ -236,5 +236,66 @@
       "copy_done": "Copiado!",
       "close": "Fechar"
     }
+  },
+  "interpreter_page": {
+    "back": "< Voltar",
+    "title": "Intérprete em tempo real",
+    "subtitle": "O idioma do cliente segue o idioma do app; o idioma da loja é fixo em coreano.",
+    "onboarding": "Quando o cliente fala, traduz para coreano; quando o funcionário fala coreano, traduz para seu idioma.",
+    "customer_lang": "Idioma do visitante",
+    "staff_lang": "Idioma da loja (Coreano)",
+    "mic_preparing": "Preparando microfone",
+    "customer_transcribing": "Reconhecendo visitante...",
+    "customer_recording": "Gravando visitante... clique de novo para terminar",
+    "translating": "Traduzindo...",
+    "customer_speak_btn": "Entrada de voz do visitante",
+    "staff_transcribing": "Reconhecendo funcionário...",
+    "staff_recording": "Gravando funcionário... clique de novo para terminar",
+    "staff_speak_btn": "Entrada de voz do funcionário",
+    "customer_input_label": "Entrada do visitante",
+    "customer_placeholder": "Digite o que o visitante disse.",
+    "send": "Enviar",
+    "staff_input_label": "Entrada do funcionário",
+    "staff_placeholder": "Digite o que o funcionário disse em coreano.",
+    "voice_supported_hint": "Grave pelo micro ou digite o texto abaixo.",
+    "voice_not_supported_hint": "Este navegador não suporta entrada de voz.",
+    "voice_recognizing": "Reconhecendo voz.",
+    "voice_unrecognized_error": "Voz não reconhecida.",
+    "voice_failed_error": "Falha no reconhecimento de voz.",
+    "mic_permission_status": "Verificando permissões do microfone.",
+    "recording_status": "Gravando... máx. {{seconds}}s.",
+    "mic_unsupported_error": "Microfone inacessível.",
+    "input_required_customer": "Introduza primeiro a frase do visitante.",
+    "input_required_staff": "Introduza primeiro a frase do funcionário.",
+    "translating_status": "Preparando tradução.",
+    "translation_failed_error": "A tradução falhou. Tente novamente.",
+    "empty_history_hint": "O histórico aparecerá aqui.",
+    "customer_role": "Visitante",
+    "staff_role": "Funcionário",
+    "replay_btn_label": "Reproduzir tradução",
+    "replay_not_supported_hint": "Reprodução de áudio não suportada.",
+    "play": "Reproduzir",
+    "translated_status": "Traduzido",
+    "source_only_status": "Apenas original",
+    "voice_too_short_error": "Por favor, fale um pouco mais."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Usando intérprete durante a visita ao {{storeName}}",
+    "interpreter_visit_service_context": "Usando intérprete para {{serviceName}} no {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }

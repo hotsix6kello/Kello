@@ -4,7 +4,7 @@ import "./globals.css";
 import LanguageInitializer from "./components/LanguageInitializer";
 import { TripProvider } from "@/lib/contexts/TripContext";
 import ClientChrome from "./components/ClientChrome";
-import { LOCALE_STORAGE_KEY, DEFAULT_CLIENT_LOCALE, isRtlLocale, resolveCanonicalLocale } from "@/lib/i18n/locales";
+import { LOCALE_STORAGE_KEY, DEFAULT_CLIENT_LOCALE, resolveCanonicalLocale } from "@/lib/i18n/locales";
 
 export const dynamic = 'force-dynamic';
 

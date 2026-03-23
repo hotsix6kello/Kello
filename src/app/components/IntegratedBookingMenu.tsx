@@ -106,13 +106,11 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
     else setViewMonth(viewMonth + 1);
   };
 
-  // 10:00 ~ 19:30 시간 슬롯
+  // 10:00 ~ 19:00 시간 슬롯 (1시간 단위)
   const timeSlots = [
-    '10:00', '10:30', '11:00', '11:30',
-    '12:00', '12:30', '13:00', '13:30',
-    '14:00', '14:30', '15:00', '15:30',
-    '16:00', '16:30', '17:00', '17:30',
-    '18:00', '18:30', '19:00', '19:30',
+    '10:00', '11:00', '12:00', '13:00',
+    '14:00', '15:00', '16:00', '17:00',
+    '18:00', '19:00'
   ];
 
   if (!isVisible && !isOpen) return null;
@@ -177,7 +175,11 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
                     key={toDateKey(day)}
                     type="button"
                     disabled={isPast}
-                    onClick={() => setSelectedDate(day)}
+                    onClick={() => {
+                      setSelectedDate(day);
+                      // Reset time when date changes
+                      setSelectedTime('');
+                    }}
                     className={`aspect-square flex items-center justify-center rounded-xl text-[14px] font-medium transition-all duration-150 ${
                       isSelected ? 'bg-[#bb8a78] text-white font-bold' : isPast ? 'text-gray-200 cursor-not-allowed' : isToday ? 'bg-[#fbf6f4] text-[#bb8a78] font-bold ring-1 ring-[#bb8a78]/50' : dayOfWeek === 0 ? 'text-red-500 hover:bg-red-50' : dayOfWeek === 6 ? 'text-blue-500 hover:bg-blue-50' : 'text-[#2c2d33] hover:bg-gray-100'
                     }`}
@@ -192,25 +194,27 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
             )}
           </div>
 
-          <div className="mb-2">
-            <h3 className="text-[15px] font-bold text-[#1f2024] mb-3">{t('select_time')}</h3>
-            <div className="grid grid-cols-4 gap-2">
-              {timeSlots.map((time) => {
-                const isSelected = selectedTime === time;
-                return (
-                  <button
-                    key={time}
-                    onClick={() => setSelectedTime(time)}
-                    className={`py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-150 active:scale-95 ${
-                      isSelected ? 'bg-[#bb8a78] text-white' : 'bg-[#f4f5f7] text-[#4a4d57] hover:bg-[#e4e6ea]'
-                    }`}
-                  >
-                    {time}
-                  </button>
-                );
-              })}
+          {selectedDate && (
+            <div className="mb-2 animate-[fadeIn_0.3s_ease-out]">
+              <h3 className="text-[15px] font-bold text-[#1f2024] mb-3">{t('select_time')}</h3>
+              <div className="grid grid-cols-4 gap-2">
+                {timeSlots.map((time) => {
+                  const isSelected = selectedTime === time;
+                  return (
+                    <button
+                      key={time}
+                      onClick={() => setSelectedTime(time)}
+                      className={`py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-150 active:scale-95 ${
+                        isSelected ? 'bg-[#bb8a78] text-white' : 'bg-[#f4f5f7] text-[#4a4d57] hover:bg-[#e4e6ea]'
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="px-5 pb-5 pt-2 border-t border-gray-100 bg-white">

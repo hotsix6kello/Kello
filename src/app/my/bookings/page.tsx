@@ -144,7 +144,7 @@ function BookingsPageContent() {
         appendBookingQueryContext(plannerParams, bookingContext, {
             includeBookingIdParam: true,
         });
-        const plannerUrl = buildPathWithParams("/planner", plannerParams);
+        const plannerUrl = buildPathWithParams("/explore", plannerParams);
         const openPlanner = () => router.push(plannerUrl);
         const openMap = () => {
             if (!item.lat || !item.lng) return;

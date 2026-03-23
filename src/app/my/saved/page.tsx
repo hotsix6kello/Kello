@@ -208,7 +208,7 @@ function SavedHubContent() {
                                 fallbackKey: "common.states.saved_locally",
                             })
                           : t("my_page.saved.plans.synced"),
-                      href: "/planner",
+                      href: "/explore",
                   },
               ]
             : [];
@@ -426,7 +426,7 @@ function SavedHubContent() {
                             </p>
                             <button
                                 className={styles.primaryButton}
-                                onClick={() => router.push("/planner")}
+                                onClick={() => router.push("/explore")}
                             >
                                     {t("common.actions.create_plan")}
                                 </button>
@@ -465,13 +465,13 @@ function SavedHubContent() {
                                         </button>
                                         <button
                                             className={styles.primaryButton}
-                                            onClick={() => router.push("/planner")}
+                                            onClick={() => router.push("/explore")}
                                         >
                                             {t("common.actions.continue_editing")}
                                         </button>
                                         <button
                                             className={styles.softButton}
-                                            onClick={() => router.push("/planner")}
+                                            onClick={() => router.push("/explore")}
                                         >
                                             {t("common.actions.use_this_plan")}
                                         </button>

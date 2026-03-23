@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
 import styles from './interpreter.module.css';
 import {
   getLocaleDisplayLabel,
+  getLocaleLabel,
   getSpeechLocale,
   INTERPRETER_SUPPORTED_LOCALES,
 } from '@/lib/translator/catalog.ts';
@@ -34,16 +35,22 @@ type InterpreterMessage = {
   canReplay: boolean;
 };
 
-type InterpreterTranslateResponse =
-  | {
-      ok: true;
-      translatedText: string;
-      provider: string;
-    }
-  | {
-      ok: false;
-      error: string;
-    };
+type InterpreterTurnResponse = {
+  turnId: string;
+  sessionId: string;
+  speaker: SpeakerRole;
+  inputMode: 'voice' | 'text';
+  originalText: string;
+  translatedText: string;
+  sourceLocale: ConciergeLocale;
+  targetLocale: ConciergeLocale;
+  createdAt: string;
+  replay: {
+    originalLang: string;
+    translatedLang: string;
+  };
+  fallbackToText: boolean;
+};
 
 type InterpreterTranscribeResponse =
   | {
@@ -103,6 +110,9 @@ function resolveCustomerLocale(appLocale?: string | null): ConciergeLocale {
 
 export default function InterpreterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const storeName = searchParams.get('storeName');
+  const serviceName = searchParams.get('serviceName');
   const { t, i18n } = useTranslation('common');
   const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>(() =>
     resolveCustomerLocale(i18n.resolvedLanguage ?? i18n.language),
@@ -122,6 +132,9 @@ export default function InterpreterPage() {
   const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
   const [voiceError, setVoiceError] = useState<string | null>(null);
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [ephemeralToken, setEphemeralToken] = useState<string | null>(null);
+  const [isSessionLoading, setIsSessionLoading] = useState(false);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
@@ -129,6 +142,67 @@ export default function InterpreterPage() {
   const activeRecordingRoleRef = useRef<SpeakerRole | null>(null);
   const recordingStartedAtRef = useRef<number | null>(null);
   const recordingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('interpreter_history');
+    if (savedMessages) {
+      try {
+        setMessages(JSON.parse(savedMessages));
+      } catch (e) {
+        console.error('Failed to parse saved interpreter messages', e);
+      }
+    }
+
+    const savedSessionId = localStorage.getItem('interpreter_session_id');
+    const savedToken = localStorage.getItem('interpreter_session_token');
+    if (savedSessionId && savedToken) {
+      setSessionId(savedSessionId);
+      setEphemeralToken(savedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('interpreter_history', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    const initSession = async () => {
+      // If we already have a session, don't create a new one unless specifically needed
+      if (sessionId) return;
+      
+      setIsSessionLoading(true);
+      try {
+        const res = await fetch('/api/interpreter/session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customerLocale,
+            staffLocale,
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setSessionId(data.id);
+          setEphemeralToken(data.ephemeralToken);
+          localStorage.setItem('interpreter_session_id', data.id);
+          localStorage.setItem('interpreter_session_token', data.ephemeralToken);
+        } else {
+          console.error('Failed to initialize interpreter session');
+        }
+      } catch (e) {
+        console.error('Interpreter session initialization error', e);
+      } finally {
+        setIsSessionLoading(false);
+      }
+    };
+
+    if (customerLocale && staffLocale) {
+      initSession();
+    }
+  }, [customerLocale, staffLocale]);
 
   useEffect(() => {
     const syncCustomerLocale = (nextLocale?: string | null) => {
@@ -290,11 +364,13 @@ export default function InterpreterPage() {
   };
 
   const requestInterpreterTranslation = async (params: {
-    sourceText: string;
-    sourceLang: ConciergeLocale;
-    targetLang: ConciergeLocale;
+    sessionId: string;
+    ephemeralToken: string;
+    speaker: SpeakerRole;
+    inputMode: 'voice' | 'text';
+    text: string;
   }) => {
-    const response = await fetch('/api/interpreter/translate', {
+    const response = await fetch('/api/interpreter/turn', {
       method: 'POST',
       cache: 'no-store',
       headers: {
@@ -303,10 +379,10 @@ export default function InterpreterPage() {
       body: JSON.stringify(params),
     });
 
-    const data = (await response.json()) as InterpreterTranslateResponse;
+    const data = await response.json();
 
-    if (!response.ok || !data.ok) {
-      throw new Error(data.ok ? 'interpreter_translate_failed' : data.error);
+    if (!response.ok) {
+      throw new Error(data.error || 'interpreter_turn_failed');
     }
 
     return data.translatedText;
@@ -334,11 +410,20 @@ export default function InterpreterPage() {
     setVoiceStatus(null);
 
     try {
-      const translatedText = await requestInterpreterTranslation({
-        sourceText: normalizedSourceText,
-        sourceLang,
-        targetLang,
-      });
+      let translatedText = normalizedSourceText;
+
+      if (sessionId && ephemeralToken) {
+        translatedText = await requestInterpreterTranslation({
+          sessionId,
+          ephemeralToken,
+          speaker: params.speaker,
+          inputMode: params.inputType,
+          text: normalizedSourceText,
+        });
+      } else {
+        // Fallback or warning if session is not ready
+        console.warn('Interpreter session not ready, translation might not be saved');
+      }
 
       appendInterpreterMessage(
         createInterpreterMessage({
@@ -615,16 +700,28 @@ export default function InterpreterPage() {
           : isTranslating
             ? t('interpreter_page.translating')
             : t('interpreter_page.staff_speak_btn');
-  const customerLanguageLabel = getLocaleDisplayLabel(customerLocale);
-  const staffLanguageLabel = getLocaleDisplayLabel(staffLocale);
+  const customerLanguageLabel = t(`beauty_bookings.lang_${customerLocale.toLowerCase().replace('-', '_')}`);
+  const staffLanguageLabel = t(`beauty_bookings.lang_${staffLocale.toLowerCase().replace('-', '_')}`);
+  const isRtl = i18n.language === 'ar' || i18n.resolvedLanguage === 'ar';
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} dir={isRtl ? 'rtl' : 'ltr'}>
       <div className={styles.header}>
         <button className={styles.backBtn} type="button" onClick={handleBack}>
           {t('interpreter_page.back')}
         </button>
       </div>
+
+      {storeName && (
+        <div className={styles.visitorContext}>
+          <span style={{ fontSize: '1.2rem' }}>📍</span>
+          <p style={{ margin: 0 }}>
+            {storeName && serviceName
+              ? t('beauty_bookings.interpreter_visit_service_context', { storeName, serviceName })
+              : t('beauty_bookings.interpreter_visit_context', { storeName })}
+          </p>
+        </div>
+      )}
 
       <section className={styles.titleSection}>
         <h1 className={styles.title}>{t('interpreter_page.title')}</h1>

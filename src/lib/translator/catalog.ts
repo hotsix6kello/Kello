@@ -226,6 +226,12 @@ export function getLocaleLabel(locale: ConciergeLocale) {
     th: "ไทย",
     id: "Bahasa Indonesia",
     ms: "Bahasa Melayu",
+    es: "Español",
+    fr: "Français",
+    de: "Deutsch",
+    ar: "العربية",
+    pt: "Português",
+    ru: "Русский",
   };
 
   return labels[locale];
@@ -242,6 +248,12 @@ export function getLocaleDisplayLabel(locale: ConciergeLocale) {
     th: "Thai (TH)",
     id: "Indonesian (ID)",
     ms: "Malay (MS)",
+    es: "Spanish (ES)",
+    fr: "French (FR)",
+    de: "German (DE)",
+    ar: "Arabic (AR)",
+    pt: "Portuguese (PT)",
+    ru: "Russian (RU)",
   };
 
   return labels[locale];
@@ -258,6 +270,12 @@ export function getSpeechLocale(locale: ConciergeLocale) {
     th: "th-TH",
     id: "id-ID",
     ms: "ms-MY",
+    es: "es-ES",
+    fr: "fr-FR",
+    de: "de-DE",
+    ar: "ar-SA",
+    pt: "pt-PT",
+    ru: "ru-RU",
   };
 
   return map[locale];
