@@ -59,23 +59,20 @@
    TOP NAVIGATION
    ────────────────────────────────────────────────────────────────────────── */
 .topNav {
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
+  background: transparent;
 }
 
 .topNav::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(251, 247, 243, 0.82);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(109, 83, 63, 0.06);
-  z-index: -1;
+  display: none;
 }
 
 .navTools {
@@ -150,7 +147,7 @@
    HERO SECTION
    ────────────────────────────────────────────────────────────────────────── */
 .heroSection {
-  padding: 32px 14px 18px;
+  padding: 0;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -163,10 +160,11 @@
 }
 
 .heroLogo {
-  width: 100%;
+  width: 100vw;
   height: auto;
-  max-width: 100%;
-  margin-bottom: 28px;
+  min-height: 240px;
+  object-fit: cover;
+  margin-bottom: 0;
 }
 
 .heroGreeting {
@@ -192,19 +190,20 @@
 }
 
 .heroTitle {
-  margin: 18px 12px 12px;
+  margin: 0;
+  padding: 40px 14px;
   font-family: inherit;
-  font-size: clamp(0.7rem, 3.2vw, 1.9rem);
-  line-height: 1.15;
+  font-size: clamp(1.4rem, 6vw, 2.2rem);
+  line-height: 1.2;
   letter-spacing: -0.04em;
   font-weight: 900;
   color: var(--text);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: calc(100% - 32px);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .heroSubtitle {
@@ -221,7 +220,7 @@
    BOOKING CARD / BEAUTY CATEGORIES
    ────────────────────────────────────────────────────────────────────────── */
 .bookingShell {
-  padding: 8px 20px 18px;
+  padding: 0 20px 24px;
   position: relative;
   z-index: 1;
 }
