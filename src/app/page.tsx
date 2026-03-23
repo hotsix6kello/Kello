@@ -59,9 +59,9 @@ export default function HomePage() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return t('common.morning');
-    if (hour < 18) return t('common.afternoon');
-    return t('common.evening');
+    if (hour < 12) return t('morning');
+    if (hour < 18) return t('afternoon');
+    return t('evening');
   };
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
