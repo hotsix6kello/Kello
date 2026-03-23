@@ -473,11 +473,13 @@ function MyPageContent() {
             }
 
             if (!user) {
-                setUserName(fallbackName);
-                setProfileSubtitle(fallbackSubtitle);
+                // ---------- [ UI Test Mode ] ----------
+                // 원래는 게스트 로그인 시 관리자 UI를 안보여주지만, 임시로 설정합니다.
+                setUserName("최고 관리자 (테스트)");
+                setProfileSubtitle("admin@kello.local");
                 setCommunityAuthor("");
-                setIsAdmin(false);
-                setPartnerStatus(null);
+                setIsAdmin(true);
+                setPartnerStatus("approved");
                 return;
             }
 
@@ -527,7 +529,10 @@ function MyPageContent() {
                 return;
             }
 
-            setPartnerStatus(partner ? (partner.status as PartnerStatus) : "none");
+            // ---------- [ UI Test Mode ] ----------
+            setPartnerStatus("approved");
+            setIsAdmin(true);
+            // --------------------------------------
         };
 
         void loadDashboardUser();
