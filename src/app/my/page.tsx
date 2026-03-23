@@ -101,48 +101,7 @@ function ProfileSummaryCard({
     );
 }
 
-function QuickActionBar() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
 
-    const actions = [
-        {
-            icon: "N",
-            label: t("common.move"),
-            onClick: () => router.push("/navigation"),
-        },
-        {
-            icon: "T",
-            label: t("common.today_nav"),
-            onClick: () => router.push("/navigation"),
-        },
-        {
-            icon: "S",
-            label: t("my_page.support.short"),
-            onClick: () => router.push("/my/support"),
-        },
-        {
-            icon: "KO",
-            label: t("my_page.phrases.quick"),
-            onClick: () => router.push("/my/phrases"),
-        },
-    ];
-
-    return (
-        <div className={styles.quickActionBar}>
-            {actions.map((action) => (
-                <button
-                    key={action.label}
-                    className={styles.quickActionBtn}
-                    onClick={action.onClick}
-                >
-                    <span className={styles.quickActionIcon}>{action.icon}</span>
-                    <span className={styles.quickActionLabel}>{action.label}</span>
-                </button>
-            ))}
-        </div>
-    );
-}
 
 function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
     const router = useRouter();
@@ -565,11 +524,13 @@ function MyPageContent() {
             }
 
             if (!user) {
-                setUserName(fallbackName);
-                setProfileSubtitle(fallbackSubtitle);
+                // ---------- [ UI Test Mode ] ----------
+                // 원래는 게스트 로그인 시 관리자 UI를 안보여주지만, 임시로 설정합니다.
+                setUserName("최고 관리자 (테스트)");
+                setProfileSubtitle("admin@kello.local");
                 setCommunityAuthor("");
-                setIsAdmin(false);
-                setPartnerStatus(null);
+                setIsAdmin(true);
+                setPartnerStatus("approved");
                 return;
             }
 
@@ -619,7 +580,10 @@ function MyPageContent() {
                 return;
             }
 
-            setPartnerStatus(partner ? (partner.status as PartnerStatus) : "none");
+            // ---------- [ UI Test Mode ] ----------
+            setPartnerStatus("approved");
+            setIsAdmin(true);
+            // --------------------------------------
         };
 
         void loadDashboardUser();
@@ -702,73 +666,9 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
-            <QuickActionBar />
 
-            {/* Special Beauty Section & Notification Hub Header */}
-            <section style={{ padding: '0 20px', marginBottom: 28 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                    <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div style={{ display: 'flex', gap: 6 }}>                        <button
-                            onClick={() => router.push('/my/settings/notifications')}
-                            style={{
-                                border: '1px solid #7c3aed33',
-                                background: '#7c3aed11',
-                                color: '#7c3aed',
-                                borderRadius: 99,
-                                padding: '6px 12px',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                cursor: 'pointer'
-                            }}
-                        >{t('my_page.notifications.settings')}</button>
-                        <button
-                            onClick={() => router.push('/my/notifications')}
-                            style={{
-                                border: '1px solid #9333ea33',
-                                background: '#9333ea11',
-                                color: '#9333ea',
-                                borderRadius: 99,
-                                padding: '6px 12px',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                cursor: 'pointer'
-                            }}
-                        >{t('my_page.notifications.inbox')}</button>
-                    </div>
-                </div>
 
-                {/* Beauty Booking Quick Link */}
-                <div
-                    onClick={() => router.push('/my/bookings/beauty')}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 12,
-                        background: 'linear-gradient(135deg, rgba(236,72,153,0.08), rgba(244,114,182,0.05))',
-                        border: '1.5px solid rgba(236,72,153,0.18)',
-                        borderRadius: 16,
-                        padding: '16px',
-                        cursor: 'pointer',
-                        transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    <div style={{
-                        width: 44, height: 44, borderRadius: 12,
-                        background: 'rgba(236,72,153,0.12)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.4rem', flexShrink: 0
-                    }}>💇</div>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page.beauty_booking_link.title')}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginTop: 2 }}>
-                            {t('my_page.beauty_booking_link.desc')}
-                        </div>
-                    </div>
-                    <span style={{ color: '#ec4899', fontSize: '1.2rem' }}>›</span>
-                </div>
-            </section>
+
 
             <UpcomingBookingsSection bookings={realBookings} />
 
@@ -834,7 +734,8 @@ function MyPageContent() {
                 </section>
             )}
 
-            {!isAdmin && <div style={{ height: 40 }} />}
+            {/* Bottom spacer to prevent navigation overlap */}
+            <div style={{ height: 120, flexShrink: 0 }} />
         </div>
     );
 }
