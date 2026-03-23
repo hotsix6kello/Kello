@@ -4,6 +4,9 @@
     "faq": "FAQ",
     "recent": "Recent Activities"
   },
+  "morning": "Good Morning",
+  "afternoon": "Good Afternoon",
+  "evening": "Good Evening",
   "home_beauty": {
     "hero": {
       "eyebrow": "Beauty Booking Concierge",
@@ -11,8 +14,8 @@
       "subtitle": "Select your beauty service first and move directly to the booking step. We have designed it for fast mobile selection followed by shop comparison and reservation requests.",
       "welcome": "Welcome {{name}}, please select a service today.",
       "welcome_user": "{{greeting}}, {{name}}! 👋",
-      "welcome_header": "{{name}}! 👋",
-      "welcome_hero": "Welcome. {{name}}! 👋"
+      "welcome_header": "{{name}}",
+      "welcome_hero": "Welcome, {{name}}! 👋"
     },
     "booking": {
       "step": "Step 1",

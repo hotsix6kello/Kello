@@ -14,8 +14,8 @@
       "subtitle": "원하시는 뷰티 서비스를 먼저 고르고, 바로 예약 단계로 넘어가 보세요. 모바일에서 빠르게 선택하고 이어서 매장 비교와 예약 요청까지 진행할 수 있도록 구성했습니다.",
       "welcome": "{{name}}님, 오늘 필요한 서비스를 선택해 보세요.",
       "welcome_user": "{{greeting}}, {{name}}님! 👋",
-      "welcome_header": "{{name}}님! 👋",
-      "welcome_hero": "환영합니다. {{name}}님! 👋"
+      "welcome_header": "{{name}}",
+      "welcome_hero": "환영합니다, {{name}}님! 👋"
     },
     "booking": {
       "step": "STEP. 01",
