@@ -59,9 +59,13 @@ export default function HomePage() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return t('morning');
-    if (hour < 18) return t('afternoon');
-    return t('evening');
+    let key = '';
+    if (hour < 12) key = 'morning';
+    else if (hour < 18) key = 'afternoon';
+    else key = 'evening';
+    
+    // 타 언어 파일에서 'common.morning' 또는 'morning' 위치가 다를 수 있어 배열로 시도
+    return t([`common.${key}`, key], { defaultValue: key });
   };
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
@@ -334,11 +338,6 @@ export default function HomePage() {
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
-        onStartBooking={() => {
-          if (selectedCategory) {
-            router.push(`/explore?category=beauty&beautyCategory=${selectedCategory}`);
-          }
-        }}
         t={t}
       />
 
