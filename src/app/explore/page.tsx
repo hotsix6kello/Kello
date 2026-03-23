@@ -1419,10 +1419,6 @@ export default function MyExplorePage() {
     const nameError = validateCustomerField('name', customerForm.name);
     const phoneError = validateCustomerField('phone', customerForm.phone);
 
-    if (!selectedPrimaryService) {
-      nextErrors.primaryService = t('beauty_bookings.error_primary_service') || '대표 시술을 먼저 골라주세요.';
-    }
-
     if (nameError) {
       nextErrors.name = nameError;
     }
