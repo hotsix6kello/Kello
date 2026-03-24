@@ -194,7 +194,7 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "Conserje de Reservas de Belleza",
-      "title": "Qué reserva necesitas?",
+      "title": "Capture la belleza de Corea\nen su agenda",
       "subtitle": "Selecciona tu servicio de belleza y pasa directamente a reservar.",
       "welcome": "{{name}}, selecciona un servicio.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"

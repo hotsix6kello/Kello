@@ -1288,7 +1288,7 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "美容预约管家",
-      "title": "您想预约什么服务？",
+      "title": "将韩国之美，\n融入您的行程。",
       "subtitle": "选择您想要的美容服务，直接进入预约步骤。",
       "welcome": "{{name}}，请选择今天的服务。",
       "welcome_user": "{{greeting}}，{{name}}！👋"
