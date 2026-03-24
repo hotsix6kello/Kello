@@ -355,60 +355,51 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
     const bannerConfig: Record<
         PartnerStatus,
         {
-            bg: string;
-            border: string;
             icon: string;
             title: string;
             desc: string;
             buttonLabel?: string;
-            buttonColor?: string;
             onClick?: () => void;
+            isRejected?: boolean;
         }
     > = {
         none: {
-            bg: "rgba(245,158,11,0.07)",
-            border: "rgba(245,158,11,0.25)",
             icon: "P",
             title: t("my_page.dashboard.partner.none_title"),
             desc: t("my_page.dashboard.partner.none_desc"),
             buttonLabel: t("my_page.dashboard.partner.none_cta"),
-            buttonColor: "#f59e0b",
             onClick: () => router.push("/auth/partner-signup"),
         },
         pending: {
-            bg: "rgba(245,158,11,0.05)",
-            border: "rgba(245,158,11,0.18)",
             icon: "...",
             title: t("my_page.dashboard.partner.pending_title"),
             desc: t("my_page.dashboard.partner.pending_desc"),
         },
         approved: {
-            bg: "rgba(16,185,129,0.05)",
-            border: "rgba(16,185,129,0.2)",
             icon: "OK",
             title: t("my_page.dashboard.partner.approved_title"),
             desc: t("my_page.dashboard.partner.approved_desc"),
         },
         rejected: {
-            bg: "rgba(239,68,68,0.05)",
-            border: "rgba(239,68,68,0.18)",
             icon: "!",
             title: t("my_page.dashboard.partner.rejected_title"),
             desc: t("my_page.dashboard.partner.rejected_desc"),
             buttonLabel: t("my_page.dashboard.partner.rejected_cta"),
-            buttonColor: "#ef4444",
             onClick: () => router.push("/auth/partner-signup"),
+            isRejected: true,
         },
     };
 
     const config = bannerConfig[status];
 
     return (
-        <div
-            className={styles.partnerBanner}
-            style={{ background: config.bg, borderColor: config.border }}
-        >
-            <span className={styles.partnerBannerIcon}>{config.icon}</span>
+        <div className={styles.partnerBanner}>
+            <span
+                className={styles.partnerBannerIcon}
+                style={{ color: config.isRejected ? "var(--korean-red)" : "var(--secondary)" }}
+            >
+                {config.icon}
+            </span>
             <div className={styles.partnerBannerBody}>
                 <div className={styles.partnerBannerTitle}>{config.title}</div>
                 <div className={styles.partnerBannerDesc}>{config.desc}</div>
@@ -417,7 +408,7 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
             {config.buttonLabel && config.onClick && (
                 <button
                     className={styles.partnerBannerBtn}
-                    style={{ background: config.buttonColor }}
+                    style={{ background: config.isRejected ? "var(--korean-red)" : "var(--secondary)" }}
                     onClick={config.onClick}
                 >
                     {config.buttonLabel}
@@ -600,7 +591,7 @@ function MyPageContent() {
     if (!hasHydrated) {
         return (
             <div className={styles.container}>
-                <div style={{ padding: 24, textAlign: "center", color: "var(--gray-500)" }}>
+                <div style={{ padding: 24, textAlign: "center", color: "var(--soft-ink)" }}>
                     Loading...
                 </div>
             </div>
@@ -618,34 +609,17 @@ function MyPageContent() {
             <QuickActionBar />
 
             {/* Special Beauty Section & Notification Hub Header */}
-            <section style={{ padding: '0 20px', marginBottom: 28 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <section className={styles.section} style={{ marginBottom: 20 }}>
+                <div className={styles.adminTitleRow}>
                     <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div style={{ display: 'flex', gap: 6 }}>                        <button
+                    <div className={styles.notificationBtnRow}>
+                        <button
                             onClick={() => router.push('/my/settings/notifications')}
-                            style={{
-                                border: '1px solid #7c3aed33',
-                                background: '#7c3aed11',
-                                color: '#7c3aed',
-                                borderRadius: 99,
-                                padding: '6px 12px',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                cursor: 'pointer'
-                            }}
+                            className={styles.notificationBtn}
                         >{t('my_page.notifications.settings')}</button>
                         <button
                             onClick={() => router.push('/my/notifications')}
-                            style={{
-                                border: '1px solid #9333ea33',
-                                background: '#9333ea11',
-                                color: '#9333ea',
-                                borderRadius: 99,
-                                padding: '6px 12px',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                cursor: 'pointer'
-                            }}
+                            className={styles.notificationBtn}
                         >{t('my_page.notifications.inbox')}</button>
                     </div>
                 </div>
@@ -653,33 +627,16 @@ function MyPageContent() {
                 {/* Beauty Booking Quick Link */}
                 <div
                     onClick={() => router.push('/my/bookings/beauty')}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 12,
-                        background: 'linear-gradient(135deg, rgba(236,72,153,0.08), rgba(244,114,182,0.05))',
-                        border: '1.5px solid rgba(236,72,153,0.18)',
-                        borderRadius: 16,
-                        padding: '16px',
-                        cursor: 'pointer',
-                        transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                    className={styles.beautyQuickLink}
                 >
-                    <div style={{
-                        width: 44, height: 44, borderRadius: 12,
-                        background: 'rgba(236,72,153,0.12)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.4rem', flexShrink: 0
-                    }}>💇</div>
+                    <div className={styles.beautyQuickIcon}>💇</div>
                     <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page.beauty_booking_link.title')}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginTop: 2 }}>
+                        <div className={styles.beautyQuickTitle}>{t('my_page.beauty_booking_link.title')}</div>
+                        <div className={styles.beautyQuickDesc}>
                             {t('my_page.beauty_booking_link.desc')}
                         </div>
                     </div>
-                    <span style={{ color: '#ec4899', fontSize: '1.2rem' }}>›</span>
+                    <span className={styles.beautyQuickArrow}>›</span>
                 </div>
             </section>
 
@@ -699,50 +656,34 @@ function MyPageContent() {
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
             {isAdmin && (
-                <section style={{ padding: '0 20px', marginTop: 28, marginBottom: 40 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                <section className={styles.section} style={{ marginTop: 20 }}>
+                    <div className={styles.adminTitleRow}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
-                        <span style={{
-                            background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                            color: 'white', fontSize: '0.65rem', fontWeight: 800,
-                            padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase'
-                        }}>Admin</span>
+                        <span className={styles.adminBadge}>Admin</span>
                     </div>
 
-                    {[
-                        { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
-                        { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
-                        { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
-                        { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                        { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
-                    ].map((item) => (
-                        <div
-                            key={item.path}
-                            onClick={() => router.push(item.path)}
-                            style={{
-                                display: 'flex', alignItems: 'center', gap: 14,
-                                background: 'white', borderRadius: 16,
-                                border: '1px solid rgba(124,58,237,0.12)',
-                                padding: '14px 18px', marginBottom: 10,
-                                cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-                                transition: 'transform 0.15s'
-                            }}
-                            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.985)'}
-                            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <div style={{
-                                width: 42, height: 42, borderRadius: 12,
-                                background: 'rgba(124,58,237,0.07)',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                fontSize: '1.25rem', flexShrink: 0
-                            }}>{item.icon}</div>
-                            <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</div>
-                                <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', marginTop: 2 }}>{item.desc}</div>
+                    <div className={styles.adminMenuGrid}>
+                        {[
+                            { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
+                            { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
+                            { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
+                            { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
+                            { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
+                        ].map((item) => (
+                            <div
+                                key={item.path}
+                                onClick={() => router.push(item.path)}
+                                className={styles.adminMenuCard}
+                            >
+                                <div className={styles.adminMenuIconWrap}>{item.icon}</div>
+                                <div style={{ flex: 1 }}>
+                                    <div className={styles.adminMenuLabel}>{item.label}</div>
+                                    <div className={styles.adminMenuDesc}>{item.desc}</div>
+                                </div>
+                                <span className={styles.adminMenuArrow}>›</span>
                             </div>
-                            <span style={{ color: 'var(--gray-300)', fontSize: '1.1rem' }}>›</span>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </section>
             )}
 

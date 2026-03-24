@@ -714,7 +714,7 @@ export default function InterpreterPage() {
     <main className={styles.main} dir={isRtl ? 'rtl' : 'ltr'}>
       <div className={styles.header}>
         <button className={styles.backBtn} type="button" onClick={handleBack} aria-label={t('interpreter_page.back')}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" style={{ width: '24px', height: '24px' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={styles.backIcon}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
           </svg>
         </button>
@@ -722,8 +722,8 @@ export default function InterpreterPage() {
 
       {storeName && (
         <div className={styles.visitorContext}>
-          <span style={{ fontSize: '1.2rem' }}>📍</span>
-          <p style={{ margin: 0 }}>
+          <span className={styles.visitorEmoji}>📍</span>
+          <p className={styles.visitorText}>
             {storeName && serviceName
               ? t('beauty_bookings.interpreter_visit_service_context', { storeName, serviceName })
               : t('beauty_bookings.interpreter_visit_context', { storeName })}
@@ -761,7 +761,7 @@ export default function InterpreterPage() {
               ))}
             </select>
           </div>
-          <div className={styles.langCard} style={{ cursor: 'default' }}>
+          <div className={styles.langCardActive}>
             <span className={styles.langRole}>{t('interpreter_page.staff_lang')}</span>
             <strong className={styles.langCurrent}>{staffLanguageLabel}</strong>
           </div>
