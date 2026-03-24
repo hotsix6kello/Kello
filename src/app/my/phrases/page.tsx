@@ -232,10 +232,10 @@ const PHRASES: PhraseItem[] = [
         emphasis: true,
     },
     {
-        id: "emergency-interpreter",
+        id: "emergency-translation",
         category: "emergency",
-        label: "Need an interpreter",
-        english: "I need an interpreter.",
+        label: "Need a translation",
+        english: "I need a translation.",
         korean: "통역이 필요합니다.",
         emphasis: true,
     },

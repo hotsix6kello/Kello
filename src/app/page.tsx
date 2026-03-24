@@ -53,20 +53,8 @@ export default function HomePage() {
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
-    setSearchQuery: setInput,
     setDestinationInfo
   } = useTrip();
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    let key = '';
-    if (hour < 12) key = 'morning';
-    else if (hour < 18) key = 'afternoon';
-    else key = 'evening';
-    
-    // 타 언어 파일에서 'common.morning' 또는 'morning' 위치가 다를 수 있어 배열로 시도
-    return t([`common.${key}`, key], { defaultValue: key });
-  };
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
   const setSelectedCategory = setGlobalCategory as (category: BeautyCategoryId | null) => void;
@@ -109,10 +97,16 @@ export default function HomePage() {
       };
     });
 
-    const mappedPlaces = MOCK_PLACES.map(p => ({
-      ...p,
-      searchTerms: [p.title, p.area].join(' ').toLowerCase()
-    }));
+    const mappedPlaces = MOCK_PLACES.map(p => {
+      const transTitle = t(p.title, { defaultValue: p.title });
+      const transArea = t(p.area, { defaultValue: p.area });
+      return {
+        ...p,
+        title: transTitle,
+        area: transArea,
+        searchTerms: [transTitle, transArea].join(' ').toLowerCase()
+      };
+    });
 
     return [...mappedPlaces, ...items];
   }, [t]);
@@ -168,7 +162,7 @@ export default function HomePage() {
     }
   };
 
-  const nextDest = itinerary.find(item => item.status === 'confirmed');
+  const nextDest = itinerary.find((item: ItineraryItem) => item.status === 'confirmed');
 
   const destInfo = useMemo(() => {
     if (selectedDest) {
@@ -247,14 +241,8 @@ export default function HomePage() {
     router.push('/interpreter');
   };
 
-  useEffect(() => {
-    if (openNavSheet || isMapOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [openNavSheet, isMapOpen]);
+  // body는 globals.css에서 overflow:hidden으로 영구 설정됨
+  // JS에서 별도 제어 불필요
 
   const handleKRide = () => {
     if (!destInfo) return;
@@ -318,21 +306,19 @@ export default function HomePage() {
   }, [destInfo]);
 
   if (!isHydrated) {
-    return <main className={styles.main} suppressHydrationWarning />;
+    return <div className={styles.main} suppressHydrationWarning />;
   }
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <HomeTopNav 
         userName={userName} 
         onSignOut={handleSignOut} 
-        greeting={getGreeting()}
         t={t} 
       />
 
       <HomeHero 
         userName={userName} 
-        greeting={getGreeting()} 
         t={t} 
       />
 
@@ -386,6 +372,6 @@ export default function HomePage() {
         </div>
       )}
 
-    </main>
+    </div>
   );
 }

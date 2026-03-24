@@ -815,6 +815,53 @@ export default function MyExplorePage() {
   const commLangs = useMemo(() => COMMUNICATION_LANGUAGES(t, tBeauty), [t, tBeauty]);
   const commIntents = useMemo(() => COMMUNICATION_INTENTS(t, tBeauty), [t, tBeauty]);
 
+  const translatedStores = useMemo(() => {
+    return BEAUTY_STORE_ITEMS.map((store) => ({
+      ...store,
+      name: tBeauty(`stores.${store.id}.name`, { defaultValue: store.name }),
+      priceLabel: tBeauty(`stores.${store.id}.priceLabel`, { defaultValue: store.priceLabel }),
+      shortDescription: tBeauty(`stores.${store.id}.shortDescription`, { defaultValue: store.shortDescription }),
+      tags: store.tags.map((tag, i) => tBeauty(`stores.${store.id}.tags.${i}`, { defaultValue: tag }))
+    }));
+  }, [tBeauty]);
+
+  const translatedDesignersByStore = useMemo(() => {
+    const result: Record<string, BeautyDesigner[]> = {};
+    for (const [storeId, designers] of Object.entries(DESIGNERS_BY_STORE)) {
+      result[storeId] = designers.map(d => ({
+        ...d,
+        name: tBeauty(`designers.${d.id}.name`, { defaultValue: d.name }),
+        specialty: tBeauty(`designers.${d.id}.specialty`, { defaultValue: d.specialty }),
+        experienceLabel: tBeauty(`designers.${d.id}.experienceLabel`, { defaultValue: d.experienceLabel }),
+        shortNote: tBeauty(`designers.${d.id}.shortNote`, { defaultValue: d.shortNote })
+      }));
+    }
+    return result;
+  }, [tBeauty]);
+
+  const translatedPrimaryServices = useMemo(() => {
+    const result: Record<string, BeautyServiceOption[]> = {};
+    for (const [cat, services] of Object.entries(PRIMARY_SERVICES_BY_CATEGORY)) {
+      result[cat] = services.map(s => ({
+        ...s,
+        name: tBeauty(`services.${s.id}.name`, { defaultValue: s.name }),
+        description: tBeauty(`services.${s.id}.desc`, { defaultValue: s.description })
+      }));
+    }
+    return result as Record<BeautyCategoryId, BeautyServiceOption[]>;
+  }, [tBeauty]);
+
+  const translatedAddOns = useMemo(() => {
+    const result: Record<string, BeautyServiceOption[]> = {};
+    for (const [cat, services] of Object.entries(ADD_ONS_BY_CATEGORY)) {
+      result[cat] = services.map(s => ({
+        ...s,
+        name: tBeauty(`services.${s.id}.name`, { defaultValue: s.name }),
+        description: tBeauty(`services.${s.id}.desc`, { defaultValue: s.description })
+      }));
+    }
+    return result as Record<BeautyCategoryId, BeautyServiceOption[]>;
+  }, [tBeauty]);
   const [currentCity, setCurrentCity] = useState<CityId>('seoul');
 
   const [currentCategory, setCurrentCategory] = useState<string>('all');
@@ -996,7 +1043,7 @@ export default function MyExplorePage() {
       return;
     }
 
-    const exists = BEAUTY_STORE_ITEMS.some((store) => {
+    const exists = translatedStores.some((store) => {
       const matchesCategory = beautyCategoryFilter ? store.category === beautyCategoryFilter : true;
       const matchesRegion = selectedRegion === 'all' ? true : store.region === selectedRegion;
       return store.id === selectedBeautyStoreId && matchesCategory && matchesRegion;
@@ -1031,15 +1078,15 @@ export default function MyExplorePage() {
 
   const currentBeautyCategory = selectedBeautyCategory ?? beautyCategoryFilter;
   const availableDesigners = useMemo(
-    () => (selectedBeautyStoreId ? DESIGNERS_BY_STORE[selectedBeautyStoreId] ?? [] : []),
+    () => (selectedBeautyStoreId ? translatedDesignersByStore[selectedBeautyStoreId] ?? [] : []),
     [selectedBeautyStoreId],
   );
   const availablePrimaryServices = useMemo(
-    () => (currentBeautyCategory ? PRIMARY_SERVICES_BY_CATEGORY[currentBeautyCategory] ?? [] : []),
+    () => (currentBeautyCategory ? translatedPrimaryServices[currentBeautyCategory] ?? [] : []),
     [currentBeautyCategory],
   );
  const availableAddOnOptions = useMemo(
-    () => (currentBeautyCategory ? ADD_ONS_BY_CATEGORY[currentBeautyCategory] ?? [] : []),
+    () => (currentBeautyCategory ? translatedAddOns[currentBeautyCategory] ?? [] : []),
     [currentBeautyCategory],
   );
   const selectedDesigner = useMemo(
@@ -1074,7 +1121,7 @@ export default function MyExplorePage() {
       storeName:
         selectedBeautyStoreName ??
         (selectedBeautyStoreId
-          ? BEAUTY_STORE_ITEMS.find((store) => store.id === selectedBeautyStoreId)?.name ?? t('beauty_explore.label_service_default')
+          ? translatedStores.find((store) => store.id === selectedBeautyStoreId)?.name ?? t('beauty_explore.label_service_default')
           : t('beauty_explore.label_service_default')),
       dateLabel: selectedBeautyDate ? bookingDateLabels[selectedBeautyDate] ?? selectedBeautyDate : t('beauty_explore.label_service_default'),
       timeLabel: selectedBeautyTime ?? t('beauty_explore.label_service_default'),
@@ -1175,13 +1222,13 @@ export default function MyExplorePage() {
   const beautyDescription = beautyCategoryFilter
     ? beautyCategoryLabels[beautyCategoryFilter].description
     : t('beauty_explore.hero_desc');
-  const filteredBeautyStores = BEAUTY_STORE_ITEMS.filter((store) => {
+  const filteredBeautyStores = translatedStores.filter((store) => {
     const matchesCategory = beautyCategoryFilter ? store.category === beautyCategoryFilter : true;
     const matchesRegion = selectedRegion === 'all' ? true : store.region === selectedRegion;
     return matchesCategory && matchesRegion;
   });
   const selectedBeautyStore = selectedBeautyStoreId
-    ? BEAUTY_STORE_ITEMS.find((store) => store.id === selectedBeautyStoreId) ?? null
+    ? translatedStores.find((store) => store.id === selectedBeautyStoreId) ?? null
     : null;
   const selectedBeautyCategoryLabel = selectedBeautyCategory
     ? beautyCategoryLabels[selectedBeautyCategory].label

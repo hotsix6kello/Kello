@@ -181,7 +181,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
                       setSelectedTime('');
                     }}
                     className={`aspect-square flex items-center justify-center rounded-xl text-[14px] font-medium transition-all duration-150 ${
-                      isSelected ? 'bg-[#bb8a78] text-white font-bold' : isPast ? 'text-gray-200 cursor-not-allowed' : isToday ? 'bg-[#fbf6f4] text-[#bb8a78] font-bold ring-1 ring-[#bb8a78]/50' : dayOfWeek === 0 ? 'text-red-500 hover:bg-red-50' : dayOfWeek === 6 ? 'text-blue-500 hover:bg-blue-50' : 'text-[#2c2d33] hover:bg-gray-100'
+                      isSelected ? 'bg-blue-600 text-white font-bold' : isPast ? 'text-gray-200 cursor-not-allowed' : isToday ? 'bg-blue-50 text-blue-600 font-bold ring-1 ring-blue-600/30' : dayOfWeek === 0 ? 'text-red-500 hover:bg-red-50' : dayOfWeek === 6 ? 'text-blue-500 hover:bg-blue-50' : 'text-[#2c2d33] hover:bg-gray-100'
                     }`}
                   >
                     {day.getDate()}
@@ -190,7 +190,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
               })}
             </div>
             {selectedDate && (
-              <div className="mt-3 text-center text-[13px] font-semibold text-[#bb8a78]">{formatDateLocalized(selectedDate, lang, t)}</div>
+              <div className="mt-3 text-center text-[13px] font-semibold text-blue-600">{formatDateLocalized(selectedDate, lang, t)}</div>
             )}
           </div>
 
@@ -205,7 +205,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
                       key={time}
                       onClick={() => setSelectedTime(time)}
                       className={`py-2.5 rounded-xl text-[14px] font-semibold transition-all duration-150 active:scale-95 ${
-                        isSelected ? 'bg-[#bb8a78] text-white' : 'bg-[#f4f5f7] text-[#4a4d57] hover:bg-[#e4e6ea]'
+                        isSelected ? 'bg-blue-600 text-white' : 'bg-[#f4f5f7] text-[#4a4d57] hover:bg-[#e4e6ea]'
                       }`}
                     >
                       {time}
@@ -225,7 +225,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
             }}
             disabled={!selectedDate || !selectedTime}
             className={`w-full text-[16px] font-bold rounded-xl py-4 transition-all ${
-              selectedDate && selectedTime ? 'bg-[#bb8a78] text-white' : 'bg-gray-200 text-gray-400'
+              selectedDate && selectedTime ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'bg-gray-200 text-gray-400'
             }`}
           >
             {t('btn_complete')}
