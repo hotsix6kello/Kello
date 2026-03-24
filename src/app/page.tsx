@@ -247,14 +247,8 @@ export default function HomePage() {
     router.push('/interpreter');
   };
 
-  useEffect(() => {
-    if (openNavSheet || isMapOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [openNavSheet, isMapOpen]);
+  // body는 globals.css에서 overflow:hidden으로 영구 설정됨
+  // JS에서 별도 제어 불필요
 
   const handleKRide = () => {
     if (!destInfo) return;
