@@ -29,6 +29,12 @@ const LANGUAGE_LABELS: Record<string, string> = {
   th: "Thai",
   id: "Indonesian",
   ms: "Malay",
+  fr: "French",
+  es: "Spanish",
+  de: "German",
+  it: "Italian",
+  ru: "Russian",
+  pt: "Portuguese",
 };
 
 class MockInterpreterTranscriptionProvider implements InterpreterTranscriptionProvider {
