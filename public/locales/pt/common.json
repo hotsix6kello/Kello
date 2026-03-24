@@ -169,8 +169,8 @@
     },
     "booking": {
       "step": "PASSO. 01",
-      "title": "Selecione o serviço de beleza desejado",
-      "description": "Selecione primeiro uma categoria para uma exploração mais precisa."
+      "title": "Selecione o serviço de beleza",
+      "description": ""
     },
     "categories": {
       "hair": {

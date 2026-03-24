@@ -237,8 +237,8 @@
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "請選擇您想要的美容服務",
-      "description": "為了進行最準확的探索，請先選擇類別。"
+      "title": "請選擇美容服務",
+      "description": ""
     },
     "categories": {
       "hair": {
