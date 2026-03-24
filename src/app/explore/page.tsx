@@ -913,6 +913,8 @@ export default function MyExplorePage() {
 /* moved below */
   const [selectedCommunicationIntent, setSelectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
   const [customerForm, setCustomerForm] = useState<CustomerFormState>(INITIAL_CUSTOMER_FORM_STATE);
+  const [selectedCountry, setSelectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
+  const [isCountryPickerOpen, setIsCountryPickerOpen] = useState(false);
   const [agreements, setAgreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
   const [formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
   const [currentStep, setCurrentStep] = useState(1);
@@ -1172,7 +1174,10 @@ export default function MyExplorePage() {
         addOnIds: selectedAddOnIds,
         addOnNames: selectedAddOnOptions.map((option) => option.name),
         priceSummary: selectedPriceSummary,
-        customer: customerForm,
+        customer: {
+          ...customerForm,
+          phone: `${selectedCountry.dial}${customerForm.phone}`
+        },
         communication: {
           language: selectedCommunicationLanguage,
           intent: selectedCommunicationIntent,
@@ -1407,6 +1412,45 @@ export default function MyExplorePage() {
 
     return '';
   };
+
+  const COUNTRY_CODES = [
+    { code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png', name: 'South Korea' },
+    { code: 'JP', dial: '+81', flag: 'https://flagcdn.com/w40/jp.png', name: 'Japan' },
+    { code: 'CN', dial: '+86', flag: 'https://flagcdn.com/w40/cn.png', name: 'China' },
+    { code: 'TW', dial: '+886', flag: 'https://flagcdn.com/w40/tw.png', name: 'Taiwan' },
+    { code: 'HK', dial: '+852', flag: 'https://flagcdn.com/w40/hk.png', name: 'Hong Kong' },
+    { code: 'VN', dial: '+84', flag: 'https://flagcdn.com/w40/vn.png', name: 'Vietnam' },
+    { code: 'TH', dial: '+66', flag: 'https://flagcdn.com/w40/th.png', name: 'Thailand' },
+    { code: 'PH', dial: '+63', flag: 'https://flagcdn.com/w40/ph.png', name: 'Philippines' },
+    { code: 'SG', dial: '+65', flag: 'https://flagcdn.com/w40/sg.png', name: 'Singapore' },
+    { code: 'MY', dial: '+60', flag: 'https://flagcdn.com/w40/my.png', name: 'Malaysia' },
+    { code: 'ID', dial: '+62', flag: 'https://flagcdn.com/w40/id.png', name: 'Indonesia' },
+    { code: 'US', dial: '+1', flag: 'https://flagcdn.com/w40/us.png', name: 'United States' },
+    { code: 'CA', dial: '+1', flag: 'https://flagcdn.com/w40/ca.png', name: 'Canada' },
+    { code: 'GB', dial: '+44', flag: 'https://flagcdn.com/w40/gb.png', name: 'United Kingdom' },
+    { code: 'FR', dial: '+33', flag: 'https://flagcdn.com/w40/fr.png', name: 'France' },
+    { code: 'DE', dial: '+49', flag: 'https://flagcdn.com/w40/de.png', name: 'Germany' },
+    { code: 'IT', dial: '+39', flag: 'https://flagcdn.com/w40/it.png', name: 'Italy' },
+    { code: 'ES', dial: '+34', flag: 'https://flagcdn.com/w40/es.png', name: 'Spain' },
+    { code: 'RU', dial: '+7', flag: 'https://flagcdn.com/w40/ru.png', name: 'Russia' },
+    { code: 'AU', dial: '+61', flag: 'https://flagcdn.com/w40/au.png', name: 'Australia' },
+    { code: 'BR', dial: '+55', flag: 'https://flagcdn.com/w40/br.png', name: 'Brazil' },
+    { code: 'MX', dial: '+52', flag: 'https://flagcdn.com/w40/mx.png', name: 'Mexico' },
+    { code: 'AE', dial: '+971', flag: 'https://flagcdn.com/w40/ae.png', name: 'United Arab Emirates' },
+    { code: 'SA', dial: '+966', flag: 'https://flagcdn.com/w40/sa.png', name: 'Saudi Arabia' },
+    { code: 'IN', dial: '+91', flag: 'https://flagcdn.com/w40/in.png', name: 'India' },
+    { code: 'MO', dial: '+853', flag: 'https://flagcdn.com/w40/mo.png', name: 'Macau' },
+    { code: 'MN', dial: '+976', flag: 'https://flagcdn.com/w40/mn.png', name: 'Mongolia' },
+    { code: 'KZ', dial: '+7', flag: 'https://flagcdn.com/w40/kz.png', name: 'Kazakhstan' },
+    { code: 'TR', dial: '+90', flag: 'https://flagcdn.com/w40/tr.png', name: 'Turkey' },
+    { code: 'EG', dial: '+20', flag: 'https://flagcdn.com/w40/eg.png', name: 'Egypt' },
+    { code: 'PT', dial: '+351', flag: 'https://flagcdn.com/w40/pt.png', name: 'Portugal' },
+    { code: 'CH', dial: '+41', flag: 'https://flagcdn.com/w40/ch.png', name: 'Switzerland' },
+    { code: 'NL', dial: '+31', flag: 'https://flagcdn.com/w40/nl.png', name: 'Netherlands' },
+    { code: 'SE', dial: '+46', flag: 'https://flagcdn.com/w40/se.png', name: 'Sweden' },
+    { code: 'PL', dial: '+48', flag: 'https://flagcdn.com/w40/pl.png', name: 'Poland' },
+    { code: 'UZ', dial: '+998', flag: 'https://flagcdn.com/w40/uz.png', name: 'Uzbekistan' },
+  ];
 
   const handleCustomerFieldChange = (field: CustomerFormFieldKey, value: string) => {
     let finalValue = value;
@@ -1920,11 +1964,65 @@ export default function MyExplorePage() {
                                  placeholder={field.placeholder}
                                  onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
                                />
+                             ) : field.key === 'phone' ? (
+                               <div className="flex gap-2">
+                                 <div className="relative shrink-0">
+                                   <div 
+                                      className="h-12 bg-neutral-100 border border-neutral-200 rounded-xl flex items-center px-3 gap-1.5 transition-all cursor-pointer focus-within:border-[#bb8a78]"
+                                      onClick={() => setIsCountryPickerOpen(!isCountryPickerOpen)}
+                                   >
+                                      <div className="flex items-center justify-center p-1 bg-white/60 rounded-md backdrop-blur-[2px] border border-white/40 shadow-sm">
+                                         <img src={selectedCountry.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px] mr-1.5" />
+                                         <span className="text-[12px] font-black text-neutral-800 leading-none">{selectedCountry.dial}</span>
+                                      </div>
+                                      
+                                      <div className="text-neutral-400">
+                                        <svg width="8" height="5" viewBox="0 0 10 6" fill="none" className={`transition-transform duration-200 ${isCountryPickerOpen ? 'rotate-180' : ''}`}>
+                                          <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                      </div>
+                                   </div>
+
+                                   {isCountryPickerOpen && (
+                                     <>
+                                       <div 
+                                         className="fixed inset-0 z-[60]" 
+                                         onClick={() => setIsCountryPickerOpen(false)} 
+                                       />
+                                       <div className="absolute top-full left-0 mt-2 w-32 max-h-60 overflow-y-auto bg-white border border-neutral-100 rounded-xl shadow-xl z-[70] py-2 animate-in fade-in zoom-in duration-200">
+                                         {COUNTRY_CODES.map((c) => (
+                                           <button
+                                             key={c.code}
+                                             type="button"
+                                             className="w-full flex items-center px-3 py-2.5 hover:bg-neutral-50 transition-colors gap-2"
+                                             onClick={() => {
+                                               setSelectedCountry({ code: c.code, dial: c.dial, flag: c.flag });
+                                               setIsCountryPickerOpen(false);
+                                             }}
+                                           >
+                                             <img src={c.flag} alt="" className="w-5 h-3.5 object-cover rounded-[1px] shrink-0" />
+                                             <span className="text-xs font-bold text-neutral-700">{c.dial}</span>
+                                           </button>
+                                         ))}
+                                       </div>
+                                     </>
+                                   )}
+                                 </div>
+                                 <input
+                                   id={inputId}
+                                   className={`flex-1 h-12 bg-neutral-50 border ${fieldError ? 'border-red-400' : 'border-neutral-200'} rounded-xl px-4 text-sm focus:border-[#bb8a78] outline-none transition-all`}
+                                   type="tel"
+                                   value={customerForm[field.key]}
+                                   placeholder={field.placeholder}
+                                   onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
+                                   onBlur={() => handleCustomerFieldBlur(field.key as any)}
+                                 />
+                               </div>
                              ) : (
                                <input
                                  id={inputId}
                                  className={`w-full h-12 bg-neutral-50 border ${fieldError ? 'border-red-400' : 'border-neutral-200'} rounded-xl px-4 text-sm focus:border-[#bb8a78] outline-none transition-all`}
-                                 type={field.key === 'phone' ? 'tel' : 'text'}
+                                 type="text"
                                  value={customerForm[field.key]}
                                  placeholder={field.placeholder}
                                  onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}

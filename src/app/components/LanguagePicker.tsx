@@ -13,21 +13,21 @@ export interface LangOption {
 }
 
 export const LANGUAGES: LangOption[] = [
-    { code: 'ko', label: '한국어', flag: '🇰🇷' },
-    { code: 'en', label: 'English', flag: '🇺🇸' },
-    { code: 'ja', label: '日本語', flag: '🇯🇵' },
-    { code: 'zh-CN', label: '简体中文', flag: '🇨🇳' },
-    { code: 'zh-HK', label: '繁體中文', flag: '🇭🇰' },
-    { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳' },
-    { code: 'th', label: 'ไทย', flag: '🇹🇭' },
-    { code: 'id', label: 'Bahasa Indonesia', flag: '🇮🇩' },
-    { code: 'ms', label: 'Bahasa Melayu', flag: '🇲🇾' },
-    { code: 'fr', label: 'Français', flag: '🇫🇷' },
-    { code: 'es', label: 'Español', flag: '🇪🇸' },
-    { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-    { code: 'pt', label: 'Português', flag: '🇵🇹' },
-    { code: 'ru', label: 'Русский', flag: '🇷🇺' },
-    { code: 'ar', label: 'العربية', flag: '🇸🇦' },
+    { code: 'ko', label: '한국어', flag: 'https://flagcdn.com/w40/kr.png' },
+    { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
+    { code: 'ja', label: '日本語', flag: 'https://flagcdn.com/w40/jp.png' },
+    { code: 'zh-CN', label: '简体中文', flag: 'https://flagcdn.com/w40/cn.png' },
+    { code: 'zh-HK', label: '繁體中文', flag: 'https://flagcdn.com/w40/hk.png' },
+    { code: 'vi', label: 'Tiếng Việt', flag: 'https://flagcdn.com/w40/vn.png' },
+    { code: 'th', label: 'ไทย', flag: 'https://flagcdn.com/w40/th.png' },
+    { code: 'id', label: 'Bahasa Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
+    { code: 'ms', label: 'Bahasa Melayu', flag: 'https://flagcdn.com/w40/my.png' },
+    { code: 'fr', label: 'Français', flag: 'https://flagcdn.com/w40/fr.png' },
+    { code: 'es', label: 'Español', flag: 'https://flagcdn.com/w40/es.png' },
+    { code: 'de', label: 'Deutsch', flag: 'https://flagcdn.com/w40/de.png' },
+    { code: 'pt', label: 'Português', flag: 'https://flagcdn.com/w40/pt.png' },
+    { code: 'ru', label: 'Русский', flag: 'https://flagcdn.com/w40/ru.png' },
+    { code: 'ar', label: 'العربية', flag: 'https://flagcdn.com/w40/sa.png' },
 ];
 
 interface LanguagePickerProps {
@@ -105,8 +105,9 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                 onClick={() => setIsOpen((value) => !value)}
                 title={t('common.select_language', { defaultValue: 'Select Language' })}
             >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 800 }}>
-                    {FLAG_EMOJIS[locale] || ''} {locale.toUpperCase()}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
+                    <img src={current.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px]" />
+                    {locale.toUpperCase()}
                 </div>
                 <span className={styles.chevron}>{isOpen ? '^' : 'v'}</span>
             </button>
@@ -125,7 +126,7 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                                     className={`${styles.langItem} ${current.code === lang.code ? styles.active : ''}`}
                                     onClick={() => handleSelect(lang)}
                                 >
-                                    <span className={styles.itemFlag}>{lang.flag}</span>
+                                    <img src={lang.flag} alt="" className="w-6 h-4 object-cover rounded-[2px] mr-3" />
                                     <span className={styles.itemLabel}>{lang.label}</span>
                                 </button>
                             ))}
