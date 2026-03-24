@@ -202,7 +202,9 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
+    // 홈 화면 진입 시 카테고리 선택 상태를 초기화하여 강조 색상이 보이지 않도록 함
+    setSelectedCategory(null);
+  }, [setSelectedCategory]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

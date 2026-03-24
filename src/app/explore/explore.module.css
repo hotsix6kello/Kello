@@ -1192,14 +1192,16 @@
 }
 
 .beautyStepItem {
-    min-width: 92px;
-    padding: 10px 12px;
+    min-width: 72px;
+    padding: 10px 8px;
     border-radius: 16px;
     border: 1px solid rgba(109, 83, 63, 0.08);
     background: rgba(255, 255, 255, 0.78);
     color: #7c6e64;
     display: grid;
-    justify-items: start;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
     gap: 6px;
 }
 
