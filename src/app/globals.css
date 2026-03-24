@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* ====== 전역 스크롤바 완전 숨김 ====== */
+/* ====== ?꾩뿭 ?ㅽ겕濡ㅻ컮 ?꾩쟾 ?④? ====== */
 * {
   -ms-overflow-style: none !important;  /* IE, Edge */
   scrollbar-width: none !important;     /* Firefox */
@@ -107,7 +107,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-main);
   max-width: 100vw;
-  overflow: hidden;            /* 브라우저 레벨 스크롤바 완전 차단 */
+  overflow: hidden;            /* 釉뚮씪?곗? ?덈꺼 ?ㅽ겕濡ㅻ컮 ?꾩쟾 李⑤떒 */
   overscroll-behavior-y: none;
   height: 100%;
   scrollbar-width: none;
@@ -163,7 +163,7 @@ button {
 .mobile-wrapper {
   max-width: 480px;
   margin: 0 auto;
-  /* 100dvh = dynamic viewport height (주소창 제외한 실제 높이) */
+  /* 100dvh = dynamic viewport height (二쇱냼李??쒖쇅???ㅼ젣 ?믪씠) */
   height: 100vh;
   height: 100dvh;
   min-height: -webkit-fill-available;
