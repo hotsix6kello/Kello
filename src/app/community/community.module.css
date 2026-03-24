@@ -1,8 +1,8 @@
 .container {
     min-height: auto;
     height: auto;
-    background: var(--background);
-    color: var(--foreground);
+    background: var(--hanji-ivory);
+    color: var(--ink-black);
     padding: 0 16px 156px;
     position: relative;
     overflow: visible;
@@ -10,11 +10,9 @@
 
 .header {
     position: static;
-    background: var(--background);
+    background: var(--hanji-ivory);
     padding: 24px 16px 0;
-    /* Reduced top padding from 56px */
-    /* Align with container padding */
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--warm-sand);
 }
 
 .title {
@@ -26,8 +24,7 @@
 
 .subtitle {
     font-size: 13px;
-    /* Reduced from 14px */
-    color: var(--gray-500);
+    color: var(--soft-ink);
     margin: 0 0 12px;
 }
 
@@ -48,21 +45,20 @@
 
 .searchInput {
     width: 100%;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-200);
-    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-md);
     padding: 8px 12px 8px 32px;
-    /* Slimmer input */
     font-size: 13px;
-    color: var(--foreground);
+    color: var(--ink-black);
     outline: none;
     transition: all 0.2s;
 }
 
 .searchInput:focus {
-    border-color: var(--primary);
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(188, 19, 254, 0.05);
+    border-color: var(--secondary);
+    background: var(--surface);
+    box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .tabs {
@@ -77,10 +73,10 @@
     flex: 1 1 calc(50% - 4px);
     min-width: 0;
     padding: 8px 12px;
-    border-radius: 14px;
-    background: #fff;
-    border: 1px solid var(--gray-200);
-    color: #475569;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--soft-ink);
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
@@ -92,9 +88,9 @@
 }
 
 .tab.activeTab {
-    background: #eff6ff;
-    border-color: #bfdbfe;
-    color: #1d4ed8;
+    background: var(--primary-glow);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 .subTabs {
@@ -107,10 +103,10 @@
 .subTab {
     max-width: 100%;
     padding: 7px 12px;
-    border-radius: 999px;
-    border: 1px solid #e2e8f0;
-    background: #fff;
-    color: #64748b;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--soft-ink);
     font-size: 11px;
     font-weight: 700;
     line-height: 1.2;
@@ -121,16 +117,16 @@
 }
 
 .activeSubTab {
-    background: #eff6ff;
-    border-color: #bfdbfe;
-    color: #1d4ed8;
+    background: var(--primary-glow);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 /* ── Navigation Summary & Sorting ── */
 .navSummaryBox {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    background: var(--primary-glow);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-md);
     padding: 12px 14px;
     margin-bottom: 12px;
     display: flex;
@@ -145,7 +141,7 @@
     min-width: 0;
     font-size: 13px;
     font-weight: 700;
-    color: #475569;
+    color: var(--soft-ink);
     line-height: 1.45;
 }
 
@@ -154,7 +150,7 @@
     border: none;
     font-size: 13px;
     font-weight: 800;
-    color: var(--primary);
+    color: var(--secondary);
     cursor: pointer;
     outline: none;
 }
@@ -167,7 +163,7 @@
 .recommendTitle {
     font-size: 15px;
     font-weight: 900;
-    color: #1e293b;
+    color: var(--ink-black);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -191,21 +187,21 @@
 .recommendCard {
     flex-shrink: 0;
     width: 140px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-md);
     padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .recommendCard:hover {
     transform: translateY(-2px);
-    border-color: var(--primary);
+    border-color: var(--secondary);
 }
 
 .recommendEmoji {
@@ -215,7 +211,7 @@
 .recommendLabel {
     font-size: 12px;
     font-weight: 800;
-    color: #334155;
+    color: var(--soft-ink);
     line-height: 1.3;
 }
 
@@ -232,16 +228,16 @@
     justify-content: center;
     padding: 44px 20px;
     text-align: center;
-    background: #f8fafc;
-    border-radius: 18px;
-    border: 1px dashed #e2e8f0;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--warm-sand);
     margin-top: 20px;
 }
 
 .errorStateContainer {
-    background: #fffaf4;
+    background: var(--primary-glow);
     border-style: solid;
-    border-color: #fed7aa;
+    border-color: var(--warm-sand);
 }
 
 .emptyIcon {
@@ -252,13 +248,13 @@
 .emptyTitle {
     font-size: 16px;
     font-weight: 800;
-    color: #475569;
+    color: var(--soft-ink);
     margin-bottom: 8px;
 }
 
 .emptyDesc {
     font-size: 13px;
-    color: var(--gray-500);
+    color: var(--soft-ink);
     margin-bottom: 10px;
 }
 
@@ -280,15 +276,15 @@
 }
 
 .emptyCtaPrimary {
-    background: var(--primary);
-    color: #fff;
+    background: var(--secondary);
+    color: var(--hanji-ivory);
     border: none;
 }
 
 .emptyCtaSecondary {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    color: #64748b;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--soft-ink);
 }
 
 .feed {
@@ -304,36 +300,42 @@
 
 .feedNotice {
     padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid #fed7aa;
-    background: #fff7ed;
-    color: #9a3412;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--dancheong-teal);
+    background: var(--primary-glow);
+    color: var(--dancheong-teal);
     font-size: 12px;
     font-weight: 700;
     line-height: 1.45;
 }
 
 .card {
-    background: #ffffff;
-    border: 1px solid var(--gray-200);
-    border-radius: 16px;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-lg);
     padding: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    cursor: pointer;
+}
+
+.cardClosed {
+    opacity: 0.7;
+    filter: grayscale(0.3);
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 16px rgba(43, 35, 29, 0.08);
 }
 
 /* Review Card Specific */
 .reviewCard {
-    border-left: 4px solid #ec4899;
-    background: linear-gradient(to bottom right, #fff, #fff5f8);
+    border-left: 4px solid var(--accent);
+    background: var(--surface);
 }
 
 .reviewHeader {
@@ -352,29 +354,29 @@
 .areaTag {
     font-size: 11px;
     font-weight: 700;
-    color: #ec4899;
-    background: rgba(236, 72, 153, 0.1);
+    color: var(--accent);
+    background: var(--primary-glow);
     padding: 2px 8px;
     border-radius: 4px;
 }
 
 .vibeTag {
     font-size: 11px;
-    color: var(--gray-500);
-    background: var(--gray-100);
+    color: var(--soft-ink);
+    background: var(--hanji-ivory);
     padding: 2px 8px;
     border-radius: 4px;
 }
 
 /* Meetup Card Specific */
 .meetupCard {
-    border-left: 4px solid #fb923c;
+    border-left: 4px solid var(--dancheong-teal);
 }
 
 .meetupInfo {
-    background: rgba(251, 146, 60, 0.05);
+    background: var(--primary-glow);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     font-size: 13px;
     display: flex;
     flex-direction: column;
@@ -383,12 +385,12 @@
 
 /* Info Card Specific */
 .infoCard {
-    border-left: 4px solid #34d399;
+    border-left: 4px solid var(--dancheong-teal);
 }
 
 /* Help Card Specific */
 .helpCard {
-    border-left: 4px solid #60a5fa;
+    border-left: 4px solid var(--secondary);
     padding: 12px;
 }
 
@@ -400,28 +402,54 @@
 }
 
 .avatar {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: var(--gray-100);
+    background: var(--hanji-ivory);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 16px;
+    border: 1px solid var(--warm-sand);
 }
 
 .authorInfo {
     flex: 1;
 }
 
-.authorName {
-    font-size: 14px;
-    font-weight: 700;
+.authorHeaderRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.statusBadge {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--primary-glow);
+    color: var(--secondary);
+    border: 1px solid var(--warm-sand);
+}
+
+.status_REVIEWS { color: var(--dancheong-teal); }
+.status_REACTING { color: var(--secondary); }
+.status_CLOSED { color: var(--soft-ink); background: var(--hanji-ivory); }
+
+.resultFeedBadge {
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--korean-red);
+    background: var(--primary-glow);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--warm-sand);
 }
 
 .postTime {
     font-size: 11px;
-    color: var(--gray-400);
+    color: var(--soft-ink);
     margin-top: 2px;
 }
 
@@ -432,35 +460,41 @@
     border-radius: 6px;
 }
 
+.badge_recent { background: var(--primary-glow); color: var(--secondary); }
 .badge_meetup {
-    background: rgba(251, 146, 60, 0.15);
-    color: #fb923c;
+    background: var(--primary-glow);
+    color: var(--dancheong-teal);
 }
 
 .badge_travel {
-    background: rgba(52, 211, 153, 0.15);
-    color: #34d399;
+    background: var(--primary-glow);
+    color: var(--dancheong-teal);
 }
 
 .badge_help {
-    background: rgba(96, 165, 250, 0.15);
-    color: #60a5fa;
+    background: var(--primary-glow);
+    color: var(--secondary);
 }
 
 .badge_review {
-    background: rgba(236, 72, 153, 0.11);
-    color: #ec4899;
+    background: var(--primary-glow);
+    color: var(--accent);
 }
 
 .postTitle {
     font-size: 16px;
     font-weight: 700;
-    margin: 0 0 8px;
+    margin: 0 0 4px;
+    color: var(--ink-black);
+}
+
+.reviewTitle {
+    font-size: 18px;
 }
 
 .postDesc {
     font-size: 14px;
-    color: var(--gray-500);
+    color: var(--soft-ink);
     line-height: 1.5;
     margin: 0 0 16px;
 }
@@ -469,7 +503,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid var(--gray-100);
+    border-top: 1px solid var(--warm-sand);
     padding-top: 12px;
     margin-top: 4px;
 }
@@ -499,11 +533,11 @@
 }
 
 .matchBtn {
-    background: var(--primary);
-    color: white;
+    background: var(--secondary);
+    color: var(--hanji-ivory);
     border: none;
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
@@ -517,7 +551,7 @@
 .actionBtn {
     background: none;
     border: none;
-    color: var(--gray-500);
+    color: var(--soft-ink);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -528,7 +562,7 @@
 }
 
 .actionBtn:hover {
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 /* ── Floating Action Button Group ── */
@@ -547,26 +581,26 @@
 .fab {
     min-height: 44px;
     padding: 10px 14px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
     border: none;
-    color: #fff;
+    color: var(--hanji-ivory);
     font-size: 13px;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+    box-shadow: var(--shadow-lg);
     cursor: pointer;
     transition: transform 0.15s, opacity 0.15s;
 }
 
 .fabSecondary {
-    background: #ffffff;
-    color: #2563eb;
-    border: 1px solid #bfdbfe;
-    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+    background: var(--surface);
+    color: var(--secondary);
+    border: 1px solid var(--warm-sand);
+    box-shadow: var(--shadow-md);
 }
 
 .fab:active {
@@ -642,7 +676,7 @@
 .modalOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(43, 35, 29, 0.7);
     z-index: 1000;
     display: flex;
     align-items: flex-end;
@@ -651,9 +685,9 @@
 
 .modalSheet {
     width: 100%;
-    background: #ffffff;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    background: var(--surface);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
     max-height: calc(100dvh - 12px);
     padding: 24px 24px 0;
     display: flex;
@@ -685,7 +719,7 @@
 .deleteBtn {
     background: none;
     border: none;
-    color: #ef4444;
+    color: var(--korean-red);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -696,7 +730,7 @@
 }
 
 .deleteBtn:hover {
-    background: rgba(239, 68, 68, 0.1);
+    background: var(--primary-glow);
 }
 
 .commentSection {
@@ -754,7 +788,7 @@
 
 .commentSubmit {
     background: var(--primary);
-    color: white;
+    color: var(--hanji-ivory);
     border: none;
     padding: 0 16px;
     border-radius: 8px;
@@ -1410,14 +1444,15 @@
     font-weight: 900;
     padding: 2px 6px;
     border-radius: 4px;
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--hanji-ivory);
+    color: var(--soft-ink);
+    border: 1px solid var(--warm-sand);
 }
 
 .nextActionLabel {
     font-size: 13px;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--ink-black);
     line-height: 1.4;
     margin-bottom: 4px;
     display: -webkit-box;
@@ -1429,7 +1464,7 @@
 
 .nextActionDesc {
     font-size: 11px;
-    color: #64748b;
+    color: var(--soft-ink);
     line-height: 1.5;
     margin-bottom: 12px;
 }
@@ -1437,10 +1472,10 @@
 .nextActionCta {
     width: 100%;
     padding: 8px;
-    background: #0f172a;
+    background: var(--secondary);
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     font-size: 11px;
     font-weight: 700;
     cursor: pointer;
@@ -1449,14 +1484,14 @@
 }
 
 .nextActionCta:hover {
-    background: #1e293b;
+    background: var(--ink-black);
 }
 
 /* ── Step 19: Related Posts & Connectivity ── */
 .cardTopicHint {
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px dashed #e2e8f0;
+    border-top: 1px dashed var(--warm-sand);
     display: flex;
     justify-content: flex-end;
 }
@@ -1464,17 +1499,18 @@
 .moreHint {
     font-size: 11px;
     font-weight: 700;
-    color: #3b82f6;
+    color: var(--secondary);
     cursor: pointer;
     transition: color 0.2s;
-    background: #eff6ff;
+    background: var(--primary-glow);
     padding: 6px 12px;
     border-radius: 20px;
+    border: 1px solid var(--warm-sand);
 }
 
 .moreHint:hover {
-    color: #1d4ed8;
-    background: #dbeafe;
+    color: var(--ink-black);
+    background: var(--warm-sand);
 }
 
 /* ── Step 20: Freshness & Simulation ── */
@@ -1493,38 +1529,38 @@
 }
 
 .freshBadge_comment {
-    background: #fff7ed;
-    color: #c2410c;
-    border: 1px solid #ffedd5;
+    background: var(--primary-glow);
+    color: var(--accent);
+    border: 1px solid var(--warm-sand);
 }
 
 .freshBadge_update {
-    background: #f0fdf4;
-    color: #15803d;
-    border: 1px solid #dcfce7;
+    background: var(--primary-glow);
+    color: var(--dancheong-teal);
+    border: 1px solid var(--warm-sand);
 }
 
 .freshBadge_alive {
-    background: #fef2f2;
-    color: #b91c1c;
-    border: 1px solid #fee2e2;
+    background: var(--primary-glow);
+    color: var(--korean-red);
+    border: 1px solid var(--warm-sand);
 }
 
 /* ── Step 21: Compact UI ── */
 .onboardingBannerCompact {
-    background: #f1f5f9;
+    background: var(--primary-glow);
     padding: 8px 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--warm-sand);
 }
 
 .onboardingText {
     font-size: 11px;
-    color: #475569;
+    color: var(--soft-ink);
     line-height: 1.4;
 }
 
@@ -1532,7 +1568,7 @@
     background: none;
     border: none;
     font-size: 14px;
-    color: #94a3b8;
+    color: var(--soft-ink);
     cursor: pointer;
     padding: 4px;
 }
@@ -1547,9 +1583,9 @@
 
 .entryCardCompact {
     min-width: 0;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-md);
     padding: 10px 12px;
     display: flex;
     align-items: center;
@@ -1559,9 +1595,9 @@
 }
 
 .entryCardCompact:hover {
-    border-color: #bfdbfe;
-    background: #f8fbff;
-    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.06);
+    border-color: var(--secondary);
+    background: var(--primary-glow);
+    box-shadow: var(--shadow-sm);
 }
 
 .entryCardCompact:active {
@@ -1582,16 +1618,45 @@
 .entryLabel {
     font-size: 11px;
     font-weight: 800;
-    color: #1e293b;
+    color: var(--ink-black);
     line-height: 1.3;
     word-break: keep-all;
 }
 
 .entrySubLabel {
     font-size: 9px;
-    color: #94a3b8;
+    color: var(--soft-ink);
     line-height: 1.3;
     word-break: keep-all;
+}
+
+.postMetaRow {
+    font-size: 12px;
+    color: var(--soft-ink);
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.postPointLabel {
+    font-size: 10px;
+    color: var(--secondary);
+    font-weight: 800;
+    background: var(--primary-glow);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--warm-sand);
+}
+
+.qualitySignal {
+    font-size: 9px;
+    background: var(--hanji-ivory);
+    color: var(--soft-ink);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--warm-sand);
 }
 
 .recommendationHub {
@@ -1603,11 +1668,11 @@
 
 .compactActivityRow {
     font-size: 11px;
-    color: #64748b;
-    background: #f8fafc;
+    color: var(--soft-ink);
+    background: var(--hanji-ivory);
     padding: 6px 12px;
     border-radius: 20px;
-    border: 1px solid #f1f5f9;
+    border: 1px solid var(--warm-sand);
 }
 
 .recommendScrollCompact {
@@ -1624,12 +1689,12 @@
 .recommendChip {
     flex-shrink: 0;
     padding: 4px 12px;
-    background: #fff;
-    border: 1px solid var(--primary);
+    background: var(--surface);
+    border: 1px solid var(--secondary);
     border-radius: 20px;
     font-size: 10px;
     font-weight: 800;
-    color: var(--primary);
+    color: var(--secondary);
     white-space: nowrap;
     cursor: pointer;
 }
@@ -1641,13 +1706,14 @@
 .nextActionTag {
     flex-shrink: 0;
     padding: 4px 10px;
-    background: #eff6ff;
-    color: #2563eb;
-    border-radius: 6px;
+    background: var(--primary-glow);
+    color: var(--secondary);
+    border-radius: var(--radius-sm);
     font-size: 10px;
     font-weight: 700;
     white-space: nowrap;
     cursor: pointer;
+    border: 1px solid var(--warm-sand);
 }
 /* ── Step 22: Feedback & Skeleton ── */
 .toast {
@@ -1655,14 +1721,14 @@
     bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(15, 23, 42, 0.9);
+    background: var(--ink-black);
     color: #fff;
     padding: 10px 20px;
     border-radius: 30px;
     font-size: 13px;
     font-weight: 700;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-lg);
     animation: toastUp 0.3s ease-out;
 }
 
@@ -1682,10 +1748,10 @@
 }
 
 .skeletonCard {
-    background: #fff;
-    border-radius: 16px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
     padding: 16px;
-    border: 1px solid #f1f5f9;
+    border: 1px solid var(--warm-sand);
 }
 
 .skeletonHeader {
@@ -1698,7 +1764,7 @@
 .skeletonAvatar {
     width: 36px;
     height: 36px;
-    background: #f1f5f9;
+    background: var(--hanji-ivory);
     border-radius: 50%;
 }
 
@@ -1712,21 +1778,21 @@
 .skeletonName {
     width: 60px;
     height: 12px;
-    background: #f1f5f9;
+    background: var(--hanji-ivory);
     border-radius: 4px;
 }
 
 .skeletonTime {
     width: 40px;
     height: 10px;
-    background: #f8fafc;
+    background: var(--surface);
     border-radius: 2px;
 }
 
 .skeletonTitle {
     width: 80%;
     height: 18px;
-    background: #f1f5f9;
+    background: var(--hanji-ivory);
     border-radius: 4px;
     margin-bottom: 8px;
 }
@@ -1734,7 +1800,7 @@
 .skeletonDesc {
     width: 100%;
     height: 36px;
-    background: #f8fafc;
+    background: var(--surface);
     border-radius: 4px;
     margin-bottom: 12px;
 }
@@ -1742,8 +1808,49 @@
 .skeletonFooter {
     width: 60px;
     height: 14px;
-    background: #f1f5f9;
+    background: var(--hanji-ivory);
     border-radius: 4px;
+}
+
+.safetyGuideBox {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--hanji-ivory);
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--warm-sand);
+    color: var(--soft-ink);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.summaryBlock {
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--primary-glow);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-md);
+    color: var(--ink-black);
+    font-size: 12px;
+}
+
+.summaryTitle {
+    font-weight: 800;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--warm-sand);
+    padding-bottom: 4px;
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.summaryLabel {
+    color: var(--soft-ink);
+    font-weight: 600;
 }
 
 .cardExiting {
@@ -1753,9 +1860,9 @@
 }
 
 .activeTab {
-    background: #eff6ff !important;
-    color: #1d4ed8 !important;
-    border-color: #bfdbfe !important;
+    background: var(--primary-glow) !important;
+    color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
 }
 
 
