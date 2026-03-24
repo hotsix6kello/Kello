@@ -2,11 +2,29 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* ====== 전역 스크롤바 완전 숨김 ====== */
-* {
-  -ms-overflow-style: none !important;  /* IE, Edge */
-  scrollbar-width: none !important;     /* Firefox */
+/* ====== 전역 스크롤바 및 뷰포트 고정 ====== */
+html,
+body,
+:root,
+#__next,
+main {
+  overflow: hidden !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: none;
 }
+
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  box-sizing: border-box;
+}
+
 *::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;

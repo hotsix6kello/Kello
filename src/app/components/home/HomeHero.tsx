@@ -17,7 +17,7 @@ export default function HomeHero({ userName, greeting, t }: HomeHeroProps) {
       </div>
 
       <section className={`${styles.heroSection} h-auto`}>
-        <Image src="/kello-logo.png" alt={t('home.badge')} width={800} height={180} className={styles.heroLogo} priority />
+        <Image src="/kello-logo.png" alt={t('home.badge')} width={960} height={200} className={styles.heroLogo} priority />
         <h1 className={`${styles.heroTitle} whitespace-normal break-keep h-auto`}>
           {userName ? (
             <span suppressHydrationWarning>

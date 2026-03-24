@@ -143,10 +143,10 @@ function buildGeminiTranscriptionPrompt(language: string) {
 
   return [
     "Transcribe the uploaded audio into plain text.",
-    `The expected spoken language is ${languageLabel}.`,
-    "Return only the transcription.",
-    "Do not add speaker labels, markdown, quotes, summaries, or explanations.",
-    "If the audio is unclear, return the best plain-text transcription you can infer.",
+    `The primary spoken language is ${languageLabel}. However, if the speaker uses a different language, identify it and transcribe it accurately as spoken.`,
+    "Return ONLY the plain-text transcription without any metadata, speaker tags, or formatting.",
+    "Do not include quotes or surrounding text.",
+    "If the audio is silent or completely unintelligible, return an empty string.",
   ].join(" ");
 }
 
