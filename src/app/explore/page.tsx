@@ -1833,7 +1833,7 @@ export default function MyExplorePage() {
                         return (
                           <article
                             key={store.id}
-                            className={`bg-white rounded-2xl transition-all duration-300 ${isSelected ? 'ring-2 ring-[#bb8a78] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100'}`}
+                            className={`bg-[var(--surface)] rounded-[var(--radius-md)] transition-all duration-300 border ${isSelected ? 'border-[var(--primary)] ring-2 ring-[var(--primary-glow)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] shadow-sm'}`}
                             style={{ overflow: 'hidden', cursor: 'pointer' }}
                             onClick={() => {
                               handleBeautyStoreSelect(store.id, store.name, store.region, store.category);
@@ -1844,11 +1844,11 @@ export default function MyExplorePage() {
                                 <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} className="h-full w-full object-cover" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h3 className="text-base font-bold text-neutral-900 truncate">{store.name}</h3>
-                                <p className="text-xs text-neutral-500">{tBeauty(`region_${store.region}`)}</p>
-                                <div className="text-sm font-semibold text-[#bb8a78] mt-1">{store.priceLabel}</div>
+                                <h3 className="text-base font-bold text-[var(--ink-black)] truncate">{store.name}</h3>
+                                <p className="text-xs text-[var(--soft-ink)]">{tBeauty(`region_${store.region}`)}</p>
+                                <div className="text-sm font-semibold text-[var(--accent)] mt-1">{store.priceLabel}</div>
                               </div>
-                              <div className="shrink-0 text-[#bb8a78] font-bold text-xs uppercase bg-[#fff5f0] px-3 py-1.5 rounded-lg border border-[#f0e0d8]">
+                              <div className="shrink-0 text-[var(--secondary)] font-bold text-xs uppercase bg-[var(--surface)] px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--warm-sand)]">
                                 {tBeauty('btn_select_salon', { defaultValue: '선택' })}
                               </div>
                             </div>
@@ -1865,34 +1865,34 @@ export default function MyExplorePage() {
               {currentStep === 2 && (
                 <div className="flex flex-col gap-6">
                   {selectedBeautyStore && (
-                    <div className="bg-white border border-neutral-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-neutral-100 overflow-hidden shrink-0">
+                    <div className="bg-[var(--surface)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4 shadow-sm flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0">
                         <img src={selectedBeautyStore.imageUrl} alt="" className="w-full h-full object-cover" />
                       </div>
                       <div className="flex-1">
-                        <span className="text-[10px] font-bold text-[#bb8a78] uppercase tracking-wider">SELECTED STORE</span>
-                        <h3 className="font-bold text-neutral-800">{selectedBeautyStoreName}</h3>
+                        <span className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">SELECTED STORE</span>
+                        <h3 className="font-bold text-[var(--ink-black)]">{selectedBeautyStoreName}</h3>
                       </div>
                     </div>
                   )}
 
-                  <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm">
-                    <h3 className="font-bold text-lg mb-4">날짜와 시간을 골라주세요</h3>
+                  <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm">
+                    <h3 className="font-bold text-lg mb-4 text-[var(--ink-black)]">날짜와 시간을 골라주세요</h3>
                     {selectedBeautyDate && selectedBeautyTime ? (
                       <div className="flex flex-col gap-4">
-                        <div className="bg-[#fffcfb] border border-[#bb8a78]/20 rounded-xl p-4">
-                          <div className="text-sm text-neutral-500 mb-1">선택된 일시</div>
-                          <div className="text-xl font-bold text-neutral-900">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
+                        <div className="bg-[var(--hanji-ivory)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4">
+                          <div className="text-sm text-[var(--soft-ink)] mb-1">선택된 일시</div>
+                          <div className="text-xl font-bold text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
                         </div>
                         <button 
                           onClick={() => setIsIntegratedBookingMenuOpen(true)}
-                          className="text-[#bb8a78] font-bold underline text-sm py-2"
+                          className="text-[var(--accent)] font-bold underline text-sm py-2"
                         >
                           다른 일시로 변경하기
                         </button>
                         <button 
                           onClick={() => setCurrentStep(3)}
-                          className="w-full bg-[#bb8a78] text-white py-4 rounded-xl font-bold shadow-lg hover:bg-[#a67969] transition-all"
+                          className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg hover:bg-[var(--deep-navy)] transition-all"
                         >
                           다음: 상세 정보 입력
                         </button>
@@ -1900,7 +1900,7 @@ export default function MyExplorePage() {
                     ) : (
                       <button 
                         onClick={() => setIsIntegratedBookingMenuOpen(true)}
-                        className="w-full bg-[#bb8a78] text-white py-5 rounded-xl font-bold text-lg shadow-md"
+                        className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-md"
                       >
                         날짜 및 시간 선택하기
                       </button>
@@ -1914,8 +1914,8 @@ export default function MyExplorePage() {
               {currentStep === 3 && (
                 <div className="flex flex-col gap-6">
                    {/* 1. 서비스 종류 선택 (Primary Service) */}
-                   <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
-                     <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Select Service</span>
+                   <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
+                     <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Select Service</span>
                      <div className="flex flex-col gap-2">
                        {availablePrimaryServices.map((service) => {
                          const isSelected = selectedPrimaryServiceId === service.id;
@@ -1923,8 +1923,8 @@ export default function MyExplorePage() {
                            <button
                              key={service.id}
                              type="button"
-                             className={`w-full flex justify-between items-center p-4 rounded-xl border-2 transition-all ${
-                               isSelected ? 'border-[#bb8a78] bg-[#fffbfa]' : 'border-neutral-50 bg-neutral-50'
+                             className={`w-full flex justify-between items-center p-4 rounded-[var(--radius-md)] border-2 transition-all ${
+                               isSelected ? 'border-[var(--primary)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] bg-[var(--hanji-ivory)]'
                              }`}
                              onClick={() => handlePrimaryServiceSelect(service.id)}
                            >
@@ -2038,7 +2038,7 @@ export default function MyExplorePage() {
 
                    <button
                      type="button"
-                     className="w-full bg-[#bb8a78] text-white py-4 rounded-xl font-bold shadow-lg hover:bg-[#a67969] transition-all"
+                     className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg hover:bg-[var(--deep-navy)] transition-all"
                      onClick={() => {
                         if (!selectedPrimaryServiceId) {
                            setFormErrors(prev => ({ ...prev, primaryService: "시술 내역을 선택해주세요." }));
@@ -2056,46 +2056,46 @@ export default function MyExplorePage() {
 
               {currentStep === 4 && (
                 <div className="flex flex-col gap-6">
-                  <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
-                    <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Booking Summary</span>
+                  <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
+                    <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Booking Summary</span>
                     <div className="flex flex-col gap-3">
-                      <div className="flex justify-between items-start border-b border-neutral-50 pb-3">
-                        <span className="text-sm text-neutral-400">매장</span>
-                        <strong className="text-sm text-neutral-800 text-right">{selectedBeautyStoreName}</strong>
+                      <div className="flex justify-between items-start border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">매장</span>
+                        <strong className="text-sm text-[var(--ink-black)] text-right">{selectedBeautyStoreName}</strong>
                       </div>
-                      <div className="flex justify-between items-center border-b border-neutral-50 pb-3">
-                        <span className="text-sm text-neutral-400">일시</span>
-                        <strong className="text-sm text-neutral-800">{selectedBeautyDateLabel} - {selectedBeautyTime}</strong>
+                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">일시</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</strong>
                       </div>
-                      <div className="flex justify-between items-center border-b border-neutral-50 pb-3">
-                        <span className="text-sm text-neutral-400">서비스</span>
-                        <strong className="text-sm text-neutral-800">{selectedPrimaryService?.name}</strong>
+                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">서비스</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{selectedPrimaryService?.name}</strong>
                       </div>
-                      <div className="flex justify-between items-center border-b border-neutral-50 pb-3">
-                        <span className="text-sm text-neutral-400">이름</span>
-                        <strong className="text-sm text-neutral-800">{customerForm.name}</strong>
+                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">이름</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{customerForm.name}</strong>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-neutral-400">연락처</span>
-                        <strong className="text-sm text-neutral-800">{customerForm.phone}</strong>
+                        <span className="text-sm text-[var(--soft-ink)]">연락처</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{customerForm.phone}</strong>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-neutral-50 rounded-2xl p-5 flex flex-col gap-4">
-                    <h4 className="text-xs font-bold text-neutral-600 uppercase tracking-widest">{t('beauty_bookings.section_agreement')}</h4>
+                  <div className="bg-[var(--hanji-ivory)] rounded-[var(--radius-md)] p-5 flex flex-col gap-4">
+                    <h4 className="text-xs font-bold text-[var(--soft-ink)] uppercase tracking-widest">{t('beauty_bookings.section_agreement')}</h4>
                     <div className="flex flex-col gap-3">
                       {agreementFields.map((field) => (
                         <label key={field.key} className="flex items-start gap-3 cursor-pointer">
                           <input
-                            className="mt-1 w-4 h-4 rounded border-gray-300 text-[#bb8a78] focus:ring-[#bb8a78]"
+                            className="mt-1 w-4 h-4 rounded border-[var(--warm-sand)] text-[var(--accent)] focus:ring-[var(--accent)]"
                             type="checkbox"
                             checked={agreements[field.key as keyof AgreementState]}
                             onChange={() => handleAgreementToggle(field.key as keyof AgreementState)}
                           />
                           <div className="flex flex-col">
-                            <span className="text-sm font-bold text-neutral-800 leading-tight">{field.label}</span>
-                            <span className="text-[11px] text-neutral-500 mt-0.5">{field.description}</span>
+                            <span className="text-sm font-bold text-[var(--ink-black)] leading-tight">{field.label}</span>
+                            <span className="text-[11px] text-[var(--soft-ink)] mt-0.5">{field.description}</span>
                           </div>
                         </label>
                       ))}
@@ -2104,7 +2104,7 @@ export default function MyExplorePage() {
 
                   <button
                     type="button"
-                    className="w-full bg-[#bb8a78] text-white py-5 rounded-xl font-bold text-lg shadow-xl hover:bg-[#a67969] transition-all disabled:opacity-50"
+                    className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-xl hover:bg-[var(--deep-navy)] transition-all disabled:opacity-50"
                     disabled={!isBeautyConfirmSubmitEnabled || isSubmittingBeautyBooking}
                     onClick={handleBeautyBookingSubmit}
                   >

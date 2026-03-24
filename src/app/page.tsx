@@ -367,7 +367,7 @@ export default function HomePage() {
 
 
       {loadingNav && (
-        <div className={styles.toast} style={{ bottom: '120px', background: 'var(--primary)', color: 'white' }}>
+        <div className={styles.toast}>
           {t('home.fetching_location', { defaultValue: 'Fetching location...' })}
         </div>
       )}

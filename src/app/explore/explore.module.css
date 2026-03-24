@@ -120,9 +120,9 @@
     position: absolute;
     top: -4px;
     right: -4px;
-    background: #ff4d4d;
+    background: var(--korean-red);
     /* Red badge */
-    color: white;
+    color: var(--hanji-ivory);
     font-size: 10px;
     width: 16px;
     height: 16px;
@@ -184,7 +184,7 @@
 
 /* For center modal */
 .modalContent {
-    background: #fff;
+    background: var(--surface);
     width: 80%;
     max-width: 320px;
     border-radius: 16px;
@@ -211,9 +211,9 @@
 .cityOption {
     padding: 12px;
     border-radius: 12px;
-    border: 1px solid #333;
-    background: #2a2a2a;
-    color: var(--foreground);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     cursor: pointer;
 }
 
@@ -225,7 +225,7 @@
 
 /* Bottom Sheet */
 .bottomSheet {
-    background: #fff;
+    background: var(--surface);
     width: 100%;
     max-width: 600px;
     border-top-left-radius: 24px;
@@ -282,9 +282,9 @@
 .dayOption {
     padding: 16px;
     border-radius: 12px;
-    background: #2a2a2a;
-    border: 1px solid #333;
-    color: var(--foreground);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--ink-black);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -313,7 +313,7 @@
 
 .cardThumbnail {
     height: 160px;
-    background-color: #333;
+    background-color: var(--warm-sand);
     position: relative;
     padding: 12px;
     display: flex;
@@ -351,7 +351,7 @@
 }
 
 .saveBtn.saved {
-    color: #ff4d4d;
+    color: var(--korean-red);
 }
 
 .cardContent {
@@ -408,7 +408,7 @@
 }
 
 .ingredientTag {
-    color: #aaa;
+    color: var(--gray-400);
 }
 
 .cardActions {
@@ -455,8 +455,8 @@
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95);
-    color: #000;
+    background: var(--surface);
+    color: var(--ink-black);
     padding: 12px 24px;
     border-radius: 24px;
     font-weight: 700;
@@ -508,8 +508,8 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #fff;
-    border: 1px solid var(--gray-200);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
     border-radius: 12px;
     margin-top: 8px;
     list-style: none;
@@ -554,7 +554,7 @@
 }
 
 .distance {
-    color: #9d4edd;
+    color: var(--dancheong-teal);
     font-weight: bold;
 }
 
@@ -573,7 +573,7 @@
     justify-content: center;
     padding: 60px 20px;
     gap: 16px;
-    color: #888;
+    color: var(--gray-400);
 }
 
 .spinner {
@@ -595,7 +595,7 @@
 .infoWindow {
     padding: 8px 4px;
     min-width: 180px;
-    color: #333;
+    color: var(--ink-black);
 }
 
 .infoTitle {
@@ -607,7 +607,7 @@
 .infoArea {
     margin: 0 0 12px;
     font-size: 12px;
-    color: #666;
+    color: var(--soft-ink);
 }
 
 .infoActions {
@@ -631,7 +631,7 @@
     background: #fdfdfd;
     cursor: pointer;
     transition: all 0.15s;
-    color: #333;
+    color: var(--ink-black);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -646,21 +646,21 @@
 }
 
 .infoActionKride {
-    background: #fff8e1;
-    border-color: #ffc107;
-    color: #ff8f00;
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .infoActionTransit {
-    background: #e3f2fd;
-    border-color: #2196f3;
-    color: #1565c0;
+    background: var(--secondary-glow);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 .infoActionMap {
-    background: #f1f8e9;
-    border-color: #8bc34a;
-    color: #33691e;
+    background: var(--primary-glow);
+    border-color: var(--dancheong-teal);
+    color: var(--dancheong-teal);
 }
 
 /* ── Route Overlay ── */
@@ -669,7 +669,7 @@
     top: 10px;
     left: 10px;
     right: 10px;
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 14px 18px;
@@ -755,9 +755,9 @@
     min-height: 100vh;
     padding: 24px 16px 220px;
     background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.05), transparent 34%),
-        linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    color: #1e293b;
+        radial-gradient(circle at top left, rgba(79, 124, 120, 0.04), transparent 34%),
+        linear-gradient(180deg, var(--hanji-ivory) 0%, #ffffff 100%);
+    color: var(--ink-black);
 }
 
 .beautyHero,
@@ -784,9 +784,9 @@
     min-height: 32px;
     align-items: center;
     padding: 0 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(37, 99, 235, 0.1);
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
     color: var(--primary);
     font-size: 11px;
     font-weight: 800;
@@ -829,10 +829,10 @@
     margin: 0 auto;
     min-height: 54px;
     padding: 0 16px;
-    border-radius: 18px;
-    background: rgba(255, 250, 246, 0.95);
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    box-shadow: 0 16px 34px rgba(73, 48, 33, 0.08);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1.5px solid var(--warm-sand);
+    box-shadow: 0 16px 34px rgba(43, 35, 29, 0.06);
 }
 
 .beautyCategoryBadgeCode {
@@ -842,9 +842,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 999px;
-    background: rgba(234, 216, 207, 0.92);
-    color: #7f4f46;
+    border-radius: 6px;
+    background: var(--primary-glow);
+    color: var(--primary);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -905,10 +905,10 @@
 .beautySelectionNotice {
     margin-top: 18px;
     padding: 18px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.76);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 16px 34px rgba(73, 48, 33, 0.06);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 16px 34px rgba(43, 35, 29, 0.05);
 }
 
 .beautyGuideCard {
@@ -921,10 +921,10 @@
 .beautyFiltersSection {
     margin-top: 28px;
     padding: 22px 18px;
-    border-radius: 28px;
-    background: rgba(255, 252, 249, 0.86);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 20px 44px rgba(43, 35, 29, 0.08);
 }
 
 .beautySectionHeader {
@@ -978,10 +978,10 @@
 }
 
 .beautyRegionChipActive {
-    background: linear-gradient(135deg, #7f4f46 0%, #b28070 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.18);
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #ffffff;
+    box-shadow: 0 14px 28px var(--secondary-glow);
 }
 
 .beautySelectionTitle {
@@ -1010,16 +1010,16 @@
 
 .beautyStoreCard {
     padding: 20px 18px;
-    border-radius: 24px;
-    background: rgba(255, 252, 249, 0.92);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 18px 36px rgba(73, 48, 33, 0.06);
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 18px 36px rgba(43, 35, 29, 0.06);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .beautyStoreCardSelected {
-    border-color: rgba(127, 79, 70, 0.28);
-    box-shadow: 0 22px 42px rgba(127, 79, 70, 0.12);
+    border-color: var(--primary);
+    box-shadow: 0 22px 42px var(--primary-glow);
 }
 
 .beautyStoreTopRow,
@@ -1108,14 +1108,14 @@
     width: 100%;
     min-height: 52px;
     border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
     color: #ffffff;
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-    box-shadow: 0 18px 34px rgba(37, 99, 235, 0.18);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 12px 24px var(--secondary-glow);
 }
 
 .beautyStoreCta:active {
@@ -1151,10 +1151,10 @@
     margin: 20px auto 0;
     padding: 22px 18px;
     scroll-margin-top: 16px;
-    border-radius: 28px;
-    background: rgba(255, 252, 249, 0.92);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+    border-radius: var(--radius-lg);
+    background: var(--hanji-ivory);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 20px 44px rgba(43, 35, 29, 0.08);
 }
 
 .beautyBookingHeader {
@@ -1206,10 +1206,10 @@
 }
 
 .beautyStepItemCurrent {
-    border-color: rgba(127, 79, 70, 0.22);
-    background: rgba(255, 247, 242, 0.96);
-    color: #231d19;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.08);
+    border-color: var(--primary);
+    background: var(--primary-glow);
+    color: var(--ink-black);
+    box-shadow: 0 8px 20px var(--primary-glow);
 }
 
 .beautyStepItemDone {
@@ -1300,10 +1300,10 @@
 }
 
 .beautyDateChipActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 16px 30px rgba(127, 79, 70, 0.18);
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #ffffff;
+    box-shadow: 0 12px 24px var(--secondary-glow);
 }
 
 .beautyDateChipPrimary {
@@ -1336,10 +1336,10 @@
 }
 
 .beautyTimeSlotActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.16);
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 12px 24px var(--primary-glow);
 }
 
 .beautyBookingInlineEmpty,
@@ -1404,14 +1404,14 @@
     width: 100%;
     min-height: 54px;
     border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
     color: #ffffff;
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.2);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 12px 30px var(--secondary-glow);
 }
 
 .beautyBookingCta:disabled {
@@ -1516,10 +1516,10 @@
 .beautyAssistChip {
     min-height: 44px;
     padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(109, 83, 63, 0.12);
-    background: rgba(255, 252, 249, 0.96);
-    color: #3d2f28;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -1530,10 +1530,10 @@
 }
 
 .beautyAssistChipActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.16);
+    background: var(--secondary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
 }
 
 .beautyAssistChip:active {
@@ -1566,9 +1566,9 @@
     display: grid;
     gap: 10px;
     padding: 14px;
-    border-radius: 18px;
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    background: rgba(255, 252, 249, 0.92);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
 }
 
 .beautyAssistMessageHeader {
@@ -1580,13 +1580,13 @@
 }
 
 .beautyAssistMessageLabel {
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 14px;
     font-weight: 800;
 }
 
 .beautyAssistMessageBox {
-    color: #3d2f28;
+    color: var(--ink-black);
     font-size: 14px;
     line-height: 1.7;
     white-space: pre-wrap;
@@ -1595,10 +1595,10 @@
 .beautyAssistTextarea {
     width: 100%;
     min-height: 132px;
-    border-radius: 16px;
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    background: rgba(255, 255, 255, 0.98);
-    color: #231d19;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: #ffffff;
+    color: var(--ink-black);
     font: inherit;
     line-height: 1.7;
     padding: 14px 16px;
@@ -1619,10 +1619,10 @@
 .beautyAssistAction {
     min-height: 36px;
     padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(127, 79, 70, 0.16);
-    background: rgba(255, 252, 249, 0.94);
-    color: #7f4f46;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--accent);
     font-size: 13px;
     font-weight: 800;
     cursor: pointer;
@@ -1650,11 +1650,11 @@
     margin: 0;
     font-size: 16px;
     line-height: 1.3;
-    color: #231d19;
+    color: var(--ink-black);
 }
 
 .beautyOptionSectionMeta {
-    color: #7c6e64;
+    color: var(--soft-ink);
     font-size: 12px;
     font-weight: 700;
 }
@@ -1668,10 +1668,10 @@
 .beautyOptionCard {
     width: 100%;
     padding: 12px;
-    border-radius: 18px;
-    border: 1px solid rgba(109, 83, 63, 0.12);
-    background: rgba(255, 252, 249, 0.96);
-    color: #231d19;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     display: grid;
     justify-items: start;
     gap: 4px;
@@ -1683,10 +1683,10 @@
 }
 
 .beautyOptionCardActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 16px 30px rgba(127, 79, 70, 0.16);
+    background: var(--secondary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
 }
 
 .beautyOptionCard:active {
@@ -1725,7 +1725,7 @@
 
 .beautyOptionHint {
     margin: 0;
-    color: #6e6259;
+    color: var(--soft-ink);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -1741,7 +1741,7 @@
 }
 
 .beautyFormLabel {
-    color: #3d2f28;
+    color: var(--ink-black);
     font-size: 14px;
     font-weight: 800;
 }
@@ -1749,10 +1749,10 @@
 .beautyTextInput,
 .beautyTextarea {
     width: 100%;
-    border-radius: 16px;
-    border: 1px solid rgba(109, 83, 63, 0.14);
-    background: rgba(255, 252, 249, 0.96);
-    color: #231d19;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     font: inherit;
     padding: 14px 16px;
     transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
@@ -1770,15 +1770,15 @@
 .beautyTextInput:focus,
 .beautyTextarea:focus {
     outline: none;
-    border-color: rgba(127, 79, 70, 0.48);
-    box-shadow: 0 0 0 4px rgba(187, 138, 120, 0.14);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--primary-glow);
     background: #fff;
 }
 
 .beautyFieldError,
 .beautyAgreementError {
     margin: 0;
-    color: #b04d42;
+    color: var(--korean-red);
     font-size: 13px;
     line-height: 1.5;
     font-weight: 700;
@@ -1805,7 +1805,7 @@
     width: 18px;
     height: 18px;
     margin-top: 2px;
-    accent-color: #7f4f46;
+    accent-color: var(--accent);
 }
 
 .beautyAgreementTextWrap {
@@ -1814,14 +1814,14 @@
 }
 
 .beautyAgreementTitle {
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 14px;
     line-height: 1.5;
     font-weight: 800;
 }
 
 .beautyAgreementText {
-    color: #6e6259;
+    color: var(--soft-ink);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -1838,9 +1838,9 @@
 .beautyFinalCta {
     width: 100%;
     border: none;
-    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
-    color: #fff9f5;
-    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 18px 34px rgba(166, 75, 67, 0.2);
     cursor: pointer;
 }
 
@@ -1848,15 +1848,16 @@
     opacity: 0.42;
     cursor: not-allowed;
     box-shadow: none;
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.42) 0%, rgba(187, 138, 120, 0.4) 100%);
+    background: var(--warm-sand);
+    color: var(--soft-ink);
 }
 
 .beautySecondaryAction {
     min-width: 180px;
     padding: 0 18px;
-    border: 1px solid rgba(127, 79, 70, 0.18);
-    background: rgba(255, 252, 249, 0.94);
-    color: #7f4f46;
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--accent);
     cursor: pointer;
 }
 
@@ -1877,12 +1878,12 @@
     font-size: 22px;
     line-height: 1.3;
     letter-spacing: -0.03em;
-    color: #231d19;
+    color: var(--ink-black);
 }
 
 .beautyCompletionText {
     margin: 0;
-    color: #6e6259;
+    color: var(--soft-ink);
     font-size: 14px;
     line-height: 1.7;
 }
@@ -1891,9 +1892,9 @@
     display: grid;
     gap: 12px;
     padding: 16px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.1) 0%, rgba(234, 216, 207, 0.28) 100%);
-    border: 1px solid rgba(127, 79, 70, 0.1);
+    border-radius: var(--radius-md);
+    background: var(--primary-glow);
+    border: 1px solid var(--warm-sand);
 }
 
 .beautyCompletionHeroBlock,
@@ -1904,7 +1905,7 @@
 }
 
 .beautyCompletionHeroLabel {
-    color: #8d6157;
+    color: var(--accent);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -1912,14 +1913,14 @@
 }
 
 .beautyCompletionHeroTitle {
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 22px;
     line-height: 1.25;
     letter-spacing: -0.03em;
 }
 
 .beautyCompletionHeroMeta {
-    color: #5d5148;
+    color: var(--soft-ink);
     font-size: 14px;
     line-height: 1.6;
     font-weight: 700;
@@ -1932,7 +1933,7 @@
 }
 
 .beautyCompletionPrice {
-    color: #7f4f46;
+    color: var(--accent);
     font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.03em;
@@ -1945,14 +1946,14 @@
 
 .beautyCompletionSection {
     padding: 16px;
-    border-radius: 20px;
-    background: rgba(255, 252, 249, 0.88);
-    border: 1px solid rgba(109, 83, 63, 0.08);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
 }
 
 .beautyCompletionSectionTitle {
     margin: 0;
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 16px;
     line-height: 1.35;
     letter-spacing: -0.02em;

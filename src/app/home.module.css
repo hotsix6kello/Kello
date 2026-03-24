@@ -1,14 +1,14 @@
 .main {
-  --bg: #f8fafc;
+  --bg: var(--hanji-ivory);
   --surface: rgba(255, 255, 255, 0.9);
   --surface-strong: #ffffff;
-  --border: rgba(37, 99, 235, 0.1);
-  --text: #1e293b;
-  --muted: #64748b;
-  --accent: #2563eb;
-  --accent-deep: #1d4ed8;
-  --accent-soft: rgba(37, 99, 235, 0.08);
-  --shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  --border: var(--warm-sand);
+  --text: var(--ink-black);
+  --muted: var(--soft-ink);
+  --accent: var(--dancheong-teal);
+  --accent-deep: var(--deep-navy);
+  --accent-soft: var(--primary-glow);
+  --shadow: 0 20px 40px rgba(43, 35, 29, 0.08);
   min-height: 100%;
   position: relative;
   width: 100%;
@@ -16,11 +16,11 @@
   overflow-x: hidden;
   padding-bottom: 0;
   background:
-    radial-gradient(circle at top left, rgba(37, 99, 235, 0.05), transparent 32%),
-    radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 28%),
-    linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+    radial-gradient(circle at top left, rgba(79, 124, 120, 0.05), transparent 32%),
+    radial-gradient(circle at top right, rgba(46, 64, 87, 0.05), transparent 28%),
+    linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
   color: var(--text);
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+  font-family: var(--font-main);
 }
 
 .backgroundEffects {
@@ -42,17 +42,17 @@
 .orbRose {
   top: 72px;
   left: -48px;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(214, 180, 170, 0.55) 0%, rgba(214, 180, 170, 0) 70%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(166, 75, 67, 0.04) 0%, rgba(166, 75, 67, 0) 70%);
 }
 
 .orbSand {
   top: 320px;
   right: -72px;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(222, 206, 193, 0.52) 0%, rgba(222, 206, 193, 0) 72%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(185, 147, 90, 0.04) 0%, rgba(185, 147, 90, 0) 72%);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -85,16 +85,16 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #1e293b;
+  color: var(--soft-ink);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg);
   backdrop-filter: blur(8px);
   padding: 8px 16px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
   transition: all 0.2s;
 }
 
@@ -106,15 +106,15 @@
 .navBtn {
   font-size: 13px;
   font-weight: 800;
-  color: #1e293b;
-  background: rgba(255, 255, 255, 0.85);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
   padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--warm-sand);
+  box-shadow: 0 4px 12px rgba(43, 35, 29, 0.05);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,26 +122,28 @@
 }
 
 .navBtn:hover {
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--surface);
   border-color: var(--accent);
-  color: var(--accent-deep);
+  color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .navBtnPrimary {
   background: var(--accent);
-  color: #fff;
+  color: var(--hanji-ivory);
   border-color: var(--accent);
 }
 
 .navBtnPrimary:hover {
   background: var(--accent-deep);
-  color: #fff;
+  color: var(--hanji-ivory);
+  border-color: var(--accent-deep);
 }
 
 .flagIcon {
   width: 24px;
   height: 16px;
-  border: 1px solid #eee;
+  border: 1px solid var(--warm-sand);
   object-fit: cover;
 }
 
@@ -149,7 +151,7 @@
    HERO SECTION
    ────────────────────────────────────────────────────────────────────────── */
 .heroSection {
-  padding: 0; /* 배너가 상단에 밀착 */
+  padding: 40px 0 20px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -158,6 +160,7 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
+  background: linear-gradient(to bottom, rgba(246, 241, 231, 0.3) 0%, rgba(246, 241, 231, 0) 100%);
 }
 
 .heroLogo {
@@ -191,20 +194,17 @@
 }
 
 .heroTitle {
-  margin: 24px 12px 16px;
-  font-family: inherit;
-  font-size: 26px; /* 28px에서 약간 축소 */
-  line-height: 1.3;
+  margin: 16px 16px 8px;
+  font-family: var(--font-main);
+  font-size: 28px;
+  line-height: 1.25;
   letter-spacing: -0.04em;
   font-weight: 800;
-  color: var(--text);
+  color: var(--ink-black);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  max-width: 100%; /* 너비 제한 해제 */
-  margin-left: auto;
-  margin-right: auto;
   padding: 0 4px;
   white-space: pre-line;
 }
@@ -229,11 +229,11 @@
 }
 
 .bookingCard {
-  border-radius: 40px;
-  padding: 32px 24px 28px;
-  background: #ffffff;
-  border: 1px solid rgba(109, 83, 63, 0.05);
-  box-shadow: 0 20px 48px rgba(73, 48, 33, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  background: var(--surface);
+  border: 1.5px solid var(--warm-sand);
+  box-shadow: 0 32px 64px rgba(43, 35, 29, 0.08);
 }
 
 .sectionHeader {
@@ -254,7 +254,7 @@
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--text);
+  color: var(--ink-black);
 }
 
 .categoryGrid {
@@ -265,24 +265,24 @@
 }
 
 .categoryButton {
-  min-height: 132px;
+  min-height: 110px;
   height: auto;
-  border-radius: 24px;
-  border: 1px solid rgba(109, 83, 63, 0.1);
-  background: rgba(255, 255, 255, 0.76);
-  padding: 18px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--warm-sand);
+  background: var(--surface);
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .categoryButton:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 24px rgba(73, 48, 33, 0.08);
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 16px 32px rgba(43, 35, 29, 0.06);
 }
 
 .categoryButtonActive {
@@ -302,9 +302,9 @@
 }
 
 .categoryLabel {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
-  color: var(--text);
+  color: var(--ink-black);
   margin-bottom: 2px;
   letter-spacing: -0.02em;
 }
@@ -312,7 +312,7 @@
 .categoryNote {
   font-size: 13px;
   line-height: 1.4;
-  color: #8c7e73;
+  color: var(--soft-ink);
   margin-top: 4px;
   word-break: keep-all;
 }
@@ -321,7 +321,7 @@
    INPUT SECTION (ORIGIN/DEV MERGED)
    ────────────────────────────────────────────────────────────────────────── */
 .inputSection {
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--glass-bg);
   border: 1px solid var(--border);
   border-radius: 24px;
   padding: 20px;
@@ -339,7 +339,7 @@
 .inputWrap {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: 14px;
   padding: 0 14px;
@@ -361,7 +361,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #fff;
+  background: var(--surface);
   border-radius: 18px;
   box-shadow: var(--shadow);
   z-index: 200;
@@ -374,7 +374,7 @@
   gap: 12px;
   padding: 14px 16px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -415,25 +415,23 @@
 }
 
 .featuredCard {
-  min-height: 132px;
-  border-radius: 24px;
-  border: 1px solid rgba(109, 83, 63, 0.1);
-  background: rgba(255, 255, 255, 0.76);
-  padding: 18px 16px;
+  min-height: 110px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--warm-sand);
+  background: var(--surface);
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
-  justify-content: flex-start;
-  align-items: flex-start;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .featuredCard:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 24px rgba(73, 48, 33, 0.08);
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 16px 32px rgba(43, 35, 29, 0.06);
 }
 
 .featuredBadge {
@@ -444,15 +442,15 @@
 }
 
 .featuredLabel {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
-  color: var(--text);
+  color: var(--ink-black);
   order: 1;
 }
 
 .customPlanCard {
   border: 1px dashed var(--accent);
-  background: rgba(251, 191, 36, 0.05); /* Match accent color with low opacity */
+  background: var(--primary-glow);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -465,11 +463,11 @@
 }
 
 .interpreterCard {
-  border-radius: 28px;
-  padding: 22px 20px;
-  background: linear-gradient(135deg, rgba(40, 34, 31, 0.96) 0%, rgba(85, 66, 58, 0.92) 100%);
-  color: #fff8f3;
-  box-shadow: 0 24px 48px rgba(40, 34, 31, 0.16);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  background: linear-gradient(135deg, var(--ink-black) 0%, var(--deep-navy) 100%);
+  color: var(--hanji-ivory);
+  box-shadow: 0 24px 48px rgba(43, 35, 29, 0.16);
 }
 
 .interpreterTitle {
@@ -499,7 +497,7 @@
   width: 100%;
   min-height: 54px;
   background: rgba(255, 255, 255, 0.1);
-  color: #fff8f3;
+  color: var(--hanji-ivory);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 18px;
   font-weight: 700;
@@ -541,7 +539,8 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(43, 35, 29, 0.4);
+  backdrop-filter: blur(4px);
   z-index: 900;
   display: flex;
   align-items: flex-end;
@@ -549,28 +548,27 @@
 
 .sheet {
   width: 100%;
-  max-width: 480px;
+  max-width: var(--container-max-w);
   margin: 0 auto;
-  background: #fff;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+  background: var(--hanji-ivory);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   padding: 0 16px 36px;
-  margin-bottom: 72px;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 -10px 40px rgba(43, 35, 29, 0.12);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sheetHandle {
   width: 40px;
   height: 4px;
-  background: #eee;
+  background: var(--soft-stone);
   border-radius: 2px;
-  margin: 14px auto 16px;
+  margin: 14px auto 20px;
 }
 
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(43, 35, 29, 0.7);
   backdrop-filter: blur(4px);
   z-index: 2000;
   display: flex;
@@ -582,7 +580,7 @@
 .mapModal {
   width: 100%;
   max-width: 500px;
-  background: #fff;
+  background: var(--surface);
   border-radius: 28px;
   overflow: hidden;
   max-height: 90vh;
@@ -590,7 +588,7 @@
 
 .mapContainer {
   height: 300px;
-  background: #f0f0f0;
+  background: var(--hanji-ivory);
 }
 
 .navActionBtn {
@@ -598,7 +596,7 @@
   border-radius: 16px;
   border: none;
   font-weight: 700;
-  color: #fff;
+  color: var(--hanji-ivory);
   cursor: pointer;
 }
 
@@ -796,7 +794,7 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -820,9 +818,26 @@
 .selectionPanel {
   margin-top: 24px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  border: 1px solid var(--warm-sand);
+  border-radius: var(--radius-md);
   padding: 16px;
+  box-shadow: 0 4px 12px rgba(43, 35, 29, 0.04);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: var(--radius-xl);
+  background: var(--primary);
+  color: var(--hanji-ivory);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 12px 32px rgba(43, 35, 29, 0.2);
+  z-index: 2000;
+  pointer-events: none;
+  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .selectionRow {
@@ -840,11 +855,12 @@
 
 .selectionTag {
   font-size: 11px;
-  padding: 2px 8px;
-  background: var(--accent-soft);
-  color: var(--accent-deep);
-  border-radius: 8px;
+  padding: 4px 10px;
+  background: var(--primary-glow);
+  color: var(--primary);
+  border-radius: 6px;
   font-weight: 700;
+  border: 1px solid rgba(79, 124, 120, 0.1);
 }
 
 .selectionEmpty {
@@ -869,9 +885,9 @@
   width: 100%;
   min-height: 56px;
   background: var(--accent);
-  color: #fff;
+  color: var(--hanji-ivory);
   border: none;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   font-size: 16px;
   font-weight: 800;
   cursor: pointer;
@@ -879,7 +895,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(166, 75, 67, 0.2);
 }
 
 .mainCtaBtn:disabled {
