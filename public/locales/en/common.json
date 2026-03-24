@@ -6,7 +6,7 @@
   },
   "interpreter_page": {
     "back": "Back",
-    "title": "Real-time Interpreter",
+    "title": "Live Translation",
     "subtitle": "Talk with salon staff in Korean easily.",
     "onboarding": "Tap to speak or type your message to translate instantly.",
     "customer_lang": "My Language",
@@ -132,9 +132,9 @@
       ]
     },
     "interpreter_entry": {
-      "title": "Real-time Interpreter",
+      "title": "Live Translation",
       "description": "Communicate easily with staff at any shop",
-      "cta": "Start Interpreter"
+      "cta": "Start Translation"
     },
     "modals": {
       "card_title": "🗺️ Please go to this address",
@@ -300,9 +300,9 @@
     "error_change_reason": "Enter what you want to change.",
     "error_change": "Change request failed.",
     "error_alt": "Processing failed.",
-    "open_interpreter": "Open Interpreter",
-    "interpreter_visit_context": "Using interpreter for your visit to {{storeName}}.",
-    "interpreter_visit_service_context": "Using interpreter for your {{serviceName}} visit at {{storeName}}."
+    "open_interpreter": "Open Translation",
+    "interpreter_visit_context": "Using translation for your visit to {{storeName}}.",
+    "interpreter_visit_service_context": "Using translation for your {{serviceName}} visit at {{storeName}}."
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -492,7 +492,7 @@
       "open_support": "Open Support",
       "open_my_support": "Open My Support",
       "open_help_center": "Open Help Center",
-      "interpreter_help": "Interpreter Help",
+      "interpreter_help": "Translation Help",
       "booking_help": "Booking Help",
       "emergency_help": "Emergency Help",
       "general_help": "General Help",
@@ -542,7 +542,7 @@
       "apply_again": "Apply Again",
       "apply_as_partner": "Apply as Partner",
       "open_admin_console": "Open Admin Console",
-      "interpreter_for_booking": "Interpreter for this booking",
+      "interpreter_for_booking": "Translation for this booking",
       "show_booking_phrases": "Show booking phrases",
       "back_to_booking_support": "Back to booking support"
     },
@@ -1013,7 +1013,7 @@
         "booking": "Booking Help",
         "general": "General Help",
         "faq": "FAQ / Quick Guide",
-        "emergency": "Emergency / Interpreter Help"
+        "emergency": "Emergency / Translation Help"
       },
       "summary": {
         "booking": {
@@ -1025,8 +1025,8 @@
           "desc": "Help Center, support paths, and community safety entry points."
         },
         "emergency": {
-          "label": "Emergency & Interpreter",
-          "desc": "Use this hub first, then open the medical, police, or interpreter detail page that fits the situation."
+          "label": "Emergency & Translation",
+          "desc": "Use this hub first, then open the medical, police, or translation detail page that fits the situation."
         }
       },
       "guides": {
@@ -1036,7 +1036,7 @@
         },
         "staff_talk": {
           "q": "It is hard to talk with staff.",
-          "a": "Use Interpreter Help for quick translation tools and hotline access. If the situation feels urgent, move to Emergency Help right away."
+          "a": "Use Translation Help for quick translation tools and hotline access. If the situation feels urgent, move to Emergency Help right away."
         },
         "change_time": {
           "q": "I want to change my booking time.",
@@ -1059,7 +1059,7 @@
       "general": {
         "help_center": {
           "label": "Help Center",
-          "desc": "Open the detailed help pages for medical, police, interpreter, lost item, and emergency contacts already available in the app."
+          "desc": "Open the detailed help pages for medical, police, translation, lost item, and emergency contacts already available in the app."
         },
         "booking_cancel": {
           "label": "Booking & cancellation help",
@@ -1082,14 +1082,14 @@
       "emergency": {
         "overview": {
           "label": "Emergency Support",
-          "desc": "Open the main emergency help page for medical, police, lost item, and interpreter access.",
+          "desc": "Open the main emergency help page for medical, police, lost item, and translation access.",
           "cta": "Open Emergency Help"
         },
         "interp": {
-          "label": "Interpreter Help",
+          "label": "Translation Help",
           "desc": "Use translation tools and hotline links when speaking with venue staff is difficult.",
-          "cta": "Open Interpreter Help",
-          "booking_desc": "Carry this booking context into the interpreter route so staff can understand which reservation you mean."
+          "cta": "Open Translation Help",
+          "booking_desc": "Carry this booking context into the translation route so staff can understand which reservation you mean."
         },
         "phrases": {
           "label": "Emergency Phrases",
@@ -1108,14 +1108,14 @@
           "desc": "Use the safety route for police contact, incident guidance, or a risky situation.",
           "cta": "Open Safety Help"
         },
-        "title": "Emergency / Interpreter Help",
+        "title": "Emergency / Translation Help",
         "desc": "My Support is the hub. Use the detailed help pages below when the situation is urgent or communication is difficult.",
-        "interpreter_notice": "Interpreter links are available below. Some options may open a call screen or an external translation page.",
+        "interpreter_notice": "Translation links are available below. Some options may open a call screen or an external translation page.",
         "hub_notice": "Use this hub to choose the right detailed page. /help/* pages explain one route in more depth, and Travel Phrasebook is for showable Korean text."
       },
       "booking": {
         "banner_report": "Reporting an issue for {{bookingName}}. Choose the support route that matches the problem.",
-        "banner_interpreter": "Need language help for {{bookingName}}? Interpreter and emergency links are ready below.",
+        "banner_interpreter": "Need language help for {{bookingName}}? Translation and emergency links are ready below.",
         "banner_default": "Need help with {{bookingName}}? Start with the booking card below.",
         "banner_fallback": "Need help with a booking? Start with the closest reservation below.",
         "title": "Booking Help",
@@ -1125,7 +1125,7 @@
           "desc": "Check My Bookings again later or explore places to start planning your trip."
         },
         "context_title": "Help for this booking",
-        "context_desc": "Keep this reservation context visible while you move between booking help, interpreter help, and phrases."
+        "context_desc": "Keep this reservation context visible while you move between booking help, translation help, and phrases."
       },
       "subtitle": "Find the right help path for bookings, questions, and urgent travel situations.",
       "faq": {
@@ -1180,7 +1180,7 @@
         },
         "emergency": {
           "label": "Emergency",
-          "description": "Urgent help phrases and interpreter-related requests.",
+          "description": "Urgent help phrases and translation-related requests.",
           "helper": "Use with nearby staff, help desks, or emergency support lines."
         }
       },
@@ -1967,11 +1967,11 @@
     "interp_detail_subtitle": "Use this page when communication is difficult. It points you to phrase support, hotlines, and simple translation tools that already exist in the app flow.",
     "interp_when_title": "When to use this page",
     "interp_when_desc": "Use this route when you need help speaking with staff, drivers, police, or medical teams. If the situation is dangerous or health-related, move to the matching detailed help page as well.",
-    "interp_services_desc": "These existing options may open a phone call or an external translation page. No new in-app interpreter service is created here.",
+    "interp_services_desc": "These existing options may open a phone call or an external translation page. No new in-app translation service is created here.",
     "interp_phrases_desc": "These are quick previews. For large showable text and more emergency phrases, move to Travel Phrasebook.",
     "interp_show_more": "Show more emergency phrases",
     "interp_next_title": "Need a different detailed route?",
-    "interp_next_desc": "Interpreter help does not replace police or medical guidance. If the problem is safety- or health-related, open the matching page below as well.",
+    "interp_next_desc": "Translation help does not replace police or medical guidance. If the problem is safety- or health-related, open the matching page below as well.",
     "interp_medical_bridge": "Move to Medical Help if symptoms, injury, or urgent treatment are part of the situation.",
     "interp_medical_cta": "Open Medical Help",
     "interp_police_bridge": "Move to Police Help if the situation feels unsafe or you need official safety guidance.",
@@ -1990,23 +1990,23 @@
     },
     "police_phrase_desc": "These quick phrases help when you need to explain the situation before opening the full phrasebook.",
     "police_bridge_title": "Need more than one route?",
-    "police_bridge_desc": "If communication is difficult, open Interpreter Help too. If the situation includes injury or urgent symptoms, open Medical Help as well.",
-    "police_interp_bridge": "Open Interpreter Help when you need help explaining the situation to officers or staff.",
+    "police_bridge_desc": "If communication is difficult, open Translation Help too. If the situation includes injury or urgent symptoms, open Medical Help as well.",
+    "police_interp_bridge": "Open Translation Help when you need help explaining the situation to officers or staff.",
     "police_medical_bridge": "Open Medical Help when the situation also includes injury, illness, or emergency treatment needs.",
     "medical_detail_subtitle": "Use this page for medical contact paths, symptom phrases, and static clinic guidance already included in the project. It does not create a new diagnosis or hospital booking service.",
     "medical_notice_title": "If the situation feels urgent",
-    "medical_notice_text": "Call 119 first for urgent symptoms, severe injury, or breathing problems. Use the phrasebook and interpreter route to help explain the situation more clearly.",
+    "medical_notice_text": "Call 119 first for urgent symptoms, severe injury, or breathing problems. Use the phrasebook and translation route to help explain the situation more clearly.",
     "clinic_desc": "These are static example clinic and hospital entries already included in the app. Call ahead when possible.",
     "medical_bridge_title": "Need another support route too?",
-    "medical_bridge_desc": "Open Interpreter Help if communication is difficult. Open Police Help as well if the medical need is connected to an unsafe incident.",
-    "medical_interp_bridge": "Move to Interpreter Help when you need a clearer way to explain symptoms or treatment questions.",
+    "medical_bridge_desc": "Open Translation Help if communication is difficult. Open Police Help as well if the medical need is connected to an unsafe incident.",
+    "medical_interp_bridge": "Move to Translation Help when you need a clearer way to explain symptoms or treatment questions.",
     "medical_police_bridge": "Move to Police Help when the medical issue is connected to a crime, accident, or safety risk.",
     "lost_quick_desc": "Use the matching official route or helpline if you need direct lost-item support.",
     "lost112_desc": "Official lost and found route for many public cases in Korea.",
     "embassy_desc": "Use this when a lost passport or identity document needs embassy support.",
     "lost_1330_desc": "Use this when you need help understanding the next step or explaining the situation.",
     "lost_steps_desc": "Follow the matching route below. Use Support or Phrasebook if you need extra help talking to staff.",
-    "interp_badge": "Interpreter Help",
+    "interp_badge": "Translation Help",
     "police_badge": "Safety Route",
     "medical_badge": "Medical Route",
     "lost_badge": "Lost Item Route",
@@ -2014,13 +2014,13 @@
       "open_papago": "Open Papago",
       "open_google_translate": "Open Google Translate"
     },
-    "interp_booking_title": "Interpreter for this booking",
+    "interp_booking_title": "Translation for this booking",
     "interp_booking_desc": "You opened interpretation help for a reservation. Keep the venue, time, and booking status visible while you talk to staff.",
     "booking_phrases_desc": "Open booking phrases first when you need to explain the reservation, delay, or check-in situation to staff.",
     "booking_context_title": "Help for this booking",
     "booking_context_desc": "You opened this help page while checking a reservation. Keep the venue, time, and booking status visible while you choose the next support route.",
     "police_booking_desc": "You opened safety help while checking a reservation. Keep the venue, time, and booking status visible while you choose the safest next route.",
-    "medical_booking_desc": "You opened medical help while checking a reservation. Keep the venue, time, and booking status visible while you choose the next medical or interpreter route.",
+    "medical_booking_desc": "You opened medical help while checking a reservation. Keep the venue, time, and booking status visible while you choose the next medical or translation route.",
     "lost_booking_desc": "If you were on the way to a reservation, keep the venue, time, and booking status visible while you ask for directions or support.",
     "interp": {
       "hotline_title": "1330 Tourism Helpline",
