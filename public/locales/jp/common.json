@@ -1127,14 +1127,14 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "ビューティー予約コンシェルジュ",
-      "title": "どんな予約をご希望ですか？",
+      "title": "韓国の美しさを、\nあなたの旅程に。",
       "subtitle": "ご希望のビューティーサービスを選んで、すぐに予約へ進みましょう。",
       "welcome": "{{name}}様、サービスをお選びください。",
       "welcome_user": "{{greeting}}、{{name}}様！👋"
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "ご希望のサービスをお選びください",
+      "title": "韓国の美しさを、\nあなたの旅程に。",
       "description": "正確な検索のために、まずカテゴリーを選択してください。"
     },
     "categories": {

@@ -209,7 +209,7 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "Beauty-Buchungs-Concierge",
-      "title": "Welche Buchung wünschen Sie?",
+      "title": "Fangen Sie die Schönheit Koreas\nin Ihrem Zeitplan ein",
       "subtitle": "Wählen Sie Ihren Beauty-Service und gehen Sie direkt zur Buchung.",
       "welcome": "{{name}}, bitte wählen Sie einen Service.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
