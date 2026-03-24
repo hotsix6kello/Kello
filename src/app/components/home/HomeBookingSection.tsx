@@ -20,9 +20,11 @@ export default function HomeBookingSection({
       <div className={styles.bookingCard}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>{t('home_beauty.booking.title')}</h2>
-          <p className={styles.sectionDescription}>
-            {t('home_beauty.booking.description')}
-          </p>
+          {t('home_beauty.booking.description') && (
+            <p className={styles.sectionDescription}>
+              {t('home_beauty.booking.description')}
+            </p>
+          )}
         </div>
 
         <div className={styles.categoryGrid}>
