@@ -35,6 +35,7 @@ const LANGUAGE_LABELS: Record<string, string> = {
   it: "Italian",
   ru: "Russian",
   pt: "Portuguese",
+  ar: "Arabic"
 };
 
 class MockInterpreterTranscriptionProvider implements InterpreterTranscriptionProvider {

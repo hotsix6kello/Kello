@@ -107,16 +107,6 @@ function QuickActionBar() {
 
     const actions = [
         {
-            icon: "N",
-            label: t("common.move"),
-            onClick: () => router.push("/navigation"),
-        },
-        {
-            icon: "T",
-            label: t("common.today_nav"),
-            onClick: () => router.push("/navigation"),
-        },
-        {
             icon: "S",
             label: t("my_page.support.short"),
             onClick: () => router.push("/my/support"),
@@ -209,13 +199,6 @@ function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
                                 )}
                             </div>
 
-                            <div className={styles.ticketActions}>
-                                <button
-                                    className={styles.ticketActionBtn}
-                                    onClick={() => router.push("/planner")}
-                                >
-                                    {t("common.actions.details")}
-                                </button>
 
                                 {booking.lat && booking.lng && (
                                     <button
@@ -229,88 +212,13 @@ function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
                                     </button>
                                 )}
                             </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
+                        ))}
+                    </div>
+                )}
+            </section>
+        );
+    }
 
-function TodayPlanSection({ itinerary }: { itinerary: ItineraryItem[] }) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const todayItems = useMemo(() => {
-        return [...itinerary]
-            .sort((left, right) => {
-                const toMinutes = (value: string) => {
-                    const [hours, minutes] = value.split(":").map(Number);
-                    return hours * 60 + minutes;
-                };
-
-                return toMinutes(left.time) - toMinutes(right.time);
-            })
-            .slice(0, 4);
-    }, [itinerary]);
-
-    const typeIcon: Record<string, string> = {
-        beauty: "B",
-        food: "F",
-        attraction: "A",
-        transport: "T",
-        event: "E",
-    };
-
-    return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("today_page.title")}</h2>
-                <button
-                    className={styles.sectionMore}
-                    onClick={() => router.push("/navigation")}
-                >
-                    {t("today_page.timeline", { defaultValue: t("common.actions.view_all") })}
-                </button>
-            </div>
-
-            {todayItems.length === 0 ? (
-                <div className={styles.emptyCard}>
-                    <span className={styles.emptyIcon}>TODAY</span>
-                    <p className={styles.emptyText}>{t("today_page.empty.title")}</p>
-                    <button
-                        className={styles.emptyBtn}
-                        onClick={() => router.push("/explore")}
-                    >
-                        {t("today_page.empty.cta")}
-                    </button>
-                </div>
-            ) : (
-                <div className={styles.todayList}>
-                    {todayItems.map((item) => (
-                        <div key={item.id} className={styles.todayItem}>
-                            <div className={styles.todayTimeCol}>
-                                <span className={styles.todayTime}>{item.time}</span>
-                            </div>
-                            <div className={styles.todayDot} />
-                            <div className={styles.todayContent}>
-                                <span className={styles.todayIcon}>
-                                    {typeIcon[item.type || "attraction"] || "A"}
-                                </span>
-                                <div>
-                                    <div className={styles.todayTitle}>{item.name}</div>
-                                    <div className={styles.todayStatus}>
-                                        {formatItineraryStatusLabel(t, item.status)}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
 
 function CommunitySummarySection({ posts }: { posts: CommunityPost[] }) {
     const router = useRouter();
@@ -565,11 +473,13 @@ function MyPageContent() {
             }
 
             if (!user) {
-                setUserName(fallbackName);
-                setProfileSubtitle(fallbackSubtitle);
+                // ---------- [ UI Test Mode ] ----------
+                // 원래는 게스트 로그인 시 관리자 UI를 안보여주지만, 임시로 설정합니다.
+                setUserName("최고 관리자 (테스트)");
+                setProfileSubtitle("admin@kello.local");
                 setCommunityAuthor("");
-                setIsAdmin(false);
-                setPartnerStatus(null);
+                setIsAdmin(true);
+                setPartnerStatus("approved");
                 return;
             }
 
@@ -619,7 +529,10 @@ function MyPageContent() {
                 return;
             }
 
-            setPartnerStatus(partner ? (partner.status as PartnerStatus) : "none");
+            // ---------- [ UI Test Mode ] ----------
+            setPartnerStatus("approved");
+            setIsAdmin(true);
+            // --------------------------------------
         };
 
         void loadDashboardUser();
@@ -772,7 +685,6 @@ function MyPageContent() {
 
             <UpcomingBookingsSection bookings={realBookings} />
 
-            <TodayPlanSection itinerary={itinerary} />
 
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}

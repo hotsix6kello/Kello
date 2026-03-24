@@ -161,7 +161,7 @@
 }
 
 .heroLogo {
-  width: 100%;
+  width: 100vw;
   height: auto;
   max-width: 100%;
   margin: 0;
@@ -198,7 +198,9 @@
   letter-spacing: -0.04em;
   font-weight: 800;
   color: var(--text);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   max-width: 100%; /* 너비 제한 해제 */
   margin-left: auto;
@@ -221,7 +223,7 @@
    BOOKING CARD / BEAUTY CATEGORIES
    ────────────────────────────────────────────────────────────────────────── */
 .bookingShell {
-  padding: 8px 20px 18px;
+  padding: 0 20px 24px;
   position: relative;
   z-index: 1;
 }
