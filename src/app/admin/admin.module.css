@@ -2,7 +2,7 @@
 .container {
     min-height: 100vh;
     background: var(--background);
-    padding-bottom: 0;
+    padding-bottom: 200px !important; /* Force margin to clear bottom nav on all admin screens */
 }
 
 .header {
@@ -35,7 +35,7 @@
 }
 
 .content {
-    padding: 16px 20px;
+    padding: 16px 20px 200px !important; /* Force internal bottom padding to clear nav bar */
 }
 
 /* Dashboard Cards */

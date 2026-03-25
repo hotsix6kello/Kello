@@ -329,6 +329,9 @@ function AdminUsersContent() {
                     </div>
                 </div>
             )}
+            
+            {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
+            <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
         </div>
     );
 }
