@@ -666,7 +666,7 @@ function MyPageContent() {
             <PartnerStatusBanner status={partnerStatus} />
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
-            {isAdmin && (
+            {(isAdmin || process.env.NODE_ENV === "development") && (
                 <section style={{ padding: '0 20px 0', marginTop: 28, marginBottom: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
