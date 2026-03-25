@@ -562,13 +562,6 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/main
-
->>>>>>> origin/develop
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
@@ -577,18 +570,12 @@ function MyPageContent() {
 
             <CommunityHubSection />
 
-
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
 
-            {/* Detailed Admin Menu (from HEAD) if Admin */}
-<<<<<<< HEAD
-            {isAdmin && (
-                <section style={{ padding: '0 20px 100px', marginTop: 28, marginBottom: 80 }}>
-=======
+            {/* 관리자 메뉴 전용 하단 여백 확보 (100px) */}
             {(isAdmin || process.env.NODE_ENV === "development") && (
-                <section style={{ padding: '0 20px 0', marginTop: 16, marginBottom: 0 }}>
->>>>>>> origin/main
+                <section style={{ padding: '0 20px 100px', marginTop: 16, marginBottom: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
                         <span style={{
@@ -634,8 +621,8 @@ function MyPageContent() {
                 </section>
             )}
 
-            {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 (관리자 및 일반 사용자 공통) - 절대 수축 불가 */}
-            <div style={{ height: '180px', minHeight: '180px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
+            {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+            <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
 
         </div>
     );

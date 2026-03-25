@@ -139,14 +139,8 @@ export default function AdminDashboard() {
                         <span className={styles.menuArrow}>›</span>
                     </div>
                 ))}
-<<<<<<< HEAD
-                {/* 하단 네비게이션 바와의 간섭 방지 (160px 대용량 여백 확보) */}
-                <div style={{ height: 160, flexShrink: 0 }} />
-=======
-                
-                {/* 하단 네비게이션 바와 섹터 사이의 여백을 확실히 보장하는 대형 스페이서 - 절대 수축 불가 */}
-                <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
->>>>>>> origin/main
+                {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+                <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
             </div>
         </div>
     );
