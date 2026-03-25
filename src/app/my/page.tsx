@@ -6,25 +6,8 @@ import { useTranslation } from "react-i18next";
 import { useTrip, ItineraryItem } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
-import {
-    formatCountLabel,
-    formatItineraryStatusLabel,
-    formatTripDayTimeLabel,
-} from "@/lib/i18n/runtimeFormatters";
 import styles from "./my.module.css";
 
-interface BookingCard {
-    id: string;
-    title: string;
-    date: string;
-    category: string;
-    status: string;
-    area?: string;
-    price?: string;
-    isNew: boolean;
-    lat?: number;
-    lng?: number;
-}
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 
@@ -94,124 +77,7 @@ function ProfileSummaryCard({
     );
 }
 
-function QuickActionBar() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
 
-    const actions = [
-        {
-            icon: "🎧",
-            label: t("my_page.support.short"),
-            onClick: () => router.push("/my/support"),
-        },
-        {
-            icon: "KO",
-            label: t("my_page.phrases.quick"),
-            onClick: () => router.push("/my/phrases"),
-        },
-    ];
-
-    return (
-        <div className={styles.quickActionBar}>
-            {actions.map((action) => (
-                <button
-                    key={action.label}
-                    className={styles.quickActionBtn}
-                    onClick={action.onClick}
-                >
-                    <span className={styles.quickActionIcon}>{action.icon}</span>
-                    <span className={styles.quickActionLabel}>{action.label}</span>
-                </button>
-            ))}
-        </div>
-    );
-}
-
-function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const displayed = bookings
-        .filter((item) => item.status === "confirmed" || item.status === "submitted")
-        .slice(0, 3);
-
-    return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("my_page.bookings.title")}</h2>
-                {bookings.length > 0 && (
-                    <button
-                        className={styles.sectionMore}
-                        onClick={() => router.push("/my/bookings")}
-                    >
-                        {t("common.actions.view_all")}
-                    </button>
-                )}
-            </div>
-
-            {displayed.length === 0 ? (
-                <div className={styles.emptyCard}>
-                    <span className={styles.emptyIcon}>📅</span>
-                    <p className={styles.emptyText}>{t("my_page.dashboard.bookings_empty", "아직 예정된 예약이 없습니다")}</p>
-                    <button
-                        className={styles.emptyBtn}
-                        onClick={() => router.push("/explore")}
-                    >
-                        {t("common.actions.explore_places")}
-                    </button>
-                </div>
-            ) : (
-                <div className={styles.bookingList}>
-                    {displayed.map((booking) => (
-                        <div key={booking.id} className={styles.bookingTicket}>
-                            <div className={styles.ticketLeft}>
-                                <div className={styles.ticketCatRow}>
-                                    <span className={styles.ticketCat}>{booking.category}</span>
-                                    <span
-                                        className={`${styles.ticketStatus} ${
-                                            booking.status === "confirmed"
-                                                ? styles.statusConfirmed
-                                                : ""
-                                        }`}
-                                    >
-                                        {formatItineraryStatusLabel(t, booking.status)}
-                                    </span>
-                                </div>
-
-                                <div className={styles.ticketTitle}>{booking.title}</div>
-                                <div className={styles.ticketMeta}>
-                                    {booking.date}
-                                    {booking.area && <span> • {booking.area}</span>}
-                                    {booking.price && <span> • {booking.price}</span>}
-                                </div>
-
-                                {booking.isNew && (
-                                    <div className={styles.newBadge}>
-                                        {t("my_page.bookings.new_added")}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className={styles.ticketActions}>
-                                {booking.lat && booking.lng && (
-                                    <button
-                                        className={styles.ticketActionBtn}
-                                        onClick={() => {
-                                            const url = `https://www.google.com/maps/dir/?api=1&destination=${booking.lat},${booking.lng}&travelmode=transit`;
-                                            window.open(url, "_blank");
-                                        }}
-                                    >
-                                        {t("common.actions.map")}
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
 
 
 function SavedHubSection({
@@ -602,33 +468,6 @@ function MyPageContent() {
         };
     }, [t]);
 
-    const realBookings = useMemo<BookingCard[]>(() => {
-        return itinerary
-            .filter((item) => item.status === "confirmed" || item.status === "submitted")
-            .map((item) => {
-                const extendedItem = item as ItineraryItem & {
-                    area?: string;
-                    price?: string;
-                };
-
-                return {
-                    id: item.id,
-                    title: item.name,
-                    date: formatTripDayTimeLabel(t, item.day, item.time, {
-                        separator: "dot",
-                    }),
-                    category: t(`common.categories.${item.type || "attraction"}`, {
-                        defaultValue: item.type || "Attraction",
-                    }),
-                    status: item.status,
-                    area: extendedItem.area,
-                    price: extendedItem.price,
-                    isNew: false,
-                    lat: item.lat,
-                    lng: item.lng,
-                };
-            });
-    }, [itinerary, t]);
 
 
 
@@ -650,10 +489,7 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
-            <QuickActionBar />
 
-
-            <UpcomingBookingsSection bookings={realBookings} />
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
@@ -662,31 +498,6 @@ function MyPageContent() {
 
             <CommunityHubSection />
 
-            {/* Support Action Button */}
-            <section style={{ padding: '0 20px', marginBottom: 32 }}>
-                <button
-                    onClick={() => router.push('/my/support')}
-                    style={{
-                        width: '100%', padding: '24px', borderRadius: 24, border: '1px solid rgba(0,0,0,0.03)', background: 'white',
-                        display: 'flex', alignItems: 'center', gap: 16, cursor: 'pointer',
-                        boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    <div style={{
-                        width: 48, height: 48, borderRadius: 16,
-                        background: '#f8fafc',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.6rem', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)'
-                    }}>🎧</div>
-                    <div style={{ textAlign: 'left', flex: 1 }}>
-                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#111827' }}>{t('my_page.support.short')}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginTop: 4 }}>고객센터 및 문의사항</div>
-                    </div>
-                    <span style={{ color: '#7c3aed', fontSize: '1.5rem', fontWeight: 700 }}>›</span>
-                </button>
-            </section>
 
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
@@ -708,7 +519,6 @@ function MyPageContent() {
                         { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
                         { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
                         { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                        { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
                     ].map((item) => (
                         <div
                             key={item.path}
