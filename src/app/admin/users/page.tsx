@@ -329,8 +329,14 @@ function AdminUsersContent() {
                     </div>
                 </div>
             )}
+<<<<<<< HEAD
             {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
             <div style={{ height: 160, flexShrink: 0 }} />
+=======
+            
+            {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
+            <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
+>>>>>>> origin/main
         </div>
     );
 }

@@ -35,7 +35,7 @@
 }
 
 .content {
-    padding: 16px 20px;
+    padding: 16px 20px 200px !important; /* Force internal bottom padding to clear nav bar */
 }
 
 /* Dashboard Cards */

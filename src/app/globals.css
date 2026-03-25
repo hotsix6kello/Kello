@@ -177,7 +177,6 @@ button {
 .mobile-wrapper {
   max-width: 480px;
   margin: 0 auto;
-  /* 100dvh = dynamic viewport height (二쇱냼李??쒖쇅???ㅼ젣 ?믪씠) */
   height: 100vh;
   height: 100dvh;
   min-height: -webkit-fill-available;
@@ -186,7 +185,6 @@ button {
   position: relative;
   background-color: var(--background);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
 }
 
 @media (min-width: 480px) {
@@ -202,12 +200,13 @@ button {
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
+  min-height: 0;
   -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(var(--total-nav-height) + var(--safe-area-bottom) + 20px);
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  padding-bottom: 88px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scroll-container::-webkit-scrollbar {

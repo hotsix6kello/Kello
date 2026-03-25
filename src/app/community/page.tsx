@@ -603,60 +603,89 @@ export default function CommunityPage() {
     const handleSubmit = async () => {
         if (!newTitle.trim() || !newDesc.trim()) return;
         setIsSubmitting(true);
-        const databaseType = getDatabaseTypeForCategory(newType);
-        const imageMeta = newImages
-            .map((image) => `\n[${COMMUNITY_IMAGE_META_KEY}:${image.dataUrl}]`)
-            .join('');
-        const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
+        
+        try {
+            // 이미지들을 Storage에 업로드하고 URL 리스트 획득
+            const uploadedImageUrls = await Promise.all(
+                newImages.map(async (img) => {
+                    // 이미 URL인 경우(수정 시) 그대로 유지
+                    if (img.dataUrl.startsWith('http')) return img.dataUrl;
+                    
+                    // Base64 Data URL을 Blob으로 변환
+                    const res = await fetch(img.dataUrl);
+                    const blob = await res.blob();
+                    
+                    const fileExt = img.name.split('.').pop() || 'jpg';
+                    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${fileExt}`;
+                    const filePath = `posts/${fileName}`;
 
-        const fakeUser = { author: loggedInUserName, flag: '🌍' };
+                    const { error: uploadError } = await supabase.storage
+                        .from('community')
+                        .upload(filePath, blob);
 
-        if (editingPostId) {
-            const { error } = await supabase.from('community_posts').update({
-                type: databaseType,
-                title: newTitle,
-                desc: composedDesc,
-                start_time: startTime || null,
-                end_time: endTime || null,
-                place_name: placeName || null,
-                place_lat: placeName ? (placeLat || 37.5665) : null,
-                place_lng: placeName ? (placeLng || 126.9780) : null
-            }).eq('id', editingPostId);
+                    if (uploadError) throw uploadError;
 
-            if (!error) {
+                    const { data } = supabase.storage.from('community').getPublicUrl(filePath);
+                    return data.publicUrl;
+                })
+            );
+
+            const databaseType = getDatabaseTypeForCategory(newType);
+            const imageMeta = uploadedImageUrls
+                .map((url) => `\n[${COMMUNITY_IMAGE_META_KEY}:${url}]`)
+                .join('');
+                
+            const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
+
+            const fakeUser = { author: loggedInUserName, flag: '🌍' };
+
+            if (editingPostId) {
+                const { error } = await supabase.from('community_posts').update({
+                    type: databaseType,
+                    title: newTitle,
+                    desc: composedDesc,
+                    start_time: startTime || null,
+                    end_time: endTime || null,
+                    place_name: placeName || null,
+                    place_lat: placeName ? (placeLat || 37.5665) : null,
+                    place_lng: placeName ? (placeLng || 126.9780) : null
+                }).eq('id', editingPostId);
+
+                if (error) throw error;
+                
                 setIsWriting(false);
                 resetDraftForm();
-                fetchPosts(); // Reload feed
+                fetchPosts();
                 showToast(t('community_page.toasts.updated'));
             } else {
-                alert(t('community_page.errors.update_failed'));
-            }
-        } else {
-            const { error } = await supabase.from('community_posts').insert([{
-                author: fakeUser.author,
-                flag: fakeUser.flag,
-                type: databaseType,
-                title: newTitle,
-                desc: composedDesc,
-                time: t('community_page.time.just_now'),
-                comments: 0,
-                start_time: startTime || null,
-                end_time: endTime || null,
-                place_name: placeName || null,
-                place_lat: placeName ? (placeLat || 37.5665) : null,
-                place_lng: placeName ? (placeLng || 126.9780) : null
-            }]);
+                const { error } = await supabase.from('community_posts').insert([{
+                    author: fakeUser.author,
+                    flag: fakeUser.flag,
+                    type: databaseType,
+                    title: newTitle,
+                    desc: composedDesc,
+                    time: t('community_page.time.just_now'),
+                    comments: 0,
+                    start_time: startTime || null,
+                    end_time: endTime || null,
+                    place_name: placeName || null,
+                    place_lat: placeName ? (placeLat || 37.5665) : null,
+                    place_lng: placeName ? (placeLng || 126.9780) : null
+                }]);
 
-            if (!error) {
+                if (error) throw error;
+                
                 setIsWriting(false);
                 resetDraftForm();
-                fetchPosts(); // Reload feed
-                showToast(t('community_page.toasts.created'));
-            } else {
-                alert(t('community_page.errors.post_failed', { message: error.message }));
+                fetchPosts();
+                showToast(t('community_page.toasts.submitted'));
             }
+        } catch (error: any) {
+            console.error('Submission error:', error);
+            alert(t('community_page.errors.submit_failed') + ': ' + (error.message || '알 수 없는 오류'));
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     const handleEditPost = (post: Post) => {
