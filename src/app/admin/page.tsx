@@ -90,11 +90,6 @@ export default function AdminDashboard() {
             highlight: null,
         },
         {
-            icon: '🗂️', bg: 'rgba(15,118,110,0.1)', title: t('admin.menu_glossary_title', { defaultValue: '번역 용어집' }),
-            desc: t('admin.menu_glossary_desc', { defaultValue: '뷰티 용어집 편집 및 언어별 우선순위 관리' }), path: '/admin/glossary',
-            highlight: null,
-        },
-        {
             icon: '💼', bg: 'rgba(236,72,153,0.1)', title: t('admin.menu_bookings_title', { defaultValue: '뷰티 예약 관리' }),
             desc: t('admin.menu_bookings_desc', { defaultValue: '예약 요청 조회 및 진행 상태 변경' }), path: '/admin/bookings/beauty',
             highlight: null,

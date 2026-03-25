@@ -7,20 +7,21 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: var(--foreground);
+    color: var(--ink-black);
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
-    background: var(--gray-100);
+    background: var(--warm-sand);
     padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid var(--gray-200);
-    transition: all 0.2s;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--soft-stone);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
 }
 
 .trigger:hover {
-    background: var(--gray-200);
+    background: var(--soft-stone);
+    border-color: var(--gray-400);
 }
 
 .arrow {
@@ -40,10 +41,10 @@
     top: calc(100% + 8px);
     right: 0;
     min-width: 180px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: var(--hanji-ivory);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 30px rgba(43, 35, 29, 0.12);
     z-index: 1001;
     overflow: hidden;
     padding: 8px 0;
@@ -57,7 +58,7 @@
     padding: 10px 16px;
     background: transparent;
     border: none;
-    color: #444;
+    color: var(--ink-black);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -66,14 +67,12 @@
 }
 
 .item:hover {
-    background: #f4f4f4;
-    color: #000;
+    background: var(--warm-sand);
 }
 
 .item.active {
-    color: #7c3aed;
-    /* Blue-Purple theme */
-    background: #fdf2ff;
+    color: var(--primary);
+    background: var(--primary-glow);
 }
 
 .code {
@@ -88,8 +87,8 @@
 .rate {
     margin-left: auto;
     font-size: 10px;
-    color: #888;
-    background: #f0f0f0;
+    color: var(--soft-ink);
+    background: var(--warm-sand);
     padding: 2px 6px;
     border-radius: 4px;
 }

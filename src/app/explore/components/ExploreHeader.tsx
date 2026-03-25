@@ -75,7 +75,7 @@ export default function ExploreHeader({
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
                     <div
-                        className={`${styles.modalContent} relative w-[92vw] max-w-[420px] max-h-[85vh] bg-white rounded-3xl shadow-[0_24px_60px_rgba(0,0,0,0.18)] overflow-hidden flex flex-col transform transition-all duration-300 ease-out ${isCityModalOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
+                        className={`${styles.modalContent} relative w-[92vw] max-w-[420px] max-h-[85vh] bg-[var(--surface)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col transform transition-all duration-300 ease-out ${isCityModalOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h3 className={styles.modalTitle}>{t('explore_page.select_city')}</h3>

@@ -264,8 +264,16 @@ function SavedHubContent() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <button className={styles.backLink} onClick={() => router.push("/my")}>
-                    {t("common.back")}
+                <button 
+                    className={styles.backLink} 
+                    onClick={() => router.push("/my")}
+                    style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center' }}
+                    aria-label={t("common.back")}
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
                 </button>
 
                 <div className={styles.headerRow}>
