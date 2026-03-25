@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from '@/lib/i18n/client';
-import { LOCALE_STORAGE_KEY, resolveCanonicalLocale } from '@/lib/i18n/locales';
+import { resolveCanonicalLocale } from '@/lib/i18n/locales';
 import styles from './LanguagePicker.module.css';
 
 export interface LangOption {
@@ -13,39 +13,86 @@ export interface LangOption {
 }
 
 export const LANGUAGES: LangOption[] = [
-    { code: 'ko', label: '한국어', flag: '🇰🇷' },
-    { code: 'en', label: 'English', flag: '🇺🇸' },
-    { code: 'ja', label: '日本語', flag: '🇯🇵' },
-    { code: 'zh-CN', label: '简体中文', flag: '🇨🇳' },
-    { code: 'zh-HK', label: '繁體中文', flag: '🇭🇰' },
-    { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳' },
-    { code: 'th', label: 'ไทย', flag: '🇹🇭' },
-    { code: 'id', label: 'Bahasa Indonesia', flag: '🇮🇩' },
-    { code: 'ms', label: 'Bahasa Melayu', flag: '🇲🇾' },
+    { code: 'ko', label: '한국어', flag: 'https://flagcdn.com/w40/kr.png' },
+    { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
+    { code: 'ja', label: '日本語', flag: 'https://flagcdn.com/w40/jp.png' },
+    { code: 'zh-CN', label: '简体中文', flag: 'https://flagcdn.com/w40/cn.png' },
+    { code: 'zh-HK', label: '繁體中文', flag: 'https://flagcdn.com/w40/hk.png' },
+    { code: 'vi', label: 'Tiếng Việt', flag: 'https://flagcdn.com/w40/vn.png' },
+    { code: 'th', label: 'ไทย', flag: 'https://flagcdn.com/w40/th.png' },
+    { code: 'id', label: 'Bahasa Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
+    { code: 'ms', label: 'Bahasa Melayu', flag: 'https://flagcdn.com/w40/my.png' },
+    { code: 'fr', label: 'Français', flag: 'https://flagcdn.com/w40/fr.png' },
+    { code: 'es', label: 'Español', flag: 'https://flagcdn.com/w40/es.png' },
+    { code: 'de', label: 'Deutsch', flag: 'https://flagcdn.com/w40/de.png' },
+    { code: 'pt', label: 'Português', flag: 'https://flagcdn.com/w40/pt.png' },
+    { code: 'ru', label: 'Русский', flag: 'https://flagcdn.com/w40/ru.png' },
+    { code: 'ar', label: 'العربية', flag: 'https://flagcdn.com/w40/sa.png' },
 ];
 
 interface LanguagePickerProps {
     compact?: boolean;
 }
 
+const LANG_TO_CURRENCY: Record<string, string> = {
+    'ko': 'KRW',
+    'en': 'USD',
+    'ja': 'JPY',
+    'zh-CN': 'CNY',
+    'zh-HK': 'HKD',
+    'vi': 'VND',
+    'th': 'THB',
+    'id': 'IDR',
+    'ms': 'MYR',
+    'fr': 'EUR',
+    'es': 'EUR',
+    'de': 'EUR',
+    'pt': 'EUR',
+    'ru': 'RUB',
+    'ar': 'SAR'
+};
+
+const LANG_TO_COUNTRY: Record<string, string> = {
+    'ko': 'KR',
+    'en': 'US',
+    'ja': 'JP',
+    'zh-CN': 'CN',
+    'zh-HK': 'HK',
+    'vi': 'VN',
+    'th': 'TH',
+    'id': 'ID',
+    'ms': 'MY',
+    'fr': 'FR',
+    'es': 'ES',
+    'de': 'DE',
+    'pt': 'PT',
+    'ru': 'RU',
+    'ar': 'SA'
+};
+
+const FLAG_EMOJIS: Record<string, string> = {
+    kr: '🇰🇷', us: '🇺🇸', jp: '🇯🇵', cn: '🇨🇳', hk: '🇭🇰',
+    vn: '🇻🇳', th: '🇹🇭', id: '🇮🇩', my: '🇲🇾', fr: '🇫🇷',
+    es: '🇪🇸', de: '🇩🇪', pt: '🇵🇹', ru: '🇷🇺', sa: '🇸🇦'
+};
+
 export default function LanguagePicker({ compact = false }: LanguagePickerProps) {
     const { t, i18n } = useTranslation('common');
     const [isOpen, setIsOpen] = useState(false);
     
     // Sync current language with i18n instance
-    const currentCode = i18n.language || 'ko';
+    const currentCode = resolveCanonicalLocale(i18n.language, 'ko');
+    const locale = (LANG_TO_COUNTRY[currentCode] || currentCode).toLowerCase();
     const current = LANGUAGES.find(l => l.code === currentCode) || LANGUAGES[0];
-
-    useEffect(() => {
-        const stored = resolveCanonicalLocale(localStorage.getItem(LOCALE_STORAGE_KEY), 'ko');
-        if (stored && stored !== i18n.language) {
-             i18n.changeLanguage(stored);
-        }
-    }, [i18n]);
 
     const handleSelect = (lang: LangOption) => {
         setIsOpen(false);
         if (lang.code !== currentCode) {
+            // Automatically switch currency based on language
+            const relatedCurrency = LANG_TO_CURRENCY[lang.code];
+            if (relatedCurrency) {
+                localStorage.setItem('kello_currency', relatedCurrency);
+            }
             changeLanguage(lang.code);
         }
     };
@@ -58,8 +105,10 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                 onClick={() => setIsOpen((value) => !value)}
                 title={t('common.select_language', { defaultValue: 'Select Language' })}
             >
-                <span className={styles.flag}>{current.flag}</span>
-                {!compact && <span className={styles.langLabel}>{current.label}</span>}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
+                    <img src={current.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px]" />
+                    {locale.toUpperCase()}
+                </div>
                 <span className={styles.chevron}>{isOpen ? '^' : 'v'}</span>
             </button>
 
@@ -77,7 +126,7 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                                     className={`${styles.langItem} ${current.code === lang.code ? styles.active : ''}`}
                                     onClick={() => handleSelect(lang)}
                                 >
-                                    <span className={styles.itemFlag}>{lang.flag}</span>
+                                    <img src={lang.flag} alt="" className="w-6 h-4 object-cover rounded-[2px] mr-3" />
                                     <span className={styles.itemLabel}>{lang.label}</span>
                                 </button>
                             ))}

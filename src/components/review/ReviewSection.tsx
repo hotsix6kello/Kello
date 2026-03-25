@@ -1,9 +1,11 @@
 "use client";
-
+import { useTranslation } from "react-i18next";
 import styles from "./review.module.css";
 // import Image from "next/image"; // Placeholder image for now
 
 export default function ReviewSection() {
+    const { t } = useTranslation();
+
     const reviews = [
         {
             id: 1,
@@ -31,10 +33,10 @@ export default function ReviewSection() {
         <div className={styles.container}>
             <div className={styles.reviewHeader}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span className={styles.reviewTitle}>Trusted Reviews</span>
+                    <span className={styles.reviewTitle}>{t('beauty_explore.reviews_title', { defaultValue: 'Trusted Reviews' })}</span>
                     <span className={styles.trustBadge}>AI Verified</span>
                 </div>
-                <span className={styles.sort}>Sort by: Trust Score</span>
+                <span className={styles.sort}>{t('beauty_explore.reviews_sort', { defaultValue: 'Sort by: Trust Score' })}</span>
             </div>
 
             {reviews.map(review => (
@@ -67,14 +69,15 @@ export default function ReviewSection() {
                     </div>
 
                     <button className={styles.helpfulBtn}>
-                        👍 Helpful ({review.helpful})
+                        👍 {t('beauty_explore.reviews_helpful', { defaultValue: 'Helpful' })} ({review.helpful})
                     </button>
                 </div>
             ))}
 
             <button style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: 'none', color: '#888', borderRadius: '12px', marginTop: '8px' }}>
-                View all 1,240 reviews
+                {t('beauty_explore.reviews_view_all', { defaultValue: 'View all 1,240 reviews' })}
             </button>
         </div>
     );
 }
+

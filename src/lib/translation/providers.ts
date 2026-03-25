@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
 import { getTranslationEngineName } from "./config.ts";
 import { injectGlossaryTokens } from "./glossary.ts";
 import type { TranslationProviderResult, TranslationTextRequest } from "./types.ts";
@@ -93,7 +93,7 @@ export class HttpTranslationProvider implements TranslationProvider {
 
 export class GeminiTranslationProvider implements TranslationProvider {
   private genAI: GoogleGenerativeAI;
-  private model: any;
+  private model: GenerativeModel;
 
   constructor(apiKey: string) {
     this.genAI = new GoogleGenerativeAI(apiKey);

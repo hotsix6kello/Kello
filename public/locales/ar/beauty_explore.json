@@ -1,0 +1,115 @@
+{
+  "title": "استكشاف الجمال",
+  "subtitle": "ابحث عن الصالون والخدمة المثالية لك.",
+  "search": {
+    "placeholder": "ابحث عن أسماء الصالونات أو العلاجات...",
+    "all": "ابحث عن الجمال، الطعام...",
+    "beauty": "ابحث عن العيادات، الصالونات...",
+    "event": "ابحث عن الحفلات، العروض...",
+    "food": "ابحث عن المطاعم، الأطباق...",
+    "festival": "ابحث عن المهرجانات...",
+    "attraction": "ابحث عن القصور، الحدائق..."
+  },
+  "form_name": "الاسم",
+  "form_name_placeholder": "أدخل اسمك",
+  "form_phone": "وسيلة التواصل (أو معرف SNS)",
+  "form_phone_placeholder": "رقم الهاتف أو معرف SNS",
+  "form_request": "الطلبات",
+  "form_request_placeholder": "الحساسية أو النمط المطلوب",
+  "agreement_confirm": "تأكيد التفاصيل",
+  "agreement_confirm_desc": "أؤكد الاختيار.",
+  "agreement_privacy": "الموافقة على الخصوصية",
+  "agreement_privacy_desc": "أوافق على تقديم المعلومات.",
+  "region_all": "كل المناطق",
+  "label_today": "اليوم",
+  "label_tomorrow": "غداً",
+  "label_booking_unit": "وون",
+  "booking_confirmation_title": "تم طلب الحجز!",
+  "booking_confirmation_desc": "سنقوم بإشعارك قريباً.",
+  "booking_confirmation_cta": "حجوزاتي",
+  "add_to_plan": "+ أضف إلى الخطة",
+  "today": "اليوم",
+  "starts_from": "يبدأ من ✨{{price}}",
+  "select_this_salon": "اختر هذا الصالون",
+  "booking_button": "احجز الآن",
+  "change_date_time": "تغيير التاريخ/الوقت",
+  "regions": {
+    "seongsu": "سيونغسو",
+    "gangnam": "جانجنام",
+    "myeongdong": "ميونغدونغ",
+    "hongdae": "هونجداي",
+    "cheongdam": "تشيونغدام",
+    "jongno": "جونغنو",
+    "itaewon": "إيتايون",
+    "jamsil": "جامسيل",
+    "garosugil": "جاروسوجيل",
+    "yeouido": "يويدو"
+  },
+  "stores": {
+    "beauty_hair_1": {
+      "name": "جيني هاوس تشيونغدام",
+      "priceLabel": "150,000 وون~",
+      "shortDescription": "صالون شعر ومكياج متميز يرتاده مشاهير K-pop",
+      "tags": ["K-Style", "Premium", "Cheongdam"]
+    },
+    "beauty_hair_2": {
+      "name": "عيادة بيوم جانجنام",
+      "priceLabel": "50,000 وون~",
+      "shortDescription": "العيادة الأكثر زيارة من قبل الأجانب لقيمتها الممتازة",
+      "tags": ["Clinic", "Gangnam", "Value"]
+    },
+    "beauty_makeup_1": {
+      "name": "أتيليه فيل للمكياج",
+      "priceLabel": "مكياج يومي 85,000 وون~",
+      "shortDescription": "مكياج طبيعي وأنيق يناسب مظهرك اليومي",
+      "tags": ["Makeup", "Seongsu", "Natural"]
+    },
+    "beauty_makeup_2": {
+      "name": "دير ميوز للمكياج",
+      "priceLabel": "مكياج ضيف زفاف 132,000 وون~",
+      "shortDescription": "خبراء في مكياج المناسبات الخاصة والزفاف",
+      "tags": ["Wedding", "Jongno", "Professional"]
+    }
+  },
+  "designers": {
+    "jia": "جيا ديزاينر",
+    "jia_desc": "استشارة دقيقة وقصات مخصصة لشكل الوجه.",
+    "minseo": "مينسيو مديرة",
+    "minseo_desc": "عناية دقيقة بالشعر حسب درجة التلف.",
+    "harin": "هارين ديزاينر",
+    "harin_desc": "تمويج طبيعي وتحديد لخط الوجه.",
+    "yuna": "يونا رئيسة فريق",
+    "yuna_desc": "خبيرة في تغيير الألوان والعناية بالشعر."
+  },
+  "services": {
+    "women_cut": "قص نسائي",
+    "women_cut_desc": "تعديل الطول وقصة مخصصة.",
+    "men_cut": "قص رجالي",
+    "men_cut_desc": "تحديد الشكل وتصفيف الشعر.",
+    "root_color": "صبغ الجذور",
+    "root_color_desc": "تصحيح لون الجذور النامية.",
+    "daily_makeup": "مكياج يومي",
+    "daily_makeup_desc": "مكياج خفيف للمواعيد اليومية."
+  },
+  "booking_panel_title": "يرجى اختيار تاريخ ووقت الحجز",
+  "booking_panel_desc": "تحقق من جدول المواعيد المتاحة لهذا الصالون واختر الوقت الذي يناسبك.",
+  "booking_empty_title": "يرجى اختيار صالون أولاً",
+  "booking_empty_desc": "بمجرد اختيارك للصالون، ستظهر التواريخ والمواعيد المتاحة هنا.",
+  "confirm_title": "راجع تفاصيل حجزك",
+  "confirm_desc": "يرجى مراجعة الصالون والجدول الزمني المختار قبل إرسال طلب الحجز.",
+  "confirm_empty_title": "لا توجد تفاصيل حجز للمراجعة بعد",
+  "confirm_empty_desc": "اختر صالوناً وجدولاً زمنياً أولاً لمراجعة تفاصيل حجزك.",
+  "select_date": "اختر التاريخ",
+  "select_time": "اختر الوقت",
+  "btn_complete": "إكمال الحجز",
+  "selected_confirmation": "✓ تم اختيار {{date}}",
+  "weekdays": {
+    "sun": "الأحد",
+    "mon": "الاثنين",
+    "tue": "الثلاثاء",
+    "wed": "الأربعاء",
+    "thu": "الخميس",
+    "fri": "الجمعة",
+    "sat": "السبت"
+  }
+}

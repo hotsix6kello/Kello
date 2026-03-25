@@ -82,12 +82,13 @@
 }
 
 .summaryGrid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .summaryCard {
+    flex: 1 1 100px;
     padding: 14px 12px;
     border-radius: 16px;
     background: var(--gray-100);
@@ -119,12 +120,13 @@
 }
 
 .tabBar {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
 .tabButton {
+    flex: 1 1 80px;
     min-height: 46px;
     padding: 10px 12px;
     border-radius: 14px;
@@ -134,6 +136,8 @@
     font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
+    white-space: normal;
+    text-align: center;
 }
 
 .activeTab {

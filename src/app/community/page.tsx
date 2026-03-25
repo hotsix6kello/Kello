@@ -240,10 +240,16 @@ const getTagLabel = (t: (key: string, options?: Record<string, unknown>) => stri
 
 export default function CommunityPage() {
     const { t } = useTranslation('common');
+    const [mounted, setMounted] = useState(false);
     const router = useRouter();
     const [filter, setFilter] = useState<string>('all');
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const [feedError, setFeedError] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [subFilter, setSubFilter] = useState('all');
@@ -769,6 +775,8 @@ export default function CommunityPage() {
     const summaryCategoryLabel = getCategoryText(newType);
     const imageUploadGuide = t(`community_page.form.image.guides.${formCategoryKey}`);
     const isImageLimitReached = newImages.length >= COMMUNITY_IMAGE_LIMIT;
+
+    if (!mounted) return null;
 
     return (
         <div className={styles.container}>

@@ -1,0 +1,19 @@
+{
+  "form_name": "Name",
+  "form_name_placeholder": "Geben Sie Ihren Namen ein",
+  "form_phone": "Kontakt (oder SNS-ID)",
+  "form_phone_placeholder": "Telefonnummer oder SNS-ID",
+  "form_request": "Wünsche",
+  "form_request_placeholder": "Allergien oder gewünschter Stil",
+  "agreement_confirm": "Details bestätigen",
+  "agreement_confirm_desc": "Ich bestätige die Auswahl.",
+  "agreement_privacy": "Datenschutzvereinbarung",
+  "agreement_privacy_desc": "Ich stimme der Bereitstellung der Informationen zu.",
+  "region_all": "Alle Regionen",
+  "label_today": "Heute",
+  "label_tomorrow": "Morgen",
+  "label_booking_unit": "KRW",
+  "booking_confirmation_title": "Buchung angefragt!",
+  "booking_confirmation_desc": "Wir benachrichtigen Sie in Kürze.",
+  "booking_confirmation_cta": "Meine Buchungen"
+}

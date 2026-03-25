@@ -7,7 +7,37 @@ const config: Config = {
     "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
+    },
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
+      maxWidth: {
+        'mobile-app': '480px',
+        'content': '1280px',
+      },
+      spacing: {
+        'safe-bottom': 'var(--safe-area-bottom)',
+        'nav-height': 'var(--nav-height)',
+      },
+      fontSize: {
+        'fluid-h1': 'clamp(1.75rem, 5vw, 2.5rem)',
+        'fluid-h2': 'clamp(1.5rem, 4vw, 2rem)',
+        'fluid-body': 'clamp(0.875rem, 2vw, 1rem)',
+      },
       colors: {
         sand: "#fffaf1",
         ink: "#132238",

@@ -4,7 +4,7 @@ import { useState } from "react";
 // import styles from "./detail.module.css";
 // import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+
 
 // Inline styles for speed as creating another CSS module is verbose, but will link correctly if file existed
 // Actually, let's use the module I just created.
