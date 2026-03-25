@@ -562,11 +562,6 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/develop
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
@@ -575,10 +570,6 @@ function MyPageContent() {
 
             <CommunityHubSection />
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/develop
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
 
