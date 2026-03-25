@@ -489,6 +489,10 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/develop
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
