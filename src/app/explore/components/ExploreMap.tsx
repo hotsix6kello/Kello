@@ -45,19 +45,19 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
 
     // 1. 사용자 실시간 위치 추적 및 중심 설정
     useEffect(() => {
-        if (navigator.geolocation) {
+        if (typeof window !== 'undefined' && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
                     const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
                     setUserLocation(coords);
-                    // 처음 로드 시 사용자 위치를 지도의 중심으로 설정
                     setMapCenter(coords);
                 },
                 (err) => {
-                    console.error('Geolocation Error:', err);
+                    // 에러 발생 시 조용히 기본 위치로 이동 (console.error 대신 warn 사용)
+                    console.warn('Geolocation access denied or timed out, using fallback.', err.message);
                     setMapCenter(propCenter || DEFAULT_CENTER);
                 },
-                { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+                { enableHighAccuracy: false, timeout: 5000, maximumAge: Infinity }
             );
         } else {
             setMapCenter(propCenter || DEFAULT_CENTER);
