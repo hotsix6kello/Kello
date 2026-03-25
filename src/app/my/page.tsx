@@ -416,7 +416,16 @@ function MyPageContent() {
             }
 
             if (!user) {
-                // [Production Logic]
+                // [Mock Mode for Development]
+                // 로컬 개발 환경에서 로그인 없이 화면을 볼 수 있도록 더미 데이터를 설정합니다.
+                if (process.env.NODE_ENV === "development") {
+                    setUserName("게스트 (테스트)");
+                    setProfileSubtitle("guest@localhost");
+                    setIsAdmin(true);
+                    setPartnerStatus("approved");
+                    return;
+                }
+
                 router.push("/auth/login?redirect=/my");
                 return;
             }
@@ -528,7 +537,7 @@ function MyPageContent() {
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
             {isAdmin && (
-                <section style={{ padding: '0 20px', marginTop: 28, marginBottom: 40 }}>
+                <section style={{ padding: '0 20px 40px', marginTop: 28, marginBottom: 120 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
                         <span style={{
@@ -552,7 +561,7 @@ function MyPageContent() {
                                 display: 'flex', alignItems: 'center', gap: 14,
                                 background: 'white', borderRadius: 16,
                                 border: '1px solid rgba(124,58,237,0.12)',
-                                padding: '14px 18px', marginBottom: 10,
+                                padding: '14px 18px', marginBottom: 16,
                                 cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
                                 transition: 'transform 0.15s'
                             }}
@@ -575,7 +584,7 @@ function MyPageContent() {
                 </section>
             )}
 
-            {!isAdmin && <div style={{ height: 40 }} />}
+            <div style={{ height: 240 }} />
         </div>
     );
 }
