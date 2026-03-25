@@ -63,12 +63,7 @@ export default function ExploreHeader({
                         />
                     </div>
 
-                    <div className={styles.headerActions}>
-                        <button className={styles.filterBtn} onClick={onFilterClick}>
-                            <span className={styles.filterIcon}>⚡</span>
-                            {filterCount > 0 && <span className={styles.filterBadge}>{filterCount}</span>}
-                        </button>
-                    </div>
+                    {/* Filter Action Removed based on User Request */}
                 </div>
 
                 {/* Category and Distance Filters Removed based on User Request */}
