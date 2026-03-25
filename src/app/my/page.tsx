@@ -6,25 +6,8 @@ import { useTranslation } from "react-i18next";
 import { useTrip, ItineraryItem } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
-import {
-    formatCountLabel,
-    formatItineraryStatusLabel,
-    formatTripDayTimeLabel,
-} from "@/lib/i18n/runtimeFormatters";
 import styles from "./my.module.css";
 
-interface BookingCard {
-    id: string;
-    title: string;
-    date: string;
-    category: string;
-    status: string;
-    area?: string;
-    price?: string;
-    isNew: boolean;
-    lat?: number;
-    lng?: number;
-}
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 
@@ -161,124 +144,7 @@ function ProfileSummaryCard({
     );
 }
 
-function QuickActionBar() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
 
-    const actions = [
-        {
-            icon: "🎧",
-            label: t("my_page.support.short"),
-            onClick: () => router.push("/my/support"),
-        },
-        {
-            icon: "KO",
-            label: t("my_page.phrases.quick"),
-            onClick: () => router.push("/my/phrases"),
-        },
-    ];
-
-    return (
-        <div className={styles.quickActionBar}>
-            {actions.map((action) => (
-                <button
-                    key={action.label}
-                    className={styles.quickActionBtn}
-                    onClick={action.onClick}
-                >
-                    <span className={styles.quickActionIcon}>{action.icon}</span>
-                    <span className={styles.quickActionLabel}>{action.label}</span>
-                </button>
-            ))}
-        </div>
-    );
-}
-
-function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const displayed = bookings
-        .filter((item) => item.status === "confirmed" || item.status === "submitted")
-        .slice(0, 3);
-
-    return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("my_page.bookings.title")}</h2>
-                {bookings.length > 0 && (
-                    <button
-                        className={styles.sectionMore}
-                        onClick={() => router.push("/my/bookings")}
-                    >
-                        {t("common.actions.view_all")}
-                    </button>
-                )}
-            </div>
-
-            {displayed.length === 0 ? (
-                <div className={styles.emptyCard}>
-                    <span className={styles.emptyIcon}>📅</span>
-                    <p className={styles.emptyText}>{t("my_page.dashboard.bookings_empty", "아직 예정된 예약이 없습니다")}</p>
-                    <button
-                        className={styles.emptyBtn}
-                        onClick={() => router.push("/explore")}
-                    >
-                        {t("common.actions.explore_places")}
-                    </button>
-                </div>
-            ) : (
-                <div className={styles.bookingList}>
-                    {displayed.map((booking) => (
-                        <div key={booking.id} className={styles.bookingTicket}>
-                            <div className={styles.ticketLeft}>
-                                <div className={styles.ticketCatRow}>
-                                    <span className={styles.ticketCat}>{booking.category}</span>
-                                    <span
-                                        className={`${styles.ticketStatus} ${
-                                            booking.status === "confirmed"
-                                                ? styles.statusConfirmed
-                                                : ""
-                                        }`}
-                                    >
-                                        {formatItineraryStatusLabel(t, booking.status)}
-                                    </span>
-                                </div>
-
-                                <div className={styles.ticketTitle}>{booking.title}</div>
-                                <div className={styles.ticketMeta}>
-                                    {booking.date}
-                                    {booking.area && <span> • {booking.area}</span>}
-                                    {booking.price && <span> • {booking.price}</span>}
-                                </div>
-
-                                {booking.isNew && (
-                                    <div className={styles.newBadge}>
-                                        {t("my_page.bookings.new_added")}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className={styles.ticketActions}>
-                                {booking.lat && booking.lng && (
-                                    <button
-                                        className={styles.ticketActionBtn}
-                                        onClick={() => {
-                                            const url = `https://www.google.com/maps/dir/?api=1&destination=${booking.lat},${booking.lng}&travelmode=transit`;
-                                            window.open(url, "_blank");
-                                        }}
-                                    >
-                                        {t("common.actions.map")}
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
 
 
 function SavedHubSection({
@@ -673,33 +539,6 @@ function MyPageContent() {
         };
     }, [t]);
 
-    const realBookings = useMemo<BookingCard[]>(() => {
-        return itinerary
-            .filter((item) => item.status === "confirmed" || item.status === "submitted")
-            .map((item) => {
-                const extendedItem = item as ItineraryItem & {
-                    area?: string;
-                    price?: string;
-                };
-
-                return {
-                    id: item.id,
-                    title: item.name,
-                    date: formatTripDayTimeLabel(t, item.day, item.time, {
-                        separator: "dot",
-                    }),
-                    category: t(`common.categories.${item.type || "attraction"}`, {
-                        defaultValue: item.type || "Attraction",
-                    }),
-                    status: item.status,
-                    area: extendedItem.area,
-                    price: extendedItem.price,
-                    isNew: false,
-                    lat: item.lat,
-                    lng: item.lng,
-                };
-            });
-    }, [itinerary, t]);
 
 
 
@@ -723,9 +562,13 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/main
 
-
-            <UpcomingBookingsSection bookings={realBookings} />
+>>>>>>> origin/develop
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
@@ -739,8 +582,13 @@ function MyPageContent() {
             <PartnerStatusBanner status={partnerStatus} />
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
+<<<<<<< HEAD
+            {isAdmin && (
+                <section style={{ padding: '0 20px 100px', marginTop: 28, marginBottom: 80 }}>
+=======
             {(isAdmin || process.env.NODE_ENV === "development") && (
                 <section style={{ padding: '0 20px 0', marginTop: 16, marginBottom: 0 }}>
+>>>>>>> origin/main
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
                         <span style={{
