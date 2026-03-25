@@ -217,9 +217,5 @@ export const CITIES = [
 
 export const CATEGORIES = [
     { id: 'all', label: 'All' },
-    { id: 'food', label: 'Food' },
-    { id: 'beauty', label: 'Beauty' },
-    { id: 'event', label: 'Events' },
-    { id: 'festival', label: 'Festivals' },
-    { id: 'attraction', label: 'Attractions' }
+    { id: 'beauty', label: 'Beauty' }
 ];
