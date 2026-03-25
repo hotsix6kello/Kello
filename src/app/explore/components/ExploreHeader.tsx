@@ -55,11 +55,7 @@ export default function ExploreHeader({
                             className={styles.searchInput}
                             value={searchTerm}
                             onChange={(e) => onSearchChange(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    onSearchSubmit(searchTerm);
-                                }
-                            }}
+                            onKeyDown={(e) => e.key === 'Enter' && onSearchSubmit(searchTerm)}
                         />
                     </div>
 

@@ -17,6 +17,7 @@ export interface ServiceItem {
     rating?: number;
     reviews?: number;
     is_premium?: boolean; // Highlighted or priority sorting
+    description?: string; // Short or full description for search
 
     // Type Specific
     // Food

@@ -1365,8 +1365,14 @@ export default function MyExplorePage() {
     setActiveFilters(filters);
   };
 
-  const handleSearchSubmit = (value: string) => {
-    setAppliedSearchTerm(value);
+  const handleSearchSubmit = (value?: string) => {
+    const term = value ?? searchTerm;
+    setAppliedSearchTerm(term);
+    if (term) {
+      showToast(`'${term}' 검색 결과입니다.`);
+    } else {
+      showToast('모든 검색 결과를 표시합니다.');
+    }
   };
 
   const clearFormError = (errorKey: FormErrorKey) => {
@@ -1696,7 +1702,8 @@ export default function MyExplorePage() {
     const lowerCaseSearchTerm = appliedSearchTerm.toLowerCase();
     return (
       item.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-      item.area.toLowerCase().includes(lowerCaseSearchTerm)
+      item.area.toLowerCase().includes(lowerCaseSearchTerm) ||
+      (item.description && item.description.toLowerCase().includes(lowerCaseSearchTerm))
     );
   });
   const sortedItemsToShow = [...itemsToShow].sort((a, b) => {
