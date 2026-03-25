@@ -650,7 +650,6 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
-            <QuickActionBar />
 
 
             <UpcomingBookingsSection bookings={realBookings} />
@@ -662,31 +661,6 @@ function MyPageContent() {
 
             <CommunityHubSection />
 
-            {/* Support Action Button */}
-            <section style={{ padding: '0 20px', marginBottom: 32 }}>
-                <button
-                    onClick={() => router.push('/my/support')}
-                    style={{
-                        width: '100%', padding: '24px', borderRadius: 24, border: '1px solid rgba(0,0,0,0.03)', background: 'white',
-                        display: 'flex', alignItems: 'center', gap: 16, cursor: 'pointer',
-                        boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    <div style={{
-                        width: 48, height: 48, borderRadius: 16,
-                        background: '#f8fafc',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.6rem', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)'
-                    }}>🎧</div>
-                    <div style={{ textAlign: 'left', flex: 1 }}>
-                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#111827' }}>{t('my_page.support.short')}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginTop: 4 }}>고객센터 및 문의사항</div>
-                    </div>
-                    <span style={{ color: '#7c3aed', fontSize: '1.5rem', fontWeight: 700 }}>›</span>
-                </button>
-            </section>
 
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
