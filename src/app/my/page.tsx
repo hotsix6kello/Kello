@@ -3,39 +3,18 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { useTrip, ItineraryItem } from "@/lib/contexts/TripContext";
+import { useTrip } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
 import {
     formatCountLabel,
-    formatItineraryStatusLabel,
     formatTripDayTimeLabel,
 } from "@/lib/i18n/runtimeFormatters";
 import styles from "./my.module.css";
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 
-interface BookingCard {
-    id: string;
-    title: string;
-    date: string;
-    category: string;
-    status: string;
-    area?: string;
-    price?: string;
-    isNew: boolean;
-    lat?: number;
-    lng?: number;
-}
 
-interface CommunityPost {
-    id: string;
-    type: string;
-    time: string;
-    title: string;
-    desc: string;
-    comments: number;
-}
 
 interface DashboardProfileRecord {
     nickname: string | null;
@@ -101,179 +80,6 @@ function ProfileSummaryCard({
     );
 }
 
-function QuickActionBar() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const actions = [
-        {
-            icon: "S",
-            label: t("my_page.support.short"),
-            onClick: () => router.push("/my/support"),
-        },
-        {
-            icon: "KO",
-            label: t("my_page.phrases.quick"),
-            onClick: () => router.push("/my/phrases"),
-        },
-    ];
-
-    return (
-        <div className={styles.quickActionBar}>
-            {actions.map((action) => (
-                <button
-                    key={action.label}
-                    className={styles.quickActionBtn}
-                    onClick={action.onClick}
-                >
-                    <span className={styles.quickActionIcon}>{action.icon}</span>
-                    <span className={styles.quickActionLabel}>{action.label}</span>
-                </button>
-            ))}
-        </div>
-    );
-}
-
-function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const displayed = bookings
-        .filter((item) => item.status === "confirmed" || item.status === "submitted")
-        .slice(0, 3);
-
-    return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("my_page.bookings.title")}</h2>
-                {bookings.length > 0 && (
-                    <button
-                        className={styles.sectionMore}
-                        onClick={() => router.push("/my/bookings")}
-                    >
-                        {t("common.actions.view_all")}
-                    </button>
-                )}
-            </div>
-
-            {displayed.length === 0 ? (
-                <div className={styles.emptyCard}>
-                    <span className={styles.emptyIcon}>BOOK</span>
-                    <p className={styles.emptyText}>{t("my_page.dashboard.bookings_empty")}</p>
-                    <button
-                        className={styles.emptyBtn}
-                        onClick={() => router.push("/explore")}
-                    >
-                        {t("common.actions.explore_places")}
-                    </button>
-                </div>
-            ) : (
-                <div className={styles.bookingList}>
-                    {displayed.map((booking) => (
-                        <div key={booking.id} className={styles.bookingTicket}>
-                            <div className={styles.ticketLeft}>
-                                <div className={styles.ticketCatRow}>
-                                    <span className={styles.ticketCat}>{booking.category}</span>
-                                    <span
-                                        className={`${styles.ticketStatus} ${
-                                            booking.status === "confirmed"
-                                                ? styles.statusConfirmed
-                                                : ""
-                                        }`}
-                                    >
-                                        {formatItineraryStatusLabel(t, booking.status)}
-                                    </span>
-                                </div>
-
-                                <div className={styles.ticketTitle}>{booking.title}</div>
-                                <div className={styles.ticketMeta}>
-                                    {booking.date}
-                                    {booking.area && <span> · {booking.area}</span>}
-                                    {booking.price && <span> · {booking.price}</span>}
-                                </div>
-
-                                {booking.isNew && (
-                                    <div className={styles.newBadge}>
-                                        {t("my_page.bookings.new_added")}
-                                    </div>
-                                )}
-                            </div>
-
-
-                                {booking.lat && booking.lng && (
-                                    <button
-                                        className={styles.ticketActionBtn}
-                                        onClick={() => {
-                                            const url = `https://www.google.com/maps/dir/?api=1&destination=${booking.lat},${booking.lng}&travelmode=transit`;
-                                            window.open(url, "_blank");
-                                        }}
-                                    >
-                                        {t("common.actions.map")}
-                                    </button>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </section>
-        );
-    }
-
-
-function CommunitySummarySection({ posts }: { posts: CommunityPost[] }) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-    const recent = posts.slice(0, 2);
-
-    return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("my_page.community.title")}</h2>
-                <button
-                    className={styles.sectionMore}
-                    onClick={() => router.push("/my/community")}
-                >
-                    {t("common.actions.view_all")}
-                </button>
-            </div>
-
-            {recent.length === 0 ? (
-                <div className={styles.emptyCard}>
-                    <span className={styles.emptyIcon}>POST</span>
-                    <p className={styles.emptyText}>{t("my_page.community.empty")}</p>
-                </div>
-            ) : (
-                <div className={styles.communityList}>
-                    {recent.map((post) => (
-                        <div
-                            key={post.id}
-                            className={styles.communityCard}
-                            onClick={() => router.push(`/community/${post.id}`)}
-                        >
-                            <div className={styles.communityCardTop}>
-                                <span
-                                    className={`${styles.communityBadge} ${
-                                        styles[`badge_${post.type}`] || ""
-                                    }`}
-                                >
-                                    {t(`community_page.type.${post.type.toUpperCase()}`, {
-                                        defaultValue: post.type,
-                                    })}
-                                </span>
-                                <span className={styles.communityTime}>{post.time}</span>
-                            </div>
-                            <div className={styles.communityTitle}>{post.title}</div>
-                            <div className={styles.communityDesc}>{post.desc}</div>
-                            <div className={styles.communityFooter}>
-                                {formatCountLabel(t, post.comments, "comments")}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
-    );
-}
 
 function SavedHubSection({
     savedPlacesCount,
@@ -287,59 +93,197 @@ function SavedHubSection({
     const router = useRouter();
     const { t } = useTranslation("common");
 
-    const summaryItems = [
-        {
-            id: "places",
-            label: t("my_page.saved.summary.places"),
-            value: savedPlacesCount,
-        },
-        {
-            id: "plans",
-            label: t("my_page.saved.summary.plans"),
-            value: savedPlansCount,
-        },
-        {
-            id: "recent",
-            label: t("my_page.saved.summary.recent"),
-            value: savedRecentCount,
-        },
-    ];
-
     return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t("my_page.saved.title")}</h2>
-                <button
-                    className={styles.sectionMore}
-                    onClick={() => router.push("/my/saved")}
-                >
-                    {t("my_page.saved.view_all")}
-                </button>
-            </div>
+        <section style={{ padding: '0 20px', marginBottom: 32 }}>
+            <div style={{ 
+                background: 'white', 
+                borderRadius: 24, 
+                padding: 24,
+                boxShadow: '0 8px 30px rgba(0,0,0,0.04)',
+                border: '1px solid rgba(0,0,0,0.03)'
+            }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+                     <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>
+                         {t("my_page.saved.title")}
+                     </h2>
+                </div>
 
-            <div className={styles.savedSummaryRow}>
-                {summaryItems.map((item) => (
-                    <div key={item.id} className={styles.savedSummaryCard}>
-                        <span className={styles.savedSummaryLabel}>{item.label}</span>
-                        <strong className={styles.savedSummaryValue}>{item.value}</strong>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 24 }}>
+                    <div style={{ background: '#f8fafc', borderRadius: 16, padding: '16px 8px', textAlign: 'center', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)' }}>
+                        <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#3b82f6', marginBottom: 6 }}>{savedPlacesCount}</div>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 700 }}>{t("my_page.saved.summary.places")}</div>
                     </div>
-                ))}
-            </div>
-
-            <button
-                className={styles.savedHubCard}
-                onClick={() => router.push("/my/saved")}
-            >
-                <div className={styles.savedHubText}>
-                    <div className={styles.savedHubTitle}>
-                        {t("my_page.saved.dashboard_title")}
+                    <div style={{ background: '#f8fafc', borderRadius: 16, padding: '16px 8px', textAlign: 'center', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)' }}>
+                        <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#10b981', marginBottom: 6 }}>{savedPlansCount}</div>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 700 }}>{t("my_page.saved.summary.plans")}</div>
                     </div>
-                    <div className={styles.savedHubDesc}>
-                        {t("my_page.saved.dashboard_desc")}
+                    <div style={{ background: '#f8fafc', borderRadius: 16, padding: '16px 8px', textAlign: 'center', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)' }}>
+                        <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#f59e0b', marginBottom: 6 }}>{savedRecentCount}</div>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 700 }}>{t("my_page.saved.summary.recent")}</div>
                     </div>
                 </div>
-                <div className={styles.savedHubArrow}>{">"}</div>
-            </button>
+
+                <button
+                    onClick={() => router.push('/my/saved')}
+                    style={{
+                        width: '100%',
+                        background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: 16,
+                        padding: '16px',
+                        fontWeight: 700,
+                        fontSize: '1rem',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 12px rgba(124,58,237,0.25)',
+                        transition: 'transform 0.1s'
+                    }}
+                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    <span>{t("my_page.saved.dashboard_title")}</span>
+                    <span style={{ fontSize: '1.2rem' }}>→</span>
+                </button>
+            </div>
+        </section>
+    );
+}
+
+function CommunityHubSection() {
+    const router = useRouter();
+    const { t } = useTranslation("common");
+    const [posts, setPosts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let isMounted = true;
+        let resolvedUserName = "Jessie Kim";
+
+        try {
+            const storedUser = localStorage.getItem("user");
+            if (storedUser) {
+                const parsed = JSON.parse(storedUser) as { name?: string };
+                if (parsed.name?.trim()) {
+                    resolvedUserName = parsed.name.trim();
+                }
+            }
+        } catch {}
+
+        const fetchPosts = async () => {
+            const { data, error } = await supabase
+                .from("community_posts")
+                .select("id, type, title, desc, created_at, time")
+                .eq("author", resolvedUserName)
+                .order("created_at", { ascending: false })
+                .limit(3);
+
+            if (isMounted) {
+                if (data) {
+                    setPosts(data);
+                }
+                setLoading(false);
+            }
+        };
+
+        void fetchPosts();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    return (
+        <section style={{ padding: '0 20px', marginBottom: 32 }}>
+            <div style={{ 
+                background: 'white', 
+                borderRadius: 24, 
+                padding: 24,
+                boxShadow: '0 8px 30px rgba(0,0,0,0.04)',
+                border: '1px solid rgba(0,0,0,0.03)'
+            }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+                     <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>
+                         내 커뮤니티
+                     </h2>
+                </div>
+
+                {loading ? (
+                    <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600 }}>
+                        불러오는 중...
+                    </div>
+                ) : posts.length === 0 ? (
+                    <div style={{ 
+                        textAlign: 'center', 
+                        padding: '32px 0px',
+                        background: '#f8fafc',
+                        borderRadius: 16
+                    }}>
+                        <div style={{ fontSize: '2rem', marginBottom: 8 }}>💬</div>
+                        <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>작성한 글이 없습니다</div>
+                        <button 
+                            onClick={() => router.push("/community")}
+                            style={{
+                                background: 'white',
+                                border: '1px solid #e2e8f0',
+                                padding: '10px 20px',
+                                borderRadius: 12,
+                                fontSize: '0.85rem',
+                                color: '#334155',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+                            }}
+                        >
+                            커뮤니티 둘러보기
+                        </button>
+                    </div>
+                ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                        {posts.map(post => (
+                            <div 
+                                key={post.id}
+                                onClick={() => router.push(`/community/${post.id}`)}
+                                style={{
+                                    padding: '16px',
+                                    borderRadius: 16,
+                                    background: '#f8fafc',
+                                    cursor: 'pointer',
+                                    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)',
+                                    transition: 'transform 0.1s'
+                                }}
+                                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+                                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                                    <span style={{ 
+                                        padding: '4px 8px', 
+                                        borderRadius: 6, 
+                                        background: 'rgba(124,58,237,0.1)', 
+                                        color: '#7c3aed', 
+                                        fontSize: '0.7rem', 
+                                        fontWeight: 800,
+                                        textTransform: 'uppercase'
+                                    }}>
+                                        {post.type || 'post'}
+                                    </span>
+                                    <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>
+                                        {post.created_at ? new Date(post.created_at).toLocaleDateString() : (post.time || '')}
+                                    </span>
+                                </div>
+                                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {post.title}
+                                </div>
+                                <div style={{ fontSize: '0.85rem', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {post.desc}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </section>
     );
 }
@@ -435,8 +379,7 @@ function MyPageContent() {
     const [hasHydrated, setHasHydrated] = useState(false);
     const [userName, setUserName] = useState("");
     const [profileSubtitle, setProfileSubtitle] = useState("");
-    const [communityAuthor, setCommunityAuthor] = useState("");
-    const [myPosts, setMyPosts] = useState<CommunityPost[]>([]);
+
     const [isAdmin, setIsAdmin] = useState(false);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
     const [savedPlacesCount, setSavedPlacesCount] = useState(0);
@@ -477,7 +420,6 @@ function MyPageContent() {
                 // 원래는 게스트 로그인 시 관리자 UI를 안보여주지만, 임시로 설정합니다.
                 setUserName("최고 관리자 (테스트)");
                 setProfileSubtitle("admin@kello.local");
-                setCommunityAuthor("");
                 setIsAdmin(true);
                 setPartnerStatus("approved");
                 return;
@@ -502,16 +444,8 @@ function MyPageContent() {
                 email ? email.split("@")[0] : "",
                 fallbackName
             );
-            const nextCommunityAuthor = pickString(
-                nextProfile?.nickname,
-                user.user_metadata?.full_name,
-                user.user_metadata?.name,
-                email ? email.split("@")[0] : ""
-            );
-
             setUserName(displayName);
             setProfileSubtitle(email || fallbackSubtitle);
-            setCommunityAuthor(nextCommunityAuthor);
             setIsAdmin(Boolean(nextProfile?.is_admin));
 
             if (!email) {
@@ -542,60 +476,7 @@ function MyPageContent() {
         };
     }, [t]);
 
-    useEffect(() => {
-        let isMounted = true;
 
-        const fetchPosts = async () => {
-            if (!communityAuthor) {
-                setMyPosts([]);
-                return;
-            }
-
-            const { data, error } = await supabase
-                .from("community_posts")
-                .select("*")
-                .eq("author", communityAuthor)
-                .order("created_at", { ascending: false });
-
-            if (isMounted && data && !error) {
-                setMyPosts(data as CommunityPost[]);
-            }
-        };
-
-        void fetchPosts();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [communityAuthor]);
-
-    const realBookings = useMemo<BookingCard[]>(() => {
-        return itinerary
-            .filter((item) => item.status === "confirmed" || item.status === "submitted")
-            .map((item) => {
-                const extendedItem = item as ItineraryItem & {
-                    area?: string;
-                    price?: string;
-                };
-
-                return {
-                    id: item.id,
-                    title: item.name,
-                    date: formatTripDayTimeLabel(t, item.day, item.time, {
-                        separator: "dot",
-                    }),
-                    category: t(`common.categories.${item.type || "attraction"}`, {
-                        defaultValue: item.type || "Attraction",
-                    }),
-                    status: item.status,
-                    area: extendedItem.area,
-                    price: extendedItem.price,
-                    isNew: false,
-                    lat: item.lat,
-                    lng: item.lng,
-                };
-            });
-    }, [itinerary, t]);
 
     if (!hasHydrated) {
         return (
@@ -615,84 +496,39 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
-            <QuickActionBar />
-
-            {/* Special Beauty Section & Notification Hub Header */}
-            <section style={{ padding: '0 20px', marginBottom: 28 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                    <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div style={{ display: 'flex', gap: 6 }}>                        <button
-                            onClick={() => router.push('/my/settings/notifications')}
-                            style={{
-                                border: '1px solid #7c3aed33',
-                                background: '#7c3aed11',
-                                color: '#7c3aed',
-                                borderRadius: 99,
-                                padding: '6px 12px',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                cursor: 'pointer'
-                            }}
-                        >{t('my_page.notifications.settings')}</button>
-                        <button
-                            onClick={() => router.push('/my/notifications')}
-                            style={{
-                                border: '1px solid #9333ea33',
-                                background: '#9333ea11',
-                                color: '#9333ea',
-                                borderRadius: 99,
-                                padding: '6px 12px',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                cursor: 'pointer'
-                            }}
-                        >{t('my_page.notifications.inbox')}</button>
-                    </div>
-                </div>
-
-                {/* Beauty Booking Quick Link */}
-                <div
-                    onClick={() => router.push('/my/bookings/beauty')}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 12,
-                        background: 'linear-gradient(135deg, rgba(236,72,153,0.08), rgba(244,114,182,0.05))',
-                        border: '1.5px solid rgba(236,72,153,0.18)',
-                        borderRadius: 16,
-                        padding: '16px',
-                        cursor: 'pointer',
-                        transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    <div style={{
-                        width: 44, height: 44, borderRadius: 12,
-                        background: 'rgba(236,72,153,0.12)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.4rem', flexShrink: 0
-                    }}>💇</div>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#be185d' }}>{t('my_page.beauty_booking_link.title')}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginTop: 2 }}>
-                            {t('my_page.beauty_booking_link.desc')}
-                        </div>
-                    </div>
-                    <span style={{ color: '#ec4899', fontSize: '1.2rem' }}>›</span>
-                </div>
-            </section>
-
-            <UpcomingBookingsSection bookings={realBookings} />
-
-
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
                 savedRecentCount={savedRecentCount}
             />
 
-            <CommunitySummarySection posts={myPosts} />
+            <CommunityHubSection />
+
+            {/* Support Action Button */}
+            <section style={{ padding: '0 20px', marginBottom: 32 }}>
+                <button
+                    onClick={() => router.push('/my/support')}
+                    style={{
+                        width: '100%', padding: '24px', borderRadius: 24, border: '1px solid rgba(0,0,0,0.03)', background: 'white',
+                        display: 'flex', alignItems: 'center', gap: 16, cursor: 'pointer',
+                        boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.1s'
+                    }}
+                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    <div style={{
+                        width: 48, height: 48, borderRadius: 16,
+                        background: '#f8fafc',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '1.6rem', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)'
+                    }}>🎧</div>
+                    <div style={{ textAlign: 'left', flex: 1 }}>
+                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#111827' }}>{t('my_page.support.short')}</div>
+                        <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginTop: 4 }}>고객센터 및 문의사항</div>
+                    </div>
+                    <span style={{ color: '#7c3aed', fontSize: '1.5rem', fontWeight: 700 }}>›</span>
+                </button>
+            </section>
 
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
