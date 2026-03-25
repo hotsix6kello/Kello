@@ -1365,8 +1365,14 @@ export default function MyExplorePage() {
     setActiveFilters(filters);
   };
 
-  const handleSearchSubmit = (value: string) => {
-    setAppliedSearchTerm(value);
+  const handleSearchSubmit = (value?: string) => {
+    const term = value ?? searchTerm;
+    setAppliedSearchTerm(term);
+    if (term) {
+      showToast(`'${term}' 검색 결과입니다.`);
+    } else {
+      showToast('모든 검색 결과를 표시합니다.');
+    }
   };
 
   const clearFormError = (errorKey: FormErrorKey) => {
@@ -1683,21 +1689,22 @@ export default function MyExplorePage() {
 
 
   const baseItems = hotelLocation && nearbyItems.length > 0 ? nearbyItems : MOCK_ITEMS;
-  const categorizedItems = baseItems.filter((item) => {
+  const itemsToShow = baseItems.filter((item) => {
+    // 검색어가 있으면 카테고리 무시하고 전체 검색 (검색 성공률 극대화)
+    if (appliedSearchTerm) {
+      const lowerCaseSearchTerm = appliedSearchTerm.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.area.toLowerCase().includes(lowerCaseSearchTerm) ||
+        (item.description && item.description.toLowerCase().includes(lowerCaseSearchTerm))
+      );
+    }
+    
+    // 검색어가 없을 때는 기존 카테고리 필터 적용
     if (currentCategory !== 'all' && item.type !== currentCategory) {
       return false;
     }
     return true;
-  });
-  const itemsToShow = categorizedItems.filter((item) => {
-    if (!appliedSearchTerm) {
-      return true;
-    }
-    const lowerCaseSearchTerm = appliedSearchTerm.toLowerCase();
-    return (
-      item.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-      item.area.toLowerCase().includes(lowerCaseSearchTerm)
-    );
   });
   const sortedItemsToShow = [...itemsToShow].sort((a, b) => {
     const aScore = (a as ServiceItem & { is_premium?: boolean }).is_premium ? 1 : 0;
@@ -1749,394 +1756,7 @@ export default function MyExplorePage() {
       })}
     </ol>
   );
-  if (isBeautyExplore) {
-    return (
-      <div className={styles.beautyExplorePage}>
-        <div className="relative w-full">
-          {/* 뒤로가기 버튼 - 좌측 상단 독립 배치 */}
-          <button
-            type="button"
-            onClick={() => {
-              if (currentStep > 1 && !submittedBooking) {
-                setCurrentStep(prev => prev - 1);
-              } else {
-                router.back();
-              }
-            }}
-            className="absolute left-3 top-0 z-[50] flex items-center justify-center text-neutral-500 hover:text-neutral-900 transition-colors"
-            aria-label={t('common.back', { defaultValue: 'Back' })}
-          >
-            {/* 화살표 아이콘 (← 선 포함) */}
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-            </svg>
-          </button>
-
-          <section className={styles.beautyHero}>
-             <span className={styles.beautyEyebrow}>STEP {currentStep} / 4</span>
-             <div className="mb-1" />
-             <h1 className={styles.beautyTitle}>
-               {currentStep === 1 && (beautyCategoryFilter ? `${beautyCategoryLabel} 매장을 선택해주세요` : "관심 있는 매장을 골라보세요")}
-               {currentStep === 2 && "예약 일시를 선택해주세요"}
-               {currentStep === 3 && "상세 정보를 입력해주세요"}
-               {currentStep === 4 && "예약 내용을 확인해주세요"}
-             </h1>
-             <div className="mt-4">
-               {renderBeautyProgressIndicator()}
-             </div>
-          </section>
-        </div>
-
-        <main className="px-4 pb-24">
-          {submittedBooking ? (
-            <div className={styles.beautyCompletionCard}>
-              <p className={styles.beautyCompletionTitle}>{t('beauty_explore.completion_title')}</p>
-              <div className={styles.beautyCompletionMain}>
-                <p className={styles.beautyCompletionDesc}>{t('beauty_explore.completion_desc1')}</p>
-                <div className={styles.beautyCompletionHero}>
-                  <div className={styles.beautyCompletionHeroBlock}>
-                    <span className={styles.beautyCompletionHeroLabel}>예약 매장</span>
-                    <strong className={styles.beautyCompletionHeroTitle}>{submittedBooking.storeName}</strong>
-                    <span className={styles.beautyCompletionHeroMeta}>{submittedBooking.date} · {submittedBooking.time}</span>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.beautyCompletionActions}>
-                <button type="button" className={styles.beautySecondaryAction} onClick={handleBookingEditReset}>
-                  메인으로 돌아가기
-                </button>
-              </div>
-            </div>
-          ) : (
-            <>
-              {currentStep === 1 && (
-                <div className="flex flex-col gap-4">
-                  <div className={styles.beautyRegionChipRow}>
-                    {beautyRegions.map((region) => {
-                      const isActive = selectedRegion === region.id;
-                      return (
-                        <button
-                          key={region.id}
-                          type="button"
-                          className={`${styles.beautyRegionChip} ${isActive ? styles.beautyRegionChipActive : ''}`}
-                          onClick={() => setSelectedRegion(region.id)}
-                        >
-                          {region.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {filteredBeautyStores.length > 0 ? (
-                      filteredBeautyStores.map((store) => {
-                        const isSelected = selectedBeautyStoreId === store.id;
-                        return (
-                          <article
-                            key={store.id}
-                            className={`bg-[var(--surface)] rounded-[var(--radius-md)] transition-all duration-300 border ${isSelected ? 'border-[var(--primary)] ring-2 ring-[var(--primary-glow)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] shadow-sm'}`}
-                            style={{ overflow: 'hidden', cursor: 'pointer' }}
-                            onClick={() => {
-                              handleBeautyStoreSelect(store.id, store.name, store.region, store.category);
-                            }}
-                          >
-                            <div className="flex flex-row w-full items-center p-3 gap-3">
-                              <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
-                                <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} className="h-full w-full object-cover" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h3 className="text-base font-bold text-[var(--ink-black)] truncate">{store.name}</h3>
-                                <p className="text-xs text-[var(--soft-ink)]">{tBeauty(`region_${store.region}`)}</p>
-                                <div className="text-sm font-semibold text-[var(--accent)] mt-1">{store.priceLabel}</div>
-                              </div>
-                              <div className="shrink-0 text-[var(--secondary)] font-bold text-xs uppercase bg-[var(--surface)] px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--warm-sand)]">
-                                {tBeauty('btn_select_salon', { defaultValue: '선택' })}
-                              </div>
-                            </div>
-                          </article>
-                        );
-                      })
-                    ) : (
-                      <p className="text-center py-10 text-neutral-400">검색된 매장이 없습니다.</p>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {currentStep === 2 && (
-                <div className="flex flex-col gap-6">
-                  {selectedBeautyStore && (
-                    <div className="bg-[var(--surface)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4 shadow-sm flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0">
-                        <img src={selectedBeautyStore.imageUrl} alt="" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="flex-1">
-                        <span className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">SELECTED STORE</span>
-                        <h3 className="font-bold text-[var(--ink-black)]">{selectedBeautyStoreName}</h3>
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm">
-                    <h3 className="font-bold text-lg mb-4 text-[var(--ink-black)]">날짜와 시간을 골라주세요</h3>
-                    {selectedBeautyDate && selectedBeautyTime ? (
-                      <div className="flex flex-col gap-4">
-                        <div className="bg-[var(--hanji-ivory)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4">
-                          <div className="text-sm text-[var(--soft-ink)] mb-1">선택된 일시</div>
-                          <div className="text-xl font-bold text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
-                        </div>
-                        <button 
-                          onClick={() => setIsIntegratedBookingMenuOpen(true)}
-                          className="text-[var(--accent)] font-bold underline text-sm py-2"
-                        >
-                          다른 일시로 변경하기
-                        </button>
-                        <button 
-                          onClick={() => setCurrentStep(3)}
-                          className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg hover:bg-[var(--deep-navy)] transition-all"
-                        >
-                          다음: 상세 정보 입력
-                        </button>
-                      </div>
-                    ) : (
-                      <button 
-                        onClick={() => setIsIntegratedBookingMenuOpen(true)}
-                        className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-md"
-                      >
-                        날짜 및 시간 선택하기
-                      </button>
-                    )}
-                  </div>
-
-                  <button onClick={() => setCurrentStep(1)} className="text-neutral-400 font-medium py-2">다른 매장 선택하기</button>
-                </div>
-              )}
-
-              {currentStep === 3 && (
-                <div className="flex flex-col gap-6">
-                   {/* 1. 서비스 종류 선택 (Primary Service) */}
-                   <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
-                     <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Select Service</span>
-                     <div className="flex flex-col gap-2">
-                       {availablePrimaryServices.map((service) => {
-                         const isSelected = selectedPrimaryServiceId === service.id;
-                         return (
-                           <button
-                             key={service.id}
-                             type="button"
-                             className={`w-full flex justify-between items-center p-4 rounded-[var(--radius-md)] border-2 transition-all ${
-                               isSelected ? 'border-[var(--primary)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] bg-[var(--hanji-ivory)]'
-                             }`}
-                             onClick={() => handlePrimaryServiceSelect(service.id)}
-                           >
-                             <div className="text-left">
-                               <div className={`font-bold text-sm ${isSelected ? 'text-[#bb8a78]' : 'text-neutral-700'}`}>{service.name}</div>
-                               <div className="text-[11px] text-neutral-400">{service.description}</div>
-                             </div>
-                             <div className={`font-bold text-sm ${isSelected ? 'text-[#bb8a78]' : 'text-neutral-500'}`}>
-                               {formatPrice ? formatPrice(service.price) : `${service.price}KRW`}
-                             </div>
-                           </button>
-                         );
-                       })}
-                       {formErrors.primaryService && <p className="text-[11px] text-red-500 font-medium px-1">{formErrors.primaryService}</p>}
-                     </div>
-                   </div>
-
-                   <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
-                     <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Customer Details</span>
-                     <div className="flex flex-col gap-4">
-                       {customerFormFields.map((field) => {
-                         const inputId = `beauty-booking-${field.key}`;
-                         const fieldError = field.key === 'request' ? '' : formErrors[field.key as FormErrorKey];
-                         const labelText = field.key === 'phone' ? `${field.label} (SNS ID 포함 가능)` : field.label;
-
-                         return (
-                           <div key={field.key} className="flex flex-col gap-1.5">
-                             <label className="text-xs font-bold text-neutral-600" htmlFor={inputId}>
-                               {labelText}{field.required ? ' *' : ''}
-                             </label>
-                             {field.multiline ? (
-                               <textarea
-                                 id={inputId}
-                                 className="w-full bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-sm focus:border-[#bb8a78] outline-none transition-all"
-                                 rows={4}
-                                 value={customerForm[field.key]}
-                                 placeholder={field.placeholder}
-                                 onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
-                               />
-                             ) : field.key === 'phone' ? (
-                               <div className="flex gap-2">
-                                 <div className="relative shrink-0">
-                                   <div 
-                                      className="h-12 bg-neutral-100 border border-neutral-200 rounded-xl flex items-center px-3 gap-1.5 transition-all cursor-pointer focus-within:border-[#bb8a78]"
-                                      onClick={() => setIsCountryPickerOpen(!isCountryPickerOpen)}
-                                   >
-                                      <div className="flex items-center justify-center p-1 bg-white/60 rounded-md backdrop-blur-[2px] border border-white/40 shadow-sm">
-                                         <img src={selectedCountry.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px] mr-1.5" />
-                                         <span className="text-[12px] font-black text-neutral-800 leading-none">{selectedCountry.dial}</span>
-                                      </div>
-                                      
-                                      <div className="text-neutral-400">
-                                        <svg width="8" height="5" viewBox="0 0 10 6" fill="none" className={`transition-transform duration-200 ${isCountryPickerOpen ? 'rotate-180' : ''}`}>
-                                          <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                      </div>
-                                   </div>
-
-                                   {isCountryPickerOpen && (
-                                     <>
-                                       <div 
-                                         className="fixed inset-0 z-[60]" 
-                                         onClick={() => setIsCountryPickerOpen(false)} 
-                                       />
-                                       <div className="absolute top-full left-0 mt-2 w-32 max-h-60 overflow-y-auto bg-white border border-neutral-100 rounded-xl shadow-xl z-[70] py-2 animate-in fade-in zoom-in duration-200">
-                                         {COUNTRY_CODES.map((c) => (
-                                           <button
-                                             key={c.code}
-                                             type="button"
-                                             className="w-full flex items-center px-3 py-2.5 hover:bg-neutral-50 transition-colors gap-2"
-                                             onClick={() => {
-                                               setSelectedCountry({ code: c.code, dial: c.dial, flag: c.flag });
-                                               setIsCountryPickerOpen(false);
-                                             }}
-                                           >
-                                             <img src={c.flag} alt="" className="w-5 h-3.5 object-cover rounded-[1px] shrink-0" />
-                                             <span className="text-xs font-bold text-neutral-700">{c.dial}</span>
-                                           </button>
-                                         ))}
-                                       </div>
-                                     </>
-                                   )}
-                                 </div>
-                                 <input
-                                   id={inputId}
-                                   className={`flex-1 h-12 bg-neutral-50 border ${fieldError ? 'border-red-400' : 'border-neutral-200'} rounded-xl px-4 text-sm focus:border-[#bb8a78] outline-none transition-all`}
-                                   type="tel"
-                                   value={customerForm[field.key]}
-                                   placeholder={field.placeholder}
-                                   onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
-                                   onBlur={() => handleCustomerFieldBlur(field.key as any)}
-                                 />
-                               </div>
-                             ) : (
-                               <input
-                                 id={inputId}
-                                 className={`w-full h-12 bg-neutral-50 border ${fieldError ? 'border-red-400' : 'border-neutral-200'} rounded-xl px-4 text-sm focus:border-[#bb8a78] outline-none transition-all`}
-                                 type="text"
-                                 value={customerForm[field.key]}
-                                 placeholder={field.placeholder}
-                                 onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
-                                 onBlur={() => handleCustomerFieldBlur(field.key as any)}
-                               />
-                             )}
-                             {fieldError && <p className="text-[11px] text-red-500 font-medium px-1 mt-0.5">{fieldError}</p>}
-                           </div>
-                         );
-                       })}
-                     </div>
-                   </div>
-
-                   <button
-                     type="button"
-                     className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg hover:bg-[var(--deep-navy)] transition-all"
-                     onClick={() => {
-                        if (!selectedPrimaryServiceId) {
-                           setFormErrors(prev => ({ ...prev, primaryService: "시술 내역을 선택해주세요." }));
-                           showToast("시술 내역을 선택해 주세요.");
-                           return;
-                        }
-                        handleStep3ToStep4Continue();
-                     }}
-                   >
-                     다음: 예약 내용 확인
-                   </button>
-                   <button onClick={() => setCurrentStep(2)} className="text-neutral-400 font-medium py-2">이전: 날짜 선택으로</button>
-                </div>
-              )}
-
-              {currentStep === 4 && (
-                <div className="flex flex-col gap-6">
-                  <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
-                    <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Booking Summary</span>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex justify-between items-start border-b border-[var(--warm-sand)] pb-3">
-                        <span className="text-sm text-[var(--soft-ink)]">매장</span>
-                        <strong className="text-sm text-[var(--ink-black)] text-right">{selectedBeautyStoreName}</strong>
-                      </div>
-                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
-                        <span className="text-sm text-[var(--soft-ink)]">일시</span>
-                        <strong className="text-sm text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</strong>
-                      </div>
-                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
-                        <span className="text-sm text-[var(--soft-ink)]">서비스</span>
-                        <strong className="text-sm text-[var(--ink-black)]">{selectedPrimaryService?.name}</strong>
-                      </div>
-                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
-                        <span className="text-sm text-[var(--soft-ink)]">이름</span>
-                        <strong className="text-sm text-[var(--ink-black)]">{customerForm.name}</strong>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-[var(--soft-ink)]">연락처</span>
-                        <strong className="text-sm text-[var(--ink-black)]">{customerForm.phone}</strong>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-[var(--hanji-ivory)] rounded-[var(--radius-md)] p-5 flex flex-col gap-4">
-                    <h4 className="text-xs font-bold text-[var(--soft-ink)] uppercase tracking-widest">{t('beauty_bookings.section_agreement')}</h4>
-                    <div className="flex flex-col gap-3">
-                      {agreementFields.map((field) => (
-                        <label key={field.key} className="flex items-start gap-3 cursor-pointer">
-                          <input
-                            className="mt-1 w-4 h-4 rounded border-[var(--warm-sand)] text-[var(--accent)] focus:ring-[var(--accent)]"
-                            type="checkbox"
-                            checked={agreements[field.key as keyof AgreementState]}
-                            onChange={() => handleAgreementToggle(field.key as keyof AgreementState)}
-                          />
-                          <div className="flex flex-col">
-                            <span className="text-sm font-bold text-[var(--ink-black)] leading-tight">{field.label}</span>
-                            <span className="text-[11px] text-[var(--soft-ink)] mt-0.5">{field.description}</span>
-                          </div>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-xl hover:bg-[var(--deep-navy)] transition-all disabled:opacity-50"
-                    disabled={!isBeautyConfirmSubmitEnabled || isSubmittingBeautyBooking}
-                    onClick={handleBeautyBookingSubmit}
-                  >
-                    {isSubmittingBeautyBooking ? '처리 중...' : '최종 예약 신청하기'}
-                  </button>
-                  <button onClick={() => setCurrentStep(3)} className="text-neutral-400 font-medium py-2">이전: 정보 수정하기</button>
-                </div>
-              )}
-            </>
-          )}
-        </main>
-
-        <IntegratedBookingMenu 
-          isOpen={isIntegratedBookingMenuOpen}
-          onClose={() => setIsIntegratedBookingMenuOpen(false)}
-          initialDate={selectedBeautyDate}
-          initialTime={selectedBeautyTime}
-          onConfirm={(date, time) => {
-            setSelectedBeautyDate(date);
-            setSelectedBeautyTime(time);
-            setIsIntegratedBookingMenuOpen(false);
-            clearSubmittedBooking();
-            setCurrentStep(2);
-            showToast("일시가 선택되었습니다.");
-          }}
-        />
-
-        {toastMessage ? <div className={styles.toast}>{toastMessage}</div> : null}
-      </div>
-    );
-  }
-
+  // Unified layout logic: map is now always available
   return (
     <div className={styles.container}>
       <ExploreHeader
@@ -2161,10 +1781,9 @@ export default function MyExplorePage() {
           flexDirection: 'column',
           position: 'relative',
           height: '100%',
-          minHeight: '500px',
         }}
       >
-        {isLoading ? (
+        {isLoading && (
           <div
             className={styles.loadingState}
             style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 10, background: 'rgba(0,0,0,0.5)' }}
@@ -2172,8 +1791,10 @@ export default function MyExplorePage() {
             <div className={styles.spinner}></div>
             <p>{t('common.searching')} {currentCategory}...</p>
           </div>
-        ) : null}
-        <div style={{ flex: 1, width: '100%', display: 'flex' }}>
+        )}
+
+        {/* 상단 고정 지도 영역 */}
+        <div style={{ width: '100%', height: '400px', display: 'flex', flexShrink: 0 }}>
           <ExploreMap
             items={sortedItemsToShow}
             center={hotelLocation ? { lat: hotelLocation.lat, lng: hotelLocation.lng } : { lat: 37.5665, lng: 126.978 }}
@@ -2182,6 +1803,277 @@ export default function MyExplorePage() {
             zoom={finalZoom}
           />
         </div>
+
+        {/* 하단 컨텐츠 영역: 뷰티 예약 모드와 일반 리스트 모드 통합 */}
+        <div className="flex-1 overflow-y-auto bg-[var(--white)] -mt-5 rounded-t-[24px] relative z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+          {isBeautyExplore ? (
+            <div className={styles.beautyExplorePage} style={{ padding: '0' }}>
+               <section className={styles.beautyHero} style={{ paddingTop: '24px' }}>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className={styles.beautyEyebrow}>STEP {currentStep} / 4</span>
+                    {currentStep > 1 && !submittedBooking && (
+                      <button onClick={() => setCurrentStep(prev => prev - 1)} className="text-sm font-bold text-[var(--accent)]">
+                        이전 단계로
+                      </button>
+                    )}
+                  </div>
+                  <h1 className={styles.beautyTitle} style={{ fontSize: '1.25rem' }}>
+                    {currentStep === 1 && (beautyCategoryFilter ? `${beautyCategoryLabel} 매장을 선택해주세요` : "관심 있는 매장을 골라보세요")}
+                    {currentStep === 2 && "예약 일시를 선택해주세요"}
+                    {currentStep === 3 && "상세 정보를 입력해주세요"}
+                    {currentStep === 4 && "예약 내용을 확인해주세요"}
+                  </h1>
+                  <div className="mt-4">
+                    {renderBeautyProgressIndicator()}
+                  </div>
+               </section>
+
+               <div className="px-4 pb-12">
+                  {submittedBooking ? (
+                    <div className={styles.beautyCompletionCard}>
+                      <p className={styles.beautyCompletionTitle}>{t('beauty_explore.completion_title')}</p>
+                      <div className={styles.beautyCompletionMain}>
+                        <p className={styles.beautyCompletionDesc}>{t('beauty_explore.completion_desc1')}</p>
+                        <div className={styles.beautyCompletionHero}>
+                          <div className={styles.beautyCompletionHeroBlock}>
+                            <span className={styles.beautyCompletionHeroLabel}>예약 매장</span>
+                            <strong className={styles.beautyCompletionHeroTitle}>{submittedBooking.storeName}</strong>
+                            <span className={styles.beautyCompletionHeroMeta}>{submittedBooking.date} · {submittedBooking.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className={styles.beautyCompletionActions}>
+                        <button type="button" className={styles.beautySecondaryAction} onClick={handleBookingEditReset}>
+                          메인으로 돌아가기
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      {currentStep === 1 && (
+                        <div className="flex flex-col gap-4">
+                          <div className={styles.beautyRegionChipRow}>
+                            {beautyRegions.map((region) => {
+                              const isActive = selectedRegion === region.id;
+                              return (
+                                <button
+                                  key={region.id}
+                                  type="button"
+                                  className={`${styles.beautyRegionChip} ${isActive ? styles.beautyRegionChipActive : ''}`}
+                                  onClick={() => setSelectedRegion(region.id)}
+                                >
+                                  {region.label}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <div className="flex flex-col gap-3">
+                            {filteredBeautyStores.length > 0 ? (
+                              filteredBeautyStores.map((store) => {
+                                const isSelected = selectedBeautyStoreId === store.id;
+                                return (
+                                  <article
+                                    key={store.id}
+                                    className={`bg-[var(--surface)] rounded-[var(--radius-md)] transition-all duration-300 border ${isSelected ? 'border-[var(--primary)] ring-2 ring-[var(--primary-glow)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] shadow-sm'}`}
+                                    style={{ overflow: 'hidden', cursor: 'pointer' }}
+                                    onClick={() => {
+                                      handleBeautyStoreSelect(store.id, store.name, store.region, store.category);
+                                    }}
+                                  >
+                                    <div className="flex flex-row w-full items-center p-3 gap-3">
+                                      <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                        <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} className="h-full w-full object-cover" />
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <h3 className="text-base font-bold text-[var(--ink-black)] truncate">{store.name}</h3>
+                                        <p className="text-xs text-[var(--soft-ink)]">{tBeauty(`region_${store.region}`)}</p>
+                                        <div className="text-sm font-semibold text-[var(--accent)] mt-1">{store.priceLabel}</div>
+                                      </div>
+                                      <div className="shrink-0 text-[var(--secondary)] font-bold text-xs uppercase bg-[var(--surface)] px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--warm-sand)]">
+                                        {tBeauty('btn_select_salon', { defaultValue: '선택' })}
+                                      </div>
+                                    </div>
+                                  </article>
+                                );
+                              })
+                            ) : (
+                              <p className="text-center py-10 text-neutral-400">검색된 매장이 없습니다.</p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {currentStep === 2 && (
+                        <div className="flex flex-col gap-6">
+                          {selectedBeautyStore && (
+                            <div className="bg-[var(--surface)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4 shadow-sm flex items-center gap-3">
+                              <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0">
+                                <img src={selectedBeautyStore.imageUrl} alt="" className="w-full h-full object-cover" />
+                              </div>
+                              <div className="flex-1">
+                                <span className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">SELECTED STORE</span>
+                                <h3 className="font-bold text-[var(--ink-black)]">{selectedBeautyStoreName}</h3>
+                              </div>
+                            </div>
+                          )}
+                          <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm">
+                            <h3 className="font-bold text-lg mb-4 text-[var(--ink-black)]">날짜와 시간을 골라주세요</h3>
+                            {selectedBeautyDate && selectedBeautyTime ? (
+                              <div className="flex flex-col gap-4">
+                                <div className="bg-[var(--hanji-ivory)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4">
+                                  <div className="text-sm text-[var(--soft-ink)] mb-1">선택된 일시</div>
+                                  <div className="text-xl font-bold text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
+                                </div>
+                                <button onClick={() => setIsIntegratedBookingMenuOpen(true)} className="text-[var(--accent)] font-bold underline text-sm py-2">
+                                  다른 일시로 변경하기
+                                </button>
+                                <button onClick={() => setCurrentStep(3)} className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg">
+                                  다음: 상세 정보 입력
+                                </button>
+                              </div>
+                            ) : (
+                              <button onClick={() => setIsIntegratedBookingMenuOpen(true)} className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-md">
+                                날짜 및 시간 선택하기
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {currentStep === 3 && (
+                        <div className="flex flex-col gap-6">
+                           <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
+                             <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Select Service</span>
+                             <div className="flex flex-col gap-2">
+                               {availablePrimaryServices.map((service) => {
+                                 const isSelected = selectedPrimaryServiceId === service.id;
+                                 return (
+                                   <button
+                                     key={service.id}
+                                     type="button"
+                                     className={`w-full flex justify-between items-center p-4 rounded-[var(--radius-md)] border-2 transition-all ${
+                                       isSelected ? 'border-[var(--primary)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] bg-[var(--hanji-ivory)]'
+                                     }`}
+                                     onClick={() => handlePrimaryServiceSelect(service.id)}
+                                   >
+                                     <div className="text-left">
+                                       <div className={`font-bold text-sm ${isSelected ? 'text-[#bb8a78]' : 'text-neutral-700'}`}>{service.name}</div>
+                                       <div className="text-[11px] text-neutral-400">{service.description}</div>
+                                     </div>
+                                     <div className={`font-bold text-sm ${isSelected ? 'text-[#bb8a78]' : 'text-neutral-500'}`}>
+                                       {formatPrice ? formatPrice(service.price) : `${service.price}KRW`}
+                                     </div>
+                                   </button>
+                                 );
+                               })}
+                             </div>
+                           </div>
+                           <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
+                             <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Customer Details</span>
+                             <div className="flex flex-col gap-4">
+                               {customerFormFields.map((field) => (
+                                 <div key={field.key} className="flex flex-col gap-1.5">
+                                   <label className="text-xs font-bold text-neutral-600">{field.label}{field.required ? ' *' : ''}</label>
+                                   <input
+                                     className="w-full h-12 bg-neutral-50 border border-neutral-200 rounded-xl px-4 text-sm outline-none"
+                                     type="text"
+                                     value={customerForm[field.key as keyof CustomerFormState]}
+                                     placeholder={field.placeholder}
+                                     onChange={(e) => handleCustomerFieldChange(field.key as any, e.target.value)}
+                                   />
+                                 </div>
+                               ))}
+                             </div>
+                           </div>
+                           <button className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold" onClick={handleStep3ToStep4Continue}>
+                             다음: 예약 내용 확인
+                           </button>
+                        </div>
+                      )}
+
+                      {currentStep === 4 && (
+                        <div className="flex flex-col gap-6">
+                           <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
+                             <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Booking Summary</span>
+                             <div className="flex flex-col gap-3">
+                               <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                                 <span className="text-sm text-[var(--soft-ink)]">매장</span>
+                                 <strong className="text-sm text-[var(--ink-black)]">{selectedBeautyStoreName}</strong>
+                               </div>
+                               <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                                 <span className="text-sm text-[var(--soft-ink)]">일시</span>
+                                 <strong className="text-sm text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</strong>
+                               </div>
+                               <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                                 <span className="text-sm text-[var(--soft-ink)]">서비스</span>
+                                 <strong className="text-sm text-[var(--ink-black)]">{selectedPrimaryService?.name}</strong>
+                               </div>
+                               <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                                 <span className="text-sm text-[var(--soft-ink)]">이름</span>
+                                 <strong className="text-sm text-[var(--ink-black)]">{customerForm.name}</strong>
+                               </div>
+                               <div className="flex justify-between items-center">
+                                 <span className="text-sm text-[var(--soft-ink)]">연락처</span>
+                                 <strong className="text-sm text-[var(--ink-black)]">{customerForm.phone}</strong>
+                               </div>
+                             </div>
+                           </div>
+                           <button
+                             type="button"
+                             className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-xl"
+                             disabled={!isBeautyConfirmSubmitEnabled || isSubmittingBeautyBooking}
+                             onClick={handleBeautyBookingSubmit}
+                           >
+                             {isSubmittingBeautyBooking ? '처리 중...' : '최종 예약 신청하기'}
+                           </button>
+                        </div>
+                      )}
+                    </>
+                  )}
+               </div>
+            </div>
+          ) : (
+            <div className="px-4 py-6">
+               <h2 className="text-lg font-bold mb-4">{t('explore_page.nearby_results')}</h2>
+               <div className="flex flex-col gap-4">
+                 {sortedItemsToShow.map((item) => (
+                   <article key={item.id} className="bg-[var(--surface)] rounded-[var(--radius-md)] border border-[var(--warm-sand)] p-3 shadow-sm flex gap-3 cursor-pointer" onClick={() => handleDetails(item.id)}>
+                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0">
+                         {item.image_url ? (
+                           <img src={item.image_url} alt="" className="w-full h-full object-cover" />
+                         ) : (
+                           <div className="w-full h-full" style={{ backgroundColor: item.image_color || '#eee' }} />
+                         )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                         <h3 className="font-bold text-[var(--ink-black)] truncate">{item.title}</h3>
+                         <p className="text-xs text-[var(--soft-ink)]">{item.area}</p>
+                         <div className="flex items-center gap-2 mt-1">
+                            {item.rating && <span className="text-xs font-bold text-orange-500">★ {item.rating}</span>}
+                            <span className="text-xs font-semibold text-[var(--accent)]">{item.price}</span>
+                         </div>
+                      </div>
+                   </article>
+                 ))}
+               </div>
+            </div>
+          )}
+        </div>
+
+        <IntegratedBookingMenu 
+          isOpen={isIntegratedBookingMenuOpen}
+          onClose={() => setIsIntegratedBookingMenuOpen(false)}
+          initialDate={selectedBeautyDate}
+          initialTime={selectedBeautyTime}
+          onConfirm={(date, time) => {
+            setSelectedBeautyDate(date);
+            setSelectedBeautyTime(time);
+            setIsIntegratedBookingMenuOpen(false);
+            clearSubmittedBooking();
+            setCurrentStep(2);
+            showToast("일시가 선택되었습니다.");
+          }}
+        />
       </main>
 
       <FilterSheet
@@ -2198,7 +2090,7 @@ export default function MyExplorePage() {
         itemTitle={selectedItemForPlan?.title || ''}
       />
 
-      {toastMessage ? <div className={styles.toast}>{toastMessage}</div> : null}
+      {toastMessage && <div className={styles.toast}>{toastMessage}</div>}
     </div>
   );
 }
