@@ -667,7 +667,7 @@ function MyPageContent() {
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
             {isAdmin && (
-                <section style={{ padding: '0 20px 40px', marginTop: 28, marginBottom: 32 }}>
+                <section style={{ padding: '0 20px 0', marginTop: 28, marginBottom: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
                         <span style={{
