@@ -71,39 +71,7 @@ export default function ExploreHeader({
                     </div>
                 </div>
 
-                {/* Category Tabs */}
-                <div className={styles.categoryScroll}>
-                    {CATEGORIES.map(cat => (
-                        <div
-                            key={cat.id}
-                            className={`${styles.categoryChip} ${currentCategory === cat.id ? styles.active : ''}`}
-                            onClick={() => onCategoryChange(cat.id)}
-                        >
-                            {t(`common.categories.${cat.id}`, { defaultValue: cat.label })}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Radius Scroll Menu */}
-                <div className={styles.categoryScroll} style={{ marginTop: '0', paddingBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div className={styles.chipLabel} style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginRight: '8px', alignSelf: 'center' }}>
-                        {t('explore_page.distance_label', { defaultValue: 'Distance:' })}
-                    </div>
-                    {[
-                        { label: '500m', value: 500 },
-                        { label: '1km', value: 1000 },
-                        { label: '3km', value: 3000 }
-                    ].map(rad => (
-                        <div
-                            key={rad.value}
-                            className={`${styles.categoryChip} ${radius === rad.value ? styles.active : ''}`}
-                            onClick={() => onRadiusChange(rad.value)}
-                            style={{ padding: '6px 12px', fontSize: '0.85rem' }}
-                        >
-                            {rad.label}
-                        </div>
-                    ))}
-                </div>
+                {/* Category and Distance Filters Removed based on User Request */}
             </header>
 
             {/* City Selection Modal */}
