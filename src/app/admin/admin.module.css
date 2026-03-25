@@ -2,7 +2,7 @@
 .container {
     min-height: 100vh;
     background: var(--background);
-    padding-bottom: 200px !important; /* Force margin to clear bottom nav on all admin screens */
+    padding-bottom: 160px; /* Massive clearance for mobile bottom navigation bar */
 }
 
 .header {
