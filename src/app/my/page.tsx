@@ -77,33 +77,6 @@ function ProfileSummaryCard({
     );
 }
 
-function QuickActionBar() {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    const actions = [
-        {
-            icon: "🎧",
-            label: t("my_page.support.short"),
-            onClick: () => router.push("/my/support"),
-        },
-    ];
-
-    return (
-        <div className={styles.quickActionBar}>
-            {actions.map((action) => (
-                <button
-                    key={action.label}
-                    className={styles.quickActionBtn}
-                    onClick={action.onClick}
-                >
-                    <span className={styles.quickActionIcon}>{action.icon}</span>
-                    <span className={styles.quickActionLabel}>{action.label}</span>
-                </button>
-            ))}
-        </div>
-    );
-}
 
 
 
@@ -516,7 +489,6 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
-            <QuickActionBar />
 
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
@@ -526,31 +498,6 @@ function MyPageContent() {
 
             <CommunityHubSection />
 
-            {/* Support Action Button */}
-            <section style={{ padding: '0 20px', marginBottom: 32 }}>
-                <button
-                    onClick={() => router.push('/my/support')}
-                    style={{
-                        width: '100%', padding: '24px', borderRadius: 24, border: '1px solid rgba(0,0,0,0.03)', background: 'white',
-                        display: 'flex', alignItems: 'center', gap: 16, cursor: 'pointer',
-                        boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    <div style={{
-                        width: 48, height: 48, borderRadius: 16,
-                        background: '#f8fafc',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.6rem', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)'
-                    }}>🎧</div>
-                    <div style={{ textAlign: 'left', flex: 1 }}>
-                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#111827' }}>{t('my_page.support.short')}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginTop: 4 }}>고객센터 및 문의사항</div>
-                    </div>
-                    <span style={{ color: '#7c3aed', fontSize: '1.5rem', fontWeight: 700 }}>›</span>
-                </button>
-            </section>
 
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
@@ -572,7 +519,6 @@ function MyPageContent() {
                         { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
                         { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
                         { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                        { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
                     ].map((item) => (
                         <div
                             key={item.path}
