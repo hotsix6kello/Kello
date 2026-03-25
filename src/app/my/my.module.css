@@ -6,8 +6,8 @@
 .container {
     padding: 20px 16px;
     background: var(--hanji-ivory);
-    min-height: 100vh;
-    padding-bottom: 200px;
+    min-height: 120vh;
+    padding-bottom: 320px;
     display: flex;
     flex-direction: column;
     gap: 12px;
