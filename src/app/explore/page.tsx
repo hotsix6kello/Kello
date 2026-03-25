@@ -142,8 +142,8 @@ type CommunicationMessagePayload = {
 const CUSTOMER_FORM_FIELDS: (t: any, tBeauty: any) => CustomerFieldConfig[] = (t, tBeauty) => [
   {
     key: 'name',
-    label: tBeauty('form_name', { defaultValue: '이름(실명)' }),
-    placeholder: tBeauty('form_name_placeholder', { defaultValue: '예약자 성함을 입력해 주세요' }),
+    label: tBeauty('form_name', { defaultValue: 'Name (English Only)' }),
+    placeholder: tBeauty('form_name_placeholder', { defaultValue: 'Please enter your name in English' }),
     required: true,
   },
   {
@@ -815,6 +815,53 @@ export default function MyExplorePage() {
   const commLangs = useMemo(() => COMMUNICATION_LANGUAGES(t, tBeauty), [t, tBeauty]);
   const commIntents = useMemo(() => COMMUNICATION_INTENTS(t, tBeauty), [t, tBeauty]);
 
+  const translatedStores = useMemo(() => {
+    return BEAUTY_STORE_ITEMS.map((store) => ({
+      ...store,
+      name: tBeauty(`stores.${store.id}.name`, { defaultValue: store.name }),
+      priceLabel: tBeauty(`stores.${store.id}.priceLabel`, { defaultValue: store.priceLabel }),
+      shortDescription: tBeauty(`stores.${store.id}.shortDescription`, { defaultValue: store.shortDescription }),
+      tags: store.tags.map((tag, i) => tBeauty(`stores.${store.id}.tags.${i}`, { defaultValue: tag }))
+    }));
+  }, [tBeauty]);
+
+  const translatedDesignersByStore = useMemo(() => {
+    const result: Record<string, BeautyDesigner[]> = {};
+    for (const [storeId, designers] of Object.entries(DESIGNERS_BY_STORE)) {
+      result[storeId] = designers.map(d => ({
+        ...d,
+        name: tBeauty(`designers.${d.id}.name`, { defaultValue: d.name }),
+        specialty: tBeauty(`designers.${d.id}.specialty`, { defaultValue: d.specialty }),
+        experienceLabel: tBeauty(`designers.${d.id}.experienceLabel`, { defaultValue: d.experienceLabel }),
+        shortNote: tBeauty(`designers.${d.id}.shortNote`, { defaultValue: d.shortNote })
+      }));
+    }
+    return result;
+  }, [tBeauty]);
+
+  const translatedPrimaryServices = useMemo(() => {
+    const result: Record<string, BeautyServiceOption[]> = {};
+    for (const [cat, services] of Object.entries(PRIMARY_SERVICES_BY_CATEGORY)) {
+      result[cat] = services.map(s => ({
+        ...s,
+        name: tBeauty(`services.${s.id}.name`, { defaultValue: s.name }),
+        description: tBeauty(`services.${s.id}.desc`, { defaultValue: s.description })
+      }));
+    }
+    return result as Record<BeautyCategoryId, BeautyServiceOption[]>;
+  }, [tBeauty]);
+
+  const translatedAddOns = useMemo(() => {
+    const result: Record<string, BeautyServiceOption[]> = {};
+    for (const [cat, services] of Object.entries(ADD_ONS_BY_CATEGORY)) {
+      result[cat] = services.map(s => ({
+        ...s,
+        name: tBeauty(`services.${s.id}.name`, { defaultValue: s.name }),
+        description: tBeauty(`services.${s.id}.desc`, { defaultValue: s.description })
+      }));
+    }
+    return result as Record<BeautyCategoryId, BeautyServiceOption[]>;
+  }, [tBeauty]);
   const [currentCity, setCurrentCity] = useState<CityId>('seoul');
 
   const [currentCategory, setCurrentCategory] = useState<string>('all');
@@ -866,10 +913,11 @@ export default function MyExplorePage() {
 /* moved below */
   const [selectedCommunicationIntent, setSelectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
   const [customerForm, setCustomerForm] = useState<CustomerFormState>(INITIAL_CUSTOMER_FORM_STATE);
+  const [selectedCountry, setSelectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
+  const [isCountryPickerOpen, setIsCountryPickerOpen] = useState(false);
   const [agreements, setAgreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
   const [formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
-  const [isBookingConfirmOpen, setIsBookingConfirmOpen] = useState(false);
-  const [isFinalCheckActive, setIsFinalCheckActive] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isSubmittingBeautyBooking, setIsSubmittingBeautyBooking] = useState(false);
   const [beautySubmitError, setBeautySubmitError] = useState<string | null>(null);
   const [submittedBookingPayload, setSubmittedBookingPayload] = useState<BeautyBookingPayload | null>(null);
@@ -903,9 +951,7 @@ export default function MyExplorePage() {
     setSelectedDesignerId(null);
     setSelectedPrimaryServiceId(null);
     setSelectedAddOnIds([]);
-    setIsBookingConfirmOpen(false);
-    setIsFinalCheckActive(false);
-    setIsSubmittingBeautyBooking(false);
+    setCurrentStep(1);
     setBeautySubmitError(null);
     setSubmittedBookingPayload(null);
     setSubmittedBooking(null);
@@ -999,7 +1045,7 @@ export default function MyExplorePage() {
       return;
     }
 
-    const exists = BEAUTY_STORE_ITEMS.some((store) => {
+    const exists = translatedStores.some((store) => {
       const matchesCategory = beautyCategoryFilter ? store.category === beautyCategoryFilter : true;
       const matchesRegion = selectedRegion === 'all' ? true : store.region === selectedRegion;
       return store.id === selectedBeautyStoreId && matchesCategory && matchesRegion;
@@ -1015,7 +1061,7 @@ export default function MyExplorePage() {
       setSelectedDesignerId(null);
       setSelectedPrimaryServiceId(null);
       setSelectedAddOnIds([]);
-      setIsBookingConfirmOpen(false);
+      setCurrentStep(1);
       setIsSubmittingBeautyBooking(false);
       setBeautySubmitError(null);
       setSubmittedBookingPayload(null);
@@ -1034,15 +1080,15 @@ export default function MyExplorePage() {
 
   const currentBeautyCategory = selectedBeautyCategory ?? beautyCategoryFilter;
   const availableDesigners = useMemo(
-    () => (selectedBeautyStoreId ? DESIGNERS_BY_STORE[selectedBeautyStoreId] ?? [] : []),
+    () => (selectedBeautyStoreId ? translatedDesignersByStore[selectedBeautyStoreId] ?? [] : []),
     [selectedBeautyStoreId],
   );
   const availablePrimaryServices = useMemo(
-    () => (currentBeautyCategory ? PRIMARY_SERVICES_BY_CATEGORY[currentBeautyCategory] ?? [] : []),
+    () => (currentBeautyCategory ? translatedPrimaryServices[currentBeautyCategory] ?? [] : []),
     [currentBeautyCategory],
   );
  const availableAddOnOptions = useMemo(
-    () => (currentBeautyCategory ? ADD_ONS_BY_CATEGORY[currentBeautyCategory] ?? [] : []),
+    () => (currentBeautyCategory ? translatedAddOns[currentBeautyCategory] ?? [] : []),
     [currentBeautyCategory],
   );
   const selectedDesigner = useMemo(
@@ -1077,7 +1123,7 @@ export default function MyExplorePage() {
       storeName:
         selectedBeautyStoreName ??
         (selectedBeautyStoreId
-          ? BEAUTY_STORE_ITEMS.find((store) => store.id === selectedBeautyStoreId)?.name ?? t('beauty_explore.label_service_default')
+          ? translatedStores.find((store) => store.id === selectedBeautyStoreId)?.name ?? t('beauty_explore.label_service_default')
           : t('beauty_explore.label_service_default')),
       dateLabel: selectedBeautyDate ? bookingDateLabels[selectedBeautyDate] ?? selectedBeautyDate : t('beauty_explore.label_service_default'),
       timeLabel: selectedBeautyTime ?? t('beauty_explore.label_service_default'),
@@ -1128,7 +1174,10 @@ export default function MyExplorePage() {
         addOnIds: selectedAddOnIds,
         addOnNames: selectedAddOnOptions.map((option) => option.name),
         priceSummary: selectedPriceSummary,
-        customer: customerForm,
+        customer: {
+          ...customerForm,
+          phone: `${selectedCountry.dial}${customerForm.phone}`
+        },
         communication: {
           language: selectedCommunicationLanguage,
           intent: selectedCommunicationIntent,
@@ -1178,13 +1227,13 @@ export default function MyExplorePage() {
   const beautyDescription = beautyCategoryFilter
     ? beautyCategoryLabels[beautyCategoryFilter].description
     : t('beauty_explore.hero_desc');
-  const filteredBeautyStores = BEAUTY_STORE_ITEMS.filter((store) => {
+  const filteredBeautyStores = translatedStores.filter((store) => {
     const matchesCategory = beautyCategoryFilter ? store.category === beautyCategoryFilter : true;
     const matchesRegion = selectedRegion === 'all' ? true : store.region === selectedRegion;
     return matchesCategory && matchesRegion;
   });
   const selectedBeautyStore = selectedBeautyStoreId
-    ? BEAUTY_STORE_ITEMS.find((store) => store.id === selectedBeautyStoreId) ?? null
+    ? translatedStores.find((store) => store.id === selectedBeautyStoreId) ?? null
     : null;
   const selectedBeautyCategoryLabel = selectedBeautyCategory
     ? beautyCategoryLabels[selectedBeautyCategory].label
@@ -1211,7 +1260,7 @@ export default function MyExplorePage() {
     if (!selectedBeautyAvailability) {
       setSelectedBeautyDate(null);
       setSelectedBeautyTime(null);
-      setIsBookingConfirmOpen(false);
+      if (currentStep > 1) setCurrentStep(1);
       return;
     }
 
@@ -1227,7 +1276,7 @@ export default function MyExplorePage() {
     // 선택 정보가 아예 없는 경우에만 닫히도록 하고, 
     // 이미 열려 있는 상태라면 정보가 일부 수정되더라도 강제로 닫지 않습니다.
     if (!selectedBeautyStoreId) {
-      setIsBookingConfirmOpen(false);
+      setCurrentStep(1);
     }
   }, [selectedBeautyStoreId]);
 
@@ -1292,9 +1341,7 @@ export default function MyExplorePage() {
     }
 
     clearSubmittedBooking();
-    setIsBookingConfirmOpen(true);
-    setIsFinalCheckActive(false); // Step 3부터 시작
-    scrollToConfirmSection();
+    setCurrentStep(3);
   };
 
   const handleStep3ToStep4Continue = () => {
@@ -1311,8 +1358,7 @@ export default function MyExplorePage() {
       return;
     }
 
-    setIsFinalCheckActive(true);
-    scrollToConfirmSection();
+    setCurrentStep(4);
   };
 
   const handleApplyFilter = (filters: ActiveFilters) => {
@@ -1342,6 +1388,10 @@ export default function MyExplorePage() {
       if (!trimmedValue) {
         return t('beauty_explore.form_name_placeholder');
       }
+      
+      if (/[^a-zA-Z\s]/.test(trimmedValue)) {
+        return 'English only, please.';
+      }
 
       return '';
     }
@@ -1363,10 +1413,56 @@ export default function MyExplorePage() {
     return '';
   };
 
+  const COUNTRY_CODES = [
+    { code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png', name: 'South Korea' },
+    { code: 'JP', dial: '+81', flag: 'https://flagcdn.com/w40/jp.png', name: 'Japan' },
+    { code: 'CN', dial: '+86', flag: 'https://flagcdn.com/w40/cn.png', name: 'China' },
+    { code: 'TW', dial: '+886', flag: 'https://flagcdn.com/w40/tw.png', name: 'Taiwan' },
+    { code: 'HK', dial: '+852', flag: 'https://flagcdn.com/w40/hk.png', name: 'Hong Kong' },
+    { code: 'VN', dial: '+84', flag: 'https://flagcdn.com/w40/vn.png', name: 'Vietnam' },
+    { code: 'TH', dial: '+66', flag: 'https://flagcdn.com/w40/th.png', name: 'Thailand' },
+    { code: 'PH', dial: '+63', flag: 'https://flagcdn.com/w40/ph.png', name: 'Philippines' },
+    { code: 'SG', dial: '+65', flag: 'https://flagcdn.com/w40/sg.png', name: 'Singapore' },
+    { code: 'MY', dial: '+60', flag: 'https://flagcdn.com/w40/my.png', name: 'Malaysia' },
+    { code: 'ID', dial: '+62', flag: 'https://flagcdn.com/w40/id.png', name: 'Indonesia' },
+    { code: 'US', dial: '+1', flag: 'https://flagcdn.com/w40/us.png', name: 'United States' },
+    { code: 'CA', dial: '+1', flag: 'https://flagcdn.com/w40/ca.png', name: 'Canada' },
+    { code: 'GB', dial: '+44', flag: 'https://flagcdn.com/w40/gb.png', name: 'United Kingdom' },
+    { code: 'FR', dial: '+33', flag: 'https://flagcdn.com/w40/fr.png', name: 'France' },
+    { code: 'DE', dial: '+49', flag: 'https://flagcdn.com/w40/de.png', name: 'Germany' },
+    { code: 'IT', dial: '+39', flag: 'https://flagcdn.com/w40/it.png', name: 'Italy' },
+    { code: 'ES', dial: '+34', flag: 'https://flagcdn.com/w40/es.png', name: 'Spain' },
+    { code: 'RU', dial: '+7', flag: 'https://flagcdn.com/w40/ru.png', name: 'Russia' },
+    { code: 'AU', dial: '+61', flag: 'https://flagcdn.com/w40/au.png', name: 'Australia' },
+    { code: 'BR', dial: '+55', flag: 'https://flagcdn.com/w40/br.png', name: 'Brazil' },
+    { code: 'MX', dial: '+52', flag: 'https://flagcdn.com/w40/mx.png', name: 'Mexico' },
+    { code: 'AE', dial: '+971', flag: 'https://flagcdn.com/w40/ae.png', name: 'United Arab Emirates' },
+    { code: 'SA', dial: '+966', flag: 'https://flagcdn.com/w40/sa.png', name: 'Saudi Arabia' },
+    { code: 'IN', dial: '+91', flag: 'https://flagcdn.com/w40/in.png', name: 'India' },
+    { code: 'MO', dial: '+853', flag: 'https://flagcdn.com/w40/mo.png', name: 'Macau' },
+    { code: 'MN', dial: '+976', flag: 'https://flagcdn.com/w40/mn.png', name: 'Mongolia' },
+    { code: 'KZ', dial: '+7', flag: 'https://flagcdn.com/w40/kz.png', name: 'Kazakhstan' },
+    { code: 'TR', dial: '+90', flag: 'https://flagcdn.com/w40/tr.png', name: 'Turkey' },
+    { code: 'EG', dial: '+20', flag: 'https://flagcdn.com/w40/eg.png', name: 'Egypt' },
+    { code: 'PT', dial: '+351', flag: 'https://flagcdn.com/w40/pt.png', name: 'Portugal' },
+    { code: 'CH', dial: '+41', flag: 'https://flagcdn.com/w40/ch.png', name: 'Switzerland' },
+    { code: 'NL', dial: '+31', flag: 'https://flagcdn.com/w40/nl.png', name: 'Netherlands' },
+    { code: 'SE', dial: '+46', flag: 'https://flagcdn.com/w40/se.png', name: 'Sweden' },
+    { code: 'PL', dial: '+48', flag: 'https://flagcdn.com/w40/pl.png', name: 'Poland' },
+    { code: 'UZ', dial: '+998', flag: 'https://flagcdn.com/w40/uz.png', name: 'Uzbekistan' },
+  ];
+
   const handleCustomerFieldChange = (field: CustomerFormFieldKey, value: string) => {
+    let finalValue = value;
+    
+    // 이름 필드는 영문(대소문자)과 공백만 허용
+    if (field === 'name') {
+      finalValue = value.replace(/[^a-zA-Z\s]/g, '');
+    }
+
     setCustomerForm((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: finalValue,
     }));
 
     if (field === 'name' || field === 'phone') {
@@ -1513,17 +1609,15 @@ export default function MyExplorePage() {
     setSelectedDesignerId(null);
     setSelectedPrimaryServiceId(null);
     setSelectedAddOnIds([]);
-    setIsBookingConfirmOpen(false);
+    setCurrentStep(2);
     clearSubmittedBooking();
     clearFormError('primaryService');
     showToast(`${storeName}${t('beauty_explore.toast_select_time')}`);
-    scrollToBookingPanel();
   };
 
   const handleBeautyDateSelect = (dateKey: string) => {
     setSelectedBeautyDate(dateKey);
     setSelectedBeautyTime(null);
-    setIsBookingConfirmOpen(false);
     clearSubmittedBooking();
   };
 
@@ -1533,7 +1627,7 @@ export default function MyExplorePage() {
     }
 
     if (!selectedBeautyStore || !selectedBeautyStoreName || !selectedBeautyDate || !selectedBeautyTime) {
-      setIsBookingConfirmOpen(false);
+      setCurrentStep(1);
       return;
     }
 
@@ -1567,8 +1661,6 @@ export default function MyExplorePage() {
             primaryServiceDefaultLabel: t('beauty_explore.label_service_default', { defaultValue: '미선택' }),
           }),
         );
-        setIsBookingConfirmOpen(true);
-        scrollToConfirmSection();
       })
       .catch((error) => {
         const nextMessage =
@@ -1586,8 +1678,7 @@ export default function MyExplorePage() {
 
   const handleBookingEditReset = () => {
     clearSubmittedBooking();
-    setIsBookingConfirmOpen(true);
-    scrollToConfirmSection();
+    setCurrentStep(1);
   };
 
 
@@ -1633,17 +1724,11 @@ export default function MyExplorePage() {
     t('beauty_explore.step_1'),
     t('beauty_explore.step_2'),
     '정보 입력',
-    tBeauty('confirm_eyebrow', { defaultValue: 'Step 4' })
+    tBeauty('confirm_eyebrow', { defaultValue: '예약확인' })
   ];
   const beautyCurrentStepIndex = submittedBooking 
     ? 4 
-    : isFinalCheckActive 
-    ? 3 
-    : isBookingConfirmOpen 
-    ? 2 
-    : selectedBeautyStoreId 
-    ? 1 
-    : 0;
+    : currentStep - 1;
 
   const renderBeautyProgressIndicator = () => (
     <ol className={styles.beautyStepIndicator} aria-label="뷰티 예약 단계">
@@ -1668,281 +1753,41 @@ export default function MyExplorePage() {
     return (
       <div className={styles.beautyExplorePage}>
         <div className="relative w-full">
-          {/* 뒤로 가기 (돌아가기) 버튼 */}
-          {beautyCategoryFilter && (
-            <button
-              type="button"
-              onClick={() => {
-                router.back(); 
-              }}
-              className="absolute left-4 top-2 z-[50] flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md border border-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-50"
-              aria-label={t('common.back', { defaultValue: 'Back' })}
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                strokeWidth={2.5} 
-                stroke="currentColor" 
-                className="h-5 w-5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
-            </button>
-          )}
+          {/* 뒤로가기 버튼 - 좌측 상단 독립 배치 */}
+          <button
+            type="button"
+            onClick={() => {
+              if (currentStep > 1 && !submittedBooking) {
+                setCurrentStep(prev => prev - 1);
+              } else {
+                router.back();
+              }
+            }}
+            className="absolute left-3 top-0 z-[50] flex items-center justify-center text-neutral-500 hover:text-neutral-900 transition-colors"
+            aria-label={t('common.back', { defaultValue: 'Back' })}
+          >
+            {/* 화살표 아이콘 (← 선 포함) */}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+          </button>
 
           <section className={styles.beautyHero}>
-            <span className={styles.beautyEyebrow}>Beauty Booking</span>
-            <div className={styles.beautyHeaderRow}>
-              <div>
-                <h1 className={styles.beautyTitle}>{beautyCategoryLabel} 예약을 바로 시작해 보세요</h1>
-                <p className={styles.beautySubtitle}>
-                  지역을 고르고 매장을 선택한 뒤, 시간만 정하면 다음 단계로 이어집니다.
-                </p>
-              </div>
-              <div className={styles.beautyCategoryBadgeWrap}>
-                <span className={styles.beautyCategoryBadgeCode}>{beautyCategoryBadge}</span>
-                <span className={styles.beautyCategoryBadgeLabel}>
-                  {beautyCategoryFilter ? beautyCategoryLabels[beautyCategoryFilter].english : 'Beauty'}
-                </span>
-              </div>
-            </div>
-            <p className={styles.beautyDescription}>{beautyDescription}</p>
-            <div className={styles.beautyHeroFlow} aria-label="빠른 예약 안내">
-              {beautyHeroFlow.map((step, index) => (
-                <div key={step} className={styles.beautyHeroFlowItem}>
-                  <span className={styles.beautyHeroFlowNumber}>{index + 1}</span>
-                  <span className={styles.beautyHeroFlowText}>{step}</span>
-                </div>
-              ))}
-            </div>
-            {!beautyCategoryFilter ? (
-              <div className={styles.beautyGuideCard}>
-                홈에서 카테고리를 먼저 고르면 더 잘 맞는 예약 흐름으로 바로 이어져요. 지금은 전체 뷰티 매장을 먼저 보고 있어요.
-              </div>
-            ) : null}
+             <span className={styles.beautyEyebrow}>STEP {currentStep} / 4</span>
+             <div className="mb-1" />
+             <h1 className={styles.beautyTitle}>
+               {currentStep === 1 && (beautyCategoryFilter ? `${beautyCategoryLabel} 매장을 선택해주세요` : "관심 있는 매장을 골라보세요")}
+               {currentStep === 2 && "예약 일시를 선택해주세요"}
+               {currentStep === 3 && "상세 정보를 입력해주세요"}
+               {currentStep === 4 && "예약 내용을 확인해주세요"}
+             </h1>
+             <div className="mt-4">
+               {renderBeautyProgressIndicator()}
+             </div>
           </section>
         </div>
 
-        <section className={styles.beautyFiltersSection}>
-          <div className={styles.beautySectionHeader}>
-            <div>
-              <span className={styles.beautySectionEyebrow}>STEP 1</span>
-              <h2 className={styles.beautySectionTitle}>관심 있는 매장을 골라보세요</h2>
-              <p className={styles.beautyBookingDescription}>다양한 매장 중 원하는 곳을 선택해 주세요.</p>
-            </div>
-            <span className={styles.beautyStoreCount}>{filteredBeautyStores.length}개 매장</span>
-          </div>
-
-          <div className={styles.beautyRegionChipRow}>
-            {beautyRegions.map((region) => {
-              const isActive = selectedRegion === region.id;
-
-              return (
-                <button
-                  key={region.id}
-                  type="button"
-                  className={`${styles.beautyRegionChip} ${isActive ? styles.beautyRegionChipActive : ''}`}
-                  aria-pressed={isActive}
-                  onClick={() => setSelectedRegion(region.id)}
-                >
-                  {region.label}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {selectedBeautyStore ? (
-          <section className={styles.beautySelectionNotice}>
-            <span className={styles.beautySelectionEyebrow}>{t('beauty_explore.step_1')}</span>
-            <strong className={styles.beautySelectionTitle}>{selectedBeautyStoreName ?? selectedBeautyStore.name}</strong>
-            <p className={styles.beautySelectionText}>
-              {t('beauty_explore.label_select_prompt')}
-            </p>
-          </section>
-        ) : null}
-
-        {/* 매장 리스트: 각 매장을 조밀하고 모던한 가로형 카드로 일렬 배치 */}
-        <section className={`${styles.beautyFiltersSection} mt-4 flex flex-col gap-3`}>
-          {filteredBeautyStores.length > 0 ? (
-            filteredBeautyStores.map((store) => {
-              const isSelected = selectedBeautyStoreId === store.id;
-              
-              return (
-                <article
-                  key={store.id}
-                  className={`bg-white rounded-2xl transition-all duration-300 ${
-                    isSelected ? 'ring-2 ring-[#bb8a78] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100 hover:shadow-md'
-                  }`}
-                  style={{ 
-                    overflow: 'hidden',
-                    cursor: 'pointer'
-                  }}
-                  onClick={() => {
-                    handleDetails(store.id);
-                  }}
-                >
-                  <div className="flex flex-row w-full items-center p-3 gap-3">
-                    {/* 매장 이미지 영역 */}
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0">
-                      <img
-                        src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'}
-                        alt={store.name}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-
-                    {/* 매장 상세 정보 영역 */}
-                    <div className="flex-1 flex flex-col justify-center min-w-0 py-1">
-                      <div className="flex items-center gap-2 mb-1 pl-1">
-                        <h3 className="text-[15px] sm:text-base font-bold text-neutral-900 truncate">
-                          {tBeauty(`stores.${store.id}.name`, { defaultValue: store.name })}
-                        </h3>
-                        <div className="flex items-center gap-0.5 shrink-0">
-                          <span className="text-yellow-500 text-[12px]">★</span>
-                          <span className="text-[12px] font-bold text-neutral-700">{store.rating ? store.rating.toFixed(1) : '4.8'}</span>
-                          <span className="text-[11px] text-neutral-400">({store.reviewCount || 120})</span>
-                        </div>
-                      </div>
-
-                      <p className="text-[12px] text-neutral-500 mb-0.5 pl-1">
-                        {tBeauty(`region_${store.region}`)}
-                      </p>
-                      
-                      <div className="text-[13px] font-semibold text-neutral-800 pl-1">
-                        {tBeauty(store.priceLabel, { defaultValue: store.priceLabel })}
-                      </div>
-                    </div>
-                    
-                    {/* 액션 버튼 그룹 */}
-                    <div className="shrink-0 flex flex-col gap-1.5 w-[72px] sm:w-[84px]">
-                      <button
-                        type="button"
-                        className="w-full h-[34px] flex items-center justify-center rounded-lg font-bold text-[11px] text-[#8d6157] bg-[#fff5f0] border border-[#f0e0d8] hover:bg-[#ffece0] transition-all"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDetails(store.id);
-                        }}
-                      >
-                        {tBeauty('btn_view_details', { defaultValue: '상세보기' })}
-                      </button>
-                      <button
-                        type="button"
-                        className={`w-full h-[34px] flex items-center justify-center rounded-lg font-bold text-[11px] transition-all shadow-sm ${
-                          isSelected 
-                            ? 'bg-[#a67969] text-white' 
-                            : 'bg-[#bb8a78] text-white hover:bg-[#a67969]'
-                        }`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleBeautyStoreSelect(
-                            store.id,
-                            store.name,
-                            store.region,
-                            store.category
-                          );
-                        }}
-                      >
-                        {isSelected ? tBeauty('btn_selected', { defaultValue: '선택됨' }) : tBeauty('btn_select_salon', { defaultValue: '예약선택' })}
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              );
-            })
-          ) : (
-            <div className={styles.beautyStoreSection} style={{ marginTop: 0 }}>
-              <div className={styles.beautyEmptyState}>
-                <p className={styles.beautyEmptyTitle}>{tBeauty('empty_store_title', { defaultValue: '검색된 매장이 없어요' })}</p>
-                <p className={styles.beautyEmptyText}>{tBeauty('empty_store_desc', { defaultValue: '필터를 조정하거나 다른 지역을 골라보세요' })}</p>
-              </div>
-            </div>
-          )}
-        </section>
-
-        <section ref={bookingPanelRef} className={styles.beautyBookingPanel}>
-          <div className={styles.beautyBookingHeader}>
-            <div>
-              <span className={styles.beautySectionEyebrow}>STEP 2</span>
-              <h2 className={styles.beautyBookingTitle}>예약 일시를 선택해주세요</h2>
-              <p className={styles.beautyBookingDescription}>
-                방문하실 날짜와 시간을 골라주세요.
-              </p>
-            </div>
-            {renderBeautyProgressIndicator()}
-          </div>
-
-          {!selectedBeautyStoreId || !selectedBeautyStore ? (
-            <div className={styles.beautyBookingEmpty}>
-              <p className={styles.beautyBookingEmptyTitle}>{tBeauty('booking_empty_title', { defaultValue: '매장을 먼저 선택해 주세요' })}</p>
-              <p className={styles.beautyBookingEmptyText}>
-                {tBeauty('booking_empty_desc', { defaultValue: '매장을 선택하면 바로 예약 가능 시간을 확인할 수 있습니다.' })}
-              </p>
-            </div>
-          ) : !selectedBeautyAvailability ? (
-            <div className={styles.beautyBookingEmpty}>
-              <p className={styles.beautyBookingEmptyTitle}>{tBeauty('booking_not_found_title', { defaultValue: '예약 정보를 불러올 수 없어요' })}</p>
-              <p className={styles.beautyBookingEmptyText}>
-                {tBeauty('booking_not_found_desc', { defaultValue: '매장 정보가 올바르지 않거나 시스템 오류입니다. 잠시 후 다시 시도해 주세요.' })}
-              </p>
-            </div>
-          ) : (
-            <div className={styles.beautyBookingLayout}>
-              <div className={styles.beautyBookingBlock}>
-                {selectedBeautyDate && selectedBeautyTime ? (
-                  <div className="flex flex-col bg-[#fbf6f4] border border-[#bb8a78]/30 rounded-2xl p-5 gap-3">
-                    <div className="flex justify-between items-center">
-                      <span className="font-bold text-[#bb8a78] text-lg">{tBeauty('label_selected_datetime', { defaultValue: '선택된 날짜 및 시간' })}</span>
-                      <button 
-                        onClick={() => setIsIntegratedBookingMenuOpen(true)}
-                        className="text-sm font-semibold text-[#bb8a78] underline px-2 py-1"
-                      >
-                        {tBeauty('btn_change', { defaultValue: '변경하기' })}
-                      </button>
-                    </div>
-                    <div className="text-neutral-900 font-bold text-xl">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
-                    <button 
-                      onClick={() => {
-                        setIsBookingConfirmOpen(true);
-                        setTimeout(() => scrollToConfirmSection(), 100);
-                      }}
-                      className="w-full mt-2 bg-[#bb8a78] text-white py-3 px-4 rounded-xl font-bold transition-all shadow-md hover:bg-[#a67969] active:scale-95"
-                    >
-                      {t('beauty_explore.summary_btn', { defaultValue: '예약 정보 확인하기' })}
-                    </button>
-                  </div>
-                ) : (
-                  <button 
-                    onClick={() => setIsIntegratedBookingMenuOpen(true)}
-                    className="w-full bg-[#bb8a78] text-white py-5 px-6 rounded-2xl font-bold text-xl shadow-lg transition-transform active:scale-95 whitespace-nowrap overflow-hidden text-ellipsis"
-                  >
-                    {tBeauty('btn_choose_datetime', { defaultValue: '예약할 날짜 및 시간 고르기' })}
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-        </section>
-
-        <section ref={confirmSectionRef} className={styles.beautyConfirmPanel}>
-          <div className={styles.beautyConfirmHeader}>
-            <div>
-              <span className={styles.beautySectionEyebrow}>
-                {isFinalCheckActive ? 'STEP 4' : 'STEP 3'}
-              </span>
-              <h2 className={styles.beautyConfirmTitle}>
-                {isFinalCheckActive ? '예약 내용을 확인해주세요' : '상세 정보를 입력해주세요'}
-              </h2>
-              <p className={styles.beautyConfirmDescription}>
-                {isFinalCheckActive 
-                  ? '신청 전 선택하신 매장과 일정이 맞는지 다시 한번 확인해주세요.'
-                  : '매장에서 참고할 정보를 입력해 주세요.'
-                }
-              </p>
-            </div>
-          </div>
-
+        <main className="px-4 pb-24">
           {submittedBooking ? (
             <div className={styles.beautyCompletionCard}>
               <p className={styles.beautyCompletionTitle}>{t('beauty_explore.completion_title')}</p>
@@ -1958,156 +1803,319 @@ export default function MyExplorePage() {
               </div>
               <div className={styles.beautyCompletionActions}>
                 <button type="button" className={styles.beautySecondaryAction} onClick={handleBookingEditReset}>
-                  {t('beauty_explore.btn_edit')}
-                </button>
-              </div>
-            </div>
-          ) : !isBookingConfirmOpen ? (
-            <div className={styles.beautyConfirmEmpty}>
-              <p className={styles.beautyConfirmEmptyTitle}>{t('beauty_explore.confirm_empty_title')}</p>
-              <p className={styles.beautyConfirmEmptyText}>{t('beauty_explore.confirm_empty_desc')}</p>
-            </div>
-          ) : isFinalCheckActive ? (
-            /* Step 4: 최종 확인 및 동의 */
-            <div className={styles.beautyConfirmLayout}>
-              <div className={styles.beautyConfirmSummaryCard}>
-                <span className={styles.beautySectionEyebrow}>Booking Summary</span>
-                <div className={styles.beautySummaryList}>
-                  <div className={styles.beautySummaryItem}>
-                    <span className={styles.beautySummaryLabel}>{t('beauty_explore.summary_store')}</span>
-                    <strong className={styles.beautySummaryValue}>{selectedBeautyStoreName}</strong>
-                  </div>
-                  <div className={styles.beautySummaryItem}>
-                    <span className={styles.beautySummaryLabel}>{t('beauty_explore.summary_date')}</span>
-                    <strong className={styles.beautySummaryValue}>{selectedBeautyDateLabel}</strong>
-                  </div>
-                  <div className={styles.beautySummaryItem}>
-                    <span className={styles.beautySummaryLabel}>{t('beauty_explore.summary_time')}</span>
-                    <strong className={styles.beautySummaryValue}>{selectedBeautyTime}</strong>
-                  </div>
-                  <div className={styles.beautySummaryItem}>
-                    <span className={styles.beautySummaryLabel}>고객 이름</span>
-                    <strong className={styles.beautySummaryValue}>{customerForm.name}</strong>
-                  </div>
-                  <div className={styles.beautySummaryItem}>
-                    <span className={styles.beautySummaryLabel}>연락처</span>
-                    <strong className={styles.beautySummaryValue}>{customerForm.phone}</strong>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.beautyAgreementCard}>
-                <span className={styles.beautySectionEyebrow}>{t('beauty_bookings.section_agreement')}</span>
-                <div className={styles.beautyAgreementList}>
-                  {agreementFields.map((field) => (
-                    <div key={field.key} className={styles.beautyAgreementItem}>
-                      <label className={styles.beautyAgreementRow}>
-                        <input
-                          className={styles.beautyAgreementCheckbox}
-                          type="checkbox"
-                          checked={agreements[field.key as keyof AgreementState]}
-                          onChange={() => handleAgreementToggle(field.key as keyof AgreementState)}
-                        />
-                        <span className={styles.beautyAgreementTextWrap}>
-                          <strong className={styles.beautyAgreementTitle}>{field.label}</strong>
-                          <span className={styles.beautyAgreementText}>{field.description}</span>
-                        </span>
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  className={styles.beautyFinalCta}
-                  disabled={!isBeautyConfirmSubmitEnabled || isSubmittingBeautyBooking}
-                  onClick={handleBeautyBookingSubmit}
-                >
-                  {isSubmittingBeautyBooking ? t('my_bookings.status_preparing') : tBeauty('btn_submit', { defaultValue: '예약 신청하기' })}
-                </button>
-                <button 
-                  type="button" 
-                  className="w-full mt-3 py-3 text-neutral-500 font-medium" 
-                  onClick={() => setIsFinalCheckActive(false)}
-                >
-                  이전 단계로
+                  메인으로 돌아가기
                 </button>
               </div>
             </div>
           ) : (
-            /* Step 3: 상세 정보 입력 (고객정보 + 전달목적) */
-            <div className={styles.beautyConfirmLayout}>
-              <div className={styles.beautyConfirmCard}>
-                <span className={styles.beautySectionEyebrow}>CUSTOMER DETAILS</span>
-                <div className={styles.beautyFormGrid}>
-                  {customerFormFields.map((field) => {
-                    const inputId = `beauty-booking-${field.key}`;
-                    const fieldError = field.key === 'request' ? '' : formErrors[field.key as FormErrorKey];
-                    return (
-                      <div key={field.key} className={styles.beautyFormField}>
-                        <label className={styles.beautyFormLabel} htmlFor={inputId}>
-                          {field.label}{field.required ? ' *' : ''}
-                        </label>
-                        {field.multiline ? (
-                          <textarea
-                            id={inputId}
-                            className={styles.beautyTextarea}
-                            rows={4}
-                            value={customerForm[field.key]}
-                            placeholder={field.placeholder}
-                            onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
-                          />
-                        ) : (
-                          <input
-                            id={inputId}
-                            className={styles.beautyTextInput}
-                            type={field.key === 'phone' ? 'tel' : 'text'}
-                            value={customerForm[field.key]}
-                            placeholder={field.placeholder}
-                            onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
-                            onBlur={() => handleCustomerFieldBlur(field.key as any)}
-                          />
-                        )}
-                        {fieldError && <p className={styles.beautyFieldError}>{fieldError}</p>}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className={styles.beautyAssistCard}>
-                <span className={styles.beautySectionEyebrow}>{t('beauty_bookings.section_communication')}</span>
-                <div className={styles.beautyAssistSection}>
-                  <div className={styles.beautyOptionSectionHeader}>
-                    <h3 className={styles.beautyOptionSectionTitle}>{t('beauty_bookings.comm_intent_title')}</h3>
-                  </div>
-                  <div className={styles.beautyOptionGrid} role="group">
-                    {commIntents.map((intent) => {
-                      const isActive = selectedCommunicationIntent === intent.id;
+            <>
+              {currentStep === 1 && (
+                <div className="flex flex-col gap-4">
+                  <div className={styles.beautyRegionChipRow}>
+                    {beautyRegions.map((region) => {
+                      const isActive = selectedRegion === region.id;
                       return (
                         <button
-                          key={intent.id}
+                          key={region.id}
                           type="button"
-                          className={`${styles.beautyOptionCard} ${isActive ? styles.beautyOptionCardActive : ''}`}
-                          onClick={() => handleCommunicationIntentSelect(intent.id)}
+                          className={`${styles.beautyRegionChip} ${isActive ? styles.beautyRegionChipActive : ''}`}
+                          onClick={() => setSelectedRegion(region.id)}
                         >
-                          <span className={styles.beautyOptionTitle}>{intent.label}</span>
-                          <span className={styles.beautyOptionDescription}>{intent.description}</span>
+                          {region.label}
                         </button>
                       );
                     })}
                   </div>
+                  <div className="flex flex-col gap-3">
+                    {filteredBeautyStores.length > 0 ? (
+                      filteredBeautyStores.map((store) => {
+                        const isSelected = selectedBeautyStoreId === store.id;
+                        return (
+                          <article
+                            key={store.id}
+                            className={`bg-[var(--surface)] rounded-[var(--radius-md)] transition-all duration-300 border ${isSelected ? 'border-[var(--primary)] ring-2 ring-[var(--primary-glow)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] shadow-sm'}`}
+                            style={{ overflow: 'hidden', cursor: 'pointer' }}
+                            onClick={() => {
+                              handleBeautyStoreSelect(store.id, store.name, store.region, store.category);
+                            }}
+                          >
+                            <div className="flex flex-row w-full items-center p-3 gap-3">
+                              <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} className="h-full w-full object-cover" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="text-base font-bold text-[var(--ink-black)] truncate">{store.name}</h3>
+                                <p className="text-xs text-[var(--soft-ink)]">{tBeauty(`region_${store.region}`)}</p>
+                                <div className="text-sm font-semibold text-[var(--accent)] mt-1">{store.priceLabel}</div>
+                              </div>
+                              <div className="shrink-0 text-[var(--secondary)] font-bold text-xs uppercase bg-[var(--surface)] px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--warm-sand)]">
+                                {tBeauty('btn_select_salon', { defaultValue: '선택' })}
+                              </div>
+                            </div>
+                          </article>
+                        );
+                      })
+                    ) : (
+                      <p className="text-center py-10 text-neutral-400">검색된 매장이 없습니다.</p>
+                    )}
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  className={styles.beautyFinalCta}
-                  onClick={handleStep3ToStep4Continue}
-                >
-                  예약 신청 전 최종 확인하기
-                </button>
-              </div>
-            </div>
+              )}
+
+              {currentStep === 2 && (
+                <div className="flex flex-col gap-6">
+                  {selectedBeautyStore && (
+                    <div className="bg-[var(--surface)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4 shadow-sm flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0">
+                        <img src={selectedBeautyStore.imageUrl} alt="" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">SELECTED STORE</span>
+                        <h3 className="font-bold text-[var(--ink-black)]">{selectedBeautyStoreName}</h3>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm">
+                    <h3 className="font-bold text-lg mb-4 text-[var(--ink-black)]">날짜와 시간을 골라주세요</h3>
+                    {selectedBeautyDate && selectedBeautyTime ? (
+                      <div className="flex flex-col gap-4">
+                        <div className="bg-[var(--hanji-ivory)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4">
+                          <div className="text-sm text-[var(--soft-ink)] mb-1">선택된 일시</div>
+                          <div className="text-xl font-bold text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</div>
+                        </div>
+                        <button 
+                          onClick={() => setIsIntegratedBookingMenuOpen(true)}
+                          className="text-[var(--accent)] font-bold underline text-sm py-2"
+                        >
+                          다른 일시로 변경하기
+                        </button>
+                        <button 
+                          onClick={() => setCurrentStep(3)}
+                          className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg hover:bg-[var(--deep-navy)] transition-all"
+                        >
+                          다음: 상세 정보 입력
+                        </button>
+                      </div>
+                    ) : (
+                      <button 
+                        onClick={() => setIsIntegratedBookingMenuOpen(true)}
+                        className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-md"
+                      >
+                        날짜 및 시간 선택하기
+                      </button>
+                    )}
+                  </div>
+
+                  <button onClick={() => setCurrentStep(1)} className="text-neutral-400 font-medium py-2">다른 매장 선택하기</button>
+                </div>
+              )}
+
+              {currentStep === 3 && (
+                <div className="flex flex-col gap-6">
+                   {/* 1. 서비스 종류 선택 (Primary Service) */}
+                   <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
+                     <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Select Service</span>
+                     <div className="flex flex-col gap-2">
+                       {availablePrimaryServices.map((service) => {
+                         const isSelected = selectedPrimaryServiceId === service.id;
+                         return (
+                           <button
+                             key={service.id}
+                             type="button"
+                             className={`w-full flex justify-between items-center p-4 rounded-[var(--radius-md)] border-2 transition-all ${
+                               isSelected ? 'border-[var(--primary)] bg-[var(--primary-glow)]' : 'border-[var(--warm-sand)] bg-[var(--hanji-ivory)]'
+                             }`}
+                             onClick={() => handlePrimaryServiceSelect(service.id)}
+                           >
+                             <div className="text-left">
+                               <div className={`font-bold text-sm ${isSelected ? 'text-[#bb8a78]' : 'text-neutral-700'}`}>{service.name}</div>
+                               <div className="text-[11px] text-neutral-400">{service.description}</div>
+                             </div>
+                             <div className={`font-bold text-sm ${isSelected ? 'text-[#bb8a78]' : 'text-neutral-500'}`}>
+                               {formatPrice ? formatPrice(service.price) : `${service.price}KRW`}
+                             </div>
+                           </button>
+                         );
+                       })}
+                       {formErrors.primaryService && <p className="text-[11px] text-red-500 font-medium px-1">{formErrors.primaryService}</p>}
+                     </div>
+                   </div>
+
+                   <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
+                     <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Customer Details</span>
+                     <div className="flex flex-col gap-4">
+                       {customerFormFields.map((field) => {
+                         const inputId = `beauty-booking-${field.key}`;
+                         const fieldError = field.key === 'request' ? '' : formErrors[field.key as FormErrorKey];
+                         const labelText = field.key === 'phone' ? `${field.label} (SNS ID 포함 가능)` : field.label;
+
+                         return (
+                           <div key={field.key} className="flex flex-col gap-1.5">
+                             <label className="text-xs font-bold text-neutral-600" htmlFor={inputId}>
+                               {labelText}{field.required ? ' *' : ''}
+                             </label>
+                             {field.multiline ? (
+                               <textarea
+                                 id={inputId}
+                                 className="w-full bg-neutral-50 border border-neutral-200 rounded-xl p-3 text-sm focus:border-[#bb8a78] outline-none transition-all"
+                                 rows={4}
+                                 value={customerForm[field.key]}
+                                 placeholder={field.placeholder}
+                                 onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
+                               />
+                             ) : field.key === 'phone' ? (
+                               <div className="flex gap-2">
+                                 <div className="relative shrink-0">
+                                   <div 
+                                      className="h-12 bg-neutral-100 border border-neutral-200 rounded-xl flex items-center px-3 gap-1.5 transition-all cursor-pointer focus-within:border-[#bb8a78]"
+                                      onClick={() => setIsCountryPickerOpen(!isCountryPickerOpen)}
+                                   >
+                                      <div className="flex items-center justify-center p-1 bg-white/60 rounded-md backdrop-blur-[2px] border border-white/40 shadow-sm">
+                                         <img src={selectedCountry.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px] mr-1.5" />
+                                         <span className="text-[12px] font-black text-neutral-800 leading-none">{selectedCountry.dial}</span>
+                                      </div>
+                                      
+                                      <div className="text-neutral-400">
+                                        <svg width="8" height="5" viewBox="0 0 10 6" fill="none" className={`transition-transform duration-200 ${isCountryPickerOpen ? 'rotate-180' : ''}`}>
+                                          <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                      </div>
+                                   </div>
+
+                                   {isCountryPickerOpen && (
+                                     <>
+                                       <div 
+                                         className="fixed inset-0 z-[60]" 
+                                         onClick={() => setIsCountryPickerOpen(false)} 
+                                       />
+                                       <div className="absolute top-full left-0 mt-2 w-32 max-h-60 overflow-y-auto bg-white border border-neutral-100 rounded-xl shadow-xl z-[70] py-2 animate-in fade-in zoom-in duration-200">
+                                         {COUNTRY_CODES.map((c) => (
+                                           <button
+                                             key={c.code}
+                                             type="button"
+                                             className="w-full flex items-center px-3 py-2.5 hover:bg-neutral-50 transition-colors gap-2"
+                                             onClick={() => {
+                                               setSelectedCountry({ code: c.code, dial: c.dial, flag: c.flag });
+                                               setIsCountryPickerOpen(false);
+                                             }}
+                                           >
+                                             <img src={c.flag} alt="" className="w-5 h-3.5 object-cover rounded-[1px] shrink-0" />
+                                             <span className="text-xs font-bold text-neutral-700">{c.dial}</span>
+                                           </button>
+                                         ))}
+                                       </div>
+                                     </>
+                                   )}
+                                 </div>
+                                 <input
+                                   id={inputId}
+                                   className={`flex-1 h-12 bg-neutral-50 border ${fieldError ? 'border-red-400' : 'border-neutral-200'} rounded-xl px-4 text-sm focus:border-[#bb8a78] outline-none transition-all`}
+                                   type="tel"
+                                   value={customerForm[field.key]}
+                                   placeholder={field.placeholder}
+                                   onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
+                                   onBlur={() => handleCustomerFieldBlur(field.key as any)}
+                                 />
+                               </div>
+                             ) : (
+                               <input
+                                 id={inputId}
+                                 className={`w-full h-12 bg-neutral-50 border ${fieldError ? 'border-red-400' : 'border-neutral-200'} rounded-xl px-4 text-sm focus:border-[#bb8a78] outline-none transition-all`}
+                                 type="text"
+                                 value={customerForm[field.key]}
+                                 placeholder={field.placeholder}
+                                 onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
+                                 onBlur={() => handleCustomerFieldBlur(field.key as any)}
+                               />
+                             )}
+                             {fieldError && <p className="text-[11px] text-red-500 font-medium px-1 mt-0.5">{fieldError}</p>}
+                           </div>
+                         );
+                       })}
+                     </div>
+                   </div>
+
+                   <button
+                     type="button"
+                     className="w-full bg-[var(--secondary)] text-white py-4 rounded-[var(--radius-md)] font-bold shadow-lg hover:bg-[var(--deep-navy)] transition-all"
+                     onClick={() => {
+                        if (!selectedPrimaryServiceId) {
+                           setFormErrors(prev => ({ ...prev, primaryService: "시술 내역을 선택해주세요." }));
+                           showToast("시술 내역을 선택해 주세요.");
+                           return;
+                        }
+                        handleStep3ToStep4Continue();
+                     }}
+                   >
+                     다음: 예약 내용 확인
+                   </button>
+                   <button onClick={() => setCurrentStep(2)} className="text-neutral-400 font-medium py-2">이전: 날짜 선택으로</button>
+                </div>
+              )}
+
+              {currentStep === 4 && (
+                <div className="flex flex-col gap-6">
+                  <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-6 border border-[var(--warm-sand)] shadow-sm flex flex-col gap-4">
+                    <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Booking Summary</span>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex justify-between items-start border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">매장</span>
+                        <strong className="text-sm text-[var(--ink-black)] text-right">{selectedBeautyStoreName}</strong>
+                      </div>
+                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">일시</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{selectedBeautyDateLabel} - {selectedBeautyTime}</strong>
+                      </div>
+                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">서비스</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{selectedPrimaryService?.name}</strong>
+                      </div>
+                      <div className="flex justify-between items-center border-b border-[var(--warm-sand)] pb-3">
+                        <span className="text-sm text-[var(--soft-ink)]">이름</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{customerForm.name}</strong>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-[var(--soft-ink)]">연락처</span>
+                        <strong className="text-sm text-[var(--ink-black)]">{customerForm.phone}</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-[var(--hanji-ivory)] rounded-[var(--radius-md)] p-5 flex flex-col gap-4">
+                    <h4 className="text-xs font-bold text-[var(--soft-ink)] uppercase tracking-widest">{t('beauty_bookings.section_agreement')}</h4>
+                    <div className="flex flex-col gap-3">
+                      {agreementFields.map((field) => (
+                        <label key={field.key} className="flex items-start gap-3 cursor-pointer">
+                          <input
+                            className="mt-1 w-4 h-4 rounded border-[var(--warm-sand)] text-[var(--accent)] focus:ring-[var(--accent)]"
+                            type="checkbox"
+                            checked={agreements[field.key as keyof AgreementState]}
+                            onChange={() => handleAgreementToggle(field.key as keyof AgreementState)}
+                          />
+                          <div className="flex flex-col">
+                            <span className="text-sm font-bold text-[var(--ink-black)] leading-tight">{field.label}</span>
+                            <span className="text-[11px] text-[var(--soft-ink)] mt-0.5">{field.description}</span>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="w-full bg-[var(--secondary)] text-white py-5 rounded-[var(--radius-md)] font-bold text-lg shadow-xl hover:bg-[var(--deep-navy)] transition-all disabled:opacity-50"
+                    disabled={!isBeautyConfirmSubmitEnabled || isSubmittingBeautyBooking}
+                    onClick={handleBeautyBookingSubmit}
+                  >
+                    {isSubmittingBeautyBooking ? '처리 중...' : '최종 예약 신청하기'}
+                  </button>
+                  <button onClick={() => setCurrentStep(3)} className="text-neutral-400 font-medium py-2">이전: 정보 수정하기</button>
+                </div>
+              )}
+            </>
           )}
-        </section>
+        </main>
 
         <IntegratedBookingMenu 
           isOpen={isIntegratedBookingMenuOpen}
@@ -2118,18 +2126,12 @@ export default function MyExplorePage() {
             setSelectedBeautyDate(date);
             setSelectedBeautyTime(time);
             setIsIntegratedBookingMenuOpen(false);
-            
             clearSubmittedBooking();
-            setIsBookingConfirmOpen(true);
-            
-            setTimeout(() => {
-              scrollToConfirmSection();
-            }, 300);
+            setCurrentStep(2);
+            showToast("일시가 선택되었습니다.");
           }}
         />
 
-        {/* 하단 패딩 확보를 위한 투명 스페이서 */}
-        <div style={{ height: '120px', width: '100%', pointerEvents: 'none' }} />
         {toastMessage ? <div className={styles.toast}>{toastMessage}</div> : null}
       </div>
     );

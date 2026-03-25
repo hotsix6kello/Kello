@@ -3,14 +3,28 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { useTrip } from "@/lib/contexts/TripContext";
+import { useTrip, ItineraryItem } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
 import {
     formatCountLabel,
+    formatItineraryStatusLabel,
     formatTripDayTimeLabel,
 } from "@/lib/i18n/runtimeFormatters";
 import styles from "./my.module.css";
+
+interface BookingCard {
+    id: string;
+    title: string;
+    date: string;
+    category: string;
+    status: string;
+    area?: string;
+    price?: string;
+    isNew: boolean;
+    lat?: number;
+    lng?: number;
+}
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 
@@ -77,6 +91,125 @@ function ProfileSummaryCard({
                 </div>
             </div>
         </div>
+    );
+}
+
+function QuickActionBar() {
+    const router = useRouter();
+    const { t } = useTranslation("common");
+
+    const actions = [
+        {
+            icon: "🎧",
+            label: t("my_page.support.short"),
+            onClick: () => router.push("/my/support"),
+        },
+        {
+            icon: "KO",
+            label: t("my_page.phrases.quick"),
+            onClick: () => router.push("/my/phrases"),
+        },
+    ];
+
+    return (
+        <div className={styles.quickActionBar}>
+            {actions.map((action) => (
+                <button
+                    key={action.label}
+                    className={styles.quickActionBtn}
+                    onClick={action.onClick}
+                >
+                    <span className={styles.quickActionIcon}>{action.icon}</span>
+                    <span className={styles.quickActionLabel}>{action.label}</span>
+                </button>
+            ))}
+        </div>
+    );
+}
+
+function UpcomingBookingsSection({ bookings }: { bookings: BookingCard[] }) {
+    const router = useRouter();
+    const { t } = useTranslation("common");
+
+    const displayed = bookings
+        .filter((item) => item.status === "confirmed" || item.status === "submitted")
+        .slice(0, 3);
+
+    return (
+        <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>{t("my_page.bookings.title")}</h2>
+                {bookings.length > 0 && (
+                    <button
+                        className={styles.sectionMore}
+                        onClick={() => router.push("/my/bookings")}
+                    >
+                        {t("common.actions.view_all")}
+                    </button>
+                )}
+            </div>
+
+            {displayed.length === 0 ? (
+                <div className={styles.emptyCard}>
+                    <span className={styles.emptyIcon}>📅</span>
+                    <p className={styles.emptyText}>{t("my_page.dashboard.bookings_empty", "아직 예정된 예약이 없습니다")}</p>
+                    <button
+                        className={styles.emptyBtn}
+                        onClick={() => router.push("/explore")}
+                    >
+                        {t("common.actions.explore_places")}
+                    </button>
+                </div>
+            ) : (
+                <div className={styles.bookingList}>
+                    {displayed.map((booking) => (
+                        <div key={booking.id} className={styles.bookingTicket}>
+                            <div className={styles.ticketLeft}>
+                                <div className={styles.ticketCatRow}>
+                                    <span className={styles.ticketCat}>{booking.category}</span>
+                                    <span
+                                        className={`${styles.ticketStatus} ${
+                                            booking.status === "confirmed"
+                                                ? styles.statusConfirmed
+                                                : ""
+                                        }`}
+                                    >
+                                        {formatItineraryStatusLabel(t, booking.status)}
+                                    </span>
+                                </div>
+
+                                <div className={styles.ticketTitle}>{booking.title}</div>
+                                <div className={styles.ticketMeta}>
+                                    {booking.date}
+                                    {booking.area && <span> • {booking.area}</span>}
+                                    {booking.price && <span> • {booking.price}</span>}
+                                </div>
+
+                                {booking.isNew && (
+                                    <div className={styles.newBadge}>
+                                        {t("my_page.bookings.new_added")}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className={styles.ticketActions}>
+                                {booking.lat && booking.lng && (
+                                    <button
+                                        className={styles.ticketActionBtn}
+                                        onClick={() => {
+                                            const url = `https://www.google.com/maps/dir/?api=1&destination=${booking.lat},${booking.lng}&travelmode=transit`;
+                                            window.open(url, "_blank");
+                                        }}
+                                    >
+                                        {t("common.actions.map")}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </section>
     );
 }
 
@@ -299,60 +432,51 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
     const bannerConfig: Record<
         PartnerStatus,
         {
-            bg: string;
-            border: string;
             icon: string;
             title: string;
             desc: string;
             buttonLabel?: string;
-            buttonColor?: string;
             onClick?: () => void;
+            isRejected?: boolean;
         }
     > = {
         none: {
-            bg: "rgba(245,158,11,0.07)",
-            border: "rgba(245,158,11,0.25)",
             icon: "P",
             title: t("my_page.dashboard.partner.none_title"),
             desc: t("my_page.dashboard.partner.none_desc"),
             buttonLabel: t("my_page.dashboard.partner.none_cta"),
-            buttonColor: "#f59e0b",
             onClick: () => router.push("/auth/partner-signup"),
         },
         pending: {
-            bg: "rgba(245,158,11,0.05)",
-            border: "rgba(245,158,11,0.18)",
             icon: "...",
             title: t("my_page.dashboard.partner.pending_title"),
             desc: t("my_page.dashboard.partner.pending_desc"),
         },
         approved: {
-            bg: "rgba(16,185,129,0.05)",
-            border: "rgba(16,185,129,0.2)",
             icon: "OK",
             title: t("my_page.dashboard.partner.approved_title"),
             desc: t("my_page.dashboard.partner.approved_desc"),
         },
         rejected: {
-            bg: "rgba(239,68,68,0.05)",
-            border: "rgba(239,68,68,0.18)",
             icon: "!",
             title: t("my_page.dashboard.partner.rejected_title"),
             desc: t("my_page.dashboard.partner.rejected_desc"),
             buttonLabel: t("my_page.dashboard.partner.rejected_cta"),
-            buttonColor: "#ef4444",
             onClick: () => router.push("/auth/partner-signup"),
+            isRejected: true,
         },
     };
 
     const config = bannerConfig[status];
 
     return (
-        <div
-            className={styles.partnerBanner}
-            style={{ background: config.bg, borderColor: config.border }}
-        >
-            <span className={styles.partnerBannerIcon}>{config.icon}</span>
+        <div className={styles.partnerBanner}>
+            <span
+                className={styles.partnerBannerIcon}
+                style={{ color: config.isRejected ? "var(--korean-red)" : "var(--secondary)" }}
+            >
+                {config.icon}
+            </span>
             <div className={styles.partnerBannerBody}>
                 <div className={styles.partnerBannerTitle}>{config.title}</div>
                 <div className={styles.partnerBannerDesc}>{config.desc}</div>
@@ -361,7 +485,7 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
             {config.buttonLabel && config.onClick && (
                 <button
                     className={styles.partnerBannerBtn}
-                    style={{ background: config.buttonColor }}
+                    style={{ background: config.isRejected ? "var(--korean-red)" : "var(--secondary)" }}
                     onClick={config.onClick}
                 >
                     {config.buttonLabel}
@@ -469,12 +593,40 @@ function MyPageContent() {
         };
     }, [t]);
 
+    const realBookings = useMemo<BookingCard[]>(() => {
+        return itinerary
+            .filter((item) => item.status === "confirmed" || item.status === "submitted")
+            .map((item) => {
+                const extendedItem = item as ItineraryItem & {
+                    area?: string;
+                    price?: string;
+                };
+
+                return {
+                    id: item.id,
+                    title: item.name,
+                    date: formatTripDayTimeLabel(t, item.day, item.time, {
+                        separator: "dot",
+                    }),
+                    category: t(`common.categories.${item.type || "attraction"}`, {
+                        defaultValue: item.type || "Attraction",
+                    }),
+                    status: item.status,
+                    area: extendedItem.area,
+                    price: extendedItem.price,
+                    isNew: false,
+                    lat: item.lat,
+                    lng: item.lng,
+                };
+            });
+    }, [itinerary, t]);
+
 
 
     if (!hasHydrated) {
         return (
             <div className={styles.container}>
-                <div style={{ padding: 24, textAlign: "center", color: "var(--gray-500)" }}>
+                <div style={{ padding: 24, textAlign: "center", color: "var(--soft-ink)" }}>
                     Loading...
                 </div>
             </div>
@@ -489,6 +641,41 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
             />
 
+            <QuickActionBar />
+
+            {/* Special Beauty Section & Notification Hub Header */}
+            <section className={styles.section} style={{ marginBottom: 20 }}>
+                <div className={styles.adminTitleRow}>
+                    <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
+                    <div className={styles.notificationBtnRow}>
+                        <button
+                            onClick={() => router.push('/my/settings/notifications')}
+                            className={styles.notificationBtn}
+                        >{t('my_page.notifications.settings', { defaultValue: 'Notifications' })}</button>
+                        <button
+                            onClick={() => router.push('/my/notifications')}
+                            className={styles.notificationBtn}
+                        >{t('my_page.notifications.inbox', { defaultValue: 'Inbox' })}</button>
+                    </div>
+                </div>
+
+                {/* Beauty Booking Quick Link */}
+                <div
+                    onClick={() => router.push('/my/bookings/beauty')}
+                    className={styles.beautyQuickLink}
+                >
+                    <div className={styles.beautyQuickIcon}>💇</div>
+                    <div style={{ flex: 1 }}>
+                        <div className={styles.beautyQuickTitle}>{t('my_page.beauty_booking_link.title', { defaultValue: 'Beauty Booking' })}</div>
+                        <div className={styles.beautyQuickDesc}>
+                            {t('my_page.beauty_booking_link.desc', { defaultValue: 'Quickly browse and book beauty services.' })}
+                        </div>
+                    </div>
+                    <span className={styles.beautyQuickArrow}>›</span>
+                </div>
+            </section>
+
+            <UpcomingBookingsSection bookings={realBookings} />
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
                 savedPlansCount={itinerary.length > 0 ? 1 : 0}
@@ -528,50 +715,34 @@ function MyPageContent() {
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
             {isAdmin && (
-                <section style={{ padding: '0 20px', marginTop: 28, marginBottom: 40 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                <section className={styles.section} style={{ marginTop: 20 }}>
+                    <div className={styles.adminTitleRow}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
-                        <span style={{
-                            background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                            color: 'white', fontSize: '0.65rem', fontWeight: 800,
-                            padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase'
-                        }}>Admin</span>
+                        <span className={styles.adminBadge}>Admin</span>
                     </div>
 
-                    {[
-                        { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
-                        { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
-                        { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
-                        { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                        { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
-                    ].map((item) => (
-                        <div
-                            key={item.path}
-                            onClick={() => router.push(item.path)}
-                            style={{
-                                display: 'flex', alignItems: 'center', gap: 14,
-                                background: 'white', borderRadius: 16,
-                                border: '1px solid rgba(124,58,237,0.12)',
-                                padding: '14px 18px', marginBottom: 10,
-                                cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-                                transition: 'transform 0.15s'
-                            }}
-                            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.985)'}
-                            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <div style={{
-                                width: 42, height: 42, borderRadius: 12,
-                                background: 'rgba(124,58,237,0.07)',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                fontSize: '1.25rem', flexShrink: 0
-                            }}>{item.icon}</div>
-                            <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</div>
-                                <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', marginTop: 2 }}>{item.desc}</div>
+                    <div className={styles.adminMenuGrid}>
+                        {[
+                            { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
+                            { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
+                            { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
+                            { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
+                            { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
+                        ].map((item) => (
+                            <div
+                                key={item.path}
+                                onClick={() => router.push(item.path)}
+                                className={styles.adminMenuCard}
+                            >
+                                <div className={styles.adminMenuIconWrap}>{item.icon}</div>
+                                <div style={{ flex: 1 }}>
+                                    <div className={styles.adminMenuLabel}>{item.label}</div>
+                                    <div className={styles.adminMenuDesc}>{item.desc}</div>
+                                </div>
+                                <span className={styles.adminMenuArrow}>›</span>
                             </div>
-                            <span style={{ color: 'var(--gray-300)', fontSize: '1.1rem' }}>›</span>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </section>
             )}
 

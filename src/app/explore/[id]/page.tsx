@@ -95,7 +95,15 @@ export default function BookingDetailPage() {
                             </button>
                         </div>
                         <div className="grid grid-cols-7 gap-0 mb-2">
-                            {['일', '월', '화', '수', '목', '금', '토'].map((d, i) => (
+                            {[
+                                t('weekdays.sun'),
+                                t('weekdays.mon'),
+                                t('weekdays.tue'),
+                                t('weekdays.wed'),
+                                t('weekdays.thu'),
+                                t('weekdays.fri'),
+                                t('weekdays.sat')
+                            ].map((d, i) => (
                                 <div key={i} className={`text-center text-[12px] font-semibold py-1 ${i === 0 ? 'text-red-400' : i === 6 ? 'text-purple-400' : 'text-gray-400'}`}>{d}</div>
                             ))}
                         </div>
