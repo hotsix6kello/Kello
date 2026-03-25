@@ -540,7 +540,16 @@ function MyPageContent() {
             }
 
             if (!user) {
-                // [Production Logic]
+                // [Mock Mode for Development]
+                // 로컬 개발 환경에서 로그인 없이 화면을 볼 수 있도록 더미 데이터를 설정합니다.
+                if (process.env.NODE_ENV === "development") {
+                    setUserName("게스트 (테스트)");
+                    setProfileSubtitle("guest@localhost");
+                    setIsAdmin(true);
+                    setPartnerStatus("approved");
+                    return;
+                }
+
                 router.push("/auth/login?redirect=/my");
                 return;
             }
@@ -643,37 +652,6 @@ function MyPageContent() {
 
             <QuickActionBar />
 
-            {/* Special Beauty Section & Notification Hub Header */}
-            <section className={styles.section} style={{ marginBottom: 20 }}>
-                <div className={styles.adminTitleRow}>
-                    <h2 className={styles.sectionTitle} style={{ margin: 0 }}>{t('my_page.bookings.title')}</h2>
-                    <div className={styles.notificationBtnRow}>
-                        <button
-                            onClick={() => router.push('/my/settings/notifications')}
-                            className={styles.notificationBtn}
-                        >{t('my_page.notifications.settings', { defaultValue: 'Notifications' })}</button>
-                        <button
-                            onClick={() => router.push('/my/notifications')}
-                            className={styles.notificationBtn}
-                        >{t('my_page.notifications.inbox', { defaultValue: 'Inbox' })}</button>
-                    </div>
-                </div>
-
-                {/* Beauty Booking Quick Link */}
-                <div
-                    onClick={() => router.push('/my/bookings/beauty')}
-                    className={styles.beautyQuickLink}
-                >
-                    <div className={styles.beautyQuickIcon}>💇</div>
-                    <div style={{ flex: 1 }}>
-                        <div className={styles.beautyQuickTitle}>{t('my_page.beauty_booking_link.title', { defaultValue: 'Beauty Booking' })}</div>
-                        <div className={styles.beautyQuickDesc}>
-                            {t('my_page.beauty_booking_link.desc', { defaultValue: 'Quickly browse and book beauty services.' })}
-                        </div>
-                    </div>
-                    <span className={styles.beautyQuickArrow}>›</span>
-                </div>
-            </section>
 
             <UpcomingBookingsSection bookings={realBookings} />
             <SavedHubSection
@@ -715,38 +693,54 @@ function MyPageContent() {
 
             {/* Detailed Admin Menu (from HEAD) if Admin */}
             {isAdmin && (
-                <section className={styles.section} style={{ marginTop: 20 }}>
-                    <div className={styles.adminTitleRow}>
+                <section style={{ padding: '0 20px 40px', marginTop: 28, marginBottom: 120 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
-                        <span className={styles.adminBadge}>Admin</span>
+                        <span style={{
+                            background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
+                            color: 'white', fontSize: '0.65rem', fontWeight: 800,
+                            padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase'
+                        }}>Admin</span>
                     </div>
 
-                    <div className={styles.adminMenuGrid}>
-                        {[
-                            { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
-                            { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
-                            { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
-                            { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                            { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
-                        ].map((item) => (
-                            <div
-                                key={item.path}
-                                onClick={() => router.push(item.path)}
-                                className={styles.adminMenuCard}
-                            >
-                                <div className={styles.adminMenuIconWrap}>{item.icon}</div>
-                                <div style={{ flex: 1 }}>
-                                    <div className={styles.adminMenuLabel}>{item.label}</div>
-                                    <div className={styles.adminMenuDesc}>{item.desc}</div>
-                                </div>
-                                <span className={styles.adminMenuArrow}>›</span>
+                    {[
+                        { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
+                        { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
+                        { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
+                        { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
+                        { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
+                    ].map((item) => (
+                        <div
+                            key={item.path}
+                            onClick={() => router.push(item.path)}
+                            style={{
+                                display: 'flex', alignItems: 'center', gap: 14,
+                                background: 'white', borderRadius: 16,
+                                border: '1px solid rgba(124,58,237,0.12)',
+                                padding: '14px 18px', marginBottom: 16,
+                                cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                                transition: 'transform 0.15s'
+                            }}
+                            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.985)'}
+                            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                        >
+                            <div style={{
+                                width: 42, height: 42, borderRadius: 12,
+                                background: 'rgba(124,58,237,0.07)',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                fontSize: '1.25rem', flexShrink: 0
+                            }}>{item.icon}</div>
+                            <div style={{ flex: 1 }}>
+                                <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</div>
+                                <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', marginTop: 2 }}>{item.desc}</div>
                             </div>
-                        ))}
-                    </div>
+                            <span style={{ color: 'var(--gray-300)', fontSize: '1.1rem' }}>›</span>
+                        </div>
+                    ))}
                 </section>
             )}
 
-            {!isAdmin && <div style={{ height: 40 }} />}
+            <div style={{ height: 240 }} />
         </div>
     );
 }

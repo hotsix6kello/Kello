@@ -14,7 +14,6 @@ import {
 import styles from "./phrases.module.css";
 
 type PhraseCategory =
-    | "booking"
     | "transport"
     | "restaurant"
     | "beauty"
@@ -34,7 +33,6 @@ const FAVORITES_KEY = "my_phrases_favorites";
 const RECENTS_KEY = "my_phrases_recent";
 
 const CATEGORY_ORDER: PhraseCategory[] = [
-    "booking",
     "transport",
     "restaurant",
     "beauty",
@@ -45,11 +43,6 @@ function buildCategoryMeta(
     t: (key: string, options?: Record<string, unknown>) => string
 ): Record<PhraseCategory, { label: string; description: string; helper: string }> {
     return {
-        booking: {
-            label: t("my_page.phrases.categories.booking.label"),
-            description: t("my_page.phrases.categories.booking.description"),
-            helper: t("my_page.phrases.categories.booking.helper"),
-        },
         transport: {
             label: t("my_page.phrases.categories.transport.label"),
             description: t("my_page.phrases.categories.transport.description"),
@@ -74,44 +67,6 @@ function buildCategoryMeta(
 }
 
 const PHRASES: PhraseItem[] = [
-    {
-        id: "booking-reservation",
-        category: "booking",
-        label: "Check-in / reservation",
-        english: "I have a reservation.",
-        korean: "예약했습니다.",
-        note: "Show your booking name or confirmation screen together.",
-        emphasis: true,
-    },
-    {
-        id: "booking-check",
-        category: "booking",
-        label: "Booking confirmation",
-        english: "Can you check my booking?",
-        korean: "예약 확인 부탁드립니다.",
-        emphasis: true,
-    },
-    {
-        id: "booking-late",
-        category: "booking",
-        label: "Running late",
-        english: "I may be about 10 minutes late.",
-        korean: "10분 정도 늦을 것 같습니다.",
-    },
-    {
-        id: "booking-change",
-        category: "booking",
-        label: "Change request",
-        english: "Can I change my option?",
-        korean: "옵션을 변경할 수 있을까요?",
-    },
-    {
-        id: "booking-checkin-desk",
-        category: "booking",
-        label: "Where to go",
-        english: "Where should I check in?",
-        korean: "어디에서 체크인하면 될까요?",
-    },
     {
         id: "transport-address",
         category: "transport",
@@ -276,15 +231,7 @@ function parseCategory(
         return requestedCategory;
     }
 
-    if (source === "booking") {
-        return "booking";
-    }
-
-    if (focus === "interpreter" || focus === "emergency") {
-        return "emergency";
-    }
-
-    return "booking";
+    return "emergency";
 }
 
 function buildPhrasesUrl(params: URLSearchParams): string {
@@ -587,7 +534,7 @@ function PhrasebookContent() {
                         </div>
                         <span className={styles.contextTag}>
                             {hasBookingContext
-                                ? categoryMeta.booking.label
+                                ? categoryMeta.emergency.label
                                 : focus === "interpreter"
                                   ? categoryMeta.emergency.label
                                   : categoryMeta[activeCategory].label}
@@ -718,20 +665,14 @@ function PhrasebookContent() {
                         {currentPhrases.map((phrase) => {
                             const isFavorite = favoriteIds.includes(phrase.id);
                             const assistanceLabel =
-                                phrase.category === "booking"
-                                    ? hasBookingContext
-                                        ? t("common.actions.booking_help")
-                                        : t("common.actions.booking_help")
-                                    : phrase.category === "emergency"
-                                      ? t("common.actions.emergency_help")
-                                      : t("common.actions.support");
+                                phrase.category === "emergency"
+                                    ? t("common.actions.emergency_help")
+                                    : t("common.actions.support");
 
                             const assistanceHref =
-                                phrase.category === "booking"
-                                    ? bookingHelpUrl
-                                    : phrase.category === "emergency"
-                                      ? emergencyUrl
-                                      : generalSupportUrl;
+                                phrase.category === "emergency"
+                                    ? emergencyUrl
+                                    : generalSupportUrl;
 
                             return (
                                 <article
@@ -883,19 +824,15 @@ function PhrasebookContent() {
                                 className={styles.secondaryButton}
                                 onClick={() =>
                                     router.push(
-                                        selectedPhrase.category === "booking"
-                                            ? bookingHelpUrl
-                                            : selectedPhrase.category === "emergency"
-                                              ? emergencyUrl
-                                              : generalSupportUrl
+                                        selectedPhrase.category === "emergency"
+                                            ? emergencyUrl
+                                            : generalSupportUrl
                                     )
                                 }
                             >
-                                {selectedPhrase.category === "booking"
-                                    ? t("common.actions.booking_help")
-                                    : selectedPhrase.category === "emergency"
-                                      ? t("common.actions.emergency_help")
-                                      : t("common.actions.support")}
+                                {selectedPhrase.category === "emergency"
+                                    ? t("common.actions.emergency_help")
+                                    : t("common.actions.support")}
                             </button>
                             <button
                                 className={styles.softButton}
