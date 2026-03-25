@@ -2,7 +2,7 @@
 .container {
     min-height: 100vh;
     background: var(--background);
-    padding-bottom: 80px;
+    padding-bottom: 160px; /* Massive clearance for mobile bottom navigation bar */
 }
 
 .header {
