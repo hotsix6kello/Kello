@@ -121,7 +121,11 @@ export const MOCK_ITEMS: ServiceItem[] = [
         badges: ['Tax Refund', 'English-friendly'],
         image_color: '#e6e6fa',
         duration_min: 60,
-        price_from: 49000
+        price_from: 49000,
+        image_url: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80',
+        description: '강남역 인근 유명 뷰티 클리닉, 영어 서비스 가능.',
+        lat: 37.4981,
+        lng: 127.0276
     },
 
     // --- Event ---

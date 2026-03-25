@@ -1689,22 +1689,22 @@ export default function MyExplorePage() {
 
 
   const baseItems = hotelLocation && nearbyItems.length > 0 ? nearbyItems : MOCK_ITEMS;
-  const categorizedItems = baseItems.filter((item) => {
+  const itemsToShow = baseItems.filter((item) => {
+    // 검색어가 있으면 카테고리 무시하고 전체 검색 (검색 성공률 극대화)
+    if (appliedSearchTerm) {
+      const lowerCaseSearchTerm = appliedSearchTerm.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.area.toLowerCase().includes(lowerCaseSearchTerm) ||
+        (item.description && item.description.toLowerCase().includes(lowerCaseSearchTerm))
+      );
+    }
+    
+    // 검색어가 없을 때는 기존 카테고리 필터 적용
     if (currentCategory !== 'all' && item.type !== currentCategory) {
       return false;
     }
     return true;
-  });
-  const itemsToShow = categorizedItems.filter((item) => {
-    if (!appliedSearchTerm) {
-      return true;
-    }
-    const lowerCaseSearchTerm = appliedSearchTerm.toLowerCase();
-    return (
-      item.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-      item.area.toLowerCase().includes(lowerCaseSearchTerm) ||
-      (item.description && item.description.toLowerCase().includes(lowerCaseSearchTerm))
-    );
   });
   const sortedItemsToShow = [...itemsToShow].sort((a, b) => {
     const aScore = (a as ServiceItem & { is_premium?: boolean }).is_premium ? 1 : 0;
