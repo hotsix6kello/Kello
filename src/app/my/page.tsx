@@ -416,12 +416,8 @@ function MyPageContent() {
             }
 
             if (!user) {
-                // ---------- [ UI Test Mode ] ----------
-                // 원래는 게스트 로그인 시 관리자 UI를 안보여주지만, 임시로 설정합니다.
-                setUserName("최고 관리자 (테스트)");
-                setProfileSubtitle("admin@kello.local");
-                setIsAdmin(true);
-                setPartnerStatus("approved");
+                // [Production Logic]
+                router.push("/auth/login?redirect=/my");
                 return;
             }
 
@@ -463,10 +459,7 @@ function MyPageContent() {
                 return;
             }
 
-            // ---------- [ UI Test Mode ] ----------
-            setPartnerStatus("approved");
-            setIsAdmin(true);
-            // --------------------------------------
+            setPartnerStatus((partner?.status as PartnerStatus) || "none");
         };
 
         void loadDashboardUser();
