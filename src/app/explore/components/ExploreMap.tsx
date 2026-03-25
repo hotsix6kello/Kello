@@ -17,8 +17,8 @@ interface ExploreMapProps {
 const mapContainerStyle = {
     width: '100%',
     height: '100%',
-    minHeight: '100%', // 레이아웃을 꽉 채우기 위해 height 100% 유지
-    borderRadius: '0px' // 탐색창 전체를 채우기 위해 라운드 제거
+    minHeight: '600px', // 물리적 높이 강제 확보
+    borderRadius: '0px'
 };
 
 const OPTIONS = {
@@ -37,10 +37,10 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
     const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
     const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(propCenter || DEFAULT_CENTER);
 
-    const { isLoaded } = useJsApiLoader({
+    const { isLoaded, loadError } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-        language: 'ko', // 기본 한국어 설정
+        language: 'ko',
     });
 
     // 1. 사용자 실시간 위치 추적 및 중심 설정
@@ -53,7 +53,6 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
                     setMapCenter(coords);
                 },
                 (err) => {
-                    // 에러 발생 시 조용히 기본 위치로 이동 (console.error 대신 warn 사용)
                     console.warn('Geolocation access denied or timed out, using fallback.', err.message);
                     setMapCenter(propCenter || DEFAULT_CENTER);
                 },
@@ -72,9 +71,24 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
         // 정리 작업
     }, []);
 
+    if (loadError) {
+        return (
+            <div style={{ height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff0f0', padding: '20px', textAlign: 'center' }}>
+                <p style={{ color: '#ff4d4f', fontWeight: 'bold' }}>Google Maps API Key Error</p>
+                <p style={{ fontSize: '13px', color: '#666', marginTop: '8px', lineHeight: '1.5' }}>
+                    GCP 콘솔에서 <b>Billing(결제 계정)</b>이 활성화되어 있는지,<br/>
+                    혹은 <b>API Key 제한</b>에 localhost가 포함되어 있는지 확인해 주세요.
+                </p>
+                <code style={{ fontSize: '11px', background: '#eee', padding: '8px', borderRadius: '4px', marginTop: '16px', display: 'block', maxWidth: '100%', wordBreak: 'break-all' }}>
+                    {loadError.message || 'Unknown Error'}
+                </code>
+            </div>
+        );
+    }
+
     if (!isLoaded) {
         return (
-            <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}>
+            <div style={{ height: '600px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}>
                 <div className={styles.spinner}></div>
                 <p style={{ marginTop: '16px', color: '#666' }}>{t('common.loading_map', { defaultValue: 'Loading Map...' })}</p>
             </div>
@@ -82,16 +96,15 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
     }
 
     return (
-        <div style={{ height: '100%', width: '100%', position: 'relative' }}>
+        <div style={{ minHeight: '600px', width: '100%', position: 'relative' }}>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 center={mapCenter}
-                zoom={propZoom || 15} // 기본 줌 레벨 15 설정
+                zoom={propZoom || 15}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
                 options={OPTIONS}
             >
-                {/* 2. 사용자 현재 위치 마커 표시 */}
                 {userLocation && (
                     <Marker
                         position={userLocation}
@@ -103,7 +116,6 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
                     />
                 )}
 
-                {/* 3. 뷰티샵/명소 마커들 표시 */}
                 {items.map(item => {
                     if (!item.lat || !item.lng) return null;
                     return (
