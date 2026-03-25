@@ -682,7 +682,6 @@ function MyPageContent() {
                         { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
                         { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
                         { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                        { icon: '🗂️', label: '번역 용어집', desc: '뷰티 번역 우선순위 관리', path: '/admin/glossary' },
                     ].map((item) => (
                         <div
                             key={item.path}
