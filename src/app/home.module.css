@@ -790,6 +790,73 @@
   line-height: 1.5;
 }
 
+/* Beauty Booking Steps (Restored for Home Overlay) */
+.beautyStepIndicator {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 16px;
+    padding: 0 0 4px;
+    list-style: none;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.beautyStepIndicator::-webkit-scrollbar {
+    display: none;
+}
+
+.beautyStepItem {
+    min-width: 72px;
+    padding: 10px 8px;
+    border-radius: 16px;
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    background: rgba(255, 255, 255, 0.78);
+    color: #7c6e64;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+}
+
+.beautyStepItemCurrent {
+    border-color: var(--primary);
+    background: var(--primary-glow);
+    color: var(--ink-black);
+    box-shadow: 0 8px 20px var(--primary-glow);
+}
+
+.beautyStepItemDone {
+    border-color: rgba(127, 79, 70, 0.12);
+    background: rgba(251, 246, 242, 0.94);
+    color: #5a4b43;
+}
+
+.beautyStepBullet {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgba(35, 29, 25, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.beautyStepItemCurrent .beautyStepBullet,
+.beautyStepItemDone .beautyStepBullet {
+    background: rgba(127, 79, 70, 0.12);
+    color: #7f4f46;
+}
+
+.beautyStepText {
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
 .navLinkBtn {
   width: 38px;
   height: 38px;
