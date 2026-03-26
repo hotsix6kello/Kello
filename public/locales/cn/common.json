@@ -1295,8 +1295,8 @@
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "请选择您想要的美容服务",
-      "description": "为了进行最准确的探索，请先选择类别。"
+      "title": "请选择美容服务",
+      "description": ""
     },
     "categories": {
       "hair": {

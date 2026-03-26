@@ -2,7 +2,7 @@
 .container {
     min-height: 100vh;
     background: var(--background);
-    padding-bottom: 140px; /* Ensure space for bottom navigation bar */
+    padding-bottom: 160px; /* Massive clearance for mobile bottom navigation bar */
 }
 
 .header {
@@ -35,7 +35,7 @@
 }
 
 .content {
-    padding: 16px 20px;
+    padding: 16px 20px 200px !important; /* Force internal bottom padding to clear nav bar */
 }
 
 /* Dashboard Cards */

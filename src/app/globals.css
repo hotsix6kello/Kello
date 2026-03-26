@@ -64,7 +64,7 @@
   --spacing-md: 16px;
   --spacing-lg: 24px;
 
-  --font-main: "Inter", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-main: 'Inter', 'Pretendard', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans Arabic', sans-serif;
 
   /* Z-Index Layers */
   --z-bg: 0;
@@ -80,6 +80,18 @@
   /* Responsive Spacing Tokens */
   --spacing-content: 16px;
   --container-max-w: 480px;
+}
+
+/* Language-specific Font Overrides */
+html:lang(ko) { --font-main: 'Pretendard', sans-serif; }
+html:lang(ja) { --font-main: 'Noto Sans JP', sans-serif; }
+html:lang(zh-CN) { --font-main: 'Noto Sans SC', sans-serif; }
+html:lang(zh-HK) { --font-main: 'Noto Sans TC', sans-serif; }
+html:lang(th) { --font-main: 'Noto Sans Thai', sans-serif; }
+html:lang(ar) { --font-main: 'Noto Sans Arabic', sans-serif; }
+html:lang(en), html:lang(id), html:lang(ms), html:lang(es), 
+html:lang(fr), html:lang(de), html:lang(pt), html:lang(ru), html:lang(vi) { 
+  --font-main: 'Inter', sans-serif; 
 }
 
 /* Tablet & Desktop Overrides */
@@ -177,7 +189,6 @@ button {
 .mobile-wrapper {
   max-width: 480px;
   margin: 0 auto;
-  /* 100dvh = dynamic viewport height (二쇱냼李??쒖쇅???ㅼ젣 ?믪씠) */
   height: 100vh;
   height: 100dvh;
   min-height: -webkit-fill-available;
@@ -186,7 +197,6 @@ button {
   position: relative;
   background-color: var(--background);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
 }
 
 @media (min-width: 480px) {
@@ -202,12 +212,13 @@ button {
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
+  min-height: 0;
   -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(var(--total-nav-height) + var(--safe-area-bottom) + 20px);
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  padding-bottom: 88px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scroll-container::-webkit-scrollbar {

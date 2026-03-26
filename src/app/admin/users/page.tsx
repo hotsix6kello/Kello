@@ -329,6 +329,8 @@ function AdminUsersContent() {
                     </div>
                 </div>
             )}
+            {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+            <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
         </div>
     );
 }

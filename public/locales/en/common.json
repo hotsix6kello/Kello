@@ -61,8 +61,8 @@
     },
     "booking": {
       "step": "Step 1",
-      "title": "Please select your desired beauty service",
-      "description": "Once you pick a category, you can start exploring reservations based on that service in the next step."
+      "title": "Choose your beauty service",
+      "description": ""
     },
     "categories": {
       "hair": {

@@ -16,6 +16,7 @@ type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 interface DashboardProfileRecord {
     nickname: string | null;
     is_admin: boolean | null;
+    avatar_url: string | null;
 }
 
 const SSR_SAFE_FALLBACK_NAME = "Traveler";
@@ -34,13 +35,19 @@ function pickString(...values: unknown[]): string {
 function ProfileSummaryCard({
     userName,
     subtitle,
+    avatarUrl,
     onOpenSettings,
+    onAvatarUpdate,
 }: {
     userName: string;
     subtitle?: string;
+    avatarUrl?: string;
     onOpenSettings: () => void;
+    onAvatarUpdate?: (url: string) => void;
 }) {
     const { t } = useTranslation("common");
+    const [uploading, setUploading] = useState(false);
+    
     const initials = userName
         .split(" ")
         .map((part) => part[0] || "")
@@ -48,12 +55,72 @@ function ProfileSummaryCard({
         .toUpperCase()
         .slice(0, 2);
 
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            setUploading(true);
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            let { error: uploadError } = await supabase.storage
+                .from('avatars')
+                .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
+            const publicUrl = data.publicUrl;
+
+            // 1. Update Profile in DB
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({ avatar_url: publicUrl })
+                .eq('id', (await supabase.auth.getUser()).data.user?.id);
+
+            if (updateError) throw updateError;
+
+            // 2. Callback
+            if (onAvatarUpdate) onAvatarUpdate(publicUrl);
+            
+            alert(t('common.messages.upload_success', '프로필 사진이 업데이트되었습니다.'));
+        } catch (error) {
+            console.error('Error uploading avatar:', error);
+            alert(t('common.messages.upload_failed', '업로드에 실패했습니다.'));
+        } finally {
+            setUploading(false);
+        }
+    };
+
     return (
         <div className={styles.profileCard}>
-            <div className={styles.profileAvatarWrap}>
-                <div className={styles.profileAvatar}>
-                    <span className={styles.profileInitials}>{initials || "TR"}</span>
-                </div>
+            <div className={styles.profileAvatarWrap} style={{ position: 'relative', cursor: 'pointer' }}>
+                <label style={{ cursor: 'pointer' }}>
+                    <div className={styles.profileAvatar}>
+                        {avatarUrl ? (
+                            <img src={avatarUrl} alt={userName} className={styles.avatarImg} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                        ) : (
+                            <span className={styles.profileInitials}>{initials || "TR"}</span>
+                        )}
+                        <div className={styles.avatarEditOverlay} style={{
+                            position: 'absolute', bottom: 0, right: 0, 
+                            background: 'var(--primary)', padding: 6, borderRadius: '50%',
+                            boxShadow: '0 2px 5px rgba(0,0,0,0.2)', border: '2px solid white'
+                        }}>
+                            📸
+                        </div>
+                    </div>
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handleFileChange} 
+                        style={{ display: 'none' }} 
+                        disabled={uploading}
+                    />
+                </label>
+                {uploading && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.7)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 700 }}>...</div>}
             </div>
 
             <div className={styles.profileInfo}>
@@ -369,6 +436,7 @@ function MyPageContent() {
     const [hasHydrated, setHasHydrated] = useState(false);
     const [userName, setUserName] = useState("");
     const [profileSubtitle, setProfileSubtitle] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined);
 
     const [isAdmin, setIsAdmin] = useState(false);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
@@ -422,7 +490,7 @@ function MyPageContent() {
 
             const { data: profile } = await supabase
                 .from("profiles")
-                .select("nickname, is_admin")
+                .select("nickname, is_admin, avatar_url")
                 .eq("id", user.id)
                 .maybeSingle();
 
@@ -431,6 +499,9 @@ function MyPageContent() {
             }
 
             const nextProfile = (profile as DashboardProfileRecord | null) ?? null;
+            if (nextProfile?.avatar_url) {
+                setAvatarUrl(nextProfile.avatar_url);
+            }
             const email = pickString(user.email);
             const displayName = pickString(
                 nextProfile?.nickname,
@@ -486,9 +557,10 @@ function MyPageContent() {
             <ProfileSummaryCard
                 userName={displayUserName}
                 subtitle={displayProfileSubtitle}
+                avatarUrl={avatarUrl}
                 onOpenSettings={() => router.push("/my/settings")}
+                onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
-
 
             <SavedHubSection
                 savedPlacesCount={savedPlacesCount}
@@ -498,13 +570,12 @@ function MyPageContent() {
 
             <CommunityHubSection />
 
-
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
 
-            {/* Detailed Admin Menu (from HEAD) if Admin */}
-            {isAdmin && (
-                <section style={{ padding: '0 20px 40px', marginTop: 28, marginBottom: 120 }}>
+            {/* 관리자 메뉴 전용 하단 여백 확보 (100px) */}
+            {(isAdmin || process.env.NODE_ENV === "development") && (
+                <section style={{ padding: '0 20px 100px', marginTop: 16, marginBottom: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
                         <span style={{
@@ -550,7 +621,9 @@ function MyPageContent() {
                 </section>
             )}
 
-            <div style={{ height: 240 }} />
+            {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+            <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
+
         </div>
     );
 }

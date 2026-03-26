@@ -30,6 +30,7 @@ interface Partner {
     address: string | null;
     website: string | null;
     description: string | null;
+    business_license_url: string | null;
     status: PartnerStatus;
     reject_reason: string | null;
     visibility_status: boolean;
@@ -280,6 +281,21 @@ function AdminPartnersContent() {
                                     </a>
                                 </div>
                             )}
+                            {partner.business_license_url && (
+                                <div className={styles.detailRow} style={{ marginTop: 8 }}>
+                                    <span className={styles.detailLabel}>인증 서류</span>
+                                    <button 
+                                        onClick={() => window.open(partner.business_license_url!)}
+                                        style={{
+                                            padding: '4px 10px', background: '#f59e0b', color: 'white',
+                                            border: 'none', borderRadius: 8, fontSize: '0.75rem', 
+                                            fontWeight: 700, cursor: 'pointer'
+                                        }}
+                                    >
+                                        📄 서류 확인하기
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         {partner.description && (
@@ -372,6 +388,9 @@ function AdminPartnersContent() {
                     </div>
                 </div>
             )}
+            
+            {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
+            <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
         </div>
     );
 }

@@ -1134,8 +1134,8 @@
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "韓国の美しさを、\nあなたの旅程に。",
-      "description": "正確な検索のために、まずカテゴリーを選択してください。"
+      "title": "美容サービスを選択してください",
+      "description": ""
     },
     "categories": {
       "hair": {

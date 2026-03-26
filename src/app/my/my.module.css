@@ -7,7 +7,7 @@
     padding: 20px 16px;
     background: var(--hanji-ivory);
     min-height: 100vh;
-    padding-bottom: 150px; /* Standardize bottom spacing to avoid nav bar overlap */
+    padding-bottom: 160px; /* Massive clearance for nav bar overlap, consistent with admin pages */
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -39,6 +39,38 @@
     align-items: center;
     justify-content: center;
     border: 2.5px solid var(--primary-glow);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profileAvatar:hover {
+    transform: scale(1.04);
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.avatarEditOverlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 26px;
+    height: 26px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: white;
+    border: 2px solid var(--surface);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 2;
 }
 
 .profileInitials {
