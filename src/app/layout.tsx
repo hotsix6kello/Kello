@@ -42,9 +42,15 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      dir="ltr"
+      dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+      </head>
       <body className="antialiased" suppressHydrationWarning data-i18n-ready="false">
         <style>{`body[data-i18n-ready="false"] .mobile-wrapper{visibility:hidden}`}</style>
         <TripProvider>
