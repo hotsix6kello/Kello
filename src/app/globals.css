@@ -114,6 +114,12 @@ button {
   flex-direction: column;
   padding-bottom: 100px;
   /* Adjust based on BottomNav height (72px) + safe area/spacing */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 

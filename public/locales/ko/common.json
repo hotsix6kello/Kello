@@ -1314,7 +1314,8 @@
       "beauty_review": "뷰티샵 이용 후기",
       "food_review": "맛집 후기",
       "travel_review": "관광 명소 후기",
-      "meetup": "공연·이벤트",
+      "meetup": "모임 후기",
+      "meetup_recruitment": "모임 만들기",
       "help": "질문"
     },
     "sub_filters": {
@@ -1395,14 +1396,17 @@
         "food_review": "💡 뷰티 일정 전후로 들르기 좋은 메뉴, 분위기, 웨이팅 정보를 남겨주세요.",
         "travel_review": "💡 시술 전후에 가기 좋았던 동선, 사진 포인트, 이동 편의성을 중심으로 적어주세요.",
         "meetup": "💡 공연 일시, 티켓 정보, 함께 가기 좋은 이유를 간단히 정리해 주세요.",
+        "meetup_recruitment": "💡 어떤 모임인지, 언제 어디서 모이는지, 모집 인원과 참여 조건을 명확히 적어주세요.",
         "help": "💡 예약, 방문, 응대 관련해서 궁금한 점을 구체적으로 남겨주세요."
       },
       "category_label": "분류",
+      "select_category": "분류선택",
       "write_guide_title": {
         "beauty_review": "뷰티샵 이용 후기를 먼저 남겨보세요",
         "food_review": "뷰티 일정과 잘 어울린 맛집 후기를 남겨보세요",
         "travel_review": "시술 전후로 좋았던 관광 동선을 남겨보세요",
         "meetup": "공연·이벤트 정보를 간단히 정리해보세요",
+        "meetup_recruitment": "새로운 모임을 만들고 함께할 분들을 모집해보세요",
         "help": "예약이나 방문과 관련된 질문을 남겨보세요"
       },
       "write_guide_body": {
@@ -1435,8 +1439,8 @@
         "help": "예: 영어 상담 가능한지 궁금해요"
       },
       "desc_label": {
-        "beauty_review": "시술 후기",
-        "default": "상세 후기"
+        "beauty_review": "후기작성",
+        "default": "상세내용"
       },
       "desc_placeholder": {
         "beauty_review": "시술 종류, 예약 과정, 응대, 만족도, 외국인 응대 편의성, 재방문 의사를 자세히 적어주세요.",
@@ -1495,8 +1499,8 @@
       "summary_enabled": "활성화",
       "summary_disabled": "비활성",
       "submit_with_reactions": "후기 올리고 반응 받기",
-      "submit_beauty": "뷰티 후기 공유하기",
-      "submit_default": "후기 공유하기"
+      "submit_beauty": "후기작성완료",
+      "submit_default": "작성 완료"
     },
     "quick_entry": {
       "beauty": {
@@ -1512,8 +1516,14 @@
         "sub": "시술 전후 동선"
       },
       "write": {
-        "label": "후기 작성",
-        "sub": "뷰티 경험 공유"
+        "label": "모임 후기",
+        "sub": "공연·이벤트 모집"
+      },
+      "beauty_together": {
+        "label": "뷰티 같이 가기"
+      },
+      "flash_meetup": {
+        "label": "번개 모임"
       },
       "browse": {
         "label": "둘러보기",
@@ -1587,7 +1597,8 @@
     },
     "fab": {
       "beauty": "뷰티 후기 작성",
-      "meetup": "공연·이벤트 작성"
+      "meetup": "모임 후기 작성",
+      "create_post": "글쓰기"
     },
     "time": {
       "just_now": "방금 전"

@@ -3,7 +3,7 @@
     height: auto;
     background: var(--background);
     color: var(--foreground);
-    padding: 0 16px 156px;
+    padding: 0 16px 40px;
     position: relative;
     overflow: visible;
 }
@@ -533,33 +533,31 @@
 
 /* ── Floating Action Button Group ── */
 .fabGroup {
-    position: fixed;
-    left: 50%;
-    bottom: calc(92px + env(safe-area-inset-bottom, 0px));
-    transform: translateX(-50%);
-    width: min(360px, calc(100% - 32px));
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    z-index: 500;
+    width: 100%;
+    margin: 16px auto 32px;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
 }
 
 .fab {
-    min-height: 44px;
-    padding: 10px 14px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    width: 100%;
+    max-width: 480px;
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     border: none;
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+    gap: 10px;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
     cursor: pointer;
-    transition: transform 0.15s, opacity 0.15s;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fabSecondary {
@@ -1614,11 +1612,12 @@
     display: flex;
     gap: 6px;
     overflow-x: auto;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE, Edge */
 }
 
 .recommendScrollCompact::-webkit-scrollbar {
-    display: none;
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .recommendChip {
@@ -1636,6 +1635,19 @@
 
 .nextActionCompact {
     margin-bottom: 16px;
+}
+
+.nextActionScroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.nextActionScroll::-webkit-scrollbar {
+    display: none;
 }
 
 .nextActionTag {

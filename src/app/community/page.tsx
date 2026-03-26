@@ -29,12 +29,12 @@ interface CommunityImageDraft {
     name: string;
 }
 
-type CommunityCategory = 'beauty_review' | 'food_review' | 'travel_review' | 'meetup' | 'help';
+type CommunityCategory = 'beauty_review' | 'food_review' | 'travel_review' | 'meetup' | 'meetup_recruitment' | 'help';
 type CommunityTag = 'solo_friendly' | 'friends_friendly' | 'photo_spot' | 'waiting' | 'foreigner_friendly';
 type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
 type CommunitySubFilter = 'all' | 'saved' | 'reacted' | 'mine' | 'recruiting' | 'active_reactions' | 'open_meetup' | 'weekend' | 'fresh';
 
-const CATEGORY_OPTIONS: CommunityCategory[] = ['beauty_review', 'food_review', 'travel_review', 'meetup', 'help'];
+const CATEGORY_OPTIONS: CommunityCategory[] = ['beauty_review', 'food_review', 'travel_review', 'meetup', 'meetup_recruitment', 'help'];
 const SUB_FILTER_OPTIONS: CommunitySubFilter[] = ['all', 'saved', 'reacted', 'mine', 'recruiting', 'active_reactions', 'open_meetup', 'weekend', 'fresh'];
 const TAG_OPTIONS: CommunityTag[] = ['solo_friendly', 'friends_friendly', 'photo_spot', 'waiting', 'foreigner_friendly'];
 const COMMUNITY_IMAGE_META_KEY = 'IMAGE';
@@ -70,6 +70,7 @@ const normalizeCommunityTag = (value: string): CommunityTag | null => {
 const getDatabaseTypeForCategory = (category: CommunityCategory) => {
     if (category === 'beauty_review' || category === 'food_review') return 'review';
     if (category === 'travel_review') return 'travel';
+    if (category === 'meetup_recruitment') return 'meetup';
     return category;
 };
 
@@ -250,7 +251,7 @@ export default function CommunityPage() {
     const [sortBy, setSortBy] = useState('latest');
 
     const [isWriting, setIsWriting] = useState(false);
-    const [newType, setNewType] = useState<CommunityCategory>('beauty_review');
+    const [newType, setNewType] = useState<CommunityCategory | ''>('');
     const [newTitle, setNewTitle] = useState('');
     const [newDesc, setNewDesc] = useState('');
     const [startTime, setStartTime] = useState('');
@@ -272,10 +273,11 @@ export default function CommunityPage() {
     const communityCategories = CATEGORY_OPTIONS.map((id) => ({ id, label: getCategoryLabel(t, id) }));
     const communitySubFilters = SUB_FILTER_OPTIONS.map((id) => ({ id, label: getSubFilterLabel(t, id) }));
     const tagChoices = TAG_OPTIONS.map((id) => ({ id, label: getTagLabel(t, id) }));
-    const getCategoryText = (category: CommunityCategory) => getCategoryLabel(t, category);
+    const getCategoryText = (category: CommunityCategory | '') => 
+        category ? getCategoryLabel(t, category) : t('community_page.form.select_category');
     const getStatusText = (status: string) => getStatusLabel(t, status);
 
-    const getHint = () => t(`community_page.form.category_hints.${newType}`);
+    const getHint = () => newType ? t(`community_page.form.category_hints.${newType}`) : '';
 
     const getNavSummary = () => {
         const currentTab = filter === 'all'
@@ -510,7 +512,7 @@ export default function CommunityPage() {
         localStorage.setItem('kello_community_banner_closed', 'true');
     };
 
-    const resetDraftForm = (category: CommunityCategory = 'beauty_review') => {
+    const resetDraftForm = (category: CommunityCategory | '' = '') => {
         setEditingPostId(null);
         setNewType(category);
         setNewTitle('');
@@ -530,7 +532,7 @@ export default function CommunityPage() {
         }
     };
 
-    const openComposer = (category: CommunityCategory = 'beauty_review') => {
+    const openComposer = (category: CommunityCategory | '' = '') => {
         resetDraftForm(category);
         setIsWriting(true);
     };
@@ -595,9 +597,9 @@ export default function CommunityPage() {
     };
 
     const handleSubmit = async () => {
-        if (!newTitle.trim() || !newDesc.trim()) return;
+        if (!newType || !newTitle.trim() || !newDesc.trim()) return;
         setIsSubmitting(true);
-        const databaseType = getDatabaseTypeForCategory(newType);
+        const databaseType = getDatabaseTypeForCategory(newType as CommunityCategory);
         const imageMeta = newImages
             .map((image) => `\n[${COMMUNITY_IMAGE_META_KEY}:${image.dataUrl}]`)
             .join('');
@@ -754,7 +756,11 @@ export default function CommunityPage() {
                 ? 'travel_review'
                 : newType === 'meetup'
                     ? 'meetup'
-                    : 'help';
+                    : newType === 'meetup_recruitment'
+                        ? 'meetup_recruitment'
+                        : newType === 'help'
+                            ? 'help'
+                            : 'beauty_review'; // Fallback for guides when none selected
     const writeGuideTitle = t(`community_page.form.write_guide_title.${formCategoryKey}`);
     const writeGuideBody = t(`community_page.form.write_guide_body.${formCategoryKey}`);
     const titleFieldLabel = isBeautyDraft ? t('community_page.form.title_label.beauty_review') : t('community_page.form.title_label.default');
@@ -848,35 +854,51 @@ export default function CommunityPage() {
                 )}
 
                 {/* 2. Quick Entry Cards - Compact Mode */}
-                <div className={styles.quickEntryScroll}>
+                <div className={styles.quickEntryGrid}>
+                    <div className={styles.entryCardCompact} onClick={() => { setFilter('meetup_recruitment'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
+                        <span className={styles.entryIcon}>👭</span>
+                        <div className={styles.entryMeta}>
+                            <span className={styles.entryLabel}>{t('community_page.quick_entry.beauty_together.label')}</span>
+                        </div>
+                    </div>
+                    <div className={styles.entryCardCompact} onClick={() => { setFilter('meetup_recruitment'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
+                        <span className={styles.entryIcon}>⚡</span>
+                        <div className={styles.entryMeta}>
+                            <span className={styles.entryLabel}>{t('community_page.quick_entry.flash_meetup.label')}</span>
+                        </div>
+                    </div>
                     <div className={styles.entryCardCompact} onClick={() => { setFilter('beauty_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
                         <span className={styles.entryIcon}>💄</span>
                         <div className={styles.entryMeta}>
                             <span className={styles.entryLabel}>{t('community_page.quick_entry.beauty.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.beauty.sub')}</span>
                         </div>
                     </div>
                     <div className={styles.entryCardCompact} onClick={() => { setFilter('food_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
                         <span className={styles.entryIcon}>🍽️</span>
                         <div className={styles.entryMeta}>
                             <span className={styles.entryLabel}>{t('community_page.quick_entry.food.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.food.sub')}</span>
                         </div>
                     </div>
                     <div className={styles.entryCardCompact} onClick={() => { setFilter('travel_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
                         <span className={styles.entryIcon}>📍</span>
                         <div className={styles.entryMeta}>
                             <span className={styles.entryLabel}>{t('community_page.quick_entry.travel.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.travel.sub')}</span>
                         </div>
                     </div>
-                    <div className={styles.entryCardCompact} onClick={() => openComposer()}>
-                        <span className={styles.entryIcon}>📝</span>
+                    <div className={styles.entryCardCompact} onClick={() => { setFilter('meetup'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
+                        <span className={styles.entryIcon}>🤝</span>
                         <div className={styles.entryMeta}>
                             <span className={styles.entryLabel}>{t('community_page.quick_entry.write.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.write.sub')}</span>
                         </div>
                     </div>
+                </div>
+
+                {/* Unified CTA inline */}
+                <div className={styles.fabGroup}>
+                    <button className={styles.fab} onClick={() => openComposer()}>
+                        <span className={styles.fabIcon}>📝</span>
+                        <span className={styles.fabLabel}>{t('community_page.fab.create_post')}</span>
+                    </button>
                 </div>
                 {false && (
                 <div className={styles.quickEntryScroll}>
@@ -1254,17 +1276,6 @@ export default function CommunityPage() {
                 )}
             </div>
 
-            {/* Purpose-driven CTAs */}
-            <div className={styles.fabGroup}>
-                <button className={`${styles.fab} ${styles.fabSecondary}`} onClick={() => openComposer('beauty_review')}>
-                    <span className={styles.fabIcon}>📝</span>
-                    <span className={styles.fabLabel}>{t('community_page.fab.beauty')}</span>
-                </button>
-                <button className={styles.fab} onClick={() => openComposer('meetup')}>
-                    <span className={styles.fabIcon}>🤝</span>
-                    <span className={styles.fabLabel}>{t('community_page.fab.meetup')}</span>
-                </button>
-            </div>
 
             {isWriting && (
                 <div className={styles.modalOverlay} onClick={() => setIsWriting(false)}>
@@ -1280,17 +1291,11 @@ export default function CommunityPage() {
                         </div>
 
                         <div className={styles.modalBody}>
-                            {/* Step 15: Writing Guide */}
-                            <div className={styles.writeGuideBox}>
-                                <div className={styles.writeGuideText}>
-                                    ✨ <b>{writeGuideTitle}</b><br />
-                                    {writeGuideBody}
-                                </div>
-                            </div>
 
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>{t('community_page.form.category_label')}</label>
                                 <select className={styles.formSelect} value={newType} onChange={e => setNewType(e.target.value as CommunityCategory)}>
+                                    <option value="" disabled>{t('community_page.form.select_category')}</option>
                                     {communityCategories.map((category) => (
                                         <option key={category.id} value={category.id}>{category.label}</option>
                                     ))}
@@ -1308,25 +1313,14 @@ export default function CommunityPage() {
                                 />
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
-                                <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                                    <label className={styles.formLabel}>{t('community_page.form.region_label')}</label>
-                                    <input
-                                        className={styles.formInput}
-                                        placeholder={t('community_page.form.region_placeholder')}
-                                        value={newRegion}
-                                        onChange={e => setNewRegion(e.target.value)}
-                                    />
-                                </div>
-                                <div className={styles.formGroup} style={{ marginBottom: 0 }}>
-                                    <label className={styles.formLabel}>{pointFieldLabel}</label>
-                                    <input
-                                        className={styles.formInput}
-                                        placeholder={pointFieldPlaceholder}
-                                        value={newPoint}
-                                        onChange={e => setNewPoint(e.target.value)}
-                                    />
-                                </div>
+                            <div className={styles.formGroup}>
+                                <label className={styles.formLabel}>{t('community_page.form.region_label')}</label>
+                                <input
+                                    className={styles.formInput}
+                                    placeholder={t('community_page.form.region_placeholder')}
+                                    value={newRegion}
+                                    onChange={e => setNewRegion(e.target.value)}
+                                />
                             </div>
 
                             <div className={styles.formGroup}>
@@ -1405,39 +1399,6 @@ export default function CommunityPage() {
                                 )}
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>{t('community_page.form.vibe_label')}</label>
-                                <div className={styles.vibeGrid}>
-                                    {tagChoices.map(tag => (
-                                        <div 
-                                            key={tag.id} 
-                                            className={`${styles.vibeChip} ${newTags.includes(tag.id) ? styles.vibeActive : ''}`}
-                                            onClick={() => {
-                                                if (newTags.includes(tag.id)) {
-                                                    setNewTags(newTags.filter((value) => value !== tag.id));
-                                                } else {
-                                                    setNewTags([...newTags, tag.id]);
-                                                }
-                                            }}
-                                        >
-                                            {tag.label}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>{placeFieldLabel}</label>
-                                <input
-                                    className={styles.formInput}
-                                    placeholder={placeFieldPlaceholder}
-                                    value={placeName}
-                                    onChange={e => setPlaceName(e.target.value)}
-                                />
-                                <small style={{ color: 'var(--gray-500)', fontSize: '0.8rem', marginTop: '4px', display: 'block' }}>
-                                    {placeFieldHelp}
-                                </small>
-                            </div>
 
                             <div className={styles.toggleGroup}>
                                 <div className={styles.toggleLabel}>
@@ -1451,31 +1412,6 @@ export default function CommunityPage() {
                                     style={{ width: '20px', height: '20px', cursor: 'pointer' }}
                                 />
                             </div>
-
-                            <div className={styles.safetyGuideBox}>
-                                <span>{t('community_page.form.safety_title')}</span>
-                                <span>{t('community_page.form.safety_item_1')}</span>
-                                <span>{t('community_page.form.safety_item_2')}</span>
-                            </div>
-
-                            {/* Summary Block before submitting */}
-                            {(newTitle || newRegion || newPoint) && (
-                                <div className={styles.summaryBlock}>
-                                    <div style={{ fontWeight: 800, marginBottom: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>{t('community_page.form.summary_title')}</div>
-                                    <div className={styles.summaryItem}>
-                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_region_type')}</span>
-                                        <span>{newRegion || '-'} / {summaryCategoryLabel}</span>
-                                    </div>
-                                    <div className={styles.summaryItem}>
-                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_point')}</span>
-                                        <span>{newPoint || '-'}</span>
-                                    </div>
-                                    <div className={styles.summaryItem}>
-                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_meetup')}</span>
-                                        <span>{isOpenForMeetup ? t('community_page.form.summary_enabled') : t('community_page.form.summary_disabled')}</span>
-                                    </div>
-                                </div>
-                            )}
                         </div>
 
                         <div className={styles.modalFooter}>
