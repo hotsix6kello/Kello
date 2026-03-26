@@ -40,7 +40,7 @@ export default function HomeModals({
             <div className={styles.mapContainer}>
               <ExploreMap
                 items={[]}
-                center={{ lat: destInfo.lat, lng: destInfo.lng, name: destInfo.nameKo }}
+                center={{ lat: destInfo.lat, lng: destInfo.lng }}
                 onItemClick={() => { }}
                 zoom={15}
               />
