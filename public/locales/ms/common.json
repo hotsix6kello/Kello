@@ -1,4 +1,23 @@
 {
+  "beauty_explore": {
+    "form_name": "Nama",
+    "form_name_placeholder": "Masukkan nama anda",
+    "form_phone": "Hubungan (atau ID SNS)",
+    "form_phone_placeholder": "Nombor telefon atau ID SNS",
+    "form_request": "Permintaan",
+    "form_request_placeholder": "Alergi atau gaya yang diingini",
+    "agreement_confirm": "Sahkan butiran",
+    "agreement_confirm_desc": "Saya mengesahkan pilihan ini.",
+    "agreement_privacy": "Persetujuan privasi",
+    "agreement_privacy_desc": "Saya setuju untuk memberikan maklumat.",
+    "region_all": "Semua kawasan",
+    "label_today": "Hari ini",
+    "label_tomorrow": "Esok",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Permintaan tempahan dihantar!",
+    "booking_confirmation_desc": "Kami akan memaklumkan anda tidak lama lagi.",
+    "booking_confirmation_cta": "Tempahan Saya"
+  },
   "common": {
     "welcome": "Selamat Datang, Pelancong.",
     "greeting": "Selamat Pagi",
@@ -41,14 +60,17 @@
       "attraction": "Tarikan",
       "transport": "Pengangkutan"
     },
-    "community_nav": "Community",
+    "community_nav": "Komuniti",
     "view_map": "Lihat Lokasi",
     "view_map_desc": "Lihat lokasi terperinci pada peta",
     "taxi_call": "Panggil Teksi",
     "route_nav": "Panduan Laluan",
     "transit_nav_desc": "Navigasi pengangkutan awam",
     "copy_address": "Salin Alamat",
-    "copied": "Disalin!"
+    "copied": "Disalin!",
+    "morning": "Selamat pagi",
+    "afternoon": "Selamat tengah hari",
+    "evening": "Selamat malam"
   },
   "categories": {
     "all": "Semua",
@@ -62,82 +84,80 @@
   "community_nav": "Community",
   "home_beauty": {
     "hero": {
-      "eyebrow": "Beauty Booking Concierge",
-      "title": "Apakah perkhidmatan yang ingin anda tempah?",
-      "subtitle": "Pilih perkhidmatan kecantikan yang anda inginkan terlebih dahulu, kemudian terus ke langkah tempahan. Kami telah mereka bentuk skrin ini untuk pemilihan pantas di telefon bimbit, diikuti dengan perbandingan kedai dan permintaan tempahan.",
-      "welcome": "{{name}}, sila pilih perkhidmatan yang anda perlukan hari ini."
+      "eyebrow": "Perkhidmatan Tempahan Kecantikan",
+      "title": "Abadikan keindahan Korea\ndalam jadual anda",
+      "subtitle": "Pilih perkhidmatan kecantikan dan terus tempah.",
+      "welcome": "{{name}}, sila pilih perkhidmatan.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "step": "Langkah 1",
-      "title": "Sila pilih perkhidmatan kecantikan yang anda inginkan",
-      "description": "Selepas memilih kategori, anda boleh mula meneroka tempahan berdasarkan perkhidmatan tersebut pada langkah seterusnya."
+      "step": "LANGKAH. 01",
+      "title": "Sila pilih perkhidmatan kecantikan",
+      "description": ""
     },
     "categories": {
       "hair": {
         "label": "Rambut",
-        "note": "Gunting, Perm, Warna, Dry",
-        "summary": "Mulakan tempahan dengan pantas daripada pertukaran gaya rambut kepada penjagaan ringan."
+        "note": "Potong, perm, warna",
+        "summary": "Tempah perkhidmatan rambut dengan pantas."
       },
       "nail": {
         "label": "Kuku",
-        "note": "Gel Nail, Penjagaan, Sambungan",
-        "summary": "Tentukan mood dan reka bentuk yang diinginkan, kemudian teruskan ke fasa tempahan dengan mudah."
+        "note": "Gel, penjagaan, sambungan",
+        "summary": "Pilih reka bentuk dan terus tempah."
       },
       "esthetic": {
         "label": "Estetik",
-        "note": "Skincare, Kontur, Penjagaan Menenangkan",
-        "summary": "Bandingkan kedai dan buat tempahan mengikut keadaan kulit dan tujuan penjagaan anda."
+        "note": "Penjagaan kulit, kontur",
+        "summary": "Bandingkan salon dan tempah."
       },
       "waxing": {
         "label": "Waxing",
-        "note": "Muka, Badan, Brazilian",
-        "summary": "Cari dan tempah kedai yang sesuai dengan bahagian badan dan jadual anda dengan cepat."
+        "note": "Muka, badan, Brazilian",
+        "summary": "Cari salon yang sesuai dengan pantas."
       },
       "makeup": {
-        "label": "Makeup",
-        "note": "Harian, Penggambaran, Perkahwinan",
-        "summary": "Pilih perkhidmatan makeup yang sesuai dengan jadual acara anda dan mulakan tempahan segera."
+        "label": "Solekan",
+        "note": "Harian, penggambaran, perkahwinan",
+        "summary": "Pilih perkhidmatan solekan untuk acara anda."
       },
       "lash": {
         "label": "Bulu Mata",
-        "note": "Sambungan, Perm, Underlash",
-        "summary": "Terhubung terus dengan menu yang diinginkan, daripada sambungan asli kepada gaya bervolume."
+        "note": "Sambungan, perm",
+        "summary": "Dari semula jadi ke volum, pilih menu anda."
       }
     },
     "selection": {
-      "eyebrow": "Kategori Terpilih",
+      "eyebrow": "Kategori yang Dipilih",
       "tags": {
-        "mobile": "Tempahan Telefon",
-        "comparison": "Perbandingan Kedai",
-        "inquiry": "Pertanyaan Masa Nyata"
+        "mobile": "Tempahan mudah alih",
+        "comparison": "Bandingkan salon",
+        "inquiry": "Pertanyaan masa nyata"
       },
-      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pilihan dibuat."
+      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pemilihan."
     },
     "cta": {
-      "hint": "Teroka perkhidmatan kecantikan yang tersedia berdasarkan kategori terpilih pada skrin seterusnya.",
+      "hint": "Pilih kategori untuk mula tempahan",
       "button": "Mula Tempahan"
     },
-    "interpreter": {
-      "eyebrow": "Sokongan Bahasa",
-      "title": "Perlukan tempahan dalam bahasa asing? Gunakan Pembantu Terjemahan",
-      "description": "Jika anda bimbang tentang komunikasi semasa rundingan sebelum menempah atau semasa di kedai, anda boleh berhubung terus dengan penterjemah masa nyata.",
-      "button": "Buka Pembantu Terjemahan"
+    "interpreter_entry": {
+      "title": "Penterjemah Masa Nyata",
+      "description": "Berkomunikasi dengan mudah dengan kakitangan",
+      "cta": "Buka Penterjemah"
     },
-    "assurance": {
-      "items": [
-        {
-          "title": "Pilihan Kategori Sekilas Pandang",
-          "desc": "Pilih perkhidmatan anda pada skrin pertama dan masuk ke aliran tempahan secara segera."
-        },
-        {
-          "title": "Tempahan Tanpa Bimbang Bahasa",
-          "desc": "Bercakap secara semula jadi dengan kedai menggunakan penterjemah masa nyata apabila diperlukan."
-        },
-        {
-          "title": "Aliran Tempahan Mobile-First",
-          "desc": "Tingkatkan penukaran dengan butang berbentuk kad dan CTA besar yang mudah dipilih dengan sebelah tangan."
-        }
-      ]
+    "location_sheet": {
+      "search_title": "Cari Lokasi",
+      "search_result_count": "{{count}} hasil untuk \"{{query}}\"",
+      "view_location": "Lihat Lokasi",
+      "view_location_desc": "Lihat lokasi terperinci pada peta",
+      "call_taxi": "Panggil Teksi",
+      "google_maps_desc": "Semak laluan pengangkutan awam di Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Sila pergi ke alamat ini",
+      "copy": "Salin Alamat",
+      "copy_done": "Berjaya disalin!",
+      "close": "Tutup"
     }
   },
   "interpreter_ui": {
@@ -193,7 +213,8 @@
       "request_custom_label": "Tersuai",
       "request_custom_title": "Mohon Jadual {{days}} Hari",
       "request_custom_toast": "Memohon jadual {{days}} hari tersuai! Concierge kami akan menghubungi anda."
-    }
+    },
+    "badge": "Alami Kecantikan Korea"
   },
   "explore_items": {
     "airport_arrival": "Ketibaan Lapangan Terbang Incheon",
@@ -245,14 +266,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "Komuniti",
+    "subtitle": "Berhubung dengan penduduk tempatan & pelancong",
+    "filter_all": "Semua",
+    "filter_meetup": "Makanan & Pertemuan",
+    "filter_travel": "Rakan Perjalanan",
+    "filter_help": "Bantuan Tempatan",
+    "comments": "Komen",
+    "message": "Mesej",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -285,8 +306,8 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
-    "detail": "Butiran Kiriman",
+    "filter_review": "Ulasan",
+    "detail": "Butiran Siaran",
     "meetup_info": "Maklumat lawatan",
     "write_post": "Tulis ulasan",
     "edit": "Edit ulasan",
@@ -534,15 +555,15 @@
     "category_waxing": "Waxing",
     "category_makeup": "Makeup",
     "category_lash": "Lash",
-    "lang_ko": "Korean",
+    "lang_ko": "한국어",
     "lang_en": "English",
-    "lang_ja": "Japanese",
-    "lang_zh_cn": "Chinese (Simplified)",
-    "lang_zh_hk": "Chinese (Traditional)",
-    "lang_vi": "Vietnamese",
-    "lang_th": "Thai",
-    "lang_id": "Indonesian",
-    "lang_ms": "Malay",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
     "intent_booking_confirm": "Booking Confirmation",
     "intent_service_request": "Service Request",
     "intent_allergy_notice": "Allergy/Sensitivity Notice",
@@ -638,7 +659,15 @@
     "error_cancel_reason": "Please select or enter a cancellation reason.",
     "error_change_reason": "Please enter what you'd like to change.",
     "error_change": "Could not send your change request. Please try again later.",
-    "error_alt": "Something went wrong. Please try again later."
+    "error_alt": "Something went wrong. Please try again later.",
+    "interpreter_visit_context": "Menggunakan penterjemah semasa melawat {{storeName}}",
+    "interpreter_visit_service_context": "Menggunakan penterjemah untuk {{serviceName}} di {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -655,5 +684,47 @@
     "event_booking_change_rejected": "Change Declined",
     "event_booking_completed": "Service Completed",
     "event_default": "Notification"
+  },
+  "interpreter_page": {
+    "back": "< Kembali",
+    "title": "Penterjemah Masa Nyata",
+    "subtitle": "Bahasa tetamu ditetapkan mengikut bahasa aplikasi; bahasa kedai tetap bahasa Korea.",
+    "onboarding": "Apabila tetamu menginput, ia akan diterjemahkan ke Korea; apabila staf menginput bahasa Korea, ia akan diterjemahkan ke bahasa anda.",
+    "customer_lang": "Bahasa Pelawat",
+    "staff_lang": "Bahasa Kedai (Korea)",
+    "mic_preparing": "Menyediakan Mikrofon",
+    "customer_transcribing": "Mengenal pasti suara pelawat...",
+    "customer_recording": "Merakam suara pelawat... klik lagi untuk tamat",
+    "translating": "Menterjemah...",
+    "customer_speak_btn": "Input Suara Pelawat",
+    "staff_transcribing": "Mengenal pasti suara staf...",
+    "staff_recording": "Merakam suara staf... klik lagi untuk tamat",
+    "staff_speak_btn": "Input Suara Staf",
+    "customer_input_label": "Input Pelawat",
+    "customer_placeholder": "Taip apa yang dikatakan pelawat.",
+    "send": "Hantar",
+    "staff_input_label": "Input Staf",
+    "staff_placeholder": "Taip apa yang dikatakan staf dalam bahasa Korea.",
+    "voice_supported_hint": "Rakam melalui mik atau taip teks di bawah.",
+    "voice_not_supported_hint": "Pelayar ini tidak menyokong input suara. Gunakan teks.",
+    "voice_recognizing": "Mengenal pasti suara.",
+    "voice_unrecognized_error": "Tidak dapat mengenal pasti suara.",
+    "voice_failed_error": "Pengecaman suara gagal.",
+    "mic_permission_status": "Memeriksa kebenaran mikrofon.",
+    "recording_status": "Merakam... maks {{seconds}} saat.",
+    "mic_unsupported_error": "Mik tidak boleh diakses.",
+    "input_required_customer": "Sila masukkan ayat pelawat terlebih dahulu.",
+    "input_required_staff": "Sila masukkan ayat staf terlebih dahulu.",
+    "translating_status": "Menyediakan terjemahan.",
+    "translation_failed_error": "Terjemahan gagal. Cuba lagi.",
+    "empty_history_hint": "Sejarah akan muncul di sini.",
+    "customer_role": "Pelawat",
+    "staff_role": "Staf",
+    "replay_btn_label": "Main semula terjemahan",
+    "replay_not_supported_hint": "Main balik audio tidak disokong.",
+    "play": "Main",
+    "translated_status": "Diterjemah",
+    "source_only_status": "Sumber Sahaja",
+    "voice_too_short_error": "Sila bercakap lebih lama sedikit."
   }
 }

@@ -553,7 +553,7 @@ export default function CommunityDetailPage() {
                                 <div style={{ height: '300px', borderRadius: '8px', overflow: 'hidden' }}>
                                     <ExploreMap
                                         items={[]}
-                                        center={{ lat: post.place_lat, lng: post.place_lng, name: post.place_name }}
+                                        center={{ lat: post.place_lat, lng: post.place_lng }}
                                         zoom={15}
                                         onItemClick={() => { }}
                                     />

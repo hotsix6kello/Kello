@@ -1,186 +1,348 @@
 {
-    "common": {
-        "welcome": "Добро пожаловать, Путешественник.",
-        "greeting": "Доброе утро",
-        "login": "Войти",
-        "today": "Сегодня",
-        "move": "Маршрут",
-        "book": "Бронировать",
-        "chat": "Чат",
-        "my": "Мой",
-        "current_operation": "Работает",
-        "live": "ПРЯМОЙ ЭФИР",
-        "recommended": "Рядом с вами",
-        "based_on_location": "На основе вашего местоположения",
-        "start_nav": "Начать навигацию",
-        "delay_10m": "Задержка +10 мин",
-        "confirmed": "Подтверждено",
-        "payment_completed": "Оплата завершена",
-        "weather_clear": "Ясно",
-        "back": "Назад",
-        "select_language": "Выбрать язык",
-        "home_nav": "Главная",
-        "explore_nav": "Поиск",
-        "planner_nav": "План",
-        "today_nav": "Сегодня",
-        "my_nav": "Мой",
-        "day_unit": "д",
-        "locale": "ru-RU",
-        "cities": {
-            "seoul": "Сеул",
-            "busan": "Пусан",
-            "jeju": "Чеджу",
-            "gyeongju": "Кёнджу"
-        },
-        "categories": {
-            "all": "Все",
-            "food": "Еда",
-            "beauty": "Красота",
-            "event": "События",
-            "festival": "Фестивали",
-            "attraction": "Места",
-            "transport": "Транспорт"
-        },
-        "community_nav": "Community"
+  "beauty_explore": {
+    "form_name": "Имя",
+    "form_name_placeholder": "Введите ваше имя",
+    "form_phone": "Контакт (или SNS ID)",
+    "form_phone_placeholder": "Телефон или SNS ID",
+    "form_request": "Пожелания",
+    "form_request_placeholder": "Аллергии или желаемый стиль",
+    "agreement_confirm": "Подтвердить детали",
+    "agreement_confirm_desc": "Я подтверждаю выбор.",
+    "agreement_privacy": "Согласие на конфиденциальность",
+    "agreement_privacy_desc": "Я согласен предоставить информацию.",
+    "region_all": "Все районы",
+    "label_today": "Сегодня",
+    "label_tomorrow": "Завтра",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Запрос на бронирование отправлен!",
+    "booking_confirmation_desc": "Мы скоро вас уведомим.",
+    "booking_confirmation_cta": "Мои бронирования"
+  },
+  "common": {
+    "welcome": "Добро пожаловать, Путешественник.",
+    "greeting": "Доброе утро",
+    "login": "Войти",
+    "today": "Сегодня",
+    "move": "Маршрут",
+    "book": "Бронировать",
+    "chat": "Чат",
+    "my": "Мой",
+    "current_operation": "Работает",
+    "live": "ПРЯМОЙ ЭФИР",
+    "recommended": "Рядом с вами",
+    "based_on_location": "На основе вашего местоположения",
+    "start_nav": "Начать навигацию",
+    "delay_10m": "Задержка +10 мин",
+    "confirmed": "Подтверждено",
+    "payment_completed": "Оплата завершена",
+    "weather_clear": "Ясно",
+    "back": "Назад",
+    "select_language": "Выбрать язык",
+    "home_nav": "Главная",
+    "explore_nav": "Поиск",
+    "planner_nav": "План",
+    "today_nav": "Сегодня",
+    "my_nav": "Мой",
+    "day_unit": "д",
+    "locale": "ru-RU",
+    "cities": {
+      "seoul": "Сеул",
+      "busan": "Пусан",
+      "jeju": "Чеджу",
+      "gyeongju": "Кёнджу"
     },
-    "transport": {
-        "moving_to": "Едем к {{dest}}",
-        "remaining": "Осталось",
-        "line_2_direction": "Линия 2 • В сторону City Hall",
-        "departed": "отправился",
-        "passing_now": "Сейчас проезжает...",
-        "current": "Текущая",
-        "get_off_at": "Выйти на",
-        "exit_3": "Выход 3",
-        "getting_off_here": "Я выхожу здесь",
-        "stations": {
-            "samseong": "Самсон",
-            "seolleung": "Соллын",
-            "yeoksam": "Ёксам",
-            "gangnam": "Каннам",
-            "gyodae": "Кёде",
-            "seocho": "Сочо",
-            "seongsu": "Сонсу"
-        }
+    "categories": {
+      "all": "Все",
+      "food": "Еда",
+      "beauty": "Красота",
+      "event": "События",
+      "festival": "Фестивали",
+      "attraction": "Места",
+      "transport": "Транспорт"
     },
-    "home": {
-        "title_korea": "Корея сегодня",
-        "title": "Путешествие в Корею, понятное за 3 секунды",
-        "subtitle": "Бронирование консьержем · Автоматический план · Навигация",
-        "create_trip_cta": "Начать планирование",
-        "input_label": "Куда вы отправляетесь?",
-        "input_placeholder": "Город, район, название отеля",
-        "days_label": "Период поездки",
-        "recommended_plans": "Рекомендуемые планы поездок",
-        "plans": {
-            "2d": {
-                "title": "2 дня: Главное в Сеуле",
-                "label": "План на 2 дня"
-            },
-            "3d": {
-                "title": "3 дня: K-культура и стиль",
-                "label": "План na 3 дня"
-            },
-            "5d": {
-                "title": "5 дней: Большое путешествие",
-                "label": "План на 5 дней"
-            },
-            "request_custom_label": "Индивидуальный",
-            "request_custom_title": "Запросить план на {{days}} дн.",
-            "request_custom_toast": "Запрошен индивидуальный план на {{days}} дн.! Наш консьерж свяжется с вами."
-        }
-    },
-    "explore_items": {
-        "airport_arrival": "Прибытие в аэропорт Инчхон",
-        "hotel_checkin": "Заселение в отель / Проживание"
-    },
-    "explore_page": {
-        "title": "Поиск",
-        "select_city": "Выбрать город"
-    },
-    "planner_page": {
-        "title": "План",
-        "day": "День {{n}}"
-    },
-    "today_page": {
-        "title": "Сегодня",
-        "active_now": "Выполняется",
-        "navigate": "Навигация",
-        "booking_ref": "Бронь: {{ref}}",
-        "next_up": "Далее",
-        "minutes_left": "Начнется через {{mins}}м",
-        "depart_early": "Выходить сейчас",
-        "timeline": "График",
-        "empty": {
-            "title": "На сегодня планов нет",
-            "desc": "Найдите интересные места и добавьте их!",
-            "cta": "Найти места"
-        }
-    },
-    "booking_detail": {
-        "select_date": "Выбрать дату",
-        "select_time": "Выбрать время",
-        "total_price": "Итого",
-        "request_booking": "Забронировать"
-    },
-    "navigation_page": {
-        "title": "Сегодня"
-    },
-    "my_page": {
-        "bookings": {
-            "title": "Мои бронирования",
-            "date_time": "Дата / Время",
-            "area": "Район",
-            "price": "Цена",
-            "new_added": "Добавлено новое бронирование!"
-        },
-        "community": {
-            "title": "Мои посты в сообществе",
-            "empty": "Пока нет написанных постов."
-        }
-    },
-    "community_page": {
-        "title": "Community",
-        "subtitle": "Connect with locals & travelers",
-        "filter_all": "All",
-        "filter_meetup": "Food & Meetup",
-        "filter_travel": "Travel Mate",
-        "filter_help": "Local Help",
-        "comments": "Comments",
-        "message": "Message",
-        "type": {
-            "MEETUP": "MEETUP",
-            "TRAVEL": "TRAVEL",
-            "HELP": "HELP",
-            "REVIEW": "REVIEW"
-        },
-        "post": {
-            "1": {
-                "author": "Mika (Japan)",
-                "time": "10 mins ago",
-                "title": "Samgyeopsal Meetup 🥓",
-                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-            },
-            "2": {
-                "author": "John (US)",
-                "time": "1 hour ago",
-                "title": "Hongdae Street Performance 🎸",
-                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-            },
-            "3": {
-                "author": "Jihoon (Korea)",
-                "time": "2 hours ago",
-                "title": "Need help with subway directions? 🚇",
-                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-            },
-            "4": {
-                "author": "Li Wei (China)",
-                "time": "3 hours ago",
-                "title": "K-Beauty Shopping 💄",
-                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-            }
-        },
-        "filter_review": "Reviews",
-        "detail": "Детали поста"
+    "community_nav": "Сообщество",
+    "morning": "Доброе утро",
+    "afternoon": "Добрый день",
+    "evening": "Добрый вечер"
+  },
+  "transport": {
+    "moving_to": "Едем к {{dest}}",
+    "remaining": "Осталось",
+    "line_2_direction": "Линия 2 • В сторону City Hall",
+    "departed": "отправился",
+    "passing_now": "Сейчас проезжает...",
+    "current": "Текущая",
+    "get_off_at": "Выйти на",
+    "exit_3": "Выход 3",
+    "getting_off_here": "Я выхожу здесь",
+    "stations": {
+      "samseong": "Самсон",
+      "seolleung": "Соллын",
+      "yeoksam": "Ёксам",
+      "gangnam": "Каннам",
+      "gyodae": "Кёде",
+      "seocho": "Сочо",
+      "seongsu": "Сонсу"
     }
+  },
+  "home": {
+    "title_korea": "Корея сегодня",
+    "title": "Путешествие в Корею, понятное за 3 секунды",
+    "subtitle": "Бронирование консьержем · Автоматический план · Навигация",
+    "create_trip_cta": "Начать планирование",
+    "input_label": "Куда вы отправляетесь?",
+    "input_placeholder": "Город, район, название отеля",
+    "days_label": "Период поездки",
+    "recommended_plans": "Рекомендуемые планы поездок",
+    "plans": {
+      "2d": {
+        "title": "2 дня: Главное в Сеуле",
+        "label": "План на 2 дня"
+      },
+      "3d": {
+        "title": "3 дня: K-культура и стиль",
+        "label": "План na 3 дня"
+      },
+      "5d": {
+        "title": "5 дней: Большое путешествие",
+        "label": "План на 5 дней"
+      },
+      "request_custom_label": "Индивидуальный",
+      "request_custom_title": "Запросить план на {{days}} дн.",
+      "request_custom_toast": "Запрошен индивидуальный план на {{days}} дн.! Наш консьерж свяжется с вами."
+    },
+    "badge": "Почувствуйте красоту Кореи"
+  },
+  "explore_items": {
+    "airport_arrival": "Прибытие в аэропорт Инчхон",
+    "hotel_checkin": "Заселение в отель / Проживание"
+  },
+  "explore_page": {
+    "title": "Поиск",
+    "select_city": "Выбрать город"
+  },
+  "planner_page": {
+    "title": "План",
+    "day": "День {{n}}"
+  },
+  "today_page": {
+    "title": "Сегодня",
+    "active_now": "Выполняется",
+    "navigate": "Навигация",
+    "booking_ref": "Бронь: {{ref}}",
+    "next_up": "Далее",
+    "minutes_left": "Начнется через {{mins}}м",
+    "depart_early": "Выходить сейчас",
+    "timeline": "График",
+    "empty": {
+      "title": "На сегодня планов нет",
+      "desc": "Найдите интересные места и добавьте их!",
+      "cta": "Найти места"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Выбрать дату",
+    "select_time": "Выбрать время",
+    "total_price": "Итого",
+    "request_booking": "Забронировать"
+  },
+  "navigation_page": {
+    "title": "Сегодня"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Мои бронирования",
+      "date_time": "Дата / Время",
+      "area": "Район",
+      "price": "Цена",
+      "new_added": "Добавлено новое бронирование!"
+    },
+    "community": {
+      "title": "Мои посты в сообществе",
+      "empty": "Пока нет написанных постов."
+    }
+  },
+  "community_page": {
+    "title": "Сообщество",
+    "subtitle": "Общайтесь с местными и путешественниками",
+    "filter_all": "Все",
+    "filter_meetup": "Еда и встречи",
+    "filter_travel": "Попутчик",
+    "filter_help": "Местная помощь",
+    "comments": "Комментарии",
+    "message": "Сообщение",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Отзывы",
+    "detail": "Детали поста"
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Консьерж бьюти-бронирования",
+      "title": "Запечатлейте красоту Кореи\nв своем расписании",
+      "subtitle": "Выберите услугу красоты и перейдите к бронированию.",
+      "welcome": "{{name}}, выберите услугу.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
+    },
+    "booking": {
+      "step": "ШАГ. 01",
+      "title": "Выберите бьюти-услугу",
+      "description": ""
+    },
+    "categories": {
+      "hair": {
+        "label": "Волосы",
+        "note": "Стрижка, завивка, окрашивание",
+        "summary": "Запись от смены стиля до быстрой стрижки."
+      },
+      "nail": {
+        "label": "Ногти",
+        "note": "Гель, уход, наращивание",
+        "summary": "Выберите дизайн и перейдите к записи."
+      },
+      "esthetic": {
+        "label": "Эстетика",
+        "note": "Уход, контуринг, успокоение",
+        "summary": "Сравните салоны и запишитесь."
+      },
+      "waxing": {
+        "label": "Депиляция",
+        "note": "Лицо, тело, бразильская",
+        "summary": "Быстро найдите подходящий салон."
+      },
+      "makeup": {
+        "label": "Макияж",
+        "note": "Дневной, съёмка, свадебный",
+        "summary": "Выберите макияж под ваше мероприятие."
+      },
+      "lash": {
+        "label": "Ресницы",
+        "note": "Наращивание, завивка",
+        "summary": "От натуральных до объёмных — выбирайте."
+      }
+    },
+    "selection": {
+      "eyebrow": "Выбранная категория",
+      "tags": {
+        "mobile": "Мобильная запись",
+        "comparison": "Сравнение салонов",
+        "inquiry": "Онлайн-запросы"
+      },
+      "empty": "Пожалуйста, сначала выберите категорию. Кнопка начала записи активируется после выбора."
+    },
+    "cta": {
+      "hint": "Выберите категорию, чтобы начать запись",
+      "button": "Начать запись"
+    },
+    "interpreter_entry": {
+      "title": "Онлайн-переводчик",
+      "description": "Общайтесь с персоналом без барьеров",
+      "cta": "Открыть переводчик"
+    },
+    "location_sheet": {
+      "search_title": "Поиск местоположения",
+      "search_result_count": "{{count}} результата(ов) для \"{{query}}\"",
+      "view_location": "Посмотреть на карте",
+      "view_location_desc": "Проверить детальное положение на карте",
+      "call_taxi": "Вызвать такси",
+      "google_maps_desc": "Проверить маршруты общественного транспорта в Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Пожалуйста, отправляйтесь по этому адресу",
+      "copy": "Копировать адрес",
+      "copy_done": "Скопировано!",
+      "close": "Закрыть"
+    }
+  },
+  "interpreter_page": {
+    "back": "< Назад",
+    "title": "Синхронный переводчик",
+    "subtitle": "Язык клиента соответствует языку приложения; язык магазина — корейский.",
+    "onboarding": "Слова клиента переводятся на корейский; корейская речь персонала — на ваш язык.",
+    "customer_lang": "Язык посетителя",
+    "staff_lang": "Язык магазина (Корейский)",
+    "mic_preparing": "Подготовка микрофона",
+    "customer_transcribing": "Распознавание речи посетителя...",
+    "customer_recording": "Запись посетителя... нажмите еще раз для завершения",
+    "translating": "Перевод...",
+    "customer_speak_btn": "Голосовой ввод посетителя",
+    "staff_transcribing": "Распознавание речи персонала...",
+    "staff_recording": "Запись персонала... нажмите еще раз для завершения",
+    "staff_speak_btn": "Голосовой ввод персонала",
+    "customer_input_label": "Ввод посетителя",
+    "customer_placeholder": "Введите, что сказал посетитель.",
+    "send": "Отправить",
+    "staff_input_label": "Ввод персонала",
+    "staff_placeholder": "Введите, что сказал персонал на корейском.",
+    "voice_supported_hint": "Записывайте через микрофон или вводите текст ниже.",
+    "voice_not_supported_hint": "Этот браузер не поддерживает голосовой ввод. Используйте текст.",
+    "voice_recognizing": "Распознавание голоса.",
+    "voice_unrecognized_error": "Не удалось распознать голос.",
+    "voice_failed_error": "Ошибка распознавания голоса.",
+    "mic_permission_status": "Проверка разрешений микрофона.",
+    "recording_status": "Запись... макс. {{seconds}} сек.",
+    "mic_unsupported_error": "Микрофон недоступен.",
+    "input_required_customer": "Сначала введите фразу посетителя.",
+    "input_required_staff": "Сначала введите фразу персонала.",
+    "translating_status": "Подготовка перевода.",
+    "translation_failed_error": "Ошибка перевода. Попробуйте еще раз.",
+    "empty_history_hint": "История появится здесь.",
+    "customer_role": "Посетитель",
+    "staff_role": "Персонал",
+    "replay_btn_label": "Воспроизвести перевод",
+    "replay_not_supported_hint": "Воспроизведение аудио не поддерживается.",
+    "play": "Пуск",
+    "translated_status": "Переведено",
+    "source_only_status": "Только оригинал",
+    "voice_too_short_error": "Пожалуйста, говорите немного дольше."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Используется переводчик во время посещения {{storeName}}",
+    "interpreter_visit_service_context": "Используется переводчик для {{serviceName}} в {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
+  }
 }

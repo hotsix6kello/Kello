@@ -1,16 +1,16 @@
 .container {
     min-height: auto;
     height: auto;
-    background: var(--background);
-    color: var(--foreground);
-    padding: 0 16px 40px;
+    background: var(--hanji-ivory);
+    color: var(--ink-black);
+    padding: 0 16px 156px;
     position: relative;
     overflow: visible;
 }
 
 .header {
     position: static;
-    background: var(--background);
+    background: var(--hanji-ivory);
     padding: 24px 16px 0;
     /* Reduced top padding from 56px */
     /* Align with container padding */
@@ -1598,176 +1598,3 @@
     gap: 8px;
     margin-bottom: 16px;
 }
-
-.compactActivityRow {
-    font-size: 11px;
-    color: #64748b;
-    background: #f8fafc;
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid #f1f5f9;
-}
-
-.recommendScrollCompact {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE, Edge */
-}
-
-.recommendScrollCompact::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
-.recommendChip {
-    flex-shrink: 0;
-    padding: 4px 12px;
-    background: #fff;
-    border: 1px solid var(--primary);
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--primary);
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.nextActionCompact {
-    margin-bottom: 16px;
-}
-
-.nextActionScroll {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.nextActionScroll::-webkit-scrollbar {
-    display: none;
-}
-
-.nextActionTag {
-    flex-shrink: 0;
-    padding: 4px 10px;
-    background: #eff6ff;
-    color: #2563eb;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    white-space: nowrap;
-    cursor: pointer;
-}
-/* ── Step 22: Feedback & Skeleton ── */
-.toast {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(15, 23, 42, 0.9);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 700;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    animation: toastUp 0.3s ease-out;
-}
-
-@keyframes toastUp {
-    from { transform: translate(-50%, 20px); opacity: 0; }
-    to { transform: translate(-50%, 0); opacity: 1; }
-}
-
-.toast_info {
-    background: rgba(51, 65, 85, 0.9);
-}
-
-.skeletonFeed {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.skeletonCard {
-    background: #fff;
-    border-radius: 16px;
-    padding: 16px;
-    border: 1px solid #f1f5f9;
-}
-
-.skeletonHeader {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.skeletonAvatar {
-    width: 36px;
-    height: 36px;
-    background: #f1f5f9;
-    border-radius: 50%;
-}
-
-.skeletonAuthorInfo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.skeletonName {
-    width: 60px;
-    height: 12px;
-    background: #f1f5f9;
-    border-radius: 4px;
-}
-
-.skeletonTime {
-    width: 40px;
-    height: 10px;
-    background: #f8fafc;
-    border-radius: 2px;
-}
-
-.skeletonTitle {
-    width: 80%;
-    height: 18px;
-    background: #f1f5f9;
-    border-radius: 4px;
-    margin-bottom: 8px;
-}
-
-.skeletonDesc {
-    width: 100%;
-    height: 36px;
-    background: #f8fafc;
-    border-radius: 4px;
-    margin-bottom: 12px;
-}
-
-.skeletonFooter {
-    width: 60px;
-    height: 14px;
-    background: #f1f5f9;
-    border-radius: 4px;
-}
-
-.cardExiting {
-    opacity: 0.5;
-    transform: scale(0.98);
-    transition: all 0.2s;
-}
-
-.activeTab {
-    background: #eff6ff !important;
-    color: #1d4ed8 !important;
-    border-color: #bfdbfe !important;
-}
-
-

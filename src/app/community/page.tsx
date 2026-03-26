@@ -241,10 +241,16 @@ const getTagLabel = (t: (key: string, options?: Record<string, unknown>) => stri
 
 export default function CommunityPage() {
     const { t } = useTranslation('common');
+    const [mounted, setMounted] = useState(false);
     const router = useRouter();
     const [filter, setFilter] = useState<string>('all');
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const [feedError, setFeedError] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [subFilter, setSubFilter] = useState('all');
@@ -599,60 +605,88 @@ export default function CommunityPage() {
     const handleSubmit = async () => {
         if (!newType || !newTitle.trim() || !newDesc.trim()) return;
         setIsSubmitting(true);
-        const databaseType = getDatabaseTypeForCategory(newType as CommunityCategory);
-        const imageMeta = newImages
-            .map((image) => `\n[${COMMUNITY_IMAGE_META_KEY}:${image.dataUrl}]`)
-            .join('');
-        const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
+        try {
+            // 이미지들을 Storage에 업로드하고 URL 리스트 획득
+            const uploadedImageUrls = await Promise.all(
+                newImages.map(async (img) => {
+                    // 이미 URL인 경우(수정 시) 그대로 유지
+                    if (img.dataUrl.startsWith('http')) return img.dataUrl;
+                    
+                    // Base64 Data URL을 Blob으로 변환
+                    const res = await fetch(img.dataUrl);
+                    const blob = await res.blob();
+                    
+                    const fileExt = img.name.split('.').pop() || 'jpg';
+                    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${fileExt}`;
+                    const filePath = `posts/${fileName}`;
 
-        const fakeUser = { author: loggedInUserName, flag: '🌍' };
+                    const { error: uploadError } = await supabase.storage
+                        .from('community')
+                        .upload(filePath, blob);
 
-        if (editingPostId) {
-            const { error } = await supabase.from('community_posts').update({
-                type: databaseType,
-                title: newTitle,
-                desc: composedDesc,
-                start_time: startTime || null,
-                end_time: endTime || null,
-                place_name: placeName || null,
-                place_lat: placeName ? (placeLat || 37.5665) : null,
-                place_lng: placeName ? (placeLng || 126.9780) : null
-            }).eq('id', editingPostId);
+                    if (uploadError) throw uploadError;
 
-            if (!error) {
+                    const { data } = supabase.storage.from('community').getPublicUrl(filePath);
+                    return data.publicUrl;
+                })
+            );
+
+            const databaseType = getDatabaseTypeForCategory(newType);
+            const imageMeta = uploadedImageUrls
+                .map((url) => `\n[${COMMUNITY_IMAGE_META_KEY}:${url}]`)
+                .join('');
+                
+            const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
+
+            const fakeUser = { author: loggedInUserName, flag: '🌍' };
+
+            if (editingPostId) {
+                const { error } = await supabase.from('community_posts').update({
+                    type: databaseType,
+                    title: newTitle,
+                    desc: composedDesc,
+                    start_time: startTime || null,
+                    end_time: endTime || null,
+                    place_name: placeName || null,
+                    place_lat: placeName ? (placeLat || 37.5665) : null,
+                    place_lng: placeName ? (placeLng || 126.9780) : null
+                }).eq('id', editingPostId);
+
+                if (error) throw error;
+                
                 setIsWriting(false);
                 resetDraftForm();
-                fetchPosts(); // Reload feed
+                fetchPosts();
                 showToast(t('community_page.toasts.updated'));
             } else {
-                alert(t('community_page.errors.update_failed'));
-            }
-        } else {
-            const { error } = await supabase.from('community_posts').insert([{
-                author: fakeUser.author,
-                flag: fakeUser.flag,
-                type: databaseType,
-                title: newTitle,
-                desc: composedDesc,
-                time: t('community_page.time.just_now'),
-                comments: 0,
-                start_time: startTime || null,
-                end_time: endTime || null,
-                place_name: placeName || null,
-                place_lat: placeName ? (placeLat || 37.5665) : null,
-                place_lng: placeName ? (placeLng || 126.9780) : null
-            }]);
+                const { error } = await supabase.from('community_posts').insert([{
+                    author: fakeUser.author,
+                    flag: fakeUser.flag,
+                    type: databaseType,
+                    title: newTitle,
+                    desc: composedDesc,
+                    time: t('community_page.time.just_now'),
+                    comments: 0,
+                    start_time: startTime || null,
+                    end_time: endTime || null,
+                    place_name: placeName || null,
+                    place_lat: placeName ? (placeLat || 37.5665) : null,
+                    place_lng: placeName ? (placeLng || 126.9780) : null
+                }]);
 
-            if (!error) {
+                if (error) throw error;
+                
                 setIsWriting(false);
                 resetDraftForm();
-                fetchPosts(); // Reload feed
-                showToast(t('community_page.toasts.created'));
-            } else {
-                alert(t('community_page.errors.post_failed', { message: error.message }));
+                fetchPosts();
+                showToast(t('community_page.toasts.submitted'));
             }
+        } catch (error: any) {
+            console.error('Submission error:', error);
+            alert(t('community_page.errors.submit_failed') + ': ' + (error.message || '알 수 없는 오류'));
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     const handleEditPost = (post: Post) => {
@@ -775,6 +809,8 @@ export default function CommunityPage() {
     const summaryCategoryLabel = getCategoryText(newType);
     const imageUploadGuide = t(`community_page.form.image.guides.${formCategoryKey}`);
     const isImageLimitReached = newImages.length >= COMMUNITY_IMAGE_LIMIT;
+
+    if (!mounted) return null;
 
     return (
         <div className={styles.container}>
@@ -1067,15 +1103,15 @@ export default function CommunityPage() {
                                 return (
                                     <div 
                                         key={post.id} 
-                                        className={`${styles.card} ${isReview ? styles.reviewCard : ''} ${isMeetup ? styles.meetupCard : ''} ${isTravel ? styles.infoCard : ''} ${isHelp ? styles.helpCard : ''} ${loading ? styles.cardExiting : ''}`} 
+                                        className={`${styles.card} ${isReview ? styles.reviewCard : ''} ${isMeetup ? styles.meetupCard : ''} ${isTravel ? styles.infoCard : ''} ${isHelp ? styles.helpCard : ''} ${currentStatus === 'CLOSED' ? styles.cardClosed : ''} ${loading ? styles.cardExiting : ''}`} 
                                         onClick={() => router.push(`/community/${post.id}`)} 
-                                        style={{ cursor: 'pointer', opacity: currentStatus === 'CLOSED' ? 0.7 : 1, filter: currentStatus === 'CLOSED' ? 'grayscale(0.3)' : 'none' }}
+                                       
                                     >
                                         {/* Card Header - Focus on Author and Meta */}
-                                        <div className={styles.cardHeader} style={{ marginBottom: isReview ? '8px' : '12px' }}>
-                                            <div className={styles.avatar} style={{ width: 36, height: 36, fontSize: 16 }}>{post.flag}</div>
+                                        <div className={styles.cardHeader}>
+                                            <div className={styles.avatar}>{post.flag}</div>
                                             <div className={styles.authorInfo}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                <div className={styles.authorHeaderRow}>
                                                     <div className={styles.authorName}>{post.author}</div>
                                                     <span className={`${styles.statusBadge} ${styles['status_' + currentStatus]}`}>
                                                         {getStatusText(currentStatus)}
@@ -1088,11 +1124,11 @@ export default function CommunityPage() {
                                                 {displayTypeLabel}
                                             </div>
                                             {post.author === loggedInUserName && (
-                                                <div style={{ display: 'flex', gap: '8px', marginLeft: '8px' }}>
-                                                    <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleEditPost(post); }} style={{ padding: '2px 4px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                                <div className={styles.postAdminActions}>
+                                                    <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleEditPost(post); }}>
                                                         ✏️
                                                     </button>
-                                                    <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDeletePost(post.id); }} style={{ padding: '2px 4px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                                    <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDeletePost(post.id); }}>
                                                         🗑️
                                                     </button>
                                                 </div>
@@ -1109,7 +1145,7 @@ export default function CommunityPage() {
                                                     <span className={styles.vibeTag}>{t('community_page.card.default_vibe')}</span>
                                                 )}
                                                 {post.desc.includes('[MEETUP_OPEN:true]') && (
-                                                    <span style={{ fontSize: '10px', background: '#dbeafe', color: '#2563eb', padding: '2px 8px', borderRadius: '4px', fontWeight: 800 }}>{t('community_page.card.open_meetup_badge')}</span>
+                                                    <span className={styles.openMeetupBadge}>{t('community_page.card.open_meetup_badge')}</span>
                                                 )}
                                             </div>
                                         )}
@@ -1131,19 +1167,19 @@ export default function CommunityPage() {
                                             );
                                         })()}
 
-                                        <h2 className={styles.postTitle} style={{ fontSize: isReview ? '18px' : '16px', marginBottom: '4px' }}>
+                                        <h2 className={`${styles.postTitle} ${isReview ? styles.reviewTitle : ''}`}>
                                             {titlePrefix ? `${titlePrefix} ${post.title}` : post.title}
                                         </h2>
 
-                                        <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '8px', display: 'flex', flexWrap: 'wrap', gap: '4px', alignItems: 'center' }}>
+                                        <div className={styles.postMetaRow}>
                                             📍 {displayRegion} · {displayTypeLabel}
                                             {displayPoint && (
-                                                <span style={{ fontSize: '10px', color: 'var(--primary)', fontWeight: 800, background: '#fff1f2', padding: '1px 6px', borderRadius: '4px', border: '1px solid #fecaca' }}>
+                                                <span className={styles.postPointLabel}>
                                                     🎯 {displayPoint}
                                                 </span>
                                             )}
                                             {getQualitySignals(post).map(signal => (
-                                                <span key={signal.id} style={{ fontSize: '9px', background: '#f8fafc', color: '#475569', padding: '1px 6px', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
+                                                <span key={signal.id} className={styles.qualitySignal}>
                                                     {signal.label}
                                                 </span>
                                             ))}
@@ -1189,7 +1225,7 @@ export default function CommunityPage() {
                                 )}
 
                                 {isReview && post.place_name && (
-                                    <div style={{ fontSize: '13px', color: 'var(--gray-500)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    <div className={styles.postPlaceInfo}>
                                         📍 <strong>{post.place_name}</strong>
                                     </div>
                                 )}
@@ -1209,11 +1245,11 @@ export default function CommunityPage() {
                                         </button>
                                     </div>
                                     {(isReview || isMeetup || isTravel) && post.comments > 0 && (
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'flex-start' }}>
-                                            <div style={{ fontSize: '11px', color: '#1e293b', fontWeight: 700, background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>
+                                        <div className={styles.draftStatusCol}>
+                                            <div className={styles.draftStatusLabel}>
                                                 {post.comments >= 4 ? t('community_page.card.draft_status.active') : post.comments >= 2 ? t('community_page.card.draft_status.forming') : t('community_page.card.draft_status.preparing')}
                                             </div>
-                                            <div style={{ fontSize: '10px', color: 'var(--gray-500)', marginLeft: '4px' }}>
+                                            <div className={styles.draftStatusDesc}>
                                                 {post.comments >= 4 ? t('community_page.card.draft_desc.active') : 
                                                  post.comments >= 2 ? t('community_page.card.draft_desc.forming') : 
                                                  t('community_page.card.draft_desc.preparing')}

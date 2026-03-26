@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // ESLint is run separately; skip during production build
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.google.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

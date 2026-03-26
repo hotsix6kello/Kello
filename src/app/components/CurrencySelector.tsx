@@ -8,16 +8,19 @@ interface Rates {
 }
 
 const SUPPORTED_CURRENCIES = [
-    { code: 'KRW', symbol: '₩' },
-    { code: 'USD', symbol: '$' },
-    { code: 'JPY', symbol: '¥' },
-    { code: 'CNY', symbol: '¥' },
-    { code: 'EUR', symbol: '€' },
-    { code: 'GBP', symbol: '£' },
-    { code: 'THB', symbol: '฿' },
-    { code: 'VND', symbol: '₫' },
-    { code: 'PHP', symbol: '₱' },
-    { code: 'SGD', symbol: '$' },
+    { code: 'KRW', symbol: '₩', flag: 'https://flagcdn.com/w40/kr.png' },
+    { code: 'USD', symbol: '$', flag: 'https://flagcdn.com/w40/us.png' },
+    { code: 'JPY', symbol: '¥', flag: 'https://flagcdn.com/w40/jp.png' },
+    { code: 'CNY', symbol: '¥', flag: 'https://flagcdn.com/w40/cn.png' },
+    { code: 'HKD', symbol: '$', flag: 'https://flagcdn.com/w40/hk.png' },
+    { code: 'EUR', symbol: '€', flag: 'https://flagcdn.com/w40/eu.png' },
+    { code: 'GBP', symbol: '£', flag: 'https://flagcdn.com/w40/gb.png' },
+    { code: 'THB', symbol: '฿', flag: 'https://flagcdn.com/w40/th.png' },
+    { code: 'VND', symbol: '₫', flag: 'https://flagcdn.com/w40/vn.png' },
+    { code: 'PHP', symbol: '₱', flag: 'https://flagcdn.com/w40/ph.png' },
+    { code: 'SGD', symbol: '$', flag: 'https://flagcdn.com/w40/sg.png' },
+    { code: 'IDR', symbol: 'Rp', flag: 'https://flagcdn.com/w40/id.png' },
+    { code: 'MYR', symbol: 'RM', flag: 'https://flagcdn.com/w40/my.png' },
 ];
 
 export default function CurrencySelector() {
@@ -57,7 +60,12 @@ export default function CurrencySelector() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.trigger} onClick={() => setIsOpen(!isOpen)}>
-                <span>{selected}</span>
+                <img 
+                    src={SUPPORTED_CURRENCIES.find(c => c.code === selected)?.flag} 
+                    alt="" 
+                    className="w-5 h-3.5 object-cover rounded-[2px] mr-2" 
+                />
+                <span className="font-bold">{selected}</span>
                 <span className={styles.arrow}>▼</span>
             </div>
 
@@ -71,6 +79,7 @@ export default function CurrencySelector() {
                                 className={`${styles.item} ${selected === curr.code ? styles.active : ''}`}
                                 onClick={() => handleSelect(curr.code)}
                             >
+                                <img src={curr.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px] mr-3 shrink-0" />
                                 <span className={styles.code}>{curr.code}</span>
                                 <span className={styles.symbol}>{curr.symbol}</span>
                                 {curr.code !== 'KRW' && rates[curr.code] && (

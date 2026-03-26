@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -10,7 +10,7 @@ export default function BookingDetailPage() {
     const router = useRouter();
     const id = params.id; // Service ID
 
-    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
     // Mock Service Data
@@ -22,18 +22,44 @@ export default function BookingDetailPage() {
         imageColor: "#ffccd5"
     };
 
-    const timeSlots = ["10:00", "11:30", "13:00", "14:30", "16:00", "17:30"];
+    const timeSlots = [
+        '10:00', '11:00', '12:00', '13:00',
+        '14:00', '15:00', '16:00', '17:00',
+        '18:00', '19:00'
+    ];
 
-    // Simple Next 7 Days Generator
-    const dates = Array.from({ length: 7 }, (_, i) => {
-        const d = new Date();
-        d.setDate(d.getDate() + i);
-        return {
-            full: d.toISOString().split('T')[0],
-            day: d.toLocaleDateString(t('common.locale', { defaultValue: 'en-US' }), { weekday: 'short' }),
-            date: d.getDate()
-        };
-    });
+    const today = useMemo(() => new Date(), []);
+    const [viewMonth, setViewMonth] = useState(today.getMonth());
+    const [viewYear, setViewYear] = useState(today.getFullYear());
+
+    const calendarDays = useMemo(() => {
+        const firstDay = new Date(viewYear, viewMonth, 1);
+        const lastDay = new Date(viewYear, viewMonth + 1, 0);
+        const startOffset = firstDay.getDay();
+        const totalDays = lastDay.getDate();
+
+        const days: (Date | null)[] = [];
+        for (let i = 0; i < startOffset; i++) days.push(null);
+        for (let d = 1; d <= totalDays; d++) days.push(new Date(viewYear, viewMonth, d));
+        return days;
+    }, [viewYear, viewMonth]);
+
+    const monthLabel = useMemo(() => {
+        return new Intl.DateTimeFormat(t('common.locale', { defaultValue: 'ko-KR' }), { year: 'numeric', month: 'long' }).format(new Date(viewYear, viewMonth, 1));
+    }, [viewYear, viewMonth, t]);
+
+    const goToPrevMonth = () => {
+        if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); }
+        else setViewMonth(viewMonth - 1);
+    };
+    const goToNextMonth = () => {
+        if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); }
+        else setViewMonth(viewMonth + 1);
+    };
+
+    function isSameDay(a: Date, b: Date): boolean {
+        return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    }
 
     const handleConfirm = () => {
         router.push('/my?booked=true');
@@ -57,21 +83,53 @@ export default function BookingDetailPage() {
             <div className="p-6">
                 {/* Step 1: Select Date */}
                 <div className="mb-8">
-                    <h2 className="text-lg font-bold mb-4">{t('booking_detail.select_date')}</h2>
-                    <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
-                        {dates.map((d) => (
-                            <div
-                                key={d.full}
-                                onClick={() => setSelectedDate(d.full)}
-                                className={`flex flex-col items-center justify-center min-w-[60px] h-[80px] rounded-2xl border transition-all cursor-pointer ${selectedDate === d.full
-                                    ? 'bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-900/50'
-                                    : 'bg-white border-gray-200 text-gray-500 hover:bg-gray-50'
-                                    }`}
-                            >
-                                <span className="text-xs">{d.day}</span>
-                                <span className="text-xl font-bold">{d.date}</span>
-                            </div>
-                        ))}
+                    <h2 className="text-lg font-bold mb-4">{t('booking_detail.select_date', { defaultValue: '날짜 선택' })}</h2>
+                    <div className="mb-4 px-1 p-4 bg-white border border-gray-200 rounded-2xl shadow-sm">
+                        <div className="flex items-center justify-between mb-4 px-2">
+                            <button onClick={goToPrevMonth} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7l6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            </button>
+                            <span className="text-[15px] font-bold text-[#1f2024]">{monthLabel}</span>
+                            <button onClick={goToNextMonth} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            </button>
+                        </div>
+                        <div className="grid grid-cols-7 gap-0 mb-2">
+                            {[
+                                t('weekdays.sun'),
+                                t('weekdays.mon'),
+                                t('weekdays.tue'),
+                                t('weekdays.wed'),
+                                t('weekdays.thu'),
+                                t('weekdays.fri'),
+                                t('weekdays.sat')
+                            ].map((d, i) => (
+                                <div key={i} className={`text-center text-[12px] font-semibold py-1 ${i === 0 ? 'text-red-400' : i === 6 ? 'text-purple-400' : 'text-gray-400'}`}>{d}</div>
+                            ))}
+                        </div>
+                        <div className="grid grid-cols-7 gap-1">
+                            {calendarDays.map((day, index) => {
+                                if (!day) return <div key={`empty-${index}`} className="aspect-square" />;
+                                const isPast = day < new Date(new Date().setHours(0,0,0,0));
+                                const isSelected = selectedDate ? isSameDay(day, selectedDate) : false;
+                                const isToday = isSameDay(day, today);
+                                const dayOfWeek = day.getDay();
+                                return (
+                                    <button
+                                        key={day.toISOString()}
+                                        type="button"
+                                        disabled={isPast}
+                                        onClick={() => {
+                                            setSelectedDate(day);
+                                            setSelectedTime(null);
+                                        }}
+                                        className={`aspect-square flex items-center justify-center rounded-xl text-[14px] font-medium transition-all duration-150 ${isSelected ? 'bg-purple-600 text-white font-bold' : isPast ? 'text-gray-200 cursor-not-allowed' : isToday ? 'bg-purple-50 text-purple-600 font-bold ring-1 ring-purple-500/50' : dayOfWeek === 0 ? 'text-red-500 hover:bg-red-50' : dayOfWeek === 6 ? 'text-purple-500 hover:bg-purple-50' : 'text-[#2c2d33] hover:bg-gray-100'}`}
+                                    >
+                                        {day.getDate()}
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
 

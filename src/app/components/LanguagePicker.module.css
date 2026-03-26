@@ -12,19 +12,21 @@
     align-items: center;
     gap: 6px;
     padding: 7px 12px;
-    border-radius: 20px;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-200);
-    color: var(--foreground);
+    border-radius: var(--radius-xl);
+    background: var(--warm-sand);
+    border: 1px solid var(--soft-stone);
+    color: var(--ink-black);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: normal;
+    word-break: break-word;
 }
 
 .trigger:hover {
-    background: var(--gray-200);
+    background: var(--soft-stone);
+    border-color: var(--gray-400);
 }
 
 .trigger.compact {
@@ -44,10 +46,9 @@
 
 .langLabel {
     font-size: 13px;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* Removed text truncation properties to allow full text display */
+    white-space: normal;
+    word-break: break-word;
 }
 
 .chevron {
@@ -73,10 +74,10 @@
     transform: translate(-50%, -50%);
     width: 90vw;
     max-width: 1100px;
-    background: #ffffff;
-    border: 1px solid var(--gray-200);
-    border-radius: 28px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+    background: var(--hanji-ivory);
+    border: 1px solid var(--warm-sand);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 40px 100px rgba(43, 35, 29, 0.12);
     overflow: hidden;
     z-index: 999999;
     animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -104,7 +105,7 @@
     margin: 0;
     font-size: 20px;
     font-weight: 800;
-    color: var(--foreground);
+    color: var(--ink-black);
 }
 
 /* ── Language List ───────────────────────────────────────── */
@@ -166,11 +167,11 @@
     transition: all 0.2s;
     border-radius: 12px;
     white-space: normal;
-    word-break: keep-all;
+    word-break: break-word;
 }
 
 .langItem:hover {
-    background: var(--gray-100);
+    background: var(--warm-sand);
 }
 
 .langItem.active {
@@ -187,7 +188,7 @@
 .itemLabel {
     flex: 1;
     white-space: normal;
-    word-break: keep-all;
+    word-break: break-word;
     line-height: 1.4;
 }
 

@@ -1,4 +1,23 @@
 {
+  "beauty_explore": {
+    "form_name": "ชื่อ",
+    "form_name_placeholder": "กรอกชื่อของคุณ",
+    "form_phone": "ช่องทางติดต่อ (หรือ SNS ID)",
+    "form_phone_placeholder": "เบอร์โทรหรือ SNS ID",
+    "form_request": "คำขอเพิ่มเติม",
+    "form_request_placeholder": "อาการแพ้หรือสไตล์ที่ต้องการ",
+    "agreement_confirm": "ยืนยันรายละเอียด",
+    "agreement_confirm_desc": "ฉันยืนยันตัวเลือกนี้",
+    "agreement_privacy": "ข้อตกลงความเป็นส่วนตัว",
+    "agreement_privacy_desc": "ฉันยินยอมให้ข้อมูลที่จำเป็น",
+    "region_all": "ทุกพื้นที่",
+    "label_today": "วันนี้",
+    "label_tomorrow": "พรุ่งนี้",
+    "label_booking_unit": "วอน",
+    "booking_confirmation_title": "ส่งคำขอจองแล้ว!",
+    "booking_confirmation_desc": "เราจะแจ้งให้คุณทราบเร็ว ๆ นี้",
+    "booking_confirmation_cta": "การจองของฉัน"
+  },
   "common": {
     "welcome": "ยินดีต้อนรับนักเดินทาง",
     "greeting": "อรุณสวัสดิ์",
@@ -54,7 +73,10 @@
     "route_nav": "แนะนำเส้นทาง",
     "transit_nav_desc": "นำทางด้วยขนส่งสาธารณะ",
     "copy_address": "คัดลอกที่อยู่",
-    "copied": "คัดลอกแล้ว!"
+    "copied": "คัดลอกแล้ว!",
+    "morning": "อรุณสวัสดิ์",
+    "afternoon": "สวัสดีตอนบ่าย",
+    "evening": "สวัสดีตอนเย็น"
   },
   "transport": {
     "moving_to": "กำลังไปที่ {{dest}}",
@@ -78,82 +100,80 @@
   },
   "home_beauty": {
     "hero": {
-      "eyebrow": "Beauty Booking Concierge",
-      "title": "คุณต้องการจองบริการแบบไหน?",
-      "subtitle": "เลือกบริการความงามที่คุณต้องการก่อน แล้วเข้าสู่ขั้นตอนการจองได้ทันที เราออกแบบมาเพื่อให้เลือกผ่านมือถือได้อย่างรวดเร็ว ตามด้วยการเปรียบเทียบร้านและส่งคำขอจอง",
-      "welcome": "คุณ {{name}} ลองเลือกบริการที่ต้องการในวันนี้ดูสิ"
+      "eyebrow": "บริการจองความงาม",
+      "title": "สัมผัสความงามของเกาหลี\nในตารางเวลาของคุณ",
+      "subtitle": "เลือกบริการความงามแล้วจองได้เลย",
+      "welcome": "{{name}} กรุณาเลือกบริการ",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "step": "Step 1",
-      "title": "กรุณาเลือกบริการความงามที่คุณต้องการ",
-      "description": "เมื่อเลือกหมวดหมู่แล้ว คุณสามารถเริ่มสำรวจการจองตามบริการนั้นได้ในขั้นตอนถัดไป"
+      "step": "STEP. 01",
+      "title": "กรุณาเลือกบริการความงาม",
+      "description": ""
     },
     "categories": {
       "hair": {
         "label": "ทำผม",
-        "note": "ตัด, ดัด, ทำสี, ไดร์",
-        "summary": "เริ่มจองได้อย่างรวดเร็ว ตั้งแต่การเปลี่ยนสไตล์ไปจนถึงการจัดแต่งทรงผมเบาๆ"
+        "note": "ตัด, ดัด, ย้อม",
+        "summary": "จองบริการทำผมได้ง่ายๆ"
       },
       "nail": {
         "label": "ทำเล็บ",
-        "note": "เล็บเจล, ดูแลเล็บ, ต่อเล็บ",
-        "summary": "เลือกอารมณ์และดีไซน์ที่ต้องการ แล้วเข้าสู่ขั้นตอนการจองได้อย่างง่ายดาย"
+        "note": "เจล, ดูแล, ต่อเล็บ",
+        "summary": "เลือกดีไซน์แล้วจองได้เลย"
       },
       "esthetic": {
-        "label": "นวดหน้า",
-        "note": "ดูแลผิว, ปรับรูปหน้า, ปลอบประโลมผิว",
-        "summary": "เปรียบเทียบร้านและทำการจองตามสภาพผิวและเป้าหมายการรักษาของคุณ"
+        "label": "เอสเธติก",
+        "note": "ดูแลผิว, คอนทัวร์",
+        "summary": "เปรียบเทียบร้านและจอง"
       },
       "waxing": {
         "label": "แว็กซ์",
         "note": "ใบหน้า, ตัว, บราซิลเลียน",
-        "summary": "ค้นหาและจองร้านที่เหมาะกับส่วนต่างๆ และตารางเวลาของคุณได้อย่างรวดเร็ว"
+        "summary": "ค้นหาร้านที่เหมาะกับคุณ"
       },
       "makeup": {
         "label": "แต่งหน้า",
-        "note": "ทั่วไป, ถ่ายแบบ, งานแต่งงาน",
-        "summary": "เลือกบริการแต่งหน้าที่เหมาะกับตารางงานของคุณและเริ่มจองได้ทันที"
+        "note": "รายวัน, ถ่ายรูป, แต่งงาน",
+        "summary": "เลือกบริการแต่งหน้าสำหรับงานของคุณ"
       },
       "lash": {
-        "label": "ทำขนตา",
-        "note": "ต่อขนตา, ดัดขนตา, ขนตาล่าง",
-        "summary": "เชื่อมต่อกับเมนูที่ต้องการโดยตรง ตั้งแต่การต่อแบบธรรมชาติไปจนถึงสไตล์หนา"
+        "label": "ขนตา",
+        "note": "ต่อขนตา, ดัดขนตา",
+        "summary": "จากธรรมชาติถึงวอลลุ่ม เลือกได้เลย"
       }
     },
     "selection": {
-      "eyebrow": "Selected Category",
+      "eyebrow": "หมวดหมู่ที่เลือก",
       "tags": {
         "mobile": "จองผ่านมือถือ",
         "comparison": "เปรียบเทียบร้าน",
         "inquiry": "สอบถามแบบเรียลไทม์"
       },
-      "empty": "กรุณาเลือกหมวดหมู่ก่อน ปุ่มเริ่มการจองจะเปิดใช้งานหลังจากเลือกแล้ว"
+      "empty": "กรุณาเลือกหมวดหมู่ก่อน ปุ่มเริ่มจองจะเปิดใช้งานหลังจากเลือกแล้ว"
     },
     "cta": {
-      "hint": "สำรวจบริการความงามที่มีตามหมวดหมู่ที่คุณเลือกในหน้าถัดไป",
-      "button": "เริ่มการจอง"
+      "hint": "เลือกหมวดหมู่เพื่อเริ่มการจอง",
+      "button": "เริ่มจอง"
     },
-    "interpreter": {
-      "eyebrow": "Language Support",
-      "title": "ต้องการจองเป็นภาษาต่างประเทศ? ใช้ผู้ช่วยแปลภาษา",
-      "description": "หากคุณกังวลเรื่องการสื่อสารระหว่างปรึกษาก่อนจองหรือตอนไปที่ร้าน คุณสามารถเชื่อมต่อกับล่ามแบบเรียลไทม์ได้โดยตรง",
-      "button": "เปิดผู้ช่วยแปลภาษา"
+    "interpreter_entry": {
+      "title": "ล่ามแบบเรียลไทม์",
+      "description": "สื่อสารกับพนักงานได้ง่ายๆ",
+      "cta": "เปิดล่าม"
     },
-    "assurance": {
-      "items": [
-        {
-          "title": "เลือกหมวดหมู่ง่ายๆ",
-          "desc": "เลือกบริการของคุณในหน้าแรกและเข้าสู่ขั้นตอนการจองได้ทันที"
-        },
-        {
-          "title": "ไร้กังวลเรื่องภาษา",
-          "desc": "พูดคุยกับทางร้านได้อย่างเป็นธรรมชาติด้วยล่ามแบบเรียลไทม์เมื่อจำเป็น"
-        },
-        {
-          "title": "ดีไซน์สำหรับมือถือ",
-          "desc": "เพิ่มความสะดวกด้วยปุ่มสไตล์การ์ดและปุ่ม CTA ขนาดใหญ่ที่เลือกได้ง่ายด้วยมือเดียว"
-        }
-      ]
+    "location_sheet": {
+      "search_title": "ค้นหาตำแหน่ง",
+      "search_result_count": "{{count}} ผลลัพธ์สำหรับ '{{query}}'",
+      "view_location": "ดูตำแหน่ง",
+      "view_location_desc": "ตรวจสอบตำแหน่งโดยละเอียดบนแผนที่",
+      "call_taxi": "เรียกแท็กซี่",
+      "google_maps_desc": "ตรวจสอบเส้นทางขนส่งสาธารณะบน Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 กรุณาไปที่ที่อยู่นี้",
+      "copy": "คัดลอกที่อยู่",
+      "copy_done": "คัดลอกแล้ว!",
+      "close": "ปิด"
     }
   },
   "interpreter_ui": {
@@ -189,7 +209,8 @@
       "request_custom_label": "กำหนดเอง",
       "request_custom_title": "ขอแผนการเดินทางแบบ {{days}} วัน",
       "request_custom_toast": "ขอแผนการเดินทางแบบ {{days}} วันที่กำหนดเองแล้ว! คอนเซียร์จของเราจะติดต่อกลับหาคุณ"
-    }
+    },
+    "badge": "สัมผัสความงามของเกาหลี"
   },
   "explore_page": {
     "title": "สำรวจ",
@@ -234,14 +255,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "ชุมชน",
+    "subtitle": "เชื่อมต่อกับคนท้องถิ่นและนักเดินทาง",
+    "filter_all": "ทั้งหมด",
+    "filter_meetup": "อาหารและมิตติ้ง",
+    "filter_travel": "หาเพื่อนร่วมทาง",
+    "filter_help": "ความช่วยเหลือในพื้นที่",
+    "comments": "ความคิดเห็น",
+    "message": "ข้อความ",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -274,7 +295,7 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
+    "filter_review": "รีวิว",
     "detail": "รายละเอียดโพสต์"
   },
   "explore_items": {
@@ -386,15 +407,15 @@
     "category_waxing": "Waxing",
     "category_makeup": "Makeup",
     "category_lash": "Lash",
-    "lang_ko": "Korean",
+    "lang_ko": "한국어",
     "lang_en": "English",
-    "lang_ja": "Japanese",
-    "lang_zh_cn": "Chinese (Simplified)",
-    "lang_zh_hk": "Chinese (Traditional)",
-    "lang_vi": "Vietnamese",
-    "lang_th": "Thai",
-    "lang_id": "Indonesian",
-    "lang_ms": "Malay",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
     "intent_booking_confirm": "Booking Confirmation",
     "intent_service_request": "Service Request",
     "intent_allergy_notice": "Allergy/Sensitivity Notice",
@@ -490,7 +511,15 @@
     "error_cancel_reason": "Please select or enter a cancellation reason.",
     "error_change_reason": "Please enter what you'd like to change.",
     "error_change": "Could not send your change request. Please try again later.",
-    "error_alt": "Something went wrong. Please try again later."
+    "error_alt": "Something went wrong. Please try again later.",
+    "interpreter_visit_context": "กำลังใช้เครื่องแปลภาษาระหว่างเข้าชม {{storeName}}",
+    "interpreter_visit_service_context": "กำลังใช้เครื่องแปลภาษาสำหรับ {{serviceName}} ที่ {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -507,5 +536,47 @@
     "event_booking_change_rejected": "Change Declined",
     "event_booking_completed": "Service Completed",
     "event_default": "Notification"
+  },
+  "interpreter_page": {
+    "back": "< กลับ",
+    "title": "ล่ามแบบเรียลไทม์",
+    "subtitle": "ภาษาของลูกค้าถูกตั้งตามภาษาของแอป ภาษาร้านค้าถูกกำหนดเป็นภาษาเกาหลี",
+    "onboarding": "เมื่อลูกค้าป้อนข้อมูล ระบบจะแปลเป็นภาษาเกาหลี เมื่อพนักงานป้อนภาษาเกาหลี ระบบจะแปลเป็นภาษาของคุณ",
+    "customer_lang": "ภาษาของผู้เยี่ยมชม",
+    "staff_lang": "ภาษาร้านค้า (เกาหลี)",
+    "mic_preparing": "กำลังเตรียมไมโครโฟน",
+    "customer_transcribing": "กำลังจดจำเสียงของผู้เยี่ยมชม...",
+    "customer_recording": "กำลังบันทึกเสียงผู้เยี่ยมชม... คลิกอีกครั้งเพื่อสิ้นสุด",
+    "translating": "กำลังแปล...",
+    "customer_speak_btn": "อินพุตเสียงผู้เยี่ยมชม",
+    "staff_transcribing": "กำลังจดจำเสียงพนักงาน...",
+    "staff_recording": "กำลังบันทึกเสียงพนักงาน... คลิกอีกครั้งเพื่อสิ้นสุด",
+    "staff_speak_btn": "อินพุตเสียงพนักงาน",
+    "customer_input_label": "อินพุตของผู้เยี่ยมชม",
+    "customer_placeholder": "พิมพ์สิ่งที่ผู้เยี่ยมชมพูด",
+    "send": "ส่ง",
+    "staff_input_label": "อินพุตของพนักงาน",
+    "staff_placeholder": "พิมพ์สิ่งที่พนักงานพูดเป็นภาษาเกาหลี",
+    "voice_supported_hint": "บันทึกผ่านไมโครโฟนหรือพิมพ์ข้อความด้านล่าง",
+    "voice_not_supported_hint": "เบราว์เซอร์นี้ไม่รองรับการป้อนข้อมูลด้วยเสียง ใช้ข้อความแทน",
+    "voice_recognizing": "กำลังจดจำเสียง",
+    "voice_unrecognized_error": "ไม่สามารถจดจำเสียงได้",
+    "voice_failed_error": "การจดจำเสียงล้มเหลว",
+    "mic_permission_status": "กำลังตรวจสอบสิทธิ์ไมโครโฟน",
+    "recording_status": "กำลังบันทึก... สูงสุด {{seconds}} วินาที",
+    "mic_unsupported_error": "ไม่สามารถเข้าถึงไมโครโฟนได้",
+    "input_required_customer": "กรุณาป้อนประโยคของผู้เยี่ยมชมก่อน",
+    "input_required_staff": "กรุณาป้อนประโยคของพนักงานก่อน",
+    "translating_status": "กำลังเตรียมคำแปล",
+    "translation_failed_error": "การแปลล้มเหลว โปรดลองอีกครั้ง",
+    "empty_history_hint": "ประวัติจะปรากฏที่นี่",
+    "customer_role": "ผู้เยี่ยมชม",
+    "staff_role": "พนักงาน",
+    "replay_btn_label": "เล่นเสียงแปลซ้ำ",
+    "replay_not_supported_hint": "ไม่รองรับการเล่นเสียง",
+    "play": "เล่น",
+    "translated_status": "แปลแล้ว",
+    "source_only_status": "ข้อความต้นฉบับเท่านั้น",
+    "voice_too_short_error": "โปรดพูดให้ยาวกว่านี้อีกนิด"
   }
 }

@@ -1,5 +1,4 @@
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "@/lib/supabaseServer.ts";
-import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
 
 export type BeautyBookingNotificationEventType =
   | "booking_created"
@@ -44,6 +43,75 @@ export const BEAUTY_NOTIFICATION_RESEND_COOLDOWN_MS = 5 * 60 * 1000; // 5 mins
 const BEAUTY_NOTIFICATION_TABLE = "beauty_booking_notifications";
 
 /**
+ * Notifies the admin via email about a new beauty booking request.
+ * Operates only if BEAUTY_BOOKING_ADMIN_EMAIL environment variable is set.
+ */
+export async function notifyAdminNewBooking(
+  bookingId: string,
+  metadata: Record<string, unknown>
+): Promise<void> {
+  const adminEmail = process.env.BEAUTY_BOOKING_ADMIN_EMAIL;
+  const apiKey = process.env.RESEND_API_KEY;
+  // Use NEXT_PUBLIC_APP_URL as primary, fallback to APP_BASE_URL
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_BASE_URL;
+
+  if (!adminEmail || !apiKey) {
+    // Silently skip if admin email or API key is not configured
+    return;
+  }
+
+  const customerName = (metadata.customerName as string) || "Unknown Customer";
+  const storeName = (metadata.storeName as string) || "Unknown Store";
+  const bookingDate = (metadata.bookingDate as string) || "Unknown Date";
+  const bookingTime = (metadata.bookingTime as string) || "Unknown Time";
+
+  // Construct admin link if baseUrl is available
+  const adminLink = baseUrl 
+    ? `${baseUrl.replace(/\/$/, "")}/admin/bookings/beauty?bookingId=${bookingId}` 
+    : null;
+
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from: "Kello <no-reply@kello.ai>",
+        to: [adminEmail],
+        subject: `[Kello] New beauty booking request`,
+        text: `New beauty booking request.\n- Customer: ${customerName}\n- Store: ${storeName}\n- Schedule: ${bookingDate} ${bookingTime}\n- Booking ID: ${bookingId}${adminLink ? `\n\nOpen admin bookings: ${adminLink}` : ""}`,
+        html: `<div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; border: 1px solid #eee; border-radius: 12px;">
+          <h2 style="color: #7c3aed; margin-top: 0;">New Beauty Booking Request</h2>
+          <p style="margin: 8px 0;"><strong>Customer:</strong> ${customerName}</p>
+          <p style="margin: 8px 0;"><strong>Store:</strong> ${storeName}</p>
+          <p style="margin: 8px 0;"><strong>Schedule:</strong> ${bookingDate} ${bookingTime}</p>
+          <p style="margin: 8px 0;"><strong>Booking ID:</strong> ${bookingId}</p>
+          ${adminLink ? `
+            <div style="margin: 30px 0;">
+              <a href="${adminLink}" style="background-color: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                Open admin bookings
+              </a>
+            </div>
+          ` : ""}
+          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
+          <p style="font-size: 12px; color: #9ca3af;">This is an automated admin notification from Kello.</p>
+        </div>`,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.warn("[beauty-notification] admin dispatch failed silently", errorData);
+    }
+  } catch (error) {
+    console.warn("[beauty-notification] admin dispatch error", error);
+  }
+}
+
+
+/**
  * Interface for generating notification title and body.
  */
 export interface BeautyBookingNotificationContent {
@@ -58,13 +126,13 @@ export interface BeautyBookingNotificationContent {
  */
 export function getBeautyBookingNotificationTemplate(
   eventType: BeautyBookingNotificationEventType,
-  metadata: Record<string, any>,
+  metadata: Record<string, unknown>,
   bookingId?: string
 ): BeautyBookingNotificationContent {
-  const storeName = metadata.storeName || "매장";
-  const date = metadata.bookingDate || "";
-  const time = metadata.bookingTime || "";
-  const service = metadata.primaryServiceName || "시술";
+  const storeName = (metadata.storeName as string) || "매장";
+  const date = (metadata.bookingDate as string) || "";
+  const time = (metadata.bookingTime as string) || "";
+  const service = (metadata.primaryServiceName as string) || "시술";
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const myBookingUrl = bookingId 
@@ -367,11 +435,13 @@ export async function resendBeautyBookingNotification(notificationId: string, ad
   const client = getSupabaseServerClient();
   
   // 1. Fetch original notification
-  const { data: original, error: fetchError } = await client
+  const { data: originalResult, error: fetchError } = await client
     .from(BEAUTY_NOTIFICATION_TABLE)
     .select("*")
     .eq("id", notificationId)
     .single();
+
+  const original = originalResult as BeautyBookingNotificationRecord | null;
 
   if (fetchError || !original) {
     throw new Error(`Notification not found: ${notificationId}`);

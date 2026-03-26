@@ -14,8 +14,8 @@ export default function HelpPage() {
             icon: '🏥',
             title: t('help_page.medical_title'),
             desc: t('help_page.medical_desc'),
-            color: '#ef4444',
-            bg: '#fef2f2',
+            color: 'var(--korean-red)',
+            bg: 'var(--hanji-ivory)',
             path: '/help/medical',
         },
         {
@@ -23,8 +23,8 @@ export default function HelpPage() {
             icon: '🔍',
             title: t('help_page.lost_title'),
             desc: t('help_page.lost_desc'),
-            color: '#f59e0b',
-            bg: '#fffbeb',
+            color: 'var(--accent)',
+            bg: 'var(--hanji-ivory)',
             path: '/help/lost',
         },
         {
@@ -32,8 +32,8 @@ export default function HelpPage() {
             icon: '🚔',
             title: t('help_page.police_title'),
             desc: t('help_page.police_desc'),
-            color: '#3b82f6',
-            bg: '#eff6ff',
+            color: 'var(--secondary)',
+            bg: 'var(--hanji-ivory)',
             path: '/help/police',
         },
         {
@@ -41,8 +41,8 @@ export default function HelpPage() {
             icon: '🌐',
             title: t('help_page.interp_title'),
             desc: t('help_page.interp_desc'),
-            color: '#8b5cf6',
-            bg: '#f5f3ff',
+            color: 'var(--dancheong-teal)',
+            bg: 'var(--hanji-ivory)',
             path: '/help/interpretation',
         },
     ];
@@ -62,10 +62,10 @@ export default function HelpPage() {
                     <button
                         key={item.id}
                         className={styles.card}
-                        style={{ background: item.bg, borderColor: item.color + '30' }}
+                        style={{ borderBottomColor: item.color }}
                         onClick={() => router.push(item.path)}
                     >
-                        <div className={styles.cardIcon} style={{ background: item.color + '15' }}>
+                        <div className={styles.cardIcon}>
                             <span style={{ fontSize: '2.4rem' }}>{item.icon}</span>
                         </div>
                         <div className={styles.cardTitle} style={{ color: item.color }}>
@@ -81,10 +81,10 @@ export default function HelpPage() {
                 <h2 className={styles.sectionTitle}>📞 {t('help_page.numbers_title')}</h2>
                 <div className={styles.numberList}>
                     {[
-                        { number: '119', label: 'Fire & Ambulance', icon: '🚑', color: '#ef4444' },
-                        { number: '112', label: 'Police', icon: '🚔', color: '#3b82f6' },
-                        { number: '1330', label: 'Tourism Helpline (EN/JA/ZH)', icon: '🌐', color: '#8b5cf6' },
-                        { number: '021-2277', label: 'Seoul Foreign Clinic', icon: '🏥', color: '#10b981' },
+                        { id: 'fire', number: '119', label: 'Fire & Ambulance', icon: '🚑', color: 'var(--korean-red)' },
+                        { id: 'police', number: '112', label: 'Police', icon: '🚔', color: 'var(--secondary)' },
+                        { id: 'tourism', number: '1330', label: 'Tourism Helpline (EN/JA/ZH)', icon: '🌐', color: 'var(--dancheong-teal)' },
+                        { id: 'clinic', number: '021-2277', label: 'Seoul Foreign Clinic', icon: '🏥', color: 'var(--dancheong-teal)' },
                     ].map((n) => (
                         <a
                             key={n.number}
@@ -95,7 +95,7 @@ export default function HelpPage() {
                             <span className={styles.numberIcon}>{n.icon}</span>
                             <div>
                                 <div className={styles.numberValue} style={{ color: n.color }}>{n.number}</div>
-                                <div className={styles.numberLabel}>{n.label}</div>
+                                <div className={styles.numberLabel}>{t(`help_page_labels.${n.id}`)}</div>
                             </div>
                             <span className={styles.callIcon}>📲</span>
                         </a>
@@ -105,8 +105,8 @@ export default function HelpPage() {
 
             {/* Floating Quick-dial Buttons */}
             <div className={styles.fab}>
-                <a href="tel:119" className={styles.fabBtn} style={{ background: '#ef4444' }}>🚑 119</a>
-                <a href="tel:1330" className={styles.fabBtn} style={{ background: '#8b5cf6' }}>🌐 1330</a>
+                <a href="tel:119" className={styles.fabBtn} style={{ background: 'var(--korean-red)' }}>🚑 119</a>
+                <a href="tel:1330" className={styles.fabBtn} style={{ background: 'var(--secondary)' }}>🌐 1330</a>
             </div>
             <div style={{ height: 120 }} />
         </div>

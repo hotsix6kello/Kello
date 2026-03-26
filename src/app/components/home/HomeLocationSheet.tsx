@@ -1,3 +1,5 @@
+import { TFunction } from 'i18next';
+import Image from 'next/image';
 import styles from '../../home.module.css';
 
 interface HomeLocationSheetProps {
@@ -5,15 +7,15 @@ interface HomeLocationSheetProps {
   onClose: () => void;
   isSearchingInSheet: boolean;
   input: string;
-  sheetSearchResults: any[];
-  destInfo: any;
-  onSelectPlace: (place: any) => void;
+  sheetSearchResults: Array<{ title: string; area: string; [key: string]: unknown }>;
+  destInfo: { name: string; nameKo: string; [key: string]: unknown };
+  onSelectPlace: (place: { title: string; area: string; [key: string]: unknown }) => void;
   onOpenMap: () => void;
   onKRide: () => void;
   onTransit: (provider: 'kakao' | 'google') => void;
   onCopy: () => void;
   copied: boolean;
-  t: (key: string, options?: any) => string;
+  t: TFunction;
 }
 
 export default function HomeLocationSheet({
@@ -84,7 +86,7 @@ export default function HomeLocationSheet({
               </button>
               <button className={styles.choiceBtn} onClick={() => onTransit('google')} style={{ gridColumn: 'span 2', flexDirection: 'row', padding: '16px' }}>
                 <div className={styles.choiceIcon} style={{ width: '40px', height: '40px', fontSize: '20px' }}>
-                  <img src="https://www.google.com/images/branding/product/ico/maps15_bnuw32.ico" width="24" height="24" alt="G" />
+                  <Image src="https://www.google.com/images/branding/product/ico/maps15_bnuw32.ico" width={24} height={24} alt="G" />
                 </div>
                 <div style={{ textAlign: 'left', flex: 1, paddingLeft: '12px' }}>
                   <div className={styles.choiceLabel}>Google Maps Transit</div>

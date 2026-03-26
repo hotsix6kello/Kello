@@ -4,7 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
-import { ItineraryItem, useTrip } from "@/lib/contexts/TripContext";
+import { useTrip } from "@/lib/contexts/TripContext";
 import {
     formatCountLabel,
     formatRelativeTime,

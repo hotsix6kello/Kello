@@ -1,19 +1,26 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
+import { ArrowUp, ChevronDown } from 'lucide-react';
 
 import styles from './interpreter.module.css';
 import {
   getLocaleDisplayLabel,
+  getLocaleLabel,
   getSpeechLocale,
   INTERPRETER_SUPPORTED_LOCALES,
 } from '@/lib/translator/catalog.ts';
-import { normalizeInterpreterTextInput } from '@/lib/translator/interpreterUi.ts';
+import {
+  normalizeInterpreterTextInput,
+} from '@/lib/translator/interpreterUi.ts';
 import type { ConciergeLocale, SpeakerRole } from '@/lib/translator/types.ts';
+import { LOCALE_STORAGE_KEY, resolveCanonicalLocale } from '@/lib/i18n/locales.ts';
+import { LANGUAGE_CHANGED_EVENT } from '@/lib/i18n/client.tsx';
 
-const DEFAULT_CUSTOMER_LOCALE: ConciergeLocale = 'en';
-const DEFAULT_STAFF_LOCALE: ConciergeLocale = 'ko';
+const STAFF_LOCALE: ConciergeLocale = 'ko';
+const FALLBACK_CUSTOMER_LOCALE: ConciergeLocale = 'en';
 const MAX_RECORDING_MS = 10000;
 const MIN_RECORDING_MS = 700;
 
@@ -25,34 +32,26 @@ type InterpreterMessage = {
   statusLabel: string;
   sourceLang: ConciergeLocale;
   targetLang: ConciergeLocale;
-  inputType: 'voice' | 'text' | 'quick-phrase';
+  inputType: 'voice' | 'text';
   canReplay: boolean;
 };
 
-type QuickPhrase = {
-  id: string;
-  translations: Record<ConciergeLocale, string>;
-};
-
-type InterpreterMessageEntry = {
+type InterpreterTurnResponse = {
+  turnId: string;
+  sessionId: string;
   speaker: SpeakerRole;
-  inputType: InterpreterMessage['inputType'];
-  sourceText: string;
-  sourceLang: ConciergeLocale;
-  targetLang: ConciergeLocale;
-  translations?: Record<ConciergeLocale, string>;
+  inputMode: 'voice' | 'text';
+  originalText: string;
+  translatedText: string;
+  sourceLocale: ConciergeLocale;
+  targetLocale: ConciergeLocale;
+  createdAt: string;
+  replay: {
+    originalLang: string;
+    translatedLang: string;
+  };
+  fallbackToText: boolean;
 };
-
-type InterpreterTranslateResponse =
-  | {
-      ok: true;
-      translatedText: string;
-      provider: string;
-    }
-  | {
-      ok: false;
-      error: string;
-    };
 
 type InterpreterTranscribeResponse =
   | {
@@ -65,276 +64,11 @@ type InterpreterTranscribeResponse =
       error: string;
     };
 
-type QuickPhraseGroupId =
-  | 'consultation'
-  | 'haircut'
-  | 'styling'
-  | 'during-service'
-  | 'finishing';
-
-const QUICK_PHRASE_GROUPS: Array<{
-  id: QuickPhraseGroupId;
-  label: string;
-  customerPhrases: QuickPhrase[];
-  staffPhrases: QuickPhrase[];
-}> = [
-  {
-    id: 'consultation',
-    label: '상담',
-    customerPhrases: [
-      {
-        id: 'sensitive-skin',
-        translations: {
-          ko: '피부가 예민해서 자극이 적었으면 좋겠어요.',
-          en: 'I have sensitive skin, so please use gentle products.',
-          ja: '肌が敏感なほうです。',
-          'zh-CN': '我的皮肤比较敏感。',
-          'zh-HK': '我的皮膚比較敏感，希望盡量溫和一點。',
-          vi: 'Da tôi khá nhạy cảm, mong dùng sản phẩm dịu nhẹ giúp tôi.',
-          th: 'ผิวของฉันค่อนข้างแพ้ง่าย รบกวนใช้ผลิตภัณฑ์ที่อ่อนโยนหน่อยนะคะ',
-          id: 'Kulit saya sensitif, jadi tolong gunakan produk yang lembut.',
-          ms: 'Kulit saya sensitif, jadi tolong gunakan produk yang lembut.',
-        },
-      },
-    ],
-    staffPhrases: [
-      {
-        id: 'consult-bangs',
-        translations: {
-          ko: '앞머리는 어떤 느낌으로 해드릴까요?',
-          en: 'How would you like your bangs styled?',
-          ja: '前髪はどのようにいたしましょうか。',
-          'zh-CN': '刘海想怎么处理呢？',
-          'zh-HK': '瀏海想要什麼感覺呢？',
-          vi: 'Bạn muốn để mái kiểu nào?',
-          th: 'หน้าม้าอยากได้ทรงแบบไหนคะ',
-          id: 'Anda ingin poni seperti apa?',
-          ms: 'Anda mahu poni gaya macam mana?',
-        },
-      },
-    ],
-  },
-  {
-    id: 'haircut',
-    label: '커트 / 앞머리',
-    customerPhrases: [
-      {
-        id: 'shorter-bangs',
-        translations: {
-          ko: '앞머리를 조금만 더 짧게 해 주세요.',
-          en: 'Please trim my bangs a little shorter.',
-          ja: '前髪をもっと短くしたいです。',
-          'zh-CN': '我想把刘海剪得更短一点。',
-          'zh-HK': '請把瀏海再修短一點。',
-          vi: 'Làm ơn cắt mái ngắn hơn một chút.',
-          th: 'ช่วยตัดหน้าม้าให้สั้นลงอีกนิดได้ไหมคะ',
-          id: 'Tolong rapikan poni saya sedikit lebih pendek.',
-          ms: 'Tolong potong poni saya sedikit lebih pendek.',
-        },
-      },
-      {
-        id: 'keep-length',
-        translations: {
-          ko: '전체 길이는 너무 짧아지지 않게 해 주세요.',
-          en: 'Please keep the overall length.',
-          ja: '全体の長さはそのままでお願いします。',
-          'zh-CN': '请保持整体长度。',
-          'zh-HK': '整體長度請不要剪得太短。',
-          vi: 'Xin đừng cắt tổng thể quá ngắn.',
-          th: 'ความยาวรวมอย่าตัดสั้นเกินไปนะคะ',
-          id: 'Tolong jangan potong keseluruhan rambut terlalu pendek.',
-          ms: 'Tolong jangan potong keseluruhan rambut terlalu pendek.',
-        },
-      },
-    ],
-    staffPhrases: [
-      {
-        id: 'desired-length',
-        translations: {
-          ko: '어느 정도 길이로 남겨드릴까요?',
-          en: 'How much length would you like to keep?',
-          ja: '長さはどのくらいをご希望ですか？',
-          'zh-CN': '长度想保留到什么程度呢？',
-          'zh-HK': '想保留到大概什麼長度呢？',
-          vi: 'Bạn muốn giữ lại độ dài khoảng bao nhiêu?',
-          th: 'อยากเหลือความยาวประมาณไหนคะ',
-          id: 'Anda ingin menyisakan panjang kira-kira seberapa banyak?',
-          ms: 'Anda mahu kekalkan panjang kira-kira sejauh mana?',
-        },
-      },
-    ],
-  },
-  {
-    id: 'styling',
-    label: '스타일링 / 볼륨',
-    customerPhrases: [
-      {
-        id: 'less-volume',
-        translations: {
-          ko: '옆쪽 볼륨은 조금 덜 살려 주세요.',
-          en: 'Please keep the sides less voluminous.',
-          ja: '横のボリュームは少なめがいいです。',
-          'zh-CN': '我希望两侧的蓬松感少一点。',
-          'zh-HK': '兩側的蓬鬆感請少一點。',
-          vi: 'Phần hai bên xin để bớt phồng một chút.',
-          th: 'ด้านข้างช่วยให้พองน้อยลงหน่อยนะคะ',
-          id: 'Tolong buat volume di bagian samping lebih sedikit.',
-          ms: 'Tolong kurangkan volume di bahagian tepi.',
-        },
-      },
-    ],
-    staffPhrases: [
-      {
-        id: 'reduce-volume',
-        translations: {
-          ko: '옆쪽 볼륨은 조금 줄여드릴까요?',
-          en: 'Would you like me to reduce the volume on the sides?',
-          ja: '横のボリュームは抑えましょうか？',
-          'zh-CN': '两侧的蓬松感要帮您减一点吗？',
-          'zh-HK': '兩側的蓬鬆感要幫您減少一點嗎？',
-          vi: 'Tôi giảm độ phồng ở hai bên cho bạn một chút nhé?',
-          th: 'ให้ลดวอลลุ่มด้านข้างลงอีกหน่อยไหมคะ',
-          id: 'Apakah Anda ingin saya kurangi volume di bagian samping?',
-          ms: 'Adakah anda mahu saya kurangkan volume di bahagian tepi?',
-        },
-      },
-    ],
-  },
-  {
-    id: 'during-service',
-    label: '시술 중',
-    customerPhrases: [
-      {
-        id: 'natural-finish',
-        translations: {
-          ko: '자연스럽게 마무리해 주세요.',
-          en: 'Please keep the finish natural.',
-          ja: 'できるだけ自然にしてください。',
-          'zh-CN': '请尽量做得自然一点。',
-          'zh-HK': '請幫我做得自然一點。',
-          vi: 'Xin hãy hoàn thiện thật tự nhiên giúp tôi.',
-          th: 'ช่วยทำให้ดูเป็นธรรมชาติหน่อยนะคะ',
-          id: 'Tolong hasil akhirnya dibuat senatural mungkin.',
-          ms: 'Tolong buat hasil akhirnya nampak semula jadi.',
-        },
-      },
-    ],
-    staffPhrases: [
-      {
-        id: 'wait-moment',
-        translations: {
-          ko: '잠시만 기다려 주세요.',
-          en: 'Please wait a moment.',
-          ja: '少々お待ちください。',
-          'zh-CN': '请稍等一下。',
-          'zh-HK': '請稍等一下。',
-          vi: 'Vui lòng đợi một chút.',
-          th: 'กรุณารอสักครู่นะคะ',
-          id: 'Mohon tunggu sebentar.',
-          ms: 'Sila tunggu sebentar.',
-        },
-      },
-      {
-        id: 'tell-discomfort',
-        translations: {
-          ko: '불편하시면 바로 말씀해 주세요.',
-          en: 'Please tell me right away if you feel uncomfortable.',
-          ja: '不快でしたらすぐに言ってください。',
-          'zh-CN': '如果您觉得不舒服，请马上告诉我。',
-          'zh-HK': '如果覺得不舒服，請馬上告訴我。',
-          vi: 'Nếu thấy khó chịu, xin hãy nói ngay cho tôi biết.',
-          th: 'ถ้ารู้สึกไม่สบายตรงไหน รบกวนบอกได้เลยนะคะ',
-          id: 'Jika ada bagian yang terasa tidak nyaman, tolong beri tahu saya segera.',
-          ms: 'Jika anda rasa tidak selesa, tolong beritahu saya segera.',
-        },
-      },
-    ],
-  },
-  {
-    id: 'finishing',
-    label: '마무리 확인',
-    customerPhrases: [
-      {
-        id: 'check-result',
-        translations: {
-          ko: '마지막 상태를 한 번 더 확인하고 싶어요.',
-          en: 'I would like to check the final result once more.',
-          ja: '仕上がりをもう一度確認したいです。',
-          'zh-CN': '我想再确认一下最终效果。',
-          'zh-HK': '我想再確認一次最後的效果。',
-          vi: 'Tôi muốn kiểm tra lại kết quả cuối cùng một lần nữa.',
-          th: 'ขอเช็กผลลัพธ์สุดท้ายอีกครั้งได้ไหมคะ',
-          id: 'Saya ingin memeriksa hasil akhirnya sekali lagi.',
-          ms: 'Saya mahu semak hasil akhirnya sekali lagi.',
-        },
-      },
-    ],
-    staffPhrases: [
-      {
-        id: 'check-mirror',
-        translations: {
-          ko: '거울로 한 번 확인해 주세요.',
-          en: 'Please take a look in the mirror.',
-          ja: '鏡でご確認ください。',
-          'zh-CN': '请您通过镜子确认一下。',
-          'zh-HK': '請先照鏡子確認一下。',
-          vi: 'Vui lòng xem thử trong gương nhé.',
-          th: 'รบกวนดูในกระจกอีกครั้งนะคะ',
-          id: 'Silakan lihat hasilnya di cermin.',
-          ms: 'Sila lihat hasilnya di cermin.',
-        },
-      },
-    ],
-  },
-];
-
 function getTimestampLabel() {
   return new Date().toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   });
-}
-
-function buildSafeFallbackTranslatedText(entry: InterpreterMessageEntry) {
-  if (entry.translations?.[entry.targetLang]) {
-    return entry.translations[entry.targetLang];
-  }
-
-  return `[${getLocaleDisplayLabel(entry.targetLang)}] ${entry.sourceText}`;
-}
-
-function createInterpreterMessage(
-  entry: InterpreterMessageEntry,
-  translatedText: string,
-  statusPrefix = '번역 완료',
-  canReplay = false,
-): InterpreterMessage {
-  return {
-    id: `${entry.speaker}-${Date.now()}`,
-    speaker: entry.speaker,
-    sourceText: entry.sourceText,
-    translatedText,
-    statusLabel: `${statusPrefix} ${getTimestampLabel()}`,
-    sourceLang: entry.sourceLang,
-    targetLang: entry.targetLang,
-    inputType: entry.inputType,
-    canReplay,
-  };
-}
-
-function getMicrophoneErrorText(error: unknown) {
-  const domLikeError = error as { name?: unknown } | null;
-  const errorName = typeof domLikeError?.name === 'string' ? domLikeError.name : '';
-
-  if (errorName === 'NotAllowedError' || errorName === 'SecurityError') {
-    return '마이크 권한이 필요합니다. 브라우저 주소창에서 마이크를 허용한 뒤 다시 시도해 주세요. 어려우면 텍스트 입력을 사용하세요.';
-  }
-
-  if (errorName === 'NotFoundError') {
-    return '사용 가능한 마이크를 찾지 못했습니다. 기기 연결을 확인하거나 텍스트 입력을 사용하세요.';
-  }
-
-  return '녹음을 시작하지 못했습니다. 주변 소음을 줄이고 다시 시도하거나 텍스트 입력을 사용하세요.';
 }
 
 function getAudioFileName(mimeType: string) {
@@ -349,22 +83,51 @@ function getAudioFileName(mimeType: string) {
   return 'interpreter-recording.webm';
 }
 
-function getRecognitionRetryMessage() {
-  return '음성이 또렷하게 인식되지 않았어요. 한 문장씩 짧게 다시 말씀해 주세요. 필요하면 텍스트 입력을 사용하세요.';
+function createInterpreterMessage(params: {
+  speaker: SpeakerRole;
+  sourceText: string;
+  translatedText: string;
+  statusLabel: string;
+  sourceLang: ConciergeLocale;
+  targetLang: ConciergeLocale;
+  inputType: 'voice' | 'text';
+  canReplay: boolean;
+}) {
+  return {
+    id: `${params.speaker}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    ...params,
+  } satisfies InterpreterMessage;
 }
 
-function getTranslationFallbackMessage() {
-  return '번역이 잠시 불안정해 원문을 함께 보여드렸어요. 필요하면 짧게 다시 말씀하거나 텍스트 입력을 사용하세요.';
+function resolveCustomerLocale(appLocale?: string | null): ConciergeLocale {
+  const canonical = resolveCanonicalLocale(appLocale, FALLBACK_CUSTOMER_LOCALE);
+
+  // KR(ko) is for staff, so for customer defaults, skip it and use fallback (English)
+  if (canonical === 'ko') {
+    return FALLBACK_CUSTOMER_LOCALE;
+  }
+
+  if (INTERPRETER_SUPPORTED_LOCALES.includes(canonical as ConciergeLocale)) {
+    return canonical as ConciergeLocale;
+  }
+
+  return FALLBACK_CUSTOMER_LOCALE;
 }
 
 export default function InterpreterPage() {
   const router = useRouter();
-  const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>(DEFAULT_CUSTOMER_LOCALE);
-  const [staffLocale, setStaffLocale] = useState<ConciergeLocale>(DEFAULT_STAFF_LOCALE);
+  const searchParams = useSearchParams();
+  const storeName = searchParams.get('storeName');
+  const serviceName = searchParams.get('serviceName');
+  const { t, i18n } = useTranslation('common');
+  const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>(() =>
+    resolveCustomerLocale(i18n.resolvedLanguage ?? i18n.language),
+  );
+  const staffLocale = STAFF_LOCALE;
+
   const [messages, setMessages] = useState<InterpreterMessage[]>([]);
   const [customerInput, setCustomerInput] = useState('');
   const [staffInput, setStaffInput] = useState('');
-  const [activeQuickGroup, setActiveQuickGroup] = useState<QuickPhraseGroupId>('consultation');
   const [isTranslating, setIsTranslating] = useState(false);
   const [translationError, setTranslationError] = useState<string | null>(null);
   const [voiceSupported, setVoiceSupported] = useState(false);
@@ -375,12 +138,110 @@ export default function InterpreterPage() {
   const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
   const [voiceError, setVoiceError] = useState<string | null>(null);
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [ephemeralToken, setEphemeralToken] = useState<string | null>(null);
+  const [isSessionLoading, setIsSessionLoading] = useState(false);
+
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const activeRecordingRoleRef = useRef<SpeakerRole | null>(null);
   const recordingStartedAtRef = useRef<number | null>(null);
   const recordingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('interpreter_history');
+    if (savedMessages) {
+      try {
+        setMessages(JSON.parse(savedMessages));
+      } catch (e) {
+        console.error('Failed to parse saved interpreter messages', e);
+      }
+    }
+
+    const savedSessionId = localStorage.getItem('interpreter_session_id');
+    const savedToken = localStorage.getItem('interpreter_session_token');
+    if (savedSessionId && savedToken) {
+      setSessionId(savedSessionId);
+      setEphemeralToken(savedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('interpreter_history', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    const initSession = async () => {
+      // If we already have a session, don't create a new one unless specifically needed
+      if (sessionId) return;
+      
+      setIsSessionLoading(true);
+      try {
+        const res = await fetch('/api/interpreter/session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customerLocale,
+            staffLocale,
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setSessionId(data.id);
+          setEphemeralToken(data.ephemeralToken);
+          localStorage.setItem('interpreter_session_id', data.id);
+          localStorage.setItem('interpreter_session_token', data.ephemeralToken);
+        } else {
+          console.error('Failed to initialize interpreter session');
+        }
+      } catch (e) {
+        console.error('Interpreter session initialization error', e);
+      } finally {
+        setIsSessionLoading(false);
+      }
+    };
+
+    if (customerLocale && staffLocale) {
+      initSession();
+    }
+  }, [customerLocale, staffLocale]);
+
+  useEffect(() => {
+    const syncCustomerLocale = (nextLocale?: string | null) => {
+      setCustomerLocale(resolveCustomerLocale(nextLocale ?? i18n.resolvedLanguage ?? i18n.language));
+    };
+
+    syncCustomerLocale();
+
+    const handleLanguageChanged = (nextLanguage: string) => {
+      syncCustomerLocale(nextLanguage);
+    };
+
+    const handleWindowLanguageChanged = (event: Event) => {
+      const customEvent = event as CustomEvent<{ locale?: string }>;
+      syncCustomerLocale(customEvent.detail?.locale);
+    };
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === LOCALE_STORAGE_KEY) {
+        syncCustomerLocale(event.newValue);
+      }
+    };
+
+    i18n.on('languageChanged', handleLanguageChanged);
+    window.addEventListener(LANGUAGE_CHANGED_EVENT, handleWindowLanguageChanged as EventListener);
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged);
+      window.removeEventListener(LANGUAGE_CHANGED_EVENT, handleWindowLanguageChanged as EventListener);
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, [i18n]);
 
   useEffect(() => {
     const isSupported =
@@ -429,24 +290,6 @@ export default function InterpreterPage() {
     };
   }, []);
 
-  const handleBack = () => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back();
-      return;
-    }
-
-    router.push('/');
-  };
-
-  const activeQuickPhraseGroup =
-    QUICK_PHRASE_GROUPS.find((group) => group.id === activeQuickGroup) ?? QUICK_PHRASE_GROUPS[0];
-
-  const getLocalesForSpeaker = (speaker: SpeakerRole) => {
-    return speaker === 'customer'
-      ? { sourceLang: customerLocale, targetLang: staffLocale }
-      : { sourceLang: staffLocale, targetLang: customerLocale };
-  };
-
   const releaseRecorder = () => {
     if (recordingTimeoutRef.current) {
       clearTimeout(recordingTimeoutRef.current);
@@ -461,16 +304,19 @@ export default function InterpreterPage() {
     recordingStartedAtRef.current = null;
   };
 
-  const appendInterpreterMessage = (
-    entry: InterpreterMessageEntry,
-    translatedText: string,
-    statusPrefix = '번역 완료',
-    canReplay = false,
-  ) => {
-    setMessages((previous) => [
-      ...previous,
-      createInterpreterMessage(entry, translatedText, statusPrefix, canReplay),
-    ]);
+  const handleBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+      return;
+    }
+
+    router.push('/');
+  };
+
+  const getLocalesForSpeaker = (speaker: SpeakerRole) => {
+    return speaker === 'customer'
+      ? { sourceLang: customerLocale, targetLang: staffLocale }
+      : { sourceLang: staffLocale, targetLang: customerLocale };
   };
 
   const findMatchingVoice = (locale: ConciergeLocale) => {
@@ -512,76 +358,57 @@ export default function InterpreterPage() {
 
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);
-    } catch {
-      // Keep TTS failures non-blocking for the interpreter flow.
+    } catch (error) {
+      console.error('Interpreter speech replay failed.', error);
     }
   };
 
   const stopSpeechPlayback = () => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-      return;
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
     }
-
-    window.speechSynthesis.cancel();
   };
 
-  const requestInterpreterTranslation = async (entry: InterpreterMessageEntry) => {
-    const response = await fetch('/api/interpreter/translate', {
+  const requestInterpreterTranslation = async (params: {
+    sessionId: string;
+    ephemeralToken: string;
+    speaker: SpeakerRole;
+    inputMode: 'voice' | 'text';
+    text: string;
+  }) => {
+    const response = await fetch('/api/interpreter/turn', {
       method: 'POST',
+      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
-      body: JSON.stringify({
-        sourceText: entry.sourceText,
-        sourceLang: entry.sourceLang,
-        targetLang: entry.targetLang,
-      }),
+      body: JSON.stringify(params),
     });
 
-    const data = (await response.json()) as InterpreterTranslateResponse;
+    const data = await response.json();
 
-    if (!response.ok || !data.ok) {
-      throw new Error(data.ok ? 'interpreter_translate_failed' : data.error);
+    if (!response.ok) {
+      throw new Error(data.error || 'interpreter_turn_failed');
     }
 
-    return data;
+    return data.translatedText;
   };
 
-  const resolveTranslatedText = async (entry: InterpreterMessageEntry) => {
-    if (entry.translations?.[entry.targetLang]) {
-      return {
-        translatedText: entry.translations[entry.targetLang],
-        statusPrefix: '번역 완료',
-      };
-    }
-
-    const response = await requestInterpreterTranslation(entry);
-
-    return {
-      translatedText: response.translatedText,
-      statusPrefix: '번역 완료',
-    };
+  const appendInterpreterMessage = (message: InterpreterMessage) => {
+    setMessages((previous) => [...previous, message]);
   };
 
   const submitInterpreterMessage = async (params: {
     speaker: SpeakerRole;
-    inputType: InterpreterMessage['inputType'];
+    inputType: 'voice' | 'text';
     sourceText: string;
-    translations?: Record<ConciergeLocale, string>;
   }) => {
     const normalizedSourceText = normalizeInterpreterTextInput(params.sourceText);
-    if (!normalizedSourceText || isTranslating) return false;
+    if (!normalizedSourceText || isTranslating) {
+      return false;
+    }
 
     const { sourceLang, targetLang } = getLocalesForSpeaker(params.speaker);
-    const entry: InterpreterMessageEntry = {
-      speaker: params.speaker,
-      inputType: params.inputType,
-      sourceText: normalizedSourceText,
-      sourceLang,
-      targetLang,
-      translations: params.translations,
-    };
 
     setIsTranslating(true);
     setTranslationError(null);
@@ -589,15 +416,50 @@ export default function InterpreterPage() {
     setVoiceStatus(null);
 
     try {
-      const translation = await resolveTranslatedText(entry);
+      let translatedText = normalizedSourceText;
 
-      appendInterpreterMessage(entry, translation.translatedText, translation.statusPrefix, true);
-      speakTranslatedText(translation.translatedText, entry.targetLang);
+      if (sessionId && ephemeralToken) {
+        translatedText = await requestInterpreterTranslation({
+          sessionId,
+          ephemeralToken,
+          speaker: params.speaker,
+          inputMode: params.inputType,
+          text: normalizedSourceText,
+        });
+      } else {
+        // Fallback or warning if session is not ready
+        console.warn('Interpreter session not ready, translation might not be saved');
+      }
+
+      appendInterpreterMessage(
+        createInterpreterMessage({
+          speaker: params.speaker,
+          sourceText: normalizedSourceText,
+          translatedText,
+          statusLabel: `${t('interpreter_page.translated_status')} ${getTimestampLabel()}`,
+          sourceLang,
+          targetLang,
+          inputType: params.inputType,
+          canReplay: true,
+        }),
+      );
+      speakTranslatedText(translatedText, targetLang);
       return true;
     } catch (error) {
       console.error('Interpreter translation failed.', error);
-      appendInterpreterMessage(entry, buildSafeFallbackTranslatedText(entry), '원문 유지');
-      setTranslationError(getTranslationFallbackMessage());
+      appendInterpreterMessage(
+        createInterpreterMessage({
+          speaker: params.speaker,
+          sourceText: normalizedSourceText,
+          translatedText: normalizedSourceText,
+          statusLabel: `${t('interpreter_page.source_only_status')} ${getTimestampLabel()}`,
+          sourceLang,
+          targetLang,
+          inputType: params.inputType,
+          canReplay: false,
+        }),
+      );
+      setTranslationError(t('interpreter_page.translation_failed_error'));
       return true;
     } finally {
       setIsTranslating(false);
@@ -617,7 +479,7 @@ export default function InterpreterPage() {
 
     setVoiceError(null);
     setTranslationError(null);
-    setVoiceStatus('음성 인식 중...');
+    setVoiceStatus(t('interpreter_page.voice_recognizing'));
 
     try {
       const response = await fetch('/api/interpreter/transcribe', {
@@ -634,7 +496,7 @@ export default function InterpreterPage() {
 
       const normalizedText = normalizeInterpreterTextInput(data.text);
       if (!normalizedText || normalizedText.length < 2) {
-        setVoiceError(getRecognitionRetryMessage());
+        setVoiceError(t('interpreter_page.voice_unrecognized_error'));
         setVoiceStatus(null);
         return;
       }
@@ -649,10 +511,22 @@ export default function InterpreterPage() {
     } catch (error) {
       console.error('Interpreter transcription failed.', error);
       setVoiceStatus(null);
-      setVoiceError(getRecognitionRetryMessage());
+      setVoiceError(t('interpreter_page.voice_failed_error'));
     } finally {
       setTranscribingRole(null);
     }
+  };
+
+  const stopRecording = () => {
+    if (!mediaRecorderRef.current || mediaRecorderRef.current.state !== 'recording') {
+      return;
+    }
+
+    const finishedRole = activeRecordingRoleRef.current;
+    setRecordingRole(null);
+    setTranscribingRole(finishedRole);
+    setVoiceStatus(t('interpreter_page.voice_recognizing'));
+    mediaRecorderRef.current.stop();
   };
 
   const startRecording = async (speaker: SpeakerRole) => {
@@ -664,7 +538,7 @@ export default function InterpreterPage() {
       setIsPreparingRecording(true);
       setVoiceError(null);
       setTranslationError(null);
-      setVoiceStatus('마이크 권한 확인 중...');
+      setVoiceStatus(t('interpreter_page.mic_permission_status'));
       stopSpeechPlayback();
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -701,14 +575,14 @@ export default function InterpreterPage() {
         if (audioBlob.size === 0) {
           setTranscribingRole(null);
           setVoiceStatus(null);
-          setVoiceError(getRecognitionRetryMessage());
+          setVoiceError(t('interpreter_page.voice_failed_error'));
           return;
         }
 
         if (durationMs > 0 && durationMs < MIN_RECORDING_MS) {
           setTranscribingRole(null);
           setVoiceStatus(null);
-          setVoiceError('조금 더 길게, 한 문장씩 말씀해 주세요. 인식이 잘 안되면 텍스트 입력을 사용하세요.');
+          setVoiceError(t('interpreter_page.voice_too_short_error'));
           return;
         }
 
@@ -721,31 +595,18 @@ export default function InterpreterPage() {
           stopRecording();
         }
       }, MAX_RECORDING_MS);
+
       setIsPreparingRecording(false);
-      setVoiceError(null);
-      setTranslationError(null);
-      setVoiceStatus(`녹음 중... 최대 ${MAX_RECORDING_MS / 1000}초까지 가능해요.`);
+      setVoiceStatus(t('interpreter_page.recording_status', { seconds: MAX_RECORDING_MS / 1000 }));
       setRecordingRole(speaker);
-    } catch (error) {
+    } catch {
       releaseRecorder();
       setIsPreparingRecording(false);
       setRecordingRole(null);
       setTranscribingRole(null);
       setVoiceStatus(null);
-      setVoiceError(getMicrophoneErrorText(error));
+      setVoiceError(t('interpreter_page.mic_unsupported_error'));
     }
-  };
-
-  const stopRecording = () => {
-    if (!mediaRecorderRef.current || mediaRecorderRef.current.state !== 'recording') {
-      return;
-    }
-
-    const finishedRole = activeRecordingRoleRef.current;
-    setRecordingRole(null);
-    setTranscribingRole(finishedRole);
-    setVoiceStatus('음성 인식 중...');
-    mediaRecorderRef.current.stop();
   };
 
   const handleSpeakButtonClick = (speaker: SpeakerRole) => {
@@ -765,30 +626,21 @@ export default function InterpreterPage() {
     speakTranslatedText(message.translatedText, message.targetLang);
   };
 
-  const appendQuickPhraseMessage = (speaker: SpeakerRole, phrase: QuickPhrase) => {
+  const handleCustomerSend = async () => {
     if (recordingRole || transcribingRole) {
       return;
     }
 
-    const { sourceLang } = getLocalesForSpeaker(speaker);
-
-    void submitInterpreterMessage({
-      speaker,
-      inputType: 'quick-phrase',
-      sourceText: phrase.translations[sourceLang] ?? phrase.translations.ko,
-      translations: phrase.translations,
-    });
-  };
-
-  const handleCustomerSend = async () => {
-    if (recordingRole || transcribingRole) {
+    const normalized = normalizeInterpreterTextInput(customerInput);
+    if (!normalized) {
+      setTranslationError(t('interpreter_page.input_required_customer'));
       return;
     }
 
     const submitted = await submitInterpreterMessage({
       speaker: 'customer',
       inputType: 'text',
-      sourceText: customerInput,
+      sourceText: normalized,
     });
 
     if (submitted) {
@@ -801,10 +653,16 @@ export default function InterpreterPage() {
       return;
     }
 
+    const normalized = normalizeInterpreterTextInput(staffInput);
+    if (!normalized) {
+      setTranslationError(t('interpreter_page.input_required_staff'));
+      return;
+    }
+
     const submitted = await submitInterpreterMessage({
       speaker: 'staff',
       inputType: 'text',
-      sourceText: staffInput,
+      sourceText: normalized,
     });
 
     if (submitted) {
@@ -830,115 +688,89 @@ export default function InterpreterPage() {
     (recordingRole !== null && !isStaffRecording);
   const customerSpeakLabel =
     isPreparingRecording
-      ? '마이크 준비 중...'
+      ? t('interpreter_page.mic_preparing')
       : transcribingRole === 'customer'
-      ? '고객 음성 인식 중...'
-      : isCustomerRecording
-        ? '고객 녹음 중... 탭하여 종료'
-        : isTranslating
-          ? '번역 중...'
-          : '고객이 말하기';
+        ? t('interpreter_page.customer_transcribing')
+        : isCustomerRecording
+          ? t('interpreter_page.customer_recording')
+          : isTranslating
+            ? t('interpreter_page.translating')
+            : t('interpreter_page.customer_speak_btn');
   const staffSpeakLabel =
     isPreparingRecording
-      ? '마이크 준비 중...'
+      ? t('interpreter_page.mic_preparing')
       : transcribingRole === 'staff'
-      ? '직원 음성 인식 중...'
-      : isStaffRecording
-        ? '직원 녹음 중... 탭하여 종료'
-        : isTranslating
-          ? '번역 중...'
-          : '직원이 말하기';
+        ? t('interpreter_page.staff_transcribing')
+        : isStaffRecording
+          ? t('interpreter_page.staff_recording')
+          : isTranslating
+            ? t('interpreter_page.translating')
+            : t('interpreter_page.staff_speak_btn');
+  const customerLanguageLabel = t(`beauty_bookings.lang_${customerLocale.toLowerCase().replace('-', '_')}`);
+  const staffLanguageLabel = t(`beauty_bookings.lang_${staffLocale.toLowerCase().replace('-', '_')}`);
+  const isRtl = i18n.language === 'ar' || i18n.resolvedLanguage === 'ar';
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} dir={isRtl ? 'rtl' : 'ltr'}>
       <div className={styles.header}>
-        <button className={styles.backBtn} type="button" onClick={handleBack}>
-          ← 이전으로
+        <button className={styles.backBtn} type="button" onClick={handleBack} aria-label={t('interpreter_page.back')}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={styles.backIcon}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
         </button>
       </div>
 
+      {storeName && (
+        <div className={styles.visitorContext}>
+          <span className={styles.visitorEmoji}>📍</span>
+          <p className={styles.visitorText}>
+            {storeName && serviceName
+              ? t('beauty_bookings.interpreter_visit_service_context', { storeName, serviceName })
+              : t('beauty_bookings.interpreter_visit_context', { storeName })}
+          </p>
+        </div>
+      )}
+
       <section className={styles.titleSection}>
-        <h1 className={styles.title}>실시간 통역 도우미</h1>
+        <h1 className={styles.title}>{t('interpreter_page.title')}</h1>
         <p className={styles.subtitle}>
-          고객과 직원이 서로의 언어로 대화할 수 있도록 도와드립니다
+          {t('interpreter_page.subtitle')}
         </p>
         <p className={styles.onboardingNote}>
-          한 사람씩 짧게 말씀해 주세요. 녹음은 최대 10초까지 가능하며, 인식이 잘 안되면 텍스트 입력이나 quick phrase를 사용하면 더 안정적입니다.
+          {t('interpreter_page.onboarding')}
         </p>
       </section>
 
       <section className={styles.languageSection}>
-      <section className={styles.languageSection}>
         <div className={styles.langTopRow}>
-          <div className={styles.langCard} style={{ cursor: 'default', border: 'none', background: 'transparent' }}>
-            <span className={styles.langRole}>고객 언어</span>
-            <div className={styles.langButtonGrid}>
-              {INTERPRETER_SUPPORTED_LOCALES.map((l) => (
-                <button
-                  key={l}
-                  className={`${styles.langButton} ${customerLocale === l ? styles.langButtonActive : ''}`}
-                  onClick={() => setCustomerLocale(l)}
-                  disabled={isNonVoiceActionDisabled}
-                >
-                  {getLocaleDisplayLabel(l)}
-                </button>
-              ))}
+          <div className={styles.langCard}>
+            <span className={styles.langRole}>{t('interpreter_page.customer_lang')}</span>
+            <div className={styles.langCurrent}>
+              {customerLanguageLabel}
+              <ChevronDown className={styles.langSelectorArrow} size={16} />
             </div>
-          </div>
-
-          <button
-            className={styles.langSwapBtn}
-            onClick={() => {
-              const temp = customerLocale;
-              setCustomerLocale(staffLocale);
-              setStaffLocale(temp);
-            }}
-            disabled={isNonVoiceActionDisabled}
-          >
-            ↔
-          </button>
-
-          <div className={styles.langCard} style={{ cursor: 'default', border: 'none', background: 'transparent' }}>
-            <span className={styles.langRole}>직원 언어</span>
-            <div className={styles.langButtonGrid}>
-              {INTERPRETER_SUPPORTED_LOCALES.map((l) => (
-                <button
-                  key={l}
-                  className={`${styles.langButton} ${staffLocale === l ? styles.langButtonStaffActive : ''}`}
-                  onClick={() => setStaffLocale(l)}
-                  disabled={isNonVoiceActionDisabled}
-                >
-                  {getLocaleDisplayLabel(l)}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      </section>
-
-      <section className={styles.contextSection}>
-        <div className={styles.contextScroll}>
-          {QUICK_PHRASE_GROUPS.map((group) => (
-            <button
-              key={group.id}
-              className={`${styles.contextChip} ${
-                activeQuickGroup === group.id ? styles.contextActive : ''
-              }`}
-              type="button"
-              onClick={() => setActiveQuickGroup(group.id)}
+            <select
+              className={styles.langHiddenSelect}
+              value={customerLocale}
+              onChange={(event) => setCustomerLocale(event.target.value as ConciergeLocale)}
             >
-              {group.label}
-            </button>
-          ))}
+              {INTERPRETER_SUPPORTED_LOCALES.filter((loc) => loc !== 'ko').map((localeCode) => (
+                <option key={localeCode} value={localeCode}>
+                  {getLocaleDisplayLabel(localeCode)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.langCardActive}>
+            <span className={styles.langRole}>{t('interpreter_page.staff_lang')}</span>
+            <strong className={styles.langCurrent}>{staffLanguageLabel}</strong>
+          </div>
         </div>
       </section>
 
       <section className={styles.actionSection}>
         <div className={styles.actionCard}>
-          <div className={styles.langRole}>
-            {getLocaleDisplayLabel(customerLocale)} to {getLocaleDisplayLabel(staffLocale)}
-          </div>
+          <div className={styles.langRole}>{`${customerLanguageLabel} -> ${staffLanguageLabel}`}</div>
           <button
             className={`${styles.speakBtn} ${styles.customerBtn} ${isCustomerRecording ? styles.recordingActive : ''}`}
             type="button"
@@ -947,28 +779,15 @@ export default function InterpreterPage() {
           >
             {customerSpeakLabel}
           </button>
-          <div className={styles.quickPhraseScroll}>
-            {activeQuickPhraseGroup.customerPhrases.map((phrase) => (
-              <button
-                key={phrase.id}
-                className={styles.quickPhraseChip}
-                type="button"
-                onClick={() => appendQuickPhraseMessage('customer', phrase)}
-                disabled={isNonVoiceActionDisabled}
-              >
-                {phrase.translations[customerLocale] ?? phrase.translations.ko}
-              </button>
-            ))}
-          </div>
           <label className={styles.langRole} htmlFor="customer-text-input">
-            고객 텍스트 입력
+            {t('interpreter_page.customer_input_label')}
           </label>
           <div className={styles.inputRow}>
             <input
               id="customer-text-input"
               className={styles.textInput}
               type="text"
-              placeholder="고객 메시지를 직접 입력하세요"
+              placeholder={t('interpreter_page.customer_placeholder')}
               value={customerInput}
               onChange={(event) => setCustomerInput(event.target.value)}
               onKeyDown={(event) => {
@@ -983,15 +802,13 @@ export default function InterpreterPage() {
               onClick={() => void handleCustomerSend()}
               disabled={isNonVoiceActionDisabled}
             >
-              전송
+              <ArrowUp size={20} />
             </button>
           </div>
         </div>
 
         <div className={styles.actionCard}>
-          <div className={styles.langRole}>
-            {getLocaleDisplayLabel(staffLocale)} to {getLocaleDisplayLabel(customerLocale)}
-          </div>
+          <div className={styles.langRole}>{`${staffLanguageLabel} -> ${customerLanguageLabel}`}</div>
           <button
             className={`${styles.speakBtn} ${styles.staffBtn} ${isStaffRecording ? styles.recordingActive : ''}`}
             type="button"
@@ -1000,28 +817,15 @@ export default function InterpreterPage() {
           >
             {staffSpeakLabel}
           </button>
-          <div className={styles.quickPhraseScroll}>
-            {activeQuickPhraseGroup.staffPhrases.map((phrase) => (
-              <button
-                key={phrase.id}
-                className={styles.quickPhraseChip}
-                type="button"
-                onClick={() => appendQuickPhraseMessage('staff', phrase)}
-                disabled={isNonVoiceActionDisabled}
-              >
-                {phrase.translations[staffLocale] ?? phrase.translations.ko}
-              </button>
-            ))}
-          </div>
           <label className={styles.langRole} htmlFor="staff-text-input">
-            직원 텍스트 입력
+            {t('interpreter_page.staff_input_label')}
           </label>
           <div className={styles.inputRow}>
             <input
               id="staff-text-input"
               className={styles.textInput}
               type="text"
-              placeholder="직원 메시지를 직접 입력하세요"
+              placeholder={t('interpreter_page.staff_placeholder')}
               value={staffInput}
               onChange={(event) => setStaffInput(event.target.value)}
               onKeyDown={(event) => {
@@ -1036,7 +840,7 @@ export default function InterpreterPage() {
               onClick={() => void handleStaffSend()}
               disabled={isNonVoiceActionDisabled}
             >
-              전송
+              <ArrowUp size={20} />
             </button>
           </div>
         </div>
@@ -1045,22 +849,21 @@ export default function InterpreterPage() {
       <div className={styles.placeholderBox}>
         <p className={styles.placeholderText}>
           {voiceSupported
-            ? '말하기 버튼을 눌러 시작하고 다시 눌러 종료하세요. 인식이 잘 안되면 짧게 다시 말하거나 텍스트 입력을 사용하세요.'
-            : '이 브라우저에서는 음성 녹음이 지원되지 않습니다. 텍스트 입력과 quick phrase를 사용하세요.'}
+            ? t('interpreter_page.voice_supported_hint')
+            : t('interpreter_page.voice_not_supported_hint')}
         </p>
       </div>
+
       {voiceStatus ? <p className={styles.sttStatusLabel}>{voiceStatus}</p> : null}
       {voiceError ? <p className={styles.errorText}>{voiceError}</p> : null}
-      {isTranslating ? (
-        <p className={styles.translatingText}>서버에서 번역 문구를 준비하고 있습니다.</p>
-      ) : null}
+      {isTranslating ? <p className={styles.translatingText}>{t('interpreter_page.translating_status')}</p> : null}
       {translationError ? <p className={styles.errorText}>{translationError}</p> : null}
 
       <section className={styles.conversationArea}>
         {messages.length === 0 ? (
           <div className={styles.placeholderBox}>
             <p className={styles.placeholderText}>
-              아직 대화가 없습니다. 말하기 버튼, quick phrase, 텍스트 입력으로 상담 문장을 바로 전달해 보세요.
+              {t('interpreter_page.empty_history_hint')}
             </p>
           </div>
         ) : (
@@ -1074,7 +877,7 @@ export default function InterpreterPage() {
               >
                 <div className={styles.messageHeader}>
                   <span className={styles.messageRole}>
-                    {message.speaker === 'customer' ? '고객' : '직원'}
+                    {message.speaker === 'customer' ? t('interpreter_page.customer_role') : t('interpreter_page.staff_role')}
                   </span>
                   <span className={styles.timestamp}>{message.statusLabel}</span>
                 </div>
@@ -1085,16 +888,16 @@ export default function InterpreterPage() {
                     <button
                       className={styles.replayBtn}
                       type="button"
-                      aria-label="번역 음성 다시 듣기"
+                      aria-label={t('interpreter_page.replay_btn_label')}
                       title={
                         ttsSupported
-                          ? '번역 음성 다시 듣기'
-                          : '이 브라우저에서는 음성 재생을 지원하지 않습니다'
+                          ? t('interpreter_page.replay_btn_label')
+                          : t('interpreter_page.replay_not_supported_hint')
                       }
                       onClick={() => handleReplayMessage(message)}
                       disabled={!ttsSupported || isNonVoiceActionDisabled}
                     >
-                      🔊
+                      {t('interpreter_page.play')}
                     </button>
                   ) : null}
                 </div>

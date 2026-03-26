@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
+import type { LatLngExpression } from "leaflet";
+
 const MapContainer = dynamic(
     () => import("react-leaflet").then((mod) => mod.MapContainer),
     { ssr: false }
@@ -59,8 +61,8 @@ export default function Map({ center, zoom = 13, markers = [], path = [], height
     }
 
     // Type assertion for LatLngExpression (Leaflet types can be tricky with dynamic imports)
-    const centerPos: any = center;
-    const pathPositions: any[] = path;
+    const centerPos = center as LatLngExpression;
+    const pathPositions = path as LatLngExpression[];
 
     return (
         <MapContainer
@@ -75,7 +77,7 @@ export default function Map({ center, zoom = 13, markers = [], path = [], height
             />
 
             {markers.map((marker, idx) => (
-                <Marker key={idx} position={marker.position as any}>
+                <Marker key={idx} position={marker.position as LatLngExpression}>
                     {marker.popupText && <Popup>{marker.popupText}</Popup>}
                 </Marker>
             ))}

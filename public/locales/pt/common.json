@@ -1,139 +1,301 @@
 {
-    "common": {
-        "welcome": "Bem-vindo, Viajante.",
-        "greeting": "Bom dia",
-        "login": "Entrar",
-        "today": "Hoje",
-        "move": "Ir",
-        "book": "Reservar",
-        "chat": "Chat",
-        "my": "Minha conta",
-        "current_operation": "Em operação",
-        "live": "AO VIVO",
-        "recommended": "Próximo a você",
-        "based_on_location": "Com base na sua localização",
-        "start_nav": "Iniciar Navegação",
-        "delay_10m": "Atraso +10 min",
-        "confirmed": "Confirmado",
-        "payment_completed": "Pagamento concluído",
-        "weather_clear": "Limpo",
-        "back": "Voltar",
-        "select_language": "Selecionar idioma",
-        "home_nav": "Início",
-        "explore_nav": "Explorar",
-        "planner_nav": "Itinerário",
-        "today_nav": "Hoje",
-        "my_nav": "Minha conta",
-        "day_unit": "d",
-        "locale": "pt-PT",
-        "community_nav": "Comunidade"
-    },
-    "transport": {
-        "moving_to": "Indo para {{dest}}",
-        "remaining": "Restando",
-        "line_2_direction": "Linha 2 • Direção City Hall",
-        "departed": "partiu",
-        "passing_now": "Passando agora...",
-        "current": "Atual",
-        "get_off_at": "Descer em",
-        "exit_3": "Saída 3",
-        "getting_off_here": "Estou saindo aqui",
-        "stations": {
-            "samseong": "Samseong",
-            "seolleung": "Seolleung",
-            "yeoksam": "Yeoksam",
-            "gangnam": "Gangnam",
-            "gyodae": "Gyodae",
-            "seocho": "Seocho",
-            "seongsu": "Seongsu"
-        }
-    },
-    "home": {
-        "title_korea": "Coreia Hoje",
-        "title": "Viagem para Coreia, entendida em 3 segundos",
-        "subtitle": "Reservas de Concierge · Itinerário Automático · Navegação",
-        "create_trip_cta": "Começar Planejamento",
-        "input_label": "Para onde você vai viajar?",
-        "input_placeholder": "Cidade, área ou nome do hotel",
-        "days_label": "Período da viagem",
-        "recommended_plans": "Planos de viagem recomendados",
-        "plans": {
-            "2d": {
-                "title": "2 Dias: O Essencial de Seul",
-                "label": "Plano de 2 Dias"
-            },
-            "3d": {
-                "title": "3 Dias: K-Cultura e Estilo",
-                "label": "Plano de 3 Dias"
-            },
-            "5d": {
-                "title": "5 Dias: O Grande Tour",
-                "label": "Plano de 5 Dias"
-            },
-            "request_custom_label": "Sob medida",
-            "request_custom_title": "Solicitar plano de {{days}} dias",
-            "request_custom_toast": "Solicitado plano de {{days}} dias personalizado! Nosso concierge entrará em contato."
-        }
-    },
-    "explore_items": {
-        "airport_arrival": "Chegada no Aeroporto de Incheon",
-        "hotel_checkin": "Check-in no Hotel / Estadia"
-    },
-    "my_page": {
-        "bookings": {
-            "title": "Minhas Reservas",
-            "date_time": "Data / Hora",
-            "area": "Área",
-            "price": "Preço",
-            "new_added": "Nova reserva adicionada!"
-        },
-        "community": {
-            "title": "Minhas Postagens",
-            "empty": "Nenhuma postagem escrita ainda."
-        }
-    },
-    "community_page": {
-        "title": "Community",
-        "subtitle": "Connect with locals & travelers",
-        "filter_all": "All",
-        "filter_meetup": "Food & Meetup",
-        "filter_travel": "Travel Mate",
-        "filter_help": "Local Help",
-        "comments": "Comments",
-        "message": "Message",
-        "type": {
-            "MEETUP": "MEETUP",
-            "TRAVEL": "TRAVEL",
-            "HELP": "HELP",
-            "REVIEW": "REVIEW"
-        },
-        "post": {
-            "1": {
-                "author": "Mika (Japan)",
-                "time": "10 mins ago",
-                "title": "Samgyeopsal Meetup 🥓",
-                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-            },
-            "2": {
-                "author": "John (US)",
-                "time": "1 hour ago",
-                "title": "Hongdae Street Performance 🎸",
-                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-            },
-            "3": {
-                "author": "Jihoon (Korea)",
-                "time": "2 hours ago",
-                "title": "Need help with subway directions? 🚇",
-                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-            },
-            "4": {
-                "author": "Li Wei (China)",
-                "time": "3 hours ago",
-                "title": "K-Beauty Shopping 💄",
-                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-            }
-        },
-        "filter_review": "Reviews",
-        "detail": "Detalhes da Postagem"
+  "beauty_explore": {
+    "form_name": "Nome",
+    "form_name_placeholder": "Digite seu nome",
+    "form_phone": "Contato (ou ID de SNS)",
+    "form_phone_placeholder": "Telefone ou ID de SNS",
+    "form_request": "Solicitações",
+    "form_request_placeholder": "Alergias ou estilo desejado",
+    "agreement_confirm": "Confirmar detalhes",
+    "agreement_confirm_desc": "Confirmo a seleção.",
+    "agreement_privacy": "Acordo de privacidade",
+    "agreement_privacy_desc": "Concordo em fornecer as informações.",
+    "region_all": "Todas as regiões",
+    "label_today": "Hoje",
+    "label_tomorrow": "Amanhã",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Reserva solicitada!",
+    "booking_confirmation_desc": "Avisaremos você em breve.",
+    "booking_confirmation_cta": "Minhas reservas"
+  },
+  "common": {
+    "welcome": "Bem-vindo, Viajante.",
+    "greeting": "Bom dia",
+    "login": "Entrar",
+    "today": "Hoje",
+    "move": "Ir",
+    "book": "Reservar",
+    "chat": "Chat",
+    "my": "Minha conta",
+    "current_operation": "Em operação",
+    "live": "AO VIVO",
+    "recommended": "Próximo a você",
+    "based_on_location": "Com base na sua localização",
+    "start_nav": "Iniciar Navegação",
+    "delay_10m": "Atraso +10 min",
+    "confirmed": "Confirmado",
+    "payment_completed": "Pagamento concluído",
+    "weather_clear": "Limpo",
+    "back": "Voltar",
+    "select_language": "Selecionar idioma",
+    "home_nav": "Início",
+    "explore_nav": "Explorar",
+    "planner_nav": "Itinerário",
+    "today_nav": "Hoje",
+    "my_nav": "Minha conta",
+    "day_unit": "d",
+    "locale": "pt-PT",
+    "community_nav": "Comunidade",
+    "morning": "Bom dia",
+    "afternoon": "Boa tarde",
+    "evening": "Boa noite"
+  },
+  "transport": {
+    "moving_to": "Indo para {{dest}}",
+    "remaining": "Restando",
+    "line_2_direction": "Linha 2 • Direção City Hall",
+    "departed": "partiu",
+    "passing_now": "Passando agora...",
+    "current": "Atual",
+    "get_off_at": "Descer em",
+    "exit_3": "Saída 3",
+    "getting_off_here": "Estou saindo aqui",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
     }
+  },
+  "home": {
+    "title_korea": "Coreia Hoje",
+    "title": "Viagem para Coreia, entendida em 3 segundos",
+    "subtitle": "Reservas de Concierge · Itinerário Automático · Navegação",
+    "create_trip_cta": "Começar Planejamento",
+    "input_label": "Para onde você vai viajar?",
+    "input_placeholder": "Cidade, área ou nome do hotel",
+    "days_label": "Período da viagem",
+    "recommended_plans": "Planos de viagem recomendados",
+    "plans": {
+      "2d": {
+        "title": "2 Dias: O Essencial de Seul",
+        "label": "Plano de 2 Dias"
+      },
+      "3d": {
+        "title": "3 Dias: K-Cultura e Estilo",
+        "label": "Plano de 3 Dias"
+      },
+      "5d": {
+        "title": "5 Dias: O Grande Tour",
+        "label": "Plano de 5 Dias"
+      },
+      "request_custom_label": "Sob medida",
+      "request_custom_title": "Solicitar plano de {{days}} dias",
+      "request_custom_toast": "Solicitado plano de {{days}} dias personalizado! Nosso concierge entrará em contato."
+    },
+    "badge": "Experimente a beleza da Coreia"
+  },
+  "explore_items": {
+    "airport_arrival": "Chegada no Aeroporto de Incheon",
+    "hotel_checkin": "Check-in no Hotel / Estadia"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Minhas Reservas",
+      "date_time": "Data / Hora",
+      "area": "Área",
+      "price": "Preço",
+      "new_added": "Nova reserva adicionada!"
+    },
+    "community": {
+      "title": "Minhas Postagens",
+      "empty": "Nenhuma postagem escrita ainda."
+    }
+  },
+  "community_page": {
+    "title": "Comunidade",
+    "subtitle": "Conecte-se com locais e viajantes",
+    "filter_all": "Tudo",
+    "filter_meetup": "Comida e Encontros",
+    "filter_travel": "Parceiro de Viagem",
+    "filter_help": "Ajuda Local",
+    "comments": "Comentários",
+    "message": "Mensagem",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Avaliações",
+    "detail": "Detalhes da postagem"
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Concierge de Reservas de Beleza",
+      "title": "Capture a beleza da Coreia\nem sua agenda",
+      "subtitle": "Selecione o serviço de beleza e reserve diretamente.",
+      "welcome": "{{name}}, selecione um serviço.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
+    },
+    "booking": {
+      "step": "PASSO. 01",
+      "title": "Selecione o serviço de beleza",
+      "description": ""
+    },
+    "categories": {
+      "hair": {
+        "label": "Cabelo",
+        "note": "Corte, permanente, cor",
+        "summary": "Reserve desde mudança de estilo até corte rápido."
+      },
+      "nail": {
+        "label": "Unhas",
+        "note": "Gel, cuidados, extensão",
+        "summary": "Escolha o design e prossiga para reservar."
+      },
+      "esthetic": {
+        "label": "Estética",
+        "note": "Cuidados com a pele, contorno",
+        "summary": "Compare salões e reserve."
+      },
+      "waxing": {
+        "label": "Depilação",
+        "note": "Rosto, corpo, brasileira",
+        "summary": "Encontre rapidamente o salão adequado."
+      },
+      "makeup": {
+        "label": "Maquilhagem",
+        "note": "Diário, ensaio, casamento",
+        "summary": "Selecione maquiagem para seu evento."
+      },
+      "lash": {
+        "label": "Cílios",
+        "note": "Extensão, permanente",
+        "summary": "Do natural ao volume, escolha seu menu."
+      }
+    },
+    "selection": {
+      "eyebrow": "Categoria selecionada",
+      "tags": {
+        "mobile": "Reserva móvel",
+        "comparison": "Comparar salões",
+        "inquiry": "Consulta em tempo real"
+      },
+      "empty": "Selecione primeiro uma categoria. O botão para iniciar a reserva será ativado após a seleção."
+    },
+    "cta": {
+      "hint": "Selecione uma categoria para iniciar a reserva",
+      "button": "Iniciar reserva"
+    },
+    "interpreter_entry": {
+      "title": "Intérprete em tempo real",
+      "description": "Comunique-se facilmente com a equipe",
+      "cta": "Abrir intérprete"
+    },
+    "location_sheet": {
+      "search_title": "Procurar localização",
+      "search_result_count": "{{count}} resultados para \"{{query}}\"",
+      "view_location": "Ver localização",
+      "view_location_desc": "Consulte a localização detalhada no mapa",
+      "call_taxi": "Chamar táxi",
+      "google_maps_desc": "Consultar rotas de transporte público no Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Por favor, dirija-se a este endereço",
+      "copy": "Copiar endereço",
+      "copy_done": "Copiado!",
+      "close": "Fechar"
+    }
+  },
+  "interpreter_page": {
+    "back": "< Voltar",
+    "title": "Intérprete em tempo real",
+    "subtitle": "O idioma do cliente segue o idioma do app; o idioma da loja é fixo em coreano.",
+    "onboarding": "Quando o cliente fala, traduz para coreano; quando o funcionário fala coreano, traduz para seu idioma.",
+    "customer_lang": "Idioma do visitante",
+    "staff_lang": "Idioma da loja (Coreano)",
+    "mic_preparing": "Preparando microfone",
+    "customer_transcribing": "Reconhecendo visitante...",
+    "customer_recording": "Gravando visitante... clique de novo para terminar",
+    "translating": "Traduzindo...",
+    "customer_speak_btn": "Entrada de voz do visitante",
+    "staff_transcribing": "Reconhecendo funcionário...",
+    "staff_recording": "Gravando funcionário... clique de novo para terminar",
+    "staff_speak_btn": "Entrada de voz do funcionário",
+    "customer_input_label": "Entrada do visitante",
+    "customer_placeholder": "Digite o que o visitante disse.",
+    "send": "Enviar",
+    "staff_input_label": "Entrada do funcionário",
+    "staff_placeholder": "Digite o que o funcionário disse em coreano.",
+    "voice_supported_hint": "Grave pelo micro ou digite o texto abaixo.",
+    "voice_not_supported_hint": "Este navegador não suporta entrada de voz.",
+    "voice_recognizing": "Reconhecendo voz.",
+    "voice_unrecognized_error": "Voz não reconhecida.",
+    "voice_failed_error": "Falha no reconhecimento de voz.",
+    "mic_permission_status": "Verificando permissões do microfone.",
+    "recording_status": "Gravando... máx. {{seconds}}s.",
+    "mic_unsupported_error": "Microfone inacessível.",
+    "input_required_customer": "Introduza primeiro a frase do visitante.",
+    "input_required_staff": "Introduza primeiro a frase do funcionário.",
+    "translating_status": "Preparando tradução.",
+    "translation_failed_error": "A tradução falhou. Tente novamente.",
+    "empty_history_hint": "O histórico aparecerá aqui.",
+    "customer_role": "Visitante",
+    "staff_role": "Funcionário",
+    "replay_btn_label": "Reproduzir tradução",
+    "replay_not_supported_hint": "Reprodução de áudio não suportada.",
+    "play": "Reproduzir",
+    "translated_status": "Traduzido",
+    "source_only_status": "Apenas original",
+    "voice_too_short_error": "Por favor, fale um pouco mais."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Usando intérprete durante a visita ao {{storeName}}",
+    "interpreter_visit_service_context": "Usando intérprete para {{serviceName}} no {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
+  }
 }
