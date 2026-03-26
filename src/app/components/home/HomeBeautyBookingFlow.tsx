@@ -19,7 +19,7 @@ import { supabase } from '@/lib/supabaseClient';
 interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
   onClose: () => void;
-  initialCategory: BeautyCategoryId | 'all';
+  initialCategory: BeautyCategoryId | 'all' | null;
   t: any;
 }
 
