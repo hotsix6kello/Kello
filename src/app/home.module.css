@@ -790,6 +790,73 @@
   line-height: 1.5;
 }
 
+/* Beauty Booking Steps (Restored for Home Overlay) */
+.beautyStepIndicator {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 16px;
+    padding: 0 0 4px;
+    list-style: none;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.beautyStepIndicator::-webkit-scrollbar {
+    display: none;
+}
+
+.beautyStepItem {
+    min-width: 72px;
+    padding: 10px 8px;
+    border-radius: 16px;
+    border: 1px solid rgba(109, 83, 63, 0.08);
+    background: rgba(255, 255, 255, 0.78);
+    color: #7c6e64;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+}
+
+.beautyStepItemCurrent {
+    border-color: var(--primary);
+    background: var(--primary-glow);
+    color: var(--ink-black);
+    box-shadow: 0 8px 20px var(--primary-glow);
+}
+
+.beautyStepItemDone {
+    border-color: rgba(127, 79, 70, 0.12);
+    background: rgba(251, 246, 242, 0.94);
+    color: #5a4b43;
+}
+
+.beautyStepBullet {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgba(35, 29, 25, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.beautyStepItemCurrent .beautyStepBullet,
+.beautyStepItemDone .beautyStepBullet {
+    background: rgba(127, 79, 70, 0.12);
+    color: #7f4f46;
+}
+
+.beautyStepText {
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
 .navLinkBtn {
   width: 38px;
   height: 38px;
@@ -989,3 +1056,207 @@
   color: var(--muted);
   line-height: 1.5;
 }
+
+/* ── Beauty Booking Flow Revert Patterns (March 24) ── */
+.beautyHero {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  background: #fffcfb;
+  border-bottom: 1px solid #f0e0d8;
+}
+
+.beautyEyebrow {
+  font-size: 11px;
+  font-weight: 900;
+  color: #bb8a78;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.beautyTitle {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #222;
+  line-height: 1.2;
+}
+
+.beautyStepIndicator {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.beautyStepIndicator::-webkit-scrollbar {
+  display: none;
+}
+
+.beautyStepItem {
+  flex: 1;
+  min-width: 80px;
+  padding: 12px 8px;
+  border-radius: 14px;
+  border: 1px solid #f0e0d8;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.beautyStepItemCurrent {
+  border-color: #bb8a78;
+  background: #fffbfa;
+  box-shadow: 0 4px 12px rgba(187, 138, 120, 0.1);
+}
+
+.beautyStepItemDone {
+  background: #fdfaf8;
+  border-color: #eee;
+  opacity: 0.7;
+}
+
+.beautyStepBullet {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #999;
+}
+
+.beautyStepItemCurrent .beautyStepBullet {
+  background: #bb8a78;
+  color: #fff;
+}
+
+.beautyStepItemDone .beautyStepBullet {
+  background: #e0d1cb;
+  color: #fff;
+}
+
+.beautyStepText {
+  font-size: 11px;
+  font-weight: 800;
+  color: #666;
+  white-space: nowrap;
+}
+
+.beautyStepItemCurrent .beautyStepText {
+  color: #bb8a78;
+}
+
+.beautyRegionChipRow {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+}
+
+.beautyRegionChipRow::-webkit-scrollbar {
+  display: none;
+}
+
+.beautyRegionChip {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  border: 1px solid #eee;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #777;
+  cursor: pointer;
+}
+
+.beautyRegionChipActive {
+  background: #bb8a78;
+  color: #fff;
+  border-color: #bb8a78;
+}
+
+.beautyCompletionCard {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid #f0e0d8;
+  padding: 30px 20px;
+  box-shadow: 0 10px 30px rgba(187, 138, 120, 0.08);
+  text-align: center;
+}
+
+.beautyCompletionTitle {
+  font-size: 20px;
+  font-weight: 900;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+.beautyCompletionMain {
+  margin-bottom: 30px;
+}
+
+.beautyCompletionDesc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.beautyCompletionHero {
+  background: #fffcfb;
+  border: 1px solid #f0e0d8;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.beautyCompletionHeroBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.beautyCompletionHeroLabel {
+  font-size: 11px;
+  font-weight: 800;
+  color: #bb8a78;
+  text-transform: uppercase;
+}
+
+.beautyCompletionHeroTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111;
+}
+
+.beautyCompletionHeroMeta {
+  font-size: 13px;
+  color: #888;
+}
+
+.beautyCompletionActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.beautySecondaryAction {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+}

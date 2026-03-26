@@ -39,6 +39,7 @@ import HomeBookingSection from './components/home/HomeBookingSection';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
+import HomeBeautyBookingFlow from './components/home/HomeBeautyBookingFlow';
 
 import { 
   BEAUTY_CATEGORY_OPTIONS, 
@@ -80,6 +81,8 @@ export default function HomePage() {
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
   const [sheetSearchResults, setSheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Merge MOCK_PLACES with MOCK_ITEMS for broader search
   const ALL_SEARCH_ITEMS = useMemo(() => {
@@ -234,7 +237,7 @@ export default function HomePage() {
 
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategory(categoryId as BeautyCategoryId);
-    router.push(`/explore?category=beauty&beautyCategory=${categoryId}`);
+    setIsBookingOpen(true);
   };
 
   const handleOpenInterpreter = () => {
@@ -369,6 +372,19 @@ export default function HomePage() {
       {loadingNav && (
         <div className={styles.toast}>
           {t('home.fetching_location', { defaultValue: 'Fetching location...' })}
+        </div>
+      )}
+
+      <HomeBeautyBookingFlow 
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+        initialCategory={selectedCategory}
+        t={t}
+      />
+
+      {toastMessage && (
+        <div className={styles.toast}>
+          {toastMessage}
         </div>
       )}
 
