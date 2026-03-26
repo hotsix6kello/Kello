@@ -55,7 +55,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
 
   const filteredStores = useMemo(() => {
     return BEAUTY_STORE_ITEMS.filter(item => {
-      const matchCategory = initialCategory === 'all' || item.category === initialCategory;
+      const matchCategory = !initialCategory || initialCategory === 'all' || item.category === initialCategory;
       const matchRegion = selectedRegion === 'all' || item.region === selectedRegion;
       return matchCategory && matchRegion;
     });
