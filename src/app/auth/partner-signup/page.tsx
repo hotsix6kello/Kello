@@ -5,17 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from './partner-signup.module.css';
 import { supabase } from '@/lib/supabaseClient';
 
-const BUSINESS_TYPES = [
-    { value: 'beauty_hair', label: '✂️ 뷰티 · 헤어', group: '💅 뷰티' },
-    { value: 'beauty_nail', label: '💅 뷰티 · 네일', group: '💅 뷰티' },
-    { value: 'beauty_body', label: '🛁 뷰티 · 바디', group: '💅 뷰티' },
-    { value: 'beauty_makeup', label: '💄 뷰티 · 메이크업', group: '💅 뷰티' },
-    { value: 'food_general', label: '🍽️ 맛집 · 일반', group: '🍽️ 맛집' },
-    { value: 'food_vegan', label: '🥗 맛집 · 비건', group: '🍽️ 맛집' },
-    { value: 'food_halal', label: '🕌 맛집 · 할랄', group: '🍽️ 맛집' },
-    { value: 'landmark', label: '🗺️ 랜드마크', group: '랜드마크' },
-    { value: 'other', label: '📋 기타', group: '기타' },
-];
+
 
 
 export default function PartnerSignupPage() {
