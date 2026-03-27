@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabaseClient";
 export type BeautyBookingPayload = {
   category: 'beauty';
   beautyCategory: string;
@@ -22,6 +23,7 @@ export type BeautyBookingPayload = {
     name: string;
     phone: string;
     request: string;
+    imageUrls: string[];
   };
   communication: {
     language: string;
@@ -159,6 +161,7 @@ export function buildBeautyBookingPayload(
       name: input.customer.name.trim(),
       phone: input.customer.phone.trim(),
       request: input.customer.request.trim(),
+      imageUrls: input.customer.imageUrls || [],
     },
     communication: {
       language: input.communication.language,
@@ -240,6 +243,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       name: typeof customer.name === 'string' ? customer.name : '',
       phone: typeof customer.phone === 'string' ? customer.phone : '',
       request: typeof customer.request === 'string' ? customer.request : '',
+      imageUrls: normalizeStringArray(customer.imageUrls),
     },
     communication: {
       language: typeof communication.language === 'string' ? communication.language : '',
@@ -318,4 +322,55 @@ export async function submitBeautyBooking(
     createdAt: body.createdAt,
     payload,
   };
+}
+
+export async function uploadBookingImages(
+  images: string[] // Array of base64 strings
+): Promise<string[]> {
+  if (!images || images.length === 0) return [];
+  
+  const uploadPromises = images.map(async (base64, idx) => {
+    try {
+      // 1. Remove base64 metadata prefix (e.g., "data:image/png;base64,")
+      const base64Data = base64.split(',')[1];
+      if (!base64Data) return null;
+      
+      // 2. Convert to binary Blob
+      const byteCharacters = atob(base64Data);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/jpeg' });
+      
+      // 3. Generate a reasonably unique filename
+      const fileName = `${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 7)}.jpg`;
+      const filePath = `beauty/${fileName}`;
+      
+      // 4. Upload to Supabase Storage bucket 'beauty-bookings'
+      const { data, error } = await supabase.storage
+        .from('beauty-bookings')
+        .upload(filePath, blob, {
+          contentType: 'image/jpeg',
+          cacheControl: '3600',
+          upsert: false
+        });
+        
+      if (error) throw error;
+      
+      // 5. Get Public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('beauty-bookings')
+        .getPublicUrl(filePath);
+        
+      return publicUrl;
+    } catch (err) {
+      console.error(`[uploadBookingImages] Failed to upload image ${idx}:`, err);
+      return null;
+    }
+  });
+  
+  const results = await Promise.all(uploadPromises);
+  return results.filter((url): url is string => url !== null);
 }
