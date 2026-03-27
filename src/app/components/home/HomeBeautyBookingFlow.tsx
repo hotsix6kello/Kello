@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 import styles from '@/app/home.module.css';
 import IntegratedBookingMenu from '../IntegratedBookingMenu';
 import { 
@@ -20,7 +21,7 @@ interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
   onClose: () => void;
   initialCategory: BeautyCategoryId | 'all' | null;
-  t: any;
+  t: (key: string, options?: any) => string;
 }
 
 export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory, t }: HomeBeautyBookingFlowProps) {
@@ -50,7 +51,12 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
 
   const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submittedBooking, setSubmittedBooking] = useState<any>(null);
+  const [submittedBooking, setSubmittedBooking] = useState<{
+    storeName: string;
+    date: string;
+    time: string;
+    serviceName?: string;
+  } | null>(null);
 
   const regions = BEAUTY_REGIONS(t, tBeauty);
 
@@ -143,7 +149,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         uploadedUrls = await uploadBookingImages(requestImages);
       }
 
-      const service = availableServices.find((s: any) => s.id === selectedServiceId);
+      const service = availableServices.find((s) => s.id === selectedServiceId);
       
       const payload: BeautyBookingPayload = {
         category: 'beauty',
@@ -317,7 +323,12 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                          >
                            <div className="flex flex-row w-full items-center p-3 gap-3">
                               <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
-                                 <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt="" className="h-full w-full object-cover" />
+                                 <Image 
+                                   src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} 
+                                   alt={store.name} 
+                                   fill
+                                   className="object-cover" 
+                                 />
                               </div>
                               <div className="flex-1 min-w-0">
                                  <h3 className="text-base font-bold text-neutral-900 truncate">{store.name}</h3>
@@ -339,8 +350,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                  <div className="flex flex-col gap-6">
                     {selectedStore && (
                        <div className="bg-white border border-neutral-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-neutral-100 overflow-hidden shrink-0">
-                             <img src={selectedStore.imageUrl} alt="" className="w-full h-full object-cover" />
+                          <div className="relative w-12 h-12 rounded-xl bg-neutral-100 overflow-hidden shrink-0">
+                             <Image src={selectedStore.imageUrl || ''} alt={selectedStore.name} fill className="object-cover" />
                           </div>
                           <div className="flex-1">
                              <span className="text-[10px] font-bold text-[#bb8a78] uppercase tracking-wider">SELECTED STORE</span>
@@ -405,7 +416,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                <div className="flex flex-wrap gap-3">
                                  {requestImages.map((img, idx) => (
                                    <div key={idx} className="relative w-20 h-20 rounded-xl overflow-hidden border border-neutral-100 group">
-                                     <img src={img} alt="attached" className="w-full h-full object-cover" />
+                                     <Image src={img} alt="attached" fill className="object-cover" />
                                      <button 
                                        onClick={() => removeImage(idx)}
                                        className="absolute top-1 right-1 bg-black/50 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs backdrop-blur-sm"
@@ -458,7 +469,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                           </div>
                            <div className="flex justify-between items-center border-b border-neutral-50 pb-3">
                               <span className="text-sm text-neutral-400">서비스</span>
-                              <strong className="text-sm text-neutral-800">{availableServices.find((s: any) => s.id === selectedServiceId)?.name}</strong>
+                              <strong className="text-sm text-neutral-800">{availableServices.find((s) => s.id === selectedServiceId)?.name}</strong>
                            </div>
                           <div className="flex justify-between items-center">
                              <span className="text-sm text-neutral-400">예약자</span>

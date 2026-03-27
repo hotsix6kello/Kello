@@ -4,17 +4,13 @@ import styles from '../explore.module.css';
 import { CITIES, CATEGORIES, CityId } from '../mock/data';
 
 interface ExploreHeaderProps {
-    currentCity: CityId;
-    onCityChange: (cityId: CityId) => void;
+    currentCity: string;
+    onCityChange: (cityId: any) => void;
     currentCategory: string; // "all" | CategoryId
     onCategoryChange: (catId: string) => void;
-    onFilterClick: () => void;
-    filterCount: number;
-    radius: number;
-    onRadiusChange: (r: number) => void;
     searchTerm: string;
     onSearchChange: (val: string) => void;
-    onSearchSubmit: (val: string) => void;
+    onSearchSubmit: (val?: string) => void;
 }
 
 export default function ExploreHeader({
@@ -22,10 +18,6 @@ export default function ExploreHeader({
     onCityChange,
     currentCategory,
     onCategoryChange,
-    onFilterClick,
-    filterCount,
-    radius,
-    onRadiusChange,
     searchTerm,
     onSearchChange,
     onSearchSubmit
