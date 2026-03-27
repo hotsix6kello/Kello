@@ -85,6 +85,7 @@ export type BeautyBookingAdminRecord = {
   customerName: string;
   customerPhone: string;
   customerRequest: string;
+  imageUrls: string[];
   communicationLanguage: string;
   communicationIntent: string;
   koreanMessage: string;
