@@ -63,11 +63,11 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
         }
     }, [propCenter]);
 
-    const onLoad = useCallback(function callback(_map: google.maps.Map) {
+    const onLoad = useCallback(function callback(__map: google.maps.Map) {
         // 지도 인스턴스 초기 로드 완료 시 동작
     }, []);
 
-    const onUnmount = useCallback(function callback(_map: google.maps.Map) {
+    const onUnmount = useCallback(function callback(__map: google.maps.Map) {
         // 정리 작업
     }, []);
 
