@@ -58,6 +58,7 @@ type BeautyBookingInsertRow = {
   customer_name: string;
   customer_phone: string;
   customer_request: string;
+  image_urls: string[] | null;
   communication_language: string;
   communication_intent: string;
   korean_message: string;
@@ -212,6 +213,7 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     customerName: row.customer_name,
     customerPhone: row.customer_phone,
     customerRequest: row.customer_request,
+    imageUrls: Array.isArray((row as any).image_urls) ? (row as any).image_urls : [],
     communicationLanguage: row.communication_language,
     communicationIntent: row.communication_intent,
     koreanMessage: row.korean_message,
@@ -268,6 +270,7 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "customer_name",
   "customer_phone",
   "customer_request",
+  "image_urls",
   "communication_language",
   "communication_intent",
   "korean_message",
@@ -307,6 +310,7 @@ function mapBeautyBookingPayloadToRow(
     customer_name: payload.customer.name,
     customer_phone: payload.customer.phone,
     customer_request: payload.customer.request,
+    image_urls: payload.customer.imageUrls && payload.customer.imageUrls.length > 0 ? payload.customer.imageUrls : null,
     communication_language: payload.communication.language,
     communication_intent: payload.communication.intent,
     korean_message: payload.communication.messages.korean,
