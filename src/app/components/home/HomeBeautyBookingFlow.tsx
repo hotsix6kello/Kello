@@ -25,7 +25,6 @@ interface HomeBeautyBookingFlowProps {
 }
 
 export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory, t }: HomeBeautyBookingFlowProps) {
-  const router = useRouter();
   const { t: tBeauty } = useTranslation(['beauty_explore', 'home_beauty']);
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
@@ -126,17 +125,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     }
   };
 
-  const validateField = (field: string, value: string) => {
-    if (field === 'name') {
-      if (!value.trim()) return tBeauty('form_name_placeholder');
-      if (/[^a-zA-Z\s]/.test(value)) return 'English only, please.';
-    }
-    if (field === 'phone') {
-      if (!value.trim()) return tBeauty('form_phone_placeholder');
-      if (value.replace(/-/g, '').length < 7) return 'Invalid phone number';
-    }
-    return '';
-  };
+
 
   const handleComplete = async () => {
     if (!selectedStore || !selectedDate || !selectedTime || !selectedServiceId) return;

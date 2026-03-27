@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import styles from '../explore.module.css';
-import { CITIES, CATEGORIES, CityId } from '../mock/data';
+import { CITIES, CityId } from '../mock/data';
 
 interface ExploreHeaderProps {
     currentCity: string;
-    onCityChange: (cityId: any) => void;
+    onCityChange: (cityId: CityId) => void;
     currentCategory: string; // "all" | CategoryId
     onCategoryChange: (catId: string) => void;
     searchTerm: string;
