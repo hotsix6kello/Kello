@@ -1327,6 +1327,14 @@ export default function CommunityPage() {
                         </div>
 
                         <div className={styles.modalBody}>
+                            {/* Step 15: Writing Guide */}
+                            <div className={styles.writeGuideBox}>
+                                <div className={styles.writeGuideText}>
+                                    📍<b>{writeGuideTitle}</b><br />
+                                    {writeGuideBody}
+                                </div>
+                            </div>
+
 
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>{t('community_page.form.category_label')}</label>
@@ -1448,6 +1456,31 @@ export default function CommunityPage() {
                                     style={{ width: '20px', height: '20px', cursor: 'pointer' }}
                                 />
                             </div>
+
+                            <div className={styles.safetyGuideBox}>
+                                <span>{t('community_page.form.safety_title')}</span>
+                                <span>{t('community_page.form.safety_item_1')}</span>
+                                <span>{t('community_page.form.safety_item_2')}</span>
+                            </div>
+
+                            {/* Summary Block before submitting */}
+                            {(newTitle || newRegion || newPoint) && (
+                                <div className={styles.summaryBlock}>
+                                    <div style={{ fontWeight: 800, marginBottom: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>{t('community_page.form.summary_title')}</div>
+                                    <div className={styles.summaryItem}>
+                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_region_type')}</span>
+                                        <span>{newRegion || '-'} / {summaryCategoryLabel}</span>
+                                    </div>
+                                    <div className={styles.summaryItem}>
+                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_point')}</span>
+                                        <span>{newPoint || '-'}</span>
+                                    </div>
+                                    <div className={styles.summaryItem}>
+                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_meetup')}</span>
+                                        <span>{isOpenForMeetup ? t('community_page.form.summary_enabled') : t('community_page.form.summary_disabled')}</span>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <div className={styles.modalFooter}>
