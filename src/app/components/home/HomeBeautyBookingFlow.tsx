@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import styles from '@/app/home.module.css';
