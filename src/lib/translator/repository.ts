@@ -73,38 +73,7 @@ export class InMemoryHomeTranslatorRepository implements HomeTranslatorRepositor
 }
 
 export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepository {
-  private readonly client: {
-    from: (table: string) => {
-      insert: (values: Record<string, unknown> | Array<Record<string, unknown>>) => {
-        select: (columns?: string) => {
-          maybeSingle: () => Promise<{ data: any; error: any }>;
-        };
-      };
-      upsert: (values: Record<string, unknown> | Array<Record<string, unknown>>) => {
-        select: (columns?: string) => {
-          maybeSingle: () => Promise<{ data: any; error: any }>;
-        };
-      };
-      select: (columns?: string) => {
-        eq: (column: string, value: unknown) => {
-          maybeSingle: () => Promise<{ data: any; error: any }>;
-        };
-        order: (column: string, options?: { ascending?: boolean }) => {
-          eq: (column: string, value: unknown) => {
-             select: (columns?: string) => Promise<{ data: any[] | null; error: any }>;
-          };
-          select: (columns?: string) => Promise<{ data: any[] | null; error: any }>;
-        };
-      };
-      update: (values: Record<string, unknown>) => {
-        eq: (column: string, value: unknown) => {
-           select: (columns?: string) => {
-             maybeSingle: () => Promise<{ data: any; error: any }>;
-           };
-        };
-      };
-    } | any;
-  };
+  private readonly client: any;
 
   constructor() {
     const { getSupabaseServerClient } = require("../supabaseServer.ts") as {

@@ -61,11 +61,13 @@ function AdminUsersContent() {
 
         // partners 이메일 → 상태 맵
         const partnerMap = new Map<string, string>();
-        (partnerData ?? []).forEach((p: any) => partnerMap.set(p.email, p.status));
+        const typedPartnerData = (partnerData || []) as { email: string; status: string }[];
+        typedPartnerData.forEach((p) => partnerMap.set(p.email, p.status));
 
-        const merged: Profile[] = (profileData ?? []).map((p: any) => ({
+        const typedProfileData = (profileData || []) as { id: string; email: string; nickname: string | null; is_admin: boolean; created_at: string }[];
+        const merged: Profile[] = typedProfileData.map((p) => ({
             ...p,
-            partnerStatus: partnerMap.get(p.email) ?? null,
+            partnerStatus: (partnerMap.get(p.email) as Profile['partnerStatus']) ?? null,
         }));
 
         setProfiles(merged);
@@ -188,10 +190,6 @@ function AdminUsersContent() {
                     <div className={styles.empty}>검색 결과가 없습니다.</div>
                 )}
 
-                {!loading && filtered.length === 0 && (
-                    <div className={styles.empty}>검색 결과가 없습니다.</div>
-                )}
-
                 {/* 관리자 섹션 */}
                 {!loading && adminList.length > 0 && (
                     <>
@@ -203,7 +201,7 @@ function AdminUsersContent() {
                             🛡️ 관리자 &nbsp;
                             <span style={{ background: '#ede9fe', color: '#7c3aed', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{adminList.length}명</span>
                         </div>
-                        {adminList.map((profile, idx) => (
+                        {adminList.map((profile) => (
                             <div key={profile.id} className={styles.card} style={{
                                 borderLeft: '4px solid #7c3aed',
                                 background: 'rgba(124,58,237,0.04)',
@@ -247,7 +245,7 @@ function AdminUsersContent() {
                             🤝 협력업체 &nbsp;
                             <span style={{ background: '#fef3c7', color: '#92400e', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{partnerList.length}명</span>
                         </div>
-                        {partnerList.map((profile, idx) => (
+                        {partnerList.map((profile) => (
                             <div key={profile.id} className={styles.card} style={{
                                 borderLeft: '4px solid #f59e0b',
                                 background: 'rgba(245,158,11,0.04)',

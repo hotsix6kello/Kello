@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAuthenticatedRouteAccess, AdminRouteAccessError } from "@/lib/admin/adminRouteAccess.ts";
 import { getBeautyNotificationPreferences, updateBeautyNotificationPreferences } from "@/lib/bookings/beautyNotificationPreferences.ts";
-import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
 
 export const runtime = "nodejs";
 

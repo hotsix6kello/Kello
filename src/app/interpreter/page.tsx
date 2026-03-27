@@ -8,7 +8,6 @@ import { ArrowUp, ChevronDown } from 'lucide-react';
 import styles from './interpreter.module.css';
 import {
   getLocaleDisplayLabel,
-  getLocaleLabel,
   getSpeechLocale,
   INTERPRETER_SUPPORTED_LOCALES,
 } from '@/lib/translator/catalog.ts';
