@@ -1,10 +1,10 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
-import { useTrip, ItineraryItem } from "@/lib/contexts/TripContext";
+import { useTrip } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
 import styles from "./my.module.css";
@@ -236,7 +236,6 @@ function SavedHubSection({
 
 function CommunityHubSection() {
     const router = useRouter();
-    const { t } = useTranslation("common");
     const [posts, setPosts] = useState<CommunityPost[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -255,7 +254,7 @@ function CommunityHubSection() {
         } catch {}
 
         const fetchPosts = async () => {
-            const { data, error } = await supabase
+            const { data } = await supabase
                 .from("community_posts")
                 .select("id, type, title, desc, created_at, time")
                 .eq("author", resolvedUserName)
