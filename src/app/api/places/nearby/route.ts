@@ -27,7 +27,17 @@ export async function POST(request: Request) {
     const includedTypes = CATEGORY_TYPE_MAP[category] || [];
 
     try {
-        const body: any = {
+        interface SearchNearbyRequest {
+            locationRestriction: {
+                circle: {
+                    center: { latitude: number; longitude: number };
+                    radius: number;
+                };
+            };
+            includedTypes?: string[];
+        }
+
+        const body: SearchNearbyRequest = {
             locationRestriction: {
                 circle: {
                     center: { latitude: lat, longitude: lng },
@@ -59,11 +69,12 @@ export async function POST(request: Request) {
 
         const data = await response.json();
         return NextResponse.json(data);
-    } catch (error: any) {
-        console.error('Google Places Nearby API Error 상세:', error?.message || error);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown Server Error';
+        console.error('Google Places Nearby API Error 상세:', errorMessage);
         return NextResponse.json({ 
             error: 'Failed to fetch nearby places',
-            detail: error?.message || 'Unknown Server Error'
+            detail: errorMessage
         }, { status: 500 });
     }
 }

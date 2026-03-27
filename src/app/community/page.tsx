@@ -278,7 +278,6 @@ export default function CommunityPage() {
     const communityFetchErrorMessage = t('community_page.states.fetch_failed_desc');
     const communityCategories = CATEGORY_OPTIONS.map((id) => ({ id, label: getCategoryLabel(t, id) }));
     const communitySubFilters = SUB_FILTER_OPTIONS.map((id) => ({ id, label: getSubFilterLabel(t, id) }));
-    const tagChoices = TAG_OPTIONS.map((id) => ({ id, label: getTagLabel(t, id) }));
     const getCategoryText = (category: CommunityCategory | '') => 
         category ? getCategoryLabel(t, category) : t('community_page.form.select_category');
     const getStatusText = (status: string) => getStatusLabel(t, status);
@@ -681,9 +680,10 @@ export default function CommunityPage() {
                 fetchPosts();
                 showToast(t('community_page.toasts.submitted'));
             }
-        } catch (error: any) {
+        } catch (error) {
             console.error('Submission error:', error);
-            alert(t('community_page.errors.submit_failed') + ': ' + (error.message || '알 수 없는 오류'));
+            const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류';
+            alert(t('community_page.errors.submit_failed') + ': ' + errorMessage);
         } finally {
             setIsSubmitting(false);
         }
@@ -799,13 +799,8 @@ export default function CommunityPage() {
     const writeGuideBody = t(`community_page.form.write_guide_body.${formCategoryKey}`);
     const titleFieldLabel = isBeautyDraft ? t('community_page.form.title_label.beauty_review') : t('community_page.form.title_label.default');
     const titleFieldPlaceholder = t(`community_page.form.title_placeholder.${formCategoryKey}`);
-    const pointFieldLabel = isBeautyDraft ? t('community_page.form.point_label.beauty_review') : t('community_page.form.point_label.default');
-    const pointFieldPlaceholder = t(`community_page.form.point_placeholder.${formCategoryKey}`);
     const descFieldLabel = isBeautyDraft ? t('community_page.form.desc_label.beauty_review') : t('community_page.form.desc_label.default');
     const descFieldPlaceholder = t(`community_page.form.desc_placeholder.${formCategoryKey}`);
-    const placeFieldLabel = isBeautyDraft ? t('community_page.form.place_label.beauty_review') : t('community_page.form.place_label.default');
-    const placeFieldPlaceholder = isBeautyDraft ? t('community_page.form.place_placeholder.beauty_review') : t('community_page.form.place_placeholder.default');
-    const placeFieldHelp = isBeautyDraft ? t('community_page.form.place_help.beauty_review') : t('community_page.form.place_help.default');
     const summaryCategoryLabel = getCategoryText(newType);
     const imageUploadGuide = t(`community_page.form.image.guides.${formCategoryKey}`);
     const isImageLimitReached = newImages.length >= COMMUNITY_IMAGE_LIMIT;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import styles from './explore.module.css';
@@ -139,7 +140,7 @@ type CommunicationMessagePayload = {
   intent: CommunicationIntentId;
 };
 
-const CUSTOMER_FORM_FIELDS: (t: any, tBeauty: any) => CustomerFieldConfig[] = (t, tBeauty) => [
+const CUSTOMER_FORM_FIELDS: (t: (key: string, options?: any) => string, tBeauty: (key: string, options?: any) => string) => CustomerFieldConfig[] = (t, tBeauty) => [
   {
     key: 'name',
     label: tBeauty('form_name', { defaultValue: 'Name (English Only)' }),
@@ -160,19 +161,6 @@ const CUSTOMER_FORM_FIELDS: (t: any, tBeauty: any) => CustomerFieldConfig[] = (t
   },
 ];
 
-const AGREEMENT_FIELDS: (t: any, tBeauty: any) => AgreementFieldConfig[] = (t, tBeauty) => [
-  {
-    key: 'bookingConfirmed',
-    label: tBeauty('agreement_confirm', { defaultValue: '예약 내용 확인' }),
-    description: tBeauty('agreement_confirm_desc', { defaultValue: '선택하신 매장, 일시, 시술 정보가 정확함을 확인합니다.' }),
-  },
-  {
-    key: 'privacyConsent',
-    label: tBeauty('agreement_privacy', { defaultValue: '개인정보 처리방침 동의' }),
-    description: tBeauty('agreement_privacy_desc', { defaultValue: '예약 진행을 위해 성함, 연락처 등의 정보가 매장에 제공됨에 동의합니다.' }),
-  },
-];
-
 const INITIAL_CUSTOMER_FORM_STATE: CustomerFormState = {
   name: '',
   phone: '',
@@ -184,14 +172,14 @@ const INITIAL_AGREEMENT_STATE: AgreementState = {
   privacyConsent: false,
 };
 
-const COMMUNICATION_LANGUAGES: (t: any, tBeauty: any) => CommunicationLanguageConfig[] = (t, tBeauty) => [
+const COMMUNICATION_LANGUAGES: (t: (key: string, options?: any) => string, tBeauty: (key: string, options?: any) => string) => CommunicationLanguageConfig[] = (t, tBeauty) => [
   { id: 'ko', label: tBeauty('lang_ko', { defaultValue: '한국어' }), badge: 'KO' },
   { id: 'en', label: tBeauty('lang_en', { defaultValue: 'English' }), badge: 'EN' },
   { id: 'ja', label: tBeauty('lang_ja', { defaultValue: '日本語' }), badge: 'JA' },
   { id: 'zh-CN', label: tBeauty('lang_zh_cn', { defaultValue: '中文' }), badge: 'ZH' },
 ];
 
-const COMMUNICATION_INTENTS: (t: any, tBeauty: any) => CommunicationIntentConfig[] = (t, tBeauty) => [
+const COMMUNICATION_INTENTS: (t: (key: string, options?: any) => string, tBeauty: (key: string, options?: any) => string) => CommunicationIntentConfig[] = (t, tBeauty) => [
   {
     id: 'booking_confirm',
     label: tBeauty('intent_booking_confirm', { defaultValue: '예약 확인' }),
@@ -214,19 +202,6 @@ const COMMUNICATION_INTENTS: (t: any, tBeauty: any) => CommunicationIntentConfig
   },
 ];
 
-const COMMUNICATION_LANGUAGE_LABELS: Record<CommunicationLanguageId, string> = {
-  ko: '한국어',
-  en: 'English',
-  ja: '日本語',
-  'zh-CN': '中文',
-};
-
-const COMMUNICATION_INTENT_LABELS: Record<CommunicationIntentId, string> = {
-  booking_confirm: '예약 확인',
-  service_request: '시술 요청 전달',
-  allergy_notice: '알레르기/민감 사항 전달',
-  style_consultation: '스타일 상담 도움',
-};
 
 function createDesigner(
   id: string,
@@ -255,13 +230,6 @@ function createServiceOption(id: string, name: string, description: string, pric
   };
 }
 
-function truncatePreview(text: string, maxLength = 140): string {
-  if (text.length <= maxLength) {
-    return text;
-  }
-
-  return `${text.slice(0, maxLength).trim()}…`;
-}
 
 function joinItemsForLanguage(items: string[], language: CommunicationLanguageId): string {
   if (items.length === 0) {
@@ -784,11 +752,8 @@ export default function MyExplorePage() {
   const { 
     addItineraryItem, 
     selectedCategory: globalCategory, 
-    setSelectedCategory: setGlobalCategory,
     searchQuery: globalSearchQuery,
-    setSearchQuery: setGlobalSearchQuery,
     destinationInfo,
-    setDestinationInfo
   } = useTrip();
   const categoryParam = searchParams.get('category');
   const beautyCategoryParam = searchParams.get('beautyCategory');
@@ -809,7 +774,6 @@ export default function MyExplorePage() {
   );
 
   const customerFormFields = useMemo(() => CUSTOMER_FORM_FIELDS(t, tBeauty), [t, tBeauty]);
-  const agreementFields = useMemo(() => AGREEMENT_FIELDS(t, tBeauty), [t, tBeauty]);
   const beautyRegions = useMemo(() => BEAUTY_REGIONS(t, tBeauty), [t, tBeauty]);
   const beautyCategoryLabels = useMemo(() => BEAUTY_CATEGORY_META(t, tBeauty), [t, tBeauty]);
   const commLangs = useMemo(() => COMMUNICATION_LANGUAGES(t, tBeauty), [t, tBeauty]);
@@ -913,17 +877,14 @@ export default function MyExplorePage() {
 /* moved below */
   const [selectedCommunicationIntent, setSelectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
   const [customerForm, setCustomerForm] = useState<CustomerFormState>(INITIAL_CUSTOMER_FORM_STATE);
-  const [selectedCountry, setSelectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
-  const [isCountryPickerOpen, setIsCountryPickerOpen] = useState(false);
+  const [selectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
   const [agreements, setAgreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
-  const [formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmittingBeautyBooking, setIsSubmittingBeautyBooking] = useState(false);
+  const [formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
   const [beautySubmitError, setBeautySubmitError] = useState<string | null>(null);
   const [submittedBookingPayload, setSubmittedBookingPayload] = useState<BeautyBookingPayload | null>(null);
   const [submittedBooking, setSubmittedBooking] = useState<BeautyBookingCompletionDisplay | null>(null);
-  const bookingPanelRef = useRef<HTMLElement | null>(null);
-  const confirmSectionRef = useRef<HTMLElement | null>(null);
   const toastTimeoutRef = useRef<number | null>(null);
 
   function showToast(message: string) {
@@ -1030,7 +991,7 @@ export default function MyExplorePage() {
     };
 
     void fetchNearby();
-  }, [currentCategory, hotelLocation, isBeautyExplore, radius]);
+  }, [currentCategory, hotelLocation, isBeautyExplore, radius, currentCity, t]);
 
   useEffect(() => {
     return () => {
@@ -1076,20 +1037,20 @@ export default function MyExplorePage() {
         return next;
       });
     }
-  }, [beautyCategoryFilter, selectedBeautyStoreId, selectedRegion]);
+  }, [beautyCategoryFilter, selectedBeautyStoreId, selectedRegion, translatedStores]);
 
   const currentBeautyCategory = selectedBeautyCategory ?? beautyCategoryFilter;
   const availableDesigners = useMemo(
     () => (selectedBeautyStoreId ? translatedDesignersByStore[selectedBeautyStoreId] ?? [] : []),
-    [selectedBeautyStoreId],
+    [selectedBeautyStoreId, translatedDesignersByStore],
   );
   const availablePrimaryServices = useMemo(
     () => (currentBeautyCategory ? translatedPrimaryServices[currentBeautyCategory] ?? [] : []),
-    [currentBeautyCategory],
+    [currentBeautyCategory, translatedPrimaryServices],
   );
  const availableAddOnOptions = useMemo(
     () => (currentBeautyCategory ? translatedAddOns[currentBeautyCategory] ?? [] : []),
-    [currentBeautyCategory],
+    [currentBeautyCategory, translatedAddOns],
   );
   const selectedDesigner = useMemo(
     () => availableDesigners.find((designer) => designer.id === selectedDesignerId) ?? null,
@@ -1221,12 +1182,6 @@ export default function MyExplorePage() {
   const beautyCategoryLabel = beautyCategoryFilter
     ? beautyCategoryLabels[beautyCategoryFilter].label
     : t('beauty_explore.hero_title');
-  const beautyCategoryBadge = beautyCategoryFilter
-    ? beautyCategoryLabels[beautyCategoryFilter].badge
-    : 'ALL';
-  const beautyDescription = beautyCategoryFilter
-    ? beautyCategoryLabels[beautyCategoryFilter].description
-    : t('beauty_explore.hero_desc');
   const filteredBeautyStores = translatedStores.filter((store) => {
     const matchesCategory = beautyCategoryFilter ? store.category === beautyCategoryFilter : true;
     const matchesRegion = selectedRegion === 'all' ? true : store.region === selectedRegion;
@@ -1245,14 +1200,6 @@ export default function MyExplorePage() {
     ? bookingDateLabels[selectedBeautyDate] ?? selectedBeautyDate
     : tBeauty('label_service_default');
 
-  const selectedDesignerLabel = selectedDesigner
-    ? `${selectedDesigner.name}${selectedDesigner.surcharge > 0 ? ` (+${formatPrice(selectedDesigner.surcharge)})` : ''}`
-    : tBeauty('label_designer_default', { defaultValue: '디자이너 선택 안 함' });
-  const selectedPrimaryServiceLabel = selectedPrimaryService ? selectedPrimaryService.name : tBeauty('label_service_default');
-  const selectedAddOnLabel = selectedAddOnOptions.length > 0
-    ? selectedAddOnOptions.map((option) => option.name).join(', ')
-    : tBeauty('label_addon_default', { defaultValue: '추가 옵션 없음' });
-  
   const selectedCommLangLabel = commLangs.find(l => l.id === selectedCommunicationLanguage)?.label ?? selectedCommunicationLanguage;
   const selectedCommIntentLabel = commIntents.find(i => i.id === selectedCommunicationIntent)?.label ?? selectedCommunicationIntent;
 
@@ -1335,14 +1282,6 @@ export default function MyExplorePage() {
     router.push(`/explore/${id}`);
   };
 
-  const handleBeautyBookingContinue = () => {
-    if (!selectedBeautyStore || !selectedBeautyStoreId || !selectedBeautyDate || !selectedBeautyTime) {
-      return;
-    }
-
-    clearSubmittedBooking();
-    setCurrentStep(3);
-  };
 
   const handleStep3ToStep4Continue = () => {
     const nameError = validateCustomerField('name', customerForm.name);
@@ -1419,44 +1358,6 @@ export default function MyExplorePage() {
     return '';
   };
 
-  const COUNTRY_CODES = [
-    { code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png', name: 'South Korea' },
-    { code: 'JP', dial: '+81', flag: 'https://flagcdn.com/w40/jp.png', name: 'Japan' },
-    { code: 'CN', dial: '+86', flag: 'https://flagcdn.com/w40/cn.png', name: 'China' },
-    { code: 'TW', dial: '+886', flag: 'https://flagcdn.com/w40/tw.png', name: 'Taiwan' },
-    { code: 'HK', dial: '+852', flag: 'https://flagcdn.com/w40/hk.png', name: 'Hong Kong' },
-    { code: 'VN', dial: '+84', flag: 'https://flagcdn.com/w40/vn.png', name: 'Vietnam' },
-    { code: 'TH', dial: '+66', flag: 'https://flagcdn.com/w40/th.png', name: 'Thailand' },
-    { code: 'PH', dial: '+63', flag: 'https://flagcdn.com/w40/ph.png', name: 'Philippines' },
-    { code: 'SG', dial: '+65', flag: 'https://flagcdn.com/w40/sg.png', name: 'Singapore' },
-    { code: 'MY', dial: '+60', flag: 'https://flagcdn.com/w40/my.png', name: 'Malaysia' },
-    { code: 'ID', dial: '+62', flag: 'https://flagcdn.com/w40/id.png', name: 'Indonesia' },
-    { code: 'US', dial: '+1', flag: 'https://flagcdn.com/w40/us.png', name: 'United States' },
-    { code: 'CA', dial: '+1', flag: 'https://flagcdn.com/w40/ca.png', name: 'Canada' },
-    { code: 'GB', dial: '+44', flag: 'https://flagcdn.com/w40/gb.png', name: 'United Kingdom' },
-    { code: 'FR', dial: '+33', flag: 'https://flagcdn.com/w40/fr.png', name: 'France' },
-    { code: 'DE', dial: '+49', flag: 'https://flagcdn.com/w40/de.png', name: 'Germany' },
-    { code: 'IT', dial: '+39', flag: 'https://flagcdn.com/w40/it.png', name: 'Italy' },
-    { code: 'ES', dial: '+34', flag: 'https://flagcdn.com/w40/es.png', name: 'Spain' },
-    { code: 'RU', dial: '+7', flag: 'https://flagcdn.com/w40/ru.png', name: 'Russia' },
-    { code: 'AU', dial: '+61', flag: 'https://flagcdn.com/w40/au.png', name: 'Australia' },
-    { code: 'BR', dial: '+55', flag: 'https://flagcdn.com/w40/br.png', name: 'Brazil' },
-    { code: 'MX', dial: '+52', flag: 'https://flagcdn.com/w40/mx.png', name: 'Mexico' },
-    { code: 'AE', dial: '+971', flag: 'https://flagcdn.com/w40/ae.png', name: 'United Arab Emirates' },
-    { code: 'SA', dial: '+966', flag: 'https://flagcdn.com/w40/sa.png', name: 'Saudi Arabia' },
-    { code: 'IN', dial: '+91', flag: 'https://flagcdn.com/w40/in.png', name: 'India' },
-    { code: 'MO', dial: '+853', flag: 'https://flagcdn.com/w40/mo.png', name: 'Macau' },
-    { code: 'MN', dial: '+976', flag: 'https://flagcdn.com/w40/mn.png', name: 'Mongolia' },
-    { code: 'KZ', dial: '+7', flag: 'https://flagcdn.com/w40/kz.png', name: 'Kazakhstan' },
-    { code: 'TR', dial: '+90', flag: 'https://flagcdn.com/w40/tr.png', name: 'Turkey' },
-    { code: 'EG', dial: '+20', flag: 'https://flagcdn.com/w40/eg.png', name: 'Egypt' },
-    { code: 'PT', dial: '+351', flag: 'https://flagcdn.com/w40/pt.png', name: 'Portugal' },
-    { code: 'CH', dial: '+41', flag: 'https://flagcdn.com/w40/ch.png', name: 'Switzerland' },
-    { code: 'NL', dial: '+31', flag: 'https://flagcdn.com/w40/nl.png', name: 'Netherlands' },
-    { code: 'SE', dial: '+46', flag: 'https://flagcdn.com/w40/se.png', name: 'Sweden' },
-    { code: 'PL', dial: '+48', flag: 'https://flagcdn.com/w40/pl.png', name: 'Poland' },
-    { code: 'UZ', dial: '+998', flag: 'https://flagcdn.com/w40/uz.png', name: 'Uzbekistan' },
-  ];
 
   const handleCustomerFieldChange = (field: CustomerFormFieldKey, value: string) => {
     let finalValue = value;
@@ -1490,68 +1391,26 @@ export default function MyExplorePage() {
     }
   };
 
-  const handleCustomerFieldBlur = (field: Extract<CustomerFormFieldKey, 'name' | 'phone'>) => {
-    const nextError = validateCustomerField(field, customerForm[field]);
-
-    setFormErrors((prev) => {
-      if (!nextError && !prev[field]) {
-        return prev;
-      }
-
-      const next = { ...prev };
-      if (nextError) {
-        next[field] = nextError;
-      } else {
-        delete next[field];
-      }
-      return next;
-    });
-  };
 
   const handleAgreementToggle = (field: AgreementKey) => {
     setAgreements((prev) => ({
       ...prev,
       [field]: !prev[field],
     }));
-    clearFormError(field);
   };
 
   const validateBeautyBookingForm = () => {
-    const nextErrors: Partial<Record<FormErrorKey, string>> = {};
     const nameError = validateCustomerField('name', customerForm.name);
     const phoneError = validateCustomerField('phone', customerForm.phone);
 
-    if (nameError) {
-      nextErrors.name = nameError;
+    if (nameError || phoneError || !agreements.bookingConfirmed || !agreements.privacyConsent) {
+      return false;
     }
 
-    if (phoneError) {
-      nextErrors.phone = phoneError;
-    }
-
-    if (!agreements.bookingConfirmed) {
-      nextErrors.bookingConfirmed = t('beauty_explore.toast_check_info');
-    }
-
-    if (!agreements.privacyConsent) {
-      nextErrors.privacyConsent = t('beauty_explore.agreement_privacy_desc');
-    }
-
-    setFormErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
+    return true;
   };
 
-  const scrollToConfirmSection = () => {
-    window.requestAnimationFrame(() => {
-      confirmSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  };
 
-  const scrollToBookingPanel = () => {
-    window.requestAnimationFrame(() => {
-      bookingPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  };
 
   const clearSubmittedBooking = () => {
     setBeautySubmitError(null);
@@ -1559,46 +1418,15 @@ export default function MyExplorePage() {
     setSubmittedBooking(null);
   };
 
-  const handleDesignerSelect = (designerId: string) => {
-    setSelectedDesignerId((prev) => (prev === designerId ? null : designerId));
-    clearSubmittedBooking();
-  };
 
   const handlePrimaryServiceSelect = (serviceId: string) => {
     setSelectedPrimaryServiceId(serviceId);
-    clearFormError('primaryService');
     clearSubmittedBooking();
   };
 
-  const handleAddOnToggle = (optionId: string) => {
-    setSelectedAddOnIds((prev) => {
-      if (prev.includes(optionId)) {
-        return prev.filter((id) => id !== optionId);
-      }
 
-      if (prev.length >= 2) {
-        showToast(t('beauty_explore.toast_addon_limit'));
-        return prev;
-      }
 
-      return [...prev, optionId];
-    });
-    clearSubmittedBooking();
-  };
 
-  const handleCommunicationLanguageSelect = (language: CommunicationLanguageId) => {
-    setSelectedCommunicationLanguage(language);
-    clearSubmittedBooking();
-  };
-
-  const handleCommunicationIntentSelect = (intent: CommunicationIntentId) => {
-    setSelectedCommunicationIntent(intent);
-    clearSubmittedBooking();
-  };
-
-  const handlePrepareMessageCopy = (label: string) => {
-    showToast(t('beauty_explore.toast_copy_hint', { label }));
-  };
 
   const handleBeautyStoreSelect = (
     storeId: string,
@@ -1617,15 +1445,9 @@ export default function MyExplorePage() {
     setSelectedAddOnIds([]);
     setCurrentStep(2);
     clearSubmittedBooking();
-    clearFormError('primaryService');
     showToast(`${storeName}${t('beauty_explore.toast_select_time')}`);
   };
 
-  const handleBeautyDateSelect = (dateKey: string) => {
-    setSelectedBeautyDate(dateKey);
-    setSelectedBeautyTime(null);
-    clearSubmittedBooking();
-  };
 
   const handleBeautyBookingSubmit = () => {
     if (isSubmittingBeautyBooking) {
@@ -1655,7 +1477,6 @@ export default function MyExplorePage() {
       .getSession()
       .then(({ data }) => submitBeautyBooking(draftBeautyBookingPayload, data.session?.access_token ?? null))
       .then((result) => {
-        setSubmittedBookingPayload(result.payload);
         setSubmittedBooking(
           buildBeautyBookingCompletionDisplay(result.payload, {
             categoryLabel: selectedBeautyCategoryLabel,
@@ -1674,7 +1495,6 @@ export default function MyExplorePage() {
             ? error.message
             : t('beauty_explore.toast_submit_error');
 
-        setBeautySubmitError(nextMessage);
         showToast(nextMessage);
       })
       .finally(() => {
@@ -1717,9 +1537,6 @@ export default function MyExplorePage() {
 
   const isCustomerNameValid = validateCustomerField('name', customerForm.name) === '';
   const isCustomerPhoneValid = validateCustomerField('phone', customerForm.phone) === '';
-  const beautyHeroFlow = beautyCategoryFilter
-    ? ['지역 선택', '매장 고르기', '시간 확인']
-    : ['카테고리 확인', '지역 선택', '매장 고르기'];
   const isBeautyConfirmSubmitEnabled =
     Boolean(selectedBeautyStore && selectedBeautyDate && selectedBeautyTime) &&
     Boolean(selectedPrimaryService) &&
@@ -1764,10 +1581,6 @@ export default function MyExplorePage() {
         onCityChange={handleCityChange}
         currentCategory={currentCategory}
         onCategoryChange={handleCategoryChange}
-        onFilterClick={() => setIsFilterOpen(true)}
-        filterCount={Object.keys(activeFilters).length}
-        radius={radius}
-        onRadiusChange={setRadius}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         onSearchSubmit={handleSearchSubmit}
@@ -1882,7 +1695,7 @@ export default function MyExplorePage() {
                                   >
                                     <div className="flex flex-row w-full items-center p-3 gap-3">
                                       <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
-                                        <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} className="h-full w-full object-cover" />
+                                        <Image src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} fill className="object-cover" />
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <h3 className="text-base font-bold text-[var(--ink-black)] truncate">{store.name}</h3>
@@ -1907,8 +1720,8 @@ export default function MyExplorePage() {
                         <div className="flex flex-col gap-6">
                           {selectedBeautyStore && (
                             <div className="bg-[var(--surface)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4 shadow-sm flex items-center gap-3">
-                              <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0">
-                                <img src={selectedBeautyStore.imageUrl} alt="" className="w-full h-full object-cover" />
+                              <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0 relative">
+                                <Image src={selectedBeautyStore.imageUrl || ''} alt="" fill className="object-cover" />
                               </div>
                               <div className="flex-1">
                                 <span className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">SELECTED STORE</span>
@@ -2038,9 +1851,9 @@ export default function MyExplorePage() {
                <div className="flex flex-col gap-4">
                  {sortedItemsToShow.map((item) => (
                    <article key={item.id} className="bg-[var(--surface)] rounded-[var(--radius-md)] border border-[var(--warm-sand)] p-3 shadow-sm flex gap-3 cursor-pointer" onClick={() => handleDetails(item.id)}>
-                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0">
+                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0 relative">
                          {item.image_url ? (
-                           <img src={item.image_url} alt="" className="w-full h-full object-cover" />
+                           <Image src={item.image_url} alt="" fill className="object-cover" />
                          ) : (
                            <div className="w-full h-full" style={{ backgroundColor: item.image_color || '#eee' }} />
                          )}

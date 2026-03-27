@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 import { useTrip, ItineraryItem } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
@@ -17,6 +18,15 @@ interface DashboardProfileRecord {
     nickname: string | null;
     is_admin: boolean | null;
     avatar_url: string | null;
+}
+
+interface CommunityPost {
+    id: string;
+    type: string;
+    title: string;
+    desc: string;
+    created_at: string;
+    time: string;
 }
 
 const SSR_SAFE_FALLBACK_NAME = "Traveler";
@@ -65,7 +75,7 @@ function ProfileSummaryCard({
             const fileName = `${Math.random()}.${fileExt}`;
             const filePath = `${fileName}`;
 
-            let { error: uploadError } = await supabase.storage
+            const { error: uploadError } = await supabase.storage
                 .from('avatars')
                 .upload(filePath, file);
 
@@ -100,7 +110,13 @@ function ProfileSummaryCard({
                 <label style={{ cursor: 'pointer' }}>
                     <div className={styles.profileAvatar}>
                         {avatarUrl ? (
-                            <img src={avatarUrl} alt={userName} className={styles.avatarImg} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                            <Image 
+                                src={avatarUrl} 
+                                alt={userName} 
+                                fill
+                                className={styles.avatarImg} 
+                                style={{ borderRadius: '50%', objectFit: 'cover' }} 
+                            />
                         ) : (
                             <span className={styles.profileInitials}>{initials || "TR"}</span>
                         )}
@@ -221,7 +237,7 @@ function SavedHubSection({
 function CommunityHubSection() {
     const router = useRouter();
     const { t } = useTranslation("common");
-    const [posts, setPosts] = useState<any[]>([]);
+    const [posts, setPosts] = useState<CommunityPost[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

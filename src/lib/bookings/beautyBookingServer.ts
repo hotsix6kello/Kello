@@ -79,7 +79,7 @@ type BeautyBookingInsertRow = {
   change_review_note?: string;
 };
 
-type BeautyBookingAdminSelectRow = {
+export type BeautyBookingAdminSelectRow = {
   id: string;
   customer_user_id: string | null;
   created_at: string;

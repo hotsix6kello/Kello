@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import styles from './CurrencySelector.module.css';
 
 interface Rates {
@@ -57,14 +58,20 @@ export default function CurrencySelector() {
         window.dispatchEvent(new CustomEvent('kello_currency_change', { detail: code }));
     };
 
+    const selectedCurrencyFlag = SUPPORTED_CURRENCIES.find(c => c.code === selected)?.flag || '';
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.trigger} onClick={() => setIsOpen(!isOpen)}>
-                <img 
-                    src={SUPPORTED_CURRENCIES.find(c => c.code === selected)?.flag} 
-                    alt="" 
-                    className="w-5 h-3.5 object-cover rounded-[2px] mr-2" 
-                />
+                {selectedCurrencyFlag && (
+                    <Image
+                        src={selectedCurrencyFlag}
+                        alt=""
+                        width={20} // w-5
+                        height={14} // h-3.5
+                        className="object-cover rounded-[2px] mr-2"
+                    />
+                )}
                 <span className="font-bold">{selected}</span>
                 <span className={styles.arrow}>▼</span>
             </div>
@@ -79,7 +86,13 @@ export default function CurrencySelector() {
                                 className={`${styles.item} ${selected === curr.code ? styles.active : ''}`}
                                 onClick={() => handleSelect(curr.code)}
                             >
-                                <img src={curr.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px] mr-3 shrink-0" />
+                                <Image
+                                    src={curr.flag}
+                                    alt=""
+                                    width={20} // w-5
+                                    height={14} // h-3.5
+                                    className="object-cover rounded-[2px] mr-3 shrink-0"
+                                />
                                 <span className={styles.code}>{curr.code}</span>
                                 <span className={styles.symbol}>{curr.symbol}</span>
                                 {curr.code !== 'KRW' && rates[curr.code] && (
