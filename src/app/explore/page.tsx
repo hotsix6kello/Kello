@@ -128,6 +128,7 @@ type CommunicationIntentConfig = {
   description: string;
 };
 
+
 type CommunicationMessagePayload = {
   categoryLabel: string;
   storeName: string;
@@ -221,6 +222,9 @@ function createDesigner(
   };
 }
 
+
+
+
 function createServiceOption(id: string, name: string, description: string, price: number): BeautyServiceOption {
   return {
     id,
@@ -229,7 +233,6 @@ function createServiceOption(id: string, name: string, description: string, pric
     price,
   };
 }
-
 
 function joinItemsForLanguage(items: string[], language: CommunicationLanguageId): string {
   if (items.length === 0) {
@@ -882,8 +885,6 @@ export default function MyExplorePage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmittingBeautyBooking, setIsSubmittingBeautyBooking] = useState(false);
   const [formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
-  const [beautySubmitError, setBeautySubmitError] = useState<string | null>(null);
-  const [submittedBookingPayload, setSubmittedBookingPayload] = useState<BeautyBookingPayload | null>(null);
   const [submittedBooking, setSubmittedBooking] = useState<BeautyBookingCompletionDisplay | null>(null);
   const toastTimeoutRef = useRef<number | null>(null);
 
@@ -913,8 +914,6 @@ export default function MyExplorePage() {
     setSelectedPrimaryServiceId(null);
     setSelectedAddOnIds([]);
     setCurrentStep(1);
-    setBeautySubmitError(null);
-    setSubmittedBookingPayload(null);
     setSubmittedBooking(null);
     setFormErrors((prev) => {
       if (!prev.primaryService) {
@@ -1024,8 +1023,6 @@ export default function MyExplorePage() {
       setSelectedAddOnIds([]);
       setCurrentStep(1);
       setIsSubmittingBeautyBooking(false);
-      setBeautySubmitError(null);
-      setSubmittedBookingPayload(null);
       setSubmittedBooking(null);
       setFormErrors((prev) => {
         if (!prev.primaryService) {
@@ -1316,17 +1313,7 @@ export default function MyExplorePage() {
     }
   };
 
-  const clearFormError = (errorKey: FormErrorKey) => {
-    setFormErrors((prev) => {
-      if (!prev[errorKey]) {
-        return prev;
-      }
 
-      const next = { ...prev };
-      delete next[errorKey];
-      return next;
-    });
-  };
 
   const validateCustomerField = (field: FormErrorKey, value: string) => {
     const trimmedValue = value.trim();
@@ -1415,8 +1402,6 @@ export default function MyExplorePage() {
 
 
   const clearSubmittedBooking = () => {
-    setBeautySubmitError(null);
-    setSubmittedBookingPayload(null);
     setSubmittedBooking(null);
   };
 
@@ -1467,17 +1452,16 @@ export default function MyExplorePage() {
 
     if (!draftBeautyBookingPayload) {
       const msg = t('beauty_explore.toast_check_info');
-      setBeautySubmitError(msg);
       showToast(msg);
       return;
     }
 
-    setBeautySubmitError(null);
+    setSubmittedBooking(null);
     setIsSubmittingBeautyBooking(true);
 
     void supabase.auth
       .getSession()
-      .then(({ data }) => submitBeautyBooking(draftBeautyBookingPayload, data.session?.access_token ?? null))
+      .then(({ data }) => submitBeautyBooking(draftBeautyBookingPayload!, data.session?.access_token ?? null))
       .then((result) => {
         setSubmittedBooking(
           buildBeautyBookingCompletionDisplay(result.payload, {
@@ -1491,11 +1475,8 @@ export default function MyExplorePage() {
           }),
         );
       })
-      .catch((error) => {
-        const nextMessage =
-          error instanceof Error && error.message
-            ? error.message
-            : t('beauty_explore.toast_submit_error');
+      .catch(() => {
+        const nextMessage = t('beauty_explore.toast_submit_error');
 
         showToast(nextMessage);
       })
