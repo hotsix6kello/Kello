@@ -52,12 +52,12 @@ export default function MembersPage() {
                 position: 'sticky', top: 0,
                 background: 'var(--background)',
                 zIndex: 10,
-                borderBottom: '1px solid var(--gray-100)',
+                borderBottom: '1px solid var(--warm-sand)',
                 display: 'flex', alignItems: 'center', gap: 12
             }}>
-                <button onClick={() => router.back()} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--foreground)' }}>←</button>
-                <h1 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0 }}>👥 회원 목록</h1>
-                <span style={{ marginLeft: 'auto', fontSize: '0.85rem', color: 'var(--gray-500)' }}>{profiles.length}명</span>
+                <button onClick={() => router.back()} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--ink-black)' }}>←</button>
+                <h1 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--ink-black)' }}>👥 회원 목록</h1>
+                <span style={{ marginLeft: 'auto', fontSize: '0.85rem', color: 'var(--soft-ink)' }}>{profiles.length}명</span>
             </header>
 
             <div style={{ padding: '16px 20px' }}>
@@ -69,9 +69,9 @@ export default function MembersPage() {
 
                 {error && (
                     <div style={{
-                        background: '#fef2f2', border: '1px solid #fecaca',
+                        background: 'var(--primary-glow)', border: '1px solid var(--accent)',
                         borderRadius: 12, padding: 16, marginBottom: 16,
-                        color: '#dc2626', fontSize: '0.9rem'
+                        color: 'var(--accent)', fontSize: '0.9rem'
                     }}>
                         <strong>⚠️ 오류:</strong> {error}
                         <br /><br />
@@ -86,7 +86,7 @@ export default function MembersPage() {
                 {!loading && !error && profiles.length === 0 && (
                     <div style={{
                         textAlign: 'center', padding: '60px 20px',
-                        background: 'white', borderRadius: 16, border: '1px solid var(--gray-100)'
+                        background: 'var(--surface)', borderRadius: 16, border: '1px solid var(--warm-sand)'
                     }}>
                         <div style={{ fontSize: '3rem', marginBottom: 12 }}>👤</div>
                         <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem' }}>
@@ -99,23 +99,23 @@ export default function MembersPage() {
                 {!loading && profiles.map((profile, idx) => (
                     <div key={profile.id} style={{
                         display: 'flex', alignItems: 'center', gap: 14,
-                        background: 'white', borderRadius: 14, padding: '14px 16px',
-                        marginBottom: 10, border: '1px solid var(--gray-100)',
-                        boxShadow: '0 1px 4px rgba(0,0,0,0.04)'
+                        background: 'var(--surface)', borderRadius: 14, padding: '14px 16px',
+                        marginBottom: 10, border: '1px solid var(--warm-sand)',
+                        boxShadow: 'var(--shadow-sm)'
                     }}>
                         <div style={{
                             width: 44, height: 44, borderRadius: '50%',
                             background: `hsl(${(idx * 53) % 360}, 70%, 60%)`,
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontWeight: 700, color: 'white', fontSize: '1.1rem', flexShrink: 0
+                            fontWeight: 700, color: 'var(--hanji-ivory)', fontSize: '1.1rem', flexShrink: 0
                         }}>
                             {(profile.nickname || profile.email || '?')[0].toUpperCase()}
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
-                            <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--foreground)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--ink-black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                 {profile.nickname || '(닉네임 없음)'}
                             </div>
-                            <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--soft-ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                 {profile.email}
                             </div>
                         </div>

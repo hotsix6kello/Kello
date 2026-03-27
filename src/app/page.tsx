@@ -39,6 +39,7 @@ import HomeBookingSection from './components/home/HomeBookingSection';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
+import HomeBeautyBookingFlow from './components/home/HomeBeautyBookingFlow';
 
 import { 
   BEAUTY_CATEGORY_OPTIONS, 
@@ -53,16 +54,8 @@ export default function HomePage() {
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
-    setSearchQuery: setInput,
     setDestinationInfo
   } = useTrip();
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return t('common.morning');
-    if (hour < 18) return t('common.afternoon');
-    return t('common.evening');
-  };
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
   const setSelectedCategory = setGlobalCategory as (category: BeautyCategoryId | null) => void;
@@ -88,6 +81,8 @@ export default function HomePage() {
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
   const [sheetSearchResults, setSheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Merge MOCK_PLACES with MOCK_ITEMS for broader search
   const ALL_SEARCH_ITEMS = useMemo(() => {
@@ -105,10 +100,16 @@ export default function HomePage() {
       };
     });
 
-    const mappedPlaces = MOCK_PLACES.map(p => ({
-      ...p,
-      searchTerms: [p.title, p.area].join(' ').toLowerCase()
-    }));
+    const mappedPlaces = MOCK_PLACES.map(p => {
+      const transTitle = t(p.title, { defaultValue: p.title });
+      const transArea = t(p.area, { defaultValue: p.area });
+      return {
+        ...p,
+        title: transTitle,
+        area: transArea,
+        searchTerms: [transTitle, transArea].join(' ').toLowerCase()
+      };
+    });
 
     return [...mappedPlaces, ...items];
   }, [t]);
@@ -164,7 +165,7 @@ export default function HomePage() {
     }
   };
 
-  const nextDest = itinerary.find(item => item.status === 'confirmed');
+  const nextDest = itinerary.find((item: ItineraryItem) => item.status === 'confirmed');
 
   const destInfo = useMemo(() => {
     if (selectedDest) {
@@ -198,7 +199,9 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
+    // 홈 화면 진입 시 카테고리 선택 상태를 초기화하여 강조 색상이 보이지 않도록 함
+    setSelectedCategory(null);
+  }, [setSelectedCategory]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -234,21 +237,15 @@ export default function HomePage() {
 
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategory(categoryId as BeautyCategoryId);
-    router.push(`/explore?category=beauty&beautyCategory=${categoryId}`);
+    setIsBookingOpen(true);
   };
 
   const handleOpenInterpreter = () => {
     router.push('/interpreter');
   };
 
-  useEffect(() => {
-    if (openNavSheet || isMapOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [openNavSheet, isMapOpen]);
+  // body는 globals.css에서 overflow:hidden으로 영구 설정됨
+  // JS에서 별도 제어 불필요
 
   const handleKRide = () => {
     if (!destInfo) return;
@@ -312,21 +309,19 @@ export default function HomePage() {
   }, [destInfo]);
 
   if (!isHydrated) {
-    return <main className={styles.main} suppressHydrationWarning />;
+    return <div className={styles.main} suppressHydrationWarning />;
   }
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <HomeTopNav 
         userName={userName} 
         onSignOut={handleSignOut} 
-        greeting={getGreeting()}
         t={t} 
       />
 
       <HomeHero 
         userName={userName} 
-        greeting={getGreeting()} 
         t={t} 
       />
 
@@ -334,11 +329,6 @@ export default function HomePage() {
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
-        onStartBooking={() => {
-          if (selectedCategory) {
-            router.push(`/explore?category=beauty&beautyCategory=${selectedCategory}`);
-          }
-        }}
         t={t}
       />
 
@@ -380,11 +370,24 @@ export default function HomePage() {
 
 
       {loadingNav && (
-        <div className={styles.toast} style={{ bottom: '120px', background: 'var(--primary)', color: 'white' }}>
+        <div className={styles.toast}>
           {t('home.fetching_location', { defaultValue: 'Fetching location...' })}
         </div>
       )}
 
-    </main>
+      <HomeBeautyBookingFlow 
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+        initialCategory={selectedCategory}
+        t={t}
+      />
+
+      {toastMessage && (
+        <div className={styles.toast}>
+          {toastMessage}
+        </div>
+      )}
+
+    </div>
   );
 }

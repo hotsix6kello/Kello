@@ -1288,15 +1288,15 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "美容预约管家",
-      "title": "您想预约什么服务？",
+      "title": "将韩国之美，\n融入您的行程。",
       "subtitle": "选择您想要的美容服务，直接进入预约步骤。",
       "welcome": "{{name}}，请选择今天的服务。",
       "welcome_user": "{{greeting}}，{{name}}！👋"
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "请选择您想要的美容服务",
-      "description": "为了进行最准确的探索，请先选择类别。"
+      "title": "请选择美容服务",
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -1365,11 +1365,11 @@
   },
   "interpreter_page": {
     "back": "< 返回",
-    "title": "实时翻译助手",
+    "title": "实时翻译",
     "subtitle": "游客语言自动设置为当前应用语言，商店语言固定为韩语。",
     "onboarding": "游客输入的内容将翻译成韩语，店员输入的韩语将翻译成游客的语言。",
     "customer_lang": "游客语言",
-    "staff_lang": "商店语言",
+    "staff_lang": "商店语言 (韩语)",
     "mic_preparing": "正在准备麦克风",
     "customer_transcribing": "正在识别游客语音",
     "customer_recording": "正在录制游客语音，再次点击以结束",
@@ -1384,17 +1384,17 @@
     "staff_input_label": "店员输入",
     "staff_placeholder": "请输入店员说的韩语内容。",
     "voice_supported_hint": "通过语音按钮录音或直接在下方输入文字。",
-    "voice_not_supported_hint": "此浏览器不支持语音输入。请使用文字输入进行翻译。",
+    "voice_not_supported_hint": "此浏览器不支持语音输入。请使用文字输入。",
     "voice_recognizing": "正在识别语音。",
     "voice_unrecognized_error": "无法识别语音。请说得更清晰一点。",
     "voice_failed_error": "语音识别失败。您可以继续使用文字输入。",
     "mic_permission_status": "正在确认麦克风权限。",
     "recording_status": "正在录音。最长可录制 {{seconds}} 秒。",
-    "mic_unsupported_error": "无法使用麦克风。请检查浏览器权限或使用文字输入。",
+    "mic_unsupported_error": "无法使用麦克风。请检查权限或使用文字输入。",
     "input_required_customer": "请先输入游客的句子。",
     "input_required_staff": "请先输入店员的句子。",
-    "translating_status": "正在准备翻译文案。",
-    "translation_failed_error": "翻译过程中出现问题。请稍后再试。",
+    "translating_status": "正在准备翻译内容。",
+    "translation_failed_error": "翻译失败。请尝试重新操作。",
     "empty_history_hint": "输入第一句话后，翻译记录将显示在这里。",
     "customer_role": "游客",
     "staff_role": "店员",
@@ -1402,7 +1402,26 @@
     "replay_not_supported_hint": "此浏览器不支持语音播放。",
     "play": "播放",
     "translated_status": "翻译完成",
-    "source_only_status": "显示原文",
-    "voice_too_short_error": "请再说长一点。语音太短将难以识别。"
+    "source_only_status": "仅显示原文",
+    "voice_too_short_error": "请多说一点，语音太短无法识别。"
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "正在 {{storeName}} 使用翻译器。",
+    "interpreter_visit_service_context": "在 {{storeName}} 进行 {{serviceName}} 服务时使用翻译器。",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }

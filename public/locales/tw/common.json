@@ -230,15 +230,15 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "美容預約管家",
-      "title": "您想預約什麼服務？",
+      "title": "將韓國之美，\n融入您的行程。",
       "subtitle": "選擇您想要的美容服務，直接進入預約步驟。",
       "welcome": "{{name}}，請選擇今天的服務。",
       "welcome_user": "{{greeting}}，{{name}}！👋"
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "請選擇您想要的美容服務",
-      "description": "為了進行最準확的探索，請先選擇類別。"
+      "title": "請選擇美容服務",
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -1748,5 +1748,66 @@
       "airport_hint": "Open the steps for items lost at the airport or in transit.",
       "street_hint": "Open the steps for items lost on the street or in a public area."
     }
+  },
+  "interpreter_page": {
+    "back": "< 返回",
+    "title": "即時翻譯",
+    "subtitle": "遊客語言自動設置為當前應用語言，商店語言固定為韓語。",
+    "onboarding": "遊客輸入的內容將翻譯成韓語，店员輸入的韓語將翻譯成遊客的語言。",
+    "customer_lang": "遊客語言",
+    "staff_lang": "商店語言 (韓語)",
+    "mic_preparing": "正在準備麥克風",
+    "customer_transcribing": "正在識別遊客語音",
+    "customer_recording": "正在錄製遊客語音，再次點擊以結束",
+    "translating": "正在翻譯",
+    "customer_speak_btn": "遊客語音輸入",
+    "staff_transcribing": "正在識別店員語音",
+    "staff_recording": "正在錄製店員語音，再次點擊以結束",
+    "staff_speak_btn": "店員語音輸入",
+    "customer_input_label": "遊客輸入",
+    "customer_placeholder": "請輸入遊客說的話。",
+    "send": "發送",
+    "staff_input_label": "店員輸入",
+    "staff_placeholder": "請輸入店員說的韓語內容。",
+    "voice_supported_hint": "通過語音按鈕錄音或直接在下方輸入文字。",
+    "voice_not_supported_hint": "此瀏覽器不支援語音輸入。請使用文字輸入。",
+    "voice_recognizing": "正在識別語音。",
+    "voice_unrecognized_error": "無法識別語音。請說得更清晰一點。",
+    "voice_failed_error": "語音識別失敗。您可以繼續使用文字輸入。",
+    "mic_permission_status": "正在確認麥克風權限。",
+    "recording_status": "正在錄音。最長可錄製 {{seconds}} 秒。",
+    "mic_unsupported_error": "無法使用麥克風。請檢查權限或使用文字輸入。",
+    "input_required_customer": "請先輸入遊客的句子。",
+    "input_required_staff": "請先輸入店員的句子。",
+    "translating_status": "正在準備翻譯內容。",
+    "translation_failed_error": "翻譯失敗。請嘗試重新操作。",
+    "empty_history_hint": "輸入第一句話後，翻譯記錄將顯示在這裡。",
+    "customer_role": "遊客",
+    "staff_role": "店員",
+    "replay_btn_label": "重新播放翻譯語音",
+    "replay_not_supported_hint": "此瀏覽器不支援語音播放。",
+    "play": "播放",
+    "translated_status": "翻譯完成",
+    "source_only_status": "僅顯示原文",
+    "voice_too_short_error": "請多說一點，語音太短無法識別。"
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "正在 {{storeName}} 使用翻译器。",
+    "interpreter_visit_service_context": "在 {{storeName}} 进行 {{serviceName}} 服务时使用翻译器。",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }

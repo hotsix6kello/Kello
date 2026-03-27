@@ -60,7 +60,7 @@
       "attraction": "Attractions",
       "transport": "Transport"
     },
-    "community_nav": "Community",
+    "community_nav": "Communauté",
     "morning": "Bonjour",
     "afternoon": "Bon après-midi",
     "evening": "Bonsoir"
@@ -166,9 +166,9 @@
     "title": "Communauté",
     "subtitle": "Connectez-vous avec les locaux et les voyageurs",
     "filter_all": "Tout",
-    "filter_meetup": "Cuisine & Rencontres",
+    "filter_meetup": "Gastronomie & Rencontres",
     "filter_travel": "Compagnon de voyage",
-    "filter_help": "Aide Locale",
+    "filter_help": "Aide locale",
     "filter_review": "Avis",
     "comments": "Commentaires",
     "message": "Message",
@@ -204,12 +204,12 @@
         "desc": "Je cherche un partenaire de shopping à Olive Young Myeongdong !"
       }
     },
-    "detail": "Détail de la publication"
+    "detail": "Détails du post"
   },
   "home_beauty": {
     "hero": {
       "eyebrow": "Conciergerie Beauté",
-      "title": "Quelle réservation souhaitez-vous ?",
+      "title": "Capturez la beauté de la Corée\ndans votre programme",
       "subtitle": "Sélectionnez votre service beauté et passez directement à l'étape de réservation.",
       "welcome": "Bienvenue {{name}}, veuillez choisir un service.",
       "welcome_user": "{{greeting}}, {{name}} ! 👋"
@@ -217,7 +217,7 @@
     "booking": {
       "step": "ÉTAPE. 01",
       "title": "Veuillez choisir votre service beauté",
-      "description": "Veuillez d'abord choisir une catégorie pour une exploration plus précise."
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -283,5 +283,66 @@
       "copy_done": "Copié !",
       "close": "Fermer"
     }
+  },
+  "interpreter_page": {
+    "back": "< Retour",
+    "title": "Traducteur en temps réel",
+    "subtitle": "Langue client : langue de l'app ; langue boutique : coréen (fixe).",
+    "onboarding": "Ce que le client dit est traduit en coréen ; ce que le personnel dit en coréen est traduit dans votre langue.",
+    "customer_lang": "Langue visiteur",
+    "staff_lang": "Langue boutique (Coréen)",
+    "mic_preparing": "Préparation du micro",
+    "customer_transcribing": "Reconnaissance du visiteur...",
+    "customer_recording": "Enregistrement du visiteur... cliquez pour arrêter",
+    "translating": "Traduction...",
+    "customer_speak_btn": "Entrée vocale visiteur",
+    "staff_transcribing": "Reconnaissance du personnel...",
+    "staff_recording": "Enregistrement du personnel... cliquez pour arrêter",
+    "staff_speak_btn": "Entrée vocale personnel",
+    "customer_input_label": "Entrée visiteur",
+    "customer_placeholder": "Tapez ce que le visiteur a dit.",
+    "send": "Envoyer",
+    "staff_input_label": "Entrée personnel",
+    "staff_placeholder": "Tapez ce que le personnel a dit en coréen.",
+    "voice_supported_hint": "Enregistrez avec le micro ou tapez ci-dessous.",
+    "voice_not_supported_hint": "Ce navigateur ne supporte pas l'entrée vocale.",
+    "voice_recognizing": "Reconnaissance vocale en cours.",
+    "voice_unrecognized_error": "Voix non reconnue.",
+    "voice_failed_error": "Échec de la reconnaissance vocale.",
+    "mic_permission_status": "Vérification des accès micro.",
+    "recording_status": "Enregistrement... max {{seconds}}s.",
+    "mic_unsupported_error": "Micro inaccessible.",
+    "input_required_customer": "Saisissez d'abord la phrase du visiteur.",
+    "input_required_staff": "Saisissez d'abord la phrase du personnel.",
+    "translating_status": "Préparation de la traduction.",
+    "translation_failed_error": "La traduction a échoué. Réessayez.",
+    "empty_history_hint": "L'historique apparaîtra ici.",
+    "customer_role": "Visiteur",
+    "staff_role": "Personnel",
+    "replay_btn_label": "Réécouter la traduction",
+    "replay_not_supported_hint": "Lecture audio non supportée.",
+    "play": "Lire",
+    "translated_status": "Traduit",
+    "source_only_status": "Source uniquement",
+    "voice_too_short_error": "Parlez un peu plus longtemps s'il vous plaît."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Utilisation d'un interprète lors de la visite du {{storeName}}",
+    "interpreter_visit_service_context": "Utilisation d'un interprète pour {{serviceName}} au {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }

@@ -15,7 +15,7 @@
   "form_phone": "연락처 (또는 SNS ID)",
   "form_phone_placeholder": "전화번호나 SNS ID를 입력해주세요.",
   "form_request": "요청사항",
-  "form_request_placeholder": "알러지, 선호하는 스타일 등 샵에서 알아야 할 내용을 적어주세요.",
+  "form_request_placeholder": "매장에 전달하실 내용을 적어주세요",
   "agreement_confirm": "예약 내용을 확인했습니다",
   "agreement_confirm_desc": "선택한 매장, 날짜, 시간 및 서비스를 확인했습니다.",
   "agreement_privacy": "개인정보 제공에 동의합니다",
@@ -43,80 +43,130 @@
     "itaewon": "이태원",
     "jamsil": "잠실",
     "garosugil": "가로수길",
-    "yeouido": "여의도"
+    "yeouido": "여의도",
+    "konkuk": "건대",
+    "pangyo": "판교"
   },
   "stores": {
     "beauty_hair_1": {
       "name": "제니하우스 청담",
       "priceLabel": "150,000원~",
       "shortDescription": "K-pop 스타들이 즐겨 찾는 프리미엄 헤어 & 메이크업 샵",
-      "tags": ["K-Style", "프리미엄", "청담"]
+      "tags": [
+        "K-Style",
+        "프리미엄",
+        "청담"
+      ]
     },
     "beauty_hair_2": {
       "name": "쁨클리닉 강남",
       "priceLabel": "50,000원~",
       "shortDescription": "뛰어난 가성비로 외국인 방문객이 가장 많이 찾는 클리닉",
-      "tags": ["클리닉", "강남", "가성비"]
+      "tags": [
+        "클리닉",
+        "강남",
+        "가성비"
+      ]
     },
     "beauty_nail_1": {
       "name": "메종 네일 홍대",
       "priceLabel": "79,000원~",
       "shortDescription": "트렌디한 컬러 조합과 시즌별 아트로 유명한 네일 스튜디오",
-      "tags": ["이달의 아트", "젤 케어", "컬러 큐레이션"]
+      "tags": [
+        "이달의 아트",
+        "젤 케어",
+        "컬러 큐레이션"
+      ]
     },
     "beauty_nail_2": {
       "name": "베이지 네일 종로",
       "priceLabel": "45,000원~",
       "shortDescription": "깔끔한 오피스 네일부터 웨딩 네일까지 꼼꼼하게 시술합니다",
-      "tags": ["오피스 네일", "웨딩 네일", "네일 케어"]
+      "tags": [
+        "오피스 네일",
+        "웨딩 네일",
+        "네일 케어"
+      ]
     },
     "beauty_esthetic_1": {
       "name": "세린 스킨 라운지 강남",
       "priceLabel": "95,000원~",
       "shortDescription": "프라이빗한 공간에서 즐기는 피부 진정 및 탄력 관리",
-      "tags": ["진정 관리", "탄력 케어", "프라이빗"]
+      "tags": [
+        "진정 관리",
+        "탄력 케어",
+        "프라이빗"
+      ]
     },
     "beauty_esthetic_2": {
       "name": "글로우 포뮬러 성수",
       "priceLabel": "88,000원~",
       "shortDescription": "민감성 피부를 위한 맞춤 진정 프로그램과 홈케어 가이드",
-      "tags": ["수분 보습", "민감성", "맞춤 상담"]
+      "tags": [
+        "수분 보습",
+        "민감성",
+        "맞춤 상담"
+      ]
     },
     "beauty_waxing_1": {
       "name": "베어 아뜰리에 왁싱 강남",
       "priceLabel": "99,000원~",
       "shortDescription": "철저한 위생 관리와 체계적인 사후 관리로 재방문율이 높은 곳",
-      "tags": ["위생 관리", "사후 케어", "브라질리언"]
+      "tags": [
+        "위생 관리",
+        "사후 케어",
+        "브라질리언"
+      ]
     },
     "beauty_waxing_2": {
       "name": "소프트 스트립 홍대",
       "priceLabel": "55,000원~",
       "shortDescription": "바쁜 일정 속에서도 빠르고 간편하게 받을 수 있는 저자극 왁싱",
-      "tags": ["팔 왁싱", "빠른 시술", "저자극"]
+      "tags": [
+        "팔 왁싱",
+        "빠른 시술",
+        "저자극"
+      ]
     },
     "beauty_makeup_1": {
       "name": "아뜰리에 베일 메이크업",
       "priceLabel": "데일리 85,000원~",
       "shortDescription": "일상에 녹아드는 자연스럽고 세련된 메이크업",
-      "tags": ["메이크업", "성수", "내추럴"]
+      "tags": [
+        "메이크업",
+        "성수",
+        "내추럴"
+      ]
     },
     "beauty_makeup_2": {
       "name": "디어뮤즈 메이크업",
       "priceLabel": "하객 메이크업 132,000원~",
       "shortDescription": "특별한 날과 웨딩을 위한 정성스러운 메이크업 전문가",
-      "tags": ["웨딩", "종로", "전문가"]
+      "tags": [
+        "웨딩",
+        "종로",
+        "전문가"
+      ]
     },
     "beauty_lash_1": {
       "name": "블룸 래쉬 부티크 강남",
       "priceLabel": "99,000원~",
       "shortDescription": "눈매에 맞춘 컬 디자인과 오래가는 유지력으로 입소문 난 곳",
-      "tags": ["컬 디자인", "유지력", "자연스러운 연장"]
+      "tags": [
+        "컬 디자인",
+        "유지력",
+        "자연스러운 연장"
+      ]
     },
     "beauty_lash_2": {
       "name": "페더 래쉬 성수",
       "priceLabel": "69,000원~",
       "shortDescription": "속눈썹 펌 입문자도 부담 없이 방문할 수 있는 내추럴 래쉬 샵",
-      "tags": ["속눈썹 펌", "입문자 추천", "자연스러운 컬"]
+      "tags": [
+        "속눈썹 펌",
+        "입문자 추천",
+        "자연스러운 컬"
+      ]
     }
   },
   "designers": {
@@ -215,7 +265,151 @@
     "sieun": "시은 원장",
     "sieun_specialty": "펌 · 손상 케어",
     "sieun_experience": "경력 10년",
-    "sieun_desc": "속눈썹 상태를 보고 시술 강도를 세심하게 조정해드려요."
+    "sieun_desc": "속눈썹 상태를 보고 시술 강도를 세심하게 조정해드려요.",
+    "designer_hair_1_a": {
+      "name": "Jia Designer",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_hair_1_b": {
+      "name": "Director Minseo",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_hair_2_a": {
+      "name": "Designer Harin",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_hair_2_b": {
+      "name": "Manager Yoona",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_nail_1_a": {
+      "name": "Artist Seoyoon",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_nail_1_b": {
+      "name": "Artist Chaerin",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_nail_2_a": {
+      "name": "Manager Nayeon",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_nail_2_b": {
+      "name": "Artist Dabin",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_esthetic_1_a": {
+      "name": "Therapist Yoojin",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_esthetic_1_b": {
+      "name": "Director Sohee",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_esthetic_2_a": {
+      "name": "Therapist Gayoung",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_esthetic_2_b": {
+      "name": "Manager Yerin",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_waxing_1_a": {
+      "name": "Manager Doyeon",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_waxing_1_b": {
+      "name": "Director Hyunah",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_waxing_2_a": {
+      "name": "Manager Sia",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_waxing_2_b": {
+      "name": "Manager Joohee",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_makeup_1_a": {
+      "name": "Artist Bora",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_makeup_1_b": {
+      "name": "Manager Sua",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_makeup_2_a": {
+      "name": "Artist Jimin",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_makeup_2_b": {
+      "name": "Director Hyewon",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_lash_1_a": {
+      "name": "Artist Sojung",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_lash_1_b": {
+      "name": "Manager Seah",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_lash_2_a": {
+      "name": "Artist Daeun",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    },
+    "designer_lash_2_b": {
+      "name": "Director Sieun",
+      "specialty": "전문 스타일",
+      "experienceLabel": "경력자",
+      "shortNote": "친절한 상담 제공"
+    }
   },
   "hero_eyebrow": "Beauty Booking",
   "label_beauty": "뷰티",
@@ -334,7 +528,19 @@
     "lash_add_tinting": "블랙 틴팅",
     "lash_add_tinting_desc": "또렷한 컬러 보정",
     "lash_add_coating": "영양 코팅",
-    "lash_add_coating_desc": "유지력 보조 코팅"
+    "lash_add_coating_desc": "유지력 보조 코팅",
+    "hair_women_cut": {
+      "name": "Women's Cut",
+      "desc": "시술 설명입니다."
+    },
+    "hair_men_cut": {
+      "name": "Men's Cut",
+      "desc": "시술 설명입니다."
+    },
+    "hair_root_color": {
+      "name": "Root Color",
+      "desc": "시술 설명입니다."
+    }
   },
   "booking_panel_title": "예약 날짜와 시간을 선택해주세요",
   "booking_panel_desc": "이 매장의 예약 가능한 일정을 확인하고 원하시는 시간대를 선택해주세요.",
@@ -346,6 +552,7 @@
   "confirm_empty_desc": "먼저 매장과 일정을 선택하시면 예약 내용을 확인하실 수 있습니다.",
   "select_date": "날짜 선택",
   "select_time": "시간 선택",
+  "btn_submit": "예약 신청하기",
   "btn_complete": "예약 완료",
   "selected_confirmation": "✓ {{date}} 선택됨",
   "weekdays": {
@@ -356,6 +563,13 @@
     "thu": "목",
     "fri": "금",
     "sat": "토"
-  }
+  },
+  "intent_booking_confirm": "예약 확인",
+  "intent_service_request": "시술 요청 전달",
+  "intent_allergy_notice": "알레르기/민감 사항 전달",
+  "intent_style_consultation": "스타일 상담 도움",
+  "lang_ko": "한국어",
+  "lang_en": "영어",
+  "lang_ja": "일본어",
+  "lang_zh_cn": "중국어"
 }
-

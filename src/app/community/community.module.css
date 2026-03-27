@@ -1,8 +1,8 @@
 .container {
     min-height: auto;
     height: auto;
-    background: var(--background);
-    color: var(--foreground);
+    background: var(--hanji-ivory);
+    color: var(--ink-black);
     padding: 0 16px 156px;
     position: relative;
     overflow: visible;
@@ -10,7 +10,7 @@
 
 .header {
     position: static;
-    background: var(--background);
+    background: var(--hanji-ivory);
     padding: 24px 16px 0;
     /* Reduced top padding from 56px */
     /* Align with container padding */
@@ -533,33 +533,31 @@
 
 /* ── Floating Action Button Group ── */
 .fabGroup {
-    position: fixed;
-    left: 50%;
-    bottom: calc(92px + env(safe-area-inset-bottom, 0px));
-    transform: translateX(-50%);
-    width: min(360px, calc(100% - 32px));
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    z-index: 500;
+    width: 100%;
+    margin: 16px auto 32px;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
 }
 
 .fab {
-    min-height: 44px;
-    padding: 10px 14px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    width: 100%;
+    max-width: 480px;
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     border: none;
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+    gap: 10px;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
     cursor: pointer;
-    transition: transform 0.15s, opacity 0.15s;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fabSecondary {
@@ -1600,162 +1598,3 @@
     gap: 8px;
     margin-bottom: 16px;
 }
-
-.compactActivityRow {
-    font-size: 11px;
-    color: #64748b;
-    background: #f8fafc;
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid #f1f5f9;
-}
-
-.recommendScrollCompact {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.recommendScrollCompact::-webkit-scrollbar {
-    display: none;
-}
-
-.recommendChip {
-    flex-shrink: 0;
-    padding: 4px 12px;
-    background: #fff;
-    border: 1px solid var(--primary);
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--primary);
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.nextActionCompact {
-    margin-bottom: 16px;
-}
-
-.nextActionTag {
-    flex-shrink: 0;
-    padding: 4px 10px;
-    background: #eff6ff;
-    color: #2563eb;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    white-space: nowrap;
-    cursor: pointer;
-}
-/* ── Step 22: Feedback & Skeleton ── */
-.toast {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(15, 23, 42, 0.9);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 700;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    animation: toastUp 0.3s ease-out;
-}
-
-@keyframes toastUp {
-    from { transform: translate(-50%, 20px); opacity: 0; }
-    to { transform: translate(-50%, 0); opacity: 1; }
-}
-
-.toast_info {
-    background: rgba(51, 65, 85, 0.9);
-}
-
-.skeletonFeed {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.skeletonCard {
-    background: #fff;
-    border-radius: 16px;
-    padding: 16px;
-    border: 1px solid #f1f5f9;
-}
-
-.skeletonHeader {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.skeletonAvatar {
-    width: 36px;
-    height: 36px;
-    background: #f1f5f9;
-    border-radius: 50%;
-}
-
-.skeletonAuthorInfo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.skeletonName {
-    width: 60px;
-    height: 12px;
-    background: #f1f5f9;
-    border-radius: 4px;
-}
-
-.skeletonTime {
-    width: 40px;
-    height: 10px;
-    background: #f8fafc;
-    border-radius: 2px;
-}
-
-.skeletonTitle {
-    width: 80%;
-    height: 18px;
-    background: #f1f5f9;
-    border-radius: 4px;
-    margin-bottom: 8px;
-}
-
-.skeletonDesc {
-    width: 100%;
-    height: 36px;
-    background: #f8fafc;
-    border-radius: 4px;
-    margin-bottom: 12px;
-}
-
-.skeletonFooter {
-    width: 60px;
-    height: 14px;
-    background: #f1f5f9;
-    border-radius: 4px;
-}
-
-.cardExiting {
-    opacity: 0.5;
-    transform: scale(0.98);
-    transition: all 0.2s;
-}
-
-.activeTab {
-    background: #eff6ff !important;
-    color: #1d4ed8 !important;
-    border-color: #bfdbfe !important;
-}
-
-

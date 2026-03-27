@@ -4,7 +4,7 @@
   "form_phone": "Hubungan (atau ID SNS)",
   "form_phone_placeholder": "Nombor telefon atau ID SNS",
   "form_request": "Permintaan",
-  "form_request_placeholder": "Alergi atau gaya yang diingini",
+  "form_request_placeholder": "Please leave a request for the salon",
   "agreement_confirm": "Sahkan butiran",
   "agreement_confirm_desc": "Saya mengesahkan pilihan ini.",
   "agreement_privacy": "Persetujuan privasi",
@@ -15,5 +15,371 @@
   "label_booking_unit": "KRW",
   "booking_confirmation_title": "Permintaan tempahan dihantar!",
   "booking_confirmation_desc": "Kami akan memaklumkan anda tidak lama lagi.",
-  "booking_confirmation_cta": "Tempahan Saya"
+  "booking_confirmation_cta": "Tempahan Saya",
+  "stores": {
+    "beauty_hair_1": {
+      "name": "La Frappe Hair Gangnam",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_hair_2": {
+      "name": "Atelier Seongsu Hair Room",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_nail_1": {
+      "name": "Maison Nail Hongdae",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_nail_2": {
+      "name": "Beige Nail Jamsil",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_esthetic_1": {
+      "name": "Serin Skin Lounge Pangyo",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_esthetic_2": {
+      "name": "Glow Formula Konkuk",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_waxing_1": {
+      "name": "Bare Atelier Waxing Gangnam",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_waxing_2": {
+      "name": "Soft Strip Hongdae",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_makeup_1": {
+      "name": "Atelier Veil Makeup Seongsu",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_makeup_2": {
+      "name": "Dear Muse Makeup Jamsil",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_lash_1": {
+      "name": "Bloom Lash Boutique Gangnam",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    },
+    "beauty_lash_2": {
+      "name": "Feather Lash Konkuk",
+      "shortDescription": "A premium studio.",
+      "priceLabel": "From 55,000 KRW"
+    }
+  },
+  "designers": {
+    "designer_hair_1_a": {
+      "name": "Jia Designer",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_hair_1_b": {
+      "name": "Director Minseo",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_hair_2_a": {
+      "name": "Designer Harin",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_hair_2_b": {
+      "name": "Manager Yoona",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_nail_1_a": {
+      "name": "Artist Seoyoon",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_nail_1_b": {
+      "name": "Artist Chaerin",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_nail_2_a": {
+      "name": "Manager Nayeon",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_nail_2_b": {
+      "name": "Artist Dabin",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_esthetic_1_a": {
+      "name": "Therapist Yoojin",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_esthetic_1_b": {
+      "name": "Director Sohee",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_esthetic_2_a": {
+      "name": "Therapist Gayoung",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_esthetic_2_b": {
+      "name": "Manager Yerin",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_waxing_1_a": {
+      "name": "Manager Doyeon",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_waxing_1_b": {
+      "name": "Director Hyunah",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_waxing_2_a": {
+      "name": "Manager Sia",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_waxing_2_b": {
+      "name": "Manager Joohee",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_makeup_1_a": {
+      "name": "Artist Bora",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_makeup_1_b": {
+      "name": "Manager Sua",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_makeup_2_a": {
+      "name": "Artist Jimin",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_makeup_2_b": {
+      "name": "Director Hyewon",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_lash_1_a": {
+      "name": "Artist Sojung",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_lash_1_b": {
+      "name": "Manager Seah",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_lash_2_a": {
+      "name": "Artist Daeun",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    },
+    "designer_lash_2_b": {
+      "name": "Director Sieun",
+      "specialty": "Specialty",
+      "experienceLabel": "Experienced",
+      "shortNote": "Friendly consultation available"
+    }
+  },
+  "services": {
+    "hair_women_cut": {
+      "name": "Women's Cut",
+      "desc": "Service Description"
+    },
+    "hair_men_cut": {
+      "name": "Men's Cut",
+      "desc": "Service Description"
+    },
+    "hair_root_color": {
+      "name": "Root Color",
+      "desc": "Service Description"
+    },
+    "hair_clinic": {
+      "name": "Hair Clinic",
+      "desc": "Service Description"
+    },
+    "nail_gel": {
+      "name": "Gel Nail",
+      "desc": "Service Description"
+    },
+    "nail_care": {
+      "name": "Nail Care",
+      "desc": "Service Description"
+    },
+    "nail_pedi": {
+      "name": "Gel Pedi",
+      "desc": "Service Description"
+    },
+    "esthetic_calming": {
+      "name": "Calming Care",
+      "desc": "Service Description"
+    },
+    "esthetic_moisture": {
+      "name": "Moisture Care",
+      "desc": "Service Description"
+    },
+    "esthetic_lifting": {
+      "name": "Lifting Care",
+      "desc": "Service Description"
+    },
+    "waxing_brazilian": {
+      "name": "Brazilian Waxing",
+      "desc": "Service Description"
+    },
+    "waxing_arm": {
+      "name": "Arm Waxing",
+      "desc": "Service Description"
+    },
+    "waxing_leg": {
+      "name": "Leg Waxing",
+      "desc": "Service Description"
+    },
+    "makeup_daily": {
+      "name": "Daily Makeup",
+      "desc": "Service Description"
+    },
+    "makeup_interview": {
+      "name": "Interview Makeup",
+      "desc": "Service Description"
+    },
+    "makeup_guest": {
+      "name": "Wedding Guest Makeup",
+      "desc": "Service Description"
+    },
+    "lash_perm": {
+      "name": "Lash Perm",
+      "desc": "Service Description"
+    },
+    "lash_extension": {
+      "name": "Lash Extension",
+      "desc": "Service Description"
+    },
+    "lash_retouch": {
+      "name": "Lash Retouch",
+      "desc": "Service Description"
+    },
+    "hair_add_scalp": {
+      "name": "Scalp Scaling",
+      "desc": "Option Description"
+    },
+    "hair_add_blowdry": {
+      "name": "Blow Dry",
+      "desc": "Option Description"
+    },
+    "hair_add_ampoule": {
+      "name": "Ampoule Care",
+      "desc": "Option Description"
+    },
+    "nail_add_removal": {
+      "name": "Gel Removal",
+      "desc": "Option Description"
+    },
+    "nail_add_art": {
+      "name": "Point Art",
+      "desc": "Option Description"
+    },
+    "nail_add_strength": {
+      "name": "Strength Coating",
+      "desc": "Option Description"
+    },
+    "esthetic_add_modeling": {
+      "name": "Modeling Pack",
+      "desc": "Option Description"
+    },
+    "esthetic_add_neck": {
+      "name": "Neck Care",
+      "desc": "Option Description"
+    },
+    "esthetic_add_led": {
+      "name": "LED Care",
+      "desc": "Option Description"
+    },
+    "waxing_add_care": {
+      "name": "Soothing Care",
+      "desc": "Option Description"
+    },
+    "waxing_add_pack": {
+      "name": "Moisture Pack",
+      "desc": "Option Description"
+    },
+    "waxing_add_trim": {
+      "name": "Trimming Included",
+      "desc": "Option Description"
+    },
+    "makeup_add_hair": {
+      "name": "Hair Styling",
+      "desc": "Option Description"
+    },
+    "makeup_add_lash": {
+      "name": "Lash Attachment",
+      "desc": "Option Description"
+    },
+    "makeup_add_touchup": {
+      "name": "Touch-up Kit",
+      "desc": "Option Description"
+    },
+    "lash_add_remove": {
+      "name": "Lash Removal",
+      "desc": "Option Description"
+    },
+    "lash_add_tinting": {
+      "name": "Black Tinting",
+      "desc": "Option Description"
+    },
+    "lash_add_coating": {
+      "name": "Nutrition Coating",
+      "desc": "Option Description"
+    }
+  },
+  "intent_booking_confirm": "Booking Confirmation",
+  "intent_service_request": "Service Request",
+  "intent_allergy_notice": "Allergy/Sensitivity Notice",
+  "intent_style_consultation": "Style Consultation Help",
+  "lang_ko": "Korean",
+  "lang_en": "English",
+  "lang_ja": "Japanese",
+  "lang_zh_cn": "Chinese"
 }

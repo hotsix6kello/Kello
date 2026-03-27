@@ -45,7 +45,7 @@
     "my_nav": "Mi Info",
     "day_unit": "d",
     "locale": "es-ES",
-    "community_nav": "Community",
+    "community_nav": "Comunidad",
     "morning": "Buenos días",
     "afternoon": "Buenas tardes",
     "evening": "Buenas noches"
@@ -148,14 +148,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "Comunidad",
+    "subtitle": "Conecta con locales y viajeros",
+    "filter_all": "Todo",
+    "filter_meetup": "Comida y Quedadas",
+    "filter_travel": "Compañero de Viaje",
+    "filter_help": "Ayuda Local",
+    "comments": "Comentarios",
+    "message": "Mensaje",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -188,21 +188,21 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
-    "detail": "Detalle de la publicación"
+    "filter_review": "Reseñas",
+    "detail": "Detalle de publicación"
   },
   "home_beauty": {
     "hero": {
       "eyebrow": "Conserje de Reservas de Belleza",
-      "title": "Qué reserva necesitas?",
+      "title": "Capture la belleza de Corea\nen su agenda",
       "subtitle": "Selecciona tu servicio de belleza y pasa directamente a reservar.",
       "welcome": "{{name}}, selecciona un servicio.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
       "step": "PASO. 01",
-      "title": "Selecciona el servicio que deseas",
-      "description": "Seleccione primero una categoría para una exploración más precisa."
+      "title": "Selecciona el servicio de belleza",
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -268,5 +268,66 @@
       "copy_done": "¡Copiado!",
       "close": "Cerrar"
     }
+  },
+  "interpreter_page": {
+    "back": "< Atrás",
+    "title": "Traductor en tiempo real",
+    "subtitle": "El idioma del cliente se establece según el idioma de la aplicación; el del negocio es coreano fijo.",
+    "onboarding": "Cuando el cliente hable, se traducirá al coreano; cuando el personal hable en coreano, se traducirá a su idioma.",
+    "customer_lang": "Idioma del visitante",
+    "staff_lang": "Idioma del establecimiento (Coreano)",
+    "mic_preparing": "Preparando micrófono",
+    "customer_transcribing": "Reconociendo al visitante...",
+    "customer_recording": "Grabando al visitante... haga clic de nuevo para terminar",
+    "translating": "Traduciendo...",
+    "customer_speak_btn": "Entrada de voz del visitante",
+    "staff_transcribing": "Reconociendo al personal...",
+    "staff_recording": "Grabando al personal... haga clic de nuevo para terminar",
+    "staff_speak_btn": "Entrada de voz del personal",
+    "customer_input_label": "Entrada del visitante",
+    "customer_placeholder": "Escriba lo que dijo el visitante.",
+    "send": "Enviar",
+    "staff_input_label": "Entrada del personal",
+    "staff_placeholder": "Escriba lo que dijo el personal en coreano.",
+    "voice_supported_hint": "Grabe por micro o escriba el texto debajo.",
+    "voice_not_supported_hint": "Este navegador no soporta entrada de voz. Use texto.",
+    "voice_recognizing": "Reconociendo voz.",
+    "voice_unrecognized_error": "No se pudo reconocer la voz.",
+    "voice_failed_error": "Fallo en el reconocimiento de voz.",
+    "mic_permission_status": "Comprobando permisos de micrófono.",
+    "recording_status": "Grabando... máx. {{seconds}}s.",
+    "mic_unsupported_error": "Micrófono no accesible.",
+    "input_required_customer": "Introduzca primero la frase del visitante.",
+    "input_required_staff": "Introduzca primero la frase del personal.",
+    "translating_status": "Preparando traducción.",
+    "translation_failed_error": "Error en la traducción. Inténtelo de nuevo.",
+    "empty_history_hint": "El historial aparecerá aquí.",
+    "customer_role": "Visitante",
+    "staff_role": "Personal",
+    "replay_btn_label": "Reproducir traducción",
+    "replay_not_supported_hint": "Reproducción de audio no soportada.",
+    "play": "Reproducir",
+    "translated_status": "Traducido",
+    "source_only_status": "Solo origen",
+    "voice_too_short_error": "Por favor, hable un poco más."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Usando traductor durante la visita a {{storeName}}",
+    "interpreter_visit_service_context": "Usando traductor para {{serviceName}} en {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }

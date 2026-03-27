@@ -60,7 +60,7 @@
       "attraction": "Wisata",
       "transport": "Transportasi"
     },
-    "community_nav": "Community",
+    "community_nav": "Komunitas",
     "view_map": "Lihat Lokasi",
     "view_map_desc": "Lihat lokasi detail di peta",
     "taxi_call": "Panggil Taksi",
@@ -85,7 +85,7 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "Layanan Booking Kecantikan",
-      "title": "Booking apa yang Anda butuhkan?",
+      "title": "Abadikan keindahan Korea\ndalam jadwal Anda",
       "subtitle": "Pilih layanan kecantikan dan langsung booking.",
       "welcome": "{{name}}, silakan pilih layanan.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
@@ -93,7 +93,7 @@
     "booking": {
       "step": "LANGKAH. 01",
       "title": "Silakan pilih layanan kecantikan",
-      "description": "Pilih kategori terlebih dahulu untuk penelusuran yang paling akurat."
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -246,14 +246,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "Komunitas",
+    "subtitle": "Terhubung dengan warga lokal & pelancong",
+    "filter_all": "Semua",
+    "filter_meetup": "Kuliner & Pertemuan",
+    "filter_travel": "Teman Perjalanan",
+    "filter_help": "Bantuan Lokal",
+    "comments": "Komentar",
+    "message": "Pesan",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -286,7 +286,7 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
+    "filter_review": "Ulasan",
     "detail": "Detail Postingan",
     "meetup_info": "Info kunjungan",
     "write_post": "Tulis ulasan",
@@ -535,15 +535,15 @@
     "category_waxing": "Waxing",
     "category_makeup": "Makeup",
     "category_lash": "Lash",
-    "lang_ko": "Korean",
+    "lang_ko": "한국어",
     "lang_en": "English",
-    "lang_ja": "Japanese",
-    "lang_zh_cn": "Chinese (Simplified)",
-    "lang_zh_hk": "Chinese (Traditional)",
-    "lang_vi": "Vietnamese",
-    "lang_th": "Thai",
-    "lang_id": "Indonesian",
-    "lang_ms": "Malay",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
     "intent_booking_confirm": "Booking Confirmation",
     "intent_service_request": "Service Request",
     "intent_allergy_notice": "Allergy/Sensitivity Notice",
@@ -639,7 +639,15 @@
     "error_cancel_reason": "Please select or enter a cancellation reason.",
     "error_change_reason": "Please enter what you'd like to change.",
     "error_change": "Could not send your change request. Please try again later.",
-    "error_alt": "Something went wrong. Please try again later."
+    "error_alt": "Something went wrong. Please try again later.",
+    "interpreter_visit_context": "Menggunakan penerjemah saat mengunjungi {{storeName}}",
+    "interpreter_visit_service_context": "Menggunakan penerjemah untuk {{serviceName}} di {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -656,5 +664,47 @@
     "event_booking_change_rejected": "Change Declined",
     "event_booking_completed": "Service Completed",
     "event_default": "Notification"
+  },
+  "interpreter_page": {
+    "back": "< Kembali",
+    "title": "Penerjemah Real-time",
+    "subtitle": "Bahasa tamu diatur sesuai bahasa aplikasi; bahasa toko tetap bahasa Korea.",
+    "onboarding": "Saat tamu menginput, akan diterjemahkan ke Korea; saat staf menginput bahasa Korea, akan diterjemahkan ke bahasa Anda.",
+    "customer_lang": "Bahasa Pengunjung",
+    "staff_lang": "Bahasa Toko (Korea)",
+    "mic_preparing": "Menyiapkan Mikrofon",
+    "customer_transcribing": "Mengenali suara pengunjung...",
+    "customer_recording": "Merekam suara pengunjung... klik lagi untuk selesai",
+    "translating": "Menerjemahkan...",
+    "customer_speak_btn": "Input Suara Pengunjung",
+    "staff_transcribing": "Mengenali suara staf...",
+    "staff_recording": "Merekam suara staf... klik lagi untuk selesai",
+    "staff_speak_btn": "Input Suara Staf",
+    "customer_input_label": "Input Pengunjung",
+    "customer_placeholder": "Ketik apa yang dikatakan pengunjung.",
+    "send": "Kirim",
+    "staff_input_label": "Input Staf",
+    "staff_placeholder": "Ketik apa yang dikatakan staf dalam bahasa Korea.",
+    "voice_supported_hint": "Rekam melalui mik atau ketik teks di bawah.",
+    "voice_not_supported_hint": "Browser ini tidak hỗ trợ input suara. Gunakan teks.",
+    "voice_recognizing": "Mengenali suara.",
+    "voice_unrecognized_error": "Tidak dapat mengenali suara.",
+    "voice_failed_error": "Pengenalan suara gagal.",
+    "mic_permission_status": "Memeriksa izin mikrofon.",
+    "recording_status": "Merekam... maks {{seconds}} dtk.",
+    "mic_unsupported_error": "Mik tidak dapat diakses.",
+    "input_required_customer": "Masukkan kalimat pengunjung terlebih dahulu.",
+    "input_required_staff": "Masukkan kalimat staf terlebih dahulu.",
+    "translating_status": "Menyiapkan terjemahan.",
+    "translation_failed_error": "Terjemahan gagal. Coba lagi.",
+    "empty_history_hint": "Riwayat akan muncul di sini.",
+    "customer_role": "Pengunjung",
+    "staff_role": "Staf",
+    "replay_btn_label": "Putar ulang terjemahan",
+    "replay_not_supported_hint": "Pemutaran audio tidak didukung.",
+    "play": "Putar",
+    "translated_status": "Diterjemahkan",
+    "source_only_status": "Hanya Sumber",
+    "voice_too_short_error": "Mohon bicara lebih lama."
   }
 }

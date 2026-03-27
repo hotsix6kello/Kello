@@ -60,7 +60,7 @@
       "attraction": "Места",
       "transport": "Транспорт"
     },
-    "community_nav": "Community",
+    "community_nav": "Сообщество",
     "morning": "Доброе утро",
     "afternoon": "Добрый день",
     "evening": "Добрый вечер"
@@ -163,14 +163,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "Сообщество",
+    "subtitle": "Общайтесь с местными и путешественниками",
+    "filter_all": "Все",
+    "filter_meetup": "Еда и встречи",
+    "filter_travel": "Попутчик",
+    "filter_help": "Местная помощь",
+    "comments": "Комментарии",
+    "message": "Сообщение",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -203,21 +203,21 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
+    "filter_review": "Отзывы",
     "detail": "Детали поста"
   },
   "home_beauty": {
     "hero": {
       "eyebrow": "Консьерж бьюти-бронирования",
-      "title": "Какую запись вы хотите?",
+      "title": "Запечатлейте красоту Кореи\nв своем расписании",
       "subtitle": "Выберите услугу красоты и перейдите к бронированию.",
       "welcome": "{{name}}, выберите услугу.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
       "step": "ШАГ. 01",
-      "title": "Выберите желаемую услугу",
-      "description": "Пожалуйста, сначала выберите категорию для более точного поиска."
+      "title": "Выберите бьюти-услугу",
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -283,5 +283,66 @@
       "copy_done": "Скопировано!",
       "close": "Закрыть"
     }
+  },
+  "interpreter_page": {
+    "back": "< Назад",
+    "title": "Синхронный переводчик",
+    "subtitle": "Язык клиента соответствует языку приложения; язык магазина — корейский.",
+    "onboarding": "Слова клиента переводятся на корейский; корейская речь персонала — на ваш язык.",
+    "customer_lang": "Язык посетителя",
+    "staff_lang": "Язык магазина (Корейский)",
+    "mic_preparing": "Подготовка микрофона",
+    "customer_transcribing": "Распознавание речи посетителя...",
+    "customer_recording": "Запись посетителя... нажмите еще раз для завершения",
+    "translating": "Перевод...",
+    "customer_speak_btn": "Голосовой ввод посетителя",
+    "staff_transcribing": "Распознавание речи персонала...",
+    "staff_recording": "Запись персонала... нажмите еще раз для завершения",
+    "staff_speak_btn": "Голосовой ввод персонала",
+    "customer_input_label": "Ввод посетителя",
+    "customer_placeholder": "Введите, что сказал посетитель.",
+    "send": "Отправить",
+    "staff_input_label": "Ввод персонала",
+    "staff_placeholder": "Введите, что сказал персонал на корейском.",
+    "voice_supported_hint": "Записывайте через микрофон или вводите текст ниже.",
+    "voice_not_supported_hint": "Этот браузер не поддерживает голосовой ввод. Используйте текст.",
+    "voice_recognizing": "Распознавание голоса.",
+    "voice_unrecognized_error": "Не удалось распознать голос.",
+    "voice_failed_error": "Ошибка распознавания голоса.",
+    "mic_permission_status": "Проверка разрешений микрофона.",
+    "recording_status": "Запись... макс. {{seconds}} сек.",
+    "mic_unsupported_error": "Микрофон недоступен.",
+    "input_required_customer": "Сначала введите фразу посетителя.",
+    "input_required_staff": "Сначала введите фразу персонала.",
+    "translating_status": "Подготовка перевода.",
+    "translation_failed_error": "Ошибка перевода. Попробуйте еще раз.",
+    "empty_history_hint": "История появится здесь.",
+    "customer_role": "Посетитель",
+    "staff_role": "Персонал",
+    "replay_btn_label": "Воспроизвести перевод",
+    "replay_not_supported_hint": "Воспроизведение аудио не поддерживается.",
+    "play": "Пуск",
+    "translated_status": "Переведено",
+    "source_only_status": "Только оригинал",
+    "voice_too_short_error": "Пожалуйста, говорите немного дольше."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Используется переводчик во время посещения {{storeName}}",
+    "interpreter_visit_service_context": "Используется переводчик для {{serviceName}} в {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   }
 }

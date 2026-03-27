@@ -295,42 +295,42 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                {/* Step 1: Store Selection */}
                {currentStep === 1 && (
                  <div className="flex flex-col gap-4">
-                   <div className={styles.beautyRegionChipRow}>
-                      {regions.map((region: { id: BeautyRegionId; label: string }) => (
-                        <button
-                          key={region.id}
-                          className={`${styles.beautyRegionChip} ${selectedRegion === region.id ? styles.beautyRegionChipActive : ''}`}
-                          style={selectedRegion === region.id ? { background: '#bb8a78', color: 'white' } : {}}
-                          onClick={() => setSelectedRegion(region.id)}
-                        >
-                          {region.label}
-                        </button>
-                      ))}
-                   </div>
-                   <div className="flex flex-col gap-3">
-                      {filteredStores.map((store: BeautyStore) => (
-                        <article
-                          key={store.id}
-                          className={`bg-white rounded-2xl transition-all duration-300 ${selectedStoreId === store.id ? 'ring-2 ring-[#bb8a78] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100'}`}
-                          style={{ overflow: 'hidden', cursor: 'pointer' }}
-                          onClick={() => handleStoreSelect(store)}
-                        >
-                          <div className="flex flex-row w-full items-center p-3 gap-3">
-                             <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
-                                <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt="" className="h-full w-full object-cover" />
-                             </div>
-                             <div className="flex-1 min-w-0">
-                                <h3 className="text-base font-bold text-neutral-900 truncate">{store.name}</h3>
-                                <p className="text-xs text-neutral-500">{tBeauty(`region_${store.region}`)}</p>
-                                <div className="text-sm font-semibold text-[#bb8a78] mt-1">{store.priceLabel}</div>
-                             </div>
-                             <div className="shrink-0 text-[#bb8a78] font-bold text-xs uppercase bg-[#fff5f0] px-3 py-1.5 rounded-lg border border-[#f0e0d8]">
-                                {tBeauty('btn_select_salon', { defaultValue: '선택' })}
-                             </div>
-                          </div>
-                        </article>
-                      ))}
-                   </div>
+                    <div className={styles.beautyRegionChipRow}>
+                       {regions.map((region: { id: BeautyRegionId; label: string }) => (
+                         <button
+                           key={region.id}
+                           className={`${styles.beautyRegionChip} ${selectedRegion === region.id ? styles.beautyRegionChipActive : ''}`}
+                           style={selectedRegion === region.id ? { background: '#bb8a78', color: 'white' } : {}}
+                           onClick={() => setSelectedRegion(region.id)}
+                         >
+                           {region.label}
+                         </button>
+                       ))}
+                    </div>
+                    <div className="flex flex-col gap-3">
+                       {filteredStores.map((store: BeautyStore) => (
+                         <article
+                           key={store.id}
+                           className={`bg-white rounded-2xl transition-all duration-300 ${selectedStoreId === store.id ? 'ring-2 ring-[#bb8a78] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100'}`}
+                           style={{ overflow: 'hidden', cursor: 'pointer' }}
+                           onClick={() => handleStoreSelect(store)}
+                         >
+                           <div className="flex flex-row w-full items-center p-3 gap-3">
+                              <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                 <img src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt="" className="h-full w-full object-cover" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                 <h3 className="text-base font-bold text-neutral-900 truncate">{store.name}</h3>
+                                 <p className="text-xs text-neutral-500">{tBeauty(`region_${store.region}`)}</p>
+                                 <div className="text-sm font-semibold text-[#bb8a78] mt-1">{store.priceLabel}</div>
+                              </div>
+                              <div className="shrink-0 text-[#bb8a78] font-bold text-xs uppercase bg-[#fff5f0] px-3 py-1.5 rounded-lg border border-[#f0e0d8]">
+                                 {tBeauty('btn_select_salon', { defaultValue: '선택' })}
+                              </div>
+                           </div>
+                         </article>
+                       ))}
+                    </div>
                  </div>
                )}
 

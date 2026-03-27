@@ -6,7 +6,6 @@ interface HomeBookingSectionProps {
   categories: BeautyCategoryOption[];
   selectedCategory: BeautyCategoryId | null;
   onSelectCategory: (id: BeautyCategoryId) => void;
-  onStartBooking: () => void;
   t: TFunction;
 }
 
@@ -14,18 +13,18 @@ export default function HomeBookingSection({
   categories,
   selectedCategory,
   onSelectCategory,
-  onStartBooking,
   t
 }: HomeBookingSectionProps) {
   return (
     <section className={styles.bookingShell}>
       <div className={styles.bookingCard}>
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionEyebrow}>{t('home_beauty.booking.step')}</span>
           <h2 className={styles.sectionTitle}>{t('home_beauty.booking.title')}</h2>
-          <p className={styles.sectionDescription}>
-            {t('home_beauty.booking.description')}
-          </p>
+          {t('home_beauty.booking.description') && (
+            <p className={styles.sectionDescription}>
+              {t('home_beauty.booking.description')}
+            </p>
+          )}
         </div>
 
         <div className={styles.categoryGrid}>
@@ -47,19 +46,7 @@ export default function HomeBookingSection({
           })}
         </div>
 
-        <div className={styles.ctaSection} style={{ marginTop: '24px' }}>
-          <p className={styles.ctaHint}>
-            {t('home_beauty.cta.hint')}
-          </p>
-          <button
-            className={styles.mainCtaBtn}
-            type="button"
-            disabled={!selectedCategory}
-            onClick={onStartBooking}
-          >
-            {t('home_beauty.cta.button')}
-          </button>
-        </div>
+
       </div>
     </section>
   );

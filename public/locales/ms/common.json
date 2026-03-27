@@ -60,7 +60,7 @@
       "attraction": "Tarikan",
       "transport": "Pengangkutan"
     },
-    "community_nav": "Community",
+    "community_nav": "Komuniti",
     "view_map": "Lihat Lokasi",
     "view_map_desc": "Lihat lokasi terperinci pada peta",
     "taxi_call": "Panggil Teksi",
@@ -85,7 +85,7 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "Perkhidmatan Tempahan Kecantikan",
-      "title": "Tempahan apa yang anda perlukan?",
+      "title": "Abadikan keindahan Korea\ndalam jadual anda",
       "subtitle": "Pilih perkhidmatan kecantikan dan terus tempah.",
       "welcome": "{{name}}, sila pilih perkhidmatan.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
@@ -93,7 +93,7 @@
     "booking": {
       "step": "LANGKAH. 01",
       "title": "Sila pilih perkhidmatan kecantikan",
-      "description": "Sila pilih kategori terlebih dahulu untuk penjelajahan yang paling tepat."
+      "description": ""
     },
     "categories": {
       "hair": {
@@ -266,14 +266,14 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
+    "title": "Komuniti",
+    "subtitle": "Berhubung dengan penduduk tempatan & pelancong",
+    "filter_all": "Semua",
+    "filter_meetup": "Makanan & Pertemuan",
+    "filter_travel": "Rakan Perjalanan",
+    "filter_help": "Bantuan Tempatan",
+    "comments": "Komen",
+    "message": "Mesej",
     "type": {
       "MEETUP": "MEETUP",
       "TRAVEL": "TRAVEL",
@@ -306,8 +306,8 @@
         "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
       }
     },
-    "filter_review": "Reviews",
-    "detail": "Butiran Kiriman",
+    "filter_review": "Ulasan",
+    "detail": "Butiran Siaran",
     "meetup_info": "Maklumat lawatan",
     "write_post": "Tulis ulasan",
     "edit": "Edit ulasan",
@@ -555,15 +555,15 @@
     "category_waxing": "Waxing",
     "category_makeup": "Makeup",
     "category_lash": "Lash",
-    "lang_ko": "Korean",
+    "lang_ko": "한국어",
     "lang_en": "English",
-    "lang_ja": "Japanese",
-    "lang_zh_cn": "Chinese (Simplified)",
-    "lang_zh_hk": "Chinese (Traditional)",
-    "lang_vi": "Vietnamese",
-    "lang_th": "Thai",
-    "lang_id": "Indonesian",
-    "lang_ms": "Malay",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
     "intent_booking_confirm": "Booking Confirmation",
     "intent_service_request": "Service Request",
     "intent_allergy_notice": "Allergy/Sensitivity Notice",
@@ -659,7 +659,15 @@
     "error_cancel_reason": "Please select or enter a cancellation reason.",
     "error_change_reason": "Please enter what you'd like to change.",
     "error_change": "Could not send your change request. Please try again later.",
-    "error_alt": "Something went wrong. Please try again later."
+    "error_alt": "Something went wrong. Please try again later.",
+    "interpreter_visit_context": "Menggunakan penterjemah semasa melawat {{storeName}}",
+    "interpreter_visit_service_context": "Menggunakan penterjemah untuk {{serviceName}} di {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -676,5 +684,47 @@
     "event_booking_change_rejected": "Change Declined",
     "event_booking_completed": "Service Completed",
     "event_default": "Notification"
+  },
+  "interpreter_page": {
+    "back": "< Kembali",
+    "title": "Penterjemah Masa Nyata",
+    "subtitle": "Bahasa tetamu ditetapkan mengikut bahasa aplikasi; bahasa kedai tetap bahasa Korea.",
+    "onboarding": "Apabila tetamu menginput, ia akan diterjemahkan ke Korea; apabila staf menginput bahasa Korea, ia akan diterjemahkan ke bahasa anda.",
+    "customer_lang": "Bahasa Pelawat",
+    "staff_lang": "Bahasa Kedai (Korea)",
+    "mic_preparing": "Menyediakan Mikrofon",
+    "customer_transcribing": "Mengenal pasti suara pelawat...",
+    "customer_recording": "Merakam suara pelawat... klik lagi untuk tamat",
+    "translating": "Menterjemah...",
+    "customer_speak_btn": "Input Suara Pelawat",
+    "staff_transcribing": "Mengenal pasti suara staf...",
+    "staff_recording": "Merakam suara staf... klik lagi untuk tamat",
+    "staff_speak_btn": "Input Suara Staf",
+    "customer_input_label": "Input Pelawat",
+    "customer_placeholder": "Taip apa yang dikatakan pelawat.",
+    "send": "Hantar",
+    "staff_input_label": "Input Staf",
+    "staff_placeholder": "Taip apa yang dikatakan staf dalam bahasa Korea.",
+    "voice_supported_hint": "Rakam melalui mik atau taip teks di bawah.",
+    "voice_not_supported_hint": "Pelayar ini tidak menyokong input suara. Gunakan teks.",
+    "voice_recognizing": "Mengenal pasti suara.",
+    "voice_unrecognized_error": "Tidak dapat mengenal pasti suara.",
+    "voice_failed_error": "Pengecaman suara gagal.",
+    "mic_permission_status": "Memeriksa kebenaran mikrofon.",
+    "recording_status": "Merakam... maks {{seconds}} saat.",
+    "mic_unsupported_error": "Mik tidak boleh diakses.",
+    "input_required_customer": "Sila masukkan ayat pelawat terlebih dahulu.",
+    "input_required_staff": "Sila masukkan ayat staf terlebih dahulu.",
+    "translating_status": "Menyediakan terjemahan.",
+    "translation_failed_error": "Terjemahan gagal. Cuba lagi.",
+    "empty_history_hint": "Sejarah akan muncul di sini.",
+    "customer_role": "Pelawat",
+    "staff_role": "Staf",
+    "replay_btn_label": "Main semula terjemahan",
+    "replay_not_supported_hint": "Main balik audio tidak disokong.",
+    "play": "Main",
+    "translated_status": "Diterjemah",
+    "source_only_status": "Sumber Sahaja",
+    "voice_too_short_error": "Sila bercakap lebih lama sedikit."
   }
 }
