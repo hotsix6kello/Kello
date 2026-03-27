@@ -7,7 +7,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './explore.module.css';
 import {
   BeautyBookingCompletionDisplay,
-  BeautyBookingPayload,
   buildBeautyBookingCompletionDisplay,
   buildBeautyBookingPayload,
   submitBeautyBooking,
@@ -108,12 +107,6 @@ type CustomerFieldConfig = {
   placeholder: string;
   required?: boolean;
   multiline?: boolean;
-};
-
-type AgreementFieldConfig = {
-  key: AgreementKey;
-  label: string;
-  description: string;
 };
 
 type CommunicationLanguageConfig = {
