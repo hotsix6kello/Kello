@@ -128,7 +128,7 @@ export class GeminiTranslationProvider implements TranslationProvider {
 
 export function createTranslationProvider(): TranslationProvider {
   const endpoint = process.env.TRANSLATION_PROVIDER_URL;
-  const apiKey = process.env.TRANSLATION_PROVIDER_API_KEY;
+  const apiKey = process.env.TRANSLATION_PROVIDER_API_KEY || process.env.GEMINI_API_KEY;
   const engineName = getTranslationEngineName();
 
   if (engineName === "gemini" && apiKey) {
