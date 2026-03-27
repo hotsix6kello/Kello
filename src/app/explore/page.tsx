@@ -1108,7 +1108,8 @@ export default function MyExplorePage() {
       selectedPrimaryService,
       beautyCategoryLabels,
       bookingDateLabels,
-      tBeauty,
+      t,
+      translatedStores,
     ],
   );
   const generatedKoreanMessage = useMemo(
@@ -1165,6 +1166,7 @@ export default function MyExplorePage() {
       selectedDesigner,
       selectedPrimaryService,
       selectedPriceSummary,
+      selectedCountry.dial,
     ],
   );
 
@@ -1217,7 +1219,7 @@ export default function MyExplorePage() {
       // Logic for confirming booking even if slot doesn't match exactly exists here.
       // We skip mandatory reset to null if the value exists.
     }
-  }, [selectedBeautyAvailability, selectedBeautyDate, selectedBeautyTime]);
+  }, [selectedBeautyAvailability, selectedBeautyDate, selectedBeautyTime, currentStep]);
 
   useEffect(() => {
     // 선택 정보가 아예 없는 경우에만 닫히도록 하고, 
