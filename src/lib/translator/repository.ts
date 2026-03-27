@@ -1,7 +1,6 @@
-import { createRequire } from "module";
 import { randomUUID } from "crypto";
 
-import { hasSupabaseServerAccess } from "../supabaseServer.ts";
+import { getSupabaseServerClient, hasSupabaseServerAccess } from "../supabaseServer.ts";
 import type {
   BookingRecord,
   ConciergeEventRecord,
@@ -10,7 +9,7 @@ import type {
   InterpreterTurnRecord,
 } from "./types.ts";
 
-const require = createRequire(import.meta.url);
+
 
 function nowIso() {
   return new Date().toISOString();
@@ -76,10 +75,6 @@ export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepositor
   private readonly client: any;
 
   constructor() {
-    const { getSupabaseServerClient } = require("../supabaseServer.ts") as {
-      getSupabaseServerClient: () => SupabaseHomeTranslatorRepository["client"];
-    };
-
     this.client = getSupabaseServerClient();
   }
 

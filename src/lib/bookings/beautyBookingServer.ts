@@ -3,7 +3,6 @@ import {
   BEAUTY_BOOKING_ALLOWED_TRANSITIONS,
   isBeautyBookingCancelActor,
   isBeautyBookingAdminStatus,
-  normalizeBeautyBookingAdminListStatus,
   type BeautyBookingAdminListFilters,
   type BeautyBookingAdminRecord,
   type BeautyBookingAdminStatus,

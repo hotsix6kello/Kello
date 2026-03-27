@@ -37,7 +37,6 @@ import {
     DEFAULT_CLIENT_LOCALE,
     DEFAULT_LOCALE,
     LOCALE_STORAGE_KEY,
-    isRtlLocale,
     resolveCanonicalLocale,
 } from "@/lib/i18n/locales";
 
