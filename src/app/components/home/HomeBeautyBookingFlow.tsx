@@ -42,6 +42,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     phone: '',
     request: ''
   });
+  const [requestImages, setRequestImages] = useState<string[]>([]);
   const [agreements, setAgreements] = useState({
     bookingConfirmed: false,
     privacyConsent: false
@@ -73,7 +74,42 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   const handleStoreSelect = (store: BeautyStore) => {
     setSelectedStoreId(store.id);
     setSelectedStoreName(store.name);
+    
+    // 매장 선택 시 해당 카테고리의 첫 번째 서비스를 자동으로 선택
+    const services = PRIMARY_SERVICES_BY_CATEGORY[store.category] || [];
+    if (services.length > 0) {
+      setSelectedServiceId(services[0].id);
+    }
+    
     setCurrentStep(2);
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    const remainingSlots = 2 - requestImages.length;
+    if (remainingSlots <= 0) {
+      alert('이미지는 최대 2장까지만 첨부 가능합니다.');
+      return;
+    }
+
+    const filesToProcess = Array.from(files).slice(0, remainingSlots);
+    
+    filesToProcess.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setRequestImages(prev => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    // Reset input
+    e.target.value = '';
+  };
+
+  const removeImage = (index: number) => {
+    setRequestImages(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleBack = () => {
@@ -235,20 +271,20 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           </div>
         ) : (
           <>
-            <section className={styles.beautyHero} style={{ background: '#fffcfb', borderBottom: '1px solid #f0e0d8', paddingTop: '60px', paddingBottom: '30px', paddingLeft: '20px', paddingRight: '20px' }}>
+            <section className={styles.beautyHero} style={{ background: '#fffcfb', borderBottom: '1px solid #f0e0d8', paddingTop: '45px', paddingBottom: '16px', paddingLeft: '20px', paddingRight: '20px' }}>
                <span className={styles.beautyEyebrow} style={{ color: '#bb8a78', fontWeight: 900 }}>STEP {currentStep} / 4</span>
-               <h1 className={styles.beautyTitle} style={{ fontSize: '24px', fontWeight: 900, marginTop: '8px', color: '#222' }}>
-                  {currentStep === 1 && (initialCategory !== 'all' ? `${tBeauty(`categories.${initialCategory}.label`)} 매장을 선택해 주세요` : "관심 있는 매장을 골라보세요")}
+               <h1 className={styles.beautyTitle} style={{ fontSize: '22px', fontWeight: 900, marginTop: '6px', color: '#222' }}>
+                  {currentStep === 1 && (!initialCategory || initialCategory === 'all' ? "관심 있는 매장을 골라보세요" : `${tBeauty(`categories.${initialCategory}.label`)} 매장을 선택해 주세요`)}
                   {currentStep === 2 && "예약 일시를 선택해 주세요"}
                   {currentStep === 3 && "상세 정보를 입력해 주세요"}
                   {currentStep === 4 && "예약 내용을 확인해 주세요"}
                </h1>
-               <div className="mt-6 px-5" style={{ paddingLeft: '0', paddingRight: '0' }}>
+               <div className="mt-4 px-5" style={{ paddingLeft: '0', paddingRight: '0' }}>
                   {renderProgress()}
                </div>
             </section>
 
-            <div className="px-4 mt-6">
+            <div className="px-4 mt-2">
                {/* Step 1: Store Selection */}
                {currentStep === 1 && (
                  <div className="flex flex-col gap-4">
@@ -327,27 +363,6 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                {currentStep === 3 && (
                  <div className="flex flex-col gap-6">
                     <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
-                       <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Select Service</span>
-                       <div className="flex flex-col gap-2">
-                          {availableServices.map(service => (
-                             <button
-                                key={service.id}
-                                className={`w-full flex justify-between items-center p-4 rounded-xl border-2 transition-all ${selectedServiceId === service.id ? 'border-[#bb8a78] bg-[#fffbfa]' : 'border-neutral-50 bg-neutral-50'}`}
-                                onClick={() => setSelectedServiceId(service.id)}
-                             >
-                                <div className="text-left">
-                                   <div className={`font-bold text-sm ${selectedServiceId === service.id ? 'text-[#bb8a78]' : 'text-neutral-700'}`}>{service.name}</div>
-                                   <div className="text-[11px] text-neutral-400">{service.description || '꼼꼼한 시술을 약속드립니다.'}</div>
-                                </div>
-                                <div className={`font-bold text-sm ${selectedServiceId === service.id ? 'text-[#bb8a78]' : 'text-neutral-500'}`}>
-                                   {service.price.toLocaleString()}원~
-                                </div>
-                             </button>
-                          ))}
-                       </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
                        <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Customer Details</span>
                        <div className="flex flex-col gap-4">
                           <div className="flex flex-col gap-1.5">
@@ -377,6 +392,35 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                 onChange={e => setCustomerForm(prev => ({ ...prev, request: e.target.value }))}
                                 placeholder="원하시는 스타일 이미지나 특이사항이 있다면 적어주세요."
                              />
+                             
+                             {/* 이미지 첨부 영역 */}
+                             <div className="mt-4">
+                               <div className="flex flex-wrap gap-3">
+                                 {requestImages.map((img, idx) => (
+                                   <div key={idx} className="relative w-20 h-20 rounded-xl overflow-hidden border border-neutral-100 group">
+                                     <img src={img} alt="attached" className="w-full h-full object-cover" />
+                                     <button 
+                                       onClick={() => removeImage(idx)}
+                                       className="absolute top-1 right-1 bg-black/50 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs backdrop-blur-sm"
+                                     >
+                                       ✕
+                                     </button>
+                                   </div>
+                                 ))}
+                                 
+                                 {requestImages.length < 2 && (
+                                   <label className="w-20 h-20 flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl bg-neutral-50 text-neutral-400 cursor-pointer hover:border-[#bb8a78] hover:bg-[#fffcfb] hover:text-[#bb8a78] transition-all">
+                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mb-1">
+                                       <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                                     </svg>
+                                     <span className="text-[10px] font-bold uppercase tracking-wide">Add Poto</span>
+                                     <input type="file" accept="image/*" className="hidden" multiple onChange={handleImageUpload} />
+                                   </label>
+                                 )}
+                               </div>
+                               <p className="text-[10px] text-neutral-400 mt-2 font-medium">* 스타일 참고용 이미지(최대 2장)를 첨부하실 수 있습니다.</p>
+                             </div>
                           </div>
                        </div>
                     </div>
