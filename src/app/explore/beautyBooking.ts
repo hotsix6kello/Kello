@@ -23,7 +23,7 @@ export type BeautyBookingPayload = {
     name: string;
     phone: string;
     request: string;
-    imageUrls: string[];
+    imageUrls?: string[];
   };
   communication: {
     language: string;
