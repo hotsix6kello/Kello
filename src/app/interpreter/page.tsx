@@ -207,7 +207,7 @@ export default function InterpreterPage() {
     if (customerLocale && staffLocale) {
       initSession();
     }
-  }, [customerLocale, staffLocale]);
+  }, [customerLocale, staffLocale, sessionId]);
 
   useEffect(() => {
     const syncCustomerLocale = (nextLocale?: string | null) => {

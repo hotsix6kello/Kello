@@ -553,7 +553,7 @@ function MyPageContent() {
         return () => {
             isMounted = false;
         };
-    }, [t]);
+    }, [t, router]);
 
 
 
