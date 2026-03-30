@@ -23,7 +23,7 @@ const eslintConfig = [
   {
     rules: {
       // Downgrade from error to warn for common patterns used throughout the project
-      "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+      "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
       "react-hooks/exhaustive-deps": "warn",
       "react/no-unescaped-entities": "warn",

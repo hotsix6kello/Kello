@@ -99,7 +99,7 @@ type AgreementState = {
   privacyConsent: boolean;
 };
 
-type AgreementKey = keyof AgreementState;
+// type AgreementKey = keyof AgreementState;
 type FormErrorKey = 'name' | 'phone' | 'primaryService' | 'bookingConfirmed' | 'privacyConsent';
 type CustomerFormFieldKey = keyof CustomerFormState;
 type CustomerFieldConfig = {
@@ -827,14 +827,14 @@ export default function MyExplorePage() {
 
   const [currentCategory, setCurrentCategory] = useState<string>('all');
   const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(destinationInfo);
-  const [radius, _setRadius] = useState<number>(1000);
+  const [radius] = useState<number>(1000);
   const [nearbyItems, setNearbyItems] = useState<ServiceItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isAddToPlanOpen, setIsAddToPlanOpen] = useState(false);
   const [selectedItemForPlan, setSelectedItemForPlan] = useState<ServiceItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [_activeFilters, setActiveFilters] = useState<ActiveFilters>({});
+  const [, setActiveFilters] = useState<ActiveFilters>({});
   const [searchTerm, setSearchTerm] = useState(globalSearchQuery);
   const [appliedSearchTerm, setAppliedSearchTerm] = useState(globalSearchQuery);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
@@ -847,7 +847,7 @@ export default function MyExplorePage() {
   const [selectedDesignerId, setSelectedDesignerId] = useState<string | null>(null);
   const [selectedPrimaryServiceId, setSelectedPrimaryServiceId] = useState<string | null>(null);
   const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([]);
-  const [selectedCommunicationLanguage, _setSelectedCommunicationLanguage] = useState<CommunicationLanguageId>('en');
+  const [selectedCommunicationLanguage] = useState<CommunicationLanguageId>('en');
   const [isIntegratedBookingMenuOpen, setIsIntegratedBookingMenuOpen] = useState(false);
   const selectedBeautyAvailability = useMemo<BeautyAvailability | null>(() => {
     if (!selectedBeautyStoreId) {
@@ -872,13 +872,13 @@ export default function MyExplorePage() {
   }, [selectedBeautyStoreId, bookingDateOptions]);
 
 /* moved below */
-  const [selectedCommunicationIntent, _setSelectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
+  const [selectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
   const [customerForm, setCustomerForm] = useState<CustomerFormState>(INITIAL_CUSTOMER_FORM_STATE);
   const [selectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
-  const [agreements, setAgreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
+  const [agreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmittingBeautyBooking, setIsSubmittingBeautyBooking] = useState(false);
-  const [_formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
+  const [, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
   const [submittedBooking, setSubmittedBooking] = useState<BeautyBookingCompletionDisplay | null>(null);
   const toastTimeoutRef = useRef<number | null>(null);
 
@@ -1375,12 +1375,13 @@ export default function MyExplorePage() {
   };
 
 
-  const _handleAgreementToggle = (field: AgreementKey) => {
-    setAgreements((prev) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
+  // Used for future feature or currently unused in the current form flow.
+  // const handleAgreementToggle = (field: AgreementKey) => {
+  //   setAgreements((prev) => ({
+  //     ...prev,
+  //     [field]: !prev[field],
+  //   }));
+  // };
 
   const validateBeautyBookingForm = () => {
     const nameError = validateCustomerField('name', customerForm.name);
