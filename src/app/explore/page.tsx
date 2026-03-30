@@ -21,6 +21,7 @@ import IntegratedBookingMenu from '../components/IntegratedBookingMenu';
 import { useTrip } from '@/lib/contexts/TripContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 
 type ActiveFilters = Record<string, string[]>;
 type BeautyCategoryId = 'hair' | 'nail' | 'esthetic' | 'waxing' | 'makeup' | 'lash';
@@ -98,7 +99,7 @@ type AgreementState = {
   privacyConsent: boolean;
 };
 
-type AgreementKey = keyof AgreementState;
+// type AgreementKey = keyof AgreementState;
 type FormErrorKey = 'name' | 'phone' | 'primaryService' | 'bookingConfirmed' | 'privacyConsent';
 type CustomerFormFieldKey = keyof CustomerFormState;
 type CustomerFieldConfig = {
@@ -134,7 +135,7 @@ type CommunicationMessagePayload = {
   intent: CommunicationIntentId;
 };
 
-const CUSTOMER_FORM_FIELDS: (t: (key: string, options?: any) => string, tBeauty: (key: string, options?: any) => string) => CustomerFieldConfig[] = (t, tBeauty) => [
+const CUSTOMER_FORM_FIELDS: (t: TFunction, tBeauty: TFunction) => CustomerFieldConfig[] = (t, tBeauty) => [
   {
     key: 'name',
     label: tBeauty('form_name', { defaultValue: 'Name (English Only)' }),
@@ -166,14 +167,14 @@ const INITIAL_AGREEMENT_STATE: AgreementState = {
   privacyConsent: false,
 };
 
-const COMMUNICATION_LANGUAGES: (t: (key: string, options?: any) => string, tBeauty: (key: string, options?: any) => string) => CommunicationLanguageConfig[] = (t, tBeauty) => [
+const COMMUNICATION_LANGUAGES: (t: TFunction, tBeauty: TFunction) => CommunicationLanguageConfig[] = (t, tBeauty) => [
   { id: 'ko', label: tBeauty('lang_ko', { defaultValue: '한국어' }), badge: 'KO' },
   { id: 'en', label: tBeauty('lang_en', { defaultValue: 'English' }), badge: 'EN' },
   { id: 'ja', label: tBeauty('lang_ja', { defaultValue: '日本語' }), badge: 'JA' },
   { id: 'zh-CN', label: tBeauty('lang_zh_cn', { defaultValue: '中文' }), badge: 'ZH' },
 ];
 
-const COMMUNICATION_INTENTS: (t: (key: string, options?: any) => string, tBeauty: (key: string, options?: any) => string) => CommunicationIntentConfig[] = (t, tBeauty) => [
+const COMMUNICATION_INTENTS: (t: TFunction, tBeauty: TFunction) => CommunicationIntentConfig[] = (t, tBeauty) => [
   {
     id: 'booking_confirm',
     label: tBeauty('intent_booking_confirm', { defaultValue: '예약 확인' }),
@@ -471,7 +472,7 @@ const BEAUTY_CATEGORY_ORDER: BeautyCategoryId[] = [
   'lash',
 ];
 
-const BEAUTY_CATEGORY_META: (t: any, tBeauty: any) => Record<
+const BEAUTY_CATEGORY_META: (t: TFunction, tBeauty: TFunction) => Record<
   BeautyCategoryId,
   { label: string; english: string; badge: string; description: string }
 > = (t, tBeauty) => ({
@@ -513,7 +514,7 @@ const BEAUTY_CATEGORY_META: (t: any, tBeauty: any) => Record<
   },
 });
 
-const BEAUTY_REGIONS: (t: any, tBeauty: any) => Array<{ id: BeautyRegionId; label: string }> = (t, tBeauty) => [
+const BEAUTY_REGIONS: (t: TFunction, tBeauty: TFunction) => Array<{ id: BeautyRegionId; label: string }> = (t, tBeauty) => [
   { id: 'all', label: tBeauty('region_all', { defaultValue: '전체 지역' }) },
   { id: 'jongno', label: tBeauty('regions.jongno', { defaultValue: '종로' }) },
   { id: 'gangnam', label: tBeauty('regions.gangnam', { defaultValue: '강남' }) },
@@ -673,7 +674,7 @@ function toLocalDateKey(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-function createBookingDateOptions(t: any, count = 6): BeautyDateOption[] {
+function createBookingDateOptions(t: TFunction, count = 6): BeautyDateOption[] {
   return Array.from({ length: count }, (_, index) => {
     const date = new Date();
     date.setHours(12, 0, 0, 0);
@@ -826,14 +827,14 @@ export default function MyExplorePage() {
 
   const [currentCategory, setCurrentCategory] = useState<string>('all');
   const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(destinationInfo);
-  const [radius, setRadius] = useState<number>(1000);
+  const [radius] = useState<number>(1000);
   const [nearbyItems, setNearbyItems] = useState<ServiceItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isAddToPlanOpen, setIsAddToPlanOpen] = useState(false);
   const [selectedItemForPlan, setSelectedItemForPlan] = useState<ServiceItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
+  const [, setActiveFilters] = useState<ActiveFilters>({});
   const [searchTerm, setSearchTerm] = useState(globalSearchQuery);
   const [appliedSearchTerm, setAppliedSearchTerm] = useState(globalSearchQuery);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
@@ -846,7 +847,7 @@ export default function MyExplorePage() {
   const [selectedDesignerId, setSelectedDesignerId] = useState<string | null>(null);
   const [selectedPrimaryServiceId, setSelectedPrimaryServiceId] = useState<string | null>(null);
   const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([]);
-  const [selectedCommunicationLanguage, setSelectedCommunicationLanguage] = useState<CommunicationLanguageId>('en');
+  const [selectedCommunicationLanguage] = useState<CommunicationLanguageId>('en');
   const [isIntegratedBookingMenuOpen, setIsIntegratedBookingMenuOpen] = useState(false);
   const selectedBeautyAvailability = useMemo<BeautyAvailability | null>(() => {
     if (!selectedBeautyStoreId) {
@@ -871,13 +872,13 @@ export default function MyExplorePage() {
   }, [selectedBeautyStoreId, bookingDateOptions]);
 
 /* moved below */
-  const [selectedCommunicationIntent, setSelectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
+  const [selectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
   const [customerForm, setCustomerForm] = useState<CustomerFormState>(INITIAL_CUSTOMER_FORM_STATE);
   const [selectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
-  const [agreements, setAgreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
+  const [agreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmittingBeautyBooking, setIsSubmittingBeautyBooking] = useState(false);
-  const [formErrors, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
+  const [, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
   const [submittedBooking, setSubmittedBooking] = useState<BeautyBookingCompletionDisplay | null>(null);
   const toastTimeoutRef = useRef<number | null>(null);
 
@@ -1374,12 +1375,13 @@ export default function MyExplorePage() {
   };
 
 
-  const handleAgreementToggle = (field: AgreementKey) => {
-    setAgreements((prev) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
+  // Used for future feature or currently unused in the current form flow.
+  // const handleAgreementToggle = (field: AgreementKey) => {
+  //   setAgreements((prev) => ({
+  //     ...prev,
+  //     [field]: !prev[field],
+  //   }));
+  // };
 
   const validateBeautyBookingForm = () => {
     const nameError = validateCustomerField('name', customerForm.name);
@@ -1768,7 +1770,7 @@ export default function MyExplorePage() {
                                      type="text"
                                      value={customerForm[field.key as keyof CustomerFormState]}
                                      placeholder={field.placeholder}
-                                     onChange={(e) => handleCustomerFieldChange(field.key as any, e.target.value)}
+                                     onChange={(e) => handleCustomerFieldChange(field.key, e.target.value)}
                                    />
                                  </div>
                                ))}

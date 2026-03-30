@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 
 import { supabase } from '@/lib/supabaseClient';
 import {
@@ -17,7 +18,7 @@ type BookingTabId = 'all' | 'active' | 'completed' | 'canceled';
 
 const TIMELINE_STEP_IDS = ['requested', 'confirmed', 'completed', 'canceled'] as const;
 
-function formatPrice(value: number, language: string, t: any) {
+function formatPrice(value: number, language: string, t: TFunction) {
   const formatted = new Intl.NumberFormat(language === 'ko' ? 'ko-KR' : 'en-US').format(value);
   const unit = t('beauty_explore.label_booking_unit');
   return language === 'ko' ? `${formatted}${unit}` : `${unit} ${formatted}`;

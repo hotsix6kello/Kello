@@ -1,3 +1,5 @@
+import type { TFunction } from 'i18next';
+
 export type BeautyCategoryId = 'hair' | 'nail' | 'esthetic' | 'waxing' | 'makeup' | 'lash';
 
 export type BeautyCategoryOption = {
@@ -86,7 +88,7 @@ export type BeautyStore = {
   imageUrl?: string;
 };
 
-export const BEAUTY_REGIONS: (t: any, tBeauty: any) => Array<{ id: BeautyRegionId; label: string }> = (t, tBeauty) => [
+export const BEAUTY_REGIONS: (t: TFunction, tBeauty: TFunction) => Array<{ id: BeautyRegionId; label: string }> = (t, tBeauty) => [
   { id: 'all', label: tBeauty('region_all', { defaultValue: '전체 지역' }) },
   { id: 'jongno', label: tBeauty('regions.jongno', { defaultValue: '종로' }) },
   { id: 'gangnam', label: tBeauty('regions.gangnam', { defaultValue: '강남' }) },
@@ -144,15 +146,31 @@ export const BEAUTY_STORE_ITEMS: BeautyStore[] = [
   },
 ];
 
-export const DESIGNERS_BY_STORE: Record<string, any[]> = {
+export type BeautyDesigner = {
+  id: string;
+  name: string;
+  specialty?: string;
+  experienceLabel?: string;
+  shortNote?: string;
+  surcharge?: number;
+};
+
+export type BeautyServiceOption = {
+  id: string;
+  name: string;
+  description?: string;
+  price: number;
+};
+
+export const DESIGNERS_BY_STORE: Record<string, BeautyDesigner[]> = {
   beauty_hair_1: [{ id: 'd1', name: '지아 디자이너' }],
   beauty_hair_2: [{ id: 'd2', name: '하린 디자이너' }],
 };
 
-export const PRIMARY_SERVICES_BY_CATEGORY: Record<string, any[]> = {
+export const PRIMARY_SERVICES_BY_CATEGORY: Record<string, BeautyServiceOption[]> = {
   hair: [{ id: 's1', name: '여성 컷', price: 55000 }],
   nail: [{ id: 's2', name: '젤 네일', price: 79000 }],
 };
 
-export const BEAUTY_AVAILABILITY_BY_STORE: Record<string, any> = {};
+export const BEAUTY_AVAILABILITY_BY_STORE: Record<string, Record<number, string[]>> = {};
 

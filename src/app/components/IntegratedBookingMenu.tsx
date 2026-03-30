@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 
 // Props 인터페이스
 interface IntegratedBookingMenuProps {
@@ -13,7 +14,7 @@ interface IntegratedBookingMenuProps {
 }
 
 // 날짜 포맷 유틸
-function formatDateLocalized(date: Date, lang: string, t: any): string {
+function formatDateLocalized(date: Date, lang: string, t: TFunction): string {
   const formatted = new Intl.DateTimeFormat(lang, { 
     month: 'short', 
     day: 'numeric', 
