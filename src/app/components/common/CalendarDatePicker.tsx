@@ -2,12 +2,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { DayPicker } from 'react-day-picker';
-import { format, isBefore, startOfToday } from 'date-fns';
+import { format, startOfToday } from 'date-fns';
+import type { Locale } from 'date-fns';
 import { ko, enUS, ja, zhCN, zhHK, arSA, es, fr, de, th, vi, id, pt, ru } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';
 import 'react-day-picker/dist/style.css';
 
-const localeMap: Record<string, any> = {
+const localeMap: Record<string, Locale> = {
   ko, en: enUS, ja, "zh-CN": zhCN, "zh-HK": zhHK, ar: arSA, es, fr, de, th, vi, id, pt, ru
 };
 
