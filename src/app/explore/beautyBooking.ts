@@ -185,10 +185,6 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
   }
 
   const candidate = input as Record<string, unknown>;
-  const createdFrom =
-    candidate.createdFrom && typeof candidate.createdFrom === 'object'
-      ? (candidate.createdFrom as Record<string, unknown>)
-      : {};
   const customer =
     candidate.customer && typeof candidate.customer === 'object'
       ? (candidate.customer as Record<string, unknown>)
@@ -347,7 +343,7 @@ export async function uploadBookingImages(
       const filePath = `beauty/${fileName}`;
       
       // 4. Upload to Supabase Storage bucket 'beauty-bookings'
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('beauty-bookings')
         .upload(filePath, blob, {
           contentType: 'image/jpeg',

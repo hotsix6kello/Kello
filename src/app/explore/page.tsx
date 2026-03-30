@@ -825,7 +825,7 @@ export default function MyExplorePage() {
   }, [tBeauty]);
   const [currentCity, setCurrentCity] = useState<CityId>('seoul');
 
-  const [currentCategory, setCurrentCategory] = useState<string>('all');
+  const [currentCategory] = useState<string>('all');
   const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(destinationInfo);
   const [radius] = useState<number>(1000);
   const [nearbyItems, setNearbyItems] = useState<ServiceItem[]>([]);
@@ -1240,10 +1240,10 @@ export default function MyExplorePage() {
     showToast(t('explore_page.city_changed', { city: cityName }));
   };
 
-  const handleCategoryChange = (catId: string) => {
-    setCurrentCategory(catId);
-    setActiveFilters({});
-  };
+  // const handleCategoryChange = (catId: string) => {
+  //   setCurrentCategory(catId);
+  //   setActiveFilters({});
+  // };
 
   const handleAddToPlan = (day: number) => {
     if (!selectedItemForPlan) {
@@ -1558,7 +1558,7 @@ export default function MyExplorePage() {
         currentCity={currentCity}
         onCityChange={handleCityChange}
         currentCategory={currentCategory}
-        onCategoryChange={handleCategoryChange}
+        // onCategoryChange={handleCategoryChange}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         onSearchSubmit={handleSearchSubmit}

@@ -7,7 +7,7 @@ interface ExploreHeaderProps {
     currentCity: string;
     onCityChange: (cityId: CityId) => void;
     currentCategory: string; // "all" | CategoryId
-    onCategoryChange: (catId: string) => void;
+    onCategoryChange?: (catId: string) => void;
     searchTerm: string;
     onSearchChange: (val: string) => void;
     onSearchSubmit: (val?: string) => void;
@@ -17,7 +17,6 @@ export default function ExploreHeader({
     currentCity,
     onCityChange,
     currentCategory,
-    onCategoryChange,
     searchTerm,
     onSearchChange,
     onSearchSubmit

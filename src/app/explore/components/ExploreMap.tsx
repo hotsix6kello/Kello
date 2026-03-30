@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 import { ServiceItem } from '../mock/data';
@@ -63,11 +63,11 @@ export default function ExploreMap({ items, center: propCenter, onItemClick, zoo
         }
     }, [propCenter]);
 
-    const onLoad = useCallback(function callback(__map: google.maps.Map) {
+    const onLoad = useCallback(function callback() {
         // 지도 인스턴스 초기 로드 완료 시 동작
     }, []);
 
-    const onUnmount = useCallback(function callback(__map: google.maps.Map) {
+    const onUnmount = useCallback(function callback() {
         // 정리 작업
     }, []);
 
