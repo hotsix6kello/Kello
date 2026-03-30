@@ -49,9 +49,10 @@ export default function PartnerSignupPage() {
 
             const { data } = supabase.storage.from('partner_documents').getPublicUrl(filePath);
             setForm(prev => ({ ...prev, business_license_url: data.publicUrl }));
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Document upload error:', err);
-            setError('서류 업로드 중 오류가 발생했습니다: ' + err.message);
+            const errorMessage = err instanceof Error ? err.message : String(err);
+            setError('서류 업로드 중 오류가 발생했습니다: ' + errorMessage);
         } finally {
             setUploading(false);
         }
