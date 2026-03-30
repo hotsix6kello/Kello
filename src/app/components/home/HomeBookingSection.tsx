@@ -1,4 +1,5 @@
 import { TFunction } from 'i18next';
+import Image from 'next/image';
 import { BeautyCategoryOption, BeautyCategoryId } from './constants';
 import styles from '../../home.module.css';
 
@@ -38,8 +39,16 @@ export default function HomeBookingSection({
                 className={`${styles.categoryButton} ${isActive ? styles.categoryButtonActive : ''}`}
                 onClick={() => onSelectCategory(option.id)}
               >
-                <span className={styles.categoryCode}>{option.code}</span>
-                <span className={styles.categoryLabel}>{t(`home_beauty.categories.${option.id}.label`)}</span>
+                <div className={styles.categoryIconWrap}>
+                  <Image 
+                    src={option.image} 
+                    alt={t(option.label)} 
+                    width={56} 
+                    height={56} 
+                    className={styles.categoryIcon}
+                  />
+                </div>
+                <span className={styles.categoryLabel}>{t(option.label)}</span>
               </button>
             );
           })}
