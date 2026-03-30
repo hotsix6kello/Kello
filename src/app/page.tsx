@@ -76,7 +76,6 @@ export default function HomePage() {
 
   // Navigation Search States
   const [selectedDest, setSelectedDest] = useState<{ title: string; area: string; lat: number; lng: number } | null>(null);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
   const [sheetSearchResults, setSheetSearchResults] = useState<SheetSearchResult[]>([]);
@@ -84,40 +83,7 @@ export default function HomePage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Merge MOCK_PLACES with MOCK_ITEMS for broader search
-  const ALL_SEARCH_ITEMS = useMemo(() => {
-    const items = MOCK_ITEMS.map(i => {
-      const transTitle = t(`explore_items.${i.id}.title`, { defaultValue: i.title });
-      const transArea = t(`explore_items.${i.id}.area`, { defaultValue: i.area });
-
-      return {
-        id: i.id,
-        title: transTitle !== `explore_items.${i.id}.title` ? transTitle : i.title,
-        area: transArea !== `explore_items.${i.id}.area` ? transArea : i.area,
-        searchTerms: [i.title, transTitle, i.area, transArea].join(' ').toLowerCase(),
-        lat: i.lat || 37.5665,
-        lng: i.lng || 126.9780
-      };
-    });
-
-    const mappedPlaces = MOCK_PLACES.map(p => {
-      const transTitle = t(p.title, { defaultValue: p.title });
-      const transArea = t(p.area, { defaultValue: p.area });
-      return {
-        ...p,
-        title: transTitle,
-        area: transArea,
-        searchTerms: [transTitle, transArea].join(' ').toLowerCase()
-      };
-    });
-
-    return [...mappedPlaces, ...items];
-  }, [t]);
-
   // Typing suggestions disabled as requested
-  useEffect(() => {
-    setShowSuggestions(false);
-  }, [input]);
 
   const handleSelectPlace = async (place: { title: string; area: string; lat?: number; lng?: number; placeId?: string }) => {
     if (place.placeId && !place.lat) {

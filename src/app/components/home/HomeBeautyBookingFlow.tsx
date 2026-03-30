@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import Image from 'next/image';
 import styles from '@/app/home.module.css';
 import IntegratedBookingMenu from '../IntegratedBookingMenu';
@@ -20,7 +21,7 @@ interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
   onClose: () => void;
   initialCategory: BeautyCategoryId | 'all' | null;
-  t: (key: string, options?: any) => string;
+  t: TFunction;
 }
 
 export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory, t }: HomeBeautyBookingFlowProps) {

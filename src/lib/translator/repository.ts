@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "../supabaseServer.ts";
 import type {
@@ -72,7 +73,7 @@ export class InMemoryHomeTranslatorRepository implements HomeTranslatorRepositor
 }
 
 export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepository {
-  private readonly client: any;
+  private readonly client: SupabaseClient;
 
   constructor() {
     this.client = getSupabaseServerClient();
