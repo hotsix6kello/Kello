@@ -39,7 +39,10 @@ export default function HomeBookingSection({
                 className={`${styles.categoryButton} ${isActive ? styles.categoryButtonActive : ''}`}
                 onClick={() => onSelectCategory(option.id)}
               >
-                <div className={styles.categoryIconWrap}>
+                <div 
+                  className={styles.categoryIconWrap}
+                  style={{ '--icon-base-scale': option.iconScale ?? 1 } as React.CSSProperties}
+                >
                   <Image 
                     src={option.image} 
                     alt={t(option.label)} 
