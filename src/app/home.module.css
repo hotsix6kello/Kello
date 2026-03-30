@@ -310,8 +310,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 6px;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Base scale from CSS variable */
