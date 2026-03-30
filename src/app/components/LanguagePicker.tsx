@@ -71,12 +71,6 @@ const LANG_TO_COUNTRY: Record<string, string> = {
     'ar': 'SA'
 };
 
-const FLAG_EMOJIS: Record<string, string> = {
-    kr: '🇰🇷', us: '🇺🇸', jp: '🇯🇵', cn: '🇨🇳', hk: '🇭🇰',
-    vn: '🇻🇳', th: '🇹🇭', id: '🇮🇩', my: '🇲🇾', fr: '🇫🇷',
-    es: '🇪🇸', de: '🇩🇪', pt: '🇵🇹', ru: '🇷🇺', sa: '🇸🇦'
-};
-
 export default function LanguagePicker({ compact = false }: LanguagePickerProps) {
     const { t, i18n } = useTranslation('common');
     const [isOpen, setIsOpen] = useState(false);

@@ -42,10 +42,7 @@ interface GuideItem {
 
 const TABS: SupportTab[] = ["booking", "general", "faq"];
 
-function buildSupportUrl(params: URLSearchParams): string {
-    const query = params.toString();
-    return query ? `/my/support?${query}` : "/my/support";
-}
+
 
 function parseTab(
     requestedTab: string | null,
@@ -196,43 +193,9 @@ function SupportPageContent() {
     });
     const contextPhrasesUrl = buildPathWithParams("/my/phrases", phrasesParams);
 
-    const emergencyDetailParams = new URLSearchParams({
-        source: hasBookingContext ? "booking" : "help",
-        focus: "emergency",
-    });
-    appendBookingQueryContext(emergencyDetailParams, resolvedBookingContext, {
-        includeBookingIdParam: true,
-    });
-    const emergencyDetailQuery = emergencyDetailParams.toString();
-    const medicalUrl = emergencyDetailQuery
-        ? `/help/medical?${emergencyDetailQuery}`
-        : "/help/medical";
-    const policeUrl = emergencyDetailQuery
-        ? `/help/police?${emergencyDetailQuery}`
-        : "/help/police";
 
-    const handleTabChange = (tab: SupportTab) => {
-        setActiveTab(tab);
 
-        const nextParams = new URLSearchParams(searchParams.toString());
-        nextParams.set("tab", tab);
-        router.replace(buildSupportUrl(nextParams), { scroll: false });
-    };
 
-    const summaryCards = [
-        {
-            id: "booking",
-            label: t("my_page.support.summary.booking.label"),
-            desc: t("my_page.support.summary.booking.desc"),
-            onClick: () => handleTabChange("booking"),
-        },
-        {
-            id: "general",
-            label: t("my_page.support.summary.general.label"),
-            desc: t("my_page.support.summary.general.desc"),
-            onClick: () => handleTabChange("general"),
-        },
-    ];
 
     const guideItems: GuideItem[] = [
         {
@@ -302,56 +265,6 @@ function SupportPageContent() {
             desc: t("my_page.support.general.partner.desc"),
             href: "/auth/partner-signup",
             ctaLabel: t("common.actions.partner_inquiry"),
-        },
-    ];
-
-    const emergencyCards = [
-        {
-            id: "overview",
-            label: t("my_page.support.emergency.overview.label"),
-            desc: t("my_page.support.emergency.overview.desc"),
-            href: "/help",
-            ctaLabel: t("my_page.support.emergency.overview.cta"),
-        },
-        {
-            id: "interp",
-            label: hasBookingContext
-                ? t("common.actions.interpreter_for_booking")
-                : t("my_page.support.emergency.interp.label"),
-            desc: hasBookingContext
-                ? t("my_page.support.emergency.interp.booking_desc")
-                : t("my_page.support.emergency.interp.desc"),
-            href: interpretationUrl,
-            ctaLabel: hasBookingContext
-                ? t("common.actions.interpreter_for_booking")
-                : t("my_page.support.emergency.interp.cta"),
-        },
-        {
-            id: "phrases",
-            label: hasBookingContext
-                ? t("my_page.support.emergency.phrases.booking_label")
-                : t("my_page.support.emergency.phrases.label"),
-            desc: hasBookingContext
-                ? t("my_page.support.emergency.phrases.booking_desc")
-                : t("my_page.support.emergency.phrases.desc"),
-            href: contextPhrasesUrl,
-            ctaLabel: hasBookingContext
-                ? t("common.actions.show_booking_phrases")
-                : t("my_page.support.emergency.phrases.cta"),
-        },
-        {
-            id: "medical",
-            label: t("my_page.support.emergency.medical.label"),
-            desc: t("my_page.support.emergency.medical.desc"),
-            href: medicalUrl,
-            ctaLabel: t("my_page.support.emergency.medical.cta"),
-        },
-        {
-            id: "police",
-            label: t("my_page.support.emergency.police.label"),
-            desc: t("my_page.support.emergency.police.desc"),
-            href: policeUrl,
-            ctaLabel: t("my_page.support.emergency.police.cta"),
         },
     ];
 

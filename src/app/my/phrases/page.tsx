@@ -223,9 +223,7 @@ function isPhraseCategory(value: string | null): value is PhraseCategory {
 }
 
 function parseCategory(
-    requestedCategory: string | null,
-    source: string | null,
-    focus: string | null
+    requestedCategory: string | null
 ): PhraseCategory {
     if (isPhraseCategory(requestedCategory)) {
         return requestedCategory;
@@ -296,7 +294,7 @@ function PhrasebookContent() {
     const bookingId = bookingQueryContext?.bookingId ?? searchParams.get("bookingId") ?? searchParams.get("id");
 
     const [activeCategory, setActiveCategory] = useState<PhraseCategory>(
-        parseCategory(searchParams.get("category"), source, focus)
+        parseCategory(searchParams.get("category"))
     );
     const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
     const [recentIds, setRecentIds] = useState<string[]>([]);
@@ -304,8 +302,8 @@ function PhrasebookContent() {
     const [copiedId, setCopiedId] = useState("");
 
     useEffect(() => {
-        setActiveCategory(parseCategory(searchParams.get("category"), source, focus));
-    }, [focus, searchParams, source]);
+        setActiveCategory(parseCategory(searchParams.get("category")));
+    }, [searchParams]);
 
     useEffect(() => {
         setFavoriteIds(readStoredList(FAVORITES_KEY));
