@@ -39,6 +39,7 @@ import HomeBookingSection from './components/home/HomeBookingSection';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
+import HomeBeautyBookingFlow from './components/home/HomeBeautyBookingFlow';
 
 import { 
   BEAUTY_CATEGORY_OPTIONS, 
@@ -53,20 +54,8 @@ export default function HomePage() {
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
-    setSearchQuery: setInput,
     setDestinationInfo
   } = useTrip();
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    let key = '';
-    if (hour < 12) key = 'morning';
-    else if (hour < 18) key = 'afternoon';
-    else key = 'evening';
-    
-    // 타 언어 파일에서 'common.morning' 또는 'morning' 위치가 다를 수 있어 배열로 시도
-    return t([`common.${key}`, key], { defaultValue: key });
-  };
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
   const setSelectedCategory = setGlobalCategory as (category: BeautyCategoryId | null) => void;
@@ -87,40 +76,14 @@ export default function HomePage() {
 
   // Navigation Search States
   const [selectedDest, setSelectedDest] = useState<{ title: string; area: string; lat: number; lng: number } | null>(null);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
   const [sheetSearchResults, setSheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
-
-  // Merge MOCK_PLACES with MOCK_ITEMS for broader search
-  const ALL_SEARCH_ITEMS = useMemo(() => {
-    const items = MOCK_ITEMS.map(i => {
-      const transTitle = t(`explore_items.${i.id}.title`, { defaultValue: i.title });
-      const transArea = t(`explore_items.${i.id}.area`, { defaultValue: i.area });
-
-      return {
-        id: i.id,
-        title: transTitle !== `explore_items.${i.id}.title` ? transTitle : i.title,
-        area: transArea !== `explore_items.${i.id}.area` ? transArea : i.area,
-        searchTerms: [i.title, transTitle, i.area, transArea].join(' ').toLowerCase(),
-        lat: i.lat || 37.5665,
-        lng: i.lng || 126.9780
-      };
-    });
-
-    const mappedPlaces = MOCK_PLACES.map(p => ({
-      ...p,
-      searchTerms: [p.title, p.area].join(' ').toLowerCase()
-    }));
-
-    return [...mappedPlaces, ...items];
-  }, [t]);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Typing suggestions disabled as requested
-  useEffect(() => {
-    setShowSuggestions(false);
-  }, [input]);
 
   const handleSelectPlace = async (place: { title: string; area: string; lat?: number; lng?: number; placeId?: string }) => {
     if (place.placeId && !place.lat) {
@@ -168,7 +131,7 @@ export default function HomePage() {
     }
   };
 
-  const nextDest = itinerary.find(item => item.status === 'confirmed');
+  const nextDest = itinerary.find((item: ItineraryItem) => item.status === 'confirmed');
 
   const destInfo = useMemo(() => {
     if (selectedDest) {
@@ -202,7 +165,9 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
+    // 홈 화면 진입 시 카테고리 선택 상태를 초기화하여 강조 색상이 보이지 않도록 함
+    setSelectedCategory(null);
+  }, [setSelectedCategory]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -238,21 +203,15 @@ export default function HomePage() {
 
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategory(categoryId as BeautyCategoryId);
-    router.push(`/explore?category=beauty&beautyCategory=${categoryId}`);
+    setIsBookingOpen(true);
   };
 
   const handleOpenInterpreter = () => {
     router.push('/interpreter');
   };
 
-  useEffect(() => {
-    if (openNavSheet || isMapOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [openNavSheet, isMapOpen]);
+  // body는 globals.css에서 overflow:hidden으로 영구 설정됨
+  // JS에서 별도 제어 불필요
 
   const handleKRide = () => {
     if (!destInfo) return;
@@ -316,21 +275,19 @@ export default function HomePage() {
   }, [destInfo]);
 
   if (!isHydrated) {
-    return <main className={styles.main} suppressHydrationWarning />;
+    return <div className={styles.main} suppressHydrationWarning />;
   }
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <HomeTopNav 
         userName={userName} 
         onSignOut={handleSignOut} 
-        greeting={getGreeting()}
         t={t} 
       />
 
       <HomeHero 
         userName={userName} 
-        greeting={getGreeting()} 
         t={t} 
       />
 
@@ -379,11 +336,24 @@ export default function HomePage() {
 
 
       {loadingNav && (
-        <div className={styles.toast} style={{ bottom: '120px', background: 'var(--primary)', color: 'white' }}>
+        <div className={styles.toast}>
           {t('home.fetching_location', { defaultValue: 'Fetching location...' })}
         </div>
       )}
 
-    </main>
+      <HomeBeautyBookingFlow 
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+        initialCategory={selectedCategory}
+        t={t}
+      />
+
+      {toastMessage && (
+        <div className={styles.toast}>
+          {toastMessage}
+        </div>
+      )}
+
+    </div>
   );
 }

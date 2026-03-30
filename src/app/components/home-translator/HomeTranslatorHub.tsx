@@ -151,7 +151,7 @@ function BookingConciergePanel() {
 
         <div className={styles.actions}>
           <button className={styles.primaryBtn} onClick={() => void handleSubmit()} disabled={loading}>
-            {loading ? t('interpreter_ui_v2.status.processing') : 'Concierge 실행'}
+            {loading ? t('interpreter_ui_v2.status.processing') : t('interpreter_ui_v2.execute_concierge', { defaultValue: 'Concierge 실행' })}
           </button>
         </div>
       </div>

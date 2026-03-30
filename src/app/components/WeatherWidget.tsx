@@ -1,12 +1,17 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const CACHE_KEY = 'kello_weather_cache';
 
 export default function WeatherWidget() {
     const [weatherData, setWeatherData] = useState<{ temp: number; icon: string } | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const isLoadingRef = useRef(isLoading);
+
+    useEffect(() => {
+        isLoadingRef.current = isLoading;
+    }, [isLoading]);
 
     useEffect(() => {
         // 1. Load from cache first for instant display
@@ -53,7 +58,7 @@ export default function WeatherWidget() {
 
         // 2. Try geolocation, fallback to Seoul if slow/blocked
         const timeoutId = setTimeout(() => {
-            if (isLoading) fetchWeather(37.5665, 126.9780); // Default: Seoul
+            if (isLoadingRef.current) fetchWeather(37.5665, 126.9780); // Default: Seoul
         }, 3000);
 
         if (navigator.geolocation) {

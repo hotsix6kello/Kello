@@ -5,17 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from './partner-signup.module.css';
 import { supabase } from '@/lib/supabaseClient';
 
-const BUSINESS_TYPES = [
-    { value: 'beauty_hair', label: '✂️ 뷰티 · 헤어', group: '💅 뷰티' },
-    { value: 'beauty_nail', label: '💅 뷰티 · 네일', group: '💅 뷰티' },
-    { value: 'beauty_body', label: '🛁 뷰티 · 바디', group: '💅 뷰티' },
-    { value: 'beauty_makeup', label: '💄 뷰티 · 메이크업', group: '💅 뷰티' },
-    { value: 'food_general', label: '🍽️ 맛집 · 일반', group: '🍽️ 맛집' },
-    { value: 'food_vegan', label: '🥗 맛집 · 비건', group: '🍽️ 맛집' },
-    { value: 'food_halal', label: '🕌 맛집 · 할랄', group: '🍽️ 맛집' },
-    { value: 'landmark', label: '🗺️ 랜드마크', group: '랜드마크' },
-    { value: 'other', label: '📋 기타', group: '기타' },
-];
+
 
 
 export default function PartnerSignupPage() {
@@ -30,8 +20,10 @@ export default function PartnerSignupPage() {
         address: '',
         website: '',
         description: '',
+        business_license_url: '',
     });
     const [loading, setLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
@@ -39,10 +31,44 @@ export default function PartnerSignupPage() {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            setUploading(true);
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}-${Math.random()}.${fileExt}`;
+            const filePath = `licenses/${fileName}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('partner_documents')
+                .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data } = supabase.storage.from('partner_documents').getPublicUrl(filePath);
+            setForm(prev => ({ ...prev, business_license_url: data.publicUrl }));
+        } catch (err: unknown) {
+            console.error('Document upload error:', err);
+            const errorMessage = err instanceof Error ? err.message : String(err);
+            setError('서류 업로드 중 오류가 발생했습니다: ' + errorMessage);
+        } finally {
+            setUploading(false);
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
+
+        // 사업자 등록증 필수 체크
+        if (!form.business_license_url) {
+            setError('사업자 등록증 또는 증빙 서류를 업로드해주세요.');
+            setLoading(false);
+            return;
+        }
 
         // 이메일 중복 확인
         const { data: existing } = await supabase
@@ -235,6 +261,55 @@ export default function PartnerSignupPage() {
                             <option value="landmark">🗺️ 랜드마크</option>
                             <option value="other">📋 기타</option>
                         </select>
+                    </div>
+
+                    {/* 서류 업로드 */}
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>
+                            사업자 등록증 / 증빙 서류 <span className={styles.required}>*</span>
+                        </label>
+                        <div style={{
+                            border: '2px dashed var(--warm-sand)',
+                            borderRadius: '12px',
+                            padding: '16px',
+                            textAlign: 'center',
+                            background: form.business_license_url ? 'rgba(5,150,105,0.05)' : 'rgba(0,0,0,0.02)',
+                            borderColor: form.business_license_url ? '#059669' : 'var(--warm-sand)',
+                            transition: 'all 0.2s'
+                        }}>
+                            {form.business_license_url ? (
+                                <div style={{ color: '#059669', fontSize: '0.88rem', fontWeight: 600 }}>
+                                    ✅ 서류가 정상적으로 업로드되었습니다.
+                                    <div style={{ fontSize: '0.75rem', marginTop: 4, opacity: 0.8, textDecoration: 'underline', cursor: 'pointer' }} onClick={() => window.open(form.business_license_url)}>파일 보기</div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div style={{ fontSize: '1.4rem', marginBottom: 6 }}>📄</div>
+                                    <div style={{ fontSize: '0.82rem', color: 'var(--gray-500)', marginBottom: 12 }}>
+                                        이미지 파일(JPG, PNG) 또는 PDF를 업로드해주세요.
+                                    </div>
+                                    <label style={{
+                                        background: 'var(--primary)',
+                                        color: 'white',
+                                        padding: '8px 16px',
+                                        borderRadius: '10px',
+                                        fontSize: '0.8rem',
+                                        fontWeight: 700,
+                                        cursor: uploading ? 'not-allowed' : 'pointer',
+                                        opacity: uploading ? 0.7 : 1
+                                    }}>
+                                        {uploading ? '업로드 중...' : '파일 선택'}
+                                        <input 
+                                            type="file" 
+                                            accept="image/*,.pdf" 
+                                            onChange={handleFileChange} 
+                                            style={{ display: 'none' }} 
+                                            disabled={uploading}
+                                        />
+                                    </label>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
 

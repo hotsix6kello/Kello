@@ -1,22 +1,22 @@
 .container {
     min-height: 100vh;
-    background: #f8fafc;
+    background: var(--hanji-ivory);
     padding-bottom: 100px;
 }
 
 .header {
-    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+    background: var(--secondary);
     padding: 48px 24px 36px;
     text-align: center;
-    color: white;
+    color: var(--hanji-ivory);
 }
 
 .headerBadge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
     padding: 4px 14px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -28,11 +28,12 @@
     font-size: 2rem;
     font-weight: 800;
     margin: 0 0 8px;
+    letter-spacing: -0.02em;
 }
 
 .subtitle {
     font-size: 0.9rem;
-    opacity: 0.75;
+    opacity: 0.85;
     margin: 0;
 }
 
@@ -48,12 +49,13 @@
     flex-direction: column;
     align-items: center;
     padding: 24px 16px;
-    border-radius: 20px;
-    border: 1.5px solid transparent;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-sm);
 }
 
 .card:active {
@@ -74,11 +76,12 @@
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 4px;
+    color: var(--ink-black);
 }
 
 .cardDesc {
     font-size: 0.78rem;
-    color: #64748b;
+    color: var(--soft-ink);
     line-height: 1.4;
 }
 
@@ -89,7 +92,7 @@
 .sectionTitle {
     font-size: 1rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--ink-black);
     margin: 0 0 12px;
 }
 
@@ -103,13 +106,16 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    background: white;
-    border-radius: 14px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
     padding: 14px 16px;
-    border-left: 4px solid;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid var(--warm-sand);
+    box-shadow: var(--shadow-sm);
     text-decoration: none;
     color: inherit;
+    border-right: 1px solid var(--warm-sand);
+    border-top: 1px solid var(--warm-sand);
+    border-bottom: 1px solid var(--warm-sand);
 }
 
 .numberIcon {
@@ -124,7 +130,7 @@
 
 .numberLabel {
     font-size: 0.8rem;
-    color: #64748b;
+    color: var(--soft-ink);
     margin-top: 2px;
 }
 
@@ -148,12 +154,12 @@
     align-items: center;
     gap: 6px;
     padding: 12px 18px;
-    border-radius: 30px;
-    color: white;
+    border-radius: var(--radius-full);
+    color: var(--hanji-ivory);
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
     transition: transform 0.15s;
 }
 

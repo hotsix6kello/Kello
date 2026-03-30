@@ -230,15 +230,15 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "美容預約管家",
-      "title": "您想預約什麼服務？",
+      "title": "將韓國之美，\n融入您的行程。",
       "subtitle": "選擇您想要的美容服務，直接進入預約步驟。",
       "welcome": "{{name}}，請選擇今天的服務。",
       "welcome_user": "{{greeting}}，{{name}}！👋"
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "請選擇您想要的美容服務",
-      "description": "為了進行最準확的探索，請先選擇類別。"
+      "title": "請選擇美容服務",
+      "description": ""
     },
     "categories": {
       "hair": {

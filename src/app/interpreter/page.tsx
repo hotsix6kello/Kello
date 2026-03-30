@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import { ArrowUp, ChevronDown } from 'lucide-react';
 
 import styles from './interpreter.module.css';
 import {
   getLocaleDisplayLabel,
-  getLocaleLabel,
   getSpeechLocale,
   INTERPRETER_SUPPORTED_LOCALES,
 } from '@/lib/translator/catalog.ts';
@@ -100,6 +100,11 @@ function createInterpreterMessage(params: {
 
 function resolveCustomerLocale(appLocale?: string | null): ConciergeLocale {
   const canonical = resolveCanonicalLocale(appLocale, FALLBACK_CUSTOMER_LOCALE);
+
+  // KR(ko) is for staff, so for customer defaults, skip it and use fallback (English)
+  if (canonical === 'ko') {
+    return FALLBACK_CUSTOMER_LOCALE;
+  }
 
   if (INTERPRETER_SUPPORTED_LOCALES.includes(canonical as ConciergeLocale)) {
     return canonical as ConciergeLocale;
@@ -202,7 +207,7 @@ export default function InterpreterPage() {
     if (customerLocale && staffLocale) {
       initSession();
     }
-  }, [customerLocale, staffLocale]);
+  }, [customerLocale, staffLocale, sessionId]);
 
   useEffect(() => {
     const syncCustomerLocale = (nextLocale?: string | null) => {
@@ -707,15 +712,17 @@ export default function InterpreterPage() {
   return (
     <main className={styles.main} dir={isRtl ? 'rtl' : 'ltr'}>
       <div className={styles.header}>
-        <button className={styles.backBtn} type="button" onClick={handleBack}>
-          {t('interpreter_page.back')}
+        <button className={styles.backBtn} type="button" onClick={handleBack} aria-label={t('interpreter_page.back')}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={styles.backIcon}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
         </button>
       </div>
 
       {storeName && (
         <div className={styles.visitorContext}>
-          <span style={{ fontSize: '1.2rem' }}>📍</span>
-          <p style={{ margin: 0 }}>
+          <span className={styles.visitorEmoji}>📍</span>
+          <p className={styles.visitorText}>
             {storeName && serviceName
               ? t('beauty_bookings.interpreter_visit_service_context', { storeName, serviceName })
               : t('beauty_bookings.interpreter_visit_context', { storeName })}
@@ -735,11 +742,25 @@ export default function InterpreterPage() {
 
       <section className={styles.languageSection}>
         <div className={styles.langTopRow}>
-          <div className={styles.langCard} style={{ cursor: 'default' }}>
+          <div className={styles.langCard}>
             <span className={styles.langRole}>{t('interpreter_page.customer_lang')}</span>
-            <strong className={styles.langCurrent}>{customerLanguageLabel}</strong>
+            <div className={styles.langCurrent}>
+              {customerLanguageLabel}
+              <ChevronDown className={styles.langSelectorArrow} size={16} />
+            </div>
+            <select
+              className={styles.langHiddenSelect}
+              value={customerLocale}
+              onChange={(event) => setCustomerLocale(event.target.value as ConciergeLocale)}
+            >
+              {INTERPRETER_SUPPORTED_LOCALES.filter((loc) => loc !== 'ko').map((localeCode) => (
+                <option key={localeCode} value={localeCode}>
+                  {getLocaleDisplayLabel(localeCode)}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className={styles.langCard} style={{ cursor: 'default' }}>
+          <div className={styles.langCardActive}>
             <span className={styles.langRole}>{t('interpreter_page.staff_lang')}</span>
             <strong className={styles.langCurrent}>{staffLanguageLabel}</strong>
           </div>
@@ -780,7 +801,7 @@ export default function InterpreterPage() {
               onClick={() => void handleCustomerSend()}
               disabled={isNonVoiceActionDisabled}
             >
-              {t('interpreter_page.send')}
+              <ArrowUp size={20} />
             </button>
           </div>
         </div>
@@ -818,7 +839,7 @@ export default function InterpreterPage() {
               onClick={() => void handleStaffSend()}
               disabled={isNonVoiceActionDisabled}
             >
-              {t('interpreter_page.send')}
+              <ArrowUp size={20} />
             </button>
           </div>
         </div>

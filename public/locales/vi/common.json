@@ -180,7 +180,7 @@
   "home_beauty": {
     "hero": {
       "eyebrow": "Dịch vụ đặt lịch làm đẹp",
-      "title": "Bạn muốn đặt dịch vụ gì?",
+      "title": "Ghi lại vẻ đẹp Hàn Quốc,\nvào lịch trình của bạn.",
       "subtitle": "Chọn dịch vụ làm đẹp và đặt lịch ngay.",
       "welcome": "{{name}}, hãy chọn dịch vụ.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
@@ -188,7 +188,7 @@
     "booking": {
       "step": "BƯỚC. 01",
       "title": "Vui lòng chọn dịch vụ làm đẹp",
-      "description": "Vui lòng chọn danh mục trước để khám phá chính xác nhất."
+      "description": ""
     },
     "categories": {
       "hair": {

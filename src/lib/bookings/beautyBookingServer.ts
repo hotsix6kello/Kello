@@ -3,7 +3,6 @@ import {
   BEAUTY_BOOKING_ALLOWED_TRANSITIONS,
   isBeautyBookingCancelActor,
   isBeautyBookingAdminStatus,
-  normalizeBeautyBookingAdminListStatus,
   type BeautyBookingAdminListFilters,
   type BeautyBookingAdminRecord,
   type BeautyBookingAdminStatus,
@@ -58,6 +57,7 @@ type BeautyBookingInsertRow = {
   customer_name: string;
   customer_phone: string;
   customer_request: string;
+  image_urls: string[] | null;
   communication_language: string;
   communication_intent: string;
   korean_message: string;
@@ -78,7 +78,7 @@ type BeautyBookingInsertRow = {
   change_review_note?: string;
 };
 
-type BeautyBookingAdminSelectRow = {
+export type BeautyBookingAdminSelectRow = {
   id: string;
   customer_user_id: string | null;
   created_at: string;
@@ -104,7 +104,7 @@ type BeautyBookingAdminSelectRow = {
   designer_id: string | null;
   designer_name: string | null;
   alternative_offer_status: string | null;
-  alternative_offer_items: any | null;
+  alternative_offer_items: BeautyBookingAlternativeOfferItem[] | null;
   alternative_offer_note: string | null;
   alternative_offered_at: string | null;
   alternative_offered_by: string | null;
@@ -212,6 +212,7 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     customerName: row.customer_name,
     customerPhone: row.customer_phone,
     customerRequest: row.customer_request,
+    imageUrls: Array.isArray((row as unknown as { image_urls?: string[] }).image_urls) ? (row as unknown as { image_urls: string[] }).image_urls : [],
     communicationLanguage: row.communication_language,
     communicationIntent: row.communication_intent,
     koreanMessage: row.korean_message,
@@ -268,6 +269,7 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "customer_name",
   "customer_phone",
   "customer_request",
+  "image_urls",
   "communication_language",
   "communication_intent",
   "korean_message",
@@ -307,6 +309,7 @@ function mapBeautyBookingPayloadToRow(
     customer_name: payload.customer.name,
     customer_phone: payload.customer.phone,
     customer_request: payload.customer.request,
+    image_urls: payload.customer.imageUrls && payload.customer.imageUrls.length > 0 ? payload.customer.imageUrls : null,
     communication_language: payload.communication.language,
     communication_intent: payload.communication.intent,
     korean_message: payload.communication.messages.korean,
@@ -923,7 +926,7 @@ export async function updateBeautyBookingOperatorInfo(
   }
 
   const client = getSupabaseServerClient();
-  const dbUpdates: Record<string, any> = {
+  const dbUpdates: Record<string, unknown> = {
     updated_at: new Date().toISOString(),
   };
 
@@ -1030,7 +1033,7 @@ export async function respondToAlternativeOffer(
   if (readError || !existing) throw new BeautyBookingStorageError("not_found");
   if (existing.customer_user_id !== userId) throw new BeautyBookingStorageError("forbidden_owner");
 
-  const updates: Record<string, any> = {
+  const updates: Record<string, unknown> = {
     alternative_offer_status: response,
     alternative_response_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),

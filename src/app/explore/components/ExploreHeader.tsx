@@ -1,31 +1,22 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import styles from '../explore.module.css';
-import { CITIES, CATEGORIES, CityId } from '../mock/data';
+import { CITIES, CityId } from '../mock/data';
 
 interface ExploreHeaderProps {
-    currentCity: CityId;
+    currentCity: string;
     onCityChange: (cityId: CityId) => void;
     currentCategory: string; // "all" | CategoryId
-    onCategoryChange: (catId: string) => void;
-    onFilterClick: () => void;
-    filterCount: number;
-    radius: number;
-    onRadiusChange: (r: number) => void;
+    onCategoryChange?: (catId: string) => void;
     searchTerm: string;
     onSearchChange: (val: string) => void;
-    onSearchSubmit: (val: string) => void;
+    onSearchSubmit: (val?: string) => void;
 }
 
 export default function ExploreHeader({
     currentCity,
     onCityChange,
     currentCategory,
-    onCategoryChange,
-    onFilterClick,
-    filterCount,
-    radius,
-    onRadiusChange,
     searchTerm,
     onSearchChange,
     onSearchSubmit
@@ -55,55 +46,14 @@ export default function ExploreHeader({
                             className={styles.searchInput}
                             value={searchTerm}
                             onChange={(e) => onSearchChange(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    onSearchSubmit(searchTerm);
-                                }
-                            }}
+                            onKeyDown={(e) => e.key === 'Enter' && onSearchSubmit(searchTerm)}
                         />
                     </div>
 
-                    <div className={styles.headerActions}>
-                        <button className={styles.filterBtn} onClick={onFilterClick}>
-                            <span className={styles.filterIcon}>⚡</span>
-                            {filterCount > 0 && <span className={styles.filterBadge}>{filterCount}</span>}
-                        </button>
-                    </div>
+                    {/* Filter Action Removed based on User Request */}
                 </div>
 
-                {/* Category Tabs */}
-                <div className={styles.categoryScroll}>
-                    {CATEGORIES.map(cat => (
-                        <div
-                            key={cat.id}
-                            className={`${styles.categoryChip} ${currentCategory === cat.id ? styles.active : ''}`}
-                            onClick={() => onCategoryChange(cat.id)}
-                        >
-                            {t(`common.categories.${cat.id}`, { defaultValue: cat.label })}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Radius Scroll Menu */}
-                <div className={styles.categoryScroll} style={{ marginTop: '0', paddingBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div className={styles.chipLabel} style={{ fontSize: '0.8rem', color: 'var(--gray-500)', marginRight: '8px', alignSelf: 'center' }}>
-                        {t('explore_page.distance_label', { defaultValue: 'Distance:' })}
-                    </div>
-                    {[
-                        { label: '500m', value: 500 },
-                        { label: '1km', value: 1000 },
-                        { label: '3km', value: 3000 }
-                    ].map(rad => (
-                        <div
-                            key={rad.value}
-                            className={`${styles.categoryChip} ${radius === rad.value ? styles.active : ''}`}
-                            onClick={() => onRadiusChange(rad.value)}
-                            style={{ padding: '6px 12px', fontSize: '0.85rem' }}
-                        >
-                            {rad.label}
-                        </div>
-                    ))}
-                </div>
+                {/* Category and Distance Filters Removed based on User Request */}
             </header>
 
             {/* City Selection Modal */}
@@ -116,7 +66,7 @@ export default function ExploreHeader({
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
                     <div
-                        className={`${styles.modalContent} relative w-[92vw] max-w-[420px] max-h-[85vh] bg-white rounded-3xl shadow-[0_24px_60px_rgba(0,0,0,0.18)] overflow-hidden flex flex-col transform transition-all duration-300 ease-out ${isCityModalOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
+                        className={`${styles.modalContent} relative w-[92vw] max-w-[420px] max-h-[85vh] bg-[var(--surface)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col transform transition-all duration-300 ease-out ${isCityModalOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'} ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h3 className={styles.modalTitle}>{t('explore_page.select_city')}</h3>

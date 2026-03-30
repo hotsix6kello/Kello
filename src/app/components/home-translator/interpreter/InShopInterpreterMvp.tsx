@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getLocaleDisplayLabel, getSpeechLocale } from '@/lib/translator/catalog.ts';
 import {
@@ -62,13 +62,7 @@ export default function InShopInterpreterMvp() {
     onError: setErrorText,
   });
 
-  useEffect(() => {
-    setErrorText(null);
-    setStatusText(t('interpreter_ui_v2.status.preparing'));
-    void createSession(customerLocale, staffLocale);
-  }, [customerLocale, staffLocale, t]);
-
-  async function createSession(nextCustomerLocale: ConciergeLocale, nextStaffLocale: ConciergeLocale) {
+  const createSession = useCallback(async (nextCustomerLocale: ConciergeLocale, nextStaffLocale: ConciergeLocale) => {
     try {
       const response = await fetch('/api/translator/interpreter/session', {
         method: 'POST',
@@ -94,7 +88,13 @@ export default function InShopInterpreterMvp() {
       setErrorText(error instanceof Error ? error.message : t('interpreter_ui_v2.status.failed'));
       setStatusText(null);
     }
-  }
+  }, [t, setSession, setErrorText, setStatusText]);
+
+  useEffect(() => {
+    setErrorText(null);
+    setStatusText(t('interpreter_ui_v2.status.preparing'));
+    void createSession(customerLocale, staffLocale);
+  }, [customerLocale, staffLocale, t, createSession]);
 
   async function submitTextTurn(speaker: SpeakerRole, text: string) {
     if (!session) {
