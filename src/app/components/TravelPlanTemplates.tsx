@@ -6,7 +6,7 @@ import styles from './TravelPlanTemplates.module.css';
 import { getTravelPlanTemplatesByLanguage } from './travelPlanData';
 
 export default function TravelPlanTemplates() {
-    const { t, i18n } = useTranslation('common');
+    const { i18n } = useTranslation('common');
     const { t: tBeauty } = useTranslation(['beauty_explore', 'home_beauty']);
 
     // Use current language or fallback to 'ko'

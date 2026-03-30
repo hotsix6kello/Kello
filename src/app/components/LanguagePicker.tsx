@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from '@/lib/i18n/client';
 import { resolveCanonicalLocale } from '@/lib/i18n/locales';
@@ -70,12 +71,6 @@ const LANG_TO_COUNTRY: Record<string, string> = {
     'ar': 'SA'
 };
 
-const FLAG_EMOJIS: Record<string, string> = {
-    kr: '🇰🇷', us: '🇺🇸', jp: '🇯🇵', cn: '🇨🇳', hk: '🇭🇰',
-    vn: '🇻🇳', th: '🇹🇭', id: '🇮🇩', my: '🇲🇾', fr: '🇫🇷',
-    es: '🇪🇸', de: '🇩🇪', pt: '🇵🇹', ru: '🇷🇺', sa: '🇸🇦'
-};
-
 export default function LanguagePicker({ compact = false }: LanguagePickerProps) {
     const { t, i18n } = useTranslation('common');
     const [isOpen, setIsOpen] = useState(false);
@@ -106,7 +101,7 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                 title={t('common.select_language', { defaultValue: 'Select Language' })}
             >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
-                    <img src={current.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px]" />
+                    <Image src={current.flag} alt="" width={20} height={14} className="object-cover rounded-[2px]" />
                     {locale.toUpperCase()}
                 </div>
                 <span className={styles.chevron}>{isOpen ? '^' : 'v'}</span>
@@ -126,7 +121,7 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                                     className={`${styles.langItem} ${current.code === lang.code ? styles.active : ''}`}
                                     onClick={() => handleSelect(lang)}
                                 >
-                                    <img src={lang.flag} alt="" className="w-6 h-4 object-cover rounded-[2px] mr-3" />
+                                    <Image src={lang.flag} alt="" width={24} height={16} className="object-cover rounded-[2px] mr-3" />
                                     <span className={styles.itemLabel}>{lang.label}</span>
                                 </button>
                             ))}

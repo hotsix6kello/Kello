@@ -35,23 +35,6 @@ type InterpreterMessage = {
   canReplay: boolean;
 };
 
-type InterpreterTurnResponse = {
-  turnId: string;
-  sessionId: string;
-  speaker: SpeakerRole;
-  inputMode: 'voice' | 'text';
-  originalText: string;
-  translatedText: string;
-  sourceLocale: ConciergeLocale;
-  targetLocale: ConciergeLocale;
-  createdAt: string;
-  replay: {
-    originalLang: string;
-    translatedLang: string;
-  };
-  fallbackToText: boolean;
-};
-
 type InterpreterTranscribeResponse =
   | {
       ok: true;
@@ -139,7 +122,6 @@ export default function InterpreterPage() {
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [ephemeralToken, setEphemeralToken] = useState<string | null>(null);
-  const [isSessionLoading, setIsSessionLoading] = useState(false);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
@@ -177,7 +159,6 @@ export default function InterpreterPage() {
       // If we already have a session, don't create a new one unless specifically needed
       if (sessionId) return;
       
-      setIsSessionLoading(true);
       try {
         const res = await fetch('/api/interpreter/session', {
           method: 'POST',
@@ -200,7 +181,7 @@ export default function InterpreterPage() {
       } catch (e) {
         console.error('Interpreter session initialization error', e);
       } finally {
-        setIsSessionLoading(false);
+        // loading state removed as it was not used in render
       }
     };
 

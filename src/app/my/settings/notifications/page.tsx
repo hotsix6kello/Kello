@@ -89,7 +89,7 @@ function NotificationSettingsContent() {
       } else {
         throw new Error(body.error);
       }
-    } catch (_error) {
+    } catch {
       setMessage({ text: '저장에 실패했습니다.', type: 'error' });
     } finally {
       setSaving(false);
