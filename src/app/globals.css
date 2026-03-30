@@ -64,7 +64,7 @@
   --spacing-md: 16px;
   --spacing-lg: 24px;
 
-  --font-main: 'Inter', 'Pretendard', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans Arabic', sans-serif;
+  --font-main: var(--font-inter), 'Pretendard', var(--font-noto-sc), var(--font-noto-jp), var(--font-noto-arabic), sans-serif;
 
   /* Z-Index Layers */
   --z-bg: 0;
@@ -84,14 +84,14 @@
 
 /* Language-specific Font Overrides */
 html:lang(ko) { --font-main: 'Pretendard', sans-serif; }
-html:lang(ja) { --font-main: 'Noto Sans JP', sans-serif; }
-html:lang(zh-CN) { --font-main: 'Noto Sans SC', sans-serif; }
-html:lang(zh-HK) { --font-main: 'Noto Sans TC', sans-serif; }
-html:lang(th) { --font-main: 'Noto Sans Thai', sans-serif; }
-html:lang(ar) { --font-main: 'Noto Sans Arabic', sans-serif; }
+html:lang(ja) { --font-main: var(--font-noto-jp), sans-serif; }
+html:lang(zh-CN) { --font-main: var(--font-noto-sc), sans-serif; }
+html:lang(zh-HK) { --font-main: var(--font-noto-tc), sans-serif; }
+html:lang(th) { --font-main: var(--font-noto-thai), sans-serif; }
+html:lang(ar) { --font-main: var(--font-noto-arabic), sans-serif; }
 html:lang(en), html:lang(id), html:lang(ms), html:lang(es), 
 html:lang(fr), html:lang(de), html:lang(pt), html:lang(ru), html:lang(vi) { 
-  --font-main: 'Inter', sans-serif; 
+  --font-main: var(--font-inter), sans-serif; 
 }
 
 /* Tablet & Desktop Overrides */
