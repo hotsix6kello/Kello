@@ -265,20 +265,20 @@
 }
 
 .categoryButton {
-  min-height: 128px;
+  min-height: 140px;
   height: auto;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--warm-sand);
+  border: 1.5px solid var(--warm-sand);
   background: var(--surface);
-  padding: 18px 12px;
+  padding: 24px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 12px rgba(43, 35, 29, 0.03);
 }
 
@@ -305,13 +305,13 @@
 }
 
 .categoryIconWrap {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 4px;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .categoryButton:hover .categoryIconWrap {
