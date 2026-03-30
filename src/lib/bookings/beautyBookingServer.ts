@@ -104,7 +104,7 @@ export type BeautyBookingAdminSelectRow = {
   designer_id: string | null;
   designer_name: string | null;
   alternative_offer_status: string | null;
-  alternative_offer_items: any | null;
+  alternative_offer_items: BeautyBookingAlternativeOfferItem[] | null;
   alternative_offer_note: string | null;
   alternative_offered_at: string | null;
   alternative_offered_by: string | null;
@@ -212,7 +212,7 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     customerName: row.customer_name,
     customerPhone: row.customer_phone,
     customerRequest: row.customer_request,
-    imageUrls: Array.isArray((row as any).image_urls) ? (row as any).image_urls : [],
+    imageUrls: Array.isArray((row as unknown as { image_urls?: string[] }).image_urls) ? (row as unknown as { image_urls: string[] }).image_urls : [],
     communicationLanguage: row.communication_language,
     communicationIntent: row.communication_intent,
     koreanMessage: row.korean_message,
@@ -926,7 +926,7 @@ export async function updateBeautyBookingOperatorInfo(
   }
 
   const client = getSupabaseServerClient();
-  const dbUpdates: Record<string, any> = {
+  const dbUpdates: Record<string, unknown> = {
     updated_at: new Date().toISOString(),
   };
 
@@ -1033,7 +1033,7 @@ export async function respondToAlternativeOffer(
   if (readError || !existing) throw new BeautyBookingStorageError("not_found");
   if (existing.customer_user_id !== userId) throw new BeautyBookingStorageError("forbidden_owner");
 
-  const updates: Record<string, any> = {
+  const updates: Record<string, unknown> = {
     alternative_offer_status: response,
     alternative_response_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
