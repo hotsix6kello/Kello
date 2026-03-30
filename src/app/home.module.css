@@ -151,7 +151,7 @@
    HERO SECTION
    ────────────────────────────────────────────────────────────────────────── */
 .heroSection {
-  padding: 40px 0 20px;
+  padding: 40px 0 12px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -265,7 +265,7 @@
 }
 
 .categoryButton {
-  min-height: 110px;
+  min-height: 88px;
   height: auto;
   border-radius: var(--radius-md);
   border: 1px solid var(--warm-sand);

@@ -40,7 +40,6 @@ export default function HomeBookingSection({
               >
                 <span className={styles.categoryCode}>{option.code}</span>
                 <span className={styles.categoryLabel}>{t(`home_beauty.categories.${option.id}.label`)}</span>
-                <span className={styles.categoryNote}>{t(`home_beauty.categories.${option.id}.note`)}</span>
               </button>
             );
           })}
