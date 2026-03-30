@@ -185,7 +185,6 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
   }
 
   const candidate = input as Record<string, unknown>;
-  candidate.createdFrom && typeof candidate.createdFrom === 'object';
   const customer =
     candidate.customer && typeof candidate.customer === 'object'
       ? (candidate.customer as Record<string, unknown>)
