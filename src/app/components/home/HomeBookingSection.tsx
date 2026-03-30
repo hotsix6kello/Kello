@@ -43,8 +43,8 @@ export default function HomeBookingSection({
                   <Image 
                     src={option.image} 
                     alt={t(option.label)} 
-                    width={56} 
-                    height={56} 
+                    width={64} 
+                    height={64} 
                     className={styles.categoryIcon}
                   />
                 </div>
