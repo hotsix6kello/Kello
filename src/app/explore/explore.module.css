@@ -301,136 +301,178 @@
     font-size: 20px;
 }
 
-/* Service Card */
-.card {
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.03);
+/* --- New Horizontal Service Card (Router 2 style) --- */
+.cardHorizontal {
+    margin: 12px 16px;
+    background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 16px;
+    display: flex;
     overflow: hidden;
-    position: relative;
-}
-
-.cardThumbnail {
-    height: 160px;
-    background-color: var(--warm-sand);
-    position: relative;
-    padding: 12px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-}
-
-.eventOverlay {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    color: var(--foreground);
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.saveBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    border: none;
-    color: var(--foreground);
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.saveBtn.saved {
-    color: var(--korean-red);
+.cardHorizontal:active {
+    transform: scale(0.98);
+    background-color: var(--gray-100);
 }
 
-.cardContent {
+.cardInfoSection {
+    flex: 1;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardTextContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .cardTitle {
-    font-size: 18px;
-    margin: 0 0 4px 0;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--ink-black);
+    margin: 0;
+    line-height: 1.3;
 }
 
-.cardMeta {
+.ratingRow {
     display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: var(--gray-500);
-    margin-bottom: 12px;
-}
-
-.badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
-}
-
-.badge {
-    padding: 4px 8px;
-    background: rgba(0, 0, 0, 0.04);
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--gray-500);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.veganBadge {
-    background: rgba(0, 255, 0, 0.1);
-    color: #cfc;
-    border-color: rgba(0, 255, 0, 0.2);
-}
-
-.foodTags,
-.festivalInfo,
-.beautyInfo,
-.attractionInfo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
     align-items: center;
+    gap: 4px;
     font-size: 13px;
-    color: var(--gray-500);
-    margin-bottom: 8px;
+    margin-top: 2px;
 }
 
-.ingredientTag {
+.ratingLabel {
+    font-weight: 700;
+    color: var(--ink-black);
+}
+
+.stars {
+    color: #FFD700; /* Gold color for stars */
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.reviewCount {
     color: var(--gray-400);
 }
 
-.cardActions {
-    padding: 0 16px 16px 16px;
+.descriptionRow {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.4;
+    margin-top: 2px;
 }
 
-.addToPlanBtn {
-    width: 100%;
-    padding: 12px;
-    background: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    border: none;
+.statusRow {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.openNow {
+    color: #2D9B63; /* Green for open status */
     font-weight: 700;
-    cursor: pointer;
-    font-size: 14px;
-    transition: opacity 0.2s;
 }
 
-.addToPlanBtn:active {
-    opacity: 0.8;
+.closingTime {
+    color: var(--gray-400);
 }
+
+.reviewSnippet {
+    margin-top: 8px;
+    padding: 8px;
+    background: var(--gray-100);
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.quoteIcon {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.snippetText {
+    font-size: 11.5px;
+    color: var(--soft-ink);
+    margin: 0;
+    line-height: 1.4;
+    font-style: italic;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardFooter {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Right Section: Image */
+.cardImageSection {
+    width: 120px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-left: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.thumbnailRect {
+     width: 80px;
+     height: 80px;
+     border-radius: 12px;
+     position: relative;
+     overflow: hidden;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.saveIconOverlay {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.miniPlanBtn {
+    width: 90px;
+    padding: 8px 0;
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    border-radius: 8px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* Animation */
 .slideUp {
