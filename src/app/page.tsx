@@ -271,7 +271,6 @@ export default function HomePage() {
       />
 
       <HomeHero 
-        userName={userName} 
         t={t} 
       />
 
