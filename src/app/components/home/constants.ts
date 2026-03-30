@@ -4,47 +4,40 @@ export type BeautyCategoryId = 'hair' | 'nail' | 'esthetic' | 'waxing' | 'makeup
 
 export type BeautyCategoryOption = {
   id: BeautyCategoryId;
-  code: string;
   label: string;
-  english: string;
+  image: string;
 };
 
 export const BEAUTY_CATEGORY_OPTIONS: BeautyCategoryOption[] = [
   {
     id: 'hair',
-    code: 'HAIR',
     label: 'home_beauty.categories.hair.label',
-    english: 'Hair',
+    image: '/images/home/categories/hair-category.png',
   },
   {
     id: 'nail',
-    code: 'NAIL',
     label: 'home_beauty.categories.nail.label',
-    english: 'Nail',
+    image: '/images/home/categories/nail-category.png',
   },
   {
     id: 'esthetic',
-    code: 'CARE',
     label: 'home_beauty.categories.esthetic.label',
-    english: 'Esthetic',
+    image: '/images/home/categories/care-category.png',
   },
   {
     id: 'waxing',
-    code: 'WAX',
     label: 'home_beauty.categories.waxing.label',
-    english: 'Waxing',
+    image: '/images/home/categories/wax-category.png',
   },
   {
     id: 'makeup',
-    code: 'MAKE',
     label: 'home_beauty.categories.makeup.label',
-    english: 'Makeup',
+    image: '/images/home/categories/makeup-category.png',
   },
   {
     id: 'lash',
-    code: 'LASH',
     label: 'home_beauty.categories.lash.label',
-    english: 'Lash',
+    image: '/images/home/categories/lash-category.png',
   },
 ];
 
