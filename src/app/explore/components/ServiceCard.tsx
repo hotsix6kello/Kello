@@ -5,13 +5,11 @@ import styles from '../explore.module.css';
 interface ServiceCardProps {
     item: ServiceItem;
     onSave: (id: string) => void;
-    onAddToPlan: (id: string) => void;
     onDetails: (id: string) => void;
     isSaved: boolean;
-    distance?: string;
 }
 
-export default function ServiceCard({ item, onSave, onAddToPlan, onDetails, isSaved, distance }: ServiceCardProps) {
+export default function ServiceCard({ item, onSave, onDetails, isSaved }: ServiceCardProps) {
     const { t } = useTranslation('common');
 
     const renderBadges = () => {

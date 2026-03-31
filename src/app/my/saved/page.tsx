@@ -12,9 +12,7 @@ import {
 } from "@/lib/i18n/runtimeFormatters";
 import { getSafeExploreDetailHref } from "@/lib/exploreDetail";
 import {
-    normalizeSavedHubRecentEntry,
     SavedHubRecentEntry,
-    SAVED_HUB_RECENTS_KEY,
     readSavedHubRecentEntries,
     readSavedItemIds,
 } from "@/lib/savedHub";
@@ -120,10 +118,6 @@ function SavedHubContent() {
         return () => window.clearTimeout(timeoutId);
     }, [toast]);
 
-    const recentStorageAvailable =
-        recentEntries.length > 0 || typeof window === "undefined"
-            ? true
-            : Boolean(localStorage.getItem(SAVED_HUB_RECENTS_KEY));
 
     const fallbackPlaceLookup = new Map(MOCK_ITEMS.map((item) => [item.id, item]));
     const placeIds = Array.from(new Set(savedPlaceIds));
@@ -241,25 +235,6 @@ function SavedHubContent() {
         );
     };
 
-    const summaryCards = [
-        {
-            id: "places",
-            label: t("my_page.saved.summary.places"),
-            value: places.length,
-        },
-        {
-            id: "plans",
-            label: t("my_page.saved.summary.plans"),
-            value: plans.length,
-        },
-        {
-            id: "recent",
-            label: t("my_page.saved.summary.recent"),
-            value: recentEntries.length,
-        },
-    ];
-
-    const normalizedRecentEntries = recentEntries.map(normalizeSavedHubRecentEntry);
 
     return (
         <div className={styles.container}>

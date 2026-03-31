@@ -365,7 +365,7 @@ export async function createBeautyBookingRequest(
     });
     // Continue with existing error handling below
   } else {
-    console.log("[beauty-booking-server] Insert successful", { id: (data as any)?.id });
+    console.log("[beauty-booking-server] Insert successful", { id: data?.id });
   }
 
   if (error) {

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { LANGUAGES } from "@/app/components/LanguagePicker";
-import { ItineraryItem, useTrip } from "@/lib/contexts/TripContext";
+import { useTrip } from "@/lib/contexts/TripContext";
 import { resolveCanonicalLocale } from "@/lib/i18n/locales";
 import { readSavedItemIds } from "@/lib/savedHub";
 import { supabase } from "@/lib/supabaseClient";
@@ -43,14 +43,6 @@ interface StoredUser {
     email?: string;
 }
 
-const SAVED_ITEM_TYPE_BY_PREFIX: Array<{ prefix: string; type: string }> = [
-    { prefix: "fs", type: "festival" },
-    { prefix: "f", type: "food" },
-    { prefix: "b", type: "beauty" },
-    { prefix: "e", type: "event" },
-    { prefix: "a", type: "attraction" },
-    { prefix: "t", type: "transport" },
-];
 
 function titleCase(value: string): string {
     return value
@@ -84,23 +76,7 @@ function formatDate(value: string): string {
     }
 }
 
-function countValues(values: string[]): Array<[string, number]> {
-    const counts = new Map<string, number>();
 
-    values.forEach((value) => {
-        if (!value) return;
-        counts.set(value, (counts.get(value) ?? 0) + 1);
-    });
-
-    return Array.from(counts.entries()).sort((left, right) => {
-        if (right[1] !== left[1]) return right[1] - left[1];
-        return left[0].localeCompare(right[0]);
-    });
-}
-
-function inferSavedItemType(id: string): string | undefined {
-    return SAVED_ITEM_TYPE_BY_PREFIX.find(({ prefix }) => id.startsWith(prefix))?.type;
-}
 
 function getLanguageMeta(
     code: string,
@@ -297,107 +273,7 @@ export default function MySettingsPage() {
 
     const languageMeta = useMemo(() => getLanguageMeta(languageCode, t), [languageCode, t]);
 
-    const itineraryAreas = useMemo(() => {
-        return countValues(
-            itinerary
-                .map((item) => {
-                    return ((item as ItineraryItem & { area?: string }).area || "").trim();
-                })
-                .filter(Boolean)
-        );
-    }, [itinerary]);
 
-    const itineraryTypes = useMemo(() => {
-        return countValues(itinerary.map((item) => item.type || "attraction"));
-    }, [itinerary]);
-
-    const savedTypeCounts = useMemo(() => {
-        return countValues(
-            savedPlaceIds
-                .map((id) => inferSavedItemType(id) || "")
-                .filter(Boolean)
-        );
-    }, [savedPlaceIds]);
-
-    const regionSummary = useMemo(() => {
-        if (itineraryAreas.length === 0) {
-            return {
-                value: t("common.states.not_set_yet"),
-                helper: t("my_page.settings.preferences.region_empty"),
-                tone: "neutral",
-            };
-        }
-
-        return {
-            value: itineraryAreas
-                .slice(0, 2)
-                .map(([area]) => area)
-                .join(", "),
-            helper: t("my_page.settings.preferences.region_hint"),
-            tone: "info",
-        };
-    }, [itineraryAreas, t]);
-
-    const travelStyleSummary = useMemo(() => {
-        if (itineraryTypes.length === 0) {
-            return {
-                value: t("common.states.not_set_yet"),
-                helper: t("my_page.settings.preferences.style_empty"),
-                tone: "neutral",
-            };
-        }
-
-        return {
-            value: itineraryTypes
-                .slice(0, 2)
-                .map(([type]) =>
-                    t(`common.categories.${type}`, {
-                        defaultValue: titleCase(type),
-                    })
-                )
-                .join(", "),
-            helper: t("my_page.settings.preferences.style_hint"),
-            tone: "info",
-        };
-    }, [itineraryTypes, t]);
-
-    const interestSummary = useMemo(() => {
-        if (savedTypeCounts.length > 0) {
-            return {
-                value: savedTypeCounts
-                    .slice(0, 3)
-                    .map(([type]) =>
-                        t(`common.categories.${type}`, {
-                            defaultValue: titleCase(type),
-                        })
-                    )
-                    .join(", "),
-                helper: t("my_page.settings.preferences.interests_saved"),
-                tone: "info",
-            };
-        }
-
-        if (itineraryTypes.length > 0) {
-            return {
-                value: itineraryTypes
-                    .slice(0, 3)
-                    .map(([type]) =>
-                        t(`common.categories.${type}`, {
-                            defaultValue: titleCase(type),
-                        })
-                    )
-                    .join(", "),
-                helper: t("my_page.settings.preferences.interests_plan"),
-                tone: "info",
-            };
-        }
-
-        return {
-            value: t("common.states.not_set_yet"),
-            helper: t("my_page.settings.preferences.interests_empty"),
-            tone: "neutral",
-        };
-    }, [itineraryTypes, savedTypeCounts, t]);
 
     const verificationItems = useMemo(() => {
         return [
@@ -452,62 +328,7 @@ export default function MySettingsPage() {
         ];
     }, [account, t]);
 
-    const preferenceItems = useMemo(() => {
-        return [
-            {
-                id: "language",
-                label: t("my_page.settings.preferences.language"),
-                value: languageMeta.label,
-                helper: t("my_page.settings.preferences.language_hint"),
-                tone: "info",
-            },
-            {
-                id: "region",
-                label: t("my_page.settings.preferences.region"),
-                value: regionSummary.value,
-                helper: regionSummary.helper,
-                tone: regionSummary.tone,
-            },
-            {
-                id: "style",
-                label: t("my_page.settings.preferences.style"),
-                value: travelStyleSummary.value,
-                helper: travelStyleSummary.helper,
-                tone: travelStyleSummary.tone,
-            },
-            {
-                id: "interests",
-                label: t("my_page.settings.preferences.interests"),
-                value: interestSummary.value,
-                helper: interestSummary.helper,
-                tone: interestSummary.tone,
-            },
-        ];
-    }, [interestSummary, languageMeta, regionSummary, t, travelStyleSummary]);
 
-    const quickLinks = useMemo(() => {
-        return [
-            {
-                id: "phrases",
-                title: t("common.actions.travel_phrasebook"),
-                desc: t("my_page.settings.links.phrases_desc"),
-                href: "/my/phrases",
-            },
-
-            {
-                id: "bookings",
-                title: t("my_page.settings.links.bookings"),
-                desc: t("my_page.settings.links.bookings_desc"),
-                href: "/my/bookings",
-            },
-            {
-                id: "community",
-                title: t("my_page.settings.links.community"),
-                desc: t("my_page.settings.links.community_desc"),
-                href: "/my/community",
-            },
-        ];
-    }, [t]);
 
     const partnerPanel = useMemo(() => {
         if (partner.status === "approved") {
