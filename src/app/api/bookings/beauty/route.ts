@@ -124,9 +124,12 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as unknown;
+    console.log("[beauty-booking-route] Raw body received", JSON.stringify(body).substring(0, 100) + "...");
+
     const payload = coerceBeautyBookingPayload(body);
 
     if (!payload) {
+      console.warn("[beauty-booking-route] Payload COERCION FAILED. Body structure:", JSON.stringify(body, null, 2));
       return NextResponse.json(
         {
           ok: false,
@@ -137,7 +140,17 @@ export async function POST(request: Request) {
     }
 
     const auth = await getOptionalAuthenticatedRouteAccess(request);
+    
+    console.log("[beauty-booking-route] POST request received", {
+      hasPayload: !!payload,
+      userId: auth?.userId,
+    });
+
     const result = await createBeautyBookingRequest(payload, auth?.userId ?? null);
+    
+    console.log("[beauty-booking-route] Result from createBeautyBookingRequest", {
+      success: !!result,
+    });
 
     return NextResponse.json(
       {
