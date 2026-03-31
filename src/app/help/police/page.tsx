@@ -1,24 +1,27 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
-const policeContacts = [
-    { label: '범죄 신고 (긴급)', note: '24시간 서비스, 외국어 대응 가능', number: '112', icon: '🚔' },
-    { label: '경찰청 공식 사이트', note: '사이버 범죄 신고 및 정보 안내', number: null, icon: '🌐', url: 'https://www.police.go.kr', urlLabel: 'police.go.kr' },
+const getPoliceContacts = (t: any) => [
+    { label: t('help_page.police.report_call_title'), note: t('help_page.police.report_call_desc'), number: '112', icon: '🚔' },
+    { label: t('help_page.police.official_site_title'), note: t('help_page.police.official_site_desc'), number: null, icon: '🌐', url: 'https://www.police.go.kr', urlLabel: 'police.go.kr' },
 ];
 
 export default function PolicePage() {
     const router = useRouter();
+    const { t } = useTranslation('common');
+    const policeContacts = getPoliceContacts(t);
 
     return (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: '#f8fafc', paddingBottom: 24 }}>
             <header style={{ background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', padding: '20px 20px 24px', color: 'white' }}>
                 <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: 'white', fontSize: '1.4rem', cursor: 'pointer', marginBottom: 8 }}>←</button>
-                <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🚔 경찰 · 안전 안내</h1>
+                <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🚔 {t('help_page.police_header')}</h1>
             </header>
 
             <div style={{ padding: '20px 20px 0' }}>
-                <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 12 }}>📞 경찰 신고 및 안내</h2>
+                <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 12 }}>📞 {t('help_page.police_contacts_section')}</h2>
 
                 {policeContacts.map((p, i) => (
                     <div key={i} style={{ background: 'white', borderRadius: 14, padding: '14px 16px', marginBottom: 10, border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: 14, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
@@ -39,12 +42,12 @@ export default function PolicePage() {
                     </div>
                 ))}
 
-                <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: '24px 0 12px' }}>🗣 관광경찰 안내</h2>
+                <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: '24px 0 12px' }}>🗣 {t('help_page.tourism_police_section')}</h2>
 
                 <div style={{ background: 'white', borderRadius: 14, padding: 16, border: '2px solid #eff6ff', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
-                    <div style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: 4 }}>👮 관광경찰 서비스</div>
+                    <div style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: 4 }}>👮 {t('help_page.tourism_police_title')}</div>
                     <div style={{ fontSize: '0.88rem', color: '#374151', lineHeight: 1.5 }}>
-                        명동, 인사동, 이태원 등 주요 관광지에서 도움을 받을 수 있습니다.
+                        {t('help_page.tourism_police_desc')}
                     </div>
                 </div>
             </div>

@@ -18,7 +18,12 @@ export default function LostFoundPage() {
     const [selected, setSelected] = useState<StepKey | null>(null);
 
     const whereOptions: StepKey[] = ['taxi', 'subway', 'airport', 'street'];
-    const placeNames: Record<StepKey, string> = { taxi: '택시', subway: '지하철', airport: '공항', street: '길거리' };
+    const placeNames: Record<StepKey, string> = { 
+        taxi: t('help_page.taxi'), 
+        subway: t('help_page.subway'), 
+        airport: t('help_page.airport'), 
+        street: t('help_page.street') 
+    };
 
     const handleSelect = (place: StepKey) => {
         setSelected(place);
@@ -32,13 +37,13 @@ export default function LostFoundPage() {
                     onClick={step === 'steps' ? () => setStep('where') : () => router.back()}
                     style={{ background: 'none', border: 'none', color: 'white', fontSize: '1.4rem', cursor: 'pointer', marginBottom: 8 }}
                 >←</button>
-                <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🔍 분실물 찾기 안내</h1>
+                <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🔍 {t('help_page.lost_header')}</h1>
             </header>
 
             {step === 'where' ? (
                 <div style={{ padding: '24px 20px' }}>
-                    <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 6 }}>어디에서 잃어버렸나요?</h2>
-                    <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: 20 }}>장소를 선택하면 맞는 찾기 경로를 안내합니다</p>
+                    <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 6 }}>{t('help_page.lost_where_title')}</h2>
+                    <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: 20 }}>{t('help_page.lost_where_desc')}</p>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                         {whereOptions.map(place => (
@@ -60,10 +65,10 @@ export default function LostFoundPage() {
                     </div>
 
                     <div style={{ marginTop: 28 }}>
-                        <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 12 }}>바로 확인하기</h2>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 12 }}>{t('help_page.lost_quick_title')}</h2>
                         {[
-                            { label: 'Lost112 분실물 조회', url: 'https://www.lost112.go.kr', color: '#3b82f6', icon: '🌐' },
-                            { label: '여권 분실 시 대사관 찾기', url: 'https://www.mofa.go.kr/eng/wpge/m_5484/contents.do', color: '#8b5cf6', icon: '🛂' },
+                            { label: t('help_page.lost112_label'), url: 'https://www.lost112.go.kr', color: '#3b82f6', icon: '🌐' },
+                            { label: t('help_page.embassy_label'), url: 'https://www.mofa.go.kr/eng/wpge/m_5484/contents.do', color: '#8b5cf6', icon: '🛂' },
                         ].map((link, i) => (
                             <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
                                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'white', borderRadius: 14, padding: '14px 16px', marginBottom: 10, border: `2px solid ${link.color}30`, color: link.color, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
@@ -73,13 +78,13 @@ export default function LostFoundPage() {
                         
                         {/* 1330 Dual Action Card */}
                         <div style={{ background: 'white', borderRadius: 14, padding: '16px', marginBottom: 10, border: '2px solid #f59e0b30', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
-                            <div style={{ fontWeight: 700, color: '#f59e0b', fontSize: '0.9rem', marginBottom: 10 }}>📞 1330 관광안내</div>
+                            <div style={{ fontWeight: 700, color: '#f59e0b', fontSize: '0.9rem', marginBottom: 10 }}>📞 {t('help_page.interp_hotline_title')}</div>
                             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                                 <a href="tel:1330" style={{ background: '#f59e0b15', color: '#d97706', padding: '8px 14px', borderRadius: 18, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}>
-                                    전화 연결
+                                    {t('help_page.call_btn', { defaultValue: '전화 연결' })}
                                 </a>
                                 <a href="https://visitkorea.or.kr/helper/main.do" target="_blank" rel="noopener noreferrer" style={{ background: '#fffbeb', color: '#b45309', padding: '8px 14px', borderRadius: 18, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', border: '1px solid #fde68a' }}>
-                                    💬 채팅 문의
+                                    💬 {t('help_page.interp_chat_label')}
                                 </a>
                             </div>
                         </div>
@@ -90,7 +95,7 @@ export default function LostFoundPage() {
                     <div style={{ padding: '24px 20px' }}>
                         <div style={{ fontSize: '3rem', textAlign: 'center', marginBottom: 8 }}>{whereIcons[selected]}</div>
                         <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 20, textAlign: 'center' }}>
-                            <span style={{ color: '#f59e0b' }}>{placeNames[selected]}</span>에서 분실 시 대응
+                            {t('help_page.lost_steps_title', { place: placeNames[selected] })}
                         </h2>
 
                         {Array.from({ length: stepCounts[selected] }, (_, i) => i + 1).map(n => {
@@ -109,7 +114,7 @@ export default function LostFoundPage() {
 
                         <a href="https://www.lost112.go.kr" target="_blank" rel="noopener noreferrer"
                             style={{ display: 'block', marginTop: 16, background: '#f59e0b', color: 'white', textAlign: 'center', padding: '16px', borderRadius: 14, fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>
-                            🌐 Lost112 분실물 조회하기
+                            🌐 {t('help_page.lost_go_lost112')}
                         </a>
                     </div>
                 )
