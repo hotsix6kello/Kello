@@ -20,7 +20,7 @@ import {
 } from "@/lib/savedHub";
 import styles from "./saved.module.css";
 
-type SavedTab = "places" | "plans" | "recent";
+type SavedTab = "places" | "plans";
 
 interface SavedPlaceItem {
     id: string;
@@ -47,7 +47,7 @@ interface SavedPlanItem {
     href: string;
 }
 
-const TABS: SavedTab[] = ["places", "plans", "recent"];
+const TABS: SavedTab[] = ["places", "plans"];
 
 const SAVED_ITEM_TYPE_BY_PREFIX: Array<{ prefix: string; type: string }> = [
     { prefix: "fs", type: "festival" },
@@ -278,43 +278,12 @@ function SavedHubContent() {
 
                 <div className={styles.headerRow}>
                     <div>
-                        <p className={styles.eyebrow}>
-                            {t("my_page.saved.eyebrow")}
-                        </p>
                         <h1 className={styles.title}>
                             {t("my_page.saved.title")}
                         </h1>
-                        <p className={styles.subtitle}>
-                            {t("my_page.saved.subtitle")}
-                        </p>
                     </div>
-
-                    <button
-                        className={styles.headerButton}
-                        onClick={() => router.push("/explore")}
-                    >
-                        {t("my_page.saved.header_cta")}
-                    </button>
                 </div>
             </header>
-
-            <section className={styles.summarySection}>
-                <div className={styles.summaryGrid}>
-                    {summaryCards.map((card) => (
-                        <button
-                            key={card.id}
-                            className={styles.summaryCard}
-                            onClick={() => handleTabChange(card.id as SavedTab)}
-                        >
-                            <span className={styles.summaryLabel}>{card.label}</span>
-                            <strong className={styles.summaryValue}>{card.value}</strong>
-                        </button>
-                    ))}
-                </div>
-                <p className={styles.summaryHint}>
-                    {t("my_page.saved.summary_hint")}
-                </p>
-            </section>
 
             <nav className={styles.tabBar}>
                 {TABS.map((tab) => (
@@ -482,84 +451,6 @@ function SavedHubContent() {
                                             onClick={() => router.push("/explore")}
                                         >
                                             {t("common.actions.use_this_plan")}
-                                        </button>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-                    )}
-                </section>
-            )}
-
-            {activeTab === "recent" && (
-                <section className={styles.section}>
-                    <div className={styles.sectionHeader}>
-                        <div>
-                            <h2 className={styles.sectionTitle}>
-                                {t("my_page.saved.recent.title")}
-                            </h2>
-                            <p className={styles.sectionText}>
-                                {t("my_page.saved.recent.desc")}
-                            </p>
-                        </div>
-                        <span className={styles.countPill}>{recentEntries.length}</span>
-                    </div>
-
-                    {recentEntries.length === 0 ? (
-                        <div className={styles.emptyState}>
-                            <div className={styles.emptyIcon}>RECENT</div>
-                            <h3 className={styles.emptyTitle}>
-                                {t("my_page.saved.recent.empty.title")}
-                            </h3>
-                            <p className={styles.emptyText}>
-                                {recentStorageAvailable
-                                    ? t("my_page.saved.recent.empty.desc")
-                                    : t("my_page.saved.recent.empty.fallback")}
-                            </p>
-                            <button
-                                className={styles.secondaryButton}
-                                onClick={() => router.push("/explore")}
-                            >
-                                {t("my_page.saved.recent.empty.cta")}
-                            </button>
-                        </div>
-                    ) : (
-                        <div className={styles.cardList}>
-                            {normalizedRecentEntries.map((entry) => (
-                                <article key={`${entry.type}-${entry.id}`} className={styles.savedCard}>
-                                    <div className={styles.cardTop}>
-                                        <span className={styles.typeBadge}>
-                                            {entry.type === "place"
-                                                ? t("my_page.saved.recent.type.place")
-                                                : entry.type === "plan"
-                                                  ? t("my_page.saved.recent.type.plan")
-                                                  : entry.type === "community"
-                                                    ? t("my_page.saved.recent.type.community")
-                                                    : titleCase(entry.type)}
-                                        </span>
-                                        <span className={styles.metaText}>
-                                            {formatRelativeTime(t, entry.viewedAt, {
-                                                fallbackKey: "common.states.saved_locally",
-                                            })}
-                                        </span>
-                                    </div>
-
-                                    <h3 className={styles.cardTitle}>{entry.title}</h3>
-                                    <p className={styles.cardText}>
-                                        {entry.subtitle ||
-                                            t("common.states.recently_viewed")}
-                                    </p>
-
-                                    <div className={styles.cardActions}>
-                                        <button
-                                            className={styles.primaryButton}
-                                            onClick={() => router.push(entry.href)}
-                                        >
-                                            {t(
-                                                entry.type === "place" && !entry.isSafePlaceDetail
-                                                    ? "common.actions.explore_places"
-                                                    : "common.actions.view_again"
-                                            )}
                                         </button>
                                     </div>
                                 </article>

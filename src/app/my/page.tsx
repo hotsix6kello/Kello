@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import { useTrip } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
-import { readSavedHubRecentEntries, readSavedItemIds } from "@/lib/savedHub";
 import styles from "./my.module.css";
 
 
@@ -162,77 +161,6 @@ function ProfileSummaryCard({
 
 
 
-
-function SavedHubSection({
-    savedPlacesCount,
-    savedPlansCount,
-    savedRecentCount,
-}: {
-    savedPlacesCount: number;
-    savedPlansCount: number;
-    savedRecentCount: number;
-}) {
-    const router = useRouter();
-    const { t } = useTranslation("common");
-
-    return (
-        <section style={{ padding: '0 20px', marginBottom: 32 }}>
-            <div style={{ 
-                background: 'white', 
-                borderRadius: 24, 
-                padding: 24,
-                boxShadow: '0 8px 30px rgba(0,0,0,0.04)',
-                border: '1px solid rgba(0,0,0,0.03)'
-            }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                     <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>
-                         {t("my_page.saved.title")}
-                     </h2>
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 24 }}>
-                    <div style={{ background: '#f8fafc', borderRadius: 16, padding: '16px 8px', textAlign: 'center', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)' }}>
-                        <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#3b82f6', marginBottom: 6 }}>{savedPlacesCount}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 700 }}>{t("my_page.saved.summary.places")}</div>
-                    </div>
-                    <div style={{ background: '#f8fafc', borderRadius: 16, padding: '16px 8px', textAlign: 'center', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)' }}>
-                        <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#10b981', marginBottom: 6 }}>{savedPlansCount}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 700 }}>{t("my_page.saved.summary.plans")}</div>
-                    </div>
-                    <div style={{ background: '#f8fafc', borderRadius: 16, padding: '16px 8px', textAlign: 'center', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)' }}>
-                        <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#f59e0b', marginBottom: 6 }}>{savedRecentCount}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 700 }}>{t("my_page.saved.summary.recent")}</div>
-                    </div>
-                </div>
-
-                <button
-                    onClick={() => router.push('/my/saved')}
-                    style={{
-                        width: '100%',
-                        background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: 16,
-                        padding: '16px',
-                        fontWeight: 700,
-                        fontSize: '1rem',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                        boxShadow: '0 4px 12px rgba(124,58,237,0.25)',
-                        transition: 'transform 0.1s'
-                    }}
-                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    <span>{t("my_page.saved.dashboard_title")}</span>
-                    <span style={{ fontSize: '1.2rem' }}>→</span>
-                </button>
-            </div>
-        </section>
-    );
-}
 
 function CommunityHubSection() {
     const router = useRouter();
@@ -455,8 +383,6 @@ function MyPageContent() {
 
     const [isAdmin, setIsAdmin] = useState(false);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
-    const [savedPlacesCount, setSavedPlacesCount] = useState(0);
-    const [savedRecentCount, setSavedRecentCount] = useState(0);
 
     const fallbackUserName = hasHydrated
         ? t("my_page.settings.account.default_name")
@@ -473,9 +399,6 @@ function MyPageContent() {
 
     useEffect(() => {
         let isMounted = true;
-
-        setSavedPlacesCount(readSavedItemIds().length);
-        setSavedRecentCount(readSavedHubRecentEntries().length);
 
         const loadDashboardUser = async () => {
             const fallbackName = t("my_page.settings.account.default_name");
@@ -576,13 +499,6 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
-
-            <SavedHubSection
-                savedPlacesCount={savedPlacesCount}
-                savedPlansCount={itinerary.length > 0 ? 1 : 0}
-                savedRecentCount={savedRecentCount}
-            />
-
             <CommunityHubSection />
 
             {/* Standard Partner Banner */}
