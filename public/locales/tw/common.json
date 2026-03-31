@@ -1621,13 +1621,13 @@
     "subtitle": "Find the right detailed help route for your situation in Korea.",
     "badge": "Help Center",
     "numbers_title": "Emergency Numbers",
-    "medical_title": "Medical Help",
+    "medical_title": "醫療幫助",
     "medical_desc": "Nearby clinics & symptom cards",
-    "lost_title": "Lost & Found",
+    "lost_title": "遺失物品",
     "lost_desc": "Step-by-step recovery guide",
-    "police_title": "Police / Crime",
+    "police_title": "警察/犯罪",
     "police_desc": "Report & get assistance",
-    "interp_title": "Interpretation",
+    "interp_title": "口譯服務",
     "interp_desc": "1330 helpline & translation apps",
     "symptom_title": "Symptom Phrase Cards",
     "symptom_hint": "Tap a symptom to show the Korean phrase to your doctor",
@@ -1747,6 +1747,29 @@
       "subway_hint": "Open the steps for items lost in the subway or at a station.",
       "airport_hint": "Open the steps for items lost at the airport or in transit.",
       "street_hint": "Open the steps for items lost on the street or in a public area."
+    },
+    "medical_header": "醫療 · 急救指南",
+    "police_header": "警察 · 安全指南",
+    "interp_header": "翻譯 · 口譯指南",
+    "lost_header": "失物招領指南",
+    "call_btn": "撥打電話",
+    "emergency_119_title": "緊急救援 (119)",
+    "consult_1339_title": "醫療諮詢 (1339)",
+    "interp_chat_label": "在線諮詢",
+    "medical": {
+      "medicines": {
+        "tylenol": "泰諾",
+        "cold": "感冒藥",
+        "digestive": "助消化藥"
+      },
+      "symptoms": {
+        "stomach": "腹痛",
+        "fever": "發燒",
+        "injury": "受傷",
+        "allergy": "過敏",
+        "breathing": "呼吸困難",
+        "pain": "胸痛"
+      }
     }
   },
   "interpreter_page": {
