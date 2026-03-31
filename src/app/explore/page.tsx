@@ -875,7 +875,7 @@ export default function MyExplorePage() {
   const [selectedCommunicationIntent] = useState<CommunicationIntentId>('booking_confirm');
   const [customerForm, setCustomerForm] = useState<CustomerFormState>(INITIAL_CUSTOMER_FORM_STATE);
   const [selectedCountry] = useState({ code: 'KR', dial: '+82', flag: 'https://flagcdn.com/w40/kr.png' });
-  const [agreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
+  const [agreements, setAgreements] = useState<AgreementState>(INITIAL_AGREEMENT_STATE);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmittingBeautyBooking, setIsSubmittingBeautyBooking] = useState(false);
   const [, setFormErrors] = useState<Partial<Record<FormErrorKey, string>>>({});
@@ -1375,13 +1375,12 @@ export default function MyExplorePage() {
   };
 
 
-  // Used for future feature or currently unused in the current form flow.
-  // const handleAgreementToggle = (field: AgreementKey) => {
-  //   setAgreements((prev) => ({
-  //     ...prev,
-  //     [field]: !prev[field],
-  //   }));
-  // };
+  const handleAgreementToggle = (field: keyof AgreementState) => {
+    setAgreements((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
 
   const validateBeautyBookingForm = () => {
     const nameError = validateCustomerField('name', customerForm.name);
@@ -1806,6 +1805,26 @@ export default function MyExplorePage() {
                                <div className="flex justify-between items-center">
                                  <span className="text-sm text-[var(--soft-ink)]">연락처</span>
                                  <strong className="text-sm text-[var(--ink-black)]">{customerForm.phone}</strong>
+                               </div>
+                               <div className="flex flex-col gap-3 mt-4">
+                                 <label className="flex items-center gap-3 cursor-pointer p-3 bg-[var(--hanji-ivory)] rounded-[var(--radius-md)] border border-[var(--warm-sand)]">
+                                   <input
+                                     type="checkbox"
+                                     className="w-5 h-5 accent-[var(--accent)]"
+                                     checked={agreements.bookingConfirmed}
+                                     onChange={() => handleAgreementToggle('bookingConfirmed')}
+                                   />
+                                   <span className="text-sm text-[var(--ink-black)] font-medium">예약 확정 및 방문 약속에 동의합니다.</span>
+                                 </label>
+                                 <label className="flex items-center gap-3 cursor-pointer p-3 bg-[var(--hanji-ivory)] rounded-[var(--radius-md)] border border-[var(--warm-sand)]">
+                                   <input
+                                     type="checkbox"
+                                     className="w-5 h-5 accent-[var(--accent)]"
+                                     checked={agreements.privacyConsent}
+                                     onChange={() => handleAgreementToggle('privacyConsent')}
+                                   />
+                                   <span className="text-sm text-[var(--ink-black)] font-medium">개인정보 수집 및 제3자 제공에 동의합니다.</span>
+                                 </label>
                                </div>
                              </div>
                            </div>
