@@ -4,7 +4,6 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
-import { useTrip } from "@/lib/contexts/TripContext";
 import { supabase } from "@/lib/supabaseClient";
 import styles from "./my.module.css";
 
@@ -375,7 +374,6 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
 function MyPageContent() {
     const { t } = useTranslation("common");
     const router = useRouter();
-    const { itinerary } = useTrip();
     const [hasHydrated, setHasHydrated] = useState(false);
     const [userName, setUserName] = useState("");
     const [profileSubtitle, setProfileSubtitle] = useState("");

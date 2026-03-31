@@ -2,8 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
-const getPoliceContacts = (t: any) => [
+const getPoliceContacts = (t: TFunction) => [
     { label: t('help_page.police.report_call_title'), note: t('help_page.police.report_call_desc'), number: '112', icon: '🚔' },
     { label: t('help_page.police.official_site_title'), note: t('help_page.police.official_site_desc'), number: null, icon: '🌐', url: 'https://www.police.go.kr', urlLabel: 'police.go.kr' },
 ];

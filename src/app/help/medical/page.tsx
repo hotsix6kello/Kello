@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
-const getMedicineItems = (t: any) => [
+const getMedicineItems = (t: TFunction) => [
     { name: t('help_page.medical.medicines.tylenol'), desc: t('help_page.medical.medicines.tylenol_desc'), icon: '💊' },
     { name: t('help_page.medical.medicines.cold'), desc: t('help_page.medical.medicines.cold_desc'), icon: '🤧' },
     { name: t('help_page.medical.medicines.digestive'), desc: t('help_page.medical.medicines.digestive_desc'), icon: '🥣' },
