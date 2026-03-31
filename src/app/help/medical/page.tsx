@@ -26,19 +26,29 @@ export default function MedicalPage() {
     const selected = symptomKeys.find(s => s.id === selectedSymptom);
 
     return (
-        <div style={{ minHeight: '100vh', background: '#f8fafc', paddingBottom: 100 }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: '#f8fafc', paddingBottom: 24 }}>
             <header style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)', padding: '20px 20px 24px', color: 'white' }}>
                 <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: 'white', fontSize: '1.4rem', cursor: 'pointer', marginBottom: 8 }}>←</button>
                 <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🏥 의료 · 응급 안내</h1>
             </header>
 
             {/* Quick call */}
-            <div style={{ background: '#fef2f2', margin: '0 20px', marginTop: -8, borderRadius: 16, padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1.5px solid #fecaca' }}>
-                <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#dc2626' }}>🚑 {t('help_page.emergency_call')}</div>
-                    <div style={{ fontSize: '0.82rem', color: '#64748b' }}>{t('help_page.emergency_hint')}</div>
+            <div style={{ background: '#fef2f2', margin: '0 20px', marginTop: -8, borderRadius: 16, padding: '16px', border: '1.5px solid #fecaca', boxShadow: '0 2px 10px rgba(220, 38, 38, 0.08)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                    <div>
+                        <div style={{ fontWeight: 800, fontSize: '1rem', color: '#dc2626' }}>🚑 응급 구조 (119)</div>
+                        <div style={{ fontSize: '0.82rem', color: '#64748b' }}>위급 상황 시 즉시 연결</div>
+                    </div>
+                    <a href="tel:119" style={{ background: '#ef4444', color: 'white', padding: '10px 20px', borderRadius: 30, fontWeight: 700, textDecoration: 'none', boxShadow: '0 2px 6px rgba(239, 68, 68, 0.3)' }}>📞 119 전화하기</a>
                 </div>
-                <a href="tel:119" style={{ background: '#ef4444', color: 'white', padding: '10px 20px', borderRadius: 30, fontWeight: 700, textDecoration: 'none' }}>📞 119</a>
+                
+                <div style={{ borderTop: '1px dashed #fecaca', paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                        <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#334155' }}>🩺 의료 상담 (1339)</div>
+                        <div style={{ fontSize: '0.78rem', color: '#64748b' }}>병원 안내 및 전문 의료 상담</div>
+                    </div>
+                    <a href="tel:1339" style={{ background: 'white', color: '#dc2626', padding: '7px 16px', borderRadius: 20, fontWeight: 700, textDecoration: 'none', fontSize: '0.85rem', border: '1px solid #fecaca' }}>1339 전화하기</a>
+                </div>
             </div>
 
             {/* Symptom Expressions */}

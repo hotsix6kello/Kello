@@ -23,12 +23,22 @@ export default function InterpretationPage() {
                             <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: 4, lineHeight: 1.5 }}>
                                 통역이나 여행 안내가 필요할 때 가장 빠른 공식 도움입니다
                             </div>
-                            <a
-                                href="tel:1330"
-                                style={{ display: 'inline-block', marginTop: 10, background: '#8b5cf615', color: '#8b5cf6', padding: '7px 14px', borderRadius: 20, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}
-                            >
-                                📞 1330 전화하기
-                            </a>
+                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
+                                <a
+                                    href="tel:1330"
+                                    style={{ background: '#8b5cf615', color: '#8b5cf6', padding: '7px 14px', borderRadius: 20, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}
+                                >
+                                    📞 1330 전화하기
+                                </a>
+                                <a
+                                    href="https://visitkorea.or.kr/helper/main.do"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ background: '#f5f3ff', color: '#7c3aed', padding: '7px 14px', borderRadius: 20, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', border: '1px solid #ddd6fe' }}
+                                >
+                                    💬 채팅으로 문의
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
