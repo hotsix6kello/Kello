@@ -9,17 +9,16 @@ import styles from './interpreter.module.css';
 import {
   getLocaleDisplayLabel,
   getSpeechLocale,
-  INTERPRETER_SUPPORTED_LOCALES,
 } from '@/lib/translator/catalog.ts';
 import {
   normalizeInterpreterTextInput,
 } from '@/lib/translator/interpreterUi.ts';
 import type { ConciergeLocale, SpeakerRole } from '@/lib/translator/types.ts';
-import { LOCALE_STORAGE_KEY, resolveCanonicalLocale } from '@/lib/i18n/locales.ts';
+import { LOCALE_STORAGE_KEY, resolveCanonicalLocale, CANONICAL_SUPPORTED_LOCALES, type CanonicalLocaleCode } from '@/lib/i18n/locales.ts';
 import { LANGUAGE_CHANGED_EVENT } from '@/lib/i18n/client.tsx';
 
 const STAFF_LOCALE: ConciergeLocale = 'ko';
-const FALLBACK_CUSTOMER_LOCALE: ConciergeLocale = 'en';
+const FALLBACK_CUSTOMER_LOCALE: CanonicalLocaleCode = 'en';
 const MAX_RECORDING_MS = 10000;
 const MIN_RECORDING_MS = 700;
 
@@ -84,16 +83,17 @@ function createInterpreterMessage(params: {
 function resolveCustomerLocale(appLocale?: string | null): ConciergeLocale {
   const canonical = resolveCanonicalLocale(appLocale, FALLBACK_CUSTOMER_LOCALE);
 
-  // KR(ko) is for staff, so for customer defaults, skip it and use fallback (English)
+  // Foundation uses zh-TW, but internal translator still uses zh-HK as pivot
+  if ((canonical as string) === 'zh-TW') {
+    return 'zh-HK' as ConciergeLocale;
+  }
+
+  // KR(ko) is for staff, so for customer defaults, skip it and use fallback
   if (canonical === 'ko') {
-    return FALLBACK_CUSTOMER_LOCALE;
+    return FALLBACK_CUSTOMER_LOCALE as ConciergeLocale;
   }
 
-  if (INTERPRETER_SUPPORTED_LOCALES.includes(canonical as ConciergeLocale)) {
-    return canonical as ConciergeLocale;
-  }
-
-  return FALLBACK_CUSTOMER_LOCALE;
+  return canonical as ConciergeLocale;
 }
 
 export default function InterpreterPage() {
@@ -734,11 +734,14 @@ export default function InterpreterPage() {
               value={customerLocale}
               onChange={(event) => setCustomerLocale(event.target.value as ConciergeLocale)}
             >
-              {INTERPRETER_SUPPORTED_LOCALES.filter((loc) => loc !== 'ko').map((localeCode) => (
-                <option key={localeCode} value={localeCode}>
-                  {getLocaleDisplayLabel(localeCode)}
-                </option>
-              ))}
+              {CANONICAL_SUPPORTED_LOCALES.filter((loc) => loc !== 'ko').map((localeCode) => {
+                const effectiveLocale = (localeCode as string) === 'zh-TW' ? 'zh-HK' : (localeCode as ConciergeLocale);
+                return (
+                  <option key={localeCode} value={effectiveLocale}>
+                    {getLocaleDisplayLabel(effectiveLocale)}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className={styles.langCardActive}>
