@@ -646,14 +646,38 @@
     },
     "recommended_plans": "Kello의 추천 여행",
     "places": {
-      "lotte_main": { "title": "롯데백화점 본점", "area": "명동" },
-      "lotte_tower": { "title": "롯데월드타워", "area": "잠실" },
-      "lotte_world": { "title": "롯데월드", "area": "잠실" },
-      "lotte_hotel": { "title": "롯데호텔 서울", "area": "명동" },
-      "namsan": { "title": "남산서울타워", "area": "남산" },
-      "namdaemun": { "title": "남대문 시장", "area": "남대문" },
-      "gyeongbokgung": { "title": "경복궁", "area": "종로" },
-      "myeongdong": { "title": "명동거리", "area": "명동" }
+      "lotte_main": {
+        "title": "롯데백화점 본점",
+        "area": "명동"
+      },
+      "lotte_tower": {
+        "title": "롯데월드타워",
+        "area": "잠실"
+      },
+      "lotte_world": {
+        "title": "롯데월드",
+        "area": "잠실"
+      },
+      "lotte_hotel": {
+        "title": "롯데호텔 서울",
+        "area": "명동"
+      },
+      "namsan": {
+        "title": "남산서울타워",
+        "area": "남산"
+      },
+      "namdaemun": {
+        "title": "남대문 시장",
+        "area": "남대문"
+      },
+      "gyeongbokgung": {
+        "title": "경복궁",
+        "area": "종로"
+      },
+      "myeongdong": {
+        "title": "명동거리",
+        "area": "명동"
+      }
     },
     "plans": {
       "2d": {
@@ -2012,7 +2036,88 @@
       "taxi_hint": "택시에서 잃어버린 물건 대응 절차를 엽니다.",
       "subway_hint": "지하철이나 역에서 잃어버린 물건 대응 절차를 엽니다.",
       "airport_hint": "공항 또는 이동 중 분실물 대응 절차를 엽니다.",
-      "street_hint": "길거리나 공공장소 분실물 대응 절차를 엽니다."
+      "street_hint": "길거리나 공공장소 분실물 대응 절차를 엽니다.",
+      "taxi_s1_t": "1. 영수증 확인",
+      "taxi_s1_d": "영수증에 기재된 카드사 번호나 차량번호로 기사님 연락처를 확보하세요.",
+      "taxi_s2_t": "2. 카드사 연락",
+      "taxi_s2_d": "결제한 카드의 고객센터에 전화하여 택시 승인 내역의 업체 연락처를 요청하세요.",
+      "taxi_s3_t": "3. Lost112 확인",
+      "taxi_s3_d": "기사님과 연락이 닿지 않으면 경찰청 유실물 통합포털(Lost112)에 습득물 등록 여부를 확인하세요.",
+      "taxi_s4_t": "4. 분실 신고",
+      "taxi_s4_d": "가까운 지구대나 파트에서 유실물 분실 신고서를 작성하세요.",
+      "subway_s1_t": "1. 역무실 방문",
+      "subway_s1_d": "내린 직후라면 해당 역의 역무실을 즉시 방문하여 열차 칸 번호를 알리세요.",
+      "subway_s2_t": "2. 유실물 센터",
+      "subway_s2_d": "시간이 지났다면 각 호선별 유실물 센터에 연락하거나 방문하세요.",
+      "subway_s3_t": "3. Lost112 확인",
+      "subway_s3_d": "유실물 센터 영업시간 외에는 Lost112 사이트에서 검색해보세요.",
+      "airport_s1_t": "1. 분실물 센터",
+      "airport_s1_d": "공항 내 분실물 보관소나 안내 데스크를 방문하세요.",
+      "airport_s2_t": "2. 항공사 문의",
+      "airport_s2_d": "비행기 안이나 게이트 부근에서 잃어버렸다면 해당 항공사에 직접 문의하세요.",
+      "airport_s3_t": "3. 온라인 조회",
+      "airport_s3_d": "인천공항 유실물 통합 관리 시스템에서 실시간 조회가 가능합니다.",
+      "street_s1_t": "1. 주변 탐색",
+      "street_s1_d": "마지막으로 머물렀던 장소나 인근 매장을 다시 방문해보세요.",
+      "street_s2_t": "2. 파출소 방문",
+      "street_s2_d": "인근 경찰서, 지구대, 파출소에 방문하여 분실물 습득 여부를 문의하세요.",
+      "street_s3_t": "3. Lost112 등록",
+      "street_s3_d": "Lost112 사이트에 접속하여 분실물 정보를 등록하고 알람을 설정하세요."
+    },
+    "medical_header": "의료 · 응급 안내",
+    "emergency_119_title": "응급 구조 (119)",
+    "emergency_119_desc": "위급 상황 시 즉시 연결",
+    "consult_1339_title": "의료 상담 (1339)",
+    "consult_1339_desc": "병원 안내 및 전문 의료 상담",
+    "symptoms_title": "증상 표현",
+    "pharmacy_title": "편의점 상비약",
+    "call_btn": "전화하기",
+    "medical": {
+      "medicines": {
+        "tylenol": "타이레놀",
+        "tylenol_desc": "해열, 진통, 근육통, 두통",
+        "cold": "종합감기약",
+        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
+        "digestive": "소화제",
+        "digestive_desc": "소화불량, 식체, 속쓰림"
+      },
+      "symptoms": {
+        "stomach": "복통",
+        "fever": "발열",
+        "injury": "부상",
+        "allergy": "알레르기",
+        "breathing": "호흡 곤란",
+        "pain": "흉통"
+      }
+    },
+    "police_header": "경찰 · 안전 안내",
+    "police_contacts_section": "경찰 신고 및 안내",
+    "police.report_call_title": "범죄 신고 (긴급)",
+    "police.report_call_desc": "24시간 서비스, 외국어 대응 가능",
+    "police.official_site_title": "경찰청 공식 사이트",
+    "police.official_site_desc": "사이버 범죄 신고 및 정보 안내",
+    "tourism_police_section": "관광경찰 안내",
+    "tourism_police_title": "관광경찰 서비스",
+    "tourism_police_desc": "명동, 인사동, 이태원 등 주요 관광지에서 도움을 받을 수 있습니다.",
+    "interp_header": "통역 · 번역 안내",
+    "interp_immediate_title": "바로 도움받기",
+    "interp_hotline_title": "1330 관광 통역 안내",
+    "interp_hotline_desc": "통역이나 여행 안내가 필요할 때 가장 빠른 공식 도움입니다",
+    "interp_chat_label": "채팅으로 문의",
+    "interp_tools_title": "번역 도구",
+    "lost_header": "분실물 찾기 안내",
+    "lost_where_title": "어디에서 잃어버렸나요?",
+    "lost_where_desc": "장소를 선택하면 맞는 찾기 경로를 안내합니다",
+    "lost_quick_title": "바로 확인하기",
+    "lost112_label": "Lost112 분실물 조회",
+    "embassy_label": "여권 분실 시 대사관 찾기",
+    "lost_steps_title": "{{place}}에서 분실 시 대응",
+    "lost_go_lost112": "Lost112 분실물 조회하기",
+    "police": {
+      "report_call_title": "범죄 신고 (긴급)",
+      "report_call_desc": "24시간 서비스, 외국어 대응 가능",
+      "official_site_title": "경찰청 공식 사이트",
+      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
     }
   }
 }
