@@ -997,13 +997,13 @@
     "subtitle": "韓国での状況に合わせた助けを素早く見つけてください。",
     "badge": "緊急",
     "numbers_title": "緊急電話番号",
-    "medical_title": "医療サポート",
+    "medical_title": "医療支援",
     "medical_desc": "近隣の病院と症状フレーズカード",
     "lost_title": "紛失物",
     "lost_desc": "ステップ別紛失物探しガイド",
-    "police_title": "警察 / 事件",
+    "police_title": "警察/犯罪",
     "police_desc": "通報および安全サポート",
-    "interp_title": "通訳",
+    "interp_title": "通訳サービス",
     "interp_desc": "1330案内と翻訳アプリ",
     "symptom_title": "症状フレーズカード",
     "symptom_hint": "症状をタップすると、医師に見せるための韓国語フレーズが表示されます",
@@ -1122,6 +1122,29 @@
       "subway_hint": "地下鉄や駅から紛失物対応手続きを開きます。",
       "airport_hint": "公用または移動中の紛失物対応手続きを開きます。",
       "street_hint": "路上や公共の場所での紛失物対応手続きを開きます。"
+    },
+    "medical_header": "医療・救急案内",
+    "police_header": "警察・安全案内",
+    "interp_header": "通訳・翻訳案内",
+    "lost_header": "遺失物検索案内",
+    "call_btn": "電話する",
+    "emergency_119_title": "緊急通報 (119)",
+    "consult_1339_title": "医療相談 (1339)",
+    "interp_chat_label": "チャットで問い合わせ",
+    "medical": {
+      "medicines": {
+        "tylenol": "タイレノール",
+        "cold": "総合風邪薬",
+        "digestive": "消化剤"
+      },
+      "symptoms": {
+        "stomach": "腹痛",
+        "fever": "発熱",
+        "injury": "負傷",
+        "allergy": "アレルギー",
+        "breathing": "呼吸困難",
+        "pain": "胸痛"
+      }
     }
   },
   "home_beauty": {

@@ -580,33 +580,33 @@
     "voice_too_short_error": "โปรดพูดให้ยาวกว่านี้อีกนิด"
   },
   "help_page": {
-    "medical_header": "Medical & Emergency",
-    "emergency_119_title": "Emergency (119)",
+    "medical_header": "การแพทย์และฉุกเฉิน",
+    "emergency_119_title": "หน่วยกู้ภัยฉุกเฉิน (119)",
     "emergency_119_desc": "Immediate rescue for emergencies",
-    "consult_1339_title": "Medical Consult (1339)",
+    "consult_1339_title": "ปรึกษาทางการแพทย์ (1339)",
     "consult_1339_desc": "Professional medical consultation",
     "symptoms_title": "Symptoms",
     "pharmacy_title": "Pharmacy (OTC)",
-    "call_btn": "Call",
+    "call_btn": "โทรออก",
     "medical": {
       "medicines": {
-        "tylenol": "타이레놀",
+        "tylenol": "ไทเลนอล",
         "tylenol_desc": "해열, 진통, 근육통, 두통",
-        "cold": "종합감기약",
+        "cold": "ยาแก้หวัด",
         "cold_desc": "콧물, 기침, 발열 등 감기 증상",
-        "digestive": "소화제",
+        "digestive": "ยาช่วยย่อย",
         "digestive_desc": "소화불량, 식체, 속쓰림"
       },
       "symptoms": {
-        "stomach": "복통",
-        "fever": "발열",
-        "injury": "부상",
-        "allergy": "알레르기",
-        "breathing": "호흡 곤란",
-        "pain": "흉통"
+        "stomach": "ปวดท้อง",
+        "fever": "มีไข้",
+        "injury": "ได้รับบาดเจ็บ",
+        "allergy": "แพ้",
+        "breathing": "หายใจลำบาก",
+        "pain": "เจ็บหน้าอก"
       }
     },
-    "police_header": "Police & Safety",
+    "police_header": "ตำรวจและความปลอดภัย",
     "police_contacts_section": "Police Contacts",
     "police.report_call_title": "Police Report (112)",
     "police.report_call_desc": "24/7 service, foreign language available",
@@ -615,13 +615,13 @@
     "tourism_police_section": "Tourist Police",
     "tourism_police_title": "Tourist Police Service",
     "tourism_police_desc": "Available in Myeongdong, Insadong, Itaewon, etc.",
-    "interp_header": "Interpretation",
+    "interp_header": "ล่ามและแปลภาษา",
     "interp_immediate_title": "Immediate Help",
     "interp_hotline_title": "1330 Helpline",
     "interp_hotline_desc": "Fastest official help for tourism help",
-    "interp_chat_label": "Chat Inquiry",
+    "interp_chat_label": "สอบถามทางแชท",
     "interp_tools_title": "Translation Tools",
-    "lost_header": "Lost & Found",
+    "lost_header": "ช่วยเหลือของหาย",
     "lost_where_title": "Where did you lose it?",
     "lost_where_desc": "Select location for recovery steps",
     "lost_quick_title": "Quick Lookup",
@@ -644,6 +644,10 @@
       "report_call_desc": "24시간 서비스, 외국어 대응 가능",
       "official_site_title": "경찰청 공식 사이트",
       "official_site_desc": "사이버 범죄 신고 및 정보 안내"
-    }
+    },
+    "medical_title": "ความช่วยเหลือทางการแพทย์",
+    "police_title": "ตำรวจ/อาชญากรรม",
+    "interp_title": "บริการล่าม",
+    "lost_title": "ของหาย"
   }
 }
