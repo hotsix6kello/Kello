@@ -94,7 +94,6 @@ export default function HelpPage() {
                     </div>
                 ))}
             </div>
-            <div style={{ height: 60 }} />
         </div>
     );
 }
