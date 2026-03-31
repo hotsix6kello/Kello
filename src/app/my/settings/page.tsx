@@ -457,7 +457,7 @@ export default function MySettingsPage() {
             {
                 id: "language",
                 label: t("my_page.settings.preferences.language"),
-                value: `${languageMeta.flag} ${languageMeta.label}`.trim(),
+                value: languageMeta.label,
                 helper: t("my_page.settings.preferences.language_hint"),
                 tone: "info",
             },
@@ -488,23 +488,12 @@ export default function MySettingsPage() {
     const quickLinks = useMemo(() => {
         return [
             {
-                id: "support",
-                title: t("common.actions.support"),
-                desc: t("my_page.settings.links.support_desc"),
-                href: "/my/support",
-            },
-            {
                 id: "phrases",
                 title: t("common.actions.travel_phrasebook"),
                 desc: t("my_page.settings.links.phrases_desc"),
                 href: "/my/phrases",
             },
-            {
-                id: "saved",
-                title: t("my_page.settings.links.saved"),
-                desc: t("my_page.settings.links.saved_desc"),
-                href: "/my/saved",
-            },
+
             {
                 id: "bookings",
                 title: t("my_page.settings.links.bookings"),
@@ -610,12 +599,6 @@ export default function MySettingsPage() {
                 <button className={styles.navButton} onClick={() => router.push("/my")}>
                     {t("common.back")}
                 </button>
-                <button
-                    className={styles.navButton}
-                    onClick={() => router.push("/my/support")}
-                >
-                    {t("my_page.settings.support_short")}
-                </button>
             </header>
 
             <section className={styles.heroCard}>
@@ -680,99 +663,7 @@ export default function MySettingsPage() {
                 </section>
             )}
 
-            <section className={styles.section}>
-                <div className={styles.sectionHeader}>
-                    <div>
-                        <h2 className={styles.sectionTitle}>
-                            {t("my_page.settings.account.title")}
-                        </h2>
-                        <p className={styles.sectionText}>
-                            {t("my_page.settings.account.desc")}
-                        </p>
-                    </div>
-                </div>
 
-                <div className={styles.list}>
-                    <div className={styles.row}>
-                        <div className={styles.rowInfo}>
-                            <div className={styles.rowLabel}>
-                                {t("my_page.settings.account.display_name")}
-                            </div>
-                            <div className={styles.rowHelper}>
-                                {t("my_page.settings.account.display_name_hint")}
-                            </div>
-                        </div>
-                        <div className={styles.valueGroup}>
-                            <div className={styles.rowValue}>{account.displayName}</div>
-                        </div>
-                    </div>
-
-                    <div className={styles.row}>
-                        <div className={styles.rowInfo}>
-                            <div className={styles.rowLabel}>
-                                {t("my_page.settings.account.email")}
-                            </div>
-                            <div className={styles.rowHelper}>
-                                {t("my_page.settings.account.email_hint")}
-                            </div>
-                        </div>
-                        <div className={styles.valueGroup}>
-                            <div className={styles.rowValue}>
-                                {account.email ||
-                                    t("common.states.not_available_yet")}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={styles.row}>
-                        <div className={styles.rowInfo}>
-                            <div className={styles.rowLabel}>
-                                {t("my_page.settings.account.joined")}
-                            </div>
-                            <div className={styles.rowHelper}>
-                                {t("my_page.settings.account.joined_hint")}
-                            </div>
-                        </div>
-                        <div className={styles.valueGroup}>
-                            <div className={styles.rowValue}>
-                                {account.joinedAt
-                                    ? formatDate(account.joinedAt)
-                                    : t("common.states.not_available_yet")}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={styles.row}>
-                        <div className={styles.rowInfo}>
-                            <div className={styles.rowLabel}>
-                                {t("my_page.settings.account.last_seen")}
-                            </div>
-                            <div className={styles.rowHelper}>
-                                {t("my_page.settings.account.last_seen_hint")}
-                            </div>
-                        </div>
-                        <div className={styles.valueGroup}>
-                            <div className={styles.rowValue}>
-                                {account.lastSignInAt
-                                    ? formatDate(account.lastSignInAt)
-                                    : t("common.states.not_available_yet")}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.sectionNote}>
-                    {t("my_page.settings.account.read_only")}
-                </div>
-                <div className={styles.actionRow}>
-                    <button
-                        className={styles.secondaryButton}
-                        onClick={() => router.push("/my/support?tab=general")}
-                    >
-                        {t("common.actions.contact_support")}
-                    </button>
-                </div>
-            </section>
 
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
@@ -808,72 +699,9 @@ export default function MySettingsPage() {
                 </div>
             </section>
 
-            <section className={styles.section}>
-                <div className={styles.sectionHeader}>
-                    <div>
-                        <h2 className={styles.sectionTitle}>
-                            {t("my_page.settings.preferences.title")}
-                        </h2>
-                        <p className={styles.sectionText}>
-                            {t("my_page.settings.preferences.desc")}
-                        </p>
-                    </div>
-                </div>
 
-                <div className={styles.list}>
-                    {preferenceItems.map((item) => (
-                        <div key={item.id} className={styles.row}>
-                            <div className={styles.rowInfo}>
-                                <div className={styles.rowLabel}>{item.label}</div>
-                                <div className={styles.rowHelper}>{item.helper}</div>
-                            </div>
-                            <div className={styles.valueGroup}>
-                                <div className={styles.rowValue}>{item.value}</div>
-                                <span className={`${styles.badge} ${styles[`${item.tone}Badge`]}`}>
-                                    {item.tone === "info"
-                                        ? t("common.states.read_only")
-                                        : t("common.states.not_set")}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
 
-            <section className={styles.section}>
-                <div className={styles.sectionHeader}>
-                    <div>
-                        <h2 className={styles.sectionTitle}>
-                            {t("my_page.settings.links.title")}
-                        </h2>
-                        <p className={styles.sectionText}>
-                            {t("my_page.settings.links.desc")}
-                        </p>
-                    </div>
-                </div>
 
-                <div className={styles.linkGrid}>
-                    {quickLinks.map((link) => (
-                        <button
-                            key={link.id}
-                            className={styles.linkCard}
-                            onClick={() => router.push(link.href)}
-                        >
-                            <div className={styles.linkTitle}>{link.title}</div>
-                            <div className={styles.linkDesc}>{link.desc}</div>
-                        </button>
-                    ))}
-                </div>
-
-                <div className={styles.placeholderPanel}>
-                    <div className={styles.placeholderTitle}>
-                        {t("my_page.settings.links.placeholder_title")}
-                    </div>
-                    <div className={styles.placeholderText}>
-                        {t("my_page.settings.links.placeholder_desc")}
-                    </div>
-                </div>
-            </section>
 
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
