@@ -18,38 +18,20 @@ export const LANGUAGES: LangOption[] = [
     { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
     { code: 'ja', label: '日本語', flag: 'https://flagcdn.com/w40/jp.png' },
     { code: 'zh-CN', label: '简体中文', flag: 'https://flagcdn.com/w40/cn.png' },
-    { code: 'zh-HK', label: '繁體中文', flag: 'https://flagcdn.com/w40/hk.png' },
+    { code: 'zh-TW', label: '繁體中文', flag: 'https://flagcdn.com/w40/tw.png' },
     { code: 'vi', label: 'Tiếng Việt', flag: 'https://flagcdn.com/w40/vn.png' },
     { code: 'th', label: 'ไทย', flag: 'https://flagcdn.com/w40/th.png' },
-    { code: 'id', label: 'Bahasa Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
-    { code: 'ms', label: 'Bahasa Melayu', flag: 'https://flagcdn.com/w40/my.png' },
-    { code: 'fr', label: 'Français', flag: 'https://flagcdn.com/w40/fr.png' },
-    { code: 'es', label: 'Español', flag: 'https://flagcdn.com/w40/es.png' },
-    { code: 'de', label: 'Deutsch', flag: 'https://flagcdn.com/w40/de.png' },
-    { code: 'pt', label: 'Português', flag: 'https://flagcdn.com/w40/pt.png' },
-    { code: 'ru', label: 'Русский', flag: 'https://flagcdn.com/w40/ru.png' },
     { code: 'ar', label: 'العربية', flag: 'https://flagcdn.com/w40/sa.png' },
 ];
-
-interface LanguagePickerProps {
-    compact?: boolean;
-}
 
 const LANG_TO_CURRENCY: Record<string, string> = {
     'ko': 'KRW',
     'en': 'USD',
     'ja': 'JPY',
     'zh-CN': 'CNY',
-    'zh-HK': 'HKD',
+    'zh-TW': 'TWD',
     'vi': 'VND',
     'th': 'THB',
-    'id': 'IDR',
-    'ms': 'MYR',
-    'fr': 'EUR',
-    'es': 'EUR',
-    'de': 'EUR',
-    'pt': 'EUR',
-    'ru': 'RUB',
     'ar': 'SAR'
 };
 
@@ -58,18 +40,15 @@ const LANG_TO_COUNTRY: Record<string, string> = {
     'en': 'US',
     'ja': 'JP',
     'zh-CN': 'CN',
-    'zh-HK': 'HK',
+    'zh-TW': 'TW',
     'vi': 'VN',
     'th': 'TH',
-    'id': 'ID',
-    'ms': 'MY',
-    'fr': 'FR',
-    'es': 'ES',
-    'de': 'DE',
-    'pt': 'PT',
-    'ru': 'RU',
     'ar': 'SA'
 };
+
+interface LanguagePickerProps {
+    compact?: boolean;
+}
 
 export default function LanguagePicker({ compact = false }: LanguagePickerProps) {
     const { t, i18n } = useTranslation('common');
