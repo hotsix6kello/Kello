@@ -273,7 +273,6 @@ export default function CommunityPage() {
     // Step 17: Activity Tracking States
     const [savedIds, setSavedIds] = useState<number[]>([]);
     const [reactedIds, setReactedIds] = useState<number[]>([]);
-    const [recentIds, setRecentIds] = useState<number[]>([]);
 
     const communityFetchErrorMessage = t('community_page.states.fetch_failed_desc');
     const communityCategories = CATEGORY_OPTIONS.map((id) => ({ id, label: getCategoryLabel(t, id) }));
@@ -338,87 +337,6 @@ export default function CommunityPage() {
             signals.push({ id: 'mate', label: t('community_page.quality_signals.mate'), type: 'mate' });
         }
         return signals;
-    };
-
-    // Step 18: Next Best Action Helper
-    interface RecommendedAction {
-        id: string;
-        type: 'mine' | 'reacted' | 'saved';
-        badge: string;
-        label: string;
-        desc: string;
-        cta: string;
-        link: string;
-    }
-
-    const getNextActions = (): RecommendedAction[] => {
-        const actions: RecommendedAction[] = [];
-        
-        // 1. My Own Posts needing updates
-        const myPosts = posts.filter(p => p.author === loggedInUserName);
-        myPosts.forEach(p => {
-            const hasResult = p.desc.includes('[RESULT:') || p.desc.includes('[TIPS:');
-            const isClosed = p.desc.includes('[STATUS:CLOSED]');
-            if (isClosed && !hasResult) {
-                actions.push({
-                    id: `mine-result-${p.id}`,
-                    type: 'mine',
-                    badge: t('community_page.next_actions.mine_result.badge'),
-                    label: p.title,
-                    desc: t('community_page.next_actions.mine_result.desc'),
-                    cta: t('community_page.next_actions.mine_result.cta'),
-                    link: `/community/${p.id}`
-                });
-            } else if (p.comments >= 5) {
-                actions.push({
-                    id: `mine-active-${p.id}`,
-                    type: 'mine',
-                    badge: t('community_page.next_actions.mine_active.badge'),
-                    label: p.title,
-                    desc: t('community_page.next_actions.mine_active.desc'),
-                    cta: t('community_page.next_actions.mine_active.cta'),
-                    link: `/community/${p.id}`
-                });
-            }
-        });
-
-        // 2. Reacted posts needing more input
-        reactedIds.forEach(rid => {
-            const p = posts.find(post => post.id === rid);
-            if (!p) return;
-            const isSurveying = p.desc.includes('[STATUS:SURVEYING]');
-            if (isSurveying) {
-                actions.push({
-                    id: `reacted-survey-${p.id}`,
-                    type: 'reacted',
-                    badge: t('community_page.next_actions.reacted_survey.badge'),
-                    label: p.title,
-                    desc: t('community_page.next_actions.reacted_survey.desc'),
-                    cta: t('community_page.next_actions.reacted_survey.cta'),
-                    link: `/community/${p.id}`
-                });
-            }
-        });
-
-        // 3. Saved posts with updates
-        savedIds.forEach(sid => {
-            const p = posts.find(post => post.id === sid);
-            if (!p) return;
-            const hasResult = p.desc.includes('[RESULT:') || p.desc.includes('[TIPS:');
-            if (hasResult) {
-                actions.push({
-                    id: `saved-result-${p.id}`,
-                    type: 'saved',
-                    badge: t('community_page.next_actions.saved_result.badge'),
-                    label: p.title,
-                    desc: t('community_page.next_actions.saved_result.desc'),
-                    cta: t('community_page.next_actions.saved_result.cta'),
-                    link: `/community/${p.id}`
-                });
-            }
-        });
-
-        return actions;
     };
 
     // Step 22: Feedback & Toast
@@ -498,13 +416,10 @@ export default function CommunityPage() {
             // ignore
         }
         
-        // Step 17: Load Activity
         const saved = JSON.parse(localStorage.getItem('kello_saved_posts') || '[]');
         const reacted = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
-        const recent = JSON.parse(localStorage.getItem('kello_recently_viewed') || '[]');
         setSavedIds(saved);
         setReactedIds(reacted);
-        setRecentIds(recent);
 
         fetchPosts();
     }, [fetchPosts]);
@@ -646,7 +561,7 @@ export default function CommunityPage() {
             const isMeetup = newType === 'meetup' || newType === 'meetup_recruitment';
 
             if (editingPostId) {
-                const updatePayload: Record<string, any> = {
+                const updatePayload: Record<string, unknown> = {
                     type: databaseType,
                     title: newTitle,
                     desc: composedDesc,
@@ -670,7 +585,7 @@ export default function CommunityPage() {
                 fetchPosts();
                 showToast(t('community_page.toasts.updated'));
             } else {
-                const insertPayload: Record<string, any> = {
+                const insertPayload: Record<string, unknown> = {
                     author_user_id: user.id,
                     author: fakeUser.author,
                     flag: fakeUser.flag,
@@ -977,50 +892,6 @@ export default function CommunityPage() {
                 </div>
                 )}
 
-                {/* Activity & Recommendation Hub - Consolidated for Step 21 */}
-                <div className={styles.recommendationHub}>
-                    {/* Activity Fragment */}
-                    {(!loading && (savedIds.length > 0 || reactedIds.length > 0)) && (
-                        <div className={styles.compactActivityRow}>
-                             💡 <b>{t('community_page.activity.label')}</b> {t('community_page.activity.summary', { saved: savedIds.length, reacted: reactedIds.length })}
-                             {posts.filter(p => (savedIds.includes(p.id) || reactedIds.includes(p.id)) && p.comments >= 3).length > 0 && ` ${t('community_page.activity.new_updates')}`}
-                        </div>
-                    )}
-
-                    {/* Quick Recommendations Horizontal Scroll */}
-                    {!loading && (filter === 'all' || filter === 'beauty_review') && subFilter === 'all' && (
-                        <div className={styles.recommendScrollCompact}>
-                            {posts.filter(p => (p.comments || 0) >= 4).slice(0, 3).map(p => (
-                                <div key={p.id} className={styles.recommendChip} onClick={() => router.push(`/community/${p.id}`)}>
-                                    🔥 {p.title}
-                                </div>
-                            ))}
-                            {posts.filter(p => p.desc.includes('[RESULT:')).slice(0, 2).map(p => (
-                                <div key={p.id} className={styles.recommendChip} onClick={() => router.push(`/community/${p.id}`)}>
-                                    🎁 {p.title.slice(0, 10)}...
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-
-                {/* Step 18 & 21: Consolidated Recommendations (Now as a secondary list) */}
-                {!loading && (() => {
-                    const recommendations = getNextActions();
-                    if (recommendations.length === 0 && recentIds.length === 0) return null;
-
-                    return (
-                        <section className={styles.nextActionCompact}>
-                            <div className={styles.nextActionScroll}>
-                                {recommendations.slice(0, 3).map(action => (
-                                    <div key={action.id} className={styles.nextActionTag} onClick={() => router.push(action.link)}>
-                                        🏃 {action.badge}: {action.label.slice(0, 8)}..
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-                    );
-                })()}
 
                 {/* Navigation Summary & Sorting */}
                 <div className={styles.navSummaryBox}>
