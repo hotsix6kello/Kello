@@ -577,17 +577,16 @@
 }
 
 .commentInputBox {
-    position: fixed;
-    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
-    left: 0;
-    right: 0;
     background: #ffffff;
-    padding: 12px 16px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
-    z-index: 20;
+    border: 2px solid #fecaca;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.04);
+    margin-bottom: 24px;
+    scroll-margin-top: 100px;
 }
 
 .inputControls {
@@ -650,27 +649,35 @@
 
 .commentInput {
     flex: 1;
-    background: var(--gray-100);
-    border: none;
-    border-radius: 20px;
-    padding: 0 16px;
-    font-size: 14px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 15px;
     outline: none;
-    height: 40px;
+    height: 48px;
+    color: var(--foreground);
+}
+
+.commentInput:focus {
+    border-color: #fb7185;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(251, 113, 133, 0.1);
 }
 
 .commentSubmit {
-    background: var(--primary);
+    background: #e11d48;
     color: #fff;
     border: none;
-    border-radius: 20px;
-    padding: 0 16px;
+    border-radius: 12px;
+    padding: 0 20px;
+    height: 48px;
     font-weight: 800;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .commentSubmit:disabled {

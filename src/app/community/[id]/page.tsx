@@ -28,6 +28,7 @@ interface Comment {
     author: string;
     content: string;
     created_at: string;
+    author_user_id?: string;
 }
 
 type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
@@ -285,36 +286,67 @@ export default function CommunityDetailPage() {
     };
 
     const handleSubmitComment = async () => {
-        if ((!newComment.trim() && !selectedIntent) || !post) return;
+        if ((!newComment.trim() && !selectedIntent) || !post || isSubmitting) return;
+
+        // Verify authentication before submission
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            alert(t('community_page.errors.login_required', { defaultValue: '로그인이 필요한 서비스입니다.' }));
+            return;
+        }
+
         setIsSubmitting(true);
         
-        let finalContent = newComment;
-        if (selectedIntent) {
-            finalContent = `[SIGNAL:${selectedIntent}]${selectedTime ? `[TIME:${selectedTime}]` : ''}${newComment}`;
-        }
-
-        const { error } = await supabase.from('community_comments').insert([{
-            post_id: post.id,
-            author: loggedInUserName,
-            content: finalContent
-        }]);
-
-        if (!error) {
-            setNewComment('');
-            setSelectedIntent(null);
-            setSelectedTime(null);
-            // Update comments count lightly
-            await supabase.from('community_posts').update({ comments: post.comments + 1 }).eq('id', post.id);
-
-            // Step 17: Track Reacted Post
-            const reactedPosts = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
-            if (!reactedPosts.includes(post.id)) {
-                localStorage.setItem('kello_reacted_posts', JSON.stringify([...reactedPosts, post.id]));
+        try {
+            let finalContent = newComment;
+            if (selectedIntent) {
+                finalContent = `[SIGNAL:${selectedIntent}]${selectedTime ? `[TIME:${selectedTime}]` : ''}${newComment}`;
             }
 
-            fetchPostData();
+            const { error } = await supabase.from('community_comments').insert([{
+                post_id: post.id,
+                author_user_id: user.id,
+                author: loggedInUserName,
+                content: finalContent
+            }]);
+
+            if (!error) {
+                setNewComment('');
+                setSelectedIntent(null);
+                setSelectedTime(null);
+                
+                // Update comments count in posts table
+                await supabase.from('community_posts')
+                    .update({ comments: (post.comments || 0) + 1 })
+                    .eq('id', post.id);
+
+                // Update local state for immediate feedback
+                setPost(prev => prev ? { ...prev, comments: (prev.comments || 0) + 1 } : null);
+
+                // Track reacted post
+                const reactedPosts = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
+                if (!reactedPosts.includes(post.id)) {
+                    localStorage.setItem('kello_reacted_posts', JSON.stringify([...reactedPosts, post.id]));
+                }
+
+                await fetchPostData();
+                
+                // Optional: scroll to the new comment or show success
+                setTimeout(() => {
+                    const list = document.querySelector(`.${styles.commentList}`);
+                    if (list) {
+                        list.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    }
+                }, 100);
+            } else {
+                console.error('Comment insertion error:', error);
+                alert(t('common.error_occurred', { defaultValue: 'An error occurred. Please try again.' }) + ` (${error.message || error.code || 'Unknown DB error'})`);
+            }
+        } catch (err) {
+            console.error('Unexpected error during comment submission:', err);
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     const handleReport = (reason: string) => {
@@ -465,8 +497,9 @@ export default function CommunityDetailPage() {
                                 {/* 2. Action Headers - Always Visible */}
                                 <div className={styles.actionRowCompact}>
                                     <button className={styles.primaryActionCompact} onClick={() => {
-                                        const el = document.getElementById('comment-input-area');
-                                        el?.scrollIntoView({ behavior: 'smooth' });
+                                        const el = document.getElementById('comment-input-field');
+                                        el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                        setTimeout(() => el?.focus(), 500);
                                     }}>
                                         {currentStatus === 'REVIEWS' ? t('community_page.detail_page.primary_action.review') : t('community_page.detail_page.primary_action.join')}
                                     </button>
@@ -627,6 +660,55 @@ export default function CommunityDetailPage() {
                     })()}
 
                     <h3 className={styles.commentTitle}>{t('community_page.detail_page.comments_title')}</h3>
+                    
+                    {/* Integrated Comment Input - Moved for better context */}
+                    <div className={styles.commentInputBox}>
+                        {(post.type === 'review' || post.type === 'travel' || post.type === 'meetup') && (
+                            <>
+                                <div className={styles.intentChips}>
+                                    {SIGNAL_INTENTS.map(intent => (
+                                        <button 
+                                            key={intent} 
+                                            className={`${styles.intentChip} ${selectedIntent === intent ? styles.intentChipActive : ''}`}
+                                            onClick={() => setSelectedIntent(selectedIntent === intent ? null : intent)}
+                                        >
+                                            {getIntentLabel(t, intent)}
+                                        </button>
+                                    ))}
+                                </div>
+                                {selectedIntent && (
+                                    <div className={styles.timeChips}>
+                                        {SIGNAL_TIMES.map(time => (
+                                            <span 
+                                                key={time} 
+                                                className={`${styles.timeChip} ${selectedTime === time ? styles.timeChipActive : ''}`}
+                                                onClick={() => setSelectedTime(selectedTime === time ? null : time)}
+                                            >
+                                                {getTimeLabel(t, time)}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </>
+                        )}
+                        <div className={styles.inputControls}>
+                            <input
+                                id="comment-input-field"
+                                className={styles.commentInput}
+                                placeholder={selectedIntent ? t('community_page.detail_page.comment_input.optional') : t('community_page.detail_page.comment_input.default')}
+                                value={newComment}
+                                onChange={e => setNewComment(e.target.value)}
+                                onKeyDown={e => e.key === 'Enter' && handleSubmitComment()}
+                            />
+                            <button
+                                className={styles.commentSubmit}
+                                disabled={(!newComment.trim() && !selectedIntent) || isSubmitting}
+                                onClick={handleSubmitComment}
+                            >
+                                {isSubmitting ? '...' : (selectedIntent ? t('community_page.detail_page.comment_input.send') : '➤')}
+                            </button>
+                        </div>
+                    </div>
 
                     {/* Author Response Panel - Step 11 */}
                     {post.author === loggedInUserName && (post.type === 'review' || post.type === 'travel' || post.type === 'meetup') && (() => {
@@ -646,8 +728,8 @@ export default function CommunityDetailPage() {
                             if (normalizedTime) timeCounts[normalizedTime] = (timeCounts[normalizedTime] || 0) + 1;
                         });
 
-                        const topTime = Object.entries(timeCounts).sort((a,b) => b[1] - a[1])[0]?.[0];
-                        const topIntent = Object.entries(intentCounts).sort((a,b) => b[1] - a[1])[0]?.[0];
+                        const topTime = Object.entries(timeCounts).sort((a: [string, number], b: [string, number]) => b[1] - a[1])[0]?.[0];
+                        const topIntent = Object.entries(intentCounts).sort((a: [string, number], b: [string, number]) => b[1] - a[1])[0]?.[0];
                         const latestSignals = signalComments.slice(-2).length;
 
                         // Guide Logic
@@ -853,8 +935,9 @@ export default function CommunityDetailPage() {
                                                     onClick={() => {
                                                         setSelectedTime(time);
                                                         setSelectedIntent(selectedIntent || 'interested');
-                                                        document.querySelector(`.${styles.commentInput}`)?.parentElement?.scrollIntoView({ behavior: 'smooth' });
-                                                        (document.querySelector(`.${styles.commentInput}`) as HTMLInputElement)?.focus();
+                                                        const el = document.getElementById('comment-input-field');
+                                                        el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                        setTimeout(() => (el as HTMLInputElement)?.focus(), 500);
                                                     }}
                                                 >
                                                     <span className={styles.chipLabel}>{getTimeLabel(t, time)}</span>
@@ -897,8 +980,9 @@ export default function CommunityDetailPage() {
                                                         onClick={() => {
                                                             setSelectedTime(time);
                                                             setSelectedIntent(selectedIntent || 'interested');
-                                                            document.querySelector(`.${styles.commentInput}`)?.parentElement?.scrollIntoView({ behavior: 'smooth' });
-                                                            (document.querySelector(`.${styles.commentInput}`) as HTMLInputElement)?.focus();
+                                                            const el = document.getElementById('comment-input-field');
+                                                            el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                            setTimeout(() => (el as HTMLInputElement)?.focus(), 500);
                                                         }}
                                                     >
                                                         {t('community_page.detail_page.signal_summary.join_time', { time: getTimeLabel(t, time) })}
@@ -916,8 +1000,9 @@ export default function CommunityDetailPage() {
                                     <button 
                                         className={styles.ctaLink}
                                         onClick={() => {
-                                            document.querySelector(`.${styles.commentInput}`)?.parentElement?.scrollIntoView({ behavior: 'smooth' });
-                                            (document.querySelector(`.${styles.commentInput}`) as HTMLInputElement)?.focus();
+                                            const el = document.getElementById('comment-input-field');
+                                            el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                            setTimeout(() => (el as HTMLInputElement)?.focus(), 500);
                                         }}
                                     >
                                         {t('community_page.detail_page.signal_summary.join_cta')}
@@ -987,53 +1072,6 @@ export default function CommunityDetailPage() {
                 </div>
             </div>
 
-            <div className={styles.commentInputBox}>
-                {(post.type === 'review' || post.type === 'travel' || post.type === 'meetup') && (
-                    <>
-                        <div className={styles.intentChips}>
-                            {SIGNAL_INTENTS.map(intent => (
-                                <button 
-                                    key={intent} 
-                                    className={`${styles.intentChip} ${selectedIntent === intent ? styles.intentChipActive : ''}`}
-                                    onClick={() => setSelectedIntent(selectedIntent === intent ? null : intent)}
-                                >
-                                    {getIntentLabel(t, intent)}
-                                </button>
-                            ))}
-                        </div>
-                        {selectedIntent && (
-                            <div className={styles.timeChips}>
-                                {SIGNAL_TIMES.map(time => (
-                                    <span 
-                                        key={time} 
-                                        className={`${styles.timeChip} ${selectedTime === time ? styles.timeChipActive : ''}`}
-                                        onClick={() => setSelectedTime(selectedTime === time ? null : time)}
-                                    >
-                                        {getTimeLabel(t, time)}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
-                    </>
-                )}
-                <div className={styles.inputControls}>
-                    <input
-                        id="comment-input-field"
-                        className={styles.commentInput}
-                        placeholder={selectedIntent ? t('community_page.detail_page.comment_input.optional') : t('community_page.detail_page.comment_input.default')}
-                        value={newComment}
-                        onChange={e => setNewComment(e.target.value)}
-                        onKeyDown={e => e.key === 'Enter' && handleSubmitComment()}
-                    />
-                    <button
-                        className={styles.commentSubmit}
-                        disabled={(!newComment.trim() && !selectedIntent) || isSubmitting}
-                        onClick={handleSubmitComment}
-                    >
-                        {isSubmitting ? '...' : (selectedIntent ? t('community_page.detail_page.comment_input.send') : '➤')}
-                    </button>
-                </div>
-            </div>
 
             {/* Report Modal - Step 14 */}
             {isReportModalOpen && (
