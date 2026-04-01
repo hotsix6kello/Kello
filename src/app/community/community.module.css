@@ -546,7 +546,7 @@
 /* ── Floating Action Button Group ── */
 .fabGroup {
     width: 100%;
-    margin: 16px auto 32px;
+    margin: 8px auto 16px;
     display: flex;
     justify-content: center;
     z-index: 10;
@@ -1065,7 +1065,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
 }
 
 .entryCard {
