@@ -638,18 +638,25 @@ export default function CommunityPage() {
             const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
 
             const fakeUser = { author: loggedInUserName, flag: '🌍' };
+            const isMeetup = newType === 'meetup' || newType === 'meetup_recruitment';
 
             if (editingPostId) {
-                const { error } = await supabase.from('community_posts').update({
+                const updatePayload: Record<string, any> = {
                     type: databaseType,
                     title: newTitle,
                     desc: composedDesc,
-                    start_time: startTime || null,
-                    end_time: endTime || null,
-                    place_name: placeName || null,
-                    place_lat: placeName ? (placeLat || 37.5665) : null,
-                    place_lng: placeName ? (placeLng || 126.9780) : null
-                }).eq('id', editingPostId);
+                };
+
+                // DB Migration is needed for these columns
+                if (isMeetup) {
+                    updatePayload.start_time = startTime || null;
+                    updatePayload.end_time = endTime || null;
+                    updatePayload.place_name = placeName || null;
+                    updatePayload.place_lat = placeName ? (placeLat || 37.5665) : null;
+                    updatePayload.place_lng = placeName ? (placeLng || 126.9780) : null;
+                }
+
+                const { error } = await supabase.from('community_posts').update(updatePayload).eq('id', editingPostId);
 
                 if (error) throw new Error(error.message || JSON.stringify(error));
                 
@@ -658,7 +665,7 @@ export default function CommunityPage() {
                 fetchPosts();
                 showToast(t('community_page.toasts.updated'));
             } else {
-                const { error } = await supabase.from('community_posts').insert([{
+                const insertPayload: Record<string, any> = {
                     author_user_id: loggedInUserId,
                     author: fakeUser.author,
                     flag: fakeUser.flag,
@@ -667,12 +674,18 @@ export default function CommunityPage() {
                     desc: composedDesc,
                     time: t('community_page.time.just_now'),
                     comments: 0,
-                    start_time: startTime || null,
-                    end_time: endTime || null,
-                    place_name: placeName || null,
-                    place_lat: placeName ? (placeLat || 37.5665) : null,
-                    place_lng: placeName ? (placeLng || 126.9780) : null
-                }]);
+                };
+
+                // DB Migration is needed for these columns
+                if (isMeetup) {
+                    insertPayload.start_time = startTime || null;
+                    insertPayload.end_time = endTime || null;
+                    insertPayload.place_name = placeName || null;
+                    insertPayload.place_lat = placeName ? (placeLat || 37.5665) : null;
+                    insertPayload.place_lng = placeName ? (placeLng || 126.9780) : null;
+                }
+
+                const { error } = await supabase.from('community_posts').insert([insertPayload]);
 
                 if (error) throw new Error(error.message || JSON.stringify(error));
                 
