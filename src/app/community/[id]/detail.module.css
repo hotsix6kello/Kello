@@ -713,6 +713,14 @@
     margin-bottom: 4px;
 }
 
+.summaryLabel {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
 .summaryValue {
     font-size: 15px;
     font-weight: 800;
@@ -1370,7 +1378,9 @@
     display: flex;
     gap: 6px;
     line-height: 1.5;
-}.saveBtn {
+}
+
+.saveBtn {
     background: none;
     border: none;
     font-size: 20px;
@@ -1669,4 +1679,56 @@
     white-space: pre-wrap;
 }
 
-
+/* ── 댓글 쓰기 트리거 버튼 ── */
+.openCommentBtn {
+    width: 100%;
+    margin: 12px 0;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.openCommentBtn:hover {
+    background: #eff6ff;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ── 인라인 댓글 입력 박스 ── */
+.inlineCommentBox {
+    margin: 12px 0 16px;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* ── 취소 버튼 ── */
+.cancelCommentBtn {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: right;
+    padding: 2px 0;
+}
+
+.cancelCommentBtn:hover {
+    color: var(--gray-600);
+}
+
+
+.commentInputWrapper { display: flex; flex-direction: column; width: 100%; }

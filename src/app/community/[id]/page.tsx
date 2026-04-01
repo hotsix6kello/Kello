@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { useTranslation } from 'react-i18next';
 import styles from './detail.module.css';
-import ExploreMap from '@/app/explore/components/ExploreMap';
+import Image from 'next/image';
 
 interface Post {
     id: number;
@@ -21,6 +21,7 @@ interface Post {
     place_name?: string;
     place_lat?: number;
     place_lng?: number;
+    imageUrl?: string;
 }
 
 interface Comment {
@@ -31,27 +32,13 @@ interface Comment {
     author_user_id?: string;
 }
 
-type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
-type CommunityTag = 'solo_friendly' | 'friends_friendly' | 'photo_spot' | 'waiting' | 'foreigner_friendly';
+
 type SignalIntent = 'interested' | 'available_this_week' | 'join_if_schedule_fits' | 'thanks' | 'question';
 type SignalTime = 'this_week' | 'this_weekend' | 'next_week' | 'schedule_coordination';
 
-const STATUS_KEY_MAP: Record<CommunityStatus, 'reviews' | 'reacting' | 'surveying' | 'drafting' | 'closed'> = {
-    REVIEWS: 'reviews',
-    REACTING: 'reacting',
-    SURVEYING: 'surveying',
-    DRAFTING: 'drafting',
-    CLOSED: 'closed',
-};
 
-const TAG_OPTIONS: CommunityTag[] = ['solo_friendly', 'friends_friendly', 'photo_spot', 'waiting', 'foreigner_friendly'];
-const LEGACY_TAG_MAP: Record<string, CommunityTag> = {
-    '혼자 가기 좋음': 'solo_friendly',
-    '친구랑 가기 좋음': 'friends_friendly',
-    '사진 맛집': 'photo_spot',
-    '웨이팅 있음': 'waiting',
-    '외국인 편함': 'foreigner_friendly',
-};
+
+
 
 const SIGNAL_INTENTS: SignalIntent[] = ['interested', 'available_this_week', 'join_if_schedule_fits', 'thanks', 'question'];
 const LEGACY_INTENT_MAP: Record<string, SignalIntent> = {
@@ -70,12 +57,25 @@ const LEGACY_TIME_MAP: Record<string, SignalTime> = {
     '날짜 조율': 'schedule_coordination',
 };
 
-const normalizeTag = (value: string): CommunityTag | null => {
-    const trimmed = value.trim();
-    if (!trimmed) return null;
-    if (TAG_OPTIONS.includes(trimmed as CommunityTag)) return trimmed as CommunityTag;
-    return LEGACY_TAG_MAP[trimmed] ?? null;
+type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
+
+const STATUS_KEY_MAP: Record<CommunityStatus, string> = {
+    REVIEWS: 'REVIEWS',
+    REACTING: 'REACTING',
+    SURVEYING: 'SURVEYING',
+    DRAFTING: 'DRAFTING',
+    CLOSED: 'CLOSED'
 };
+
+const getStatusLabel = (t: any, status: string) => {
+    return t(`community_page.detail_page.status.${status}`, { defaultValue: status });
+};
+
+const getTagLabel = (t: any, tag: string) => {
+    return t(`community_page.detail_page.tags.${tag}`, { defaultValue: tag });
+};
+
+
 
 const normalizeIntent = (value: string): SignalIntent | null => {
     const trimmed = value.trim();
@@ -89,16 +89,6 @@ const normalizeTime = (value: string): SignalTime | null => {
     if (!trimmed) return null;
     if (SIGNAL_TIMES.includes(trimmed as SignalTime)) return trimmed as SignalTime;
     return LEGACY_TIME_MAP[trimmed] ?? null;
-};
-
-const getStatusLabel = (t: (key: string, options?: Record<string, unknown>) => string, status: string) => {
-    const key = STATUS_KEY_MAP[status as CommunityStatus];
-    return key ? t(`community_page.status.${key}`) : status;
-};
-
-const getTagLabel = (t: (key: string, options?: Record<string, unknown>) => string, tag: string) => {
-    const normalized = normalizeTag(tag);
-    return normalized ? t(`community_page.tags.${normalized}`) : tag;
 };
 
 const getIntentLabel = (t: (key: string, options?: Record<string, unknown>) => string, intent: string) => {
@@ -124,8 +114,8 @@ export default function CommunityDetailPage() {
     const [selectedTime, setSelectedTime] = useState<SignalTime | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isCommentOpen, setIsCommentOpen] = useState(false);
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
-    const [allPosts, setAllPosts] = useState<Post[]>([]);
 
     // Step 14: Safety States
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -135,26 +125,18 @@ export default function CommunityDetailPage() {
     const [activeCommentMenu, setActiveCommentMenu] = useState<number | null>(null);
     const [isPostHidden, setIsPostHidden] = useState(false);
 
-    // Step 17: Activity Tracking States
+    const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({ strength: true, decision: true, safety: true });
     const [isSaved, setIsSaved] = useState(false);
+    const [resultText, setResultText] = useState('');
 
-    // Step 21: Accordion States for Information Density
-    const [isExpanded, setIsExpanded] = useState<Record<string, boolean>>({
-        strength: false,
-        decision: false,
-        safety: false
-    });
 
-    const toggleExpand = (section: string) => {
-        setIsExpanded(prev => ({ ...prev, [section]: !prev[section] }));
-    };
+
+
 
     useEffect(() => {
         if (!id) return;
         
-        // Check if saved
-        const savedPosts = JSON.parse(localStorage.getItem('kello_saved_posts') || '[]');
-        setIsSaved(savedPosts.includes(Number(id)));
+
 
         // Update recently viewed
         let recentlyViewed = JSON.parse(localStorage.getItem('kello_recently_viewed') || '[]');
@@ -162,17 +144,7 @@ export default function CommunityDetailPage() {
         localStorage.setItem('kello_recently_viewed', JSON.stringify(recentlyViewed));
     }, [id]);
 
-    const toggleSave = () => {
-        const savedPosts = JSON.parse(localStorage.getItem('kello_saved_posts') || '[]');
-        let newSaved;
-        if (isSaved) {
-            newSaved = savedPosts.filter((sid: number) => sid !== Number(id));
-        } else {
-            newSaved = [...savedPosts, Number(id)];
-        }
-        localStorage.setItem('kello_saved_posts', JSON.stringify(newSaved));
-        setIsSaved(!isSaved);
-    };
+
 
     const reportReasons = [
         t('community_page.report.reasons.ad_spam'),
@@ -206,9 +178,7 @@ export default function CommunityDetailPage() {
             setComments(commentsData as Comment[]);
         }
 
-        // Fetch All Posts for Related Section - Step 19
-        const { data: allData } = await supabase.from('community_posts').select('*').order('created_at', { ascending: false });
-        if (allData) setAllPosts(allData as Post[]);
+
 
         setLoading(false);
     };
@@ -230,65 +200,46 @@ export default function CommunityDetailPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
-    const [resultText, setResultText] = useState('');
+    const toggleExpand = (key: string) => {
+        setIsExpanded(prev => ({ ...prev, [key]: !prev[key] }));
+    };
 
-    const handleUpdateStatus = async (newStatus: string) => {
+    const toggleSave = () => {
+        setIsSaved(!isSaved);
+    };
+
+    const handleUpdateStatus = async (status: CommunityStatus) => {
         if (!post) return;
-        
-        let newDesc = post.desc;
-        if (newDesc.includes('[STATUS:')) {
-            newDesc = newDesc.replace(/\[STATUS:.*?\]/, `[STATUS:${newStatus}]`);
-        } else {
-            newDesc = `${newDesc} [STATUS:${newStatus}]`;
-        }
+        const newDesc = post.desc.includes('[STATUS:')
+            ? post.desc.replace(/\[STATUS:.*?\]/, `[STATUS:${status}]`)
+            : `${post.desc} [STATUS:${status}]`;
 
-        const { error } = await supabase
-            .from('community_posts')
-            .update({ desc: newDesc })
-            .eq('id', post.id);
-
+        const { error } = await supabase.from('community_posts').update({ desc: newDesc }).eq('id', post.id);
         if (!error) {
             setPost({ ...post, desc: newDesc });
-            fetchPostData();
         }
     };
 
-    const handleUpdateResult = async (visited: boolean) => {
+    const handleUpdateResult = async (isVisited: boolean) => {
         if (!post || !resultText.trim()) return;
+        const resultTag = isVisited ? '[RESULT:VISITED]' : '[RESULT:SAVED]';
+        const newDesc = `${post.desc} ${resultTag} [TIPS:${resultText}] [STATUS:CLOSED]`;
 
-        let newDesc = post.desc;
-        const resultTag = `[RESULT:${resultText}]`;
-        const visitTag = `[VISITED:${visited}]`;
-        const tipsTag = `[TIPS:${visited
-            ? t('community_page.detail_page.result.tips_visited')
-            : t('community_page.detail_page.result.tips_retry')}]`;
-
-        // Replace or Append
-        if (newDesc.includes('[RESULT:')) newDesc = newDesc.replace(/\[RESULT:.*?\]/, resultTag);
-        else newDesc = `${newDesc} ${resultTag}`;
-
-        if (newDesc.includes('[VISITED:')) newDesc = newDesc.replace(/\[VISITED:.*?\]/, visitTag);
-        else newDesc = `${newDesc} ${visitTag}`;
-
-        if (newDesc.includes('[TIPS:')) newDesc = newDesc.replace(/\[TIPS:.*?\]/, tipsTag);
-        else newDesc = `${newDesc} ${tipsTag}`;
-
-        const { error } = await supabase
-            .from('community_posts')
-            .update({ desc: newDesc })
-            .eq('id', post.id);
-
+        const { error } = await supabase.from('community_posts').update({ desc: newDesc }).eq('id', post.id);
         if (!error) {
+            setPost({ ...post, desc: newDesc });
             setResultText('');
-            fetchPostData();
-            alert(t('community_page.detail_page.result.saved_alert'));
         }
+    };
+
+    const handleReport = (reason: string) => {
+        alert(t('community_page.report.success', { defaultValue: '정상적으로 신고되었습니다.' }));
+        setIsReportModalOpen(false);
     };
 
     const handleSubmitComment = async () => {
         if ((!newComment.trim() && !selectedIntent) || !post || isSubmitting) return;
 
-        // Verify authentication before submission
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
             alert(t('community_page.errors.login_required', { defaultValue: '로그인이 필요한 서비스입니다.' }));
@@ -298,10 +249,9 @@ export default function CommunityDetailPage() {
         setIsSubmitting(true);
         
         try {
-            let finalContent = newComment;
-            if (selectedIntent) {
-                finalContent = `[SIGNAL:${selectedIntent}]${selectedTime ? `[TIME:${selectedTime}]` : ''}${newComment}`;
-            }
+            let finalContent = selectedIntent 
+                ? `[SIGNAL:${selectedIntent}]${selectedTime ? `[TIME:${selectedTime}]` : ''}${newComment}`
+                : newComment;
 
             const { error } = await supabase.from('community_comments').insert([{
                 post_id: post.id,
@@ -315,15 +265,12 @@ export default function CommunityDetailPage() {
                 setSelectedIntent(null);
                 setSelectedTime(null);
                 
-                // Update comments count in posts table
                 await supabase.from('community_posts')
                     .update({ comments: (post.comments || 0) + 1 })
                     .eq('id', post.id);
 
-                // Update local state for immediate feedback
                 setPost(prev => prev ? { ...prev, comments: (prev.comments || 0) + 1 } : null);
 
-                // Track reacted post
                 const reactedPosts = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
                 if (!reactedPosts.includes(post.id)) {
                     localStorage.setItem('kello_reacted_posts', JSON.stringify([...reactedPosts, post.id]));
@@ -331,7 +278,6 @@ export default function CommunityDetailPage() {
 
                 await fetchPostData();
                 
-                // Optional: scroll to the new comment or show success
                 setTimeout(() => {
                     const list = document.querySelector(`.${styles.commentList}`);
                     if (list) {
@@ -340,22 +286,13 @@ export default function CommunityDetailPage() {
                 }, 100);
             } else {
                 console.error('Comment insertion error:', error);
-                alert(t('common.error_occurred', { defaultValue: 'An error occurred. Please try again.' }) + ` (${error.message || error.code || 'Unknown DB error'})`);
+                alert(t('common.error_occurred', { defaultValue: 'An error occurred. Please try again.' }));
             }
         } catch (err) {
             console.error('Unexpected error during comment submission:', err);
         } finally {
             setIsSubmitting(false);
         }
-    };
-
-    const handleReport = (reason: string) => {
-        const itemLabel = reportingItem?.type === 'post'
-            ? t('community_page.report.item_post')
-            : t('community_page.report.item_comment');
-        alert(t('community_page.report.submitted_alert', { item: itemLabel, reason }));
-        setIsReportModalOpen(false);
-        setReportingItem(null);
     };
 
     if (loading) return <div className={styles.loading}>{t('community_page.detail_page.loading')}</div>;
@@ -397,15 +334,14 @@ export default function CommunityDetailPage() {
                                 </div>
                             )}
                         </div>
-                        <button 
-                            className={`${styles.saveBtn} ${isSaved ? styles.saved : ''}`} 
-                            onClick={toggleSave}
-                            aria-label={t('community_page.detail_page.save_post_aria')}
-                        >
-                            {isSaved ? '⭐' : '☆'}
-                        </button>
                     </div>
                     <h2 className={styles.postTitle}>{post.title}</h2>
+
+                    {post.imageUrl && (
+                        <div className={styles.imageWrapper} style={{ marginTop: '16px', borderRadius: '12px', overflow: 'hidden' }}>
+                            <Image src={post.imageUrl} alt="post target" width={800} height={800} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                        </div>
+                    )}
 
                     {/* Step 20: Freshness Summary Bar */}
                     {(() => {
@@ -565,36 +501,6 @@ export default function CommunityDetailPage() {
                     </div>
 
 
-                    {(post.start_time || post.place_name) && (
-                        <div style={{ marginTop: '20px', background: 'var(--gray-50)', padding: '16px', borderRadius: '12px', border: '1px solid var(--gray-200)' }}>
-                            <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '12px', color: 'var(--foreground)' }}>
-                                {t('community_page.meetup_info', { defaultValue: 'Meetup Details' })}
-                            </h3>
-                            {post.start_time && (
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--gray-700)' }}>
-                                    <span>🕒</span>
-                                    <span>{post.start_time} {post.end_time ? ` ~ ${post.end_time}` : ''}</span>
-                                </div>
-                            )}
-                            {post.place_name && (
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', color: 'var(--gray-700)' }}>
-                                    <span>📍</span>
-                                    <span style={{ fontWeight: 500 }}>{post.place_name}</span>
-                                </div>
-                            )}
-                            {post.place_lat && post.place_lng && (
-                                <div style={{ height: '300px', borderRadius: '8px', overflow: 'hidden' }}>
-                                    <ExploreMap
-                                        items={[]}
-                                        center={{ lat: post.place_lat, lng: post.place_lng }}
-                                        zoom={15}
-                                        onItemClick={() => { }}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    )}
-
                     {/* Like / Dislike reaction feature - step 22 */}
                     <div className={styles.reactionGroup}>
                         <button className={styles.reactionBtn} onClick={() => alert(t('community_page.detail_page.like_alert', { defaultValue: '공감했습니다!' }))}>
@@ -611,53 +517,6 @@ export default function CommunityDetailPage() {
                 </div>
 
                 <div className={styles.commentSection} id="comment-input-area">
-                    {/* Related Posts & Bundle Section - Step 19 */}
-                    {(() => {
-                        const regionMatch = post.desc.match(/\[REGION:(.*?)\]/);
-                        const currentRegion = regionMatch ? regionMatch[1] : (post.place_name?.split(' ')[0] || '');
-                        
-                        const related = allPosts.filter(p => {
-                            if (p.id === post.id) return false;
-                            const pRegion = p.desc.match(/\[REGION:(.*?)\]/)?.[1] || (p.place_name?.split(' ')[0] || '');
-                            const isSameRegion = currentRegion && pRegion === currentRegion;
-                            const isSameType = p.type === post.type;
-                            return isSameRegion || isSameType;
-                        }).slice(0, 3);
-
-                        return (
-                            <div className={styles.relatedSection}>
-                                <div className={styles.bundleInfo}>
-                                    <h3 className={styles.bundleTitle}>{t('community_page.detail_page.related.bundle_title', { region: currentRegion || t('community_page.detail_page.related.this_region') })}</h3>
-                                    <button 
-                                        className={styles.moreInRegionBtn}
-                                        onClick={() => router.push(`/community?filter=all&subFilter=all&search=${currentRegion}`)}
-                                    >
-                                        {t('community_page.detail_page.related.more', { region: currentRegion })}
-                                    </button>
-                                </div>
-
-                                <div className={styles.relatedTitle}>{t('community_page.detail_page.related.title')}</div>
-                                {related.length > 0 ? (
-                                    <div className={styles.relatedGrid}>
-                                        {related.map(rp => (
-                                            <div key={rp.id} className={styles.relatedCard} onClick={() => router.push(`/community/${rp.id}`)}>
-                                                <div className={styles.relatedEmoji}>{rp.flag}</div>
-                                                <div className={styles.relatedInfo}>
-                                                    <div className={styles.relatedPostTitle}>{rp.title}</div>
-                                                    <div className={styles.relatedMeta}>{rp.author} · {rp.type === 'review' ? t('community_page.detail_page.related.meta.review') : t('community_page.detail_page.related.meta.gathering')}</div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className={styles.emptyRelated}>
-                                        {t('community_page.detail_page.related.empty_line_1')} <br/>
-                                        {t('community_page.detail_page.related.empty_line_2')}
-                                    </div>
-                                )}
-                            </div>
-                        );
-                    })()}
 
                     <h3 className={styles.commentTitle}>{t('community_page.detail_page.comments_title')}</h3>
                     
@@ -1060,17 +919,77 @@ export default function CommunityDetailPage() {
                         )}
                     </div>
 
-                    {/* Integrated Safety Guide - Step 14 */}
-                    <div className={styles.safetyGuideBox}>
-                        <div className={styles.safetyGuideTitle}>{t('community_page.detail_page.bottom_safety.title')}</div>
-                        <div className={styles.safetyGuideList}>
-                            <div className={styles.safetyGuideItem}>• {t('community_page.detail_page.bottom_safety.item_1')}</div>
-                            <div className={styles.safetyGuideItem}>• {t('community_page.detail_page.bottom_safety.item_2')}</div>
-                            <div className={styles.safetyGuideItem}>• {t('community_page.detail_page.bottom_safety.item_3')}</div>
+                    {/* 통합된 댓글 입력 영역 */}
+                    <div className={styles.commentInputWrapper}>
+                        {/* 댓글 쓰기 버튼: 기본 숨김, 클릭 시 입력 UI 열림 */}
+                        {!isCommentOpen && (
+                            <button
+                                className={styles.openCommentBtn}
+                                onClick={() => {
+                                    console.log('✏️ [Comment] open btn clicked! Set isCommentOpen to true');
+                                    setIsCommentOpen(true);
+                                    
+                                    // 렌더링 직후 포커스 & 스크롤 이동
+                                    setTimeout(() => {
+                                        const el = document.getElementById('comment-input-field');
+                                        if (el) {
+                                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                            el.focus();
+                                        }
+                                    }, 50);
+                                }}
+                            >
+                                ✏️ {t('community_page.detail_page.comment_input.open_btn', { defaultValue: '댓글 쓰기' })}
+                            </button>
+                        )}
+
+                        {/* 인라인 댓글 입력 UI - isCommentOpen일 때만 표시 */}
+                        {isCommentOpen && (
+                            <div className={styles.inlineCommentBox}>
+                            {selectedIntent && (
+                                <div className={styles.timeChips}>
+                                    {SIGNAL_TIMES.map(time => (
+                                        <span
+                                            key={time}
+                                            className={`${styles.timeChip} ${selectedTime === time ? styles.timeChipActive : ''}`}
+                                            onClick={() => setSelectedTime(selectedTime === time ? null : time)}
+                                        >
+                                            {getTimeLabel(t, time)}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                            <div className={styles.inputControls}>
+                                <input
+                                    id="comment-input-field"
+                                    className={styles.commentInput}
+                                    placeholder={selectedIntent ? t('community_page.detail_page.comment_input.optional') : t('community_page.detail_page.comment_input.default')}
+                                    value={newComment}
+                                    onChange={e => setNewComment(e.target.value)}
+                                    onKeyDown={e => e.key === 'Enter' && handleSubmitComment()}
+                                    autoFocus
+                                />
+                                <button
+                                    className={styles.commentSubmit}
+                                    disabled={(!newComment.trim() && !selectedIntent) || isSubmitting}
+                                    onClick={handleSubmitComment}
+                                >
+                                    {isSubmitting ? '...' : (selectedIntent ? t('community_page.detail_page.comment_input.send') : '➤')}
+                                </button>
+                            </div>
+                            <button
+                                className={styles.cancelCommentBtn}
+                                onClick={() => { setIsCommentOpen(false); setNewComment(''); setSelectedIntent(null); setSelectedTime(null); }}
+                            >
+                                {t('community_page.detail_page.comment_input.cancel', { defaultValue: '취소' })}
+                            </button>
                         </div>
+                    )}
                     </div>
                 </div>
+
             </div>
+
 
 
             {/* Report Modal - Step 14 */}

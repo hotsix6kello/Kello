@@ -8,7 +8,7 @@
   --accent: var(--dancheong-teal);
   --accent-deep: var(--deep-navy);
   --accent-soft: var(--primary-glow);
-  --shadow: 0 20px 40px rgba(43, 35, 29, 0.08);
+  --shadow: 0 20px 40px rgba(75, 58, 66, 0.08);
   min-height: 100%;
   position: relative;
   width: 100%;
@@ -16,8 +16,8 @@
   overflow-x: hidden;
   padding-bottom: 0;
   background:
-    radial-gradient(circle at top left, rgba(79, 124, 120, 0.05), transparent 32%),
-    radial-gradient(circle at top right, rgba(46, 64, 87, 0.05), transparent 28%),
+    radial-gradient(circle at top left, rgba(244, 91, 135, 0.05), transparent 32%),
+    radial-gradient(circle at top right, rgba(75, 58, 66, 0.05), transparent 28%),
     linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
   color: var(--text);
   font-family: var(--font-main);
@@ -44,7 +44,7 @@
   left: -48px;
   width: 320px;
   height: 320px;
-  background: radial-gradient(circle, rgba(166, 75, 67, 0.04) 0%, rgba(166, 75, 67, 0) 70%);
+  background: radial-gradient(circle, rgba(244, 91, 135, 0.06) 0%, rgba(244, 91, 135, 0) 70%);
 }
 
 .orbSand {
@@ -52,7 +52,7 @@
   right: -72px;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(185, 147, 90, 0.04) 0%, rgba(185, 147, 90, 0) 72%);
+  background: radial-gradient(circle, rgba(141, 116, 125, 0.05) 0%, rgba(141, 116, 125, 0) 72%);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -151,7 +151,7 @@
    HERO SECTION
    ────────────────────────────────────────────────────────────────────────── */
 .heroSection {
-  padding: 40px 0 12px;
+  padding: 0 0 12px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -160,7 +160,7 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(to bottom, rgba(246, 241, 231, 0.3) 0%, rgba(246, 241, 231, 0) 100%);
+  background: linear-gradient(to bottom, rgba(249, 238, 242, 0.3) 0%, rgba(249, 238, 242, 0) 100%);
 }
 
 .heroLogo {
