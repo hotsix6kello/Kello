@@ -305,7 +305,6 @@ export default function CommunityPage() {
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
 
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
-    const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
     const imageInputRef = useRef<HTMLInputElement | null>(null);
 
     // Step 15: Onboarding States (Removed)
@@ -494,7 +493,6 @@ export default function CommunityPage() {
             if (storedUser) {
                 const parsed = JSON.parse(storedUser);
                 if (parsed.name) setLoggedInUserName(parsed.name);
-                if (parsed.id) setLoggedInUserId(parsed.id);
             }
         } catch {
             // ignore
@@ -601,6 +599,13 @@ export default function CommunityPage() {
         if (!newType || !newTitle.trim() || !newDesc.trim()) return;
         setIsSubmitting(true);
         try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                alert(t('community_page.errors.login_required', '로그인이 필요한 서비스입니다.'));
+                setIsSubmitting(false);
+                return;
+            }
+
             // 이미지들을 Storage에 업로드하고 URL 리스트 획득
             const uploadedImageUrls = await Promise.all(
                 newImages.map(async (img) => {
@@ -617,7 +622,7 @@ export default function CommunityPage() {
                     
                     const fileExt = img.name.split('.').pop() || 'jpg';
                     const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${fileExt}`;
-                    const filePath = loggedInUserId ? `${loggedInUserId}/${fileName}` : `posts/${fileName}`;
+                    const filePath = `${user.id}/${fileName}`;
 
                     const { error: uploadError } = await supabase.storage
                         .from('community')
@@ -666,7 +671,7 @@ export default function CommunityPage() {
                 showToast(t('community_page.toasts.updated'));
             } else {
                 const insertPayload: Record<string, any> = {
-                    author_user_id: loggedInUserId,
+                    author_user_id: user.id,
                     author: fakeUser.author,
                     flag: fakeUser.flag,
                     type: databaseType,
