@@ -255,48 +255,303 @@
     }
   },
   "community_page": {
-    "title": "ชุมชน",
-    "subtitle": "เชื่อมต่อกับคนท้องถิ่นและนักเดินทาง",
-    "filter_all": "ทั้งหมด",
-    "filter_meetup": "อาหารและมิตติ้ง",
-    "filter_travel": "หาเพื่อนร่วมทาง",
-    "filter_help": "ความช่วยเหลือในพื้นที่",
-    "comments": "ความคิดเห็น",
-    "message": "ข้อความ",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
+    "hero": {
+      "title": "ชุมชน Kello",
+      "search_placeholder": "ค้นหาหัวข้อที่สนใจ"
     },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+    "categories": {
+      "all": "All",
+      "beauty_review": "Beauty Reviews",
+      "food_review": "Restaurant Tips",
+      "travel_review": "Travel Tips",
+      "meetup": "Flash Meetups",
+      "meetup_recruitment": "Travel Mates",
+      "help": "Q&A"
+    },
+    "sub_filters": {
+      "all": "All",
+      "saved": "Saved",
+      "reacted": "Reacted",
+      "mine": "My Posts",
+      "recruiting": "Recruiting",
+      "active_reactions": "Trending",
+      "open_meetup": "Open Meetups",
+      "weekend": "Weekend",
+      "fresh": "Fresh Info"
+    },
+    "status": {
+      "reviews": "Reviews",
+      "reacting": "Reacting",
+      "surveying": "Surveying",
+      "drafting": "Drafting",
+      "closed": "Closed"
+    },
+    "tags": {
+      "solo_friendly": "Solo Friendly",
+      "friends_friendly": "Friends Friendly",
+      "photo_spot": "Photo Spots",
+      "waiting": "Waiting Expected",
+      "foreigner_friendly": "Foreigner Friendly"
+    },
+    "states": {
+      "fetch_failed_desc": "Failed to load posts. Please check your network.",
+      "fetch_failed_title": "Data Error",
+      "fetch_failed_tip": "Try refreshing the page.",
+      "empty_title": "No posts yet",
+      "empty_desc": "Be the first to share your story!",
+      "empty_tip": "Tap the write button on the bottom right.",
+      "no_results_title": "No results found",
+      "no_results_desc": "Try searching with other keywords."
+    },
+    "quality_signals": {
+      "organized": "Well Organized",
+      "active": "Very Popular",
+      "asset": "Rich Information",
+      "mate": "Good Mate"
+    },
+    "toasts": {
+      "save_added": "Added to saved posts.",
+      "save_removed": "Removed from saved posts.",
+      "deleted": "Deleted successfully.",
+      "updated": "Updated successfully.",
+      "submitted": "Posted successfully."
+    },
+    "nav_summary": {
+      "all": "Viewing all stories in {{tab}}",
+      "active_reactions": "Getting hot reactions in {{tab}}!",
+      "open_meetup": "Looking for new mates in {{tab}}",
+      "weekend": "Any plans for this weekend in {{tab}}?",
+      "default": "Showing results filtered by {{sub}} in {{tab}}"
+    },
+    "form": {
+      "select_category": "Select Category",
+      "write_guide_title": {
+        "beauty_review": "Share your beauty experience",
+        "food_review": "Any hidden gems to recommend?",
+        "travel_review": "Share your travel tips",
+        "meetup": "Find mates to hang out with",
+        "meetup_recruitment": "Looking for travel mates?",
+        "help": "Ask anything"
       },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      "write_guide_body": {
+        "beauty_review": "Share your honest review of the treatment or service.",
+        "food_review": "Share information on taste, mood, or waiting.",
+        "travel_review": "Provide useful tips on courses, packing, or moving.",
+        "meetup": "Describe when, where, and what to do.",
+        "meetup_recruitment": "State your travel schedule, destinations, and mate conditions.",
+        "help": "Describe your question or situation in detail."
       },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      "title_label": {
+        "beauty_review": "Srv/Theme",
+        "default": "Title"
       },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      "title_placeholder": {
+        "beauty_review": "e.g. Gangnam Layered Cut Review",
+        "food_review": "e.g. Trendy Japanese spot in Seongsu",
+        "travel_review": "e.g. KTX tips from Seoul to Busan",
+        "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
+        "meetup_recruitment": "e.g. Gyeongbokgung next week together",
+        "help": "e.g. How to get to hotel from ICN airport?"
+      },
+      "desc_label": {
+        "beauty_review": "Details",
+        "default": "Content"
+      },
+      "desc_placeholder": {
+        "beauty_review": "Describe the process or results in detail.",
+        "food_review": "Recommend menus and explain why.",
+        "travel_review": "Share info helpful for other travelers.",
+        "meetup": "Describe the meetup in detail.",
+        "meetup_recruitment": "Describe what you want to do together.",
+        "help": "Detailed questions help getting better answers."
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "Add before/after or shop interior photos (Max 4)",
+          "food_review": "Add food and shop interior photos (Max 4)",
+          "travel_review": "Add photos that show the vibe (Max 4)",
+          "meetup": "Add photos of the place or activity (Max 4)",
+          "meetup_recruitment": "Add destination or reference photos (Max 4)",
+          "help": "Add photos that help explain the issue (Max 4)"
+        },
+        "saved_name": "Saved image {{index}}",
+        "file_only_alert": "Only image files can be selected.",
+        "limit_alert": "Up to {{count}} images can be uploaded.",
+        "load_failed_alert": "Failed to load images."
+      },
+      "category_hints": {
+        "beauty_review": "Share your beauty shop experiences.",
+        "food_review": "Recommend your favorite spots.",
+        "travel_review": "Share your own travel know-how.",
+        "meetup": "Create a casual meetup to enjoy together.",
+        "meetup_recruitment": "Find travel mates with similar schedules.",
+        "help": "Ask anything you're curious about."
       }
     },
-    "filter_review": "รีวิว",
-    "detail": "รายละเอียดโพสต์"
+    "detail": "Post Detail",
+    "detail_page": {
+      "loading": "Loading data...",
+      "hidden_post": "This post is hidden.",
+      "not_found": "Post not found.",
+      "show_hidden": "Show Hidden Post",
+      "hide_post": "Hide this post",
+      "freshness": {
+        "realtime": "Actively Live",
+        "updated": "Info Updated",
+        "active": "Active Post",
+        "calm": "Calm Post"
+      },
+      "strengths": {
+        "title": "Post Strengths",
+        "organized": "Well Organized",
+        "active": "Active Interaction",
+        "visited_tip": "Includes Tips",
+        "new": "New Content"
+      },
+      "checklist": {
+        "title": "Checklist",
+        "recommended": "Recommended for",
+        "required": "Must Check",
+        "comment_check": "Check comments",
+        "read_details": "Read details"
+      },
+      "mini_signal_tag": "Meetup Open",
+      "primary_action": {
+        "review": "Leave Review",
+        "join": "Express Interest"
+      },
+      "save": {
+        "saved": "Saved",
+        "default": "Save"
+      },
+      "meetup_safety": {
+        "title": "Meetup Safety Guide",
+        "item_1": "Meeting in public places is recommended.",
+        "item_2": "Be careful with personal information."
+      },
+      "body_title": "Post Content",
+      "like": "Like",
+      "dislike": "Dislike",
+      "like_alert": "Liked!",
+      "dislike_alert": "Disliked.",
+      "comments_title": "Comments",
+      "comment_input": {
+        "default": "Enter a comment...",
+        "optional": "Add an optional note",
+        "send": "Send"
+      },
+      "signal_intents": {
+        "interested": "I'm interested",
+        "available_this_week": "Available this week",
+        "join_if_schedule_fits": "Join if schedule fits",
+        "thanks": "Thanks for info",
+        "question": "Have a question"
+      },
+      "signal_times": {
+        "this_week": "This week",
+        "this_weekend": "This weekend",
+        "next_week": "Next week",
+        "schedule_coordination": "Coordinating date"
+      },
+      "author_panel": {
+        "title": "Author Dashboard",
+        "badge": "Author",
+        "stats": {
+          "total": "Total Reactions",
+          "total_value": "{{count}}",
+          "time": "Preferred Time",
+          "time_pending": "Calculating",
+          "intent": "Main Intent",
+          "recent": "Last 24h",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "Weekend has most reactions. Suggest a detailed schedule.",
+          "vote": "Preferred times vary. Try a vote to finalize.",
+          "share": "Share more info to get more attention."
+        },
+        "action": {
+          "weekend": "Suggest Weekend Schedule",
+          "vote": "Post a Vote",
+          "share": "Share Extra Tips"
+        },
+        "draft": {
+          "weekend": "How about meeting this weekend at 2PM?",
+          "vote": "Please vote for your preferred time!",
+          "share": "Here's one more tip for you!"
+        },
+        "final_draft": "Closing the recruitment. Please join our open chat if you're participating!",
+        "final_action": "Close Recruitment",
+        "footer": "Kello promotes a safe community culture."
+      },
+      "status_controls": {
+        "title": "Change Status"
+      },
+      "result": {
+        "title": "Post-visit Report & Tips",
+        "help": "Share tips or reviews after your visit. It helps others a lot.",
+        "placeholder": "Write your post-visit review here...",
+        "save_visited": "Save Visit & Tips",
+        "save_only": "Save Info Only"
+      },
+      "author_safety": {
+        "title": "Author Safety Guide",
+        "item_1": "Do not expose personal contact info directly.",
+        "item_2": "Beware of illegal meetups or money requests.",
+        "item_3": "Communicate with trusted users."
+      },
+      "signal_summary": {
+        "title": "Participation Summary",
+        "status": {
+          "active": "Actively Recruiting",
+          "forming": "Forming",
+          "preparing": "Starting"
+        },
+        "time_split": "Preferred times are split.",
+        "time_focus": "Most preferred: {{time}}",
+        "time_flexible": "Many flexible times.",
+        "desc": "{{count}} people expressed interest in {{topic}}.",
+        "topic_review": "review sharing",
+        "topic_outing": "meetup participation",
+        "schedule_title": "Choose Preferred Time"
+      },
+      "status": {
+        "REVIEWS": "Reviews Done",
+        "REACTING": "Reacting",
+        "SURVEYING": "Surveying",
+        "DRAFTING": "Drafting",
+        "CLOSED": "Closed"
+      },
+      "tags": {
+        "solo_friendly": "Solo Friendly",
+        "friends_friendly": "With Friends",
+        "photo_spot": "Photo Spots",
+        "waiting": "Wait Exists",
+        "foreigner_friendly": "Foreigner Friendly"
+      }
+    },
+    "actions": {
+      "delete_confirm": "Are you sure you want to delete?"
+    },
+    "errors": {
+      "login_required": "Login required.",
+      "post_failed": "Failed to post: {{message}}"
+    },
+    "report": {
+      "report_action": "Report",
+      "success": "Reported successfully.",
+      "reasons": {
+        "ad_spam": "Ad/Spam",
+        "offensive": "Offensive",
+        "contact": "Contact Induction",
+        "unsafe": "Unsafe",
+        "other": "Other"
+      }
+    },
+    "comments": "Comments",
+    "time": {
+      "just_now": "Just now"
+    }
   },
   "explore_items": {
     "airport_arrival": "ถึงสนามบินอินชอน",
