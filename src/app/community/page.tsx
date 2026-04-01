@@ -305,6 +305,7 @@ export default function CommunityPage() {
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
 
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
+    const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
     const imageInputRef = useRef<HTMLInputElement | null>(null);
 
     // Step 15: Onboarding States (Removed)
@@ -493,6 +494,7 @@ export default function CommunityPage() {
             if (storedUser) {
                 const parsed = JSON.parse(storedUser);
                 if (parsed.name) setLoggedInUserName(parsed.name);
+                if (parsed.id) setLoggedInUserId(parsed.id);
             }
         } catch {
             // ignore
@@ -607,17 +609,21 @@ export default function CommunityPage() {
                     
                     // Base64 Data URL을 Blob으로 변환
                     const res = await fetch(img.dataUrl);
+                    if (!res.ok) {
+                        const errBody = await res.text().catch(() => '');
+                        throw new Error(`이미지 로드 실패 (HTTP ${res.status} ${res.statusText}): ${errBody}`.trim());
+                    }
                     const blob = await res.blob();
                     
                     const fileExt = img.name.split('.').pop() || 'jpg';
                     const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${fileExt}`;
-                    const filePath = `posts/${fileName}`;
+                    const filePath = loggedInUserId ? `${loggedInUserId}/${fileName}` : `posts/${fileName}`;
 
                     const { error: uploadError } = await supabase.storage
                         .from('community')
                         .upload(filePath, blob);
 
-                    if (uploadError) throw uploadError;
+                    if (uploadError) throw new Error(uploadError.message || JSON.stringify(uploadError));
 
                     const { data } = supabase.storage.from('community').getPublicUrl(filePath);
                     return data.publicUrl;
@@ -645,7 +651,7 @@ export default function CommunityPage() {
                     place_lng: placeName ? (placeLng || 126.9780) : null
                 }).eq('id', editingPostId);
 
-                if (error) throw error;
+                if (error) throw new Error(error.message || JSON.stringify(error));
                 
                 setIsWriting(false);
                 resetDraftForm();
@@ -653,6 +659,7 @@ export default function CommunityPage() {
                 showToast(t('community_page.toasts.updated'));
             } else {
                 const { error } = await supabase.from('community_posts').insert([{
+                    author_user_id: loggedInUserId,
                     author: fakeUser.author,
                     flag: fakeUser.flag,
                     type: databaseType,
@@ -667,17 +674,40 @@ export default function CommunityPage() {
                     place_lng: placeName ? (placeLng || 126.9780) : null
                 }]);
 
-                if (error) throw error;
+                if (error) throw new Error(error.message || JSON.stringify(error));
                 
                 setIsWriting(false);
                 resetDraftForm();
                 fetchPosts();
                 showToast(t('community_page.toasts.submitted'));
             }
-        } catch (error) {
-            console.error('Submission error:', error);
-            const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류';
-            alert(t('community_page.errors.submit_failed') + ': ' + errorMessage);
+        } catch (error: unknown) {
+            let normalizedError = '알 수 없는 오류';
+            
+            if (error instanceof Error) {
+                normalizedError = error.message;
+            } else if (error instanceof Response) {
+                normalizedError = `HTTP Error: ${error.status} ${error.statusText}`;
+            } else if (typeof error === 'object' && error !== null) {
+                const anyErr = error as Record<string, unknown>;
+                if (anyErr.message) {
+                    normalizedError = String(anyErr.message);
+                } else if (anyErr.error_description) {
+                    normalizedError = String(anyErr.error_description);
+                } else {
+                    try {
+                        const str = JSON.stringify(error);
+                        normalizedError = str === '{}' ? '원인을 알 수 없는 빈 객체({}) 발생' : str;
+                    } catch {
+                        normalizedError = String(error);
+                    }
+                }
+            } else {
+                normalizedError = String(error);
+            }
+
+            console.error('Submission failed:', normalizedError, error);
+            alert(t('community_page.errors.post_failed', { message: normalizedError }) || `제출 실패: ${normalizedError}`);
         } finally {
             setIsSubmitting(false);
         }
