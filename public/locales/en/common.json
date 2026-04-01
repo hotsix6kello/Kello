@@ -1396,517 +1396,302 @@
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
-    },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-      },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-      },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-      },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-      }
-    },
-    "filter_review": "Reviews",
-    "detail": "Post Detail",
-    "meetup_info": "Visit details",
-    "write_post": "Write review",
-    "edit": "Edit review",
-    "posting": "Posting...",
     "hero": {
-      "title": "Beauty booking reviews come first here",
-      "search_placeholder": "Search salon names, treatment experiences, or booking reviews"
+      "title": "Kello Community",
+      "search_placeholder": "Search topics you're interested in"
     },
     "categories": {
       "all": "All",
-      "beauty_review": "Beauty salon review",
-      "food_review": "Food review",
-      "travel_review": "Sightseeing review",
-      "meetup": "Shows & events",
-      "help": "Questions"
+      "beauty_review": "Beauty Reviews",
+      "food_review": "Restaurant Tips",
+      "travel_review": "Travel Tips",
+      "meetup": "Flash Meetups",
+      "meetup_recruitment": "Travel Mates",
+      "help": "Q&A"
     },
     "sub_filters": {
       "all": "All",
-      "saved": "⭐ Saved posts",
-      "reacted": "💬 Joined posts",
-      "mine": "👤 My posts",
-      "recruiting": "📢 Open only",
-      "active_reactions": "🔥 Hot reactions",
-      "open_meetup": "🤝 Go-together open",
-      "weekend": "📅 This weekend",
-      "fresh": "✨ Recently updated"
-    },
-    "tags": {
-      "solo_friendly": "Good solo",
-      "friends_friendly": "Good with friends",
-      "photo_spot": "Photo spot",
-      "waiting": "Has wait",
-      "foreigner_friendly": "Foreigner-friendly"
-    },
-    "quality_signals": {
-      "organized": "✨ Detailed review",
-      "active": "🔥 High engagement",
-      "asset": "💜 Follow-up tips",
-      "mate": "🤝 Meetup active"
-    },
-    "nav_summary": {
-      "all": "You are viewing every story in {{tab}}.",
-      "active_reactions": "These {{tab}} posts are getting the hottest reactions.",
-      "open_meetup": "These {{tab}} posts are open for going together.",
-      "weekend": "Check {{tab}} ideas that fit this weekend.",
-      "default": "Showing {{sub}} {{tab}} posts first."
-    },
-    "next_actions": {
-      "mine_result": {
-        "badge": "Add follow-up tip",
-        "desc": "Have you visited already? Leave a short tip for the next person.",
-        "cta": "Add tip"
-      },
-      "mine_active": {
-        "badge": "Reactions surging",
-        "desc": "A lot of people are paying attention to your post. Take a look.",
-        "cta": "View reactions"
-      },
-      "reacted_survey": {
-        "badge": "Need input",
-        "desc": "People are coordinating opinions. Share a day or time that works for you.",
-        "cta": "Leave input"
-      },
-      "saved_result": {
-        "badge": "Updated",
-        "desc": "A saved post now has a new tip.",
-        "cta": "Check it"
-      }
-    },
-    "actions": {
-      "delete_confirm": "Delete this post?"
-    },
-    "errors": {
-      "update_failed": "Could not update the review. Please try again.",
-      "post_failed": "Could not publish the review. {{message}}"
-    },
-    "states": {
-      "fetch_failed_title": "Could not load posts",
-      "fetch_failed_desc": "Please try again in a moment.",
-      "fetch_failed_tip": "Open the page again to refresh the latest posts.",
-      "empty_title": "No posts yet",
-      "empty_desc": "Be the first to share a beauty salon review.",
-      "empty_tip": "Adding the salon name, treatment, booking flow, and service quality helps others decide faster.",
-      "no_results_title": "No posts match this view",
-      "no_results_desc": "Try another keyword or a lighter filter.",
-      "cta_write": "Write a review",
-      "cta_all": "View all"
-    },
-    "form": {
-      "category_hints": {
-        "beauty_review": "💡 Include the salon name, treatment experience, booking and service flow, foreigner support, and revisit intent.",
-        "food_review": "💡 Leave the menu, atmosphere, and wait time that fit before or after a beauty booking.",
-        "travel_review": "💡 Focus on routes, photo points, and how easy it was to visit before or after treatment.",
-        "meetup": "💡 Summarize the show time, ticket information, and why it is fun to go together.",
-        "help": "💡 Explain your booking, visit, or service question as clearly as possible."
-      },
-      "category_label": "Category",
-      "write_guide_title": {
-        "beauty_review": "Start with a beauty salon review",
-        "food_review": "Share a food spot that fits a beauty schedule",
-        "travel_review": "Share a sightseeing route that worked well before or after treatment",
-        "meetup": "Summarize the show or event briefly",
-        "help": "Ask a booking or visit question clearly"
-      },
-      "write_guide_body": {
-        "beauty_review": "The salon name, treatment experience, booking flow, service quality, foreigner support, and revisit intent help a lot before booking.",
-        "food_review": "Menu, atmosphere, and wait time make it easier to connect food reviews to a beauty day.",
-        "travel_review": "Photo points, travel time, and quick-stop reasons help the follow-up flow stay useful.",
-        "meetup": "Keep the show time, ticket details, and on-site mood short and clear.",
-        "help": "Describe your booking, service, or pre-visit question with enough detail to get a useful answer."
-      },
-      "title_label": {
-        "beauty_review": "Salon name or review title",
-        "default": "Place name or review title"
-      },
-      "title_placeholder": {
-        "beauty_review": "e.g. Lash perm review at OO Beauty in Gangnam",
-        "food_review": "e.g. Brunch cafe that worked well after treatment",
-        "travel_review": "e.g. Seongsu walk I enjoyed before and after treatment",
-        "meetup": "e.g. Let us go to this weekend exhibition together",
-        "help": "e.g. Please recommend a salon with good foreigner support"
-      },
-      "point_label": {
-        "beauty_review": "One-line satisfaction point",
-        "default": "One-line recommendation point"
-      },
-      "point_placeholder": {
-        "beauty_review": "e.g. Fast booking replies and comfortable guidance for foreigners",
-        "food_review": "e.g. Short wait and a clean meal",
-        "travel_review": "e.g. Easy to visit within an hour before or after treatment",
-        "meetup": "e.g. More fun to see together than alone",
-        "help": "e.g. I want to know if English consultation is available"
-      },
-      "desc_label": {
-        "beauty_review": "Treatment review",
-        "default": "Detailed review"
-      },
-      "desc_placeholder": {
-        "beauty_review": "Describe the treatment, booking flow, service, satisfaction, foreigner support, and whether you would revisit.",
-        "food_review": "Describe the menu, mood, wait time, and why it matched your beauty day well.",
-        "travel_review": "Describe the route, photo spots, travel time, and why it worked well before or after treatment.",
-        "meetup": "Describe the event and why you want to go together.",
-        "help": "Describe your question and current situation clearly."
-      },
-      "place_label": {
-        "beauty_review": "Salon location (optional)",
-        "default": "Place (optional)"
-      },
-      "place_placeholder": {
-        "beauty_review": "e.g. 3F, OO Beauty, Gangnam Station",
-        "default": "e.g. Exit 11, Gangnam Station"
-      },
-      "place_help": {
-        "beauty_review": "Adding the salon location makes the booking route easier to understand.",
-        "default": "A map view is attached together."
-      },
-      "region_label": "Area",
-      "region_placeholder": "e.g. Gangnam, Mapo",
-      "vibe_label": "Pick vibes",
-      "meetup_toggle_title": "Open for going together",
-      "meetup_toggle_desc": "Receive interest signals from other people.",
-      "safety_title": "🔒 Safety guide",
-      "safety_item_1": "• Do not share personal contact info right away. Check reactions in comments first.",
-      "safety_item_2": "• We recommend arranging plans around public places.",
-      "image": {
-        "label": "Add images",
-        "title": "You can upload up to {{count}} images.",
-        "file_only_alert": "Only image files can be added.",
-        "limit_alert": "You can upload up to {{count}} images.",
-        "load_failed_alert": "Couldn't load the image.",
-        "button_loading": "Preparing images...",
-        "button_limit": "{{count}} selected",
-        "button_add_more": "Add more images",
-        "button_select": "Select images",
-        "preview_alt": "Upload preview {{index}}",
-        "preview_name": "Selected image {{index}}",
-        "preview_desc": "Image {{index}}. Check the preview before posting.",
-        "remove": "Remove",
-        "saved_name": "Uploaded image {{index}}",
-        "guides": {
-          "beauty_review": "Share treatment results or the salon atmosphere if you can.",
-          "food_review": "Add food shots or a photo of the place if it helps.",
-          "travel_review": "Capture the mood of the place or a memorable point.",
-          "meetup": "Share the on-site atmosphere or why it would be fun together.",
-          "help": "Upload a reference image too if it helps explain."
-        }
-      },
-      "summary_title": "Review summary",
-      "summary_region_type": "Area / type",
-      "summary_point": "Point",
-      "summary_meetup": "Going together",
-      "summary_enabled": "Open",
-      "summary_disabled": "Closed",
-      "submit_with_reactions": "Post review and gather reactions",
-      "submit_beauty": "Share beauty review",
-      "submit_default": "Share review"
-    },
-    "quick_entry": {
-      "beauty": {
-        "label": "Beauty reviews",
-        "sub": "Booking, service, satisfaction"
-      },
-      "food": {
-        "label": "Food reviews",
-        "sub": "Beauty day add-on"
-      },
-      "travel": {
-        "label": "Sightseeing reviews",
-        "sub": "Before and after treatment route"
-      },
-      "write": {
-        "label": "Write review",
-        "sub": "Share beauty experience"
-      },
-      "browse": {
-        "label": "Browse",
-        "sub": "Popular spots now"
-      },
-      "recruiting": {
-        "label": "Open plans",
-        "sub": "Find company"
-      },
-      "weekend": {
-        "label": "Weekend plans",
-        "sub": "Active spots"
-      },
-      "record": {
-        "label": "Write",
-        "sub": "Share notes"
-      }
-    },
-    "activity": {
-      "label": "My activity:",
-      "summary": "Saved {{saved}}, joined {{reacted}}",
-      "new_updates": "✨ New updates!"
-    },
-    "sort": {
-      "latest": "Newest",
-      "reactions": "Most reactions",
-      "draft": "Draft activity"
-    },
-    "defaults": {
-      "region": "Seoul"
+      "saved": "Saved",
+      "reacted": "Reacted",
+      "mine": "My Posts",
+      "recruiting": "Recruiting",
+      "active_reactions": "Trending",
+      "open_meetup": "Open Meetups",
+      "weekend": "Weekend",
+      "fresh": "Fresh Info"
     },
     "status": {
-      "reviews": "Review live",
-      "reacting": "Getting reactions",
-      "surveying": "Gathering input",
-      "drafting": "Drafting plan",
+      "reviews": "Reviews",
+      "reacting": "Reacting",
+      "surveying": "Surveying",
+      "drafting": "Drafting",
       "closed": "Closed"
     },
-    "card": {
-      "title_prefix": {
-        "beauty_review": "[Beauty review]",
-        "food_review": "[Food review]",
-        "travel_review": "[Sightseeing review]"
-      },
-      "result_badge": "📝 Follow-up tip",
-      "default_vibe": "✨ Good vibe",
-      "open_meetup_badge": "🤝 Open to go together",
-      "fresh_badges": {
-        "comment": "💬 Active",
-        "update": "✨ Tip update"
-      },
-      "draft_status": {
-        "active": "🔥 Draft active",
-        "forming": "📝 Draft forming",
-        "preparing": "🤝 Draft starting"
-      },
-      "draft_desc": {
-        "active": "Reactions are clustering around times and dates.",
-        "forming": "A possible plan is starting to form.",
-        "preparing": "People are still split on timing."
-      },
-      "cta": {
-        "review": "Go together?",
-        "join": "Join"
-      },
-      "owner_reactions": {
-        "region": "📊 {{region}} / {{count}} reactions",
-        "join": "📊 {{count}} join signals"
-      },
-      "more_region": "📍 See other reviews and meetup posts in {{region}} →"
+    "tags": {
+      "solo_friendly": "Solo Friendly",
+      "friends_friendly": "Friends Friendly",
+      "photo_spot": "Photo Spots",
+      "waiting": "Waiting Expected",
+      "foreigner_friendly": "Foreigner Friendly"
     },
-    "fab": {
-      "beauty": "Write beauty review",
-      "meetup": "Write show/event post"
+    "states": {
+      "fetch_failed_desc": "Failed to load posts. Please check your network.",
+      "fetch_failed_title": "Data Error",
+      "fetch_failed_tip": "Try refreshing the page.",
+      "empty_title": "No posts yet",
+      "empty_desc": "Be the first to share your story!",
+      "empty_tip": "Tap the write button on the bottom right.",
+      "no_results_title": "No results found",
+      "no_results_desc": "Try searching with other keywords."
     },
-    "time": {
-      "just_now": "Just now"
+    "quality_signals": {
+      "organized": "Well Organized",
+      "active": "Very Popular",
+      "asset": "Rich Information",
+      "mate": "Good Mate"
     },
     "toasts": {
-      "save_removed": "Saved post removed.",
-      "save_added": "Review saved! ⭐",
-      "deleted": "Post deleted.",
-      "updated": "Post updated.",
-      "created": "New review posted! 🎉",
-      "region_collected": "📍 Collected posts related to {{region}}."
+      "save_added": "Added to saved posts.",
+      "save_removed": "Removed from saved posts.",
+      "deleted": "Deleted successfully.",
+      "updated": "Updated successfully.",
+      "submitted": "Posted successfully."
     },
-    "report": {
-      "modal_title": "Choose a report reason",
-      "report_action": "Report",
-      "cancel": "Cancel",
-      "item_post": "post",
-      "item_comment": "comment",
-      "submitted_alert": "The {{item}} was reported.\nReason: {{reason}}\nWe will review it shortly.",
-      "reasons": {
-        "ad_spam": "Looks like advertising or promotion",
-        "offensive": "Contains offensive wording",
-        "contact": "Pushes private contact too hard",
-        "unsafe": "Feels unsafe",
-        "other": "Other"
+    "nav_summary": {
+      "all": "Viewing all stories in {{tab}}",
+      "active_reactions": "Getting hot reactions in {{tab}}!",
+      "open_meetup": "Looking for new mates in {{tab}}",
+      "weekend": "Any plans for this weekend in {{tab}}?",
+      "default": "Showing results filtered by {{sub}} in {{tab}}"
+    },
+    "form": {
+      "select_category": "Select Category",
+      "write_guide_title": {
+        "beauty_review": "Share your beauty experience",
+        "food_review": "Any hidden gems to recommend?",
+        "travel_review": "Share your travel tips",
+        "meetup": "Find mates to hang out with",
+        "meetup_recruitment": "Looking for travel mates?",
+        "help": "Ask anything"
+      },
+      "write_guide_body": {
+        "beauty_review": "Share your honest review of the treatment or service.",
+        "food_review": "Share information on taste, mood, or waiting.",
+        "travel_review": "Provide useful tips on courses, packing, or moving.",
+        "meetup": "Describe when, where, and what to do.",
+        "meetup_recruitment": "State your travel schedule, destinations, and mate conditions.",
+        "help": "Describe your question or situation in detail."
+      },
+      "title_label": {
+        "beauty_review": "Srv/Theme",
+        "default": "Title"
+      },
+      "title_placeholder": {
+        "beauty_review": "e.g. Gangnam Layered Cut Review",
+        "food_review": "e.g. Trendy Japanese spot in Seongsu",
+        "travel_review": "e.g. KTX tips from Seoul to Busan",
+        "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
+        "meetup_recruitment": "e.g. Gyeongbokgung next week together",
+        "help": "e.g. How to get to hotel from ICN airport?"
+      },
+      "desc_label": {
+        "beauty_review": "Details",
+        "default": "Content"
+      },
+      "desc_placeholder": {
+        "beauty_review": "Describe the process or results in detail.",
+        "food_review": "Recommend menus and explain why.",
+        "travel_review": "Share info helpful for other travelers.",
+        "meetup": "Describe the meetup in detail.",
+        "meetup_recruitment": "Describe what you want to do together.",
+        "help": "Detailed questions help getting better answers."
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "Add before/after or shop interior photos (Max 4)",
+          "food_review": "Add food and shop interior photos (Max 4)",
+          "travel_review": "Add photos that show the vibe (Max 4)",
+          "meetup": "Add photos of the place or activity (Max 4)",
+          "meetup_recruitment": "Add destination or reference photos (Max 4)",
+          "help": "Add photos that help explain the issue (Max 4)"
+        },
+        "saved_name": "Saved image {{index}}",
+        "file_only_alert": "Only image files can be selected.",
+        "limit_alert": "Up to {{count}} images can be uploaded.",
+        "load_failed_alert": "Failed to load images."
+      },
+      "category_hints": {
+        "beauty_review": "Share your beauty shop experiences.",
+        "food_review": "Recommend your favorite spots.",
+        "travel_review": "Share your own travel know-how.",
+        "meetup": "Create a casual meetup to enjoy together.",
+        "meetup_recruitment": "Find travel mates with similar schedules.",
+        "help": "Ask anything you're curious about."
       }
     },
+    "detail": "Post Detail",
     "detail_page": {
-      "loading": "Loading post...",
+      "loading": "Loading data...",
       "hidden_post": "This post is hidden.",
-      "show_hidden": "Show again",
       "not_found": "Post not found.",
+      "show_hidden": "Show Hidden Post",
       "hide_post": "Hide this post",
-      "hide_comment": "Hide",
-      "save_post_aria": "Save post",
       "freshness": {
-        "realtime": "🔥 Reactions from travelers are coming in right now.",
-        "updated": "✨ The author added new tips after visiting.",
-        "active": "💬 People are still actively discussing this post.",
-        "calm": "🍃 It is calm now, but still useful to come back to anytime."
+        "realtime": "Actively Live",
+        "updated": "Info Updated",
+        "active": "Active Post",
+        "calm": "Calm Post"
       },
       "strengths": {
-        "title": "🎯 Key points of this post",
-        "organized": "✨ Detailed review",
-        "active": "🔥 Active reactions",
-        "visited_tip": "🧡 Real visit tip",
-        "new": "🌱 Fresh update"
-      },
-      "mini_signal_tag": "🤝 Looking for company",
-      "primary_action": {
-        "review": "💬 Leave feedback",
-        "join": "🤝 Join"
-      },
-      "save": {
-        "default": "☆ Save",
-        "saved": "⭐ Saved"
+        "title": "Post Strengths",
+        "organized": "Well Organized",
+        "active": "Active Interaction",
+        "visited_tip": "Includes Tips",
+        "new": "New Content"
       },
       "checklist": {
-        "title": "💡 Before you go",
-        "recommended": "✅ Best for",
-        "required": "📌 Must check",
-        "comment_check": "Check comment reactions",
-        "read_details": "Read details carefully"
+        "title": "Checklist",
+        "recommended": "Recommended for",
+        "required": "Must Check",
+        "comment_check": "Check comments",
+        "read_details": "Read details"
+      },
+      "mini_signal_tag": "Meetup Open",
+      "primary_action": {
+        "review": "Leave Review",
+        "join": "Express Interest"
+      },
+      "save": {
+        "saved": "Saved",
+        "default": "Save"
       },
       "meetup_safety": {
-        "title": "🛡️ Safe meetup guide",
-        "item_1": "Meet in public places such as cafes or restaurants.",
-        "item_2": "Talk enough in comments before sharing contact information."
+        "title": "Meetup Safety Guide",
+        "item_1": "Meeting in public places is recommended.",
+        "item_2": "Be careful with personal information."
       },
-      "body_title": "Details",
-      "related": {
-        "bundle_title": "📍 More stories in {{region}}",
-        "this_region": "this area",
-        "more": "See more {{region}} reviews →",
-        "title": "✨ Similar reviews",
-        "meta": {
-          "review": "Review",
-          "gathering": "Plan"
-        },
-        "empty_line_1": "There are no other reviews in this area yet.",
-        "empty_line_2": "Why not leave the first related update?"
-      },
-      "comments_title": "Comments & go together",
-      "author_panel": {
-        "title": "📊 My post reaction report",
-        "badge": "Author only",
-        "stats": {
-          "total": "Total signals",
-          "total_value": "{{count}} people",
-          "time": "Top time",
-          "time_pending": "Coordinating",
-          "intent": "Top intent",
-          "recent": "Recent signals",
-          "recent_value": "+{{count}}"
-        },
-        "guide": {
-          "weekend": "This weekend is getting the most reactions. Try suggesting a specific time.",
-          "vote": "Opinions are split. Offer a few date options and ask people to choose.",
-          "share": "People are starting to gather. Thank them and share the exact place once more."
-        },
-        "action": {
-          "weekend": "Coordinate weekend time",
-          "vote": "Start a date vote",
-          "share": "Thank & share place"
-        },
-        "draft": {
-          "weekend": "This weekend has the most interest. How does Saturday around 2 PM sound?",
-          "vote": "There are several options. Which works better this week, Saturday or Sunday?",
-          "share": "Thanks for the interest. I will share the exact location once more in the comments."
-        },
-        "final_action": "Start final coordination in comments",
-        "final_draft": "Everyone, shall we finalize who is going this weekend in the comments?",
-        "footer": "This is not a confirmed meetup yet. Please keep coordinating in the comments."
-      },
-      "status_controls": {
-        "title": "⚙️ Change progress status"
-      },
-      "result": {
-        "title": "📝 Wrap-up after closing / visiting",
-        "help": "💡 A short wrap-up helps the next person a lot. Even one useful tip keeps this post valuable longer.",
-        "placeholder": "Did you actually go? Share how it went and what tip the next visitor should know.",
-        "save_visited": "✅ Visited & save result",
-        "save_only": "📋 Save result only",
-        "saved_alert": "Follow-up result saved!",
-        "tips_visited": "If you visit next, be sure to check the author tips.",
-        "tips_retry": "If plans changed, try opening the meetup again with a new schedule."
-      },
-      "author_safety": {
-        "title": "🛡️ Safety guide for authors",
-        "item_1": "For a first meetup, guide people to a public place such as a cafe or restaurant.",
-        "item_2": "Coordinate enough in public comments before sharing private contact information.",
-        "item_3": "If someone makes an uncomfortable request, use the report feature."
-      },
-      "signal_summary": {
-        "title": "📝 Tentative meetup draft",
-        "status": {
-          "active": "Draft active",
-          "forming": "Draft forming",
-          "preparing": "Draft preparing"
-        },
-        "time_split": "People are still split on timing, so more coordination is needed in comments.",
-        "time_focus": "A shared plan to go here on {{time}} is starting to form.",
-        "time_flexible": "Many reactions are still about coordinating the date, so the plan is flexible.",
-        "desc": "There are {{count}} reactions from people who want to go together for {{topic}}.",
-        "topic_review": "visiting this reviewed place",
-        "topic_outing": "this sightseeing or event plan",
-        "schedule_title": "📅 Schedule suggestions",
-        "preview_title": "👥 Signal preview (latest)",
-        "group_count": "{{count}} joining",
-        "reaction_fallback": "I want to join!",
-        "join_time": "Join the {{time}} plan",
-        "notice_1": "⚠️ This is not a confirmed meetup yet.",
-        "notice_2": "🗨️ Do not share private contact information. Talk in comments first.",
-        "join_cta": "Leave a signal for this draft"
-      },
-      "empty_comments": "No comments yet.",
-      "signal_tag": "Together signal",
-      "signal_content_default": "Shared an interest signal.",
-      "bottom_safety": {
-        "title": "🛡️ Safe meetup promise",
-        "item_1": "Do not share private contact information right away. Coordinate enough in comments first.",
-        "item_2": "We recommend a first meetup in public places such as cafes or galleries.",
-        "item_3": "Firmly refuse requests for money or personal information."
-      },
+      "body_title": "Post Content",
+      "like": "Like",
+      "dislike": "Dislike",
+      "like_alert": "Liked!",
+      "dislike_alert": "Disliked.",
+      "comments_title": "Comments",
       "comment_input": {
-        "default": "Write a comment...",
-        "optional": "Extra message (optional)",
+        "default": "Enter a comment...",
+        "optional": "Add an optional note",
         "send": "Send"
       },
       "signal_intents": {
-        "interested": "I would like to go too",
-        "available_this_week": "I am free this week",
-        "join_if_schedule_fits": "I will join if the time works",
-        "thanks": "Thanks for the information",
-        "question": "I have a question"
+        "interested": "I'm interested",
+        "available_this_week": "Available this week",
+        "join_if_schedule_fits": "Join if schedule fits",
+        "thanks": "Thanks for info",
+        "question": "Have a question"
       },
       "signal_times": {
         "this_week": "This week",
         "this_weekend": "This weekend",
         "next_week": "Next week",
-        "schedule_coordination": "Coordinate date"
+        "schedule_coordination": "Coordinating date"
+      },
+      "author_panel": {
+        "title": "Author Dashboard",
+        "badge": "Author",
+        "stats": {
+          "total": "Total Reactions",
+          "total_value": "{{count}}",
+          "time": "Preferred Time",
+          "time_pending": "Calculating",
+          "intent": "Main Intent",
+          "recent": "Last 24h",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "Weekend has most reactions. Suggest a detailed schedule.",
+          "vote": "Preferred times vary. Try a vote to finalize.",
+          "share": "Share more info to get more attention."
+        },
+        "action": {
+          "weekend": "Suggest Weekend Schedule",
+          "vote": "Post a Vote",
+          "share": "Share Extra Tips"
+        },
+        "draft": {
+          "weekend": "How about meeting this weekend at 2PM?",
+          "vote": "Please vote for your preferred time!",
+          "share": "Here's one more tip for you!"
+        },
+        "final_draft": "Closing the recruitment. Please join our open chat if you're participating!",
+        "final_action": "Close Recruitment",
+        "footer": "Kello promotes a safe community culture."
+      },
+      "status_controls": {
+        "title": "Change Status"
+      },
+      "result": {
+        "title": "Post-visit Report & Tips",
+        "help": "Share tips or reviews after your visit. It helps others a lot.",
+        "placeholder": "Write your post-visit review here...",
+        "save_visited": "Save Visit & Tips",
+        "save_only": "Save Info Only"
+      },
+      "author_safety": {
+        "title": "Author Safety Guide",
+        "item_1": "Do not expose personal contact info directly.",
+        "item_2": "Beware of illegal meetups or money requests.",
+        "item_3": "Communicate with trusted users."
+      },
+      "signal_summary": {
+        "title": "Participation Summary",
+        "status": {
+          "active": "Actively Recruiting",
+          "forming": "Forming",
+          "preparing": "Starting"
+        },
+        "time_split": "Preferred times are split.",
+        "time_focus": "Most preferred: {{time}}",
+        "time_flexible": "Many flexible times.",
+        "desc": "{{count}} people expressed interest in {{topic}}.",
+        "topic_review": "review sharing",
+        "topic_outing": "meetup participation",
+        "schedule_title": "Choose Preferred Time"
+      },
+      "status": {
+        "REVIEWS": "Reviews Done",
+        "REACTING": "Reacting",
+        "SURVEYING": "Surveying",
+        "DRAFTING": "Drafting",
+        "CLOSED": "Closed"
+      },
+      "tags": {
+        "solo_friendly": "Solo Friendly",
+        "friends_friendly": "With Friends",
+        "photo_spot": "Photo Spots",
+        "waiting": "Wait Exists",
+        "foreigner_friendly": "Foreigner Friendly"
       }
+    },
+    "actions": {
+      "delete_confirm": "Are you sure you want to delete?"
+    },
+    "errors": {
+      "login_required": "Login required.",
+      "post_failed": "Failed to post: {{message}}"
+    },
+    "report": {
+      "report_action": "Report",
+      "success": "Reported successfully.",
+      "reasons": {
+        "ad_spam": "Ad/Spam",
+        "offensive": "Offensive",
+        "contact": "Contact Induction",
+        "unsafe": "Unsafe",
+        "other": "Other"
+      }
+    },
+    "comments": "Comments",
+    "time": {
+      "just_now": "Just now"
     }
   },
   "help_page": {

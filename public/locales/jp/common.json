@@ -949,48 +949,303 @@
     }
   },
   "community_page": {
-    "title": "コミュニティ",
-    "subtitle": "地元の人や旅行者と繋がる",
-    "filter_all": "すべて",
-    "filter_meetup": "食事＆集まり",
-    "filter_travel": "旅行仲間",
-    "filter_help": "ローカルヘルプ",
-    "comments": "コメント",
-    "message": "メッセージ",
-    "type": {
-      "MEETUP": "集まり",
-      "TRAVEL": "旅行",
-      "HELP": "ヘルプ",
-      "REVIEW": "REVIEW"
+    "hero": {
+      "title": "Kello コミュニティ",
+      "search_placeholder": "興味のあるトピックを検索"
     },
-    "post": {
-      "1": {
-        "author": "ミカ (日本)",
-        "time": "10分前",
-        "title": "サムギョプサル集まり 🥓",
-        "desc": "今夜7時に金豚食堂で一緒にサムギョプサル食べませんか？"
+    "categories": {
+      "all": "公式",
+      "beauty_review": "ビューティーレビュー",
+      "food_review": "グルメおすすめ",
+      "travel_review": "旅行のヒント",
+      "meetup": "気軽な集まり",
+      "meetup_recruitment": "同行者募集",
+      "help": "質問/相談"
+    },
+    "sub_filters": {
+      "all": "すべて",
+      "saved": "保存した記事",
+      "reacted": "反応した記事",
+      "mine": "自分の投稿",
+      "recruiting": "募集中",
+      "active_reactions": "トレンド",
+      "open_meetup": "オープンな集まり",
+      "weekend": "今週末",
+      "fresh": "最新情報"
+    },
+    "status": {
+      "reviews": "レビューのみ",
+      "reacting": "反応募集中",
+      "surveying": "意思確認中",
+      "drafting": "準備中",
+      "closed": "募集終了"
+    },
+    "tags": {
+      "solo_friendly": "一人旅に最適",
+      "friends_friendly": "友達と一緒に",
+      "photo_spot": "フォトスポット",
+      "waiting": "待ち時間あり",
+      "foreigner_friendly": "外国人に優しい"
+    },
+    "states": {
+      "fetch_failed_desc": "投稿の読み込みに失敗しました。ネットワークを確認してください。",
+      "fetch_failed_title": "データエラー",
+      "fetch_failed_tip": "リフレッシュしてください。",
+      "empty_title": "まだ投稿がありません",
+      "empty_desc": "最初の投稿をしてみませんか？",
+      "empty_tip": "右下のボタンから投稿できます。",
+      "no_results_title": "検索結果がありません",
+      "no_results_desc": "他のキーワードで検索してみてください。"
+    },
+    "quality_signals": {
+      "organized": "整理された記事",
+      "active": "人気上昇中",
+      "asset": "情報が豊富",
+      "mate": "良い仲間"
+    },
+    "toasts": {
+      "save_added": "保存しました。",
+      "save_removed": "保存を解除しました。",
+      "deleted": "削除しました。",
+      "updated": "更新しました。",
+      "submitted": "投稿しました。"
+    },
+    "nav_summary": {
+      "all": "{{tab}}のすべてのストーリーを表示中",
+      "active_reactions": "{{tab}}で注目のトピック！",
+      "open_meetup": "{{tab}}で新しい仲間を探しています",
+      "weekend": "{{tab}} 今週末の予定は？",
+      "default": "{{tab}}で {{sub}} フィルタリングされた結果"
+    },
+    "form": {
+      "select_category": "カテゴリを選択",
+      "write_guide_title": {
+        "beauty_review": "ビューティー体験を教えてください",
+        "food_review": "おすすめのグルメはありますか？",
+        "travel_review": "旅行のヒントを共有しましょう",
+        "meetup": "一緒に楽しむ仲間を見つけましょう",
+        "meetup_recruitment": "旅行の同行者を探していますか？",
+        "help": "何でも聞いてください"
       },
-      "2": {
-        "author": "ジョン (米国)",
-        "time": "1時間前",
-        "title": "弘大路上ライブ 🎸",
-        "desc": "インディーズバンドを見に弘大に向かっています。一緒にどうですか！"
+      "write_guide_body": {
+        "beauty_review": "施術の満足度や店舗のサービスなど、正直な感想をどうぞ。",
+        "food_review": "味、雰囲気、待ち時間などの情報を共有してください。",
+        "travel_review": "コース、持ち物、移動手段などの役立つヒントを。",
+        "meetup": "いつ、どこで、何をするか自由に書いてください。",
+        "meetup_recruitment": "スケジュールや目的地、同行者の条件を記入してください。",
+        "help": "質問内容や困っている状況を詳しく書いてください。"
       },
-      "3": {
-        "author": "ジフン (韓国)",
-        "time": "2時間前",
-        "title": "地下鉄の案内が必要ですか？ 🚇",
-        "desc": "明洞の近くに住んでいるので、道に迷ったら通訳や案内ができますよ。お気軽にメッセージください！"
+      "title_label": {
+        "beauty_review": "メニュー/テーマ",
+        "default": "タイトル"
       },
-      "4": {
-        "author": "リウェイ (中国)",
-        "time": "3時間前",
-        "title": "K-Beauty コスメショッピング 💄",
-        "desc": "明洞のオリーブヤングで一緒に買い物する友達を探しています。いいブランドたくさん知ってます！"
+      "title_placeholder": {
+        "beauty_review": "例：江南駅 レイヤードカットのレビュー",
+        "food_review": "例：聖水洞で行列ができる日本料理店",
+        "travel_review": "例：ソウルから釜山までのKTXのコツ",
+        "meetup": "例：新論峴駅の近くでチメクする人募集！",
+        "meetup_recruitment": "例：来週の景福宮に一緒に行く人募集",
+        "help": "例：仁川空港から宿までどう行けばいいですか？"
+      },
+      "desc_label": {
+        "beauty_review": "詳細レビュー",
+        "default": "内容"
+      },
+      "desc_placeholder": {
+        "beauty_review": "施術の過程や仕上がりについて詳しく教えてください。",
+        "food_review": "美味しかったメニューやおすすめの理由をどうぞ。",
+        "travel_review": "他の旅行者に役立つ情報を共有してください。",
+        "meetup": "集まりの内容について詳しく説明してください。",
+        "meetup_recruitment": "一緒にしたい内容を書いてください。",
+        "help": "詳しい質問内容を記入すると、良い回答が得られやすくなります。"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "Before/Afterや店内の写真を追加（最大4枚）",
+          "food_review": "料理や店内の写真を追加（最大4枚）",
+          "travel_review": "現場の雰囲気が伝わる写真を追加（最大4枚）",
+          "meetup": "場所や活動に関連する写真を追加（最大4枚）",
+          "meetup_recruitment": "目的地や参考写真を追加（最大4枚）",
+          "help": "問題が伝わる写真があれば追加してください（最大4枚）"
+        },
+        "saved_name": "保存された画像 {{index}}",
+        "file_only_alert": "画像ファイルのみ選択可能です。",
+        "limit_alert": "画像は最大 {{count}}枚までアップロード可能です。",
+        "load_failed_alert": "画像を読み込めませんでした。"
+      },
+      "category_hints": {
+        "beauty_review": "美容室やクリニックの体験を自由に共有しましょう。",
+        "food_review": "お気に入りの店を推薦してください。",
+        "travel_review": "あなただけの旅行ノウハウを共有しましょう。",
+        "meetup": "軽く集まって楽しむ募集を作成しましょう。",
+        "meetup_recruitment": "スケジュールが合う旅行仲間を見つけましょう。",
+        "help": "気になることがあれば何でも聞いてください。"
       }
     },
-    "filter_review": "Reviews",
-    "detail": "投稿の詳細"
+    "detail": "投稿詳細",
+    "detail_page": {
+      "loading": "データを読み込み中...",
+      "hidden_post": "非公開の投稿です。",
+      "not_found": "投稿が見つかりませんでした。",
+      "show_hidden": "非表示の投稿を表示",
+      "hide_post": "この投稿を非表示にする",
+      "freshness": {
+        "realtime": "活発に更新中",
+        "updated": "情報更新済み",
+        "active": "活発な投稿",
+        "calm": "落ち着いた投稿"
+      },
+      "strengths": {
+        "title": "投稿のポイント",
+        "organized": "整理された内容",
+        "active": "活発な交流",
+        "visited_tip": "訪問のヒントあり",
+        "new": "新着情報"
+      },
+      "checklist": {
+        "title": "チェックリスト",
+        "recommended": "おすすめの人",
+        "required": "必須確認",
+        "comment_check": "コメントを確認",
+        "read_details": "詳細を読む"
+      },
+      "mini_signal_tag": "募集中",
+      "primary_action": {
+        "review": "レビューを書く",
+        "join": "興味あります"
+      },
+      "save": {
+        "saved": "保存済み",
+        "default": "保存"
+      },
+      "meetup_safety": {
+        "title": "安全な集まりのためのガイド",
+        "item_1": "公共の場での待ち合わせを推奨します。",
+        "item_2": "個人情報の取り扱いに注意してください。"
+      },
+      "body_title": "投稿内容",
+      "like": "いいね",
+      "dislike": "いまいち",
+      "like_alert": "いいねしました！",
+      "dislike_alert": "いまいちしました。",
+      "comments_title": "コメントリスト",
+      "comment_input": {
+        "default": "コメントを入力...",
+        "optional": "ひと言添えてください (任意)",
+        "send": "送信"
+      },
+      "signal_intents": {
+        "interested": "私も行ってみたいです",
+        "available_this_week": "今週空いています",
+        "join_if_schedule_fits": "予定が合えば一緒に！",
+        "thanks": "情報ありがとうございます",
+        "question": "質問があります"
+      },
+      "signal_times": {
+        "this_week": "今週",
+        "this_weekend": "今週末",
+        "next_week": "来週",
+        "schedule_coordination": "日程調整"
+      },
+      "author_panel": {
+        "title": "投稿者ダッシュボード",
+        "badge": "投稿者",
+        "stats": {
+          "total": "総反応数",
+          "total_value": "{{count}}件",
+          "time": "希望時間",
+          "time_pending": "集計中",
+          "intent": "主な意思",
+          "recent": "直近24時間",
+          "recent_value": "{{count}}件"
+        },
+        "guide": {
+          "weekend": "週末の反応が最も多いです。具体的なスケジュールを提案してみましょう。",
+          "vote": "希望時間が分散しています。投票で決定してみましょう。",
+          "share": "さらに情報を共有して関心を集めましょう。"
+        },
+        "action": {
+          "weekend": "週末の予定を提案",
+          "vote": "投票を作成",
+          "share": "追加チップを共有"
+        },
+        "draft": {
+          "weekend": "今週末の午後2時はどうですか？",
+          "vote": "いつがいいか投票をお願いします！",
+          "share": "さらにもう一つ、ヒントがあります！"
+        },
+        "final_draft": "募集を締め切ります。参加者はオープンチャットに入ってください！",
+        "final_action": "募集を締切る",
+        "footer": "Kelloは健全なコミュニティ文化を推奨します。"
+      },
+      "status_controls": {
+        "title": "募集情報の変更"
+      },
+      "result": {
+        "title": "訪問結果とヒントの記入",
+        "help": "実際の訪問後に得たコツや感想を共有してください。他の人の助けになります。",
+        "placeholder": "訪問レビューを自由に記入してください...",
+        "save_visited": "訪問完了とチップを保存",
+        "save_only": "情報のみ保存"
+      },
+      "author_safety": {
+        "title": "投稿者安全ガイド",
+        "item_1": "本文に直接電話番号などを入れないでください。",
+        "item_2": "金銭の要求や不審な勧誘に注意してください。",
+        "item_3": "信頼できるユーザーと交流を。"
+      },
+      "signal_summary": {
+        "title": "参加状況サマリー",
+        "status": {
+          "active": "活発に募集中",
+          "forming": "メンバー調整中",
+          "preparing": "募集開始"
+        },
+        "time_split": "希望時間が分かれています。",
+        "time_focus": "{{time}} が最も選ばれています。",
+        "time_flexible": "調整可能な時間がたくさんあります。",
+        "desc": "{{topic}} について {{count}}人が参加の意思を表明しました。",
+        "topic_review": "レビュー共有",
+        "topic_outing": "集まりに参加",
+        "schedule_title": "希望する時間帯を選択"
+      },
+      "status": {
+        "REVIEWS": "レビュー完了",
+        "REACTING": "反応募集中",
+        "SURVEYING": "意思確認",
+        "DRAFTING": "準備中",
+        "CLOSED": "募集締切"
+      },
+      "tags": {
+        "solo_friendly": "一人旅歓迎",
+        "friends_friendly": "友達もOK",
+        "photo_spot": "映えスポット",
+        "waiting": "待ち時間注意",
+        "foreigner_friendly": "外国人歓迎"
+      }
+    },
+    "actions": {
+      "delete_confirm": "本当に削除しますか？"
+    },
+    "errors": {
+      "login_required": "ログインが必要です。",
+      "post_failed": "投稿に失敗しました: {{message}}"
+    },
+    "report": {
+      "report_action": "通報する",
+      "success": "通報が完了しました。",
+      "reasons": {
+        "ad_spam": "広告/スパム",
+        "offensive": "不適切な内容",
+        "contact": "外部誘導",
+        "unsafe": "危険な行動",
+        "other": "その他"
+      }
+    },
+    "comments": "コメント",
+    "time": {
+      "just_now": "たった今"
+    }
   },
   "help_page": {
     "title": "緊急支援",

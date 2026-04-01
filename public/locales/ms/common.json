@@ -266,217 +266,302 @@
     }
   },
   "community_page": {
-    "title": "Komuniti",
-    "subtitle": "Berhubung dengan penduduk tempatan & pelancong",
-    "filter_all": "Semua",
-    "filter_meetup": "Makanan & Pertemuan",
-    "filter_travel": "Rakan Perjalanan",
-    "filter_help": "Bantuan Tempatan",
-    "comments": "Komen",
-    "message": "Mesej",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
-    },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-      },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-      },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-      },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-      }
-    },
-    "filter_review": "Ulasan",
-    "detail": "Butiran Siaran",
-    "meetup_info": "Maklumat lawatan",
-    "write_post": "Tulis ulasan",
-    "edit": "Edit ulasan",
-    "posting": "Sedang siar...",
     "hero": {
-      "title": "Komuniti yang mengutamakan ulasan beauty selepas tempahan",
-      "search_placeholder": "Cari nama salon, pengalaman rawatan atau ulasan tempahan"
+      "title": "Komuniti Kello",
+      "search_placeholder": "Cari topik yang diminati"
     },
     "categories": {
-      "all": "Semua",
-      "beauty_review": "Ulasan salon beauty",
-      "food_review": "Ulasan makanan",
-      "travel_review": "Ulasan tempat lawatan",
-      "meetup": "Acara",
-      "help": "Soalan"
+      "all": "All",
+      "beauty_review": "Beauty Reviews",
+      "food_review": "Restaurant Tips",
+      "travel_review": "Travel Tips",
+      "meetup": "Flash Meetups",
+      "meetup_recruitment": "Travel Mates",
+      "help": "Q&A"
     },
     "sub_filters": {
-      "all": "Semua",
-      "saved": "⭐ Disimpan",
-      "reacted": "💬 Saya sertai",
-      "mine": "👤 Tulisan saya",
-      "recruiting": "📢 Masih dibuka",
-      "active_reactions": "🔥 Banyak respons",
-      "open_meetup": "🤝 Buka ajakan bersama",
-      "weekend": "📅 Hujung minggu ini",
-      "fresh": "✨ Baru dikemas kini"
+      "all": "All",
+      "saved": "Saved",
+      "reacted": "Reacted",
+      "mine": "My Posts",
+      "recruiting": "Recruiting",
+      "active_reactions": "Trending",
+      "open_meetup": "Open Meetups",
+      "weekend": "Weekend",
+      "fresh": "Fresh Info"
+    },
+    "status": {
+      "reviews": "Reviews",
+      "reacting": "Reacting",
+      "surveying": "Surveying",
+      "drafting": "Drafting",
+      "closed": "Closed"
+    },
+    "tags": {
+      "solo_friendly": "Solo Friendly",
+      "friends_friendly": "Friends Friendly",
+      "photo_spot": "Photo Spots",
+      "waiting": "Waiting Expected",
+      "foreigner_friendly": "Foreigner Friendly"
     },
     "states": {
-      "fetch_failed_title": "Tidak dapat memuatkan pos",
-      "fetch_failed_desc": "Sila cuba semula sebentar lagi.",
-      "fetch_failed_tip": "Buka semula halaman ini untuk memuatkan pos terkini.",
-      "empty_title": "Belum ada pos",
-      "empty_desc": "Jadilah orang pertama berkongsi ulasan beauty.",
-      "empty_tip": "Nama salon, pengalaman rawatan dan aliran tempahan sangat membantu orang lain.",
-      "no_results_title": "Tiada pos yang sepadan",
-      "no_results_desc": "Cuba kata kunci atau penapis lain.",
-      "cta_write": "Tulis ulasan",
-      "cta_all": "Lihat semua"
+      "fetch_failed_desc": "Failed to load posts. Please check your network.",
+      "fetch_failed_title": "Data Error",
+      "fetch_failed_tip": "Try refreshing the page.",
+      "empty_title": "No posts yet",
+      "empty_desc": "Be the first to share your story!",
+      "empty_tip": "Tap the write button on the bottom right.",
+      "no_results_title": "No results found",
+      "no_results_desc": "Try searching with other keywords."
+    },
+    "quality_signals": {
+      "organized": "Well Organized",
+      "active": "Very Popular",
+      "asset": "Rich Information",
+      "mate": "Good Mate"
+    },
+    "toasts": {
+      "save_added": "Added to saved posts.",
+      "save_removed": "Removed from saved posts.",
+      "deleted": "Deleted successfully.",
+      "updated": "Updated successfully.",
+      "submitted": "Posted successfully."
+    },
+    "nav_summary": {
+      "all": "Viewing all stories in {{tab}}",
+      "active_reactions": "Getting hot reactions in {{tab}}!",
+      "open_meetup": "Looking for new mates in {{tab}}",
+      "weekend": "Any plans for this weekend in {{tab}}?",
+      "default": "Showing results filtered by {{sub}} in {{tab}}"
     },
     "form": {
-      "category_label": "Kategori",
-      "region_label": "Kawasan",
-      "region_placeholder": "Contoh: Gangnam, Mapo",
-      "vibe_label": "Pilih suasana",
-      "meetup_toggle_title": "Buka ajakan bersama",
-      "meetup_toggle_desc": "Terima isyarat minat daripada orang lain.",
-      "safety_title": "🔒 Panduan keselamatan",
-      "safety_item_1": "• Jangan terus kongsi maklumat hubungan peribadi. Semak reaksi dalam komen dahulu.",
-      "safety_item_2": "• Disyorkan untuk merancang janji di tempat awam.",
+      "select_category": "Select Category",
+      "write_guide_title": {
+        "beauty_review": "Share your beauty experience",
+        "food_review": "Any hidden gems to recommend?",
+        "travel_review": "Share your travel tips",
+        "meetup": "Find mates to hang out with",
+        "meetup_recruitment": "Looking for travel mates?",
+        "help": "Ask anything"
+      },
+      "write_guide_body": {
+        "beauty_review": "Share your honest review of the treatment or service.",
+        "food_review": "Share information on taste, mood, or waiting.",
+        "travel_review": "Provide useful tips on courses, packing, or moving.",
+        "meetup": "Describe when, where, and what to do.",
+        "meetup_recruitment": "State your travel schedule, destinations, and mate conditions.",
+        "help": "Describe your question or situation in detail."
+      },
+      "title_label": {
+        "beauty_review": "Srv/Theme",
+        "default": "Title"
+      },
+      "title_placeholder": {
+        "beauty_review": "e.g. Gangnam Layered Cut Review",
+        "food_review": "e.g. Trendy Japanese spot in Seongsu",
+        "travel_review": "e.g. KTX tips from Seoul to Busan",
+        "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
+        "meetup_recruitment": "e.g. Gyeongbokgung next week together",
+        "help": "e.g. How to get to hotel from ICN airport?"
+      },
+      "desc_label": {
+        "beauty_review": "Details",
+        "default": "Content"
+      },
+      "desc_placeholder": {
+        "beauty_review": "Describe the process or results in detail.",
+        "food_review": "Recommend menus and explain why.",
+        "travel_review": "Share info helpful for other travelers.",
+        "meetup": "Describe the meetup in detail.",
+        "meetup_recruitment": "Describe what you want to do together.",
+        "help": "Detailed questions help getting better answers."
+      },
       "image": {
-        "label": "Tambah imej",
-        "title": "Anda boleh memuat naik sehingga {{count}} imej.",
-        "file_only_alert": "Hanya fail imej boleh ditambah.",
-        "limit_alert": "Anda boleh memuat naik sehingga {{count}} imej.",
-        "load_failed_alert": "Imej tidak dapat dimuatkan.",
-        "button_loading": "Sedang menyediakan imej...",
-        "button_limit": "{{count}} imej telah dipilih",
-        "button_add_more": "Tambah lagi imej",
-        "button_select": "Pilih imej",
-        "preview_alt": "Pratonton muat naik {{index}}",
-        "preview_name": "Imej dipilih {{index}}",
-        "preview_desc": "Ini imej ke-{{index}}. Semak pratonton sebelum menghantar.",
-        "remove": "Buang",
-        "saved_name": "Imej dimuat naik {{index}}",
         "guides": {
-          "beauty_review": "Tambah gambar hasil rawatan atau suasana salon jika ada.",
-          "food_review": "Tambah foto makanan atau suasana kedai untuk beri gambaran lebih jelas.",
-          "travel_review": "Rakam suasana tempat atau titik yang paling berkesan.",
-          "meetup": "Kongsi suasana acara atau sebab seronok pergi bersama.",
-          "help": "Jika ada imej rujukan, muat naik sekali."
-        }
+          "beauty_review": "Add before/after or shop interior photos (Max 4)",
+          "food_review": "Add food and shop interior photos (Max 4)",
+          "travel_review": "Add photos that show the vibe (Max 4)",
+          "meetup": "Add photos of the place or activity (Max 4)",
+          "meetup_recruitment": "Add destination or reference photos (Max 4)",
+          "help": "Add photos that help explain the issue (Max 4)"
+        },
+        "saved_name": "Saved image {{index}}",
+        "file_only_alert": "Only image files can be selected.",
+        "limit_alert": "Up to {{count}} images can be uploaded.",
+        "load_failed_alert": "Failed to load images."
       },
-      "summary_title": "Ringkasan pos",
-      "summary_region_type": "Kawasan / jenis",
-      "summary_point": "Poin",
-      "summary_meetup": "Pergi bersama",
-      "summary_enabled": "Aktif",
-      "summary_disabled": "Tidak aktif",
-      "submit_with_reactions": "Siarkan ulasan dan kumpul respons",
-      "submit_beauty": "Kongsi ulasan beauty",
-      "submit_default": "Kongsi ulasan"
-    },
-    "quick_entry": {
-      "beauty": {
-        "label": "Ulasan beauty",
-        "sub": "Tempahan · layanan · kepuasan"
-      },
-      "food": {
-        "label": "Ulasan makanan",
-        "sub": "Sambungan hari beauty"
-      },
-      "travel": {
-        "label": "Ulasan lawatan",
-        "sub": "Laluan sebelum dan selepas rawatan"
-      },
-      "write": {
-        "label": "Tulis ulasan",
-        "sub": "Kongsi pengalaman beauty"
+      "category_hints": {
+        "beauty_review": "Share your beauty shop experiences.",
+        "food_review": "Recommend your favorite spots.",
+        "travel_review": "Share your own travel know-how.",
+        "meetup": "Create a casual meetup to enjoy together.",
+        "meetup_recruitment": "Find travel mates with similar schedules.",
+        "help": "Ask anything you're curious about."
       }
     },
-    "activity": {
-      "label": "Aktiviti saya:",
-      "summary": "Simpan {{saved}}, sertai {{reacted}}",
-      "new_updates": "✨ Ada kemas kini baru!"
-    },
-    "sort": {
-      "latest": "Terbaharu",
-      "reactions": "Paling banyak respons",
-      "draft": "Pembentukan pelan"
-    },
-    "defaults": {
-      "region": "Seoul"
-    },
-    "fab": {
-      "beauty": "Tulis ulasan beauty",
-      "meetup": "Tulis pos acara"
-    },
-    "report": {
-      "modal_title": "Pilih sebab laporan",
-      "report_action": "Laporkan",
-      "cancel": "Batal",
-      "item_post": "pos",
-      "item_comment": "komen",
-      "submitted_alert": "{{item}} telah dilaporkan.\nSebab: {{reason}}\nKami akan menyemaknya secepat mungkin.",
-      "reasons": {
-        "ad_spam": "Nampak seperti iklan",
-        "offensive": "Ada ungkapan yang tidak menyenangkan",
-        "contact": "Terlalu memaksa untuk hubungi secara peribadi",
-        "unsafe": "Kelihatan tidak selamat",
-        "other": "Lain-lain"
-      }
-    },
+    "detail": "Post Detail",
     "detail_page": {
-      "loading": "Sedang memuatkan pos...",
-      "hidden_post": "Pos ini disembunyikan.",
-      "show_hidden": "Tunjuk semula",
-      "not_found": "Pos tidak ditemui.",
-      "hide_post": "Sembunyikan pos ini",
-      "hide_comment": "Sembunyikan",
-      "save_post_aria": "Simpan pos",
-      "body_title": "Butiran",
-      "comments_title": "Komen & pergi bersama",
-      "empty_comments": "Belum ada komen.",
-      "signal_tag": "Isyarat pergi bersama",
-      "comment_input": {
-        "default": "Tulis komen...",
-        "optional": "Mesej tambahan (pilihan)",
-        "send": "Hantar"
+      "loading": "Loading data...",
+      "hidden_post": "This post is hidden.",
+      "not_found": "Post not found.",
+      "show_hidden": "Show Hidden Post",
+      "hide_post": "Hide this post",
+      "freshness": {
+        "realtime": "Actively Live",
+        "updated": "Info Updated",
+        "active": "Active Post",
+        "calm": "Calm Post"
       },
-      "signal_intents": {
-        "interested": "Saya pun mahu pergi",
-        "available_this_week": "Saya lapang minggu ini",
-        "join_if_schedule_fits": "Saya ikut jika masa sesuai",
-        "thanks": "Terima kasih atas maklumat",
-        "question": "Saya ada soalan"
+      "strengths": {
+        "title": "Post Strengths",
+        "organized": "Well Organized",
+        "active": "Active Interaction",
+        "visited_tip": "Includes Tips",
+        "new": "New Content"
       },
-      "signal_times": {
-        "this_week": "Minggu ini",
-        "this_weekend": "Hujung minggu ini",
-        "next_week": "Minggu depan",
-        "schedule_coordination": "Selaras tarikh"
+      "checklist": {
+        "title": "Checklist",
+        "recommended": "Recommended for",
+        "required": "Must Check",
+        "comment_check": "Check comments",
+        "read_details": "Read details"
       },
-      "related": {
-        "this_region": "kawasan ini"
+      "mini_signal_tag": "Meetup Open",
+      "primary_action": {
+        "review": "Leave Review",
+        "join": "Express Interest"
       },
       "save": {
-        "default": "☆ Simpan",
-        "saved": "⭐ Disimpan"
+        "saved": "Saved",
+        "default": "Save"
+      },
+      "meetup_safety": {
+        "title": "Meetup Safety Guide",
+        "item_1": "Meeting in public places is recommended.",
+        "item_2": "Be careful with personal information."
+      },
+      "body_title": "Post Content",
+      "like": "Like",
+      "dislike": "Dislike",
+      "like_alert": "Liked!",
+      "dislike_alert": "Disliked.",
+      "comments_title": "Comments",
+      "comment_input": {
+        "default": "Enter a comment...",
+        "optional": "Add an optional note",
+        "send": "Send"
+      },
+      "signal_intents": {
+        "interested": "I'm interested",
+        "available_this_week": "Available this week",
+        "join_if_schedule_fits": "Join if schedule fits",
+        "thanks": "Thanks for info",
+        "question": "Have a question"
+      },
+      "signal_times": {
+        "this_week": "This week",
+        "this_weekend": "This weekend",
+        "next_week": "Next week",
+        "schedule_coordination": "Coordinating date"
+      },
+      "author_panel": {
+        "title": "Author Dashboard",
+        "badge": "Author",
+        "stats": {
+          "total": "Total Reactions",
+          "total_value": "{{count}}",
+          "time": "Preferred Time",
+          "time_pending": "Calculating",
+          "intent": "Main Intent",
+          "recent": "Last 24h",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "Weekend has most reactions. Suggest a detailed schedule.",
+          "vote": "Preferred times vary. Try a vote to finalize.",
+          "share": "Share more info to get more attention."
+        },
+        "action": {
+          "weekend": "Suggest Weekend Schedule",
+          "vote": "Post a Vote",
+          "share": "Share Extra Tips"
+        },
+        "draft": {
+          "weekend": "How about meeting this weekend at 2PM?",
+          "vote": "Please vote for your preferred time!",
+          "share": "Here's one more tip for you!"
+        },
+        "final_draft": "Closing the recruitment. Please join our open chat if you're participating!",
+        "final_action": "Close Recruitment",
+        "footer": "Kello promotes a safe community culture."
+      },
+      "status_controls": {
+        "title": "Change Status"
+      },
+      "result": {
+        "title": "Post-visit Report & Tips",
+        "help": "Share tips or reviews after your visit. It helps others a lot.",
+        "placeholder": "Write your post-visit review here...",
+        "save_visited": "Save Visit & Tips",
+        "save_only": "Save Info Only"
+      },
+      "author_safety": {
+        "title": "Author Safety Guide",
+        "item_1": "Do not expose personal contact info directly.",
+        "item_2": "Beware of illegal meetups or money requests.",
+        "item_3": "Communicate with trusted users."
+      },
+      "signal_summary": {
+        "title": "Participation Summary",
+        "status": {
+          "active": "Actively Recruiting",
+          "forming": "Forming",
+          "preparing": "Starting"
+        },
+        "time_split": "Preferred times are split.",
+        "time_focus": "Most preferred: {{time}}",
+        "time_flexible": "Many flexible times.",
+        "desc": "{{count}} people expressed interest in {{topic}}.",
+        "topic_review": "review sharing",
+        "topic_outing": "meetup participation",
+        "schedule_title": "Choose Preferred Time"
+      },
+      "status": {
+        "REVIEWS": "Reviews Done",
+        "REACTING": "Reacting",
+        "SURVEYING": "Surveying",
+        "DRAFTING": "Drafting",
+        "CLOSED": "Closed"
+      },
+      "tags": {
+        "solo_friendly": "Solo Friendly",
+        "friends_friendly": "With Friends",
+        "photo_spot": "Photo Spots",
+        "waiting": "Wait Exists",
+        "foreigner_friendly": "Foreigner Friendly"
       }
+    },
+    "actions": {
+      "delete_confirm": "Are you sure you want to delete?"
+    },
+    "errors": {
+      "login_required": "Login required.",
+      "post_failed": "Failed to post: {{message}}"
+    },
+    "report": {
+      "report_action": "Report",
+      "success": "Reported successfully.",
+      "reasons": {
+        "ad_spam": "Ad/Spam",
+        "offensive": "Offensive",
+        "contact": "Contact Induction",
+        "unsafe": "Unsafe",
+        "other": "Other"
+      }
+    },
+    "comments": "Comments",
+    "time": {
+      "just_now": "Just now"
     }
   },
   "home_new": {
