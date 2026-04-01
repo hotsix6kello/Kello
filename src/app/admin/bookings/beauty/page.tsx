@@ -198,11 +198,11 @@ function AdminBeautyBookingsContent() {
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('is_admin')
+        .select('role')
         .eq('id', user.id)
         .maybeSingle();
 
-      setIsAdmin(profile?.is_admin === true);
+      setIsAdmin(profile?.role === 'admin' || profile?.role === 'super_admin');
     };
 
     void init();

@@ -13,8 +13,10 @@ type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 
 
 interface DashboardProfileRecord {
+    email: string | null;
     nickname: string | null;
-    is_admin: boolean | null;
+    role: string | null;
+    created_at: string | null;
     avatar_url: string | null;
 }
 
@@ -416,9 +418,9 @@ function MyPageContent() {
                 return;
             }
 
-            const { data: profile } = await supabase
+            const { data: profileData } = await supabase
                 .from("profiles")
-                .select("nickname, is_admin, avatar_url")
+                .select("email, nickname, role, created_at, avatar_url")
                 .eq("id", user.id)
                 .maybeSingle();
 
@@ -426,7 +428,7 @@ function MyPageContent() {
                 return;
             }
 
-            const nextProfile = (profile as DashboardProfileRecord | null) ?? null;
+            const nextProfile = (profileData as DashboardProfileRecord | null) ?? null;
             if (nextProfile?.avatar_url) {
                 setAvatarUrl(nextProfile.avatar_url);
             }
@@ -440,7 +442,7 @@ function MyPageContent() {
             );
             setUserName(displayName);
             setProfileSubtitle(email || fallbackSubtitle);
-            setIsAdmin(Boolean(nextProfile?.is_admin));
+            setIsAdmin(nextProfile?.role === "admin" || nextProfile?.role === "super_admin");
 
             if (!email) {
                 setPartnerStatus("none");
