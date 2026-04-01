@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import styles from './detail.module.css';
 import Image from 'next/image';
 
@@ -67,11 +68,11 @@ const STATUS_KEY_MAP: Record<CommunityStatus, string> = {
     CLOSED: 'CLOSED'
 };
 
-const getStatusLabel = (t: any, status: string) => {
+const getStatusLabel = (t: TFunction, status: string) => {
     return t(`community_page.detail_page.status.${status}`, { defaultValue: status });
 };
 
-const getTagLabel = (t: any, tag: string) => {
+const getTagLabel = (t: TFunction, tag: string) => {
     return t(`community_page.detail_page.tags.${tag}`, { defaultValue: tag });
 };
 
@@ -119,7 +120,6 @@ export default function CommunityDetailPage() {
 
     // Step 14: Safety States
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-    const [reportingItem, setReportingItem] = useState<{ id: number; type: 'post' | 'comment' } | null>(null);
     const [hiddenComments, setHiddenComments] = useState<number[]>([]);
     const [isPostMoreMenuOpen, setIsPostMoreMenuOpen] = useState(false);
     const [activeCommentMenu, setActiveCommentMenu] = useState<number | null>(null);
@@ -232,7 +232,7 @@ export default function CommunityDetailPage() {
         }
     };
 
-    const handleReport = (reason: string) => {
+    const handleReport = () => {
         alert(t('community_page.report.success', { defaultValue: '정상적으로 신고되었습니다.' }));
         setIsReportModalOpen(false);
     };
@@ -249,7 +249,7 @@ export default function CommunityDetailPage() {
         setIsSubmitting(true);
         
         try {
-            let finalContent = selectedIntent 
+            const finalContent = selectedIntent 
                 ? `[SIGNAL:${selectedIntent}]${selectedTime ? `[TIME:${selectedTime}]` : ''}${newComment}`
                 : newComment;
 
@@ -323,7 +323,6 @@ export default function CommunityDetailPage() {
                             {isPostMoreMenuOpen && (
                                 <div className={styles.moreMenuDropdown}>
                                     <button className={`${styles.moreMenuItem} ${styles.moreMenuItem_report}`} onClick={() => {
-                                        setReportingItem({ id: post.id, type: 'post' });
                                         setIsReportModalOpen(true);
                                         setIsPostMoreMenuOpen(false);
                                     }}>{t('community_page.report.report_action')}</button>
@@ -894,7 +893,6 @@ export default function CommunityDetailPage() {
                                                 {activeCommentMenu === c.id && (
                                                     <div className={styles.moreMenuDropdown} style={{ right: 0, top: '24px' }}>
                                                         <button className={`${styles.moreMenuItem} ${styles.moreMenuItem_report}`} onClick={() => {
-                                                            setReportingItem({ id: c.id, type: 'comment' });
                                                             setIsReportModalOpen(true);
                                                             setActiveCommentMenu(null);
                                                         }}>{t('community_page.report.report_action')}</button>
@@ -999,7 +997,7 @@ export default function CommunityDetailPage() {
                         <div className={styles.modalTitle}>{t('community_page.report.modal_title')}</div>
                         <div className={styles.reportReasonList}>
                             {reportReasons.map(reason => (
-                                <button key={reason} className={styles.reportReasonBtn} onClick={() => handleReport(reason)}>
+                                <button key={reason} className={styles.reportReasonBtn} onClick={() => handleReport()}>
                                     {reason}
                                 </button>
                             ))}

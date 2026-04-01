@@ -893,264 +893,302 @@
     }
   },
   "community_page": {
-    "title": "社区",
-    "subtitle": "与当地人和旅行者交流",
-    "filter_all": "全部",
-    "filter_meetup": "美食与聚会",
-    "filter_travel": "旅行伙伴",
-    "filter_help": "当地帮助",
-    "comments": "评论",
-    "message": "发信息",
-    "type": {
-      "MEETUP": "聚会",
-      "TRAVEL": "旅行",
-      "HELP": "帮助",
-      "REVIEW": "REVIEW"
-    },
-    "post": {
-      "1": {
-        "author": "Mika (日本)",
-        "time": "10分钟前",
-        "title": "一起吃五花肉 🥓",
-        "desc": "今晚7点在金猪食堂有人想一起吃五花肉吗？"
-      },
-      "2": {
-        "author": "John (美国)",
-        "time": "1小时前",
-        "title": "弘大街头表演 🎸",
-        "desc": "我正要去弘大看独立乐队表演，一起来吧！"
-      },
-      "3": {
-        "author": "Jihoon (韩国)",
-        "time": "2小时前",
-        "title": "需要地铁方向的帮助吗？ 🚇",
-        "desc": "我住在明洞附近，如果您迷路了，我可以帮您翻译或指路。随时给我发信息！"
-      },
-      "4": {
-        "author": "Li Wei (中国)",
-        "time": "3小时前",
-        "title": "K-Beauty 化妆品购物 💄",
-        "desc": "找个在明洞Olive Young一起购物的伙伴。我知道很多好用的牌子！"
-      }
-    },
-    "filter_review": "Reviews",
-    "detail": "帖子详情",
-    "meetup_info": "到访信息",
-    "write_post": "写点评",
-    "edit": "编辑点评",
-    "posting": "发布中...",
     "hero": {
-      "title": "先看美容店预约后真实点评的社区",
-      "search_placeholder": "搜索店名、项目体验或预约点评"
+      "title": "Kello 社区",
+      "search_placeholder": "搜索您感兴趣的话题"
     },
     "categories": {
       "all": "全部",
-      "beauty_review": "美容店使用点评",
-      "food_review": "美食点评",
-      "travel_review": "景点点评",
-      "meetup": "演出·活动",
-      "help": "提问"
+      "beauty_review": "美妆点评",
+      "food_review": "美食推荐",
+      "travel_review": "旅行心得",
+      "meetup": "线下聚会",
+      "meetup_recruitment": "招募搭子",
+      "help": "求助/咨询"
     },
     "sub_filters": {
       "all": "全部",
-      "saved": "⭐ 已保存",
-      "reacted": "💬 我参与的",
-      "mine": "👤 我的帖子",
-      "recruiting": "📢 招募中",
-      "active_reactions": "🔥 热门互动",
-      "open_meetup": "🤝 可一起去",
-      "weekend": "📅 本周末",
-      "fresh": "✨ 最近更新"
-    },
-    "tags": {
-      "solo_friendly": "适合独自去",
-      "friends_friendly": "适合和朋友去",
-      "photo_spot": "拍照出片",
-      "waiting": "需要排队",
-      "foreigner_friendly": "对外国人友好"
-    },
-    "states": {
-      "fetch_failed_title": "无法加载帖子",
-      "fetch_failed_desc": "请稍后再试。",
-      "fetch_failed_tip": "重新打开页面即可刷新最新帖子。",
-      "empty_title": "暂无帖子",
-      "empty_desc": "来写第一条美容点评吧。",
-      "empty_tip": "写上店名、项目体验、预约流程和服务感受，会更有帮助。",
-      "no_results_title": "没有符合条件的帖子",
-      "no_results_desc": "试试换个关键词或放宽筛选。",
-      "cta_write": "写点评",
-      "cta_all": "查看全部"
-    },
-    "form": {
-      "category_label": "分类",
-      "region_label": "地区",
-      "region_placeholder": "例如：江南、麻浦",
-      "vibe_label": "选择氛围",
-      "meetup_toggle_title": "开放一起去",
-      "meetup_toggle_desc": "接收其他人的参与意向。",
-      "safety_title": "🔒 安全指南",
-      "safety_item_1": "• 不要马上分享私人联系方式，先在评论里确认对方反应。",
-      "safety_item_2": "• 建议优先约在公开场所见面。",
-      "image": {
-        "label": "添加图片",
-        "title": "最多可上传{{count}}张图片。",
-        "file_only_alert": "只能添加图片文件。",
-        "limit_alert": "最多可上传{{count}}张图片。",
-        "load_failed_alert": "无法加载图片。",
-        "button_loading": "正在准备图片...",
-        "button_limit": "已选满{{count}}张",
-        "button_add_more": "继续添加",
-        "button_select": "选择图片",
-        "preview_alt": "上传预览 {{index}}",
-        "preview_name": "已选图片 {{index}}",
-        "preview_desc": "这是第{{index}}张图片，发布前请先确认预览。",
-        "remove": "移除",
-        "saved_name": "已上传图片 {{index}}",
-        "guides": {
-          "beauty_review": "可以分享术后效果或店内氛围照片。",
-          "food_review": "可以附上餐点和店内氛围照片。",
-          "travel_review": "拍下地点氛围或值得看的亮点吧。",
-          "meetup": "分享现场氛围或一起去的亮点。",
-          "help": "如果有参考图片，也可以一起上传。"
-        }
-      },
-      "summary_title": "发布摘要",
-      "summary_region_type": "地区 / 类型",
-      "summary_point": "亮点",
-      "summary_meetup": "一起去",
-      "summary_enabled": "开启",
-      "summary_disabled": "关闭",
-      "submit_with_reactions": "发布点评并收集反应",
-      "submit_beauty": "分享美容点评",
-      "submit_default": "分享点评"
-    },
-    "quick_entry": {
-      "beauty": {
-        "label": "美容点评",
-        "sub": "预约·接待·满意度"
-      },
-      "food": {
-        "label": "美食点评",
-        "sub": "美容行程延伸"
-      },
-      "travel": {
-        "label": "景点点评",
-        "sub": "项目前后动线"
-      },
-      "write": {
-        "label": "写点评",
-        "sub": "分享美容体验"
-      }
-    },
-    "activity": {
-      "label": "我的活动:",
-      "summary": "保存 {{saved}}，参与 {{reacted}}",
-      "new_updates": "✨ 有新动态!"
-    },
-    "sort": {
-      "latest": "最新",
-      "reactions": "互动最多",
-      "draft": "草案形成度"
-    },
-    "defaults": {
-      "region": "首尔"
+      "saved": "我的收藏",
+      "reacted": "参与过的",
+      "mine": "我的发布",
+      "recruiting": "招募中",
+      "active_reactions": "热门动态",
+      "open_meetup": "开放中的聚会",
+      "weekend": "本周末",
+      "fresh": "最新消息"
     },
     "status": {
-      "reviews": "点评分享中",
-      "reacting": "正在收集反应",
-      "surveying": "征集中",
-      "drafting": "整理草案中",
-      "closed": "已结束"
+      "reviews": "点评中",
+      "reacting": "招募中",
+      "surveying": "确认意向",
+      "drafting": "准备中",
+      "closed": "招募结束"
     },
-    "card": {
-      "title_prefix": {
-        "beauty_review": "[美容点评]",
-        "food_review": "[美食点评]",
-        "travel_review": "[景点点评]"
-      },
-      "result_badge": "📝 后续提示",
-      "default_vibe": "✨ 氛围不错",
-      "open_meetup_badge": "🤝 开放一起去",
-      "fresh_badges": {
-        "comment": "💬 有互动",
-        "update": "✨ 提示更新"
-      },
-      "draft_status": {
-        "active": "🔥 草案活跃",
-        "forming": "📝 草案形成中",
-        "preparing": "🤝 草案准备中"
-      },
-      "draft_desc": {
-        "active": "大家正在集中讨论时间和日期。",
-        "forming": "一起去的方案开始成形。",
-        "preparing": "时间意见还比较分散。"
-      },
-      "cta": {
-        "review": "一起去吗",
-        "join": "参与"
-      },
-      "owner_reactions": {
-        "region": "📊 {{region}} / {{count}}条反应",
-        "join": "📊 {{count}}条参与反应"
-      },
-      "more_region": "📍 查看 {{region}} 的其他点评和招募 →"
+    "tags": {
+      "solo_friendly": "一人友好",
+      "friends_friendly": "适合朋友",
+      "photo_spot": "拍照打卡",
+      "waiting": "需排队",
+      "foreigner_friendly": "外国友人友好"
     },
-    "fab": {
-      "beauty": "写美容点评",
-      "meetup": "写演出·活动"
+    "states": {
+      "fetch_failed_desc": "内容加载失败，请检查网络。",
+      "fetch_failed_title": "网络错误",
+      "fetch_failed_tip": "请尝试刷新页面。",
+      "empty_title": "目前还没有帖子",
+      "empty_desc": "快来发布第一条动态吧！",
+      "empty_tip": "点击右下角按钮开始发布。",
+      "no_results_title": "未找到相关结果",
+      "no_results_desc": "请尝试更换其他关键词。"
     },
-    "report": {
-      "modal_title": "选择举报原因",
-      "report_action": "举报",
-      "cancel": "取消",
-      "item_post": "帖子",
-      "item_comment": "评论",
-      "submitted_alert": "{{item}}已举报。\n原因: {{reason}}\n我们会尽快处理。",
-      "reasons": {
-        "ad_spam": "像广告或宣传",
-        "offensive": "有令人不适的表达",
-        "contact": "过度引导私下联系",
-        "unsafe": "看起来不安全",
-        "other": "其他"
+    "quality_signals": {
+      "organized": "整理精良",
+      "active": "互动活跃",
+      "asset": "干货丰富",
+      "mate": "优秀搭子"
+    },
+    "toasts": {
+      "save_added": "已加入收藏。",
+      "save_removed": "已移除收藏。",
+      "deleted": "已删除。",
+      "updated": "已更新。",
+      "submitted": "发布成功。"
+    },
+    "nav_summary": {
+      "all": "正在查看 {{tab}} 的全部内容",
+      "active_reactions": "{{tab}} 里的热门话题！",
+      "open_meetup": "{{tab}} 正在招募新伙伴",
+      "weekend": "{{tab}} 这个周末有安排吗？",
+      "default": "{{tab}} 中按 {{sub}} 筛选的结果"
+    },
+    "form": {
+      "select_category": "选择分类",
+      "write_guide_title": {
+        "beauty_review": "分享您的美容体验",
+        "food_review": "发现了什么宝藏店铺？",
+        "travel_review": "分享您的避雷/必去心得",
+        "meetup": "寻找有趣的小伙伴",
+        "meetup_recruitment": "正在寻找旅行搭子吗？",
+        "help": "有什么需要帮忙的？"
+      },
+      "write_guide_body": {
+        "beauty_review": "描述一下您的项目满意度和店铺服务吧。",
+        "food_review": "分享一下口味、环境和排队信息吧。",
+        "travel_review": "路线、必备物品、交通等实用建议。",
+        "meetup": "描述一下时间、地点和内容。",
+        "meetup_recruitment": "写下您的行程安排和对搭子的要求。",
+        "help": "详细描述您的问题，以便小伙伴们提供帮助。"
+      },
+      "title_label": {
+        "beauty_review": "项目/主题",
+        "default": "标题"
+      },
+      "title_placeholder": {
+        "beauty_review": "例如：江南站层次修剪体验",
+        "food_review": "例如：圣水洞人气第一的日料店",
+        "travel_review": "例如：首尔到釜山的高铁省钱攻略",
+        "meetup": "例如：新论岘站附近约吃炸鸡！",
+        "meetup_recruitment": "例如：下周二求个景福宫搭子",
+        "help": "例如：从仁川机场到酒店怎么坐车最方便？"
+      },
+      "desc_label": {
+        "beauty_review": "详细评价",
+        "default": "正文"
+      },
+      "desc_placeholder": {
+        "beauty_review": "详细描述一下过程或最终效果吧。",
+        "food_review": "推荐几个必点菜，说说理由。",
+        "travel_review": "分享一些对其他朋友有帮助的信息。",
+        "meetup": "详细说明聚会的计划。",
+        "meetup_recruitment": "描述一下您想找什么样的搭子。",
+        "help": "描述越详细，越容易得到有用的回答哦。"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "添加对比照或店铺环境照（最多4张）",
+          "food_review": "添加美食或店铺照片（最多4张）",
+          "travel_review": "添加现场氛围照（最多4张）",
+          "meetup": "添加聚会地点或相关照片（最多4张）",
+          "meetup_recruitment": "目的地或参考照片（最多4张）",
+          "help": "如果有助于理解问题的照片请添加（最多4张）"
+        },
+        "saved_name": "已保存的图片 {{index}}",
+        "file_only_alert": "仅支持上传图片格式。",
+        "limit_alert": "最多可上传 {{count}} 张图片。",
+        "load_failed_alert": "图片加载失败。"
+      },
+      "category_hints": {
+        "beauty_review": "自由分享您的美容体验。",
+        "food_review": "推荐您喜欢的美食店铺。",
+        "travel_review": "分享您的独家旅行攻略。",
+        "meetup": "发起一个轻社交活动吧。",
+        "meetup_recruitment": "寻找行程契合的搭子。",
+        "help": "有疑惑尽管提问。"
       }
     },
+    "detail": "帖子详情",
     "detail_page": {
-      "loading": "正在加载帖子...",
-      "hidden_post": "这是已隐藏的帖子。",
-      "show_hidden": "取消隐藏",
-      "not_found": "未找到帖子。",
-      "hide_post": "隐藏这条帖子",
-      "hide_comment": "隐藏",
-      "save_post_aria": "保存帖子",
-      "body_title": "详细内容",
-      "comments_title": "评论与一起去",
-      "empty_comments": "还没有评论。",
-      "signal_tag": "一起去信号",
+      "loading": "内容加载中...",
+      "hidden_post": "该内容已被隐藏。",
+      "not_found": "帖子不存在。",
+      "show_hidden": "查看隐藏内容",
+      "hide_post": "隐藏此帖子",
+      "freshness": {
+        "realtime": "实时活跃中",
+        "updated": "信息已更新",
+        "active": "活跃帖子",
+        "calm": "陈旧内容"
+      },
+      "strengths": {
+        "title": "内容亮点",
+        "organized": "逻辑清晰",
+        "active": "互动频繁",
+        "visited_tip": "包含隐藏攻略",
+        "new": "新鲜速报"
+      },
+      "checklist": {
+        "title": "小提醒",
+        "recommended": "建议人群",
+        "required": "必读项",
+        "comment_check": "看下评论区",
+        "read_details": "查看详情"
+      },
+      "mini_signal_tag": "招募中",
+      "primary_action": {
+        "review": "写点评",
+        "join": "我有兴趣"
+      },
+      "save": {
+        "saved": "已收藏",
+        "default": "收藏"
+      },
+      "meetup_safety": {
+        "title": "安全社交指南",
+        "item_1": "建议在公共场所见面。",
+        "item_2": "注意保护个人隐私信息。"
+      },
+      "body_title": "正文内容",
+      "like": "点赞",
+      "dislike": "无感",
+      "like_alert": "已点赞！",
+      "dislike_alert": "已踩。",
+      "comments_title": "评论列表",
       "comment_input": {
-        "default": "写下评论...",
-        "optional": "补充留言（可选）",
-        "send": "发送"
+        "default": "发表评论...",
+        "optional": "想对楼主说点什么？ (选填)",
+        "send": "发布"
       },
       "signal_intents": {
-        "interested": "我也想去看看",
-        "available_this_week": "这周可以",
-        "join_if_schedule_fits": "时间合适我就去",
-        "thanks": "谢谢分享",
-        "question": "我有问题"
+        "interested": "我也想去",
+        "available_this_week": "这周有空",
+        "join_if_schedule_fits": "时间合适就一起",
+        "thanks": "感谢分享信息",
+        "question": "我有疑问"
       },
       "signal_times": {
         "this_week": "这周",
-        "this_weekend": "这个周末",
+        "this_weekend": "这周末",
         "next_week": "下周",
-        "schedule_coordination": "协调日期"
+        "schedule_coordination": "时间再议"
       },
-      "related": {
-        "this_region": "这个地区"
+      "author_panel": {
+        "title": "发布者管理平台",
+        "badge": "发布者",
+        "stats": {
+          "total": "总互动数",
+          "total_value": "{{count}}个",
+          "time": "热门时间",
+          "time_pending": "统计中",
+          "intent": "主要意向",
+          "recent": "24小时内",
+          "recent_value": "{{count}}个"
+        },
+        "guide": {
+          "weekend": "周末的反响最热烈，建议发布具体行程。",
+          "vote": "大家的空闲时间比较多元，发起个投票吧。",
+          "share": "分享更多细节来吸引关注。"
+        },
+        "action": {
+          "weekend": "建议周末行程",
+          "vote": "发起投票",
+          "share": "更新附加提示"
+        },
+        "draft": {
+          "weekend": "这周六下午两点见面怎么样？",
+          "vote": "大家什么时候有空？来投票吧！",
+          "share": "再给大家分享一个额外的攻略！"
+        },
+        "final_draft": "招募已完成。请加入群聊方便后续联系！",
+        "final_action": "关闭招募",
+        "footer": "Kello 致力于打造互助、安全的社区文化。"
       },
-      "save": {
-        "default": "☆ 保存",
-        "saved": "⭐ 已保存"
+      "status_controls": {
+        "title": "修改招募状态"
+      },
+      "result": {
+        "title": "填写反馈与建议",
+        "help": "分享您到店后的真实体验或小贴士，这会对其他伙伴很有帮助。",
+        "placeholder": "在这里写下您的真实反馈...",
+        "save_visited": "保存并分享攻略",
+        "save_only": "仅保存信息"
+      },
+      "author_safety": {
+        "title": "安全建议",
+        "item_1": "请勿在正文中直接留联系方式。",
+        "item_2": "提防涉及金钱的私下转账要求。",
+        "item_3": "首选在站内与高信誉用户沟通。"
+      },
+      "signal_summary": {
+        "title": "参与情况汇总",
+        "status": {
+          "active": "火热招募中",
+          "forming": "组队中",
+          "preparing": "准备发起"
+        },
+        "time_split": "大家的意向时间较为分散。",
+        "time_focus": "大多数人意向 {{time}}。",
+        "time_flexible": "有很多时间可以灵活调整。",
+        "desc": "目前有 {{count}} 人对 {{topic}} 表示了兴趣。",
+        "topic_review": "攻略分享",
+        "topic_outing": "参与组队",
+        "schedule_title": "选择心仪的时间"
+      },
+      "status": {
+        "REVIEWS": "评价完成",
+        "REACTING": "招募中",
+        "SURVEYING": "意向确认",
+        "DRAFTING": "准备中",
+        "CLOSED": "招募结束"
+      },
+      "tags": {
+        "solo_friendly": "一人无忧",
+        "friends_friendly": "聚会首选",
+        "photo_spot": "容易出片",
+        "waiting": "建议预留时间",
+        "foreigner_friendly": "沟通无障碍"
       }
+    },
+    "actions": {
+      "delete_confirm": "确定要删除吗？"
+    },
+    "errors": {
+      "login_required": "请先登录。",
+      "post_failed": "发布失败: {{message}}"
+    },
+    "report": {
+      "report_action": "举报",
+      "success": "已收到您的举报。",
+      "reasons": {
+        "ad_spam": "广告骚扰",
+        "offensive": "不当言论",
+        "contact": "私下导流",
+        "unsafe": "危险行为",
+        "other": "其他"
+      }
+    },
+    "comments": "评论",
+    "time": {
+      "just_now": "刚刚"
     }
   },
   "help_page": {
