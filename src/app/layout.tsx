@@ -1,10 +1,58 @@
 import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
+import {
+  Inter,
+  Noto_Sans_Arabic,
+  Noto_Sans_JP,
+  Noto_Sans_SC,
+  Noto_Sans_TC,
+  Noto_Sans_Thai
+} from "next/font/google";
 import "./globals.css";
 import LanguageInitializer from "./components/LanguageInitializer";
 import { TripProvider } from "@/lib/contexts/TripContext";
 import ClientChrome from "./components/ClientChrome";
 import { LOCALE_STORAGE_KEY, DEFAULT_CLIENT_LOCALE, resolveCanonicalLocale } from "@/lib/i18n/locales";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-noto-arabic",
+  display: "swap",
+});
+
+const notoJP = Noto_Sans_JP({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-noto-jp",
+  display: "swap",
+});
+
+const notoSC = Noto_Sans_SC({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-noto-sc",
+  display: "swap",
+});
+
+const notoTC = Noto_Sans_TC({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-noto-tc",
+  display: "swap",
+});
+
+const notoThai = Noto_Sans_Thai({
+  weight: ["400", "500", "700"],
+  subsets: ["thai"],
+  variable: "--font-noto-thai",
+  display: "swap",
+});
 
 export const dynamic = 'force-dynamic';
 
@@ -43,12 +91,10 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
+      className={`${inter.variable} ${notoArabic.variable} ${notoJP.variable} ${notoSC.variable} ${notoTC.variable} ${notoThai.variable}`}
       suppressHydrationWarning
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
       </head>
       <body className="antialiased" suppressHydrationWarning data-i18n-ready="false">

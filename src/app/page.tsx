@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
-import { MOCK_ITEMS } from './explore/mock/data';
-
 import styles from './home.module.css';
 
 interface SheetSearchResult {
@@ -18,18 +16,6 @@ interface SheetSearchResult {
   isGoogle?: boolean;
   [key: string]: unknown;
 }
-
-interface GooglePrediction {
-  placePrediction: {
-    structuredFormat: {
-      mainText: { text: string };
-      secondaryText?: { text: string };
-    };
-    placeId: string;
-  };
-}
-
-
 
 // Home Specific Components
 import HomeTopNav from './components/home/HomeTopNav';
@@ -43,7 +29,6 @@ import HomeBeautyBookingFlow from './components/home/HomeBeautyBookingFlow';
 
 import { 
   BEAUTY_CATEGORY_OPTIONS, 
-  MOCK_PLACES, 
   BeautyCategoryId
 } from './components/home/constants';
 
@@ -78,10 +63,9 @@ export default function HomePage() {
   const [selectedDest, setSelectedDest] = useState<{ title: string; area: string; lat: number; lng: number } | null>(null);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
-  const [sheetSearchResults, setSheetSearchResults] = useState<SheetSearchResult[]>([]);
+  const [sheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Typing suggestions disabled as requested
 
@@ -287,7 +271,6 @@ export default function HomePage() {
       />
 
       <HomeHero 
-        userName={userName} 
         t={t} 
       />
 
@@ -347,12 +330,6 @@ export default function HomePage() {
         initialCategory={selectedCategory}
         t={t}
       />
-
-      {toastMessage && (
-        <div className={styles.toast}>
-          {toastMessage}
-        </div>
-      )}
 
     </div>
   );

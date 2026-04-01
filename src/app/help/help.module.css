@@ -1,41 +1,23 @@
 .container {
     min-height: 100vh;
     background: var(--hanji-ivory);
-    padding-bottom: 100px;
+    padding-bottom: 24px;
 }
 
 .header {
     background: var(--secondary);
-    padding: 48px 24px 36px;
+    padding: 24px 24px 20px;
     text-align: center;
     color: var(--hanji-ivory);
 }
 
-.headerBadge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
-    padding: 4px 14px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-}
-
 .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    margin: 0 0 8px;
+    margin: 0;
     letter-spacing: -0.02em;
 }
 
-.subtitle {
-    font-size: 0.9rem;
-    opacity: 0.85;
-    margin: 0;
-}
 
 .grid {
     display: grid;
@@ -83,86 +65,29 @@
     font-size: 0.78rem;
     color: var(--soft-ink);
     line-height: 1.4;
-}
-
-.section {
-    padding: 24px 20px 0;
-}
-
-.sectionTitle {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ink-black);
-    margin: 0 0 12px;
-}
-
-.numberList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.numberCard {
+    flex-grow: 1;
     display: flex;
     align-items: center;
-    gap: 14px;
-    background: var(--surface);
+}
+
+.phoneNumber {
+    margin-top: 14px;
+    padding: 10px 16px;
+    background: var(--hanji-ivory);
     border-radius: var(--radius-md);
-    padding: 14px 16px;
-    border-left: 4px solid var(--warm-sand);
-    box-shadow: var(--shadow-sm);
-    text-decoration: none;
-    color: inherit;
-    border-right: 1px solid var(--warm-sand);
-    border-top: 1px solid var(--warm-sand);
-    border-bottom: 1px solid var(--warm-sand);
-}
-
-.numberIcon {
-    font-size: 1.4rem;
-}
-
-.numberValue {
-    font-size: 1.2rem;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.numberLabel {
-    font-size: 0.8rem;
-    color: var(--soft-ink);
-    margin-top: 2px;
-}
-
-.callIcon {
-    margin-left: auto;
-    font-size: 1.2rem;
-}
-
-.fab {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 100;
-}
-
-.fabBtn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 18px;
-    border-radius: var(--radius-full);
-    color: var(--hanji-ivory);
-    font-weight: 700;
     font-size: 0.95rem;
+    font-weight: 800;
     text-decoration: none;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid var(--warm-sand);
+    width: 100%;
+    transition: background 0.15s, transform 0.1s;
 }
 
-.fabBtn:active {
-    transform: scale(0.95);
-}
+.phoneNumber:active {
+    background: var(--warm-sand);
+    transform: scale(0.98);
+}

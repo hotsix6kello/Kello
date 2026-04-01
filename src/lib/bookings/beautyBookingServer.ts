@@ -342,11 +342,31 @@ export async function createBeautyBookingRequest(
   }
 
   const client = getSupabaseServerClient();
+  const insertData = mapBeautyBookingPayloadToRow(payload, customerUserId);
+  console.log("[beauty-booking-server] Attempting insert", {
+    store_id: insertData.store_id,
+    beauty_category: insertData.beauty_category,
+    region: insertData.region,
+    customer_name: insertData.customer_name,
+  });
+
   const { data, error } = await client
     .from(BEAUTY_BOOKING_TABLE)
-    .insert(mapBeautyBookingPayloadToRow(payload, customerUserId))
+    .insert(insertData)
     .select("id, status, created_at, customer_user_id, store_name, booking_date, booking_time")
     .single();
+
+  if (error) {
+    console.error("[beauty-booking-server] Insert failed", {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+    });
+    // Continue with existing error handling below
+  } else {
+    console.log("[beauty-booking-server] Insert successful", { id: data?.id });
+  }
 
   if (error) {
     if (isRecord(error) && error.code === "42P01") {

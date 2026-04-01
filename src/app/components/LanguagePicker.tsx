@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from '@/lib/i18n/client';
 import { resolveCanonicalLocale } from '@/lib/i18n/locales';
@@ -17,38 +18,20 @@ export const LANGUAGES: LangOption[] = [
     { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
     { code: 'ja', label: '日本語', flag: 'https://flagcdn.com/w40/jp.png' },
     { code: 'zh-CN', label: '简体中文', flag: 'https://flagcdn.com/w40/cn.png' },
-    { code: 'zh-HK', label: '繁體中文', flag: 'https://flagcdn.com/w40/hk.png' },
+    { code: 'zh-TW', label: '繁體中文', flag: 'https://flagcdn.com/w40/tw.png' },
     { code: 'vi', label: 'Tiếng Việt', flag: 'https://flagcdn.com/w40/vn.png' },
     { code: 'th', label: 'ไทย', flag: 'https://flagcdn.com/w40/th.png' },
-    { code: 'id', label: 'Bahasa Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
-    { code: 'ms', label: 'Bahasa Melayu', flag: 'https://flagcdn.com/w40/my.png' },
-    { code: 'fr', label: 'Français', flag: 'https://flagcdn.com/w40/fr.png' },
-    { code: 'es', label: 'Español', flag: 'https://flagcdn.com/w40/es.png' },
-    { code: 'de', label: 'Deutsch', flag: 'https://flagcdn.com/w40/de.png' },
-    { code: 'pt', label: 'Português', flag: 'https://flagcdn.com/w40/pt.png' },
-    { code: 'ru', label: 'Русский', flag: 'https://flagcdn.com/w40/ru.png' },
     { code: 'ar', label: 'العربية', flag: 'https://flagcdn.com/w40/sa.png' },
 ];
-
-interface LanguagePickerProps {
-    compact?: boolean;
-}
 
 const LANG_TO_CURRENCY: Record<string, string> = {
     'ko': 'KRW',
     'en': 'USD',
     'ja': 'JPY',
     'zh-CN': 'CNY',
-    'zh-HK': 'HKD',
+    'zh-TW': 'TWD',
     'vi': 'VND',
     'th': 'THB',
-    'id': 'IDR',
-    'ms': 'MYR',
-    'fr': 'EUR',
-    'es': 'EUR',
-    'de': 'EUR',
-    'pt': 'EUR',
-    'ru': 'RUB',
     'ar': 'SAR'
 };
 
@@ -57,24 +40,15 @@ const LANG_TO_COUNTRY: Record<string, string> = {
     'en': 'US',
     'ja': 'JP',
     'zh-CN': 'CN',
-    'zh-HK': 'HK',
+    'zh-TW': 'TW',
     'vi': 'VN',
     'th': 'TH',
-    'id': 'ID',
-    'ms': 'MY',
-    'fr': 'FR',
-    'es': 'ES',
-    'de': 'DE',
-    'pt': 'PT',
-    'ru': 'RU',
     'ar': 'SA'
 };
 
-const FLAG_EMOJIS: Record<string, string> = {
-    kr: '🇰🇷', us: '🇺🇸', jp: '🇯🇵', cn: '🇨🇳', hk: '🇭🇰',
-    vn: '🇻🇳', th: '🇹🇭', id: '🇮🇩', my: '🇲🇾', fr: '🇫🇷',
-    es: '🇪🇸', de: '🇩🇪', pt: '🇵🇹', ru: '🇷🇺', sa: '🇸🇦'
-};
+interface LanguagePickerProps {
+    compact?: boolean;
+}
 
 export default function LanguagePicker({ compact = false }: LanguagePickerProps) {
     const { t, i18n } = useTranslation('common');
@@ -106,7 +80,7 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                 title={t('common.select_language', { defaultValue: 'Select Language' })}
             >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
-                    <img src={current.flag} alt="" className="w-5 h-3.5 object-cover rounded-[2px]" />
+                    <Image src={current.flag} alt="" width={20} height={14} className="object-cover rounded-[2px]" />
                     {locale.toUpperCase()}
                 </div>
                 <span className={styles.chevron}>{isOpen ? '^' : 'v'}</span>
@@ -126,7 +100,7 @@ export default function LanguagePicker({ compact = false }: LanguagePickerProps)
                                     className={`${styles.langItem} ${current.code === lang.code ? styles.active : ''}`}
                                     onClick={() => handleSelect(lang)}
                                 >
-                                    <img src={lang.flag} alt="" className="w-6 h-4 object-cover rounded-[2px] mr-3" />
+                                    <Image src={lang.flag} alt="" width={24} height={16} className="object-cover rounded-[2px] mr-3" />
                                     <span className={styles.itemLabel}>{lang.label}</span>
                                 </button>
                             ))}

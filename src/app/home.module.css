@@ -151,7 +151,7 @@
    HERO SECTION
    ────────────────────────────────────────────────────────────────────────── */
 .heroSection {
-  padding: 40px 0 20px;
+  padding: 40px 0 12px;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -265,24 +265,27 @@
 }
 
 .categoryButton {
-  min-height: 110px;
+  min-height: 140px;
   height: auto;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--warm-sand);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--warm-sand);
   background: var(--surface);
-  padding: 16px;
+  padding: 24px 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  text-align: left;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(43, 35, 29, 0.03);
 }
 
 .categoryButton:hover {
-  transform: translateY(-3px);
-  border-color: var(--primary);
-  box-shadow: 0 16px 32px rgba(43, 35, 29, 0.06);
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 32px rgba(159, 109, 98, 0.08);
 }
 
 .categoryButtonActive {
@@ -301,11 +304,34 @@
   margin-bottom: 4px;
 }
 
+.categoryIconWrap {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base scale from CSS variable */
+.categoryIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(var(--icon-base-scale, 1.0));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.categoryButton:hover .categoryIcon {
+  transform: scale(calc(var(--icon-base-scale, 1.0) * 1.08));
+}
+
 .categoryLabel {
-  font-size: 20px;
+  display: block;
+  font-size: 14px;
   font-weight: 800;
   color: var(--ink-black);
-  margin-bottom: 2px;
   letter-spacing: -0.02em;
 }
 

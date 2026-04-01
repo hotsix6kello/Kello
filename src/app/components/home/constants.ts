@@ -4,61 +4,47 @@ export type BeautyCategoryId = 'hair' | 'nail' | 'esthetic' | 'waxing' | 'makeup
 
 export type BeautyCategoryOption = {
   id: BeautyCategoryId;
-  code: string;
   label: string;
-  english: string;
-  note: string;
-  summary: string;
+  image: string;
+  iconScale?: number;
 };
 
 export const BEAUTY_CATEGORY_OPTIONS: BeautyCategoryOption[] = [
   {
     id: 'hair',
-    code: 'HAIR',
     label: 'home_beauty.categories.hair.label',
-    english: 'Hair',
-    note: 'home_beauty.categories.hair.note',
-    summary: 'home_beauty.categories.hair.summary',
+    image: '/images/home/categories/hair-category.png',
+    iconScale: 1.45,
   },
   {
     id: 'nail',
-    code: 'NAIL',
     label: 'home_beauty.categories.nail.label',
-    english: 'Nail',
-    note: 'home_beauty.categories.nail.note',
-    summary: 'home_beauty.categories.nail.summary',
+    image: '/images/home/categories/nail-category.png',
+    iconScale: 1.05,
   },
   {
     id: 'esthetic',
-    code: 'CARE',
     label: 'home_beauty.categories.esthetic.label',
-    english: 'Esthetic',
-    note: 'home_beauty.categories.esthetic.note',
-    summary: 'home_beauty.categories.esthetic.summary',
+    image: '/images/home/categories/care-category.png',
+    iconScale: 1.25,
   },
   {
     id: 'waxing',
-    code: 'WAX',
     label: 'home_beauty.categories.waxing.label',
-    english: 'Waxing',
-    note: 'home_beauty.categories.waxing.note',
-    summary: 'home_beauty.categories.waxing.summary',
+    image: '/images/home/categories/wax-category.png',
+    iconScale: 1.3,
   },
   {
     id: 'makeup',
-    code: 'MAKE',
     label: 'home_beauty.categories.makeup.label',
-    english: 'Makeup',
-    note: 'home_beauty.categories.makeup.note',
-    summary: 'home_beauty.categories.makeup.summary',
+    image: '/images/home/categories/makeup-category.png',
+    iconScale: 1.15,
   },
   {
     id: 'lash',
-    code: 'LASH',
     label: 'home_beauty.categories.lash.label',
-    english: 'Lash',
-    note: 'home_beauty.categories.lash.note',
-    summary: 'home_beauty.categories.lash.summary',
+    image: '/images/home/categories/lash-category.png',
+    iconScale: 1.6,
   },
 ];
 
