@@ -97,11 +97,12 @@ export default function AdminGlossaryPage() {
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('is_admin')
+        .select('role')
         .eq('id', user.id)
         .maybeSingle();
 
-      if (!profile?.is_admin) {
+      const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+      if (!isAdminRole) {
         setIsAdmin(false);
         setLoading(false);
         return;
