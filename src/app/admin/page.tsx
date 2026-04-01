@@ -26,17 +26,18 @@ export default function AdminDashboard() {
 
             const { data: profile } = await supabase
                 .from('profiles')
-                .select('is_admin')
+                .select('role')
                 .eq('id', user.id)
                 .maybeSingle();
 
-            if (!profile?.is_admin) { setIsAdmin(false); return; }
+            const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+            if (!isAdminRole) { setIsAdmin(false); return; }
             setIsAdmin(true);
 
             // 통계 조회
             const [{ count: totalUsers }, { count: adminUsers }, { count: pendingPartners }, { count: approvedPartners }] = await Promise.all([
                 supabase.from('profiles').select('*', { count: 'exact', head: true }),
-                supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('is_admin', true),
+                supabase.from('profiles').select('*', { count: 'exact', head: true }).in('role', ['admin', 'super_admin']),
                 supabase.from('partners').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
                 supabase.from('partners').select('*', { count: 'exact', head: true }).eq('status', 'approved'),
             ]);

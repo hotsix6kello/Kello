@@ -15,7 +15,7 @@ type PartnerStatus = "none" | "pending" | "approved" | "rejected";
 interface ProfileRecord {
     email: string | null;
     nickname: string | null;
-    is_admin: boolean | null;
+    role: string | null;
     created_at: string | null;
 }
 
@@ -180,7 +180,7 @@ export default function MySettingsPage() {
 
             const { data: profileData } = await supabase
                 .from("profiles")
-                .select("email, nickname, is_admin, created_at")
+                .select("email, nickname, role, created_at")
                 .eq("id", user.id)
                 .maybeSingle();
 
@@ -375,10 +375,10 @@ export default function MySettingsPage() {
     }, [partner.status, t]);
 
     const adminPanel = useMemo(() => {
-        if (profile?.is_admin) {
+        if (profile?.role === "admin" || profile?.role === "super_admin") {
             return {
                 badge: t("my_page.settings.admin.enabled"),
-                tone: "admin",
+                tone: "verified",
                 desc: t("my_page.settings.admin.enabled_desc"),
                 actionLabel: t("common.actions.open_admin_console"),
                 actionHref: "/admin",
@@ -392,7 +392,7 @@ export default function MySettingsPage() {
             actionLabel: "",
             actionHref: "",
         };
-    }, [profile?.is_admin, t]);
+    }, [profile?.role, t]);
 
     const summaryCards = useMemo(() => {
         return [
@@ -589,7 +589,7 @@ export default function MySettingsPage() {
 
                         <div className={styles.metaRow}>
                             <span className={styles.metaChip}>
-                                {profile?.is_admin
+                                {profile?.role === "admin" || profile?.role === "super_admin"
                                     ? t("my_page.settings.admin.source")
                                     : t("my_page.settings.admin.source_none")}
                             </span>
