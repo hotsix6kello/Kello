@@ -1444,14 +1444,7 @@
     "posting": "Posting...",
     "hero": {
       "title": "Beauty booking reviews come first here",
-      "subtitle": "Start with salon visit reviews, then continue into food, sightseeing, and event follow-ups.",
       "search_placeholder": "Search salon names, treatment experiences, or booking reviews"
-    },
-    "banner": {
-      "title": "kello Beauty Review Board ✨",
-      "body": "Check real post-booking salon experiences first and compare service quality, satisfaction, and revisit intent.",
-      "secondary_title": "kello Community Board 👋",
-      "secondary_body": "Browse reviews for places you may want to visit together and line up plans."
     },
     "categories": {
       "all": "All",

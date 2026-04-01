@@ -34,7 +34,7 @@ type CommunityTag = 'solo_friendly' | 'friends_friendly' | 'photo_spot' | 'waiti
 type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
 type CommunitySubFilter = 'all' | 'saved' | 'reacted' | 'mine' | 'recruiting' | 'active_reactions' | 'open_meetup' | 'weekend' | 'fresh';
 
-const CATEGORY_OPTIONS: CommunityCategory[] = ['beauty_review', 'food_review', 'travel_review', 'meetup', 'meetup_recruitment', 'help'];
+const CATEGORY_OPTIONS: CommunityCategory[] = ['meetup_recruitment', 'beauty_review', 'food_review', 'travel_review', 'meetup', 'help'];
 const SUB_FILTER_OPTIONS: CommunitySubFilter[] = ['all', 'saved', 'reacted', 'mine', 'recruiting', 'active_reactions', 'open_meetup', 'weekend', 'fresh'];
 const TAG_OPTIONS: CommunityTag[] = ['solo_friendly', 'friends_friendly', 'photo_spot', 'waiting', 'foreigner_friendly'];
 const COMMUNITY_IMAGE_META_KEY = 'IMAGE';
@@ -307,8 +307,7 @@ export default function CommunityPage() {
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
     const imageInputRef = useRef<HTMLInputElement | null>(null);
 
-    // Step 15: Onboarding States
-    const [isBannerClosed, setIsBannerClosed] = useState(false);
+    // Step 15: Onboarding States (Removed)
 
     const searchParams = useSearchParams();
     useEffect(() => {
@@ -488,8 +487,6 @@ export default function CommunityPage() {
     }, [communityFetchErrorMessage]);
 
     useEffect(() => {
-        const bannerState = localStorage.getItem('kello_community_banner_closed');
-        if (bannerState === 'true') setIsBannerClosed(true);
 
         try {
             const storedUser = localStorage.getItem('user');
@@ -512,10 +509,7 @@ export default function CommunityPage() {
         fetchPosts();
     }, [fetchPosts]);
 
-    const closeBanner = () => {
-        setIsBannerClosed(true);
-        localStorage.setItem('kello_community_banner_closed', 'true');
-    };
+
 
     const resetDraftForm = (category: CommunityCategory | '' = '') => {
         setEditingPostId(null);
@@ -818,7 +812,6 @@ export default function CommunityPage() {
 
             <header className={styles.header}>
                 <h1 className={styles.title}>{t('community_page.hero.title')}</h1>
-                <p className={styles.subtitle}>{t('community_page.hero.subtitle')}</p>
                 <div className={styles.searchBar}>
                     <span className={styles.searchIcon}>🔍</span>
                     <input
@@ -851,38 +844,10 @@ export default function CommunityPage() {
                     ))}
                 </div>
 
-                {/* Quick Sub-Filters */}
-                <div className={styles.subTabs}>
-                    {communitySubFilters.map(sub => (
-                        <button 
-                            key={sub.id} 
-                            className={`${styles.subTab} ${subFilter === sub.id ? styles.activeSubTab : ''}`} 
-                            onClick={() => { setSubFilter(sub.id); setLoading(true); setTimeout(()=>setLoading(false),200); }}
-                        >
-                            {sub.label}
-                        </button>
-                    ))}
-                </div>
+                {/* 보조 필터(subTabs) 영역 제거됨 */}
             </header>
 
             <div className={styles.feed}>
-                {/* 1. Onboarding Banner - Step 21 Simplified */}
-                {!isBannerClosed && (
-                    <div className={styles.onboardingBannerCompact}>
-                        <div className={styles.onboardingText}>
-                            <b>{t('community_page.banner.title')}</b> {t('community_page.banner.body')}
-                        </div>
-                        <button className={styles.bannerCloseBtnCompact} onClick={closeBanner}>×</button>
-                    </div>
-                )}
-                {false && !isBannerClosed && (
-                    <div className={styles.onboardingBannerCompact}>
-                        <div className={styles.onboardingText}>
-                            <b>{t('community_page.banner.secondary_title')}</b> {t('community_page.banner.secondary_body')}
-                        </div>
-                        <button className={styles.bannerCloseBtnCompact} onClick={closeBanner}>✕</button>
-                    </div>
-                )}
 
                 {/* 2. Quick Entry Cards - Compact Mode */}
                 <div className={styles.quickEntryGrid}>
