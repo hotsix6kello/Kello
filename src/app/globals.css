@@ -16,42 +16,42 @@
 
 :root {
   /* Korean Theme Foundation - Base */
-  --hanji-ivory: #F6F1E7;
-  --warm-sand: #E9DFCF;
-  --soft-stone: #D8CEC0;
+  --hanji-ivory: #fcf7f8;
+  --warm-sand: #f1dce4;
+  --soft-stone: #e4cbd6;
 
   /* Korean Theme Foundation - Text */
-  --ink-black: #2B231D;
-  --soft-ink: #4A4038;
+  --ink-black: #4b3a42;
+  --soft-ink: #8d747d;
 
   /* Korean Theme Foundation - Accent */
-  --dancheong-teal: #4F7C78;
-  --deep-navy: #2E4057;
-  --korean-red: #A64B43;
-  --muted-gold: #B9935A;
+  --dancheong-teal: #f45b87;
+  --deep-navy: #4b3a42;
+  --korean-red: #ef4d7d;
+  --muted-gold: #bd9d8c;
 
   /* Functional Mapping */
   --background: var(--hanji-ivory);
   --foreground: var(--ink-black);
   --primary: var(--dancheong-teal);
-  --primary-glow: rgba(79, 124, 120, 0.1);
+  --primary-glow: #ffe3ec;
   --secondary: var(--deep-navy);
-  --secondary-glow: rgba(46, 64, 87, 0.1);
+  --secondary-glow: rgba(75, 58, 66, 0.1);
   --accent: var(--korean-red);
-  --success: #4F7C78; /* Use teal for success in Korean theme */
-  --warning: #B9935A; /* Use gold for warning */
+  --success: #f45b87; /* Match brand pink for consistency */
+  --warning: #bd9d8c;
 
   --surface: #ffffff;
   --surface-alt: var(--warm-sand);
   
-  --glass-bg: rgba(246, 241, 231, 0.9);
-  --glass-border: rgba(43, 35, 29, 0.08);
+  --glass-bg: rgba(252, 247, 248, 0.9);
+  --glass-border: rgba(75, 58, 66, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.5);
 
-  --gray-100: #FBF9F5;
+  --gray-100: #f9eef2;
   --gray-200: var(--warm-sand);
-  --gray-300: #D8CEC0;
-  --gray-400: #A89F93;
+  --gray-300: #e4cbd6;
+  --gray-400: #af98a1;
   --gray-500: var(--soft-ink);
 
   --radius-sm: 8px;
