@@ -204,19 +204,12 @@ function CommunityHubSection() {
     }, []);
 
     return (
-        <section style={{ padding: '0 20px', marginBottom: 32 }}>
-            <div style={{ 
-                background: 'white', 
-                borderRadius: 24, 
-                padding: 24,
-                boxShadow: '0 8px 30px rgba(0,0,0,0.04)',
-                border: '1px solid rgba(0,0,0,0.03)'
-            }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                     <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>
-                         내 커뮤니티
-                     </h2>
-                </div>
+        <>
+            <div className={styles.sectionHeader}>
+                 <h2 className={styles.sectionTitle}>
+                     내 커뮤니티
+                 </h2>
+            </div>
 
                 {loading ? (
                     <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600 }}>
@@ -291,8 +284,7 @@ function CommunityHubSection() {
                         ))}
                     </div>
                 )}
-            </div>
-        </section>
+        </>
     );
 }
 
@@ -497,15 +489,37 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
-            <CommunityHubSection />
+
+            {/* Member Quick Actions Shell */}
+            <section className={styles.quickActionBar}>
+                {[
+                    { icon: "📅", label: t("common.actions.my_bookings"), path: "/my/bookings" },
+                    { icon: "🔖", label: t("common.states.favorites"), path: "/my/saved" },
+                    { icon: "🔔", label: t("notifications.page_title"), path: "/my/notifications" },
+                    { icon: "📖", label: t("common.actions.travel_phrases"), path: "/my/phrases" },
+                ].map((item) => (
+                    <button
+                        key={item.path}
+                        className={styles.quickActionBtn}
+                        onClick={() => router.push(item.path)}
+                    >
+                        <span className={styles.quickActionIcon}>{item.icon}</span>
+                        <span className={styles.quickActionLabel}>{item.label}</span>
+                    </button>
+                ))}
+            </section>
+
+            <section className={styles.section}>
+                <CommunityHubSection />
+            </section>
 
             {/* Standard Partner Banner */}
             <PartnerStatusBanner status={partnerStatus} />
 
-            {/* 관리자 메뉴 전용 하단 여백 확보 (100px) */}
+            {/* Admin Section with Shell consistency */}
             {(isAdmin || process.env.NODE_ENV === "development") && (
-                <section style={{ padding: '0 20px 100px', marginTop: 16, marginBottom: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                <section className={styles.section} style={{ marginBottom: 0, paddingBottom: 100 }}>
+                    <div className={styles.sectionHeader} style={{ justifyContent: 'flex-start', gap: 8 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
                         <span style={{
                             background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
@@ -514,45 +528,46 @@ function MyPageContent() {
                         }}>Admin</span>
                     </div>
 
-                    {[
-                        { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
-                        { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
-                        { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
-                        { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
-                    ].map((item) => (
-                        <div
-                            key={item.path}
-                            onClick={() => router.push(item.path)}
-                            style={{
-                                display: 'flex', alignItems: 'center', gap: 14,
-                                background: 'white', borderRadius: 16,
-                                border: '1px solid rgba(124,58,237,0.12)',
-                                padding: '14px 18px', marginBottom: 16,
-                                cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-                                transition: 'transform 0.15s'
-                            }}
-                            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.985)'}
-                            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <div style={{
-                                width: 42, height: 42, borderRadius: 12,
-                                background: 'rgba(124,58,237,0.07)',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                fontSize: '1.25rem', flexShrink: 0
-                            }}>{item.icon}</div>
-                            <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</div>
-                                <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', marginTop: 2 }}>{item.desc}</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 16 }}>
+                        {[
+                            { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
+                            { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
+                            { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
+                            { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
+                        ].map((item) => (
+                            <div
+                                key={item.path}
+                                onClick={() => router.push(item.path)}
+                                style={{
+                                    display: 'flex', alignItems: 'center', gap: 14,
+                                    background: 'var(--hanji-ivory)', borderRadius: 16,
+                                    border: '1px solid var(--warm-sand)',
+                                    padding: '14px 18px',
+                                    cursor: 'pointer', boxShadow: 'var(--shadow-sm)',
+                                    transition: 'transform 0.15s'
+                                }}
+                                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.985)'}
+                                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                            >
+                                <div style={{
+                                    width: 42, height: 42, borderRadius: 12,
+                                    background: 'var(--primary-glow)',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    fontSize: '1.25rem', flexShrink: 0
+                                }}>{item.icon}</div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</div>
+                                    <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', marginTop: 2 }}>{item.desc}</div>
+                                </div>
+                                <span style={{ color: 'var(--gray-300)', fontSize: '1.1rem' }}>›</span>
                             </div>
-                            <span style={{ color: 'var(--gray-300)', fontSize: '1.1rem' }}>›</span>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </section>
             )}
 
-            {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+            {/* Bottom Spacer */}
             <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
-
         </div>
     );
 }
