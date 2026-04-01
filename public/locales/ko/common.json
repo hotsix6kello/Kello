@@ -1422,16 +1422,10 @@
     "detail": "게시글 상세",
     "meetup_info": "방문 정보",
     "hero": {
-      "title": "뷰티샵 예약 후기가 먼저 보이는 커뮤니티",
-      "subtitle": "뷰티샵 이용 후기를 중심으로 맛집, 관광, 공연 후기까지 이어서 살펴보세요.",
+      "title": "뷰티와 여행 정보를 나누세요",
       "search_placeholder": "샵 이름, 시술 경험, 예약 후기를 검색해보세요"
     },
-    "banner": {
-      "title": "kello 뷰티 후기 보드 ✨",
-      "body": "예약 후 방문한 뷰티샵 경험을 먼저 보고, 만족도와 재방문 의사까지 차분히 비교해보세요.",
-      "secondary_title": "kello 커뮤니티 장 👋",
-      "secondary_body": "함께 가고 싶은 장소의 후기를 보고 일정을 맞춰보세요."
-    },
+
     "categories": {
       "all": "전체",
       "beauty_review": "뷰티샵 이용 후기",
@@ -1466,7 +1460,7 @@
       "mate": "🤝 모임 활발"
     },
     "nav_summary": {
-      "all": "{{tab}}의 모든 이야기를 보고 있어요.",
+      "all": "지금 올라오는 이야기",
       "active_reactions": "{{tab}} 중 반응이 뜨거운 소식들이에요.",
       "open_meetup": "같이 가기가 열린 {{tab}}들을 모아봤어요.",
       "weekend": "이번 주말에 가기 좋은 {{tab}} 이야기를 확인하세요.",
@@ -1505,13 +1499,13 @@
       "fetch_failed_title": "게시글을 불러오지 못했어요",
       "fetch_failed_desc": "잠시 후 다시 확인해 주세요.",
       "fetch_failed_tip": "페이지를 다시 열면 최신 글을 다시 불러와요.",
-      "empty_title": "게시글이 없습니다",
-      "empty_desc": "첫 번째 뷰티 후기를 남겨보세요.",
-      "empty_tip": "샵 이름, 시술 경험, 예약과 응대 포인트를 적어두면 다른 사람이 빠르게 참고할 수 있어요.",
+      "empty_title": "아직 첫 이야기가 없어요",
+      "empty_desc": "뷰티샵 후기부터 맛집 추천, 같이 가기 모집, 여행 질문까지 자유롭게 나눠보세요.",
+      "empty_tip": "",
       "no_results_title": "조건에 맞는 글이 없어요",
       "no_results_desc": "검색어나 필터를 조금 바꾸면 다른 글을 더 쉽게 찾을 수 있어요.",
-      "cta_write": "후기 작성하기",
-      "cta_all": "전체 보기"
+      "cta_write": "첫 글 쓰기",
+      "cta_all": "카테고리 둘러보기"
     },
     "form": {
       "category_hints": {
