@@ -562,6 +562,16 @@ export default function CommunityDetailPage() {
                         </div>
                     )}
 
+                    {/* Like / Dislike reaction feature - step 22 */}
+                    <div className={styles.reactionGroup}>
+                        <button className={styles.reactionBtn} onClick={() => alert(t('community_page.detail_page.like_alert', { defaultValue: '공감했습니다!' }))}>
+                            👍 {t('community_page.detail_page.like', { defaultValue: '공감' })}
+                        </button>
+                        <button className={styles.reactionBtn} onClick={() => alert(t('community_page.detail_page.dislike_alert', { defaultValue: '비공감했습니다.' }))}>
+                            👎 {t('community_page.detail_page.dislike', { defaultValue: '비공감' })}
+                        </button>
+                    </div>
+
                     <div className={styles.stats} style={{ marginTop: '16px' }}>
                         💬 {comments.length} {t('community_page.comments', { defaultValue: 'Comments' })}
                     </div>
