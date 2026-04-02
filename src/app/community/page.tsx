@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import styles from './community.module.css';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
@@ -985,8 +986,6 @@ export default function CommunityPage() {
                                     <div 
                                         key={post.id} 
                                         className={`${styles.card} ${isReview ? styles.reviewCard : ''} ${isMeetup ? styles.meetupCard : ''} ${isTravel ? styles.infoCard : ''} ${isHelp ? styles.helpCard : ''} ${currentStatus === 'CLOSED' ? styles.cardClosed : ''} ${loading ? styles.cardExiting : ''}`} 
-                                        onClick={() => router.push(`/community/${post.id}`)} 
-                                       
                                     >
                                         {/* Card Header - Focus on Author and Meta */}
                                         <div className={styles.cardHeader}>
@@ -1049,7 +1048,9 @@ export default function CommunityPage() {
                                         })()}
 
                                         <h2 className={`${styles.postTitle} ${isReview ? styles.reviewTitle : ''}`}>
-                                            {titlePrefix ? `${titlePrefix} ${post.title}` : post.title}
+                                            <Link href={`/community/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                {titlePrefix ? `${titlePrefix} ${post.title}` : post.title}
+                                            </Link>
                                         </h2>
 
                                         <div className={styles.postMetaRow}>
