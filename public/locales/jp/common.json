@@ -1126,8 +1126,8 @@
       "body_title": "投稿内容",
       "like": "いいね",
       "dislike": "いまいち",
-      "like_alert": "いいねしました！",
-      "dislike_alert": "いまいちしました。",
+      "like_alert": "「いいね」しました！",
+      "dislike_alert": "「いまいち」にしました。",
       "comments_title": "コメントリスト",
       "comment_input": {
         "default": "コメントを入力...",

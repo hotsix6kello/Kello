@@ -1396,6 +1396,12 @@
     }
   },
   "community_page": {
+    "write_post": "Write Post",
+    "edit": "Edit Post",
+    "posting": "Posting...",
+    "defaults": {
+      "region": "Seoul"
+    },
     "hero": {
       "title": "Kello Community",
       "search_placeholder": "Search topics you're interested in"
@@ -1442,7 +1448,9 @@
       "empty_desc": "Be the first to share your story!",
       "empty_tip": "Tap the write button on the bottom right.",
       "no_results_title": "No results found",
-      "no_results_desc": "Try searching with other keywords."
+      "no_results_desc": "Try searching with other keywords.",
+      "cta_write": "Write First Post",
+      "cta_all": "View All"
     },
     "quality_signals": {
       "organized": "Well Organized",
@@ -1455,7 +1463,8 @@
       "save_removed": "Removed from saved posts.",
       "deleted": "Deleted successfully.",
       "updated": "Updated successfully.",
-      "submitted": "Posted successfully."
+      "submitted": "Posted successfully.",
+      "region_collected": "Showing posts in {{region}}"
     },
     "nav_summary": {
       "all": "Viewing all stories in {{tab}}",
@@ -1465,6 +1474,9 @@
       "default": "Showing results filtered by {{sub}} in {{tab}}"
     },
     "form": {
+      "category_label": "Category",
+      "region_label": "Region",
+      "region_placeholder": "e.g. Gangnam, Mapo",
       "select_category": "Select Category",
       "write_guide_title": {
         "beauty_review": "Share your beauty experience",
@@ -1529,6 +1541,59 @@
         "help": "Ask anything you're curious about."
       }
     },
+    "quick_entry": {
+      "beauty_together": { "label": "Beauty Trip" },
+      "flash_meetup": { "label": "Flash Meetup" },
+      "beauty": { "label": "Beauty Reviews" },
+      "food": { "label": "Food Tips" },
+      "travel": { "label": "Travel Info" },
+      "write": { "label": "New Post" },
+      "browse": { "label": "Browse", "sub": "Popular Posts" },
+      "recruiting": { "label": "Recruiting", "sub": "Mates" },
+      "weekend": { "label": "Weekend", "sub": "Weekly Plan" },
+      "record": { "label": "Journal", "sub": "Daily Life" }
+    },
+    "fab": {
+      "create_post": "Write"
+    },
+    "sort": {
+      "latest": "Latest",
+      "reactions": "Most Popular",
+      "draft": "Active Recruiting"
+    },
+    "card": {
+      "default_vibe": "Good Vibe",
+      "title_prefix": {
+        "beauty_review": "[Beauty]",
+        "food_review": "[Food]",
+        "travel_review": "[Travel]"
+      },
+      "cta": {
+        "review": "View Post",
+        "join": "Join Now"
+      },
+      "result_badge": "Completed",
+      "open_meetup_badge": "Meetup Open",
+      "fresh_badges": {
+        "comment": "Hot Reactions",
+        "update": "Updated Just Now"
+      },
+      "draft_status": {
+        "active": "Active Chatting",
+        "forming": "Mates Forming",
+        "preparing": "Interested"
+      },
+      "draft_desc": {
+        "active": "Many people are interested!",
+        "forming": "Looking for more mates.",
+        "preparing": "Be the first one to join!"
+      },
+      "owner_reactions": {
+        "region": "Chatting with {{count}} about {{region}}",
+        "join": "{{count}} people interested"
+      },
+      "more_region": "See more stories in {{region}}"
+    },
     "detail": "Post Detail",
     "detail_page": {
       "loading": "Loading data...",
@@ -1536,6 +1601,22 @@
       "not_found": "Post not found.",
       "show_hidden": "Show Hidden Post",
       "hide_post": "Hide this post",
+      "empty_comments": "No comments yet. Be the first to share your thoughts!",
+      "hide_comment": "Hide this comment",
+      "status": {
+        "REVIEWS": "Reviews",
+        "REACTING": "Reacting",
+        "SURVEYING": "Surveying",
+        "DRAFTING": "Drafting",
+        "CLOSED": "Closed"
+      },
+      "tags": {
+        "solo_friendly": "Solo Friendly",
+        "friends_friendly": "Friends Friendly",
+        "photo_spot": "Photo Spot",
+        "waiting": "Waiting Required",
+        "foreigner_friendly": "Foreigner Friendly"
+      },
       "freshness": {
         "realtime": "Actively Live",
         "updated": "Info Updated",
@@ -1573,13 +1654,15 @@
       "body_title": "Post Content",
       "like": "Like",
       "dislike": "Dislike",
-      "like_alert": "Liked!",
-      "dislike_alert": "Disliked.",
+      "like_alert": "You liked this post!",
+      "dislike_alert": "You disliked this post.",
       "comments_title": "Comments",
       "comment_input": {
         "default": "Enter a comment...",
         "optional": "Add an optional note",
-        "send": "Send"
+        "send": "Send",
+        "open_btn": "Comment",
+        "cancel": "Cancel"
       },
       "signal_intents": {
         "interested": "I'm interested",
@@ -1655,20 +1738,6 @@
         "topic_review": "review sharing",
         "topic_outing": "meetup participation",
         "schedule_title": "Choose Preferred Time"
-      },
-      "status": {
-        "REVIEWS": "Reviews Done",
-        "REACTING": "Reacting",
-        "SURVEYING": "Surveying",
-        "DRAFTING": "Drafting",
-        "CLOSED": "Closed"
-      },
-      "tags": {
-        "solo_friendly": "Solo Friendly",
-        "friends_friendly": "With Friends",
-        "photo_spot": "Photo Spots",
-        "waiting": "Wait Exists",
-        "foreigner_friendly": "Foreigner Friendly"
       }
     },
     "actions": {

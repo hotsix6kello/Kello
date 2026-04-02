@@ -997,102 +997,102 @@
         "desc": "Open Community to write a review and choose the Review type in the existing composer."
       },
       "posts_desc": "General community posts you created, ready to revisit or manage.",
-      "reviews_desc": "Review posts you already published, plus a quick path back to booking history.",
-      "meetups_desc": "Meetup-style activity from your community posts, including travel mate plans.",
-      "loading": "Loading your activity...",
-      "no_comments": "No comments yet",
+      "reviews_desc": "查看您已發佈的評價，並快速返回預約歷史。",
+      "meetups_desc": "在社群帖子中發起聚會或尋找旅伴。",
+      "loading": "正在加載您的活動...",
+      "no_comments": "暫無評論",
       "type": {
-        "travel": "Travel Mate",
-        "meetup": "Meetup"
+        "travel": "旅伴",
+        "meetup": "聚會"
       }
     },
     "bookings_hub": {
-      "title": "My Bookings",
+      "title": "我的預約",
       "summary": {
-        "upcoming": "Upcoming",
-        "history": "History"
+        "upcoming": "即將到來",
+        "history": "歷史記錄"
       },
       "tabs": {
-        "upcoming": "Upcoming",
-        "completed": "Completed",
-        "other": "Other"
+        "upcoming": "即將到來",
+        "completed": "已完成",
+        "other": "其他"
       },
       "meta": {
-        "time": "Time",
-        "area": "Area",
-        "total_price": "Total Price",
-        "reference": "Reference"
+        "time": "時間",
+        "area": "區域",
+        "total_price": "總額",
+        "reference": "參考編號"
       },
       "empty": {
         "upcoming": {
-          "title": "No upcoming bookings",
-          "desc": "Explore top-rated spots and start planning your next stop."
+          "title": "沒有即將到來的預約",
+          "desc": "探索熱門地點並開始規劃您的下一站。"
         },
         "completed": {
-          "title": "No completed bookings yet",
-          "desc": "Places you finish will be saved here, ready for a review."
+          "title": "尚無已完成的預約",
+          "desc": "您完成的地點將會顯示在這裡並可供評價。"
         },
         "other": {
-          "title": "No other records",
-          "desc": "Cancelled or unavailable requests will appear here."
+          "title": "沒有其他記錄",
+          "desc": "已取消或不可用的請求將會顯示在這裡。"
         }
       }
     },
     "dashboard": {
-      "bookings_empty": "No confirmed bookings yet",
-      "saved_recent_title": "Saved & Recent",
-      "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
-      "admin_title": "Admin Console",
-      "admin_desc": "Dashboard and partner management",
+      "bookings_empty": "尚無確認的預約",
+      "saved_recent_title": "儲存與近期",
+      "saved_recent_desc": "快速返回您儲存的地點、計劃草稿以及近期查看的項目。",
+      "admin_title": "管理後台",
+      "admin_desc": "數據中心與合作夥伴管理",
       "partner": {
-        "none_title": "Apply as Partner",
-        "none_desc": "Join Kello as a partner and introduce your service to more travelers.",
-        "none_cta": "Apply",
-        "pending_title": "Partner review in progress",
-        "pending_desc": "Your request is under review. We will update you after the admin check.",
-        "approved_title": "Partner approved",
-        "approved_desc": "Your Kello partner registration is complete.",
-        "rejected_title": "Partner request needs update",
-        "rejected_desc": "Update the details and apply again.",
-        "rejected_cta": "Apply Again"
+        "none_title": "申請成為合作夥伴",
+        "none_desc": "加入 Kello 合作夥伴，向更多旅行者推廣您的服務。",
+        "none_cta": "申請",
+        "pending_title": "合作夥伴審核中",
+        "pending_desc": "您的申請正在審核中。管理員確認後將會更新狀態。",
+        "approved_title": "合作夥伴已批准",
+        "approved_desc": "您的 Kello 合作夥伴註冊已完成。",
+        "rejected_title": "合作夥伴申請需要更新",
+        "rejected_desc": "請更新詳細資訊後重新申請。",
+        "rejected_cta": "重新申請"
       }
     }
   },
   "fab": {
-    "idle": "Plan Trip",
-    "pre_trip": "Departure Soon",
-    "on_trip": "Next Place?",
-    "near_deadline": "Late Risk!",
-    "to": "to {{dest}}",
-    "kride": "Call K.Ride",
-    "kride_sub": "Arrives in {{mins}}m",
-    "transit": "Transit Guide",
-    "transit_sub": "Fastest route",
-    "copy": "Copy Address",
-    "copy_done": "Copied!",
-    "card": "For Driver Card",
-    "card_sub": "Show this to driver",
-    "card_modal_title": "🗺️ Please go to this address",
-    "cancel": "Cancel"
+    "idle": "行程規劃",
+    "pre_trip": "即將出發",
+    "on_trip": "下一站去哪？",
+    "near_deadline": "遲到風險！",
+    "to": "前往 {{dest}}",
+    "kride": "呼叫 K.Ride",
+    "kride_sub": "預計 {{mins}} 分鐘後抵達",
+    "transit": "交通指南",
+    "transit_sub": "最短路線",
+    "copy": "複製地址",
+    "copy_done": "已複製！",
+    "card": "司機提示卡",
+    "card_sub": "向司機出示此卡",
+    "card_modal_title": "🗺️ 請前往此地址",
+    "cancel": "取消"
   },
   "transport": {
-    "moving_to": "Moving to {{dest}}",
-    "remaining": "Remaining",
-    "line_2_direction": "Line 2 • Headed to City Hall direction",
-    "departed": "departed",
-    "passing_now": "Passing now...",
-    "current": "Current",
-    "get_off_at": "Get off at",
-    "exit_3": "Exit 3",
-    "getting_off_here": "I'm Getting Off Here",
+    "moving_to": "正在前往 {{dest}}",
+    "remaining": "剩餘",
+    "line_2_direction": "2 號線 • 往市廳方向",
+    "departed": "已出發",
+    "passing_now": "正在經過...",
+    "current": "目前",
+    "get_off_at": "在此下車",
+    "exit_3": "3 號出口",
+    "getting_off_here": "我在這裏下車",
     "stations": {
-      "samseong": "Samseong",
-      "seolleung": "Seolleung",
-      "yeoksam": "Yeoksam",
-      "gangnam": "Gangnam",
-      "gyodae": "Gyodae",
-      "seocho": "Seocho",
-      "seongsu": "Seongsu"
+      "samseong": "三成",
+      "seolleung": "宣陵",
+      "yeoksam": "驛三",
+      "gangnam": "江南",
+      "gyodae": "教大",
+      "seocho": "瑞草",
+      "seongsu": "聖水"
     }
   },
   "community_page": {
@@ -1271,10 +1271,10 @@
         "item_2": "注意保護個人隱私資訊。"
       },
       "body_title": "正文內容",
-      "like": "點讚",
-      "dislike": "無感",
-      "like_alert": "已點讚！",
-      "dislike_alert": "已踩。",
+      "like": "讚",
+      "dislike": "爛",
+      "like_alert": "已按讚！",
+      "dislike_alert": "已按爛。",
       "comments_title": "評論列表",
       "comment_input": {
         "default": "發表評論...",
@@ -1395,26 +1395,26 @@
     }
   },
   "help_page": {
-    "title": "Help Center",
+    "title": "幫助中心",
     "medical_title": "醫療幫助",
-    "medical_desc": "Nearby clinics & symptom cards",
+    "medical_desc": "附近的診所與症狀卡片",
     "lost_title": "遺失物品",
-    "lost_desc": "Step-by-step recovery guide",
+    "lost_desc": "一步步找回遺失物的指南",
     "police_title": "警察/犯罪",
-    "police_desc": "Report & get assistance",
+    "police_desc": "報案與獲取援助",
     "interp_title": "口譯服務",
-    "interp_desc": "1330 helpline & translation apps",
-    "taxi": "Taxi",
-    "subway": "Subway",
-    "airport": "Airport",
-    "street": "Street",
+    "interp_desc": "1330 熱線與翻譯應用",
+    "taxi": "出租車",
+    "subway": "地鐵",
+    "airport": "機場",
+    "street": "街道",
     "interp_actions": {
-      "open_papago": "Open Papago",
-      "open_google_translate": "Open Google Translate"
+      "open_papago": "打開 Papago",
+      "open_google_translate": "打開 Google 翻譯"
     },
     "interp": {
-      "papago_desc": "Open Naver Papago for quick translation and text support.",
-      "google_desc": "Open Google Translate when you need another quick translation option."
+      "papago_desc": "打開 Naver Papago 以獲取快速翻譯與文本支持。",
+      "google_desc": "在需要另一個快速翻譯選項時打開 Google 翻譯。"
     },
     "medical_header": "醫療 · 急救指南",
     "police_header": "警察 · 安全指南",
