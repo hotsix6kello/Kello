@@ -103,7 +103,7 @@ export default function CommunityDetailPage() {
     const [comments, setComments] = useState<Comment[]>([]);
     const [newComment, setNewComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [isInitialFetchDone, setIsInitialFetchDone] = useState(false);
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
     const [userReaction, setUserReaction] = useState<'like' | 'dislike' | null>(null);
     const [likesCount, setLikesCount] = useState(0);
@@ -132,9 +132,6 @@ export default function CommunityDetailPage() {
     ];
 
     const fetchPostData = async (isInitial = true) => {
-        // 300ms delay before showing the full-page loading message to skip it for fast responses
-        const loadingTimer = isInitial && !post ? setTimeout(() => setLoading(true), 300) : null;
-        
         try {
             // Priority 1: Fetch Post metadata first to show the content fast
             const { data: postData } = await supabase
@@ -147,10 +144,6 @@ export default function CommunityDetailPage() {
                 setPost(postData);
                 setLikesCount(postData.likes_count || 0);
                 setDislikesCount(postData.dislikes_count || 0);
-                
-                // Immediately hide global loader when post is ready, even if comments are still fetching
-                if (loadingTimer) clearTimeout(loadingTimer);
-                setLoading(false);
             }
 
             // Priority 2: Parallel fetch for user context and comments in the background
@@ -173,8 +166,7 @@ export default function CommunityDetailPage() {
                 setComments(commentsData as Comment[]);
             }
         } finally {
-            if (loadingTimer) clearTimeout(loadingTimer);
-            setLoading(false);
+            if (isInitial) setIsInitialFetchDone(true);
         }
     };
 
@@ -327,7 +319,11 @@ export default function CommunityDetailPage() {
         }
     };
 
-    if (loading && !post) return <div className={styles.loading}>{t('community_page.detail_page.loading')}</div>;
+    // Completely remove the global "Data is Loading..." message.
+    // Instead, return null (blank screen) until the first fetch attempt is complete.
+    if (!isInitialFetchDone && !post) return null;
+
+    // After the initial fetch, if no post exists or it's hidden, show the appropriate error UI.
     if (!post || isPostHidden) return (
         <div className={styles.loading}>
             {isPostHidden ? t('community_page.detail_page.hidden_post') : t('community_page.detail_page.not_found')}
