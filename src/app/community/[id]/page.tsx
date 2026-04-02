@@ -122,6 +122,7 @@ export default function CommunityDetailPage() {
     const [isPostMoreMenuOpen, setIsPostMoreMenuOpen] = useState(false);
     const [activeCommentMenu, setActiveCommentMenu] = useState<number | null>(null);
     const [isPostHidden, setIsPostHidden] = useState(false);
+    const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
     useEffect(() => {
         if (!id) return;
@@ -161,6 +162,7 @@ export default function CommunityDetailPage() {
             ]);
 
             if (userData?.user) {
+                setCurrentUserId(userData.user.id);
                 const { data: reactionData } = await supabase
                     .from('community_reactions')
                     .select('reaction_type')
@@ -281,6 +283,7 @@ export default function CommunityDetailPage() {
         
         try {
             const finalContent = newComment;
+            const newCommentCount = (post.comments || 0) + 1;
 
             const { error } = await supabase.from('community_comments').insert([{
                 post_id: post.id,
@@ -293,21 +296,26 @@ export default function CommunityDetailPage() {
                 setNewComment('');
                 
                 // Optimistic UI Update: Update Comment Count
-                setPost(prev => prev ? { ...prev, comments: (prev.comments || 0) + 1 } : null);
+                setPost(prev => prev ? { ...prev, comments: newCommentCount } : null);
                 
-                await supabase.from('community_posts')
-                    .update({ comments: (post.comments || 0) + 1 })
+                const { error: postUpdateError } = await supabase.from('community_posts')
+                    .update({ comments: newCommentCount })
                     .eq('id', post.id);
+                
+                if (postUpdateError) console.error('Post count update failed:', postUpdateError);
 
-                // Update List Cache for instant sync on return
+                // Update List Cache and Dispatch Event for instant sync
                 try {
                     const cached: Post[] = JSON.parse(localStorage.getItem('kello_community_posts') || '[]');
                     const idx = cached.findIndex((p: Post) => p.id === post.id);
                     if (idx !== -1) {
-                        cached[idx].comments = (cached[idx].comments || 0) + 1;
+                        cached[idx].comments = newCommentCount;
                         localStorage.setItem('kello_community_posts', JSON.stringify(cached));
                     }
-                } catch { /* ignore cache refresh errors */ }
+                    window.dispatchEvent(new CustomEvent('community_post_updated', { 
+                        detail: { id: post.id, comments: newCommentCount } 
+                    }));
+                } catch { /* ignore sync errors */ }
 
                 const reactedPosts = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
                 if (!reactedPosts.includes(post.id)) {
@@ -346,6 +354,62 @@ export default function CommunityDetailPage() {
             console.error('Unexpected error during comment submission:', err);
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const handleDeleteComment = async (commentId: number) => {
+        if (!confirm(t('community_page.actions.delete_confirm', { defaultValue: '정말 삭제하시겠습니까?' }))) return;
+        if (!post) return;
+
+        const targetComment = comments.find(c => c.id === commentId);
+        if (!targetComment) return;
+
+        try {
+            const isAuthor = targetComment.author_user_id === currentUserId || (loggedInUserName && targetComment.author === loggedInUserName);
+            if (!isAuthor) {
+                alert(t('common.no_permission', { defaultValue: '삭제 권한이 없습니다.' }));
+                return;
+            }
+
+            const { error: deleteError } = await supabase
+                .from('community_comments')
+                .delete()
+                .eq('id', commentId);
+
+            if (deleteError) {
+                console.error('Comment deletion error:', deleteError);
+                return;
+            }
+
+            // Sync Local UI
+            setComments(prev => prev.filter(c => c.id !== commentId));
+            
+            const newCount = Math.max(0, (post.comments || 1) - 1);
+            setPost(prev => prev ? { ...prev, comments: newCount } : null);
+
+            // Sync Database Post Count
+            const { error: postUpdateError } = await supabase.from('community_posts')
+                .update({ comments: newCount })
+                .eq('id', post.id);
+            
+            if (postUpdateError) console.error('Post count update failed:', postUpdateError);
+
+            // Sync Cache & Global Event
+            try {
+                const cached: Post[] = JSON.parse(localStorage.getItem('kello_community_posts') || '[]');
+                const idx = cached.findIndex((p: Post) => p.id === post.id);
+                if (idx !== -1) {
+                    cached[idx].comments = newCount;
+                    localStorage.setItem('kello_community_posts', JSON.stringify(cached));
+                }
+                window.dispatchEvent(new CustomEvent('community_post_updated', { 
+                    detail: { id: post.id, comments: newCount } 
+                }));
+            } catch { /* ignore sync errors */ }
+
+            setActiveCommentMenu(null);
+        } catch (err) {
+            console.error('Unexpected error during comment deletion:', err);
         }
     };
 
@@ -492,6 +556,14 @@ export default function CommunityDetailPage() {
                                                             setHiddenComments([...hiddenComments, c.id]);
                                                             setActiveCommentMenu(null);
                                                         }}>{t('community_page.detail_page.hide_comment')}</button>
+                                                        {c.author_user_id === currentUserId && (
+                                                            <button 
+                                                                className={`${styles.moreMenuItem} ${styles.moreMenuItem_report}`} 
+                                                                onClick={() => handleDeleteComment(c.id)}
+                                                            >
+                                                                {t('common.delete', { defaultValue: '삭제' })}
+                                                            </button>
+                                                        )}
                                                     </div>
                                                 )}
                                             </div>
