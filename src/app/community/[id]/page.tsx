@@ -99,7 +99,15 @@ export default function CommunityDetailPage() {
     const params = useParams();
     const id = params?.id as string;
 
-    const [post, setPost] = useState<Post | null>(null);
+    const [post, setPost] = useState<Post | null>(() => {
+        if (typeof window !== 'undefined') {
+            try {
+                const cached: Post[] = JSON.parse(localStorage.getItem('kello_community_posts') || '[]');
+                return cached.find((p: Post) => p.id === Number(id)) || null;
+            } catch { return null; }
+        }
+        return null;
+    });
     const [comments, setComments] = useState<Comment[]>([]);
     const [newComment, setNewComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -182,6 +190,18 @@ export default function CommunityDetailPage() {
         }
 
         if (id) {
+            // First Priority: Fast initialization from cache
+            try {
+                const cached: Post[] = JSON.parse(localStorage.getItem('kello_community_posts') || '[]');
+                const matching = cached.find((p: Post) => p.id === Number(id));
+                if (matching) {
+                    setPost(matching);
+                    setLikesCount(matching.likes_count || 0);
+                    setDislikesCount(matching.dislikes_count || 0);
+                    // No need to set isInitialFetchDone here, background fetch still runs
+                }
+            } catch { /* ignore cache errors */ }
+
             fetchPostData(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -278,6 +298,16 @@ export default function CommunityDetailPage() {
                 await supabase.from('community_posts')
                     .update({ comments: (post.comments || 0) + 1 })
                     .eq('id', post.id);
+
+                // Update List Cache for instant sync on return
+                try {
+                    const cached: Post[] = JSON.parse(localStorage.getItem('kello_community_posts') || '[]');
+                    const idx = cached.findIndex((p: Post) => p.id === post.id);
+                    if (idx !== -1) {
+                        cached[idx].comments = (cached[idx].comments || 0) + 1;
+                        localStorage.setItem('kello_community_posts', JSON.stringify(cached));
+                    }
+                } catch { /* ignore cache refresh errors */ }
 
                 const reactedPosts = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
                 if (!reactedPosts.includes(post.id)) {
