@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
+import Script from "next/script";
 import {
   Inter,
   Noto_Sans_Arabic,
@@ -59,7 +60,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: "Kello | Book Beauty Services in Korea",
   description: "Booking and language support for beauty services in Korea for global travelers.",
-  manifest: "/manifest.json",
+  referrer: "origin",
 };
 
 export const viewport: Viewport = {
@@ -95,6 +96,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="referrer" content="origin" />
         <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
       </head>
       <body className="antialiased" suppressHydrationWarning data-i18n-ready="false">
