@@ -441,10 +441,10 @@
         "item_2": "Be careful with personal information."
       },
       "body_title": "Post Content",
-      "like": "Like",
-      "dislike": "Dislike",
-      "like_alert": "Liked!",
-      "dislike_alert": "Disliked.",
+      "like": "Suka",
+      "dislike": "Tidak suka",
+      "like_alert": "Anda menyukai kiriman ini!",
+      "dislike_alert": "Anda tidak menyukai kiriman ini.",
       "comments_title": "Comments",
       "comment_input": {
         "default": "Enter a comment...",

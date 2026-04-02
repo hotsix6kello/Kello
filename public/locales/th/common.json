@@ -430,10 +430,10 @@
         "item_2": "Be careful with personal information."
       },
       "body_title": "Post Content",
-      "like": "Like",
-      "dislike": "Dislike",
-      "like_alert": "Liked!",
-      "dislike_alert": "Disliked.",
+      "like": "ถูกใจ",
+      "dislike": "ไม่ถูกใจ",
+      "like_alert": "คุณถูกใจโพสต์นี้แล้ว!",
+      "dislike_alert": "คุณไม่ถูกใจโพสต์นี้แล้ว.",
       "comments_title": "Comments",
       "comment_input": {
         "default": "Enter a comment...",

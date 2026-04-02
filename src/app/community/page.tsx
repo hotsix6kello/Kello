@@ -16,6 +16,8 @@ interface Post {
     desc: string;
     time: string;
     comments: number;
+    likes_count: number;
+    dislikes_count: number;
     start_time?: string;
     end_time?: string;
     place_name?: string;
@@ -1112,9 +1114,11 @@ export default function CommunityPage() {
                                 {/* Footer Actions */}
                                 <div className={styles.cardFooter}>
                                     <div className={styles.footerLeft}>
-                                        <button className={styles.actionBtn}>
-                                            💬 {post.comments}
-                                        </button>
+                                        <div className={styles.statsGroup}>
+                                            <span className={styles.statItem}>💬 {post.comments}</span>
+                                            <span className={styles.statItem}>👍 {post.likes_count || 0}</span>
+                                            <span className={styles.statItem}>👎 {post.dislikes_count || 0}</span>
+                                        </div>
                                         {/* Step 22: Feedback for Bookmark */}
                                         <button 
                                             className={`${styles.saveBtn} ${savedIds.includes(post.id) ? styles.savedActive : ''}`} 
@@ -1136,14 +1140,6 @@ export default function CommunityPage() {
                                         </div>
                                     )}
                                     <div className={styles.footerRight}>
-                                        {isReview && post.author !== loggedInUserName && (
-                                            <button 
-                                                className={styles.matchBtn}
-                                                onClick={(e) => { e.stopPropagation(); router.push(`/community/${post.id}?action=apply`); }}
-                                            >
-                                                {t('community_page.card.cta.review')}
-                                            </button>
-                                        )}
                                         {isReview && post.author === loggedInUserName && post.comments > 0 && (
                                             <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
                                                 <span style={{ fontSize: '10px', background: '#eff6ff', color: '#2563eb', padding: '2px 8px', borderRadius: '4px', fontWeight: 800, border: '1px solid #bfdbfe' }}>
