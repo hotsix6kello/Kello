@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
 import { supabase } from "@/lib/supabaseClient";
+import Link from "next/link";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -64,8 +65,16 @@ export default function LoginPage() {
             {/* Background Orbs */}
             <div className={`${styles.orb} ${styles.orbTop}`} />
             <div className={`${styles.orb} ${styles.orbBottom}`} />
+            
+            <div style={{ width: '100%', maxWidth: '400px', zIndex: 10 }}>
+                <div className={styles.homeShortcut}>
+                    <Link href="/" className={styles.homeLink}>
+                        <span>←</span>
+                        <span>홈 바로가기</span>
+                    </Link>
+                </div>
 
-            <div className={styles.formCard}>
+                <div className={styles.formCard}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>Welcome Back</h1>
                     <p className={styles.subTitle}>Sign in to access your Kello OS</p>
@@ -189,5 +198,6 @@ export default function LoginPage() {
                 </div>
             </div>
         </div>
+    </div>
     );
 }

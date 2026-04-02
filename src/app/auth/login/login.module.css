@@ -160,3 +160,30 @@
 .socialBtn:hover {
     background: var(--gray-200);
 }
+
+.homeShortcut {
+    align-self: flex-start;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    z-index: 10;
+}
+
+.homeLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-500);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.homeLink:hover {
+    color: var(--primary);
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateX(-2px);
+}
