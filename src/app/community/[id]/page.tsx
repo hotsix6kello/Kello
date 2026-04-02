@@ -131,46 +131,51 @@ export default function CommunityDetailPage() {
         t('community_page.report.reasons.other'),
     ];
 
-    const fetchPostData = async () => {
-        setLoading(true);
-        const { data: postData } = await supabase
-            .from('community_posts')
-            .select('*')
-            .eq('id', id)
-            .single();
-
-        if (postData) {
-            setPost(postData);
-            setLikesCount(postData.likes_count || 0);
-            setDislikesCount(postData.dislikes_count || 0);
-        }
-
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-            const { data: reactionData } = await supabase
-                .from('community_reactions')
-                .select('reaction_type')
-                .eq('post_id', id)
-                .eq('user_id', user.id)
+    const fetchPostData = async (isInitial = true) => {
+        // 300ms delay before showing the full-page loading message to skip it for fast responses
+        const loadingTimer = isInitial && !post ? setTimeout(() => setLoading(true), 300) : null;
+        
+        try {
+            // Priority 1: Fetch Post metadata first to show the content fast
+            const { data: postData } = await supabase
+                .from('community_posts')
+                .select('*')
+                .eq('id', id)
                 .single();
-            if (reactionData) {
-                setUserReaction(reactionData.reaction_type as 'like' | 'dislike');
-            } else {
-                setUserReaction(null);
+
+            if (postData) {
+                setPost(postData);
+                setLikesCount(postData.likes_count || 0);
+                setDislikesCount(postData.dislikes_count || 0);
+                
+                // Immediately hide global loader when post is ready, even if comments are still fetching
+                if (loadingTimer) clearTimeout(loadingTimer);
+                setLoading(false);
             }
+
+            // Priority 2: Parallel fetch for user context and comments in the background
+            const [{ data: userData }, { data: commentsData }] = await Promise.all([
+                supabase.auth.getUser(),
+                supabase.from('community_comments').select('*').eq('post_id', id).order('created_at', { ascending: true })
+            ]);
+
+            if (userData?.user) {
+                const { data: reactionData } = await supabase
+                    .from('community_reactions')
+                    .select('reaction_type')
+                    .eq('post_id', id)
+                    .eq('user_id', userData.user.id)
+                    .single();
+                setUserReaction(reactionData ? (reactionData.reaction_type as 'like' | 'dislike') : null);
+            }
+
+            if (commentsData) {
+                setComments(commentsData as Comment[]);
+            }
+        } finally {
+            if (loadingTimer) clearTimeout(loadingTimer);
+            setLoading(false);
         }
-
-        const { data: commentsData } = await supabase
-            .from('community_comments')
-            .select('*')
-            .eq('post_id', id)
-            .order('created_at', { ascending: true });
-
-        if (commentsData) {
-            setComments(commentsData as Comment[]);
-        }
-
-        setLoading(false);
     };
 
     useEffect(() => {
@@ -185,7 +190,7 @@ export default function CommunityDetailPage() {
         }
 
         if (id) {
-            fetchPostData();
+            fetchPostData(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
@@ -275,18 +280,35 @@ export default function CommunityDetailPage() {
             if (!error) {
                 setNewComment('');
                 
+                // Optimistic UI Update: Update Comment Count
+                setPost(prev => prev ? { ...prev, comments: (prev.comments || 0) + 1 } : null);
+                
                 await supabase.from('community_posts')
                     .update({ comments: (post.comments || 0) + 1 })
                     .eq('id', post.id);
-
-                setPost(prev => prev ? { ...prev, comments: (prev.comments || 0) + 1 } : null);
 
                 const reactedPosts = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
                 if (!reactedPosts.includes(post.id)) {
                     localStorage.setItem('kello_reacted_posts', JSON.stringify([...reactedPosts, post.id]));
                 }
 
-                await fetchPostData();
+                // Add the new comment locally instead of full refresh
+                const tempNewComment: Comment = {
+                    id: Date.now(),
+                    author: loggedInUserName,
+                    content: finalContent,
+                    created_at: new Date().toISOString(),
+                    author_user_id: user.id
+                };
+                setComments(prev => [...prev, tempNewComment]);
+                
+                // Trigger background refresh of comments ONLY (no page-level loading)
+                const { data: freshComments } = await supabase
+                    .from('community_comments')
+                    .select('*')
+                    .eq('post_id', id)
+                    .order('created_at', { ascending: true });
+                if (freshComments) setComments(freshComments as Comment[]);
                 
                 setTimeout(() => {
                     const list = document.querySelector(`.${styles.commentList}`);
@@ -305,7 +327,7 @@ export default function CommunityDetailPage() {
         }
     };
 
-    if (loading) return <div className={styles.loading}>{t('community_page.detail_page.loading')}</div>;
+    if (loading && !post) return <div className={styles.loading}>{t('community_page.detail_page.loading')}</div>;
     if (!post || isPostHidden) return (
         <div className={styles.loading}>
             {isPostHidden ? t('community_page.detail_page.hidden_post') : t('community_page.detail_page.not_found')}
