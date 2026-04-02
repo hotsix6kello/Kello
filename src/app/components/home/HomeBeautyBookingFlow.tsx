@@ -316,6 +316,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                    src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} 
                                    alt={store.name} 
                                    fill
+                                   sizes="(max-width: 768px) 100vw, 33vw"
                                    className="object-cover" 
                                  />
                               </div>
@@ -340,7 +341,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                     {selectedStore && (
                        <div className="bg-white border border-neutral-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
                           <div className="relative w-12 h-12 rounded-xl bg-neutral-100 overflow-hidden shrink-0">
-                             <Image src={selectedStore.imageUrl || ''} alt={selectedStore.name} fill className="object-cover" />
+                             <Image src={selectedStore.imageUrl || ''} alt={selectedStore.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                           </div>
                           <div className="flex-1">
                              <span className="text-[10px] font-bold text-[#bb8a78] uppercase tracking-wider">SELECTED STORE</span>
@@ -405,7 +406,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                <div className="flex flex-wrap gap-3">
                                  {requestImages.map((img, idx) => (
                                    <div key={idx} className="relative w-20 h-20 rounded-xl overflow-hidden border border-neutral-100 group">
-                                     <Image src={img} alt="attached" fill className="object-cover" />
+                                     <Image src={img} alt="attached" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                                      <button 
                                        onClick={() => removeImage(idx)}
                                        className="absolute top-1 right-1 bg-black/50 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs backdrop-blur-sm"

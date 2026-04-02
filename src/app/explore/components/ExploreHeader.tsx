@@ -11,6 +11,7 @@ interface ExploreHeaderProps {
     searchTerm: string;
     onSearchChange: (val: string) => void;
     onSearchSubmit: (val?: string) => void;
+    isFloating?: boolean;
 }
 
 export default function ExploreHeader({
@@ -19,7 +20,8 @@ export default function ExploreHeader({
     currentCategory,
     searchTerm,
     onSearchChange,
-    onSearchSubmit
+    onSearchSubmit,
+    isFloating = false
 }: ExploreHeaderProps) {
     const { t, i18n } = useTranslation('common');
     const [isCityModalOpen, setIsCityModalOpen] = useState(false);
@@ -36,7 +38,7 @@ export default function ExploreHeader({
 
     return (
         <>
-            <header className={styles.stickyHeader}>
+            <header className={isFloating ? styles.floatingHeader : styles.stickyHeader}>
                 <div className={styles.searchContainer}>
                     <div className={styles.searchWrapper}>
                         <span className={styles.searchIcon}>🔍</span>

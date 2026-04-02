@@ -1,10 +1,14 @@
 'use client';
 
-import { useCallback, useState, useEffect } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useRef, useState } from 'react';
+import Script from 'next/script';
 import { ServiceItem } from '../mock/data';
-import styles from '../explore.module.css';
+
+declare global {
+    interface Window {
+        naver: any;
+    }
+}
 
 interface ExploreMapProps {
     items: ServiceItem[];
@@ -14,120 +18,158 @@ interface ExploreMapProps {
     zoom?: number;
 }
 
-const mapContainerStyle = {
-    width: '100%',
-    height: '100%',
-    minHeight: '600px', // 물리적 높이 강제 확보
-    borderRadius: '0px'
-};
-
-const OPTIONS = {
-    disableDefaultUI: false, // 사용자 편의를 위해 기본 UI 일부 허용
-    zoomControl: true,
-    gestureHandling: 'greedy',
-    mapTypeControl: false,
-    streetViewControl: false,
-    fullscreenControl: false,
-};
-
 const DEFAULT_CENTER = { lat: 37.5665, lng: 126.9780 }; // 서울 시청 Fallback
 
 export default function ExploreMap({ items, center: propCenter, onItemClick, zoom: propZoom }: ExploreMapProps) {
-    const { t } = useTranslation('common');
+    const mapRef = useRef<HTMLDivElement>(null);
+    const [mapInstance, setMapInstance] = useState<any>(null);
     const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-    const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(propCenter || DEFAULT_CENTER);
+    const markersRef = useRef<any[]>([]);
+    
+    // 네이버 맵 단 1회 초기화 방어 (React StrictMode 대응)
+    const initRef = useRef(false);
 
-    const { isLoaded, loadError } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-        language: 'ko',
-    });
+    const isNaverMapFullyLoaded = () => {
+        return (
+            typeof window !== 'undefined' &&
+            window.naver &&
+            window.naver.maps &&
+            typeof window.naver.maps.Map === 'function' &&
+            window.naver.maps.LatLng &&
+            window.naver.maps.Size
+        );
+    };
 
-    // 1. 사용자 실시간 위치 추적 및 중심 설정
+    const initMap = () => {
+        if (!mapRef.current || !isNaverMapFullyLoaded()) return;
+        if (mapRef.current.hasChildNodes()) return; // Prevent double init
+        initRef.current = true;
+        
+        const initialCenter = propCenter || DEFAULT_CENTER;
+        
+        const map = new window.naver.maps.Map(mapRef.current, {
+            center: new window.naver.maps.LatLng(initialCenter.lat, initialCenter.lng),
+            zoom: propZoom || 15,
+            minZoom: 7,
+            draggable: true,
+            pinchZoom: true,
+            scrollWheel: true,
+            keyboardShortcuts: true,
+            disableDoubleTapZoom: false,
+            disableDoubleClickZoom: false,
+            disableTwoFingerTapZoom: false,
+            scaleControl: true,
+            logoControl: true,
+            mapDataControl: false,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: window.naver.maps.Position.RIGHT_CENTER,
+            },
+        });
+
+        setMapInstance(map);
+    };
+
+    // propCenter 변경 시 지도 중심 이동 (새 맵 객체 렌더링 방지용)
+    useEffect(() => {
+        if (mapInstance && window.naver?.maps?.LatLng && propCenter) {
+            mapInstance.setCenter(new window.naver.maps.LatLng(propCenter.lat, propCenter.lng));
+        }
+    }, [propCenter, mapInstance]);
+
+    // 실시간 위치 추적
     useEffect(() => {
         if (typeof window !== 'undefined' && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
                     const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
                     setUserLocation(coords);
-                    setMapCenter(coords);
+                    if (mapInstance && window.naver?.maps?.LatLng) {
+                        mapInstance.setCenter(new window.naver.maps.LatLng(coords.lat, coords.lng));
+                    }
                 },
                 (err) => {
-                    console.warn('Geolocation access denied or timed out, using fallback.', err.message);
-                    setMapCenter(propCenter || DEFAULT_CENTER);
+                    console.warn('Geolocation error, using fallback.', err.message);
                 },
                 { enableHighAccuracy: false, timeout: 5000, maximumAge: Infinity }
             );
-        } else {
-            setMapCenter(propCenter || DEFAULT_CENTER);
         }
-    }, [propCenter]);
+    }, [mapInstance]);
 
-    const onLoad = useCallback(function callback() {
-        // 지도 인스턴스 초기 로드 완료 시 동작
-    }, []);
+    // 내 위치 마커 업데이트
+    useEffect(() => {
+        if (!mapInstance || !window.naver?.maps?.Marker || !window.naver?.maps?.LatLng || !window.naver?.maps?.Point || !userLocation) return;
+        
+        const userMarker = new window.naver.maps.Marker({
+            position: new window.naver.maps.LatLng(userLocation.lat, userLocation.lng),
+            map: mapInstance,
+            title: "You are here",
+            icon: {
+                content: `<div style="width:16px;height:16px;background:#3b82f6;border:3px solid white;border-radius:50%;box-shadow:0 0 4px rgba(0,0,0,0.3);"></div>`,
+                anchor: new window.naver.maps.Point(8, 8)
+            }
+        });
 
-    const onUnmount = useCallback(function callback() {
-        // 정리 작업
-    }, []);
+        return () => {
+            try {
+                userMarker.setMap(null);
+            } catch (e) {
+                console.warn('userMarker unmount error', e);
+            }
+        };
+    }, [mapInstance, userLocation]);
 
-    if (loadError) {
-        return (
-            <div style={{ height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff0f0', padding: '20px', textAlign: 'center' }}>
-                <p style={{ color: '#ff4d4f', fontWeight: 'bold' }}>Google Maps API Key Error</p>
-                <p style={{ fontSize: '13px', color: '#666', marginTop: '8px', lineHeight: '1.5' }}>
-                    GCP 콘솔에서 <b>Billing(결제 계정)</b>이 활성화되어 있는지,<br/>
-                    혹은 <b>API Key 제한</b>에 localhost가 포함되어 있는지 확인해 주세요.
-                </p>
-                <code style={{ fontSize: '11px', background: '#eee', padding: '8px', borderRadius: '4px', marginTop: '16px', display: 'block', maxWidth: '100%', wordBreak: 'break-all' }}>
-                    {loadError.message || 'Unknown Error'}
-                </code>
-            </div>
-        );
-    }
+    // 상점/서비스 마커 업데이트
+    useEffect(() => {
+        if (!mapInstance || !window.naver?.maps?.Marker || !window.naver?.maps?.LatLng || !window.naver?.maps?.Event) return;
 
-    if (!isLoaded) {
-        return (
-            <div style={{ height: '600px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}>
-                <div className={styles.spinner}></div>
-                <p style={{ marginTop: '16px', color: '#666' }}>{t('common.loading_map', { defaultValue: 'Loading Map...' })}</p>
-            </div>
-        );
-    }
+        // 기존 마커 초기화
+        markersRef.current.forEach(m => {
+            try {
+                m.setMap(null);
+            } catch (e) {
+                // Ignore strict mode immediate unmount errors
+            }
+        });
+        markersRef.current = [];
+
+        items.forEach(item => {
+            if (!item.lat || !item.lng) return;
+
+            const markerOptions: any = {
+                position: new window.naver.maps.LatLng(item.lat, item.lng),
+                map: mapInstance,
+            };
+            if (item.title) markerOptions.title = item.title;
+
+            const marker = new window.naver.maps.Marker(markerOptions);
+
+            window.naver.maps.Event.addListener(marker, 'click', () => {
+                onItemClick(item.id);
+            });
+
+            markersRef.current.push(marker);
+        });
+
+        return () => {
+            markersRef.current.forEach(m => {
+                try {
+                    m.setMap(null);
+                } catch (e) {}
+            });
+            markersRef.current = [];
+        };
+    }, [mapInstance, items, onItemClick]);
 
     return (
-        <div style={{ minHeight: '600px', width: '100%', position: 'relative' }}>
-            <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                center={mapCenter}
-                zoom={propZoom || 15}
-                onLoad={onLoad}
-                onUnmount={onUnmount}
-                options={OPTIONS}
-            >
-                {userLocation && (
-                    <Marker
-                        position={userLocation}
-                        icon={{
-                            url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                            scaledSize: new window.google.maps.Size(40, 40)
-                        }}
-                        title="You are here"
-                    />
-                )}
-
-                {items.map(item => {
-                    if (!item.lat || !item.lng) return null;
-                    return (
-                        <Marker
-                            key={item.id}
-                            position={{ lat: item.lat, lng: item.lng }}
-                            onClick={() => onItemClick(item.id)}
-                            title={item.title}
-                        />
-                    );
-                })}
-            </GoogleMap>
+        <div style={{ position: 'relative', width: '100%', height: '100%', pointerEvents: 'auto' }}>
+            <Script
+                strategy="afterInteractive"
+                src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}&submodules=geocoder`}
+                referrerPolicy="origin"
+                onReady={initMap}
+            />
+            <div ref={mapRef} style={{ width: '100%', height: '100%', borderRadius: '0px', pointerEvents: 'auto' }} />
         </div>
     );
 }

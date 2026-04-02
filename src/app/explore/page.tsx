@@ -16,6 +16,7 @@ import ExploreHeader from './components/ExploreHeader';
 import FilterSheet from './components/FilterSheet';
 import AddToPlanModal from './components/AddToPlanModal';
 import ExploreMap from './components/ExploreMap';
+import BottomCarousel from './components/BottomCarousel';
 import IntegratedBookingMenu from '../components/IntegratedBookingMenu';
 
 import { useTrip } from '@/lib/contexts/TripContext';
@@ -827,8 +828,26 @@ export default function MyExplorePage() {
 
   const [currentCategory] = useState<string>('all');
   const [hotelLocation, setHotelLocation] = useState<{ lat: number; lng: number; name: string } | null>(destinationInfo);
+  const [currentUserLocation, setCurrentUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [radius] = useState<number>(1000);
   const [nearbyItems, setNearbyItems] = useState<ServiceItem[]>([]);
+
+  // 사용자 위치 감지 로직
+  useEffect(() => {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log("Current User Location detected:", latitude, longitude);
+          setCurrentUserLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+          // 위치 권한 거부 시 기본값 활용
+        }
+      );
+    }
+  }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isAddToPlanOpen, setIsAddToPlanOpen] = useState(false);
@@ -1297,15 +1316,103 @@ export default function MyExplorePage() {
     setActiveFilters(filters);
   };
 
-  const handleSearchSubmit = (value?: string) => {
+  // 하버사인 공식을 이용한 두 지점 간 거리(km) 계산 함수
+  const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const R = 6371; // 지구 반지름 (km)
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  };
+
+  const handleSearchSubmit = async (value?: string) => {
     const term = value ?? searchTerm;
+    if (!term.trim()) return;
+
+    // [1. 검색어 강제 결합 및 로그]
+    const apiQuery = `${term.trim()} 미용실`;
+    console.log("1. 검색어 (Forced Query):", apiQuery);
+
+    // 검색 시작 전 이전 데이터 초기화 (식당 등 잔존 방어)
+    setNearbyItems([]);
     setAppliedSearchTerm(term);
-    if (term) {
-      showToast(`'${term}' 검색 결과입니다.`);
-    } else {
-      showToast('모든 검색 결과를 표시합니다.');
+    setIsLoading(true);
+
+    const searchLat = currentUserLocation?.lat ?? hotelLocation?.lat;
+    const searchLng = currentUserLocation?.lng ?? hotelLocation?.lng;
+
+    try {
+      const response = await fetch('/api/places/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          query: apiQuery,
+          lat: searchLat,
+          lng: searchLng,
+          radius: 1000,
+          languageCode: i18n.language === 'ko' ? 'ko' : 'en'
+        }),
+      });
+
+      const data = await response.json();
+      console.log("2. API 원본 응답:", data);
+      
+      if (data.places && data.places.length > 0) {
+        // [순수 검색 결과 바인딩 - 위치 제약 해제]
+        const filteredData: ServiceItem[] = data.places.map((place: any) => {
+          return {
+            id: place.id,
+            title: place.displayName?.text || 'Unknown',
+            image_url: place.photos && place.photos.length > 0 
+              ? `https://places.googleapis.com/v1/${place.photos[0].name}/media?maxWidthPx=400&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+              : 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80',
+            rating: place.rating || 0,
+            review_count: place.userRatingCount || 0,
+            type: (place.types && place.types[0]) || 'store',
+            area: place.formattedAddress?.split(' ').slice(1, 3).join(' ') || '',
+            address: place.formattedAddress || '',
+            lat: place.location?.latitude,
+            lng: place.location?.longitude,
+            distance: 0,
+            description: place.editorialSummary?.text || ''
+          };
+        });
+
+        console.log("3. 검색 결과 데이터 바인딩:", filteredData);
+        setNearbyItems(filteredData.slice(0, 20));
+        
+        if (filteredData[0]?.lat && filteredData[0]?.lng) {
+          setHotelLocation({
+            lat: filteredData[0].lat,
+            lng: filteredData[0].lng,
+            name: term
+          });
+        }
+      } else {
+        console.log("3. 검색 결과 없음");
+        setNearbyItems([]);
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      showToast('검색 중 오류가 발생했습니다.');
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // 초기 사용자 위치 획득 시 자동 검색 기능을 비활성화 (Bypass) - 텅 빈 화면 보장
+  useEffect(() => {
+    /* 
+    if (currentUserLocation && nearbyItems.length === 0 && !appliedSearchTerm) {
+      handleSearchSubmit('뷰티'); 
+    }
+    */
+    console.log("Initial load: Geolocation active but auto-search disabled for testing.");
+  }, [currentUserLocation, appliedSearchTerm]);
 
 
 
@@ -1485,24 +1592,10 @@ export default function MyExplorePage() {
   };
 
 
-  const baseItems = hotelLocation && nearbyItems.length > 0 ? nearbyItems : MOCK_ITEMS;
-  const itemsToShow = baseItems.filter((item) => {
-    // 검색어가 있으면 카테고리 무시하고 전체 검색 (검색 성공률 극대화)
-    if (appliedSearchTerm) {
-      const lowerCaseSearchTerm = appliedSearchTerm.toLowerCase();
-      return (
-        item.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-        item.area.toLowerCase().includes(lowerCaseSearchTerm) ||
-        (item.description && item.description.toLowerCase().includes(lowerCaseSearchTerm))
-      );
-    }
-    
-    // 검색어가 없을 때는 기존 카테고리 필터 적용
-    if (currentCategory !== 'all' && item.type !== currentCategory) {
-      return false;
-    }
-    return true;
-  });
+  // 데이터 소스 결정: 검색 결과가 있는 경우만 반환 (MOCK_ITEMS 폴백 제거하여 비관련 업종 노출 원천 차단)
+  const itemsToShow = useMemo(() => {
+    return nearbyItems;
+  }, [nearbyItems]);
   const sortedItemsToShow = [...itemsToShow].sort((a, b) => {
     const aScore = (a as ServiceItem & { is_premium?: boolean }).is_premium ? 1 : 0;
     const bScore = (b as ServiceItem & { is_premium?: boolean }).is_premium ? 1 : 0;
@@ -1552,51 +1645,118 @@ export default function MyExplorePage() {
   );
   // Unified layout logic: map is now always available
   return (
-    <div className={styles.container}>
-      <ExploreHeader
-        currentCity={currentCity}
-        onCityChange={handleCityChange}
-        currentCategory={currentCategory}
-        // onCategoryChange={handleCategoryChange}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        onSearchSubmit={handleSearchSubmit}
-      />
-
+    <div className={styles.container} style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <main
         style={{
-          paddingBottom: '80px',
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
-          height: '100%',
+          overflow: 'hidden',
+          paddingBottom: '0'
         }}
       >
         {isLoading && (
           <div
             className={styles.loadingState}
-            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 10, background: 'rgba(0,0,0,0.5)' }}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, background: 'rgba(0,0,0,0.2)' }}
           >
             <div className={styles.spinner}></div>
-            <p>{t('common.searching')} {currentCategory}...</p>
           </div>
         )}
 
-        {/* 상단 고정 지도 영역 */}
-        <div style={{ width: '100%', height: '400px', display: 'flex', flexShrink: 0 }}>
+        {/* 1. 지도 화면 영역: 노란 선 위치(50%)까지로 제한 */}
+        <div style={{ 
+          width: '100%', 
+          height: '50dvh', /* 정확한 50% 분할 */
+          position: 'relative', 
+          overflow: 'hidden', 
+          zIndex: 1,
+          borderBottom: '1px solid rgba(0,0,0,0.05)'
+        }}>
+          {/* 부유하는 검색창 섹터 (좌우 16px 여백으로 컨트롤러 간섭 방지) */}
+          <div style={{ position: 'absolute', top: 0, left: 16, right: 16, zIndex: 10, paddingTop: '12px' }}>
+            <ExploreHeader
+              currentCity={currentCity}
+              onCityChange={handleCityChange}
+              currentCategory={currentCategory}
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              onSearchSubmit={handleSearchSubmit}
+              isFloating={true}
+            />
+          </div>
+          
           <ExploreMap
             items={sortedItemsToShow}
             center={hotelLocation ? { lat: hotelLocation.lat, lng: hotelLocation.lng } : { lat: 37.5665, lng: 126.978 }}
-            onItemClick={handleDetails}
+            onItemClick={(id) => {
+              const store = translatedStores.find(s => s.id === id);
+              if (store) {
+                handleBeautyStoreSelect(id, store.name, store.region, store.category);
+              } else {
+                setSelectedBeautyStoreId(id);
+              }
+            }}
             radius={radius}
             zoom={finalZoom}
           />
         </div>
 
-        {/* 하단 컨텐츠 영역: 뷰티 예약 모드와 일반 리스트 모드 통합 */}
-        <div className="flex-1 overflow-y-auto bg-[var(--white)] -mt-5 rounded-t-[24px] relative z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
-          {isBeautyExplore ? (
+        {/* 2. 업체 소개 카드 영역: 빨간 박스 전용 공간 */}
+        <div style={{ 
+          flex: 1, 
+          background: '#ffffff', 
+          zIndex: 2, 
+          overflowY: 'auto', 
+          padding: '16px 16px 120px 16px',
+          WebkitOverflowScrolling: 'touch'
+        }}>
+          {nearbyItems.length > 0 ? (
+            <>
+              <div style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 'bold', color: 'var(--soft-ink)', display: 'flex', justifyContent: 'space-between' }}>
+                <span>{currentUserLocation ? '📍 내 주변 추천 매장' : '🔍 검색 결과'}</span>
+                <span>{Math.min(nearbyItems.length, 10)}곳 (반경 1km 이내)</span>
+              </div>
+              
+              <BottomCarousel 
+                items={sortedItemsToShow.slice(0, 10)} 
+                selectedId={selectedBeautyStoreId}
+                onSelect={(id) => {
+                  const store = translatedStores.find(s => s.id === id);
+                  if (store) {
+                    handleBeautyStoreSelect(id, store.name, store.region, store.category);
+                  } else {
+                    const item = sortedItemsToShow.find(it => it.id === id);
+                    handleBeautyStoreSelect(
+                      id, 
+                      item?.title || '', 
+                      (item as any)?.region || 'gangnam', 
+                      (item as any)?.beautyCategory || 'hair'
+                    );
+                  }
+                }}
+                onDetails={handleDetails}
+                styles={styles}
+                useGrid={true}
+              />
+            </>
+          ) : (
+             <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '40px 20px' }}>
+                <div style={{ fontSize: '40px', marginBottom: '16px' }}>📍</div>
+                <p style={{ fontSize: '15px', color: 'var(--ink-black)', fontWeight: 'bold', marginBottom: '8px' }}>
+                  1km 이내에 검색된 매장이 없습니다.
+                </p>
+                <p style={{ fontSize: '13px', color: 'var(--soft-ink)' }}>
+                  지도를 움직여 다시 검색해 보세요.
+                </p>
+             </div>
+          )}
+        </div>
+
+        {/* 하단 컨텐츠 영역: 뷰티 예약 모드일 때만 렌더링 */}
+        {isBeautyExplore && (
+          <div className="flex-1 overflow-y-auto bg-[var(--white)] -mt-5 rounded-t-[24px] relative z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
             <div className={styles.beautyExplorePage} style={{ padding: '0' }}>
                <section className={styles.beautyHero} style={{ paddingTop: '24px' }}>
                   <div className="flex justify-between items-center mb-2">
@@ -1672,7 +1832,7 @@ export default function MyExplorePage() {
                                   >
                                     <div className="flex flex-row w-full items-center p-3 gap-3">
                                       <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
-                                        <Image src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} fill className="object-cover" />
+                                        <Image src={store.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={store.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <h3 className="text-base font-bold text-[var(--ink-black)] truncate">{store.name}</h3>
@@ -1698,7 +1858,7 @@ export default function MyExplorePage() {
                           {selectedBeautyStore && (
                             <div className="bg-[var(--surface)] border border-[var(--warm-sand)] rounded-[var(--radius-md)] p-4 shadow-sm flex items-center gap-3">
                               <div className="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--hanji-ivory)] overflow-hidden shrink-0 relative">
-                                <Image src={selectedBeautyStore.imageUrl || ''} alt="" fill className="object-cover" />
+                                <Image src={selectedBeautyStore.imageUrl || ''} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                               </div>
                               <div className="flex-1">
                                 <span className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">SELECTED STORE</span>
@@ -1842,33 +2002,8 @@ export default function MyExplorePage() {
                   )}
                </div>
             </div>
-          ) : (
-            <div className="px-4 py-6">
-               <h2 className="text-lg font-bold mb-4">{t('explore_page.nearby_results')}</h2>
-               <div className="flex flex-col gap-4">
-                 {sortedItemsToShow.map((item) => (
-                   <article key={item.id} className="bg-[var(--surface)] rounded-[var(--radius-md)] border border-[var(--warm-sand)] p-3 shadow-sm flex gap-3 cursor-pointer" onClick={() => handleDetails(item.id)}>
-                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0 relative">
-                         {item.image_url ? (
-                           <Image src={item.image_url} alt="" fill className="object-cover" />
-                         ) : (
-                           <div className="w-full h-full" style={{ backgroundColor: item.image_color || '#eee' }} />
-                         )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                         <h3 className="font-bold text-[var(--ink-black)] truncate">{item.title}</h3>
-                         <p className="text-xs text-[var(--soft-ink)]">{item.area}</p>
-                         <div className="flex items-center gap-2 mt-1">
-                            {item.rating && <span className="text-xs font-bold text-orange-500">★ {item.rating}</span>}
-                            <span className="text-xs font-semibold text-[var(--accent)]">{item.price}</span>
-                         </div>
-                      </div>
-                   </article>
-                 ))}
-               </div>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
 
         <IntegratedBookingMenu 
           isOpen={isIntegratedBookingMenuOpen}
