@@ -247,8 +247,14 @@ export default function CommunityPage() {
     const [mounted, setMounted] = useState(false);
     const router = useRouter();
     const [filter, setFilter] = useState<string>('all');
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [posts, setPosts] = useState<Post[]>(() => {
+        // CSR: Use cached posts to render immediately
+        if (typeof window !== 'undefined') {
+            try { return JSON.parse(localStorage.getItem('kello_community_posts') || '[]'); } catch { return []; }
+        }
+        return [];
+    });
+    const [loading, setLoading] = useState(posts.length === 0);
 
     useEffect(() => {
         setMounted(true);
@@ -365,7 +371,8 @@ export default function CommunityPage() {
     };
 
     const fetchPosts = useCallback(async () => {
-        setLoading(true);
+        // Only show explicit loading if we have NO posts yet
+        if (posts.length === 0) setLoading(true);
         setFeedError(null);
 
         try {
@@ -376,6 +383,8 @@ export default function CommunityPage() {
 
             if (Array.isArray(data)) {
                 setPosts(data as Post[]);
+                // Cache for fast init and cross-page sync
+                localStorage.setItem('kello_community_posts', JSON.stringify(data));
                 return;
             }
 
@@ -402,10 +411,9 @@ export default function CommunityPage() {
                 setPosts([]);
             }
         } finally {
-            // Artificial delay for smoother UX transition
-            setTimeout(() => setLoading(false), 300);
+            setLoading(false);
         }
-    }, [communityFetchErrorMessage]);
+    }, [communityFetchErrorMessage, posts.length]);
 
     useEffect(() => {
 
