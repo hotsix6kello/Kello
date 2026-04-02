@@ -258,6 +258,16 @@ export default function CommunityPage() {
 
     useEffect(() => {
         setMounted(true);
+
+        const handlePostUpdate = (e: Event) => {
+            const detail = (e as CustomEvent).detail;
+            if (detail && typeof detail.id === 'number' && typeof detail.comments === 'number') {
+                setPosts(prev => prev.map(p => p.id === detail.id ? { ...p, comments: detail.comments } : p));
+            }
+        };
+
+        window.addEventListener('community_post_updated', handlePostUpdate);
+        return () => window.removeEventListener('community_post_updated', handlePostUpdate);
     }, []);
 
     const [feedError, setFeedError] = useState<string | null>(null);
