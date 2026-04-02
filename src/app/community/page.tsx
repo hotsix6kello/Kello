@@ -388,13 +388,22 @@ export default function CommunityPage() {
         try {
             const { data, error } = await supabase
                 .from('community_posts')
-                .select('*')
+                .select(`
+                    *,
+                    community_comments(count)
+                `)
                 .order('created_at', { ascending: false });
 
             if (Array.isArray(data)) {
-                setPosts(data as Post[]);
+                // Map the count from the nested object to the comments field
+                const mappedData = data.map(item => ({
+                    ...item,
+                    comments: (item.community_comments as any)?.[0]?.count || 0
+                }));
+                setPosts(mappedData as Post[]);
+                
                 // Cache for fast init and cross-page sync
-                localStorage.setItem('kello_community_posts', JSON.stringify(data));
+                localStorage.setItem('kello_community_posts', JSON.stringify(mappedData));
                 return;
             }
 
