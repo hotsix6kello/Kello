@@ -173,7 +173,20 @@ export default function CommunityDetailPage() {
             }
 
             if (commentsData) {
+                const actualCount = commentsData.length;
                 setComments(commentsData as Comment[]);
+                
+                // Self-heal: Sync denormalized count if mismatched
+                if (postData && postData.comments !== actualCount) {
+                    await supabase.from('community_posts')
+                        .update({ comments: actualCount })
+                        .eq('id', id);
+                    
+                    // Dispatch to update any open list pages
+                    window.dispatchEvent(new CustomEvent('community_post_updated', { 
+                        detail: { id: Number(id), comments: actualCount } 
+                    }));
+                }
             }
         } finally {
             if (isInitial) setIsInitialFetchDone(true);
@@ -283,7 +296,8 @@ export default function CommunityDetailPage() {
         
         try {
             const finalContent = newComment;
-            const newCommentCount = (post.comments || 0) + 1;
+            // Use local comments list length as the single source of truth for updates
+            const newCommentCount = comments.length + 1;
 
             const { error } = await supabase.from('community_comments').insert([{
                 post_id: post.id,
@@ -295,7 +309,7 @@ export default function CommunityDetailPage() {
             if (!error) {
                 setNewComment('');
                 
-                // Optimistic UI Update: Update Comment Count
+                // Optimistic UI Update
                 setPost(prev => prev ? { ...prev, comments: newCommentCount } : null);
                 
                 const { error: postUpdateError } = await supabase.from('community_posts')
@@ -304,7 +318,7 @@ export default function CommunityDetailPage() {
                 
                 if (postUpdateError) console.error('Post count update failed:', postUpdateError);
 
-                // Update List Cache and Dispatch Event for instant sync
+                // Update Cache and Dispatch Event
                 try {
                     const cached: Post[] = JSON.parse(localStorage.getItem('kello_community_posts') || '[]');
                     const idx = cached.findIndex((p: Post) => p.id === post.id);
@@ -382,9 +396,10 @@ export default function CommunityDetailPage() {
             }
 
             // Sync Local UI
-            setComments(prev => prev.filter(c => c.id !== commentId));
+            const remainingComments = comments.filter(c => c.id !== commentId);
+            setComments(remainingComments);
             
-            const newCount = Math.max(0, (post.comments || 1) - 1);
+            const newCount = remainingComments.length;
             setPost(prev => prev ? { ...prev, comments: newCount } : null);
 
             // Sync Database Post Count
