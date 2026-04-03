@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
@@ -15,6 +16,7 @@ interface ProfileRecord {
     nickname: string | null;
     role: string | null;
     created_at: string | null;
+    avatar_path: string | null;
 }
 
 interface PartnerRecord {
@@ -70,6 +72,32 @@ interface SettingsRow {
     actionHref?: string;
 }
 
+interface HeroCommunityPostRecord {
+    type: string | null;
+    desc: string | null;
+    likes_count: number | null;
+}
+
+interface HeroCommunityStats {
+    postCount: number;
+    reviewCount: number;
+    commentCount: number;
+    likesReceived: number;
+    badge: string;
+}
+
+interface HeroBookingRecord {
+    status?: string;
+    storeId?: string | null;
+}
+
+interface HeroBookingStats {
+    totalCount: number;
+    completedCount: number;
+    revisitCount: number;
+    badge: string;
+}
+
 function titleCase(value: string): string {
     return value
         .split(/[_-\s]+/)
@@ -111,6 +139,136 @@ function extractSnsId(user: {
         pickRecordValue(user.user_metadata, "user_name", "preferred_username", "screen_name"),
         pickRecordValue(identityData, "user_name", "preferred_username", "screen_name")
     );
+}
+
+function getAvatarPublicUrl(path: string): string {
+    const { data } = supabase.storage.from("avatars").getPublicUrl(path);
+    return data.publicUrl;
+}
+
+function isReviewCommunityPost(post: HeroCommunityPostRecord): boolean {
+    const type = pickString(post.type).toLowerCase();
+    const desc = pickString(post.desc).toLowerCase();
+
+    return (
+        type === "review" ||
+        type === "travel" ||
+        desc.includes("[category:beauty_review]") ||
+        desc.includes("[category:food_review]") ||
+        desc.includes("[category:travel_review]")
+    );
+}
+
+function getCommunityBadge(points: number): string {
+    if (points >= 80) return "커뮤니티 리더";
+    if (points >= 30) return "트렌드 피커";
+    if (points >= 10) return "뷰티 메이트";
+    return "새싹";
+}
+
+function getBookingBadge(completedCount: number): string {
+    if (completedCount >= 10) return "VVIP";
+    if (completedCount >= 5) return "VIP";
+    if (completedCount >= 2) return "Regular";
+    return "New";
+}
+
+const EMPTY_COMMUNITY_STATS: HeroCommunityStats = {
+    postCount: 0,
+    reviewCount: 0,
+    commentCount: 0,
+    likesReceived: 0,
+    badge: "새싹",
+};
+
+const EMPTY_BOOKING_STATS: HeroBookingStats = {
+    totalCount: 0,
+    completedCount: 0,
+    revisitCount: 0,
+    badge: "New",
+};
+
+async function loadCommunityStats(userId: string, displayName: string): Promise<HeroCommunityStats> {
+    let posts: HeroCommunityPostRecord[] = [];
+
+    const authoredPosts = await supabase
+        .from("community_posts")
+        .select("type, desc, likes_count")
+        .eq("author_user_id", userId);
+
+    if (!authoredPosts.error && Array.isArray(authoredPosts.data)) {
+        posts = authoredPosts.data as HeroCommunityPostRecord[];
+    } else if (displayName) {
+        const fallbackPosts = await supabase
+            .from("community_posts")
+            .select("type, desc, likes_count")
+            .eq("author", displayName);
+
+        if (!fallbackPosts.error && Array.isArray(fallbackPosts.data)) {
+            posts = fallbackPosts.data as HeroCommunityPostRecord[];
+        }
+    }
+
+    const authoredComments = await supabase
+        .from("community_comments")
+        .select("*", { count: "exact", head: true })
+        .eq("author_user_id", userId);
+
+    const reviewCount = posts.filter((post) => isReviewCommunityPost(post)).length;
+    const postCount = Math.max(posts.length - reviewCount, 0);
+    const commentCount = authoredComments.error ? 0 : authoredComments.count ?? 0;
+    const likesReceived = posts.reduce((sum, post) => sum + (post.likes_count ?? 0), 0);
+    const points = postCount * 3 + commentCount + likesReceived + reviewCount * 5;
+
+    return {
+        postCount,
+        reviewCount,
+        commentCount,
+        likesReceived,
+        badge: getCommunityBadge(points),
+    };
+}
+
+async function loadBookingStats(accessToken: string): Promise<HeroBookingStats> {
+    try {
+        const response = await fetch("/api/bookings/beauty/mine", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+            cache: "no-store",
+        });
+
+        const body = (await response.json()) as {
+            ok?: boolean;
+            items?: HeroBookingRecord[];
+        };
+
+        if (!response.ok || !body.ok || !Array.isArray(body.items)) {
+            return EMPTY_BOOKING_STATS;
+        }
+
+        const completedItems = body.items.filter((item) => item.status === "completed");
+        const storeVisitMap = new Map<string, number>();
+
+        completedItems.forEach((item) => {
+            if (!item.storeId) return;
+            storeVisitMap.set(item.storeId, (storeVisitMap.get(item.storeId) ?? 0) + 1);
+        });
+
+        const revisitCount = Array.from(storeVisitMap.values()).reduce(
+            (sum, count) => sum + Math.max(count - 1, 0),
+            0
+        );
+
+        return {
+            totalCount: body.items.length,
+            completedCount: completedItems.length,
+            revisitCount,
+            badge: getBookingBadge(completedItems.length),
+        };
+    } catch {
+        return EMPTY_BOOKING_STATS;
+    }
 }
 
 function buildNotificationSummary(
@@ -236,6 +394,14 @@ export default function MySettingsPage() {
     const [notificationSummary, setNotificationSummary] = useState<NotificationSummary>(
         buildNotificationSummary(null, false)
     );
+    const [viewerId, setViewerId] = useState("");
+    const [avatarPath, setAvatarPath] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState("");
+    const [avatarUploading, setAvatarUploading] = useState(false);
+    const [avatarError, setAvatarError] = useState<string | null>(null);
+    const [communityStats, setCommunityStats] = useState<HeroCommunityStats>(EMPTY_COMMUNITY_STATS);
+    const [bookingStats, setBookingStats] = useState<HeroBookingStats>(EMPTY_BOOKING_STATS);
+    const avatarInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         let isMounted = true;
@@ -261,6 +427,11 @@ export default function MySettingsPage() {
                 if (!user) {
                     setProfile(null);
                     setPartner(EMPTY_PARTNER);
+                    setViewerId("");
+                    setAvatarPath("");
+                    setAvatarUrl("");
+                    setCommunityStats(EMPTY_COMMUNITY_STATS);
+                    setBookingStats(EMPTY_BOOKING_STATS);
                     setAccount({
                         displayName: pickString(storedUser.name),
                         email: pickString(storedUser.email),
@@ -279,7 +450,7 @@ export default function MySettingsPage() {
 
                 const { data: profileData } = await supabase
                     .from("profiles")
-                    .select("email, nickname, role, created_at")
+                    .select("email, nickname, role, created_at, avatar_path")
                     .eq("id", user.id)
                     .maybeSingle();
 
@@ -312,7 +483,7 @@ export default function MySettingsPage() {
                     data: { session },
                 } = await supabase.auth.getSession();
 
-                const [partnerResult, notificationResult] = await Promise.all([
+                const [partnerResult, notificationResult, communityResult, bookingResult] = await Promise.all([
                     email
                         ? supabase
                               .from("partners")
@@ -347,12 +518,21 @@ export default function MySettingsPage() {
 
                         return buildNotificationSummary(null, true);
                     })(),
+                    loadCommunityStats(user.id, nextAccount.displayName),
+                    session?.access_token
+                        ? loadBookingStats(session.access_token)
+                        : Promise.resolve(EMPTY_BOOKING_STATS),
                 ]);
 
                 if (!isMounted) return;
 
                 setProfile(nextProfile);
+                setViewerId(user.id);
+                setAvatarPath(nextProfile?.avatar_path ?? "");
+                setAvatarUrl(nextProfile?.avatar_path ? getAvatarPublicUrl(nextProfile.avatar_path) : "");
                 setAccount(nextAccount);
+                setCommunityStats(communityResult);
+                setBookingStats(bookingResult);
                 setPartner(
                     partnerResult.data
                         ? {
@@ -391,6 +571,57 @@ export default function MySettingsPage() {
     }, [account.displayName]);
 
     const pageTitle = account.displayName || "내 설정";
+    const heroSummaryText = `게시글 ${communityStats.postCount} · 후기 ${communityStats.reviewCount} · 예약 ${bookingStats.totalCount}`;
+
+    const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        event.target.value = "";
+
+        if (!file || !viewerId) {
+            return;
+        }
+
+        const fileExt = file.name.split(".").pop()?.toLowerCase() || "jpg";
+        const filePath = `${viewerId}/${Date.now()}-${crypto.randomUUID()}.${fileExt}`;
+
+        setAvatarUploading(true);
+        setAvatarError(null);
+
+        try {
+            const { error: uploadError } = await supabase.storage
+                .from("avatars")
+                .upload(filePath, file, { upsert: false });
+
+            if (uploadError) {
+                throw uploadError;
+            }
+
+            const { error: profileError } = await supabase
+                .from("profiles")
+                .update({ avatar_path: filePath })
+                .eq("id", viewerId);
+
+            if (profileError) {
+                throw profileError;
+            }
+
+            setAvatarPath(filePath);
+            setAvatarUrl(getAvatarPublicUrl(filePath));
+            setProfile((current) =>
+                current
+                    ? {
+                          ...current,
+                          avatar_path: filePath,
+                      }
+                    : current
+            );
+        } catch (error) {
+            console.error("[settings-avatar] upload_failed", error);
+            setAvatarError("이미지를 바꾸지 못했어요.");
+        } finally {
+            setAvatarUploading(false);
+        }
+    };
 
     const showPartnerTab = partner.status !== "none";
     const showAdminTab = isAdminRole(profile?.role);
@@ -645,9 +876,55 @@ export default function MySettingsPage() {
             </header>
 
             <section className={styles.profileCard}>
-                <div className={styles.avatar}>{initials || "ME"}</div>
+                <div className={styles.heroAvatarArea}>
+                    <div className={styles.avatarFrame}>
+                        <div className={styles.avatar}>
+                            {avatarUrl ? (
+                                <Image
+                                    src={avatarUrl}
+                                    alt={pageTitle}
+                                    fill
+                                    className={styles.avatarImage}
+                                    sizes="96px"
+                                />
+                            ) : (
+                                initials || "ME"
+                            )}
+                        </div>
+                    </div>
+                    {account.isLoggedIn ? (
+                        <>
+                            <input
+                                ref={avatarInputRef}
+                                type="file"
+                                accept="image/*"
+                                className={styles.avatarInput}
+                                onChange={handleAvatarChange}
+                                disabled={avatarUploading}
+                            />
+                            <button
+                                type="button"
+                                className={styles.avatarButton}
+                                onClick={() => avatarInputRef.current?.click()}
+                                disabled={avatarUploading}
+                            >
+                                {avatarUploading ? "업로드 중..." : avatarPath ? "이미지 변경" : "이미지 등록"}
+                            </button>
+                        </>
+                    ) : null}
+                </div>
                 <div className={styles.profileContent}>
                     <h1 className={styles.pageTitle}>{pageTitle}</h1>
+                    <div className={styles.heroBadgeRow}>
+                        <span className={`${styles.heroBadge} ${styles.communityHeroBadge}`}>
+                            {communityStats.badge}
+                        </span>
+                        <span className={`${styles.heroBadge} ${styles.bookingHeroBadge}`}>
+                            {bookingStats.badge}
+                        </span>
+                    </div>
+                    <p className={styles.heroSummary}>{heroSummaryText}</p>
+                    {avatarError ? <p className={styles.heroMessage}>{avatarError}</p> : null}
                 </div>
             </section>
 
