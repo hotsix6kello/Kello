@@ -387,6 +387,43 @@
     justify-content: flex-start;
 }
 
+.inlineEditorRow {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inlineInput {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 0.84rem;
+    color: var(--foreground);
+    background: #fff;
+}
+
+.inlineInput::placeholder {
+    color: var(--gray-400);
+}
+
+.inlineEditorMessage {
+    margin-top: 8px;
+    font-size: 0.74rem;
+    line-height: 1.5;
+    color: var(--gray-500);
+}
+
+.inlineEditorError {
+    color: #b91c1c;
+}
+
+.inlineEditorSuccess {
+    color: #166534;
+}
+
 .secondaryButton {
     background: rgba(15, 118, 110, 0.1);
     color: #0f766e;
@@ -395,6 +432,11 @@
     padding: 9px 13px;
     font-size: 0.76rem;
     font-weight: 800;
+}
+
+.secondaryButton:disabled {
+    opacity: 0.55;
+    cursor: default;
 }
 
 .loadingText {
