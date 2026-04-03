@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 import { ServiceItem } from '../mock/data';
 import styles from '../explore.module.css';
 
@@ -130,6 +131,14 @@ export default function ServiceCard({ item, onSave, onDetails, isSaved }: Servic
                     className={styles.thumbnailRect}
                     style={{ backgroundColor: item.image_color || '#F3F4F6' }}
                 >
+                    {item.image_url && (
+                        <Image 
+                            src={item.image_url} 
+                            alt={item.title} 
+                            fill 
+                            className={styles.thumbnailImage}
+                        />
+                    )}
                     {/* Save Button on the top of Image */}
                     <button
                         className={`${styles.saveIconOverlay} ${isSaved ? styles.savedIcon : ''}`}

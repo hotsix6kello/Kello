@@ -2,174 +2,177 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
+import { useRouter } from 'next/navigation';
 import { ServiceItem } from '../mock/data';
 
 declare global {
-    interface Window {
-        naver: any;
-    }
+  interface Window {
+    kakao: any;
+  }
 }
 
 interface ExploreMapProps {
-    items: ServiceItem[];
-    center?: { lat: number; lng: number };
-    onItemClick: (id: string) => void;
-    radius?: number;
-    zoom?: number;
+  items: ServiceItem[];
+  center?: { lat: number; lng: number };
+  onItemClick: (id: string) => void;
+  radius?: number;
+  zoom?: number;
 }
 
 const DEFAULT_CENTER = { lat: 37.5665, lng: 126.9780 }; // 서울 시청 Fallback
 
 export default function ExploreMap({ items, center: propCenter, onItemClick, zoom: propZoom }: ExploreMapProps) {
-    const mapRef = useRef<HTMLDivElement>(null);
-    const [mapInstance, setMapInstance] = useState<any>(null);
-    const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-    const markersRef = useRef<any[]>([]);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const [mapInstance, setMapInstance] = useState<any>(null);
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const markersRef = useRef<any[]>([]);
+
+  const initMap = () => {
+    if (!window.kakao || !window.kakao.maps) return;
     
-    // 네이버 맵 단 1회 초기화 방어 (React StrictMode 대응)
-    const initRef = useRef(false);
+    window.kakao.maps.load(() => {
+      if (!mapRef.current) return;
+      
+      // 기존에 맵이 있으면 초기화 안함 (React StrictMode 대응)
+      if (mapRef.current.hasChildNodes() && mapInstance) return;
 
-    const isNaverMapFullyLoaded = () => {
-        return (
-            typeof window !== 'undefined' &&
-            window.naver &&
-            window.naver.maps &&
-            typeof window.naver.maps.Map === 'function' &&
-            window.naver.maps.LatLng &&
-            window.naver.maps.Size
-        );
+      const initialCenter = propCenter || DEFAULT_CENTER;
+      const options = {
+        center: new window.kakao.maps.LatLng(initialCenter.lat, initialCenter.lng),
+        level: propZoom ? Math.max(1, 15 - propZoom) : 3, // Kakao level is inverse of Naver zoom
+      };
+
+      const map = new window.kakao.maps.Map(mapRef.current, options);
+      setMapInstance(map);
+    });
+  };
+
+  useEffect(() => {
+    const SCRIPT_ID = 'kakao-map-script';
+
+    if (document.getElementById(SCRIPT_ID)) {
+      if (window.kakao && window.kakao.maps) {
+        initMap();
+      }
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.id = SCRIPT_ID;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY || 'bf92ec51c26fcda4eb7fb33076f2d61b'}&libraries=services&autoload=false`;
+    script.async = true;
+
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      if (window.kakao && window.kakao.maps) {
+        initMap();
+      }
     };
+  }, []);
 
-    const initMap = () => {
-        if (!mapRef.current || !isNaverMapFullyLoaded()) return;
-        if (mapRef.current.hasChildNodes()) return; // Prevent double init
-        initRef.current = true;
-        
-        const initialCenter = propCenter || DEFAULT_CENTER;
-        
-        const map = new window.naver.maps.Map(mapRef.current, {
-            center: new window.naver.maps.LatLng(initialCenter.lat, initialCenter.lng),
-            zoom: propZoom || 15,
-            minZoom: 7,
-            draggable: true,
-            pinchZoom: true,
-            scrollWheel: true,
-            keyboardShortcuts: true,
-            disableDoubleTapZoom: false,
-            disableDoubleClickZoom: false,
-            disableTwoFingerTapZoom: false,
-            scaleControl: true,
-            logoControl: true,
-            mapDataControl: false,
-            zoomControl: true,
-            zoomControlOptions: {
-                position: window.naver.maps.Position.RIGHT_CENTER,
-            },
-        });
+  // propCenter 변경 시 지도 중심 이동
+  useEffect(() => {
+    if (mapInstance && window.kakao?.maps?.LatLng && propCenter) {
+      const moveLatLon = new window.kakao.maps.LatLng(propCenter.lat, propCenter.lng);
+      mapInstance.setCenter(moveLatLon);
+    }
+  }, [propCenter, mapInstance]);
 
-        setMapInstance(map);
+  // 실시간 위치 추적
+  useEffect(() => {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          setUserLocation(coords);
+          if (mapInstance && window.kakao?.maps?.LatLng) {
+            const moveLatLon = new window.kakao.maps.LatLng(coords.lat, coords.lng);
+            mapInstance.setCenter(moveLatLon);
+          }
+        },
+        (err) => {
+          console.warn('Geolocation error, using fallback.', err.message);
+        },
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: Infinity }
+      );
+    }
+  }, [mapInstance]);
+
+  // 내 위치 마커 업데이트
+  useEffect(() => {
+    if (!mapInstance || !window.kakao?.maps?.Marker || !window.kakao?.maps?.LatLng || !userLocation) return;
+    
+    // 이전에 생성된 마커가 있다면 제거는 생략하고 새로 그리는 방식으로 구현 (Kakao API에 맞게)
+    const markerPosition = new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng);
+    const userMarker = new window.kakao.maps.Marker({
+      position: markerPosition
+    });
+
+    userMarker.setMap(mapInstance);
+
+    return () => {
+      userMarker.setMap(null);
     };
+  }, [mapInstance, userLocation]);
 
-    // propCenter 변경 시 지도 중심 이동 (새 맵 객체 렌더링 방지용)
-    useEffect(() => {
-        if (mapInstance && window.naver?.maps?.LatLng && propCenter) {
-            mapInstance.setCenter(new window.naver.maps.LatLng(propCenter.lat, propCenter.lng));
-        }
-    }, [propCenter, mapInstance]);
+  // 상점/서비스 마커 업데이트
+  useEffect(() => {
+    if (!mapInstance || !window.kakao?.maps?.Marker || !window.kakao?.maps?.LatLng || !window.kakao?.maps?.event) return;
 
-    // 실시간 위치 추적
-    useEffect(() => {
-        if (typeof window !== 'undefined' && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-                    setUserLocation(coords);
-                    if (mapInstance && window.naver?.maps?.LatLng) {
-                        mapInstance.setCenter(new window.naver.maps.LatLng(coords.lat, coords.lng));
-                    }
-                },
-                (err) => {
-                    console.warn('Geolocation error, using fallback.', err.message);
-                },
-                { enableHighAccuracy: false, timeout: 5000, maximumAge: Infinity }
-            );
-        }
-    }, [mapInstance]);
+    // 기존 마커 초기화
+    markersRef.current.forEach(m => {
+      m.setMap(null);
+    });
+    markersRef.current = [];
 
-    // 내 위치 마커 업데이트
-    useEffect(() => {
-        if (!mapInstance || !window.naver?.maps?.Marker || !window.naver?.maps?.LatLng || !window.naver?.maps?.Point || !userLocation) return;
-        
-        const userMarker = new window.naver.maps.Marker({
-            position: new window.naver.maps.LatLng(userLocation.lat, userLocation.lng),
-            map: mapInstance,
-            title: "You are here",
-            icon: {
-                content: `<div style="width:16px;height:16px;background:#3b82f6;border:3px solid white;border-radius:50%;box-shadow:0 0 4px rgba(0,0,0,0.3);"></div>`,
-                anchor: new window.naver.maps.Point(8, 8)
-            }
-        });
+    items.forEach(item => {
+      if (!item.lat || !item.lng) return;
 
-        return () => {
-            try {
-                userMarker.setMap(null);
-            } catch (e) {
-                console.warn('userMarker unmount error', e);
-            }
-        };
-    }, [mapInstance, userLocation]);
+      const markerPosition = new window.kakao.maps.LatLng(item.lat, item.lng);
+      const marker = new window.kakao.maps.Marker({
+        position: markerPosition,
+        title: item.title || ''
+      });
 
-    // 상점/서비스 마커 업데이트
-    useEffect(() => {
-        if (!mapInstance || !window.naver?.maps?.Marker || !window.naver?.maps?.LatLng || !window.naver?.maps?.Event) return;
+      marker.setMap(mapInstance);
 
-        // 기존 마커 초기화
-        markersRef.current.forEach(m => {
-            try {
-                m.setMap(null);
-            } catch (e) {
-                // Ignore strict mode immediate unmount errors
-            }
-        });
-        markersRef.current = [];
+      window.kakao.maps.event.addListener(marker, 'click', () => {
+        onItemClick(item.id);
+        const query = new URLSearchParams({
+          name: item.title || '',
+          address: item.description || item.area || '',
+          image: item.image_url || ''
+        }).toString();
+        router.push(`/business/${item.id}?${query}`);
+      });
 
-        items.forEach(item => {
-            if (!item.lat || !item.lng) return;
+      markersRef.current.push(marker);
+    });
 
-            const markerOptions: any = {
-                position: new window.naver.maps.LatLng(item.lat, item.lng),
-                map: mapInstance,
-            };
-            if (item.title) markerOptions.title = item.title;
+    return () => {
+      markersRef.current.forEach(m => {
+        m.setMap(null);
+      });
+      markersRef.current = [];
+    };
+  }, [mapInstance, items, onItemClick, router]);
 
-            const marker = new window.naver.maps.Marker(markerOptions);
-
-            window.naver.maps.Event.addListener(marker, 'click', () => {
-                onItemClick(item.id);
-            });
-
-            markersRef.current.push(marker);
-        });
-
-        return () => {
-            markersRef.current.forEach(m => {
-                try {
-                    m.setMap(null);
-                } catch (e) {}
-            });
-            markersRef.current = [];
-        };
-    }, [mapInstance, items, onItemClick]);
-
-    return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', pointerEvents: 'auto' }}>
-            <Script
-                strategy="afterInteractive"
-                src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}&submodules=geocoder`}
-                referrerPolicy="origin"
-                onReady={initMap}
-            />
-            <div ref={mapRef} style={{ width: '100%', height: '100%', borderRadius: '0px', pointerEvents: 'auto' }} />
-        </div>
-    );
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%', pointerEvents: 'auto' }}>
+      <div 
+        ref={mapRef} 
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          borderRadius: '0px', 
+          pointerEvents: 'auto',
+          zIndex: 10,
+          position: 'relative'
+        }} 
+      />
+    </div>
+  );
 }
+
