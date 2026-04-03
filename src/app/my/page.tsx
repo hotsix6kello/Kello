@@ -34,6 +34,11 @@ interface CommunityPost {
     time: string;
 }
 
+type MyBookingCardRecord = Pick<
+    BeautyBookingAdminRecord,
+    "id" | "status" | "storeName" | "primaryServiceName" | "beautyCategory" | "bookingDate" | "bookingTime" | "totalPrice"
+>;
+
 const SSR_SAFE_FALLBACK_NAME = "Traveler";
 const SSR_SAFE_FALLBACK_SUBTITLE = "Account & preferences";
 
@@ -183,30 +188,80 @@ const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> =
     change_requested: '#7c3aed',
 };
 
-function MyBookingsSection() {
+function SectionCardSkeleton({ rows = 2 }: { rows?: number }) {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {Array.from({ length: rows }).map((_, index) => (
+                <div
+                    key={index}
+                    style={{
+                        background: '#f8fafc',
+                        borderRadius: 14,
+                        border: '1px solid #e2e8f0',
+                        padding: '14px 16px',
+                    }}
+                >
+                    <div style={{ width: '42%', height: 14, borderRadius: 999, background: '#e2e8f0', marginBottom: 10 }} />
+                    <div style={{ width: '68%', height: 12, borderRadius: 999, background: '#e2e8f0', marginBottom: 8 }} />
+                    <div style={{ width: '56%', height: 12, borderRadius: 999, background: '#e2e8f0', marginBottom: 14 }} />
+                    <div style={{ display: 'flex', gap: 8 }}>
+                        <div style={{ flex: 1, height: 34, borderRadius: 10, background: '#e2e8f0' }} />
+                        <div style={{ flex: 1, height: 34, borderRadius: 10, background: '#e2e8f0' }} />
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+function MyBookingsSection({
+    accessToken,
+    authReady,
+}: {
+    accessToken: string;
+    authReady: boolean;
+}) {
     const router = useRouter();
-    const [bookings, setBookings] = useState<BeautyBookingAdminRecord[]>([]);
+    const [bookings, setBookings] = useState<MyBookingCardRecord[]>([]);
     const [loading, setLoading] = useState(true);
     const [fetchError, setFetchError] = useState<string | null>(null);
 
     useEffect(() => {
         let cancelled = false;
         const load = async () => {
-            try {
-                const { data: { session } } = await supabase.auth.getSession();
-                if (!session?.access_token) {
-                    if (!cancelled) setLoading(false);
-                    return;
+            if (!authReady) {
+                return;
+            }
+
+            if (!accessToken) {
+                if (!cancelled) {
+                    setBookings([]);
+                    setFetchError(null);
+                    setLoading(false);
                 }
-                const res = await fetch('/api/bookings/beauty/mine', {
-                    headers: { Authorization: `Bearer ${session.access_token}` },
+                return;
+            }
+
+            try {
+                if (!cancelled) {
+                    setFetchError(null);
+                    setLoading(true);
+                }
+
+                const res = await fetch('/api/bookings/beauty/mine?view=summary', {
+                    headers: { Authorization: `Bearer ${accessToken}` },
                     cache: 'no-store',
                 });
                 const body = await res.json().catch(() => null) as
-                    | { ok?: boolean; items?: BeautyBookingAdminRecord[] }
+                    | { ok?: boolean; items?: MyBookingCardRecord[] }
                     | null;
+
+                if (!res.ok || body?.ok !== true || !Array.isArray(body.items)) {
+                    throw new Error('예약을 불러오지 못했어요.');
+                }
+
                 if (!cancelled) {
-                    setBookings(Array.isArray(body?.items) ? body!.items.slice(0, 3) : []);
+                    setBookings(body.items);
                 }
             } catch {
                 if (!cancelled) setFetchError('예약을 불러오지 못했어요.');
@@ -216,7 +271,7 @@ function MyBookingsSection() {
         };
         void load();
         return () => { cancelled = true; };
-    }, []);
+    }, [accessToken, authReady]);
 
     return (
         <section className={styles.section}>
@@ -230,11 +285,7 @@ function MyBookingsSection() {
                 </button>
             </div>
 
-            {loading && (
-                <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600 }}>
-                    불러오는 중...
-                </div>
-            )}
+            {loading && <SectionCardSkeleton />}
             {!loading && fetchError && (
                 <div style={{ textAlign: 'center', padding: '12px 0', color: '#ef4444', fontSize: '0.85rem' }}>
                     {fetchError}
@@ -329,30 +380,29 @@ function MyBookingsSection() {
 }
 
 
-function CommunityHubSection() {
+function CommunityHubSection({ authorName }: { authorName: string }) {
     const router = useRouter();
     const [posts, setPosts] = useState<CommunityPost[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         let isMounted = true;
-        let resolvedUserName = "Jessie Kim";
-
-        try {
-            const storedUser = localStorage.getItem("user");
-            if (storedUser) {
-                const parsed = JSON.parse(storedUser) as { name?: string };
-                if (parsed.name?.trim()) {
-                    resolvedUserName = parsed.name.trim();
-                }
-            }
-        } catch {}
 
         const fetchPosts = async () => {
+            if (!authorName) {
+                if (isMounted) {
+                    setPosts([]);
+                    setLoading(false);
+                }
+                return;
+            }
+
+            setLoading(true);
+
             const { data } = await supabase
                 .from("community_posts")
                 .select("id, type, title, desc, created_at, time")
-                .eq("author", resolvedUserName)
+                .eq("author", authorName)
                 .order("created_at", { ascending: false })
                 .limit(3);
 
@@ -369,7 +419,7 @@ function CommunityHubSection() {
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [authorName]);
 
     return (
         <>
@@ -380,9 +430,7 @@ function CommunityHubSection() {
             </div>
 
                 {loading ? (
-                    <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600 }}>
-                        불러오는 중...
-                    </div>
+                    <SectionCardSkeleton rows={2} />
                 ) : posts.length === 0 ? (
                     <div style={{ 
                         textAlign: 'center', 
@@ -535,9 +583,12 @@ function MyPageContent() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const [hasHydrated, setHasHydrated] = useState(false);
+    const [cachedUserName, setCachedUserName] = useState("");
     const [userName, setUserName] = useState("");
     const [profileSubtitle, setProfileSubtitle] = useState("");
     const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined);
+    const [authReady, setAuthReady] = useState(false);
+    const [accessToken, setAccessToken] = useState("");
 
     const [isAdmin, setIsAdmin] = useState(false);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
@@ -553,6 +604,13 @@ function MyPageContent() {
 
     useEffect(() => {
         setHasHydrated(true);
+
+        try {
+            const storedUser = JSON.parse(localStorage.getItem("user") || "{}") as { name?: string };
+            setCachedUserName(pickString(storedUser.name));
+        } catch {
+            setCachedUserName("");
+        }
     }, []);
 
     useEffect(() => {
@@ -561,13 +619,21 @@ function MyPageContent() {
         const loadDashboardUser = async () => {
             const fallbackName = t("my_page.settings.account.default_name");
             const fallbackSubtitle = t("my_page.profile.account_hint");
-            const {
-                data: { user },
-            } = await supabase.auth.getUser();
+            const [
+                {
+                    data: { session },
+                },
+                {
+                    data: { user },
+                },
+            ] = await Promise.all([supabase.auth.getSession(), supabase.auth.getUser()]);
 
             if (!isMounted) {
                 return;
             }
+
+            setAccessToken(session?.access_token ?? "");
+            setAuthReady(true);
 
             if (!user) {
                 // [Mock Mode for Development]
@@ -635,6 +701,8 @@ function MyPageContent() {
         };
     }, [t, router]);
 
+    const communityAuthorName = cachedUserName || userName;
+
 
 
 
@@ -658,29 +726,10 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
-            {/* Member Quick Actions Shell */}
-            <section className={styles.quickActionBar}>
-                {[
-                    { icon: "📅", label: t("common.actions.my_bookings"), path: "/my/bookings" },
-                    { icon: "🔖", label: t("common.states.favorites"), path: "/my/saved" },
-                    { icon: "🔔", label: t("notifications.page_title"), path: "/my/notifications" },
-                    { icon: "📖", label: t("common.actions.travel_phrases"), path: "/my/phrases" },
-                ].map((item) => (
-                    <button
-                        key={item.path}
-                        className={styles.quickActionBtn}
-                        onClick={() => router.push(item.path)}
-                    >
-                        <span className={styles.quickActionIcon}>{item.icon}</span>
-                        <span className={styles.quickActionLabel}>{item.label}</span>
-                    </button>
-                ))}
-            </section>
-
-            <MyBookingsSection />
+            <MyBookingsSection accessToken={accessToken} authReady={authReady} />
 
             <section className={styles.section}>
-                <CommunityHubSection />
+                <CommunityHubSection authorName={communityAuthorName} />
             </section>
 
             {/* Standard Partner Banner */}
