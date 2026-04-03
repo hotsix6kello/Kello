@@ -5,15 +5,20 @@ import {
   BEAUTY_BOOKING_TABLE,
   BeautyBookingStorageError,
   listBeautyBookingRequestsForUser,
+  listBeautyBookingSummaryForUser,
 } from "@/lib/bookings/beautyBookingServer.ts";
 import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
 
 export const runtime = "nodejs";
 
+type BeautyBookingMineRouteItems =
+  | Awaited<ReturnType<typeof listBeautyBookingRequestsForUser>>
+  | Awaited<ReturnType<typeof listBeautyBookingSummaryForUser>>;
+
 type BeautyBookingMineRouteResponse =
   | {
       ok: true;
-      items: Awaited<ReturnType<typeof listBeautyBookingRequestsForUser>>;
+      items: BeautyBookingMineRouteItems;
     }
   | {
       ok: false;
@@ -33,7 +38,11 @@ function jsonFailure(error: string, status: number) {
 export async function GET(request: Request) {
   try {
     const { userId } = await requireAuthenticatedRouteAccess(request);
-    const items = await listBeautyBookingRequestsForUser(userId);
+    const view = new URL(request.url).searchParams.get("view");
+    const items =
+      view === "summary"
+        ? await listBeautyBookingSummaryForUser(userId)
+        : await listBeautyBookingRequestsForUser(userId);
 
     return NextResponse.json(
       {
