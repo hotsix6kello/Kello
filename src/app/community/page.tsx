@@ -391,8 +391,10 @@ export default function CommunityPage() {
                 .select('*')
                 .order('created_at', { ascending: false });
 
-            if (Array.isArray(data)) {
+                        if (Array.isArray(data)) {
+                // Rely on the denormalized comments column, which is kept in sync by a DB trigger
                 setPosts(data as Post[]);
+                
                 // Cache for fast init and cross-page sync
                 localStorage.setItem('kello_community_posts', JSON.stringify(data));
                 return;
