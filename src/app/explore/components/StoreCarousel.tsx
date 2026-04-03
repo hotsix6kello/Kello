@@ -65,19 +65,19 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, selectedId, onSele
                     pointer-events: auto !important;
                     width: 100% !important;
                     display: ${useGrid ? 'grid' : 'flex'} !important;
-                    grid-template-columns: ${useGrid ? 'repeat(2, 1fr)' : 'none'} !important;
-                    gap: 12px !important;
+                    grid-template-columns: ${useGrid ? 'repeat(auto-fill, minmax(200px, 1fr))' : 'none'} !important;
+                    gap: 16px !important;
                     overflow-x: ${useGrid ? 'hidden' : 'auto'} !important;
                     scroll-snap-type: ${useGrid ? 'none' : 'x mandatory'} !important;
                     scroll-behavior: smooth !important;
                     scrollbar-width: none !important;
-                    padding: ${useGrid ? '0' : '8px 16px 20px 16px'} !important;
+                    padding: ${useGrid ? '16px 0' : '8px 16px 20px 16px'} !important;
                     -webkit-overflow-scrolling: touch !important;
                 }
                 .cardItem {
                     flex-shrink: 0 !important;
                     width: ${useGrid ? '100%' : 'calc(50% - 22px)'} !important;
-                    min-height: 200px !important;
+                    min-height: 240px !important;
                     background: var(--surface, #ffffff) !important;
                     border-radius: var(--radius-md, 16px) !important;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
@@ -94,13 +94,16 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, selectedId, onSele
                 .cardItem.selected {
                     border-color: var(--primary, #f45b87) !important;
                 }
-                /* ... rest of styles ... */
                 .cardImageWrapper {
                     position: relative !important;
                     width: 100% !important;
-                    height: 100px !important;
+                    aspect-ratio: 16 / 9 !important;
                     background: var(--gray-100, #f9eef2) !important;
                     flex-shrink: 0 !important;
+                    overflow: hidden !important;
+                }
+                .cardImageWrapper img {
+                    object-fit: cover !important;
                 }
                 .cardContent {
                     padding: 10px !important;
@@ -156,7 +159,7 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, selectedId, onSele
                 ref={scrollContainerRef}
                 className="carouselInner"
             >
-                {items.map(item => {
+                {items.map((item, index) => {
                     const isSelected = selectedId === item.id;
                     const formattedDistance = item.distance 
                         ? (item.distance < 1 
@@ -179,7 +182,8 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, selectedId, onSele
                                     alt={item.title} 
                                     fill 
                                     sizes="(max-width: 768px) 40vw, 200px"
-                                    className="object-cover" 
+                                    className="object-cover"
+                                    priority={index === 0}
                                 />
                             </div>
                             <div className="cardContent">

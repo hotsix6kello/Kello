@@ -463,6 +463,10 @@
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
+.thumbnailImage {
+    object-fit: cover !important;
+}
+
 .saveIconOverlay {
     position: absolute;
     top: 4px;

@@ -439,3 +439,7 @@ BE 작업 파일:
 | 버전 | 날짜 | 내용 |
 |---|---|---|
 | v1.0 | 2026-02-23 | 최초 작성 |
+<Script
+  src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=bf92ec51c26fcda4eb7fb33076f2d61b&libraries=services&autoload=false`}
+  strategy="beforeInteractive"
+/>
