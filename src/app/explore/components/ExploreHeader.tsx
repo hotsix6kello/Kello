@@ -41,7 +41,11 @@ export default function ExploreHeader({
             <header className={isFloating ? styles.floatingHeader : styles.stickyHeader}>
                 <div className={styles.searchContainer}>
                     <div className={styles.searchWrapper}>
-                        <span className={styles.searchIcon}>🔍</span>
+                        <span 
+                            className={styles.searchIcon}
+                            onClick={() => onSearchSubmit(searchTerm)}
+                            style={{ cursor: 'pointer' }}
+                        >🔍</span>
                         <input
                             type="text"
                             placeholder={getPlaceholder()}

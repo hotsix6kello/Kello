@@ -18,12 +18,12 @@ export async function POST(request: Request) {
             languageCode: languageCode,
         };
 
-        // 위치 정보가 있으면 주변 검색으로 제한
+        // 위치 정보가 있으면 반경 50km(50000m) 내 결과로 가중치를 둠 (제한이 아닌 바이어스)
         if (lat && lng) {
             body.locationBias = {
                 circle: {
                     center: { latitude: lat, longitude: lng },
-                    radius: radius,
+                    radius: 50000,
                 },
             };
         }
