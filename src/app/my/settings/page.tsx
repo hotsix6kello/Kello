@@ -17,6 +17,8 @@ interface ProfileRecord {
     role: string | null;
     created_at: string | null;
     avatar_path: string | null;
+    sns: string | null;
+    phone_number: string | null;
 }
 
 interface PartnerRecord {
@@ -72,6 +74,24 @@ interface SettingsRow {
     actionHref?: string;
 }
 
+type ContactField = "sns" | "phone";
+type SaveStatus = "idle" | "saving" | "success" | "error";
+
+interface ContactDraftState {
+    sns: string;
+    phone: string;
+}
+
+interface ContactSaveState {
+    sns: SaveStatus;
+    phone: SaveStatus;
+}
+
+interface ContactMessageState {
+    sns: string;
+    phone: string;
+}
+
 interface HeroCommunityPostRecord {
     type: string | null;
     desc: string | null;
@@ -114,6 +134,14 @@ function pickString(...values: unknown[]): string {
     }
 
     return "";
+}
+
+function resolveEditableValue(profileValue: string | null | undefined, fallbackValue: string): string {
+    if (profileValue === null || profileValue === undefined) {
+        return fallbackValue;
+    }
+
+    return profileValue;
 }
 
 function describePartnerType(rawType: string | null): string {
@@ -401,6 +429,18 @@ export default function MySettingsPage() {
     const [avatarError, setAvatarError] = useState<string | null>(null);
     const [communityStats, setCommunityStats] = useState<HeroCommunityStats>(EMPTY_COMMUNITY_STATS);
     const [bookingStats, setBookingStats] = useState<HeroBookingStats>(EMPTY_BOOKING_STATS);
+    const [contactDrafts, setContactDrafts] = useState<ContactDraftState>({
+        sns: "",
+        phone: "",
+    });
+    const [contactSaveState, setContactSaveState] = useState<ContactSaveState>({
+        sns: "idle",
+        phone: "idle",
+    });
+    const [contactMessages, setContactMessages] = useState<ContactMessageState>({
+        sns: "",
+        phone: "",
+    });
     const avatarInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
@@ -443,6 +483,18 @@ export default function MySettingsPage() {
                         snsId: "",
                         isLoggedIn: false,
                     });
+                    setContactDrafts({
+                        sns: "",
+                        phone: "",
+                    });
+                    setContactSaveState({
+                        sns: "idle",
+                        phone: "idle",
+                    });
+                    setContactMessages({
+                        sns: "",
+                        phone: "",
+                    });
                     setNotificationSummary(buildNotificationSummary(null, false));
                     setLoading(false);
                     return;
@@ -450,7 +502,7 @@ export default function MySettingsPage() {
 
                 const { data: profileData } = await supabase
                     .from("profiles")
-                    .select("email, nickname, role, created_at, avatar_path")
+                    .select("email, nickname, role, created_at, avatar_path, sns, phone_number")
                     .eq("id", user.id)
                     .maybeSingle();
 
@@ -472,10 +524,13 @@ export default function MySettingsPage() {
                     email,
                     joinedAt: pickString(nextProfile?.created_at, user.created_at),
                     emailVerified: Boolean(user.email_confirmed_at || user.confirmed_at),
-                    phone: pickString(user.phone),
-                    phoneVerified: Boolean(user.phone && user.phone_confirmed_at),
+                    phone: resolveEditableValue(nextProfile?.phone_number, pickString(user.phone)),
+                    phoneVerified:
+                        nextProfile?.phone_number === null || nextProfile?.phone_number === undefined
+                            ? Boolean(user.phone && user.phone_confirmed_at)
+                            : false,
                     providerLabel: providerSource ? titleCase(providerSource) : "Email",
-                    snsId: extractSnsId(user),
+                    snsId: resolveEditableValue(nextProfile?.sns, extractSnsId(user)),
                     isLoggedIn: true,
                 };
 
@@ -531,6 +586,18 @@ export default function MySettingsPage() {
                 setAvatarPath(nextProfile?.avatar_path ?? "");
                 setAvatarUrl(nextProfile?.avatar_path ? getAvatarPublicUrl(nextProfile.avatar_path) : "");
                 setAccount(nextAccount);
+                setContactDrafts({
+                    sns: nextAccount.snsId,
+                    phone: nextAccount.phone,
+                });
+                setContactSaveState({
+                    sns: "idle",
+                    phone: "idle",
+                });
+                setContactMessages({
+                    sns: "",
+                    phone: "",
+                });
                 setCommunityStats(communityResult);
                 setBookingStats(bookingResult);
                 setPartner(
@@ -572,6 +639,128 @@ export default function MySettingsPage() {
 
     const pageTitle = account.displayName || "내 설정";
     const heroSummaryText = `게시글 ${communityStats.postCount} · 후기 ${communityStats.reviewCount} · 예약 ${bookingStats.totalCount}`;
+
+    const validatePhoneInput = (value: string) => {
+        const compactValue = value.trim().replace(/\s+/g, "");
+
+        if (!compactValue) {
+            return "";
+        }
+
+        if (!/^[0-9-]+$/.test(compactValue) || compactValue.replace(/-/g, "").length < 7) {
+            return (
+                t("beauty_bookings.error_phone_format") ||
+                "연락처는 숫자와 하이픈만 사용해 입력해 주세요."
+            );
+        }
+
+        return "";
+    };
+
+    const handleContactDraftChange = (field: ContactField, value: string) => {
+        setContactDrafts((current) => ({
+            ...current,
+            [field]: value,
+        }));
+        setContactSaveState((current) => ({
+            ...current,
+            [field]: "idle",
+        }));
+        setContactMessages((current) => ({
+            ...current,
+            [field]: "",
+        }));
+    };
+
+    const handleContactSave = async (field: ContactField) => {
+        if (!viewerId) {
+            return;
+        }
+
+        const nextSns = contactDrafts.sns.trim();
+        const nextPhone = contactDrafts.phone.trim().replace(/\s+/g, "");
+        const phoneError = validatePhoneInput(nextPhone);
+
+        if (field === "phone" && phoneError) {
+            setContactSaveState((current) => ({
+                ...current,
+                phone: "error",
+            }));
+            setContactMessages((current) => ({
+                ...current,
+                phone: phoneError,
+            }));
+            return;
+        }
+
+        const updates =
+            field === "sns"
+                ? { sns: nextSns }
+                : { phone_number: nextPhone };
+
+        setContactSaveState((current) => ({
+            ...current,
+            [field]: "saving",
+        }));
+        setContactMessages((current) => ({
+            ...current,
+            [field]: "",
+        }));
+
+        try {
+            const { error } = await supabase
+                .from("profiles")
+                .update(updates)
+                .eq("id", viewerId);
+
+            if (error) {
+                throw error;
+            }
+
+            setProfile((current) =>
+                current
+                    ? {
+                          ...current,
+                          ...(field === "sns"
+                              ? { sns: nextSns }
+                              : { phone_number: nextPhone }),
+                      }
+                    : current
+            );
+            setAccount((current) => ({
+                ...current,
+                ...(field === "sns"
+                    ? { snsId: nextSns }
+                    : { phone: nextPhone, phoneVerified: false }),
+            }));
+            setContactDrafts((current) => ({
+                ...current,
+                ...(field === "sns" ? { sns: nextSns } : { phone: nextPhone }),
+            }));
+            setContactSaveState((current) => ({
+                ...current,
+                [field]: "success",
+            }));
+            setContactMessages((current) => ({
+                ...current,
+                [field]: "저장했어요.",
+            }));
+        } catch (error) {
+            console.error("[settings-contact] save_failed", error);
+            setContactDrafts((current) => ({
+                ...current,
+                ...(field === "sns" ? { sns: account.snsId } : { phone: account.phone }),
+            }));
+            setContactSaveState((current) => ({
+                ...current,
+                [field]: "error",
+            }));
+            setContactMessages((current) => ({
+                ...current,
+                [field]: "저장하지 못했어요.",
+            }));
+        }
+    };
 
     const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -681,24 +870,22 @@ export default function MySettingsPage() {
             {
                 id: "sns",
                 title: "sns",
-                value: account.snsId || "연결 안 됨",
+                value: account.snsId || "입력 안 됨",
                 helper: account.snsId
-                    ? "연결된 소셜 계정 아이디예요."
-                    : "연결된 소셜 계정 아이디가 없어요.",
-                badge: account.snsId ? "연결됨" : "미연결",
-                tone: account.snsId ? "verified" : "neutral",
+                    ? "현재 저장된 sns예요."
+                    : "저장된 sns가 없어요.",
+                badge: account.snsId ? "저장됨" : "미입력",
+                tone: account.snsId ? "info" : "neutral",
             },
             {
                 id: "phone",
                 title: "전화번호",
-                value: account.phone || "연결 안 됨",
-                helper: account.phoneVerified
-                    ? "확인된 연락처예요."
-                    : account.phone
-                      ? "등록되어 있지만 확인이 필요해요."
-                      : "등록된 전화번호가 없어요.",
-                badge: account.phoneVerified ? "확인됨" : account.phone ? "확인 필요" : "미연결",
-                tone: account.phoneVerified ? "verified" : account.phone ? "warning" : "neutral",
+                value: account.phone || "입력 안 됨",
+                helper: account.phone
+                    ? "현재 저장된 전화번호예요."
+                    : "저장된 전화번호가 없어요.",
+                badge: account.phone ? "저장됨" : "미입력",
+                tone: account.phone ? "info" : "neutral",
             },
             {
                 id: "login",
@@ -867,6 +1054,66 @@ export default function MySettingsPage() {
     const activeRows =
         activeTab === "partner" ? partnerRows : activeTab === "admin" ? adminRows : personalRows;
 
+    const renderEditableContactCard = (row: SettingsRow) => {
+        const field = row.id as ContactField;
+        const draftValue = contactDrafts[field];
+        const saveState = contactSaveState[field];
+        const savedValue = field === "sns" ? account.snsId : account.phone;
+        const validationMessage = field === "phone" ? validatePhoneInput(draftValue) : "";
+        const helperMessage =
+            saveState === "error"
+                ? contactMessages[field] || validationMessage || row.helper
+                : saveState === "success"
+                  ? contactMessages[field]
+                  : validationMessage || row.helper;
+        const isDirty = draftValue !== savedValue;
+        const isSaving = saveState === "saving";
+        const canSave =
+            account.isLoggedIn && isDirty && !isSaving && !validationMessage;
+
+        return (
+            <article key={row.id} className={styles.itemCard}>
+                <div className={styles.itemTop}>
+                    <div className={styles.itemText}>
+                        <h3 className={styles.itemTitle}>{row.title}</h3>
+                    </div>
+                    <span className={`${styles.badge} ${styles[`${row.tone}Badge`]}`}>
+                        {row.badge}
+                    </span>
+                </div>
+                <div className={styles.inlineEditorRow}>
+                    <input
+                        type="text"
+                        value={draftValue}
+                        onChange={(event) => handleContactDraftChange(field, event.target.value)}
+                        placeholder={field === "sns" ? "sns를 입력해 주세요." : "전화번호를 입력해 주세요."}
+                        className={styles.inlineInput}
+                        disabled={!account.isLoggedIn || isSaving}
+                    />
+                    <button
+                        type="button"
+                        className={styles.secondaryButton}
+                        onClick={() => void handleContactSave(field)}
+                        disabled={!canSave}
+                    >
+                        {isSaving ? "저장 중..." : "저장"}
+                    </button>
+                </div>
+                <p
+                    className={`${styles.inlineEditorMessage} ${
+                        saveState === "error" || validationMessage
+                            ? styles.inlineEditorError
+                            : saveState === "success"
+                              ? styles.inlineEditorSuccess
+                              : ""
+                    }`}
+                >
+                    {helperMessage}
+                </p>
+            </article>
+        );
+    };
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -970,29 +1217,33 @@ export default function MySettingsPage() {
 
                 <div className={styles.itemsList}>
                     {activeRows.map((row) => (
-                        <article key={row.id} className={styles.itemCard}>
-                            <div className={styles.itemTop}>
-                                <div className={styles.itemText}>
-                                    <h3 className={styles.itemTitle}>{row.title}</h3>
-                                    <p className={styles.itemValue}>{row.value}</p>
-                                    <p className={styles.itemHelper}>{row.helper}</p>
+                        row.id === "sns" || row.id === "phone" ? (
+                            renderEditableContactCard(row)
+                        ) : (
+                            <article key={row.id} className={styles.itemCard}>
+                                <div className={styles.itemTop}>
+                                    <div className={styles.itemText}>
+                                        <h3 className={styles.itemTitle}>{row.title}</h3>
+                                        <p className={styles.itemValue}>{row.value}</p>
+                                        <p className={styles.itemHelper}>{row.helper}</p>
+                                    </div>
+                                    <span className={`${styles.badge} ${styles[`${row.tone}Badge`]}`}>
+                                        {row.badge}
+                                    </span>
                                 </div>
-                                <span className={`${styles.badge} ${styles[`${row.tone}Badge`]}`}>
-                                    {row.badge}
-                                </span>
-                            </div>
-                            {row.actionHref ? (
-                                <div className={styles.itemActions}>
-                                    <button
-                                        type="button"
-                                        className={styles.secondaryButton}
-                                        onClick={() => router.push(row.actionHref!)}
-                                    >
-                                        {row.actionLabel}
-                                    </button>
-                                </div>
-                            ) : null}
-                        </article>
+                                {row.actionHref ? (
+                                    <div className={styles.itemActions}>
+                                        <button
+                                            type="button"
+                                            className={styles.secondaryButton}
+                                            onClick={() => router.push(row.actionHref!)}
+                                        >
+                                            {row.actionLabel}
+                                        </button>
+                                    </div>
+                                ) : null}
+                            </article>
+                        )
                     ))}
                 </div>
             </section>
