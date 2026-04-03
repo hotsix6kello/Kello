@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
+import { normalizeInternationalPhoneInput } from "@/lib/settings/contact";
 import styles from "./settings.module.css";
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
@@ -12,13 +13,14 @@ type TabId = "personal" | "partner" | "admin";
 type Tone = "verified" | "warning" | "neutral" | "info";
 
 interface ProfileRecord {
-    email: string | null;
-    nickname: string | null;
+    id: string;
+    display_name: string | null;
     role: string | null;
     created_at: string | null;
-    avatar_path: string | null;
-    sns: string | null;
-    phone_number: string | null;
+    avatar_url: string | null;
+    avatar_path?: string | null;
+    sns?: string | null;
+    phone: string | null;
 }
 
 interface PartnerRecord {
@@ -92,6 +94,16 @@ interface ContactMessageState {
     phone: string;
 }
 
+interface ContactSaveResponse {
+    ok?: boolean;
+    error?: string;
+    contact?: {
+        sns: string;
+        phone: string;
+    };
+    profile?: ProfileRecord | null;
+}
+
 interface HeroCommunityPostRecord {
     type: string | null;
     desc: string | null;
@@ -134,14 +146,6 @@ function pickString(...values: unknown[]): string {
     }
 
     return "";
-}
-
-function resolveEditableValue(profileValue: string | null | undefined, fallbackValue: string): string {
-    if (profileValue === null || profileValue === undefined) {
-        return fallbackValue;
-    }
-
-    return profileValue;
 }
 
 function describePartnerType(rawType: string | null): string {
@@ -403,6 +407,19 @@ const EMPTY_PARTNER: PartnerRecord = {
 export default function MySettingsPage() {
     const router = useRouter();
     const { t } = useTranslation("common");
+    const internationalPhoneExample = "+82 10 1234 5678";
+    const phonePlaceholder = t("my_page.settings.account.phone.placeholder", {
+        defaultValue: `예: ${internationalPhoneExample}`,
+    });
+    const phoneEmptyHelper = t("my_page.settings.account.phone.helper_empty", {
+        defaultValue: `국가번호를 포함해 입력해 주세요. 예: ${internationalPhoneExample}`,
+    });
+    const phoneSavedHelper = t("my_page.settings.account.phone.helper_saved", {
+        defaultValue: "현재 저장된 국제형 전화번호예요.",
+    });
+    const phoneValidationMessage = t("my_page.settings.account.phone.helper_invalid", {
+        defaultValue: `국가번호를 포함한 국제형으로 입력해 주세요. 예: ${internationalPhoneExample}`,
+    });
 
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<TabId>("personal");
@@ -500,14 +517,18 @@ export default function MySettingsPage() {
                     return;
                 }
 
-                const { data: profileData } = await supabase
+                const { data: profileData, error: profileError } = await supabase
                     .from("profiles")
-                    .select("email, nickname, role, created_at, avatar_path, sns, phone_number")
+                    .select("*")
                     .eq("id", user.id)
                     .maybeSingle();
 
+                if (profileError) {
+                    console.error("[settings-contact] profile_load_failed", profileError);
+                }
+
                 const nextProfile = (profileData as ProfileRecord | null) ?? null;
-                const email = pickString(user.email, nextProfile?.email, storedUser.email);
+                const email = pickString(user.email, storedUser.email);
                 const providerSource = pickString(
                     user.app_metadata?.provider,
                     Array.isArray(user.app_metadata?.providers)
@@ -516,7 +537,7 @@ export default function MySettingsPage() {
                 );
                 const nextAccount: AccountState = {
                     displayName: pickString(
-                        nextProfile?.nickname,
+                        nextProfile?.display_name,
                         user.user_metadata?.full_name,
                         user.user_metadata?.name,
                         storedUser.name
@@ -524,13 +545,13 @@ export default function MySettingsPage() {
                     email,
                     joinedAt: pickString(nextProfile?.created_at, user.created_at),
                     emailVerified: Boolean(user.email_confirmed_at || user.confirmed_at),
-                    phone: resolveEditableValue(nextProfile?.phone_number, pickString(user.phone)),
+                    phone: nextProfile ? pickString(nextProfile.phone) : pickString(user.phone),
                     phoneVerified:
-                        nextProfile?.phone_number === null || nextProfile?.phone_number === undefined
+                        !nextProfile || nextProfile.phone === null || nextProfile.phone === undefined
                             ? Boolean(user.phone && user.phone_confirmed_at)
                             : false,
                     providerLabel: providerSource ? titleCase(providerSource) : "Email",
-                    snsId: resolveEditableValue(nextProfile?.sns, extractSnsId(user)),
+                    snsId: nextProfile ? pickString(nextProfile.sns) : extractSnsId(user),
                     isLoggedIn: true,
                 };
 
@@ -583,8 +604,8 @@ export default function MySettingsPage() {
 
                 setProfile(nextProfile);
                 setViewerId(user.id);
-                setAvatarPath(nextProfile?.avatar_path ?? "");
-                setAvatarUrl(nextProfile?.avatar_path ? getAvatarPublicUrl(nextProfile.avatar_path) : "");
+                setAvatarPath(nextProfile?.avatar_url ?? "");
+                setAvatarUrl(nextProfile?.avatar_url ?? "");
                 setAccount(nextAccount);
                 setContactDrafts({
                     sns: nextAccount.snsId,
@@ -641,20 +662,33 @@ export default function MySettingsPage() {
     const heroSummaryText = `게시글 ${communityStats.postCount} · 후기 ${communityStats.reviewCount} · 예약 ${bookingStats.totalCount}`;
 
     const validatePhoneInput = (value: string) => {
-        const compactValue = value.trim().replace(/\s+/g, "");
-
-        if (!compactValue) {
+        if (!value.trim()) {
             return "";
         }
 
-        if (!/^[0-9-]+$/.test(compactValue) || compactValue.replace(/-/g, "").length < 7) {
-            return (
-                t("beauty_bookings.error_phone_format") ||
-                "연락처는 숫자와 하이픈만 사용해 입력해 주세요."
-            );
+        if (!normalizeInternationalPhoneInput(value)) {
+            return phoneValidationMessage;
         }
 
         return "";
+    };
+
+    const getContactSaveErrorMessage = (field: ContactField, errorCode?: string) => {
+        if (errorCode === "unauthorized") {
+            return "로그인 세션을 다시 확인해 주세요.";
+        }
+
+        if (errorCode === "profile_not_found") {
+            return "프로필 정보를 찾지 못했어요. 다시 로그인해 주세요.";
+        }
+
+        if (errorCode === "contact_schema_missing") {
+            return field === "sns"
+                ? "SNS 저장 컬럼이 아직 DB에 적용되지 않았어요."
+                : "전화번호 저장 컬럼이 아직 DB에 적용되지 않았어요.";
+        }
+
+        return "저장하지 못했어요.";
     };
 
     const handleContactDraftChange = (field: ContactField, value: string) => {
@@ -677,9 +711,7 @@ export default function MySettingsPage() {
             return;
         }
 
-        const nextSns = contactDrafts.sns.trim();
-        const nextPhone = contactDrafts.phone.trim().replace(/\s+/g, "");
-        const phoneError = validatePhoneInput(nextPhone);
+        const phoneError = validatePhoneInput(contactDrafts.phone);
 
         if (field === "phone" && phoneError) {
             setContactSaveState((current) => ({
@@ -693,11 +725,6 @@ export default function MySettingsPage() {
             return;
         }
 
-        const updates =
-            field === "sns"
-                ? { sns: nextSns }
-                : { phone_number: nextPhone };
-
         setContactSaveState((current) => ({
             ...current,
             [field]: "saving",
@@ -708,45 +735,57 @@ export default function MySettingsPage() {
         }));
 
         try {
-            const { error } = await supabase
-                .from("profiles")
-                .update(updates)
-                .eq("id", viewerId);
+            const {
+                data: { session },
+            } = await supabase.auth.getSession();
 
-            if (error) {
-                throw error;
+            if (!session?.access_token) {
+                throw new Error("unauthorized");
             }
 
-            setProfile((current) =>
-                current
-                    ? {
-                          ...current,
-                          ...(field === "sns"
-                              ? { sns: nextSns }
-                              : { phone_number: nextPhone }),
-                      }
-                    : current
-            );
+            const response = await fetch("/api/my/settings/contact", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${session.access_token}`,
+                },
+                body: JSON.stringify({
+                    field,
+                    value: field === "sns" ? contactDrafts.sns : contactDrafts.phone,
+                }),
+            });
+
+            const body = (await response.json()) as ContactSaveResponse;
+
+            if (!response.ok || !body.ok || !body.contact) {
+                throw new Error(body.error || "failed_to_update_contact");
+            }
+
+            const savedSns = body.contact.sns;
+            const savedPhone = body.contact.phone;
+
+            setProfile(body.profile ?? null);
             setAccount((current) => ({
                 ...current,
-                ...(field === "sns"
-                    ? { snsId: nextSns }
-                    : { phone: nextPhone, phoneVerified: false }),
+                snsId: savedSns,
+                phone: savedPhone,
+                phoneVerified: field === "phone" ? false : current.phoneVerified,
             }));
-            setContactDrafts((current) => ({
-                ...current,
-                ...(field === "sns" ? { sns: nextSns } : { phone: nextPhone }),
-            }));
+            setContactDrafts({
+                sns: savedSns,
+                phone: savedPhone,
+            });
             setContactSaveState((current) => ({
                 ...current,
                 [field]: "success",
             }));
             setContactMessages((current) => ({
                 ...current,
-                [field]: "저장했어요.",
+                [field]: field === "sns" ? "SNS 아이디를 저장했어요." : "전화번호를 저장했어요.",
             }));
         } catch (error) {
             console.error("[settings-contact] save_failed", error);
+            const errorCode = error instanceof Error ? error.message : undefined;
             setContactDrafts((current) => ({
                 ...current,
                 ...(field === "sns" ? { sns: account.snsId } : { phone: account.phone }),
@@ -757,9 +796,11 @@ export default function MySettingsPage() {
             }));
             setContactMessages((current) => ({
                 ...current,
-                [field]: "저장하지 못했어요.",
+                [field]: getContactSaveErrorMessage(field, errorCode),
             }));
         }
+
+        return;
     };
 
     const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -869,7 +910,7 @@ export default function MySettingsPage() {
             },
             {
                 id: "sns",
-                title: "sns",
+                title: "SNS",
                 value: account.snsId || "입력 안 됨",
                 helper: account.snsId
                     ? "현재 저장된 sns예요."
@@ -1065,7 +1106,8 @@ export default function MySettingsPage() {
                 ? contactMessages[field] || validationMessage || row.helper
                 : saveState === "success"
                   ? contactMessages[field]
-                  : validationMessage || row.helper;
+                  : validationMessage ||
+                    (field === "phone" ? (savedValue ? phoneSavedHelper : phoneEmptyHelper) : row.helper);
         const isDirty = draftValue !== savedValue;
         const isSaving = saveState === "saving";
         const canSave =
@@ -1086,7 +1128,7 @@ export default function MySettingsPage() {
                         type="text"
                         value={draftValue}
                         onChange={(event) => handleContactDraftChange(field, event.target.value)}
-                        placeholder={field === "sns" ? "sns를 입력해 주세요." : "전화번호를 입력해 주세요."}
+                        placeholder={field === "sns" ? "SNS 아이디를 입력해 주세요." : phonePlaceholder}
                         className={styles.inlineInput}
                         disabled={!account.isLoggedIn || isSaving}
                     />
