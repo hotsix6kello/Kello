@@ -176,12 +176,8 @@ export default function CommunityDetailPage() {
                 const actualCount = commentsData.length;
                 setComments(commentsData as Comment[]);
                 
-                // Self-heal: Sync denormalized count if mismatched
+                // Dispatch to update any open list pages in case of cache mismatch
                 if (postData && postData.comments !== actualCount) {
-                    await supabase.from('community_posts')
-                        .update({ comments: actualCount })
-                        .eq('id', id);
-                    
                     // Dispatch to update any open list pages
                     window.dispatchEvent(new CustomEvent('community_post_updated', { 
                         detail: { id: Number(id), comments: actualCount } 
@@ -311,12 +307,6 @@ export default function CommunityDetailPage() {
                 
                 // Optimistic UI Update
                 setPost(prev => prev ? { ...prev, comments: newCommentCount } : null);
-                
-                const { error: postUpdateError } = await supabase.from('community_posts')
-                    .update({ comments: newCommentCount })
-                    .eq('id', post.id);
-                
-                if (postUpdateError) console.error('Post count update failed:', postUpdateError);
 
                 // Update Cache and Dispatch Event
                 try {
@@ -401,13 +391,6 @@ export default function CommunityDetailPage() {
             
             const newCount = remainingComments.length;
             setPost(prev => prev ? { ...prev, comments: newCount } : null);
-
-            // Sync Database Post Count
-            const { error: postUpdateError } = await supabase.from('community_posts')
-                .update({ comments: newCount })
-                .eq('id', post.id);
-            
-            if (postUpdateError) console.error('Post count update failed:', postUpdateError);
 
             // Sync Cache & Global Event
             try {

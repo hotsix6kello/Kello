@@ -388,22 +388,15 @@ export default function CommunityPage() {
         try {
             const { data, error } = await supabase
                 .from('community_posts')
-                .select(`
-                    *,
-                    community_comments(count)
-                `)
+                .select('*')
                 .order('created_at', { ascending: false });
 
-            if (Array.isArray(data)) {
-                // Map the count from the nested object to the comments field
-                const mappedData = data.map(item => ({
-                    ...item,
-                    comments: (item.community_comments as any)?.[0]?.count || 0
-                }));
-                setPosts(mappedData as Post[]);
+                        if (Array.isArray(data)) {
+                // Rely on the denormalized comments column, which is kept in sync by a DB trigger
+                setPosts(data as Post[]);
                 
                 // Cache for fast init and cross-page sync
-                localStorage.setItem('kello_community_posts', JSON.stringify(mappedData));
+                localStorage.setItem('kello_community_posts', JSON.stringify(data));
                 return;
             }
 
