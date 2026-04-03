@@ -6,6 +6,11 @@ import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
 import styles from "./my.module.css";
+import {
+    type BeautyBookingAdminRecord,
+    isBeautyBookingCustomerCancelableStatus,
+    isBeautyBookingCustomerChangeableStatus,
+} from "@/lib/bookings/beautyBookingAdmin";
 
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
@@ -160,7 +165,168 @@ function ProfileSummaryCard({
     );
 }
 
+const BOOKING_STATUS_KO: Record<BeautyBookingAdminRecord['status'], string> = {
+    requested: '예약 요청',
+    confirmed: '예약 확정',
+    completed: '이용 완료',
+    canceled: '취소됨',
+    failed: '예약 실패',
+    change_requested: '변경 요청 중',
+};
 
+const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> = {
+    requested: '#d97706',
+    confirmed: '#16a34a',
+    completed: '#6b7280',
+    canceled: '#dc2626',
+    failed: '#dc2626',
+    change_requested: '#7c3aed',
+};
+
+function MyBookingsSection() {
+    const router = useRouter();
+    const [bookings, setBookings] = useState<BeautyBookingAdminRecord[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let cancelled = false;
+        const load = async () => {
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (!session?.access_token) {
+                    if (!cancelled) setLoading(false);
+                    return;
+                }
+                const res = await fetch('/api/bookings/beauty/mine', {
+                    headers: { Authorization: `Bearer ${session.access_token}` },
+                    cache: 'no-store',
+                });
+                const body = await res.json().catch(() => null) as
+                    | { ok?: boolean; items?: BeautyBookingAdminRecord[] }
+                    | null;
+                if (!cancelled) {
+                    setBookings(Array.isArray(body?.items) ? body!.items.slice(0, 3) : []);
+                }
+            } catch {
+                if (!cancelled) setFetchError('예약을 불러오지 못했어요.');
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        };
+        void load();
+        return () => { cancelled = true; };
+    }, []);
+
+    return (
+        <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>내 예약</h2>
+                <button
+                    className={styles.sectionMore}
+                    onClick={() => router.push('/my/bookings/beauty')}
+                >
+                    전체보기
+                </button>
+            </div>
+
+            {loading && (
+                <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600 }}>
+                    불러오는 중...
+                </div>
+            )}
+            {!loading && fetchError && (
+                <div style={{ textAlign: 'center', padding: '12px 0', color: '#ef4444', fontSize: '0.85rem' }}>
+                    {fetchError}
+                </div>
+            )}
+            {!loading && !fetchError && bookings.length === 0 && (
+                <div style={{ textAlign: 'center', padding: '32px 0', background: '#f8fafc', borderRadius: 16 }}>
+                    <div style={{ fontSize: '2rem', marginBottom: 8 }}>📅</div>
+                    <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>예약 내역이 없습니다</div>
+                    <button
+                        onClick={() => router.push('/beauty')}
+                        style={{
+                            background: 'white', border: '1px solid #e2e8f0',
+                            padding: '10px 20px', borderRadius: 12,
+                            fontSize: '0.85rem', color: '#334155',
+                            fontWeight: 600, cursor: 'pointer',
+                        }}
+                    >
+                        뷰티 예약 둘러보기
+                    </button>
+                </div>
+            )}
+            {!loading && bookings.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {bookings.map(b => (
+                        <div
+                            key={b.id}
+                            style={{
+                                background: '#f8fafc', borderRadius: 14,
+                                border: '1px solid #e2e8f0', padding: '14px 16px',
+                            }}
+                        >
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b' }}>
+                                    {b.storeName}
+                                </span>
+                                <span style={{
+                                    fontSize: '0.7rem', fontWeight: 700,
+                                    padding: '3px 8px', borderRadius: 20,
+                                    background: `${BOOKING_STATUS_COLOR[b.status]}18`,
+                                    color: BOOKING_STATUS_COLOR[b.status],
+                                    border: `1px solid ${BOOKING_STATUS_COLOR[b.status]}40`,
+                                }}>
+                                    {BOOKING_STATUS_KO[b.status]}
+                                </span>
+                            </div>
+                            <div style={{ fontSize: '0.85rem', color: '#475569', marginBottom: 4 }}>
+                                {b.primaryServiceName || b.beautyCategory}
+                            </div>
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 4 }}>
+                                📅 {b.bookingDate} · {b.bookingTime}
+                            </div>
+                            <div style={{ fontSize: '0.82rem', color: '#64748b', marginBottom: 12 }}>
+                                💰 {b.totalPrice.toLocaleString('ko-KR')}원
+                            </div>
+                            <div style={{ display: 'flex', gap: 8 }}>
+                                <button
+                                    onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
+                                    disabled={!isBeautyBookingCustomerChangeableStatus(b.status)}
+                                    style={{
+                                        flex: 1, padding: '9px 0', borderRadius: 10,
+                                        fontSize: '0.8rem', fontWeight: 700,
+                                        cursor: isBeautyBookingCustomerChangeableStatus(b.status) ? 'pointer' : 'not-allowed',
+                                        background: isBeautyBookingCustomerChangeableStatus(b.status) ? 'var(--primary-glow)' : '#f1f5f9',
+                                        color: isBeautyBookingCustomerChangeableStatus(b.status) ? 'var(--secondary)' : '#94a3b8',
+                                        border: '1px solid var(--warm-sand)',
+                                    }}
+                                >
+                                    수정 요청
+                                </button>
+                                <button
+                                    onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
+                                    disabled={!isBeautyBookingCustomerCancelableStatus(b.status)}
+                                    style={{
+                                        flex: 1, padding: '9px 0', borderRadius: 10,
+                                        fontSize: '0.8rem', fontWeight: 700,
+                                        cursor: isBeautyBookingCustomerCancelableStatus(b.status) ? 'pointer' : 'not-allowed',
+                                        background: isBeautyBookingCustomerCancelableStatus(b.status) ? '#fff1f2' : '#f1f5f9',
+                                        color: isBeautyBookingCustomerCancelableStatus(b.status) ? '#dc2626' : '#94a3b8',
+                                        border: `1px solid ${isBeautyBookingCustomerCancelableStatus(b.status) ? '#fecdd3' : '#e2e8f0'}`,
+                                    }}
+                                >
+                                    취소 요청
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </section>
+    );
+}
 
 
 function CommunityHubSection() {
@@ -510,6 +676,8 @@ function MyPageContent() {
                     </button>
                 ))}
             </section>
+
+            <MyBookingsSection />
 
             <section className={styles.section}>
                 <CommunityHubSection />
