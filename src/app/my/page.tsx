@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
+import { getMyPageCapabilities, type PartnerStatus } from "./pagePermissions";
 import styles from "./my.module.css";
 import {
     type BeautyBookingAdminRecord,
@@ -12,17 +13,16 @@ import {
     isBeautyBookingCustomerChangeableStatus,
 } from "@/lib/bookings/beautyBookingAdmin";
 
-
-type PartnerStatus = "none" | "pending" | "approved" | "rejected";
-
-
-
 interface DashboardProfileRecord {
-    email: string | null;
-    nickname: string | null;
+    display_name: string | null;
     role: string | null;
     created_at: string | null;
     avatar_url: string | null;
+}
+
+interface PartnerStatusRouteResponse {
+    ok: boolean;
+    partnerStatus?: PartnerStatus;
 }
 
 interface CommunityPost {
@@ -504,7 +504,13 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
     );
 }
 
-function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
+function PartnerStatusBanner({
+    status,
+    canApplyForPartner,
+}: {
+    status: PartnerStatus | null;
+    canApplyForPartner: boolean;
+}) {
     const router = useRouter();
     const { t } = useTranslation("common");
 
@@ -565,7 +571,7 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
                 <div className={styles.partnerBannerDesc}>{config.desc}</div>
             </div>
 
-            {config.buttonLabel && config.onClick && (
+            {canApplyForPartner && config.buttonLabel && config.onClick && (
                 <button
                     className={styles.partnerBannerBtn}
                     style={{ background: config.isRejected ? "var(--korean-red)" : "var(--secondary)" }}
@@ -589,8 +595,8 @@ function MyPageContent() {
     const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined);
     const [authReady, setAuthReady] = useState(false);
     const [accessToken, setAccessToken] = useState("");
-
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [permissionsResolved, setPermissionsResolved] = useState(false);
+    const [profileRole, setProfileRole] = useState<string | null>(null);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
 
     const fallbackUserName = hasHydrated
@@ -634,25 +640,18 @@ function MyPageContent() {
 
             setAccessToken(session?.access_token ?? "");
             setAuthReady(true);
+            setPermissionsResolved(false);
+            setProfileRole(null);
+            setPartnerStatus(null);
 
             if (!user) {
-                // [Mock Mode for Development]
-                // 로컬 개발 환경에서 로그인 없이 화면을 볼 수 있도록 더미 데이터를 설정합니다.
-                if (process.env.NODE_ENV === "development") {
-                    setUserName("게스트 (테스트)");
-                    setProfileSubtitle("guest@localhost");
-                    setIsAdmin(true);
-                    setPartnerStatus("approved");
-                    return;
-                }
-
                 router.push("/auth/login?redirect=/my");
                 return;
             }
 
             const { data: profileData } = await supabase
                 .from("profiles")
-                .select("email, nickname, role, created_at, avatar_url")
+                .select("display_name, role, created_at, avatar_url")
                 .eq("id", user.id)
                 .maybeSingle();
 
@@ -661,12 +660,10 @@ function MyPageContent() {
             }
 
             const nextProfile = (profileData as DashboardProfileRecord | null) ?? null;
-            if (nextProfile?.avatar_url) {
-                setAvatarUrl(nextProfile.avatar_url);
-            }
+            setAvatarUrl(nextProfile?.avatar_url ?? undefined);
             const email = pickString(user.email);
             const displayName = pickString(
-                nextProfile?.nickname,
+                nextProfile?.display_name,
                 user.user_metadata?.full_name,
                 user.user_metadata?.name,
                 email ? email.split("@")[0] : "",
@@ -674,24 +671,40 @@ function MyPageContent() {
             );
             setUserName(displayName);
             setProfileSubtitle(email || fallbackSubtitle);
-            setIsAdmin(nextProfile?.role === "admin" || nextProfile?.role === "super_admin");
+            setProfileRole(nextProfile?.role ?? null);
 
             if (!email) {
                 setPartnerStatus("none");
+                setPermissionsResolved(true);
                 return;
             }
 
-            const { data: partner } = await supabase
-                .from("partners")
-                .select("status")
-                .eq("email", email)
-                .maybeSingle();
+            let nextPartnerStatus: PartnerStatus = "none";
+
+            if (session?.access_token) {
+                try {
+                    const response = await fetch("/api/my/partner-status", {
+                        headers: {
+                            Authorization: `Bearer ${session.access_token}`,
+                        },
+                        cache: "no-store",
+                    });
+                    const body = (await response.json()) as PartnerStatusRouteResponse;
+
+                    if (response.ok && body.ok && body.partnerStatus) {
+                        nextPartnerStatus = body.partnerStatus;
+                    }
+                } catch {
+                    nextPartnerStatus = "none";
+                }
+            }
 
             if (!isMounted) {
                 return;
             }
 
-            setPartnerStatus((partner?.status as PartnerStatus) || "none");
+            setPartnerStatus(nextPartnerStatus);
+            setPermissionsResolved(true);
         };
 
         void loadDashboardUser();
@@ -702,6 +715,11 @@ function MyPageContent() {
     }, [t, router]);
 
     const communityAuthorName = cachedUserName || userName;
+    const capabilities = getMyPageCapabilities({
+        permissionsResolved,
+        profileRole,
+        partnerStatus,
+    });
 
 
 
@@ -733,10 +751,15 @@ function MyPageContent() {
             </section>
 
             {/* Standard Partner Banner */}
-            <PartnerStatusBanner status={partnerStatus} />
+            {capabilities.showPartnerBanner && (
+                <PartnerStatusBanner
+                    status={partnerStatus}
+                    canApplyForPartner={capabilities.canApplyForPartner}
+                />
+            )}
 
             {/* Admin Section with Shell consistency */}
-            {(isAdmin || process.env.NODE_ENV === "development") && (
+            {capabilities.canViewAdminConsole && (
                 <section className={styles.section} style={{ marginBottom: 0, paddingBottom: 100 }}>
                     <div className={styles.sectionHeader} style={{ justifyContent: 'flex-start', gap: 8 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
