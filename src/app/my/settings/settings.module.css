@@ -394,6 +394,26 @@
     gap: 8px;
 }
 
+.phoneEditorGrid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: minmax(168px, 200px) minmax(0, 1fr);
+    gap: 8px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.inputLabel {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gray-500);
+}
+
 .inlineInput {
     flex: 1;
     min-width: 0;
@@ -407,6 +427,22 @@
 
 .inlineInput::placeholder {
     color: var(--gray-400);
+}
+
+.inlineSelect {
+    width: 100%;
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 0.84rem;
+    color: var(--foreground);
+    background: #fff;
+}
+
+.inlineEditorActions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .inlineEditorMessage {
@@ -454,6 +490,10 @@
     .noticeCard,
     .itemTop {
         flex-direction: column;
+    }
+
+    .phoneEditorGrid {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .noticeCard {
