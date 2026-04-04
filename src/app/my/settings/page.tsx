@@ -5,7 +5,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
-import { normalizeInternationalPhoneInput } from "@/lib/settings/contact";
+import {
+    getPhoneCountryById,
+    getPhoneCountryOptions,
+    normalizePhoneNationalNumberInput,
+    normalizeStructuredPhoneInput,
+    parseStructuredPhoneInput,
+} from "@/lib/settings/contact";
 import styles from "./settings.module.css";
 
 type PartnerStatus = "none" | "pending" | "approved" | "rejected";
@@ -81,7 +87,6 @@ type SaveStatus = "idle" | "saving" | "success" | "error";
 
 interface ContactDraftState {
     sns: string;
-    phone: string;
 }
 
 interface ContactSaveState {
@@ -130,6 +135,11 @@ interface HeroBookingStats {
     badge: string;
 }
 
+interface PhoneDraftState {
+    countryId: string;
+    nationalNumber: string;
+}
+
 function titleCase(value: string): string {
     return value
         .split(/[_-\s]+/)
@@ -176,6 +186,25 @@ function extractSnsId(user: {
 function getAvatarPublicUrl(path: string): string {
     const { data } = supabase.storage.from("avatars").getPublicUrl(path);
     return data.publicUrl;
+}
+
+function getProfileAvatarUrl(profile: ProfileRecord | null): string {
+    if (!profile) {
+        return "";
+    }
+
+    return pickString(
+        profile.avatar_url,
+        profile.avatar_path ? getAvatarPublicUrl(profile.avatar_path) : ""
+    );
+}
+
+function getProfileAvatarPresence(profile: ProfileRecord | null): string {
+    if (!profile) {
+        return "";
+    }
+
+    return pickString(profile.avatar_path, profile.avatar_url);
 }
 
 function isReviewCommunityPost(post: HeroCommunityPostRecord): boolean {
@@ -407,7 +436,8 @@ const EMPTY_PARTNER: PartnerRecord = {
 export default function MySettingsPage() {
     const router = useRouter();
     const { t } = useTranslation("common");
-    const internationalPhoneExample = "+82 10 1234 5678";
+    const internationalPhoneExample = "01012345678";
+    const phoneCountryOptions = getPhoneCountryOptions();
     const phonePlaceholder = t("my_page.settings.account.phone.placeholder", {
         defaultValue: `예: ${internationalPhoneExample}`,
     });
@@ -420,6 +450,13 @@ export default function MySettingsPage() {
     const phoneValidationMessage = t("my_page.settings.account.phone.helper_invalid", {
         defaultValue: `국가번호를 포함한 국제형으로 입력해 주세요. 예: ${internationalPhoneExample}`,
     });
+
+    const structuredPhoneEmptyHelper =
+        phoneEmptyHelper || "국가번호를 고른 뒤 전화번호를 입력하면 국제 형식(E.164)으로 저장돼요.";
+    const structuredPhoneSavedHelper =
+        phoneSavedHelper || "현재 저장된 번호는 국제 형식(E.164)으로 유지되고 있어요.";
+    const structuredPhoneValidationMessage =
+        phoneValidationMessage || "국가번호를 선택하고 전화번호를 숫자로 입력해 주세요.";
 
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<TabId>("personal");
@@ -448,8 +485,8 @@ export default function MySettingsPage() {
     const [bookingStats, setBookingStats] = useState<HeroBookingStats>(EMPTY_BOOKING_STATS);
     const [contactDrafts, setContactDrafts] = useState<ContactDraftState>({
         sns: "",
-        phone: "",
     });
+    const [phoneDraft, setPhoneDraft] = useState<PhoneDraftState>(() => parseStructuredPhoneInput(""));
     const [contactSaveState, setContactSaveState] = useState<ContactSaveState>({
         sns: "idle",
         phone: "idle",
@@ -502,8 +539,8 @@ export default function MySettingsPage() {
                     });
                     setContactDrafts({
                         sns: "",
-                        phone: "",
                     });
+                    setPhoneDraft(parseStructuredPhoneInput(""));
                     setContactSaveState({
                         sns: "idle",
                         phone: "idle",
@@ -604,13 +641,13 @@ export default function MySettingsPage() {
 
                 setProfile(nextProfile);
                 setViewerId(user.id);
-                setAvatarPath(nextProfile?.avatar_url ?? "");
-                setAvatarUrl(nextProfile?.avatar_url ?? "");
+                setAvatarPath(getProfileAvatarPresence(nextProfile));
+                setAvatarUrl(getProfileAvatarUrl(nextProfile));
                 setAccount(nextAccount);
                 setContactDrafts({
                     sns: nextAccount.snsId,
-                    phone: nextAccount.phone,
                 });
+                setPhoneDraft(parseStructuredPhoneInput(nextAccount.phone));
                 setContactSaveState({
                     sns: "idle",
                     phone: "idle",
@@ -661,13 +698,15 @@ export default function MySettingsPage() {
     const pageTitle = account.displayName || "내 설정";
     const heroSummaryText = `게시글 ${communityStats.postCount} · 후기 ${communityStats.reviewCount} · 예약 ${bookingStats.totalCount}`;
 
-    const validatePhoneInput = (value: string) => {
-        if (!value.trim()) {
+    const selectedPhoneCountry = getPhoneCountryById(phoneDraft.countryId);
+
+    const validatePhoneInput = (draft: PhoneDraftState) => {
+        if (!draft.nationalNumber.trim()) {
             return "";
         }
 
-        if (!normalizeInternationalPhoneInput(value)) {
-            return phoneValidationMessage;
+        if (!normalizeStructuredPhoneInput(draft.countryId, draft.nationalNumber)) {
+            return structuredPhoneValidationMessage;
         }
 
         return "";
@@ -691,19 +730,36 @@ export default function MySettingsPage() {
         return "저장하지 못했어요.";
     };
 
-    const handleContactDraftChange = (field: ContactField, value: string) => {
-        setContactDrafts((current) => ({
-            ...current,
-            [field]: value,
-        }));
+    const handleSnsDraftChange = (value: string) => {
+        setContactDrafts({
+            sns: value,
+        });
         setContactSaveState((current) => ({
             ...current,
-            [field]: "idle",
+            sns: "idle",
         }));
         setContactMessages((current) => ({
             ...current,
-            [field]: "",
+            sns: "",
         }));
+    };
+
+    const handlePhoneDraftChange = (nextDraft: PhoneDraftState) => {
+        setPhoneDraft(nextDraft);
+        setContactSaveState((current) => ({
+            ...current,
+            phone: "idle",
+        }));
+        setContactMessages((current) => ({
+            ...current,
+            phone: "",
+        }));
+    };
+
+    const handleContactDraftChange = (field: ContactField, value: string) => {
+        if (field === "sns") {
+            handleSnsDraftChange(value);
+        }
     };
 
     const handleContactSave = async (field: ContactField) => {
@@ -711,7 +767,11 @@ export default function MySettingsPage() {
             return;
         }
 
-        const phoneError = validatePhoneInput(contactDrafts.phone);
+        const normalizedPhoneDraft = normalizeStructuredPhoneInput(
+            phoneDraft.countryId,
+            phoneDraft.nationalNumber
+        );
+        const phoneError = validatePhoneInput(phoneDraft);
 
         if (field === "phone" && phoneError) {
             setContactSaveState((current) => ({
@@ -751,7 +811,7 @@ export default function MySettingsPage() {
                 },
                 body: JSON.stringify({
                     field,
-                    value: field === "sns" ? contactDrafts.sns : contactDrafts.phone,
+                    value: field === "sns" ? contactDrafts.sns : normalizedPhoneDraft ?? "",
                 }),
             });
 
@@ -773,8 +833,8 @@ export default function MySettingsPage() {
             }));
             setContactDrafts({
                 sns: savedSns,
-                phone: savedPhone,
             });
+            setPhoneDraft(parseStructuredPhoneInput(savedPhone));
             setContactSaveState((current) => ({
                 ...current,
                 [field]: "success",
@@ -786,10 +846,13 @@ export default function MySettingsPage() {
         } catch (error) {
             console.error("[settings-contact] save_failed", error);
             const errorCode = error instanceof Error ? error.message : undefined;
-            setContactDrafts((current) => ({
-                ...current,
-                ...(field === "sns" ? { sns: account.snsId } : { phone: account.phone }),
-            }));
+            if (field === "sns") {
+                setContactDrafts({
+                    sns: account.snsId,
+                });
+            } else {
+                setPhoneDraft(parseStructuredPhoneInput(account.phone));
+            }
             setContactSaveState((current) => ({
                 ...current,
                 [field]: "error",
@@ -826,25 +889,27 @@ export default function MySettingsPage() {
                 throw uploadError;
             }
 
-            const { error: profileError } = await supabase
+            const publicUrl = getAvatarPublicUrl(filePath);
+            const { data: updatedProfile, error: profileError } = await supabase
                 .from("profiles")
-                .update({ avatar_path: filePath })
-                .eq("id", viewerId);
+                .update({ avatar_url: publicUrl })
+                .eq("id", viewerId)
+                .select("*")
+                .maybeSingle();
 
             if (profileError) {
                 throw profileError;
             }
 
-            setAvatarPath(filePath);
-            setAvatarUrl(getAvatarPublicUrl(filePath));
-            setProfile((current) =>
-                current
-                    ? {
-                          ...current,
-                          avatar_path: filePath,
-                      }
-                    : current
-            );
+            const nextProfile = (updatedProfile as ProfileRecord | null) ?? null;
+
+            if (!nextProfile) {
+                throw new Error("profile_not_found");
+            }
+
+            setProfile(nextProfile);
+            setAvatarPath(pickString(getProfileAvatarPresence(nextProfile), filePath, publicUrl));
+            setAvatarUrl(pickString(getProfileAvatarUrl(nextProfile), publicUrl));
         } catch (error) {
             console.error("[settings-avatar] upload_failed", error);
             setAvatarError("이미지를 바꾸지 못했어요.");
@@ -1097,17 +1162,122 @@ export default function MySettingsPage() {
 
     const renderEditableContactCard = (row: SettingsRow) => {
         const field = row.id as ContactField;
-        const draftValue = contactDrafts[field];
-        const saveState = contactSaveState[field];
-        const savedValue = field === "sns" ? account.snsId : account.phone;
-        const validationMessage = field === "phone" ? validatePhoneInput(draftValue) : "";
+
+        if (field === "phone") {
+            const saveState = contactSaveState.phone;
+            const isSaving = saveState === "saving";
+            const savedPhoneDraft = parseStructuredPhoneInput(account.phone);
+            const normalizedPhoneDraft =
+                normalizeStructuredPhoneInput(phoneDraft.countryId, phoneDraft.nationalNumber) ?? "";
+            const validationMessage = validatePhoneInput(phoneDraft);
+            const previewMessage =
+                normalizedPhoneDraft && normalizedPhoneDraft !== account.phone
+                    ? `저장 시 ${normalizedPhoneDraft} 형태로 저장돼요.`
+                    : "";
+            const helperMessage =
+                saveState === "error"
+                    ? contactMessages.phone ||
+                      validationMessage ||
+                      previewMessage ||
+                      (account.phone ? structuredPhoneSavedHelper : structuredPhoneEmptyHelper)
+                    : saveState === "success"
+                      ? contactMessages.phone
+                      : validationMessage ||
+                        previewMessage ||
+                        (account.phone ? structuredPhoneSavedHelper : structuredPhoneEmptyHelper);
+            const isDirty = account.phone
+                ? phoneDraft.countryId !== savedPhoneDraft.countryId ||
+                  phoneDraft.nationalNumber !== savedPhoneDraft.nationalNumber
+                : phoneDraft.nationalNumber !== "";
+            const canSave = account.isLoggedIn && isDirty && !isSaving && !validationMessage;
+
+            return (
+                <article key={row.id} className={styles.itemCard}>
+                    <div className={styles.itemTop}>
+                        <div className={styles.itemText}>
+                            <h3 className={styles.itemTitle}>{row.title}</h3>
+                            <p className={styles.itemValue}>{account.phone || "입력 안 됨"}</p>
+                        </div>
+                        <span className={`${styles.badge} ${styles[`${row.tone}Badge`]}`}>
+                            {row.badge}
+                        </span>
+                    </div>
+                    <div className={styles.phoneEditorGrid}>
+                        <label className={styles.inputGroup}>
+                            <span className={styles.inputLabel}>국가번호</span>
+                            <select
+                                value={phoneDraft.countryId}
+                                onChange={(event) =>
+                                    handlePhoneDraftChange({
+                                        ...phoneDraft,
+                                        countryId: event.target.value,
+                                    })
+                                }
+                                className={styles.inlineSelect}
+                                disabled={!account.isLoggedIn || isSaving}
+                            >
+                                {phoneCountryOptions.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                        <label className={styles.inputGroup}>
+                            <span className={styles.inputLabel}>전화번호</span>
+                            <input
+                                type="tel"
+                                inputMode="numeric"
+                                value={phoneDraft.nationalNumber}
+                                onChange={(event) =>
+                                    handlePhoneDraftChange({
+                                        ...phoneDraft,
+                                        nationalNumber: normalizePhoneNationalNumberInput(
+                                            event.target.value
+                                        ),
+                                    })
+                                }
+                                placeholder={selectedPhoneCountry.exampleNationalNumber}
+                                className={styles.inlineInput}
+                                disabled={!account.isLoggedIn || isSaving}
+                            />
+                        </label>
+                    </div>
+                    <div className={styles.inlineEditorActions}>
+                        <button
+                            type="button"
+                            className={styles.secondaryButton}
+                            onClick={() => void handleContactSave(field)}
+                            disabled={!canSave}
+                        >
+                            {isSaving ? "저장 중..." : "저장"}
+                        </button>
+                    </div>
+                    <p
+                        className={`${styles.inlineEditorMessage} ${
+                            saveState === "error" || validationMessage
+                                ? styles.inlineEditorError
+                                : saveState === "success"
+                                  ? styles.inlineEditorSuccess
+                                  : ""
+                        }`}
+                    >
+                        {helperMessage}
+                    </p>
+                </article>
+            );
+        }
+
+        const draftValue = contactDrafts.sns;
+        const saveState = contactSaveState.sns;
+        const savedValue = account.snsId;
+        const validationMessage = "";
         const helperMessage =
             saveState === "error"
-                ? contactMessages[field] || validationMessage || row.helper
+                ? contactMessages.sns || row.helper
                 : saveState === "success"
-                  ? contactMessages[field]
-                  : validationMessage ||
-                    (field === "phone" ? (savedValue ? phoneSavedHelper : phoneEmptyHelper) : row.helper);
+                  ? contactMessages.sns
+                  : row.helper;
         const isDirty = draftValue !== savedValue;
         const isSaving = saveState === "saving";
         const canSave =

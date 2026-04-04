@@ -18,17 +18,31 @@ export default function LoginPage() {
     const handleGoogleLogin = async () => {
         setGoogleLoading(true);
         setError(null);
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo: `${window.location.origin}/auth/callback`,
-            },
-        });
-        if (error) {
-            setError(error.message);
+
+        try {
+            const redirectTo = new URL("/auth/callback", window.location.origin).toString();
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: {
+                    redirectTo,
+                    skipBrowserRedirect: true,
+                },
+            });
+
+            if (error) {
+                throw error;
+            }
+
+            if (!data?.url) {
+                throw new Error("Google login could not start. Please try again.");
+            }
+
+            window.location.assign(data.url);
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Google login could not start. Please try again.");
+        } finally {
             setGoogleLoading(false);
         }
-        // 성공 시 Google 페이지로 리다이렉트됨
     };
 
     // --- Email Magic Link ---
