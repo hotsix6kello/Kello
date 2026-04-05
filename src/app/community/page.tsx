@@ -37,7 +37,7 @@ type CommunityTag = 'solo_friendly' | 'friends_friendly' | 'photo_spot' | 'waiti
 type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
 type CommunitySubFilter = 'all' | 'saved' | 'reacted' | 'mine' | 'recruiting' | 'active_reactions' | 'open_meetup' | 'weekend' | 'fresh';
 
-const CATEGORY_OPTIONS: CommunityCategory[] = ['meetup_recruitment', 'beauty_review', 'food_review', 'travel_review', 'meetup', 'help'];
+const CATEGORY_OPTIONS: CommunityCategory[] = ['meetup', 'beauty_review', 'food_review', 'travel_review', 'help'];
 const SUB_FILTER_OPTIONS: CommunitySubFilter[] = ['all', 'saved', 'reacted', 'mine', 'recruiting', 'active_reactions', 'open_meetup', 'weekend', 'fresh'];
 const TAG_OPTIONS: CommunityTag[] = ['solo_friendly', 'friends_friendly', 'photo_spot', 'waiting', 'foreigner_friendly'];
 const COMMUNITY_IMAGE_META_KEY = 'IMAGE';
@@ -248,7 +248,6 @@ export default function CommunityPage() {
     const router = useRouter();
     const [filter, setFilter] = useState<string>('all');
     const [posts, setPosts] = useState<Post[]>(() => {
-        // CSR: Use cached posts to render immediately
         if (typeof window !== 'undefined') {
             try { return JSON.parse(localStorage.getItem('kello_community_posts') || '[]'); } catch { return []; }
         }
@@ -258,14 +257,12 @@ export default function CommunityPage() {
 
     useEffect(() => {
         setMounted(true);
-
         const handlePostUpdate = (e: Event) => {
             const detail = (e as CustomEvent).detail;
             if (detail && typeof detail.id === 'number' && typeof detail.comments === 'number') {
                 setPosts(prev => prev.map(p => p.id === detail.id ? { ...p, comments: detail.comments } : p));
             }
         };
-
         window.addEventListener('community_post_updated', handlePostUpdate);
         return () => window.removeEventListener('community_post_updated', handlePostUpdate);
     }, []);
@@ -288,8 +285,6 @@ export default function CommunityPage() {
     const [isOpenForMeetup, setIsOpenForMeetup] = useState(false);
     const [newImages, setNewImages] = useState<CommunityImageDraft[]>([]);
     const [isPreparingImage, setIsPreparingImage] = useState(false);
-
-    // Step 17: Activity Tracking States
     const [savedIds, setSavedIds] = useState<number[]>([]);
     const [reactedIds, setReactedIds] = useState<number[]>([]);
 
@@ -298,34 +293,42 @@ export default function CommunityPage() {
     const communitySubFilters = SUB_FILTER_OPTIONS.map((id) => ({ id, label: getSubFilterLabel(t, id) }));
     const getCategoryText = (category: CommunityCategory | '') => 
         category ? getCategoryLabel(t, category) : t('community_page.form.select_category');
-    const getStatusText = (status: string) => getStatusLabel(t, status);
-
-    const getHint = () => newType ? t(`community_page.form.category_hints.${newType}`) : '';
 
     const getNavSummary = () => {
-        const currentTab = filter === 'all'
-            ? t('community_page.categories.all')
-            : getCategoryText(filter as CommunityCategory);
+        const currentTab = filter === 'all' ? t('community_page.categories.all') : getCategoryText(filter as CommunityCategory);
         const currentSub = communitySubFilters.find((sub) => sub.id === subFilter)?.label || '';
-        
         if (subFilter === 'all') return t('community_page.nav_summary.all', { tab: currentTab });
-        if (subFilter === 'active_reactions') return t('community_page.nav_summary.active_reactions', { tab: currentTab });
-        if (subFilter === 'open_meetup') return t('community_page.nav_summary.open_meetup', { tab: currentTab });
-        if (subFilter === 'weekend') return t('community_page.nav_summary.weekend', { tab: currentTab });
         return t('community_page.nav_summary.default', { sub: currentSub, tab: currentTab });
     };
 
-    // For simplicity, we can default these or let the user choose. We'll set a default Seoul coordinate if a place name is given.
     const [placeLat, setPlaceLat] = useState<number | null>(null);
     const [placeLng, setPlaceLng] = useState<number | null>(null);
-
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
-
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
     const imageInputRef = useRef<HTMLInputElement | null>(null);
+    const tabsRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
-    // Step 15: Onboarding States (Removed)
+    const handleMouseDown = (e: React.MouseEvent) => {
+        if (!tabsRef.current) return;
+        setIsDragging(true);
+        setStartX(e.pageX - tabsRef.current.offsetLeft);
+        setScrollLeft(tabsRef.current.scrollLeft);
+    };
+
+    const handleMouseLeave = () => setIsDragging(false);
+    const handleMouseUp = () => setIsDragging(false);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging || !tabsRef.current) return;
+        e.preventDefault();
+        const x = e.pageX - tabsRef.current.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed
+        tabsRef.current.scrollLeft = scrollLeft - walk;
+    };
 
     const searchParams = useSearchParams();
     useEffect(() => {
@@ -333,32 +336,6 @@ export default function CommunityPage() {
         if (initialSearch) setSearchQuery(initialSearch);
     }, [searchParams]);
 
-    // Step 16: Quality Signals Helper
-    const getQualitySignals = (post: Post) => {
-        const signals: { id: string; label: string; type: string }[] = [];
-        const isReview = post.type === 'review';
-        const cleanDescText = post.desc.replace(/\[.*?\]/g, '').trim();
-        const hasPoint = post.desc.includes('[POINT:');
-        const hasTags = post.desc.includes('[TAGS:');
-        const hasResult = post.desc.includes('[RESULT:') || post.desc.includes('[TIPS:');
-        const commentsCount = post.comments || 0;
-
-        if (isReview && cleanDescText.length > 80 && hasPoint && hasTags) {
-            signals.push({ id: 'organized', label: t('community_page.quality_signals.organized'), type: 'well_organized' });
-        }
-        if (commentsCount >= 5) {
-            signals.push({ id: 'active', label: t('community_page.quality_signals.active'), type: 'active' });
-        }
-        if (hasResult) {
-            signals.push({ id: 'asset', label: t('community_page.quality_signals.asset'), type: 'asset' });
-        }
-        if (post.desc.includes('[MEETUP_OPEN:true]') && commentsCount >= 3) {
-            signals.push({ id: 'mate', label: t('community_page.quality_signals.mate'), type: 'mate' });
-        }
-        return signals;
-    };
-
-    // Step 22: Feedback & Toast
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
     const showToast = (message: string, type: 'success' | 'info' = 'success') => {
         setToast({ message, type });
@@ -381,400 +358,126 @@ export default function CommunityPage() {
     };
 
     const fetchPosts = useCallback(async () => {
-        // Only show explicit loading if we have NO posts yet
         if (posts.length === 0) setLoading(true);
         setFeedError(null);
-
         try {
             const { data, error } = await supabase
                 .from('community_posts')
                 .select('*')
                 .order('created_at', { ascending: false });
 
-                        if (Array.isArray(data)) {
-                // Rely on the denormalized comments column, which is kept in sync by a DB trigger
+            if (Array.isArray(data)) {
                 setPosts(data as Post[]);
-                
-                // Cache for fast init and cross-page sync
                 localStorage.setItem('kello_community_posts', JSON.stringify(data));
                 return;
             }
-
             const meaningfulError = getMeaningfulFetchError(error);
             const errorLogMessage = formatMeaningfulFetchError(meaningfulError);
-
-            if (errorLogMessage) {
-                console.warn('Community posts fetch issue:', errorLogMessage);
-                setFeedError(communityFetchErrorMessage);
-                setPosts((prevPosts) => (prevPosts.length > 0 ? prevPosts : []));
-                return;
-            }
-
-            setPosts([]);
+            if (errorLogMessage) setFeedError(communityFetchErrorMessage);
         } catch (error) {
-            const meaningfulError = getMeaningfulFetchError(error);
-            const errorLogMessage = formatMeaningfulFetchError(meaningfulError);
-
-            if (errorLogMessage) {
-                console.warn('Community posts fetch issue:', errorLogMessage);
-                setFeedError(communityFetchErrorMessage);
-                setPosts((prevPosts) => (prevPosts.length > 0 ? prevPosts : []));
-            } else {
-                setPosts([]);
-            }
+            setFeedError(communityFetchErrorMessage);
         } finally {
             setLoading(false);
         }
     }, [communityFetchErrorMessage, posts.length]);
 
     useEffect(() => {
-
         try {
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const parsed = JSON.parse(storedUser);
                 if (parsed.name) setLoggedInUserName(parsed.name);
             }
-        } catch {
-            // ignore
-        }
-        
+        } catch {}
         const saved = JSON.parse(localStorage.getItem('kello_saved_posts') || '[]');
         const reacted = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
         setSavedIds(saved);
         setReactedIds(reacted);
-
         fetchPosts();
     }, [fetchPosts]);
 
-
-
     const resetDraftForm = (category: CommunityCategory | '' = '') => {
-        setEditingPostId(null);
-        setNewType(category);
-        setNewTitle('');
-        setNewDesc('');
-        setStartTime('');
-        setEndTime('');
-        setPlaceName('');
-        setNewRegion('');
-        setNewPoint('');
-        setNewTags([]);
-        setIsOpenForMeetup(false);
-        setPlaceLat(null);
-        setPlaceLng(null);
-        setNewImages([]);
-        if (imageInputRef.current) {
-            imageInputRef.current.value = '';
-        }
+        setEditingPostId(null); setNewType(category); setNewTitle(''); setNewDesc('');
+        setStartTime(''); setEndTime(''); setPlaceName(''); setNewRegion('');
+        setNewPoint(''); setNewTags([]); setIsOpenForMeetup(false); setPlaceLat(null);
+        setPlaceLng(null); setNewImages([]); if (imageInputRef.current) imageInputRef.current.value = '';
     };
 
     const openComposer = (category: CommunityCategory | '' = '') => {
-        resetDraftForm(category);
-        setIsWriting(true);
+        resetDraftForm(category); setIsWriting(true);
     };
 
     const handleImageSelect = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(event.target.files ?? []);
         if (files.length === 0) return;
-
-        const validFiles = files.filter((file) => file.type.startsWith('image/'));
-        if (validFiles.length !== files.length) {
-            alert(t('community_page.form.image.file_only_alert'));
-        }
-
         const availableSlots = COMMUNITY_IMAGE_LIMIT - newImages.length;
-        if (availableSlots <= 0) {
-            alert(t('community_page.form.image.limit_alert', { count: COMMUNITY_IMAGE_LIMIT }));
-            event.target.value = '';
-            return;
-        }
-
-        const selectedFiles = validFiles.slice(0, availableSlots);
-        if (selectedFiles.length < validFiles.length) {
-            alert(t('community_page.form.image.limit_alert', { count: COMMUNITY_IMAGE_LIMIT }));
-        }
-
-        if (selectedFiles.length === 0) {
-            event.target.value = '';
-            return;
-        }
-
+        if (availableSlots <= 0) return;
         setIsPreparingImage(true);
-
         try {
             const preparedImages = await Promise.all(
-                selectedFiles.map(async (file, index) => ({
-                    id: `${Date.now()}-${index}-${Math.random().toString(36).slice(2, 8)}`,
+                files.slice(0, availableSlots).map(async (file, index) => ({
+                    id: `${Date.now()}-${index}`,
                     dataUrl: await prepareCommunityImage(file),
                     name: file.name
                 }))
             );
-            setNewImages((prevImages) => [...prevImages, ...preparedImages].slice(0, COMMUNITY_IMAGE_LIMIT));
-        } catch {
-            alert(t('community_page.form.image.load_failed_alert'));
-        } finally {
-            setIsPreparingImage(false);
-            event.target.value = '';
-        }
+            setNewImages(prev => [...prev, ...preparedImages]);
+        } catch (err) { alert('Image load failed'); } finally { setIsPreparingImage(false); event.target.value = ''; }
     };
 
-    const handleRemoveImage = (imageId: string) => {
-        setNewImages((prevImages) => prevImages.filter((image) => image.id !== imageId));
-    };
-
-    // Comment logic moved to detail page
-
-    const handleDeletePost = async (id: number) => {
-        if (confirm(t('community_page.actions.delete_confirm'))) {
-            await supabase.from('community_posts').delete().eq('id', id);
-            fetchPosts();
-            showToast(t('community_page.toasts.deleted'));
-        }
-    };
+    const handleRemoveImage = (imageId: string) => setNewImages(prev => prev.filter(img => img.id !== imageId));
 
     const handleSubmit = async () => {
         if (!newType || !newTitle.trim() || !newDesc.trim()) return;
         setIsSubmitting(true);
         try {
             const { data: { user } } = await supabase.auth.getUser();
-            if (!user) {
-                alert(t('community_page.errors.login_required', '로그인이 필요한 서비스입니다.'));
-                setIsSubmitting(false);
-                return;
-            }
+            if (!user) throw new Error('Login required');
 
-            // 이미지들을 Storage에 업로드하고 URL 리스트 획득
-            const uploadedImageUrls = await Promise.all(
-                newImages.map(async (img) => {
-                    // 이미 URL인 경우(수정 시) 그대로 유지
-                    if (img.dataUrl.startsWith('http')) return img.dataUrl;
-                    
-                    // Base64 Data URL을 Blob으로 변환
-                    const res = await fetch(img.dataUrl);
-                    if (!res.ok) {
-                        const errBody = await res.text().catch(() => '');
-                        throw new Error(`이미지 로드 실패 (HTTP ${res.status} ${res.statusText}): ${errBody}`.trim());
-                    }
-                    const blob = await res.blob();
-                    
-                    const fileExt = img.name.split('.').pop() || 'jpg';
-                    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${fileExt}`;
-                    const filePath = `${user.id}/${fileName}`;
+            const uploadedUrls = await Promise.all(newImages.map(async (img) => {
+                if (img.dataUrl.startsWith('http')) return img.dataUrl;
+                const res = await fetch(img.dataUrl); const blob = await res.blob();
+                const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+                const filePath = `${user.id}/${fileName}`;
+                const { error: uploadError } = await supabase.storage.from('community').upload(filePath, blob);
+                if (uploadError) throw uploadError;
+                const { data } = supabase.storage.from('community').getPublicUrl(filePath);
+                return data.publicUrl;
+            }));
 
-                    const { error: uploadError } = await supabase.storage
-                        .from('community')
-                        .upload(filePath, blob);
-
-                    if (uploadError) throw new Error(uploadError.message || JSON.stringify(uploadError));
-
-                    const { data } = supabase.storage.from('community').getPublicUrl(filePath);
-                    return data.publicUrl;
-                })
-            );
-
-            const databaseType = getDatabaseTypeForCategory(newType);
-            const imageMeta = uploadedImageUrls
-                .map((url) => `\n[${COMMUNITY_IMAGE_META_KEY}:${url}]`)
-                .join('');
-                
+            const imageMeta = uploadedUrls.map(url => `\n[${COMMUNITY_IMAGE_META_KEY}:${url}]`).join('');
             const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
 
-            const fakeUser = { author: loggedInUserName, flag: '🌍' };
-            const isMeetup = newType === 'meetup' || newType === 'meetup_recruitment';
+            const payload = {
+                author_user_id: user.id, author: loggedInUserName, flag: '🌍',
+                type: getDatabaseTypeForCategory(newType), title: newTitle, desc: composedDesc,
+                time: t('community_page.time.just_now'), comments: 0
+            };
 
-            if (editingPostId) {
-                const updatePayload: Record<string, unknown> = {
-                    type: databaseType,
-                    title: newTitle,
-                    desc: composedDesc,
-                };
+            const { error } = editingPostId 
+                ? await supabase.from('community_posts').update(payload).eq('id', editingPostId)
+                : await supabase.from('community_posts').insert([payload]);
 
-                // DB Migration is needed for these columns
-                if (isMeetup) {
-                    updatePayload.start_time = startTime || null;
-                    updatePayload.end_time = endTime || null;
-                    updatePayload.place_name = placeName || null;
-                    updatePayload.place_lat = placeName ? (placeLat || 37.5665) : null;
-                    updatePayload.place_lng = placeName ? (placeLng || 126.9780) : null;
-                }
-
-                const { error } = await supabase.from('community_posts').update(updatePayload).eq('id', editingPostId);
-
-                if (error) throw new Error(error.message || JSON.stringify(error));
-                
-                setIsWriting(false);
-                resetDraftForm();
-                fetchPosts();
-                showToast(t('community_page.toasts.updated'));
-            } else {
-                const insertPayload: Record<string, unknown> = {
-                    author_user_id: user.id,
-                    author: fakeUser.author,
-                    flag: fakeUser.flag,
-                    type: databaseType,
-                    title: newTitle,
-                    desc: composedDesc,
-                    time: t('community_page.time.just_now'),
-                    comments: 0,
-                };
-
-                // DB Migration is needed for these columns
-                if (isMeetup) {
-                    insertPayload.start_time = startTime || null;
-                    insertPayload.end_time = endTime || null;
-                    insertPayload.place_name = placeName || null;
-                    insertPayload.place_lat = placeName ? (placeLat || 37.5665) : null;
-                    insertPayload.place_lng = placeName ? (placeLng || 126.9780) : null;
-                }
-
-                const { error } = await supabase.from('community_posts').insert([insertPayload]);
-
-                if (error) throw new Error(error.message || JSON.stringify(error));
-                
-                setIsWriting(false);
-                resetDraftForm();
-                fetchPosts();
-                showToast(t('community_page.toasts.submitted'));
-            }
-        } catch (error: unknown) {
-            let normalizedError = '알 수 없는 오류';
-            
-            if (error instanceof Error) {
-                normalizedError = error.message;
-            } else if (error instanceof Response) {
-                normalizedError = `HTTP Error: ${error.status} ${error.statusText}`;
-            } else if (typeof error === 'object' && error !== null) {
-                const anyErr = error as Record<string, unknown>;
-                if (anyErr.message) {
-                    normalizedError = String(anyErr.message);
-                } else if (anyErr.error_description) {
-                    normalizedError = String(anyErr.error_description);
-                } else {
-                    try {
-                        const str = JSON.stringify(error);
-                        normalizedError = str === '{}' ? '원인을 알 수 없는 빈 객체({}) 발생' : str;
-                    } catch {
-                        normalizedError = String(error);
-                    }
-                }
-            } else {
-                normalizedError = String(error);
-            }
-
-            console.error('Submission failed:', normalizedError, error);
-            alert(t('community_page.errors.post_failed', { message: normalizedError }) || `제출 실패: ${normalizedError}`);
-        } finally {
-            setIsSubmitting(false);
-        }
+            if (error) throw error;
+            setIsWriting(false); resetDraftForm(); fetchPosts(); showToast(t('community_page.toasts.submitted'));
+        } catch (err) { alert(String(err)); } finally { setIsSubmitting(false); }
     };
 
-    const handleEditPost = (post: Post) => {
-        const category = getPostCategory(post);
-        const tags = getMetaValue(post.desc, 'TAGS')
-            .split(',')
-            .map((tag) => normalizeCommunityTag(tag))
-            .filter((tag): tag is CommunityTag => Boolean(tag));
+    const filteredPosts = posts.filter(p => {
+        const postCategory = getPostCategory(p);
+        const matchesTab = filter === 'all' || postCategory === filter;
+        const normalizedSearch = searchQuery.toLowerCase();
+        const matchesSearch = p.title.toLowerCase().includes(normalizedSearch) || p.desc.toLowerCase().includes(normalizedSearch);
+        if (!matchesSearch) return false;
+        if (subFilter === 'saved') return savedIds.includes(p.id);
+        if (subFilter === 'mine') return p.author === loggedInUserName;
+        return matchesTab;
+    });
 
-        setEditingPostId(post.id);
-        setNewType(category);
-        setNewTitle(post.title);
-        setNewDesc(stripCommunityMetadata(post.desc));
-        setStartTime(post.start_time || '');
-        setEndTime(post.end_time || '');
-        setPlaceName(post.place_name || '');
-        setNewRegion(getMetaValue(post.desc, 'REGION'));
-        setNewPoint(getMetaValue(post.desc, 'POINT'));
-        setNewTags(tags);
-        setIsOpenForMeetup(getMetaValue(post.desc, 'MEETUP_OPEN') === 'true');
-        setNewImages(
-            getMetaValues(post.desc, COMMUNITY_IMAGE_META_KEY).slice(0, COMMUNITY_IMAGE_LIMIT).map((dataUrl, index) => ({
-                id: `saved-${post.id}-${index}`,
-                dataUrl,
-                name: t('community_page.form.image.saved_name', { index: index + 1 })
-            }))
-        );
-        setPlaceLat(post.place_lat || null);
-        setPlaceLng(post.place_lng || null);
-        setIsWriting(true);
-    };
+    if (!mounted) return null;
 
-    const filteredPosts = posts
-        .filter(p => {
-            const postCategory = getPostCategory(p);
-            const matchesTab = filter === 'all' || postCategory === filter;
-            const normalizedSearchQuery = searchQuery.toLowerCase();
-            const matchesSearch = p.title.toLowerCase().includes(normalizedSearchQuery) ||
-                stripCommunityMetadata(p.desc).toLowerCase().includes(normalizedSearchQuery);
-            
-            if (!matchesSearch) return false;
-
-            // Step 17: Activity Filters - These ignore the 'Tab' filter for convenience
-            if (subFilter === 'saved') return savedIds.includes(p.id);
-            if (subFilter === 'reacted') return reactedIds.includes(p.id);
-            if (subFilter === 'mine') return p.author === loggedInUserName;
-
-            if (!matchesTab) return false;
-
-            // Sub Filters
-            if (subFilter === 'recruiting') return !p.desc.includes('[STATUS:CLOSED]');
-            if (subFilter === 'active_reactions') return p.comments >= 4;
-            if (subFilter === 'open_meetup') return p.desc.includes('[MEETUP_OPEN:true]');
-            if (subFilter === 'weekend') return p.desc.includes('주말');
-            if (subFilter === 'fresh') return p.comments >= 1 || p.desc.includes('[RESULT:') || p.desc.includes('[TIPS:');
-            
-            return true;
-        })
-        .sort((a, b) => {
-            if (subFilter === 'fresh') return b.comments - a.comments; // 가짜 신선도: 반응 많은 순
-            if (sortBy === 'reactions') return b.comments - a.comments;
-            if (sortBy === 'draft') {
-                const aDraft = a.comments >= 2 ? 1 : 0;
-                const bDraft = b.comments >= 2 ? 1 : 0;
-                return bDraft - aDraft || b.comments - a.comments;
-            }
-            // Default latest (created_at is implicitly sorted by fetch order, but we use ID for safety)
-            return b.id - a.id;
-        });
-
-    const hasSearchInput = searchQuery.trim().length > 0;
-    const hasNoPosts = posts.length === 0;
-    const showFeedErrorNotice = !loading && Boolean(feedError) && posts.length > 0;
-    const showFeedErrorState = !loading && Boolean(feedError) && posts.length === 0;
-    const showEmptyState = !loading && !showFeedErrorState && filteredPosts.length === 0;
-    const emptyStateTitle = showFeedErrorState
-        ? t('community_page.states.fetch_failed_title')
-        : hasNoPosts
-            ? t('community_page.states.empty_title')
-            : hasSearchInput || filter !== 'all' || subFilter !== 'all'
-            ? t('community_page.states.no_results_title')
-            : t('community_page.states.empty_title');
-    const emptyStateDesc = showFeedErrorState
-        ? feedError ?? communityFetchErrorMessage
-        : hasNoPosts
-            ? t('community_page.states.empty_desc')
-            : hasSearchInput || subFilter !== 'all'
-            ? t('community_page.states.no_results_desc')
-            : t('community_page.states.empty_desc');
-    const emptyStateTip = showFeedErrorState
-        ? t('community_page.states.fetch_failed_tip')
-        : t('community_page.states.empty_tip');
     const isBeautyDraft = newType === 'beauty_review';
-    const isFoodDraft = newType === 'food_review';
-    const isTravelDraft = newType === 'travel_review';
-    const formCategoryKey = isBeautyDraft
-        ? 'beauty_review'
-        : isFoodDraft
-            ? 'food_review'
-            : isTravelDraft
-                ? 'travel_review'
-                : newType === 'meetup'
-                    ? 'meetup'
-                    : newType === 'meetup_recruitment'
-                        ? 'meetup_recruitment'
-                        : newType === 'help'
-                            ? 'help'
-                            : 'beauty_review'; // Fallback for guides when none selected
+    const formCategoryKey = isBeautyDraft ? 'beauty_review' : (newType || 'help');
     const writeGuideTitle = t(`community_page.form.write_guide_title.${formCategoryKey}`);
     const writeGuideBody = t(`community_page.form.write_guide_body.${formCategoryKey}`);
     const titleFieldLabel = isBeautyDraft ? t('community_page.form.title_label.beauty_review') : t('community_page.form.title_label.default');
@@ -785,620 +488,268 @@ export default function CommunityPage() {
     const imageUploadGuide = t(`community_page.form.image.guides.${formCategoryKey}`);
     const isImageLimitReached = newImages.length >= COMMUNITY_IMAGE_LIMIT;
 
-    if (!mounted) return null;
-
     return (
         <div className={styles.container}>
-            {/* Step 22: Toast Notification */}
             {toast && (
                 <div className={`${styles.toast} ${styles['toast_' + toast.type]}`}>
                     {toast.message}
                 </div>
             )}
 
-            <header className={styles.header}>
-                <h1 className={styles.title}>{t('community_page.hero.title')}</h1>
-                <div className={styles.searchBar}>
-                    <span className={styles.searchIcon}>🔍</span>
-                    <input
-                        type="text"
-                        className={styles.searchInput}
-                        placeholder={t('community_page.hero.search_placeholder')}
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                </div>
-                <div className={styles.tabs}>
-                    <button className={`${styles.tab} ${filter === 'all' ? styles.activeTab : ''}`} onClick={() => { setFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200);}}>
-                        {t('community_page.categories.all')}
-                    </button>
-                    {communityCategories.map((category) => (
-                        <button
-                            key={category.id}
-                            className={`${styles.tab} ${filter === category.id ? styles.activeTab : ''}`}
-                            onClick={() => {
-                                setFilter(category.id);
-                                if (category.id === 'travel_review' || category.id === 'meetup' || category.id === 'help') {
-                                    setSubFilter('all');
-                                }
-                                setLoading(true);
-                                setTimeout(() => setLoading(false), 200);
-                            }}
+            <div className={styles.scrollableContent}>
+                <header className={styles.header}>
+                    <h1 className={styles.title}>{t('community_page.hero.title')}</h1>
+                    <div className={styles.searchBar}>
+                        <span className={styles.searchIcon}>🔍</span>
+                        <input 
+                            className={styles.searchInput} 
+                            placeholder={t('community_page.hero.search_placeholder')} 
+                            value={searchQuery} 
+                            onChange={e => setSearchQuery(e.target.value)} 
+                        />
+                    </div>
+                    <div 
+                        className={styles.tabs}
+                        ref={tabsRef}
+                        onMouseDown={handleMouseDown}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseUp={handleMouseUp}
+                        onMouseMove={handleMouseMove}
+                        style={{ cursor: isDragging ? 'grabbing' : 'pointer' }}
+                    >
+                        <button 
+                            className={`${styles.tab} ${filter === 'all' ? styles.activeTab : ''}`} 
+                            onClick={() => { setFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}
                         >
-                            {category.label}
+                            {t('community_page.categories.all')}
                         </button>
-                    ))}
-                </div>
-
-                {/* 보조 필터(subTabs) 영역 제거됨 */}
-            </header>
-
-            <div className={styles.feed}>
-
-                {/* 2. Quick Entry Cards - Compact Mode */}
-                <div className={styles.quickEntryGrid}>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('meetup_recruitment'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>👭</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.beauty_together.label')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('meetup_recruitment'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>⚡</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.flash_meetup.label')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('beauty_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>💄</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.beauty.label')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('food_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>🍽️</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.food.label')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('travel_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>📍</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.travel.label')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('meetup'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>🤝</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.write.label')}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Unified CTA inline */}
-                <div className={styles.fabGroup}>
-                    <button className={styles.fab} onClick={() => openComposer()}>
-                        <span className={styles.fabIcon}>📝</span>
-                        <span className={styles.fabLabel}>{t('community_page.fab.create_post')}</span>
-                    </button>
-                </div>
-                {false && (
-                <div className={styles.quickEntryScroll}>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('beauty_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>👀</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.browse.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.browse.sub')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('food_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>🤝</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.recruiting.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.recruiting.sub')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => { setFilter('travel_review'); setSubFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}>
-                        <span className={styles.entryIcon}>📅</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.weekend.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.weekend.sub')}</span>
-                        </div>
-                    </div>
-                    <div className={styles.entryCardCompact} onClick={() => setIsWriting(true)}>
-                        <span className={styles.entryIcon}>📝</span>
-                        <div className={styles.entryMeta}>
-                            <span className={styles.entryLabel}>{t('community_page.quick_entry.record.label')}</span>
-                            <span className={styles.entrySubLabel}>{t('community_page.quick_entry.record.sub')}</span>
-                        </div>
-                    </div>
-                </div>
-                )}
-
-
-                {/* Navigation Summary & Sorting */}
-                <div className={styles.navSummaryBox}>
-                    <div className={styles.summaryText}>{getNavSummary()}</div>
-                    <select className={styles.sortSelect} value={sortBy} onChange={e => setSortBy(e.target.value)}>
-                        <option value="latest">{t('community_page.sort.latest')}</option>
-                        <option value="reactions">{t('community_page.sort.reactions')}</option>
-                        <option value="draft">{t('community_page.sort.draft')}</option>
-                    </select>
-                </div>
-
-                {loading ? (
-                    // Step 22: Improved Skeleton Feed
-                    <div className={styles.skeletonFeed}>
-                        {[1, 2, 3].map(n => (
-                            <div key={n} className={styles.skeletonCard}>
-                                <div className={styles.skeletonHeader}>
-                                    <div className={styles.skeletonAvatar} />
-                                    <div className={styles.skeletonAuthorInfo}>
-                                        <div className={styles.skeletonName} />
-                                        <div className={styles.skeletonTime} />
-                                    </div>
-                                </div>
-                                <div className={styles.skeletonTitle} />
-                                <div className={styles.skeletonDesc} />
-                                <div className={styles.skeletonFooter} />
-                            </div>
+                        {communityCategories.map((category) => (
+                            <button 
+                                key={category.id} 
+                                className={`${styles.tab} ${filter === category.id ? styles.activeTab : ''}`} 
+                                onClick={() => { setFilter(category.id); setLoading(true); setTimeout(() => setLoading(false), 200); }}
+                            >
+                                {category.label}
+                            </button>
                         ))}
                     </div>
-                ) : showEmptyState || showFeedErrorState ? (
-                    <div className={`${styles.emptyStateContainer} ${showFeedErrorState ? styles.errorStateContainer : ''}`}>
-                        <div className={styles.emptyIcon}>🔍</div>
-                        <div className={styles.emptyTitle}>{emptyStateTitle}</div>
-                        <div className={styles.emptyDesc}>{emptyStateDesc}</div>
-                        <div className={styles.emptyTip}>{emptyStateTip}</div>
-                        {!showFeedErrorState && (
-                            <div className={styles.emptyCtaGroup}>
-                                <button className={`${styles.emptyCta} ${styles.emptyCtaPrimary}`} onClick={() => openComposer()}>{t('community_page.states.cta_write')}</button>
-                                <button className={`${styles.emptyCta} ${styles.emptyCtaSecondary}`} onClick={() => { setFilter('all'); setSubFilter('all'); setSearchQuery(''); }}>{t('community_page.states.cta_all')}</button>
-                            </div>
-                        )}
+                </header>
+
+                <div className={styles.feed} style={{ background: '#f8fafc', padding: 0 }}>
+                    <div className={styles.navSummaryBox} style={{ background: '#fff' }}>
+                        <div className={styles.summaryText}>{getNavSummary()}</div>
                     </div>
-                ) : (
-                    <>
-                    {showFeedErrorNotice && (
-                        <div className={styles.feedNotice}>{feedError}</div>
-                    )}
-                    {filteredPosts.map(post => {
-                        const postCategory = getPostCategory(post);
-                        const isReview = post.type === 'review';
-                        const isBeautyReview = postCategory === 'beauty_review';
-                        const isFoodReview = postCategory === 'food_review';
-                        const isMeetup = postCategory === 'meetup';
-                        const isTravel = postCategory === 'travel_review';
-                        const isHelp = postCategory === 'help';
-                        const displayTypeLabel = getCategoryText(postCategory);
-                        const titlePrefix = isBeautyReview
-                            ? t('community_page.card.title_prefix.beauty_review')
-                            : isFoodReview
-                                ? t('community_page.card.title_prefix.food_review')
-                                : isTravel
-                                    ? t('community_page.card.title_prefix.travel_review')
-                                    : '';
-                                // Metadata Parser
-                                const regionMatch = post.desc.match(/\[REGION:(.*?)\]/);
-                                const pointMatch = post.desc.match(/\[POINT:(.*?)\]/);
-                                const tagsMatch = post.desc.match(/\[TAGS:(.*?)\]/);
 
-                                const displayRegion = regionMatch ? regionMatch[1] : (post.place_name?.split(' ')[0] || t('community_page.defaults.region'));
-                                const displayPoint = pointMatch ? pointMatch[1] : '';
-                                const displayTags = tagsMatch
-                                    ? tagsMatch[1]
-                                        .split(',')
-                                        .map((tag) => getTagLabel(t, tag))
-                                        .filter(Boolean)
-                                    : [];
-                                const cleanDesc = stripCommunityMetadata(post.desc);
-                                const imagePreviewSrcList = getMetaValues(post.desc, COMMUNITY_IMAGE_META_KEY).slice(0, COMMUNITY_IMAGE_LIMIT);
+                    {loading ? (
+                        <div className={styles.skeletonFeed}>
+                            {[1, 2, 3].map(n => <div key={n} className={styles.skeletonCard} />)}
+                        </div>
+                    ) : filteredPosts.length === 0 ? (
+                        <div className={styles.emptyStateContainer}>{t('community_page.states.no_results_title')}</div>
+                    ) : (
+                        filteredPosts.map(post => {
+                            const postCategory = getPostCategory(post);
+                            const cleanDesc = stripCommunityMetadata(post.desc);
+                            const imagePreviewSrcList = getMetaValues(post.desc, COMMUNITY_IMAGE_META_KEY).slice(0, 1);
+                            const region = getMetaValue(post.desc, 'REGION') || t('community_page.defaults.region');
+                            const hasResult = post.desc.includes('[RESULT:') || post.desc.includes('[TIPS:');
+                            const isFresh = post.comments >= 3;
 
-                                // Status & Result Parsing
-                                const statusMatch = post.desc.match(/\[STATUS:(.*?)\]/);
-                                const resultMatch = post.desc.match(/\[RESULT:(.*?)\]/);
-                                const tipsMatch = post.desc.match(/\[TIPS:(.*?)\]/);
-                                const hasResult = !!(resultMatch || tipsMatch);
-                                
-                                const currentStatus = statusMatch ? statusMatch[1] : ((isReview || isTravel) ? 'REVIEWS' : 'REACTING');
-
-                                return (
-                                    <div 
-                                        key={post.id} 
-                                        className={`${styles.card} ${isReview ? styles.reviewCard : ''} ${isMeetup ? styles.meetupCard : ''} ${isTravel ? styles.infoCard : ''} ${isHelp ? styles.helpCard : ''} ${currentStatus === 'CLOSED' ? styles.cardClosed : ''} ${loading ? styles.cardExiting : ''}`} 
-                                    >
-                                        {/* Card Header - Focus on Author and Meta */}
-                                        <div className={styles.cardHeader}>
-                                            <div className={styles.avatar}>{post.flag}</div>
-                                            <div className={styles.authorInfo}>
-                                                <div className={styles.authorHeaderRow}>
-                                                    <div className={styles.authorName}>{post.author}</div>
-                                                    <span className={`${styles.statusBadge} ${styles['status_' + currentStatus]}`}>
-                                                        {getStatusText(currentStatus)}
-                                                    </span>
-                                                    {hasResult && <span className={styles.resultFeedBadge}>{t('community_page.card.result_badge')}</span>}
-                                                </div>
-                                                <div className={styles.postTime}>{post.time}</div>
-                                            </div>
-                                            <div className={`${styles.badge} ${styles['badge_' + post.type]}`}>
-                                                {displayTypeLabel}
-                                            </div>
-                                            {post.author === loggedInUserName && (
-                                                <div className={styles.postAdminActions}>
-                                                    <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleEditPost(post); }}>
-                                                        ✏️
-                                                    </button>
-                                                    <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDeletePost(post.id); }}>
-                                                        🗑️
-                                                    </button>
-                                                </div>
-                                            )}
+                            return (
+                                <div key={post.id} className={styles.card} style={{ 
+                                    position:'relative', padding: '16px 16px 12px 16px', 
+                                    paddingRight: imagePreviewSrcList.length > 0 ? '112px' : '16px', 
+                                    borderRadius: 0, border: 'none', borderBottom: '8px solid #f8fafc', 
+                                    background: '#fff', display: 'flex', flexDirection: 'column', gap: '2px' 
+                                }}>
+                                    <div className={styles.cardHeader} style={{ padding: 0, marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <div className={styles.authorInfo} style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#94a3b8' }}>
+                                            <span style={{ fontWeight: 600, color: '#64748b' }}>{post.author}</span>
+                                            <span>•</span>
+                                            <span>{post.time}</span>
+                                            <span>•</span>
+                                            <span>{region}</span>
                                         </div>
-
-                                        {/* Body Content based on Type */}
-                                        {isReview && (
-                                            <div className={styles.reviewMeta}>
-                                                <span className={styles.areaTag}>{displayRegion}</span>
-                                                {displayTags.length > 0 ? (
-                                                    displayTags.map(tag => <span key={tag} className={styles.vibeTag}>{tag}</span>)
-                                                ) : (
-                                                    <span className={styles.vibeTag}>{t('community_page.card.default_vibe')}</span>
-                                                )}
-                                                {post.desc.includes('[MEETUP_OPEN:true]') && (
-                                                    <span className={styles.openMeetupBadge}>{t('community_page.card.open_meetup_badge')}</span>
-                                                )}
-                                            </div>
-                                        )}
-
-                                        {/* Step 20 & 21: Limited Freshness Signal */}
-                                        {(() => {
-                                            const hasResult = post.desc.includes('[RESULT:') || post.desc.includes('[TIPS:');
-                                            const isFresh = post.comments >= 3;
-                                            if (!isFresh && !hasResult) return null;
-
-                                            return (
-                                                <div className={styles.freshnessBadgeRow}>
-                                                    {post.comments >= 3 ? (
-                                                        <span className={styles.freshBadge_comment}>{t('community_page.card.fresh_badges.comment')}</span>
-                                                    ) : hasResult ? (
-                                                        <span className={styles.freshBadge_update}>{t('community_page.card.fresh_badges.update')}</span>
-                                                    ) : null}
-                                                </div>
-                                            );
-                                        })()}
-
-                                        <h2 className={`${styles.postTitle} ${isReview ? styles.reviewTitle : ''}`}>
-                                            <Link href={`/community/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                                {titlePrefix ? `${titlePrefix} ${post.title}` : post.title}
-                                            </Link>
-                                        </h2>
-
-                                        <div className={styles.postMetaRow}>
-                                            📍 {displayRegion} · {displayTypeLabel}
-                                            {displayPoint && (
-                                                <span className={styles.postPointLabel}>
-                                                    🎯 {displayPoint}
-                                                </span>
-                                            )}
-                                            {getQualitySignals(post).map(signal => (
-                                                <span key={signal.id} className={styles.qualitySignal}>
-                                                    {signal.label}
-                                                </span>
-                                            ))}
+                                        <div className={`${styles.badge} ${styles['badge_' + post.type]}`} style={{ marginLeft: 'auto', fontSize: '9px', fontWeight: 700, padding: '1px 5px', borderRadius: '4px' }}>
+                                            {getCategoryLabel(t, postCategory)}
                                         </div>
-                                        
-                                        <p className={styles.postDesc} style={{ 
-                                            marginBottom: '8px',
-                                            display: '-webkit-box',
-                                            WebkitLineClamp: 2,
-                                            WebkitBoxOrient: 'vertical',
-                                            overflow: 'hidden',
-                                            fontSize: '13px'
-                                        }}>
-                                            {cleanDesc}
-                                        </p>
-
-                                        {imagePreviewSrcList.length > 0 && (
-                                            <div className={`${styles.postImageGrid} ${imagePreviewSrcList.length === 1 ? styles.postImageGridSingle : ''}`}>
-                                                {imagePreviewSrcList.map((imagePreviewSrc, index) => (
-                                                    <div
-                                                        key={`${post.id}-image-${index}`}
-                                                        className={`${styles.postImageFrame} ${imagePreviewSrcList.length === 1 ? styles.postImageFrameSingle : ''}`}
-                                                    >
-                                                        <Image
-                                                            src={imagePreviewSrc}
-                                                            alt={`${post.title} ${index + 1}`}
-                                                            fill
-                                                            unoptimized
-                                                            className={styles.postImage}
-                                                            sizes="(max-width: 768px) 50vw, 320px"
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-
-                                {/* Contextual Info */}
-                                {isMeetup && (
-                                    <div className={styles.meetupInfo}>
-                                        {post.start_time && <div>🕒 {post.start_time} {post.end_time ? ` ~ ${post.end_time}` : ''}</div>}
-                                        {post.place_name && <div>📍 {post.place_name}</div>}
                                     </div>
-                                )}
 
-                                {isReview && post.place_name && (
-                                    <div className={styles.postPlaceInfo}>
-                                        📍 <strong>{post.place_name}</strong>
-                                    </div>
-                                )}
-
-                                {/* Footer Actions */}
-                                <div className={styles.cardFooter}>
-                                    <div className={styles.footerLeft}>
-                                        <div className={styles.statsGroup}>
-                                            <span className={styles.statItem}>💬 {post.comments}</span>
-                                            <span className={styles.statItem}>👍 {post.likes_count || 0}</span>
-                                            <span className={styles.statItem}>👎 {post.dislikes_count || 0}</span>
+                                    {(isFresh || hasResult) && (
+                                        <div className={styles.freshnessBadgeRow} style={{ display: 'flex', gap: '4px', marginBottom: '2px' }}>
+                                            {isFresh && <span className={styles.freshBadge_comment} style={{ fontSize: '10px', background: '#eef2ff', color: '#4f46e5', padding: '2px 6px', borderRadius: '10px', fontWeight: 600 }}>{t('community_page.card.fresh_badges.comment')}</span>}
+                                            {hasResult && <span className={styles.freshBadge_update} style={{ fontSize: '10px', background: '#f0fdf4', color: '#16a34a', padding: '2px 6px', borderRadius: '10px', fontWeight: 600 }}>{t('community_page.card.fresh_badges.update')}</span>}
                                         </div>
-                                        {/* Step 22: Feedback for Bookmark */}
-                                        <button 
-                                            className={`${styles.saveBtn} ${savedIds.includes(post.id) ? styles.savedActive : ''}`} 
-                                            onClick={(e) => handleToggleSaveInFeed(e, post.id)}
-                                        >
+                                    )}
+
+                                    <h2 style={{ margin: '2px 0 4px 0', fontSize: '15px', fontWeight: 600, lineHeight: 1.4 }}>
+                                        <Link href={`/community/${post.id}`} style={{ color: '#111827', textDecoration: 'none' }}>{post.title}</Link>
+                                    </h2>
+                                    <p style={{ margin: 0, fontSize: '13px', color: '#4b5563', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.45 }}>
+                                        {cleanDesc}
+                                    </p>
+                                    {imagePreviewSrcList.map(src => (
+                                        <div key={src} style={{ position:'absolute', top:'16px', right:'16px', width:'84px', height:'84px', borderRadius:'8px', overflow:'hidden', border: '1px solid #f1f5f9' }}>
+                                            <Image src={src} alt="" fill unoptimized style={{ objectFit:'cover' }} />
+                                        </div>
+                                    ))}
+                                    <div className={styles.cardFooter} style={{ display: 'flex', gap: '12px', fontSize: '12px', color: '#64748b', marginTop: '6px', padding: 0, border: 'none', background: 'transparent' }}>
+                                        <div className={styles.statsGroup} style={{ gap: '8px' }}>
+                                            <span>💬 {post.comments}</span>
+                                            <span>👍 {post.likes_count || 0}</span>
+                                        </div>
+                                        <button onClick={(e) => handleToggleSaveInFeed(e, post.id)} style={{ marginLeft: 'auto', background: 'none', border: 'none', padding: 0, fontSize: '14px' }}>
                                             {savedIds.includes(post.id) ? '⭐' : '🔖'}
                                         </button>
                                     </div>
-                                    {(isReview || isMeetup || isTravel) && post.comments > 0 && (
-                                        <div className={styles.draftStatusCol}>
-                                            <div className={styles.draftStatusLabel}>
-                                                {post.comments >= 4 ? t('community_page.card.draft_status.active') : post.comments >= 2 ? t('community_page.card.draft_status.forming') : t('community_page.card.draft_status.preparing')}
-                                            </div>
-                                            <div className={styles.draftStatusDesc}>
-                                                {post.comments >= 4 ? t('community_page.card.draft_desc.active') : 
-                                                 post.comments >= 2 ? t('community_page.card.draft_desc.forming') : 
-                                                 t('community_page.card.draft_desc.preparing')}
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div className={styles.footerRight}>
-                                        {isReview && post.author === loggedInUserName && post.comments > 0 && (
-                                            <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-                                                <span style={{ fontSize: '10px', background: '#eff6ff', color: '#2563eb', padding: '2px 8px', borderRadius: '4px', fontWeight: 800, border: '1px solid #bfdbfe' }}>
-                                                    {t('community_page.card.owner_reactions.region', { region: displayRegion, count: post.comments })}
-                                                </span>
-                                            </div>
-                                        )}
-                                        {isMeetup && post.author !== loggedInUserName && (
-                                            <button 
-                                                className={styles.matchBtn}
-                                                onClick={(e) => { e.stopPropagation(); router.push(`/community/${post.id}?action=apply`); }}
-                                            >
-                                                {t('community_page.card.cta.join')}
-                                            </button>
-                                        )}
-                                        {isMeetup && post.author === loggedInUserName && post.comments > 0 && (
-                                            <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-                                                <span style={{ fontSize: '10px', background: '#eff6ff', color: '#2563eb', padding: '2px 8px', borderRadius: '4px', fontWeight: 800, border: '1px solid #bfdbfe' }}>
-                                                    {t('community_page.card.owner_reactions.join', { count: post.comments })}
-                                                </span>
-                                            </div>
-                                        )}
-                                    </div>
                                 </div>
-                                {/* Step 19: Topic Connectivity Hint */}
-                                <div className={styles.cardTopicHint}>
-                                    <span 
-                                        className={styles.moreHint} 
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setSearchQuery(displayRegion);
-                                            setFilter('all');
-                                            setSubFilter('all');
-                                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            showToast(t('community_page.toasts.region_collected', { region: displayRegion }));
-                                        }}
-                                    >
-                                        {t('community_page.card.more_region', { region: displayRegion })}
-                                    </span>
-                                </div>
-                            </div>
-                        );
-                    })}
-                    </>
-                )}
+                            );
+                        })
+                    )}
+                </div>
             </div>
 
+            {/* FAB - Absolute position within container (relative) */}
+            <button
+                onClick={() => openComposer()}
+                style={{
+                    position:'absolute', bottom:'88px', right:'16px',
+                    zIndex:1000, background:'#f06292', color:'#fff',
+                    border:'none', borderRadius:'28px', padding:'14px 22px',
+                    fontSize:'15px', fontWeight:700, cursor:'pointer',
+                    boxShadow:'0 8px 24px rgba(240,98,146,0.3)',
+                    display:'flex', alignItems:'center', gap:'8px',
+                    transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                }}
+            >
+                ✏️ {t('community_page.fab.create_post')}
+            </button>
 
             {isWriting && (
                 <div className={styles.modalOverlay} onClick={() => setIsWriting(false)}>
                     <div className={styles.modalSheet} onClick={e => e.stopPropagation()}>
                         <div className={styles.modalHeader}>
                             <h2 className={styles.modalTitle}>
-                                {editingPostId
-                                    ? t('community_page.edit', { defaultValue: 'Edit Post' })
-                                    : t('community_page.write_post', { defaultValue: 'Write Post' })
-                                }
+                                {editingPostId ? t('community_page.form.edit_title') : t('community_page.form.write_title')}
                             </h2>
-                            {/* Home/Close button removed as requested */}
                         </div>
-
-                        <div className={styles.modalBody}>
-                            {/* Step 15: Writing Guide */}
-                            <div className={styles.writeGuideBox}>
-                                <div className={styles.writeGuideText}>
-                                    📍<b>{writeGuideTitle}</b><br />
-                                    {writeGuideBody}
-                                </div>
-                            </div>
-
-
+                        <div className={styles.modalBody} style={{ padding: '16px' }}>
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>{t('community_page.form.category_label')}</label>
-                                <select className={styles.formSelect} value={newType} onChange={e => setNewType(e.target.value as CommunityCategory)}>
-                                    <option value="" disabled>{t('community_page.form.select_category')}</option>
-                                    {communityCategories.map((category) => (
-                                        <option key={category.id} value={category.id}>{category.label}</option>
-                                    ))}
+                                <select className={styles.formSelect} value={newType} onChange={e => setNewType(e.target.value as any)}>
+                                    <option value="">{t('community_page.form.select_category')}</option>
+                                    {communityCategories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
                                 </select>
-                                <div className={styles.formHint}>{getHint()}</div>
                             </div>
-
                             <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>{titleFieldLabel}</label>
-                                <input
-                                    className={styles.formInput}
-                                    placeholder={titleFieldPlaceholder}
-                                    value={newTitle}
-                                    onChange={e => setNewTitle(e.target.value)}
+                                <label>{t('community_page.form.title_label.default')}</label>
+                                <input className={styles.formInput} value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder={t('community_page.form.title_placeholder.default')} />
+                            </div>
+                            
+                            {/* Region/Location Field */}
+                            <div className={styles.formGroup}>
+                                <label>{t('community_page.form.region_label')}</label>
+                                <input 
+                                    className={styles.formInput} 
+                                    value={newRegion} 
+                                    onChange={e => setNewRegion(e.target.value)} 
+                                    placeholder={t('community_page.form.region_placeholder')} 
                                 />
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>{t('community_page.form.region_label')}</label>
-                                <input
-                                    className={styles.formInput}
-                                    placeholder={t('community_page.form.region_placeholder')}
-                                    value={newRegion}
-                                    onChange={e => setNewRegion(e.target.value)}
-                                />
+                                <label>{t('community_page.form.desc_label.default')}</label>
+                                <textarea className={styles.formTextarea} value={newDesc} onChange={e => setNewDesc(e.target.value)} placeholder={t('community_page.form.desc_placeholder.default')} />
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>{descFieldLabel}</label>
-                                <textarea
-                                    className={styles.formTextarea}
-                                    placeholder={descFieldPlaceholder}
-                                    value={newDesc}
-                                    onChange={e => setNewDesc(e.target.value)}
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>{t('community_page.form.image.label')}</label>
-                                <input
-                                    ref={imageInputRef}
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    className={styles.imageInput}
-                                    onChange={handleImageSelect}
-                                />
-                                <div className={styles.imageUploadBox}>
-                                    <div className={styles.imageUploadCopy}>
-                                        <strong>{t('community_page.form.image.title', { count: COMMUNITY_IMAGE_LIMIT })}</strong>
-                                        <span>{imageUploadGuide}</span>
-                                    </div>
-                                    <div className={styles.imageUploadActions}>
-                                        <span className={styles.imageCountBadge}>{newImages.length}/{COMMUNITY_IMAGE_LIMIT}</span>
-                                        <button
-                                            type="button"
-                                            className={styles.imagePickerBtn}
+                            {/* Image Upload/Preview Field */}
+                            <div className={styles.formGroup} style={{ marginBottom: '100px' }}>
+                                <label>{t('community_page.form.image_label')} (최대 {COMMUNITY_IMAGE_LIMIT}장)</label>
+                                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '8px' }}>
+                                    {newImages.map((img) => (
+                                        <div key={img.id} style={{ position: 'relative', width: '80px', height: '80px' }}>
+                                            <Image 
+                                                src={img.dataUrl} 
+                                                alt="" 
+                                                fill 
+                                                style={{ objectFit: 'cover', borderRadius: '8px' }} 
+                                                unoptimized 
+                                            />
+                                            <button 
+                                                onClick={() => handleRemoveImage(img.id)}
+                                                style={{ 
+                                                    position: 'absolute', top: '-6px', right: '-6px', 
+                                                    background: '#ef4444', color: '#fff', border: 'none', 
+                                                    borderRadius: '50%', width: '22px', height: '22px', 
+                                                    cursor: 'pointer', fontSize: '12px', fontWeight: 'bold',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                                                }}
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {newImages.length < COMMUNITY_IMAGE_LIMIT && (
+                                        <button 
                                             onClick={() => imageInputRef.current?.click()}
-                                            disabled={isPreparingImage || isImageLimitReached}
+                                            style={{ 
+                                                width: '80px', height: '80px', border: '1px solid #e2e8f0', 
+                                                borderRadius: '12px', cursor: 'pointer', background: '#f8fafc',
+                                                display: 'flex', flexDirection: 'column', alignItems: 'center', 
+                                                justifyContent: 'center', color: '#64748b', transition: 'all 0.2s',
+                                                gap: '4px'
+                                            }}
                                         >
-                                            {isPreparingImage
-                                                ? t('community_page.form.image.button_loading')
-                                                : isImageLimitReached
-                                                    ? t('community_page.form.image.button_limit', { count: COMMUNITY_IMAGE_LIMIT })
-                                                    : newImages.length > 0
-                                                        ? t('community_page.form.image.button_add_more')
-                                                        : t('community_page.form.image.button_select')
-                                            }
+                                            <span style={{ fontSize: '24px', color: '#94a3b8' }}>+</span>
+                                            <span style={{ fontSize: '12px', fontWeight: 500 }}>{t('community_page.form.add_photo')}</span>
                                         </button>
-                                    </div>
-                                </div>
-
-                                {newImages.length > 0 && (
-                                    <div className={styles.imagePreviewGrid}>
-                                        {newImages.map((image, index) => (
-                                            <div key={image.id} className={styles.imagePreviewCard}>
-                                                <div className={styles.imagePreviewFrame}>
-                                                    <Image
-                                                        src={image.dataUrl}
-                                                        alt={newTitle || t('community_page.form.image.preview_alt', { index: index + 1 })}
-                                                        fill
-                                                        unoptimized
-                                                        className={styles.imagePreview}
-                                                        sizes="(max-width: 768px) 50vw, 160px"
-                                                    />
-                                                </div>
-                                                <div className={styles.imagePreviewMeta}>
-                                                    <strong>{image.name || t('community_page.form.image.preview_name', { index: index + 1 })}</strong>
-                                                    <span>{t('community_page.form.image.preview_desc', { index: index + 1 })}</span>
-                                                </div>
-                                                <button
-                                                    type="button"
-                                                    className={styles.imageRemoveBtn}
-                                                    onClick={() => handleRemoveImage(image.id)}
-                                                >
-                                                    {t('community_page.form.image.remove')}
-                                                </button>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-
-
-                            <div className={styles.toggleGroup}>
-                                <div className={styles.toggleLabel}>
-                                    <span className={styles.toggleTitle}>{t('community_page.form.meetup_toggle_title')}</span>
-                                    <span className={styles.toggleDesc}>{t('community_page.form.meetup_toggle_desc')}</span>
+                                    )}
                                 </div>
                                 <input 
-                                    type="checkbox" 
-                                    checked={isOpenForMeetup} 
-                                    onChange={e => setIsOpenForMeetup(e.target.checked)}
-                                    style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                                    type="file" 
+                                    ref={imageInputRef} 
+                                    style={{ display: 'none' }} 
+                                    onChange={handleImageSelect} 
+                                    multiple 
+                                    accept="image/*" 
                                 />
+                                {isPreparingImage && <p style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>{t('community_page.form.preparing_images')}</p>}
                             </div>
-
-                            <div className={styles.safetyGuideBox}>
-                                <span>{t('community_page.form.safety_title')}</span>
-                                <span>{t('community_page.form.safety_item_1')}</span>
-                                <span>{t('community_page.form.safety_item_2')}</span>
-                            </div>
-
-                            {/* Summary Block before submitting */}
-                            {(newTitle || newRegion || newPoint) && (
-                                <div className={styles.summaryBlock}>
-                                    <div style={{ fontWeight: 800, marginBottom: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>{t('community_page.form.summary_title')}</div>
-                                    <div className={styles.summaryItem}>
-                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_region_type')}</span>
-                                        <span>{newRegion || '-'} / {summaryCategoryLabel}</span>
-                                    </div>
-                                    <div className={styles.summaryItem}>
-                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_point')}</span>
-                                        <span>{newPoint || '-'}</span>
-                                    </div>
-                                    <div className={styles.summaryItem}>
-                                        <span className={styles.summaryLabel}>{t('community_page.form.summary_meetup')}</span>
-                                        <span>{isOpenForMeetup ? t('community_page.form.summary_enabled') : t('community_page.form.summary_disabled')}</span>
-                                    </div>
-                                </div>
-                            )}
                         </div>
-
-                        <div className={styles.modalFooter}>
-                            <button
-                                className={styles.submitBtn}
-                                onClick={handleSubmit}
-                                disabled={isSubmitting || isPreparingImage || !newTitle || !newDesc}
+                        <div className={styles.modalFooter} style={{ 
+                            display: 'flex', gap: '8px', padding: '16px 20px 30px', 
+                            borderTop: '1px solid #f1f5f9', background: '#fff',
+                            position: 'absolute', bottom: 0, left: 0, right: 0,
+                            borderBottomLeftRadius: '24px', borderBottomRightRadius: '24px',
+                            zIndex: 100
+                        }}>
+                             <button 
+                                className={styles.cancelBtn} 
+                                onClick={() => setIsWriting(false)}
+                                style={{
+                                    flex: 1, padding: '15px', borderRadius: '14px', border: '1px solid #e2e8f0',
+                                    background: '#fff', color: '#64748b', fontSize: '15px', fontWeight: 600, cursor: 'pointer'
+                                }}
                             >
-                                {isSubmitting
-                                    ? t('community_page.posting', { defaultValue: 'Posting...' })
-                                    : isOpenForMeetup 
-                                        ? t('community_page.form.submit_with_reactions') 
-                                        : isBeautyDraft
-                                            ? t('community_page.form.submit_beauty')
-                                            : t('community_page.form.submit_default')
-                                }
+                                {t('community_page.form.cancel')}
+                            </button>
+                            <button 
+                                className={styles.submitBtn} 
+                                onClick={handleSubmit} 
+                                disabled={isSubmitting}
+                                style={{
+                                    flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
+                                    background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
+                                    opacity: isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+                                }}
+                            >
+                                {isSubmitting ? '...' : t('community_page.form.submit')}
                             </button>
                         </div>
                     </div>
                 </div>
             )}
-
         </div>
     );
 }

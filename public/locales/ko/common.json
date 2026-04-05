@@ -1378,12 +1378,12 @@
     },
     "categories": {
       "all": "전체",
-      "beauty_review": "뷰티 후기",
-      "food_review": "맛집 추천",
-      "travel_review": "여행 팁",
-      "meetup": "번개 모임",
-      "meetup_recruitment": "동행 모집",
-      "help": "질문/도움"
+      "meetup": "모임",
+      "beauty_review": "뷰티",
+      "food_review": "맛집",
+      "travel_review": "관광",
+      "meetup_recruitment": "모집",
+      "help": "꿀팁"
     },
     "sub_filters": {
       "all": "전체",
@@ -1470,11 +1470,7 @@
       },
       "title_placeholder": {
         "beauty_review": "예: 강남역 레이어드 컷 후기",
-        "food_review": "예: 성수동 줄 서서 먹는 일식집",
-        "travel_review": "예: 서울에서 부산까지 KTX 꿀팁",
-        "meetup": "예: 신논현역 근처 치맥 하실 분!",
-        "meetup_recruitment": "예: 다음 주 경복궁 같이 가실 분",
-        "help": "예: 인천공항에서 숙소까지 어떻게 가나요?"
+        "default": "무엇에 대해 쓸까 고민 중인가요?"
       },
       "desc_label": {
         "beauty_review": "상세 후기",
@@ -1482,11 +1478,12 @@
       },
       "desc_placeholder": {
         "beauty_review": "시술 과정이나 결과에 대해 자세히 알려주세요.",
-        "food_review": "맛있었던 메뉴와 추천 이유를 적어주세요.",
-        "travel_review": "다른 여행자들에게 도움이 될 정보를 공유해주세요.",
-        "meetup": "모임에 대해 자세히 설명해주세요.",
+        "food_review": "맛있고 추천하고 싶은 메뉴와 이유를 적어주세요.",
+        "travel_review": "코스, 준비물 등 다른 여행자들에게 유용한 정보를 알려주세요.",
+        "meetup": "모임에 대해 더 자세히 알려주세요.",
         "meetup_recruitment": "함께 하고 싶은 내용을 적어주세요.",
-        "help": "질문 내용을 자세히 적어주시면 답변에 도움이 됩니다."
+        "help": "자세하게 물어보면 더 좋은 답변을 얻을 수 있어요.",
+        "default": "함께 나누고 싶은 이야기를 적어보세요"
       },
       "image": {
         "guides": {
@@ -1509,7 +1506,14 @@
         "meetup": "가볍게 만나서 즐길 모임을 만들어보세요.",
         "meetup_recruitment": "여행 일정이 맞는 동행을 찾아보세요.",
         "help": "궁금한 것이 있다면 무엇이든 물어보세요."
-      }
+      },
+      "submit": "등록하기",
+      "write_title": "글쓰기",
+      "edit_title": "글 수정",
+      "image_label": "이미지 첨부",
+      "add_photo": "사진 추가",
+      "preparing_images": "이미지 준비 중...",
+      "cancel": "취소"
     },
     "quick_entry": {
       "beauty_together": { "label": "뷰티 같이하기" },
