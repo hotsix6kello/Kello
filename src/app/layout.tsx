@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import {
   Inter,
   Noto_Sans_Arabic,
@@ -12,7 +12,7 @@ import "./globals.css";
 import LanguageInitializer from "./components/LanguageInitializer";
 import { TripProvider } from "@/lib/contexts/TripContext";
 import ClientChrome from "./components/ClientChrome";
-import { LOCALE_STORAGE_KEY, DEFAULT_CLIENT_LOCALE, resolveCanonicalLocale } from "@/lib/i18n/locales";
+import { DEFAULT_CLIENT_LOCALE, resolveCanonicalLocale } from "@/lib/i18n/locales";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -75,17 +75,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
   const headerStore = await headers();
 
-  const cookieLocale = cookieStore.get(LOCALE_STORAGE_KEY)?.value;
+  // middleware가 확정한 x-resolved-locale을 Source of Truth로 사용
   const headerLocale = headerStore.get("x-resolved-locale");
-  const acceptLanguage = headerStore.get("accept-language");
-
-  const locale = resolveCanonicalLocale(
-    cookieLocale ?? headerLocale ?? acceptLanguage,
-    DEFAULT_CLIENT_LOCALE
-  );
+  const locale = resolveCanonicalLocale(headerLocale, DEFAULT_CLIENT_LOCALE);
 
   return (
     <html

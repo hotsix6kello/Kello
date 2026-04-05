@@ -1,7 +1,7 @@
 'use client';
 
 import { useLayoutEffect } from 'react';
-import { initClientLanguage, syncI18nLanguage } from '@/lib/i18n/client';
+import { initClientLanguage } from '@/lib/i18n/client';
 
 /**
  * Centrally manages language initialization.
@@ -10,9 +10,8 @@ import { initClientLanguage, syncI18nLanguage } from '@/lib/i18n/client';
  * 
  * locale: server-resolved locale passed from layout.tsx to minimize first-render flash.
  */
-export default function LanguageInitializer({ locale }: { locale?: string }) {
+export default function LanguageInitializer({ locale }: { locale: string }) {
     useLayoutEffect(() => {
-        syncI18nLanguage(locale);
         initClientLanguage(locale);
         document.body.dataset.i18nReady = 'true';
     }, [locale]);
