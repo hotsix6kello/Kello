@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     kakao: any;
   }
 }
 
 export default function KakaoMapContainer() {
-  const [map, setMap] = useState<any>(null);
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,8 +24,7 @@ export default function KakaoMapContainer() {
           center: new window.kakao.maps.LatLng(37.4711, 126.7010),
           level: 3,
         };
-        const newMap = new window.kakao.maps.Map(mapRef.current, options);
-        setMap(newMap);
+        new window.kakao.maps.Map(mapRef.current, options);
       });
     };
 

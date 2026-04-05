@@ -1,17 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Star } from 'lucide-react';
-
-interface Business {
-    id: string;
-    title: string;
-    area: string;
-    image_url?: string;
-    rating?: number;
-    price?: string;
-}
 
 interface StoreCarouselProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     items: any[];
     selectedId: string | null;
     onSelect: (id: string) => void;
