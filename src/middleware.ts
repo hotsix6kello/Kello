@@ -10,29 +10,6 @@ import {
 
 const SUPPORTED_LOCALES = new Set<string>(CANONICAL_SUPPORTED_LOCALES);
 
-function getLocaleFromCountry(country: string): string {
-  const normalizedCountry = country.trim().toUpperCase();
-
-  const localeByCountry: Record<string, string> = {
-    KR: 'ko',
-    US: 'en',
-    JP: 'ja',
-    CN: 'zh-CN',
-    HK: 'zh-HK',
-    VN: 'vi',
-    TH: 'th',
-    ID: 'id',
-    MY: 'ms',
-    ES: 'es',
-    FR: 'fr',
-    DE: 'de',
-    SA: 'ar',
-    PT: 'pt',
-    RU: 'ru',
-  };
-
-  return localeByCountry[normalizedCountry] ?? DEFAULT_CLIENT_LOCALE;
-}
 
 function getLocaleFromAcceptLanguage(acceptLanguage: string): string | null {
   const candidates = acceptLanguage
@@ -52,9 +29,7 @@ function getLocaleFromAcceptLanguage(acceptLanguage: string): string | null {
 
 function getResolvedRequestLocale(request: NextRequest) {
   const cookieLocale = request.cookies.get(LOCALE_STORAGE_KEY)?.value ?? null;
-  const headerLocale = request.headers.get('x-resolved-locale');
   const acceptLanguage = request.headers.get('accept-language');
-  const countryHeader = request.headers.get('x-vercel-ip-country') || request.headers.get('cf-ipcountry');
 
   const cookieResolved =
     cookieLocale && SUPPORTED_LOCALES.has(resolveCanonicalLocale(cookieLocale, DEFAULT_CLIENT_LOCALE))
@@ -62,25 +37,15 @@ function getResolvedRequestLocale(request: NextRequest) {
       : null;
 
   if (cookieResolved) {
-    return { locale: cookieResolved, source: 'cookie' as const, shouldRefreshCookie: cookieResolved !== cookieLocale };
-  }
-
-  const headerResolved =
-    headerLocale && SUPPORTED_LOCALES.has(resolveCanonicalLocale(headerLocale, DEFAULT_CLIENT_LOCALE))
-      ? resolveCanonicalLocale(headerLocale, DEFAULT_CLIENT_LOCALE)
-      : null;
-
-  if (headerResolved) {
-    return { locale: headerResolved, source: 'header' as const, shouldRefreshCookie: true };
+    return { locale: cookieResolved, shouldRefreshCookie: cookieResolved !== cookieLocale };
   }
 
   const browserResolved = acceptLanguage ? getLocaleFromAcceptLanguage(acceptLanguage) : null;
   if (browserResolved) {
-    return { locale: browserResolved, source: 'accept-language' as const, shouldRefreshCookie: true };
+    return { locale: browserResolved, shouldRefreshCookie: true };
   }
 
-  const countryResolved = countryHeader ? getLocaleFromCountry(countryHeader) : DEFAULT_CLIENT_LOCALE;
-  return { locale: countryResolved, source: 'country' as const, shouldRefreshCookie: true };
+  return { locale: DEFAULT_CLIENT_LOCALE, shouldRefreshCookie: true };
 }
 
 export function middleware(request: NextRequest) {

@@ -42,18 +42,16 @@ const localeResources = {
 const resources = localeResources;
 export const LANGUAGE_CHANGED_EVENT = "kello-language-changed";
 
-function getInitialI18nLanguage() {
-    if (typeof document !== "undefined") {
-        return resolveCanonicalLocale(document.documentElement.lang, DEFAULT_CLIENT_LOCALE);
-    }
-
-    return DEFAULT_CLIENT_LOCALE;
-}
-
 if (!i18n.isInitialized) {
+    // 서버 환경이나 초기 렌더링 시에는 html lang 우선 참작. 
+    // 실제 동기화는 initClientLanguage에서 덮어씀
+    const fallbackInitialLang = typeof document !== "undefined" 
+        ? resolveCanonicalLocale(document.documentElement.lang, DEFAULT_CLIENT_LOCALE)
+        : DEFAULT_CLIENT_LOCALE;
+
     i18n.use(initReactI18next).init({
         resources,
-        lng: getInitialI18nLanguage(),
+        lng: fallbackInitialLang,
         fallbackLng: DEFAULT_LOCALE,
         supportedLngs: [...CANONICAL_SUPPORTED_LOCALES],
         ns: ["common", "beauty_explore"],
@@ -74,40 +72,30 @@ export function syncI18nLanguage(lang?: string | null) {
     return canonical;
 }
 
-// serverLocale: locale hint passed from the server (via LanguageInitializer prop).
-// Priority: serverLocale > localStorage > navigator.language > DEFAULT_CLIENT_LOCALE
-export function initClientLanguage(serverLocale?: string) {
+// 서버가 확정해준 locale만 사용하여 초기화 진행
+export function initClientLanguage(serverLocale: string) {
     if (typeof window === "undefined") return;
 
-    if (serverLocale) {
-        applyLanguage(serverLocale);
-        return;
-    }
-
-    const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
-    if (stored) {
-        applyLanguage(stored);
-        return;
-    }
-
-    applyLanguage(
-        navigator.language
-            ? resolveCanonicalLocale(navigator.language, DEFAULT_CLIENT_LOCALE)
-            : DEFAULT_CLIENT_LOCALE
-    );
-}
-
-function applyLanguage(lang: string) {
-    const canonical = syncI18nLanguage(lang);
-    localStorage.setItem(LOCALE_STORAGE_KEY, canonical);
-    document.cookie = `${LOCALE_STORAGE_KEY}=${canonical}; path=/; max-age=31536000; samesite=lax`;
+    const canonical = syncI18nLanguage(serverLocale);
+    
+    // HTML lang/dir 동기화 방어 패스
     document.documentElement.dir = isRtlLocale(canonical) ? "rtl" : "ltr";
     document.documentElement.lang = canonical;
+
+    // 초기 접속 시 보조 스토리지에도 동기화만 수행 (쿠키 갱신은 middleware에 위임되므로 불필요)
+    localStorage.setItem(LOCALE_STORAGE_KEY, canonical);
+
     window.dispatchEvent(new CustomEvent(LANGUAGE_CHANGED_EVENT, { detail: { locale: canonical } }));
 }
 
+// 사용자가 명시적으로 언어를 변경했을 때만 Cookie/Storage 갱신 및 Reload
 export function changeLanguage(lang: string) {
-    applyLanguage(lang);
+    const canonical = resolveCanonicalLocale(lang, DEFAULT_CLIENT_LOCALE);
+    
+    // 기기 귀속 저장을 위해 쿠키와 스토리지를 동시 업데이트
+    localStorage.setItem(LOCALE_STORAGE_KEY, canonical);
+    document.cookie = `${LOCALE_STORAGE_KEY}=${canonical}; path=/; max-age=31536000; samesite=lax`;
+    
     if (typeof window !== "undefined") {
         window.location.reload();
     }
