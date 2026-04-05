@@ -912,11 +912,21 @@
       "new_added": "New Booking Added!",
       "date_time": "Date / Time",
       "area": "Area",
-      "price": "Price"
+      "price": "Price",
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
     },
     "community": {
       "title": "My Community Posts",
-      "empty": "No community posts written yet."
+      "empty": "No community posts written yet.",
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
     },
     "settings": {
       "short": "Settings",
@@ -1347,6 +1357,16 @@
       "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
       "admin_title": "Admin Console",
       "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      },
       "partner": {
         "none_title": "Apply as Partner",
         "none_desc": "Join Kello as a partner and introduce your service to more travelers.",

@@ -612,11 +612,17 @@
       "new_added": "New Booking Added!",
       "date_time": "Date / Time",
       "area": "Area",
-      "price": "Price"
+      "price": "Price",
+      "browse_beauty_cta": "瀏覽美容預約",
+      "action_edit_request": "修改請求",
+      "action_cancel_request": "取消請求",
+      "error_fetch": "載入預約失敗。"
     },
     "community": {
       "title": "My Community Posts",
-      "empty": "No community posts written yet."
+      "empty": "No community posts written yet.",
+      "empty_simple": "暫無發布文章",
+      "browse_cta": "瀏覽社區"
     },
     "settings": {
       "short": "Settings",
@@ -1045,8 +1051,8 @@
       "bookings_empty": "尚無確認的預約",
       "saved_recent_title": "儲存與近期",
       "saved_recent_desc": "快速返回您儲存的地點、計劃草稿以及近期查看的項目。",
-      "admin_title": "管理後台",
-      "admin_desc": "數據中心與合作夥伴管理",
+      "admin_title": "管理員控制台",
+      "admin_desc": "打開管理員控制台與合作夥伴管理",
       "partner": {
         "none_title": "申請成為合作夥伴",
         "none_desc": "加入 Kello 合作夥伴，向更多旅行者推廣您的服務。",
@@ -1058,7 +1064,21 @@
         "rejected_title": "合作夥伴申請需要更新",
         "rejected_desc": "請更新詳細資訊後重新申請。",
         "rejected_cta": "重新申請"
+      },
+      "admin_menu": {
+        "dashboard": "管理員控制台",
+        "dashboard_desc": "統計與完整選單",
+        "bookings": "美容預約管理",
+        "bookings_desc": "預約請求與狀態變更",
+        "partners": "合作夥伴管理",
+        "partners_desc": "加入申請審核管理",
+        "users": "管理員帳號管理",
+        "users_desc": "權限授予與狀態解除"
       }
+    },
+    "messages": {
+      "upload_success": "個人主頁照片已更新。",
+      "upload_failed": "上傳失敗。"
     }
   },
   "fab": {

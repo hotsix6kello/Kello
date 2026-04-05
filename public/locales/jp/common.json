@@ -583,11 +583,17 @@
       "today_time": "今日, {{time}}",
       "tomorrow_time": "明日, {{time}}",
       "next_week_time": "来週, {{time}}",
-      "new_added": "新しい予約が追加されました！"
+      "new_added": "新しい予約が追加されました！",
+      "browse_beauty_cta": "ビューティー予約を探す",
+      "action_edit_request": "修正リクエスト",
+      "action_cancel_request": "キャンセリクエスト",
+      "error_fetch": "予約の読み込みに失敗しました。"
     },
     "community": {
       "title": "マイコミュニティ投稿",
-      "empty": "まだコミュニティの投稿がありません。"
+      "empty": "まだコミュニティの投稿がありません。",
+      "empty_simple": "作成した投稿がありません",
+      "browse_cta": "コミュニティを見る"
     },
     "support": {
       "short": "サポート",
@@ -948,6 +954,24 @@
       "type": {
         "travel": "旅行仲間",
         "meetup": "集まり"
+      }
+    },
+    "messages": {
+      "upload_success": "プロフィール写真が更新されました。",
+      "upload_failed": "アップロードに失敗しました。"
+    },
+    "dashboard": {
+      "admin_title": "管理コンソール",
+      "admin_desc": "ダッシュボードとパートナー管理を開きます",
+      "admin_menu": {
+        "dashboard": "管理者ダッシュボード",
+        "dashboard_desc": "統計および全体メニュー",
+        "bookings": "ビューティー予約管理",
+        "bookings_desc": "予約リクエストおよび状態変更",
+        "partners": "協力会社管理",
+        "partners_desc": "加入申請承認管理",
+        "users": "管理者アカウント管理",
+        "users_desc": "権限付与および状態解除"
       }
     }
   },
