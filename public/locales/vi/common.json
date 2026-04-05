@@ -356,11 +356,17 @@
       "date_time": "Ngày / Giờ",
       "area": "Khu vực",
       "price": "Giá",
-      "new_added": "Đã thêm đơn đặt mới!"
+      "new_added": "Đã thêm đơn đặt mới!",
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
     },
     "community": {
       "title": "Bài viết Của Tôi",
-      "empty": "Chưa có bài viết nào được tạo."
+      "empty": "Chưa có bài viết nào được tạo.",
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
     },
     "support": {
       "short": "H? tr?",
@@ -1724,6 +1730,24 @@
       "event_booking_change_rejected": "Change Declined",
       "event_booking_completed": "Service Completed",
       "event_default": "Notification"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
+    },
+    "dashboard": {
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      }
     }
   },
   "interpreter_page": {

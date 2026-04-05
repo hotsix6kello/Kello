@@ -527,11 +527,17 @@
       "today_time": "今天, {{time}}",
       "tomorrow_time": "明天, {{time}}",
       "next_week_time": "下周, {{time}}",
-      "new_added": "新预约已添加！"
+      "new_added": "新预约已添加！",
+      "browse_beauty_cta": "浏览美容预约",
+      "action_edit_request": "修改请求",
+      "action_cancel_request": "取消请求",
+      "error_fetch": "加载预约失败。"
     },
     "community": {
       "title": "我的社区动态",
-      "empty": "还没有撰写任何社区动态。"
+      "empty": "还没有撰写任何社区动态。",
+      "empty_simple": "暂无发布文章",
+      "browse_cta": "浏览社区"
     },
     "support": {
       "short": "??",
@@ -892,6 +898,24 @@
       "type": {
         "travel": "旅行",
         "meetup": "聚会"
+      }
+    },
+    "messages": {
+      "upload_success": "个人主页照片已更新。",
+      "upload_failed": "上传失败。"
+    },
+    "dashboard": {
+      "admin_title": "管理员控制台",
+      "admin_desc": "打开管理员控制台与合作伙伴管理",
+      "admin_menu": {
+        "dashboard": "管理员控制台",
+        "dashboard_desc": "统计与完整菜单",
+        "bookings": "美容预约管理",
+        "bookings_desc": "预约请求与状态变更",
+        "partners": "合作伙伴管理",
+        "partners_desc": "加入申请审核管理",
+        "users": "管理员账号管理",
+        "users_desc": "权限授予与状态解除"
       }
     }
   },

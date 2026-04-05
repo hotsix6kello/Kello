@@ -859,11 +859,21 @@
       "new_added": "새 예약이 추가되었습니다!",
       "date_time": "날짜 / 시간",
       "area": "지역",
-      "price": "가격"
+      "price": "가격",
+      "browse_beauty_cta": "뷰티 예약 둘러보기",
+      "action_edit_request": "수정 요청",
+      "action_cancel_request": "취소 요청",
+      "error_fetch": "예약을 불러오지 못했어요."
     },
     "community": {
       "title": "내 커뮤니티 활동",
-      "empty": "작성하신 커뮤니티 게시글이 없습니다."
+      "empty": "작성하신 커뮤니티 게시글이 없습니다.",
+      "empty_simple": "작성한 글이 없습니다",
+      "browse_cta": "커뮤니티 둘러보기"
+    },
+    "messages": {
+      "upload_success": "프로필 사진이 업데이트되었습니다.",
+      "upload_failed": "업로드에 실패했습니다."
     },
     "settings": {
       "short": "설정",
@@ -1260,6 +1270,16 @@
       "bookings_empty": "확정된 예약이 아직 없습니다",
       "admin_title": "관리 콘솔",
       "admin_desc": "관리자 대시보드와 파트너 관리를 엽니다",
+      "admin_menu": {
+        "dashboard": "관리자 대시보드",
+        "dashboard_desc": "통계 및 전체 메뉴",
+        "bookings": "뷰티 예약 관리",
+        "bookings_desc": "예약 요청 및 상태 변경",
+        "partners": "협력업체 관리",
+        "partners_desc": "가입 신청 승인 관리",
+        "users": "관리자 계정 관리",
+        "users_desc": "권한 부여 및 상태 해제"
+      },
       "partner": {
         "none_title": "파트너로 신청",
         "none_desc": "Kello 파트너로 등록하고 더 많은 여행자에게 서비스를 소개하세요.",

@@ -351,6 +351,34 @@
           "cta": "ابدأ التصفح"
         }
       }
+    },
+    "bookings": {
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
+    },
+    "community": {
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
+    },
+    "dashboard": {
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      }
     }
   },
   "interpreter_page": {
