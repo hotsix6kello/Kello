@@ -21,6 +21,8 @@ type Tone = "verified" | "warning" | "neutral" | "info";
 interface ProfileRecord {
     id: string;
     display_name: string | null;
+    nickname: string | null;
+    nickname_updated_at: string | null;
     role: string | null;
     created_at: string | null;
     avatar_url: string | null;
@@ -41,6 +43,8 @@ interface PartnerRecord {
 
 interface AccountState {
     displayName: string;
+    nickname: string;
+    nicknameUpdatedAt: string | null;
     email: string;
     joinedAt: string;
     emailVerified: boolean;
@@ -84,6 +88,8 @@ interface SettingsRow {
 
 type ContactField = "sns" | "phone";
 type SaveStatus = "idle" | "saving" | "success" | "error";
+
+const NICKNAME_COOLDOWN_DAYS = 90;
 
 interface ContactDraftState {
     sns: string;
@@ -462,6 +468,8 @@ export default function MySettingsPage() {
     const [activeTab, setActiveTab] = useState<TabId>("personal");
     const [account, setAccount] = useState<AccountState>({
         displayName: "",
+        nickname: "",
+        nicknameUpdatedAt: null,
         email: "",
         joinedAt: "",
         emailVerified: false,
@@ -486,6 +494,10 @@ export default function MySettingsPage() {
     const [contactDrafts, setContactDrafts] = useState<ContactDraftState>({
         sns: "",
     });
+    const [nicknameDraft, setNicknameDraft] = useState("");
+    const [nicknameSaveStatus, setNicknameSaveStatus] = useState<SaveStatus>("idle");
+    const [nicknameMessage, setNicknameMessage] = useState("");
+
     const [phoneDraft, setPhoneDraft] = useState<PhoneDraftState>(() => parseStructuredPhoneInput(""));
     const [contactSaveState, setContactSaveState] = useState<ContactSaveState>({
         sns: "idle",
@@ -528,6 +540,8 @@ export default function MySettingsPage() {
                     setBookingStats(EMPTY_BOOKING_STATS);
                     setAccount({
                         displayName: pickString(storedUser.name),
+                        nickname: "",
+                        nicknameUpdatedAt: null,
                         email: pickString(storedUser.email),
                         joinedAt: "",
                         emailVerified: false,
@@ -537,6 +551,7 @@ export default function MySettingsPage() {
                         snsId: "",
                         isLoggedIn: false,
                     });
+                    setNicknameDraft("");
                     setContactDrafts({
                         sns: "",
                     });
@@ -574,11 +589,14 @@ export default function MySettingsPage() {
                 );
                 const nextAccount: AccountState = {
                     displayName: pickString(
+                        nextProfile?.nickname,
                         nextProfile?.display_name,
                         user.user_metadata?.full_name,
                         user.user_metadata?.name,
                         storedUser.name
                     ),
+                    nickname: pickString(nextProfile?.nickname),
+                    nicknameUpdatedAt: nextProfile?.nickname_updated_at ?? null,
                     email,
                     joinedAt: pickString(nextProfile?.created_at, user.created_at),
                     emailVerified: Boolean(user.email_confirmed_at || user.confirmed_at),
@@ -644,6 +662,7 @@ export default function MySettingsPage() {
                 setAvatarPath(getProfileAvatarPresence(nextProfile));
                 setAvatarUrl(getProfileAvatarUrl(nextProfile));
                 setAccount(nextAccount);
+                setNicknameDraft(nextAccount.nickname);
                 setContactDrafts({
                     sns: nextAccount.snsId,
                 });
@@ -866,6 +885,83 @@ export default function MySettingsPage() {
         return;
     };
 
+    const handleNicknameSave = async () => {
+        if (!viewerId) return;
+
+        const { canUpdate, daysLeft } = getNicknameCooldownInfo(account.nicknameUpdatedAt);
+
+        if (!canUpdate) {
+            setNicknameSaveStatus("error");
+            setNicknameMessage(`별명은 90일마다 한 번만 변경할 수 있습니다. (남은 기간: ${daysLeft}일)`);
+            return;
+        }
+
+        const newNickname = nicknameDraft.trim();
+        if (!newNickname) {
+            setNicknameSaveStatus("error");
+            setNicknameMessage("별명을 입력해 주세요.");
+            return;
+        }
+
+        if (newNickname === account.nickname) {
+            setNicknameSaveStatus("idle");
+            setNicknameMessage("");
+            return;
+        }
+
+        setNicknameSaveStatus("saving");
+        setNicknameMessage("");
+
+        try {
+            const now = new Date().toISOString();
+            const { data, error } = await supabase
+                .from("profiles")
+                .update({
+                    nickname: newNickname,
+                    nickname_updated_at: now,
+                })
+                .eq("id", viewerId)
+                .select("*")
+                .maybeSingle();
+
+            if (error) throw error;
+
+            const nextProfile = data as ProfileRecord | null;
+            if (!nextProfile) throw new Error("profile_not_found");
+
+            setProfile(nextProfile);
+            setAccount((current) => ({
+                ...current,
+                displayName: nextProfile.nickname || nextProfile.display_name || current.displayName,
+                nickname: nextProfile.nickname || "",
+                nicknameUpdatedAt: nextProfile.nickname_updated_at,
+            }));
+            setNicknameDraft(nextProfile.nickname || "");
+            setNicknameSaveStatus("success");
+            setNicknameMessage("별명을 성공적으로 변경했습니다.");
+        } catch (error) {
+            console.error("[settings-nickname] save_failed", error);
+            setNicknameSaveStatus("error");
+            setNicknameMessage("별명을 저장하지 못했습니다. 다시 시도해 주세요.");
+        }
+    };
+
+    const getNicknameCooldownInfo = (updatedAt: string | null) => {
+        if (!updatedAt) return { canUpdate: true, daysLeft: 0, nextAvailableDate: null };
+
+        const lastUpdate = new Date(updatedAt);
+        const now = new Date();
+        const diffTime = now.getTime() - lastUpdate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        const canUpdate = diffDays >= NICKNAME_COOLDOWN_DAYS;
+        const daysLeft = Math.max(0, NICKNAME_COOLDOWN_DAYS - diffDays);
+
+        const nextDate = new Date(lastUpdate.getTime() + NICKNAME_COOLDOWN_DAYS * 24 * 60 * 60 * 1000);
+
+        return { canUpdate, daysLeft, nextAvailableDate: nextDate };
+    };
+
     const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         event.target.value = "";
@@ -961,6 +1057,16 @@ export default function MySettingsPage() {
 
     const personalRows = useMemo<SettingsRow[]>(
         () => [
+            {
+                id: "nickname",
+                title: "별명",
+                value: account.nickname || "설정 안 됨",
+                helper: account.nickname
+                    ? "커뮤니티와 프로필에 표시되는 이름이에요."
+                    : "아직 별명이 설정되지 않았어요.",
+                badge: account.nickname ? "설정됨" : "미설정",
+                tone: account.nickname ? "info" : "neutral",
+            },
             {
                 id: "email",
                 title: "이메일",
@@ -1159,6 +1265,68 @@ export default function MySettingsPage() {
 
     const activeRows =
         activeTab === "partner" ? partnerRows : activeTab === "admin" ? adminRows : personalRows;
+
+    const renderEditableNicknameCard = (row: SettingsRow) => {
+        const { canUpdate, daysLeft, nextAvailableDate } = getNicknameCooldownInfo(account.nicknameUpdatedAt);
+        const isSaving = nicknameSaveStatus === "saving";
+        const isDirty = nicknameDraft !== account.nickname;
+        const canSave = account.isLoggedIn && isDirty && !isSaving && canUpdate;
+
+        const helperMessage =
+            nicknameSaveStatus === "error"
+                ? nicknameMessage
+                : nicknameSaveStatus === "success"
+                  ? nicknameMessage
+                  : !canUpdate && nextAvailableDate
+                    ? `${NICKNAME_COOLDOWN_DAYS}일에 한 번만 변경 가능합니다. (다음 변경 가능일: ${nextAvailableDate.toLocaleDateString()})`
+                    : row.helper;
+
+        return (
+            <article key={row.id} className={styles.itemCard}>
+                <div className={styles.itemTop}>
+                    <div className={styles.itemText}>
+                        <h3 className={styles.itemTitle}>{row.title}</h3>
+                    </div>
+                    <span className={`${styles.badge} ${styles[`${row.tone}Badge`]}`}>
+                        {row.badge}
+                    </span>
+                </div>
+                <div className={styles.inlineEditorRow}>
+                    <input
+                        type="text"
+                        value={nicknameDraft}
+                        onChange={(event) => {
+                            setNicknameDraft(event.target.value);
+                            setNicknameSaveStatus("idle");
+                            setNicknameMessage("");
+                        }}
+                        placeholder="새 별명을 입력해 주세요."
+                        className={styles.inlineInput}
+                        disabled={!account.isLoggedIn || isSaving || !canUpdate}
+                    />
+                    <button
+                        type="button"
+                        className={styles.secondaryButton}
+                        onClick={() => void handleNicknameSave()}
+                        disabled={!canSave}
+                    >
+                        {isSaving ? "저장 중..." : "저장"}
+                    </button>
+                </div>
+                <p
+                    className={`${styles.inlineEditorMessage} ${
+                        nicknameSaveStatus === "error" || !canUpdate
+                            ? styles.inlineEditorError
+                            : nicknameSaveStatus === "success"
+                              ? styles.inlineEditorSuccess
+                              : ""
+                    }`}
+                >
+                    {helperMessage}
+                </p>
+            </article>
+        );
+    };
 
     const renderEditableContactCard = (row: SettingsRow) => {
         const field = row.id as ContactField;
@@ -1429,7 +1597,9 @@ export default function MySettingsPage() {
 
                 <div className={styles.itemsList}>
                     {activeRows.map((row) => (
-                        row.id === "sns" || row.id === "phone" ? (
+                        row.id === "nickname" ? (
+                            renderEditableNicknameCard(row)
+                        ) : row.id === "sns" || row.id === "phone" ? (
                             renderEditableContactCard(row)
                         ) : (
                             <article key={row.id} className={styles.itemCard}>
