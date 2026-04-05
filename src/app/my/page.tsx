@@ -15,6 +15,8 @@ import {
 
 interface DashboardProfileRecord {
     display_name: string | null;
+    nickname: string | null;
+    nickname_updated_at: string | null;
     role: string | null;
     created_at: string | null;
     avatar_url: string | null;
@@ -651,7 +653,7 @@ function MyPageContent() {
 
             const { data: profileData } = await supabase
                 .from("profiles")
-                .select("display_name, role, created_at, avatar_url")
+                .select("display_name, nickname, nickname_updated_at, role, created_at, avatar_url")
                 .eq("id", user.id)
                 .maybeSingle();
 
@@ -663,6 +665,7 @@ function MyPageContent() {
             setAvatarUrl(nextProfile?.avatar_url ?? undefined);
             const email = pickString(user.email);
             const displayName = pickString(
+                nextProfile?.nickname,
                 nextProfile?.display_name,
                 user.user_metadata?.full_name,
                 user.user_metadata?.name,
