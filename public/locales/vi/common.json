@@ -1793,7 +1793,7 @@
       "search_placeholder": "Tìm kiếm chủ đề quan tâm"
     },
     "categories": {
-      "all": "All",
+      "all": "Tất cả",
       "beauty_review": "Beauty Reviews",
       "food_review": "Restaurant Tips",
       "travel_review": "Travel Tips",
@@ -1802,154 +1802,169 @@
       "help": "Q&A"
     },
     "sub_filters": {
-      "all": "All",
-      "saved": "Saved",
-      "reacted": "Reacted",
-      "mine": "My Posts",
-      "recruiting": "Recruiting",
-      "active_reactions": "Trending",
-      "open_meetup": "Open Meetups",
-      "weekend": "Weekend",
-      "fresh": "Fresh Info"
+      "all": "Tất cả",
+      "saved": "Đã lưu",
+      "reacted": "Đã phản hồi",
+      "mine": "Bài của tôi",
+      "recruiting": "Đang tuyển",
+      "active_reactions": "Phản ứng nồng nhiệt",
+      "open_meetup": "Cuộc gặp mở",
+      "weekend": "Cuối tuần này",
+      "fresh": "Thông tin mới"
     },
     "status": {
-      "reviews": "Reviews",
-      "reacting": "Reacting",
-      "surveying": "Surveying",
-      "drafting": "Drafting",
-      "closed": "Closed"
+      "reviews": "Đánh giá",
+      "reacting": "Đang gom phản hồi",
+      "surveying": "Đang xác nhận",
+      "drafting": "Đang chuẩn bị",
+      "closed": "Đã đóng"
     },
     "tags": {
-      "solo_friendly": "Solo Friendly",
-      "friends_friendly": "Friends Friendly",
-      "photo_spot": "Photo Spots",
-      "waiting": "Waiting Expected",
-      "foreigner_friendly": "Foreigner Friendly"
+      "solo_friendly": "Thích hợp đi một mình",
+      "friends_friendly": "Thích hợp đi cùng bạn",
+      "photo_spot": "Nơi chụp ảnh đẹp",
+      "waiting": "Có thời gian chờ",
+      "foreigner_friendly": "Thân thiện với người nước ngoài"
     },
     "states": {
-      "fetch_failed_desc": "Failed to load posts. Please check your network.",
-      "fetch_failed_title": "Data Error",
-      "fetch_failed_tip": "Try refreshing the page.",
-      "empty_title": "No posts yet",
-      "empty_desc": "Be the first to share your story!",
-      "empty_tip": "Tap the write button on the bottom right.",
-      "no_results_title": "No results found",
-      "no_results_desc": "Try searching with other keywords."
+      "fetch_failed_desc": "Không tải được bài. Kiểm tra mạng.",
+      "fetch_failed_title": "Lỗi dữ liệu",
+      "fetch_failed_tip": "Vui lòng làm mới.",
+      "empty_title": "Chưa có bài viết nào",
+      "empty_desc": "Hãy trở thành người đầu tiên!",
+      "empty_tip": "Nhấp vào góc dưới bên phải để viết.",
+      "no_results_title": "Không có kết quả",
+      "no_results_desc": "Thử từ khóa khác.",
+      "cta_write": "Viết bài đầu tiên",
+      "cta_all": "Xem tất cả"
     },
     "quality_signals": {
-      "organized": "Well Organized",
-      "active": "Very Popular",
-      "asset": "Rich Information",
-      "mate": "Good Mate"
+      "organized": "Bài viết tốt",
+      "active": "Rất được ưa chuộng",
+      "asset": "Đầy đủ thông tin",
+      "mate": "Tìm được bạn đồng hành tốt"
     },
     "toasts": {
-      "save_added": "Added to saved posts.",
-      "save_removed": "Removed from saved posts.",
-      "deleted": "Deleted successfully.",
-      "updated": "Updated successfully.",
-      "submitted": "Posted successfully."
+      "save_added": "Đã thêm vào bài yêu thích.",
+      "save_removed": "Đã xóa khỏi bài yêu thích.",
+      "deleted": "Đã xóa.",
+      "updated": "Đã cập nhật.",
+      "submitted": "Đã gửi.",
+      "region_collected": "Xem bài viết về {{region}}"
     },
     "nav_summary": {
-      "all": "Viewing all stories in {{tab}}",
-      "active_reactions": "Getting hot reactions in {{tab}}!",
-      "open_meetup": "Looking for new mates in {{tab}}",
-      "weekend": "Any plans for this weekend in {{tab}}?",
-      "default": "Showing results filtered by {{sub}} in {{tab}}"
+      "all": "Đang xem tất cả câu chuyện ở {{tab}}",
+      "active_reactions": "Được quan tâm nhiều trong {{tab}}!",
+      "open_meetup": "Đang tìm bạn đồng hành mới ở {{tab}}",
+      "weekend": "{{tab}} có kế hoạch cuối tuần này không?",
+      "default": "Kết quả đã lọc {{sub}} ở {{tab}}"
     },
     "form": {
-      "select_category": "Select Category",
+      "select_category": "Chọn danh mục",
       "write_guide_title": {
-        "beauty_review": "Share your beauty experience",
-        "food_review": "Any hidden gems to recommend?",
-        "travel_review": "Share your travel tips",
-        "meetup": "Find mates to hang out with",
-        "meetup_recruitment": "Looking for travel mates?",
-        "help": "Ask anything"
+        "beauty_review": "Kể cho chúng tôi trải nghiệm làm đẹp của bạn",
+        "food_review": "Có quán ăn bí mật nào không?",
+        "travel_review": "Chia sẻ mẹo du lịch",
+        "meetup": "Tìm bạn đồng hành",
+        "meetup_recruitment": "Tìm bạn đồng hành?",
+        "help": "Hỏi bất cứ điều gì"
       },
       "write_guide_body": {
-        "beauty_review": "Share your honest review of the treatment or service.",
-        "food_review": "Share information on taste, mood, or waiting.",
-        "travel_review": "Provide useful tips on courses, packing, or moving.",
-        "meetup": "Describe when, where, and what to do.",
-        "meetup_recruitment": "State your travel schedule, destinations, and mate conditions.",
-        "help": "Describe your question or situation in detail."
+        "beauty_review": "Chia sẻ đánh giá chân thực.",
+        "food_review": "Chia sẻ vị giác, không khí...",
+        "travel_review": "Chia sẻ mẹo du lịch.",
+        "meetup": "Viết về thời điểm, địa điểm...",
+        "meetup_recruitment": "Ghi lịch trình, điểm đến...",
+        "help": "Viết chi tiết câu hỏi."
       },
       "title_label": {
-        "beauty_review": "Srv/Theme",
-        "default": "Title"
+        "beauty_review": "Dịch vụ/Chủ đề",
+        "default": "Tiêu đề"
       },
       "title_placeholder": {
-        "beauty_review": "e.g. Gangnam Layered Cut Review",
+        "beauty_review": "VD: Đánh giá cắt tóc",
         "food_review": "e.g. Trendy Japanese spot in Seongsu",
         "travel_review": "e.g. KTX tips from Seoul to Busan",
         "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
         "meetup_recruitment": "e.g. Gyeongbokgung next week together",
-        "help": "e.g. How to get to hotel from ICN airport?"
+        "help": "e.g. How to get to hotel from ICN airport?",
+        "default": "Bạn đang nghĩ xem nên viết gì?"
       },
       "desc_label": {
-        "beauty_review": "Details",
-        "default": "Content"
+        "beauty_review": "Đánh giá chi tiết",
+        "default": "Nội dung"
       },
       "desc_placeholder": {
-        "beauty_review": "Describe the process or results in detail.",
-        "food_review": "Recommend menus and explain why.",
-        "travel_review": "Share info helpful for other travelers.",
-        "meetup": "Describe the meetup in detail.",
-        "meetup_recruitment": "Describe what you want to do together.",
-        "help": "Detailed questions help getting better answers."
+        "beauty_review": "Chia sẻ chi tiết...",
+        "food_review": "Gợi ý menu...",
+        "travel_review": "Chia sẻ mẹo du lịch...",
+        "meetup": "Chi tiết buổi gặp.",
+        "meetup_recruitment": "Viết việc muốn làm...",
+        "help": "Hỏi chi tiết hơn...",
+        "default": "Viết câu chuyện bạn muốn chia sẻ"
       },
       "image": {
         "guides": {
-          "beauty_review": "Add before/after or shop interior photos (Max 4)",
-          "food_review": "Add food and shop interior photos (Max 4)",
-          "travel_review": "Add photos that show the vibe (Max 4)",
-          "meetup": "Add photos of the place or activity (Max 4)",
-          "meetup_recruitment": "Add destination or reference photos (Max 4)",
-          "help": "Add photos that help explain the issue (Max 4)"
+          "beauty_review": "Thêm ảnh (tối đa 4)",
+          "food_review": "Thêm ảnh (tối đa 4)",
+          "travel_review": "Thêm ảnh (tối đa 4)",
+          "meetup": "Thêm ảnh nhóm (tối đa 4)",
+          "meetup_recruitment": "Thêm ảnh (tối đa 4)",
+          "help": "Thêm ảnh (tối đa 4)"
         },
-        "saved_name": "Saved image {{index}}",
-        "file_only_alert": "Only image files can be selected.",
-        "limit_alert": "Up to {{count}} images can be uploaded.",
+        "saved_name": "Ảnh đã lưu {{index}}",
+        "file_only_alert": "Chỉ cho phép ảnh.",
+        "limit_alert": "Tối đa {{count}} ảnh.",
         "load_failed_alert": "Không thể tải ảnh.",
         "limit_label": "(Tối đa {{count}} ảnh)"
       },
       "category_hints": {
-        "beauty_review": "Share your beauty shop experiences.",
-        "food_review": "Recommend your favorite spots.",
-        "travel_review": "Share your own travel know-how.",
-        "meetup": "Create a casual meetup to enjoy together.",
-        "meetup_recruitment": "Find travel mates with similar schedules.",
-        "help": "Ask anything you're curious about."
-      }
+        "beauty_review": "Chia sẻ làm đẹp...",
+        "food_review": "Gợi ý nhà hàng...",
+        "travel_review": "Bí quyết du lịch...",
+        "meetup": "Tạo cuộc gặp thoải mái.",
+        "meetup_recruitment": "Tìm bạn du lịch phù hợp.",
+        "help": "Hỏi bất cứ điều gì..."
+      },
+      "category_label": "Danh mục",
+      "region_label": "Khu vực",
+      "region_placeholder": "Khu vực (vd: Gangnam)",
+      "submit": "Gửi",
+      "write_title": "Viết bài",
+      "edit_title": "Chỉnh sửa",
+      "image_label": "Đính kèm ảnh",
+      "add_photo": "Thêm ảnh",
+      "preparing_images": "Đang chuẩn bị ảnh...",
+      "cancel": "Hủy"
     },
-    "detail": "Post Detail",
+    "detail": "Chi tiết bài",
     "detail_page": {
-      "loading": "Loading data...",
-      "hidden_post": "This post is hidden.",
-      "not_found": "Post not found.",
-      "show_hidden": "Show Hidden Post",
-      "hide_post": "Hide this post",
+      "loading": "Đang tải...",
+      "hidden_post": "Bài đã ẩn.",
+      "not_found": "Không tìm thấy.",
+      "show_hidden": "Xem bài đã ẩn",
+      "hide_post": "Ẩn bài này",
       "freshness": {
-        "realtime": "Actively Live",
-        "updated": "Info Updated",
-        "active": "Active Post",
-        "calm": "Calm Post"
+        "realtime": "Đang hoạt động",
+        "updated": "Thông tin đã cập nhật",
+        "active": "Bài viết sôi nổi",
+        "calm": "Bài viết yên tĩnh"
       },
       "strengths": {
-        "title": "Post Strengths",
-        "organized": "Well Organized",
-        "active": "Active Interaction",
-        "visited_tip": "Includes Tips",
-        "new": "New Content"
+        "title": "Điểm mạnh bài viết",
+        "organized": "Đánh giá chi tiết",
+        "active": "Giao tiếp tốt",
+        "visited_tip": "Bao gồm mẹo",
+        "new": "Tin tức mới"
       },
       "checklist": {
-        "title": "Checklist",
-        "recommended": "Recommended for",
-        "required": "Must Check",
-        "comment_check": "Check comments",
-        "read_details": "Read details"
+        "title": "Danh sách",
+        "recommended": "Khuyên dùng",
+        "required": "Bắt buộc kiểm tra",
+        "comment_check": "Nên đọc bình luận",
+        "read_details": "Xem chi tiết"
       },
-      "mini_signal_tag": "Meetup Open",
+      "mini_signal_tag": "Có thể gặp mặt",
       "primary_action": {
         "review": "Để lại đánh giá",
         "join": "Tôi quan tâm"
@@ -1957,135 +1972,221 @@
       "save": {
         "saved": "Đã lưu",
         "default": "Lưu"
-      }
-,
-      "meetup_safety": {
-        "title": "Meetup Safety Guide",
-        "item_1": "Meeting in public places is recommended.",
-        "item_2": "Be careful with personal information."
       },
-      "body_title": "Post Content",
-      "like": "Like",
-      "dislike": "Dislike",
+      "meetup_safety": {
+        "title": "An toàn khi gặp mặt",
+        "item_1": "Gặp nơi công cộng.",
+        "item_2": "Cẩn thận với thông tin."
+      },
+      "body_title": "Nội dung bài viết",
+      "like": "Thích",
+      "dislike": "Không thích",
       "like_alert": "Liked!",
       "dislike_alert": "Disliked.",
-      "comments_title": "Comments",
+      "comments_title": "Bình luận",
       "comment_input": {
-        "default": "Enter a comment...",
-        "optional": "Add an optional note",
-        "send": "Send"
+        "default": "Nhập bình luận...",
+        "optional": "Để lại ý định (Tuỳ chọn)",
+        "send": "Gửi",
+        "open_btn": "Viết bình luận",
+        "cancel": "Hủy"
       },
       "signal_intents": {
-        "interested": "I'm interested",
-        "available_this_week": "Available this week",
-        "join_if_schedule_fits": "Join if schedule fits",
-        "thanks": "Thanks for info",
-        "question": "Have a question"
+        "interested": "Tôi cũng muốn đi",
+        "available_this_week": "Có thể tuần này",
+        "join_if_schedule_fits": "Cùng đi nếu hợp lịch",
+        "thanks": "Cảm ơn",
+        "question": "Có câu hỏi"
       },
       "signal_times": {
-        "this_week": "This week",
-        "this_weekend": "This weekend",
-        "next_week": "Next week",
-        "schedule_coordination": "Coordinating date"
+        "this_week": "Tuần này",
+        "this_weekend": "Cuối tuần này",
+        "next_week": "Tuần tới",
+        "schedule_coordination": "Sẽ thoả thuận"
       },
       "author_panel": {
-        "title": "Author Dashboard",
-        "badge": "Author",
+        "title": "Bảng điều khiển tác giả",
+        "badge": "Tác giả",
         "stats": {
-          "total": "Total Reactions",
+          "total": "Tổng phản hồi",
           "total_value": "{{count}}",
-          "time": "Preferred Time",
-          "time_pending": "Calculating",
-          "intent": "Main Intent",
-          "recent": "Last 24h",
+          "time": "Thời gian tốt nhất",
+          "time_pending": "Đang tính toán",
+          "intent": "Dự định chính",
+          "recent": "24h gần đây",
           "recent_value": "{{count}}"
         },
         "guide": {
-          "weekend": "Weekend has most reactions. Suggest a detailed schedule.",
-          "vote": "Preferred times vary. Try a vote to finalize.",
-          "share": "Share more info to get more attention."
+          "weekend": "Cuối tuần phù hợp",
+          "vote": "Mở bình chọn.",
+          "share": "Chia sẻ thêm."
         },
         "action": {
-          "weekend": "Suggest Weekend Schedule",
-          "vote": "Post a Vote",
-          "share": "Share Extra Tips"
+          "weekend": "Đề xuất cuối tuần",
+          "vote": "Tạo bình chọn",
+          "share": "Chia sẻ thêm mẹo"
         },
         "draft": {
-          "weekend": "How about meeting this weekend at 2PM?",
-          "vote": "Please vote for your preferred time!",
-          "share": "Here's one more tip for you!"
+          "weekend": "Hẹn 2H chiều cuối tuần này nhé?",
+          "vote": "Bình chọn thời gian tốt nhất nào!",
+          "share": "Một mẹo nữa nhé!"
         },
-        "final_draft": "Closing the recruitment. Please join our open chat if you're participating!",
-        "final_action": "Close Recruitment",
-        "footer": "Kello promotes a safe community culture."
+        "final_draft": "Hoàn tất gọi nhóm. Vào chat nhé!",
+        "final_action": "Đóng tuyển người",
+        "footer": "Kello hướng tới an toàn."
       },
       "status_controls": {
-        "title": "Change Status"
+        "title": "Đổi trạng thái"
       },
       "result": {
-        "title": "Post-visit Report & Tips",
-        "help": "Share tips or reviews after your visit. It helps others a lot.",
-        "placeholder": "Write your post-visit review here...",
-        "save_visited": "Save Visit & Tips",
-        "save_only": "Save Info Only"
+        "title": "Ghi kết quả và mẹo",
+        "help": "Chia sẻ kinh nghiệm thực tế.",
+        "placeholder": "Viết đánh giá của bạn...",
+        "save_visited": "Lưu kết quả",
+        "save_only": "Chỉ lưu thông tin"
       },
       "author_safety": {
-        "title": "Author Safety Guide",
-        "item_1": "Do not expose personal contact info directly.",
-        "item_2": "Beware of illegal meetups or money requests.",
-        "item_3": "Communicate with trusted users."
+        "title": "Hướng dẫn an toàn tác giả",
+        "item_1": "Không tiết lộ liên lạc.",
+        "item_2": "Đề phòng lừa đảo.",
+        "item_3": "Tương tác với người đáng tin."
       },
       "signal_summary": {
-        "title": "Participation Summary",
+        "title": "Tóm tắt",
         "status": {
-          "active": "Actively Recruiting",
-          "forming": "Forming",
-          "preparing": "Starting"
+          "active": "Tích cực tuyển",
+          "forming": "Đang tập hợp",
+          "preparing": "Tuyển người"
         },
-        "time_split": "Preferred times are split.",
-        "time_focus": "Most preferred: {{time}}",
-        "time_flexible": "Many flexible times.",
-        "desc": "{{count}} people expressed interest in {{topic}}.",
-        "topic_review": "review sharing",
-        "topic_outing": "meetup participation",
-        "schedule_title": "Choose Preferred Time"
+        "time_split": "Ý kiến khác nhau.",
+        "time_focus": "{{time}} được thích nhất.",
+        "time_flexible": "Nhiều thời điểm linh động.",
+        "desc": "Về {{topic}}, {{count}} người tham gia.",
+        "topic_review": "Chia sẻ Review",
+        "topic_outing": "Tham gia Meetup",
+        "schedule_title": "Chọn thời gian"
       },
       "status": {
         "REVIEWS": "Reviews Done",
-        "REACTING": "Reacting",
-        "SURVEYING": "Surveying",
-        "DRAFTING": "Drafting",
-        "CLOSED": "Closed"
+        "REACTING": "Đang gom phản hồi",
+        "SURVEYING": "Đang xác nhận",
+        "DRAFTING": "Đang chuẩn bị",
+        "CLOSED": "Đã đóng"
       },
       "tags": {
-        "solo_friendly": "Solo Friendly",
+        "solo_friendly": "Thích hợp đi một mình",
         "friends_friendly": "With Friends",
         "photo_spot": "Photo Spots",
         "waiting": "Wait Exists",
-        "foreigner_friendly": "Foreigner Friendly"
-      }
+        "foreigner_friendly": "Thân thiện với người nước ngoài"
+      },
+      "empty_comments": "Chưa có bình luận. Hãy là người đầu tiên!",
+      "hide_comment": "Ẩn bình luận này"
     },
     "actions": {
-      "delete_confirm": "Are you sure you want to delete?"
+      "delete_confirm": "Bạn có chắc chắn muốn xóa không?"
     },
     "errors": {
-      "login_required": "Login required.",
-      "post_failed": "Failed to post: {{message}}"
+      "login_required": "Yêu cầu đăng nhập.",
+      "post_failed": "Lỗi đăng bài: {{message}}"
     },
     "report": {
-      "report_action": "Report",
-      "success": "Reported successfully.",
+      "report_action": "Báo cáo",
+      "success": "Đã báo cáo.",
       "reasons": {
-        "ad_spam": "Ad/Spam",
-        "offensive": "Offensive",
-        "contact": "Contact Induction",
-        "unsafe": "Unsafe",
-        "other": "Other"
+        "ad_spam": "Quảng cáo/Rác",
+        "offensive": "Nội dung không phù hợp",
+        "contact": "Gợi ý xấu",
+        "unsafe": "Thông tin nguy hiểm",
+        "other": "Khác"
       }
     },
-    "comments": "Comments",
+    "comments": "Bình luận",
     "time": {
-      "just_now": "Just now"
+      "just_now": "Vừa xong"
+    },
+    "write_post": "Viết bài",
+    "edit": "Chỉnh sửa",
+    "posting": "Đang đăng...",
+    "defaults": {
+      "region": "Seoul"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "Cùng làm đẹp"
+      },
+      "flash_meetup": {
+        "label": "Gặp mặt nhanh"
+      },
+      "beauty": {
+        "label": "Đánh giá làm đẹp"
+      },
+      "food": {
+        "label": "Gợi ý món ăn"
+      },
+      "travel": {
+        "label": "Mẹo du lịch"
+      },
+      "write": {
+        "label": "Viết bài"
+      },
+      "browse": {
+        "label": "Kiểm tra",
+        "sub": "Bài viết phổ biến"
+      },
+      "recruiting": {
+        "label": "Đang tuyển",
+        "sub": "Tìm bạn đồng hành"
+      },
+      "weekend": {
+        "label": "Cuối tuần này",
+        "sub": "Chia sẻ lịch trình"
+      },
+      "record": {
+        "label": "Ghi lại",
+        "sub": "Chia sẻ hàng ngày"
+      }
+    },
+    "fab": {
+      "create_post": "Viết bài"
+    },
+    "sort": {
+      "latest": "Mới nhất",
+      "reactions": "Nhiều phản hồi nhất",
+      "draft": "Tuyển dụng nhiều nhất"
+    },
+    "card": {
+      "default_vibe": "Không khí tuyệt vời",
+      "title_prefix": {
+        "beauty_review": "[Làm đẹp]",
+        "food_review": "[Đồ ăn]",
+        "travel_review": "[Du lịch]"
+      },
+      "cta": {
+        "review": "Xem đánh giá",
+        "join": "Tham gia"
+      },
+      "result_badge": "Hoàn tất đánh giá",
+      "open_meetup_badge": "Có thể gặp mặt",
+      "fresh_badges": {
+        "comment": "Đang tương tác",
+        "update": "Vừa cập nhật"
+      },
+      "draft_status": {
+        "active": "Giao tiếp tích cực",
+        "forming": "Đang tập hợp",
+        "preparing": "Đang mong tham gia"
+      },
+      "draft_desc": {
+        "active": "Nhiều người đã quan tâm!",
+        "forming": "Mọi người đang dần tập hợp.",
+        "preparing": "Hãy là người đầu tiên thể hiện sự quan tâm."
+      },
+      "owner_reactions": {
+        "region": "Đang trò chuyện với {{count}} người về {{region}}",
+        "join": "{{count}} người muốn tham gia"
+      },
+      "more_region": "Xem thêm câu chuyện về {{region}}"
     }
   },
   "help_page": {

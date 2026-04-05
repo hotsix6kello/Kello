@@ -1515,7 +1515,8 @@
         "travel_review": "Share info helpful for other travelers.",
         "meetup": "Describe the meetup in detail.",
         "meetup_recruitment": "Describe what you want to do together.",
-        "help": "Detailed questions help getting better answers."
+        "help": "Detailed questions help getting better answers.",
+        "default": "Write the story you want to share"
       },
       "image": {
         "guides": {
@@ -1549,16 +1550,40 @@
       "cancel": "Cancel"
     },
     "quick_entry": {
-      "beauty_together": { "label": "Beauty Trip" },
-      "flash_meetup": { "label": "Flash Meetup" },
-      "beauty": { "label": "Beauty Reviews" },
-      "food": { "label": "Food Tips" },
-      "travel": { "label": "Travel Info" },
-      "write": { "label": "New Post" },
-      "browse": { "label": "Browse", "sub": "Popular Posts" },
-      "recruiting": { "label": "Recruiting", "sub": "Mates" },
-      "weekend": { "label": "Weekend", "sub": "Weekly Plan" },
-      "record": { "label": "Journal", "sub": "Daily Life" }
+      "beauty_together": {
+        "label": "Beauty Trip"
+      },
+      "flash_meetup": {
+        "label": "Flash Meetup"
+      },
+      "beauty": {
+        "label": "Beauty Reviews"
+      },
+      "food": {
+        "label": "Food Tips"
+      },
+      "travel": {
+        "label": "Travel Info"
+      },
+      "write": {
+        "label": "New Post"
+      },
+      "browse": {
+        "label": "Browse",
+        "sub": "Popular Posts"
+      },
+      "recruiting": {
+        "label": "Recruiting",
+        "sub": "Mates"
+      },
+      "weekend": {
+        "label": "Weekend",
+        "sub": "Weekly Plan"
+      },
+      "record": {
+        "label": "Journal",
+        "sub": "Daily Life"
+      }
     },
     "fab": {
       "create_post": "Write Post"
