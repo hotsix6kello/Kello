@@ -191,7 +191,6 @@
         "days_zero": "{{count}} 天",
         "days_one": "{{count}} 天",
         "days_other": "{{count}} 天"
-
       }
     },
     "morning": "早上好",
@@ -943,7 +942,9 @@
       "empty_desc": "快来发布第一条动态吧！",
       "empty_tip": "点击右下角按钮开始发布。",
       "no_results_title": "未找到相关结果",
-      "no_results_desc": "请尝试更换其他关键词。"
+      "no_results_desc": "请尝试更换其他关键词。",
+      "cta_write": "发表第一篇帖子",
+      "cta_all": "查看全部"
     },
     "quality_signals": {
       "organized": "整理精良",
@@ -956,7 +957,8 @@
       "save_removed": "已移除收藏。",
       "deleted": "已删除。",
       "updated": "已更新。",
-      "submitted": "发布成功。"
+      "submitted": "发布成功。",
+      "region_collected": "只看{{region}}的帖子"
     },
     "nav_summary": {
       "all": "正在查看 {{tab}} 的全部内容",
@@ -1035,7 +1037,8 @@
       "image_label": "图片附件",
       "add_photo": "添加照片",
       "preparing_images": "正在准备图片...",
-      "cancel": "取消"
+      "cancel": "取消",
+      "category_label": "类别"
     },
     "detail": "帖子详情",
     "detail_page": {
@@ -1087,7 +1090,9 @@
       "comment_input": {
         "default": "发表评论...",
         "optional": "想对楼主说点什么？ (选填)",
-        "send": "发布"
+        "send": "发布",
+        "open_btn": "写评论",
+        "cancel": "取消"
       },
       "signal_intents": {
         "interested": "我也想去",
@@ -1177,7 +1182,9 @@
         "photo_spot": "容易出片",
         "waiting": "建议预留时间",
         "foreigner_friendly": "沟通无障碍"
-      }
+      },
+      "empty_comments": "暂无评论。来抢沙发吧！",
+      "hide_comment": "隐藏此评论"
     },
     "actions": {
       "delete_confirm": "确定要删除吗？",
@@ -1201,6 +1208,89 @@
     "comments": "评论",
     "time": {
       "just_now": "刚刚"
+    },
+    "write_post": "发帖",
+    "edit": "编辑",
+    "posting": "提交中...",
+    "defaults": {
+      "region": "首尔"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "一起做美容"
+      },
+      "flash_meetup": {
+        "label": "快闪聚会"
+      },
+      "beauty": {
+        "label": "美容评价"
+      },
+      "food": {
+        "label": "美食推荐"
+      },
+      "travel": {
+        "label": "旅行提示"
+      },
+      "write": {
+        "label": "发帖"
+      },
+      "browse": {
+        "label": "浏览",
+        "sub": "热门贴子"
+      },
+      "recruiting": {
+        "label": "招募中",
+        "sub": "寻找旅伴"
+      },
+      "weekend": {
+        "label": "这个周末",
+        "sub": "共享行程"
+      },
+      "record": {
+        "label": "记录",
+        "sub": "日常分享"
+      }
+    },
+    "fab": {
+      "create_post": "发帖"
+    },
+    "sort": {
+      "latest": "最新排序",
+      "reactions": "最多互动",
+      "draft": "最活跃招募"
+    },
+    "card": {
+      "default_vibe": "气氛好",
+      "title_prefix": {
+        "beauty_review": "[美容]",
+        "food_review": "[美食]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "查看评价",
+        "join": "参与"
+      },
+      "result_badge": "评价完成",
+      "open_meetup_badge": "可聚会",
+      "fresh_badges": {
+        "comment": "实时互动中",
+        "update": "刚刚更新"
+      },
+      "draft_status": {
+        "active": "活跃交流中",
+        "forming": "人员组成中",
+        "preparing": "希望参与中"
+      },
+      "draft_desc": {
+        "active": "已经有很多人感兴趣！",
+        "forming": "人们正在慢慢聚集。",
+        "preparing": "成为第一个表达兴趣的人。"
+      },
+      "owner_reactions": {
+        "region": "正在与{{count}}人交流关于{{region}}",
+        "join": "{{count}}人希望参与"
+      },
+      "more_region": "查看更多关于{{region}}的故事"
     }
   },
   "help_page": {
