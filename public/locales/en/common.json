@@ -1408,12 +1408,12 @@
     },
     "categories": {
       "all": "All",
-      "beauty_review": "Beauty Reviews",
-      "food_review": "Restaurant Tips",
-      "travel_review": "Travel Tips",
-      "meetup": "Flash Meetups",
-      "meetup_recruitment": "Travel Mates",
-      "help": "Q&A"
+      "meetup": "Meetups",
+      "beauty_review": "Beauty",
+      "food_review": "Food",
+      "travel_review": "Travel",
+      "meetup_recruitment": "Recruit",
+      "help": "Tips"
     },
     "sub_filters": {
       "all": "All",
@@ -1500,11 +1500,7 @@
       },
       "title_placeholder": {
         "beauty_review": "e.g. Gangnam Layered Cut Review",
-        "food_review": "e.g. Trendy Japanese spot in Seongsu",
-        "travel_review": "e.g. KTX tips from Seoul to Busan",
-        "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
-        "meetup_recruitment": "e.g. Gyeongbokgung next week together",
-        "help": "e.g. How to get to hotel from ICN airport?"
+        "default": "Enter title"
       },
       "desc_label": {
         "beauty_review": "Details",
@@ -1539,7 +1535,14 @@
         "meetup": "Create a casual meetup to enjoy together.",
         "meetup_recruitment": "Find travel mates with similar schedules.",
         "help": "Ask anything you're curious about."
-      }
+      },
+      "submit": "Post",
+      "write_title": "Write Post",
+      "edit_title": "Edit Post",
+      "image_label": "Images",
+      "add_photo": "Add Photo",
+      "preparing_images": "Preparing images...",
+      "cancel": "Cancel"
     },
     "quick_entry": {
       "beauty_together": { "label": "Beauty Trip" },
@@ -1554,7 +1557,7 @@
       "record": { "label": "Journal", "sub": "Daily Life" }
     },
     "fab": {
-      "create_post": "Write"
+      "create_post": "Write Post"
     },
     "sort": {
       "latest": "Latest",
