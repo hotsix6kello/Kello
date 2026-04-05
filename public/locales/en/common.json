@@ -550,7 +550,8 @@
       "open_admin_console": "Open Admin Console",
       "interpreter_for_booking": "Translation for this booking",
       "show_booking_phrases": "Show booking phrases",
-      "back_to_booking_support": "Back to booking support"
+      "back_to_booking_support": "Back to booking support",
+      "delete": "Delete"
     },
     "states": {
       "sign_in_required": "Sign in required",
@@ -567,6 +568,8 @@
       "read_only": "Read-only",
       "active": "Active",
       "verified": "Verified",
+      "no_permission": "No permission.",
+      "error_occurred": "An error occurred while processing your request.",
       "not_verified": "Not verified",
       "needs_review": "Needs review",
       "approved": "Approved",
@@ -1526,7 +1529,8 @@
         "saved_name": "Saved image {{index}}",
         "file_only_alert": "Only image files can be selected.",
         "limit_alert": "Up to {{count}} images can be uploaded.",
-        "load_failed_alert": "Failed to load images."
+        "load_failed_alert": "Failed to load images.",
+        "limit_label": "(Max {{count}})"
       },
       "category_hints": {
         "beauty_review": "Share your beauty shop experiences.",

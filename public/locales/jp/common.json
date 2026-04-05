@@ -206,7 +206,8 @@
       "view": "表示",
       "view_place_details": "詳細を表示",
       "view_plan": "予定を表示",
-      "write_review": "レビューを書く"
+      "write_review": "レビューを書く",
+      "delete": "削除"
     },
     "states": {
       "active": "アクティブ",
@@ -234,7 +235,9 @@
       "posts": "投稿",
       "recently_viewed": "最近見た項目",
       "reviews": "レビュー",
-      "saved_locally": "保存済み"
+      "saved_locally": "保存済み",
+      "no_permission": "権限がありません。",
+      "error_occurred": "リクエストの処理中にエラーが発生しました。"
     },
     "runtime": {
       "counts": {
@@ -954,13 +957,13 @@
       "search_placeholder": "興味のあるトピックを検索"
     },
     "categories": {
-      "all": "公式",
-      "beauty_review": "ビューティーレビュー",
-      "food_review": "グルメおすすめ",
-      "travel_review": "旅行のヒント",
-      "meetup": "気軽な集まり",
+      "all": "すべて",
+      "meetup": "交流会/集まり",
+      "beauty_review": "ビューティー",
+      "food_review": "グルメ/お店",
+      "travel_review": "観光/旅行",
       "meetup_recruitment": "同行者募集",
-      "help": "質問/相談"
+      "help": "お役立ち情報"
     },
     "sub_filters": {
       "all": "すべて",
@@ -1071,7 +1074,8 @@
         "saved_name": "保存された画像 {{index}}",
         "file_only_alert": "画像ファイルのみ選択可能です。",
         "limit_alert": "画像は最大 {{count}}枚までアップロード可能です。",
-        "load_failed_alert": "画像を読み込めませんでした。"
+        "load_failed_alert": "画像を読み込めませんでした。",
+        "limit_label": "(最大 {{count}}枚)"
       },
       "category_hints": {
         "beauty_review": "美容室やクリニックの体験を自由に共有しましょう。",
@@ -1225,7 +1229,8 @@
       }
     },
     "actions": {
-      "delete_confirm": "本当に削除しますか？"
+      "delete_confirm": "本当に削除しますか？",
+      "delete": "削除"
     },
     "errors": {
       "login_required": "ログインが必要です。",

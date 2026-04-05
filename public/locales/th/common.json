@@ -76,7 +76,14 @@
     "copied": "คัดลอกแล้ว!",
     "morning": "อรุณสวัสดิ์",
     "afternoon": "สวัสดีตอนบ่าย",
-    "evening": "สวัสดีตอนเย็น"
+    "evening": "สวัสดีตอนเย็น",
+    "actions": {
+      "delete": "ลบ"
+    },
+    "states": {
+      "no_permission": "ไม่มีสิทธิ์เข้าถึง",
+      "error_occurred": "เกิดข้อผิดพลาดในการประมวลผลคำขอของคุณ"
+    }
   },
   "transport": {
     "moving_to": "กำลังไปที่ {{dest}}",
@@ -260,13 +267,13 @@
       "search_placeholder": "ค้นหาหัวข้อที่สนใจ"
     },
     "categories": {
-      "all": "All",
-      "beauty_review": "Beauty Reviews",
-      "food_review": "Restaurant Tips",
-      "travel_review": "Travel Tips",
-      "meetup": "Flash Meetups",
-      "meetup_recruitment": "Travel Mates",
-      "help": "Q&A"
+      "all": "ทั้งหมด",
+      "meetup": "กลุ่มพบปะ/กิจกรรม",
+      "beauty_review": "บิวตี้/ความงาม",
+      "food_review": "ร้านอาหาร/คาเฟ่",
+      "travel_review": "ท่องเที่ยว/กิจกรรม",
+      "meetup_recruitment": "หาเพื่อนร่วมทาง",
+      "help": "ข้อมูลที่เป็นประโยชน์"
     },
     "sub_filters": {
       "all": "All",
@@ -276,8 +283,8 @@
       "recruiting": "Recruiting",
       "active_reactions": "Trending",
       "open_meetup": "Open Meetups",
-      "weekend": "Weekend",
-      "fresh": "Fresh Info"
+      "weekend": "สุดสัปดาห์",
+      "fresh": "ข้อมูลใหม่"
     },
     "status": {
       "reviews": "Reviews",
@@ -347,11 +354,7 @@
       },
       "title_placeholder": {
         "beauty_review": "e.g. Gangnam Layered Cut Review",
-        "food_review": "e.g. Trendy Japanese spot in Seongsu",
-        "travel_review": "e.g. KTX tips from Seoul to Busan",
-        "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
-        "meetup_recruitment": "e.g. Gyeongbokgung next week together",
-        "help": "e.g. How to get to hotel from ICN airport?"
+        "default": "กำลังลังเลว่าจะเขียนอะไรดีอยู่หรือเปล่า?"
       },
       "desc_label": {
         "beauty_review": "Details",
@@ -363,7 +366,8 @@
         "travel_review": "Share info helpful for other travelers.",
         "meetup": "Describe the meetup in detail.",
         "meetup_recruitment": "Describe what you want to do together.",
-        "help": "Detailed questions help getting better answers."
+        "help": "Detailed questions help getting better answers.",
+        "default": "เขียนเรื่องราวที่คุณต้องการแชร์ได้เลย"
       },
       "image": {
         "guides": {
@@ -377,7 +381,8 @@
         "saved_name": "Saved image {{index}}",
         "file_only_alert": "Only image files can be selected.",
         "limit_alert": "Up to {{count}} images can be uploaded.",
-        "load_failed_alert": "Failed to load images."
+        "load_failed_alert": "ไม่สามารถโหลดรูปภาพได้",
+        "limit_label": "(สูงสุด {{count}} รูป)"
       },
       "category_hints": {
         "beauty_review": "Share your beauty shop experiences.",
@@ -386,7 +391,16 @@
         "meetup": "Create a casual meetup to enjoy together.",
         "meetup_recruitment": "Find travel mates with similar schedules.",
         "help": "Ask anything you're curious about."
-      }
+      },
+      "region_label": "ย่าน/พื้นที่",
+      "region_placeholder": "เช่น คังนัม, มาโพ",
+      "submit": "โพสต์",
+      "write_title": "สร้างโพสต์",
+      "edit_title": "แก้ไขโพสต์",
+      "image_label": "แนบรูปภาพ",
+      "add_photo": "เพิ่มรูปภาพ",
+      "preparing_images": "กำลังเตรียมรูปภาพ...",
+      "cancel": "ยกเลิก"
     },
     "detail": "Post Detail",
     "detail_page": {

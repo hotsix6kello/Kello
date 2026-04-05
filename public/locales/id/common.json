@@ -70,7 +70,14 @@
     "copied": "Tersalin!",
     "morning": "Selamat pagi",
     "afternoon": "Selamat siang",
-    "evening": "Selamat malam"
+    "evening": "Selamat malam",
+    "actions": {
+      "delete": "Hapus"
+    },
+    "states": {
+      "no_permission": "Tidak ada izin.",
+      "error_occurred": "Terjadi kesalahan saat memproses permintaan Anda."
+    }
   },
   "categories": {
     "all": "Semua",
@@ -251,13 +258,13 @@
       "search_placeholder": "Cari topik yang diminati"
     },
     "categories": {
-      "all": "All",
-      "beauty_review": "Beauty Reviews",
-      "food_review": "Restaurant Tips",
-      "travel_review": "Travel Tips",
-      "meetup": "Flash Meetups",
-      "meetup_recruitment": "Travel Mates",
-      "help": "Q&A"
+      "all": "Semua",
+      "meetup": "Pertemuan/Acara",
+      "beauty_review": "Kecantikan/Salon",
+      "food_review": "Kuliner/Kafe",
+      "travel_review": "Wisata/Kegiatan",
+      "meetup_recruitment": "Cari Teman Jalan",
+      "help": "Tips Bermanfaat"
     },
     "sub_filters": {
       "all": "All",
@@ -338,11 +345,7 @@
       },
       "title_placeholder": {
         "beauty_review": "e.g. Gangnam Layered Cut Review",
-        "food_review": "e.g. Trendy Japanese spot in Seongsu",
-        "travel_review": "e.g. KTX tips from Seoul to Busan",
-        "meetup": "e.g. Beer/Chicken tonight in Sinnonhyeon!",
-        "meetup_recruitment": "e.g. Gyeongbokgung next week together",
-        "help": "e.g. How to get to hotel from ICN airport?"
+        "default": "Sedang ragu ingin menulis apa?"
       },
       "desc_label": {
         "beauty_review": "Details",
@@ -354,7 +357,8 @@
         "travel_review": "Share info helpful for other travelers.",
         "meetup": "Describe the meetup in detail.",
         "meetup_recruitment": "Describe what you want to do together.",
-        "help": "Detailed questions help getting better answers."
+        "help": "Detailed questions help getting better answers.",
+        "default": "Tuliskan cerita yang ingin Anda bagikan"
       },
       "image": {
         "guides": {
@@ -368,7 +372,8 @@
         "saved_name": "Saved image {{index}}",
         "file_only_alert": "Only image files can be selected.",
         "limit_alert": "Up to {{count}} images can be uploaded.",
-        "load_failed_alert": "Failed to load images."
+        "load_failed_alert": "Gagal memuat gambar.",
+        "limit_label": "(Maks. {{count}} foto)"
       },
       "category_hints": {
         "beauty_review": "Share your beauty shop experiences.",
@@ -377,7 +382,16 @@
         "meetup": "Create a casual meetup to enjoy together.",
         "meetup_recruitment": "Find travel mates with similar schedules.",
         "help": "Ask anything you're curious about."
-      }
+      },
+      "region_label": "Wilayah/Area",
+      "region_placeholder": "misal: Gangnam, Mapo",
+      "submit": "Unggah",
+      "write_title": "Buat Tulisan",
+      "edit_title": "Edit Tulisan",
+      "image_label": "Lampiran Gambar",
+      "add_photo": "Tambah Foto",
+      "preparing_images": "Menyiapkan gambar...",
+      "cancel": "Batal"
     },
     "detail": "Post Detail",
     "detail_page": {

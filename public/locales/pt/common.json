@@ -48,7 +48,14 @@
     "community_nav": "Comunidade",
     "morning": "Bom dia",
     "afternoon": "Boa tarde",
-    "evening": "Boa noite"
+    "evening": "Boa noite",
+    "actions": {
+      "delete": "Excluir"
+    },
+    "states": {
+      "no_permission": "Sem permissão.",
+      "error_occurred": "Ocorreu um erro ao processar sua solicitação."
+    }
   },
   "transport": {
     "moving_to": "Indo para {{dest}}",
@@ -118,6 +125,11 @@
   "community_page": {
     "title": "Comunidade",
     "subtitle": "Conecte-se com locais e viajantes",
+    "form": {
+      "image": {
+        "limit_label": "(Máx. {{count}} imagens)"
+      }
+    },
     "filter_all": "Tudo",
     "filter_meetup": "Comida e Encontros",
     "filter_travel": "Parceiro de Viagem",
