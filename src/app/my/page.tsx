@@ -83,9 +83,13 @@ function ProfileSummaryCard({
             const file = e.target.files?.[0];
             if (!file) return;
 
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Math.random()}.${fileExt}`;
-            const filePath = `${fileName}`;
+            const { data: userData } = await supabase.auth.getUser();
+            const user = userData.user;
+            if (!user) throw new Error("Not authenticated");
+
+            const fileExt = file.name.split('.').pop() || 'jpg';
+            const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+            const filePath = `${user.id}/${fileName}`;
 
             const { error: uploadError } = await supabase.storage
                 .from('avatars')
@@ -100,7 +104,7 @@ function ProfileSummaryCard({
             const { error: updateError } = await supabase
                 .from('profiles')
                 .update({ avatar_url: publicUrl })
-                .eq('id', (await supabase.auth.getUser()).data.user?.id);
+                .eq('id', user.id);
 
             if (updateError) throw updateError;
 
