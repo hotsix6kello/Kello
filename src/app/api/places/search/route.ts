@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    const { query, lat, lng, radius = 5000, languageCode = 'en' } = await request.json();
+    const { query, lat, lng, languageCode = 'en' } = await request.json();
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
     if (!apiKey) {

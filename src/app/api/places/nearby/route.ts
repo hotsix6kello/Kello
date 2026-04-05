@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         // [핵심] 만약 사용자가 프론트엔드에서 검색어(query)를 보냈다면, 
         // 묻지마 주변거리 탐색(searchNearby)이 아닌 명시적 텍스트 검색(searchText) API를 사용합니다.
         let endPoint = 'https://places.googleapis.com/v1/places:searchNearby';
-        let finalBody: any = body;
+        let finalBody: unknown = body;
 
         if (query) {
             endPoint = 'https://places.googleapis.com/v1/places:searchText';

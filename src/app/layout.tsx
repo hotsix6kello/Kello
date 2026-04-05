@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
-import Script from "next/script";
 import {
   Inter,
   Noto_Sans_Arabic,

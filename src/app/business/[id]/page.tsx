@@ -1,16 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useTranslation } from "react-i18next";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 export default function BusinessDetailPage() {
-    const { t } = useTranslation("common");
-    const params = useParams();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const id = params.id as string;
 
     // URL에서 전달받은 데이터 추출
     const name = searchParams.get('name') || "Standard Salon";

@@ -1,12 +1,11 @@
-import Image from 'next/image';
 import StoreCarousel from './StoreCarousel';
 
 interface BottomCarouselProps {
-    items: any[];
+    items: Record<string, unknown>[];
     selectedId: string | null;
     onSelect: (id: string) => void;
     onDetails: (id: string) => void;
-    styles: any;
+    styles: Record<string, string>;
     useGrid?: boolean;
 }
 
