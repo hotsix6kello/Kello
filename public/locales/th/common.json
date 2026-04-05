@@ -262,6 +262,19 @@
     },
     "settings": {
       "account": {
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
         "default_name": "Traveler",
         "phone": {
           "placeholder": "e.g. {{example}}",
@@ -1019,5 +1032,217 @@
     "police_title": "ตำรวจ/อาชญากรรม",
     "interp_title": "บริการล่าม",
     "lost_title": "ของหาย"
+  },
+  "settings_page": {
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Partner status and store operations in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quick access to administrative features."
+      }
+    },
+    "hero": {
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "uploading": "Uploading...",
+        "change": "Change Image",
+        "register": "Register Image",
+        "error": "Failed to update image."
+      },
+      "default_title": "My Settings"
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "placeholder": "Enter new nickname.",
+        "helper_set": "Displayed in community and profile.",
+        "helper_unset": "Nickname not set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set"
+      },
+      "email": {
+        "title": "Email",
+        "helper_verified": "Currently verified email.",
+        "helper_unverified": "Email verification required.",
+        "helper_none": "No linked email.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not Linked",
+        "value_none": "Not Linked"
+      },
+      "sns": {
+        "title": "SNS",
+        "placeholder": "Enter SNS ID.",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No saved SNS.",
+        "badge_set": "Saved",
+        "badge_unset": "Empty",
+        "value_none": "Not Set"
+      },
+      "phone": {
+        "title": "Phone",
+        "label_country": "Country",
+        "label_number": "Number",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No saved phone number.",
+        "helper_empty": "Stored in E.164 format. Choose country first.",
+        "helper_saved": "Kept in E.164 format.",
+        "helper_invalid": "Please select country and enter digits.",
+        "helper_preview": "Will be saved as {{value}}.",
+        "badge_set": "Saved",
+        "badge_unset": "Empty",
+        "value_none": "Not Set"
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Currently used login method.",
+        "helper_out": "Sign in to check.",
+        "badge_in": "Active",
+        "badge_out": "Standby",
+        "value_out": "Login Required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Login to view",
+        "helper_out": "Check current status after sign in.",
+        "badge_out": "Standby",
+        "value_error": "Check Required",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check Needed",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All Notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking alerts.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} only ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Verified as partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Reviewing",
+          "helper": "Your information is under review.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Requires Update",
+          "helper": "Update details and apply again.",
+          "badge": "Action Required",
+          "cta": "Apply Again"
+        },
+        "none": {
+          "value": "No Partner Data",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store info",
+        "helper_none": "No store summary available.",
+        "badge_set": "Registered",
+        "badge_unset": "Empty",
+        "visibility_on": "Visible in Explore",
+        "visibility_off": "Hidden in Explore"
+      },
+      "hours": {
+        "title": "Hours",
+        "value_none": "No hours info",
+        "helper_none": "Will appear when connected.",
+        "badge_unset": "Empty"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate menu",
+        "value_pending": "Check after approval",
+        "helper_approved": "Request summaries are structured.",
+        "helper_pending": "Becomes easier after approval.",
+        "badge_info": "Guide",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Service / Pricing",
+        "value_none": "No separate menu",
+        "helper_none": "Currently not linked to a specific screen.",
+        "badge_info": "Guide"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approval",
+        "value": "Check applications",
+        "helper": "View and manage partner requests."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review requests & changes",
+        "helper": "Check booking status and change requests."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "Unlinked",
+        "helper": "No notice management screen connected."
+      },
+      "badge_open": "Open available",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "sns_saved": "SNS ID saved.",
+      "phone_saved": "Phone number saved.",
+      "nickname_cooldown": "Nickname can only be changed every 90 days. ({{days}} days left)",
+      "nickname_cooldown_long": "Changeable every {{limit}} days. (Next: {{date}})",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Nickname changed successfully.",
+      "nickname_error": "Failed to save nickname. Try again.",
+      "unauthorized": "Please check your session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applicable to DB.",
+      "schema_missing_phone": "Phone column not yet applicable to DB.",
+      "save_error": "Failed to save.",
+      "saving": "Saving...",
+      "save": "Save",
+      "action_open": "Open",
+      "action_contact": "Enquire"
+    },
+    "login_prompt": {
+      "title": "Sign in to see more settings.",
+      "desc": "Check verified values and notification status after log in."
+    },
+    "tab_aria_label": "Settings Tabs"
   }
 }
