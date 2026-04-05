@@ -1145,7 +1145,9 @@
       "empty_desc": "快來發佈第一條動態吧！",
       "empty_tip": "點擊右下角按鈕開始發佈。",
       "no_results_title": "未找到相關結果",
-      "no_results_desc": "請嘗試更換其他關鍵詞。"
+      "no_results_desc": "請嘗試更換其他關鍵詞。",
+      "cta_write": "發表第一篇貼文",
+      "cta_all": "查看全部"
     },
     "quality_signals": {
       "organized": "整理精良",
@@ -1158,7 +1160,8 @@
       "save_removed": "已移除收藏。",
       "deleted": "已刪除。",
       "updated": "已更新。",
-      "submitted": "發佈成功。"
+      "submitted": "發佈成功。",
+      "region_collected": "只看{{region}}的貼文"
     },
     "nav_summary": {
       "all": "正在查看 {{tab}} 的全部內容",
@@ -1237,7 +1240,8 @@
       "image_label": "圖片附件",
       "add_photo": "添加照片",
       "preparing_images": "正在準備圖片...",
-      "cancel": "取消"
+      "cancel": "取消",
+      "category_label": "類別"
     },
     "detail": "貼文詳情",
     "detail_page": {
@@ -1289,7 +1293,9 @@
       "comment_input": {
         "default": "發表評論...",
         "optional": "想對樓主說點什麼？ (選填)",
-        "send": "發佈"
+        "send": "發佈",
+        "open_btn": "寫評論",
+        "cancel": "取消"
       },
       "signal_intents": {
         "interested": "我也想去",
@@ -1379,7 +1385,9 @@
         "photo_spot": "容易出片",
         "waiting": "建議預留時間",
         "foreigner_friendly": "溝通無障礙"
-      }
+      },
+      "empty_comments": "暫無評論。來搶頭香吧！",
+      "hide_comment": "隱藏此評論"
     },
     "actions": {
       "delete_confirm": "確定要刪除嗎？"
@@ -1402,6 +1410,89 @@
     "comments": "評論",
     "time": {
       "just_now": "剛剛"
+    },
+    "write_post": "發文",
+    "edit": "編輯",
+    "posting": "提交中...",
+    "defaults": {
+      "region": "首爾"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "一起做美容"
+      },
+      "flash_meetup": {
+        "label": "快閃聚會"
+      },
+      "beauty": {
+        "label": "美容評價"
+      },
+      "food": {
+        "label": "美食推薦"
+      },
+      "travel": {
+        "label": "旅行提示"
+      },
+      "write": {
+        "label": "發文"
+      },
+      "browse": {
+        "label": "瀏覽",
+        "sub": "熱門貼文"
+      },
+      "recruiting": {
+        "label": "招募中",
+        "sub": "尋找旅伴"
+      },
+      "weekend": {
+        "label": "這個週末",
+        "sub": "共享行程"
+      },
+      "record": {
+        "label": "記錄",
+        "sub": "日常分享"
+      }
+    },
+    "fab": {
+      "create_post": "發文"
+    },
+    "sort": {
+      "latest": "最新排序",
+      "reactions": "最多互動",
+      "draft": "最活躍招募"
+    },
+    "card": {
+      "default_vibe": "氣氛好",
+      "title_prefix": {
+        "beauty_review": "[美容]",
+        "food_review": "[美食]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "查看評價",
+        "join": "參與"
+      },
+      "result_badge": "評價完成",
+      "open_meetup_badge": "可聚會",
+      "fresh_badges": {
+        "comment": "實時互動中",
+        "update": "剛剛更新"
+      },
+      "draft_status": {
+        "active": "活躍交流中",
+        "forming": "人員組成中",
+        "preparing": "希望參與中"
+      },
+      "draft_desc": {
+        "active": "已經有很多人感興趣！",
+        "forming": "人們正在慢慢聚集。",
+        "preparing": "成為第一個表達興趣的人。"
+      },
+      "owner_reactions": {
+        "region": "正在與{{count}}人交流關於{{region}}",
+        "join": "{{count}}人希望參與"
+      },
+      "more_region": "查看更多關於{{region}}的故事"
     }
   },
   "help_page": {

@@ -276,121 +276,124 @@
       "help": "ข้อมูลที่เป็นประโยชน์"
     },
     "sub_filters": {
-      "all": "All",
-      "saved": "Saved",
-      "reacted": "Reacted",
-      "mine": "My Posts",
-      "recruiting": "Recruiting",
-      "active_reactions": "Trending",
-      "open_meetup": "Open Meetups",
+      "all": "ทั้งหมด",
+      "saved": "บันทึกแล้ว",
+      "reacted": "ตอบกลับแล้ว",
+      "mine": "โพสต์ของฉัน",
+      "recruiting": "กำลังรับสมัคร",
+      "active_reactions": "การตอบสนองที่ร้อนแรง",
+      "open_meetup": "การนัดพบเปิด",
       "weekend": "สุดสัปดาห์",
       "fresh": "ข้อมูลใหม่"
     },
     "status": {
-      "reviews": "Reviews",
-      "reacting": "Reacting",
-      "surveying": "Surveying",
-      "drafting": "Drafting",
-      "closed": "Closed"
+      "reviews": "รีวิว",
+      "reacting": "กำลังรวบรวม",
+      "surveying": "กำลังยืนยัน",
+      "drafting": "กำลังเตรียม",
+      "closed": "ปิดรับ"
     },
     "tags": {
-      "solo_friendly": "Solo Friendly",
-      "friends_friendly": "Friends Friendly",
-      "photo_spot": "Photo Spots",
-      "waiting": "Waiting Expected",
-      "foreigner_friendly": "Foreigner Friendly"
+      "solo_friendly": "เหมาะไปคนเดียว",
+      "friends_friendly": "เหมาะไปกับเพื่อน",
+      "photo_spot": "จุดถ่ายรูป",
+      "waiting": "มีคิว",
+      "foreigner_friendly": "เป็นมิตรกับชาวต่างชาติ"
     },
     "states": {
-      "fetch_failed_desc": "Failed to load posts. Please check your network.",
-      "fetch_failed_title": "Data Error",
-      "fetch_failed_tip": "Try refreshing the page.",
-      "empty_title": "No posts yet",
-      "empty_desc": "Be the first to share your story!",
-      "empty_tip": "Tap the write button on the bottom right.",
-      "no_results_title": "No results found",
-      "no_results_desc": "Try searching with other keywords."
+      "fetch_failed_desc": "ไม่สามารถโหลดโพสต์ ตรวจสอบเครือข่ายของคุณ",
+      "fetch_failed_title": "ข้อผิดพลาดของข้อมูล",
+      "fetch_failed_tip": "กรุณารีเฟรช",
+      "empty_title": "ยังไม่มีโพสต์",
+      "empty_desc": "เป็นคนแรก โพสต์เลย!",
+      "empty_tip": "คลิกขวาล่างเพื่อเขียน",
+      "no_results_title": "ไม่พบผลลัพธ์",
+      "no_results_desc": "ลองใช้คำค้นอื่น",
+      "cta_write": "เขียนโพสต์แรก",
+      "cta_all": "ดูทั้งหมด"
     },
     "quality_signals": {
-      "organized": "Well Organized",
-      "active": "Very Popular",
-      "asset": "Rich Information",
-      "mate": "Good Mate"
+      "organized": "บทความที่มีการจัดการดี",
+      "active": "เป็นที่นิยมมาก",
+      "asset": "เต็มไปด้วยข้อมูล",
+      "mate": "พบเพื่อนร่วมทางที่ดี"
     },
     "toasts": {
-      "save_added": "Added to saved posts.",
-      "save_removed": "Removed from saved posts.",
-      "deleted": "Deleted successfully.",
-      "updated": "Updated successfully.",
-      "submitted": "Posted successfully."
+      "save_added": "เพิ่มลงในโพสต์ที่บันทึกแล้ว",
+      "save_removed": "ลบออกจากโพสต์ที่บันทึกแล้ว",
+      "deleted": "ลบแล้ว",
+      "updated": "อัปเดตแล้ว",
+      "submitted": "ส่งแล้ว",
+      "region_collected": "ดูโพสต์สำหรับ {{region}}"
     },
     "nav_summary": {
-      "all": "Viewing all stories in {{tab}}",
-      "active_reactions": "Getting hot reactions in {{tab}}!",
-      "open_meetup": "Looking for new mates in {{tab}}",
-      "weekend": "Any plans for this weekend in {{tab}}?",
-      "default": "Showing results filtered by {{sub}} in {{tab}}"
+      "all": "กำลังดูเรื่องราวทั้งหมดใน {{tab}}",
+      "active_reactions": "ได้รับการตอบสนองดีใน {{tab}}",
+      "open_meetup": "หาเพื่อนร่วมทางใหม่ใน {{tab}}",
+      "weekend": "{{tab}} มีแผนสุดสัปดาห์นี้ไหม?",
+      "default": "ผลลัพธ์การกรอง {{sub}} ใน {{tab}}"
     },
     "form": {
-      "select_category": "Select Category",
+      "select_category": "เลือกหมวดหมู่",
       "write_guide_title": {
-        "beauty_review": "Share your beauty experience",
-        "food_review": "Any hidden gems to recommend?",
-        "travel_review": "Share your travel tips",
-        "meetup": "Find mates to hang out with",
-        "meetup_recruitment": "Looking for travel mates?",
-        "help": "Ask anything"
+        "beauty_review": "เล่าประสบการณ์ความงามของคุณให้เราฟัง",
+        "food_review": "มีร้านอาหารลับบ้างไหม?",
+        "travel_review": "แบ่งปันเคล็ดลับการเดินทาง",
+        "meetup": "ค้นหาเพื่อนร่วมทาง",
+        "meetup_recruitment": "หาเพื่อนร่วมทางไหม?",
+        "help": "ถามอะไรก็ได้"
       },
       "write_guide_body": {
-        "beauty_review": "Share your honest review of the treatment or service.",
-        "food_review": "Share information on taste, mood, or waiting.",
-        "travel_review": "Provide useful tips on courses, packing, or moving.",
-        "meetup": "Describe when, where, and what to do.",
-        "meetup_recruitment": "State your travel schedule, destinations, and mate conditions.",
-        "help": "Describe your question or situation in detail."
+        "beauty_review": "แชร์รีวิวตรงๆ",
+        "food_review": "แชร์รสชาติ บรรยากาศ เวลารอคอย",
+        "travel_review": "แบ่งปันเคล็ดลับ",
+        "meetup": "เขียนเรื่องเวลาและสถานที่ได้อย่างอิสระ",
+        "meetup_recruitment": "ระบุกำหนดการและเงื่อนไข...",
+        "help": "เขียนรายละเอียดคำถาม"
       },
       "title_label": {
-        "beauty_review": "Srv/Theme",
-        "default": "Title"
+        "beauty_review": "ขั้นตอน/ธีม",
+        "default": "หัวข้อ"
       },
       "title_placeholder": {
-        "beauty_review": "e.g. Gangnam Layered Cut Review",
+        "beauty_review": "เช่น รีวิวตัดผม",
         "default": "กำลังลังเลว่าจะเขียนอะไรดีอยู่หรือเปล่า?"
       },
       "desc_label": {
-        "beauty_review": "Details",
-        "default": "Content"
+        "beauty_review": "รีวิวโดยละเอียด",
+        "default": "เนื้อหา"
       },
       "desc_placeholder": {
-        "beauty_review": "Describe the process or results in detail.",
-        "food_review": "Recommend menus and explain why.",
-        "travel_review": "Share info helpful for other travelers.",
-        "meetup": "Describe the meetup in detail.",
-        "meetup_recruitment": "Describe what you want to do together.",
-        "help": "Detailed questions help getting better answers.",
+        "beauty_review": "แบ่งปันรายละเอียด...",
+        "food_review": "แนะนำเมนู...",
+        "travel_review": "แชร์เคล็ดลับ...",
+        "meetup": "รายละเอียดงานพบปะ",
+        "meetup_recruitment": "เขียนสิ่งที่คุณต้องการ...",
+        "help": "คำถามที่ละเอียด...",
         "default": "เขียนเรื่องราวที่คุณต้องการแชร์ได้เลย"
       },
       "image": {
         "guides": {
-          "beauty_review": "Add before/after or shop interior photos (Max 4)",
-          "food_review": "Add food and shop interior photos (Max 4)",
-          "travel_review": "Add photos that show the vibe (Max 4)",
-          "meetup": "Add photos of the place or activity (Max 4)",
-          "meetup_recruitment": "Add destination or reference photos (Max 4)",
-          "help": "Add photos that help explain the issue (Max 4)"
+          "beauty_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "food_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "travel_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "meetup": "เพิ่มภาพกิจกรรม (ไม่เกิน 4)",
+          "meetup_recruitment": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "help": "เพิ่มภาพถ่าย (สูงสุด 4)"
         },
-        "saved_name": "Saved image {{index}}",
-        "file_only_alert": "Only image files can be selected.",
-        "limit_alert": "Up to {{count}} images can be uploaded.",
+        "saved_name": "รูปภาพที่บันทึก {{index}}",
+        "file_only_alert": "อนุญาตไฟล์รูปภาพเท่านั้น",
+        "limit_alert": "สูงสุด {{count}} ภาพ",
         "load_failed_alert": "ไม่สามารถโหลดรูปภาพได้",
         "limit_label": "(สูงสุด {{count}} รูป)"
       },
       "category_hints": {
-        "beauty_review": "Share your beauty shop experiences.",
-        "food_review": "Recommend your favorite spots.",
-        "travel_review": "Share your own travel know-how.",
-        "meetup": "Create a casual meetup to enjoy together.",
-        "meetup_recruitment": "Find travel mates with similar schedules.",
-        "help": "Ask anything you're curious about."
+        "beauty_review": "รีวิวความงาม...",
+        "food_review": "แนะนำร้านอาหาร...",
+        "travel_review": "แบ่งปันเคล็ดลับ...",
+        "meetup": "จัดการนัดพบแบบสบายๆ",
+        "meetup_recruitment": "หาเพื่อนร่วมทาง",
+        "help": "ถามอะไรก็ได้..."
       },
       "region_label": "ย่าน/พื้นที่",
       "region_placeholder": "เช่น คังนัม, มาโพ",
@@ -400,171 +403,259 @@
       "image_label": "แนบรูปภาพ",
       "add_photo": "เพิ่มรูปภาพ",
       "preparing_images": "กำลังเตรียมรูปภาพ...",
-      "cancel": "ยกเลิก"
+      "cancel": "ยกเลิก",
+      "category_label": "หมวดหมู่"
     },
-    "detail": "Post Detail",
+    "detail": "รายละเอียดโพสต์",
     "detail_page": {
-      "loading": "Loading data...",
-      "hidden_post": "This post is hidden.",
-      "not_found": "Post not found.",
-      "show_hidden": "Show Hidden Post",
-      "hide_post": "Hide this post",
+      "loading": "กำลังโหลด...",
+      "hidden_post": "โพสต์ซ่อนไว้",
+      "not_found": "ไม่พบโพสต์",
+      "show_hidden": "ดูโพสต์ที่ซ่อน",
+      "hide_post": "ซ่อนโพสต์นี้",
       "freshness": {
-        "realtime": "Actively Live",
-        "updated": "Info Updated",
-        "active": "Active Post",
-        "calm": "Calm Post"
+        "realtime": "กำลังใช้งาน",
+        "updated": "อัปเดตข้อมูลแล้ว",
+        "active": "โพสต์ที่มีความเคลื่อนไหว",
+        "calm": "โพสต์เงียบ"
       },
       "strengths": {
-        "title": "Post Strengths",
-        "organized": "Well Organized",
-        "active": "Active Interaction",
-        "visited_tip": "Includes Tips",
-        "new": "New Content"
+        "title": "จุดเด่นของโพสต์",
+        "organized": "รีวิวที่จัดระเบียบ",
+        "active": "การสื่อสารที่แอคทีฟ",
+        "visited_tip": "รวมเคล็ดลับการไป",
+        "new": "ข่าวใหม่"
       },
       "checklist": {
-        "title": "Checklist",
-        "recommended": "Recommended for",
-        "required": "Must Check",
-        "comment_check": "Check comments",
-        "read_details": "Read details"
+        "title": "รายการตรวจสอบ",
+        "recommended": "แนะนำ",
+        "required": "ตรวจสอบที่จำเป็น",
+        "comment_check": "อ่านความคิดเห็น",
+        "read_details": "อ่านรายละเอียด"
       },
-      "mini_signal_tag": "Meetup Open",
+      "mini_signal_tag": "มีการนัดพบ",
       "primary_action": {
-        "review": "Leave Review",
-        "join": "Express Interest"
+        "review": "ทิ้งรีวิว",
+        "join": "แสดงเจตนา"
       },
       "save": {
-        "saved": "Saved",
-        "default": "Save"
+        "saved": "บันทึกแล้ว",
+        "default": "บันทึก"
       },
       "meetup_safety": {
-        "title": "Meetup Safety Guide",
-        "item_1": "Meeting in public places is recommended.",
-        "item_2": "Be careful with personal information."
+        "title": "ความปลอดภัยพบปะ",
+        "item_1": "พบกันในที่สาธารณะ",
+        "item_2": "ระวังแชร์ข้อมูล"
       },
-      "body_title": "Post Content",
+      "body_title": "เนื้อหาโพสต์",
       "like": "ถูกใจ",
       "dislike": "ไม่ถูกใจ",
       "like_alert": "คุณถูกใจโพสต์นี้แล้ว!",
       "dislike_alert": "คุณไม่ถูกใจโพสต์นี้แล้ว.",
-      "comments_title": "Comments",
+      "comments_title": "ความคิดเห็น",
       "comment_input": {
-        "default": "Enter a comment...",
-        "optional": "Add an optional note",
-        "send": "Send"
+        "default": "พิมพ์ความคิดเห็น...",
+        "optional": "แสดงความจำนง (ตัวเลือก)",
+        "send": "ส่ง",
+        "open_btn": "เขียนความคิดเห็น",
+        "cancel": "ยกเลิก"
       },
       "signal_intents": {
-        "interested": "I'm interested",
-        "available_this_week": "Available this week",
-        "join_if_schedule_fits": "Join if schedule fits",
-        "thanks": "Thanks for info",
-        "question": "Have a question"
+        "interested": "ฉันก็อยากไป",
+        "available_this_week": "สัปดาห์นี้ว่าง",
+        "join_if_schedule_fits": "ถ้าวันตรงกัน ไปด้วยกัน",
+        "thanks": "ขอบคุณ",
+        "question": "ฉันมีคำถาม"
       },
       "signal_times": {
-        "this_week": "This week",
-        "this_weekend": "This weekend",
-        "next_week": "Next week",
-        "schedule_coordination": "Coordinating date"
+        "this_week": "สัปดาห์นี้",
+        "this_weekend": "สุดสัปดาห์นี้",
+        "next_week": "สัปดาห์หน้า",
+        "schedule_coordination": "รอกำหนด"
       },
       "author_panel": {
-        "title": "Author Dashboard",
-        "badge": "Author",
+        "title": "แดชบอร์ดผู้แต่ง",
+        "badge": "ผู้แต่ง",
         "stats": {
-          "total": "Total Reactions",
+          "total": "การตอบกลับรวม",
           "total_value": "{{count}}",
-          "time": "Preferred Time",
-          "time_pending": "Calculating",
-          "intent": "Main Intent",
-          "recent": "Last 24h",
+          "time": "เวลาที่ดีที่สุด",
+          "time_pending": "กำลังคำนวณ",
+          "intent": "ความตั้งใจหลัก",
+          "recent": "24ชม. ที่ผ่านมา",
           "recent_value": "{{count}}"
         },
         "guide": {
-          "weekend": "Weekend has most reactions. Suggest a detailed schedule.",
-          "vote": "Preferred times vary. Try a vote to finalize.",
-          "share": "Share more info to get more attention."
+          "weekend": "สุดสัปดาห์เหมาะสม",
+          "vote": "เปิดโพล",
+          "share": "แบ่งปันเพิ่มเติม"
         },
         "action": {
-          "weekend": "Suggest Weekend Schedule",
-          "vote": "Post a Vote",
-          "share": "Share Extra Tips"
+          "weekend": "เสนอข้อสุดสัปดาห์",
+          "vote": "สร้างโพล",
+          "share": "แชร์ทิปสเพิ่มเติม"
         },
         "draft": {
-          "weekend": "How about meeting this weekend at 2PM?",
-          "vote": "Please vote for your preferred time!",
-          "share": "Here's one more tip for you!"
+          "weekend": "บ่ายสองสุดสัปดาห์นี้ล่ะ?",
+          "vote": "โหวตเวลาที่ดีที่สุด!",
+          "share": "มีอีกหนึ่งเคล็ดลับให้คุณ!"
         },
-        "final_draft": "Closing the recruitment. Please join our open chat if you're participating!",
-        "final_action": "Close Recruitment",
-        "footer": "Kello promotes a safe community culture."
+        "final_draft": "เสร็จสิ้น ไปที่แชทกันเถอะ!",
+        "final_action": "ปิดรับคน",
+        "footer": "Kello ส่งเสริมความปลอดภัย"
       },
       "status_controls": {
-        "title": "Change Status"
+        "title": "เปลี่ยนสถานะ"
       },
       "result": {
-        "title": "Post-visit Report & Tips",
-        "help": "Share tips or reviews after your visit. It helps others a lot.",
-        "placeholder": "Write your post-visit review here...",
-        "save_visited": "Save Visit & Tips",
-        "save_only": "Save Info Only"
+        "title": "เขียนผลและเคล็ดลับ",
+        "help": "แชร์ข้อคิดเห็น",
+        "placeholder": "เขียนรีวิว...",
+        "save_visited": "บันทึกผลและทิปส์",
+        "save_only": "บันทึกอินโฟ മാത്രം"
       },
       "author_safety": {
-        "title": "Author Safety Guide",
-        "item_1": "Do not expose personal contact info directly.",
-        "item_2": "Beware of illegal meetups or money requests.",
-        "item_3": "Communicate with trusted users."
+        "title": "แนวทางความปลอดภัย",
+        "item_1": "อย่าเปิดเผยที่ติดต่อ",
+        "item_2": "ระวังมิจฉาชีพ",
+        "item_3": "พูดคุยเฉพาะที่เชื่อถือได้"
       },
       "signal_summary": {
-        "title": "Participation Summary",
+        "title": "สรุป",
         "status": {
-          "active": "Actively Recruiting",
-          "forming": "Forming",
-          "preparing": "Starting"
+          "active": "กำลังรับคนอย่างกระตือรือร้น",
+          "forming": "กำลังรวบรวมคน",
+          "preparing": "เริ่มรับคน"
         },
-        "time_split": "Preferred times are split.",
-        "time_focus": "Most preferred: {{time}}",
-        "time_flexible": "Many flexible times.",
-        "desc": "{{count}} people expressed interest in {{topic}}.",
-        "topic_review": "review sharing",
-        "topic_outing": "meetup participation",
-        "schedule_title": "Choose Preferred Time"
+        "time_split": "ความคิดเห็นหลากหลาย",
+        "time_focus": "ชอบ {{time}} ที่สุด",
+        "time_flexible": "เวลายืดหยุ่น",
+        "desc": "{{count}} คนสน {{topic}}",
+        "topic_review": "แชร์รีวิว",
+        "topic_outing": "เข้าร่วมนัดพบ",
+        "schedule_title": "เลือกเวลา"
       },
       "status": {
         "REVIEWS": "Reviews Done",
-        "REACTING": "Reacting",
-        "SURVEYING": "Surveying",
-        "DRAFTING": "Drafting",
-        "CLOSED": "Closed"
+        "REACTING": "กำลังรวบรวม",
+        "SURVEYING": "กำลังยืนยัน",
+        "DRAFTING": "กำลังเตรียม",
+        "CLOSED": "ปิดรับ"
       },
       "tags": {
-        "solo_friendly": "Solo Friendly",
+        "solo_friendly": "เหมาะไปคนเดียว",
         "friends_friendly": "With Friends",
         "photo_spot": "Photo Spots",
         "waiting": "Wait Exists",
-        "foreigner_friendly": "Foreigner Friendly"
-      }
+        "foreigner_friendly": "เป็นมิตรกับชาวต่างชาติ"
+      },
+      "empty_comments": "ยังไม่มีความคิดเห็น. เป็นคนแรกเลย!",
+      "hide_comment": "ซ่อนความคิดเห็นนี้"
     },
     "actions": {
-      "delete_confirm": "Are you sure you want to delete?"
+      "delete_confirm": "แน่ใจเหรอที่จะลบ?"
     },
     "errors": {
-      "login_required": "Login required.",
-      "post_failed": "Failed to post: {{message}}"
+      "login_required": "ต้องเข้าสู่ระบบ",
+      "post_failed": "การโพสต์ล้มเหลว: {{message}}"
     },
     "report": {
-      "report_action": "Report",
-      "success": "Reported successfully.",
+      "report_action": "รายงาน",
+      "success": "รายงานแล้ว",
       "reasons": {
-        "ad_spam": "Ad/Spam",
-        "offensive": "Offensive",
-        "contact": "Contact Induction",
-        "unsafe": "Unsafe",
-        "other": "Other"
+        "ad_spam": "โฆษณา/สแปม",
+        "offensive": "เนื้อหาไม่เหมาะสม",
+        "contact": "พฤติกรรมหลอกลวง",
+        "unsafe": "ข้อมูลอันตราย",
+        "other": "อื่นๆ"
       }
     },
-    "comments": "Comments",
+    "comments": "ความคิดเห็น",
     "time": {
-      "just_now": "Just now"
+      "just_now": "เมื่อสักครู่"
+    },
+    "write_post": "เขียนโพสต์",
+    "edit": "แก้ไข",
+    "posting": "กำลังโพสต์...",
+    "defaults": {
+      "region": "โซล"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "ทำความงามด้วยกัน"
+      },
+      "flash_meetup": {
+        "label": "มีทติ้งด่วน"
+      },
+      "beauty": {
+        "label": "รีวิวความงาม"
+      },
+      "food": {
+        "label": "แนะนำอาหาร"
+      },
+      "travel": {
+        "label": "เคล็ดลับเดินทาง"
+      },
+      "write": {
+        "label": "เขียนโพสต์"
+      },
+      "browse": {
+        "label": "เรียกดู",
+        "sub": "โพสต์ยอดนิยม"
+      },
+      "recruiting": {
+        "label": "กำลังรับสมัคร",
+        "sub": "หาเพื่อนร่วมทาง"
+      },
+      "weekend": {
+        "label": "สุดสัปดาห์นี้",
+        "sub": "แชร์ตาราง"
+      },
+      "record": {
+        "label": "บันทึก",
+        "sub": "แชร์ชีวิตประจำวัน"
+      }
+    },
+    "fab": {
+      "create_post": "เขียนโพสต์"
+    },
+    "sort": {
+      "latest": "ล่าสุด",
+      "reactions": "ตอบกลับมากที่สุด",
+      "draft": "รับสมัครมากที่สุด"
+    },
+    "card": {
+      "default_vibe": "บรรยากาศดี",
+      "title_prefix": {
+        "beauty_review": "[ความงาม]",
+        "food_review": "[อาหาร]",
+        "travel_review": "[ท่องเที่ยว]"
+      },
+      "cta": {
+        "review": "ดูรีวิว",
+        "join": "เข้าร่วม"
+      },
+      "result_badge": "รีวิวเสร็จสิ้น",
+      "open_meetup_badge": "มีการนัดพบ",
+      "fresh_badges": {
+        "comment": "กำลังตอบสนอง",
+        "update": "เพิ่งอัปเดต"
+      },
+      "draft_status": {
+        "active": "สื่อสารอย่างกระตือรือร้น",
+        "forming": "กำลังรวบรวมคน",
+        "preparing": "หวังจะเข้าร่วม"
+      },
+      "draft_desc": {
+        "active": "หลายคนสนใจแล้ว!",
+        "forming": "ผู้คนกำลังเริ่มมา",
+        "preparing": "แสดงความสนใจเป็นคนแรก"
+      },
+      "owner_reactions": {
+        "region": "สนทนากับ {{count}} คนเกี่ยวกับ {{region}}",
+        "join": "{{count}} คนต้องการเข้าร่วม"
+      },
+      "more_region": "ดูเรื่องราวเพิ่มเติมเกี่ยวกับ {{region}}"
     }
   },
   "explore_items": {

@@ -998,7 +998,9 @@
       "empty_desc": "最初の投稿をしてみませんか？",
       "empty_tip": "右下のボタンから投稿できます。",
       "no_results_title": "検索結果がありません",
-      "no_results_desc": "他のキーワードで検索してみてください。"
+      "no_results_desc": "他のキーワードで検索してみてください。",
+      "cta_write": "最初の投稿を作成",
+      "cta_all": "すべて見る"
     },
     "quality_signals": {
       "organized": "整理された記事",
@@ -1011,7 +1013,8 @@
       "save_removed": "保存を解除しました。",
       "deleted": "削除しました。",
       "updated": "更新しました。",
-      "submitted": "投稿しました。"
+      "submitted": "投稿しました。",
+      "region_collected": "{{region}}の投稿のみ表示"
     },
     "nav_summary": {
       "all": "{{tab}}のすべてのストーリーを表示中",
@@ -1048,7 +1051,8 @@
         "travel_review": "例：ソウルから釜山までのKTXのコツ",
         "meetup": "例：新論峴駅の近くでチメクする人募集！",
         "meetup_recruitment": "例：来週の景福宮に一緒に行く人募集",
-        "help": "例：仁川空港から宿までどう行けばいいですか？"
+        "help": "例：仁川空港から宿までどう行けばいいですか？",
+        "default": "何について書こうか悩んでいますか？"
       },
       "desc_label": {
         "beauty_review": "詳細レビュー",
@@ -1060,7 +1064,8 @@
         "travel_review": "他の旅行者に役立つ情報を共有してください。",
         "meetup": "集まりの内容について詳しく説明してください。",
         "meetup_recruitment": "一緒にしたい内容を書いてください。",
-        "help": "詳しい質問内容を記入すると、良い回答が得られやすくなります。"
+        "help": "詳しい質問内容を記入すると、良い回答が得られやすくなります。",
+        "default": "共有したい話の書いてください"
       },
       "image": {
         "guides": {
@@ -1084,7 +1089,17 @@
         "meetup": "軽く集まって楽しむ募集を作成しましょう。",
         "meetup_recruitment": "スケジュールが合う旅行仲間を見つけましょう。",
         "help": "気になることがあれば何でも聞いてください。"
-      }
+      },
+      "category_label": "カテゴリー",
+      "region_label": "地域",
+      "region_placeholder": "地域(例：江南、麻浦)",
+      "submit": "登録する",
+      "write_title": "作成",
+      "edit_title": "編集",
+      "image_label": "画像添付",
+      "add_photo": "写真を追加",
+      "preparing_images": "画像を準備中...",
+      "cancel": "キャンセル"
     },
     "detail": "投稿詳細",
     "detail_page": {
@@ -1136,7 +1151,9 @@
       "comment_input": {
         "default": "コメントを入力...",
         "optional": "ひと言添えてください (任意)",
-        "send": "送信"
+        "send": "送信",
+        "open_btn": "コメントを書く",
+        "cancel": "キャンセル"
       },
       "signal_intents": {
         "interested": "私も行ってみたいです",
@@ -1226,7 +1243,9 @@
         "photo_spot": "映えスポット",
         "waiting": "待ち時間注意",
         "foreigner_friendly": "外国人歓迎"
-      }
+      },
+      "empty_comments": "まだコメントがありません。最初のコメントを残してください！",
+      "hide_comment": "このコメントを隠す"
     },
     "actions": {
       "delete_confirm": "本当に削除しますか？",
@@ -1250,6 +1269,89 @@
     "comments": "コメント",
     "time": {
       "just_now": "たった今"
+    },
+    "write_post": "作成",
+    "edit": "編集",
+    "posting": "登録中...",
+    "defaults": {
+      "region": "ソウル"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "ビューティーを一緒に"
+      },
+      "flash_meetup": {
+        "label": "オフ会"
+      },
+      "beauty": {
+        "label": "ビューティーレビュー"
+      },
+      "food": {
+        "label": "グルメおすすめ"
+      },
+      "travel": {
+        "label": "旅行ヒント"
+      },
+      "write": {
+        "label": "作成"
+      },
+      "browse": {
+        "label": "見て回る",
+        "sub": "人気投稿"
+      },
+      "recruiting": {
+        "label": "募集中",
+        "sub": "同行者を探す"
+      },
+      "weekend": {
+        "label": "今週末",
+        "sub": "日程共有"
+      },
+      "record": {
+        "label": "記録する",
+        "sub": "日常共有"
+      }
+    },
+    "fab": {
+      "create_post": "作成"
+    },
+    "sort": {
+      "latest": "最新順",
+      "reactions": "反応が多い順",
+      "draft": "募集が活発な順"
+    },
+    "card": {
+      "default_vibe": "雰囲気がいいです",
+      "title_prefix": {
+        "beauty_review": "[ビューティー]",
+        "food_review": "[グルメ]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "レビューを見る",
+        "join": "参加する"
+      },
+      "result_badge": "レビュー完了",
+      "open_meetup_badge": "集まり可能",
+      "fresh_badges": {
+        "comment": "リアルタイム反応中",
+        "update": "たった今更新"
+      },
+      "draft_status": {
+        "active": "活発にコミュニケーション中",
+        "forming": "人数構成中",
+        "preparing": "参加希望中"
+      },
+      "draft_desc": {
+        "active": "すでに多くの方が関心を示しています！",
+        "forming": "少しずつ人が集まっています。",
+        "preparing": "最初の関心を表現してみてください。"
+      },
+      "owner_reactions": {
+        "region": "{{region}}について{{count}}人とコミュニケーション中",
+        "join": "{{count}}人が参加を希望しています"
+      },
+      "more_region": "{{region}}のさらに多くの話を見る"
     }
   },
   "help_page": {

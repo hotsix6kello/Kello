@@ -461,7 +461,9 @@
       "empty_desc": "كن أول من يشارك قصتك!",
       "empty_tip": "اضغط على زر الكتابة في أسفل اليمين.",
       "no_results_title": "لم يتم العثور على نتائج",
-      "no_results_desc": "حاول البحث بكلمات رئيسية أخرى."
+      "no_results_desc": "حاول البحث بكلمات رئيسية أخرى.",
+      "cta_write": "كتابة المنشور الأول",
+      "cta_all": "عرض الكل"
     },
     "quality_signals": {
       "organized": "منظم جيداً",
@@ -474,7 +476,8 @@
       "save_removed": "تمت الإزالة من المنشورات المحفوظة.",
       "deleted": "تم الحذف بنجاح.",
       "updated": "تم التحديث بنجاح.",
-      "submitted": "تم النشر بنجاح."
+      "submitted": "تم النشر بنجاح.",
+      "region_collected": "عرض المنشورات لـ {{region}}"
     },
     "nav_summary": {
       "all": "عرض جميع القصص في {{tab}}",
@@ -511,7 +514,8 @@
         "travel_review": "مثلاً: نصائح قطار KTX من سيول إلى بوسان",
         "meetup": "مثلاً: بيرة/دجاج الليلة في سينونهيون!",
         "meetup_recruitment": "مثلاً: قصر كيونغبوك غونغ الأسبوع القادم معاً",
-        "help": "مثلاً: كيف أصل للفندق من مطار إنشيون؟"
+        "help": "مثلاً: كيف أصل للفندق من مطار إنشيون؟",
+        "default": "تتساءل عما ستكتب عنه؟"
       },
       "desc_label": {
         "beauty_review": "التفاصيل",
@@ -523,7 +527,8 @@
         "travel_review": "شارك معلومات مفيدة للمسافرين الآخرين.",
         "meetup": "صف اللقاء بالتفصيل.",
         "meetup_recruitment": "صف ما تريد القيام به معاً.",
-        "help": "الأسئلة المفصلة تساعد في الحصول على إجابات أفضل."
+        "help": "الأسئلة المفصلة تساعد في الحصول على إجابات أفضل.",
+        "default": "اكتب القصة التي تريد مشاركتها"
       },
       "image": {
         "guides": {
@@ -556,7 +561,8 @@
       "image_label": "الصور",
       "add_photo": "إضافة صورة",
       "preparing_images": "جاري تحضير الصور...",
-      "cancel": "إلغاء"
+      "cancel": "إلغاء",
+      "category_label": "فئة"
     },
     "detail": "تفاصيل المنشور",
     "detail_page": {
@@ -608,7 +614,9 @@
       "comment_input": {
         "default": "أدخل تعليقاً...",
         "optional": "أضف ملاحظة اختيارية",
-        "send": "إرسال"
+        "send": "إرسال",
+        "open_btn": "كتابة تعليق",
+        "cancel": "إلغاء"
       },
       "signal_intents": {
         "interested": "أنا مهتم",
@@ -698,7 +706,9 @@
         "photo_spot": "أماكن تصوير",
         "waiting": "توقع انتظار",
         "foreigner_friendly": "ودود للأجانب"
-      }
+      },
+      "empty_comments": "لا توجد تعليقات بعد. كن الأول!",
+      "hide_comment": "إخفاء هذا التعليق"
     },
     "actions": {
       "delete_confirm": "هل أنت متأكد أنك تريد الحذف؟"
@@ -721,6 +731,89 @@
     "comments": "التعليقات",
     "time": {
       "just_now": "الآن"
+    },
+    "write_post": "كتابة منشور",
+    "edit": "تعديل",
+    "posting": "جاري النشر...",
+    "defaults": {
+      "region": "سيول"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "تجميل معاً"
+      },
+      "flash_meetup": {
+        "label": "لقاء سريع"
+      },
+      "beauty": {
+        "label": "مراجعة تجميل"
+      },
+      "food": {
+        "label": "توصية طعام"
+      },
+      "travel": {
+        "label": "نصائح سفر"
+      },
+      "write": {
+        "label": "كتابة منشور"
+      },
+      "browse": {
+        "label": "تصفح",
+        "sub": "مشاركات شائعة"
+      },
+      "recruiting": {
+        "label": "توظيف",
+        "sub": "ابحث عن رفيق"
+      },
+      "weekend": {
+        "label": "هذا الأسبوع",
+        "sub": "شارك الجدول"
+      },
+      "record": {
+        "label": "سجل",
+        "sub": "شارك اليوميات"
+      }
+    },
+    "fab": {
+      "create_post": "كتابة منشور"
+    },
+    "sort": {
+      "latest": "الأحدث",
+      "reactions": "الأكثر تفاعلاً",
+      "draft": "توظيف نشط"
+    },
+    "card": {
+      "default_vibe": "جو رائع",
+      "title_prefix": {
+        "beauty_review": "[تجميل]",
+        "food_review": "[طعام]",
+        "travel_review": "[سفر]"
+      },
+      "cta": {
+        "review": "عرض المراجعات",
+        "join": "انضمام"
+      },
+      "result_badge": "اكتملت المراجعة",
+      "open_meetup_badge": "متاح للقاء",
+      "fresh_badges": {
+        "comment": "تفاعل مباشر",
+        "update": "تم التحديث للتو"
+      },
+      "draft_status": {
+        "active": "التواصل بنشاط",
+        "forming": "تشكيل الفريق",
+        "preparing": "نأمل المشاركة"
+      },
+      "draft_desc": {
+        "active": "الكثير مهتمون!",
+        "forming": "يتجمع الناس ببطء.",
+        "preparing": "كن أول من يظهر الاهتمام."
+      },
+      "owner_reactions": {
+        "region": "محادثة مع {{count}} حول {{region}}",
+        "join": "{{count}} أشخاص يريدون الانضمام"
+      },
+      "more_region": "عرض المزيد من القصص حول {{region}}"
     }
   }
 }
