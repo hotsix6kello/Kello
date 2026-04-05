@@ -25,7 +25,14 @@
     "home_nav": "الرئيسية",
     "explore_nav": "استكشاف",
     "planner_nav": "المخطط",
-    "help_nav": "مركز المساعدة"
+    "help_nav": "مركز المساعدة",
+    "actions": {
+      "delete": "حذف"
+    },
+    "states": {
+      "no_permission": "ليس لديك صلاحية.",
+      "error_occurred": "حدث خطأ أثناء معالجة طلبك."
+    }
   },
   "transport": {
     "moving_to": "متجه إلى {{dest}}",
@@ -530,7 +537,8 @@
         "saved_name": "صورة محفوظة {{index}}",
         "file_only_alert": "يمكن اختيار ملفات الصور فقط.",
         "limit_alert": "يمكن تحميل ما يصل إلى {{count}} صور.",
-        "load_failed_alert": "فشل تحميل الصور."
+        "load_failed_alert": "فشل تحميل الصور.",
+        "limit_label": "(بحد أقصى {{count}} صور)"
       },
       "category_hints": {
         "beauty_review": "شارك تجاربك في محلات التجميل.",
@@ -539,7 +547,16 @@
         "meetup": "أنشئ لقاءً غير رسمي للاستمتاع معاً.",
         "meetup_recruitment": "ابحث عن رفاق سفر بجداول مماثلة.",
         "help": "اسأل عن أي شيء يثير فضولك."
-      }
+      },
+      "region_label": "المنطقة",
+      "region_placeholder": "مثلاً: كانغنام، مابو",
+      "submit": "نشر",
+      "write_title": "كتابة منشور",
+      "edit_title": "تعديل المنشور",
+      "image_label": "الصور",
+      "add_photo": "إضافة صورة",
+      "preparing_images": "جاري تحضير الصور...",
+      "cancel": "إلغاء"
     },
     "detail": "تفاصيل المنشور",
     "detail_page": {

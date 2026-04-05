@@ -565,6 +565,7 @@
       "write_review": "리뷰 쓰기",
       "view_all": "전체 보기",
       "details": "상세 보기",
+      "delete": "삭제",
       "map": "지도"
     },
     "states": {
@@ -593,7 +594,9 @@
       "saved_locally": "로컬에 저장됨",
       "sign_in_required": "로그인 필요",
       "standard_account": "일반 계정",
-      "verified": "인증됨"
+      "verified": "인증됨",
+      "no_permission": "권한이 없습니다.",
+      "error_occurred": "요청을 처리하는 중 오류가 발생했습니다."
     }
   },
   "transport": {
@@ -1497,7 +1500,8 @@
         "saved_name": "저장된 이미지 {{index}}",
         "file_only_alert": "이미지 파일만 선택 가능합니다.",
         "limit_alert": "이미지는 최대 {{count}}개까지 업로드 가능합니다.",
-        "load_failed_alert": "이미지를 불러오지 못했습니다."
+        "load_failed_alert": "이미지를 불러오지 못했습니다.",
+        "limit_label": "(최대 {{count}}장)"
       },
       "category_hints": {
         "beauty_review": "뷰티샵 이용 후기를 자유롭게 공유하세요.",

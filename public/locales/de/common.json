@@ -63,7 +63,14 @@
     "community_nav": "Community",
     "morning": "Guten Morgen",
     "afternoon": "Guten Tag",
-    "evening": "Guten Abend"
+    "evening": "Guten Abend",
+    "actions": {
+      "delete": "Löschen"
+    },
+    "states": {
+      "no_permission": "Keine Berechtigung.",
+      "error_occurred": "Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten."
+    }
   },
   "transport": {
     "moving_to": "Fahrt nach {{dest}}",
@@ -165,6 +172,11 @@
   "community_page": {
     "title": "Community",
     "subtitle": "Vernetzen Sie sich mit Einheimischen & Reisenden",
+    "form": {
+      "image": {
+        "limit_label": "(Max. {{count}} Bilder)"
+      }
+    },
     "filter_all": "Alle",
     "filter_meetup": "Essen & Treffen",
     "filter_travel": "Reisepartner",

@@ -422,7 +422,7 @@ export default function CommunityPage() {
                 }))
             );
             setNewImages(prev => [...prev, ...preparedImages]);
-        } catch (err) { alert('Image load failed'); } finally { setIsPreparingImage(false); event.target.value = ''; }
+        } catch (err) { alert(t('community_page.form.image.load_failed_alert')); } finally { setIsPreparingImage(false); event.target.value = ''; }
     };
 
     const handleRemoveImage = (imageId: string) => setNewImages(prev => prev.filter(img => img.id !== imageId));
@@ -664,7 +664,7 @@ export default function CommunityPage() {
 
                             {/* Image Upload/Preview Field */}
                             <div className={styles.formGroup} style={{ marginBottom: '100px' }}>
-                                <label>{t('community_page.form.image_label')} (최대 {COMMUNITY_IMAGE_LIMIT}장)</label>
+                                <label>{t('community_page.form.image_label')} {t('community_page.form.image.limit_label', { count: COMMUNITY_IMAGE_LIMIT })}</label>
                                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '8px' }}>
                                     {newImages.map((img) => (
                                         <div key={img.id} style={{ position: 'relative', width: '80px', height: '80px' }}>

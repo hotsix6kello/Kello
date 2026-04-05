@@ -221,7 +221,7 @@ export default function CommunityDetailPage() {
     const handleReaction = async (type: 'like' | 'dislike') => {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
-            alert(t('community_page.errors.login_required', { defaultValue: '로그인이 필요한 서비스입니다.' }));
+            alert(t('community_page.errors.login_required'));
             return;
         }
 
@@ -269,13 +269,13 @@ export default function CommunityDetailPage() {
                 setLikesCount(previousLikes);
                 setDislikesCount(previousDislikes);
                 console.error('Reaction update error:', error);
-                alert(t('common.error_occurred', { defaultValue: '요청을 처리하는 중 오류가 발생했습니다.' }));
+                alert(t('common.states.error_occurred'));
             }
         }
     };
 
     const handleReport = () => {
-        alert(t('community_page.report.success', { defaultValue: '정상적으로 신고되었습니다.' }));
+        alert(t('community_page.report.success'));
         setIsReportModalOpen(false);
     };
 
@@ -284,7 +284,7 @@ export default function CommunityDetailPage() {
 
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
-            alert(t('community_page.errors.login_required', { defaultValue: '로그인이 필요한 서비스입니다.' }));
+            alert(t('community_page.errors.login_required'));
             return;
         }
 
@@ -352,7 +352,7 @@ export default function CommunityDetailPage() {
                 }, 100);
             } else {
                 console.error('Comment insertion error:', error);
-                alert(t('common.error_occurred', { defaultValue: 'An error occurred. Please try again.' }));
+                alert(t('common.states.error_occurred'));
             }
         } catch (err) {
             console.error('Unexpected error during comment submission:', err);
@@ -362,7 +362,7 @@ export default function CommunityDetailPage() {
     };
 
     const handleDeleteComment = async (commentId: number) => {
-        if (!confirm(t('community_page.actions.delete_confirm', { defaultValue: '정말 삭제하시겠습니까?' }))) return;
+        if (!confirm(t('community_page.actions.delete_confirm'))) return;
         if (!post) return;
 
         const targetComment = comments.find(c => c.id === commentId);
@@ -371,7 +371,7 @@ export default function CommunityDetailPage() {
         try {
             const isAuthor = targetComment.author_user_id === currentUserId || (loggedInUserName && targetComment.author === loggedInUserName);
             if (!isAuthor) {
-                alert(t('common.no_permission', { defaultValue: '삭제 권한이 없습니다.' }));
+                alert(t('common.states.no_permission'));
                 return;
             }
 
@@ -427,7 +427,7 @@ export default function CommunityDetailPage() {
         <div className={styles.container}>
             <header className={styles.header}>
                 <button className={styles.backBtn} onClick={() => router.back()}>←</button>
-                <h1 className={styles.headerTitle}>{t('community_page.detail', { defaultValue: 'Post Detail' })}</h1>
+                <h1 className={styles.headerTitle}>{t('community_page.detail')}</h1>
             </header>
 
             <div className={styles.content}>
@@ -491,7 +491,7 @@ export default function CommunityDetailPage() {
                             onClick={() => handleReaction('like')}
                         >
                             <span className={styles.reactionEmoji}>👍</span>
-                            <span className={styles.reactionLabel}>{t('community_page.detail_page.like', { defaultValue: '좋아요' })}</span>
+                            <span className={styles.reactionLabel}>{t('community_page.detail_page.like')}</span>
                             <span className={styles.reactionCount}>{likesCount}</span>
                         </button>
                         <button 
@@ -499,13 +499,13 @@ export default function CommunityDetailPage() {
                             onClick={() => handleReaction('dislike')}
                         >
                             <span className={styles.reactionEmoji}>👎</span>
-                            <span className={styles.reactionLabel}>{t('community_page.detail_page.dislike', { defaultValue: '싫어요' })}</span>
+                            <span className={styles.reactionLabel}>{t('community_page.detail_page.dislike')}</span>
                             <span className={styles.reactionCount}>{dislikesCount}</span>
                         </button>
                     </div>
 
                     <div className={styles.stats}>
-                        <span>💬 {comments.length} {t('community_page.comments', { defaultValue: 'Comments' })}</span>
+                        <span>💬 {comments.length} {t('community_page.comments')}</span>
                     </div>
                 </div>
 
@@ -517,7 +517,7 @@ export default function CommunityDetailPage() {
                             <input
                                 id="comment-input-field"
                                 className={styles.commentInput}
-                                placeholder={t('community_page.detail_page.comment_input.default', { defaultValue: '댓글을 입력하세요...' })}
+                                placeholder={t('community_page.detail_page.comment_input.default')}
                                 value={newComment}
                                 onChange={e => setNewComment(e.target.value)}
                                 onKeyDown={e => e.key === 'Enter' && handleSubmitComment()}
@@ -559,7 +559,7 @@ export default function CommunityDetailPage() {
                                                                 className={`${styles.moreMenuItem} ${styles.moreMenuItem_report}`} 
                                                                 onClick={() => handleDeleteComment(c.id)}
                                                             >
-                                                                {t('common.delete', { defaultValue: '삭제' })}
+                                                                {t('common.actions.delete')}
                                                             </button>
                                                         )}
                                                     </div>
