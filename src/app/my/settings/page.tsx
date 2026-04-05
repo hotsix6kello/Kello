@@ -195,22 +195,11 @@ function getAvatarPublicUrl(path: string): string {
 }
 
 function getProfileAvatarUrl(profile: ProfileRecord | null): string {
-    if (!profile) {
-        return "";
-    }
-
-    return pickString(
-        profile.avatar_url,
-        profile.avatar_path ? getAvatarPublicUrl(profile.avatar_path) : ""
-    );
+    return profile?.avatar_url || "";
 }
 
 function getProfileAvatarPresence(profile: ProfileRecord | null): string {
-    if (!profile) {
-        return "";
-    }
-
-    return pickString(profile.avatar_path, profile.avatar_url);
+    return profile?.avatar_url || "";
 }
 
 function isReviewCommunityPost(post: HeroCommunityPostRecord): boolean {
@@ -1004,8 +993,13 @@ export default function MySettingsPage() {
             }
 
             setProfile(nextProfile);
-            setAvatarPath(pickString(getProfileAvatarPresence(nextProfile), filePath, publicUrl));
-            setAvatarUrl(pickString(getProfileAvatarUrl(nextProfile), publicUrl));
+            setAvatarUrl(nextProfile.avatar_url || publicUrl);
+            
+            // Sync dashboard-like view name if nickname exists, etc.
+            setAccount((current) => ({
+                ...current,
+                displayName: nextProfile.nickname || nextProfile.display_name || current.displayName,
+            }));
         } catch (error) {
             console.error("[settings-avatar] upload_failed", error);
             setAvatarError("이미지를 바꾸지 못했어요.");
