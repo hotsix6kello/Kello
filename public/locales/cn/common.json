@@ -150,7 +150,8 @@
       "view": "查看",
       "view_place_details": "查看地点详情",
       "view_plan": "查看行程",
-      "write_review": "撰写评价"
+      "write_review": "撰写评价",
+      "delete": "删除"
     },
     "states": {
       "active": "激活",
@@ -171,6 +172,8 @@
       "sign_in_required": "需登录",
       "standard_account": "标准账户",
       "verified": "已验证",
+      "no_permission": "没有权限。",
+      "error_occurred": "处理请求时发生错误。",
       "current_trip_plan": "当前旅行计划",
       "details_unavailable": "详细信息不可用",
       "meetups": "聚会",
@@ -182,12 +185,13 @@
     },
     "runtime": {
       "counts": {
-        "stops_zero": "{{count}}????",
-        "stops_one": "{{count}}????",
-        "stops_other": "{{count}}????",
-        "days_zero": "{{count}}?",
-        "days_one": "{{count}}?",
-        "days_other": "{{count}}?"
+        "stops_zero": "{{count}} 个地点",
+        "stops_one": "{{count}} 个地点",
+        "stops_other": "{{count}} 个地点",
+        "days_zero": "{{count}} 天",
+        "days_one": "{{count}} 天",
+        "days_other": "{{count}} 天"
+
       }
     },
     "morning": "早上好",
@@ -899,12 +903,12 @@
     },
     "categories": {
       "all": "全部",
-      "beauty_review": "美妆点评",
-      "food_review": "美食推荐",
-      "travel_review": "旅行心得",
-      "meetup": "线下聚会",
+      "meetup": "社交/聚会",
+      "beauty_review": "美妆/美容",
+      "food_review": "美食/探店",
+      "travel_review": "旅游/观光",
       "meetup_recruitment": "招募搭子",
-      "help": "求助/咨询"
+      "help": "攻略/求助"
     },
     "sub_filters": {
       "all": "全部",
@@ -985,11 +989,7 @@
       },
       "title_placeholder": {
         "beauty_review": "例如：江南站层次修剪体验",
-        "food_review": "例如：圣水洞人气第一的日料店",
-        "travel_review": "例如：首尔到釜山的高铁省钱攻略",
-        "meetup": "例如：新论岘站附近约吃炸鸡！",
-        "meetup_recruitment": "例如：下周二求个景福宫搭子",
-        "help": "例如：从仁川机场到酒店怎么坐车最方便？"
+        "default": "正在犹豫写点什么吗？"
       },
       "desc_label": {
         "beauty_review": "详细评价",
@@ -1001,7 +1001,8 @@
         "travel_review": "分享一些对其他朋友有帮助的信息。",
         "meetup": "详细说明聚会的计划。",
         "meetup_recruitment": "描述一下您想找什么样的搭子。",
-        "help": "描述越详细，越容易得到有用的回答哦。"
+        "help": "描述越详细，越容易得到有用的回答哦。",
+        "default": "写下您想分享的故事吧"
       },
       "image": {
         "guides": {
@@ -1015,7 +1016,8 @@
         "saved_name": "已保存的图片 {{index}}",
         "file_only_alert": "仅支持上传图片格式。",
         "limit_alert": "最多可上传 {{count}} 张图片。",
-        "load_failed_alert": "图片加载失败。"
+        "load_failed_alert": "图片加载失败。",
+        "limit_label": "(最多 {{count}} 张)"
       },
       "category_hints": {
         "beauty_review": "自由分享您的美容体验。",
@@ -1024,7 +1026,16 @@
         "meetup": "发起一个轻社交活动吧。",
         "meetup_recruitment": "寻找行程契合的搭子。",
         "help": "有疑惑尽管提问。"
-      }
+      },
+      "region_label": "区域",
+      "region_placeholder": "例如：江南, 麻浦",
+      "submit": "发布",
+      "write_title": "写文章",
+      "edit_title": "编辑文章",
+      "image_label": "图片附件",
+      "add_photo": "添加照片",
+      "preparing_images": "正在准备图片...",
+      "cancel": "取消"
     },
     "detail": "帖子详情",
     "detail_page": {
@@ -1169,7 +1180,8 @@
       }
     },
     "actions": {
-      "delete_confirm": "确定要删除吗？"
+      "delete_confirm": "确定要删除吗？",
+      "delete": "删除"
     },
     "errors": {
       "login_required": "请先登录。",

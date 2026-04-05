@@ -162,7 +162,8 @@
       "open_admin_console": "Open Admin Console",
       "interpreter_for_booking": "Interpreter for this booking",
       "show_booking_phrases": "Show booking phrases",
-      "back_to_booking_support": "Back to booking support"
+      "back_to_booking_support": "返回預約支持",
+      "delete": "刪除"
     },
     "states": {
       "sign_in_required": "Sign in required",
@@ -185,7 +186,9 @@
       "pending_review": "Pending review",
       "needs_update": "Needs update",
       "not_joined": "Not joined",
-      "standard_account": "Standard account",
+      "standard_account": "標準帳戶",
+      "no_permission": "沒有權限。",
+      "error_occurred": "處理請求時發生錯誤。",
       "frequent": "Frequent",
       "favorites": "Favorites",
       "recent": "Recent",
@@ -214,13 +217,13 @@
       },
       "trip": {
         "day_label": "Day {{day}}",
-        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dot": "第 {{day}} 天 · {{time}}",
         "day_time_dash": "Day {{day}} - {{time}}"
       },
       "counts": {
-        "comments": "{{count}} comments",
-        "stops": "{{count}} stops",
-        "days": "{{count}} days"
+        "comments": "{{count}} 則評論",
+        "stops": "{{count}} 個地點",
+        "days": "{{count}} 天"
       }
     },
     "morning": "早安",
@@ -1102,12 +1105,12 @@
     },
     "categories": {
       "all": "全部",
-      "beauty_review": "美妝評價",
-      "food_review": "美食推薦",
-      "travel_review": "旅遊心得",
       "meetup": "線下聚會",
+      "beauty_review": "美妝/美容",
+      "food_review": "美食/探店",
+      "travel_review": "旅遊/觀光",
       "meetup_recruitment": "招募夥伴",
-      "help": "求助/諮詢"
+      "help": "旅遊攻略"
     },
     "sub_filters": {
       "all": "全部",
@@ -1188,11 +1191,7 @@
       },
       "title_placeholder": {
         "beauty_review": "例如：江南站層次修剪體驗",
-        "food_review": "例如：聖水洞人氣第一的日料店",
-        "travel_review": "例如：首爾到釜山的高鐵慳錢攻略",
-        "meetup": "例如：新論峴站附近約食炸雞！",
-        "meetup_recruitment": "例如：下週二求個景福宮夥伴",
-        "help": "例如：從仁川機場到酒店點樣搭車最方便？"
+        "default": "正在猶豫寫點什麼嗎？"
       },
       "desc_label": {
         "beauty_review": "詳細評價",
@@ -1204,7 +1203,8 @@
         "travel_review": "分享一些對其他朋友有幫助的資訊。",
         "meetup": "詳細說明聚會的計畫。",
         "meetup_recruitment": "描述一下您想找什麼樣的夥伴。",
-        "help": "描述越詳細，越容易得到有用的回答喔。"
+        "help": "描述越詳細，越容易得到有用的回答喔。",
+        "default": "寫下您想分享的故事吧"
       },
       "image": {
         "guides": {
@@ -1218,7 +1218,8 @@
         "saved_name": "已保存的圖片 {{index}}",
         "file_only_alert": "僅支持上傳圖片格式。",
         "limit_alert": "最多可上傳 {{count}} 張圖片。",
-        "load_failed_alert": "圖片加載失敗。"
+        "load_failed_alert": "圖片加載失敗。",
+        "limit_label": "(最多 {{count}} 張)"
       },
       "category_hints": {
         "beauty_review": "自由分享您的美容體驗。",
@@ -1227,7 +1228,16 @@
         "meetup": "發起一個輕社交活動啦。",
         "meetup_recruitment": "尋找行程契合的夥伴。",
         "help": "有疑惑儘管提問。"
-      }
+      },
+      "region_label": "區域",
+      "region_placeholder": "例如：江南, 麻浦",
+      "submit": "發佈",
+      "write_title": "寫文章",
+      "edit_title": "編輯文章",
+      "image_label": "圖片附件",
+      "add_photo": "添加照片",
+      "preparing_images": "正在準備圖片...",
+      "cancel": "取消"
     },
     "detail": "貼文詳情",
     "detail_page": {

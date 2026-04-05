@@ -63,7 +63,14 @@
     "community_nav": "Сообщество",
     "morning": "Доброе утро",
     "afternoon": "Добрый день",
-    "evening": "Добрый вечер"
+    "evening": "Добрый вечер",
+    "actions": {
+      "delete": "Удалить"
+    },
+    "states": {
+      "no_permission": "Нет прав доступа.",
+      "error_occurred": "Произошла ошибка при обработке вашего запроса."
+    }
   },
   "transport": {
     "moving_to": "Едем к {{dest}}",
@@ -165,6 +172,11 @@
   "community_page": {
     "title": "Сообщество",
     "subtitle": "Общайтесь с местными и путешественниками",
+    "form": {
+      "image": {
+        "limit_label": "(макс. {{count}} фото)"
+      }
+    },
     "filter_all": "Все",
     "filter_meetup": "Еда и встречи",
     "filter_travel": "Попутчик",

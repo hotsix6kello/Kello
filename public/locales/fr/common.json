@@ -63,7 +63,14 @@
     "community_nav": "Communauté",
     "morning": "Bonjour",
     "afternoon": "Bon après-midi",
-    "evening": "Bonsoir"
+    "evening": "Bonsoir",
+    "actions": {
+      "delete": "Supprimer"
+    },
+    "states": {
+      "no_permission": "Accès refusé.",
+      "error_occurred": "Une erreur est survenue lors du traitement de votre demande."
+    }
   },
   "transport": {
     "moving_to": "En route vers {{dest}}",
@@ -165,6 +172,11 @@
   "community_page": {
     "title": "Communauté",
     "subtitle": "Connectez-vous avec les locaux et les voyageurs",
+    "form": {
+      "image": {
+        "limit_label": "(Max {{count}} images)"
+      }
+    },
     "filter_all": "Tout",
     "filter_meetup": "Gastronomie & Rencontres",
     "filter_travel": "Compagnon de voyage",

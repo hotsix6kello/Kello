@@ -113,7 +113,8 @@
       "view": "Xem",
       "view_place_details": "Xem chi tiết địa điểm",
       "view_plan": "Xem kế hoạch",
-      "write_review": "Viết đánh giá"
+      "write_review": "Viết đánh giá",
+      "delete": "Xóa"
     },
     "states": {
       "active": "?ang ho?t Đóng",
@@ -140,14 +141,15 @@
       "planner_draft": "B?n nh?p Planner",
       "posts": "B?i vi?t",
       "recently_viewed": "?? xem g?n ??y",
-      "reviews": "??nh gi?",
-      "saved_locally": "Đã lưu tr?n thi?t b? n?y"
+      "labels": "Nhãn",
+      "no_permission": "Bạn không có quyền thực hiện hành động này.",
+      "error_occurred": "Đã xảy ra lỗi khi xử lý yêu cầu của bạn."
     },
     "runtime": {
       "counts": {
-        "stops_zero": "{{count}} ?i?m d?ng",
-        "stops_one": "{{count}} ?i?m d?ng",
-        "stops_other": "{{count}} ?i?m d?ng",
+        "stops_zero": "{{count}} điểm dừng",
+        "stops_one": "{{count}} điểm dừng",
+        "stops_other": "{{count}} điểm dừng",
         "days_zero": "{{count}} ngày",
         "days_one": "{{count}} ngày",
         "days_other": "{{count}} ngày"
@@ -1908,7 +1910,8 @@
         "saved_name": "Saved image {{index}}",
         "file_only_alert": "Only image files can be selected.",
         "limit_alert": "Up to {{count}} images can be uploaded.",
-        "load_failed_alert": "Failed to load images."
+        "load_failed_alert": "Không thể tải ảnh.",
+        "limit_label": "(Tối đa {{count}} ảnh)"
       },
       "category_hints": {
         "beauty_review": "Share your beauty shop experiences.",
@@ -1948,13 +1951,14 @@
       },
       "mini_signal_tag": "Meetup Open",
       "primary_action": {
-        "review": "Leave Review",
-        "join": "Express Interest"
+        "review": "Để lại đánh giá",
+        "join": "Tôi quan tâm"
       },
       "save": {
-        "saved": "Saved",
-        "default": "Save"
-      },
+        "saved": "Đã lưu",
+        "default": "Lưu"
+      }
+,
       "meetup_safety": {
         "title": "Meetup Safety Guide",
         "item_1": "Meeting in public places is recommended.",
