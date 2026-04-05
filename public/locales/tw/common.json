@@ -707,7 +707,13 @@
         "last_seen": "Last sign-in",
         "last_seen_hint": "Read-only from the auth session.",
         "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-        "default_name": "Traveler"
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
       },
       "partner_admin": {
         "title": "Partner / Admin",

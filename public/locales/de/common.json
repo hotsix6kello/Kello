@@ -167,6 +167,17 @@
     "community": {
       "title": "Meine Community-Beiträge",
       "empty": "Noch keine Community-Beiträge geschrieben."
+    },
+    "settings": {
+      "account": {
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
+      }
     }
   },
   "community_page": {

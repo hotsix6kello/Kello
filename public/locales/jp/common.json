@@ -807,7 +807,13 @@
         "last_seen": "最終アクセス",
         "last_seen_hint": "最後にアプリを利用した時間。",
         "read_only": "この情報はSupabase認証を通じて管理されています。",
-        "default_name": "ユーザー"
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
       },
       "partner_admin": {
         "title": "パートナー / 管理",
