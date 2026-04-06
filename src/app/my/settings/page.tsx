@@ -215,18 +215,18 @@ function isReviewCommunityPost(post: HeroCommunityPostRecord): boolean {
     );
 }
 
-function getCommunityBadge(points: number): string {
-    if (points >= 80) return "커뮤니티 리더";
-    if (points >= 30) return "트렌드 피커";
-    if (points >= 10) return "뷰티 메이트";
-    return "새싹";
+function getCommunityBadge(points: number, t: any): string {
+    if (points >= 80) return t("settings_page.badges.community.leader", { defaultValue: "커뮤니티 리더" });
+    if (points >= 30) return t("settings_page.badges.community.trend", { defaultValue: "트렌드 피커" });
+    if (points >= 10) return t("settings_page.badges.community.mate", { defaultValue: "뷰티 메이트" });
+    return t("settings_page.badges.community.sprout", { defaultValue: "새싹" });
 }
 
-function getBookingBadge(completedCount: number): string {
-    if (completedCount >= 10) return "VVIP";
-    if (completedCount >= 5) return "VIP";
-    if (completedCount >= 2) return "Regular";
-    return "New";
+function getBookingBadge(completedCount: number, t: any): string {
+    if (completedCount >= 10) return t("settings_page.badges.booking.vvip", { defaultValue: "VVIP" });
+    if (completedCount >= 5) return t("settings_page.badges.booking.vip", { defaultValue: "VIP" });
+    if (completedCount >= 2) return t("settings_page.badges.booking.regular", { defaultValue: "Regular" });
+    return t("settings_page.badges.booking.new", { defaultValue: "New" });
 }
 
 const EMPTY_COMMUNITY_STATS: HeroCommunityStats = {
@@ -234,17 +234,17 @@ const EMPTY_COMMUNITY_STATS: HeroCommunityStats = {
     reviewCount: 0,
     commentCount: 0,
     likesReceived: 0,
-    badge: "새싹",
+    badge: "",
 };
 
 const EMPTY_BOOKING_STATS: HeroBookingStats = {
     totalCount: 0,
     completedCount: 0,
     revisitCount: 0,
-    badge: "New",
+    badge: "",
 };
 
-async function loadCommunityStats(userId: string, displayName: string): Promise<HeroCommunityStats> {
+async function loadCommunityStats(userId: string, displayName: string, t: any): Promise<HeroCommunityStats> {
     let posts: HeroCommunityPostRecord[] = [];
 
     const authoredPosts = await supabase
@@ -281,11 +281,11 @@ async function loadCommunityStats(userId: string, displayName: string): Promise<
         reviewCount,
         commentCount,
         likesReceived,
-        badge: getCommunityBadge(points),
+        badge: getCommunityBadge(points, t),
     };
 }
 
-async function loadBookingStats(accessToken: string): Promise<HeroBookingStats> {
+async function loadBookingStats(accessToken: string, t: any): Promise<HeroBookingStats> {
     try {
         const response = await fetch("/api/bookings/beauty/mine", {
             headers: {
@@ -320,7 +320,7 @@ async function loadBookingStats(accessToken: string): Promise<HeroBookingStats> 
             totalCount: body.items.length,
             completedCount: completedItems.length,
             revisitCount,
-            badge: getBookingBadge(completedItems.length),
+            badge: getBookingBadge(completedItems.length, t),
         };
     } catch {
         return EMPTY_BOOKING_STATS;
@@ -329,29 +329,34 @@ async function loadBookingStats(accessToken: string): Promise<HeroBookingStats> 
 
 function buildNotificationSummary(
     preferences: NotificationPreferences | null,
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
+    t: any
 ): NotificationSummary {
     if (!isLoggedIn) {
         return {
-            value: "로그인 후 확인",
-            helper: "로그인 후 현재 알림 상태를 볼 수 있어요.",
-            badge: "대기",
+            value: t("settings_page.personal.notifications.value_out", { defaultValue: "로그인 후 확인" }),
+            helper: t("settings_page.personal.notifications.helper_out", {
+                defaultValue: "로그인 후 현재 알림 상태를 볼 수 있어요.",
+            }),
+            badge: t("settings_page.personal.notifications.badge_out", { defaultValue: "대기" }),
             tone: "neutral",
         };
     }
 
     if (!preferences) {
         return {
-            value: "설정 확인 필요",
-            helper: "알림 상태를 불러오지 못했어요.",
-            badge: "확인 필요",
+            value: t("settings_page.personal.notifications.value_error", { defaultValue: "설정 확인 필요" }),
+            helper: t("settings_page.personal.notifications.helper_error", {
+                defaultValue: "알림 상태를 불러오지 못했어요.",
+            }),
+            badge: t("settings_page.personal.notifications.badge_error", { defaultValue: "확인 필요" }),
             tone: "warning",
         };
     }
 
     const enabledChannels = [
-        preferences.inAppEnabled ? "앱" : "",
-        preferences.emailEnabled ? "이메일" : "",
+        preferences.inAppEnabled ? t("settings_page.personal.notifications.channel_app", { defaultValue: "앱" }) : "",
+        preferences.emailEnabled ? t("settings_page.personal.notifications.channel_email", { defaultValue: "이메일" }) : "",
     ].filter(Boolean);
     const enabledTypes = [
         preferences.bookingUpdatesEnabled,
@@ -361,58 +366,78 @@ function buildNotificationSummary(
 
     if (enabledChannels.length === 0) {
         return {
-            value: "모든 알림 OFF",
-            helper: `예약 관련 알림 ${enabledTypes}/3개만 수신 중이에요.`,
-            badge: "OFF",
+            value: t("settings_page.personal.notifications.value_all_off", { defaultValue: "모든 알림 OFF" }),
+            helper: t("settings_page.personal.notifications.helper_summary", {
+                count: enabledTypes,
+                defaultValue: `예약 관련 알림 ${enabledTypes}/3개만 수신 중이에요.`,
+            }),
+            badge: t("settings_page.personal.notifications.badge_off", { defaultValue: "OFF" }),
             tone: "warning",
         };
     }
 
     const value =
-        enabledChannels.length === 2 ? "앱 · 이메일 ON" : `${enabledChannels[0]}만 ON`;
+        enabledChannels.length === 2
+            ? t("settings_page.personal.notifications.value_both_on", { defaultValue: "앱 · 이메일 ON" })
+            : t("settings_page.personal.notifications.value_single_on", {
+                  channel: enabledChannels[0],
+                  defaultValue: `${enabledChannels[0]}만 ON`,
+              });
 
     return {
         value,
-        helper: `예약 관련 알림 ${enabledTypes}/3개를 수신 중이에요.`,
-        badge: enabledTypes === 3 ? "활성" : "일부만 ON",
+        helper: t("settings_page.personal.notifications.helper_summary", {
+            count: enabledTypes,
+            defaultValue: `예약 관련 알림 ${enabledTypes}/3개를 수신 중이에요.`,
+        }),
+        badge:
+            enabledTypes === 3
+                ? t("settings_page.personal.notifications.badge_all_on", { defaultValue: "활성" })
+                : t("settings_page.personal.notifications.badge_partial_on", { defaultValue: "일부만 ON" }),
         tone: enabledTypes === 3 ? "verified" : "info",
     };
 }
 
-function getPartnerStatusMeta(status: PartnerStatus) {
+function getPartnerStatusMeta(status: PartnerStatus, t: any) {
     switch (status) {
         case "approved":
             return {
-                value: "승인 완료",
-                helper: "현재 파트너 계정으로 확인되고 있어요.",
-                badge: "승인",
+                value: t("settings_page.partner.status.approved.value", { defaultValue: "승인 완료" }),
+                helper: t("settings_page.partner.status.approved.helper", {
+                    defaultValue: "현재 파트너 계정으로 확인되고 있어요.",
+                }),
+                badge: t("settings_page.partner.status.approved.badge", { defaultValue: "승인" }),
                 tone: "verified" as Tone,
-                actionLabel: "문의",
+                actionLabel: t("settings_page.messages.action_contact", { defaultValue: "문의" }),
                 actionHref: "/my/support?tab=general",
             };
         case "pending":
             return {
-                value: "검토 중",
-                helper: "제출한 파트너 정보를 검토하고 있어요.",
-                badge: "대기",
+                value: t("settings_page.partner.status.pending.value", { defaultValue: "검토 중" }),
+                helper: t("settings_page.partner.status.pending.helper", {
+                    defaultValue: "제출한 파트너 정보를 검토하고 있어요.",
+                }),
+                badge: t("settings_page.partner.status.pending.badge", { defaultValue: "대기" }),
                 tone: "warning" as Tone,
-                actionLabel: "문의",
+                actionLabel: t("settings_page.messages.action_contact", { defaultValue: "문의" }),
                 actionHref: "/my/support?tab=general",
             };
         case "rejected":
             return {
-                value: "보완 후 재신청",
-                helper: "신청 정보를 보완한 뒤 다시 제출할 수 있어요.",
-                badge: "보완 필요",
+                value: t("settings_page.partner.status.rejected.value", { defaultValue: "보완 후 재신청" }),
+                helper: t("settings_page.partner.status.rejected.helper", {
+                    defaultValue: "신청 정보를 보완한 뒤 다시 제출할 수 있어요.",
+                }),
+                badge: t("settings_page.partner.status.rejected.badge", { defaultValue: "보완 필요" }),
                 tone: "warning" as Tone,
-                actionLabel: "재신청",
+                actionLabel: t("settings_page.partner.status.rejected.cta", { defaultValue: "재신청" }),
                 actionHref: "/auth/partner-signup",
             };
         default:
             return {
-                value: "파트너 정보 없음",
-                helper: "등록된 파트너 상태가 없어요.",
-                badge: "없음",
+                value: t("settings_page.partner.status.none.value", { defaultValue: "파트너 정보 없음" }),
+                helper: t("settings_page.partner.status.none.helper", { defaultValue: "등록된 파트너 상태가 없어요." }),
+                badge: t("settings_page.partner.status.none.badge", { defaultValue: "없음" }),
                 tone: "neutral" as Tone,
             };
     }
@@ -464,14 +489,14 @@ export default function MySettingsPage() {
         emailVerified: false,
         phone: "",
         phoneVerified: false,
-        providerLabel: "로그인 필요",
+        providerLabel: t("settings_page.personal.login.value_out", { defaultValue: "로그인 필요" }),
         snsId: "",
         isLoggedIn: false,
     });
     const [profile, setProfile] = useState<ProfileRecord | null>(null);
     const [partner, setPartner] = useState<PartnerRecord>(EMPTY_PARTNER);
     const [notificationSummary, setNotificationSummary] = useState<NotificationSummary>(
-        buildNotificationSummary(null, false)
+        buildNotificationSummary(null, false, t)
     );
     const [viewerId, setViewerId] = useState("");
     const [avatarPath, setAvatarPath] = useState("");
@@ -536,7 +561,7 @@ export default function MySettingsPage() {
                         emailVerified: false,
                         phone: "",
                         phoneVerified: false,
-                        providerLabel: "로그인 필요",
+                        providerLabel: t("settings_page.personal.login.value_out", { defaultValue: "로그인 필요" }),
                         snsId: "",
                         isLoggedIn: false,
                     });
@@ -553,7 +578,7 @@ export default function MySettingsPage() {
                         sns: "",
                         phone: "",
                     });
-                    setNotificationSummary(buildNotificationSummary(null, false));
+                    setNotificationSummary(buildNotificationSummary(null, false, t));
                     setLoading(false);
                     return;
                 }
@@ -615,7 +640,7 @@ export default function MySettingsPage() {
                         : Promise.resolve({ data: null }),
                     (async () => {
                         if (!session?.access_token) {
-                            return buildNotificationSummary(null, true);
+                            return buildNotificationSummary(null, true, t);
                         }
 
                         try {
@@ -630,17 +655,17 @@ export default function MySettingsPage() {
                             };
 
                             if (response.ok && body.ok && body.preferences) {
-                                return buildNotificationSummary(body.preferences, true);
+                                return buildNotificationSummary(body.preferences, true, t);
                             }
                         } catch {
-                            return buildNotificationSummary(null, true);
+                            return buildNotificationSummary(null, true, t);
                         }
 
-                        return buildNotificationSummary(null, true);
+                        return buildNotificationSummary(null, true, t);
                     })(),
-                    loadCommunityStats(user.id, nextAccount.displayName),
+                    loadCommunityStats(user.id, nextAccount.displayName, t),
                     session?.access_token
-                        ? loadBookingStats(session.access_token)
+                        ? loadBookingStats(session.access_token, t)
                         : Promise.resolve(EMPTY_BOOKING_STATS),
                 ]);
 
@@ -703,8 +728,13 @@ export default function MySettingsPage() {
             .toUpperCase();
     }, [account.displayName]);
 
-    const pageTitle = account.displayName || "내 설정";
-    const heroSummaryText = `게시글 ${communityStats.postCount} · 후기 ${communityStats.reviewCount} · 예약 ${bookingStats.totalCount}`;
+    const pageTitle = account.displayName || t("settings_page.hero.default_title", { defaultValue: "내 설정" });
+    const heroSummaryText = t("settings_page.hero.stats", {
+        postCount: communityStats.postCount,
+        reviewCount: communityStats.reviewCount,
+        bookingCount: bookingStats.totalCount,
+        defaultValue: `게시글 ${communityStats.postCount} · 후기 ${communityStats.reviewCount} · 예약 ${bookingStats.totalCount}`,
+    });
 
     const selectedPhoneCountry = getPhoneCountryById(phoneDraft.countryId);
 
@@ -722,20 +752,26 @@ export default function MySettingsPage() {
 
     const getContactSaveErrorMessage = (field: ContactField, errorCode?: string) => {
         if (errorCode === "unauthorized") {
-            return "로그인 세션을 다시 확인해 주세요.";
+            return t("settings_page.messages.unauthorized", { defaultValue: "로그인 세션을 다시 확인해 주세요." });
         }
 
         if (errorCode === "profile_not_found") {
-            return "프로필 정보를 찾지 못했어요. 다시 로그인해 주세요.";
+            return t("settings_page.messages.profile_not_found", {
+                defaultValue: "프로필 정보를 찾지 못했어요. 다시 로그인해 주세요.",
+            });
         }
 
         if (errorCode === "contact_schema_missing") {
             return field === "sns"
-                ? "SNS 저장 컬럼이 아직 DB에 적용되지 않았어요."
-                : "전화번호 저장 컬럼이 아직 DB에 적용되지 않았어요.";
+                ? t("settings_page.messages.schema_missing_sns", {
+                      defaultValue: "SNS 저장 컬럼이 아직 DB에 적용되지 않았어요.",
+                  })
+                : t("settings_page.messages.schema_missing_phone", {
+                      defaultValue: "전화번호 저장 컬럼이 아직 DB에 적용되지 않았어요.",
+                  });
         }
 
-        return "저장하지 못했어요.";
+        return t("settings_page.messages.save_error", { defaultValue: "저장하지 못했어요." });
     };
 
     const handleSnsDraftChange = (value: string) => {
@@ -849,7 +885,10 @@ export default function MySettingsPage() {
             }));
             setContactMessages((current) => ({
                 ...current,
-                [field]: field === "sns" ? "SNS 아이디를 저장했어요." : "전화번호를 저장했어요.",
+                [field]:
+                    field === "sns"
+                        ? t("settings_page.messages.sns_saved", { defaultValue: "SNS 아이디를 저장했어요." })
+                        : t("settings_page.messages.phone_saved", { defaultValue: "전화번호를 저장했어요." }),
             }));
         } catch (error) {
             console.error("[settings-contact] save_failed", error);
@@ -881,14 +920,19 @@ export default function MySettingsPage() {
 
         if (!canUpdate) {
             setNicknameSaveStatus("error");
-            setNicknameMessage(`별명은 90일마다 한 번만 변경할 수 있습니다. (남은 기간: ${daysLeft}일)`);
+            setNicknameMessage(
+                t("settings_page.messages.nickname_cooldown", {
+                    days: daysLeft,
+                    defaultValue: `별명은 90일마다 한 번만 변경할 수 있습니다. (남은 기간: ${daysLeft}일)`,
+                })
+            );
             return;
         }
 
         const newNickname = nicknameDraft.trim();
         if (!newNickname) {
             setNicknameSaveStatus("error");
-            setNicknameMessage("별명을 입력해 주세요.");
+            setNicknameMessage(t("settings_page.messages.nickname_empty", { defaultValue: "별명을 입력해 주세요." }));
             return;
         }
 
@@ -927,11 +971,17 @@ export default function MySettingsPage() {
             }));
             setNicknameDraft(nextProfile.nickname || "");
             setNicknameSaveStatus("success");
-            setNicknameMessage("별명을 성공적으로 변경했습니다.");
+            setNicknameMessage(
+                t("settings_page.messages.nickname_saved", { defaultValue: "별명을 성공적으로 변경했습니다." })
+            );
         } catch (error) {
             console.error("[settings-nickname] save_failed", error);
             setNicknameSaveStatus("error");
-            setNicknameMessage("별명을 저장하지 못했습니다. 다시 시도해 주세요.");
+            setNicknameMessage(
+                t("settings_page.messages.nickname_error", {
+                    defaultValue: "별명을 저장하지 못했습니다. 다시 시도해 주세요.",
+                })
+            );
         }
     };
 
@@ -1002,7 +1052,7 @@ export default function MySettingsPage() {
             }));
         } catch (error) {
             console.error("[settings-avatar] upload_failed", error);
-            setAvatarError("이미지를 바꾸지 못했어요.");
+            setAvatarError(t("settings_page.hero.avatar.error", { defaultValue: "이미지를 바꾸지 못했어요." }));
         } finally {
             setAvatarUploading(false);
         }
@@ -1010,33 +1060,36 @@ export default function MySettingsPage() {
 
     const showPartnerTab = partner.status !== "none";
     const showAdminTab = isAdminRole(profile?.role);
-    const partnerStatusMeta = useMemo(
-        () => getPartnerStatusMeta(partner.status),
-        [partner.status]
-    );
+    const partnerStatusMeta = useMemo(() => getPartnerStatusMeta(partner.status, t), [partner.status]);
 
     const visibleTabs = useMemo(() => {
         const tabs: Array<{ id: TabId; label: string; desc: string }> = [
             {
                 id: "personal",
-                label: "개인",
-                desc: "이메일, 연락처, 로그인과 알림 설정을 확인하세요.",
+                label: t("settings_page.tabs.personal.label", { defaultValue: "개인" }),
+                desc: t("settings_page.tabs.personal.desc", {
+                    defaultValue: "이메일, 연락처, 로그인과 알림 설정을 확인하세요.",
+                }),
             },
         ];
 
         if (showPartnerTab) {
             tabs.push({
                 id: "partner",
-                label: "파트너",
-                desc: "파트너 상태와 매장 운영 관련 항목을 한곳에서 확인하세요.",
+                label: t("settings_page.tabs.partner.label", { defaultValue: "파트너" }),
+                desc: t("settings_page.tabs.partner.desc", {
+                    defaultValue: "파트너 상태와 매장 운영 관련 항목을 한곳에서 확인하세요.",
+                }),
             });
         }
 
         if (showAdminTab) {
             tabs.push({
                 id: "admin",
-                label: "관리자",
-                desc: "관리 권한에 연결된 항목을 빠르게 확인하세요.",
+                label: t("settings_page.tabs.admin.label", { defaultValue: "관리자" }),
+                desc: t("settings_page.tabs.admin.desc", {
+                    defaultValue: "관리 권한에 연결된 항목을 빠르게 확인하세요.",
+                }),
             });
         }
 
@@ -1053,64 +1106,84 @@ export default function MySettingsPage() {
         () => [
             {
                 id: "nickname",
-                title: "별명",
-                value: account.nickname || "설정 안 됨",
+                title: t("settings_page.personal.nickname.title", { defaultValue: "별명" }),
+                value: account.nickname || t("settings_page.badges.nickname_unset", { defaultValue: "설정 안 됨" }),
                 helper: account.nickname
-                    ? "커뮤니티와 프로필에 표시되는 이름이에요."
-                    : "아직 별명이 설정되지 않았어요.",
-                badge: account.nickname ? "설정됨" : "미설정",
+                    ? t("settings_page.personal.nickname.helper_set", {
+                          defaultValue: "커뮤니티와 프로필에 표시되는 이름이에요.",
+                      })
+                    : t("settings_page.personal.nickname.helper_unset", {
+                          defaultValue: "아직 별명이 설정되지 않았어요.",
+                      }),
+                badge: account.nickname
+                    ? t("settings_page.personal.nickname.badge_set", { defaultValue: "설정됨" })
+                    : t("settings_page.personal.nickname.badge_unset", { defaultValue: "미설정" }),
                 tone: account.nickname ? "info" : "neutral",
             },
             {
                 id: "email",
-                title: "이메일",
-                value: account.email || "연결 안 됨",
+                title: t("settings_page.personal.email.title", { defaultValue: "이메일" }),
+                value: account.email || t("settings_page.personal.email.value_none", { defaultValue: "연결 안 됨" }),
                 helper: account.emailVerified
-                    ? "현재 확인된 이메일 주소예요."
+                    ? t("settings_page.personal.email.helper_verified", { defaultValue: "현재 확인된 이메일 주소예요." })
                     : account.email
-                      ? "이메일 확인이 아직 필요해요."
-                      : "연결된 이메일이 없어요.",
-                badge: account.emailVerified ? "확인됨" : account.email ? "미확인" : "미연결",
+                      ? t("settings_page.personal.email.helper_unverified", {
+                            defaultValue: "이메일 확인이 아직 필요해요.",
+                        })
+                      : t("settings_page.personal.email.helper_none", { defaultValue: "연결된 이메일이 없어요." }),
+                badge: account.emailVerified
+                    ? t("settings_page.personal.email.badge_verified", { defaultValue: "확인됨" })
+                    : account.email
+                      ? t("settings_page.personal.email.badge_unverified", { defaultValue: "미확인" })
+                      : t("settings_page.personal.email.badge_none", { defaultValue: "미연결" }),
                 tone: account.emailVerified ? "verified" : account.email ? "warning" : "neutral",
             },
             {
                 id: "sns",
-                title: "SNS",
-                value: account.snsId || "입력 안 됨",
+                title: t("settings_page.personal.sns.title", { defaultValue: "SNS" }),
+                value: account.snsId || t("settings_page.personal.sns.value_none", { defaultValue: "입력 안 됨" }),
                 helper: account.snsId
-                    ? "현재 저장된 sns예요."
-                    : "저장된 sns가 없어요.",
-                badge: account.snsId ? "저장됨" : "미입력",
+                    ? t("settings_page.personal.sns.helper_set", { defaultValue: "현재 저장된 SNS예요." })
+                    : t("settings_page.personal.sns.helper_unset", { defaultValue: "저장된 SNS가 없어요." }),
+                badge: account.snsId
+                    ? t("settings_page.personal.sns.badge_set", { defaultValue: "저장됨" })
+                    : t("settings_page.personal.sns.badge_unset", { defaultValue: "미입력" }),
                 tone: account.snsId ? "info" : "neutral",
             },
             {
                 id: "phone",
-                title: "전화번호",
-                value: account.phone || "입력 안 됨",
+                title: t("settings_page.personal.phone.title", { defaultValue: "전화번호" }),
+                value: account.phone || t("settings_page.personal.phone.value_none", { defaultValue: "입력 안 됨" }),
                 helper: account.phone
-                    ? "현재 저장된 전화번호예요."
-                    : "저장된 전화번호가 없어요.",
-                badge: account.phone ? "저장됨" : "미입력",
+                    ? t("settings_page.personal.phone.helper_set", { defaultValue: "현재 저장된 전화번호예요." })
+                    : t("settings_page.personal.phone.helper_unset", { defaultValue: "저장된 전화번호가 없어요." }),
+                badge: account.phone
+                    ? t("settings_page.personal.phone.badge_set", { defaultValue: "저장됨" })
+                    : t("settings_page.personal.phone.badge_unset", { defaultValue: "미입력" }),
                 tone: account.phone ? "info" : "neutral",
             },
             {
                 id: "login",
-                title: "로그인 방식",
+                title: t("settings_page.personal.login.title", { defaultValue: "로그인 방식" }),
                 value: account.providerLabel,
                 helper: account.isLoggedIn
-                    ? "현재 로그인에 사용 중인 방식이에요."
-                    : "로그인 후 확인할 수 있어요.",
-                badge: account.isLoggedIn ? "사용 중" : "대기",
+                    ? t("settings_page.personal.login.helper_in", { defaultValue: "현재 로그인에 사용 중인 방식이에요." })
+                    : t("settings_page.personal.login.helper_out", { defaultValue: "로그인 후 확인할 수 있어요." }),
+                badge: account.isLoggedIn
+                    ? t("settings_page.personal.login.badge_in", { defaultValue: "사용 중" })
+                    : t("settings_page.personal.login.badge_out", { defaultValue: "대기" }),
                 tone: account.isLoggedIn ? "info" : "neutral",
             },
             {
                 id: "notifications",
-                title: "알림 설정",
+                title: t("settings_page.personal.notifications.title", { defaultValue: "알림 설정" }),
                 value: notificationSummary.value,
                 helper: notificationSummary.helper,
                 badge: notificationSummary.badge,
                 tone: notificationSummary.tone,
-                actionLabel: account.isLoggedIn ? "열기" : undefined,
+                actionLabel: account.isLoggedIn
+                    ? t("settings_page.messages.action_open", { defaultValue: "열기" })
+                    : undefined,
                 actionHref: account.isLoggedIn ? "/my/settings/notifications" : undefined,
             },
         ],
@@ -1124,7 +1197,7 @@ export default function MySettingsPage() {
             [base, partnerType].filter(Boolean).join(" · "),
             base,
             partnerType,
-            "등록된 매장 정보 없음"
+            t("settings_page.partner.store.value_none", { defaultValue: "등록된 매장 정보 없음" })
         );
     }, [partner.business_type, partner.company_name]);
 
@@ -1141,7 +1214,7 @@ export default function MySettingsPage() {
 
         return details.length > 0
             ? details.join(" · ")
-            : "현재 저장된 매장 요약 정보가 없어요.";
+            : t("settings_page.partner.store.helper_none", { defaultValue: "현재 저장된 매장 요약 정보가 없어요." });
     }, [partner.address, partner.visibility_status, partner.website]);
 
     const partnerRows = useMemo<SettingsRow[]>(
@@ -1158,37 +1231,53 @@ export default function MySettingsPage() {
             },
             {
                 id: "store-info",
-                title: "매장 정보",
+                title: t("settings_page.partner.store.title", { defaultValue: "매장 정보" }),
                 value: partnerStoreInfoValue,
                 helper: partnerStoreInfoHelper,
-                badge: partner.company_name ? "등록됨" : "미등록",
+                badge: partner.company_name
+                    ? t("settings_page.partner.store.badge_set", { defaultValue: "등록됨" })
+                    : t("settings_page.partner.store.badge_unset", { defaultValue: "미등록" }),
                 tone: partner.company_name ? "info" : "neutral",
             },
             {
                 id: "operating-hours",
-                title: "운영시간",
-                value: "등록된 운영시간 없음",
-                helper: "운영시간 정보가 연결되면 이곳에서 함께 확인할 수 있어요.",
-                badge: "미등록",
+                title: t("settings_page.partner.hours.title", { defaultValue: "운영시간" }),
+                value: t("settings_page.partner.hours.value_none", { defaultValue: "등록된 운영시간 없음" }),
+                helper: t("settings_page.partner.hours.helper_none", {
+                    defaultValue: "운영시간 정보가 연결되면 이곳에서 함께 확인할 수 있어요.",
+                }),
+                badge: t("settings_page.partner.hours.badge_unset", { defaultValue: "미등록" }),
                 tone: "neutral",
             },
             {
                 id: "booking-requests",
-                title: "예약 요청 관리",
-                value: partner.status === "approved" ? "별도 관리 메뉴 없음" : "파트너 승인 후 확인",
+                title: t("settings_page.partner.bookings.title", { defaultValue: "예약 요청 관리" }),
+                value:
+                    partner.status === "approved"
+                        ? t("settings_page.partner.bookings.value_info", { defaultValue: "별도 관리 메뉴 없음" })
+                        : t("settings_page.partner.bookings.value_pending", { defaultValue: "파트너 승인 후 확인" }),
                 helper:
                     partner.status === "approved"
-                        ? "현재는 예약 요청 요약만 구조화해 두었어요."
-                        : "파트너 상태가 승인되면 관련 항목을 더 쉽게 확인할 수 있어요.",
-                badge: partner.status === "approved" ? "안내" : "대기",
+                        ? t("settings_page.partner.bookings.helper_approved", {
+                              defaultValue: "현재는 예약 요청 요약만 구조화해 두었어요.",
+                          })
+                        : t("settings_page.partner.bookings.helper_pending", {
+                              defaultValue: "파트너 상태가 승인되면 관련 항목을 더 쉽게 확인할 수 있어요.",
+                          }),
+                badge:
+                    partner.status === "approved"
+                        ? t("settings_page.partner.bookings.badge_info", { defaultValue: "안내" })
+                        : t("settings_page.partner.bookings.badge_pending", { defaultValue: "대기" }),
                 tone: partner.status === "approved" ? "info" : "neutral",
             },
             {
                 id: "service-pricing",
-                title: "시술/가격 관리",
-                value: "별도 관리 메뉴 없음",
-                helper: "현재 코드베이스에서 바로 연결되는 시술/가격 관리 화면은 없어요.",
-                badge: "안내",
+                title: t("settings_page.partner.pricing.title", { defaultValue: "시술/가격 관리" }),
+                value: t("settings_page.partner.pricing.value_none", { defaultValue: "별도 관리 메뉴 없음" }),
+                helper: t("settings_page.partner.pricing.helper_none", {
+                    defaultValue: "현재 코드베이스에서 바로 연결되는 시술/가격 관리 화면은 없어요.",
+                }),
+                badge: t("settings_page.partner.pricing.badge_info", { defaultValue: "안내" }),
                 tone: "neutral",
             },
         ],
@@ -1205,40 +1294,48 @@ export default function MySettingsPage() {
         () => [
             {
                 id: "partner-approval",
-                title: "파트너 승인",
-                value: "신청 내역 확인",
-                helper: "기존 관리자 화면에서 파트너 신청을 승인하거나 거절할 수 있어요.",
-                badge: "열기 가능",
+                title: t("settings_page.admin.approval.title", { defaultValue: "파트너 승인" }),
+                value: t("settings_page.admin.approval.value", { defaultValue: "신청 내역 확인" }),
+                helper: t("settings_page.admin.approval.helper", {
+                    defaultValue: "기존 관리자 화면에서 파트너 신청을 승인하거나 거절할 수 있어요.",
+                }),
+                badge: t("settings_page.admin.badge_open", { defaultValue: "열기 가능" }),
                 tone: "verified",
-                actionLabel: "열기",
+                actionLabel: t("settings_page.messages.action_open", { defaultValue: "열기" }),
                 actionHref: "/admin/partners",
             },
             {
                 id: "booking-issues",
-                title: "예약 이슈",
-                value: "예약 요청 및 변경 검토",
-                helper: "기존 관리자 화면에서 예약 상태와 변경 요청을 확인할 수 있어요.",
-                badge: "열기 가능",
+                title: t("settings_page.admin.issues.title", { defaultValue: "예약 이슈" }),
+                value: t("settings_page.admin.issues.value", { defaultValue: "예약 요청 및 변경 검토" }),
+                helper: t("settings_page.admin.issues.helper", {
+                    defaultValue: "기존 관리자 화면에서 예약 상태와 변경 요청을 확인할 수 있어요.",
+                }),
+                badge: t("settings_page.admin.badge_open", { defaultValue: "열기 가능" }),
                 tone: "verified",
-                actionLabel: "열기",
+                actionLabel: t("settings_page.messages.action_open", { defaultValue: "열기" }),
                 actionHref: "/admin/bookings/beauty",
             },
             {
                 id: "user-management",
-                title: "사용자 관리",
-                value: "계정 권한 확인",
-                helper: "기존 관리자 화면에서 사용자와 관리자 권한을 관리할 수 있어요.",
-                badge: "열기 가능",
+                title: t("settings_page.admin.users.title", { defaultValue: "사용자 관리" }),
+                value: t("settings_page.admin.users.value", { defaultValue: "계정 권한 확인" }),
+                helper: t("settings_page.admin.users.helper", {
+                    defaultValue: "기존 관리자 화면에서 사용자와 관리자 권한을 관리할 수 있어요.",
+                }),
+                badge: t("settings_page.admin.badge_open", { defaultValue: "열기 가능" }),
                 tone: "verified",
-                actionLabel: "열기",
+                actionLabel: t("settings_page.messages.action_open", { defaultValue: "열기" }),
                 actionHref: "/admin/users",
             },
             {
                 id: "notice-management",
-                title: "공지 관리",
-                value: "연결된 관리 화면 없음",
-                helper: "현재 코드베이스에는 공지 전용 관리자 화면이 연결되어 있지 않아요.",
-                badge: "미연결",
+                title: t("settings_page.admin.notices.title", { defaultValue: "공지 관리" }),
+                value: t("settings_page.admin.notices.value", { defaultValue: "연결된 관리 화면 없음" }),
+                helper: t("settings_page.admin.notices.helper", {
+                    defaultValue: "현재 코드베이스에는 공지 전용 관리자 화면이 연결되어 있지 않아요.",
+                }),
+                badge: t("settings_page.admin.badge_unlinked", { defaultValue: "미연결" }),
                 tone: "neutral",
             },
         ],
@@ -1272,7 +1369,11 @@ export default function MySettingsPage() {
                 : nicknameSaveStatus === "success"
                   ? nicknameMessage
                   : !canUpdate && nextAvailableDate
-                    ? `${NICKNAME_COOLDOWN_DAYS}일에 한 번만 변경 가능합니다. (다음 변경 가능일: ${nextAvailableDate.toLocaleDateString()})`
+                    ? t("settings_page.messages.nickname_cooldown_long", {
+                          limit: NICKNAME_COOLDOWN_DAYS,
+                          date: nextAvailableDate.toLocaleDateString(),
+                          defaultValue: `${NICKNAME_COOLDOWN_DAYS}일에 한 번만 변경 가능합니다. (다음 변경 가능일: ${nextAvailableDate.toLocaleDateString()})`,
+                      })
                     : row.helper;
 
         return (
@@ -1294,7 +1395,9 @@ export default function MySettingsPage() {
                             setNicknameSaveStatus("idle");
                             setNicknameMessage("");
                         }}
-                        placeholder="새 별명을 입력해 주세요."
+                        placeholder={t("settings_page.personal.nickname.placeholder", {
+                            defaultValue: "새 별명을 입력해 주세요.",
+                        })}
                         className={styles.inlineInput}
                         disabled={!account.isLoggedIn || isSaving || !canUpdate}
                     />
@@ -1304,7 +1407,9 @@ export default function MySettingsPage() {
                         onClick={() => void handleNicknameSave()}
                         disabled={!canSave}
                     >
-                        {isSaving ? "저장 중..." : "저장"}
+                        {isSaving
+                            ? t("settings_page.messages.saving", { defaultValue: "저장 중..." })
+                            : t("settings_page.messages.save", { defaultValue: "저장" })}
                     </button>
                 </div>
                 <p
@@ -1334,7 +1439,10 @@ export default function MySettingsPage() {
             const validationMessage = validatePhoneInput(phoneDraft);
             const previewMessage =
                 normalizedPhoneDraft && normalizedPhoneDraft !== account.phone
-                    ? `저장 시 ${normalizedPhoneDraft} 형태로 저장돼요.`
+                    ? t("settings_page.personal.phone.helper_preview", {
+                          value: normalizedPhoneDraft,
+                          defaultValue: `저장 시 ${normalizedPhoneDraft} 형태로 저장돼요.`,
+                      })
                     : "";
             const helperMessage =
                 saveState === "error"
@@ -1358,7 +1466,10 @@ export default function MySettingsPage() {
                     <div className={styles.itemTop}>
                         <div className={styles.itemText}>
                             <h3 className={styles.itemTitle}>{row.title}</h3>
-                            <p className={styles.itemValue}>{account.phone || "입력 안 됨"}</p>
+                            <p className={styles.itemValue}>
+                                {account.phone ||
+                                    t("settings_page.personal.phone.value_none", { defaultValue: "입력 안 됨" })}
+                            </p>
                         </div>
                         <span className={`${styles.badge} ${styles[`${row.tone}Badge`]}`}>
                             {row.badge}
@@ -1366,7 +1477,9 @@ export default function MySettingsPage() {
                     </div>
                     <div className={styles.phoneEditorGrid}>
                         <label className={styles.inputGroup}>
-                            <span className={styles.inputLabel}>국가번호</span>
+                            <span className={styles.inputLabel}>
+                                {t("settings_page.personal.phone.country_label", { defaultValue: "국가번호" })}
+                            </span>
                             <select
                                 value={phoneDraft.countryId}
                                 onChange={(event) =>
@@ -1386,7 +1499,9 @@ export default function MySettingsPage() {
                             </select>
                         </label>
                         <label className={styles.inputGroup}>
-                            <span className={styles.inputLabel}>전화번호</span>
+                            <span className={styles.inputLabel}>
+                                {t("settings_page.personal.phone.number_label", { defaultValue: "전화번호" })}
+                            </span>
                             <input
                                 type="tel"
                                 inputMode="numeric"
@@ -1412,7 +1527,9 @@ export default function MySettingsPage() {
                             onClick={() => void handleContactSave(field)}
                             disabled={!canSave}
                         >
-                            {isSaving ? "저장 중..." : "저장"}
+                            {isSaving
+                                ? t("settings_page.messages.saving", { defaultValue: "저장 중..." })
+                                : t("settings_page.messages.save", { defaultValue: "저장" })}
                         </button>
                     </div>
                     <p
@@ -1460,7 +1577,13 @@ export default function MySettingsPage() {
                         type="text"
                         value={draftValue}
                         onChange={(event) => handleContactDraftChange(field, event.target.value)}
-                        placeholder={field === "sns" ? "SNS 아이디를 입력해 주세요." : phonePlaceholder}
+                        placeholder={
+                            field === "sns"
+                                ? t("settings_page.personal.sns.placeholder", {
+                                      defaultValue: "SNS 아이디를 입력해 주세요.",
+                                  })
+                                : phonePlaceholder
+                        }
                         className={styles.inlineInput}
                         disabled={!account.isLoggedIn || isSaving}
                     />
@@ -1470,7 +1593,9 @@ export default function MySettingsPage() {
                         onClick={() => void handleContactSave(field)}
                         disabled={!canSave}
                     >
-                        {isSaving ? "저장 중..." : "저장"}
+                        {isSaving
+                            ? t("settings_page.messages.saving", { defaultValue: "저장 중..." })
+                            : t("settings_page.messages.save", { defaultValue: "저장" })}
                     </button>
                 </div>
                 <p
@@ -1509,7 +1634,7 @@ export default function MySettingsPage() {
                                     sizes="96px"
                                 />
                             ) : (
-                                initials || "ME"
+                                initials || t("settings_page.hero.avatar.placeholder", { defaultValue: "ME" })
                             )}
                         </div>
                     </div>
@@ -1529,7 +1654,11 @@ export default function MySettingsPage() {
                                 onClick={() => avatarInputRef.current?.click()}
                                 disabled={avatarUploading}
                             >
-                                {avatarUploading ? "업로드 중..." : avatarPath ? "이미지 변경" : "이미지 등록"}
+                                {avatarUploading
+                                    ? t("settings_page.messages.uploading", { defaultValue: "업로드 중..." })
+                                    : avatarPath
+                                      ? t("settings_page.hero.avatar.change", { defaultValue: "이미지 변경" })
+                                      : t("settings_page.hero.avatar.register", { defaultValue: "이미지 등록" })}
                             </button>
                         </>
                     ) : null}
@@ -1552,9 +1681,16 @@ export default function MySettingsPage() {
             {!loading && !account.isLoggedIn ? (
                 <section className={styles.noticeCard}>
                     <div>
-                        <h2 className={styles.noticeTitle}>로그인 후 더 많은 설정을 볼 수 있어요.</h2>
+                        <h2 className={styles.noticeTitle}>
+                            {t("settings_page.hero.login_promo.title", {
+                                defaultValue: "로그인 후 더 많은 설정을 볼 수 있어요.",
+                            })}
+                        </h2>
                         <p className={styles.noticeText}>
-                            개인 탭은 지금도 확인할 수 있지만, 연결된 값과 알림 상태는 로그인 후 표시돼요.
+                            {t("settings_page.hero.login_promo.desc", {
+                                defaultValue:
+                                    "개인 탭은 지금도 확인할 수 있지만, 연결된 값과 알림 상태는 로그인 후 표시돼요.",
+                            })}
                         </p>
                     </div>
                     <button
@@ -1567,7 +1703,7 @@ export default function MySettingsPage() {
             ) : null}
 
             {visibleTabs.length > 1 ? (
-                <nav className={styles.tabBar} aria-label="설정 탭">
+                <nav className={styles.tabBar} aria-label={t("settings_page.hero.tabs_aria", { defaultValue: "설정 탭" })}>
                     {visibleTabs.map((tab) => (
                         <button
                             key={tab.id}
