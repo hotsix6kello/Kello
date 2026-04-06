@@ -951,25 +951,25 @@
         "email_pending": "이메일 인증 필요"
       },
       "account": {
-        "sign_in_title": "Sign in to manage account details",
-        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
-        "title": "Account / Profile",
-        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
-        "display_name": "Display name",
-        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
-        "email": "Email / login",
-        "email_hint": "Read from the active Supabase auth user.",
-        "joined": "Joined",
-        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
-        "last_seen": "Last sign-in",
-        "last_seen_hint": "Read-only from the auth session.",
-        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-        "default_name": "Traveler",
+        "sign_in_title": "계정 정보를 확인하려면 로그인해 주세요",
+        "sign_in_desc": "이 로그인은 활성 Supabase 세션에서 인증된 항목만 읽을 수 있습니다.",
+        "title": "계정 / 프로필",
+        "desc": "이 필드는 현재 인증된 사용자 정보와 기본 계정 메타데이터에서 가져옵니다.",
+        "display_name": "기본 이름",
+        "display_name_hint": "별명이 우선적으로 사용되며, 없을 경우 이메일 앞부분 등이 사용됩니다.",
+        "email": "이메일 / 로그인",
+        "email_hint": "현재 활성화된 Supabase 인증 계정의 이메일입니다.",
+        "joined": "가입일",
+        "joined_hint": "프로필 생성 시점 또는 인증 계정 생성 시점을 기준으로 합니다.",
+        "last_seen": "마지막 로그인",
+        "last_seen_hint": "인증 세션 정보에서 읽기 전용으로 가져옵니다.",
+        "read_only": "프로필 편집은 이 빌드에서 아직 지원되지 않습니다. 수정이 필요한 경우 지원팀에 문의해 주세요.",
+        "default_name": "여행자",
         "phone": {
-          "placeholder": "e.g. {{example}}",
-          "helper_empty": "Includes country code. e.g. {{example}}",
-          "helper_saved": "Kept in international format.",
-          "helper_invalid": "Include country code. e.g. {{example}}"
+          "placeholder": "예: +82 01012345678",
+          "helper_empty": "국가번호를 포함해 입력해 주세요. 예: +82 1012345678",
+          "helper_saved": "국제 형식(E.164)으로 안전하게 저장되어 있어요.",
+          "helper_invalid": "국가번호를 포함한 형식으로 입력해 주세요. 예: +82 1012345678"
         }
       },
       "partner_admin": {
@@ -1285,827 +1285,211 @@
         "partners_desc": "가입 신청 승인 관리",
         "users": "관리자 계정 관리",
         "users_desc": "권한 부여 및 상태 해제"
-      },
-      "partner": {
-        "none_title": "파트너로 신청",
-        "none_desc": "Kello 파트너로 등록하고 더 많은 여행자에게 서비스를 소개하세요.",
-        "none_cta": "신청",
-        "pending_title": "파트너 검토 진행 중",
-        "pending_desc": "신청이 검토 중입니다. 관리자 확인 후 상태가 업데이트됩니다.",
-        "approved_title": "파트너 승인됨",
-        "approved_desc": "Kello 파트너 등록이 완료되었습니다.",
-        "rejected_title": "파트너 신청 정보 수정 필요",
-        "rejected_desc": "세부 정보를 수정한 뒤 다시 신청하세요.",
-        "rejected_cta": "다시 신청"
       }
-    }
-  },
-  "fab": {
-    "idle": "내 여행 만들기",
-    "pre_trip": "이동방법",
-    "on_trip": "다음 목적지는?",
-    "near_deadline": "지연 위험!",
-    "to": "{{dest}} (으)로",
-    "kride": "K.Ride 호출",
-    "kride_sub": "{{mins}}분 후 도착",
-    "transit": "대중교통 안내",
-    "transit_sub": "최적 경로 안내",
-    "copy": "주소 복사",
-    "copy_done": "복사 완료!",
-    "card": "기사님 보여드리기",
-    "card_sub": "택시 기사님용 카드",
-    "card_modal_title": "🗺️ 이 주소로 가주세요",
-    "cancel": "닫기"
-  },
-  "today_page": {
-    "title": "오늘의 일정",
-    "active_now": "지금 진행 중",
-    "navigate": "길찾기",
-    "booking_ref": "예약번호: {{ref}}",
-    "next_up": "다음 일정",
-    "minutes_left": "{{mins}}분 후 시작",
-    "depart_early": "지금 출발하기",
-    "timeline": "전체 타임라인",
-    "departure_warning": "⚠️ {{title}} 시작 {{mins}}분 전 — 지금 출발하세요!",
-    "status": {
-      "on_trip": "여행 중",
-      "pre_trip": "여행 준비 중",
-      "idle": "일정이 없습니다"
-    },
-    "countdown": {
-      "today": "오늘",
-      "starts_in": "{{mins}}분 후 시작",
-      "traveling_to": "{{dest}} 이동 중"
-    },
-    "empty": {
-      "title": "오늘 일정이 없네요",
-      "subtitle": "가고 싶은 곳을 탐색해서 추가해보세요!",
-      "cta": "장소 탐색하기"
-    },
-    "actions": {
-      "directions": "길찾기",
-      "booking": "예약 보기",
-      "late_risk": "지각 위험!",
-      "booking_ref": "예약번호: {{ref}}",
-      "departure_warning": "⚠️ {{title}} 시작 {{mins}}분 전 — 지금 출발하세요!"
-    }
-  },
-  "planner_page": {
-    "title": "일정표",
-    "day": "{{n}}일차",
-    "add_from_discover": "🔍 장소 추가",
-    "auto_build": "✨ 자동 완성",
-    "add_to": "{{slot}}에 추가",
-    "book_all": "🎫 예약 요청하기",
-    "booking_modal": {
-      "title": "예약 요청",
-      "date": "날짜",
-      "people": "인원",
-      "people_count": "{{n}}명",
-      "notes": "요청 사항 (선택)",
-      "submit": "요약 요청 제출",
-      "submitting": "제출 중...",
-      "success_title": "요청이 접수되었습니다!",
-      "success_desc": "24시간 내에 담당자가 연락드릴 예정입니다.",
-      "unavailable_title": "예약 불가",
-      "unavailable_desc": "다음 장소들을 추천드려요:",
-      "view_status": "상태 확인"
-    },
-    "status": {
-      "draft": "가안",
-      "submitted": "요청됨",
-      "confirmed": "확정됨",
-      "unavailable": "불가",
-      "completed": "완료"
-    },
-    "slots": {
-      "am": "오전",
-      "pm": "오후",
-      "night": "밤"
-    },
-    "focus": {
-      "title": "???? ??",
-      "desc": "?? ???? ??? ??? ?? ??? ??? ? ?? ???????."
-    }
-  },
-  "booking_detail": {
-    "select_date": "날짜 선택",
-    "select_time": "시간 선택",
-    "total_price": "총 금액",
-    "request_booking": "예약 요청하기"
-  },
-  "community_page": {
-    "write_post": "글쓰기",
-    "edit": "글 수정",
-    "posting": "등록 중...",
-    "defaults": {
-      "region": "서울"
-    },
-    "hero": {
-      "title": "Kello 커뮤니티",
-      "search_placeholder": "관심 있는 주제를 검색해 보세요"
-    },
-    "categories": {
-      "all": "전체",
-      "meetup": "모임",
-      "beauty_review": "뷰티",
-      "food_review": "맛집",
-      "travel_review": "관광",
-      "meetup_recruitment": "모집",
-      "help": "꿀팁"
-    },
-    "sub_filters": {
-      "all": "전체",
-      "saved": "저장한 글",
-      "reacted": "반응한 글",
-      "mine": "내가 쓴 글",
-      "recruiting": "모집 중",
-      "active_reactions": "뜨거운 반응",
-      "open_meetup": "열린 모임",
-      "weekend": "이번 주말",
-      "fresh": "신선한 정보"
-    },
-    "status": {
-      "reviews": "후기",
-      "reacting": "반응 모집 중",
-      "surveying": "의사 확인 중",
-      "drafting": "준비 중",
-      "closed": "마감됨"
-    },
-    "tags": {
-      "solo_friendly": "혼자 가기 좋음",
-      "friends_friendly": "친구랑 가기 좋음",
-      "photo_spot": "사진 맛집",
-      "waiting": "웨이팅 있음",
-      "foreigner_friendly": "외국인 편함"
-    },
-    "states": {
-      "fetch_failed_desc": "게시물을 불러오지 못했습니다. 네트워크 상태를 확인해 주세요.",
-      "fetch_failed_title": "데이터 오류",
-      "fetch_failed_tip": "새로고침을 해보세요.",
-      "empty_title": "게시물이 아직 없습니다",
-      "empty_desc": "첫 번째 주인공이 되어보세요!",
-      "empty_tip": "오른쪽 아래 버튼을 눌러 글을 써보세요.",
-      "no_results_title": "검색 결과가 없습니다",
-      "no_results_desc": "다른 키워드로 검색해 보세요.",
-      "cta_write": "첫 글 작성하기",
-      "cta_all": "전체 보기"
-    },
-    "quality_signals": {
-      "organized": "잘 정리된 글",
-      "active": "인기가 많아요",
-      "asset": "정보가 가득해요",
-      "mate": "좋은 동료 발굴"
-    },
-    "toasts": {
-      "save_added": "관심 게시물에 추가되었습니다.",
-      "save_removed": "관심 게시물에서 제거되었습니다.",
-      "deleted": "삭제되었습니다.",
-      "updated": "수정되었습니다.",
-      "submitted": "등록되었습니다.",
-      "region_collected": "{{region}}의 글만 모아보기"
-    },
-    "nav_summary": {
-      "all": "{{tab}}의 모든 이야기를 보고 있어요",
-      "active_reactions": "{{tab}}에서 뜨거운 반응을 얻는 중!",
-      "open_meetup": "{{tab}}에서 새로운 동행을 구합니다",
-      "weekend": "{{tab}} 이번 주말 계획이 있으신가요?",
-      "default": "{{tab}}에서 {{sub}} 필터링된 결과"
-    },
-    "form": {
-      "category_label": "카테고리",
-      "region_label": "지역",
-      "region_placeholder": "지역(예: 강남, 마포)",
-      "select_category": "카테고리 선택",
-      "write_guide_title": {
-        "beauty_review": "뷰티 서비스 경험을 들려주세요",
-        "food_review": "나만 알고 싶은 맛집이 있나요?",
-        "travel_review": "여행 꿀팁을 공유해주세요",
-        "meetup": "함께 할 동료를 찾아보세요",
-        "meetup_recruitment": "함께 할 동행을 구하시나요?",
-        "help": "무엇이든 물어보세요"
-      },
-      "write_guide_body": {
-        "beauty_review": "시술 후 만족도나 매장 서비스 등 솔직한 후기를 남겨보세요.",
-        "food_review": "맛, 분위기, 웨이팅 정보 등을 공유해주세요.",
-        "travel_review": "코스, 준비물, 이동 수단 등 유용한 팁을 알려주세요.",
-        "meetup": "언제, 어디서, 무엇을 할지 자유롭게 적어주세요.",
-        "meetup_recruitment": "여행 일정과 원하는 여행지, 동행 조건을 적어주세요.",
-        "help": "궁금한 내용이나 도움이 필요한 상황을 자세히 적어주세요."
-      },
-      "title_label": {
-        "beauty_review": "시술명/테마",
-        "default": "제목"
-      },
-      "title_placeholder": {
-        "beauty_review": "예: 강남역 레이어드 컷 후기",
-        "default": "무엇에 대해 쓸까 고민 중인가요?"
-      },
-      "desc_label": {
-        "beauty_review": "상세 후기",
-        "default": "내용"
-      },
-      "desc_placeholder": {
-        "beauty_review": "시술 과정이나 결과에 대해 자세히 알려주세요.",
-        "food_review": "맛있고 추천하고 싶은 메뉴와 이유를 적어주세요.",
-        "travel_review": "코스, 준비물 등 다른 여행자들에게 유용한 정보를 알려주세요.",
-        "meetup": "모임에 대해 더 자세히 알려주세요.",
-        "meetup_recruitment": "함께 하고 싶은 내용을 적어주세요.",
-        "help": "자세하게 물어보면 더 좋은 답변을 얻을 수 있어요.",
-        "default": "함께 나누고 싶은 이야기를 적어보세요"
-      },
-      "image": {
-        "guides": {
-          "beauty_review": "전후 사진이나 샵 내부 사진을 추가해보세요 (최대 4장)",
-          "food_review": "음식과 매장 전경 사진을 추가해보세요 (최대 4장)",
-          "travel_review": "현장감을 느낄 수 있는 사진을 추가해보세요 (최대 4장)",
-          "meetup": "모임 장소나 활동 관련 사진을 추가해보세요 (최대 4장)",
-          "meetup_recruitment": "여행지 사진이나 참고 사진을 추가해보세요 (최대 4장)",
-          "help": "문제를 설명할 수 있는 사진이 있다면 추가해주세요 (최대 4장)"
-        },
-        "saved_name": "저장된 이미지 {{index}}",
-        "file_only_alert": "이미지 파일만 선택 가능합니다.",
-        "limit_alert": "이미지는 최대 {{count}}개까지 업로드 가능합니다.",
-        "load_failed_alert": "이미지를 불러오지 못했습니다.",
-        "limit_label": "(최대 {{count}}장)"
-      },
-      "category_hints": {
-        "beauty_review": "뷰티샵 이용 후기를 자유롭게 공유하세요.",
-        "food_review": "맛있게 먹었던 곳을 추천해보세요.",
-        "travel_review": "나만의 여행 노하우를 공유해보세요.",
-        "meetup": "가볍게 만나서 즐길 모임을 만들어보세요.",
-        "meetup_recruitment": "여행 일정이 맞는 동행을 찾아보세요.",
-        "help": "궁금한 것이 있다면 무엇이든 물어보세요."
-      },
-      "submit": "등록하기",
-      "write_title": "글쓰기",
-      "edit_title": "글 수정",
-      "image_label": "이미지 첨부",
-      "add_photo": "사진 추가",
-      "preparing_images": "이미지 준비 중...",
-      "cancel": "취소"
-    },
-    "quick_entry": {
-      "beauty_together": {
-        "label": "뷰티 같이하기"
-      },
-      "flash_meetup": {
-        "label": "번개 모임"
-      },
-      "beauty": {
-        "label": "뷰티 후기"
-      },
-      "food": {
-        "label": "맛집 추천"
-      },
-      "travel": {
-        "label": "여행 팁"
-      },
-      "write": {
-        "label": "글쓰기"
-      },
-      "browse": {
-        "label": "둘러보기",
-        "sub": "인기 게시글"
-      },
-      "recruiting": {
-        "label": "모집 중",
-        "sub": "동행 찾기"
-      },
-      "weekend": {
-        "label": "이번 주말",
-        "sub": "일정 공유"
-      },
-      "record": {
-        "label": "기록하기",
-        "sub": "일상 공유"
-      }
-    },
-    "fab": {
-      "create_post": "글쓰기"
-    },
-    "sort": {
-      "latest": "최신 정렬",
-      "reactions": "반응 많은 순",
-      "draft": "모집 활발한 순"
-    },
-    "card": {
-      "default_vibe": "분위기 좋아요",
-      "title_prefix": {
-        "beauty_review": "[뷰티]",
-        "food_review": "[맛집]",
-        "travel_review": "[여행]"
-      },
-      "cta": {
-        "review": "후기 보기",
-        "join": "참여하기"
-      },
-      "result_badge": "후기 완료",
-      "open_meetup_badge": "모임 가능",
-      "fresh_badges": {
-        "comment": "실시간 반응 중",
-        "update": "방금 업데이트됨"
-      },
-      "draft_status": {
-        "active": "활발히 소통 중",
-        "forming": "인원 구성 중",
-        "preparing": "참여 희망 중"
-      },
-      "draft_desc": {
-        "active": "이미 많은 분이 관심을 보여요!",
-        "forming": "슬슬 인원이 모이고 있어요.",
-        "preparing": "첫 번째 관심을 표현해보세요."
-      },
-      "owner_reactions": {
-        "region": "{{region}}에 대해 {{count}}명과 소통 중",
-        "join": "{{count}}명이 참여를 희망해요"
-      },
-      "more_region": "{{region}}의 더 많은 이야기 보기"
-    },
-    "detail": "게시물 상세",
-    "detail_page": {
-      "loading": "데이터를 불러오는 중입니다...",
-      "hidden_post": "숨겨진 게시물입니다.",
-      "not_found": "게시물을 찾을 수 없습니다.",
-      "show_hidden": "숨긴 게시물 보기",
-      "hide_post": "이 게시물 숨기기",
-      "empty_comments": "아직 댓글이 없습니다. 첫 번째 댓글을 남겨보세요!",
-      "hide_comment": "이 댓글 숨기기",
-      "status": {
-        "REVIEWS": "후기",
-        "REACTING": "반응 모집 중",
-        "SURVEYING": "의사 확인 중",
-        "DRAFTING": "준비 중",
-        "CLOSED": "마감됨"
-      },
-      "tags": {
-        "solo_friendly": "혼자 가기 좋음",
-        "friends_friendly": "친구랑 가기 좋음",
-        "photo_spot": "사진 맛집",
-        "waiting": "웨이팅 있음",
-        "foreigner_friendly": "외국인 편함"
-      },
-      "freshness": {
-        "realtime": "실시간 활성 중",
-        "updated": "정보 업데이트됨",
-        "active": "활동적인 게시물",
-        "calm": "조용한 게시물"
-      },
-      "strengths": {
-        "title": "게시물 강점",
-        "organized": "정리된 후기",
-        "active": "활발한 소통",
-        "visited_tip": "방문 팁 포함",
-        "new": "새로운 소식"
-      },
-      "checklist": {
-        "title": "체크리스트",
-        "recommended": "추천 대상",
-        "required": "필수 확인",
-        "comment_check": "댓글 확인 필수",
-        "read_details": "상세 내용 확인"
-      },
-      "mini_signal_tag": "모임 가능",
-      "primary_action": {
-        "review": "후기 남기기",
-        "join": "참여 의사 밝히기"
-      },
-      "save": {
-        "saved": "저장됨",
-        "default": "저장하기"
-      },
-      "meetup_safety": {
-        "title": "안전한 모임을 위한 안내",
-        "item_1": "공공장소에서 만남을 권장합니다.",
-        "item_2": "개인정보 공유에 주의하세요."
-      },
-      "body_title": "게시물 내용",
-      "like": "좋아요",
-      "dislike": "싫어요",
-      "like_alert": "좋아요를 눌렀습니다!",
-      "dislike_alert": "싫어요를 눌렀습니다.",
-      "comments_title": "댓글 목록",
-      "comment_input": {
-        "default": "댓글을 입력하세요...",
-        "optional": "의사 표현을 남겨보세요 (선택사항)",
-        "send": "전송",
-        "open_btn": "댓글 쓰기",
-        "cancel": "취소"
-      },
-      "signal_intents": {
-        "interested": "저도 가보고 싶어요",
-        "available_this_week": "이번 주 가능해요",
-        "join_if_schedule_fits": "날짜 맞으면 같이 가요",
-        "thanks": "정보 감사합니다",
-        "question": "질문 있어요"
-      },
-      "signal_times": {
-        "this_week": "이번 주",
-        "this_weekend": "이번 주말",
-        "next_week": "다음 주",
-        "schedule_coordination": "날짜 조율"
-      },
-      "author_panel": {
-        "title": "작성자 대시보드",
-        "badge": "작성자",
-        "stats": {
-          "total": "총 반응",
-          "total_value": "{{count}}개",
-          "time": "가장 선호하는 시간",
-          "time_pending": "집계 중",
-          "intent": "주요 의사",
-          "recent": "최근 24시간",
-          "recent_value": "{{count}}개"
-        },
-        "guide": {
-          "weekend": "이번 주말 반응이 가장 많습니다. 상세 일정을 제안해보세요.",
-          "vote": "희망 시간이 다양합니다. 투표를 통해 확정해보세요.",
-          "share": "더 많은 정보를 공유해서 관심을 모아보세요."
-        },
-        "action": {
-          "weekend": "주말 일정 제안하기",
-          "vote": "투표 게시글 작성하기",
-          "share": "추가 팁 공유하기"
-        },
-        "draft": {
-          "weekend": "이번 주말 오후 2시에 만나는 건 어떨까요?",
-          "vote": "언제가 가장 좋으신지 투표 부탁드려요!",
-          "share": "여기에 한 가지 팁을 더 드릴게요!"
-        },
-        "final_draft": "모집을 완료하겠습니다. 참여하시는 분들 오픈채팅으로 들어와주세요!",
-        "final_action": "모집 마감하기",
-        "footer": "Kello는 안전한 커뮤니티 문화를 지향합니다."
-      },
-      "status_controls": {
-        "title": "모집 상태 변경"
-      },
-      "result": {
-        "title": "방문 결과 및 팁 작성",
-        "help": "실제 방문 후 얻은 꿀팁이나 후기를 공유해주세요. 다른 분들에게 큰 도움이 됩니다.",
-        "placeholder": "방문 후기를 여기에 자유롭게 작성해주세요...",
-        "save_visited": "방문 완료 및 팁 저장",
-        "save_only": "단순 정보 저장"
-      },
-      "author_safety": {
-        "title": "작성자 안전 가이드",
-        "item_1": "개인 연락처를 본문에 직접 노출하지 마세요.",
-        "item_2": "불법적인 만남이나 금전 요구를 주의하세요.",
-        "item_3": "신뢰할 수 있는 사용자들과 소통하세요."
-      },
-      "signal_summary": {
-        "title": "참여 현황 요약",
-        "status": {
-          "active": "활발히 모집 중",
-          "forming": "인원 구성 중",
-          "preparing": "모집 시작"
-        },
-        "time_split": "희망 시간이 나뉘어 있습니다.",
-        "time_focus": "{{time}}에 가장 많이 희망합니다.",
-        "time_flexible": "조율 가능한 시간이 많습니다.",
-        "desc": "{{topic}}에 대해 {{count}}명이 참여 의사를 밝혔습니다.",
-        "topic_review": "후기 공유",
-        "topic_outing": "모임 참여",
-        "schedule_title": "선호하는 시간대 선택"
-      }
-    },
-    "actions": {
-      "delete_confirm": "정말로 삭제하시겠습니까?"
-    },
-    "errors": {
-      "login_required": "로그인이 필요합니다.",
-      "post_failed": "게시물 등록에 실패했습니다: {{message}}"
-    },
-    "report": {
-      "report_action": "신고하기",
-      "success": "정상적으로 신고되었습니다.",
-      "reasons": {
-        "ad_spam": "광고/스팸",
-        "offensive": "부적절한 내용",
-        "contact": "유도 행위",
-        "unsafe": "위험한 행동",
-        "other": "기타"
-      }
-    },
-    "comments": "댓글",
-    "time": {
-      "just_now": "방금 전"
-    }
-  },
-  "help_page": {
-    "title": "긴급 지원",
-    "medical_title": "의료 도움",
-    "medical_desc": "근처 병원과 증상 문구 카드",
-    "lost_title": "분실물",
-    "lost_desc": "단계별 분실물 찾기 가이드",
-    "police_title": "경찰 / 범죄",
-    "police_desc": "신고 및 안전 도움",
-    "interp_title": "통역 / 도움",
-    "interp_desc": "1330 도움말과 번역 앱",
-    "taxi": "택시",
-    "subway": "지하철",
-    "airport": "공항",
-    "street": "길거리",
-    "interp_actions": {
-      "open_papago": "Papago 열기",
-      "open_google_translate": "Google Translate 열기"
-    },
-    "interp": {
-      "papago_desc": "빠른 번역과 텍스트 지원을 위해 Naver Papago를 엽니다.",
-      "google_desc": "다른 빠른 번역 옵션이 필요하면 Google Translate를 엽니다."
-    },
-    "lost": {
-      "taxi_s1_t": "1. 영수증 확인",
-      "taxi_s1_d": "영수증에 기재된 카드사 번호나 차량번호로 기사님 연락처를 확보하세요.",
-      "taxi_s2_t": "2. 카드사 연락",
-      "taxi_s2_d": "결제한 카드의 고객센터에 전화하여 택시 승인 내역의 업체 연락처를 요청하세요.",
-      "taxi_s3_t": "3. Lost112 확인",
-      "taxi_s3_d": "기사님과 연락이 닿지 않으면 경찰청 유실물 통합포털(Lost112)에 습득물 등록 여부를 확인하세요.",
-      "taxi_s4_t": "4. 분실 신고",
-      "taxi_s4_d": "가까운 지구대나 파트에서 유실물 분실 신고서를 작성하세요.",
-      "subway_s1_t": "1. 역무실 방문",
-      "subway_s1_d": "내린 직후라면 해당 역의 역무실을 즉시 방문하여 열차 칸 번호를 알리세요.",
-      "subway_s2_t": "2. 유실물 센터",
-      "subway_s2_d": "시간이 지났다면 각 호선별 유실물 센터에 연락하거나 방문하세요.",
-      "subway_s3_t": "3. Lost112 확인",
-      "subway_s3_d": "유실물 센터 영업시간 외에는 Lost112 사이트에서 검색해보세요.",
-      "airport_s1_t": "1. 분실물 센터",
-      "airport_s1_d": "공항 내 분실물 보관소나 안내 데스크를 방문하세요.",
-      "airport_s2_t": "2. 항공사 문의",
-      "airport_s2_d": "비행기 안이나 게이트 부근에서 잃어버렸다면 해당 항공사에 직접 문의하세요.",
-      "airport_s3_t": "3. 온라인 조회",
-      "airport_s3_d": "인천공항 유실물 통합 관리 시스템에서 실시간 조회가 가능합니다.",
-      "street_s1_t": "1. 주변 탐색",
-      "street_s1_d": "마지막으로 머물렀던 장소나 인근 매장을 다시 방문해보세요.",
-      "street_s2_t": "2. 파출소 방문",
-      "street_s2_d": "인근 경찰서, 지구대, 파출소에 방문하여 분실물 습득 여부를 문의하세요.",
-      "street_s3_t": "3. Lost112 등록",
-      "street_s3_d": "Lost112 사이트에 접속하여 분실물 정보를 등록하고 알람을 설정하세요."
-    },
-    "medical_header": "의료 · 응급 안내",
-    "emergency_119_title": "응급 구조 (119)",
-    "emergency_119_desc": "위급 상황 시 즉시 연결",
-    "consult_1339_title": "의료 상담 (1339)",
-    "consult_1339_desc": "병원 안내 및 전문 의료 상담",
-    "symptoms_title": "증상 표현",
-    "call_btn": "전화하기",
-    "medical": {
-      "medicines": {
-        "tylenol": "타이레놀",
-        "tylenol_desc": "해열, 진통, 근육통, 두통",
-        "cold": "종합감기약",
-        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
-        "digestive": "소화제",
-        "digestive_desc": "소화불량, 식체, 속쓰림"
-      },
-      "symptoms": {
-        "stomach": "복통",
-        "fever": "발열",
-        "injury": "부상",
-        "allergy": "알레르기",
-        "breathing": "호흡 곤란",
-        "pain": "흉통"
-      }
-    },
-    "police_header": "경찰 · 안전 안내",
-    "police_contacts_section": "경찰 신고 및 안내",
-    "police.report_call_title": "범죄 신고 (긴급)",
-    "police.report_call_desc": "24시간 서비스, 외국어 대응 가능",
-    "police.official_site_title": "경찰청 공식 사이트",
-    "police.official_site_desc": "사이버 범죄 신고 및 정보 안내",
-    "tourism_police_section": "관광경찰 안내",
-    "tourism_police_title": "관광경찰 서비스",
-    "tourism_police_desc": "명동, 인사동, 이태원 등 주요 관광지에서 도움을 받을 수 있습니다.",
-    "interp_header": "통역 · 번역 안내",
-    "interp_immediate_title": "바로 도움받기",
-    "interp_hotline_title": "1330 관광 통역 안내",
-    "interp_hotline_desc": "통역이나 여행 안내가 필요할 때 가장 빠른 공식 도움입니다",
-    "interp_chat_label": "채팅으로 문의",
-    "interp_tools_title": "번역 도구",
-    "lost_header": "분실물 찾기 안내",
-    "lost_where_title": "어디에서 잃어버렸나요?",
-    "lost_where_desc": "장소를 선택하면 맞는 찾기 경로를 안내합니다",
-    "lost_quick_title": "바로 확인하기",
-    "lost112_label": "Lost112 분실물 조회",
-    "embassy_label": "여권 분실 시 대사관 찾기",
-    "lost_steps_title": "{{place}}에서 분실 시 대응",
-    "lost_go_lost112": "Lost112 분실물 조회하기",
-    "police": {
-      "report_call_title": "범죄 신고 (긴급)",
-      "report_call_desc": "24시간 서비스, 외국어 대응 가능",
-      "official_site_title": "경찰청 공식 사이트",
-      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
     }
   },
   "settings_page": {
-    "tabs": {
-      "personal": {
-        "label": "Personal",
-        "desc": "Check your email, contact, login, and notification settings."
-      },
-      "partner": {
-        "label": "Partner",
-        "desc": "Partner status and store operations in one place."
-      },
-      "admin": {
-        "label": "Admin",
-        "desc": "Quick access to administrative features."
-      }
-    },
-    "hero": {
-      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
-      "avatar": {
-        "uploading": "Uploading...",
-        "change": "Change Image",
-        "register": "Register Image",
-        "error": "Failed to update image."
-      },
-      "default_title": "My Settings"
-    },
-    "badges": {
-      "community": {
-        "leader": "Community Leader",
-        "trend": "Trend Picker",
-        "mate": "Beauty Mate",
-        "sprout": "Sprout"
-      },
-      "booking": {
-        "vvip": "VVIP",
-        "vip": "VIP",
-        "regular": "Regular",
-        "new": "New"
-      }
-    },
+  "hero": {
+    "default_title": "내 설정",
+    "stats": "게시글 {{postCount}} · 후기 {{reviewCount}} · 예약 {{bookingCount}}",
+    "avatar": {
+      "error": "이미지를 바꾸지 못했어요."
+    }
+  },
+  "tabs": {
     "personal": {
-      "nickname": {
-        "title": "Nickname",
-        "placeholder": "Enter new nickname.",
-        "helper_set": "Displayed in community and profile.",
-        "helper_unset": "Nickname not set yet.",
-        "badge_set": "Set",
-        "badge_unset": "Not Set"
-      },
-      "email": {
-        "title": "Email",
-        "helper_verified": "Currently verified email.",
-        "helper_unverified": "Email verification required.",
-        "helper_none": "No linked email.",
-        "badge_verified": "Verified",
-        "badge_unverified": "Unverified",
-        "badge_none": "Not Linked",
-        "value_none": "Not Linked"
-      },
-      "sns": {
-        "title": "SNS",
-        "placeholder": "Enter SNS ID.",
-        "helper_set": "Currently saved SNS.",
-        "helper_unset": "No saved SNS.",
-        "badge_set": "Saved",
-        "badge_unset": "Empty",
-        "value_none": "Not Set"
-      },
-      "phone": {
-        "title": "Phone",
-        "label_country": "Country",
-        "label_number": "Number",
-        "helper_set": "Currently saved phone number.",
-        "helper_unset": "No saved phone number.",
-        "helper_empty": "Stored in E.164 format. Choose country first.",
-        "helper_saved": "Kept in E.164 format.",
-        "helper_invalid": "Please select country and enter digits.",
-        "helper_preview": "Will be saved as {{value}}.",
-        "badge_set": "Saved",
-        "badge_unset": "Empty",
-        "value_none": "Not Set"
-      },
-      "login": {
-        "title": "Login Method",
-        "helper_in": "Currently used login method.",
-        "helper_out": "Sign in to check.",
-        "badge_in": "Active",
-        "badge_out": "Standby",
-        "value_out": "Login Required"
-      },
-      "notifications": {
-        "title": "Notifications",
-        "value_out": "Login to view",
-        "helper_out": "Check current status after sign in.",
-        "badge_out": "Standby",
-        "value_error": "Check Required",
-        "helper_error": "Failed to load notification settings.",
-        "badge_error": "Check Needed",
-        "channel_app": "App",
-        "channel_email": "Email",
-        "value_all_off": "All Notifications OFF",
-        "helper_summary": "Receiving {{count}}/3 booking alerts.",
-        "badge_off": "OFF",
-        "value_both_on": "App · Email ON",
-        "value_single_on": "{{channel}} only ON",
-        "badge_all_on": "Active",
-        "badge_partial_on": "Partial ON"
-      }
+      "label": "개인",
+      "desc": "이메일, 연락처, 로그인과 알림 설정을 확인하세요."
     },
     "partner": {
-      "status": {
-        "title": "Partner Status",
-        "approved": {
-          "value": "Approved",
-          "helper": "Verified as partner account.",
-          "badge": "Approved"
-        },
-        "pending": {
-          "value": "Reviewing",
-          "helper": "Your information is under review.",
-          "badge": "Pending"
-        },
-        "rejected": {
-          "value": "Requires Update",
-          "helper": "Update details and apply again.",
-          "badge": "Action Required",
-          "cta": "Apply Again"
-        },
-        "none": {
-          "value": "No Partner Data",
-          "helper": "No registered partner status.",
-          "badge": "None"
-        }
-      },
-      "store": {
-        "title": "Store Info",
-        "value_none": "No store info",
-        "helper_none": "No store summary available.",
-        "badge_set": "Registered",
-        "badge_unset": "Empty",
-        "visibility_on": "Visible in Explore",
-        "visibility_off": "Hidden in Explore"
-      },
-      "hours": {
-        "title": "Hours",
-        "value_none": "No hours info",
-        "helper_none": "Will appear when connected.",
-        "badge_unset": "Empty"
-      },
-      "bookings": {
-        "title": "Booking Management",
-        "value_info": "No separate menu",
-        "value_pending": "Check after approval",
-        "helper_approved": "Request summaries are structured.",
-        "helper_pending": "Becomes easier after approval.",
-        "badge_info": "Guide",
-        "badge_pending": "Standby"
-      },
-      "pricing": {
-        "title": "Service / Pricing",
-        "value_none": "No separate menu",
-        "helper_none": "Currently not linked to a specific screen.",
-        "badge_info": "Guide"
-      }
+      "label": "파트너",
+      "desc": "파트너 상태와 매장 운영 관련 항목을 한곳에서 확인하세요."
     },
     "admin": {
-      "approval": {
-        "title": "Partner Approval",
-        "value": "Check applications",
-        "helper": "View and manage partner requests."
-      },
-      "issues": {
-        "title": "Booking Issues",
-        "value": "Review requests & changes",
-        "helper": "Check booking status and change requests."
-      },
-      "users": {
-        "title": "User Management",
-        "value": "Check permissions",
-        "helper": "Manage users and admin permissions."
-      },
-      "notices": {
-        "title": "Notice Management",
-        "value": "Unlinked",
-        "helper": "No notice management screen connected."
-      },
-      "badge_open": "Open available",
-      "badge_unlinked": "Unlinked"
+      "label": "관리자",
+      "desc": "관리 권한에 연결된 항목을 빠르게 확인하세요."
+    }
+  },
+  "personal": {
+    "nickname": {
+      "title": "별명",
+      "helper_set": "커뮤니티와 프로필에 표시되는 이름이에요.",
+      "helper_unset": "아직 별명이 설정되지 않았어요.",
+      "badge_set": "설정됨",
+      "badge_unset": "미설정",
+      "placeholder": "새 별명을 입력해 주세요."
     },
-    "messages": {
-      "sns_saved": "SNS ID saved.",
-      "phone_saved": "Phone number saved.",
-      "nickname_cooldown": "Nickname can only be changed every 90 days. ({{days}} days left)",
-      "nickname_cooldown_long": "Changeable every {{limit}} days. (Next: {{date}})",
-      "nickname_empty": "Please enter a nickname.",
-      "nickname_saved": "Nickname changed successfully.",
-      "nickname_error": "Failed to save nickname. Try again.",
-      "unauthorized": "Please check your session.",
-      "profile_not_found": "Profile not found. Please log in again.",
-      "schema_missing_sns": "SNS column not yet applicable to DB.",
-      "schema_missing_phone": "Phone column not yet applicable to DB.",
-      "save_error": "Failed to save.",
-      "saving": "Saving...",
-      "save": "Save",
-      "action_open": "Open",
-      "action_contact": "Enquire"
+    "email": {
+      "title": "이메일",
+      "value_none": "연결 안 됨",
+      "helper_verified": "현재 확인된 이메일 주소예요.",
+      "helper_unverified": "이메일 확인이 아직 필요해요.",
+      "helper_none": "연결된 이메일이 없어요.",
+      "badge_verified": "확인됨",
+      "badge_unverified": "미확인",
+      "badge_none": "미연결"
     },
-    "login_prompt": {
-      "title": "Sign in to see more settings.",
-      "desc": "Check verified values and notification status after log in."
+    "sns": {
+      "title": "SNS",
+      "value_none": "입력 안 됨",
+      "helper_set": "현재 저장된 SNS예요.",
+      "helper_unset": "저장된 SNS가 없어요.",
+      "badge_set": "저장됨",
+      "badge_unset": "미입력",
+      "placeholder": "SNS 아이디를 입력해 주세요."
     },
-    "tab_aria_label": "Settings Tabs"
+    "phone": {
+      "title": "전화번호",
+      "value_none": "입력 안 됨",
+      "helper_set": "현재 저장된 전화번호예요.",
+      "helper_unset": "저장된 전화번호가 없어요.",
+      "badge_set": "저장됨",
+      "badge_unset": "미입력",
+      "country_label": "국가번호",
+      "number_label": "전화번호",
+      "helper_preview": "저장 시 {{value}} 형태로 저장돼요."
+    },
+    "login": {
+      "title": "로그인 방식",
+      "helper_in": "현재 로그인에 사용 중인 방식이에요.",
+      "helper_out": "로그인 후 확인할 수 있어요.",
+      "badge_in": "사용 중",
+      "badge_out": "대기",
+      "provider_email": "이메일",
+      "value_out": "로그인 필요"
+    },
+    "notifications": {
+      "title": "알림 설정",
+      "value_out": "로그인 후 확인",
+      "helper_out": "로그인 후 현재 알림 상태를 볼 수 있어요.",
+      "badge_out": "대기",
+      "value_error": "설정 확인 필요",
+      "helper_error": "알림 상태를 불러오지 못했어요.",
+      "badge_error": "확인 필요",
+      "channel_app": "앱",
+      "channel_email": "이메일",
+      "value_all_off": "모든 알림 OFF",
+      "helper_summary": "예약 관련 알림 {{count}}/3개를 수신 중이에요.",
+      "badge_off": "OFF",
+      "value_both_on": "앱 · 이메일 ON",
+      "value_single_on": "{{channel}}만 ON",
+      "badge_all_on": "활성",
+      "badge_partial_on": "일부만 ON"
+    }
+  },
+  "partner": {
+    "status": {
+      "title": "파트너 상태",
+      "approved": {
+        "value": "승인 완료",
+        "helper": "현재 파트너 계정으로 확인되고 있어요.",
+        "badge": "승인"
+      },
+      "pending": {
+        "value": "검토 중",
+        "helper": "제출한 파트너 정보를 검토하고 있어요.",
+        "badge": "대기"
+      },
+      "rejected": {
+        "value": "보완 후 재신청",
+        "helper": "신청 정보를 보완한 뒤 다시 제출할 수 있어요.",
+        "badge": "보완 필요",
+        "cta": "재신청"
+      },
+      "none": {
+        "value": "파트너 정보 없음",
+        "helper": "등록된 파트너 상태가 없어요.",
+        "badge": "없음"
+      }
+    },
+    "store": {
+      "title": "매장 정보",
+      "value_none": "등록된 매장 정보 없음",
+      "helper_none": "현재 저장된 매장 요약 정보가 없어요.",
+      "badge_set": "등록됨",
+      "badge_unset": "미등록",
+      "visibility_on": "탐색 노출 중",
+      "visibility_off": "탐색 비노출"
+    },
+    "hours": {
+      "title": "운영시간",
+      "value_none": "등록된 운영시간 없음",
+      "helper_none": "운영시간 정보가 연결되면 이곳에서 함께 확인할 수 있어요.",
+      "badge_unset": "미등록"
+    },
+    "bookings": {
+      "title": "예약 요청 관리",
+      "value_info": "별도 관리 메뉴 없음",
+      "value_pending": "파트너 승인 후 확인",
+      "helper_approved": "현재는 예약 요청 요약만 구조화해 두었어요.",
+      "helper_pending": "파트너 상태가 승인되면 관련 항목을 더 쉽게 확인할 수 있어요.",
+      "badge_info": "안내",
+      "badge_pending": "대기"
+    },
+    "pricing": {
+      "title": "시술/가격 관리",
+      "value_none": "별도 관리 메뉴 없음",
+      "helper_none": "현재 코드베이스에서 바로 연결되는 시술/가격 관리 화면은 없어요.",
+      "badge_info": "안내"
+    }
+  },
+  "admin": {
+    "approval": {
+      "title": "파트너 승인",
+      "value": "신청 내역 확인",
+      "helper": "기존 관리자 화면에서 파트너 신청을 승인하거나 거절할 수 있어요."
+    },
+    "issues": {
+      "title": "예약 이슈",
+      "value": "예약 요청 및 변경 검토",
+      "helper": "기존 관리자 화면에서 예약 상태와 변경 요청을 확인할 수 있어요."
+    },
+    "users": {
+      "title": "사용자 관리",
+      "value": "계정 권한 확인",
+      "helper": "기존 관리자 화면에서 사용자와 관리자 권한을 관리할 수 있어요."
+    },
+    "notices": {
+      "title": "공지 관리",
+      "value": "연결된 관리 화면 없음",
+      "helper": "현재 코드베이스에는 공지 전용 관리자 화면이 연결되어 있지 않아요."
+    },
+    "badge_open": "열기 가능",
+    "badge_unlinked": "미연결"
+  },
+  "messages": {
+    "action_contact": "문의",
+    "action_open": "열기",
+    "unauthorized": "로그인 세션을 다시 확인해 주세요.",
+    "profile_not_found": "프로필 정보를 찾지 못했어요. 다시 로그인해 주세요.",
+    "schema_missing_sns": "SNS 저장 컬럼이 아직 DB에 적용되지 않았어요.",
+    "schema_missing_phone": "전화번호 저장 컬럼이 아직 DB에 적용되지 않았어요.",
+    "save_error": "저장하지 못했어요.",
+    "sns_saved": "SNS 아이디를 저장했어요.",
+    "phone_saved": "전화번호를 저장했어요.",
+    "nickname_cooldown": "별명은 90일마다 한 번만 변경할 수 있습니다. (남은 기간: {{days}}일)",
+    "nickname_empty": "별명을 입력해 주세요.",
+    "nickname_saved": "별명을 성공적으로 변경했습니다.",
+    "nickname_error": "별명을 저장하지 못했습니다. 다시 시도해 주세요.",
+    "nickname_cooldown_long": "{{limit}}일에 한 번만 변경 가능합니다. (다음 변경 가능일: {{date}})",
+    "save": "저장",
+    "saving": "저장 중..."
+  },
+  "badges": {
+    "community": {
+      "leader": "커뮤니티 리더",
+      "trend": "트렌드 피커",
+      "mate": "뷰티 메이트",
+      "sprout": "새싹"
+    },
+    "booking": {
+      "vvip": "VVIP",
+      "vip": "VIP",
+      "regular": "Regular",
+      "new": "New"
+    },
+    "nickname_unset": "설정 안 됨"
+  },
+  "tab_aria_label": "설정 탭"
   }
 }

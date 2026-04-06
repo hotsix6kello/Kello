@@ -127,6 +127,7 @@ interface HeroCommunityStats {
     commentCount: number;
     likesReceived: number;
     badge: string;
+    points: number;
 }
 
 interface HeroBookingRecord {
@@ -235,6 +236,7 @@ const EMPTY_COMMUNITY_STATS: HeroCommunityStats = {
     commentCount: 0,
     likesReceived: 0,
     badge: "",
+    points: 0,
 };
 
 const EMPTY_BOOKING_STATS: HeroBookingStats = {
@@ -282,6 +284,7 @@ async function loadCommunityStats(userId: string, displayName: string, t: any): 
         commentCount,
         likesReceived,
         badge: getCommunityBadge(points, t),
+        points,
     };
 }
 
@@ -472,11 +475,11 @@ export default function MySettingsPage() {
     });
 
     const structuredPhoneEmptyHelper =
-        phoneEmptyHelper || "국가번호를 고른 뒤 전화번호를 입력하면 국제 형식(E.164)으로 저장돼요.";
+        phoneEmptyHelper || t("settings_page.personal.phone.helper_empty_fallback", { defaultValue: "국가번호를 고른 뒤 전화번호를 입력하면 국제 형식(E.164)으로 저장돼요." });
     const structuredPhoneSavedHelper =
-        phoneSavedHelper || "현재 저장된 번호는 국제 형식(E.164)으로 유지되고 있어요.";
+        phoneSavedHelper || t("settings_page.personal.phone.helper_saved_fallback", { defaultValue: "현재 저장된 번호는 국제 형식(E.164)으로 유지되고 있어요." });
     const structuredPhoneValidationMessage =
-        phoneValidationMessage || "국가번호를 선택하고 전화번호를 숫자로 입력해 주세요.";
+        phoneValidationMessage || t("settings_page.personal.phone.helper_invalid_fallback", { defaultValue: "국가번호를 선택하고 전화번호를 숫자로 입력해 주세요." });
 
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<TabId>("personal");
@@ -495,6 +498,7 @@ export default function MySettingsPage() {
     });
     const [profile, setProfile] = useState<ProfileRecord | null>(null);
     const [partner, setPartner] = useState<PartnerRecord>(EMPTY_PARTNER);
+    const [notificationPrefs, setNotificationPrefs] = useState<NotificationPreferences | null>(null);
     const [notificationSummary, setNotificationSummary] = useState<NotificationSummary>(
         buildNotificationSummary(null, false, t)
     );
@@ -578,7 +582,9 @@ export default function MySettingsPage() {
                         sns: "",
                         phone: "",
                     });
-                    setNotificationSummary(buildNotificationSummary(null, false, t));
+                    const notLoggedInSummary = buildNotificationSummary(null, false, t);
+                    setNotificationSummary(notLoggedInSummary);
+                    setNotificationPrefs(null);
                     setLoading(false);
                     return;
                 }
@@ -619,7 +625,7 @@ export default function MySettingsPage() {
                         !nextProfile || nextProfile.phone === null || nextProfile.phone === undefined
                             ? Boolean(user.phone && user.phone_confirmed_at)
                             : false,
-                    providerLabel: providerSource ? titleCase(providerSource) : "Email",
+                    providerLabel: providerSource ? titleCase(providerSource) : t("settings_page.personal.login.provider_email", { defaultValue: "이메일" }),
                     snsId: nextProfile ? pickString(nextProfile.sns) : extractSnsId(user),
                     isLoggedIn: true,
                 };
@@ -639,8 +645,9 @@ export default function MySettingsPage() {
                               .maybeSingle()
                         : Promise.resolve({ data: null }),
                     (async () => {
+                        let prefs: NotificationPreferences | null = null;
                         if (!session?.access_token) {
-                            return buildNotificationSummary(null, true, t);
+                            return { summary: buildNotificationSummary(null, true, t), prefs: null };
                         }
 
                         try {
@@ -655,13 +662,14 @@ export default function MySettingsPage() {
                             };
 
                             if (response.ok && body.ok && body.preferences) {
-                                return buildNotificationSummary(body.preferences, true, t);
+                                prefs = body.preferences;
+                                return { summary: buildNotificationSummary(prefs, true, t), prefs };
                             }
                         } catch {
-                            return buildNotificationSummary(null, true, t);
+                            // Ignored
                         }
 
-                        return buildNotificationSummary(null, true, t);
+                        return { summary: buildNotificationSummary(null, true, t), prefs: null };
                     })(),
                     loadCommunityStats(user.id, nextAccount.displayName, t),
                     session?.access_token
@@ -689,6 +697,8 @@ export default function MySettingsPage() {
                     sns: "",
                     phone: "",
                 });
+                setNotificationPrefs(notificationResult.prefs);
+                setNotificationSummary(notificationResult.summary);
                 setCommunityStats(communityResult);
                 setBookingStats(bookingResult);
                 setPartner(
@@ -704,7 +714,6 @@ export default function MySettingsPage() {
                           }
                         : EMPTY_PARTNER
                 );
-                setNotificationSummary(notificationResult);
             } finally {
                 if (isMounted) {
                     setLoading(false);
@@ -1060,7 +1069,7 @@ export default function MySettingsPage() {
 
     const showPartnerTab = partner.status !== "none";
     const showAdminTab = isAdminRole(profile?.role);
-    const partnerStatusMeta = useMemo(() => getPartnerStatusMeta(partner.status, t), [partner.status]);
+    const partnerStatusMeta = useMemo(() => getPartnerStatusMeta(partner.status, t), [partner.status, t]);
 
     const visibleTabs = useMemo(() => {
         const tabs: Array<{ id: TabId; label: string; desc: string }> = [
@@ -1094,13 +1103,36 @@ export default function MySettingsPage() {
         }
 
         return tabs;
-    }, [showAdminTab, showPartnerTab]);
+    }, [showAdminTab, showPartnerTab, t]);
 
     useEffect(() => {
         if (!visibleTabs.some((tab) => tab.id === activeTab)) {
             setActiveTab("personal");
         }
     }, [activeTab, visibleTabs]);
+
+    // Re-sync translated states when t changes (client-side language settlement)
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setAccount(prev => ({
+                ...prev,
+                providerLabel: prev.isLoggedIn 
+                    ? (prev.providerLabel.includes("@") || prev.providerLabel === "이메일" || prev.providerLabel === "Email"
+                        ? t("settings_page.personal.login.provider_email", { defaultValue: "이메일" })
+                        : prev.providerLabel)
+                    : t("settings_page.personal.login.value_out", { defaultValue: "로그인 필요" })
+            }));
+            setNotificationSummary(buildNotificationSummary(notificationPrefs, account.isLoggedIn, t));
+            setCommunityStats(prev => ({
+                ...prev,
+                badge: getCommunityBadge(prev.points, t)
+            }));
+            setBookingStats(prev => ({
+                ...prev,
+                badge: getBookingBadge(prev.completedCount, t)
+            }));
+        }
+    }, [t]);
 
     const personalRows = useMemo<SettingsRow[]>(
         () => [
@@ -1187,7 +1219,7 @@ export default function MySettingsPage() {
                 actionHref: account.isLoggedIn ? "/my/settings/notifications" : undefined,
             },
         ],
-        [account, notificationSummary]
+        [account, notificationSummary, t]
     );
 
     const partnerStoreInfoValue = useMemo(() => {
@@ -1199,7 +1231,7 @@ export default function MySettingsPage() {
             partnerType,
             t("settings_page.partner.store.value_none", { defaultValue: "등록된 매장 정보 없음" })
         );
-    }, [partner.business_type, partner.company_name]);
+    }, [partner.business_type, partner.company_name, t]);
 
     const partnerStoreInfoHelper = useMemo(() => {
         const details = [
@@ -1208,20 +1240,20 @@ export default function MySettingsPage() {
             partner.visibility_status === null
                 ? ""
                 : partner.visibility_status
-                  ? "탐색 노출 중"
-                  : "탐색 비노출",
+                  ? t("settings_page.partner.store.visibility_on", { defaultValue: "탐색 노출 중" })
+                  : t("settings_page.partner.store.visibility_off", { defaultValue: "탐색 비노출" }),
         ].filter(Boolean);
 
         return details.length > 0
             ? details.join(" · ")
             : t("settings_page.partner.store.helper_none", { defaultValue: "현재 저장된 매장 요약 정보가 없어요." });
-    }, [partner.address, partner.visibility_status, partner.website]);
+    }, [partner.address, partner.visibility_status, partner.website, t]);
 
     const partnerRows = useMemo<SettingsRow[]>(
         () => [
             {
                 id: "partner-status",
-                title: "파트너 상태",
+                title: t("settings_page.partner.status.title", { defaultValue: "파트너 상태" }),
                 value: partnerStatusMeta.value,
                 helper: partnerStatusMeta.helper,
                 badge: partnerStatusMeta.badge,
@@ -1284,9 +1316,8 @@ export default function MySettingsPage() {
         [
             partner.company_name,
             partner.status,
-            partnerStatusMeta,
-            partnerStoreInfoHelper,
             partnerStoreInfoValue,
+            t,
         ]
     );
 
@@ -1339,7 +1370,7 @@ export default function MySettingsPage() {
                 tone: "neutral",
             },
         ],
-        []
+        [t]
     );
 
     const activePanel = useMemo(() => {
