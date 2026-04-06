@@ -278,7 +278,7 @@ function MyBookingsSection({
         };
         void load();
         return () => { cancelled = true; };
-    }, [accessToken, authReady]);
+    }, [accessToken, authReady, t]);
 
     return (
         <section className={styles.section}>

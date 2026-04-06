@@ -1,1375 +1,206 @@
-﻿{
-    "common":  {
-                   "welcome":  "مرحباً أيها المسافر",
-                   "greeting":  "صباح الخير",
-                   "login":  "تسجيل الدخول",
-                   "signup":  "إنشاء حساب",
-                   "today":  "اليوم",
-                   "move":  "تنقل",
-                   "book":  "حجز",
-                   "chat":  "دردشة",
-                   "my":  "حسابي",
-                   "current_operation":  "يعمل الآن",
-                   "live":  "مباشر",
-                   "recommended":  "قريب منك",
-                   "based_on_location":  "بناءً على موقعك",
-                   "start_nav":  "بدء الملاحة",
-                   "delay_10m":  "تأخير +10 دقائق",
-                   "confirmed":  "تم التأكيد",
-                   "payment_completed":  "اكتملت الدفعة",
-                   "weather_clear":  "صافٍ",
-                   "back":  "رجوع",
-                   "community_nav":  "المجتمع",
-                   "today_nav":  "مسار الرحلة",
-                   "my_nav":  "حسابي",
-                   "home_nav":  "الرئيسية",
-                   "explore_nav":  "استكشاف",
-                   "planner_nav":  "المخطط",
-                   "help_nav":  "مركز المساعدة",
-                   "actions":  {
-                                   "delete":  "حذف"
-                               },
-                   "states":  {
-                                  "no_permission":  "ليس لديك صلاحية.",
-                                  "error_occurred":  "حدث خطأ أثناء معالجة طلبك."
-                              }
-               },
-    "transport":  {
-                      "moving_to":  "متجه إلى {{dest}}",
-                      "remaining":  "متبقي",
-                      "line_2_direction":  "الخط 2 • اتجاه City Hall",
-                      "departed":  "غادر",
-                      "passing_now":  "يمر الآن...",
-                      "current":  "الحالي",
-                      "get_off_at":  "انزل في",
-                      "exit_3":  "مخرج 3",
-                      "getting_off_here":  "سأنزل هنا",
-                      "stations":  {
-                                       "samseong":  "سامسيونغ",
-                                       "seolleung":  "سيولونغ",
-                                       "yeoksam":  "يوكسام",
-                                       "gangnam":  "كانغنام",
-                                       "gyodae":  "كيوداي",
-                                       "seocho":  "سيوتشو",
-                                       "seongsu":  "سيونغسو",
-                                       "hongdae":  "هونغداي",
-                                       "jamsil":  "جامسيل",
-                                       "konkuk":  "جامعة كونكوك",
-                                       "pangyo":  "بانغيو"
-                                   }
-                  },
-    "beauty_explore":  {
-                           "hero_title":  "استكشاف حجوزات التجميل",
-                           "hero_desc":  "اختر فئة لاستكشاف أدق للحجوزات. يمكنك الآن التحقق من جميع صالونات التجميل.",
-                           "hero_title_with_category":  "ابدأ حجز {{category}} الآن",
-                           "hero_subtitle_desc":  "اختر المنطقة والمتجر والوقت للمتابعة.",
-                           "hero_guide_no_category":  "اختيار فئة من الصفحة الرئيسية يؤدي إلى أفضل تدفق للحجز. أنت تشاهد حالياً جميع صالونات التجميل.",
-                           "hero_flow_step_category":  "تحقق من الفئة",
-                           "hero_flow_step_region":  "اختر المنطقة",
-                           "hero_flow_step_store":  "اختر المتجر",
-                           "hero_flow_step_time":  "تأكيد الوقت",
-                           "hero_flow_aria_label":  "دليل الحجز السريع",
-                           "region_filter_title":  "اختر منطقتك المفضلة",
-                           "region_all":  "كل المناطق",
-                           "step_indicator_label":  "خطوات حجز التجميل",
-                           "label_today":  "اليوم",
-                           "label_tomorrow":  "غداً",
-                           "label_rating":  "التقييم",
-                           "label_review":  "المراجعات",
-                           "label_price_from":  "من",
-                           "label_booking_unit":  "وون",
-                           "btn_select_time":  "اختر وقت الحجز",
-                           "btn_reselect_time":  "إعادة اختيار الوقت",
-                           "empty_store_title":  "لا توجد متاجر تطابق المعايير.",
-                           "empty_store_desc":  "جرب منطقة أخرى أو فئة مختلفة.",
-                           "booking_panel_title":  "اختر التاريخ والوقت",
-                           "booking_panel_desc":  "اختر وقتاً للمتجر وتابع للتأكيد.",
-                           "summary_btn":  "تحقق من معلومات الحجز",
-                           "btn_submit":  "إرسال طلب الحجز",
-                           "btn_edit":  "تعديل المعلومات",
-                           "completion_title":  "تم إرسال طلب الحجز!",
-                           "confirm_title":  "تأكيد المعلومات وإدخال التفاصيل",
-                           "confirm_desc":  "املأ التفاصيل للحصول على بطاقة طلب جاهزة للعرض.",
-                           "confirm_empty_title":  "الخطوة التالية لم تفتح بعد.",
-                           "confirm_empty_desc":  "اضغط على `تحقق من معلومات الحجز` after picking date/time.",
-                           "confirm_review_error_title":  "تحقق من معلومات الحجز مرة أخرى.",
-                           "confirm_review_error_desc":  "يتطلب المتجر والتاريخ والوقت.",
-                           "confirm_price_hint":  "السعر المقدر هو للعرض فقط. قد يختلف الدفع النهائي.",
-                           "label_no_surcharge":  "بدون رسوم إضافية",
-                           "label_no_designer":  "لا توجد معلومات عن المصمم حالياً.",
-                           "label_designer_hint":  "اختيار المصمم اختياري. اختيار المتجر هو البديل.",
-                           "label_addon_limit":  "الحد الأقصى 2",
-                           "selected_confirmation":  "التاريخ المختار: {{date}}",
-                           "completion_desc1":  "سنخطرك بعد أن يتحقق المتجر من التوفر.",
-                           "completion_desc2":  "يرجى ملاحظة أنه لم يتم تأكيده حتى تتلقى إشعار تأكيد.",
-                           "completion_desc3":  "تتبع التقدم في أي وقت في قائمة حجوزاتي."
-                       },
-    "home":  {
-                 "title_korea":  "كوريا اليوم",
-                 "recommended_plans":  "خطط السفر الموصى بها",
-                 "plans":  {
-                               "2d":  {
-                                          "title":  "يومان: أساسيات سيول",
-                                          "label":  "خطة يومين"
-                                      },
-                               "3d":  {
-                                          "title":  "3 أيام: الثقافة الكورية والأسلوب",
-                                          "label":  "خطة 3 أيام"
-                                      },
-                               "5d":  {
-                                          "title":  "5 أيام: الجولة الكبرى",
-                                          "label":  "خطة 5 أيام"
-                                      },
-                               "request_custom_label":  "مخصص",
-                               "request_custom_title":  "طلب خطة لـ {{days}} أيام",
-                               "request_custom_toast":  "تم طلب خطة مخصصة لـ {{days}} أيام! سيتواصل معك فريق الاستقبال قريباً."
-                           },
-                 "badge":  "اختبر جمال كوريا",
-                 "categories":  {
-                                    "all":  "الكل",
-                                    "beauty":  "تجميل",
-                                    "food":  "طعام",
-                                    "attraction":  "معالم",
-                                    "event":  "فعاليات",
-                                    "festival":  "مهرجانات"
-                                },
-                 "cities":  {
-                                "seoul":  "سيول",
-                                "busan":  "بوسان",
-                                "jeju":  "جيجو",
-                                "incheon":  "إنشيون",
-                                "gyeongju":  "كيونغجو"
-                            }
-             },
-    "explore_page":  {
-                         "title":  "استكشاف",
-                         "select_city":  "اختر مدينة",
-                         "search_placeholders":  {
-                                                     "all":  "ابحث عن التجميل، الطعام...",
-                                                     "beauty":  "ابحث عن صالونات التجميل...",
-                                                     "food":  "ابحث عن المطاعم، الأطباق...",
-                                                     "attraction":  "ابحث عن القصور، المنتزهات...",
-                                                     "event":  "ابحث عن الحفلات، العروض...",
-                                                     "festival":  "ابحث عن المهرجانات..."
-                                                 },
-                         "distance_label":  "المسافة:"
-                     },
-    "help_page":  {
-                      "title":  "دعم الطوارئ",
-                      "medical_title":  "المساعدة الطبية",
-                      "medical_desc":  "عيادات قريبة وبطاقات الأعراض",
-                      "lost_title":  "الأمتعة المفقودة",
-                      "lost_desc":  "دليل خطوة بخطوة للاسترداد",
-                      "police_title":  "الشرطة / الجريمة",
-                      "police_desc":  "الإبلاغ والحصول على المساعدة",
-                      "interp_title":  "الترجمة الفورية",
-                      "interp_desc":  "خط المساعدة 1330 وتطبيقات الترجمة",
-                      "taxi":  "تاكسي",
-                      "subway":  "مترو",
-                      "airport":  "مطار",
-                      "street":  "شارع",
-                      "lost":  {
-                                   "taxi_s1_t":  "1. تحقق من الإيصال",
-                                   "taxi_s1_d":  "احصل على معلومات الاتصال بالسائق من خلال رقم بطاقة الائتمان أو رقم السيارة الموجود على الإيصال.",
-                                   "taxi_s2_t":  "2. اتصل بجهة إصدار البطاقة",
-                                   "taxi_s2_d":  "اتصل بمركز خدمة عملاء البطاقة واطلب معلومات الاتصال بالتاكسي من سجل الدفع.",
-                                   "taxi_s3_t":  "3. التقرير للشرطة",
-                                   "taxi_s3_d":  "اتصل بـ 112 وأدخل رقم تسجيل السيارة ووقت الرحلة.",
-                                   "taxi_s4_t":  "4. مركز المفقودات",
-                                   "taxi_s4_d":  "جمعية تاكسي سيول: 02-414-8090 (كورية فقط - استعن بـ 1330).",
-                                   "subway_s1_t":  "1. قم بزيارة مكتب المحطة",
-                                   "subway_s1_d":  "إذا نزلت للتو، قم بزيارة مكتب المحطة وأخبرهم برقم العربة والقطار.",
-                                   "subway_s2_t":  "2. مركز المفقودات",
-                                   "subway_s2_d":  "إذا مر وقت طويل، اتصل بمركز مفقودات خط المترو المعني.",
-                                   "subway_s3_t":  "3. تقديم تقرير إلكتروني",
-                                   "subway_s3_d":  "يمكنك تقديم تقرير بالإنجليزية على lost112.",
-                                   "airport_s1_t":  "1. مطار إنشيون - مكتب المفقودات",
-                                   "airport_s1_d":  "مبنى 1: 032-741-3110 / مبنى 2: 032-741-3119.",
-                                   "airport_s2_t":  "2. مطار كيمبو",
-                                   "airport_s2_d":  "الاتصال: 02-2660-2536. الموقع: الطابق B1.",
-                                   "airport_s3_t":  "3. شرطة المطار",
-                                   "airport_s3_d":  "متوفرة 24 ساعة في صالات الوصول."
-                               },
-                      "interp":  {
-                                     "papago_desc":  "أفضل ترجمة مجانية للكورية. يعمل بدون إنترنت.",
-                                     "google_desc":  "يدعم الصوت والكاميرا. متاح بدون إنترنت."
-                                 },
-                      "medical_header":  "المساعدة الطبية والطوارئ",
-                      "emergency_119_title":  "الطوارئ (119)",
-                      "emergency_119_desc":  "الاتصال الفوري في حالات الطوارئ",
-                      "consult_1339_title":  "الاستشارة الطبية (1339)",
-                      "consult_1339_desc":  "دليل المستشفيات والاستشارات الطبية المتخصصة",
-                      "symptoms_title":  "وصف الأعراض",
-                      "call_btn":  "اتصال",
-                      "medical":  {
-                                      "medicines":  {
-                                                        "tylenol":  "تايلينول",
-                                                        "tylenol_desc":  "حمى، صداع، آلام عضلات",
-                                                        "cold":  "دواء البرد",
-                                                        "cold_desc":  "سعال، حمى، سيلان أنف",
-                                                        "digestive":  "هاضم",
-                                                        "digestive_desc":  "عسر هضم، حموضة"
-                                                    },
-                                      "symptoms":  {
-                                                       "stomach":  "ألم في البطن",
-                                                       "fever":  "حمى",
-                                                       "injury":  "إصابة",
-                                                       "allergy":  "حساسية",
-                                                       "breathing":  "ضيق تنفس",
-                                                       "pain":  "ألم في الصدر"
-                                                   }
-                                  }
-                  },
-    "home_beauty":  {
-                        "hero":  {
-                                     "eyebrow":  "خدمة حجز الجمال",
-                                     "title":  "التقط جمال كوريا\nفي جدولك الزمني",
-                                     "subtitle":  "اختر خدمة التجميل واحجز مباشرة.",
-                                     "welcome":  "{{name}}، يرجى اختيار خدمة.",
-                                     "welcome_user":  "{{greeting}}، {{name}}! 👋"
-                                 },
-                        "booking":  {
-                                        "step":  "الخطوة الأولية",
-                                        "title":  "يرجى اختيار خدمة التجميل",
-                                        "description":  ""
-                                    },
-                        "categories":  {
-                                           "hair":  {
-                                                        "label":  "شعر",
-                                                        "note":  "قص، تجعيد، صبغ",
-                                                        "summary":  "احجز من تغيير الستايل إلى القص السريع."
-                                                    },
-                                           "nail":  {
-                                                        "label":  "أظافر",
-                                                        "note":  "جل، عناية، تركيب",
-                                                        "summary":  "اختر التصميم وانتقل للحجز."
-                                                    },
-                                           "esthetic":  {
-                                                            "label":  "تجميل",
-                                                            "note":  "عناية بالبشرة، نحت",
-                                                            "summary":  "قارن الصالونات واحجز."
-                                                        },
-                                           "waxing":  {
-                                                          "label":  "إزالة الشعر",
-                                                          "note":  "وجه، جسم، برازيلي",
-                                                          "summary":  "اعثر على الصالون المناسب بسرعة."
-                                                      },
-                                           "makeup":  {
-                                                          "label":  "مكياج",
-                                                          "note":  "يومي، تصوير، زفاف",
-                                                          "summary":  "اختر خدمة مكياج لمناسبتك."
-                                                      },
-                                           "lash":  {
-                                                        "label":  "رموش",
-                                                        "note":  "تركيب، تجعيد",
-                                                        "summary":  "من الطبيعي إلى الكثيف، اختر قائمتك."
-                                                    }
-                                       },
-                        "selection":  {
-                                          "eyebrow":  "كافة الفئات المختارة",
-                                          "tags":  {
-                                                       "mobile":  "حجز عبر الجوال",
-                                                       "comparison":  "مقارنة الصالونات",
-                                                       "inquiry":  "استفسار فوري"
-                                                   },
-                                          "empty":  "يرجى اختيار فئة أولاً."
-                                      },
-                        "cta":  {
-                                    "hint":  "اختر فئة لبدء الحجز",
-                                    "button":  "ابدأ الحجز"
-                                },
-                        "interpreter_entry":  {
-                                                  "title":  "مترجم فوري",
-                                                  "description":  "تواصل بسهولة مع الموظفين",
-                                                  "cta":  "فتح المترجم"
-                                              }
-                    },
-    "today_page":  {
-                       "title":  "جدول اليوم",
-                       "active_now":  "جارٍ الآن",
-                       "navigate":  "الاتجاهات",
-                       "booking_ref":  "رقم الحجز: {{ref}}",
-                       "next_up":  "التالي",
-                       "minutes_left":  "يبدأ خلال {{mins}} دقيقة",
-                       "depart_early":  "الانطلاق الآن",
-                       "timeline":  "الجدول الزمني",
-                       "departure_warning":  "⚠️ يبدأ {{title}} خلال {{mins}} دقيقة — انطلق الآن!",
-                       "empty":  {
-                                     "title":  "لا يوجد جدول لليوم",
-                                     "desc":  "استكشف الأماكن لإضافتها إلى جدولك!",
-                                     "cta":  "استكشاف الأماكن"
-                                 }
-                   },
-    "my_page":  {
-                    "profile":  {
-                                    "trust_score":  "Trust Score",
-                                    "trust_level_excellent":  "Excellent",
-                                    "account_hint":  "Account \u0026 preferences",
-                                    "level_badge":  "Lv.{{level}}",
-                                    "badge_korea_travel":  "Korea Travel",
-                                    "badge_verified":  "Verified"
-                                },
-                    "passport":  {
-                                     "title":  "My Passport",
-                                     "view_all":  "View All",
-                                     "seoul":  "Seoul",
-                                     "beauty":  "Beauty",
-                                     "jeju":  "Jeju"
-                                 },
-                    "bookings":  {
-                                     "title":  "My Bookings",
-                                     "today_time":  "Today, {{time}}",
-                                     "tomorrow_time":  "Tomorrow, {{time}}",
-                                     "next_week_time":  "Next Week, {{time}}",
-                                     "new_added":  "New Booking Added!",
-                                     "date_time":  "Date / Time",
-                                     "area":  "Area",
-                                     "price":  "Price",
-                                     "browse_beauty_cta":  "Browse Beauty Bookings",
-                                     "action_edit_request":  "Edit Request",
-                                     "action_cancel_request":  "Cancel Request",
-                                     "error_fetch":  "Failed to load bookings."
-                                 },
-                    "community":  {
-                                      "title":  "My Community Posts",
-                                      "empty":  "No community posts written yet.",
-                                      "empty_simple":  "No posts written yet",
-                                      "browse_cta":  "Browse Community"
-                                  },
-                    "messages":  {
-                                     "upload_success":  "Profile picture updated successfully.",
-                                     "upload_failed":  "Upload failed."
-                                 },
-                    "settings":  {
-                                     "account":  {
-                                                     "sign_in_title":  "Sign in to manage account details",
-                                                     "sign_in_desc":  "This hub can only read verified account and profile fields from the active Supabase session.",
-                                                     "title":  "Account / Profile",
-                                                     "desc":  "These fields come from your current auth user, profile nickname, and basic account metadata.",
-                                                     "display_name":  "Display name",
-                                                     "display_name_hint":  "Nickname is preferred, then auth metadata, then your email name.",
-                                                     "email":  "Email / login",
-                                                     "email_hint":  "Read from the active Supabase auth user.",
-                                                     "joined":  "Joined",
-                                                     "joined_hint":  "Uses the profile created_at value when available, then falls back to auth created_at.",
-                                                     "last_seen":  "Last sign-in",
-                                                     "last_seen_hint":  "Read-only from the auth session.",
-                                                     "read_only":  "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-                                                     "default_name":  "Traveler",
-                                                     "phone":  {
-                                                                   "placeholder":  "e.g. {{example}}",
-                                                                   "helper_empty":  "Includes country code. e.g. {{example}}",
-                                                                   "helper_saved":  "Kept in international format.",
-                                                                   "helper_invalid":  "Include country code. e.g. {{example}}"
-                                                               }
-                                                 }
-                                 },
-                    "support":  {
-                                    "short":  "Support",
-                                    "eyebrow":  "Support hub",
-                                    "title":  "My Support",
-                                    "header_cta":  "Open Help Center",
-                                    "tabs":  {
-                                                 "booking":  "Booking Help",
-                                                 "general":  "General Help",
-                                                 "faq":  "FAQ / Quick Guide",
-                                                 "emergency":  "Emergency / Translation Help"
-                                             },
-                                    "summary":  {
-                                                    "booking":  {
-                                                                    "label":  "Booking Help",
-                                                                    "desc":  "Recent reservations, issue reporting, and next-step help."
-                                                                },
-                                                    "general":  {
-                                                                    "label":  "General Help",
-                                                                    "desc":  "Help Center, support paths, and community safety entry points."
-                                                                },
-                                                    "emergency":  {
-                                                                      "label":  "Emergency \u0026 Translation",
-                                                                      "desc":  "Use this hub first, then open the medical, police, or translation detail page that fits the situation."
-                                                                  }
-                                                },
-                                    "guides":  {
-                                                   "find_booking":  {
-                                                                        "q":  "I cannot find my booking place.",
-                                                                        "a":  "Check the map and area shown on your booking first. If you still cannot locate it, open Translation Help or the Help Center for local assistance."
-                                                                    },
-                                                   "staff_talk":  {
-                                                                      "q":  "It is hard to talk with staff.",
-                                                                      "a":  "Use Translation Help for quick translation tools and hotline access. If the situation feels urgent, move to Emergency Help right away."
-                                                                  },
-                                                   "change_time":  {
-                                                                       "q":  "I want to change my booking time.",
-                                                                       "a":  "Direct booking changes are not available in the app yet. Start from Booking Help so you can choose the safest next step before heading to the venue."
-                                                                   },
-                                                   "cancel_refund":  {
-                                                                         "q":  "Where do I cancel or ask about refunds?",
-                                                                         "a":  "In-app cancellation and refund handling are not available yet. Use Help Center or Booking Help to confirm what support path is available for your case."
-                                                                     },
-                                                   "write_review":  {
-                                                                        "q":  "How do I write a review after my visit?",
-                                                                        "a":  "Completed bookings can send you to My Community \u003e Reviews. If a dedicated review form is not ready yet, use the existing Community composer."
-                                                                    },
-                                                   "community_safety":  {
-                                                                            "q":  "A meetup or community situation feels unsafe.",
-                                                                            "a":  "Stop sharing personal details and move to police or emergency help first if needed. Community-specific report handling is limited right now, so use the safety route that fits the situation.",
-                                                                            "cta":  "Safety Help"
-                                                                        }
-                                               },
-                                    "general":  {
-                                                    "help_center":  {
-                                                                        "label":  "Help Center",
-                                                                        "desc":  "Open the detailed help pages for medical, police, translation, lost item, and emergency contacts already available in the app."
-                                                                    },
-                                                    "booking_cancel":  {
-                                                                           "label":  "Booking \u0026 cancellation help",
-                                                                           "desc":  "Use this first for time changes, availability questions, and issue-report guidance.",
-                                                                           "cta":  "Open Booking Help"
-                                                                       },
-                                                    "community_safety":  {
-                                                                             "label":  "Community safety",
-                                                                             "desc":  "For unsafe meetups or uncomfortable situations, move to the safety route first.",
-                                                                             "cta":  "Open Safety Help"
-                                                                         },
-                                                    "partner":  {
-                                                                    "label":  "Partner inquiry",
-                                                                    "desc":  "Business and partner-related onboarding can continue from the partner signup flow."
-                                                                },
-                                                    "title":  "General Help",
-                                                    "desc":  "Use these entry points when you are not sure where to go next.",
-                                                    "report_notice":  "Direct issue tickets are not available yet. Use the help paths below for your booking question."
-                                                },
-                                    "emergency":  {
-                                                      "overview":  {
-                                                                       "label":  "Emergency Support",
-                                                                       "desc":  "Open the main emergency help page for medical, police, lost item, and translation access.",
-                                                                       "cta":  "Open Emergency Help"
-                                                                   },
-                                                      "interp":  {
-                                                                     "label":  "Translation Help",
-                                                                     "desc":  "Use translation tools and hotline links when speaking with venue staff is difficult.",
-                                                                     "cta":  "Open Translation Help",
-                                                                     "booking_desc":  "Carry this booking context into the translation route so staff can understand which reservation you mean."
-                                                                 },
-                                                      "phrases":  {
-                                                                      "label":  "Emergency Phrases",
-                                                                      "desc":  "Open large Korean phrases you can show directly to nearby staff, drivers, or help desks.",
-                                                                      "cta":  "Open Travel Phrases",
-                                                                      "booking_label":  "Booking Phrases",
-                                                                      "booking_desc":  "Open booking phrases first when you need to explain the reservation, delay, or check-in situation to staff."
-                                                                  },
-                                                      "medical":  {
-                                                                      "label":  "Medical Help",
-                                                                      "desc":  "Need clinic or emergency medical support? Open the medical help path directly.",
-                                                                      "cta":  "Medical Help"
-                                                                  },
-                                                      "police":  {
-                                                                     "label":  "Police / Safety Help",
-                                                                     "desc":  "Use the safety route for police contact, incident guidance, or a risky situation.",
-                                                                     "cta":  "Open Safety Help"
-                                                                 },
-                                                      "title":  "Emergency / Translation Help",
-                                                      "desc":  "My Support is the hub. Use the detailed help pages below when the situation is urgent or communication is difficult.",
-                                                      "interpreter_notice":  "Translation links are available below. Some options may open a call screen or an external translation page.",
-                                                      "hub_notice":  "Use this hub to choose the right detailed page. /help/* pages explain one route in more depth, and Travel Phrasebook is for showable Korean text."
-                                                  },
-                                    "booking":  {
-                                                    "banner_report":  "Reporting an issue for {{bookingName}}. Choose the support route that matches the problem.",
-                                                    "banner_interpreter":  "Need language help for {{bookingName}}? Translation and emergency links are ready below.",
-                                                    "banner_default":  "Need help with {{bookingName}}? Start with the booking card below.",
-                                                    "banner_fallback":  "Need help with a booking? Start with the closest reservation below.",
-                                                    "title":  "Booking Help",
-                                                    "desc":  "Use your recent bookings as the fastest way to find the right support path.",
-                                                    "empty":  {
-                                                                  "title":  "There is no booking to ask about right now.",
-                                                                  "desc":  "Check My Bookings again later or explore places to start planning your trip."
-                                                              },
-                                                    "context_title":  "Help for this booking",
-                                                    "context_desc":  "Keep this reservation context visible while you move between booking help, translation help, and phrases."
-                                                },
-                                    "subtitle":  "Find the right help path for bookings, questions, and urgent travel situations.",
-                                    "faq":  {
-                                                "title":  "FAQ / Quick Guide",
-                                                "desc":  "Short, safe guidance for common travel questions inside the current app scope."
-                                            }
-                                },
-                    "phrases":  {
-                                    "quick":  "Phrases",
-                                    "title":  "Travel Phrasebook",
-                                    "eyebrow":  "Translation hub",
-                                    "favorites":  {
-                                                      "title":  "Favorites",
-                                                      "desc":  "Save the phrases you expect to show most often during your trip.",
-                                                      "empty":  "Save a few frequent phrases so they stay easy to reopen."
-                                                  },
-                                    "recent":  {
-                                                   "title":  "Recent",
-                                                   "desc":  "Recently opened or copied phrases stay here for quick access."
-                                               },
-                                    "subtitle":  "Show these phrases to staff, drivers, or shop teams in Korea when you need a fast answer on the spot.",
-                                    "hero":  {
-                                                 "badge":  "Ready-made Korean phrases",
-                                                 "count":  "phrases"
-                                             },
-                                    "context":  {
-                                                    "title":  "Current context",
-                                                    "interpreter":  "Emergency phrases are ready if you need to explain a situation quickly.",
-                                                    "support":  "Use this phrasebook with the support hub when speaking with local staff is difficult.",
-                                                    "booking":  "Booking phrases are ready for this reservation."
-                                                },
-                                    "categories":  {
-                                                       "booking":  {
-                                                                       "label":  "Booking",
-                                                                       "description":  "Reservation check-in, delays, and option requests.",
-                                                                       "helper":  "Best for front desks, tour desks, and venue staff."
-                                                                   },
-                                                       "transport":  {
-                                                                         "label":  "Transport",
-                                                                         "description":  "Taxi, station, and route support for moving around Korea.",
-                                                                         "helper":  "Useful for drivers, station staff, and route questions."
-                                                                     },
-                                                       "restaurant":  {
-                                                                          "label":  "Restaurant",
-                                                                          "description":  "Ordering help, allergy notes, and menu questions.",
-                                                                          "helper":  "Show these before ordering when timing is tight."
-                                                                      },
-                                                       "beauty":  {
-                                                                      "label":  "Beauty",
-                                                                      "description":  "Salon, spa, and treatment requests in simple Korean.",
-                                                                      "helper":  "Helpful for consultations and price checks before treatment."
-                                                                  },
-                                                       "emergency":  {
-                                                                         "label":  "Emergency",
-                                                                         "description":  "Urgent help phrases and translation-related requests.",
-                                                                         "helper":  "Use with nearby staff, help desks, or emergency support lines."
-                                                                     }
-                                                   },
-                                    "category":  {
-                                                     "title":  "{{category}} phrases"
-                                                 },
-                                    "empty":  {
-                                                  "title":  "No phrases available right now.",
-                                                  "desc":  "Try another category or use Support if you need help right away."
-                                              }
-                                },
-                    "saved":  {
-                                  "eyebrow":  "محفوظاتي",
-                                  "title":  "العناصر المحفوظة",
-                                  "subtitle":  "عرض وإدارة الأماكن وخطط الرحلات المحفوظة.",
-                                  "header_cta":  "استكشاف الأماكن",
-                                  "summary":  {
-                                                  "places":  "أماكن",
-                                                  "plans":  "خطط",
-                                                  "recent":  "الأحدث"
-                                              },
-                                  "summary_hint":  "يتم حفظ العناصر محلياً على هذا الجهاز.",
-                                  "tabs":  {
-                                               "places":  "أماكن",
-                                               "plans":  "خطط",
-                                               "recent":  "الأحدث"
-                                           },
-                                  "places":  {
-                                                 "title":  "الأماكن المحفوظة",
-                                                 "desc":  "تحقق من الأماكن التي قمت بحفظها أثناء الاستكشاف.",
-                                                 "fallback_title":  "مكان {{id}}",
-                                                 "source_plan":  "من خطة الرحلة",
-                                                 "source_saved":  "العناصر المحفوظة",
-                                                 "source_fallback":  "بيانات تجريبية",
-                                                 "source_id_only":  "المعرف فقط",
-                                                 "added":  "تمت الإضافة إلى جدولك!"
-                                             },
-                                  "plans":  {
-                                                "title":  "الخطط المحفوظة",
-                                                "desc":  "عرض جداول رحلاتك الحالية والسابقة.",
-                                                "synced":  "متزامن مع السحابة",
-                                                "empty":  {
-                                                              "title":  "لا توجد خطط بعد",
-                                                              "desc":  "ابدأ في بناء رحلتك في المخطط."
-                                                          }
-                                            },
-                                  "recent":  {
-                                                 "title":  "شوهد مؤخراً",
-                                                 "desc":  "الأماكن والخطط التيقمت بالتحقق منها مؤخراً.",
-                                                 "type":  {
-                                                              "place":  "مكان",
-                                                              "plan":  "خطة",
-                                                              "community":  "منشور"
-                                                          },
-                                                 "empty":  {
-                                                               "title":  "لا يوجد سجل مؤخراً",
-                                                               "desc":  "العناصر التي تشاهدها ستظهر هنا.",
-                                                               "fallback":  "السجل غير متاح على هذا الجهاز.",
-                                                               "cta":  "ابدأ التصفح"
-                                                           }
-                                             }
-                              },
-                    "community_hub":  {
-                                          "eyebrow":  "My activity hub",
-                                          "title":  "My Community",
-                                          "subtitle":  "Track what you posted, reviewed, and planned with the community in one place.",
-                                          "browse":  "Browse Community",
-                                          "summary":  {
-                                                          "posts":  "Posts",
-                                                          "reviews":  "Reviews",
-                                                          "meetups":  "Meetups"
-                                                      },
-                                          "tabs":  {
-                                                       "posts":  "Posts",
-                                                       "reviews":  "Reviews",
-                                                       "meetups":  "Meetups"
-                                                   },
-                                          "empty":  {
-                                                        "reviews":  {
-                                                                        "title":  "You have not written any reviews yet.",
-                                                                        "desc":  "Start with a completed booking and share what helped your trip.",
-                                                                        "no_completed":  "Finish a booking first, then come back here to leave a helpful review.",
-                                                                        "cta":  "See Completed Bookings"
-                                                                    },
-                                                        "meetups":  {
-                                                                        "title":  "No meetup activity yet.",
-                                                                        "desc":  "Browse meetup-style community posts and keep your next plan here."
-                                                                    },
-                                                        "posts":  {
-                                                                      "title":  "No posts saved in your hub yet.",
-                                                                      "desc":  "Browse the community, ask a question, or leave a helpful tip for other travelers."
-                                                                  }
-                                                    },
-                                          "summary_hint":  "Counts are based on your authored community posts and your completed bookings.",
-                                          "sync_error":  "Community posts could not be refreshed right now. Empty states are shown as a fallback.",
-                                          "review_prompts":  {
-                                                                 "title":  "Write from your completed bookings",
-                                                                 "desc":  "Open Community to write a review and choose the Review type in the existing composer."
-                                                             },
-                                          "posts_desc":  "General community posts you created, ready to revisit or manage.",
-                                          "reviews_desc":  "Review posts you already published, plus a quick path back to booking history.",
-                                          "meetups_desc":  "Meetup-style activity from your community posts, including travel mate plans.",
-                                          "loading":  "Loading your activity...",
-                                          "no_comments":  "No comments yet",
-                                          "type":  {
-                                                       "travel":  "Travel Mate",
-                                                       "meetup":  "Meetup"
-                                                   }
-                                      },
-                    "bookings_hub":  {
-                                         "title":  "My Bookings",
-                                         "summary":  {
-                                                         "upcoming":  "Upcoming",
-                                                         "history":  "History"
-                                                     },
-                                         "tabs":  {
-                                                      "upcoming":  "Upcoming",
-                                                      "completed":  "Completed",
-                                                      "other":  "Other"
-                                                  },
-                                         "meta":  {
-                                                      "time":  "Time",
-                                                      "area":  "Area",
-                                                      "total_price":  "Total Price",
-                                                      "reference":  "Reference"
-                                                  },
-                                         "empty":  {
-                                                       "upcoming":  {
-                                                                        "title":  "No upcoming bookings",
-                                                                        "desc":  "Explore top-rated spots and start planning your next stop."
-                                                                    },
-                                                       "completed":  {
-                                                                         "title":  "No completed bookings yet",
-                                                                         "desc":  "Places you finish will be saved here, ready for a review."
-                                                                     },
-                                                       "other":  {
-                                                                     "title":  "No other records",
-                                                                     "desc":  "Cancelled or unavailable requests will appear here."
-                                                                 }
-                                                   }
-                                     },
-                    "dashboard":  {
-                                      "admin_title":  "Admin Console",
-                                      "admin_desc":  "Dashboard and partner management",
-                                      "admin_menu":  {
-                                                         "dashboard":  "Admin Dashboard",
-                                                         "dashboard_desc":  "Stats \u0026 Full Menu",
-                                                         "bookings":  "Beauty Bookings",
-                                                         "bookings_desc":  "Requests \u0026 Status Management",
-                                                         "partners":  "Partner Management",
-                                                         "partners_desc":  "Registration \u0026 Approval",
-                                                         "users":  "Admin Management",
-                                                         "users_desc":  "Permissions \u0026 Access Control"
-                                                     }
-                                  }
-                },
-    "interpreter_page":  {
-                             "back":  "\u003c عودة",
-                             "title":  "مترجم فوري",
-                             "subtitle":  "لغة الزائر هي لغة التطبيق؛ لغة المتجر ثابتة على الكورية.",
-                             "onboarding":  "عند إدخال الزائر، يترجم للكورية؛ وعند إدخال الموظف بالكورية، يترجم للغتك.",
-                             "customer_lang":  "لغة الزائر",
-                             "staff_lang":  "لغة المتجر (الكورية)",
-                             "mic_preparing":  "جاري تحضير الميكروفون",
-                             "customer_transcribing":  "جاري التعرف على صوت الزائر...",
-                             "customer_recording":  "جاري تسجيل صوت الزائر...",
-                             "translating":  "جاري الترجمة...",
-                             "customer_speak_btn":  "إدخال صوتي للزائر",
-                             "staff_transcribing":  "جاري التعرف على صوت الموظف...",
-                             "staff_recording":  "جاري تسجيل صوت الموظف...",
-                             "staff_speak_btn":  "إدخال صوتي للموظف",
-                             "customer_input_label":  "مدخلات الزائر",
-                             "customer_placeholder":  "اكتب ما قاله الزائر.",
-                             "send":  "إرسال",
-                             "staff_input_label":  "مدخلات الموظف",
-                             "staff_placeholder":  "اكتب ما قاله الموظف بالكورية.",
-                             "voice_supported_hint":  "سجل عبر الميكروفون أو اكتب النص.",
-                             "voice_not_supported_hint":  "الإدخال الصوتي غير مدعوم.",
-                             "voice_recognizing":  "جاري التعرف...",
-                             "voice_unrecognized_error":  "تعذر التعرف.",
-                             "voice_failed_error":  "فشل التعرف.",
-                             "mic_permission_status":  "تحقق من الأذونات.",
-                             "recording_status":  "جاري التسجيل...",
-                             "mic_unsupported_error":  "الميكروفون غير متوفر.",
-                             "input_required_customer":  "أدخل جملة الزائر.",
-                             "input_required_staff":  "أدخل جملة الموظف.",
-                             "translating_status":  "تحضير الترجمة.",
-                             "translation_failed_error":  "فشلت الترجمة.",
-                             "empty_history_hint":  "السجل يظهر هنا.",
-                             "customer_role":  "الزائر",
-                             "staff_role":  "الموظف",
-                             "replay_btn_label":  "إعادة تشغيل",
-                             "replay_not_supported_hint":  "غير مدعوم.",
-                             "play":  "تشغيل",
-                             "translated_status":  "مترجم",
-                             "source_only_status":  "الأصل فقط",
-                             "voice_too_short_error":  "تحدث لفترة أطول."
-                         },
-    "beauty_bookings":  {
-                            "lang_ko":  "한국어",
-                            "lang_en":  "English",
-                            "lang_ja":  "日本語",
-                            "lang_zh_cn":  "简体中文",
-                            "lang_zh_hk":  "繁體中文",
-                            "lang_vi":  "Tiếng Việt",
-                            "lang_th":  "ไทย",
-                            "lang_id":  "Bahasa Indonesia",
-                            "lang_ms":  "Bahasa Melayu",
-                            "interpreter_visit_context":  "استخدام المترجم أثناء زيارة {{storeName}}",
-                            "interpreter_visit_service_context":  "استخدام المترجم لـ {{serviceName}} في {{storeName}}",
-                            "lang_es":  "Español",
-                            "lang_fr":  "Français",
-                            "lang_de":  "Deutsch",
-                            "lang_ar":  "العربية",
-                            "lang_pt":  "Português",
-                            "lang_ru":  "Русский"
-                        },
-    "community_page":  {
-                           "hero":  {
-                                        "title":  "مجتمع كلو",
-                                        "search_placeholder":  "ابحث عن مواضيع تهمك"
-                                    },
-                           "categories":  {
-                                              "all":  "الكل",
-                                              "beauty_review":  "مراجعات التجميل",
-                                              "food_review":  "نصائح المطاعم",
-                                              "travel_review":  "نصائح السفر",
-                                              "meetup":  "لقاءات سريعة",
-                                              "meetup_recruitment":  "رفاق السفر",
-                                              "help":  "أسئلة وأجوبة"
-                                          },
-                           "sub_filters":  {
-                                               "all":  "الكل",
-                                               "saved":  "المحفوظة",
-                                               "reacted":  "تم التفاعل",
-                                               "mine":  "منشوراتي",
-                                               "recruiting":  "جارٍ التوظيف",
-                                               "active_reactions":  "رائج",
-                                               "open_meetup":  "لقاءات مفتوحة",
-                                               "weekend":  "عطلة نهاية الأسبوع",
-                                               "fresh":  "معلومات جديدة"
-                                           },
-                           "status":  {
-                                          "reviews":  "مراجعات",
-                                          "reacting":  "تفاعل",
-                                          "surveying":  "استطلاع",
-                                          "drafting":  "مسودة",
-                                          "closed":  "مغلق"
-                                      },
-                           "tags":  {
-                                        "solo_friendly":  "مناسب للمنفردين",
-                                        "friends_friendly":  "مناسب للأصدقاء",
-                                        "photo_spot":  "أماكن تصوير",
-                                        "waiting":  "توقع انتظار",
-                                        "foreigner_friendly":  "مناسب للأجانب"
-                                    },
-                           "states":  {
-                                          "fetch_failed_desc":  "فشل تحميل المنشورات. يرجى التحقق من الشبكة.",
-                                          "fetch_failed_title":  "خطأ في البيانات",
-                                          "fetch_failed_tip":  "حاول تحديث الصفحة.",
-                                          "empty_title":  "لا توجد منشورات بعد",
-                                          "empty_desc":  "كن أول من يشارك قصتك!",
-                                          "empty_tip":  "اضغط على زر الكتابة في أسفل اليمين.",
-                                          "no_results_title":  "لم يتم العثور على نتائج",
-                                          "no_results_desc":  "حاول البحث بكلمات رئيسية أخرى.",
-                                          "cta_write":  "كتابة المنشور الأول",
-                                          "cta_all":  "عرض الكل"
-                                      },
-                           "quality_signals":  {
-                                                   "organized":  "منظم جيداً",
-                                                   "active":  "شعبية كبيرة",
-                                                   "asset":  "معلومات غنية",
-                                                   "mate":  "رفيق جيد"
-                                               },
-                           "toasts":  {
-                                          "save_added":  "تمت الإضافة إلى المنشورات المحفوظة.",
-                                          "save_removed":  "تمت الإزالة من المنشورات المحفوظة.",
-                                          "deleted":  "تم الحذف بنجاح.",
-                                          "updated":  "تم التحديث بنجاح.",
-                                          "submitted":  "تم النشر بنجاح.",
-                                          "region_collected":  "عرض المنشورات لـ {{region}}"
-                                      },
-                           "nav_summary":  {
-                                               "all":  "عرض جميع القصص في {{tab}}",
-                                               "active_reactions":  "تفاعلات ساخنة في {{tab}}!",
-                                               "open_meetup":  "تبحث عن رفاق جدد في {{tab}}",
-                                               "weekend":  "أي خطط لعطلة نهاية الأسبوع في {{tab}}؟",
-                                               "default":  "عرض النتائج المصفاة بواسطة {{sub}} في {{tab}}"
-                                           },
-                           "form":  {
-                                        "select_category":  "اختر الفئة",
-                                        "write_guide_title":  {
-                                                                  "beauty_review":  "شارك تجربتك في التجميل",
-                                                                  "food_review":  "هل تنصح بأماكن خفية؟",
-                                                                  "travel_review":  "شارك نصائحك في السفر",
-                                                                  "meetup":  "ابحث عن رفاق لقضاء الوقت",
-                                                                  "meetup_recruitment":  "تبحث عن رفاق سفر؟",
-                                                                  "help":  "اسأل عن أي شيء"
-                                                              },
-                                        "write_guide_body":  {
-                                                                 "beauty_review":  "شارك مراجعتك الصادقة للعلاج أو الخدمة.",
-                                                                 "food_review":  "شارك معلومات عن المذاق، الجو، أو الانتظار.",
-                                                                 "travel_review":  "قدم نصائح مفيدة عن الدورات، التعبئة، أو التنقل.",
-                                                                 "meetup":  "صف متى، أين، وماذا ستفعل.",
-                                                                 "meetup_recruitment":  "حدد جدول سفرك، وجهاتك، وشروط الرفيق.",
-                                                                 "help":  "صف سؤالك أو حالتك بالتفصيل."
-                                                             },
-                                        "title_label":  {
-                                                            "beauty_review":  "الخدمة/الموضوع",
-                                                            "default":  "العنوان"
-                                                        },
-                                        "title_placeholder":  {
-                                                                  "beauty_review":  "مثلاً: مراجعة قصة شعر في كانغنام",
-                                                                  "food_review":  "مثلاً: مطعم ياباني عصري في سيونغسو",
-                                                                  "travel_review":  "مثلاً: نصائح قطار KTX من سيول إلى بوسان",
-                                                                  "meetup":  "مثلاً: بيرة/دجاج الليلة في سينونهيون!",
-                                                                  "meetup_recruitment":  "مثلاً: قصر كيونغبوك غونغ الأسبوع القادم معاً",
-                                                                  "help":  "مثلاً: كيف أصل للفندق من مطار إنشيون؟",
-                                                                  "default":  "تتساءل عما ستكتب عنه؟"
-                                                              },
-                                        "desc_label":  {
-                                                           "beauty_review":  "التفاصيل",
-                                                           "default":  "المحتوى"
-                                                       },
-                                        "desc_placeholder":  {
-                                                                 "beauty_review":  "صف العملية أو النتائج بالتفصيل.",
-                                                                 "food_review":  "انصح بالقوائم واشرح السبب.",
-                                                                 "travel_review":  "شارك معلومات مفيدة للمسافرين الآخرين.",
-                                                                 "meetup":  "صف اللقاء بالتفصيل.",
-                                                                 "meetup_recruitment":  "صف ما تريد القيام به معاً.",
-                                                                 "help":  "الأسئلة المفصلة تساعد في الحصول على إجابات أفضل.",
-                                                                 "default":  "اكتب القصة التي تريد مشاركتها"
-                                                             },
-                                        "image":  {
-                                                      "guides":  {
-                                                                     "beauty_review":  "أضف صوراً قبل/بعد أو لداخل المحل (بحد أقصى 4)",
-                                                                     "food_review":  "أضف صوراً للطعام والداخل (بحد أقصى 4)",
-                                                                     "travel_review":  "أضف صوراً تظهر الجو العام (بحد أقصى 4)",
-                                                                     "meetup":  "أضف صوراً للمكان أو النشاط (بحد أقصى 4)",
-                                                                     "meetup_recruitment":  "أضف صور وجهة أو صوراً مرجعية (بحد أقصى 4)",
-                                                                     "help":  "أضف صوراً تساعد في شرح المشكلة (بحد أقصى 4)"
-                                                                 },
-                                                      "saved_name":  "صورة محفوظة {{index}}",
-                                                      "file_only_alert":  "يمكن اختيار ملفات الصور فقط.",
-                                                      "limit_alert":  "يمكن تحميل ما يصل إلى {{count}} صور.",
-                                                      "load_failed_alert":  "فشل تحميل الصور.",
-                                                      "limit_label":  "(بحد أقصى {{count}} صور)"
-                                                  },
-                                        "category_hints":  {
-                                                               "beauty_review":  "شارك تجاربك في محلات التجميل.",
-                                                               "food_review":  "انصح بأماكنك المفضلة.",
-                                                               "travel_review":  "شارك خبراتك الخاصة في السفر.",
-                                                               "meetup":  "أنشئ لقاءً غير رسمي للاستمتاع معاً.",
-                                                               "meetup_recruitment":  "ابحث عن رفاق سفر بجداول مماثلة.",
-                                                               "help":  "اسأل عن أي شيء يثير فضولك."
-                                                           },
-                                        "region_label":  "المنطقة",
-                                        "region_placeholder":  "مثلاً: كانغنام، مابو",
-                                        "submit":  "نشر",
-                                        "write_title":  "كتابة منشور",
-                                        "edit_title":  "تعديل المنشور",
-                                        "image_label":  "الصور",
-                                        "add_photo":  "إضافة صورة",
-                                        "preparing_images":  "جاري تحضير الصور...",
-                                        "cancel":  "إلغاء",
-                                        "category_label":  "فئة"
-                                    },
-                           "detail":  "تفاصيل المنشور",
-                           "detail_page":  {
-                                               "loading":  "جاري تحميل البيانات...",
-                                               "hidden_post":  "هذا المنشور مخفي.",
-                                               "not_found":  "المنشور غير موجود.",
-                                               "show_hidden":  "إظهار المنشور المخفي",
-                                               "hide_post":  "إخفاء هذا المنشور",
-                                               "freshness":  {
-                                                                 "realtime":  "نشط حالياً",
-                                                                 "updated":  "تمت تحديث المعلومات",
-                                                                 "active":  "منشور نشط",
-                                                                 "calm":  "منشور هادئ"
-                                                             },
-                                               "strengths":  {
-                                                                 "title":  "نقاط قوة المنشور",
-                                                                 "organized":  "منظم جيداً",
-                                                                 "active":  "تفاعل نشط",
-                                                                 "visited_tip":  "يتضمن نصائح",
-                                                                 "new":  "محتوى جديد"
-                                                             },
-                                               "checklist":  {
-                                                                 "title":  "قائمة التحقق",
-                                                                 "recommended":  "موصى به لـ",
-                                                                 "required":  "يجب التحقق",
-                                                                 "comment_check":  "تحقق من التعليقات",
-                                                                 "read_details":  "اقرأ التفاصيل"
-                                                             },
-                                               "mini_signal_tag":  "اللقاء مفتوح",
-                                               "primary_action":  {
-                                                                      "review":  "اترك مراجعة",
-                                                                      "join":  "أبدي اهتماماً"
-                                                                  },
-                                               "save":  {
-                                                            "saved":  "محفوظ",
-                                                            "default":  "حفظ"
-                                                        },
-                                               "meetup_safety":  {
-                                                                     "title":  "دليل سلامة اللقاءات",
-                                                                     "item_1":  "يوصى باللقاء في أماكن عامة.",
-                                                                     "item_2":  "كن حذراً بشأن المعلومات الشخصية."
-                                                                 },
-                                               "body_title":  "محتوى المنشور",
-                                               "like":  "أعجبني",
-                                               "dislike":  "لم يعجبني",
-                                               "like_alert":  "أعجبك هذا المنشور!",
-                                               "dislike_alert":  "لم يعجبك هذا المنشور.",
-                                               "comments_title":  "التعليقات",
-                                               "comment_input":  {
-                                                                     "default":  "أدخل تعليقاً...",
-                                                                     "optional":  "أضف ملاحظة اختيارية",
-                                                                     "send":  "إرسال",
-                                                                     "open_btn":  "كتابة تعليق",
-                                                                     "cancel":  "إلغاء"
-                                                                 },
-                                               "signal_intents":  {
-                                                                      "interested":  "أنا مهتم",
-                                                                      "available_this_week":  "متاح هذا الأسبوع",
-                                                                      "join_if_schedule_fits":  "انضم إذا كان الجدول مناسباً",
-                                                                      "thanks":  "شكراً على المعلومات",
-                                                                      "question":  "لديك سؤال"
-                                                                  },
-                                               "signal_times":  {
-                                                                    "this_week":  "هذا الأسبوع",
-                                                                    "this_weekend":  "عطلة نهاية الأسبوع هذه",
-                                                                    "next_week":  "الأسبوع القادم",
-                                                                    "schedule_coordination":  "تنسيق التاريخ"
-                                                                },
-                                               "author_panel":  {
-                                                                    "title":  "لوحة تحكم المؤلف",
-                                                                    "badge":  "مؤلف",
-                                                                    "stats":  {
-                                                                                  "total":  "إجمالي التفاعلات",
-                                                                                  "total_value":  "{{count}}",
-                                                                                  "time":  "الوقت المفضل",
-                                                                                  "time_pending":  "جاري الحساب",
-                                                                                  "intent":  "النية الرئيسية",
-                                                                                  "recent":  "آخر 24 ساعة",
-                                                                                  "recent_value":  "{{count}}"
-                                                                              },
-                                                                    "guide":  {
-                                                                                  "weekend":  "عطلة نهاية الأسبوع لديها معظم التفاعلات. اقترح جدولاً مفصلاً.",
-                                                                                  "vote":  "تختلف الأوقات المفضلة. جرب التصويت للنهائي.",
-                                                                                  "share":  "شارك مزيداً من المعلومات لجذب مزيد من الاهتمام."
-                                                                              },
-                                                                    "action":  {
-                                                                                   "weekend":  "اقترح جدول عطلة نهاية الأسبوع",
-                                                                                   "vote":  "نشر تصويت",
-                                                                                   "share":  "شارك نصائح إضافية"
-                                                                               },
-                                                                    "draft":  {
-                                                                                  "weekend":  "ماذا عن اللقاء في عطلة نهاية الأسبوع هذه الساعة 2 ظهراً؟",
-                                                                                  "vote":  "يرجى التصويت لوقتك المفضل!",
-                                                                                  "share":  "إليك نصيحة أخرى لك!"
-                                                                              },
-                                                                    "final_draft":  "إغلاق التوظيف. يرجى الانضمام إلى دردشتنا المفتوحة إذا كنت مشاركاً!",
-                                                                    "final_action":  "إغلاق التوظيف",
-                                                                    "footer":  "كلو تعزز ثقافة المجتمع الآمنة."
-                                                                },
-                                               "status_controls":  {
-                                                                       "title":  "تغيير حالة التوظيف"
-                                                                   },
-                                               "result":  {
-                                                              "title":  "كتابة النتائج ونصائح الزيارة",
-                                                              "help":  "يرجى مشاركة النصائح أو المراجعات التي حصلت عليها بعد الزيارة الفعلية. هذا يساعد الآخرين كثيراً.",
-                                                              "placeholder":  "اكتب مراجعة زيارتك هنا بحرية...",
-                                                              "save_visited":  "إكمال الزيارة وحفظ النصيحة",
-                                                              "save_only":  "حفظ المعلومات فقط"
-                                                          },
-                                               "author_safety":  {
-                                                                     "title":  "دليل سلامة المؤلف",
-                                                                     "item_1":  "لا تعرض جهات الاتصال الخاصة بك مباشرة في النص.",
-                                                                     "item_2":  "احذر من اللقاءات غير القانونية أو طلبات الأموال.",
-                                                                     "item_3":  "تواصل مع المستخدمين الجديرين بالثقة."
-                                                                 },
-                                               "signal_summary":  {
-                                                                      "title":  "ملخص حالة المشاركة",
-                                                                      "status":  {
-                                                                                     "active":  "توظيف نشط",
-                                                                                     "forming":  "تكوين المجموعة",
-                                                                                     "preparing":  "بدء التوظيف"
-                                                                                 },
-                                                                      "time_split":  "الأوقات المفضلة منقسمة.",
-                                                                      "time_focus":  "الأغلبية تفضل {{time}}.",
-                                                                      "time_flexible":  "هناك العديد من الأوقات القابلة للتنسيق.",
-                                                                      "desc":  "أبدى {{count}} أشخاص اهتمامهم بـ {{topic}}.",
-                                                                      "topic_review":  "مشاركة المراجعة",
-                                                                      "topic_outing":  "المشاركة في اللقاء",
-                                                                      "schedule_title":  "اختر الوقت المفضل"
-                                                                  },
-                                               "status":  {
-                                                              "REVIEWS":  "اكتملت المراجعة",
-                                                              "REACTING":  "جمع التفاعلات",
-                                                              "SURVEYING":  "تأكيد النية",
-                                                              "DRAFTING":  "تحضير اللقاء",
-                                                              "CLOSED":  "إغلاق التوظيف"
-                                                          },
-                                               "tags":  {
-                                                            "solo_friendly":  "مناسب للمنفردين",
-                                                            "friends_friendly":  "مع الأصدقاء",
-                                                            "photo_spot":  "أماكن تصوير",
-                                                            "waiting":  "توقع انتظار",
-                                                            "foreigner_friendly":  "ودود للأجانب"
-                                                        },
-                                               "empty_comments":  "لا توجد تعليقات بعد. كن الأول!",
-                                               "hide_comment":  "إخفاء هذا التعليق"
-                                           },
-                           "actions":  {
-                                           "delete_confirm":  "هل أنت متأكد أنك تريد الحذف؟"
-                                       },
-                           "errors":  {
-                                          "login_required":  "تسجيل الدخول مطلوب.",
-                                          "post_failed":  "فشل في تسجيل المنشور: {{message}}"
-                                      },
-                           "report":  {
-                                          "report_action":  "إبلاغ",
-                                          "success":  "تم الإبلاغ بنجاح.",
-                                          "reasons":  {
-                                                          "ad_spam":  "إعلان/سبام",
-                                                          "offensive":  "محتوى غير لائق",
-                                                          "contact":  "سلوك استدراج",
-                                                          "unsafe":  "سلوك خطير",
-                                                          "other":  "أخرى"
-                                                      }
-                                      },
-                           "comments":  "التعليقات",
-                           "time":  {
-                                        "just_now":  "الآن"
-                                    },
-                           "write_post":  "كتابة منشور",
-                           "edit":  "تعديل",
-                           "posting":  "جاري النشر...",
-                           "defaults":  {
-                                            "region":  "سيول"
-                                        },
-                           "quick_entry":  {
-                                               "beauty_together":  {
-                                                                       "label":  "تجميل معاً"
-                                                                   },
-                                               "flash_meetup":  {
-                                                                    "label":  "لقاء سريع"
-                                                                },
-                                               "beauty":  {
-                                                              "label":  "مراجعة تجميل"
-                                                          },
-                                               "food":  {
-                                                            "label":  "توصية طعام"
-                                                        },
-                                               "travel":  {
-                                                              "label":  "نصائح سفر"
-                                                          },
-                                               "write":  {
-                                                             "label":  "كتابة منشور"
-                                                         },
-                                               "browse":  {
-                                                              "label":  "تصفح",
-                                                              "sub":  "مشاركات شائعة"
-                                                          },
-                                               "recruiting":  {
-                                                                  "label":  "توظيف",
-                                                                  "sub":  "ابحث عن رفيق"
-                                                              },
-                                               "weekend":  {
-                                                               "label":  "هذا الأسبوع",
-                                                               "sub":  "شارك الجدول"
-                                                           },
-                                               "record":  {
-                                                              "label":  "سجل",
-                                                              "sub":  "شارك اليوميات"
-                                                          }
-                                           },
-                           "fab":  {
-                                       "create_post":  "كتابة منشور"
-                                   },
-                           "sort":  {
-                                        "latest":  "الأحدث",
-                                        "reactions":  "الأكثر تفاعلاً",
-                                        "draft":  "توظيف نشط"
-                                    },
-                           "card":  {
-                                        "default_vibe":  "جو رائع",
-                                        "title_prefix":  {
-                                                             "beauty_review":  "[تجميل]",
-                                                             "food_review":  "[طعام]",
-                                                             "travel_review":  "[سفر]"
-                                                         },
-                                        "cta":  {
-                                                    "review":  "عرض المراجعات",
-                                                    "join":  "انضمام"
-                                                },
-                                        "result_badge":  "اكتملت المراجعة",
-                                        "open_meetup_badge":  "متاح للقاء",
-                                        "fresh_badges":  {
-                                                             "comment":  "تفاعل مباشر",
-                                                             "update":  "تم التحديث للتو"
-                                                         },
-                                        "draft_status":  {
-                                                             "active":  "التواصل بنشاط",
-                                                             "forming":  "تشكيل الفريق",
-                                                             "preparing":  "نأمل المشاركة"
-                                                         },
-                                        "draft_desc":  {
-                                                           "active":  "الكثير مهتمون!",
-                                                           "forming":  "يتجمع الناس ببطء.",
-                                                           "preparing":  "كن أول من يظهر الاهتمام."
-                                                       },
-                                        "owner_reactions":  {
-                                                                "region":  "محادثة مع {{count}} حول {{region}}",
-                                                                "join":  "{{count}} أشخاص يريدون الانضمام"
-                                                            },
-                                        "more_region":  "عرض المزيد من القصص حول {{region}}"
-                                    }
-                       },
-    "settings_page":  {
-                          "tabs":  {
-                                       "personal":  {
-                                                        "label":  "Personal",
-                                                        "desc":  "Check your email, contact, login, and notification settings."
-                                                    },
-                                       "partner":  {
-                                                       "label":  "Partner",
-                                                       "desc":  "Partner status and store operations in one place."
-                                                   },
-                                       "admin":  {
-                                                     "label":  "Admin",
-                                                     "desc":  "Quick access to administrative features."
-                                                 }
-                                   },
-                          "hero":  {
-                                       "stats":  "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
-                                       "avatar":  {
-                                                      "uploading":  "Uploading...",
-                                                      "change":  "Change Image",
-                                                      "register":  "Register Image",
-                                                      "error":  "Failed to update image."
-                                                  },
-                                       "default_title":  "My Settings"
-                                   },
-                          "badges":  {
-                                         "community":  {
-                                                           "leader":  "Community Leader",
-                                                           "trend":  "Trend Picker",
-                                                           "mate":  "Beauty Mate",
-                                                           "sprout":  "Sprout"
-                                                       },
-                                         "booking":  {
-                                                         "vvip":  "VVIP",
-                                                         "vip":  "VIP",
-                                                         "regular":  "Regular",
-                                                         "new":  "New"
-                                                     }
-                                     },
-                          "personal":  {
-                                           "nickname":  {
-                                                            "title":  "Nickname",
-                                                            "placeholder":  "Enter new nickname.",
-                                                            "helper_set":  "Displayed in community and profile.",
-                                                            "helper_unset":  "Nickname not set yet.",
-                                                            "badge_set":  "Set",
-                                                            "badge_unset":  "Not Set"
-                                                        },
-                                           "email":  {
-                                                         "title":  "Email",
-                                                         "helper_verified":  "Currently verified email.",
-                                                         "helper_unverified":  "Email verification required.",
-                                                         "helper_none":  "No linked email.",
-                                                         "badge_verified":  "Verified",
-                                                         "badge_unverified":  "Unverified",
-                                                         "badge_none":  "Not Linked",
-                                                         "value_none":  "Not Linked"
-                                                     },
-                                           "sns":  {
-                                                       "title":  "SNS",
-                                                       "placeholder":  "Enter SNS ID.",
-                                                       "helper_set":  "Currently saved SNS.",
-                                                       "helper_unset":  "No saved SNS.",
-                                                       "badge_set":  "Saved",
-                                                       "badge_unset":  "Empty",
-                                                       "value_none":  "Not Set"
-                                                   },
-                                           "phone":  {
-                                                         "title":  "Phone",
-                                                         "label_country":  "Country",
-                                                         "label_number":  "Number",
-                                                         "helper_set":  "Currently saved phone number.",
-                                                         "helper_unset":  "No saved phone number.",
-                                                         "helper_empty":  "Stored in E.164 format. Choose country first.",
-                                                         "helper_saved":  "Kept in E.164 format.",
-                                                         "helper_invalid":  "Please select country and enter digits.",
-                                                         "helper_preview":  "Will be saved as {{value}}.",
-                                                         "badge_set":  "Saved",
-                                                         "badge_unset":  "Empty",
-                                                         "value_none":  "Not Set"
-                                                     },
-                                           "login":  {
-                                                         "title":  "Login Method",
-                                                         "helper_in":  "Currently used login method.",
-                                                         "helper_out":  "Sign in to check.",
-                                                         "badge_in":  "Active",
-                                                         "badge_out":  "Standby",
-                                                         "value_out":  "Login Required"
-                                                     },
-                                           "notifications":  {
-                                                                 "title":  "Notifications",
-                                                                 "value_out":  "Login to view",
-                                                                 "helper_out":  "Check current status after sign in.",
-                                                                 "badge_out":  "Standby",
-                                                                 "value_error":  "Check Required",
-                                                                 "helper_error":  "Failed to load notification settings.",
-                                                                 "badge_error":  "Check Needed",
-                                                                 "channel_app":  "App",
-                                                                 "channel_email":  "Email",
-                                                                 "value_all_off":  "All Notifications OFF",
-                                                                 "helper_summary":  "Receiving {{count}}/3 booking alerts.",
-                                                                 "badge_off":  "OFF",
-                                                                 "value_both_on":  "App · Email ON",
-                                                                 "value_single_on":  "{{channel}} only ON",
-                                                                 "badge_all_on":  "Active",
-                                                                 "badge_partial_on":  "Partial ON"
-                                                             }
-                                       },
-                          "partner":  {
-                                          "status":  {
-                                                         "title":  "Partner Status",
-                                                         "approved":  {
-                                                                          "value":  "Approved",
-                                                                          "helper":  "Verified as partner account.",
-                                                                          "badge":  "Approved"
-                                                                      },
-                                                         "pending":  {
-                                                                         "value":  "Reviewing",
-                                                                         "helper":  "Your information is under review.",
-                                                                         "badge":  "Pending"
-                                                                     },
-                                                         "rejected":  {
-                                                                          "value":  "Requires Update",
-                                                                          "helper":  "Update details and apply again.",
-                                                                          "badge":  "Action Required",
-                                                                          "cta":  "Apply Again"
-                                                                      },
-                                                         "none":  {
-                                                                      "value":  "No Partner Data",
-                                                                      "helper":  "No registered partner status.",
-                                                                      "badge":  "None"
-                                                                  }
-                                                     },
-                                          "store":  {
-                                                        "title":  "Store Info",
-                                                        "value_none":  "No store info",
-                                                        "helper_none":  "No store summary available.",
-                                                        "badge_set":  "Registered",
-                                                        "badge_unset":  "Empty",
-                                                        "visibility_on":  "Visible in Explore",
-                                                        "visibility_off":  "Hidden in Explore"
-                                                    },
-                                          "hours":  {
-                                                        "title":  "Hours",
-                                                        "value_none":  "No hours info",
-                                                        "helper_none":  "Will appear when connected.",
-                                                        "badge_unset":  "Empty"
-                                                    },
-                                          "bookings":  {
-                                                           "title":  "Booking Management",
-                                                           "value_info":  "No separate menu",
-                                                           "value_pending":  "Check after approval",
-                                                           "helper_approved":  "Request summaries are structured.",
-                                                           "helper_pending":  "Becomes easier after approval.",
-                                                           "badge_info":  "Guide",
-                                                           "badge_pending":  "Standby"
-                                                       },
-                                          "pricing":  {
-                                                          "title":  "Service / Pricing",
-                                                          "value_none":  "No separate menu",
-                                                          "helper_none":  "Currently not linked to a specific screen.",
-                                                          "badge_info":  "Guide"
-                                                      }
-                                      },
-                          "admin":  {
-                                        "approval":  {
-                                                         "title":  "Partner Approval",
-                                                         "value":  "Check applications",
-                                                         "helper":  "View and manage partner requests."
-                                                     },
-                                        "issues":  {
-                                                       "title":  "Booking Issues",
-                                                       "value":  "Review requests \u0026 changes",
-                                                       "helper":  "Check booking status and change requests."
-                                                   },
-                                        "users":  {
-                                                      "title":  "User Management",
-                                                      "value":  "Check permissions",
-                                                      "helper":  "Manage users and admin permissions."
-                                                  },
-                                        "notices":  {
-                                                        "title":  "Notice Management",
-                                                        "value":  "Unlinked",
-                                                        "helper":  "No notice management screen connected."
-                                                    },
-                                        "badge_open":  "Open available",
-                                        "badge_unlinked":  "Unlinked"
-                                    },
-                          "messages":  {
-                                           "sns_saved":  "SNS ID saved.",
-                                           "phone_saved":  "Phone number saved.",
-                                           "nickname_cooldown":  "Nickname can only be changed every 90 days. ({{days}} days left)",
-                                           "nickname_cooldown_long":  "Changeable every {{limit}} days. (Next: {{date}})",
-                                           "nickname_empty":  "Please enter a nickname.",
-                                           "nickname_saved":  "Nickname changed successfully.",
-                                           "nickname_error":  "Failed to save nickname. Try again.",
-                                           "unauthorized":  "Please check your session.",
-                                           "profile_not_found":  "Profile not found. Please log in again.",
-                                           "schema_missing_sns":  "SNS column not yet applicable to DB.",
-                                           "schema_missing_phone":  "Phone column not yet applicable to DB.",
-                                           "save_error":  "Failed to save.",
-                                           "saving":  "Saving...",
-                                           "save":  "Save",
-                                           "action_open":  "Open",
-                                           "action_contact":  "Enquire"
-                                       },
-                          "login_prompt":  {
-                                               "title":  "Sign in to see more settings.",
-                                               "desc":  "Check verified values and notification status after log in."
-                                           },
-                          "tab_aria_label":  "Settings Tabs"
-                      }
+{
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
+    },
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
+  }
 }

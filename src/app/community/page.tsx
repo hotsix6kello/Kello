@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './community.module.css';
 import { useTranslation } from 'react-i18next';
@@ -33,42 +33,22 @@ interface CommunityImageDraft {
 }
 
 type CommunityCategory = 'beauty_review' | 'food_review' | 'travel_review' | 'meetup' | 'meetup_recruitment' | 'help';
-type CommunityTag = 'solo_friendly' | 'friends_friendly' | 'photo_spot' | 'waiting' | 'foreigner_friendly';
-type CommunityStatus = 'REVIEWS' | 'REACTING' | 'SURVEYING' | 'DRAFTING' | 'CLOSED';
 type CommunitySubFilter = 'all' | 'saved' | 'reacted' | 'mine' | 'recruiting' | 'active_reactions' | 'open_meetup' | 'weekend' | 'fresh';
 
 const CATEGORY_OPTIONS: CommunityCategory[] = ['meetup', 'beauty_review', 'food_review', 'travel_review', 'help'];
 const SUB_FILTER_OPTIONS: CommunitySubFilter[] = ['all', 'saved', 'reacted', 'mine', 'recruiting', 'active_reactions', 'open_meetup', 'weekend', 'fresh'];
-const TAG_OPTIONS: CommunityTag[] = ['solo_friendly', 'friends_friendly', 'photo_spot', 'waiting', 'foreigner_friendly'];
 const COMMUNITY_IMAGE_META_KEY = 'IMAGE';
 const COMMUNITY_IMAGE_MAX_SIDE = 1280;
 const COMMUNITY_IMAGE_LIMIT = 4;
 
-const LEGACY_TAG_MAP: Record<string, CommunityTag> = {
-    '혼자 가기 좋음': 'solo_friendly',
-    '친구랑 가기 좋음': 'friends_friendly',
-    '사진 맛집': 'photo_spot',
-    '웨이팅 있음': 'waiting',
-    '외국인 편함': 'foreigner_friendly',
-};
 
-const STATUS_KEY_MAP: Record<CommunityStatus, 'reviews' | 'reacting' | 'surveying' | 'drafting' | 'closed'> = {
-    REVIEWS: 'reviews',
-    REACTING: 'reacting',
-    SURVEYING: 'surveying',
-    DRAFTING: 'drafting',
-    CLOSED: 'closed',
-};
+
+
 
 const isCommunityCategory = (value: string): value is CommunityCategory =>
     CATEGORY_OPTIONS.includes(value as CommunityCategory);
 
-const normalizeCommunityTag = (value: string): CommunityTag | null => {
-    const trimmed = value.trim();
-    if (!trimmed) return null;
-    if (TAG_OPTIONS.includes(trimmed as CommunityTag)) return trimmed as CommunityTag;
-    return LEGACY_TAG_MAP[trimmed] ?? null;
-};
+
 
 const getDatabaseTypeForCategory = (category: CommunityCategory) => {
     if (category === 'beauty_review' || category === 'food_review') return 'review';
@@ -232,20 +212,17 @@ const getCategoryLabel = (t: (key: string, options?: Record<string, unknown>) =>
 const getSubFilterLabel = (t: (key: string, options?: Record<string, unknown>) => string, subFilter: CommunitySubFilter) =>
     t(`community_page.sub_filters.${subFilter}`);
 
-const getStatusLabel = (t: (key: string, options?: Record<string, unknown>) => string, status: string) => {
-    const key = STATUS_KEY_MAP[status as CommunityStatus];
-    return key ? t(`community_page.status.${key}`) : status;
-};
 
-const getTagLabel = (t: (key: string, options?: Record<string, unknown>) => string, tag: string) => {
-    const normalizedTag = normalizeCommunityTag(tag);
-    return normalizedTag ? t(`community_page.tags.${normalizedTag}`) : tag;
-};
+
+
 
 export default function CommunityPage() {
     const { t } = useTranslation('common');
+
+    
+
     const [mounted, setMounted] = useState(false);
-    const router = useRouter();
+
     const [filter, setFilter] = useState<string>('all');
     const [posts, setPosts] = useState<Post[]>(() => {
         if (typeof window !== 'undefined') {
@@ -267,28 +244,24 @@ export default function CommunityPage() {
         return () => window.removeEventListener('community_post_updated', handlePostUpdate);
     }, []);
 
-    const [feedError, setFeedError] = useState<string | null>(null);
+
     const [searchQuery, setSearchQuery] = useState('');
-    const [subFilter, setSubFilter] = useState('all');
-    const [sortBy, setSortBy] = useState('latest');
+    const [subFilter] = useState('all');
 
     const [isWriting, setIsWriting] = useState(false);
     const [newType, setNewType] = useState<CommunityCategory | ''>('');
     const [newTitle, setNewTitle] = useState('');
     const [newDesc, setNewDesc] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
-    const [placeName, setPlaceName] = useState('');
     const [newRegion, setNewRegion] = useState('');
     const [newPoint, setNewPoint] = useState('');
-    const [newTags, setNewTags] = useState<CommunityTag[]>([]);
+    const [newTags, setNewTags] = useState<string[]>([]);
     const [isOpenForMeetup, setIsOpenForMeetup] = useState(false);
     const [newImages, setNewImages] = useState<CommunityImageDraft[]>([]);
     const [isPreparingImage, setIsPreparingImage] = useState(false);
     const [savedIds, setSavedIds] = useState<number[]>([]);
     const [reactedIds, setReactedIds] = useState<number[]>([]);
+    const [feedError, setFeedError] = useState<string | null>(null);
 
-    const communityFetchErrorMessage = t('community_page.states.fetch_failed_desc');
     const communityCategories = CATEGORY_OPTIONS.map((id) => ({ id, label: getCategoryLabel(t, id) }));
     const communitySubFilters = SUB_FILTER_OPTIONS.map((id) => ({ id, label: getSubFilterLabel(t, id) }));
     const getCategoryText = (category: CommunityCategory | '') => 
@@ -301,8 +274,7 @@ export default function CommunityPage() {
         return t('community_page.nav_summary.default', { sub: currentSub, tab: currentTab });
     };
 
-    const [placeLat, setPlaceLat] = useState<number | null>(null);
-    const [placeLng, setPlaceLng] = useState<number | null>(null);
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
     const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
@@ -358,8 +330,7 @@ export default function CommunityPage() {
     };
 
     const fetchPosts = useCallback(async () => {
-        if (posts.length === 0) setLoading(true);
-        setFeedError(null);
+        setLoading(true); setFeedError(null);
         try {
             const { data, error } = await supabase
                 .from('community_posts')
@@ -373,13 +344,13 @@ export default function CommunityPage() {
             }
             const meaningfulError = getMeaningfulFetchError(error);
             const errorLogMessage = formatMeaningfulFetchError(meaningfulError);
-            if (errorLogMessage) setFeedError(communityFetchErrorMessage);
-        } catch (error) {
-            setFeedError(communityFetchErrorMessage);
+            if (errorLogMessage) setFeedError(t('community_page.states.fetch_failed_desc'));
+        } catch {
+            setFeedError(t('community_page.states.fetch_failed_desc'));
         } finally {
             setLoading(false);
         }
-    }, [communityFetchErrorMessage, posts.length]);
+    }, [t]);
 
     useEffect(() => {
         try {
@@ -398,9 +369,8 @@ export default function CommunityPage() {
 
     const resetDraftForm = (category: CommunityCategory | '' = '') => {
         setEditingPostId(null); setNewType(category); setNewTitle(''); setNewDesc('');
-        setStartTime(''); setEndTime(''); setPlaceName(''); setNewRegion('');
-        setNewPoint(''); setNewTags([]); setIsOpenForMeetup(false); setPlaceLat(null);
-        setPlaceLng(null); setNewImages([]); if (imageInputRef.current) imageInputRef.current.value = '';
+        setNewRegion(''); setNewPoint(''); setNewTags([]); setIsOpenForMeetup(false);
+        setNewImages([]); if (imageInputRef.current) imageInputRef.current.value = '';
     };
 
     const openComposer = (category: CommunityCategory | '' = '') => {
@@ -422,7 +392,7 @@ export default function CommunityPage() {
                 }))
             );
             setNewImages(prev => [...prev, ...preparedImages]);
-        } catch (err) { alert(t('community_page.form.image.load_failed_alert')); } finally { setIsPreparingImage(false); event.target.value = ''; }
+        } catch { alert(t('community_page.form.image.load_failed_alert')); } finally { setIsPreparingImage(false); event.target.value = ''; }
     };
 
     const handleRemoveImage = (imageId: string) => setNewImages(prev => prev.filter(img => img.id !== imageId));
@@ -471,22 +441,16 @@ export default function CommunityPage() {
         if (!matchesSearch) return false;
         if (subFilter === 'saved') return savedIds.includes(p.id);
         if (subFilter === 'mine') return p.author === loggedInUserName;
+        if (subFilter === 'reacted') return reactedIds.includes(p.id);
+        if (subFilter === 'open_meetup') return p.desc.includes('[MEETUP_OPEN:true]');
+        if (subFilter === 'active_reactions') return p.comments > 0;
         return matchesTab;
     });
 
     if (!mounted) return null;
 
-    const isBeautyDraft = newType === 'beauty_review';
-    const formCategoryKey = isBeautyDraft ? 'beauty_review' : (newType || 'help');
-    const writeGuideTitle = t(`community_page.form.write_guide_title.${formCategoryKey}`);
-    const writeGuideBody = t(`community_page.form.write_guide_body.${formCategoryKey}`);
-    const titleFieldLabel = isBeautyDraft ? t('community_page.form.title_label.beauty_review') : t('community_page.form.title_label.default');
-    const titleFieldPlaceholder = t(`community_page.form.title_placeholder.${formCategoryKey}`);
-    const descFieldLabel = isBeautyDraft ? t('community_page.form.desc_label.beauty_review') : t('community_page.form.desc_label.default');
-    const descFieldPlaceholder = t(`community_page.form.desc_placeholder.${formCategoryKey}`);
-    const summaryCategoryLabel = getCategoryText(newType);
-    const imageUploadGuide = t(`community_page.form.image.guides.${formCategoryKey}`);
-    const isImageLimitReached = newImages.length >= COMMUNITY_IMAGE_LIMIT;
+
+
 
     return (
         <div className={styles.container}>
@@ -499,6 +463,7 @@ export default function CommunityPage() {
             <div className={styles.scrollableContent}>
                 <header className={styles.header}>
                     <h1 className={styles.title}>{t('community_page.hero.title')}</h1>
+
                     <div className={styles.searchBar}>
                         <span className={styles.searchIcon}>🔍</span>
                         <input 
@@ -540,7 +505,9 @@ export default function CommunityPage() {
                         <div className={styles.summaryText}>{getNavSummary()}</div>
                     </div>
 
-                    {loading ? (
+                    {feedError ? (
+                        <div className={styles.emptyStateContainer}>{feedError}</div>
+                    ) : loading ? (
                         <div className={styles.skeletonFeed}>
                             {[1, 2, 3].map(n => <div key={n} className={styles.skeletonCard} />)}
                         </div>
@@ -636,17 +603,12 @@ export default function CommunityPage() {
                         <div className={styles.modalBody} style={{ padding: '16px' }}>
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>{t('community_page.form.category_label')}</label>
-                                <select className={styles.formSelect} value={newType} onChange={e => setNewType(e.target.value as any)}>
+                                <select className={styles.formSelect} value={newType} onChange={e => setNewType(e.target.value as CommunityCategory | '')}>
                                     <option value="">{t('community_page.form.select_category')}</option>
                                     {communityCategories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
                                 </select>
                             </div>
-                            <div className={styles.formGroup}>
-                                <label>{t('community_page.form.title_label.default')}</label>
-                                <input className={styles.formInput} value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder={t('community_page.form.title_placeholder.default')} />
-                            </div>
-                            
-                            {/* Region/Location Field */}
+
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.region_label')}</label>
                                 <input 
@@ -656,6 +618,13 @@ export default function CommunityPage() {
                                     placeholder={t('community_page.form.region_placeholder')} 
                                 />
                             </div>
+
+                            <div className={styles.formGroup}>
+                                <label>{t('community_page.form.title_label.default')}</label>
+                                <input className={styles.formInput} value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder={t('community_page.form.title_placeholder.default')} />
+                            </div>
+                            
+
 
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.desc_label.default')}</label>
