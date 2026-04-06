@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTrip } from '@/lib/contexts/TripContext';
 
 export default function ExplorePage() {
+  const { setSharedBusinesses, setLastSelectedStoreId } = useTrip();
   const [searchInput, setSearchInput] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [businessList, setBusinessList] = useState<any[]>([]);
@@ -12,6 +14,11 @@ export default function ExplorePage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const markersRef = useRef<any[]>([]);     // 마커 객체 배열 보관용 Ref
   const router = useRouter();
+
+  // 0. 로컬 업체 리스트를 전역 상태로 전파
+  useEffect(() => {
+    setSharedBusinesses(businessList);
+  }, [businessList, setSharedBusinesses]);
 
   // 1. 카카오맵 순수 JS 강제 주입 및 렌더링 무한 보장 로직 (Ultimate Fix + 상세 디버깅)
   useEffect(() => {
@@ -173,13 +180,37 @@ export default function ExplorePage() {
           title: biz.name || biz.title || (biz.displayName && biz.displayName.text) || ''
         });
 
-        // 마커 클릭 시 가로 스크롤 리스트의 해당 카드로 스크롤 이동 및 지도 중앙 커스텀 이동
-        window.kakao.maps.event.addListener(marker, 'click', () => {
+        // 마우스 호버 시 해당 카드로 스크롤 및 하이라이트
+        window.kakao.maps.event.addListener(marker, 'mouseover', () => {
           const card = document.getElementById(`biz-card-${biz.id || idx}`);
           if (card) {
+            // [플래그 설정] 지도가 스크롤을 시켰으므로 onScroll 로직 무시
+            (window as any)._isInternalScrolling = true;
             card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            card.style.borderColor = '#ff3366';
+            card.style.boxShadow = '0 12px 30px rgba(255, 51, 102, 0.25)';
+            card.style.transform = 'scale(1.02)';
+            
+            // 스크롤이 끝날 즈음 플래그 해제
+            setTimeout(() => { (window as any)._isInternalScrolling = false; }, 600);
           }
-          map.panTo(marker.getPosition()); // 지도 중심도 마커로 이동
+        });
+
+        // 마우스 아웃 시 하이라이트 제거
+        window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+          const card = document.getElementById(`biz-card-${biz.id || idx}`);
+          if (card) {
+            card.style.borderColor = 'rgba(0,0,0,0.05)';
+            card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.12)';
+            card.style.transform = 'scale(1)';
+          }
+        });
+
+        // 마커 클릭 시 홈 화면의 예약 플로우(일정 선택)로 바로 이동
+        window.kakao.maps.event.addListener(marker, 'click', () => {
+          const businessId = biz.id || biz.place_id || `shared-${idx}`;
+          setLastSelectedStoreId(businessId);
+          router.push(`/?booking=true&business_name=${encodeURIComponent(biz.name || '')}&store_id=${encodeURIComponent(businessId)}`);
         });
 
         newMarkers.push(marker);
@@ -295,16 +326,67 @@ export default function ExplorePage() {
       <div 
         id="business-carousel"
         onWheel={(e) => {
-          // 데스크탑 마우스 휠(상하)을 가로 스크롤(좌우)로 치환해주는 매직 로직
+          // 데스크톱 마우스 휠(상하)을 가로 스크롤(좌우)로 치환
           if (e.deltaY !== 0) {
             e.currentTarget.scrollLeft += e.deltaY;
           }
         }}
+        onScroll={(e) => {
+          // [최적화] 마커 호버로 인한 자동 스크롤시에는 지도를 이동시키지 않음
+          if ((window as any)._isInternalScrolling) return;
+
+          const carousel = e.currentTarget;
+          const map = mapInstanceRef.current;
+          if (!map || businessList.length === 0) return;
+
+          if ((window as any)._scrollTimer) {
+            clearTimeout((window as any)._scrollTimer);
+          }
+
+          (window as any)._scrollTimer = setTimeout(() => {
+            const scrollLeft = carousel.scrollLeft;
+            const carouselWidth = carousel.offsetWidth;
+            const carouselCenter = scrollLeft + carouselWidth / 2;
+
+            let nearestIdx = -1;
+            let minDistance = Infinity;
+
+            const cards = carousel.querySelectorAll('[id^="biz-card-"]');
+            cards.forEach((card: any, idx: number) => {
+              const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+              const distance = Math.abs(carouselCenter - cardCenter);
+              if (distance < minDistance) {
+                minDistance = distance;
+                nearestIdx = idx;
+              }
+            });
+
+            if (nearestIdx !== -1) {
+              const biz = businessList[nearestIdx];
+              const lat = biz.lat || biz.y || biz.location?.latitude || biz.geometry?.location?.lat;
+              const lng = biz.lng || biz.x || biz.location?.longitude || biz.geometry?.location?.lng;
+              
+              if (lat && lng) {
+                const movePos = new window.kakao.maps.LatLng(lat, lng);
+                const currentCenter = map.getCenter();
+                if (Math.abs(currentCenter.getLat() - lat) > 0.0001 || Math.abs(currentCenter.getLng() - lng) > 0.0001) {
+                  map.panTo(movePos);
+                }
+              }
+            }
+          }, 150);
+        }}
         style={{ 
-          position: 'absolute', bottom: '80px', left: 0, right: 0, zIndex: 30,
-          display: 'flex', overflowX: 'auto', gap: '12px', padding: '0 20px 20px',
-          scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch',
-          msOverflowStyle: 'auto', scrollbarWidth: 'auto'
+          position: 'absolute', bottom: '80px', left: 0, width: '100%', zIndex: 100,
+          display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', 
+          overflowX: 'scroll', gap: '12px', 
+          padding: '0 20px 20px', 
+          scrollSnapType: 'x mandatory', 
+          WebkitOverflowScrolling: 'touch',
+          msOverflowStyle: 'none', 
+          scrollbarWidth: 'none',
+          touchAction: 'pan-x',
+          scrollBehavior: 'smooth'
         }}
       >
         {businessList.length > 0 ? (
@@ -317,36 +399,57 @@ export default function ExplorePage() {
               <div 
                 key={biz.id || idx} 
                 id={`biz-card-${biz.id || idx}`}
-                onClick={() => router.push(`/business/${biz.id || idx}`)}
+                onClick={() => {
+                  const businessId = biz.id || biz.place_id || `shared-${idx}`;
+                  setLastSelectedStoreId(businessId);
+                  router.push(`/?booking=true&business_name=${encodeURIComponent(name)}&store_id=${encodeURIComponent(businessId)}`);
+                }}
                 style={{ 
-                  flex: '0 0 auto', width: '200px', backgroundColor: '#fff', 
-                  borderRadius: '16px', overflow: 'hidden', scrollSnapAlign: 'center',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)', cursor: 'pointer',
-                  border: '1px solid #eee'
+                  flex: '0 0 auto', 
+                  width: 'calc(100% - 60px)', // 다음 카드가 살짝 보이는 Peek Effect
+                  maxWidth: '300px',           // 테블릿/PC 대응 최대 너비
+                  backgroundColor: '#fff', 
+                  borderRadius: '20px', 
+                  overflow: 'hidden', 
+                  scrollSnapAlign: 'center',    // 스크롤 시 중앙 정렬
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.12)', 
+                  cursor: 'pointer',
+                  border: '1px solid rgba(0,0,0,0.05)',
+                  transition: 'transform 0.2s ease'
                 }}
               >
                 {/* [중요] Kello 서비스 규정: 16/9 비율, overflow: hidden 및 object-fit: cover 무조건 유지 */}
-                <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#eee' }}>
+                <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
                   {imageUrl ? (
                     <>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={imageUrl} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </>
                   ) : (
-                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: '10px' }}>No Image</div>
+                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f0f0', color: '#ccc' }}>
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M15.5 21H3.5C2.4 21 1.5 20.1 1.5 19V5C1.5 3.9 2.4 3 3.5 3H15.5C16.6 3 17.5 3.9 17.5 5V19C17.5 20.1 16.6 21 15.5 21Z" />
+                        <path d="M1.5 16L6.5 11L10.5 15L13.5 12L17.5 16" />
+                        <circle cx="6" cy="7.5" r="1.5" />
+                      </svg>
+                    </div>
                   )}
                 </div>
-                <div style={{ padding: '12px' }}>
-                  <h3 style={{ fontSize: '15px', fontWeight: 'bold', margin: '0 0 4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</h3>
-                  <p style={{ fontSize: '12px', color: '#666', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>{address}</p>
+                <div style={{ padding: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
+                    <h3 style={{ fontSize: '17px', fontWeight: 'bold', margin: 0, color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>{name}</h3>
+                    <span style={{ fontSize: '11px', backgroundColor: '#fff0f3', color: '#ff3366', padding: '2px 8px', borderRadius: '10px', fontWeight: 'bold' }}>Beauty</span>
+                  </div>
+                  <p style={{ fontSize: '13px', color: '#666', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>{address}</p>
                 </div>
               </div>
             );
           })
         ) : (
-          <div style={{ flex: '1', backgroundColor: '#fff', padding: '20px', borderRadius: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', textAlign: 'center' }}>
-            <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>현재 지도 영역에 매장이 없습니다.</p>
-            <p style={{ fontSize: '11px', marginTop: '6px', color: '#666' }}>지도를 이동하거나 다른 키워드로 다시 검색해 보세요.</p>
+          <div style={{ flex: '0 0 auto', width: 'calc(100% - 40px)', backgroundColor: '#fff', padding: '30px 20px', borderRadius: '20px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', textAlign: 'center', scrollSnapAlign: 'center' }}>
+            <div style={{ marginBottom: '12px' }}>🔍</div>
+            <p style={{ fontSize: '15px', fontWeight: 'bold', color: '#333', marginBottom: '4px' }}>주변에 매장이 없습니다.</p>
+            <p style={{ fontSize: '12px', color: '#888' }}>다른 지역으로 이동하거나 검색어를 바꿔보세요.</p>
           </div>
         )}
       </div>

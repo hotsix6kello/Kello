@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import Image from 'next/image';
@@ -16,6 +16,7 @@ import {
 } from './constants';
 import { submitBeautyBooking, uploadBookingImages, BeautyBookingPayload } from '@/app/explore/beautyBooking';
 import { supabase } from '@/lib/supabaseClient';
+import { useTrip } from '@/lib/contexts/TripContext';
 
 interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ interface HomeBeautyBookingFlowProps {
 
 export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory, t }: HomeBeautyBookingFlowProps) {
   const { t: tBeauty } = useTranslation(['beauty_explore', 'home_beauty']);
+  const { sharedBusinesses, lastSelectedStoreId, setLastSelectedStoreId } = useTrip();
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
   
@@ -57,24 +59,82 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     serviceName?: string;
   } | null>(null);
 
+  // 모든 가용 매장 (실시간 검색 결과 + 기본 추천 매장)
+  const allStores = useMemo(() => {
+    // 탐색 페이지에서 넘어온 검색 결과 매핑
+    const dynamicStores: BeautyStore[] = (sharedBusinesses || []).map((biz, idx) => ({
+      id: biz.id || biz.place_id || `shared-${idx}`,
+      name: biz.name || biz.title || 'Unknown Store',
+      category: (initialCategory && initialCategory !== 'all' ? initialCategory : 'hair') as BeautyCategoryId,
+      region: 'gangnam', // 기본값 혹은 검색 위치 기반 추정
+      rating: biz.rating || 0.0,
+      reviewCount: biz.user_ratings_total || 0,
+      priceLabel: '가격 문의',
+      shortDescription: biz.vicinity || biz.formatted_address || '',
+      tags: biz.types || [],
+      imageUrl: biz.imageUrl || biz.image_url || (biz.photos && biz.photos[0] && `https://places.googleapis.com/v1/${biz.photos[0].name}/media?maxWidthPx=400&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`)
+    }));
+
+    // 중복 제거 (이미 ID가 있는 경우)
+    const storeIds = new Set(dynamicStores.map(s => s.id));
+    const uniqueMockStores = BEAUTY_STORE_ITEMS.filter(s => !storeIds.has(s.id));
+
+    return [...dynamicStores, ...uniqueMockStores];
+  }, [sharedBusinesses, initialCategory]);
+
   const regions = BEAUTY_REGIONS(t, tBeauty);
 
   const filteredStores = useMemo(() => {
-    return BEAUTY_STORE_ITEMS.filter((item: BeautyStore) => {
+    return allStores.filter((item: BeautyStore) => {
       const matchCategory = !initialCategory || initialCategory === 'all' || item.category === initialCategory;
       const matchRegion = selectedRegion === 'all' || item.region === selectedRegion;
       return matchCategory && matchRegion;
     });
-  }, [initialCategory, selectedRegion]);
+  }, [allStores, initialCategory, selectedRegion]);
 
   const selectedStore = useMemo(() => 
-    BEAUTY_STORE_ITEMS.find((s: BeautyStore) => s.id === selectedStoreId) || null
-  , [selectedStoreId]);
+    allStores.find((s: BeautyStore) => s.id === selectedStoreId) || null
+  , [allStores, selectedStoreId]);
 
   const availableServices = useMemo(() => {
     if (!selectedStore) return [];
-    return PRIMARY_SERVICES_BY_CATEGORY[selectedStore.category] || [];
+    return PRIMARY_SERVICES_BY_CATEGORY[selectedStore.category] || [{ id: 'default', name: '상담 후 결정', price: 0 }];
   }, [selectedStore]);
+
+  // [추가] 탐색 페이지에서 선택된 매장이 있을 경우 자동 반영
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const queryStoreId = params.get('store_id');
+    const targetId = lastSelectedStoreId || queryStoreId;
+    
+    if (targetId) {
+      // 해당 ID를 가진 매장이 allStores에 있는지 확인
+      const targetStore = allStores.find((s: BeautyStore) => s.id === targetId);
+      if (targetStore) {
+        setSelectedStoreId(targetStore.id);
+        setSelectedStoreName(targetStore.name);
+        
+        // 매장 선택 시 해당 카테고리의 첫 번째 서비스를 자동으로 선택
+        const services = PRIMARY_SERVICES_BY_CATEGORY[targetStore.category] || [];
+        if (services.length > 0) {
+          setSelectedServiceId(services[0].id);
+        } else {
+          setSelectedServiceId('default');
+        }
+        
+        // 바로 2단계(일정 선택)로 이동
+        setCurrentStep(2);
+        
+        // 컨텍스트 및 URL 정리 (선택 전이 완료되었으므로)
+        if (lastSelectedStoreId) setLastSelectedStoreId(null);
+        // URL에서 파라미터 제거 (선택사항, 지저분함 방지)
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, '', newUrl);
+      }
+    }
+  }, [isOpen, allStores, lastSelectedStoreId, setLastSelectedStoreId]);
 
   const handleStoreSelect = (store: BeautyStore) => {
     setSelectedStoreId(store.id);
@@ -341,7 +401,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                     {selectedStore && (
                        <div className="bg-white border border-neutral-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
                           <div className="relative w-12 h-12 rounded-xl bg-neutral-100 overflow-hidden shrink-0">
-                             <Image src={selectedStore.imageUrl || ''} alt={selectedStore.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+                             <Image src={selectedStore.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={selectedStore.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                           </div>
                           <div className="flex-1">
                              <span className="text-[10px] font-bold text-[#bb8a78] uppercase tracking-wider">SELECTED STORE</span>
