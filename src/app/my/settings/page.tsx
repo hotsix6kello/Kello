@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 import { supabase } from "@/lib/supabaseClient";
 import {
     getPhoneCountryById,
@@ -216,14 +217,14 @@ function isReviewCommunityPost(post: HeroCommunityPostRecord): boolean {
     );
 }
 
-function getCommunityBadge(points: number, t: any): string {
+function getCommunityBadge(points: number, t: TFunction): string {
     if (points >= 80) return t("settings_page.badges.community.leader", { defaultValue: "커뮤니티 리더" });
     if (points >= 30) return t("settings_page.badges.community.trend", { defaultValue: "트렌드 피커" });
     if (points >= 10) return t("settings_page.badges.community.mate", { defaultValue: "뷰티 메이트" });
     return t("settings_page.badges.community.sprout", { defaultValue: "새싹" });
 }
 
-function getBookingBadge(completedCount: number, t: any): string {
+function getBookingBadge(completedCount: number, t: TFunction): string {
     if (completedCount >= 10) return t("settings_page.badges.booking.vvip", { defaultValue: "VVIP" });
     if (completedCount >= 5) return t("settings_page.badges.booking.vip", { defaultValue: "VIP" });
     if (completedCount >= 2) return t("settings_page.badges.booking.regular", { defaultValue: "Regular" });
@@ -246,7 +247,7 @@ const EMPTY_BOOKING_STATS: HeroBookingStats = {
     badge: "",
 };
 
-async function loadCommunityStats(userId: string, displayName: string, t: any): Promise<HeroCommunityStats> {
+async function loadCommunityStats(userId: string, displayName: string, t: TFunction): Promise<HeroCommunityStats> {
     let posts: HeroCommunityPostRecord[] = [];
 
     const authoredPosts = await supabase
@@ -288,7 +289,7 @@ async function loadCommunityStats(userId: string, displayName: string, t: any): 
     };
 }
 
-async function loadBookingStats(accessToken: string, t: any): Promise<HeroBookingStats> {
+async function loadBookingStats(accessToken: string, t: TFunction): Promise<HeroBookingStats> {
     try {
         const response = await fetch("/api/bookings/beauty/mine", {
             headers: {
@@ -333,7 +334,7 @@ async function loadBookingStats(accessToken: string, t: any): Promise<HeroBookin
 function buildNotificationSummary(
     preferences: NotificationPreferences | null,
     isLoggedIn: boolean,
-    t: any
+    t: TFunction
 ): NotificationSummary {
     if (!isLoggedIn) {
         return {
@@ -401,7 +402,7 @@ function buildNotificationSummary(
     };
 }
 
-function getPartnerStatusMeta(status: PartnerStatus, t: any) {
+function getPartnerStatusMeta(status: PartnerStatus, t: TFunction) {
     switch (status) {
         case "approved":
             return {
@@ -726,7 +727,7 @@ export default function MySettingsPage() {
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [t]);
 
     const initials = useMemo(() => {
         return account.displayName
@@ -1132,7 +1133,7 @@ export default function MySettingsPage() {
                 badge: getBookingBadge(prev.completedCount, t)
             }));
         }
-    }, [t]);
+    }, [t, account.isLoggedIn, notificationPrefs]);
 
     const personalRows = useMemo<SettingsRow[]>(
         () => [
@@ -1314,9 +1315,11 @@ export default function MySettingsPage() {
             },
         ],
         [
+            partnerStatusMeta,
+            partnerStoreInfoHelper,
+            partnerStoreInfoValue,
             partner.company_name,
             partner.status,
-            partnerStoreInfoValue,
             t,
         ]
     );
@@ -1389,7 +1392,7 @@ export default function MySettingsPage() {
         activeTab === "partner" ? partnerRows : activeTab === "admin" ? adminRows : personalRows;
 
     const renderEditableNicknameCard = (row: SettingsRow) => {
-        const { canUpdate, daysLeft, nextAvailableDate } = getNicknameCooldownInfo(account.nicknameUpdatedAt);
+        const { canUpdate, nextAvailableDate } = getNicknameCooldownInfo(account.nicknameUpdatedAt);
         const isSaving = nicknameSaveStatus === "saving";
         const isDirty = nicknameDraft !== account.nickname;
         const canSave = account.isLoggedIn && isDirty && !isSaving && canUpdate;
