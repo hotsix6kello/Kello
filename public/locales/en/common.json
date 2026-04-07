@@ -1862,6 +1862,7 @@
     "symptoms_title": "Symptoms",
     "call_btn": "Call",
     "medical": {
+      "pharmacy_title": "OTC Medicines (Convenience Store)",
       "medicines": {
         "tylenol": "타이레놀",
         "tylenol_desc": "해열, 진통, 근육통, 두통",
