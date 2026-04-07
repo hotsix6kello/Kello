@@ -34,6 +34,8 @@ interface TripContextType {
     selectedCategory: string | null;
     searchQuery: string;
     destinationInfo: SharedLocation | null;
+    sharedBusinesses: any[];
+    lastSelectedStoreId: string | null;
     setTripStatus: (status: TripMode) => void;
     setTripDays: (days: number) => void;
     addItineraryItem: (item: ItineraryItem) => void;
@@ -42,6 +44,8 @@ interface TripContextType {
     setSelectedCategory: (category: string | null) => void;
     setSearchQuery: (query: string) => void;
     setDestinationInfo: (info: SharedLocation | null) => void;
+    setSharedBusinesses: (businesses: any[]) => void;
+    setLastSelectedStoreId: (id: string | null) => void;
 }
 
 const TripContext = createContext<TripContextType | undefined>(undefined);
@@ -53,6 +57,8 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [destinationInfo, setDestinationInfo] = useState<SharedLocation | null>(null);
+    const [sharedBusinesses, setSharedBusinesses] = useState<any[]>([]);
+    const [lastSelectedStoreId, setLastSelectedStoreId] = useState<string | null>(null);
 
     useEffect(() => {
         try {
@@ -156,7 +162,11 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
             setItinerary,
             setSelectedCategory,
             setSearchQuery,
-            setDestinationInfo
+            setDestinationInfo,
+            sharedBusinesses,
+            setSharedBusinesses,
+            lastSelectedStoreId,
+            setLastSelectedStoreId
         }}>
             {children}
         </TripContext.Provider>

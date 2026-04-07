@@ -76,7 +76,14 @@
     "copied": "คัดลอกแล้ว!",
     "morning": "อรุณสวัสดิ์",
     "afternoon": "สวัสดีตอนบ่าย",
-    "evening": "สวัสดีตอนเย็น"
+    "evening": "สวัสดีตอนเย็น",
+    "actions": {
+      "delete": "ลบ"
+    },
+    "states": {
+      "no_permission": "ไม่มีสิทธิ์เข้าถึง",
+      "error_occurred": "เกิดข้อผิดพลาดในการประมวลผลคำขอของคุณ"
+    }
   },
   "transport": {
     "moving_to": "กำลังไปที่ {{dest}}",
@@ -247,56 +254,457 @@
       "date_time": "วันที่ / เวลา",
       "area": "ย่าน",
       "price": "ราคา",
-      "new_added": "เพิ่มหน้าการจองใหม่แล้ว!"
+      "new_added": "เพิ่มหน้าการจองใหม่แล้ว!",
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
     },
     "community": {
       "title": "โพสต์ของฉัน",
-      "empty": "ยังไม่มีโพสต์ในชุมชน"
+      "empty": "ยังไม่มีโพสต์ในชุมชน",
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
+    },
+    "dashboard": {
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      }
+    },
+    "settings": {
+      "account": {
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
+      }
     }
   },
   "community_page": {
-    "title": "ชุมชน",
-    "subtitle": "เชื่อมต่อกับคนท้องถิ่นและนักเดินทาง",
-    "filter_all": "ทั้งหมด",
-    "filter_meetup": "อาหารและมิตติ้ง",
-    "filter_travel": "หาเพื่อนร่วมทาง",
-    "filter_help": "ความช่วยเหลือในพื้นที่",
-    "comments": "ความคิดเห็น",
-    "message": "ข้อความ",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
+    "hero": {
+      "title": "ชุมชน Kello",
+      "search_placeholder": "ค้นหาหัวข้อที่สนใจ"
     },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+    "categories": {
+      "all": "ทั้งหมด",
+      "meetup": "กลุ่มพบปะ/กิจกรรม",
+      "beauty_review": "บิวตี้/ความงาม",
+      "food_review": "ร้านอาหาร/คาเฟ่",
+      "travel_review": "ท่องเที่ยว/กิจกรรม",
+      "meetup_recruitment": "หาเพื่อนร่วมทาง",
+      "help": "ข้อมูลที่เป็นประโยชน์"
+    },
+    "sub_filters": {
+      "all": "ทั้งหมด",
+      "saved": "บันทึกแล้ว",
+      "reacted": "ตอบกลับแล้ว",
+      "mine": "โพสต์ของฉัน",
+      "recruiting": "กำลังรับสมัคร",
+      "active_reactions": "การตอบสนองที่ร้อนแรง",
+      "open_meetup": "การนัดพบเปิด",
+      "weekend": "สุดสัปดาห์",
+      "fresh": "ข้อมูลใหม่"
+    },
+    "status": {
+      "reviews": "รีวิว",
+      "reacting": "กำลังรวบรวม",
+      "surveying": "กำลังยืนยัน",
+      "drafting": "กำลังเตรียม",
+      "closed": "ปิดรับ"
+    },
+    "tags": {
+      "solo_friendly": "เหมาะไปคนเดียว",
+      "friends_friendly": "เหมาะไปกับเพื่อน",
+      "photo_spot": "จุดถ่ายรูป",
+      "waiting": "มีคิว",
+      "foreigner_friendly": "เป็นมิตรกับชาวต่างชาติ"
+    },
+    "states": {
+      "fetch_failed_desc": "ไม่สามารถโหลดโพสต์ ตรวจสอบเครือข่ายของคุณ",
+      "fetch_failed_title": "ข้อผิดพลาดของข้อมูล",
+      "fetch_failed_tip": "กรุณารีเฟรช",
+      "empty_title": "ยังไม่มีโพสต์",
+      "empty_desc": "เป็นคนแรก โพสต์เลย!",
+      "empty_tip": "คลิกขวาล่างเพื่อเขียน",
+      "no_results_title": "ไม่พบผลลัพธ์",
+      "no_results_desc": "ลองใช้คำค้นอื่น",
+      "cta_write": "เขียนโพสต์แรก",
+      "cta_all": "ดูทั้งหมด"
+    },
+    "quality_signals": {
+      "organized": "บทความที่มีการจัดการดี",
+      "active": "เป็นที่นิยมมาก",
+      "asset": "เต็มไปด้วยข้อมูล",
+      "mate": "พบเพื่อนร่วมทางที่ดี"
+    },
+    "toasts": {
+      "save_added": "เพิ่มลงในโพสต์ที่บันทึกแล้ว",
+      "save_removed": "ลบออกจากโพสต์ที่บันทึกแล้ว",
+      "deleted": "ลบแล้ว",
+      "updated": "อัปเดตแล้ว",
+      "submitted": "ส่งแล้ว",
+      "region_collected": "ดูโพสต์สำหรับ {{region}}"
+    },
+    "nav_summary": {
+      "all": "กำลังดูเรื่องราวทั้งหมดใน {{tab}}",
+      "active_reactions": "ได้รับการตอบสนองดีใน {{tab}}",
+      "open_meetup": "หาเพื่อนร่วมทางใหม่ใน {{tab}}",
+      "weekend": "{{tab}} มีแผนสุดสัปดาห์นี้ไหม?",
+      "default": "ผลลัพธ์การกรอง {{sub}} ใน {{tab}}"
+    },
+    "form": {
+      "select_category": "เลือกหมวดหมู่",
+      "write_guide_title": {
+        "beauty_review": "เล่าประสบการณ์ความงามของคุณให้เราฟัง",
+        "food_review": "มีร้านอาหารลับบ้างไหม?",
+        "travel_review": "แบ่งปันเคล็ดลับการเดินทาง",
+        "meetup": "ค้นหาเพื่อนร่วมทาง",
+        "meetup_recruitment": "หาเพื่อนร่วมทางไหม?",
+        "help": "ถามอะไรก็ได้"
       },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      "write_guide_body": {
+        "beauty_review": "แชร์รีวิวตรงๆ",
+        "food_review": "แชร์รสชาติ บรรยากาศ เวลารอคอย",
+        "travel_review": "แบ่งปันเคล็ดลับ",
+        "meetup": "เขียนเรื่องเวลาและสถานที่ได้อย่างอิสระ",
+        "meetup_recruitment": "ระบุกำหนดการและเงื่อนไข...",
+        "help": "เขียนรายละเอียดคำถาม"
       },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      "title_label": {
+        "beauty_review": "ขั้นตอน/ธีม",
+        "default": "หัวข้อ"
       },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      "title_placeholder": {
+        "beauty_review": "เช่น รีวิวตัดผม",
+        "default": "กำลังลังเลว่าจะเขียนอะไรดีอยู่หรือเปล่า?"
+      },
+      "desc_label": {
+        "beauty_review": "รีวิวโดยละเอียด",
+        "default": "เนื้อหา"
+      },
+      "desc_placeholder": {
+        "beauty_review": "แบ่งปันรายละเอียด...",
+        "food_review": "แนะนำเมนู...",
+        "travel_review": "แชร์เคล็ดลับ...",
+        "meetup": "รายละเอียดงานพบปะ",
+        "meetup_recruitment": "เขียนสิ่งที่คุณต้องการ...",
+        "help": "คำถามที่ละเอียด...",
+        "default": "เขียนเรื่องราวที่คุณต้องการแชร์ได้เลย"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "food_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "travel_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "meetup": "เพิ่มภาพกิจกรรม (ไม่เกิน 4)",
+          "meetup_recruitment": "เพิ่มภาพถ่าย (สูงสุด 4)",
+          "help": "เพิ่มภาพถ่าย (สูงสุด 4)"
+        },
+        "saved_name": "รูปภาพที่บันทึก {{index}}",
+        "file_only_alert": "อนุญาตไฟล์รูปภาพเท่านั้น",
+        "limit_alert": "สูงสุด {{count}} ภาพ",
+        "load_failed_alert": "ไม่สามารถโหลดรูปภาพได้",
+        "limit_label": "(สูงสุด {{count}} รูป)"
+      },
+      "category_hints": {
+        "beauty_review": "รีวิวความงาม...",
+        "food_review": "แนะนำร้านอาหาร...",
+        "travel_review": "แบ่งปันเคล็ดลับ...",
+        "meetup": "จัดการนัดพบแบบสบายๆ",
+        "meetup_recruitment": "หาเพื่อนร่วมทาง",
+        "help": "ถามอะไรก็ได้..."
+      },
+      "region_label": "ย่าน/พื้นที่",
+      "region_placeholder": "เช่น คังนัม, มาโพ",
+      "submit": "โพสต์",
+      "write_title": "สร้างโพสต์",
+      "edit_title": "แก้ไขโพสต์",
+      "image_label": "แนบรูปภาพ",
+      "add_photo": "เพิ่มรูปภาพ",
+      "preparing_images": "กำลังเตรียมรูปภาพ...",
+      "cancel": "ยกเลิก",
+      "category_label": "หมวดหมู่"
+    },
+    "detail": "รายละเอียดโพสต์",
+    "detail_page": {
+      "loading": "กำลังโหลด...",
+      "hidden_post": "โพสต์ซ่อนไว้",
+      "not_found": "ไม่พบโพสต์",
+      "show_hidden": "ดูโพสต์ที่ซ่อน",
+      "hide_post": "ซ่อนโพสต์นี้",
+      "freshness": {
+        "realtime": "กำลังใช้งาน",
+        "updated": "อัปเดตข้อมูลแล้ว",
+        "active": "โพสต์ที่มีความเคลื่อนไหว",
+        "calm": "โพสต์เงียบ"
+      },
+      "strengths": {
+        "title": "จุดเด่นของโพสต์",
+        "organized": "รีวิวที่จัดระเบียบ",
+        "active": "การสื่อสารที่แอคทีฟ",
+        "visited_tip": "รวมเคล็ดลับการไป",
+        "new": "ข่าวใหม่"
+      },
+      "checklist": {
+        "title": "รายการตรวจสอบ",
+        "recommended": "แนะนำ",
+        "required": "ตรวจสอบที่จำเป็น",
+        "comment_check": "อ่านความคิดเห็น",
+        "read_details": "อ่านรายละเอียด"
+      },
+      "mini_signal_tag": "มีการนัดพบ",
+      "primary_action": {
+        "review": "ทิ้งรีวิว",
+        "join": "แสดงเจตนา"
+      },
+      "save": {
+        "saved": "บันทึกแล้ว",
+        "default": "บันทึก"
+      },
+      "meetup_safety": {
+        "title": "ความปลอดภัยพบปะ",
+        "item_1": "พบกันในที่สาธารณะ",
+        "item_2": "ระวังแชร์ข้อมูล"
+      },
+      "body_title": "เนื้อหาโพสต์",
+      "like": "ถูกใจ",
+      "dislike": "ไม่ถูกใจ",
+      "like_alert": "คุณถูกใจโพสต์นี้แล้ว!",
+      "dislike_alert": "คุณไม่ถูกใจโพสต์นี้แล้ว.",
+      "comments_title": "ความคิดเห็น",
+      "comment_input": {
+        "default": "พิมพ์ความคิดเห็น...",
+        "optional": "แสดงความจำนง (ตัวเลือก)",
+        "send": "ส่ง",
+        "open_btn": "เขียนความคิดเห็น",
+        "cancel": "ยกเลิก"
+      },
+      "signal_intents": {
+        "interested": "ฉันก็อยากไป",
+        "available_this_week": "สัปดาห์นี้ว่าง",
+        "join_if_schedule_fits": "ถ้าวันตรงกัน ไปด้วยกัน",
+        "thanks": "ขอบคุณ",
+        "question": "ฉันมีคำถาม"
+      },
+      "signal_times": {
+        "this_week": "สัปดาห์นี้",
+        "this_weekend": "สุดสัปดาห์นี้",
+        "next_week": "สัปดาห์หน้า",
+        "schedule_coordination": "รอกำหนด"
+      },
+      "author_panel": {
+        "title": "แดชบอร์ดผู้แต่ง",
+        "badge": "ผู้แต่ง",
+        "stats": {
+          "total": "การตอบกลับรวม",
+          "total_value": "{{count}}",
+          "time": "เวลาที่ดีที่สุด",
+          "time_pending": "กำลังคำนวณ",
+          "intent": "ความตั้งใจหลัก",
+          "recent": "24ชม. ที่ผ่านมา",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "สุดสัปดาห์เหมาะสม",
+          "vote": "เปิดโพล",
+          "share": "แบ่งปันเพิ่มเติม"
+        },
+        "action": {
+          "weekend": "เสนอข้อสุดสัปดาห์",
+          "vote": "สร้างโพล",
+          "share": "แชร์ทิปสเพิ่มเติม"
+        },
+        "draft": {
+          "weekend": "บ่ายสองสุดสัปดาห์นี้ล่ะ?",
+          "vote": "โหวตเวลาที่ดีที่สุด!",
+          "share": "มีอีกหนึ่งเคล็ดลับให้คุณ!"
+        },
+        "final_draft": "เสร็จสิ้น ไปที่แชทกันเถอะ!",
+        "final_action": "ปิดรับคน",
+        "footer": "Kello ส่งเสริมความปลอดภัย"
+      },
+      "status_controls": {
+        "title": "เปลี่ยนสถานะ"
+      },
+      "result": {
+        "title": "เขียนผลและเคล็ดลับ",
+        "help": "แชร์ข้อคิดเห็น",
+        "placeholder": "เขียนรีวิว...",
+        "save_visited": "บันทึกผลและทิปส์",
+        "save_only": "บันทึกอินโฟ മാത്രം"
+      },
+      "author_safety": {
+        "title": "แนวทางความปลอดภัย",
+        "item_1": "อย่าเปิดเผยที่ติดต่อ",
+        "item_2": "ระวังมิจฉาชีพ",
+        "item_3": "พูดคุยเฉพาะที่เชื่อถือได้"
+      },
+      "signal_summary": {
+        "title": "สรุป",
+        "status": {
+          "active": "กำลังรับคนอย่างกระตือรือร้น",
+          "forming": "กำลังรวบรวมคน",
+          "preparing": "เริ่มรับคน"
+        },
+        "time_split": "ความคิดเห็นหลากหลาย",
+        "time_focus": "ชอบ {{time}} ที่สุด",
+        "time_flexible": "เวลายืดหยุ่น",
+        "desc": "{{count}} คนสน {{topic}}",
+        "topic_review": "แชร์รีวิว",
+        "topic_outing": "เข้าร่วมนัดพบ",
+        "schedule_title": "เลือกเวลา"
+      },
+      "status": {
+        "REVIEWS": "Reviews Done",
+        "REACTING": "กำลังรวบรวม",
+        "SURVEYING": "กำลังยืนยัน",
+        "DRAFTING": "กำลังเตรียม",
+        "CLOSED": "ปิดรับ"
+      },
+      "tags": {
+        "solo_friendly": "เหมาะไปคนเดียว",
+        "friends_friendly": "With Friends",
+        "photo_spot": "Photo Spots",
+        "waiting": "Wait Exists",
+        "foreigner_friendly": "เป็นมิตรกับชาวต่างชาติ"
+      },
+      "empty_comments": "ยังไม่มีความคิดเห็น. เป็นคนแรกเลย!",
+      "hide_comment": "ซ่อนความคิดเห็นนี้"
+    },
+    "actions": {
+      "delete_confirm": "แน่ใจเหรอที่จะลบ?"
+    },
+    "errors": {
+      "login_required": "ต้องเข้าสู่ระบบ",
+      "post_failed": "การโพสต์ล้มเหลว: {{message}}"
+    },
+    "report": {
+      "report_action": "รายงาน",
+      "success": "รายงานแล้ว",
+      "reasons": {
+        "ad_spam": "โฆษณา/สแปม",
+        "offensive": "เนื้อหาไม่เหมาะสม",
+        "contact": "พฤติกรรมหลอกลวง",
+        "unsafe": "ข้อมูลอันตราย",
+        "other": "อื่นๆ"
       }
     },
-    "filter_review": "รีวิว",
-    "detail": "รายละเอียดโพสต์"
+    "comments": "ความคิดเห็น",
+    "time": {
+      "just_now": "เมื่อสักครู่"
+    },
+    "write_post": "เขียนโพสต์",
+    "edit": "แก้ไข",
+    "posting": "กำลังโพสต์...",
+    "defaults": {
+      "region": "โซล"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "ทำความงามด้วยกัน"
+      },
+      "flash_meetup": {
+        "label": "มีทติ้งด่วน"
+      },
+      "beauty": {
+        "label": "รีวิวความงาม"
+      },
+      "food": {
+        "label": "แนะนำอาหาร"
+      },
+      "travel": {
+        "label": "เคล็ดลับเดินทาง"
+      },
+      "write": {
+        "label": "เขียนโพสต์"
+      },
+      "browse": {
+        "label": "เรียกดู",
+        "sub": "โพสต์ยอดนิยม"
+      },
+      "recruiting": {
+        "label": "กำลังรับสมัคร",
+        "sub": "หาเพื่อนร่วมทาง"
+      },
+      "weekend": {
+        "label": "สุดสัปดาห์นี้",
+        "sub": "แชร์ตาราง"
+      },
+      "record": {
+        "label": "บันทึก",
+        "sub": "แชร์ชีวิตประจำวัน"
+      }
+    },
+    "fab": {
+      "create_post": "เขียนโพสต์"
+    },
+    "sort": {
+      "latest": "ล่าสุด",
+      "reactions": "ตอบกลับมากที่สุด",
+      "draft": "รับสมัครมากที่สุด"
+    },
+    "card": {
+      "default_vibe": "บรรยากาศดี",
+      "title_prefix": {
+        "beauty_review": "[ความงาม]",
+        "food_review": "[อาหาร]",
+        "travel_review": "[ท่องเที่ยว]"
+      },
+      "cta": {
+        "review": "ดูรีวิว",
+        "join": "เข้าร่วม"
+      },
+      "result_badge": "รีวิวเสร็จสิ้น",
+      "open_meetup_badge": "มีการนัดพบ",
+      "fresh_badges": {
+        "comment": "กำลังตอบสนอง",
+        "update": "เพิ่งอัปเดต"
+      },
+      "draft_status": {
+        "active": "สื่อสารอย่างกระตือรือร้น",
+        "forming": "กำลังรวบรวมคน",
+        "preparing": "หวังจะเข้าร่วม"
+      },
+      "draft_desc": {
+        "active": "หลายคนสนใจแล้ว!",
+        "forming": "ผู้คนกำลังเริ่มมา",
+        "preparing": "แสดงความสนใจเป็นคนแรก"
+      },
+      "owner_reactions": {
+        "region": "สนทนากับ {{count}} คนเกี่ยวกับ {{region}}",
+        "join": "{{count}} คนต้องการเข้าร่วม"
+      },
+      "more_region": "ดูเรื่องราวเพิ่มเติมเกี่ยวกับ {{region}}"
+    }
   },
   "explore_items": {
     "airport_arrival": "ถึงสนามบินอินชอน",
@@ -648,5 +1056,209 @@
     "police_title": "ตำรวจ/อาชญากรรม",
     "interp_title": "บริการล่าม",
     "lost_title": "ของหาย"
+  },
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
+    },
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
   }
 }

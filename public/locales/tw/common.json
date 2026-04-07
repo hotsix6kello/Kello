@@ -162,7 +162,8 @@
       "open_admin_console": "Open Admin Console",
       "interpreter_for_booking": "Interpreter for this booking",
       "show_booking_phrases": "Show booking phrases",
-      "back_to_booking_support": "Back to booking support"
+      "back_to_booking_support": "返回預約支持",
+      "delete": "刪除"
     },
     "states": {
       "sign_in_required": "Sign in required",
@@ -185,7 +186,9 @@
       "pending_review": "Pending review",
       "needs_update": "Needs update",
       "not_joined": "Not joined",
-      "standard_account": "Standard account",
+      "standard_account": "標準帳戶",
+      "no_permission": "沒有權限。",
+      "error_occurred": "處理請求時發生錯誤。",
       "frequent": "Frequent",
       "favorites": "Favorites",
       "recent": "Recent",
@@ -214,13 +217,13 @@
       },
       "trip": {
         "day_label": "Day {{day}}",
-        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dot": "第 {{day}} 天 · {{time}}",
         "day_time_dash": "Day {{day}} - {{time}}"
       },
       "counts": {
-        "comments": "{{count}} comments",
-        "stops": "{{count}} stops",
-        "days": "{{count}} days"
+        "comments": "{{count}} 則評論",
+        "stops": "{{count}} 個地點",
+        "days": "{{count}} 天"
       }
     },
     "morning": "早安",
@@ -609,11 +612,17 @@
       "new_added": "New Booking Added!",
       "date_time": "Date / Time",
       "area": "Area",
-      "price": "Price"
+      "price": "Price",
+      "browse_beauty_cta": "瀏覽美容預約",
+      "action_edit_request": "修改請求",
+      "action_cancel_request": "取消請求",
+      "error_fetch": "載入預約失敗。"
     },
     "community": {
       "title": "My Community Posts",
-      "empty": "No community posts written yet."
+      "empty": "No community posts written yet.",
+      "empty_simple": "暫無發布文章",
+      "browse_cta": "瀏覽社區"
     },
     "settings": {
       "short": "Settings",
@@ -704,7 +713,13 @@
         "last_seen": "Last sign-in",
         "last_seen_hint": "Read-only from the auth session.",
         "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-        "default_name": "Traveler"
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
       },
       "partner_admin": {
         "title": "Partner / Admin",
@@ -997,639 +1012,536 @@
         "desc": "Open Community to write a review and choose the Review type in the existing composer."
       },
       "posts_desc": "General community posts you created, ready to revisit or manage.",
-      "reviews_desc": "Review posts you already published, plus a quick path back to booking history.",
-      "meetups_desc": "Meetup-style activity from your community posts, including travel mate plans.",
-      "loading": "Loading your activity...",
-      "no_comments": "No comments yet",
+      "reviews_desc": "查看您已發佈的評價，並快速返回預約歷史。",
+      "meetups_desc": "在社群帖子中發起聚會或尋找旅伴。",
+      "loading": "正在加載您的活動...",
+      "no_comments": "暫無評論",
       "type": {
-        "travel": "Travel Mate",
-        "meetup": "Meetup"
+        "travel": "旅伴",
+        "meetup": "聚會"
       }
     },
     "bookings_hub": {
-      "title": "My Bookings",
+      "title": "我的預約",
       "summary": {
-        "upcoming": "Upcoming",
-        "history": "History"
+        "upcoming": "即將到來",
+        "history": "歷史記錄"
       },
       "tabs": {
-        "upcoming": "Upcoming",
-        "completed": "Completed",
-        "other": "Other"
+        "upcoming": "即將到來",
+        "completed": "已完成",
+        "other": "其他"
       },
       "meta": {
-        "time": "Time",
-        "area": "Area",
-        "total_price": "Total Price",
-        "reference": "Reference"
+        "time": "時間",
+        "area": "區域",
+        "total_price": "總額",
+        "reference": "參考編號"
       },
       "empty": {
         "upcoming": {
-          "title": "No upcoming bookings",
-          "desc": "Explore top-rated spots and start planning your next stop."
+          "title": "沒有即將到來的預約",
+          "desc": "探索熱門地點並開始規劃您的下一站。"
         },
         "completed": {
-          "title": "No completed bookings yet",
-          "desc": "Places you finish will be saved here, ready for a review."
+          "title": "尚無已完成的預約",
+          "desc": "您完成的地點將會顯示在這裡並可供評價。"
         },
         "other": {
-          "title": "No other records",
-          "desc": "Cancelled or unavailable requests will appear here."
+          "title": "沒有其他記錄",
+          "desc": "已取消或不可用的請求將會顯示在這裡。"
         }
       }
     },
     "dashboard": {
-      "bookings_empty": "No confirmed bookings yet",
-      "saved_recent_title": "Saved & Recent",
-      "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
-      "admin_title": "Admin Console",
-      "admin_desc": "Dashboard and partner management",
+      "bookings_empty": "尚無確認的預約",
+      "saved_recent_title": "儲存與近期",
+      "saved_recent_desc": "快速返回您儲存的地點、計劃草稿以及近期查看的項目。",
+      "admin_title": "管理員控制台",
+      "admin_desc": "打開管理員控制台與合作夥伴管理",
       "partner": {
-        "none_title": "Apply as Partner",
-        "none_desc": "Join Kello as a partner and introduce your service to more travelers.",
-        "none_cta": "Apply",
-        "pending_title": "Partner review in progress",
-        "pending_desc": "Your request is under review. We will update you after the admin check.",
-        "approved_title": "Partner approved",
-        "approved_desc": "Your Kello partner registration is complete.",
-        "rejected_title": "Partner request needs update",
-        "rejected_desc": "Update the details and apply again.",
-        "rejected_cta": "Apply Again"
+        "none_title": "申請成為合作夥伴",
+        "none_desc": "加入 Kello 合作夥伴，向更多旅行者推廣您的服務。",
+        "none_cta": "申請",
+        "pending_title": "合作夥伴審核中",
+        "pending_desc": "您的申請正在審核中。管理員確認後將會更新狀態。",
+        "approved_title": "合作夥伴已批准",
+        "approved_desc": "您的 Kello 合作夥伴註冊已完成。",
+        "rejected_title": "合作夥伴申請需要更新",
+        "rejected_desc": "請更新詳細資訊後重新申請。",
+        "rejected_cta": "重新申請"
+      },
+      "admin_menu": {
+        "dashboard": "管理員控制台",
+        "dashboard_desc": "統計與完整選單",
+        "bookings": "美容預約管理",
+        "bookings_desc": "預約請求與狀態變更",
+        "partners": "合作夥伴管理",
+        "partners_desc": "加入申請審核管理",
+        "users": "管理員帳號管理",
+        "users_desc": "權限授予與狀態解除"
       }
+    },
+    "messages": {
+      "upload_success": "個人主頁照片已更新。",
+      "upload_failed": "上傳失敗。"
     }
   },
   "fab": {
-    "idle": "Plan Trip",
-    "pre_trip": "Departure Soon",
-    "on_trip": "Next Place?",
-    "near_deadline": "Late Risk!",
-    "to": "to {{dest}}",
-    "kride": "Call K.Ride",
-    "kride_sub": "Arrives in {{mins}}m",
-    "transit": "Transit Guide",
-    "transit_sub": "Fastest route",
-    "copy": "Copy Address",
-    "copy_done": "Copied!",
-    "card": "For Driver Card",
-    "card_sub": "Show this to driver",
-    "card_modal_title": "🗺️ Please go to this address",
-    "cancel": "Cancel"
+    "idle": "行程規劃",
+    "pre_trip": "即將出發",
+    "on_trip": "下一站去哪？",
+    "near_deadline": "遲到風險！",
+    "to": "前往 {{dest}}",
+    "kride": "呼叫 K.Ride",
+    "kride_sub": "預計 {{mins}} 分鐘後抵達",
+    "transit": "交通指南",
+    "transit_sub": "最短路線",
+    "copy": "複製地址",
+    "copy_done": "已複製！",
+    "card": "司機提示卡",
+    "card_sub": "向司機出示此卡",
+    "card_modal_title": "🗺️ 請前往此地址",
+    "cancel": "取消"
   },
   "transport": {
-    "moving_to": "Moving to {{dest}}",
-    "remaining": "Remaining",
-    "line_2_direction": "Line 2 • Headed to City Hall direction",
-    "departed": "departed",
-    "passing_now": "Passing now...",
-    "current": "Current",
-    "get_off_at": "Get off at",
-    "exit_3": "Exit 3",
-    "getting_off_here": "I'm Getting Off Here",
+    "moving_to": "正在前往 {{dest}}",
+    "remaining": "剩餘",
+    "line_2_direction": "2 號線 • 往市廳方向",
+    "departed": "已出發",
+    "passing_now": "正在經過...",
+    "current": "目前",
+    "get_off_at": "在此下車",
+    "exit_3": "3 號出口",
+    "getting_off_here": "我在這裏下車",
     "stations": {
-      "samseong": "Samseong",
-      "seolleung": "Seolleung",
-      "yeoksam": "Yeoksam",
-      "gangnam": "Gangnam",
-      "gyodae": "Gyodae",
-      "seocho": "Seocho",
-      "seongsu": "Seongsu"
+      "samseong": "三成",
+      "seolleung": "宣陵",
+      "yeoksam": "驛三",
+      "gangnam": "江南",
+      "gyodae": "教大",
+      "seocho": "瑞草",
+      "seongsu": "聖水"
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
-    },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-      },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-      },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-      },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-      }
-    },
-    "filter_review": "Reviews",
-    "detail": "Post Detail",
-    "meetup_info": "Visit details",
-    "write_post": "Write review",
-    "edit": "Edit review",
-    "posting": "Posting...",
     "hero": {
-      "title": "Beauty booking reviews come first here",
-      "search_placeholder": "Search salon names, treatment experiences, or booking reviews"
+      "title": "Kello 社群",
+      "search_placeholder": "搜尋您感興趣的話題"
     },
     "categories": {
-      "all": "All",
-      "beauty_review": "Beauty salon review",
-      "food_review": "Food review",
-      "travel_review": "Sightseeing review",
-      "meetup": "Shows & events",
-      "help": "Questions"
+      "all": "全部",
+      "meetup": "線下聚會",
+      "beauty_review": "美妝/美容",
+      "food_review": "美食/探店",
+      "travel_review": "旅遊/觀光",
+      "meetup_recruitment": "招募夥伴",
+      "help": "旅遊攻略"
     },
     "sub_filters": {
-      "all": "All",
-      "saved": "⭐ Saved posts",
-      "reacted": "💬 Joined posts",
-      "mine": "👤 My posts",
-      "recruiting": "📢 Open only",
-      "active_reactions": "🔥 Hot reactions",
-      "open_meetup": "🤝 Go-together open",
-      "weekend": "📅 This weekend",
-      "fresh": "✨ Recently updated"
-    },
-    "tags": {
-      "solo_friendly": "Good solo",
-      "friends_friendly": "Good with friends",
-      "photo_spot": "Photo spot",
-      "waiting": "Has wait",
-      "foreigner_friendly": "Foreigner-friendly"
-    },
-    "quality_signals": {
-      "organized": "✨ Detailed review",
-      "active": "🔥 High engagement",
-      "asset": "💜 Follow-up tips",
-      "mate": "🤝 Meetup active"
-    },
-    "nav_summary": {
-      "all": "You are viewing every story in {{tab}}.",
-      "active_reactions": "These {{tab}} posts are getting the hottest reactions.",
-      "open_meetup": "These {{tab}} posts are open for going together.",
-      "weekend": "Check {{tab}} ideas that fit this weekend.",
-      "default": "Showing {{sub}} {{tab}} posts first."
-    },
-    "next_actions": {
-      "mine_result": {
-        "badge": "Add follow-up tip",
-        "desc": "Have you visited already? Leave a short tip for the next person.",
-        "cta": "Add tip"
-      },
-      "mine_active": {
-        "badge": "Reactions surging",
-        "desc": "A lot of people are paying attention to your post. Take a look.",
-        "cta": "View reactions"
-      },
-      "reacted_survey": {
-        "badge": "Need input",
-        "desc": "People are coordinating opinions. Share a day or time that works for you.",
-        "cta": "Leave input"
-      },
-      "saved_result": {
-        "badge": "Updated",
-        "desc": "A saved post now has a new tip.",
-        "cta": "Check it"
-      }
-    },
-    "actions": {
-      "delete_confirm": "Delete this post?"
-    },
-    "errors": {
-      "update_failed": "Could not update the review. Please try again.",
-      "post_failed": "Could not publish the review. {{message}}"
-    },
-    "states": {
-      "fetch_failed_title": "Could not load posts",
-      "fetch_failed_desc": "Please try again in a moment.",
-      "fetch_failed_tip": "Open the page again to refresh the latest posts.",
-      "empty_title": "No posts yet",
-      "empty_desc": "Be the first to share a beauty salon review.",
-      "empty_tip": "Adding the salon name, treatment, booking flow, and service quality helps others decide faster.",
-      "no_results_title": "No posts match this view",
-      "no_results_desc": "Try another keyword or a lighter filter.",
-      "cta_write": "Write a review",
-      "cta_all": "View all"
-    },
-    "form": {
-      "category_hints": {
-        "beauty_review": "💡 Include the salon name, treatment experience, booking and service flow, foreigner support, and revisit intent.",
-        "food_review": "💡 Leave the menu, atmosphere, and wait time that fit before or after a beauty booking.",
-        "travel_review": "💡 Focus on routes, photo points, and how easy it was to visit before or after treatment.",
-        "meetup": "💡 Summarize the show time, ticket information, and why it is fun to go together.",
-        "help": "💡 Explain your booking, visit, or service question as clearly as possible."
-      },
-      "category_label": "Category",
-      "write_guide_title": {
-        "beauty_review": "Start with a beauty salon review",
-        "food_review": "Share a food spot that fits a beauty schedule",
-        "travel_review": "Share a sightseeing route that worked well before or after treatment",
-        "meetup": "Summarize the show or event briefly",
-        "help": "Ask a booking or visit question clearly"
-      },
-      "write_guide_body": {
-        "beauty_review": "The salon name, treatment experience, booking flow, service quality, foreigner support, and revisit intent help a lot before booking.",
-        "food_review": "Menu, atmosphere, and wait time make it easier to connect food reviews to a beauty day.",
-        "travel_review": "Photo points, travel time, and quick-stop reasons help the follow-up flow stay useful.",
-        "meetup": "Keep the show time, ticket details, and on-site mood short and clear.",
-        "help": "Describe your booking, service, or pre-visit question with enough detail to get a useful answer."
-      },
-      "title_label": {
-        "beauty_review": "Salon name or review title",
-        "default": "Place name or review title"
-      },
-      "title_placeholder": {
-        "beauty_review": "e.g. Lash perm review at OO Beauty in Gangnam",
-        "food_review": "e.g. Brunch cafe that worked well after treatment",
-        "travel_review": "e.g. Seongsu walk I enjoyed before and after treatment",
-        "meetup": "e.g. Let us go to this weekend exhibition together",
-        "help": "e.g. Please recommend a salon with good foreigner support"
-      },
-      "point_label": {
-        "beauty_review": "One-line satisfaction point",
-        "default": "One-line recommendation point"
-      },
-      "point_placeholder": {
-        "beauty_review": "e.g. Fast booking replies and comfortable guidance for foreigners",
-        "food_review": "e.g. Short wait and a clean meal",
-        "travel_review": "e.g. Easy to visit within an hour before or after treatment",
-        "meetup": "e.g. More fun to see together than alone",
-        "help": "e.g. I want to know if English consultation is available"
-      },
-      "desc_label": {
-        "beauty_review": "Treatment review",
-        "default": "Detailed review"
-      },
-      "desc_placeholder": {
-        "beauty_review": "Describe the treatment, booking flow, service, satisfaction, foreigner support, and whether you would revisit.",
-        "food_review": "Describe the menu, mood, wait time, and why it matched your beauty day well.",
-        "travel_review": "Describe the route, photo spots, travel time, and why it worked well before or after treatment.",
-        "meetup": "Describe the event and why you want to go together.",
-        "help": "Describe your question and current situation clearly."
-      },
-      "place_label": {
-        "beauty_review": "Salon location (optional)",
-        "default": "Place (optional)"
-      },
-      "place_placeholder": {
-        "beauty_review": "e.g. 3F, OO Beauty, Gangnam Station",
-        "default": "e.g. Exit 11, Gangnam Station"
-      },
-      "place_help": {
-        "beauty_review": "Adding the salon location makes the booking route easier to understand.",
-        "default": "A map view is attached together."
-      },
-      "region_label": "Area",
-      "region_placeholder": "e.g. Gangnam, Mapo",
-      "vibe_label": "Pick vibes",
-      "meetup_toggle_title": "Open for going together",
-      "meetup_toggle_desc": "Receive interest signals from other people.",
-      "safety_title": "🔒 Safety guide",
-      "safety_item_1": "• Do not share personal contact info right away. Check reactions in comments first.",
-      "safety_item_2": "• We recommend arranging plans around public places.",
-      "image": {
-        "label": "Add images",
-        "title": "You can upload up to {{count}} images.",
-        "file_only_alert": "Only image files can be added.",
-        "limit_alert": "You can upload up to {{count}} images.",
-        "load_failed_alert": "Couldn't load the image.",
-        "button_loading": "Preparing images...",
-        "button_limit": "{{count}} selected",
-        "button_add_more": "Add more images",
-        "button_select": "Select images",
-        "preview_alt": "Upload preview {{index}}",
-        "preview_name": "Selected image {{index}}",
-        "preview_desc": "Image {{index}}. Check the preview before posting.",
-        "remove": "Remove",
-        "saved_name": "Uploaded image {{index}}",
-        "guides": {
-          "beauty_review": "Share treatment results or the salon atmosphere if you can.",
-          "food_review": "Add food shots or a photo of the place if it helps.",
-          "travel_review": "Capture the mood of the place or a memorable point.",
-          "meetup": "Share the on-site atmosphere or why it would be fun together.",
-          "help": "Upload a reference image too if it helps explain."
-        }
-      },
-      "summary_title": "Review summary",
-      "summary_region_type": "Area / type",
-      "summary_point": "Point",
-      "summary_meetup": "Going together",
-      "summary_enabled": "Open",
-      "summary_disabled": "Closed",
-      "submit_with_reactions": "Post review and gather reactions",
-      "submit_beauty": "Share beauty review",
-      "submit_default": "Share review"
-    },
-    "quick_entry": {
-      "beauty": {
-        "label": "Beauty reviews",
-        "sub": "Booking, service, satisfaction"
-      },
-      "food": {
-        "label": "Food reviews",
-        "sub": "Beauty day add-on"
-      },
-      "travel": {
-        "label": "Sightseeing reviews",
-        "sub": "Before and after treatment route"
-      },
-      "write": {
-        "label": "Write review",
-        "sub": "Share beauty experience"
-      },
-      "browse": {
-        "label": "Browse",
-        "sub": "Popular spots now"
-      },
-      "recruiting": {
-        "label": "Open plans",
-        "sub": "Find company"
-      },
-      "weekend": {
-        "label": "Weekend plans",
-        "sub": "Active spots"
-      },
-      "record": {
-        "label": "Write",
-        "sub": "Share notes"
-      }
-    },
-    "activity": {
-      "label": "My activity:",
-      "summary": "Saved {{saved}}, joined {{reacted}}",
-      "new_updates": "✨ New updates!"
-    },
-    "sort": {
-      "latest": "Newest",
-      "reactions": "Most reactions",
-      "draft": "Draft activity"
-    },
-    "defaults": {
-      "region": "Seoul"
+      "all": "全部",
+      "saved": "我的收藏",
+      "reacted": "參與過的",
+      "mine": "我的發佈",
+      "recruiting": "招募中",
+      "active_reactions": "熱門動態",
+      "open_meetup": "開放中的聚會",
+      "weekend": "本週末",
+      "fresh": "最新消息"
     },
     "status": {
-      "reviews": "Review live",
-      "reacting": "Getting reactions",
-      "surveying": "Gathering input",
-      "drafting": "Drafting plan",
-      "closed": "Closed"
+      "reviews": "評價中",
+      "reacting": "招募中",
+      "surveying": "確認意向",
+      "drafting": "準備中",
+      "closed": "招募結束"
     },
-    "card": {
-      "title_prefix": {
-        "beauty_review": "[Beauty review]",
-        "food_review": "[Food review]",
-        "travel_review": "[Sightseeing review]"
-      },
-      "result_badge": "📝 Follow-up tip",
-      "default_vibe": "✨ Good vibe",
-      "open_meetup_badge": "🤝 Open to go together",
-      "fresh_badges": {
-        "comment": "💬 Active",
-        "update": "✨ Tip update"
-      },
-      "draft_status": {
-        "active": "🔥 Draft active",
-        "forming": "📝 Draft forming",
-        "preparing": "🤝 Draft starting"
-      },
-      "draft_desc": {
-        "active": "Reactions are clustering around times and dates.",
-        "forming": "A possible plan is starting to form.",
-        "preparing": "People are still split on timing."
-      },
-      "cta": {
-        "review": "Go together?",
-        "join": "Join"
-      },
-      "owner_reactions": {
-        "region": "📊 {{region}} / {{count}} reactions",
-        "join": "📊 {{count}} join signals"
-      },
-      "more_region": "📍 See other reviews and meetup posts in {{region}} →"
+    "tags": {
+      "solo_friendly": "一人友好",
+      "friends_friendly": "適合朋友",
+      "photo_spot": "拍照打卡",
+      "waiting": "需排隊",
+      "foreigner_friendly": "外國友人友好"
     },
-    "fab": {
-      "beauty": "Write beauty review",
-      "meetup": "Write show/event post"
+    "states": {
+      "fetch_failed_desc": "內容加載失敗，請檢查網絡。",
+      "fetch_failed_title": "網絡錯誤",
+      "fetch_failed_tip": "請嘗試刷新頁面。",
+      "empty_title": "目前還沒有貼文",
+      "empty_desc": "快來發佈第一條動態吧！",
+      "empty_tip": "點擊右下角按鈕開始發佈。",
+      "no_results_title": "未找到相關結果",
+      "no_results_desc": "請嘗試更換其他關鍵詞。",
+      "cta_write": "發表第一篇貼文",
+      "cta_all": "查看全部"
     },
-    "time": {
-      "just_now": "Just now"
+    "quality_signals": {
+      "organized": "整理精良",
+      "active": "互動活躍",
+      "asset": "資訊豐富",
+      "mate": "優秀夥伴"
     },
     "toasts": {
-      "save_removed": "Saved post removed.",
-      "save_added": "Review saved! ⭐",
-      "deleted": "Post deleted.",
-      "updated": "Post updated.",
-      "created": "New review posted! 🎉",
-      "region_collected": "📍 Collected posts related to {{region}}."
+      "save_added": "已加入收藏。",
+      "save_removed": "已移除收藏。",
+      "deleted": "已刪除。",
+      "updated": "已更新。",
+      "submitted": "發佈成功。",
+      "region_collected": "只看{{region}}的貼文"
     },
-    "report": {
-      "modal_title": "Choose a report reason",
-      "report_action": "Report",
-      "cancel": "Cancel",
-      "item_post": "post",
-      "item_comment": "comment",
-      "submitted_alert": "The {{item}} was reported.\nReason: {{reason}}\nWe will review it shortly.",
-      "reasons": {
-        "ad_spam": "Looks like advertising or promotion",
-        "offensive": "Contains offensive wording",
-        "contact": "Pushes private contact too hard",
-        "unsafe": "Feels unsafe",
-        "other": "Other"
-      }
+    "nav_summary": {
+      "all": "正在查看 {{tab}} 的全部內容",
+      "active_reactions": "{{tab}} 裡的熱門話題！",
+      "open_meetup": "{{tab}} 正在招募新夥伴",
+      "weekend": "{{tab}} 這個週末有安排嗎？",
+      "default": "{{tab}} 中按 {{sub}} 篩選的結果"
     },
+    "form": {
+      "select_category": "選擇分類",
+      "write_guide_title": {
+        "beauty_review": "分享您的美容體驗",
+        "food_review": "發現了什麼寶藏店鋪？",
+        "travel_review": "分享您的避雷/必去心得",
+        "meetup": "尋找有趣的小夥伴",
+        "meetup_recruitment": "正在尋找旅遊搭子嗎？",
+        "help": "有什麼需要幫忙的？"
+      },
+      "write_guide_body": {
+        "beauty_review": "描述一下您的項目滿意度同店鋪服務啦。",
+        "food_review": "分享一下口味、環境同排隊資訊啦。",
+        "travel_review": "路線、必備物品、交通等實用建議。",
+        "meetup": "描述一下時間、地點同內容。",
+        "meetup_recruitment": "寫低您的行程安排同對夥伴的要求。",
+        "help": "詳細描述您的問題，等小夥伴們提供幫助。"
+      },
+      "title_label": {
+        "beauty_review": "項目/主題",
+        "default": "標題"
+      },
+      "title_placeholder": {
+        "beauty_review": "例如：江南站層次修剪體驗",
+        "default": "正在猶豫寫點什麼嗎？"
+      },
+      "desc_label": {
+        "beauty_review": "詳細評價",
+        "default": "正文"
+      },
+      "desc_placeholder": {
+        "beauty_review": "詳細描述一下過程或最終效果啦。",
+        "food_review": "推薦幾個必點菜，講下理由。",
+        "travel_review": "分享一些對其他朋友有幫助的資訊。",
+        "meetup": "詳細說明聚會的計畫。",
+        "meetup_recruitment": "描述一下您想找什麼樣的夥伴。",
+        "help": "描述越詳細，越容易得到有用的回答喔。",
+        "default": "寫下您想分享的故事吧"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "添加對比照或店鋪環境照（最多4張）",
+          "food_review": "添加美食或店鋪照片（最多4張）",
+          "travel_review": "添加現場氛圍照（最多4張）",
+          "meetup": "添加聚會地點或相關照片（最多4張）",
+          "meetup_recruitment": "目的地或參考照片（最多4張）",
+          "help": "如果有助理解問題的照片就添加啦（最多4張）"
+        },
+        "saved_name": "已保存的圖片 {{index}}",
+        "file_only_alert": "僅支持上傳圖片格式。",
+        "limit_alert": "最多可上傳 {{count}} 張圖片。",
+        "load_failed_alert": "圖片加載失敗。",
+        "limit_label": "(最多 {{count}} 張)"
+      },
+      "category_hints": {
+        "beauty_review": "自由分享您的美容體驗。",
+        "food_review": "推薦您喜歡的美食店鋪。",
+        "travel_review": "分享您的獨家旅遊攻略。",
+        "meetup": "發起一個輕社交活動啦。",
+        "meetup_recruitment": "尋找行程契合的夥伴。",
+        "help": "有疑惑儘管提問。"
+      },
+      "region_label": "區域",
+      "region_placeholder": "例如：江南, 麻浦",
+      "submit": "發佈",
+      "write_title": "寫文章",
+      "edit_title": "編輯文章",
+      "image_label": "圖片附件",
+      "add_photo": "添加照片",
+      "preparing_images": "正在準備圖片...",
+      "cancel": "取消",
+      "category_label": "類別"
+    },
+    "detail": "貼文詳情",
     "detail_page": {
-      "loading": "Loading post...",
-      "hidden_post": "This post is hidden.",
-      "show_hidden": "Show again",
-      "not_found": "Post not found.",
-      "hide_post": "Hide this post",
-      "hide_comment": "Hide",
-      "save_post_aria": "Save post",
+      "loading": "內容加載中...",
+      "hidden_post": "該內容已被隱藏。",
+      "not_found": "貼文不存在。",
+      "show_hidden": "查看隱藏內容",
+      "hide_post": "隱藏此貼文",
       "freshness": {
-        "realtime": "🔥 Reactions from travelers are coming in right now.",
-        "updated": "✨ The author added new tips after visiting.",
-        "active": "💬 People are still actively discussing this post.",
-        "calm": "🍃 It is calm now, but still useful to come back to anytime."
+        "realtime": "實時活躍中",
+        "updated": "資訊已更新",
+        "active": "活躍貼文",
+        "calm": "陳舊內容"
       },
       "strengths": {
-        "title": "🎯 Key points of this post",
-        "organized": "✨ Detailed review",
-        "active": "🔥 Active reactions",
-        "visited_tip": "🧡 Real visit tip",
-        "new": "🌱 Fresh update"
-      },
-      "mini_signal_tag": "🤝 Looking for company",
-      "primary_action": {
-        "review": "💬 Leave feedback",
-        "join": "🤝 Join"
-      },
-      "save": {
-        "default": "☆ Save",
-        "saved": "⭐ Saved"
+        "title": "內容亮點",
+        "organized": "邏輯清晰",
+        "active": "互動頻繁",
+        "visited_tip": "包含隱藏攻略",
+        "new": "新鮮速報"
       },
       "checklist": {
-        "title": "💡 Before you go",
-        "recommended": "✅ Best for",
-        "required": "📌 Must check",
-        "comment_check": "Check comment reactions",
-        "read_details": "Read details carefully"
+        "title": "小提醒",
+        "recommended": "建議人群",
+        "required": "必讀項",
+        "comment_check": "看下評論區",
+        "read_details": "查看詳情"
+      },
+      "mini_signal_tag": "招募中",
+      "primary_action": {
+        "review": "寫評價",
+        "join": "我有興趣"
+      },
+      "save": {
+        "saved": "已收藏",
+        "default": "收藏"
       },
       "meetup_safety": {
-        "title": "🛡️ Safe meetup guide",
-        "item_1": "Meet in public places such as cafes or restaurants.",
-        "item_2": "Talk enough in comments before sharing contact information."
+        "title": "安全社交指南",
+        "item_1": "建議在公共場所見面。",
+        "item_2": "注意保護個人隱私資訊。"
       },
-      "body_title": "Details",
-      "related": {
-        "bundle_title": "📍 More stories in {{region}}",
-        "this_region": "this area",
-        "more": "See more {{region}} reviews →",
-        "title": "✨ Similar reviews",
-        "meta": {
-          "review": "Review",
-          "gathering": "Plan"
-        },
-        "empty_line_1": "There are no other reviews in this area yet.",
-        "empty_line_2": "Why not leave the first related update?"
-      },
-      "comments_title": "Comments & go together",
-      "author_panel": {
-        "title": "📊 My post reaction report",
-        "badge": "Author only",
-        "stats": {
-          "total": "Total signals",
-          "total_value": "{{count}} people",
-          "time": "Top time",
-          "time_pending": "Coordinating",
-          "intent": "Top intent",
-          "recent": "Recent signals",
-          "recent_value": "+{{count}}"
-        },
-        "guide": {
-          "weekend": "This weekend is getting the most reactions. Try suggesting a specific time.",
-          "vote": "Opinions are split. Offer a few date options and ask people to choose.",
-          "share": "People are starting to gather. Thank them and share the exact place once more."
-        },
-        "action": {
-          "weekend": "Coordinate weekend time",
-          "vote": "Start a date vote",
-          "share": "Thank & share place"
-        },
-        "draft": {
-          "weekend": "This weekend has the most interest. How does Saturday around 2 PM sound?",
-          "vote": "There are several options. Which works better this week, Saturday or Sunday?",
-          "share": "Thanks for the interest. I will share the exact location once more in the comments."
-        },
-        "final_action": "Start final coordination in comments",
-        "final_draft": "Everyone, shall we finalize who is going this weekend in the comments?",
-        "footer": "This is not a confirmed meetup yet. Please keep coordinating in the comments."
-      },
-      "status_controls": {
-        "title": "⚙️ Change progress status"
-      },
-      "result": {
-        "title": "📝 Wrap-up after closing / visiting",
-        "help": "💡 A short wrap-up helps the next person a lot. Even one useful tip keeps this post valuable longer.",
-        "placeholder": "Did you actually go? Share how it went and what tip the next visitor should know.",
-        "save_visited": "✅ Visited & save result",
-        "save_only": "📋 Save result only",
-        "saved_alert": "Follow-up result saved!",
-        "tips_visited": "If you visit next, be sure to check the author tips.",
-        "tips_retry": "If plans changed, try opening the meetup again with a new schedule."
-      },
-      "author_safety": {
-        "title": "🛡️ Safety guide for authors",
-        "item_1": "For a first meetup, guide people to a public place such as a cafe or restaurant.",
-        "item_2": "Coordinate enough in public comments before sharing private contact information.",
-        "item_3": "If someone makes an uncomfortable request, use the report feature."
-      },
-      "signal_summary": {
-        "title": "📝 Tentative meetup draft",
-        "status": {
-          "active": "Draft active",
-          "forming": "Draft forming",
-          "preparing": "Draft preparing"
-        },
-        "time_split": "People are still split on timing, so more coordination is needed in comments.",
-        "time_focus": "A shared plan to go here on {{time}} is starting to form.",
-        "time_flexible": "Many reactions are still about coordinating the date, so the plan is flexible.",
-        "desc": "There are {{count}} reactions from people who want to go together for {{topic}}.",
-        "topic_review": "visiting this reviewed place",
-        "topic_outing": "this sightseeing or event plan",
-        "schedule_title": "📅 Schedule suggestions",
-        "preview_title": "👥 Signal preview (latest)",
-        "group_count": "{{count}} joining",
-        "reaction_fallback": "I want to join!",
-        "join_time": "Join the {{time}} plan",
-        "notice_1": "⚠️ This is not a confirmed meetup yet.",
-        "notice_2": "🗨️ Do not share private contact information. Talk in comments first.",
-        "join_cta": "Leave a signal for this draft"
-      },
-      "empty_comments": "No comments yet.",
-      "signal_tag": "Together signal",
-      "signal_content_default": "Shared an interest signal.",
-      "bottom_safety": {
-        "title": "🛡️ Safe meetup promise",
-        "item_1": "Do not share private contact information right away. Coordinate enough in comments first.",
-        "item_2": "We recommend a first meetup in public places such as cafes or galleries.",
-        "item_3": "Firmly refuse requests for money or personal information."
-      },
+      "body_title": "正文內容",
+      "like": "讚",
+      "dislike": "爛",
+      "like_alert": "已按讚！",
+      "dislike_alert": "已按爛。",
+      "comments_title": "評論列表",
       "comment_input": {
-        "default": "Write a comment...",
-        "optional": "Extra message (optional)",
-        "send": "Send"
+        "default": "發表評論...",
+        "optional": "想對樓主說點什麼？ (選填)",
+        "send": "發佈",
+        "open_btn": "寫評論",
+        "cancel": "取消"
       },
       "signal_intents": {
-        "interested": "I would like to go too",
-        "available_this_week": "I am free this week",
-        "join_if_schedule_fits": "I will join if the time works",
-        "thanks": "Thanks for the information",
-        "question": "I have a question"
+        "interested": "我也想去",
+        "available_this_week": "這週有空",
+        "join_if_schedule_fits": "時間合適就一起",
+        "thanks": "感謝分享資訊",
+        "question": "我有疑問"
       },
       "signal_times": {
-        "this_week": "This week",
-        "this_weekend": "This weekend",
-        "next_week": "Next week",
-        "schedule_coordination": "Coordinate date"
+        "this_week": "這週",
+        "this_weekend": "這週末",
+        "next_week": "下週",
+        "schedule_coordination": "時間再議"
+      },
+      "author_panel": {
+        "title": "發佈者管理平台",
+        "badge": "發佈者",
+        "stats": {
+          "total": "總互動數",
+          "total_value": "{{count}}個",
+          "time": "熱門時間",
+          "time_pending": "統計中",
+          "intent": "主要意向",
+          "recent": "24小時內",
+          "recent_value": "{{count}}個"
+        },
+        "guide": {
+          "weekend": "週末的反響最熱烈，建議發佈具體行程。",
+          "vote": "大家的空閒時間比較多元，發起個投票啦。",
+          "share": "分享更多細節來吸引關注。"
+        },
+        "action": {
+          "weekend": "建議週末行程",
+          "vote": "發起投票",
+          "share": "更新附加提示"
+        },
+        "draft": {
+          "weekend": "這週六下午兩點見面點樣呀？",
+          "vote": "大家幾時有空？投票啦！",
+          "share": "再同大家分享一個額外嘅攻略！"
+        },
+        "final_draft": "招募已完成。請加入群組方便後續聯繫！",
+        "final_action": "關閉招募",
+        "footer": "Kello 致力於打造互連、安全的社群文化。"
+      },
+      "status_controls": {
+        "title": "修改招募狀態"
+      },
+      "result": {
+        "title": "填寫反饋與建議",
+        "help": "分享您到店後的真實體驗或小貼士，這會對其他夥伴很有幫助。",
+        "placeholder": "在這裡寫下您的真實反饋...",
+        "save_visited": "保存並分享攻略",
+        "save_only": "僅保存資訊"
+      },
+      "author_safety": {
+        "title": "安全建議",
+        "item_1": "請勿在正文中直接留聯繫方式。",
+        "item_2": "提防涉及金錢的私下轉帳要求。",
+        "item_3": "首選在站內與高信譽用戶溝通。"
+      },
+      "signal_summary": {
+        "title": "參與情況彙總",
+        "status": {
+          "active": "火熱招募中",
+          "forming": "組隊中",
+          "preparing": "準備發起"
+        },
+        "time_split": "大家的意向時間較為分散。",
+        "time_focus": "大多數人意向 {{time}}。",
+        "time_flexible": "有很多時間可以靈活調整。",
+        "desc": "目前有 {{count}} 人對 {{topic}} 表示了興趣。",
+        "topic_review": "攻略分享",
+        "topic_outing": "參與組隊",
+        "schedule_title": "選擇心儀的時間"
+      },
+      "status": {
+        "REVIEWS": "評價完成",
+        "REACTING": "招募中",
+        "SURVEYING": "意向確認",
+        "DRAFTING": "準備中",
+        "CLOSED": "招募結束"
+      },
+      "tags": {
+        "solo_friendly": "一人無憂",
+        "friends_friendly": "聚會首選",
+        "photo_spot": "容易出片",
+        "waiting": "建議預留時間",
+        "foreigner_friendly": "溝通無障礙"
+      },
+      "empty_comments": "暫無評論。來搶頭香吧！",
+      "hide_comment": "隱藏此評論"
+    },
+    "actions": {
+      "delete_confirm": "確定要刪除嗎？"
+    },
+    "errors": {
+      "login_required": "請先登錄。",
+      "post_failed": "發佈失敗: {{message}}"
+    },
+    "report": {
+      "report_action": "舉報",
+      "success": "已收到您的舉報。",
+      "reasons": {
+        "ad_spam": "廣告騷擾",
+        "offensive": "不當言論",
+        "contact": "私下導流",
+        "unsafe": "危險行為",
+        "other": "其他"
       }
+    },
+    "comments": "評論",
+    "time": {
+      "just_now": "剛剛"
+    },
+    "write_post": "發文",
+    "edit": "編輯",
+    "posting": "提交中...",
+    "defaults": {
+      "region": "首爾"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "一起做美容"
+      },
+      "flash_meetup": {
+        "label": "快閃聚會"
+      },
+      "beauty": {
+        "label": "美容評價"
+      },
+      "food": {
+        "label": "美食推薦"
+      },
+      "travel": {
+        "label": "旅行提示"
+      },
+      "write": {
+        "label": "發文"
+      },
+      "browse": {
+        "label": "瀏覽",
+        "sub": "熱門貼文"
+      },
+      "recruiting": {
+        "label": "招募中",
+        "sub": "尋找旅伴"
+      },
+      "weekend": {
+        "label": "這個週末",
+        "sub": "共享行程"
+      },
+      "record": {
+        "label": "記錄",
+        "sub": "日常分享"
+      }
+    },
+    "fab": {
+      "create_post": "發文"
+    },
+    "sort": {
+      "latest": "最新排序",
+      "reactions": "最多互動",
+      "draft": "最活躍招募"
+    },
+    "card": {
+      "default_vibe": "氣氛好",
+      "title_prefix": {
+        "beauty_review": "[美容]",
+        "food_review": "[美食]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "查看評價",
+        "join": "參與"
+      },
+      "result_badge": "評價完成",
+      "open_meetup_badge": "可聚會",
+      "fresh_badges": {
+        "comment": "實時互動中",
+        "update": "剛剛更新"
+      },
+      "draft_status": {
+        "active": "活躍交流中",
+        "forming": "人員組成中",
+        "preparing": "希望參與中"
+      },
+      "draft_desc": {
+        "active": "已經有很多人感興趣！",
+        "forming": "人們正在慢慢聚集。",
+        "preparing": "成為第一個表達興趣的人。"
+      },
+      "owner_reactions": {
+        "region": "正在與{{count}}人交流關於{{region}}",
+        "join": "{{count}}人希望參與"
+      },
+      "more_region": "查看更多關於{{region}}的故事"
     }
   },
   "help_page": {
-    "title": "Help Center",
+    "title": "幫助中心",
     "medical_title": "醫療幫助",
-    "medical_desc": "Nearby clinics & symptom cards",
+    "medical_desc": "附近的診所與症狀卡片",
     "lost_title": "遺失物品",
-    "lost_desc": "Step-by-step recovery guide",
+    "lost_desc": "一步步找回遺失物的指南",
     "police_title": "警察/犯罪",
-    "police_desc": "Report & get assistance",
+    "police_desc": "報案與獲取援助",
     "interp_title": "口譯服務",
-    "interp_desc": "1330 helpline & translation apps",
-    "taxi": "Taxi",
-    "subway": "Subway",
-    "airport": "Airport",
-    "street": "Street",
+    "interp_desc": "1330 熱線與翻譯應用",
+    "taxi": "出租車",
+    "subway": "地鐵",
+    "airport": "機場",
+    "street": "街道",
     "interp_actions": {
-      "open_papago": "Open Papago",
-      "open_google_translate": "Open Google Translate"
+      "open_papago": "打開 Papago",
+      "open_google_translate": "打開 Google 翻譯"
     },
     "interp": {
-      "papago_desc": "Open Naver Papago for quick translation and text support.",
-      "google_desc": "Open Google Translate when you need another quick translation option."
+      "papago_desc": "打開 Naver Papago 以獲取快速翻譯與文本支持。",
+      "google_desc": "在需要另一個快速翻譯選項時打開 Google 翻譯。"
     },
     "medical_header": "醫療 · 急救指南",
     "police_header": "警察 · 安全指南",
@@ -1715,5 +1627,209 @@
     "lang_ar": "العربية",
     "lang_pt": "Português",
     "lang_ru": "Русский"
+  },
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
+    },
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
   }
 }

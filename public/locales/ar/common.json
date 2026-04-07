@@ -1,568 +1,206 @@
 {
-  "common": {
-    "welcome": "مرحباً أيها المسافر",
-    "greeting": "صباح الخير",
-    "login": "تسجيل الدخول",
-    "signup": "إنشاء حساب",
-    "today": "اليوم",
-    "move": "تنقل",
-    "book": "حجز",
-    "chat": "دردشة",
-    "my": "حسابي",
-    "current_operation": "يعمل الآن",
-    "live": "مباشر",
-    "recommended": "قريب منك",
-    "based_on_location": "بناءً على موقعك",
-    "start_nav": "بدء الملاحة",
-    "delay_10m": "تأخير +10 دقائق",
-    "confirmed": "تم التأكيد",
-    "payment_completed": "اكتملت الدفعة",
-    "weather_clear": "صافٍ",
-    "back": "رجوع",
-    "community_nav": "المجتمع",
-    "today_nav": "مسار الرحلة",
-    "my_nav": "حسابي",
-    "home_nav": "الرئيسية",
-    "explore_nav": "استكشاف",
-    "planner_nav": "المخطط",
-    "help_nav": "مركز المساعدة"
-  },
-  "transport": {
-    "moving_to": "متجه إلى {{dest}}",
-    "remaining": "متبقي",
-    "line_2_direction": "الخط 2 • اتجاه City Hall",
-    "departed": "غادر",
-    "passing_now": "يمر الآن...",
-    "current": "الحالي",
-    "get_off_at": "انزل في",
-    "exit_3": "مخرج 3",
-    "getting_off_here": "سأنزل هنا",
-    "stations": {
-      "samseong": "سامسيونغ",
-      "seolleung": "سيولونغ",
-      "yeoksam": "يوكسام",
-      "gangnam": "كانغنام",
-      "gyodae": "كيوداي",
-      "seocho": "سيوتشو",
-      "seongsu": "سيونغسو",
-      "hongdae": "هونغداي",
-      "jamsil": "جامسيل",
-      "konkuk": "جامعة كونكوك",
-      "pangyo": "بانغيو"
-    }
-  },
-  "beauty_explore": {
-    "hero_title": "استكشاف حجوزات التجميل",
-    "hero_desc": "اختر فئة لاستكشاف أدق للحجوزات. يمكنك الآن التحقق من جميع صالونات التجميل.",
-    "hero_title_with_category": "ابدأ حجز {{category}} الآن",
-    "hero_subtitle_desc": "اختر المنطقة والمتجر والوقت للمتابعة.",
-    "hero_guide_no_category": "اختيار فئة من الصفحة الرئيسية يؤدي إلى أفضل تدفق للحجز. أنت تشاهد حالياً جميع صالونات التجميل.",
-    "hero_flow_step_category": "تحقق من الفئة",
-    "hero_flow_step_region": "اختر المنطقة",
-    "hero_flow_step_store": "اختر المتجر",
-    "hero_flow_step_time": "تأكيد الوقت",
-    "hero_flow_aria_label": "دليل الحجز السريع",
-    "region_filter_title": "اختر منطقتك المفضلة",
-    "region_all": "كل المناطق",
-    "step_indicator_label": "خطوات حجز التجميل",
-    "step_1": "اختيار المتجر",
-    "step_2": "اختيار الوقت",
-    "step_3": "تأكيد",
-    "step_4": "إدخال المعلومات",
-    "step_5": "مكتمل",
-    "form_name": "الاسم",
-    "form_name_placeholder": "برجاء إدخال اسمك",
-    "form_phone": "وسيلة الاتصال",
-    "form_phone_placeholder": "على سبيل المثال: 010-1234-5678",
-    "form_request": "طلب",
-    "form_request_placeholder": "اذكر النمط المطلوب أو أي طلبات خاصة",
-    "agreement_confirm": "لقد راجعت معلومات الحجز المختارة.",
-    "agreement_confirm_desc": "أفهم أنه قد يتم تعديل الأوقات بناءً على توفر المتجر.",
-    "agreement_privacy": "أوافق على تلقي جهات اتصال الدليل للحجز.",
-    "agreement_privacy_desc": "أوافق على تقديم معلومات الاتصال للتأكيد والتغييرات.",
-    "toast_addon_limit": "يمكن اختيار خيارين إضافيين كحد أقصى.",
-    "toast_copy_hint": "اضغط لفترة طويلة على {{label}} للنسخ.",
-    "toast_select_time": "اختر وقتاً لـ ",
-    "toast_check_info": "تحقق من معلومات الحجز مرة أخرى.",
-    "toast_submit_error": "فشل في حفظ الحجز. حاول مرة أخرى.",
-    "label_designer_default": "خيار المتجر",
-    "label_service_default": "قبل الاختيار",
-    "label_addon_default": "بدون اختيار",
-    "label_select_prompt": "اختر حجزاً لمشاهدة التفاصيل.",
-    "label_price_from": "من",
-    "label_today": "اليوم",
-    "label_tomorrow": "غداً",
-    "label_booking_unit": "وون",
-    "btn_continue": "احجز الآن",
-    "btn_submit": "إرسال الطلب",
-    "btn_reset": "تعديل الحجز",
-    "btn_close": "إغلاق",
-    "completion_title": "تم إرسال طلب الحجز!",
-    "completion_desc1": "سنخطرك بعد أن يتحقق المتجر من التوفر.",
-    "completion_desc2": "يرجى ملاحظة أنه لم يتم تأكيده حتى تتلقى إشعار تأكيد.",
-    "completion_desc3": "تتبع التقدم في أي وقت في قائمة حجوزاتي.",
-    "label_rating": "التقييم",
-    "label_review": "المراجعات",
-    "btn_select_time": "اختر وقت الحجز",
-    "btn_reselect_time": "إعادة اختيار وقت الحجز",
-    "empty_store_title": "لا توجد متاجر تطابق المعايير.",
-    "empty_store_desc": "جرب منطقة أخرى أو فئة مختلفة.",
-    "booking_panel_title": "اختر التاريخ والوقت",
-    "booking_panel_desc": "اختر وقتاً للمتجر وتابع للتأكيد.",
-    "booking_empty_title": "اختر متجراً أولاً.",
-    "booking_empty_desc": "اضغط على `اختر وقت الحجز` في بطاقة المتجر أعلاه.",
-    "booking_not_found_title": "لم يتم العثور على أوقات متاحة.",
-    "booking_not_found_desc": "اختر متجراً آخر أو أعد تحميل الأوقات.",
-    "booking_date_label": "التاريخ",
-    "booking_time_label": "الوقت",
-    "booking_no_date": "لا توجد تواريخ قابلة للاختيار بعد.",
-    "booking_no_time_wait": "اختر تاريخاً أولاً.",
-    "booking_no_slots": "لا توجد أوقات متاحة لهذا التاريخ.",
-    "summary_category": "الفئة",
-    "summary_store": "المتجر",
-    "summary_region": "المنطقة",
-    "summary_date": "التاريخ",
-    "summary_time": "الوقت",
-    "summary_hint": "اختر التاريخ والوقت للمتابعة.",
-    "summary_btn": "تحقق من معلومات الحجز",
-    "confirm_title": "تأكيد المعلومات وإدخال التفاصيل",
-    "confirm_desc": "املأ التفاصيل للحصول على بطاقة طلب جاهزة للعرض.",
-    "btn_edit": "تعديل معلومات الحجز",
-    "confirm_empty_title": "الخطوة التالية لم تفتح بعد.",
-    "confirm_empty_desc": "اضغط على `تحقق من معلومات الحجز` after picking date/time.",
-    "confirm_review_error_title": "تحقق من معلومات الحجز مرة أخرى.",
-    "confirm_review_error_desc": "يتطلب المتجر والتاريخ والوقت.",
-    "confirm_price_hint": "السعر المقدر هو للعرض فقط. قد يختلف الدفع النهائي.",
-    "label_no_surcharge": "بدون رسوم إضافية",
-    "label_no_designer": "لا توجد معلومات عن المصمم حالياً.",
-    "label_designer_hint": "اختيار المصمم اختياري. اختيار المتجر هو البديل.",
-    "label_addon_limit": "الحد الأقصى 2",
-    "selected_confirmation": "التاريخ المختار: {{date}}"
-  },
-  "home": {
-    "title_korea": "كوريا اليوم",
-    "recommended_plans": "خطط السفر الموصى بها",
-    "plans": {
-      "2d": {
-        "title": "يومان: أساسيات سيول",
-        "label": "خطة يومين"
-      },
-      "3d": {
-        "title": "3 أيام: الثقافة الكورية والأسلوب",
-        "label": "خطة 3 أيام"
-      },
-      "5d": {
-        "title": "5 أيام: الجولة الكبرى",
-        "label": "خطة 5 أيام"
-      },
-      "request_custom_label": "مخصص",
-      "request_custom_title": "طلب خطة لـ {{days}} أيام",
-      "request_custom_toast": "تم طلب خطة مخصصة لـ {{days}} أيام! سيتواصل معك فريق الاستقبال قريباً."
-    },
-    "badge": "اختبر جمال كوريا",
-    "categories": {
-      "all": "الكل",
-      "beauty": "تجميل",
-      "food": "طعام",
-      "attraction": "معالم",
-      "event": "فعاليات",
-      "festival": "مهرجانات"
-    },
-    "cities": {
-      "seoul": "سيول",
-      "busan": "بوسان",
-      "jeju": "جيجو",
-      "incheon": "إنشيون",
-      "gyeongju": "كيونغجو"
-    }
-  },
-  "explore_page": {
-    "title": "استكشاف",
-    "select_city": "اختر مدينة",
-    "search_placeholders": {
-      "all": "ابحث عن التجميل، الطعام...",
-      "beauty": "ابحث عن الع이밥، الصالونات...",
-      "food": "ابحث عن المطاعم، الأطباق...",
-      "attraction": "ابحث عن القصور، المنتزهات...",
-      "event": "ابحث عن الحفلات، العروض...",
-      "festival": "ابحث عن المهرجانات..."
-    },
-    "distance_label": "المسافة:"
-  },
-  "help_page": {
-    "title": "دعم الطوارئ",
-    "medical_title": "المساعدة الطبية",
-    "medical_desc": "عيادات قريبة وبطاقات الأعراض",
-    "lost_title": "الأمتعة المفقودة",
-    "lost_desc": "دليل خطوة بخطوة للاسترداد",
-    "police_title": "الشرطة / الجريمة",
-    "police_desc": "الإبلاغ والحصول على المساعدة",
-    "interp_title": "الترجمة الفورية",
-    "interp_desc": "خط المساعدة 1330 وتطبيقات الترجمة",
-    "taxi": "تاكسي",
-    "subway": "مترو",
-    "airport": "مطار",
-    "street": "شارع",
-    "lost": {
-      "taxi_s1_t": "1. 영수증 확인",
-      "taxi_s1_d": "영수증에 기재된 카드사 번호나 차량번호로 기사님 연락처를 확보하세요.",
-      "taxi_s2_t": "2. 카드사 연락",
-      "taxi_s2_d": "결제한 카드의 고객센터에 전화하여 택시 승인 내역의 업체 연락처를 요청하세요.",
-      "taxi_s3_t": "3. تقرير للشرطة",
-      "taxi_s3_d": "اتصل بـ 112 وأبلغ عن المفقود بالرقم التسجيلي ووقت الركوب.",
-      "taxi_s4_t": "4. مركز مفقودات التاكسي",
-      "taxi_s4_d": "رابطة تاكسي سيول: 02-414-8090 (كوري فقط — استخدم 1330 للترجمة).",
-      "subway_s1_t": "1. 역무실 방문",
-      "subway_s1_d": "내린 직후라면 해당 역의 역무실을 즉시 방문하여 열차 칸 번호를 알리세요.",
-      "subway_s2_t": "2. 유실물 센터",
-      "subway_s2_d": "시간이 지났다면 각 호선별 유실물 센터에 연락하거나 방문하세요.",
-      "subway_s3_t": "3. تقديم تقرير إلكتروني",
-      "subway_s3_d": "يمكنك تقديم تقرير بالإنجليزية على الموقع الرسمي lost112.",
-      "airport_s1_t": "1. مكتب المفقودات مطار إنشيون",
-      "airport_s1_d": "المبنى 1: 032-741-3110 / المبنى 2: 032-741-3119. مفتوح 24 ساعة.",
-      "airport_s2_t": "2. مطار كيمبو",
-      "airport_s2_d": "الاتصال: 02-2660-2536. الموقع: B1F (내국인) / 3F (외국인).",
-      "airport_s3_t": "3. تقرير لشرطة المطار",
-      "airport_s3_d": "شرطة المطار متاحة 24 ساعة. الكاونتر في صالة الوصول.",
-      "street_s1_t": "1. أعد تتبع خطواتك",
-      "street_s1_d": "معظم المتاجر تحتفظ بالأشياء الماجدة. اسأل أقرب متجر.",
-      "street_s2_t": "2. الإبلاغ لأقرب مركز شرطة",
-      "street_s2_d": "(파출소) — الضباط لديهم مترجمون.",
-      "street_s3_t": "3. الاتصال على 112",
-      "street_s3_d": "أبلغ عن المفقود. يمكن للشرطة فحص كاميرات المراقبة."
-    },
-    "interp": {
-      "papago_desc": "أفضل ترجمة مجانية للكورية. يعمل بدون إنترنت مع وضع الكاميرا.",
-      "google_desc": "يدعم الصوت والكاميرا ووضع المحادثة. متاح بدون إنترنت."
-    },
-    "medical_header": "المساعدة الطبية والطوارئ",
-    "emergency_119_title": "الطوارئ (119)",
-    "emergency_119_desc": "الاتصال الفوري في حالات الطوارئ",
-    "consult_1339_title": "الاستشارة الطبية (1339)",
-    "consult_1339_desc": "دليل المستشفيات والاستشارات الطبية المتخصصة",
-    "symptoms_title": "وصف الأعراض",
-    "call_btn": "اتصال",
-    "medical": {
-      "medicines": {
-        "tylenol": "타이레놀",
-        "tylenol_desc": "해열, 진통, 근육통, 두통",
-        "cold": "종합감기약",
-        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
-        "digestive": "소화제",
-        "digestive_desc": "소화불량, 식체, 속쓰림"
-      },
-      "symptoms": {
-        "stomach": "ألم في البطن",
-        "fever": "حمى",
-        "injury": "إصابة",
-        "allergy": "حساسية",
-        "breathing": "صعوبة في التنفس",
-        "pain": "ألم في الصدر"
-      }
-    },
-    "police_header": "Police & Safety",
-    "police_contacts_section": "Police Contacts",
-    "police.report_call_title": "Police Report (112)",
-    "police.report_call_desc": "24/7 service, foreign language available",
-    "police.official_site_title": "Official Police Site",
-    "police.official_site_desc": "Cyber crime report & info",
-    "tourism_police_section": "Tourist Police",
-    "tourism_police_title": "Tourist Police Service",
-    "tourism_police_desc": "Available in Myeongdong, Insadong, Itaewon, etc.",
-    "interp_header": "Interpretation",
-    "interp_immediate_title": "Immediate Help",
-    "interp_hotline_title": "1330 Helpline",
-    "interp_hotline_desc": "Fastest official help for tourism help",
-    "interp_chat_label": "Chat Inquiry",
-    "interp_tools_title": "Translation Tools",
-    "lost_header": "Lost & Found",
-    "lost_where_title": "Where did you lose it?",
-    "lost_where_desc": "Select location for recovery steps",
-    "lost_quick_title": "Quick Lookup",
-    "lost112_label": "Lost112 Portal",
-    "embassy_label": "Find Embassy",
-    "lost_steps_title": "Lost in {{place}}",
-    "lost_go_lost112": "Search in Lost112",
-    "police": {
-      "report_call_title": "범죄 신고 (긴급)",
-      "report_call_desc": "24시간 서비스, 외국어 대응 가능",
-      "official_site_title": "경찰청 공식 사이트",
-      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
-    }
-  },
-  "home_beauty": {
+  "settings_page": {
     "hero": {
-      "eyebrow": "خدمة حجز الجمال",
-      "title": "التقط جمال كوريا\nفي جدولك الزمني",
-      "subtitle": "اختر خدمة التجميل واحجز مباشرة.",
-      "welcome": "{{name}}، يرجى اختيار خدمة.",
-      "welcome_user": "{{greeting}}، {{name}}! 👋"
-    },
-    "booking": {
-      "step": "الخطوة الأولية",
-      "title": "يرجى اختيار خدمة التجميل",
-      "description": ""
-    },
-    "categories": {
-      "hair": {
-        "label": "شعر",
-        "note": "قص، تجعيد، صبغ",
-        "summary": "احجز من تغيير الستايل إلى القص السريع."
-      },
-      "nail": {
-        "label": "أظافر",
-        "note": "جل، عناية، تركيب",
-        "summary": "اختر التصميم وانتقل للحجز."
-      },
-      "esthetic": {
-        "label": "تجميل",
-        "note": "عناية بالبشرة، نحت",
-        "summary": "قارن الصالونات واحجز."
-      },
-      "waxing": {
-        "label": "إزالة الشعر",
-        "note": "وجه، جسم، برازيلي",
-        "summary": "اعثر على الصالون المناسب بسرعة."
-      },
-      "makeup": {
-        "label": "مكياج",
-        "note": "يومي، تصوير، زفاف",
-        "summary": "اختر خدمة مكياج لمناسبتك."
-      },
-      "lash": {
-        "label": "رموش",
-        "note": "تركيب، تجعيد",
-        "summary": "من الطبيعي إلى الكثيف، اختر قائمتك."
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
       }
     },
-    "selection": {
-      "eyebrow": "كافة الفئات المختارة",
-      "tags": {
-        "mobile": "حجز عبر الجوال",
-        "comparison": "مقارنة الصالونات",
-        "inquiry": "استفسار فوري"
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
       },
-      "empty": "يرجى اختيار فئة أولاً. سيتم تفعيل زر بدء الحجز بعد الاختيار."
-    },
-    "cta": {
-      "hint": "اختر فئة لبدء الحجز",
-      "button": "ابدأ الحجز"
-    },
-    "interpreter_entry": {
-      "title": "مترجم فوري",
-      "description": "تواصل بسهولة مع الموظفين",
-      "cta": "فتح المترجم"
-    },
-    "location_sheet": {
-      "search_title": "ابحث في موقعك",
-      "search_result_count": "{{count}} نتائج لـ \"{{query}}\"",
-      "view_location": "عرض الموقع",
-      "view_location_desc": "تحقق من الموقع التفصيلي على الخريطة",
-      "call_taxi": "اتصل بـ K.Ride",
-      "google_maps_desc": "تحقق من مسارات العبور على خرائط جوجل"
-    },
-    "modals": {
-      "card_title": "📍 يرجى الذهاب إلى هذا العنوان",
-      "copy": "نسخ العنوان",
-      "copy_done": "تم النسخ!",
-      "close": "إغلاق"
-    },
-    "transport": {
-      "moving_to": "متجه إلى {{dest}}",
-      "remaining": "متبقي",
-      "line_2_direction": "الخط 2 • اتجاه City Hall",
-      "departed": "غادر",
-      "passing_now": "يمر الآن...",
-      "current": "الحالي",
-      "get_off_at": "انزل في",
-      "exit_3": "مخرج 3",
-      "getting_off_here": "سأنزل هنا",
-      "stations": {
-        "samseong": "سامسيونغ",
-        "seolleung": "سيولونغ",
-        "yeoksam": "يوكسام",
-        "gangnam": "كانغنام",
-        "gyodae": "كيوداي",
-        "seocho": "سيوتشو",
-        "seongsu": "سيونغسو",
-        "hongdae": "هونغداي",
-        "jamsil": "جامسيل",
-        "konkuk": "جامعة كونكوك",
-        "pangyo": "بانغيو"
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
       }
     },
-    "beauty_explore": {
-      "hero_title": "استكشاف حجوزات التجميل",
-      "hero_desc": "اختر فئة لاستكشاف أدق للحجوزات. يمكنك الآن التحقق من جميع صالونات التجميل.",
-      "hero_title_with_category": "ابدأ حجز {{category}} الآن",
-      "hero_subtitle_desc": "اختر المنطقة والمتجر والوقت للمتابعة.",
-      "hero_guide_no_category": "اختيار فئة من الصفحة الرئيسية يؤدي إلى أفضل تدفق للحجز. أنت تشاهد حالياً جميع صالونات التجميل.",
-      "hero_flow_step_category": "تحقق من الفئة",
-      "hero_flow_step_region": "اختر المنطقة",
-      "hero_flow_step_store": "اختر المتجر",
-      "hero_flow_step_time": "تأكيد الوقت",
-      "hero_flow_aria_label": "دليل الحجز السريع",
-      "region_filter_title": "اختر منطقتك المفضلة",
-      "region_all": "كل المناطق",
-      "step_indicator_label": "خطوات حجز التجميل",
-      "label_today": "اليوم",
-      "label_tomorrow": "غداً",
-      "label_rating": "التقييم",
-      "label_review": "التقييمات",
-      "label_price_from": "من",
-      "label_booking_unit": "وون",
-      "btn_select_time": "اختر وقت الحجز",
-      "btn_reselect_time": "إعادة اختيار الوقت",
-      "empty_store_title": "لا توجد متاجر تطابق المعايير.",
-      "empty_store_desc": "جرب منطقة أخرى أو فئة مختلفة.",
-      "booking_panel_title": "اختر التاريخ والوقت",
-      "booking_panel_desc": "اختر وقتاً للمتجر وتابع للتأكيد.",
-      "summary_btn": "تحقق من معلومات الحجز",
-      "btn_submit": "إرسال طلب الحجز",
-      "btn_edit": "تعديل المعلومات",
-      "completion_title": "تم إرسال طلب الحجز!"
-    }
-  },
-  "today_page": {
-    "title": "جدول اليوم",
-    "active_now": "جارٍ الآن",
-    "navigate": "الاتجاهات",
-    "booking_ref": "رقم الحجز: {{ref}}",
-    "next_up": "التالي",
-    "minutes_left": "يبدأ خلال {{mins}} دقيقة",
-    "depart_early": "الانطلاق الآن",
-    "timeline": "الجدول الزمني",
-    "departure_warning": "⚠️ يبدأ {{title}} خلال {{mins}} دقيقة — انطلق الآن!",
-    "empty": {
-      "title": "لا يوجد جدول لليوم",
-      "desc": "استكشف الأماكن لإضافتها إلى جدولك!",
-      "cta": "استكشاف الأماكن"
-    }
-  },
-  "my_page": {
-    "saved": {
-      "eyebrow": "محفوظاتي",
-      "title": "العناصر المحفوظة",
-      "subtitle": "عرض وإدارة الأماكن وخطط الرحلات المحفوظة.",
-      "header_cta": "استكشاف الأماكن",
-      "summary": {
-        "places": "أماكن",
-        "plans": "خطط",
-        "recent": "الأحدث"
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
       },
-      "summary_hint": "يتم حفظ العناصر محلياً على هذا الجهاز.",
-      "tabs": {
-        "places": "أماكن",
-        "plans": "خطط",
-        "recent": "الأحدث"
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
       },
-      "places": {
-        "title": "الأماكن المحفوظة",
-        "desc": "تحقق من الأماكن التي قمت بحفظها أثناء الاستكشاف.",
-        "fallback_title": "مكان {{id}}",
-        "source_plan": "من خطة الرحلة",
-        "source_saved": "العناصر المحفوظة",
-        "source_fallback": "بيانات تجريبية",
-        "source_id_only": "المعرف فقط",
-        "added": "تمت الإضافة إلى جدولك!"
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
       },
-      "plans": {
-        "title": "الخطط المحفوظة",
-        "desc": "عرض جداول رحلاتك الحالية والسابقة.",
-        "synced": "متزامن مع السحابة",
-        "empty": {
-          "title": "لا توجد خطط بعد",
-          "desc": "ابدأ في بناء رحلتك في المخطط."
-        }
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
       },
-      "recent": {
-        "title": "شوهد مؤخراً",
-        "desc": "الأماكن والخطط التيقمت بالتحقق منها مؤخراً.",
-        "type": {
-          "place": "مكان",
-          "plan": "خطة",
-          "community": "منشور"
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
         },
-        "empty": {
-          "title": "لا يوجد سجل مؤخراً",
-          "desc": "العناصر التي تشاهدها ستظهر هنا.",
-          "fallback": "السجل غير متاح على هذا الجهاز.",
-          "cta": "ابدأ التصفح"
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
         }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
       }
-    }
-  },
-  "interpreter_page": {
-    "back": "< عودة",
-    "title": "مترجم فوري",
-    "subtitle": "لغة الزائر هي لغة التطبيق؛ لغة المتجر ثابتة على الكورية.",
-    "onboarding": "عند إدخال الزائر، يترجم للكورية؛ وعند إدخال الموظف بالكورية، يترجم للغتك.",
-    "customer_lang": "لغة الزائر",
-    "staff_lang": "لغة المتجر (الكورية)",
-    "mic_preparing": "جاري تحضير الميكروفون",
-    "customer_transcribing": "جاري التعرف على صوت الزائر...",
-    "customer_recording": "جاري تسجيل صوت الزائر... انقر مرة أخرى للإنهاء",
-    "translating": "جاري الترجمة...",
-    "customer_speak_btn": "إدخال صوتي للزائر",
-    "staff_transcribing": "جاري التعرف على صوت الموظف...",
-    "staff_recording": "جاري تسجيل صوت الموظف... انقر مرة أخرى للإنهاء",
-    "staff_speak_btn": "إدخال صوتي للموظف",
-    "customer_input_label": "مدخلات الزائر",
-    "customer_placeholder": "اكتب ما قاله الزائر.",
-    "send": "إرسال",
-    "staff_input_label": "مدخلات الموظف",
-    "staff_placeholder": "اكتب ما قاله الموظف بالكورية.",
-    "voice_supported_hint": "سجل عبر الميكروفون أو اكتب النص أدناه.",
-    "voice_not_supported_hint": "هذا المتصفح لا يدعم الإدخال الصوتي. استخدم النص.",
-    "voice_recognizing": "جاري التعرف على الصوت.",
-    "voice_unrecognized_error": "تعذر التعرف على الصوت.",
-    "voice_failed_error": "فشل التعرف على الصوت.",
-    "mic_permission_status": "جاري التحقق من أذونات الميكروفون.",
-    "recording_status": "جاري التسجيل... الحد الأقصى {{seconds}} ثانية.",
-    "mic_unsupported_error": "لا يمكن الوصول للميكروفون.",
-    "input_required_customer": "يرجى إدخال جملة الزائر أولاً.",
-    "input_required_staff": "يرجى إدخال جملة الموظف أولاً.",
-    "translating_status": "جاري تجهيز الترجمة.",
-    "translation_failed_error": "فشلت الترجمة. حاول مرة أخرى.",
-    "empty_history_hint": "سجل المحادثات سيظهر هنا.",
-    "customer_role": "الزائر",
-    "staff_role": "الموظف",
-    "replay_btn_label": "إعادة تشغيل الترجمة",
-    "replay_not_supported_hint": "تشغيل الصوت غير مدعوم.",
-    "play": "تشغيل",
-    "translated_status": "تمت الترجمة",
-    "source_only_status": "الأصل فقط",
-    "voice_too_short_error": "يرجى التحدث لفترة أطول قليلاً."
-  },
-  "beauty_bookings": {
-    "lang_ko": "한국어",
-    "lang_en": "English",
-    "lang_ja": "日本語",
-    "lang_zh_cn": "简体中文",
-    "lang_zh_hk": "繁體中文",
-    "lang_vi": "Tiếng Việt",
-    "lang_th": "ไทย",
-    "lang_id": "Bahasa Indonesia",
-    "lang_ms": "Bahasa Melayu",
-    "interpreter_visit_context": "استخدام المترجم أثناء زيارة {{storeName}}",
-    "interpreter_visit_service_context": "استخدام المترجم لـ {{serviceName}} في {{storeName}}",
-    "lang_es": "Español",
-    "lang_fr": "Français",
-    "lang_de": "Deutsch",
-    "lang_ar": "العربية",
-    "lang_pt": "Português",
-    "lang_ru": "Русский"
-  },
-  "community_page": {
-    "title": "المجتمع",
-    "subtitle": "تواصل مع السكان المحليين والمسافرين",
-    "filter_all": "الكل",
-    "filter_meetup": "طعام ولقاءات",
-    "filter_travel": "رفيق سفر",
-    "filter_help": "مساعدة محلية",
-    "filter_review": "تقييمات",
-    "comments": "تعليقات",
-    "message": "رسالة",
-    "detail": "تفاصيل المنشور"
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
   }
 }

@@ -1,133 +1,181 @@
 'use client';
 
-import { useCallback, useState, useEffect } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { ServiceItem } from '../mock/data';
-import styles from '../explore.module.css';
 
-interface ExploreMapProps {
-    items: ServiceItem[];
-    center?: { lat: number; lng: number };
-    onItemClick: (id: string) => void;
-    radius?: number;
-    zoom?: number;
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    kakao: any;
+  }
 }
 
-const mapContainerStyle = {
-    width: '100%',
-    height: '100%',
-    minHeight: '600px', // 물리적 높이 강제 확보
-    borderRadius: '0px'
-};
-
-const OPTIONS = {
-    disableDefaultUI: false, // 사용자 편의를 위해 기본 UI 일부 허용
-    zoomControl: true,
-    gestureHandling: 'greedy',
-    mapTypeControl: false,
-    streetViewControl: false,
-    fullscreenControl: false,
-};
+interface ExploreMapProps {
+  items: ServiceItem[];
+  center?: { lat: number; lng: number };
+  onItemClick: (id: string) => void;
+  radius?: number;
+  zoom?: number;
+}
 
 const DEFAULT_CENTER = { lat: 37.5665, lng: 126.9780 }; // 서울 시청 Fallback
 
 export default function ExploreMap({ items, center: propCenter, onItemClick, zoom: propZoom }: ExploreMapProps) {
-    const { t } = useTranslation('common');
-    const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-    const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(propCenter || DEFAULT_CENTER);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [mapInstance, setMapInstance] = useState<any>(null);
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const markersRef = useRef<any[]>([]);
 
-    const { isLoaded, loadError } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-        language: 'ko',
+  const initMap = () => {
+    if (!window.kakao || !window.kakao.maps) return;
+    
+    window.kakao.maps.load(() => {
+      if (!mapRef.current) return;
+      
+      // 기존에 맵이 있으면 초기화 안함 (React StrictMode 대응)
+      if (mapRef.current.hasChildNodes() && mapInstance) return;
+
+      const initialCenter = propCenter || DEFAULT_CENTER;
+      const options = {
+        center: new window.kakao.maps.LatLng(initialCenter.lat, initialCenter.lng),
+        level: propZoom ? Math.max(1, 15 - propZoom) : 3, // Kakao level is inverse of Naver zoom
+      };
+
+      const map = new window.kakao.maps.Map(mapRef.current, options);
+      setMapInstance(map);
+    });
+  };
+
+  useEffect(() => {
+    const SCRIPT_ID = 'kakao-map-script';
+
+    if (document.getElementById(SCRIPT_ID)) {
+      if (window.kakao && window.kakao.maps) {
+        initMap();
+      }
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.id = SCRIPT_ID;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY || 'bf92ec51c26fcda4eb7fb33076f2d61b'}&libraries=services&autoload=false`;
+    script.async = true;
+
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      if (window.kakao && window.kakao.maps) {
+        initMap();
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // propCenter 변경 시 지도 중심 이동
+  useEffect(() => {
+    if (mapInstance && window.kakao?.maps?.LatLng && propCenter) {
+      const moveLatLon = new window.kakao.maps.LatLng(propCenter.lat, propCenter.lng);
+      mapInstance.setCenter(moveLatLon);
+    }
+  }, [propCenter, mapInstance]);
+
+  // 실시간 위치 추적
+  useEffect(() => {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          setUserLocation(coords);
+          if (mapInstance && window.kakao?.maps?.LatLng) {
+            const moveLatLon = new window.kakao.maps.LatLng(coords.lat, coords.lng);
+            mapInstance.setCenter(moveLatLon);
+          }
+        },
+        (err) => {
+          console.warn('Geolocation error, using fallback.', err.message);
+        },
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: Infinity }
+      );
+    }
+  }, [mapInstance]);
+
+  // 내 위치 마커 업데이트
+  useEffect(() => {
+    if (!mapInstance || !window.kakao?.maps?.Marker || !window.kakao?.maps?.LatLng || !userLocation) return;
+    
+    // 이전에 생성된 마커가 있다면 제거는 생략하고 새로 그리는 방식으로 구현 (Kakao API에 맞게)
+    const markerPosition = new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng);
+    const userMarker = new window.kakao.maps.Marker({
+      position: markerPosition
     });
 
-    // 1. 사용자 실시간 위치 추적 및 중심 설정
-    useEffect(() => {
-        if (typeof window !== 'undefined' && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-                    setUserLocation(coords);
-                    setMapCenter(coords);
-                },
-                (err) => {
-                    console.warn('Geolocation access denied or timed out, using fallback.', err.message);
-                    setMapCenter(propCenter || DEFAULT_CENTER);
-                },
-                { enableHighAccuracy: false, timeout: 5000, maximumAge: Infinity }
-            );
-        } else {
-            setMapCenter(propCenter || DEFAULT_CENTER);
-        }
-    }, [propCenter]);
+    userMarker.setMap(mapInstance);
 
-    const onLoad = useCallback(function callback() {
-        // 지도 인스턴스 초기 로드 완료 시 동작
-    }, []);
+    return () => {
+      userMarker.setMap(null);
+    };
+  }, [mapInstance, userLocation]);
 
-    const onUnmount = useCallback(function callback() {
-        // 정리 작업
-    }, []);
+  // 상점/서비스 마커 업데이트
+  useEffect(() => {
+    if (!mapInstance || !window.kakao?.maps?.Marker || !window.kakao?.maps?.LatLng || !window.kakao?.maps?.event) return;
 
-    if (loadError) {
-        return (
-            <div style={{ height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff0f0', padding: '20px', textAlign: 'center' }}>
-                <p style={{ color: '#ff4d4f', fontWeight: 'bold' }}>Google Maps API Key Error</p>
-                <p style={{ fontSize: '13px', color: '#666', marginTop: '8px', lineHeight: '1.5' }}>
-                    GCP 콘솔에서 <b>Billing(결제 계정)</b>이 활성화되어 있는지,<br/>
-                    혹은 <b>API Key 제한</b>에 localhost가 포함되어 있는지 확인해 주세요.
-                </p>
-                <code style={{ fontSize: '11px', background: '#eee', padding: '8px', borderRadius: '4px', marginTop: '16px', display: 'block', maxWidth: '100%', wordBreak: 'break-all' }}>
-                    {loadError.message || 'Unknown Error'}
-                </code>
-            </div>
-        );
-    }
+    // 기존 마커 초기화
+    markersRef.current.forEach(m => {
+      m.setMap(null);
+    });
+    markersRef.current = [];
 
-    if (!isLoaded) {
-        return (
-            <div style={{ height: '600px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}>
-                <div className={styles.spinner}></div>
-                <p style={{ marginTop: '16px', color: '#666' }}>{t('common.loading_map', { defaultValue: 'Loading Map...' })}</p>
-            </div>
-        );
-    }
+    items.forEach(item => {
+      if (!item.lat || !item.lng) return;
 
-    return (
-        <div style={{ minHeight: '600px', width: '100%', position: 'relative' }}>
-            <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                center={mapCenter}
-                zoom={propZoom || 15}
-                onLoad={onLoad}
-                onUnmount={onUnmount}
-                options={OPTIONS}
-            >
-                {userLocation && (
-                    <Marker
-                        position={userLocation}
-                        icon={{
-                            url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                            scaledSize: new window.google.maps.Size(40, 40)
-                        }}
-                        title="You are here"
-                    />
-                )}
+      const markerPosition = new window.kakao.maps.LatLng(item.lat, item.lng);
+      const marker = new window.kakao.maps.Marker({
+        position: markerPosition,
+        title: item.title || ''
+      });
 
-                {items.map(item => {
-                    if (!item.lat || !item.lng) return null;
-                    return (
-                        <Marker
-                            key={item.id}
-                            position={{ lat: item.lat, lng: item.lng }}
-                            onClick={() => onItemClick(item.id)}
-                            title={item.title}
-                        />
-                    );
-                })}
-            </GoogleMap>
-        </div>
-    );
+      marker.setMap(mapInstance);
+
+      window.kakao.maps.event.addListener(marker, 'click', () => {
+        onItemClick(item.id);
+        const query = new URLSearchParams({
+          name: item.title || '',
+          address: item.description || item.area || '',
+          image: item.image_url || ''
+        }).toString();
+        router.push(`/business/${item.id}?${query}`);
+      });
+
+      markersRef.current.push(marker);
+    });
+
+    return () => {
+      markersRef.current.forEach(m => {
+        m.setMap(null);
+      });
+      markersRef.current = [];
+    };
+  }, [mapInstance, items, onItemClick, router]);
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%', pointerEvents: 'auto' }}>
+      <div 
+        ref={mapRef} 
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          borderRadius: '0px', 
+          pointerEvents: 'auto',
+          zIndex: 10,
+          position: 'relative'
+        }} 
+      />
+    </div>
+  );
 }
+

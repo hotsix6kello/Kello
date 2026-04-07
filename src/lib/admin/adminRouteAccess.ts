@@ -90,7 +90,7 @@ export async function requireAdminRouteAccess(request: Request) {
 
   const { data: profile, error: profileError } = await client
     .from("profiles")
-    .select("is_admin")
+    .select("role")
     .eq("id", userId)
     .maybeSingle();
 
@@ -98,7 +98,9 @@ export async function requireAdminRouteAccess(request: Request) {
     throw profileError;
   }
 
-  if (!profile?.is_admin) {
+  const isAdmin = profile?.role === "admin" || profile?.role === "super_admin";
+
+  if (!isAdmin) {
     throw new AdminRouteAccessError("forbidden");
   }
 

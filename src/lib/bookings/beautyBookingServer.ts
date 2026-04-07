@@ -133,6 +133,30 @@ export type BeautyBookingAdminSelectRow = {
   created_from_flow: string;
 };
 
+type BeautyBookingSummarySelectRow = Pick<
+  BeautyBookingAdminSelectRow,
+  | "id"
+  | "status"
+  | "store_name"
+  | "primary_service_name"
+  | "beauty_category"
+  | "booking_date"
+  | "booking_time"
+  | "total_price"
+>;
+
+export type BeautyBookingSummaryRecord = Pick<
+  BeautyBookingAdminRecord,
+  | "id"
+  | "status"
+  | "storeName"
+  | "primaryServiceName"
+  | "beautyCategory"
+  | "bookingDate"
+  | "bookingTime"
+  | "totalPrice"
+>;
+
 export type PersistedBeautyBookingRecord = {
   bookingId: string;
   status: "requested";
@@ -282,6 +306,32 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "customer_contacted",
   "follow_up_needed",
 ].join(", ");
+
+const BEAUTY_BOOKING_SUMMARY_SELECT = [
+  "id",
+  "status",
+  "store_name",
+  "primary_service_name",
+  "beauty_category",
+  "booking_date",
+  "booking_time",
+  "total_price",
+].join(", ");
+
+function mapBeautyBookingRowToSummaryRecord(
+  row: BeautyBookingSummarySelectRow,
+): BeautyBookingSummaryRecord {
+  return {
+    id: row.id,
+    status: normalizeDbStatus(row.status),
+    storeName: row.store_name,
+    primaryServiceName: row.primary_service_name ?? null,
+    beautyCategory: row.beauty_category,
+    bookingDate: row.booking_date,
+    bookingTime: row.booking_time,
+    totalPrice: row.total_price,
+  };
+}
 
 function mapBeautyBookingPayloadToRow(
   payload: BeautyBookingPayload,
@@ -499,6 +549,41 @@ export async function listBeautyBookingRequestsForUser(
 
   return ((data as unknown as BeautyBookingAdminSelectRow[] | null) ?? []).map(
     mapBeautyBookingRowToAdminRecord,
+  );
+}
+
+export async function listBeautyBookingSummaryForUser(
+  customerUserId: string,
+): Promise<BeautyBookingSummaryRecord[]> {
+  if (!hasSupabaseServerAccess()) {
+    throw new BeautyBookingStorageError("env_missing", {
+      missingEnvVars: getMissingSupabaseServerEnvVars(),
+    });
+  }
+
+  const client = getSupabaseServerClient();
+  const { data, error } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .select(BEAUTY_BOOKING_SUMMARY_SELECT)
+    .eq("customer_user_id", customerUserId)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  if (error) {
+    if (isRecord(error) && error.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", {
+        table: BEAUTY_BOOKING_TABLE,
+        code: error.code,
+      });
+    }
+
+    throw new BeautyBookingStorageError("read_failed", {
+      code: isRecord(error) && typeof error.code === "string" ? error.code : undefined,
+    });
+  }
+
+  return ((data as unknown as BeautyBookingSummarySelectRow[] | null) ?? []).map(
+    mapBeautyBookingRowToSummaryRecord,
   );
 }
 

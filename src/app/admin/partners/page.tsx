@@ -59,11 +59,17 @@ function AdminPartnersContent() {
 
             const { data: profile } = await supabase
                 .from('profiles')
-                .select('is_admin')
+                .select('role')
                 .eq('id', user.id)
                 .maybeSingle();
 
-            setIsAdmin(profile?.is_admin === true);
+            const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+            if (!isAdminRole) {
+                setIsAdmin(false);
+                setLoading(false);
+                return;
+            }
+            setIsAdmin(true);
         };
         checkAdmin();
     }, []);
@@ -150,7 +156,7 @@ function AdminPartnersContent() {
                 <h2 style={{ fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>관리자 전용 페이지</h2>
                 <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', textAlign: 'center' }}>
                     이 페이지는 관리자만 접근할 수 있습니다.<br />
-                    Supabase에서 is_admin 권한을 부여받으세요.
+                    관리자 권한을 부여받으세요.
                 </p>
                 <button
                     onClick={() => router.push('/')}

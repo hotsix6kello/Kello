@@ -5,17 +5,26 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
+import { getMyPageCapabilities, type PartnerStatus } from "./pagePermissions";
 import styles from "./my.module.css";
-
-
-type PartnerStatus = "none" | "pending" | "approved" | "rejected";
-
-
+import {
+    type BeautyBookingAdminRecord,
+    isBeautyBookingCustomerCancelableStatus,
+    isBeautyBookingCustomerChangeableStatus,
+} from "@/lib/bookings/beautyBookingAdmin";
 
 interface DashboardProfileRecord {
+    display_name: string | null;
     nickname: string | null;
-    is_admin: boolean | null;
+    nickname_updated_at: string | null;
+    role: string | null;
+    created_at: string | null;
     avatar_url: string | null;
+}
+
+interface PartnerStatusRouteResponse {
+    ok: boolean;
+    partnerStatus?: PartnerStatus;
 }
 
 interface CommunityPost {
@@ -26,6 +35,11 @@ interface CommunityPost {
     created_at: string;
     time: string;
 }
+
+type MyBookingCardRecord = Pick<
+    BeautyBookingAdminRecord,
+    "id" | "status" | "storeName" | "primaryServiceName" | "beautyCategory" | "bookingDate" | "bookingTime" | "totalPrice"
+>;
 
 const SSR_SAFE_FALLBACK_NAME = "Traveler";
 const SSR_SAFE_FALLBACK_SUBTITLE = "Account & preferences";
@@ -69,9 +83,13 @@ function ProfileSummaryCard({
             const file = e.target.files?.[0];
             if (!file) return;
 
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Math.random()}.${fileExt}`;
-            const filePath = `${fileName}`;
+            const { data: userData } = await supabase.auth.getUser();
+            const user = userData.user;
+            if (!user) throw new Error("Not authenticated");
+
+            const fileExt = file.name.split('.').pop() || 'jpg';
+            const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+            const filePath = `${user.id}/${fileName}`;
 
             const { error: uploadError } = await supabase.storage
                 .from('avatars')
@@ -86,17 +104,17 @@ function ProfileSummaryCard({
             const { error: updateError } = await supabase
                 .from('profiles')
                 .update({ avatar_url: publicUrl })
-                .eq('id', (await supabase.auth.getUser()).data.user?.id);
+                .eq('id', user.id);
 
             if (updateError) throw updateError;
 
             // 2. Callback
             if (onAvatarUpdate) onAvatarUpdate(publicUrl);
             
-            alert(t('common.messages.upload_success', '프로필 사진이 업데이트되었습니다.'));
+            alert(t('my_page.messages.upload_success'));
         } catch (error) {
             console.error('Error uploading avatar:', error);
-            alert(t('common.messages.upload_failed', '업로드에 실패했습니다.'));
+            alert(t('my_page.messages.upload_failed'));
         } finally {
             setUploading(false);
         }
@@ -158,33 +176,241 @@ function ProfileSummaryCard({
     );
 }
 
+const BOOKING_STATUS_KO_KEY: Record<BeautyBookingAdminRecord['status'], string> = {
+    requested: 'beauty_bookings.status_requested',
+    confirmed: 'beauty_bookings.status_confirmed',
+    completed: 'beauty_bookings.status_completed',
+    canceled: 'beauty_bookings.status_canceled',
+    failed: 'beauty_bookings.status_failed',
+    change_requested: 'beauty_bookings.status_change_requested',
+};
+
+const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> = {
+    requested: '#d97706',
+    confirmed: '#16a34a',
+    completed: '#6b7280',
+    canceled: '#dc2626',
+    failed: '#dc2626',
+    change_requested: '#7c3aed',
+};
+
+function SectionCardSkeleton({ rows = 2 }: { rows?: number }) {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {Array.from({ length: rows }).map((_, index) => (
+                <div
+                    key={index}
+                    style={{
+                        background: '#f8fafc',
+                        borderRadius: 14,
+                        border: '1px solid #e2e8f0',
+                        padding: '14px 16px',
+                    }}
+                >
+                    <div style={{ width: '42%', height: 14, borderRadius: 999, background: '#e2e8f0', marginBottom: 10 }} />
+                    <div style={{ width: '68%', height: 12, borderRadius: 999, background: '#e2e8f0', marginBottom: 8 }} />
+                    <div style={{ width: '56%', height: 12, borderRadius: 999, background: '#e2e8f0', marginBottom: 14 }} />
+                    <div style={{ display: 'flex', gap: 8 }}>
+                        <div style={{ flex: 1, height: 34, borderRadius: 10, background: '#e2e8f0' }} />
+                        <div style={{ flex: 1, height: 34, borderRadius: 10, background: '#e2e8f0' }} />
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+function MyBookingsSection({
+    accessToken,
+    authReady,
+}: {
+    accessToken: string;
+    authReady: boolean;
+}) {
+    const { t } = useTranslation("common");
+    const router = useRouter();
+    const [bookings, setBookings] = useState<MyBookingCardRecord[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState<string | null>(null);
+
+    useEffect(() => {
+        let cancelled = false;
+        const load = async () => {
+            if (!authReady) {
+                return;
+            }
+
+            if (!accessToken) {
+                if (!cancelled) {
+                    setBookings([]);
+                    setFetchError(null);
+                    setLoading(false);
+                }
+                return;
+            }
+
+            try {
+                if (!cancelled) {
+                    setFetchError(null);
+                    setLoading(true);
+                }
+
+                const res = await fetch('/api/bookings/beauty/mine?view=summary', {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                    cache: 'no-store',
+                });
+                const body = await res.json().catch(() => null) as
+                    | { ok?: boolean; items?: MyBookingCardRecord[] }
+                    | null;
+
+                if (!res.ok || body?.ok !== true || !Array.isArray(body.items)) {
+                    throw new Error(t('my_page.bookings.error_fetch'));
+                }
+
+                if (!cancelled) {
+                    setBookings(body.items);
+                }
+            } catch {
+                if (!cancelled) setFetchError(t('my_page.bookings.error_fetch'));
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        };
+        void load();
+        return () => { cancelled = true; };
+    }, [accessToken, authReady, t]);
+
+    return (
+        <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>{t('my_page.bookings.title')}</h2>
+                <button
+                    className={styles.sectionMore}
+                    onClick={() => router.push('/my/bookings/beauty')}
+                >
+                    {t('common.actions.view_all')}
+                </button>
+            </div>
+
+            {loading && <SectionCardSkeleton />}
+            {!loading && fetchError && (
+                <div style={{ textAlign: 'center', padding: '12px 0', color: '#ef4444', fontSize: '0.85rem' }}>
+                    {fetchError}
+                </div>
+            )}
+            {!loading && !fetchError && bookings.length === 0 && (
+                <div style={{ textAlign: 'center', padding: '32px 0', background: '#f8fafc', borderRadius: 16 }}>
+                    <div style={{ fontSize: '2rem', marginBottom: 8 }}>📅</div>
+                    <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>{t('my_page.dashboard.bookings_empty')}</div>
+                    <button
+                        onClick={() => router.push('/beauty')}
+                        style={{
+                            background: 'white', border: '1px solid #e2e8f0',
+                            padding: '10px 20px', borderRadius: 12,
+                            fontSize: '0.85rem', color: '#334155',
+                            fontWeight: 600, cursor: 'pointer',
+                        }}
+                    >
+                        {t('my_page.bookings.browse_beauty_cta')}
+                    </button>
+                </div>
+            )}
+            {!loading && bookings.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {bookings.map(b => (
+                        <div
+                            key={b.id}
+                            style={{
+                                background: '#f8fafc', borderRadius: 14,
+                                border: '1px solid #e2e8f0', padding: '14px 16px',
+                            }}
+                        >
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b' }}>
+                                    {b.storeName}
+                                </span>
+                                <span style={{
+                                    fontSize: '0.7rem', fontWeight: 700,
+                                    padding: '3px 8px', borderRadius: 20,
+                                    background: `${BOOKING_STATUS_COLOR[b.status]}18`,
+                                    color: BOOKING_STATUS_COLOR[b.status],
+                                    border: `1px solid ${BOOKING_STATUS_COLOR[b.status]}40`,
+                                }}>
+                                    {t(BOOKING_STATUS_KO_KEY[b.status])}
+                                </span>
+                            </div>
+                            <div style={{ fontSize: '0.85rem', color: '#475569', marginBottom: 4 }}>
+                                {b.primaryServiceName || b.beautyCategory}
+                            </div>
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 4 }}>
+                                📅 {b.bookingDate} · {b.bookingTime}
+                            </div>
+                            <div style={{ fontSize: '0.82rem', color: '#64748b', marginBottom: 12 }}>
+                                💰 {b.totalPrice.toLocaleString('ko-KR')}{t('beauty_explore.label_booking_unit')}
+                            </div>
+                            <div style={{ display: 'flex', gap: 8 }}>
+                                <button
+                                    onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
+                                    disabled={!isBeautyBookingCustomerChangeableStatus(b.status)}
+                                    style={{
+                                        flex: 1, padding: '9px 0', borderRadius: 10,
+                                        fontSize: '0.8rem', fontWeight: 700,
+                                        cursor: isBeautyBookingCustomerChangeableStatus(b.status) ? 'pointer' : 'not-allowed',
+                                        background: isBeautyBookingCustomerChangeableStatus(b.status) ? 'var(--primary-glow)' : '#f1f5f9',
+                                        color: isBeautyBookingCustomerChangeableStatus(b.status) ? 'var(--secondary)' : '#94a3b8',
+                                        border: '1px solid var(--warm-sand)',
+                                    }}
+                                >
+                                    {t('my_page.bookings.action_edit_request')}
+                                </button>
+                                <button
+                                    onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
+                                    disabled={!isBeautyBookingCustomerCancelableStatus(b.status)}
+                                    style={{
+                                        flex: 1, padding: '9px 0', borderRadius: 10,
+                                        fontSize: '0.8rem', fontWeight: 700,
+                                        cursor: isBeautyBookingCustomerCancelableStatus(b.status) ? 'pointer' : 'not-allowed',
+                                        background: isBeautyBookingCustomerCancelableStatus(b.status) ? '#fff1f2' : '#f1f5f9',
+                                        color: isBeautyBookingCustomerCancelableStatus(b.status) ? '#dc2626' : '#94a3b8',
+                                        border: `1px solid ${isBeautyBookingCustomerCancelableStatus(b.status) ? '#fecdd3' : '#e2e8f0'}`,
+                                    }}
+                                >
+                                    {t('my_page.bookings.action_cancel_request')}
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </section>
+    );
+}
 
 
-
-function CommunityHubSection() {
+function CommunityHubSection({ authorName }: { authorName: string }) {
+    const { t } = useTranslation("common");
     const router = useRouter();
     const [posts, setPosts] = useState<CommunityPost[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         let isMounted = true;
-        let resolvedUserName = "Jessie Kim";
-
-        try {
-            const storedUser = localStorage.getItem("user");
-            if (storedUser) {
-                const parsed = JSON.parse(storedUser) as { name?: string };
-                if (parsed.name?.trim()) {
-                    resolvedUserName = parsed.name.trim();
-                }
-            }
-        } catch {}
 
         const fetchPosts = async () => {
+            if (!authorName) {
+                if (isMounted) {
+                    setPosts([]);
+                    setLoading(false);
+                }
+                return;
+            }
+
+            setLoading(true);
+
             const { data } = await supabase
                 .from("community_posts")
                 .select("id, type, title, desc, created_at, time")
-                .eq("author", resolvedUserName)
+                .eq("author", authorName)
                 .order("created_at", { ascending: false })
                 .limit(3);
 
@@ -201,20 +427,18 @@ function CommunityHubSection() {
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [authorName]);
 
     return (
         <>
             <div className={styles.sectionHeader}>
                  <h2 className={styles.sectionTitle}>
-                     내 커뮤니티
+                     {t('my_page.community_hub.title')}
                  </h2>
             </div>
 
                 {loading ? (
-                    <div style={{ textAlign: 'center', padding: '20px 0', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600 }}>
-                        불러오는 중...
-                    </div>
+                    <SectionCardSkeleton rows={2} />
                 ) : posts.length === 0 ? (
                     <div style={{ 
                         textAlign: 'center', 
@@ -223,7 +447,7 @@ function CommunityHubSection() {
                         borderRadius: 16
                     }}>
                         <div style={{ fontSize: '2rem', marginBottom: 8 }}>💬</div>
-                        <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>작성한 글이 없습니다</div>
+                        <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>{t('my_page.community.empty_simple')}</div>
                         <button 
                             onClick={() => router.push("/community")}
                             style={{
@@ -238,7 +462,7 @@ function CommunityHubSection() {
                                 boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
                             }}
                         >
-                            커뮤니티 둘러보기
+                            {t('common.actions.browse_community')}
                         </button>
                     </div>
                 ) : (
@@ -268,7 +492,7 @@ function CommunityHubSection() {
                                         fontWeight: 800,
                                         textTransform: 'uppercase'
                                     }}>
-                                        {post.type || 'post'}
+                                        {post.type || t('common.states.posts')}
                                     </span>
                                     <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>
                                         {post.created_at ? new Date(post.created_at).toLocaleDateString() : (post.time || '')}
@@ -288,7 +512,13 @@ function CommunityHubSection() {
     );
 }
 
-function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
+function PartnerStatusBanner({
+    status,
+    canApplyForPartner,
+}: {
+    status: PartnerStatus | null;
+    canApplyForPartner: boolean;
+}) {
     const router = useRouter();
     const { t } = useTranslation("common");
 
@@ -349,7 +579,7 @@ function PartnerStatusBanner({ status }: { status: PartnerStatus | null }) {
                 <div className={styles.partnerBannerDesc}>{config.desc}</div>
             </div>
 
-            {config.buttonLabel && config.onClick && (
+            {canApplyForPartner && config.buttonLabel && config.onClick && (
                 <button
                     className={styles.partnerBannerBtn}
                     style={{ background: config.isRejected ? "var(--korean-red)" : "var(--secondary)" }}
@@ -367,11 +597,14 @@ function MyPageContent() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const [hasHydrated, setHasHydrated] = useState(false);
+    const [cachedUserName, setCachedUserName] = useState("");
     const [userName, setUserName] = useState("");
     const [profileSubtitle, setProfileSubtitle] = useState("");
     const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined);
-
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [authReady, setAuthReady] = useState(false);
+    const [accessToken, setAccessToken] = useState("");
+    const [permissionsResolved, setPermissionsResolved] = useState(false);
+    const [profileRole, setProfileRole] = useState<string | null>(null);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
 
     const fallbackUserName = hasHydrated
@@ -385,6 +618,13 @@ function MyPageContent() {
 
     useEffect(() => {
         setHasHydrated(true);
+
+        try {
+            const storedUser = JSON.parse(localStorage.getItem("user") || "{}") as { name?: string };
+            setCachedUserName(pickString(storedUser.name));
+        } catch {
+            setCachedUserName("");
+        }
     }, []);
 
     useEffect(() => {
@@ -393,32 +633,33 @@ function MyPageContent() {
         const loadDashboardUser = async () => {
             const fallbackName = t("my_page.settings.account.default_name");
             const fallbackSubtitle = t("my_page.profile.account_hint");
-            const {
-                data: { user },
-            } = await supabase.auth.getUser();
+            const [
+                {
+                    data: { session },
+                },
+                {
+                    data: { user },
+                },
+            ] = await Promise.all([supabase.auth.getSession(), supabase.auth.getUser()]);
 
             if (!isMounted) {
                 return;
             }
 
-            if (!user) {
-                // [Mock Mode for Development]
-                // 로컬 개발 환경에서 로그인 없이 화면을 볼 수 있도록 더미 데이터를 설정합니다.
-                if (process.env.NODE_ENV === "development") {
-                    setUserName("게스트 (테스트)");
-                    setProfileSubtitle("guest@localhost");
-                    setIsAdmin(true);
-                    setPartnerStatus("approved");
-                    return;
-                }
+            setAccessToken(session?.access_token ?? "");
+            setAuthReady(true);
+            setPermissionsResolved(false);
+            setProfileRole(null);
+            setPartnerStatus(null);
 
+            if (!user) {
                 router.push("/auth/login?redirect=/my");
                 return;
             }
 
-            const { data: profile } = await supabase
+            const { data: profileData } = await supabase
                 .from("profiles")
-                .select("nickname, is_admin, avatar_url")
+                .select("display_name, nickname, nickname_updated_at, role, created_at, avatar_url")
                 .eq("id", user.id)
                 .maybeSingle();
 
@@ -426,13 +667,12 @@ function MyPageContent() {
                 return;
             }
 
-            const nextProfile = (profile as DashboardProfileRecord | null) ?? null;
-            if (nextProfile?.avatar_url) {
-                setAvatarUrl(nextProfile.avatar_url);
-            }
+            const nextProfile = (profileData as DashboardProfileRecord | null) ?? null;
+            setAvatarUrl(nextProfile?.avatar_url ?? undefined);
             const email = pickString(user.email);
             const displayName = pickString(
                 nextProfile?.nickname,
+                nextProfile?.display_name,
                 user.user_metadata?.full_name,
                 user.user_metadata?.name,
                 email ? email.split("@")[0] : "",
@@ -440,24 +680,40 @@ function MyPageContent() {
             );
             setUserName(displayName);
             setProfileSubtitle(email || fallbackSubtitle);
-            setIsAdmin(Boolean(nextProfile?.is_admin));
+            setProfileRole(nextProfile?.role ?? null);
 
             if (!email) {
                 setPartnerStatus("none");
+                setPermissionsResolved(true);
                 return;
             }
 
-            const { data: partner } = await supabase
-                .from("partners")
-                .select("status")
-                .eq("email", email)
-                .maybeSingle();
+            let nextPartnerStatus: PartnerStatus = "none";
+
+            if (session?.access_token) {
+                try {
+                    const response = await fetch("/api/my/partner-status", {
+                        headers: {
+                            Authorization: `Bearer ${session.access_token}`,
+                        },
+                        cache: "no-store",
+                    });
+                    const body = (await response.json()) as PartnerStatusRouteResponse;
+
+                    if (response.ok && body.ok && body.partnerStatus) {
+                        nextPartnerStatus = body.partnerStatus;
+                    }
+                } catch {
+                    nextPartnerStatus = "none";
+                }
+            }
 
             if (!isMounted) {
                 return;
             }
 
-            setPartnerStatus((partner?.status as PartnerStatus) || "none");
+            setPartnerStatus(nextPartnerStatus);
+            setPermissionsResolved(true);
         };
 
         void loadDashboardUser();
@@ -467,6 +723,13 @@ function MyPageContent() {
         };
     }, [t, router]);
 
+    const communityAuthorName = cachedUserName || userName;
+    const capabilities = getMyPageCapabilities({
+        permissionsResolved,
+        profileRole,
+        partnerStatus,
+    });
+
 
 
 
@@ -474,7 +737,7 @@ function MyPageContent() {
         return (
             <div className={styles.container}>
                 <div style={{ padding: 24, textAlign: "center", color: "var(--soft-ink)" }}>
-                    Loading...
+                    {t('common.loading')}
                 </div>
             </div>
         );
@@ -490,34 +753,22 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
-            {/* Member Quick Actions Shell */}
-            <section className={styles.quickActionBar}>
-                {[
-                    { icon: "📅", label: t("common.actions.my_bookings"), path: "/my/bookings" },
-                    { icon: "🔖", label: t("common.states.favorites"), path: "/my/saved" },
-                    { icon: "🔔", label: t("notifications.page_title"), path: "/my/notifications" },
-                    { icon: "📖", label: t("common.actions.travel_phrases"), path: "/my/phrases" },
-                ].map((item) => (
-                    <button
-                        key={item.path}
-                        className={styles.quickActionBtn}
-                        onClick={() => router.push(item.path)}
-                    >
-                        <span className={styles.quickActionIcon}>{item.icon}</span>
-                        <span className={styles.quickActionLabel}>{item.label}</span>
-                    </button>
-                ))}
-            </section>
+            <MyBookingsSection accessToken={accessToken} authReady={authReady} />
 
             <section className={styles.section}>
-                <CommunityHubSection />
+                <CommunityHubSection authorName={communityAuthorName} />
             </section>
 
             {/* Standard Partner Banner */}
-            <PartnerStatusBanner status={partnerStatus} />
+            {capabilities.showPartnerBanner && (
+                <PartnerStatusBanner
+                    status={partnerStatus}
+                    canApplyForPartner={capabilities.canApplyForPartner}
+                />
+            )}
 
             {/* Admin Section with Shell consistency */}
-            {(isAdmin || process.env.NODE_ENV === "development") && (
+            {capabilities.canViewAdminConsole && (
                 <section className={styles.section} style={{ marginBottom: 0, paddingBottom: 100 }}>
                     <div className={styles.sectionHeader} style={{ justifyContent: 'flex-start', gap: 8 }}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
@@ -525,15 +776,15 @@ function MyPageContent() {
                             background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
                             color: 'white', fontSize: '0.65rem', fontWeight: 800,
                             padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase'
-                        }}>Admin</span>
+                        }}>{t('my_page.settings.admin.enabled')}</span>
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 16 }}>
                         {[
-                            { icon: '📊', label: '관리자 대시보드', desc: '통계 및 전체 메뉴', path: '/admin' },
-                            { icon: '💼', label: '뷰티 예약 관리', desc: '예약 요청 및 상태 변경', path: '/admin/bookings/beauty' },
-                            { icon: '🤝', label: '협력업체 관리', desc: '가입 신청 승인 관리', path: '/admin/partners' },
-                            { icon: '🛡️', label: '관리자 계정 관리', desc: '권한 부여 및 상태 해제', path: '/admin/users' },
+                            { icon: '📊', label: t('my_page.dashboard.admin_menu.dashboard'), desc: t('my_page.dashboard.admin_menu.dashboard_desc'), path: '/admin' },
+                            { icon: '💼', label: t('my_page.dashboard.admin_menu.bookings'), desc: t('my_page.dashboard.admin_menu.bookings_desc'), path: '/admin/bookings/beauty' },
+                            { icon: '🤝', label: t('my_page.dashboard.admin_menu.partners'), desc: t('my_page.dashboard.admin_menu.partners_desc'), path: '/admin/partners' },
+                            { icon: '🛡️', label: t('my_page.dashboard.admin_menu.users'), desc: t('my_page.dashboard.admin_menu.users_desc'), path: '/admin/users' },
                         ].map((item) => (
                             <div
                                 key={item.path}

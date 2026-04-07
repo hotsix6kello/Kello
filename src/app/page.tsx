@@ -151,6 +151,15 @@ export default function HomePage() {
     setIsHydrated(true);
     // 홈 화면 진입 시 카테고리 선택 상태를 초기화하여 강조 색상이 보이지 않도록 함
     setSelectedCategory(null);
+
+    // [추가] URL 파라미터에 booking=true가 있으면 예약 플로우를 즉시 엽니다.
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('booking') === 'true') {
+      setIsBookingOpen(true);
+      // 필터링된 카테고리가 있다면 설정 (예: 헤어)
+      const cat = params.get('category');
+      if (cat) setSelectedCategory(cat as BeautyCategoryId);
+    }
   }, [setSelectedCategory]);
 
   useEffect(() => {
