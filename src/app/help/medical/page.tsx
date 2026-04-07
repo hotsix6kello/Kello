@@ -35,7 +35,7 @@ export default function MedicalPage() {
             </header>
 
             {/* Quick call */}
-            <div style={{ background: '#fef2f2', margin: '0 20px', marginTop: -8, borderRadius: 16, padding: '16px', border: '1.5px solid #fecaca', boxShadow: '0 2px 10px rgba(220, 38, 38, 0.08)' }}>
+            <div style={{ background: '#fef2f2', margin: '0 20px', marginTop: 16, borderRadius: 16, padding: '16px', border: '1.5px solid #fecaca', boxShadow: '0 2px 10px rgba(220, 38, 38, 0.08)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                     <div>
                         <div style={{ fontWeight: 800, fontSize: '1rem', color: '#dc2626' }}>🚑 {t('help_page.emergency_119_title')}</div>

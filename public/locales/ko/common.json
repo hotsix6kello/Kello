@@ -1288,15 +1288,99 @@
       }
     }
   },
+  "help_page": {
+    "title": "헬프센터",
+    "medical_title": "의료 지원",
+    "medical_desc": "주변 병원 및 증상 안내",
+    "lost_title": "분실물 안내",
+    "lost_desc": "단계별 물품 찾기 가이드",
+    "police_title": "경찰 / 범죄",
+    "police_desc": "신고 및 지원 요청",
+    "interp_title": "통역 지원",
+    "interp_desc": "1330 헬프라인 및 통역 앱",
+    "taxi": "택시",
+    "subway": "지하철",
+    "airport": "공항",
+    "street": "거리",
+    "interp_actions": {
+      "open_papago": "파파고 열기",
+      "open_google_translate": "구글 번역 열기"
+    },
+    "interp": {
+      "papago_desc": "네이버 파파고 앱을 열어 빠른 이미지/텍스트 번역을 시작하세요.",
+      "google_desc": "기타 언어 지원이 필요할 때 구글 번역기를 사용하세요."
+    },
+    "lost": {
+      "taxi_s1_t": "1. 영수증 확인",
+      "taxi_s1_d": "영수증에 기재된 카드사 번호나 차량번호로 기사님 연락처를 확보하세요.",
+      "taxi_s2_t": "2. 카드사 연락",
+      "taxi_s2_d": "결제한 카드의 고객센터에 전화하여 택시 승인 내역의 업체 연락처를 요청하세요.",
+      "subway_s1_t": "1. 역무실 방문",
+      "subway_s1_d": "내린 직후라면 해당 역의 역무실을 즉시 방문하여 열차 칸 번호를 알리세요.",
+      "subway_s2_t": "2. 유실물 센터",
+      "subway_s2_d": "시간이 지났다면 각 호선별 유실물 센터에 연락하거나 방문하세요."
+    },
+    "medical_header": "의료 및 비상 지원",
+    "emergency_119_title": "응급실 신고 (119)",
+    "emergency_119_desc": "긴급 구조 및 응급 의료 지원",
+    "consult_1339_title": "의료 상담 (1339)",
+    "consult_1339_desc": "질병관리청 전문 의료 상담",
+    "symptoms_title": "주요 증상",
+    "call_btn": "전화 걸기",
+    "medical": {
+      "pharmacy_title": "편의점 비상약",
+      "medicines": {
+        "tylenol": "타이레놀",
+        "tylenol_desc": "해열, 진통, 근육통, 두통",
+        "cold": "종합감기약",
+        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
+        "digestive": "소화제",
+        "digestive_desc": "소화불량, 식체, 속쓰림"
+      },
+      "symptoms": {
+        "stomach": "복통",
+        "fever": "발열",
+        "injury": "부상",
+        "allergy": "알레르기",
+        "breathing": "호흡 곤란",
+        "pain": "흉통"
+      }
+    },
+    "police_header": "경찰 및 안전 지원",
+    "police_contacts_section": "주요 연락처",
+    "police": {
+      "report_call_title": "범죄 신고 (112)",
+      "report_call_desc": "24시간 서비스, 외국어 대응 가능",
+      "official_site_title": "경찰청 공식 사이트",
+      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
+    },
+    "tourism_police_section": "관광 경찰",
+    "tourism_police_title": "관광 경찰 서비스",
+    "tourism_police_desc": "명동, 인사동, 이태원 등 주요 관광지 거점 지원",
+    "interp_header": "통역 및 상담 지원",
+    "interp_immediate_title": "직통 연락",
+    "interp_hotline_title": "1330 헬프라인",
+    "interp_hotline_desc": "한국 관광 안내 및 최신 정보 공식 채널",
+    "interp_chat_label": "채팅 문의",
+    "interp_tools_title": "추천 번역 앱",
+    "lost_header": "유실물 / 분실물",
+    "lost_where_title": "어디서 분실하셨나요?",
+    "lost_where_desc": "위 장소 중 하나를 선택해 주세요",
+    "lost_quick_title": "빠른 조회",
+    "lost112_label": "로스트112 포털",
+    "embassy_label": "대사관 찾기",
+    "lost_steps_title": "{{place}} 분실 시 단계별 안내",
+    "lost_go_lost112": "로스트112에서 검색하기"
+  },
   "settings_page": {
-  "hero": {
+    "hero": {
     "default_title": "내 설정",
     "stats": "게시글 {{postCount}} · 후기 {{reviewCount}} · 예약 {{bookingCount}}",
     "avatar": {
       "error": "이미지를 바꾸지 못했어요."
     }
   },
-  "tabs": {
+    "tabs": {
     "personal": {
       "label": "개인",
       "desc": "이메일, 연락처, 로그인과 알림 설정을 확인하세요."
@@ -1310,7 +1394,7 @@
       "desc": "관리 권한에 연결된 항목을 빠르게 확인하세요."
     }
   },
-  "personal": {
+    "personal": {
     "nickname": {
       "title": "별명",
       "helper_set": "커뮤니티와 프로필에 표시되는 이름이에요.",
@@ -1377,7 +1461,7 @@
       "badge_partial_on": "일부만 ON"
     }
   },
-  "partner": {
+    "partner": {
     "status": {
       "title": "파트너 상태",
       "approved": {
@@ -1433,7 +1517,7 @@
       "badge_info": "안내"
     }
   },
-  "admin": {
+    "admin": {
     "approval": {
       "title": "파트너 승인",
       "value": "신청 내역 확인",
@@ -1457,7 +1541,7 @@
     "badge_open": "열기 가능",
     "badge_unlinked": "미연결"
   },
-  "messages": {
+    "messages": {
     "action_contact": "문의",
     "action_open": "열기",
     "unauthorized": "로그인 세션을 다시 확인해 주세요.",
@@ -1475,7 +1559,7 @@
     "save": "저장",
     "saving": "저장 중..."
   },
-  "badges": {
+    "badges": {
     "community": {
       "leader": "커뮤니티 리더",
       "trend": "트렌드 피커",
@@ -1490,7 +1574,7 @@
     },
     "nickname_unset": "설정 안 됨"
   },
-  "tab_aria_label": "설정 탭"
+    "tab_aria_label": "설정 탭"
   },
   "community_page": {
     "write_post": "글쓰기",
