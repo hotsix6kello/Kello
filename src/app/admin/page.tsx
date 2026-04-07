@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import { useTranslation } from 'react-i18next';
 import styles from './admin.module.css';
 
 interface Stats {
@@ -13,6 +14,7 @@ interface Stats {
 }
 
 export default function AdminDashboard() {
+    const { t } = useTranslation();
     const router = useRouter();
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
     const [stats, setStats] = useState<Stats>({ totalUsers: 0, adminUsers: 0, pendingPartners: 0, approvedPartners: 0 });
@@ -24,17 +26,18 @@ export default function AdminDashboard() {
 
             const { data: profile } = await supabase
                 .from('profiles')
-                .select('is_admin')
+                .select('role')
                 .eq('id', user.id)
                 .maybeSingle();
 
-            if (!profile?.is_admin) { setIsAdmin(false); return; }
+            const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+            if (!isAdminRole) { setIsAdmin(false); return; }
             setIsAdmin(true);
 
             // 통계 조회
             const [{ count: totalUsers }, { count: adminUsers }, { count: pendingPartners }, { count: approvedPartners }] = await Promise.all([
                 supabase.from('profiles').select('*', { count: 'exact', head: true }),
-                supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('is_admin', true),
+                supabase.from('profiles').select('*', { count: 'exact', head: true }).in('role', ['admin', 'super_admin']),
                 supabase.from('partners').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
                 supabase.from('partners').select('*', { count: 'exact', head: true }).eq('status', 'approved'),
             ]);
@@ -62,39 +65,34 @@ export default function AdminDashboard() {
         return (
             <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, background: 'var(--background)', padding: 24 }}>
                 <div style={{ fontSize: '3rem' }}>🔒</div>
-                <h2 style={{ fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>관리자 전용 페이지</h2>
-                <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', textAlign: 'center' }}>접근 권한이 없습니다.</p>
-                <button onClick={() => router.push('/')} style={{ padding: '12px 28px', background: 'var(--primary)', color: 'white', border: 'none', borderRadius: 14, fontWeight: 700, cursor: 'pointer' }}>홈으로</button>
+                <h2 style={{ fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>{t('admin.no_auth_title', { defaultValue: '관리자 전용 페이지' })}</h2>
+                <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', textAlign: 'center' }}>{t('admin.no_auth_desc', { defaultValue: '접근 권한이 없습니다.' })}</p>
+                <button onClick={() => router.push('/')} style={{ padding: '12px 28px', background: 'var(--primary)', color: 'white', border: 'none', borderRadius: 14, fontWeight: 700, cursor: 'pointer' }}>{t('common.go_home', { defaultValue: '홈으로' })}</button>
             </div>
         );
     }
 
     const STAT_CARDS = [
-        { icon: '👥', value: stats.totalUsers, label: '전체 회원', color: '#3b82f6', path: '/admin/users?tab=all' },
-        { icon: '🛡️', value: stats.adminUsers, label: '관리자', color: '#7c3aed', path: '/admin/users?tab=admin' },
-        { icon: '⏳', value: stats.pendingPartners, label: '승인 대기', color: '#f59e0b', path: '/admin/partners?tab=pending' },
-        { icon: '✅', value: stats.approvedPartners, label: '승인 업체', color: '#10b981', path: '/admin/partners?tab=approved' },
+        { icon: '👥', value: stats.totalUsers, label: t('admin.stats_total_users', { defaultValue: '전체 회원' }), color: '#3b82f6', path: '/admin/users?tab=all' },
+        { icon: '🛡️', value: stats.adminUsers, label: t('admin.stats_admin_users', { defaultValue: '관리자' }), color: '#7c3aed', path: '/admin/users?tab=admin' },
+        { icon: '⏳', value: stats.pendingPartners, label: t('admin.stats_pending_partners', { defaultValue: '승인 대기' }), color: '#f59e0b', path: '/admin/partners?tab=pending' },
+        { icon: '✅', value: stats.approvedPartners, label: t('admin.stats_approved_partners', { defaultValue: '승인 업체' }), color: '#10b981', path: '/admin/partners?tab=approved' },
     ];
 
     const MENU_ITEMS = [
         {
-            icon: '🤝', bg: 'rgba(245,158,11,0.1)', title: '협력업체 관리',
-            desc: '가입 신청 승인 · 거절 처리', path: '/admin/partners',
-            highlight: stats.pendingPartners > 0 ? `${stats.pendingPartners}건 대기 중` : null,
+            icon: '🤝', bg: 'rgba(245,158,11,0.1)', title: t('admin.menu_partners_title', { defaultValue: '협력업체 관리' }),
+            desc: t('admin.menu_partners_desc', { defaultValue: '가입 신청 승인 · 거절 처리' }), path: '/admin/partners',
+            highlight: stats.pendingPartners > 0 ? t('admin.menu_partners_pending_count', { count: stats.pendingPartners, defaultValue: `${stats.pendingPartners}건 대기 중` }) : null,
         },
         {
-            icon: '🛡️', bg: 'rgba(124,58,237,0.1)', title: '관리자 계정 관리',
-            desc: '관리자 권한 부여 · 해제', path: '/admin/users',
+            icon: '🛡️', bg: 'rgba(124,58,237,0.1)', title: t('admin.menu_admins_title', { defaultValue: '관리자 계정 관리' }),
+            desc: t('admin.menu_admins_desc', { defaultValue: '관리자 권한 부여 · 해제' }), path: '/admin/users',
             highlight: null,
         },
         {
-            icon: '🗂️', bg: 'rgba(15,118,110,0.1)', title: '번역 용어집',
-            desc: '뷰티 용어집 편집 및 언어별 우선순위 관리', path: '/admin/glossary',
-            highlight: null,
-        },
-        {
-            icon: '💼', bg: 'rgba(236,72,153,0.1)', title: '뷰티 예약 관리',
-            desc: '예약 요청 조회 및 진행 상태 변경', path: '/admin/bookings/beauty',
+            icon: '💼', bg: 'rgba(236,72,153,0.1)', title: t('admin.menu_bookings_title', { defaultValue: '뷰티 예약 관리' }),
+            desc: t('admin.menu_bookings_desc', { defaultValue: '예약 요청 조회 및 진행 상태 변경' }), path: '/admin/bookings/beauty',
             highlight: null,
         },
     ];
@@ -102,8 +100,8 @@ export default function AdminDashboard() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <button onClick={() => router.push('/')} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--foreground)' }}>←</button>
-                <h1 className={styles.headerTitle}>⚙️ 관리자 대시보드</h1>
+                <button onClick={() => router.push('/')} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--foreground)' }} aria-label={t('common.back', { defaultValue: '뒤로가기' })}>←</button>
+                <h1 className={styles.headerTitle}>⚙️ {t('admin.dashboard_title', { defaultValue: '관리자 대시보드' })}</h1>
                 <span className={styles.adminBadge}>ADMIN</span>
             </header>
 
@@ -122,13 +120,13 @@ export default function AdminDashboard() {
                             <div className={styles.statIcon}>{s.icon}</div>
                             <div className={styles.statValue} style={{ color: s.color }}>{s.value}</div>
                             <div className={styles.statLabel}>{s.label}</div>
-                            <div style={{ fontSize: '0.68rem', color: s.color, marginTop: 4, fontWeight: 600, opacity: 0.7 }}>바로가기 →</div>
+                            <div style={{ fontSize: '0.68rem', color: s.color, marginTop: 4, fontWeight: 600, opacity: 0.7 }}>{t('common.shortcuts', { defaultValue: '바로가기' })} →</div>
                         </div>
                     ))}
                 </div>
 
                 {/* 메뉴 */}
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--gray-400)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>관리 메뉴</p>
+                <p style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--gray-400)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>{t('admin.menu_section_title', { defaultValue: '관리 메뉴' })}</p>
                 {MENU_ITEMS.map((m) => (
                     <div key={m.path} className={styles.menuCard} onClick={() => router.push(m.path)}>
                         <div className={styles.menuIcon} style={{ background: m.bg }}>{m.icon}</div>
@@ -142,7 +140,10 @@ export default function AdminDashboard() {
                         <span className={styles.menuArrow}>›</span>
                     </div>
                 ))}
+                {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+                <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
             </div>
         </div>
     );
 }
+

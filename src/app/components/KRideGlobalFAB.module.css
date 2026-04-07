@@ -19,8 +19,10 @@
     cursor: pointer;
     box-shadow: 0 6px 24px rgba(37, 99, 235, 0.3);
     transition: width 0.25s ease, padding 0.25s ease, box-shadow 0.2s;
-    white-space: nowrap;
-    max-width: 200px;
+    line-height: 1.2;
+    min-height: 52px;
+    max-width: 220px;
+    justify-content: center;
 }
 
 .fab:active {

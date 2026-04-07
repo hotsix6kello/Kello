@@ -1,186 +1,612 @@
 {
-    "common": {
-        "welcome": "Bienvenue, Voyageur.",
-        "greeting": "Bonjour",
-        "login": "Connexion",
-        "today": "Aujourd'hui",
-        "move": "Déplacer",
-        "book": "Réserver",
-        "chat": "Discuter",
-        "my": "Mon Info",
-        "current_operation": "Opération Actuelle",
-        "live": "EN DIRECT",
-        "recommended": "Recommandé à Proximité",
-        "based_on_location": "Basé sur votre position",
-        "start_nav": "Lancer Navigation",
-        "delay_10m": "Retard +10m",
-        "confirmed": "Confirmé",
-        "payment_completed": "Paiement Terminé",
-        "weather_clear": "Clair",
-        "back": "Retour",
-        "select_language": "Changer de langue",
-        "home_nav": "Accueil",
-        "explore_nav": "Explorer",
-        "planner_nav": "Itinéraire",
-        "today_nav": "Aujourd'hui",
-        "my_nav": "Mon Info",
-        "day_unit": "j",
-        "locale": "fr-FR",
-        "cities": {
-            "seoul": "Séoul",
-            "busan": "Busan",
-            "jeju": "Jeju",
-            "gyeongju": "Gyeongju"
-        },
-        "categories": {
-            "all": "Tout",
-            "food": "Gastronomie",
-            "beauty": "Beauté",
-            "event": "Événements",
-            "festival": "Festivals",
-            "attraction": "Attractions",
-            "transport": "Transport"
-        },
-        "community_nav": "Community"
+  "beauty_explore": {
+    "form_name": "Nom",
+    "form_name_placeholder": "Entrez votre nom",
+    "form_phone": "Contact (ou ID SNS)",
+    "form_phone_placeholder": "Téléphone ou ID SNS",
+    "form_request": "Demandes",
+    "form_request_placeholder": "Allergies ou style souhaité",
+    "agreement_confirm": "Confirmer les détails",
+    "agreement_confirm_desc": "Je confirme la sélection.",
+    "agreement_privacy": "Accord de confidentialité",
+    "agreement_privacy_desc": "J'accepte de fournir les informations.",
+    "region_all": "Toutes les zones",
+    "label_today": "Aujourd'hui",
+    "label_tomorrow": "Demain",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Réservation demandée !",
+    "booking_confirmation_desc": "Nous vous informerons bientôt.",
+    "booking_confirmation_cta": "Mes réservations"
+  },
+  "common": {
+    "welcome": "Bienvenue, Voyageur.",
+    "greeting": "Bonjour",
+    "login": "Connexion",
+    "today": "Aujourd'hui",
+    "move": "Déplacer",
+    "book": "Réserver",
+    "chat": "Discuter",
+    "my": "Mon Info",
+    "current_operation": "Opération Actuelle",
+    "live": "EN DIRECT",
+    "recommended": "Recommandé à Proximité",
+    "based_on_location": "Basé sur votre position",
+    "start_nav": "Lancer Navigation",
+    "delay_10m": "Retard +10m",
+    "confirmed": "Confirmé",
+    "payment_completed": "Paiement Terminé",
+    "weather_clear": "Clair",
+    "back": "Retour",
+    "select_language": "Changer de langue",
+    "home_nav": "Accueil",
+    "explore_nav": "Explorer",
+    "planner_nav": "Itinéraire",
+    "today_nav": "Aujourd'hui",
+    "my_nav": "Mon Info",
+    "day_unit": "j",
+    "locale": "fr-FR",
+    "cities": {
+      "seoul": "Séoul",
+      "busan": "Busan",
+      "jeju": "Jeju",
+      "gyeongju": "Gyeongju"
     },
-    "transport": {
-        "moving_to": "En route vers {{dest}}",
-        "remaining": "Restant",
-        "line_2_direction": "Ligne 2 • Direction Hôtel de Ville",
-        "departed": "parti",
-        "passing_now": "Passe maintenant...",
-        "current": "Actuel",
-        "get_off_at": "Descendre à",
-        "exit_3": "Sortie 3",
-        "getting_off_here": "Je descends ici",
-        "stations": {
-            "samseong": "Samseong",
-            "seolleung": "Seolleung",
-            "yeoksam": "Yeoksam",
-            "gangnam": "Gangnam",
-            "gyodae": "Gyodae",
-            "seocho": "Seocho",
-            "seongsu": "Seongsu"
-        }
+    "categories": {
+      "all": "Tout",
+      "food": "Gastronomie",
+      "beauty": "Beauté",
+      "event": "Événements",
+      "festival": "Festivals",
+      "attraction": "Attractions",
+      "transport": "Transport"
     },
-    "home": {
-        "title_korea": "Aujourd'hui en Corée",
-        "title": "Voyage en Corée, compris en 3 secondes",
-        "subtitle": "Réservations de conciergerie · Itinéraire automatique · Navigation",
-        "create_trip_cta": "Commencer le planning",
-        "input_label": "Où voyagez-vous ?",
-        "input_placeholder": "Ville, quartier, nom de l'hôtel",
-        "days_label": "Période du voyage",
-        "recommended_plans": "Plans de voyage recommandés",
-        "plans": {
-            "2d": {
-                "title": "2 Jours : L'Essentiel de Séoul",
-                "label": "Plan 2 Jours"
-            },
-            "3d": {
-                "title": "3 Jours : K-Culture & Style",
-                "label": "Plan 3 Jours"
-            },
-            "5d": {
-                "title": "5 Jours : Le Grand Tour",
-                "label": "Plan 5 Jours"
-            },
-            "request_custom_label": "Sur mesure",
-            "request_custom_title": "Demander un plan de {{days}} jours",
-            "request_custom_toast": "Plan de {{days}} jours personnalisé demandé ! Notre concierge vous contactera."
-        }
+    "community_nav": "Communauté",
+    "morning": "Bonjour",
+    "afternoon": "Bon après-midi",
+    "evening": "Bonsoir",
+    "actions": {
+      "delete": "Supprimer"
     },
-    "explore_items": {
-        "airport_arrival": "Arrivée à l'aéroport d'Incheon",
-        "hotel_checkin": "Enregistrement à l'hôtel / Séjour"
-    },
-    "explore_page": {
-        "title": "Explorer",
-        "select_city": "Choisir une ville"
-    },
-    "planner_page": {
-        "title": "Itinéraire",
-        "day": "Jour {{n}}"
-    },
-    "today_page": {
-        "title": "Aujourd'hui",
-        "active_now": "Actif",
-        "navigate": "Naviguer",
-        "booking_ref": "Réf booking: {{ref}}",
-        "next_up": "À suivre",
-        "minutes_left": "Commence dans {{mins}}m",
-        "depart_early": "Partir maintenant",
-        "timeline": "Timeline",
-        "empty": {
-            "title": "Pas de planning aujourd'hui",
-            "desc": "Explorez des lieux et ajoutez-les !",
-            "cta": "Explorer des lieux"
-        }
-    },
-    "booking_detail": {
-        "select_date": "Choisir une date",
-        "select_time": "Choisir une heure",
-        "total_price": "Prix total",
-        "request_booking": "Demander la réservation"
-    },
-    "navigation_page": {
-        "title": "Aujourd'hui"
-    },
-    "my_page": {
-        "bookings": {
-            "title": "Mes réservations",
-            "date_time": "Date / Heure",
-            "area": "Zone",
-            "price": "Prix",
-            "new_added": "Nouvelle réservation ajoutée !"
-        },
-        "community": {
-            "title": "Mes Posts de la Communauté",
-            "empty": "Aucun post n'a encore été écrit."
-        }
-    },
-    "community_page": {
-        "title": "Communauté",
-        "subtitle": "Connectez-vous avec les locaux et les voyageurs",
-        "filter_all": "Tout",
-        "filter_meetup": "Cuisine & Rencontres",
-        "filter_travel": "Compagnon de voyage",
-        "filter_help": "Aide Locale",
-        "filter_review": "Avis",
-        "comments": "Commentaires",
-        "message": "Message",
-        "type": {
-            "MEETUP": "RENCONTRE",
-            "TRAVEL": "VOYAGE",
-            "HELP": "AIDE",
-            "REVIEW": "AVIS"
-        },
-        "post": {
-            "1": {
-                "author": "Mika (Japon)",
-                "time": "il y a 10 min",
-                "title": "Rencontre Samgyeopsal 🥓",
-                "desc": "Quelqu'un veut manger du Samgyeopsal ce soir à 19h ?"
-            },
-            "2": {
-                "author": "John (États-Unis)",
-                "time": "il y a 1 h",
-                "title": "Spectacle de Rue à Hongdae 🎸",
-                "desc": "Je vais à Hongdae pour voir les groupes indés. Rejoignez-moi !"
-            },
-            "3": {
-                "author": "Jihoon (Corée)",
-                "time": "il y a 2 h",
-                "title": "Besoin d'aide pour le métro ? 🚇",
-                "desc": "J'habite près de Myeongdong et je peux vous aider à traduire ou vous guider."
-            },
-            "4": {
-                "author": "Li Wei (Chine)",
-                "time": "il y a 3 h",
-                "title": "Shopping K-Beauty 💄",
-                "desc": "Je cherche un partenaire de shopping à Olive Young Myeongdong !"
-            }
-        },
-        "detail": "Détail de la publication"
+    "states": {
+      "no_permission": "Accès refusé.",
+      "error_occurred": "Une erreur est survenue lors du traitement de votre demande."
     }
+  },
+  "transport": {
+    "moving_to": "En route vers {{dest}}",
+    "remaining": "Restant",
+    "line_2_direction": "Ligne 2 • Direction Hôtel de Ville",
+    "departed": "parti",
+    "passing_now": "Passe maintenant...",
+    "current": "Actuel",
+    "get_off_at": "Descendre à",
+    "exit_3": "Sortie 3",
+    "getting_off_here": "Je descends ici",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
+    }
+  },
+  "home": {
+    "title_korea": "Aujourd'hui en Corée",
+    "title": "Voyage en Corée, compris en 3 secondes",
+    "subtitle": "Réservations de conciergerie · Itinéraire automatique · Navigation",
+    "create_trip_cta": "Commencer le planning",
+    "input_label": "Où voyagez-vous ?",
+    "input_placeholder": "Ville, quartier, nom de l'hôtel",
+    "days_label": "Période du voyage",
+    "recommended_plans": "Plans de voyage recommandés",
+    "plans": {
+      "2d": {
+        "title": "2 Jours : L'Essentiel de Séoul",
+        "label": "Plan 2 Jours"
+      },
+      "3d": {
+        "title": "3 Jours : K-Culture & Style",
+        "label": "Plan 3 Jours"
+      },
+      "5d": {
+        "title": "5 Jours : Le Grand Tour",
+        "label": "Plan 5 Jours"
+      },
+      "request_custom_label": "Sur mesure",
+      "request_custom_title": "Demander un plan de {{days}} jours",
+      "request_custom_toast": "Plan de {{days}} jours personnalisé demandé ! Notre concierge vous contactera."
+    },
+    "badge": "Découvrez la beauté de la Corée"
+  },
+  "explore_items": {
+    "airport_arrival": "Arrivée à l'aéroport d'Incheon",
+    "hotel_checkin": "Enregistrement à l'hôtel / Séjour"
+  },
+  "explore_page": {
+    "title": "Explorer",
+    "select_city": "Choisir une ville"
+  },
+  "planner_page": {
+    "title": "Itinéraire",
+    "day": "Jour {{n}}"
+  },
+  "today_page": {
+    "title": "Aujourd'hui",
+    "active_now": "Actif",
+    "navigate": "Naviguer",
+    "booking_ref": "Réf booking: {{ref}}",
+    "next_up": "À suivre",
+    "minutes_left": "Commence dans {{mins}}m",
+    "depart_early": "Partir maintenant",
+    "timeline": "Timeline",
+    "empty": {
+      "title": "Pas de planning aujourd'hui",
+      "desc": "Explorez des lieux et ajoutez-les !",
+      "cta": "Explorer des lieux"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Choisir une date",
+    "select_time": "Choisir une heure",
+    "total_price": "Prix total",
+    "request_booking": "Demander la réservation"
+  },
+  "navigation_page": {
+    "title": "Aujourd'hui"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Mes réservations",
+      "date_time": "Date / Heure",
+      "area": "Zone",
+      "price": "Prix",
+      "new_added": "Nouvelle réservation ajoutée !",
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
+    },
+    "community": {
+      "title": "Mes Posts de la Communauté",
+      "empty": "Aucun post n'a encore été écrit.",
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
+    },
+    "dashboard": {
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      }
+    },
+    "settings": {
+      "account": {
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
+      }
+    }
+  },
+  "community_page": {
+    "title": "Communauté",
+    "subtitle": "Connectez-vous avec les locaux et les voyageurs",
+    "form": {
+      "image": {
+        "limit_label": "(Max {{count}} images)"
+      }
+    },
+    "filter_all": "Tout",
+    "filter_meetup": "Gastronomie & Rencontres",
+    "filter_travel": "Compagnon de voyage",
+    "filter_help": "Aide locale",
+    "filter_review": "Avis",
+    "comments": "Commentaires",
+    "message": "Message",
+    "type": {
+      "MEETUP": "RENCONTRE",
+      "TRAVEL": "VOYAGE",
+      "HELP": "AIDE",
+      "REVIEW": "AVIS"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japon)",
+        "time": "il y a 10 min",
+        "title": "Rencontre Samgyeopsal 🥓",
+        "desc": "Quelqu'un veut manger du Samgyeopsal ce soir à 19h ?"
+      },
+      "2": {
+        "author": "John (États-Unis)",
+        "time": "il y a 1 h",
+        "title": "Spectacle de Rue à Hongdae 🎸",
+        "desc": "Je vais à Hongdae pour voir les groupes indés. Rejoignez-moi !"
+      },
+      "3": {
+        "author": "Jihoon (Corée)",
+        "time": "il y a 2 h",
+        "title": "Besoin d'aide pour le métro ? 🚇",
+        "desc": "J'habite près de Myeongdong et je peux vous aider à traduire ou vous guider."
+      },
+      "4": {
+        "author": "Li Wei (Chine)",
+        "time": "il y a 3 h",
+        "title": "Shopping K-Beauty 💄",
+        "desc": "Je cherche un partenaire de shopping à Olive Young Myeongdong !"
+      }
+    },
+    "detail": "Détails du post"
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Conciergerie Beauté",
+      "title": "Capturez la beauté de la Corée\ndans votre programme",
+      "subtitle": "Sélectionnez votre service beauté et passez directement à l'étape de réservation.",
+      "welcome": "Bienvenue {{name}}, veuillez choisir un service.",
+      "welcome_user": "{{greeting}}, {{name}} ! 👋"
+    },
+    "booking": {
+      "step": "ÉTAPE. 01",
+      "title": "Veuillez choisir votre service beauté",
+      "description": ""
+    },
+    "categories": {
+      "hair": {
+        "label": "Cheveux",
+        "note": "Coupe, Coloration, Style",
+        "summary": "Réservez du changement de style à la coupe rapide."
+      },
+      "nail": {
+        "label": "Ongles",
+        "note": "Gel, Soins, Pose",
+        "summary": "Choisissez votre design et réservez."
+      },
+      "esthetic": {
+        "label": "Esthétique",
+        "note": "Soin visage, Soins peau",
+        "summary": "Comparez les salons et réservez."
+      },
+      "waxing": {
+        "label": "Épilation",
+        "note": "Visage, Corps, Maillot",
+        "summary": "Trouvez rapidement le salon adapté."
+      },
+      "makeup": {
+        "label": "Maquillage",
+        "note": "Quotidien, Fête, Mariage",
+        "summary": "Choisissez un maquillage pour votre événement."
+      },
+      "lash": {
+        "label": "Cils",
+        "note": "Extension, Permanente",
+        "summary": "Du naturel au volume, choisissez votre menu."
+      }
+    },
+    "selection": {
+      "eyebrow": "Catégorie sélectionnée",
+      "tags": {
+        "mobile": "Réservation mobile",
+        "comparison": "Comparer les salons",
+        "inquiry": "Demande en temps réel"
+      },
+      "empty": "Veuillez d'abord choisir une catégorie. Le bouton de réservation sera activé après votre choix."
+    },
+    "cta": {
+      "hint": "Choisissez une catégorie pour commencer la réservation",
+      "button": "Commencer la réservation"
+    },
+    "interpreter_entry": {
+      "title": "Interprète en temps réel",
+      "description": "Communiquez facilement avec le personnel",
+      "cta": "Ouvrir l'interprète"
+    },
+    "location_sheet": {
+      "search_title": "Recherche d'emplacement",
+      "search_result_count": "{{count}} résultats pour \"{{query}}\"",
+      "view_location": "Voir l'emplacement",
+      "view_location_desc": "Consulter l'emplacement détaillé sur la carte",
+      "call_taxi": "Appeler un taxi",
+      "google_maps_desc": "Consulter les itinéraires de transport en commun sur Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Veuillez vous rendre à cette adresse",
+      "copy": "Copier l'adresse",
+      "copy_done": "Copié !",
+      "close": "Fermer"
+    }
+  },
+  "interpreter_page": {
+    "back": "< Retour",
+    "title": "Traducteur en temps réel",
+    "subtitle": "Langue client : langue de l'app ; langue boutique : coréen (fixe).",
+    "onboarding": "Ce que le client dit est traduit en coréen ; ce que le personnel dit en coréen est traduit dans votre langue.",
+    "customer_lang": "Langue visiteur",
+    "staff_lang": "Langue boutique (Coréen)",
+    "mic_preparing": "Préparation du micro",
+    "customer_transcribing": "Reconnaissance du visiteur...",
+    "customer_recording": "Enregistrement du visiteur... cliquez pour arrêter",
+    "translating": "Traduction...",
+    "customer_speak_btn": "Entrée vocale visiteur",
+    "staff_transcribing": "Reconnaissance du personnel...",
+    "staff_recording": "Enregistrement du personnel... cliquez pour arrêter",
+    "staff_speak_btn": "Entrée vocale personnel",
+    "customer_input_label": "Entrée visiteur",
+    "customer_placeholder": "Tapez ce que le visiteur a dit.",
+    "send": "Envoyer",
+    "staff_input_label": "Entrée personnel",
+    "staff_placeholder": "Tapez ce que le personnel a dit en coréen.",
+    "voice_supported_hint": "Enregistrez avec le micro ou tapez ci-dessous.",
+    "voice_not_supported_hint": "Ce navigateur ne supporte pas l'entrée vocale.",
+    "voice_recognizing": "Reconnaissance vocale en cours.",
+    "voice_unrecognized_error": "Voix non reconnue.",
+    "voice_failed_error": "Échec de la reconnaissance vocale.",
+    "mic_permission_status": "Vérification des accès micro.",
+    "recording_status": "Enregistrement... max {{seconds}}s.",
+    "mic_unsupported_error": "Micro inaccessible.",
+    "input_required_customer": "Saisissez d'abord la phrase du visiteur.",
+    "input_required_staff": "Saisissez d'abord la phrase du personnel.",
+    "translating_status": "Préparation de la traduction.",
+    "translation_failed_error": "La traduction a échoué. Réessayez.",
+    "empty_history_hint": "L'historique apparaîtra ici.",
+    "customer_role": "Visiteur",
+    "staff_role": "Personnel",
+    "replay_btn_label": "Réécouter la traduction",
+    "replay_not_supported_hint": "Lecture audio non supportée.",
+    "play": "Lire",
+    "translated_status": "Traduit",
+    "source_only_status": "Source uniquement",
+    "voice_too_short_error": "Parlez un peu plus longtemps s'il vous plaît."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Utilisation d'un interprète lors de la visite du {{storeName}}",
+    "interpreter_visit_service_context": "Utilisation d'un interprète pour {{serviceName}} au {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
+  },
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
+    },
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
+  }
 }

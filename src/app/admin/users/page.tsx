@@ -9,7 +9,7 @@ interface Profile {
     id: string;
     email: string;
     nickname: string | null;
-    is_admin: boolean;
+    role: string | null;
     created_at: string;
     partnerStatus?: 'pending' | 'approved' | 'rejected' | null;
 }
@@ -36,11 +36,11 @@ function AdminUsersContent() {
 
             const { data: profile } = await supabase
                 .from('profiles')
-                .select('is_admin')
+                .select('role')
                 .eq('id', user.id)
                 .maybeSingle();
 
-            setIsAdmin(profile?.is_admin === true);
+            setIsAdmin(profile?.role === 'admin' || profile?.role === 'super_admin');
         };
         init();
     }, []);
@@ -52,7 +52,7 @@ function AdminUsersContent() {
         const [{ data: profileData }, { data: partnerData }] = await Promise.all([
             supabase
                 .from('profiles')
-                .select('id, email, nickname, is_admin, created_at')
+                .select('id, email, nickname, role, created_at')
                 .order('created_at', { ascending: false }),
             supabase
                 .from('partners')
@@ -61,11 +61,13 @@ function AdminUsersContent() {
 
         // partners 이메일 → 상태 맵
         const partnerMap = new Map<string, string>();
-        (partnerData ?? []).forEach((p: any) => partnerMap.set(p.email, p.status));
+        const typedPartnerData = (partnerData || []) as { email: string; status: string }[];
+        typedPartnerData.forEach((p) => partnerMap.set(p.email, p.status));
 
-        const merged: Profile[] = (profileData ?? []).map((p: any) => ({
+        const typedProfileData = (profileData || []) as { id: string; email: string; nickname: string | null; role: string | null; created_at: string }[];
+        const merged: Profile[] = typedProfileData.map((p) => ({
             ...p,
-            partnerStatus: partnerMap.get(p.email) ?? null,
+            partnerStatus: (partnerMap.get(p.email) as Profile['partnerStatus']) ?? null,
         }));
 
         setProfiles(merged);
@@ -79,9 +81,10 @@ function AdminUsersContent() {
     const handleToggle = async () => {
         if (!confirmTarget) return;
         setActionLoading(true);
+        const isTargetAdmin = confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin';
         await supabase
             .from('profiles')
-            .update({ is_admin: !confirmTarget.is_admin })
+            .update({ role: isTargetAdmin ? 'customer' : 'admin' })
             .eq('id', confirmTarget.id);
         setConfirmTarget(null);
         await fetchProfiles();
@@ -101,16 +104,16 @@ function AdminUsersContent() {
 
     // 탭 필터링
     const tabFiltered = tab === 'admin'
-        ? filtered.filter(p => p.is_admin)
+        ? filtered.filter(p => p.role === 'admin' || p.role === 'super_admin')
         : tab === 'partner'
-            ? filtered.filter(p => !p.is_admin && p.partnerStatus === 'approved')
+            ? filtered.filter(p => p.role !== 'admin' && p.role !== 'super_admin' && p.partnerStatus === 'approved')
             : tab === 'normal'
-                ? filtered.filter(p => !p.is_admin && p.partnerStatus !== 'approved')
+                ? filtered.filter(p => p.role !== 'admin' && p.role !== 'super_admin' && p.partnerStatus !== 'approved')
                 : filtered;
 
-    const adminList = tabFiltered.filter(p => p.is_admin);
-    const partnerList = tabFiltered.filter(p => !p.is_admin && p.partnerStatus === 'approved');
-    const normalList = tabFiltered.filter(p => !p.is_admin && p.partnerStatus !== 'approved');
+    const adminList = tabFiltered.filter(p => p.role === 'admin' || p.role === 'super_admin');
+    const partnerList = tabFiltered.filter(p => p.role !== 'admin' && p.role !== 'super_admin' && p.partnerStatus === 'approved');
+    const normalList = tabFiltered.filter(p => p.role !== 'admin' && p.role !== 'super_admin' && p.partnerStatus !== 'approved');
 
     // 접근 제어
     if (isAdmin === null) {
@@ -188,10 +191,6 @@ function AdminUsersContent() {
                     <div className={styles.empty}>검색 결과가 없습니다.</div>
                 )}
 
-                {!loading && filtered.length === 0 && (
-                    <div className={styles.empty}>검색 결과가 없습니다.</div>
-                )}
-
                 {/* 관리자 섹션 */}
                 {!loading && adminList.length > 0 && (
                     <>
@@ -203,7 +202,7 @@ function AdminUsersContent() {
                             🛡️ 관리자 &nbsp;
                             <span style={{ background: '#ede9fe', color: '#7c3aed', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{adminList.length}명</span>
                         </div>
-                        {adminList.map((profile, idx) => (
+                        {adminList.map((profile) => (
                             <div key={profile.id} className={styles.card} style={{
                                 borderLeft: '4px solid #7c3aed',
                                 background: 'rgba(124,58,237,0.04)',
@@ -247,7 +246,7 @@ function AdminUsersContent() {
                             🤝 협력업체 &nbsp;
                             <span style={{ background: '#fef3c7', color: '#92400e', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{partnerList.length}명</span>
                         </div>
-                        {partnerList.map((profile, idx) => (
+                        {partnerList.map((profile) => (
                             <div key={profile.id} className={styles.card} style={{
                                 borderLeft: '4px solid #f59e0b',
                                 background: 'rgba(245,158,11,0.04)',
@@ -312,23 +311,25 @@ function AdminUsersContent() {
                 <div className={styles.confirmModal} onClick={() => setConfirmTarget(null)}>
                     <div className={styles.confirmSheet} onClick={e => e.stopPropagation()}>
                         <h3 className={styles.confirmTitle}>
-                            {confirmTarget.is_admin ? '🔓 관리자 권한 해제' : '🛡️ 관리자 권한 부여'}
+                            {(confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin') ? '🔓 관리자 권한 해제' : '🛡️ 관리자 권한 부여'}
                         </h3>
                         <p className={styles.confirmDesc}>
                             <strong>{confirmTarget.nickname || confirmTarget.email}</strong> 계정의<br />
-                            관리자 권한을 {confirmTarget.is_admin ? '해제' : '부여'}하시겠습니까?
+                            관리자 권한을 {(confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin') ? '해제' : '부여'}하시겠습니까?
                         </p>
                         <button
-                            className={`${styles.confirmBtn} ${confirmTarget.is_admin ? styles.confirmRevoke : styles.confirmGrant}`}
+                            className={`${styles.confirmBtn} ${(confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin') ? styles.confirmRevoke : styles.confirmGrant}`}
                             onClick={handleToggle}
                             disabled={actionLoading}
                         >
-                            {actionLoading ? '처리 중...' : confirmTarget.is_admin ? '권한 해제' : '권한 부여'}
+                            {actionLoading ? '처리 중...' : (confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin') ? '권한 해제' : '권한 부여'}
                         </button>
                         <button className={styles.cancelBtn} onClick={() => setConfirmTarget(null)}>취소</button>
                     </div>
                 </div>
             )}
+            {/* 하단 네비게이션 가림 방지용 대용량 스페이서 (160px 확보) */}
+            <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
         </div>
     );
 }

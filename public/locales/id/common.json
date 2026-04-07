@@ -1,4 +1,23 @@
 {
+  "beauty_explore": {
+    "form_name": "Nama",
+    "form_name_placeholder": "Masukkan nama Anda",
+    "form_phone": "Kontak (atau ID SNS)",
+    "form_phone_placeholder": "Nomor telepon atau ID SNS",
+    "form_request": "Permintaan",
+    "form_request_placeholder": "Alergi atau gaya yang diinginkan",
+    "agreement_confirm": "Konfirmasi detail",
+    "agreement_confirm_desc": "Saya mengonfirmasi pilihan ini.",
+    "agreement_privacy": "Persetujuan privasi",
+    "agreement_privacy_desc": "Saya setuju memberikan informasi.",
+    "region_all": "Semua area",
+    "label_today": "Hari ini",
+    "label_tomorrow": "Besok",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Permintaan booking terkirim!",
+    "booking_confirmation_desc": "Kami akan segera memberi tahu Anda.",
+    "booking_confirmation_cta": "Booking Saya"
+  },
   "common": {
     "welcome": "Selamat datang, Pelancong.",
     "greeting": "Selamat Pagi",
@@ -41,14 +60,24 @@
       "attraction": "Wisata",
       "transport": "Transportasi"
     },
-    "community_nav": "Community",
+    "community_nav": "Komunitas",
     "view_map": "Lihat Lokasi",
     "view_map_desc": "Lihat lokasi detail di peta",
     "taxi_call": "Panggil Taksi",
     "route_nav": "Panduan Rute",
     "transit_nav_desc": "Navigasi transportasi umum",
     "copy_address": "Salin Alamat",
-    "copied": "Tersalin!"
+    "copied": "Tersalin!",
+    "morning": "Selamat pagi",
+    "afternoon": "Selamat siang",
+    "evening": "Selamat malam",
+    "actions": {
+      "delete": "Hapus"
+    },
+    "states": {
+      "no_permission": "Tidak ada izin.",
+      "error_occurred": "Terjadi kesalahan saat memproses permintaan Anda."
+    }
   },
   "categories": {
     "all": "Semua",
@@ -62,82 +91,80 @@
   "community_nav": "Community",
   "home_beauty": {
     "hero": {
-      "eyebrow": "Beauty Booking Concierge",
-      "title": "Layanan apa yang ingin Anda pesan?",
-      "subtitle": "Pilih layanan kecantikan yang Anda inginkan terlebih dahulu, lalu masuk ke langkah pemesanan. Kami mendesain layar ini untuk pemilihan cepat di ponsel, diikuti perbandingan toko dan permintaan reservasi.",
-      "welcome": "{{name}}, silakan pilih layanan yang Anda butuhkan hari ini."
+      "eyebrow": "Layanan Booking Kecantikan",
+      "title": "Abadikan keindahan Korea\ndalam jadwal Anda",
+      "subtitle": "Pilih layanan kecantikan dan langsung booking.",
+      "welcome": "{{name}}, silakan pilih layanan.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
     "booking": {
-      "step": "Langkah 1",
-      "title": "Silakan pilih layanan kecantikan yang diinginkan",
-      "description": "Setelah memilih kategori, Anda dapat mulai mengeksplorasi pemesanan berdasarkan layanan tersebut pada langkah berikutnya."
+      "step": "LANGKAH. 01",
+      "title": "Silakan pilih layanan kecantikan",
+      "description": ""
     },
     "categories": {
       "hair": {
         "label": "Rambut",
-        "note": "Potong, Perm, Warna, Dry",
-        "summary": "Mulai pemesanan dengan cepat dari perubahan gaya hingga perawatan ringan."
+        "note": "Potong, perm, warna",
+        "summary": "Booking penataan rambut dengan cepat."
       },
       "nail": {
         "label": "Kuku",
-        "note": "Gel Nail, Perawatan, Ekstensi",
-        "summary": "Tentukan suasana dan desain yang diinginkan, lalu lanjut ke tahap pemesanan dengan mudah."
+        "note": "Gel, perawatan, ekstensi",
+        "summary": "Pilih desain dan lanjut booking."
       },
       "esthetic": {
         "label": "Estetik",
-        "note": "Skincare, Kontur, Perawatan Penenang",
-        "summary": "Bandingkan toko dan lakukan pemesanan sesuai kondisi kulit dan tujuan perawatan Anda."
+        "note": "Perawatan kulit, kontur",
+        "summary": "Bandingkan salon dan booking."
       },
       "waxing": {
         "label": "Waxing",
-        "note": "Wajah, Tubuh, Brazilian",
-        "summary": "Temukan dan pesan toko yang sesuai dengan area dan jadwal Anda dengan cepat."
+        "note": "Wajah, badan, Brazilian",
+        "summary": "Temukan salon yang cocok dengan cepat."
       },
       "makeup": {
         "label": "Makeup",
-        "note": "Harian, Pemotretan, Pernikahan",
-        "summary": "Pilih layanan makeup yang sesuai dengan jadwal acara Anda dan mulai pemesanan segera."
+        "note": "Harian, foto, pernikahan",
+        "summary": "Pilih layanan makeup untuk acara Anda."
       },
       "lash": {
         "label": "Bulu Mata",
-        "note": "Ekstensi, Perm, Underlash",
-        "summary": "Terhubung langsung dengan menu yang diinginkan, mulai dari ekstensi alami hingga gaya bervolume."
+        "note": "Ekstensi, perm",
+        "summary": "Dari natural hingga volume, pilih menu Anda."
       }
     },
     "selection": {
-      "eyebrow": "Kategori Terpilih",
+      "eyebrow": "Kategori yang Dipilih",
       "tags": {
-        "mobile": "Pemesanan Ponsel",
-        "comparison": "Perbandingan Toko",
-        "inquiry": "Konsultasi Real-time"
+        "mobile": "Booking mobile",
+        "comparison": "Bandingkan salon",
+        "inquiry": "Tanya langsung"
       },
-      "empty": "Silakan pilih kategori terlebih dahulu. Tombol mulai pemesanan akan aktif setelah memilih."
+      "empty": "Silakan pilih kategori terlebih dahulu. Tombol mulai booking akan aktif setelah pemilihan."
     },
     "cta": {
-      "hint": "Jelajahi layanan kecantikan yang tersedia berdasarkan kategori terpilih pada layar berikutnya.",
-      "button": "Mulai Pemesanan"
+      "hint": "Pilih kategori untuk mulai booking",
+      "button": "Mulai Booking"
     },
-    "interpreter": {
-      "eyebrow": "Dukungan Bahasa",
-      "title": "Butuh reservasi dalam bahasa asing? Gunakan Asisten Penerjemah",
-      "description": "Jika Anda khawatir tentang komunikasi saat konsultasi sebelum memesan atau saat di toko, Anda dapat terhubung langsung dengan penerjemah real-time.",
-      "button": "Buka Asisten Penerjemah"
+    "interpreter_entry": {
+      "title": "Penerjemah Real-time",
+      "description": "Berkomunikasi mudah dengan staf",
+      "cta": "Buka Penerjemah"
     },
-    "assurance": {
-      "items": [
-        {
-          "title": "Pilihan Kategori Sekilas",
-          "desc": "Pilih layanan Anda di layar pertama dan masuk ke alur pemesanan secara instan."
-        },
-        {
-          "title": "Pemesanan Tanpa Khawatir Bahasa",
-          "desc": "Bicara secara alami dengan toko menggunakan penerjemah real-time saat diperlukan."
-        },
-        {
-          "title": "Alur Pemesanan Mobile-First",
-          "desc": "Tingkatkan konversi dengan tombol berbentuk kartu dan CTA besar yang mudah dipilih dengan satu tangan."
-        }
-      ]
+    "location_sheet": {
+      "search_title": "Cari Lokasi",
+      "search_result_count": "{{count}} hasil untuk \"{{query}}\"",
+      "view_location": "Lihat Lokasi",
+      "view_location_desc": "Lihat lokasi detail di peta",
+      "call_taxi": "Panggil Taksi",
+      "google_maps_desc": "Lihat rute transportasi umum di Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Silakan pergi ke alamat ini",
+      "copy": "Salin Alamat",
+      "copy_done": "Berhasil disalin!",
+      "close": "Tutup"
     }
   },
   "interpreter_ui": {
@@ -149,7 +176,7 @@
     "expires": "Kedaluwarsa"
   },
   "home": {
-    "badge": "Kello",
+    "badge": "Rasakan Kecantikan Korea",
     "title": "Pemesanan Concierge · Jadwal Otomatis · Navigasi",
     "subtitle": "",
     "create_trip_cta": "Mulai Membuat Jadwal",
@@ -218,226 +245,365 @@
       "date_time": "Tanggal / Waktu",
       "area": "Lokasi",
       "price": "Harga",
-      "new_added": "Pemesanan baru ditambahkan!"
+      "new_added": "Pemesanan baru ditambahkan!",
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
     },
     "community": {
       "title": "Postingan Komunitas Saya",
-      "empty": "Belum ada postingan komunitas yang ditulis."
+      "empty": "Belum ada postingan komunitas yang ditulis.",
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
+    },
+    "dashboard": {
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      }
+    },
+    "settings": {
+      "account": {
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
+      }
     }
   },
   "community_page": {
-    "title": "Community",
-    "subtitle": "Connect with locals & travelers",
-    "filter_all": "All",
-    "filter_meetup": "Food & Meetup",
-    "filter_travel": "Travel Mate",
-    "filter_help": "Local Help",
-    "comments": "Comments",
-    "message": "Message",
-    "type": {
-      "MEETUP": "MEETUP",
-      "TRAVEL": "TRAVEL",
-      "HELP": "HELP",
-      "REVIEW": "REVIEW"
-    },
-    "post": {
-      "1": {
-        "author": "Mika (Japan)",
-        "time": "10 mins ago",
-        "title": "Samgyeopsal Meetup 🥓",
-        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-      },
-      "2": {
-        "author": "John (US)",
-        "time": "1 hour ago",
-        "title": "Hongdae Street Performance 🎸",
-        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-      },
-      "3": {
-        "author": "Jihoon (Korea)",
-        "time": "2 hours ago",
-        "title": "Need help with subway directions? 🚇",
-        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-      },
-      "4": {
-        "author": "Li Wei (China)",
-        "time": "3 hours ago",
-        "title": "K-Beauty Shopping 💄",
-        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-      }
-    },
-    "filter_review": "Reviews",
-    "detail": "Detail Postingan",
-    "meetup_info": "Info kunjungan",
-    "write_post": "Tulis ulasan",
-    "edit": "Edit ulasan",
-    "posting": "Sedang memposting...",
     "hero": {
-      "title": "Komunitas yang memprioritaskan ulasan beauty setelah reservasi",
-      "subtitle": "Mulai dari ulasan salon beauty, lalu lanjut ke makanan, wisata, dan acara.",
-      "search_placeholder": "Cari nama salon, pengalaman treatment, atau ulasan reservasi"
+      "title": "Komunitas Kello",
+      "search_placeholder": "Cari topik yang diminati"
     },
     "categories": {
       "all": "Semua",
-      "beauty_review": "Ulasan salon beauty",
-      "food_review": "Ulasan kuliner",
-      "travel_review": "Ulasan tempat wisata",
-      "meetup": "Acara",
-      "help": "Pertanyaan"
+      "meetup": "Pertemuan/Acara",
+      "beauty_review": "Kecantikan/Salon",
+      "food_review": "Kuliner/Kafe",
+      "travel_review": "Wisata/Kegiatan",
+      "meetup_recruitment": "Cari Teman Jalan",
+      "help": "Tips Bermanfaat"
     },
     "sub_filters": {
-      "all": "Semua",
-      "saved": "⭐ Disimpan",
-      "reacted": "💬 Saya ikut",
-      "mine": "👤 Tulisan saya",
-      "recruiting": "📢 Masih buka",
-      "active_reactions": "🔥 Banyak respons",
-      "open_meetup": "🤝 Buka ajakan bareng",
-      "weekend": "📅 Akhir pekan ini",
-      "fresh": "✨ Baru diperbarui"
+      "all": "All",
+      "saved": "Saved",
+      "reacted": "Reacted",
+      "mine": "My Posts",
+      "recruiting": "Recruiting",
+      "active_reactions": "Trending",
+      "open_meetup": "Open Meetups",
+      "weekend": "Weekend",
+      "fresh": "Fresh Info"
+    },
+    "status": {
+      "reviews": "Reviews",
+      "reacting": "Reacting",
+      "surveying": "Surveying",
+      "drafting": "Drafting",
+      "closed": "Closed"
+    },
+    "tags": {
+      "solo_friendly": "Solo Friendly",
+      "friends_friendly": "Friends Friendly",
+      "photo_spot": "Photo Spots",
+      "waiting": "Waiting Expected",
+      "foreigner_friendly": "Foreigner Friendly"
     },
     "states": {
-      "fetch_failed_title": "Tidak bisa memuat postingan",
-      "fetch_failed_desc": "Silakan coba lagi sebentar lagi.",
-      "fetch_failed_tip": "Buka ulang halaman ini untuk memuat postingan terbaru.",
-      "empty_title": "Belum ada postingan",
-      "empty_desc": "Jadilah yang pertama membagikan ulasan beauty.",
-      "empty_tip": "Menulis nama salon, pengalaman treatment, dan alur reservasi akan sangat membantu orang lain.",
-      "no_results_title": "Tidak ada postingan yang cocok",
-      "no_results_desc": "Coba kata kunci atau filter lain.",
-      "cta_write": "Tulis ulasan",
-      "cta_all": "Lihat semua"
+      "fetch_failed_desc": "Failed to load posts. Please check your network.",
+      "fetch_failed_title": "Data Error",
+      "fetch_failed_tip": "Try refreshing the page.",
+      "empty_title": "No posts yet",
+      "empty_desc": "Be the first to share your story!",
+      "empty_tip": "Tap the write button on the bottom right.",
+      "no_results_title": "No results found",
+      "no_results_desc": "Try searching with other keywords."
+    },
+    "quality_signals": {
+      "organized": "Well Organized",
+      "active": "Very Popular",
+      "asset": "Rich Information",
+      "mate": "Good Mate"
+    },
+    "toasts": {
+      "save_added": "Added to saved posts.",
+      "save_removed": "Removed from saved posts.",
+      "deleted": "Deleted successfully.",
+      "updated": "Updated successfully.",
+      "submitted": "Posted successfully."
+    },
+    "nav_summary": {
+      "all": "Viewing all stories in {{tab}}",
+      "active_reactions": "Getting hot reactions in {{tab}}!",
+      "open_meetup": "Looking for new mates in {{tab}}",
+      "weekend": "Any plans for this weekend in {{tab}}?",
+      "default": "Showing results filtered by {{sub}} in {{tab}}"
     },
     "form": {
-      "category_label": "Kategori",
-      "region_label": "Area",
-      "region_placeholder": "Contoh: Gangnam, Mapo",
-      "vibe_label": "Pilih suasana",
-      "meetup_toggle_title": "Buka ajakan bareng",
-      "meetup_toggle_desc": "Terima sinyal minat dari orang lain.",
-      "safety_title": "🔒 Panduan aman",
-      "safety_item_1": "• Jangan langsung membagikan kontak pribadi. Cek respons lewat komentar dulu.",
-      "safety_item_2": "• Disarankan membuat janji di tempat umum.",
+      "select_category": "Select Category",
+      "write_guide_title": {
+        "beauty_review": "Share your beauty experience",
+        "food_review": "Any hidden gems to recommend?",
+        "travel_review": "Share your travel tips",
+        "meetup": "Find mates to hang out with",
+        "meetup_recruitment": "Looking for travel mates?",
+        "help": "Ask anything"
+      },
+      "write_guide_body": {
+        "beauty_review": "Share your honest review of the treatment or service.",
+        "food_review": "Share information on taste, mood, or waiting.",
+        "travel_review": "Provide useful tips on courses, packing, or moving.",
+        "meetup": "Describe when, where, and what to do.",
+        "meetup_recruitment": "State your travel schedule, destinations, and mate conditions.",
+        "help": "Describe your question or situation in detail."
+      },
+      "title_label": {
+        "beauty_review": "Srv/Theme",
+        "default": "Title"
+      },
+      "title_placeholder": {
+        "beauty_review": "e.g. Gangnam Layered Cut Review",
+        "default": "Sedang ragu ingin menulis apa?"
+      },
+      "desc_label": {
+        "beauty_review": "Details",
+        "default": "Content"
+      },
+      "desc_placeholder": {
+        "beauty_review": "Describe the process or results in detail.",
+        "food_review": "Recommend menus and explain why.",
+        "travel_review": "Share info helpful for other travelers.",
+        "meetup": "Describe the meetup in detail.",
+        "meetup_recruitment": "Describe what you want to do together.",
+        "help": "Detailed questions help getting better answers.",
+        "default": "Tuliskan cerita yang ingin Anda bagikan"
+      },
       "image": {
-        "label": "Tambah gambar",
-        "title": "Anda dapat mengunggah hingga {{count}} gambar.",
-        "file_only_alert": "Hanya file gambar yang bisa ditambahkan.",
-        "limit_alert": "Anda dapat mengunggah hingga {{count}} gambar.",
-        "load_failed_alert": "Gambar tidak dapat dimuat.",
-        "button_loading": "Menyiapkan gambar...",
-        "button_limit": "{{count}} gambar sudah dipilih",
-        "button_add_more": "Tambah gambar",
-        "button_select": "Pilih gambar",
-        "preview_alt": "Pratinjau unggahan {{index}}",
-        "preview_name": "Gambar terpilih {{index}}",
-        "preview_desc": "Ini gambar ke-{{index}}. Periksa pratinjaunya sebelum mengirim.",
-        "remove": "Hapus",
-        "saved_name": "Gambar unggahan {{index}}",
         "guides": {
-          "beauty_review": "Tambahkan hasil treatment atau suasana salon bila ada.",
-          "food_review": "Tambahkan foto makanan atau suasana tempat agar lebih jelas.",
-          "travel_review": "Ambil suasana lokasi atau titik yang paling berkesan.",
-          "meetup": "Bagikan suasana acara atau alasan serunya pergi bersama.",
-          "help": "Kalau ada gambar referensi, unggah juga sekalian."
-        }
+          "beauty_review": "Add before/after or shop interior photos (Max 4)",
+          "food_review": "Add food and shop interior photos (Max 4)",
+          "travel_review": "Add photos that show the vibe (Max 4)",
+          "meetup": "Add photos of the place or activity (Max 4)",
+          "meetup_recruitment": "Add destination or reference photos (Max 4)",
+          "help": "Add photos that help explain the issue (Max 4)"
+        },
+        "saved_name": "Saved image {{index}}",
+        "file_only_alert": "Only image files can be selected.",
+        "limit_alert": "Up to {{count}} images can be uploaded.",
+        "load_failed_alert": "Gagal memuat gambar.",
+        "limit_label": "(Maks. {{count}} foto)"
       },
-      "summary_title": "Ringkasan posting",
-      "summary_region_type": "Area / jenis",
-      "summary_point": "Poin",
-      "summary_meetup": "Pergi bersama",
-      "summary_enabled": "Aktif",
-      "summary_disabled": "Nonaktif",
-      "submit_with_reactions": "Posting ulasan dan kumpulkan respons",
-      "submit_beauty": "Bagikan ulasan beauty",
-      "submit_default": "Bagikan ulasan"
-    },
-    "quick_entry": {
-      "beauty": {
-        "label": "Ulasan beauty",
-        "sub": "Reservasi · layanan · kepuasan"
+      "category_hints": {
+        "beauty_review": "Share your beauty shop experiences.",
+        "food_review": "Recommend your favorite spots.",
+        "travel_review": "Share your own travel know-how.",
+        "meetup": "Create a casual meetup to enjoy together.",
+        "meetup_recruitment": "Find travel mates with similar schedules.",
+        "help": "Ask anything you're curious about."
       },
-      "food": {
-        "label": "Ulasan kuliner",
-        "sub": "Tambahan untuk hari beauty"
-      },
-      "travel": {
-        "label": "Ulasan wisata",
-        "sub": "Rute sebelum dan sesudah treatment"
-      },
-      "write": {
-        "label": "Tulis ulasan",
-        "sub": "Bagikan pengalaman beauty"
-      }
+      "region_label": "Wilayah/Area",
+      "region_placeholder": "misal: Gangnam, Mapo",
+      "submit": "Unggah",
+      "write_title": "Buat Tulisan",
+      "edit_title": "Edit Tulisan",
+      "image_label": "Lampiran Gambar",
+      "add_photo": "Tambah Foto",
+      "preparing_images": "Menyiapkan gambar...",
+      "cancel": "Batal"
     },
-    "activity": {
-      "label": "Aktivitas saya:",
-      "summary": "Simpan {{saved}}, ikut {{reacted}}",
-      "new_updates": "✨ Ada kabar baru!"
-    },
-    "sort": {
-      "latest": "Terbaru",
-      "reactions": "Respons terbanyak",
-      "draft": "Pembentukan rencana"
-    },
-    "defaults": {
-      "region": "Seoul"
-    },
-    "fab": {
-      "beauty": "Tulis ulasan beauty",
-      "meetup": "Tulis posting acara"
-    },
-    "report": {
-      "modal_title": "Pilih alasan laporan",
-      "report_action": "Laporkan",
-      "cancel": "Batal",
-      "item_post": "postingan",
-      "item_comment": "komentar",
-      "submitted_alert": "{{item}} telah dilaporkan.\nAlasan: {{reason}}\nKami akan meninjaunya segera.",
-      "reasons": {
-        "ad_spam": "Terlihat seperti iklan",
-        "offensive": "Ada ungkapan yang tidak nyaman",
-        "contact": "Terlalu mendorong kontak pribadi",
-        "unsafe": "Terlihat tidak aman",
-        "other": "Lainnya"
-      }
-    },
+    "detail": "Post Detail",
     "detail_page": {
-      "loading": "Memuat postingan...",
-      "hidden_post": "Postingan ini disembunyikan.",
-      "show_hidden": "Tampilkan lagi",
-      "not_found": "Postingan tidak ditemukan.",
-      "hide_post": "Sembunyikan postingan ini",
-      "hide_comment": "Sembunyikan",
-      "save_post_aria": "Simpan postingan",
-      "body_title": "Detail",
-      "comments_title": "Komentar & pergi bersama",
-      "empty_comments": "Belum ada komentar.",
-      "signal_tag": "Sinyal pergi bersama",
-      "comment_input": {
-        "default": "Tulis komentar...",
-        "optional": "Pesan tambahan (opsional)",
-        "send": "Kirim"
+      "loading": "Loading data...",
+      "hidden_post": "This post is hidden.",
+      "not_found": "Post not found.",
+      "show_hidden": "Show Hidden Post",
+      "hide_post": "Hide this post",
+      "freshness": {
+        "realtime": "Actively Live",
+        "updated": "Info Updated",
+        "active": "Active Post",
+        "calm": "Calm Post"
       },
-      "signal_intents": {
-        "interested": "Saya juga ingin pergi",
-        "available_this_week": "Saya bisa minggu ini",
-        "join_if_schedule_fits": "Saya ikut kalau jadwal cocok",
-        "thanks": "Terima kasih infonya",
-        "question": "Saya punya pertanyaan"
+      "strengths": {
+        "title": "Post Strengths",
+        "organized": "Well Organized",
+        "active": "Active Interaction",
+        "visited_tip": "Includes Tips",
+        "new": "New Content"
       },
-      "signal_times": {
-        "this_week": "Minggu ini",
-        "this_weekend": "Akhir pekan ini",
-        "next_week": "Minggu depan",
-        "schedule_coordination": "Atur tanggal"
+      "checklist": {
+        "title": "Checklist",
+        "recommended": "Recommended for",
+        "required": "Must Check",
+        "comment_check": "Check comments",
+        "read_details": "Read details"
       },
-      "related": {
-        "this_region": "area ini"
+      "mini_signal_tag": "Meetup Open",
+      "primary_action": {
+        "review": "Leave Review",
+        "join": "Express Interest"
       },
       "save": {
-        "default": "☆ Simpan",
-        "saved": "⭐ Tersimpan"
+        "saved": "Saved",
+        "default": "Save"
+      },
+      "meetup_safety": {
+        "title": "Meetup Safety Guide",
+        "item_1": "Meeting in public places is recommended.",
+        "item_2": "Be careful with personal information."
+      },
+      "body_title": "Post Content",
+      "like": "Suka",
+      "dislike": "Tidak suka",
+      "like_alert": "Anda menyukai postingan ini!",
+      "dislike_alert": "Anda tidak menyukai postingan ini.",
+      "comments_title": "Comments",
+      "comment_input": {
+        "default": "Enter a comment...",
+        "optional": "Add an optional note",
+        "send": "Send"
+      },
+      "signal_intents": {
+        "interested": "I'm interested",
+        "available_this_week": "Available this week",
+        "join_if_schedule_fits": "Join if schedule fits",
+        "thanks": "Thanks for info",
+        "question": "Have a question"
+      },
+      "signal_times": {
+        "this_week": "This week",
+        "this_weekend": "This weekend",
+        "next_week": "Next week",
+        "schedule_coordination": "Coordinating date"
+      },
+      "author_panel": {
+        "title": "Author Dashboard",
+        "badge": "Author",
+        "stats": {
+          "total": "Total Reactions",
+          "total_value": "{{count}}",
+          "time": "Preferred Time",
+          "time_pending": "Calculating",
+          "intent": "Main Intent",
+          "recent": "Last 24h",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "Weekend has most reactions. Suggest a detailed schedule.",
+          "vote": "Preferred times vary. Try a vote to finalize.",
+          "share": "Share more info to get more attention."
+        },
+        "action": {
+          "weekend": "Suggest Weekend Schedule",
+          "vote": "Post a Vote",
+          "share": "Share Extra Tips"
+        },
+        "draft": {
+          "weekend": "How about meeting this weekend at 2PM?",
+          "vote": "Please vote for your preferred time!",
+          "share": "Here's one more tip for you!"
+        },
+        "final_draft": "Closing the recruitment. Please join our open chat if you're participating!",
+        "final_action": "Close Recruitment",
+        "footer": "Kello promotes a safe community culture."
+      },
+      "status_controls": {
+        "title": "Change Status"
+      },
+      "result": {
+        "title": "Post-visit Report & Tips",
+        "help": "Share tips or reviews after your visit. It helps others a lot.",
+        "placeholder": "Write your post-visit review here...",
+        "save_visited": "Save Visit & Tips",
+        "save_only": "Save Info Only"
+      },
+      "author_safety": {
+        "title": "Author Safety Guide",
+        "item_1": "Do not expose personal contact info directly.",
+        "item_2": "Beware of illegal meetups or money requests.",
+        "item_3": "Communicate with trusted users."
+      },
+      "signal_summary": {
+        "title": "Participation Summary",
+        "status": {
+          "active": "Actively Recruiting",
+          "forming": "Forming",
+          "preparing": "Starting"
+        },
+        "time_split": "Preferred times are split.",
+        "time_focus": "Most preferred: {{time}}",
+        "time_flexible": "Many flexible times.",
+        "desc": "{{count}} people expressed interest in {{topic}}.",
+        "topic_review": "review sharing",
+        "topic_outing": "meetup participation",
+        "schedule_title": "Choose Preferred Time"
+      },
+      "status": {
+        "REVIEWS": "Reviews Done",
+        "REACTING": "Reacting",
+        "SURVEYING": "Surveying",
+        "DRAFTING": "Drafting",
+        "CLOSED": "Closed"
+      },
+      "tags": {
+        "solo_friendly": "Solo Friendly",
+        "friends_friendly": "With Friends",
+        "photo_spot": "Photo Spots",
+        "waiting": "Wait Exists",
+        "foreigner_friendly": "Foreigner Friendly"
       }
+    },
+    "actions": {
+      "delete_confirm": "Are you sure you want to delete?"
+    },
+    "errors": {
+      "login_required": "Login required.",
+      "post_failed": "Failed to post: {{message}}"
+    },
+    "report": {
+      "report_action": "Report",
+      "success": "Reported successfully.",
+      "reasons": {
+        "ad_spam": "Ad/Spam",
+        "offensive": "Offensive",
+        "contact": "Contact Induction",
+        "unsafe": "Unsafe",
+        "other": "Other"
+      }
+    },
+    "comments": "Comments",
+    "time": {
+      "just_now": "Just now"
     }
   },
   "home_new": {
@@ -515,15 +681,15 @@
     "category_waxing": "Waxing",
     "category_makeup": "Makeup",
     "category_lash": "Lash",
-    "lang_ko": "Korean",
+    "lang_ko": "한국어",
     "lang_en": "English",
-    "lang_ja": "Japanese",
-    "lang_zh_cn": "Chinese (Simplified)",
-    "lang_zh_hk": "Chinese (Traditional)",
-    "lang_vi": "Vietnamese",
-    "lang_th": "Thai",
-    "lang_id": "Indonesian",
-    "lang_ms": "Malay",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
     "intent_booking_confirm": "Booking Confirmation",
     "intent_service_request": "Service Request",
     "intent_allergy_notice": "Allergy/Sensitivity Notice",
@@ -619,7 +785,15 @@
     "error_cancel_reason": "Please select or enter a cancellation reason.",
     "error_change_reason": "Please enter what you'd like to change.",
     "error_change": "Could not send your change request. Please try again later.",
-    "error_alt": "Something went wrong. Please try again later."
+    "error_alt": "Something went wrong. Please try again later.",
+    "interpreter_visit_context": "Menggunakan penerjemah saat mengunjungi {{storeName}}",
+    "interpreter_visit_service_context": "Menggunakan penerjemah untuk {{serviceName}} di {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
   },
   "notifications": {
     "page_title": "Notification Center",
@@ -636,5 +810,251 @@
     "event_booking_change_rejected": "Change Declined",
     "event_booking_completed": "Service Completed",
     "event_default": "Notification"
+  },
+  "interpreter_page": {
+    "back": "< Kembali",
+    "title": "Penerjemah Real-time",
+    "subtitle": "Bahasa tamu diatur sesuai bahasa aplikasi; bahasa toko tetap bahasa Korea.",
+    "onboarding": "Saat tamu menginput, akan diterjemahkan ke Korea; saat staf menginput bahasa Korea, akan diterjemahkan ke bahasa Anda.",
+    "customer_lang": "Bahasa Pengunjung",
+    "staff_lang": "Bahasa Toko (Korea)",
+    "mic_preparing": "Menyiapkan Mikrofon",
+    "customer_transcribing": "Mengenali suara pengunjung...",
+    "customer_recording": "Merekam suara pengunjung... klik lagi untuk selesai",
+    "translating": "Menerjemahkan...",
+    "customer_speak_btn": "Input Suara Pengunjung",
+    "staff_transcribing": "Mengenali suara staf...",
+    "staff_recording": "Merekam suara staf... klik lagi untuk selesai",
+    "staff_speak_btn": "Input Suara Staf",
+    "customer_input_label": "Input Pengunjung",
+    "customer_placeholder": "Ketik apa yang dikatakan pengunjung.",
+    "send": "Kirim",
+    "staff_input_label": "Input Staf",
+    "staff_placeholder": "Ketik apa yang dikatakan staf dalam bahasa Korea.",
+    "voice_supported_hint": "Rekam melalui mik atau ketik teks di bawah.",
+    "voice_not_supported_hint": "Browser ini tidak hỗ trợ input suara. Gunakan teks.",
+    "voice_recognizing": "Mengenali suara.",
+    "voice_unrecognized_error": "Tidak dapat mengenali suara.",
+    "voice_failed_error": "Pengenalan suara gagal.",
+    "mic_permission_status": "Memeriksa izin mikrofon.",
+    "recording_status": "Merekam... maks {{seconds}} dtk.",
+    "mic_unsupported_error": "Mik tidak dapat diakses.",
+    "input_required_customer": "Masukkan kalimat pengunjung terlebih dahulu.",
+    "input_required_staff": "Masukkan kalimat staf terlebih dahulu.",
+    "translating_status": "Menyiapkan terjemahan.",
+    "translation_failed_error": "Terjemahan gagal. Coba lagi.",
+    "empty_history_hint": "Riwayat akan muncul di sini.",
+    "customer_role": "Pengunjung",
+    "staff_role": "Staf",
+    "replay_btn_label": "Putar ulang terjemahan",
+    "replay_not_supported_hint": "Pemutaran audio tidak didukung.",
+    "play": "Putar",
+    "translated_status": "Diterjemahkan",
+    "source_only_status": "Hanya Sumber",
+    "voice_too_short_error": "Mohon bicara lebih lama."
+  },
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
+    },
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
   }
 }

@@ -39,15 +39,15 @@
 .formCard {
     width: 100%;
     max-width: 400px;
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 1);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-highlight);
     border-radius: 24px;
     padding: 32px;
     z-index: 10;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px -10px rgba(43, 35, 29, 0.1);
 }
 
 .header {
@@ -83,8 +83,8 @@
     width: 100%;
     padding: 14px;
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
     color: var(--foreground);
     font-size: 1rem;
     transition: border 0.2s;
@@ -100,7 +100,7 @@
     width: 100%;
     margin-top: 12px;
     background: var(--primary);
-    color: white;
+    color: var(--hanji-ivory);
     border: none;
     padding: 16px;
     border-radius: 16px;
@@ -159,4 +159,31 @@
 
 .socialBtn:hover {
     background: var(--gray-200);
+}
+
+.homeShortcut {
+    align-self: flex-start;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    z-index: 10;
+}
+
+.homeLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-500);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.homeLink:hover {
+    color: var(--primary);
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateX(-2px);
 }

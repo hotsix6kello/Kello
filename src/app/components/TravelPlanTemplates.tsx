@@ -7,6 +7,7 @@ import { getTravelPlanTemplatesByLanguage } from './travelPlanData';
 
 export default function TravelPlanTemplates() {
     const { i18n } = useTranslation('common');
+    const { t: tBeauty } = useTranslation(['beauty_explore', 'home_beauty']);
 
     // Use current language or fallback to 'ko'
     const currentLang = i18n.language || 'ko';
@@ -32,7 +33,7 @@ export default function TravelPlanTemplates() {
     return (
         <section className={styles.templatesSection}>
             <h2 className={styles.sectionTitle}>
-                {currentLang.startsWith('ko') ? '인기 추천 플랜' : currentLang.startsWith('th') ? 'แพ็กเกจยอดนิยม' : 'Popular Recommended Plans'}
+                {tBeauty('popular_recommended_plans', { defaultValue: '인기 추천 플랜' })}
             </h2>
 
             <div className={styles.tabContainer}>
@@ -65,7 +66,7 @@ export default function TravelPlanTemplates() {
                 </button>
 
                 <div className={`${styles.collapsibleContent} ${isExpanded ? styles.expanded : ''}`}>
-                    <div className={styles.itineraryTitle}>📅Schedule</div>
+                    <div className={styles.itineraryTitle}>📅{tBeauty('schedule_title', { defaultValue: 'Schedule' })}</div>
                     <div className={styles.itineraryList}>
                         {activePlan.itinerary.map((item, idx) => (
                             <div key={idx} className={styles.itineraryItem}>

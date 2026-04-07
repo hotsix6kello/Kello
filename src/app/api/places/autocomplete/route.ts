@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    const { input, language } = await request.json();
+    const { input } = await request.json();
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
     if (!apiKey) {
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
         const data = await response.json();
         return NextResponse.json(data);
     } catch (error) {
+        console.error('Autocomplete error:', error);
         return NextResponse.json({ error: 'Failed to fetch autocomplete' }, { status: 500 });
     }
 }

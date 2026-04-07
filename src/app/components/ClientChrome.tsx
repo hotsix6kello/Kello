@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import GlobalLangButton from './GlobalLangButton';
 import BottomNav from './BottomNav';
-import KRideGlobalFAB from './KRideGlobalFAB';
 
 /**
  * Ensures global chrome UI (that uses next/navigation hooks) 
@@ -26,7 +25,6 @@ export default function ClientChrome() {
         <>
             <GlobalLangButton />
             <BottomNav />
-            <KRideGlobalFAB />
         </>
     );
 }

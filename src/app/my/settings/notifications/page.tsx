@@ -54,8 +54,8 @@ function NotificationSettingsContent() {
       if (body.ok) {
         setPreferences(body.preferences);
       }
-    } catch (error) {
-      console.error('Failed to fetch preferences:', error);
+    } catch (_error) {
+      console.error('Failed to fetch preferences:', _error);
     } finally {
       setLoading(false);
     }
@@ -89,7 +89,7 @@ function NotificationSettingsContent() {
       } else {
         throw new Error(body.error);
       }
-    } catch (error) {
+    } catch {
       setMessage({ text: '저장에 실패했습니다.', type: 'error' });
     } finally {
       setSaving(false);

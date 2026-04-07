@@ -30,8 +30,10 @@ interface Partner {
     address: string | null;
     website: string | null;
     description: string | null;
+    business_license_url: string | null;
     status: PartnerStatus;
     reject_reason: string | null;
+    visibility_status: boolean;
     created_at: string;
     reviewed_at: string | null;
 }
@@ -57,11 +59,17 @@ function AdminPartnersContent() {
 
             const { data: profile } = await supabase
                 .from('profiles')
-                .select('is_admin')
+                .select('role')
                 .eq('id', user.id)
                 .maybeSingle();
 
-            setIsAdmin(profile?.is_admin === true);
+            const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+            if (!isAdminRole) {
+                setIsAdmin(false);
+                setLoading(false);
+                return;
+            }
+            setIsAdmin(true);
         };
         checkAdmin();
     }, []);
@@ -91,6 +99,16 @@ function AdminPartnersContent() {
         await supabase
             .from('partners')
             .update({ status: 'approved', reviewed_at: new Date().toISOString() })
+            .eq('id', partner.id);
+        await fetchPartners();
+        setActionLoading(null);
+    };
+
+    const handleToggleVisibility = async (partner: Partner) => {
+        setActionLoading(partner.id);
+        await supabase
+            .from('partners')
+            .update({ visibility_status: !partner.visibility_status })
             .eq('id', partner.id);
         await fetchPartners();
         setActionLoading(null);
@@ -138,7 +156,7 @@ function AdminPartnersContent() {
                 <h2 style={{ fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>관리자 전용 페이지</h2>
                 <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', textAlign: 'center' }}>
                     이 페이지는 관리자만 접근할 수 있습니다.<br />
-                    Supabase에서 is_admin 권한을 부여받으세요.
+                    관리자 권한을 부여받으세요.
                 </p>
                 <button
                     onClick={() => router.push('/')}
@@ -269,6 +287,21 @@ function AdminPartnersContent() {
                                     </a>
                                 </div>
                             )}
+                            {partner.business_license_url && (
+                                <div className={styles.detailRow} style={{ marginTop: 8 }}>
+                                    <span className={styles.detailLabel}>인증 서류</span>
+                                    <button 
+                                        onClick={() => window.open(partner.business_license_url!)}
+                                        style={{
+                                            padding: '4px 10px', background: '#f59e0b', color: 'white',
+                                            border: 'none', borderRadius: 8, fontSize: '0.75rem', 
+                                            fontWeight: 700, cursor: 'pointer'
+                                        }}
+                                    >
+                                        📄 서류 확인하기
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         {partner.description && (
@@ -305,6 +338,31 @@ function AdminPartnersContent() {
                                 </button>
                             </div>
                         )}
+
+                        {/* 노출 설정 (승인된 경우에만) */}
+                        {partner.status === 'approved' && (
+                            <div className={styles.visibilityRow} style={{
+                                marginTop: 12, paddingTop: 12, borderTop: '1px dashed rgba(0,0,0,0.06)',
+                                display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+                            }}>
+                                <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--gray-600)' }}>
+                                    {partner.visibility_status ? '🌐 탐색 화면 노출 중' : '🙈 현재 비노출 상태'}
+                                </span>
+                                <button
+                                    onClick={() => handleToggleVisibility(partner)}
+                                    disabled={actionLoading === partner.id}
+                                    style={{
+                                        padding: '6px 14px', borderRadius: 10, border: '1px solid',
+                                        fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer',
+                                        background: partner.visibility_status ? 'rgba(239,68,68,0.05)' : 'rgba(16,185,129,0.05)',
+                                        color: partner.visibility_status ? '#dc2626' : '#059669',
+                                        borderColor: partner.visibility_status ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)',
+                                    }}
+                                >
+                                    {partner.visibility_status ? '비노출로 전환' : '탐색 노출 허용'}
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
@@ -336,6 +394,9 @@ function AdminPartnersContent() {
                     </div>
                 </div>
             )}
+            
+            {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
+            <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
@@ -65,6 +65,25 @@ export default function AdminGlossaryPage() {
   const [form, setForm] = useState<GlossaryFormState>(EMPTY_FORM);
   const [userEmail, setUserEmail] = useState('');
 
+  const filteredEntries = useMemo(() => {
+    return entries.filter((entry) => entry.domain === filterDomain && entry.target_locale === filterLocale);
+  }, [entries, filterDomain, filterLocale]);
+
+  const fetchEntries = useCallback(async (domain = filterDomain, locale = filterLocale) => {
+    setLoading(true);
+
+    const { data } = await supabase
+      .from('translation_glossary')
+      .select('*')
+      .eq('domain', domain)
+      .eq('target_locale', locale)
+      .order('priority', { ascending: true })
+      .order('source_term', { ascending: true });
+
+    setEntries((data as GlossaryRow[] | null) ?? []);
+    setLoading(false);
+  }, [filterDomain, filterLocale]);
+
   useEffect(() => {
     const init = async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -78,11 +97,12 @@ export default function AdminGlossaryPage() {
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('is_admin')
+        .select('role')
         .eq('id', user.id)
         .maybeSingle();
 
-      if (!profile?.is_admin) {
+      const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+      if (!isAdminRole) {
         setIsAdmin(false);
         setLoading(false);
         return;
@@ -93,26 +113,7 @@ export default function AdminGlossaryPage() {
     };
 
     void init();
-  }, []);
-
-  const filteredEntries = useMemo(() => {
-    return entries.filter((entry) => entry.domain === filterDomain && entry.target_locale === filterLocale);
-  }, [entries, filterDomain, filterLocale]);
-
-  async function fetchEntries(domain = filterDomain, locale = filterLocale) {
-    setLoading(true);
-
-    const { data } = await supabase
-      .from('translation_glossary')
-      .select('*')
-      .eq('domain', domain)
-      .eq('target_locale', locale)
-      .order('priority', { ascending: true })
-      .order('source_term', { ascending: true });
-
-    setEntries((data as GlossaryRow[] | null) ?? []);
-    setLoading(false);
-  }
+  }, [fetchEntries]);
 
   function resetForm() {
     setForm({
@@ -406,6 +407,9 @@ export default function AdminGlossaryPage() {
             )}
           </section>
         </div>
+        
+        {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
+        <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
       </div>
     </div>
   );

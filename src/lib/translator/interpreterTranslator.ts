@@ -12,6 +12,12 @@ const INTERPRETER_LANGUAGE_LABELS: Record<ConciergeLocale, string> = {
   th: "Thai",
   id: "Indonesian",
   ms: "Malay",
+  es: "Spanish",
+  fr: "French",
+  de: "German",
+  ar: "Arabic",
+  pt: "Portuguese",
+  ru: "Russian",
 };
 
 export interface InterpreterTranslationRequest {

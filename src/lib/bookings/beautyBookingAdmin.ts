@@ -74,8 +74,8 @@ export type BeautyBookingAdminRecord = {
   bookingTime: string;
   designerId: string | null;
   designerName: string | null;
-  primaryServiceId: string;
-  primaryServiceName: string;
+  primaryServiceId: string | null;
+  primaryServiceName: string | null;
   addOnIds: string[];
   addOnNames: string[];
   basePrice: number;
@@ -85,6 +85,7 @@ export type BeautyBookingAdminRecord = {
   customerName: string;
   customerPhone: string;
   customerRequest: string;
+  imageUrls: string[];
   communicationLanguage: string;
   communicationIntent: string;
   koreanMessage: string;

@@ -40,12 +40,9 @@ interface GuideItem {
     href?: string;
 }
 
-const TABS: SupportTab[] = ["booking", "general", "faq", "emergency"];
+const TABS: SupportTab[] = ["booking", "general", "faq"];
 
-function buildSupportUrl(params: URLSearchParams): string {
-    const query = params.toString();
-    return query ? `/my/support?${query}` : "/my/support";
-}
+
 
 function parseTab(
     requestedTab: string | null,
@@ -196,49 +193,9 @@ function SupportPageContent() {
     });
     const contextPhrasesUrl = buildPathWithParams("/my/phrases", phrasesParams);
 
-    const emergencyDetailParams = new URLSearchParams({
-        source: hasBookingContext ? "booking" : "help",
-        focus: "emergency",
-    });
-    appendBookingQueryContext(emergencyDetailParams, resolvedBookingContext, {
-        includeBookingIdParam: true,
-    });
-    const emergencyDetailQuery = emergencyDetailParams.toString();
-    const medicalUrl = emergencyDetailQuery
-        ? `/help/medical?${emergencyDetailQuery}`
-        : "/help/medical";
-    const policeUrl = emergencyDetailQuery
-        ? `/help/police?${emergencyDetailQuery}`
-        : "/help/police";
 
-    const handleTabChange = (tab: SupportTab) => {
-        setActiveTab(tab);
 
-        const nextParams = new URLSearchParams(searchParams.toString());
-        nextParams.set("tab", tab);
-        router.replace(buildSupportUrl(nextParams), { scroll: false });
-    };
 
-    const summaryCards = [
-        {
-            id: "booking",
-            label: t("my_page.support.summary.booking.label"),
-            desc: t("my_page.support.summary.booking.desc"),
-            onClick: () => handleTabChange("booking"),
-        },
-        {
-            id: "general",
-            label: t("my_page.support.summary.general.label"),
-            desc: t("my_page.support.summary.general.desc"),
-            onClick: () => handleTabChange("general"),
-        },
-        {
-            id: "emergency",
-            label: t("my_page.support.summary.emergency.label"),
-            desc: t("my_page.support.summary.emergency.desc"),
-            onClick: () => handleTabChange("emergency"),
-        },
-    ];
 
     const guideItems: GuideItem[] = [
         {
@@ -289,13 +246,6 @@ function SupportPageContent() {
 
     const generalHelpCards = [
         {
-            id: "help-center",
-            label: t("my_page.support.general.help_center.label"),
-            desc: t("my_page.support.general.help_center.desc"),
-            href: "/help",
-            ctaLabel: t("common.actions.open_help_center"),
-        },
-        {
             id: "booking-cancel",
             label: t("my_page.support.general.booking_cancel.label"),
             desc: t("my_page.support.general.booking_cancel.desc"),
@@ -315,56 +265,6 @@ function SupportPageContent() {
             desc: t("my_page.support.general.partner.desc"),
             href: "/auth/partner-signup",
             ctaLabel: t("common.actions.partner_inquiry"),
-        },
-    ];
-
-    const emergencyCards = [
-        {
-            id: "overview",
-            label: t("my_page.support.emergency.overview.label"),
-            desc: t("my_page.support.emergency.overview.desc"),
-            href: "/help",
-            ctaLabel: t("my_page.support.emergency.overview.cta"),
-        },
-        {
-            id: "interp",
-            label: hasBookingContext
-                ? t("common.actions.interpreter_for_booking")
-                : t("my_page.support.emergency.interp.label"),
-            desc: hasBookingContext
-                ? t("my_page.support.emergency.interp.booking_desc")
-                : t("my_page.support.emergency.interp.desc"),
-            href: interpretationUrl,
-            ctaLabel: hasBookingContext
-                ? t("common.actions.interpreter_for_booking")
-                : t("my_page.support.emergency.interp.cta"),
-        },
-        {
-            id: "phrases",
-            label: hasBookingContext
-                ? t("my_page.support.emergency.phrases.booking_label")
-                : t("my_page.support.emergency.phrases.label"),
-            desc: hasBookingContext
-                ? t("my_page.support.emergency.phrases.booking_desc")
-                : t("my_page.support.emergency.phrases.desc"),
-            href: contextPhrasesUrl,
-            ctaLabel: hasBookingContext
-                ? t("common.actions.show_booking_phrases")
-                : t("my_page.support.emergency.phrases.cta"),
-        },
-        {
-            id: "medical",
-            label: t("my_page.support.emergency.medical.label"),
-            desc: t("my_page.support.emergency.medical.desc"),
-            href: medicalUrl,
-            ctaLabel: t("my_page.support.emergency.medical.cta"),
-        },
-        {
-            id: "police",
-            label: t("my_page.support.emergency.police.label"),
-            desc: t("my_page.support.emergency.police.desc"),
-            href: policeUrl,
-            ctaLabel: t("my_page.support.emergency.police.cta"),
         },
     ];
 
@@ -415,8 +315,16 @@ function SupportPageContent() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <button className={styles.backLink} onClick={() => router.push("/my")}>
-                    {t("common.back")}
+                <button 
+                    className={styles.backLink} 
+                    onClick={() => router.push("/my")}
+                    style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center' }}
+                    aria-label={t("common.back")}
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
                 </button>
 
                 <div className={styles.headerRow}>
@@ -429,42 +337,10 @@ function SupportPageContent() {
                         </h1>
                         <p className={styles.subtitle}>{t("my_page.support.subtitle")}</p>
                     </div>
-
-                    <button
-                        className={styles.headerButton}
-                        onClick={() => router.push("/help")}
-                    >
-                        {t("my_page.support.header_cta")}
-                    </button>
                 </div>
             </header>
 
-            <section className={styles.summarySection}>
-                <div className={styles.summaryGrid}>
-                    {summaryCards.map((card) => (
-                        <button
-                            key={card.id}
-                            className={styles.summaryCard}
-                            onClick={card.onClick}
-                        >
-                            <span className={styles.summaryLabel}>{card.label}</span>
-                            <span className={styles.summaryDesc}>{card.desc}</span>
-                        </button>
-                    ))}
-                </div>
-            </section>
 
-            <nav className={styles.tabBar}>
-                {TABS.map((tab) => (
-                    <button
-                        key={tab}
-                        className={`${styles.tabButton} ${activeTab === tab ? styles.activeTab : ""}`}
-                        onClick={() => handleTabChange(tab)}
-                    >
-                        {t(`my_page.support.tabs.${tab}`)}
-                    </button>
-                ))}
-            </nav>
 
             {(bookingBannerText || hasBookingContext) && (
                 <BookingContextBanner
@@ -692,55 +568,8 @@ function SupportPageContent() {
                         })}
                     </div>
                 </section>
-            )}
-
-            {activeTab === "emergency" && (
-                <section className={styles.section}>
-                    <div className={styles.sectionHeader}>
-                        <div>
-                            <h2 className={styles.sectionTitle}>{t("my_page.support.emergency.title")}</h2>
-                            <p className={styles.sectionText}>{t("my_page.support.emergency.desc")}</p>
-                        </div>
-                    </div>
-
-                    {(focus === "interpreter" || source === "help") && (
-                        <div className={styles.inlineNotice}>
-                            {focus === "interpreter"
-                                ? t("my_page.support.emergency.interpreter_notice")
-                                : t("my_page.support.emergency.hub_notice")}
-                        </div>
-                    )}
-
-                    <div className={styles.hotlineRow}>
-                        <a href="tel:1330" className={styles.hotlineChip}>
-                            {t("common.actions.call_1330")}
-                        </a>
-                        <a href="tel:119" className={styles.hotlineChip}>
-                            {t("common.actions.call_119")}
-                        </a>
-                        <a href="tel:112" className={styles.hotlineChip}>
-                            {t("common.actions.call_112")}
-                        </a>
-                    </div>
-
-                    <div className={styles.helpGrid}>
-                        {emergencyCards.map((card) => (
-                            <article key={card.id} className={styles.helpCard}>
-                                <h3 className={styles.helpCardTitle}>{card.label}</h3>
-                                <p className={styles.helpCardDesc}>{card.desc}</p>
-                                <button
-                                    className={styles.secondaryButton}
-                                    onClick={() => router.push(card.href)}
-                                >
-                                    {card.ctaLabel}
-                                </button>
-                            </article>
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            <div className={styles.bottomSpacer} />
+            )}            {/* Force huge spacer to prevent Bottom Nav overlap */}
+            <div style={{ height: 200, minHeight: 200, flexShrink: 0, width: '100%' }} />
         </div>
     );
 }

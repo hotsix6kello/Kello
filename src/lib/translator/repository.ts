@@ -1,7 +1,7 @@
-import { createRequire } from "module";
 import { randomUUID } from "crypto";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-import { hasSupabaseServerAccess } from "../supabaseServer.ts";
+import { getSupabaseServerClient, hasSupabaseServerAccess } from "../supabaseServer.ts";
 import type {
   BookingRecord,
   ConciergeEventRecord,
@@ -10,7 +10,7 @@ import type {
   InterpreterTurnRecord,
 } from "./types.ts";
 
-const require = createRequire(import.meta.url);
+
 
 function nowIso() {
   return new Date().toISOString();
@@ -73,23 +73,9 @@ export class InMemoryHomeTranslatorRepository implements HomeTranslatorRepositor
 }
 
 export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepository {
-  private readonly client: {
-    from: (table: string) => {
-      insert: (values: Record<string, unknown> | Array<Record<string, unknown>>) => any;
-      upsert: (values: Record<string, unknown> | Array<Record<string, unknown>>) => any;
-      select: (columns?: string) => any;
-      update: (values: Record<string, unknown>) => any;
-      eq: (column: string, value: unknown) => any;
-      order: (column: string, options?: { ascending?: boolean }) => any;
-      maybeSingle: () => Promise<{ data: Record<string, unknown> | null; error: unknown }>;
-    };
-  };
+  private readonly client: SupabaseClient;
 
   constructor() {
-    const { getSupabaseServerClient } = require("../supabaseServer.ts") as {
-      getSupabaseServerClient: () => SupabaseHomeTranslatorRepository["client"];
-    };
-
     this.client = getSupabaseServerClient();
   }
 

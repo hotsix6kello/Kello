@@ -71,7 +71,7 @@ await run("interpreter session route validates unsupported locales", async () =>
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        customerLocale: "fr",
+        customerLocale: "xx",
         staffLocale: "ko",
       }),
     }),

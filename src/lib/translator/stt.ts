@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "crypto";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
 
 import type { ConciergeLocale, InterpreterSttRequest, InterpreterSttResponse } from "./types.ts";
 
@@ -40,6 +40,30 @@ const MOCK_TRANSCRIPTS: Record<ConciergeLocale, string[]> = {
     "Tolong buat hasilnya nampak semula jadi.",
     "Boleh kurangkan sedikit volume di bahagian ini?",
   ],
+  es: [
+    "Por favor, haga que parezca natural.",
+    "¿Podría reducir el volumen aquí?",
+  ],
+  fr: [
+    "S'il vous plaît, faites en sorte que cela ait l'air naturel.",
+    "Pourriez-vous réduire le volume ici ?",
+  ],
+  de: [
+    "Bitte lassen Sie es natürlich aussehen.",
+    "Könnten Sie hier das Volumen reduzieren?",
+  ],
+  ar: [
+    "يرجى جعله يبدو طبيعياً.",
+    "هل يمكنك تقليل الصوت هنا؟",
+  ],
+  pt: [
+    "Por favor, faça com que pareça natural.",
+    "Poderia reduzir o volume aqui?",
+  ],
+  ru: [
+    "Пожалуйста, сделайте так, чтобы это выглядело естественно.",
+    "Не могли бы вы уменьшить объем здесь?",
+  ],
 };
 
 const STT_LANGUAGE_LABELS: Record<ConciergeLocale, string> = {
@@ -52,6 +76,12 @@ const STT_LANGUAGE_LABELS: Record<ConciergeLocale, string> = {
   th: "Thai",
   id: "Indonesian",
   ms: "Malay",
+  es: "Spanish",
+  fr: "French",
+  de: "German",
+  ar: "Arabic",
+  pt: "Portuguese",
+  ru: "Russian",
 };
 
 export interface InterpreterSttProvider {
@@ -125,7 +155,7 @@ export class HttpInterpreterSttProvider implements InterpreterSttProvider {
 
 export class GeminiInterpreterSttProvider implements InterpreterSttProvider {
   private genAI: GoogleGenerativeAI;
-  private model: any;
+  private model: GenerativeModel;
 
   constructor(apiKey: string) {
     this.genAI = new GoogleGenerativeAI(apiKey);

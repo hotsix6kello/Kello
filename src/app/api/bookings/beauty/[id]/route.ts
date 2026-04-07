@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import type { BeautyBookingAdminSelectRow } from "@/lib/bookings/beautyBookingServer.ts";
 
 import { AdminRouteAccessError, requireAdminRouteAccess } from "@/lib/admin/adminRouteAccess.ts";
 import {
@@ -12,7 +13,6 @@ import {
 import {
   listNotificationsByBooking,
   resendBeautyBookingNotification,
-  type BeautyBookingNotificationRecord,
 } from "@/lib/bookings/beautyNotificationServer.ts";
 import { 
   isBeautyBookingAdminStatus, 
@@ -142,11 +142,12 @@ export async function PATCH(
       
       try {
         await resendBeautyBookingNotification(body.notificationId, adminId);
-      } catch (resendError: any) {
-        if (resendError.message === "resend_limit_exceeded") {
+      } catch (resendError: unknown) {
+        const message = resendError instanceof Error ? resendError.message : String(resendError);
+        if (message === "resend_limit_exceeded") {
           return jsonFailure("maximum resend limit (3) reached for this notification", 429);
         }
-        if (resendError.message === "resend_cooldown_active") {
+        if (message === "resend_cooldown_active") {
           return jsonFailure("please wait 5 minutes before resending this notification icon", 429);
         }
         throw resendError;
@@ -157,7 +158,7 @@ export async function PATCH(
       const { mapBeautyBookingRowToAdminRecord, BEAUTY_BOOKING_ADMIN_SELECT } = await import("@/lib/bookings/beautyBookingServer.ts");
       const client = getSupabaseServerClient();
       const { data } = await client.from(BEAUTY_BOOKING_TABLE).select(BEAUTY_BOOKING_ADMIN_SELECT).eq("id", id).single();
-      item = mapBeautyBookingRowToAdminRecord(data as any);
+      item = mapBeautyBookingRowToAdminRecord(data as unknown as BeautyBookingAdminSelectRow);
     } else {
       if (!isBeautyBookingAdminStatus(body.status)) {
         return jsonFailure("valid booking status is required for status updates", 400);

@@ -1,274 +1,206 @@
 {
-    "common": {
-        "welcome": "مرحباً أيها المسافر",
-        "greeting": "صباح الخير",
-        "login": "تسجيل الدخول",
-        "today": "اليوم",
-        "move": "تنقل",
-        "book": "حجز",
-        "chat": "دردشة",
-        "my": "حسابي",
-        "current_operation": "يعمل الآن",
-        "live": "مباشر",
-        "recommended": "قريب منك",
-        "based_on_location": "بناءً على موقعك",
-        "start_nav": "بدء الملاحة",
-        "delay_10m": "تأخير +10 دقائق",
-        "confirmed": "تم التأكيد",
-        "payment_completed": "اكتملت الدفعة",
-        "weather_clear": "صافٍ",
-        "back": "رجوع",
-        "community_nav": "Community"
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
     },
-    "transport": {
-        "moving_to": "متجه إلى {{dest}}",
-        "remaining": "متبقي",
-        "line_2_direction": "الخط 2 • اتجاه City Hall",
-        "departed": "غادر",
-        "passing_now": "يمر الآن...",
-        "current": "الحالي",
-        "get_off_at": "انزل في",
-        "exit_3": "مخرج 3",
-        "getting_off_here": "سأنزل هنا",
-        "stations": {
-            "samseong": "سامسيونغ",
-            "seolleung": "سيولونغ",
-            "yeoksam": "يوكسام",
-            "gangnam": "كانغنام",
-            "gyodae": "كيوداي",
-            "seocho": "سيوتشو",
-            "seongsu": "سيونغسو"
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
         }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
     },
-    "home": {
-        "title_korea": "كوريا اليوم",
-        "recommended_plans": "خطط السفر الموصى بها",
-        "plans": {
-            "2d": {
-                "title": "يومان: أساسيات سيول",
-                "label": "خطة يومين"
-            },
-            "3d": {
-                "title": "3 أيام: الثقافة الكورية والأسلوب",
-                "label": "خطة 3 أيام"
-            },
-            "5d": {
-                "title": "5 أيام: الجولة الكبرى",
-                "label": "خطة 5 أيام"
-            },
-            "request_custom_label": "مخصص",
-            "request_custom_title": "طلب خطة لـ {{days}} أيام",
-            "request_custom_toast": "تم طلب خطة مخصصة لـ {{days}} أيام! سيتواصل معك فريق الاستقبال قريباً."
-        }
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
     },
-    "my_page": {
-        "bookings": {
-            "title": "حجوزاتي",
-            "date_time": "التاريخ / الوقت",
-            "area": "المنطقة",
-            "price": "السعر",
-            "new_added": "تم إضافة حجز جديد!"
-        },
-        "community": {
-            "title": "مشاركاتي في المجتمع",
-            "empty": "لم تتم كتابة مشاركات بعد."
-        }
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
     },
-    "community_page": {
-        "title": "Community",
-        "subtitle": "Connect with locals & travelers",
-        "filter_all": "All",
-        "filter_meetup": "Food & Meetup",
-        "filter_travel": "Travel Mate",
-        "filter_help": "Local Help",
-        "comments": "Comments",
-        "message": "Message",
-        "type": {
-            "MEETUP": "MEETUP",
-            "TRAVEL": "TRAVEL",
-            "HELP": "HELP",
-            "REVIEW": "REVIEW"
-        },
-        "post": {
-            "1": {
-                "author": "Mika (Japan)",
-                "time": "10 mins ago",
-                "title": "Samgyeopsal Meetup 🥓",
-                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-            },
-            "2": {
-                "author": "John (US)",
-                "time": "1 hour ago",
-                "title": "Hongdae Street Performance 🎸",
-                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-            },
-            "3": {
-                "author": "Jihoon (Korea)",
-                "time": "2 hours ago",
-                "title": "Need help with subway directions? 🚇",
-                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-            },
-            "4": {
-                "author": "Li Wei (China)",
-                "time": "3 hours ago",
-                "title": "K-Beauty Shopping 💄",
-                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-            }
-        },
-        "filter_review": "Reviews",
-        "detail": "تفاصيل المشاركة"
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
     },
-    "explore_items": {
-        "airport_arrival": "الوصول إلى مطار إنتشون",
-        "hotel_checkin": "تسجيل الوصول في الفندق",
-        "f1": {
-            "title": "Plant Cafe Seoul"
-        },
-        "f2": {
-            "title": "Gold Pig BBQ"
-        },
-        "f3": {
-            "title": "سوق المأكولات البحرية"
-        },
-        "b1": {
-            "title": "Jenny House Beauty"
-        },
-        "b2": {
-            "title": "PPEUM Clinic Gangnam"
-        },
-        "e1": {
-            "title": "PSY Water Show"
-        },
-        "e2": {
-            "title": "Nanta Show Myeongdong"
-        },
-        "fs1": {
-            "title": "مهرجان الفوانيس في سيول"
-        },
-        "a1": {
-            "title": "قصر جيونج بوكجونج"
-        },
-        "a2": {
-            "title": "Lotte World Tower"
-        }
-    },
-    "help_page": {
-        "title": "دعم الطوارئ",
-        "subtitle": "مساعدة فورية للمسافرين في كوريا",
-        "badge": "طوارئ",
-        "numbers_title": "أرقام الطوارئ",
-        "medical_title": "المساعدة الطبية",
-        "medical_desc": "عيادات قريبة وبطاقات الأعراض",
-        "lost_title": "الأمتعة المفقودة",
-        "lost_desc": "دليل خطوة بخطوة للاسترداد",
-        "police_title": "الشرطة / الجريمة",
-        "police_desc": "الإبلاغ والحصول على المساعدة",
-        "interp_title": "الترجمة الفورية",
-        "interp_desc": "خط المساعدة 1330 وتطبيقات الترجمة",
-        "symptom_title": "بطاقات الأعراض",
-        "symptom_hint": "اضغط على العرض لعرض العبارة الكورية للطبيب",
-        "clinic_title": "العيادات الدولية وغرف الطوارئ",
-        "med_title": "الأدوية في المتاجر",
-        "med_hint": "متاح 24/7 في GS25 وCU و7-Eleven",
-        "lost_step1": "الخطوة 1: أين فقدت الشيء؟",
-        "lost_step1_hint": "اختر الموقع لعرض خطوات الاسترداد.",
-        "quick_links": "روابط سريعة",
-        "go_lost112": "اذهب إلى الموقع الرسمي Lost112",
-        "police_contacts": "جهات الاتصال الرئيسية",
-        "police_phrases": "عبارات الطوارئ",
-        "interp_services": "خدمات الترجمة",
-        "interp_phrases": "عبارات مفيدة",
-        "emergency_call": "طوارئ؟",
-        "emergency_hint": "اتصل بـ 119 فوراً",
-        "taxi": "تاكسي",
-        "subway": "مترو",
-        "airport": "مطار",
-        "street": "شارع",
-        "lost_in": "فقد في:",
-        "symptoms": {
-            "stomach": "ألم في المعدة",
-            "fever": "حمى",
-            "injury": "إصابة",
-            "allergy": "حساسية",
-            "breathing": "صعوبة في التنفس",
-            "pain": "ألم في الصدر"
-        },
-        "clinic_types": {
-            "er_intl": "طوارئ + دولي",
-            "er": "غرفة الطوارئ",
-            "intl": "مركز العيادات الدولية"
-        },
-        "medicines": {
-            "tylenol_use": "مسكن للألم / خافض للحرارة",
-            "tylenol_note": "متوفر في جميع المتاجر (GS25, CU, 7-Eleven)",
-            "benadryl_use": "مضاد للهيستامين / الحساسية",
-            "benadryl_note": "متوفر في الصيدليات",
-            "gastic_use": "هضمي / حرقة المعدة",
-            "gastic_note": "متوفر في المتاجر",
-            "bandage_use": "العناية بالجروح",
-            "bandage_note": "متوفر في المتاجر والصيدليات"
-        },
-        "lost": {
-            "taxi_s1_t": "1. تحقق من إيصال البطاقة",
-            "taxi_s1_d": "البنك يسجل شركة التاكسي. اتصل للحصول على رقم السيارة.",
-            "taxi_s2_t": "2. تطبيق Kakao T",
-            "taxi_s2_d": "إذا استخدمت Kakao T، اذهب لسجل الرحلات للتواصل مع السائق.",
-            "taxi_s3_t": "3. تقرير للشرطة",
-            "taxi_s3_d": "اتصل بـ 112 وأبلغ عن المفقود بالرقم التسجيلي ووقت الركوب.",
-            "taxi_s4_t": "4. مركز مفقودات التاكسي",
-            "taxi_s4_d": "رابطة تاكسي سيول: 02-414-8090 (كوري فقط — استخدم 1330 للترجمة).",
-            "subway_s1_t": "1. الذهاب إلى مكتب المفقودات",
-            "subway_s1_d": "كل خط مترو لديه مكتب مفقودات في المحطات الرئيسية.",
-            "subway_s2_t": "2. موقع مفقودات مترو سيول",
-            "subway_s2_d": "زيارة: lost112.go.kr أو الاتصال على 1577-1234.",
-            "subway_s3_t": "3. تقديم تقرير إلكتروني",
-            "subway_s3_d": "يمكنك تقديم تقرير بالإنجليزية على الموقع الرسمي lost112.",
-            "airport_s1_t": "1. مكتب المفقودات مطار إنشيون",
-            "airport_s1_d": "المبنى 1: 032-741-3110 / المبنى 2: 032-741-3119. مفتوح 24 ساعة.",
-            "airport_s2_t": "2. مطار كيمبو",
-            "airport_s2_d": "الاتصال: 02-2660-2536. الموقع: B1F (داخلي) / 3F (دولي).",
-            "airport_s3_t": "3. تقرير لشرطة المطار",
-            "airport_s3_d": "شرطة المطار متاحة 24 ساعة. الكاونتر في صالة الوصول.",
-            "street_s1_t": "1. أعد تتبع خطواتك",
-            "street_s1_d": "معظم المتاجر تحتفظ بالأشياء المُجدة. اسأل أقرب متجر.",
-            "street_s2_t": "2. الإبلاغ لأقرب مركز شرطة",
-            "street_s2_d": "(파출소) — الضباط لديهم مترجمون.",
-            "street_s3_t": "3. الاتصال على 112",
-            "street_s3_d": "أبلغ عن المفقود. يمكن للشرطة فحص كاميرات المراقبة."
-        },
-        "police_info": {
-            "crime_label": "إبلاغ عن جريمة / طوارئ",
-            "crime_note": "متاح 24 ساعة. ترجمة متوفرة.",
-            "tourist_label": "خط الشرطة السياحية",
-            "tourist_note": "عربي / إنجليزي / ياباني / صيني",
-            "station_label": "البحث عن أقرب قسم شرطة",
-            "p1_kr": "도와주세요!",
-            "p1_en": "ساعدني!",
-            "p2_kr": "경찰을 불러주세요",
-            "p2_en": "من فضلك اتصل بالشرطة.",
-            "p3_kr": "소매치기를 당했어요",
-            "p3_en": "تعرضت للسرقة.",
-            "p4_kr": "사진을 찍지 마세요",
-            "p4_en": "لا تأخذ صوراً لي.",
-            "tourist_info": "يتمركز ضباط الشرطة السياحية في ميونغدونغ وإيتايون ويتحدثون لغات متعددة."
-        },
-        "interp": {
-            "hotline_title": "خط سياحة كوريا 1330",
-            "hotline_desc": "متوفر بالعربية والإنجليزية واليابانية والصينية. 24 ساعة.",
-            "papago_title": "Naver Papago",
-            "papago_desc": "أفضل ترجمة مجانية للكورية. يعمل بدون إنترنت مع وضع الكاميرا.",
-            "google_title": "Google Translate",
-            "google_desc": "يدعم الصوت والكاميرا ووضع المحادثة. متاح بدون إنترنت.",
-            "dasan_title": "120 مركز اتصالات داسان سيول",
-            "dasan_desc": "خدمة مدينة سيول بالعربية والإنجليزية والصينية واليابانية.",
-            "p1_kr": "한국어를 못해요",
-            "p1_en": "لا أتحدث الكورية.",
-            "p2_kr": "영어 하시나요?",
-            "p2_en": "هل تتحدث الإنجليزية؟",
-            "p3_kr": "통역사가 필요해요",
-            "p3_en": "أحتاج إلى مترجم.",
-            "p4_kr": "천천히 말씀해 주세요",
-            "p4_en": "من فضلك تحدث ببطء."
-        }
-    }
+    "tab_aria_label": "Settings Tabs"
+  }
 }

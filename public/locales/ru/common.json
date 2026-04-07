@@ -1,186 +1,612 @@
 {
-    "common": {
-        "welcome": "Добро пожаловать, Путешественник.",
-        "greeting": "Доброе утро",
-        "login": "Войти",
-        "today": "Сегодня",
-        "move": "Маршрут",
-        "book": "Бронировать",
-        "chat": "Чат",
-        "my": "Мой",
-        "current_operation": "Работает",
-        "live": "ПРЯМОЙ ЭФИР",
-        "recommended": "Рядом с вами",
-        "based_on_location": "На основе вашего местоположения",
-        "start_nav": "Начать навигацию",
-        "delay_10m": "Задержка +10 мин",
-        "confirmed": "Подтверждено",
-        "payment_completed": "Оплата завершена",
-        "weather_clear": "Ясно",
-        "back": "Назад",
-        "select_language": "Выбрать язык",
-        "home_nav": "Главная",
-        "explore_nav": "Поиск",
-        "planner_nav": "План",
-        "today_nav": "Сегодня",
-        "my_nav": "Мой",
-        "day_unit": "д",
-        "locale": "ru-RU",
-        "cities": {
-            "seoul": "Сеул",
-            "busan": "Пусан",
-            "jeju": "Чеджу",
-            "gyeongju": "Кёнджу"
-        },
-        "categories": {
-            "all": "Все",
-            "food": "Еда",
-            "beauty": "Красота",
-            "event": "События",
-            "festival": "Фестивали",
-            "attraction": "Места",
-            "transport": "Транспорт"
-        },
-        "community_nav": "Community"
+  "beauty_explore": {
+    "form_name": "Имя",
+    "form_name_placeholder": "Введите ваше имя",
+    "form_phone": "Контакт (или SNS ID)",
+    "form_phone_placeholder": "Телефон или SNS ID",
+    "form_request": "Пожелания",
+    "form_request_placeholder": "Аллергии или желаемый стиль",
+    "agreement_confirm": "Подтвердить детали",
+    "agreement_confirm_desc": "Я подтверждаю выбор.",
+    "agreement_privacy": "Согласие на конфиденциальность",
+    "agreement_privacy_desc": "Я согласен предоставить информацию.",
+    "region_all": "Все районы",
+    "label_today": "Сегодня",
+    "label_tomorrow": "Завтра",
+    "label_booking_unit": "KRW",
+    "booking_confirmation_title": "Запрос на бронирование отправлен!",
+    "booking_confirmation_desc": "Мы скоро вас уведомим.",
+    "booking_confirmation_cta": "Мои бронирования"
+  },
+  "common": {
+    "welcome": "Добро пожаловать, Путешественник.",
+    "greeting": "Доброе утро",
+    "login": "Войти",
+    "today": "Сегодня",
+    "move": "Маршрут",
+    "book": "Бронировать",
+    "chat": "Чат",
+    "my": "Мой",
+    "current_operation": "Работает",
+    "live": "ПРЯМОЙ ЭФИР",
+    "recommended": "Рядом с вами",
+    "based_on_location": "На основе вашего местоположения",
+    "start_nav": "Начать навигацию",
+    "delay_10m": "Задержка +10 мин",
+    "confirmed": "Подтверждено",
+    "payment_completed": "Оплата завершена",
+    "weather_clear": "Ясно",
+    "back": "Назад",
+    "select_language": "Выбрать язык",
+    "home_nav": "Главная",
+    "explore_nav": "Поиск",
+    "planner_nav": "План",
+    "today_nav": "Сегодня",
+    "my_nav": "Мой",
+    "day_unit": "д",
+    "locale": "ru-RU",
+    "cities": {
+      "seoul": "Сеул",
+      "busan": "Пусан",
+      "jeju": "Чеджу",
+      "gyeongju": "Кёнджу"
     },
-    "transport": {
-        "moving_to": "Едем к {{dest}}",
-        "remaining": "Осталось",
-        "line_2_direction": "Линия 2 • В сторону City Hall",
-        "departed": "отправился",
-        "passing_now": "Сейчас проезжает...",
-        "current": "Текущая",
-        "get_off_at": "Выйти на",
-        "exit_3": "Выход 3",
-        "getting_off_here": "Я выхожу здесь",
-        "stations": {
-            "samseong": "Самсон",
-            "seolleung": "Соллын",
-            "yeoksam": "Ёксам",
-            "gangnam": "Каннам",
-            "gyodae": "Кёде",
-            "seocho": "Сочо",
-            "seongsu": "Сонсу"
-        }
+    "categories": {
+      "all": "Все",
+      "food": "Еда",
+      "beauty": "Красота",
+      "event": "События",
+      "festival": "Фестивали",
+      "attraction": "Места",
+      "transport": "Транспорт"
     },
-    "home": {
-        "title_korea": "Корея сегодня",
-        "title": "Путешествие в Корею, понятное за 3 секунды",
-        "subtitle": "Бронирование консьержем · Автоматический план · Навигация",
-        "create_trip_cta": "Начать планирование",
-        "input_label": "Куда вы отправляетесь?",
-        "input_placeholder": "Город, район, название отеля",
-        "days_label": "Период поездки",
-        "recommended_plans": "Рекомендуемые планы поездок",
-        "plans": {
-            "2d": {
-                "title": "2 дня: Главное в Сеуле",
-                "label": "План на 2 дня"
-            },
-            "3d": {
-                "title": "3 дня: K-культура и стиль",
-                "label": "План na 3 дня"
-            },
-            "5d": {
-                "title": "5 дней: Большое путешествие",
-                "label": "План на 5 дней"
-            },
-            "request_custom_label": "Индивидуальный",
-            "request_custom_title": "Запросить план на {{days}} дн.",
-            "request_custom_toast": "Запрошен индивидуальный план на {{days}} дн.! Наш консьерж свяжется с вами."
-        }
+    "community_nav": "Сообщество",
+    "morning": "Доброе утро",
+    "afternoon": "Добрый день",
+    "evening": "Добрый вечер",
+    "actions": {
+      "delete": "Удалить"
     },
-    "explore_items": {
-        "airport_arrival": "Прибытие в аэропорт Инчхон",
-        "hotel_checkin": "Заселение в отель / Проживание"
-    },
-    "explore_page": {
-        "title": "Поиск",
-        "select_city": "Выбрать город"
-    },
-    "planner_page": {
-        "title": "План",
-        "day": "День {{n}}"
-    },
-    "today_page": {
-        "title": "Сегодня",
-        "active_now": "Выполняется",
-        "navigate": "Навигация",
-        "booking_ref": "Бронь: {{ref}}",
-        "next_up": "Далее",
-        "minutes_left": "Начнется через {{mins}}м",
-        "depart_early": "Выходить сейчас",
-        "timeline": "График",
-        "empty": {
-            "title": "На сегодня планов нет",
-            "desc": "Найдите интересные места и добавьте их!",
-            "cta": "Найти места"
-        }
-    },
-    "booking_detail": {
-        "select_date": "Выбрать дату",
-        "select_time": "Выбрать время",
-        "total_price": "Итого",
-        "request_booking": "Забронировать"
-    },
-    "navigation_page": {
-        "title": "Сегодня"
-    },
-    "my_page": {
-        "bookings": {
-            "title": "Мои бронирования",
-            "date_time": "Дата / Время",
-            "area": "Район",
-            "price": "Цена",
-            "new_added": "Добавлено новое бронирование!"
-        },
-        "community": {
-            "title": "Мои посты в сообществе",
-            "empty": "Пока нет написанных постов."
-        }
-    },
-    "community_page": {
-        "title": "Community",
-        "subtitle": "Connect with locals & travelers",
-        "filter_all": "All",
-        "filter_meetup": "Food & Meetup",
-        "filter_travel": "Travel Mate",
-        "filter_help": "Local Help",
-        "comments": "Comments",
-        "message": "Message",
-        "type": {
-            "MEETUP": "MEETUP",
-            "TRAVEL": "TRAVEL",
-            "HELP": "HELP",
-            "REVIEW": "REVIEW"
-        },
-        "post": {
-            "1": {
-                "author": "Mika (Japan)",
-                "time": "10 mins ago",
-                "title": "Samgyeopsal Meetup 🥓",
-                "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
-            },
-            "2": {
-                "author": "John (US)",
-                "time": "1 hour ago",
-                "title": "Hongdae Street Performance 🎸",
-                "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
-            },
-            "3": {
-                "author": "Jihoon (Korea)",
-                "time": "2 hours ago",
-                "title": "Need help with subway directions? 🚇",
-                "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
-            },
-            "4": {
-                "author": "Li Wei (China)",
-                "time": "3 hours ago",
-                "title": "K-Beauty Shopping 💄",
-                "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
-            }
-        },
-        "filter_review": "Reviews",
-        "detail": "Детали поста"
+    "states": {
+      "no_permission": "Нет прав доступа.",
+      "error_occurred": "Произошла ошибка при обработке вашего запроса."
     }
+  },
+  "transport": {
+    "moving_to": "Едем к {{dest}}",
+    "remaining": "Осталось",
+    "line_2_direction": "Линия 2 • В сторону City Hall",
+    "departed": "отправился",
+    "passing_now": "Сейчас проезжает...",
+    "current": "Текущая",
+    "get_off_at": "Выйти на",
+    "exit_3": "Выход 3",
+    "getting_off_here": "Я выхожу здесь",
+    "stations": {
+      "samseong": "Самсон",
+      "seolleung": "Соллын",
+      "yeoksam": "Ёксам",
+      "gangnam": "Каннам",
+      "gyodae": "Кёде",
+      "seocho": "Сочо",
+      "seongsu": "Сонсу"
+    }
+  },
+  "home": {
+    "title_korea": "Корея сегодня",
+    "title": "Путешествие в Корею, понятное за 3 секунды",
+    "subtitle": "Бронирование консьержем · Автоматический план · Навигация",
+    "create_trip_cta": "Начать планирование",
+    "input_label": "Куда вы отправляетесь?",
+    "input_placeholder": "Город, район, название отеля",
+    "days_label": "Период поездки",
+    "recommended_plans": "Рекомендуемые планы поездок",
+    "plans": {
+      "2d": {
+        "title": "2 дня: Главное в Сеуле",
+        "label": "План на 2 дня"
+      },
+      "3d": {
+        "title": "3 дня: K-культура и стиль",
+        "label": "План na 3 дня"
+      },
+      "5d": {
+        "title": "5 дней: Большое путешествие",
+        "label": "План на 5 дней"
+      },
+      "request_custom_label": "Индивидуальный",
+      "request_custom_title": "Запросить план на {{days}} дн.",
+      "request_custom_toast": "Запрошен индивидуальный план на {{days}} дн.! Наш консьерж свяжется с вами."
+    },
+    "badge": "Почувствуйте красоту Кореи"
+  },
+  "explore_items": {
+    "airport_arrival": "Прибытие в аэропорт Инчхон",
+    "hotel_checkin": "Заселение в отель / Проживание"
+  },
+  "explore_page": {
+    "title": "Поиск",
+    "select_city": "Выбрать город"
+  },
+  "planner_page": {
+    "title": "План",
+    "day": "День {{n}}"
+  },
+  "today_page": {
+    "title": "Сегодня",
+    "active_now": "Выполняется",
+    "navigate": "Навигация",
+    "booking_ref": "Бронь: {{ref}}",
+    "next_up": "Далее",
+    "minutes_left": "Начнется через {{mins}}м",
+    "depart_early": "Выходить сейчас",
+    "timeline": "График",
+    "empty": {
+      "title": "На сегодня планов нет",
+      "desc": "Найдите интересные места и добавьте их!",
+      "cta": "Найти места"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Выбрать дату",
+    "select_time": "Выбрать время",
+    "total_price": "Итого",
+    "request_booking": "Забронировать"
+  },
+  "navigation_page": {
+    "title": "Сегодня"
+  },
+  "my_page": {
+    "bookings": {
+      "title": "Мои бронирования",
+      "date_time": "Дата / Время",
+      "area": "Район",
+      "price": "Цена",
+      "new_added": "Добавлено новое бронирование!",
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "action_edit_request": "Edit Request",
+      "action_cancel_request": "Cancel Request",
+      "error_fetch": "Failed to load bookings."
+    },
+    "community": {
+      "title": "Мои посты в сообществе",
+      "empty": "Пока нет написанных постов.",
+      "empty_simple": "No posts written yet",
+      "browse_cta": "Browse Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture updated successfully.",
+      "upload_failed": "Upload failed."
+    },
+    "dashboard": {
+      "admin_title": "Admin Console",
+      "admin_desc": "Dashboard and partner management",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Stats & Full Menu",
+        "bookings": "Beauty Bookings",
+        "bookings_desc": "Requests & Status Management",
+        "partners": "Partner Management",
+        "partners_desc": "Registration & Approval",
+        "users": "Admin Management",
+        "users_desc": "Permissions & Access Control"
+      }
+    },
+    "settings": {
+      "account": {
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
+        "default_name": "Traveler",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
+      }
+    }
+  },
+  "community_page": {
+    "title": "Сообщество",
+    "subtitle": "Общайтесь с местными и путешественниками",
+    "form": {
+      "image": {
+        "limit_label": "(макс. {{count}} фото)"
+      }
+    },
+    "filter_all": "Все",
+    "filter_meetup": "Еда и встречи",
+    "filter_travel": "Попутчик",
+    "filter_help": "Местная помощь",
+    "comments": "Комментарии",
+    "message": "Сообщение",
+    "type": {
+      "MEETUP": "MEETUP",
+      "TRAVEL": "TRAVEL",
+      "HELP": "HELP",
+      "REVIEW": "REVIEW"
+    },
+    "post": {
+      "1": {
+        "author": "Mika (Japan)",
+        "time": "10 mins ago",
+        "title": "Samgyeopsal Meetup 🥓",
+        "desc": "Anyone wants to eat Samgyeopsal at Gold Pig BBQ tonight at 7PM?"
+      },
+      "2": {
+        "author": "John (US)",
+        "time": "1 hour ago",
+        "title": "Hongdae Street Performance 🎸",
+        "desc": "Heading to Hongdae right now to watch indie bands. Join me!"
+      },
+      "3": {
+        "author": "Jihoon (Korea)",
+        "time": "2 hours ago",
+        "title": "Need help with subway directions? 🚇",
+        "desc": "I live near Myeongdong and can help translate or guide you if you are lost. Feel free to message me!"
+      },
+      "4": {
+        "author": "Li Wei (China)",
+        "time": "3 hours ago",
+        "title": "K-Beauty Shopping 💄",
+        "desc": "Looking for a shopping buddy at Olive Young Myeongdong. I know all the good brands!"
+      }
+    },
+    "filter_review": "Отзывы",
+    "detail": "Детали поста"
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "Консьерж бьюти-бронирования",
+      "title": "Запечатлейте красоту Кореи\nв своем расписании",
+      "subtitle": "Выберите услугу красоты и перейдите к бронированию.",
+      "welcome": "{{name}}, выберите услугу.",
+      "welcome_user": "{{greeting}}, {{name}}! 👋"
+    },
+    "booking": {
+      "step": "ШАГ. 01",
+      "title": "Выберите бьюти-услугу",
+      "description": ""
+    },
+    "categories": {
+      "hair": {
+        "label": "Волосы",
+        "note": "Стрижка, завивка, окрашивание",
+        "summary": "Запись от смены стиля до быстрой стрижки."
+      },
+      "nail": {
+        "label": "Ногти",
+        "note": "Гель, уход, наращивание",
+        "summary": "Выберите дизайн и перейдите к записи."
+      },
+      "esthetic": {
+        "label": "Эстетика",
+        "note": "Уход, контуринг, успокоение",
+        "summary": "Сравните салоны и запишитесь."
+      },
+      "waxing": {
+        "label": "Депиляция",
+        "note": "Лицо, тело, бразильская",
+        "summary": "Быстро найдите подходящий салон."
+      },
+      "makeup": {
+        "label": "Макияж",
+        "note": "Дневной, съёмка, свадебный",
+        "summary": "Выберите макияж под ваше мероприятие."
+      },
+      "lash": {
+        "label": "Ресницы",
+        "note": "Наращивание, завивка",
+        "summary": "От натуральных до объёмных — выбирайте."
+      }
+    },
+    "selection": {
+      "eyebrow": "Выбранная категория",
+      "tags": {
+        "mobile": "Мобильная запись",
+        "comparison": "Сравнение салонов",
+        "inquiry": "Онлайн-запросы"
+      },
+      "empty": "Пожалуйста, сначала выберите категорию. Кнопка начала записи активируется после выбора."
+    },
+    "cta": {
+      "hint": "Выберите категорию, чтобы начать запись",
+      "button": "Начать запись"
+    },
+    "interpreter_entry": {
+      "title": "Онлайн-переводчик",
+      "description": "Общайтесь с персоналом без барьеров",
+      "cta": "Открыть переводчик"
+    },
+    "location_sheet": {
+      "search_title": "Поиск местоположения",
+      "search_result_count": "{{count}} результата(ов) для \"{{query}}\"",
+      "view_location": "Посмотреть на карте",
+      "view_location_desc": "Проверить детальное положение на карте",
+      "call_taxi": "Вызвать такси",
+      "google_maps_desc": "Проверить маршруты общественного транспорта в Google Maps"
+    },
+    "modals": {
+      "card_title": "📍 Пожалуйста, отправляйтесь по этому адресу",
+      "copy": "Копировать адрес",
+      "copy_done": "Скопировано!",
+      "close": "Закрыть"
+    }
+  },
+  "interpreter_page": {
+    "back": "< Назад",
+    "title": "Синхронный переводчик",
+    "subtitle": "Язык клиента соответствует языку приложения; язык магазина — корейский.",
+    "onboarding": "Слова клиента переводятся на корейский; корейская речь персонала — на ваш язык.",
+    "customer_lang": "Язык посетителя",
+    "staff_lang": "Язык магазина (Корейский)",
+    "mic_preparing": "Подготовка микрофона",
+    "customer_transcribing": "Распознавание речи посетителя...",
+    "customer_recording": "Запись посетителя... нажмите еще раз для завершения",
+    "translating": "Перевод...",
+    "customer_speak_btn": "Голосовой ввод посетителя",
+    "staff_transcribing": "Распознавание речи персонала...",
+    "staff_recording": "Запись персонала... нажмите еще раз для завершения",
+    "staff_speak_btn": "Голосовой ввод персонала",
+    "customer_input_label": "Ввод посетителя",
+    "customer_placeholder": "Введите, что сказал посетитель.",
+    "send": "Отправить",
+    "staff_input_label": "Ввод персонала",
+    "staff_placeholder": "Введите, что сказал персонал на корейском.",
+    "voice_supported_hint": "Записывайте через микрофон или вводите текст ниже.",
+    "voice_not_supported_hint": "Этот браузер не поддерживает голосовой ввод. Используйте текст.",
+    "voice_recognizing": "Распознавание голоса.",
+    "voice_unrecognized_error": "Не удалось распознать голос.",
+    "voice_failed_error": "Ошибка распознавания голоса.",
+    "mic_permission_status": "Проверка разрешений микрофона.",
+    "recording_status": "Запись... макс. {{seconds}} сек.",
+    "mic_unsupported_error": "Микрофон недоступен.",
+    "input_required_customer": "Сначала введите фразу посетителя.",
+    "input_required_staff": "Сначала введите фразу персонала.",
+    "translating_status": "Подготовка перевода.",
+    "translation_failed_error": "Ошибка перевода. Попробуйте еще раз.",
+    "empty_history_hint": "История появится здесь.",
+    "customer_role": "Посетитель",
+    "staff_role": "Персонал",
+    "replay_btn_label": "Воспроизвести перевод",
+    "replay_not_supported_hint": "Воспроизведение аудио не поддерживается.",
+    "play": "Пуск",
+    "translated_status": "Переведено",
+    "source_only_status": "Только оригинал",
+    "voice_too_short_error": "Пожалуйста, говорите немного дольше."
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "Используется переводчик во время посещения {{storeName}}",
+    "interpreter_visit_service_context": "Используется переводчик для {{serviceName}} в {{storeName}}",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
+  },
+  "settings_page": {
+    "hero": {
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "avatar": {
+        "error": "Failed to change image."
+      }
+    },
+    "tabs": {
+      "personal": {
+        "label": "Personal",
+        "desc": "Check your email, contact, login, and notification settings."
+      },
+      "partner": {
+        "label": "Partner",
+        "desc": "Check your partner status and store management items in one place."
+      },
+      "admin": {
+        "label": "Admin",
+        "desc": "Quickly check items linked to your administrative privileges."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "Nickname",
+        "helper_set": "This name is displayed in the community and profile.",
+        "helper_unset": "No nickname set yet.",
+        "badge_set": "Set",
+        "badge_unset": "Not Set",
+        "placeholder": "Enter a new nickname."
+      },
+      "email": {
+        "title": "Email",
+        "value_none": "Not connected",
+        "helper_verified": "This is your verified email address.",
+        "helper_unverified": "Email verification is required.",
+        "helper_none": "No email connected.",
+        "badge_verified": "Verified",
+        "badge_unverified": "Unverified",
+        "badge_none": "Not connected"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved SNS.",
+        "helper_unset": "No SNS saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "placeholder": "Enter your SNS ID."
+      },
+      "phone": {
+        "title": "Phone",
+        "value_none": "Not entered",
+        "helper_set": "Currently saved phone number.",
+        "helper_unset": "No phone number saved.",
+        "badge_set": "Saved",
+        "badge_unset": "Not Entered",
+        "country_label": "Country Code",
+        "number_label": "Phone Number",
+        "helper_preview": "It will be saved as {{value}}."
+      },
+      "login": {
+        "title": "Login Method",
+        "helper_in": "Current login method as being used.",
+        "helper_out": "Check after logging in.",
+        "badge_in": "In use",
+        "badge_out": "Standby",
+        "provider_email": "Email",
+        "value_out": "Login required"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "value_out": "Check after login",
+        "helper_out": "Check current notification status after login.",
+        "badge_out": "Standby",
+        "value_error": "Settings unknown",
+        "helper_error": "Failed to load notification settings.",
+        "badge_error": "Check required",
+        "channel_app": "App",
+        "channel_email": "Email",
+        "value_all_off": "All notifications OFF",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "OFF",
+        "value_both_on": "App · Email ON",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "Active",
+        "badge_partial_on": "Partial ON"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "Partner Status",
+        "approved": {
+          "value": "Approved",
+          "helper": "Confirmed as a partner account.",
+          "badge": "Approved"
+        },
+        "pending": {
+          "value": "Under review",
+          "helper": "Reviewing your partner application.",
+          "badge": "Pending"
+        },
+        "rejected": {
+          "value": "Resubmit with changes",
+          "helper": "You can resubmit after correcting your submission.",
+          "badge": "Requires correction",
+          "cta": "Resubmit"
+        },
+        "none": {
+          "value": "No partner info",
+          "helper": "No registered partner status.",
+          "badge": "None"
+        }
+      },
+      "store": {
+        "title": "Store Info",
+        "value_none": "No store information registered",
+        "helper_none": "No store summary information available.",
+        "badge_set": "Registered",
+        "badge_unset": "Not Registered",
+        "visibility_on": "Visible in search",
+        "visibility_off": "Hidden in search"
+      },
+      "hours": {
+        "title": "Operating Hours",
+        "value_none": "No registered hours",
+        "helper_none": "Operating hours will be shown here when linked.",
+        "badge_unset": "Not Registered"
+      },
+      "bookings": {
+        "title": "Booking Management",
+        "value_info": "No separate management menu",
+        "value_pending": "Check after partner approval",
+        "helper_approved": "Currently only booking summary is structured.",
+        "helper_pending": "Related items will be easier to check once approved.",
+        "badge_info": "Info",
+        "badge_pending": "Standby"
+      },
+      "pricing": {
+        "title": "Treatment/Pricing",
+        "value_none": "No separate management menu",
+        "helper_none": "Currently no direct link to treatment/pricing management.",
+        "badge_info": "Info"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "Partner Approvals",
+        "value": "Check applications",
+        "helper": "Approve or reject partner applications in the admin console."
+      },
+      "issues": {
+        "title": "Booking Issues",
+        "value": "Review items",
+        "helper": "Check booking status and change requests in the admin console."
+      },
+      "users": {
+        "title": "User Management",
+        "value": "Check permissions",
+        "helper": "Manage users and admin permissions in the admin console."
+      },
+      "notices": {
+        "title": "Notice Management",
+        "value": "No connected screen",
+        "helper": "Currently no notice management screen connected."
+      },
+      "badge_open": "Openable",
+      "badge_unlinked": "Unlinked"
+    },
+    "messages": {
+      "action_contact": "Enquire",
+      "action_open": "Open",
+      "unauthorized": "Please reconfirm login session.",
+      "profile_not_found": "Profile not found. Please log in again.",
+      "schema_missing_sns": "SNS column not yet applied to the database.",
+      "schema_missing_phone": "Phone column not yet applied to the database.",
+      "save_error": "Failed to save.",
+      "sns_saved": "Saved SNS ID.",
+      "phone_saved": "Saved phone number.",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "Please enter a nickname.",
+      "nickname_saved": "Successfully changed nickname.",
+      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "badges": {
+      "community": {
+        "leader": "Community Leader",
+        "trend": "Trend Picker",
+        "mate": "Beauty Mate",
+        "sprout": "Sprout"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "Regular",
+        "new": "New"
+      },
+      "nickname_unset": "Not Set"
+    },
+    "tab_aria_label": "Settings Tabs"
+  }
 }

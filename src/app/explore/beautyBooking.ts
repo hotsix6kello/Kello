@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabaseClient";
 export type BeautyBookingPayload = {
   category: 'beauty';
   beautyCategory: string;
@@ -8,8 +9,8 @@ export type BeautyBookingPayload = {
   bookingTime: string;
   designerId: string | null;
   designerName: string | null;
-  primaryServiceId: string;
-  primaryServiceName: string;
+  primaryServiceId: string | null;
+  primaryServiceName: string | null;
   addOnIds: string[];
   addOnNames: string[];
   priceSummary: {
@@ -22,6 +23,7 @@ export type BeautyBookingPayload = {
     name: string;
     phone: string;
     request: string;
+    imageUrls?: string[];
   };
   communication: {
     language: string;
@@ -93,6 +95,7 @@ export type BeautyBookingCompletionDisplayMeta = {
   communicationLanguageLabel: string;
   communicationIntentLabel: string;
   designerDefaultLabel: string;
+  primaryServiceDefaultLabel: string;
 };
 
 export type BeautyBookingSubmitResult = {
@@ -127,33 +130,23 @@ export function buildBeautyBookingPayload(
     !hasRequiredText(input.storeId) ||
     !hasRequiredText(input.storeName) ||
     !hasRequiredText(input.bookingDate) ||
-    !hasRequiredText(input.bookingTime) ||
-    !hasRequiredText(input.primaryServiceId) ||
-    !hasRequiredText(input.primaryServiceName) ||
-    !hasRequiredText(input.customer.name) ||
-    !hasRequiredText(input.customer.phone) ||
-    !hasRequiredText(input.communication.language) ||
-    !hasRequiredText(input.communication.intent) ||
-    !isFiniteNumber(input.priceSummary.basePrice) ||
-    !isFiniteNumber(input.priceSummary.addOnPrice) ||
-    !isFiniteNumber(input.priceSummary.designerSurcharge) ||
-    !isFiniteNumber(input.priceSummary.totalPrice)
+    !hasRequiredText(input.bookingTime)
   ) {
     return null;
   }
 
   return {
     category: 'beauty',
-    beautyCategory: input.beautyCategory,
-    region: input.region,
-    storeId: input.storeId,
-    storeName: input.storeName.trim(),
-    bookingDate: input.bookingDate,
-    bookingTime: input.bookingTime,
+    beautyCategory: input.beautyCategory ?? '',
+    region: input.region ?? '',
+    storeId: input.storeId ?? '',
+    storeName: (input.storeName ?? '').trim(),
+    bookingDate: input.bookingDate ?? '',
+    bookingTime: input.bookingTime ?? '',
     designerId: hasRequiredText(input.designerId) ? input.designerId : null,
     designerName: hasRequiredText(input.designerName) ? input.designerName.trim() : null,
-    primaryServiceId: input.primaryServiceId,
-    primaryServiceName: input.primaryServiceName.trim(),
+    primaryServiceId: input.primaryServiceId ?? null,
+    primaryServiceName: input.primaryServiceName ? input.primaryServiceName.trim() : null,
     addOnIds: input.addOnIds,
     addOnNames: input.addOnNames.map((name) => name.trim()).filter(Boolean),
     priceSummary: {
@@ -166,6 +159,7 @@ export function buildBeautyBookingPayload(
       name: input.customer.name.trim(),
       phone: input.customer.phone.trim(),
       request: input.customer.request.trim(),
+      imageUrls: input.customer.imageUrls || [],
     },
     communication: {
       language: input.communication.language,
@@ -191,10 +185,6 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
   }
 
   const candidate = input as Record<string, unknown>;
-  const createdFrom =
-    candidate.createdFrom && typeof candidate.createdFrom === 'object'
-      ? (candidate.createdFrom as Record<string, unknown>)
-      : {};
   const customer =
     candidate.customer && typeof candidate.customer === 'object'
       ? (candidate.customer as Record<string, unknown>)
@@ -216,7 +206,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       ? (candidate.priceSummary as Record<string, unknown>)
       : {};
 
-  if (candidate.category !== 'beauty' || createdFrom.flow !== 'beauty-explore') {
+  if (candidate.category !== 'beauty') {
     return null;
   }
 
@@ -247,6 +237,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       name: typeof customer.name === 'string' ? customer.name : '',
       phone: typeof customer.phone === 'string' ? customer.phone : '',
       request: typeof customer.request === 'string' ? customer.request : '',
+      imageUrls: normalizeStringArray(customer.imageUrls),
     },
     communication: {
       language: typeof communication.language === 'string' ? communication.language : '',
@@ -272,7 +263,7 @@ export function buildBeautyBookingCompletionDisplay(
     date: meta.dateLabel,
     time: payload.bookingTime,
     designerName: payload.designerName ?? meta.designerDefaultLabel,
-    primaryServiceName: payload.primaryServiceName,
+    primaryServiceName: payload.primaryServiceName ?? meta.primaryServiceDefaultLabel,
     addOnNames: payload.addOnNames,
     basePrice: payload.priceSummary.basePrice,
     addOnPrice: payload.priceSummary.addOnPrice,
@@ -325,4 +316,55 @@ export async function submitBeautyBooking(
     createdAt: body.createdAt,
     payload,
   };
+}
+
+export async function uploadBookingImages(
+  images: string[] // Array of base64 strings
+): Promise<string[]> {
+  if (!images || images.length === 0) return [];
+  
+  const uploadPromises = images.map(async (base64, idx) => {
+    try {
+      // 1. Remove base64 metadata prefix (e.g., "data:image/png;base64,")
+      const base64Data = base64.split(',')[1];
+      if (!base64Data) return null;
+      
+      // 2. Convert to binary Blob
+      const byteCharacters = atob(base64Data);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/jpeg' });
+      
+      // 3. Generate a reasonably unique filename
+      const fileName = `${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 7)}.jpg`;
+      const filePath = `beauty/${fileName}`;
+      
+      // 4. Upload to Supabase Storage bucket 'beauty-bookings'
+      const { error } = await supabase.storage
+        .from('beauty-bookings')
+        .upload(filePath, blob, {
+          contentType: 'image/jpeg',
+          cacheControl: '3600',
+          upsert: false
+        });
+        
+      if (error) throw error;
+      
+      // 5. Get Public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('beauty-bookings')
+        .getPublicUrl(filePath);
+        
+      return publicUrl;
+    } catch (err) {
+      console.error(`[uploadBookingImages] Failed to upload image ${idx}:`, err);
+      return null;
+    }
+  });
+  
+  const results = await Promise.all(uploadPromises);
+  return results.filter((url): url is string => url !== null);
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getLocaleDisplayLabel, getSpeechLocale } from '@/lib/translator/catalog.ts';
 import {
@@ -25,6 +25,7 @@ import { InterpreterHeader } from './InterpreterHeader';
 import { LanguageSelectorRow } from './LanguageSelectorRow';
 import { mergeInterpreterHistory } from './storage';
 import { SpeakerControlCard } from './SpeakerControlCard';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_CUSTOMER_LOCALE: ConciergeLocale = 'en';
 const DEFAULT_STAFF_LOCALE: ConciergeLocale = 'ko';
@@ -44,6 +45,7 @@ function getReplayPayload(turn: InterpreterTurnResponse) {
 }
 
 export default function InShopInterpreterMvp() {
+  const { t } = useTranslation('common');
   const [customerLocale, setCustomerLocale] = useState<ConciergeLocale>(DEFAULT_CUSTOMER_LOCALE);
   const [staffLocale, setStaffLocale] = useState<ConciergeLocale>(DEFAULT_STAFF_LOCALE);
   const [session, setSession] = useState<InterpreterSession | null>(null);
@@ -60,13 +62,7 @@ export default function InShopInterpreterMvp() {
     onError: setErrorText,
   });
 
-  useEffect(() => {
-    setErrorText(null);
-    setStatusText('Preparing an interpreter session.');
-    void createSession(customerLocale, staffLocale);
-  }, [customerLocale, staffLocale]);
-
-  async function createSession(nextCustomerLocale: ConciergeLocale, nextStaffLocale: ConciergeLocale) {
+  const createSession = useCallback(async (nextCustomerLocale: ConciergeLocale, nextStaffLocale: ConciergeLocale) => {
     try {
       const response = await fetch('/api/translator/interpreter/session', {
         method: 'POST',
@@ -87,12 +83,18 @@ export default function InShopInterpreterMvp() {
       }
 
       setSession(data);
-      setStatusText('Interpreter session ready. Hold a button to speak, type a message, or tap a quick phrase.');
+      setStatusText(t('interpreter_ui_v2.status.ready'));
     } catch (error) {
-      setErrorText(error instanceof Error ? error.message : 'Interpreter session creation failed.');
+      setErrorText(error instanceof Error ? error.message : t('interpreter_ui_v2.status.failed'));
       setStatusText(null);
     }
-  }
+  }, [t, setSession, setErrorText, setStatusText]);
+
+  useEffect(() => {
+    setErrorText(null);
+    setStatusText(t('interpreter_ui_v2.status.preparing'));
+    void createSession(customerLocale, staffLocale);
+  }, [customerLocale, staffLocale, t, createSession]);
 
   async function submitTextTurn(speaker: SpeakerRole, text: string) {
     if (!session) {
@@ -136,9 +138,9 @@ export default function InShopInterpreterMvp() {
 
       applyTurnResult(speaker, data);
     } catch (error) {
-      setErrorText(error instanceof Error ? error.message : 'Translation request failed.');
+      setErrorText(error instanceof Error ? error.message : t('interpreter_ui_v2.status.failed'));
       setBusyRole(null);
-      setStatusText('Use text input or a quick phrase to try again.');
+      setStatusText(t('interpreter_ui_v2.status.try_again'));
     }
   }
 
@@ -167,11 +169,13 @@ export default function InShopInterpreterMvp() {
       if ('error' in data) {
         setBusyRole(null);
         setErrorText(data.error);
-        setStatusText(getTranscriptionFallbackStatusMessage());
+        setStatusText(t('interpreter_ui_v2.status.stt_failed'));
         return;
       }
 
-      setStatusText(data.fallbackUsed ? `Transcribed with backup STT (${data.engine}).` : `Transcription complete (${data.engine}).`);
+      setStatusText(data.fallbackUsed 
+        ? t('interpreter_ui_v2.status.transcription_complete_fallback', { engine: data.engine }) 
+        : t('interpreter_ui_v2.status.transcription_complete', { engine: data.engine }));
 
       await submitInterpreterTurn({
         speaker,
@@ -276,8 +280,8 @@ export default function InShopInterpreterMvp() {
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <div className="grid gap-5">
           <SpeakerControlCard
-            title="Customer"
-            subtitle="The customer can speak or type in their own language. The app translates it for the Korean staff."
+            title={t('interpreter_ui.customer_speaks')}
+            subtitle={t('interpreter_ui_v2.customer_input_desc')}
             accentClassName="bg-sky-100 text-sky-800"
             helperLabel={`${getLocaleDisplayLabel(customerLocale)} to ${getLocaleDisplayLabel(staffLocale)}`}
             voiceButtonLabel="Customer speech"
@@ -297,8 +301,8 @@ export default function InShopInterpreterMvp() {
           />
 
           <SpeakerControlCard
-            title="Staff"
-            subtitle="The Korean staff can speak or type. The app translates each turn into the customer's language and plays it back."
+            title={t('interpreter_ui.staff_speaks')}
+            subtitle={t('interpreter_ui_v2.mvp_desc')}
             accentClassName="bg-amber-100 text-amber-900"
             helperLabel={`${getLocaleDisplayLabel(staffLocale)} to ${getLocaleDisplayLabel(customerLocale)}`}
             voiceButtonLabel="Staff speech"
@@ -337,9 +341,7 @@ export default function InShopInterpreterMvp() {
       </div>
 
       <div className="rounded-[28px] border border-slate-200 bg-white px-5 py-4 text-sm leading-6 text-slate-600 shadow-soft">
-        <span className="font-black text-slate-950">MVP architecture:</span> short audio upload or text submit,
-        server STT, server translation, browser TTS, and local history caching. If voice fails, the interpreter
-        continues with text input.
+        <span className="font-black text-slate-950">{t('interpreter_ui.structured_output')}:</span> {t('interpreter_ui_v2.mvp_desc')}
       </div>
     </div>
   );

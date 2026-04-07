@@ -20,6 +20,27 @@
     padding: 16px;
 }
 
+.floatingHeader {
+    width: 100%;
+    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+}
+
+.floatingHeader .searchContainer {
+    background: white !important;
+    border-radius: 24px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    margin-bottom: 0 !important;
+    padding: 4px 8px !important;
+}
+
+.floatingHeader .searchWrapper {
+    background: transparent !important;
+}
+
 .headerTop {
     display: flex;
     justify-content: space-between;
@@ -120,9 +141,9 @@
     position: absolute;
     top: -4px;
     right: -4px;
-    background: #ff4d4d;
+    background: var(--korean-red);
     /* Red badge */
-    color: white;
+    color: var(--hanji-ivory);
     font-size: 10px;
     width: 16px;
     height: 16px;
@@ -156,7 +177,8 @@
     background: rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 13px;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
     cursor: pointer;
     transition: all 0.2s;
     color: var(--gray-500);
@@ -183,7 +205,7 @@
 
 /* For center modal */
 .modalContent {
-    background: #fff;
+    background: var(--surface);
     width: 80%;
     max-width: 320px;
     border-radius: 16px;
@@ -210,9 +232,9 @@
 .cityOption {
     padding: 12px;
     border-radius: 12px;
-    border: 1px solid #333;
-    background: #2a2a2a;
-    color: var(--foreground);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     cursor: pointer;
 }
 
@@ -224,7 +246,7 @@
 
 /* Bottom Sheet */
 .bottomSheet {
-    background: #fff;
+    background: var(--surface);
     width: 100%;
     max-width: 600px;
     border-top-left-radius: 24px;
@@ -281,9 +303,9 @@
 .dayOption {
     padding: 16px;
     border-radius: 12px;
-    background: #2a2a2a;
-    border: 1px solid #333;
-    color: var(--foreground);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--ink-black);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -300,136 +322,182 @@
     font-size: 20px;
 }
 
-/* Service Card */
-.card {
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.03);
+/* --- New Horizontal Service Card (Router 2 style) --- */
+.cardHorizontal {
+    margin: 12px 16px;
+    background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 16px;
+    display: flex;
     overflow: hidden;
-    position: relative;
-}
-
-.cardThumbnail {
-    height: 160px;
-    background-color: #333;
-    position: relative;
-    padding: 12px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-}
-
-.eventOverlay {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    color: var(--foreground);
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.saveBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    border: none;
-    color: var(--foreground);
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.saveBtn.saved {
-    color: #ff4d4d;
+.cardHorizontal:active {
+    transform: scale(0.98);
+    background-color: var(--gray-100);
 }
 
-.cardContent {
+.cardInfoSection {
+    flex: 1;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardTextContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .cardTitle {
-    font-size: 18px;
-    margin: 0 0 4px 0;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--ink-black);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.ratingLabel {
+    font-weight: 700;
+    color: var(--ink-black);
+}
+
+.stars {
+    color: #FFD700; /* Gold color for stars */
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.reviewCount {
+    color: var(--gray-400);
+}
+
+.descriptionRow {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+.statusRow {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.openNow {
+    color: #2D9B63; /* Green for open status */
     font-weight: 700;
 }
 
-.cardMeta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: var(--gray-500);
-    margin-bottom: 12px;
+.closingTime {
+    color: var(--gray-400);
 }
 
-.badges {
+.reviewSnippet {
+    margin-top: 8px;
+    padding: 8px;
+    background: var(--gray-100);
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.quoteIcon {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.snippetText {
+    font-size: 11.5px;
+    color: var(--soft-ink);
+    margin: 0;
+    line-height: 1.4;
+    font-style: italic;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardFooter {
+    margin-top: 12px;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 12px;
 }
 
-.badge {
-    padding: 4px 8px;
-    background: rgba(0, 0, 0, 0.04);
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--gray-500);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.veganBadge {
-    background: rgba(0, 255, 0, 0.1);
-    color: #cfc;
-    border-color: rgba(0, 255, 0, 0.2);
-}
-
-.foodTags,
-.festivalInfo,
-.beautyInfo,
-.attractionInfo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    font-size: 13px;
-    color: var(--gray-500);
-    margin-bottom: 8px;
-}
-
-.ingredientTag {
-    color: #aaa;
-}
-
-.cardActions {
-    padding: 0 16px 16px 16px;
-}
-
-.addToPlanBtn {
-    width: 100%;
+/* Right Section: Image */
+.cardImageSection {
+    width: 120px;
     padding: 12px;
-    background: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 14px;
-    transition: opacity 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-left: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.addToPlanBtn:active {
-    opacity: 0.8;
+.thumbnailRect {
+     width: 80px;
+     height: 80px;
+     border-radius: 12px;
+     position: relative;
+     overflow: hidden;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
+
+.thumbnailImage {
+    object-fit: cover !important;
+}
+
+.saveIconOverlay {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.miniPlanBtn {
+    width: 90px;
+    padding: 8px 0;
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    border-radius: 8px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* Animation */
 .slideUp {
@@ -454,8 +522,8 @@
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95);
-    color: #000;
+    background: var(--surface);
+    color: var(--ink-black);
     padding: 12px 24px;
     border-radius: 24px;
     font-weight: 700;
@@ -507,8 +575,8 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #fff;
-    border: 1px solid var(--gray-200);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
     border-radius: 12px;
     margin-top: 8px;
     list-style: none;
@@ -553,7 +621,7 @@
 }
 
 .distance {
-    color: #9d4edd;
+    color: var(--dancheong-teal);
     font-weight: bold;
 }
 
@@ -572,7 +640,7 @@
     justify-content: center;
     padding: 60px 20px;
     gap: 16px;
-    color: #888;
+    color: var(--gray-400);
 }
 
 .spinner {
@@ -594,7 +662,7 @@
 .infoWindow {
     padding: 8px 4px;
     min-width: 180px;
-    color: #333;
+    color: var(--ink-black);
 }
 
 .infoTitle {
@@ -606,7 +674,7 @@
 .infoArea {
     margin: 0 0 12px;
     font-size: 12px;
-    color: #666;
+    color: var(--soft-ink);
 }
 
 .infoActions {
@@ -630,7 +698,7 @@
     background: #fdfdfd;
     cursor: pointer;
     transition: all 0.15s;
-    color: #333;
+    color: var(--ink-black);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -645,21 +713,21 @@
 }
 
 .infoActionKride {
-    background: #fff8e1;
-    border-color: #ffc107;
-    color: #ff8f00;
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .infoActionTransit {
-    background: #e3f2fd;
-    border-color: #2196f3;
-    color: #1565c0;
+    background: var(--secondary-glow);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 .infoActionMap {
-    background: #f1f8e9;
-    border-color: #8bc34a;
-    color: #33691e;
+    background: var(--primary-glow);
+    border-color: var(--dancheong-teal);
+    color: var(--dancheong-teal);
 }
 
 /* ── Route Overlay ── */
@@ -668,7 +736,7 @@
     top: 10px;
     left: 10px;
     right: 10px;
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 14px 18px;
@@ -752,11 +820,11 @@
 
 .beautyExplorePage {
     min-height: 100vh;
-    padding: 24px 16px 96px;
+    padding: 24px 16px 220px;
     background:
-        radial-gradient(circle at top left, rgba(236, 219, 210, 0.85), transparent 34%),
-        linear-gradient(180deg, #fcf8f4 0%, #f4ede7 100%);
-    color: #231d19;
+        radial-gradient(circle at top left, rgba(79, 124, 120, 0.04), transparent 34%),
+        linear-gradient(180deg, var(--hanji-ivory) 0%, #ffffff 100%);
+    color: var(--ink-black);
 }
 
 .beautyHero,
@@ -768,7 +836,10 @@
 }
 
 .beautyHero {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 14px;
 }
 
@@ -780,10 +851,10 @@
     min-height: 32px;
     align-items: center;
     padding: 0 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    color: #8d6157;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--primary);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -791,8 +862,11 @@
 }
 
 .beautyHeaderRow {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
+    width: 100%;
 }
 
 .beautyTitle {
@@ -801,6 +875,7 @@
     font-size: clamp(2rem, 7vw, 3.4rem);
     line-height: 1.06;
     letter-spacing: -0.04em;
+    word-break: keep-all;
 }
 
 .beautySubtitle {
@@ -809,6 +884,8 @@
     font-size: 15px;
     line-height: 1.7;
     font-weight: 600;
+    word-break: keep-all;
+    white-space: pre-line;
 }
 
 .beautyCategoryBadgeWrap {
@@ -816,12 +893,13 @@
     align-items: center;
     gap: 10px;
     width: fit-content;
+    margin: 0 auto;
     min-height: 54px;
     padding: 0 16px;
-    border-radius: 18px;
-    background: rgba(255, 250, 246, 0.95);
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    box-shadow: 0 16px 34px rgba(73, 48, 33, 0.08);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1.5px solid var(--warm-sand);
+    box-shadow: 0 16px 34px rgba(43, 35, 29, 0.06);
 }
 
 .beautyCategoryBadgeCode {
@@ -831,9 +909,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 999px;
-    background: rgba(234, 216, 207, 0.92);
-    color: #7f4f46;
+    border-radius: 6px;
+    background: var(--primary-glow);
+    color: var(--primary);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -846,11 +924,12 @@
 }
 
 .beautyDescription {
-    margin: 0;
+    margin: 0 auto;
     max-width: 42rem;
     color: #6e6259;
     font-size: 14px;
     line-height: 1.75;
+    text-align: center;
 }
 
 .beautyHeroFlow {
@@ -893,10 +972,10 @@
 .beautySelectionNotice {
     margin-top: 18px;
     padding: 18px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.76);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 16px 34px rgba(73, 48, 33, 0.06);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 16px 34px rgba(43, 35, 29, 0.05);
 }
 
 .beautyGuideCard {
@@ -909,10 +988,10 @@
 .beautyFiltersSection {
     margin-top: 28px;
     padding: 22px 18px;
-    border-radius: 28px;
-    background: rgba(255, 252, 249, 0.86);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 20px 44px rgba(43, 35, 29, 0.08);
 }
 
 .beautySectionHeader {
@@ -934,13 +1013,10 @@
 }
 
 .beautyRegionChipRow {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
     margin-top: 18px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
 
 .beautyRegionChipRow::-webkit-scrollbar {
@@ -948,17 +1024,20 @@
 }
 
 .beautyRegionChip {
-    min-height: 42px;
-    padding: 0 16px;
-    border-radius: 999px;
+    min-height: 40px;
+    padding: 8px 4px;
+    border-radius: 12px;
     border: 1px solid rgba(109, 83, 63, 0.12);
     background: rgba(255, 255, 255, 0.74);
     color: #5d5148;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    transition: all 0.18s ease;
 }
 
 .beautyRegionChip:active {
@@ -966,10 +1045,10 @@
 }
 
 .beautyRegionChipActive {
-    background: linear-gradient(135deg, #7f4f46 0%, #b28070 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.18);
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #ffffff;
+    box-shadow: 0 14px 28px var(--secondary-glow);
 }
 
 .beautySelectionTitle {
@@ -998,16 +1077,16 @@
 
 .beautyStoreCard {
     padding: 20px 18px;
-    border-radius: 24px;
-    background: rgba(255, 252, 249, 0.92);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 18px 36px rgba(73, 48, 33, 0.06);
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 18px 36px rgba(43, 35, 29, 0.06);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .beautyStoreCardSelected {
-    border-color: rgba(127, 79, 70, 0.28);
-    box-shadow: 0 22px 42px rgba(127, 79, 70, 0.12);
+    border-color: var(--primary);
+    box-shadow: 0 22px 42px var(--primary-glow);
 }
 
 .beautyStoreTopRow,
@@ -1037,8 +1116,9 @@
 }
 
 .beautyStoreRegionPill {
-    background: rgba(244, 237, 231, 0.9);
-    color: #5d5148;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(109, 83, 63, 0.14);
+    color: #493f39;
 }
 
 .beautyStoreTitle {
@@ -1055,15 +1135,22 @@
 }
 
 .beautyStoreRating {
-    color: #b2732e;
+    color: #ff9500;
     font-weight: 800;
 }
 
+.beautyStoreReviewCount {
+    color: #6e6259;
+    font-weight: 600;
+}
+
 .beautyStorePrice {
-    margin-top: 14px;
-    color: #7f4f46;
-    font-size: 16px;
+    margin-top: 18px;
+    color: #8d6157;
+    font-size: 18px;
+    line-height: 1.2;
     font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 .beautyStoreDescription {
@@ -1088,14 +1175,14 @@
     width: 100%;
     min-height: 52px;
     border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
-    color: #fff9f5;
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    color: #ffffff;
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 12px 24px var(--secondary-glow);
 }
 
 .beautyStoreCta:active {
@@ -1131,10 +1218,10 @@
     margin: 20px auto 0;
     padding: 22px 18px;
     scroll-margin-top: 16px;
-    border-radius: 28px;
-    background: rgba(255, 252, 249, 0.92);
-    border: 1px solid rgba(109, 83, 63, 0.08);
-    box-shadow: 0 20px 44px rgba(73, 48, 33, 0.08);
+    border-radius: var(--radius-lg);
+    background: var(--hanji-ivory);
+    border: 1px solid var(--warm-sand);
+    box-shadow: 0 20px 44px rgba(43, 35, 29, 0.08);
 }
 
 .beautyBookingHeader {
@@ -1172,22 +1259,24 @@
 }
 
 .beautyStepItem {
-    min-width: 92px;
-    padding: 10px 12px;
+    min-width: 72px;
+    padding: 10px 8px;
     border-radius: 16px;
     border: 1px solid rgba(109, 83, 63, 0.08);
     background: rgba(255, 255, 255, 0.78);
     color: #7c6e64;
     display: grid;
-    justify-items: start;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
     gap: 6px;
 }
 
 .beautyStepItemCurrent {
-    border-color: rgba(127, 79, 70, 0.22);
-    background: rgba(255, 247, 242, 0.96);
-    color: #231d19;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.08);
+    border-color: var(--primary);
+    background: var(--primary-glow);
+    color: var(--ink-black);
+    box-shadow: 0 8px 20px var(--primary-glow);
 }
 
 .beautyStepItemDone {
@@ -1221,7 +1310,8 @@
 }
 
 .beautyBookingLayout {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     margin-top: 18px;
 }
@@ -1277,10 +1367,10 @@
 }
 
 .beautyDateChipActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 16px 30px rgba(127, 79, 70, 0.18);
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #ffffff;
+    box-shadow: 0 12px 24px var(--secondary-glow);
 }
 
 .beautyDateChipPrimary {
@@ -1313,10 +1403,10 @@
 }
 
 .beautyTimeSlotActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.16);
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 12px 24px var(--primary-glow);
 }
 
 .beautyBookingInlineEmpty,
@@ -1381,14 +1471,14 @@
     width: 100%;
     min-height: 54px;
     border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
-    color: #fff9f5;
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    color: #ffffff;
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 12px 30px var(--secondary-glow);
 }
 
 .beautyBookingCta:disabled {
@@ -1401,7 +1491,7 @@
 .beautyConfirmPanel {
     width: min(1120px, 100%);
     margin: 20px auto 0;
-    padding: 22px 18px;
+    padding: 22px 18px 100px;
     scroll-margin-top: 16px;
     border-radius: 28px;
     background: rgba(255, 250, 246, 0.94);
@@ -1493,10 +1583,10 @@
 .beautyAssistChip {
     min-height: 44px;
     padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(109, 83, 63, 0.12);
-    background: rgba(255, 252, 249, 0.96);
-    color: #3d2f28;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -1507,10 +1597,10 @@
 }
 
 .beautyAssistChipActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 14px 28px rgba(127, 79, 70, 0.16);
+    background: var(--secondary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
 }
 
 .beautyAssistChip:active {
@@ -1543,9 +1633,9 @@
     display: grid;
     gap: 10px;
     padding: 14px;
-    border-radius: 18px;
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    background: rgba(255, 252, 249, 0.92);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
 }
 
 .beautyAssistMessageHeader {
@@ -1557,13 +1647,13 @@
 }
 
 .beautyAssistMessageLabel {
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 14px;
     font-weight: 800;
 }
 
 .beautyAssistMessageBox {
-    color: #3d2f28;
+    color: var(--ink-black);
     font-size: 14px;
     line-height: 1.7;
     white-space: pre-wrap;
@@ -1572,10 +1662,10 @@
 .beautyAssistTextarea {
     width: 100%;
     min-height: 132px;
-    border-radius: 16px;
-    border: 1px solid rgba(109, 83, 63, 0.1);
-    background: rgba(255, 255, 255, 0.98);
-    color: #231d19;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: #ffffff;
+    color: var(--ink-black);
     font: inherit;
     line-height: 1.7;
     padding: 14px 16px;
@@ -1596,10 +1686,10 @@
 .beautyAssistAction {
     min-height: 36px;
     padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(127, 79, 70, 0.16);
-    background: rgba(255, 252, 249, 0.94);
-    color: #7f4f46;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--accent);
     font-size: 13px;
     font-weight: 800;
     cursor: pointer;
@@ -1627,40 +1717,43 @@
     margin: 0;
     font-size: 16px;
     line-height: 1.3;
-    color: #231d19;
+    color: var(--ink-black);
 }
 
 .beautyOptionSectionMeta {
-    color: #7c6e64;
+    color: var(--soft-ink);
     font-size: 12px;
     font-weight: 700;
 }
 
 .beautyOptionGrid {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 
 .beautyOptionCard {
     width: 100%;
-    padding: 14px;
-    border-radius: 18px;
-    border: 1px solid rgba(109, 83, 63, 0.12);
-    background: rgba(255, 252, 249, 0.96);
-    color: #231d19;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     display: grid;
     justify-items: start;
-    gap: 6px;
+    gap: 4px;
     text-align: left;
     cursor: pointer;
+    overflow: hidden;
+    word-break: keep-all;
     transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .beautyOptionCardActive {
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.96) 0%, rgba(178, 128, 112, 0.94) 100%);
-    border-color: #7f4f46;
-    color: #fff9f5;
-    box-shadow: 0 16px 30px rgba(127, 79, 70, 0.16);
+    background: var(--secondary);
+    border-color: var(--primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
 }
 
 .beautyOptionCard:active {
@@ -1668,21 +1761,27 @@
 }
 
 .beautyOptionTitle {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 .beautyOptionMeta {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.5;
     opacity: 0.86;
 }
 
 .beautyOptionDescription {
-    font-size: 13px;
-    line-height: 1.6;
-    opacity: 0.92;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: 0.82;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .beautyOptionPrice {
@@ -1693,7 +1792,7 @@
 
 .beautyOptionHint {
     margin: 0;
-    color: #6e6259;
+    color: var(--soft-ink);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -1709,7 +1808,7 @@
 }
 
 .beautyFormLabel {
-    color: #3d2f28;
+    color: var(--ink-black);
     font-size: 14px;
     font-weight: 800;
 }
@@ -1717,10 +1816,10 @@
 .beautyTextInput,
 .beautyTextarea {
     width: 100%;
-    border-radius: 16px;
-    border: 1px solid rgba(109, 83, 63, 0.14);
-    background: rgba(255, 252, 249, 0.96);
-    color: #231d19;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--ink-black);
     font: inherit;
     padding: 14px 16px;
     transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
@@ -1738,15 +1837,15 @@
 .beautyTextInput:focus,
 .beautyTextarea:focus {
     outline: none;
-    border-color: rgba(127, 79, 70, 0.48);
-    box-shadow: 0 0 0 4px rgba(187, 138, 120, 0.14);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--primary-glow);
     background: #fff;
 }
 
 .beautyFieldError,
 .beautyAgreementError {
     margin: 0;
-    color: #b04d42;
+    color: var(--korean-red);
     font-size: 13px;
     line-height: 1.5;
     font-weight: 700;
@@ -1773,7 +1872,7 @@
     width: 18px;
     height: 18px;
     margin-top: 2px;
-    accent-color: #7f4f46;
+    accent-color: var(--accent);
 }
 
 .beautyAgreementTextWrap {
@@ -1782,14 +1881,14 @@
 }
 
 .beautyAgreementTitle {
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 14px;
     line-height: 1.5;
     font-weight: 800;
 }
 
 .beautyAgreementText {
-    color: #6e6259;
+    color: var(--soft-ink);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -1806,9 +1905,9 @@
 .beautyFinalCta {
     width: 100%;
     border: none;
-    background: linear-gradient(135deg, #7f4f46 0%, #bb8a78 100%);
-    color: #fff9f5;
-    box-shadow: 0 18px 34px rgba(127, 79, 70, 0.18);
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 18px 34px rgba(166, 75, 67, 0.2);
     cursor: pointer;
 }
 
@@ -1816,15 +1915,16 @@
     opacity: 0.42;
     cursor: not-allowed;
     box-shadow: none;
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.42) 0%, rgba(187, 138, 120, 0.4) 100%);
+    background: var(--warm-sand);
+    color: var(--soft-ink);
 }
 
 .beautySecondaryAction {
     min-width: 180px;
     padding: 0 18px;
-    border: 1px solid rgba(127, 79, 70, 0.18);
-    background: rgba(255, 252, 249, 0.94);
-    color: #7f4f46;
+    border: 1px solid var(--warm-sand);
+    background: var(--surface);
+    color: var(--accent);
     cursor: pointer;
 }
 
@@ -1845,12 +1945,12 @@
     font-size: 22px;
     line-height: 1.3;
     letter-spacing: -0.03em;
-    color: #231d19;
+    color: var(--ink-black);
 }
 
 .beautyCompletionText {
     margin: 0;
-    color: #6e6259;
+    color: var(--soft-ink);
     font-size: 14px;
     line-height: 1.7;
 }
@@ -1859,9 +1959,9 @@
     display: grid;
     gap: 12px;
     padding: 16px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(127, 79, 70, 0.1) 0%, rgba(234, 216, 207, 0.28) 100%);
-    border: 1px solid rgba(127, 79, 70, 0.1);
+    border-radius: var(--radius-md);
+    background: var(--primary-glow);
+    border: 1px solid var(--warm-sand);
 }
 
 .beautyCompletionHeroBlock,
@@ -1872,7 +1972,7 @@
 }
 
 .beautyCompletionHeroLabel {
-    color: #8d6157;
+    color: var(--accent);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -1880,14 +1980,14 @@
 }
 
 .beautyCompletionHeroTitle {
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 22px;
     line-height: 1.25;
     letter-spacing: -0.03em;
 }
 
 .beautyCompletionHeroMeta {
-    color: #5d5148;
+    color: var(--soft-ink);
     font-size: 14px;
     line-height: 1.6;
     font-weight: 700;
@@ -1900,7 +2000,7 @@
 }
 
 .beautyCompletionPrice {
-    color: #7f4f46;
+    color: var(--accent);
     font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.03em;
@@ -1913,14 +2013,14 @@
 
 .beautyCompletionSection {
     padding: 16px;
-    border-radius: 20px;
-    background: rgba(255, 252, 249, 0.88);
-    border: 1px solid rgba(109, 83, 63, 0.08);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
 }
 
 .beautyCompletionSectionTitle {
     margin: 0;
-    color: #231d19;
+    color: var(--ink-black);
     font-size: 16px;
     line-height: 1.35;
     letter-spacing: -0.02em;
@@ -1950,7 +2050,7 @@
 
 @media (min-width: 768px) {
     .beautyExplorePage {
-        padding: 36px 24px 120px;
+        padding: 36px 24px 160px;
     }
 
     .beautyHeaderRow,
@@ -1985,7 +2085,7 @@
     }
 
     .beautyConfirmLayout {
-        grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+        grid-template-columns: 1fr;
     }
 
     .beautyStepItem {
@@ -2014,6 +2114,25 @@
     .beautyCompletionGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
+
+/* Map Overlay Carousel Styles */
+.fixedBottomList {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+.carouselInner {
+    width: 100%;
+    max-width: 600px;
+    pointer-events: auto;
+    overflow: hidden;
 }
 
 @media (min-width: 1100px) {

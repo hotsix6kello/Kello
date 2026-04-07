@@ -3,7 +3,6 @@ import {
   BEAUTY_BOOKING_ALLOWED_TRANSITIONS,
   isBeautyBookingCancelActor,
   isBeautyBookingAdminStatus,
-  normalizeBeautyBookingAdminListStatus,
   type BeautyBookingAdminListFilters,
   type BeautyBookingAdminRecord,
   type BeautyBookingAdminStatus,
@@ -19,6 +18,7 @@ import {
 } from "@/lib/supabaseServer.ts";
 import { 
   createBeautyBookingNotification,
+  notifyAdminNewBooking,
   type BeautyBookingNotificationEventType 
 } from "./beautyNotificationServer.ts";
 
@@ -46,8 +46,8 @@ type BeautyBookingInsertRow = {
   booking_time: string;
   designer_id: string | null;
   designer_name: string | null;
-  primary_service_id: string;
-  primary_service_name: string;
+  primary_service_id: string | null;
+  primary_service_name: string | null;
   add_on_ids: string[];
   add_on_names: string[];
   base_price: number;
@@ -57,6 +57,7 @@ type BeautyBookingInsertRow = {
   customer_name: string;
   customer_phone: string;
   customer_request: string;
+  image_urls: string[] | null;
   communication_language: string;
   communication_intent: string;
   korean_message: string;
@@ -77,7 +78,7 @@ type BeautyBookingInsertRow = {
   change_review_note?: string;
 };
 
-type BeautyBookingAdminSelectRow = {
+export type BeautyBookingAdminSelectRow = {
   id: string;
   customer_user_id: string | null;
   created_at: string;
@@ -103,7 +104,7 @@ type BeautyBookingAdminSelectRow = {
   designer_id: string | null;
   designer_name: string | null;
   alternative_offer_status: string | null;
-  alternative_offer_items: any | null;
+  alternative_offer_items: BeautyBookingAlternativeOfferItem[] | null;
   alternative_offer_note: string | null;
   alternative_offered_at: string | null;
   alternative_offered_by: string | null;
@@ -113,8 +114,8 @@ type BeautyBookingAdminSelectRow = {
   shop_contacted: boolean;
   customer_contacted: boolean;
   follow_up_needed: boolean;
-  primary_service_id: string;
-  primary_service_name: string;
+  primary_service_id: string | null;
+  primary_service_name: string | null;
   add_on_ids: string[] | null;
   add_on_names: string[] | null;
   base_price: number;
@@ -131,6 +132,30 @@ type BeautyBookingAdminSelectRow = {
   agreements: unknown;
   created_from_flow: string;
 };
+
+type BeautyBookingSummarySelectRow = Pick<
+  BeautyBookingAdminSelectRow,
+  | "id"
+  | "status"
+  | "store_name"
+  | "primary_service_name"
+  | "beauty_category"
+  | "booking_date"
+  | "booking_time"
+  | "total_price"
+>;
+
+export type BeautyBookingSummaryRecord = Pick<
+  BeautyBookingAdminRecord,
+  | "id"
+  | "status"
+  | "storeName"
+  | "primaryServiceName"
+  | "beautyCategory"
+  | "bookingDate"
+  | "bookingTime"
+  | "totalPrice"
+>;
 
 export type PersistedBeautyBookingRecord = {
   bookingId: string;
@@ -200,8 +225,8 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     bookingTime: row.booking_time,
     designerId: row.designer_id,
     designerName: row.designer_name,
-    primaryServiceId: row.primary_service_id,
-    primaryServiceName: row.primary_service_name,
+    primaryServiceId: row.primary_service_id ?? null,
+    primaryServiceName: row.primary_service_name ?? null,
     addOnIds: row.add_on_ids ?? [],
     addOnNames: row.add_on_names ?? [],
     basePrice: row.base_price,
@@ -211,6 +236,7 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     customerName: row.customer_name,
     customerPhone: row.customer_phone,
     customerRequest: row.customer_request,
+    imageUrls: Array.isArray((row as unknown as { image_urls?: string[] }).image_urls) ? (row as unknown as { image_urls: string[] }).image_urls : [],
     communicationLanguage: row.communication_language,
     communicationIntent: row.communication_intent,
     koreanMessage: row.korean_message,
@@ -267,6 +293,7 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "customer_name",
   "customer_phone",
   "customer_request",
+  "image_urls",
   "communication_language",
   "communication_intent",
   "korean_message",
@@ -279,6 +306,32 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "customer_contacted",
   "follow_up_needed",
 ].join(", ");
+
+const BEAUTY_BOOKING_SUMMARY_SELECT = [
+  "id",
+  "status",
+  "store_name",
+  "primary_service_name",
+  "beauty_category",
+  "booking_date",
+  "booking_time",
+  "total_price",
+].join(", ");
+
+function mapBeautyBookingRowToSummaryRecord(
+  row: BeautyBookingSummarySelectRow,
+): BeautyBookingSummaryRecord {
+  return {
+    id: row.id,
+    status: normalizeDbStatus(row.status),
+    storeName: row.store_name,
+    primaryServiceName: row.primary_service_name ?? null,
+    beautyCategory: row.beauty_category,
+    bookingDate: row.booking_date,
+    bookingTime: row.booking_time,
+    totalPrice: row.total_price,
+  };
+}
 
 function mapBeautyBookingPayloadToRow(
   payload: BeautyBookingPayload,
@@ -295,8 +348,8 @@ function mapBeautyBookingPayloadToRow(
     booking_time: payload.bookingTime,
     designer_id: payload.designerId,
     designer_name: payload.designerName,
-    primary_service_id: payload.primaryServiceId,
-    primary_service_name: payload.primaryServiceName,
+    primary_service_id: payload.primaryServiceId === 'none' ? null : payload.primaryServiceId,
+    primary_service_name: payload.primaryServiceName === '선택 안 함' ? null : payload.primaryServiceName,
     add_on_ids: payload.addOnIds,
     add_on_names: payload.addOnNames,
     base_price: payload.priceSummary.basePrice,
@@ -306,6 +359,7 @@ function mapBeautyBookingPayloadToRow(
     customer_name: payload.customer.name,
     customer_phone: payload.customer.phone,
     customer_request: payload.customer.request,
+    image_urls: payload.customer.imageUrls && payload.customer.imageUrls.length > 0 ? payload.customer.imageUrls : null,
     communication_language: payload.communication.language,
     communication_intent: payload.communication.intent,
     korean_message: payload.communication.messages.korean,
@@ -338,11 +392,31 @@ export async function createBeautyBookingRequest(
   }
 
   const client = getSupabaseServerClient();
+  const insertData = mapBeautyBookingPayloadToRow(payload, customerUserId);
+  console.log("[beauty-booking-server] Attempting insert", {
+    store_id: insertData.store_id,
+    beauty_category: insertData.beauty_category,
+    region: insertData.region,
+    customer_name: insertData.customer_name,
+  });
+
   const { data, error } = await client
     .from(BEAUTY_BOOKING_TABLE)
-    .insert(mapBeautyBookingPayloadToRow(payload, customerUserId))
+    .insert(insertData)
     .select("id, status, created_at, customer_user_id, store_name, booking_date, booking_time")
     .single();
+
+  if (error) {
+    console.error("[beauty-booking-server] Insert failed", {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+    });
+    // Continue with existing error handling below
+  } else {
+    console.log("[beauty-booking-server] Insert successful", { id: data?.id });
+  }
 
   if (error) {
     if (isRecord(error) && error.code === "42P01") {
@@ -372,6 +446,14 @@ export async function createBeautyBookingRequest(
       },
     }).catch(console.error);
   }
+
+  // Support for Admin Notification
+  void notifyAdminNewBooking(String(data.id), {
+    customerName: payload.customer.name,
+    storeName: data.store_name,
+    bookingDate: data.booking_date,
+    bookingTime: data.booking_time
+  }).catch((err) => console.warn("[beauty-booking] admin notification failed", err));
 
   return {
     bookingId: String(data.id),
@@ -467,6 +549,41 @@ export async function listBeautyBookingRequestsForUser(
 
   return ((data as unknown as BeautyBookingAdminSelectRow[] | null) ?? []).map(
     mapBeautyBookingRowToAdminRecord,
+  );
+}
+
+export async function listBeautyBookingSummaryForUser(
+  customerUserId: string,
+): Promise<BeautyBookingSummaryRecord[]> {
+  if (!hasSupabaseServerAccess()) {
+    throw new BeautyBookingStorageError("env_missing", {
+      missingEnvVars: getMissingSupabaseServerEnvVars(),
+    });
+  }
+
+  const client = getSupabaseServerClient();
+  const { data, error } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .select(BEAUTY_BOOKING_SUMMARY_SELECT)
+    .eq("customer_user_id", customerUserId)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  if (error) {
+    if (isRecord(error) && error.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", {
+        table: BEAUTY_BOOKING_TABLE,
+        code: error.code,
+      });
+    }
+
+    throw new BeautyBookingStorageError("read_failed", {
+      code: isRecord(error) && typeof error.code === "string" ? error.code : undefined,
+    });
+  }
+
+  return ((data as unknown as BeautyBookingSummarySelectRow[] | null) ?? []).map(
+    mapBeautyBookingRowToSummaryRecord,
   );
 }
 
@@ -914,7 +1031,7 @@ export async function updateBeautyBookingOperatorInfo(
   }
 
   const client = getSupabaseServerClient();
-  const dbUpdates: Record<string, any> = {
+  const dbUpdates: Record<string, unknown> = {
     updated_at: new Date().toISOString(),
   };
 
@@ -1021,7 +1138,7 @@ export async function respondToAlternativeOffer(
   if (readError || !existing) throw new BeautyBookingStorageError("not_found");
   if (existing.customer_user_id !== userId) throw new BeautyBookingStorageError("forbidden_owner");
 
-  const updates: Record<string, any> = {
+  const updates: Record<string, unknown> = {
     alternative_offer_status: response,
     alternative_response_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
