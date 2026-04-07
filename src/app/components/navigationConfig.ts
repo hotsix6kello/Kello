@@ -1,6 +1,7 @@
 export const navItems = [
     { id: 'home', path: "/", icon: "✦", labelKey: 'common.home_nav', defaultLabel: 'Home', activeKey: "/" },
-    { id: 'explore', path: "/explore", icon: "🔍", labelKey: 'common.explore_nav', defaultLabel: 'Explore', activeKey: "/explore" },
+    // TODO: 추후 탐색 기능 업데이트 시 활성화
+    // { id: 'explore', path: "/explore", icon: "🔍", labelKey: 'common.explore_nav', defaultLabel: 'Explore', activeKey: "/explore" },
     { id: 'navigation', path: "/navigation", icon: "📍", labelKey: 'common.today_nav', defaultLabel: 'Itinerary', activeKey: "/navigation" },
     { id: 'community', path: "/community", icon: "💬", labelKey: 'common.community_nav', defaultLabel: 'Community', activeKey: "/community" },
     { id: 'help', path: "/help", icon: "🆘", labelKey: 'common.help_nav', defaultLabel: 'Help', activeKey: "/help" },
