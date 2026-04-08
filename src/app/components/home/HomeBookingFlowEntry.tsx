@@ -40,13 +40,12 @@ export default function HomeBookingFlowEntry({
   isOpen,
   onClose,
   initialCategory,
-  t: _t,
+  t: _,
   storeContext,
   onDraftReady,
   onDraftDebugStateChange,
   onSubmitPreparationChange,
   uploadedImageUrls,
-  onImageUploadBridgeRequest,
   completedImageUploadResult,
   onSubmitAttemptStateChange,
   skeletonDebugPanel,
@@ -188,8 +187,6 @@ export default function HomeBookingFlowEntry({
         const currentStateDrafts = snapshot.state.customerDetails.currentStateImages;
         const desiredStyleDrafts = snapshot.state.customerDetails.desiredStyleImages;
 
-        const uploadPromises: Promise<{ url: string | null; error: string | null } | null>[] = [];
-        
         // Match files with drafts from the local map
         const currentStateFiles = currentStateDrafts
           .map(d => localImageFilesRef.current.get(d.id))
@@ -233,11 +230,12 @@ export default function HomeBookingFlowEntry({
           message: `예약이 완료되었습니다! (ID: ${result.bookingId})`,
           errorSummary: null,
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
         submitAttemptStatusRef.current = "submit-error";
+        const errorMessage = err instanceof Error ? err.message : "예약 제출 중 오류가 발생했습니다.";
         onSubmitAttemptStateChange?.({
           status: "submit-error",
-          message: err.message || "예약 제출 중 오류가 발생했습니다.",
+          message: errorMessage,
           errorSummary: "Submission failed.",
         });
       }

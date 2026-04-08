@@ -134,9 +134,6 @@ export type HomeBookingFlowEntryProps = {
   onSubmitPreparationChange?: (result: LegacySubmitPreparationResult) => void;
   // Optional override seam for debug/mock upload refs. When omitted, skeleton state-derived refs are used.
   uploadedImageUrls?: string[];
-  // Future upload caller seam: step3 emits raw file+draft pairs here, caller uploads externally,
-  // then feeds one completedImageUploadResult back into the already-wired bridge.
-  onImageUploadBridgeRequest?: (items: BookingImageUploadBridgeItem[]) => void;
   // Future upload-complete seam: writes one completed image result back into step3 local state.
   completedImageUploadResult?: BookingUploadedImageResultCompletion | null;
   // Submit attempt summary for debug/read-only consumers in skeleton mode.

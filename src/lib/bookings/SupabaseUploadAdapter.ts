@@ -38,7 +38,8 @@ export async function uploadBookingImage(
       .getPublicUrl(data.path);
 
     return { url: publicUrl, error: null };
-  } catch (err: any) {
-    return { url: null, error: err.message || 'Unknown upload error' };
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : 'Unknown upload error';
+    return { url: null, error: errorMessage };
   }
 }
