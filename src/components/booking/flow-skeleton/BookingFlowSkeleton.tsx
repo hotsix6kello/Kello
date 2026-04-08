@@ -261,9 +261,9 @@ export function BookingFlowSkeleton({
     setState((currentState) =>
       currentState.currentStep === "date-time-selection"
         ? {
-            ...currentState,
-            currentStep: "customer-details",
-          }
+          ...currentState,
+          currentStep: "customer-details",
+        }
         : currentState,
     );
   }, [state.currentStep]);
@@ -307,8 +307,6 @@ export function BookingFlowSkeleton({
 
   const serviceMenu = state.category ? BOOKING_FLOW_SERVICE_MENUS[state.category] : null;
   const summary = useMemo(() => buildBookingFlowSummary(state), [state]);
-  const selectedCategoryLabel =
-    BOOKING_FLOW_CATEGORY_OPTIONS.find((option) => option.id === state.category)?.label ?? null;
   const activeVisualStepId = resolveVisualStepId(state.currentStep);
   const activeVisualStep = getVisualStepDefinition(activeVisualStepId);
   const isConfirmationStep = activeVisualStepId === "confirmation";
@@ -317,8 +315,8 @@ export function BookingFlowSkeleton({
     (!hasConfiguredServiceItems(state.category) || state.selectedServiceId !== null);
   const canAdvanceFromDetailsEntry = Boolean(
     state.selectedDate &&
-      state.customerDetails.name.trim() &&
-      state.customerDetails.phone.trim(),
+    state.customerDetails.name.trim() &&
+    state.customerDetails.phone.trim(),
   );
   const canMoveNext =
     activeVisualStepId === "service-selection"
@@ -356,7 +354,6 @@ export function BookingFlowSkeleton({
             selectedCategory={state.category}
             serviceMenu={serviceMenu}
             selectedServiceId={state.selectedServiceId}
-            isCategoryLocked={Boolean(initialCategory)}
             onSelectCategory={(category) =>
               setState((currentState) => ({
                 ...currentState,
@@ -377,30 +374,11 @@ export function BookingFlowSkeleton({
 
       case "details-entry":
         return (
-          <div className="flex flex-col gap-6">
-            <div className="border-b border-neutral-200 pb-4">
-              <div className="flex flex-wrap gap-2">
-                {selectedCategoryLabel ? (
-                  <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-                    {selectedCategoryLabel}
-                  </span>
-                ) : null}
-                {summary.selectedServiceTitle ? (
-                  <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-                    {summary.selectedServiceTitle}
-                  </span>
-                ) : null}
-              </div>
-            </div>
-
+          <div className="flex flex-col gap-8">
             <DateTimeSelectionStepShell
               embedded
-              dateOnly
               category={state.category}
-              categoryLabel={selectedCategoryLabel}
-              selectedServiceTitle={summary.selectedServiceTitle}
               selectedDate={state.selectedDate}
-              selectedTime={null}
               onSelectDate={(selectedDate) =>
                 setState((currentState) => ({
                   ...currentState,
@@ -412,13 +390,7 @@ export function BookingFlowSkeleton({
 
             <CustomerDetailsStepShell
               embedded
-              hideBookingSummary
-              hideSelectedTime
               category={state.category}
-              categoryLabel={selectedCategoryLabel}
-              selectedServiceTitle={summary.selectedServiceTitle}
-              selectedDate={summary.selectedDate}
-              selectedTime={null}
               details={state.customerDetails}
               onChangeName={(name) =>
                 setState((currentState) => ({
@@ -510,7 +482,7 @@ export function BookingFlowSkeleton({
             </div>
           </div>
 
-          <ol className="grid grid-cols-3 gap-2">
+          <ol className="flex w-full">
             {BOOKING_FLOW_VISUAL_STEPS.map((step) => {
               const isActive = step.id === activeVisualStepId;
               const isComplete = step.order < activeVisualStep.order;
@@ -518,18 +490,15 @@ export function BookingFlowSkeleton({
               return (
                 <li
                   key={step.id}
-                  className={`rounded-2xl px-3 py-3 text-sm ${
-                    isActive
-                      ? "bg-fuchsia-600 text-white shadow-[0_12px_24px_rgba(192,38,211,0.18)]"
-                      : isComplete
-                        ? "bg-fuchsia-50 text-fuchsia-700"
-                        : "bg-neutral-50 text-neutral-500"
-                  }`}
+                  className={`flex-1 flex flex-col items-center justify-end pb-3 border-b-[3px] text-sm transition-colors ${isActive || isComplete
+                      ? "border-fuchsia-600 text-fuchsia-700"
+                      : "border-neutral-100 text-neutral-400"
+                    }`}
                 >
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em]">
+                  <div className="text-[11px] font-bold uppercase tracking-[0.14em]">
                     {`STEP ${step.order}`}
                   </div>
-                  <div className="mt-1 font-medium leading-5">{step.title}</div>
+                  <div className="mt-1 font-semibold leading-5">{step.title}</div>
                 </li>
               );
             })}
@@ -540,16 +509,12 @@ export function BookingFlowSkeleton({
       <section className="py-4">{renderCurrentStep()}</section>
 
       {!isConfirmationStep ? (
-        <section className="sticky bottom-0 z-10 -mx-4 mt-2 bg-gradient-to-t from-white via-white/95 to-transparent px-4 pb-[calc(env(safe-area-inset-bottom)+2rem)] pt-4 backdrop-blur">
+        <section className="sticky bottom-0 z-10 -mx-4 mt-2 bg-white px-4 pb-10 pt-4 shadow-[0_-20px_40px_rgba(255,255,255,1)]">
           <button
             type="button"
             onClick={() => handleNext()}
             disabled={!canMoveNext}
-            className={`inline-flex min-h-14 w-full items-center justify-center rounded-2xl px-6 text-sm font-semibold transition ${
-              canMoveNext
-                ? "bg-fuchsia-600 text-white shadow-[0_16px_32px_rgba(192,38,211,0.22)] hover:bg-fuchsia-700"
-                : "cursor-not-allowed bg-neutral-100 text-neutral-400"
-            }`}
+            className="inline-flex min-h-14 w-full items-center justify-center rounded-xl px-6 text-[15px] font-semibold transition bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none disabled:cursor-not-allowed"
           >
             {activeVisualStepId === "service-selection" ? "다음 단계로 이동" : "최종 예약 확인"}
           </button>

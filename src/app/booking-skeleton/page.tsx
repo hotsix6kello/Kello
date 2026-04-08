@@ -4,7 +4,10 @@ import {
   BOOKING_FLOW_CATEGORY_OPTIONS,
   BOOKING_FLOW_CATEGORY_ORDER,
 } from "@/lib/bookings/bookingFlowSkeleton/constants";
-import type { BookingFlowCategory } from "@/lib/bookings/bookingFlowSkeleton/types";
+import type {
+  BookingFlowCategory,
+  BookingFlowCategoryConfig,
+} from "@/lib/bookings/bookingFlowSkeleton/types";
 
 type BookingSkeletonPageSearchParams = {
   category?: string | string[];
@@ -60,7 +63,7 @@ export default async function BookingSkeletonPage({
           </div>
 
           <nav className="mt-5 flex flex-wrap gap-2" aria-label="Skeleton categories">
-            {BOOKING_FLOW_CATEGORY_OPTIONS.map((option) => {
+            {BOOKING_FLOW_CATEGORY_OPTIONS.map((option: BookingFlowCategoryConfig) => {
               const isActive = option.id === category;
 
               return (
