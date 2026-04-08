@@ -12,6 +12,7 @@ import { type BeautyBookingAlternativeOfferItem } from "@/lib/bookings/beautyBoo
 import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type BeautyBookingMinePatchRouteResponse =
   | {

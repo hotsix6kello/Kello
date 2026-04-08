@@ -69,8 +69,9 @@ import type {
   SkeletonSubmitAttemptStatus,
 } from './components/home/HomeBookingFlowEntry.types';
 
-import { 
-  BEAUTY_CATEGORY_OPTIONS, 
+import {
+  BEAUTY_STORE_ITEMS,
+  BEAUTY_CATEGORY_OPTIONS,
   BeautyCategoryId
 } from './components/home/constants';
 
@@ -78,10 +79,43 @@ const SKELETON_DEBUG_MOCK_UPLOADED_IMAGE_URLS = [
   'https://debug.local/mock-uploaded-image-1.jpg',
 ];
 
+function resolveSkeletonPreviewStoreContext(
+  category: BeautyCategoryId | null,
+  explicitStore?: {
+    storeId?: string | null;
+    storeName?: string | null;
+    region?: string | null;
+  },
+) {
+  const normalizedStoreId = explicitStore?.storeId?.trim() || null;
+  const normalizedStoreName = explicitStore?.storeName?.trim() || null;
+  const normalizedRegion = explicitStore?.region?.trim() || null;
+
+  const matchedStoreById = normalizedStoreId
+    ? BEAUTY_STORE_ITEMS.find((store) => store.id === normalizedStoreId) ?? null
+    : null;
+  const matchedStoreByCategory = category
+    ? BEAUTY_STORE_ITEMS.find((store) => store.category === category) ?? null
+    : null;
+  const fallbackStore =
+    matchedStoreById ??
+    matchedStoreByCategory ?? {
+      id: category ? `skeleton-${category}-preview` : 'skeleton-preview-store',
+      name: category ? `${category} preview store` : 'skeleton preview store',
+      region: 'seoul',
+    };
+
+  return {
+    storeId: normalizedStoreId ?? fallbackStore.id,
+    storeName: normalizedStoreName ?? fallbackStore.name,
+    region: normalizedRegion ?? fallbackStore.region,
+  };
+}
+
 export default function HomePage() {
   const { t, i18n } = useTranslation('common');
-  const { 
-    itinerary, 
+  const {
+    itinerary,
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
@@ -237,17 +271,20 @@ export default function HomePage() {
       setSubmitPreparationDebugState(null);
       setSubmitAttemptDebugState(null);
     }
-    setBookingStoreContext({
-      storeId: params.get('store_id'),
-      storeName: params.get('business_name'),
-      region: params.get('region'),
-    });
+    const cat = params.get('category');
+    const nextCategory = cat ? (cat as BeautyCategoryId) : null;
+    setBookingStoreContext(
+      resolveSkeletonPreviewStoreContext(nextCategory, {
+        storeId: params.get('store_id'),
+        storeName: params.get('business_name'),
+        region: params.get('region'),
+      }),
+    );
 
     if (hasBookingQuery) {
       setIsBookingOpen(true);
       // 필터링된 카테고리가 있다면 설정 (예: 헤어)
-      const cat = params.get('category');
-      if (cat) setSelectedCategory(cat as BeautyCategoryId);
+      if (nextCategory) setSelectedCategory(nextCategory);
     }
   }, [setSelectedCategory]);
 
@@ -284,7 +321,9 @@ export default function HomePage() {
   };
 
   const handleCategorySelect = (categoryId: string) => {
-    setSelectedCategory(categoryId as BeautyCategoryId);
+    const nextCategory = categoryId as BeautyCategoryId;
+    setSelectedCategory(nextCategory);
+    setBookingStoreContext(resolveSkeletonPreviewStoreContext(nextCategory));
     setIsBookingOpen(true);
   };
 
@@ -441,6 +480,31 @@ export default function HomePage() {
   const skeletonDebugPanelDisplay: HomeBookingSkeletonDebugPanelDisplay = buildHomeBookingSkeletonDebugPanelDisplay(
     skeletonDebugPanelDisplayInput,
   );
+  const skeletonDebugPanel =
+    isSkeletonFlowEnabled && isDraftDebugEnabled ? (
+      <aside
+        style={{
+          border: '1px dashed #cbd5e1',
+          borderRadius: 12,
+          background: '#f8fafc',
+          padding: 10,
+          fontSize: 12,
+          color: '#334155',
+        }}
+      >
+        <div style={{ fontWeight: 700 }}>{skeletonDebugPanelDisplay.title}</div>
+        {skeletonDebugPanelDisplay.sections.map((section, sectionIndex) => (
+          <div
+            key={section.key}
+            style={{ marginTop: sectionIndex === 0 ? 6 : 8, lineHeight: 1.5 }}
+          >
+            {section.lines.map((line, lineIndex) => (
+              <div key={`${section.key}-${lineIndex}`}>{line}</div>
+            ))}
+          </div>
+        ))}
+      </aside>
+    ) : null;
 
   // body는 globals.css에서 overflow:hidden으로 영구 설정됨
   // JS에서 별도 제어 불필요
@@ -512,17 +576,17 @@ export default function HomePage() {
 
   return (
     <div className={styles.main}>
-      <HomeTopNav 
-        userName={userName} 
-        onSignOut={handleSignOut} 
-        t={t} 
+      <HomeTopNav
+        userName={userName}
+        onSignOut={handleSignOut}
+        t={t}
       />
 
-      <HomeHero 
-        t={t} 
+      <HomeHero
+        t={t}
       />
 
-      <HomeBookingSection 
+      <HomeBookingSection
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
@@ -533,7 +597,7 @@ export default function HomePage() {
 
 
 
-      <HomeLocationSheet 
+      <HomeLocationSheet
         isOpen={openNavSheet}
         onClose={() => setOpenNavSheet(false)}
         isSearchingInSheet={isSearchingInSheet}
@@ -549,7 +613,7 @@ export default function HomePage() {
         t={t}
       />
 
-      <HomeModals 
+      <HomeModals
         isMapOpen={isMapOpen}
         onMapClose={() => setIsMapOpen(false)}
         showCard={showCard}
@@ -560,7 +624,7 @@ export default function HomePage() {
         t={t}
       />
 
-      <HomeInterpreterEntry 
+      <HomeInterpreterEntry
         onOpenInterpreter={handleOpenInterpreter}
         t={t}
       />
@@ -572,7 +636,7 @@ export default function HomePage() {
         </div>
       )}
 
-      <HomeBookingFlowEntry 
+      <HomeBookingFlowEntry
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
         initialCategory={selectedCategory}
@@ -597,33 +661,8 @@ export default function HomePage() {
         onSubmitAttemptStateChange={
           isSkeletonFlowEnabled && isDraftDebugEnabled ? handleSubmitAttemptStateChange : undefined
         }
+        skeletonDebugPanel={skeletonDebugPanel}
       />
-
-      {isSkeletonFlowEnabled && isDraftDebugEnabled ? (
-        <aside
-          style={{
-            marginTop: 12,
-            border: '1px dashed #cbd5e1',
-            borderRadius: 12,
-            background: '#f8fafc',
-            padding: 10,
-            fontSize: 12,
-            color: '#334155',
-          }}
-        >
-          <div style={{ fontWeight: 700 }}>{skeletonDebugPanelDisplay.title}</div>
-          {skeletonDebugPanelDisplay.sections.map((section, sectionIndex) => (
-            <div
-              key={section.key}
-              style={{ marginTop: sectionIndex === 0 ? 6 : 8, lineHeight: 1.5 }}
-            >
-              {section.lines.map((line, lineIndex) => (
-                <div key={`${section.key}-${lineIndex}`}>{line}</div>
-              ))}
-            </div>
-          ))}
-        </aside>
-      ) : null}
 
     </div>
   );

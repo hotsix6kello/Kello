@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { TFunction } from "i18next";
 import type {
   BookingFlowState,
@@ -144,5 +145,7 @@ export type HomeBookingFlowEntryProps = {
     message: string | null;
     errorSummary: string | null;
   }) => void;
+  // Debug display node is rendered inside the skeleton modal shell so it never leaks into the home body flow.
+  skeletonDebugPanel?: ReactNode;
   onResolvedMode?: (mode: HomeBookingFlowMode) => void;
 };
