@@ -5,7 +5,6 @@ import type {
   BookingUploadedImageResultState,
 } from "@/lib/bookings/bookingFlowSkeleton/types";
 import type {
-  BookingImageUploadBridgeItem,
   BookingUploadedImageResultCompletion,
 } from "@/lib/bookings/bookingFlowSkeleton/uploadedImageResults";
 import type {
