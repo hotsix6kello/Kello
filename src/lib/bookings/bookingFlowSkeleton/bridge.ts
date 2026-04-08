@@ -160,6 +160,8 @@ export type LegacyBookingDraftFromSkeleton = {
     name: string;
     phone: string;
     request: string;
+    currentImageUrl?: string | null;
+    styleImageUrl?: string | null;
   };
   images: {
     flattened: FlattenedSkeletonImageDraft[];
