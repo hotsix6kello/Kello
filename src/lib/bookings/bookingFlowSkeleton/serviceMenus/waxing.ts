@@ -2,45 +2,45 @@ import type { BookingServiceMenuConfig } from "@/lib/bookings/bookingFlowSkeleto
 
 export const waxingServiceMenuConfig: BookingServiceMenuConfig = {
   category: "waxing",
-  title: "Waxing service menu",
-  description: "Preview-only starter menu for the waxing flow skeleton.",
+  title: "왁싱 시술",
+  description: "관리 부위를 먼저 선택한 뒤 다음 단계로 넘어가세요.",
   sections: [
     {
       id: "waxing-services",
-      title: "Waxing services",
+      title: "대표 왁싱 메뉴",
       items: [
         {
           id: "brazilian",
-          title: "Brazilian",
-          description: "Brazilian waxing booking for full intimate area care.",
+          title: "브라질리언",
+          description: "브라질리언 부위 중심의 집중 왁싱 예약입니다.",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "arms",
-          title: "Arms",
-          description: "Arm waxing booking for smooth upper and lower arm care.",
+          title: "팔",
+          description: "상완과 하완을 포함한 팔 왁싱 관리입니다.",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "legs",
-          title: "Legs",
-          description: "Leg waxing booking for half-leg or full-leg coverage.",
+          title: "다리",
+          description: "종아리 또는 전체 다리 기준의 왁싱 예약입니다.",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "face",
-          title: "Face",
-          description: "Facial waxing booking for brow, lip, or full-face areas.",
+          title: "페이스",
+          description: "눈썹, 인중, 얼굴 부위 중심의 왁싱 관리입니다.",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "body",
-          title: "Body",
-          description: "Body waxing booking for back, chest, or custom areas.",
+          title: "바디",
+          description: "등, 가슴, 원하는 바디 부위 상담형 왁싱입니다.",
           durationMinutes: null,
           priceLabel: null,
         },

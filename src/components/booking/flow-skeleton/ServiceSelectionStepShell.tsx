@@ -10,6 +10,8 @@ type ServiceSelectionStepShellProps = {
   selectedCategory: BookingFlowCategory | null;
   serviceMenu: BookingServiceMenuConfig | null;
   selectedServiceId: string | null;
+  isCategoryLocked?: boolean;
+  embedded?: boolean;
   onSelectCategory?: (category: BookingFlowCategory) => void;
   onSelectService?: (serviceId: string) => void;
 };
@@ -19,17 +21,16 @@ export function ServiceSelectionStepShell({
   selectedCategory,
   serviceMenu,
   selectedServiceId,
+  embedded = false,
   onSelectCategory,
   onSelectService,
 }: ServiceSelectionStepShellProps) {
-  return (
-    <BookingFlowStepFrame
-      eyebrow="Step 1"
-      title="Service selection"
-      description="This skeleton starts from category and service menu selection. Store selection stays out of the new step order."
-    >
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-wrap gap-2">
+  const showCategorySelector = !selectedCategory;
+
+  const content = (
+    <div className="bg-white">
+      {showCategorySelector ? (
+        <div className="flex flex-wrap gap-2 border-b border-neutral-200 pb-3">
           {categories.map((category) => {
             const isSelected = category.id === selectedCategory;
 
@@ -38,10 +39,10 @@ export function ServiceSelectionStepShell({
                 key={category.id}
                 type="button"
                 onClick={() => onSelectCategory?.(category.id)}
-                className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   isSelected
-                    ? "border-neutral-900 bg-neutral-900 text-white"
-                    : "border-neutral-300 bg-white text-neutral-700"
+                    ? "bg-fuchsia-600 text-white shadow-[0_10px_24px_rgba(192,38,211,0.18)]"
+                    : "bg-neutral-100 text-neutral-700 hover:bg-fuchsia-50 hover:text-fuchsia-700"
                 }`}
               >
                 {category.label}
@@ -49,71 +50,76 @@ export function ServiceSelectionStepShell({
             );
           })}
         </div>
+      ) : null}
 
-        {serviceMenu ? (
-          <div className="flex flex-col gap-4">
-            <div className="rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 p-4">
-              <p className="text-sm font-medium text-neutral-800">{serviceMenu.title}</p>
-              <p className="mt-1 text-sm text-neutral-600">{serviceMenu.description}</p>
-              {serviceMenu.sections.some((section) => section.items.length > 0) ? (
-                <p className="mt-2 text-sm text-neutral-500">
-                  Select one service to enable the next step.
-                </p>
+      {serviceMenu ? (
+        <div className="py-3">
+          {serviceMenu.sections.map((section) => (
+            <div key={section.id} className="pb-3 last:pb-0">
+              {serviceMenu.sections.length > 1 ? (
+                <div className="mb-2 px-1">
+                  <h3 className="text-sm font-semibold text-neutral-900">{section.title}</h3>
+                </div>
               ) : null}
-            </div>
 
-            {serviceMenu.sections.map((section) => (
-              <section key={section.id} className="rounded-2xl border border-neutral-200 p-4">
-                <h3 className="text-sm font-semibold text-neutral-800">{section.title}</h3>
-                {section.items.length === 0 ? (
-                  <p className="mt-2 text-sm text-neutral-500">
-                    Menu items are intentionally empty in this turn. Category-specific data will be filled later.
-                  </p>
-                ) : (
-                  <div className="mt-3 flex flex-col gap-2">
-                    {section.items.map((item) => {
-                      const isSelected = item.id === selectedServiceId;
+              {section.items.length === 0 ? (
+                <p className="px-1 text-sm text-neutral-500">
+                  표시할 시술이 아직 준비되지 않았습니다.
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 gap-2">
+                  {section.items.map((item) => {
+                    const isSelected = item.id === selectedServiceId;
 
-                      return (
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => onSelectService?.(item.id)}
-                          className={`rounded-2xl border px-4 py-3 text-left transition ${
-                            isSelected
-                              ? "border-neutral-900 bg-neutral-900 text-white"
-                              : "border-neutral-200 bg-white text-neutral-800"
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => onSelectService?.(item.id)}
+                        aria-pressed={isSelected}
+                        className={`w-full rounded-2xl border px-4 py-3.5 text-left transition ${
+                          isSelected
+                            ? "border-fuchsia-500 bg-fuchsia-50 shadow-[0_10px_24px_rgba(192,38,211,0.08)]"
+                            : "border-neutral-200 bg-white hover:border-fuchsia-300 hover:bg-fuchsia-50/40"
+                        }`}
+                      >
+                        <p
+                          className={`text-[15px] font-semibold leading-6 ${
+                            isSelected ? "text-fuchsia-700" : "text-neutral-950"
                           }`}
                         >
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
-                              <div className="font-medium">{item.title}</div>
-                              <div className="mt-1 text-sm opacity-80">{item.description}</div>
-                            </div>
-                            <span
-                              className={`rounded-full px-2 py-1 text-xs font-semibold ${
-                                isSelected
-                                  ? "bg-white/15 text-white"
-                                  : "bg-neutral-100 text-neutral-500"
-                              }`}
-                            >
-                              {isSelected ? "Selected" : "Select"}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </section>
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-sm text-neutral-600">
-            Select a category to load the matching service menu config skeleton.
-          </div>
-        )}
-      </div>
+                          {item.title}
+                        </p>
+                        <p className="mt-1 text-sm leading-5 text-neutral-600">
+                          {item.description}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="py-5 text-sm text-neutral-500">
+          카테고리를 선택하면 시술 목록이 바로 나타납니다.
+        </div>
+      )}
+    </div>
+  );
+
+  if (embedded) {
+    return content;
+  }
+
+  return (
+    <BookingFlowStepFrame
+      eyebrow="STEP 1"
+      title="서비스 선택"
+      description="원하는 시술을 먼저 고른 뒤 다음 단계에서 예약 정보를 입력하세요."
+    >
+      {content}
     </BookingFlowStepFrame>
   );
 }

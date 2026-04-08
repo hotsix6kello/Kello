@@ -20,32 +20,32 @@ export const BOOKING_FLOW_CATEGORY_ORDER = [
 export const BOOKING_FLOW_CATEGORY_CONFIG: Record<BookingFlowCategory, BookingFlowCategoryConfig> = {
   hair: {
     id: "hair",
-    label: "Hair",
+    label: "헤어",
     legacyBeautyCategoryId: "hair",
   },
   nail: {
     id: "nail",
-    label: "Nail",
+    label: "네일",
     legacyBeautyCategoryId: "nail",
   },
   aesthetic: {
     id: "aesthetic",
-    label: "Aesthetic",
+    label: "에스테틱",
     legacyBeautyCategoryId: "esthetic",
   },
   eyelash: {
     id: "eyelash",
-    label: "Eyelash",
+    label: "속눈썹",
     legacyBeautyCategoryId: "lash",
   },
   makeup: {
     id: "makeup",
-    label: "Makeup",
+    label: "메이크업",
     legacyBeautyCategoryId: "makeup",
   },
   waxing: {
     id: "waxing",
-    label: "Waxing",
+    label: "왁싱",
     legacyBeautyCategoryId: "waxing",
   },
 };
@@ -192,22 +192,22 @@ export function getBookingFlowImageGroups(category: BookingFlowCategory | null):
 }
 
 export const BOOKING_FLOW_REVIEW_COPY = {
-  noRequestNote: "No request note added yet.",
-  noImages: "No images selected.",
-  noService: "No service selected",
-  noDate: "No date selected",
-  noTime: "No time selected",
-  noCustomerName: "No name added yet",
-  noContact: "No contact added yet",
-  previewOnlyTitle: "Preview only: submission is not connected yet.",
-  previewOnlyButton: "Preview only - Submission not connected yet",
+  noRequestNote: "아직 요청사항이 없습니다.",
+  noImages: "선택한 이미지가 없습니다.",
+  noService: "선택한 서비스가 없습니다.",
+  noDate: "선택한 날짜가 없습니다.",
+  noTime: "선택한 시간이 없습니다.",
+  noCustomerName: "이름이 입력되지 않았습니다.",
+  noContact: "연락처가 입력되지 않았습니다.",
+  previewOnlyTitle: "현재는 예약 확인 단계만 연결되어 있으며 실제 제출은 진행되지 않습니다.",
+  previewOnlyButton: "예약 확인만 진행 (미제출)",
 } as const;
 
 export const BOOKING_FLOW_CONFIRMATION_COPY = {
-  bookingConfirmedLabel: "I confirm that the booking details are correct.",
-  privacyConsentLabel: "I agree to provide my personal information for this booking.",
-  intentButtonLabel: "Preview submit intent (not submitted)",
-  intentDescription: "This only sends a local intent signal to the wrapper. No network request is made.",
+  bookingConfirmedLabel: "선택한 예약 정보가 맞는지 확인했습니다.",
+  privacyConsentLabel: "예약 진행을 위해 개인정보 제공에 동의합니다.",
+  intentButtonLabel: "예약 요청 확인하기 (미제출)",
+  intentDescription: "이 버튼은 skeleton 내부에서 제출 준비 상태만 확인합니다. 실제 네트워크 요청은 발생하지 않습니다.",
 } as const;
 
 export const BOOKING_FLOW_STEPS = [
@@ -215,29 +215,29 @@ export const BOOKING_FLOW_STEPS = [
     key: "step1",
     id: "service-selection",
     order: 1,
-    title: "service selection",
-    description: "Start the new flow with service menu selection instead of store selection.",
+    title: "서비스 선택",
+    description: "매장 선택 대신 원하는 시술을 먼저 고르는 단계입니다.",
   },
   {
     key: "step2",
     id: "date-time-selection",
     order: 2,
-    title: "date selection",
-    description: "Choose a visit date after selecting a service.",
+    title: "날짜 선택",
+    description: "선택한 시술을 기준으로 방문 일정을 정합니다.",
   },
   {
     key: "step3",
     id: "customer-details",
     order: 3,
-    title: "customer details",
-    description: "Keep room for profile autofill, request notes, and reference images.",
+    title: "고객 정보",
+    description: "연락처, 요청사항, 참고 이미지를 입력합니다.",
   },
   {
     key: "step4",
     id: "confirmation",
     order: 4,
-    title: "confirmation",
-    description: "Review the new flow payload shape before wiring submission.",
+    title: "예약 확인",
+    description: "선택한 예약 정보를 마지막으로 확인합니다.",
   },
 ] satisfies BookingFlowStepDefinition[];
 
