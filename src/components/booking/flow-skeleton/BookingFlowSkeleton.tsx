@@ -528,11 +528,7 @@ export function BookingFlowSkeleton({
             type="button"
             onClick={() => handleNext()}
             disabled={!canMoveNext}
-            className={`inline-flex min-h-14 w-full items-center justify-center rounded-xl px-6 text-[15px] font-semibold transition ${
-              canMoveNext
-                ? "bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700"
-                : "cursor-not-allowed bg-neutral-100 text-neutral-400"
-            }`}
+            className="inline-flex min-h-14 w-full items-center justify-center rounded-xl px-6 text-[15px] font-semibold transition bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none disabled:cursor-not-allowed"
           >
             {activeVisualStepId === "service-selection" ? "다음 단계로 이동" : "최종 예약 확인"}
           </button>
