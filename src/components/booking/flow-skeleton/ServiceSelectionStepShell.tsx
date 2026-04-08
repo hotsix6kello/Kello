@@ -76,17 +76,16 @@ export function ServiceSelectionStepShell({
                         key={item.id}
                         type="button"
                         onClick={() => onSelectService?.(item.id)}
-                        aria-pressed={isSelected}
-                        className={`w-full text-left p-5 mb-4 rounded-xl border transition-all duration-200 ${
+                        className={`w-full text-left p-5 mb-4 rounded-xl border-2 transition-all duration-200 outline-none ${
                           isSelected
-                            ? "bg-fuchsia-50 border-fuchsia-500 ring-1 ring-fuchsia-500"
+                            ? "bg-fuchsia-50 border-fuchsia-500 shadow-sm"
                             : "bg-white border-neutral-200 hover:border-fuchsia-300"
                         }`}
                       >
-                        <p className="text-lg font-bold text-neutral-900 mb-1">
+                        <h3 className="text-lg font-bold text-neutral-900 mb-1">
                           {item.title}
-                        </p>
-                        <p className="text-sm text-neutral-500 line-clamp-2">
+                        </h3>
+                        <p className="text-sm text-neutral-500">
                           {item.description}
                         </p>
                       </button>
