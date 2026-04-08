@@ -5,34 +5,29 @@ import { ConfirmationStepShell } from "@/components/booking/flow-skeleton/Confir
 import { CustomerDetailsStepShell } from "@/components/booking/flow-skeleton/CustomerDetailsStepShell";
 import { DateTimeSelectionStepShell } from "@/components/booking/flow-skeleton/DateTimeSelectionStepShell";
 import { ServiceSelectionStepShell } from "@/components/booking/flow-skeleton/ServiceSelectionStepShell";
-import {
-  BOOKING_FLOW_CATEGORY_OPTIONS,
-  BOOKING_FLOW_STEP_LOOKUP,
-  BOOKING_FLOW_STEPS,
-} from "@/lib/bookings/bookingFlowSkeleton/constants";
+import { BOOKING_FLOW_CATEGORY_OPTIONS } from "@/lib/bookings/bookingFlowSkeleton/constants";
 import { BOOKING_FLOW_SERVICE_MENUS } from "@/lib/bookings/bookingFlowSkeleton/serviceMenus";
 import {
-  buildUploadedImageUrlsFromCustomerDetails,
   buildBookingFlowSummary,
-  canMoveToNextBookingFlowStep,
+  buildUploadedImageUrlsFromCustomerDetails,
   createEmptyBookingUploadedImageResultState,
   createInitialBookingFlowState,
-  getNextBookingFlowStep,
-  getPreviousBookingFlowStep,
+  hasConfiguredServiceItems,
 } from "@/lib/bookings/bookingFlowSkeleton/state";
 import {
   applyBookingUploadedImageResultToFlowState,
   type BookingImageUploadBridgeItem,
+  type BookingUploadedImageResultCompletion,
 } from "@/lib/bookings/bookingFlowSkeleton/uploadedImageResults";
 import { supabase } from "@/lib/supabaseClient";
 import type {
   BookingFlowCategory,
   BookingFlowState,
+  BookingFlowStepId,
   BookingImageDraft,
   BookingImageGroupStateKey,
   BookingImageKind,
 } from "@/lib/bookings/bookingFlowSkeleton/types";
-import type { BookingUploadedImageResultCompletion } from "@/lib/bookings/bookingFlowSkeleton/uploadedImageResults";
 
 export type BookingFlowSkeletonDraftStateSnapshot = {
   state: BookingFlowState;
@@ -56,6 +51,53 @@ type BookingFlowSkeletonProps = {
   onDraftStateChange?: (snapshot: BookingFlowSkeletonDraftStateSnapshot) => void;
   onSubmitIntent?: (snapshot: BookingFlowSkeletonDraftStateSnapshot) => void;
 };
+
+type BookingFlowVisualStepId = "service-selection" | "details-entry" | "confirmation";
+
+type BookingFlowVisualStepDefinition = {
+  id: BookingFlowVisualStepId;
+  order: 1 | 2 | 3;
+  title: string;
+  description: string;
+};
+
+const BOOKING_FLOW_VISUAL_STEPS: BookingFlowVisualStepDefinition[] = [
+  {
+    id: "service-selection",
+    order: 1,
+    title: "서비스 선택",
+    description: "원하는 시술을 고르고 다음 단계로 넘어가세요.",
+  },
+  {
+    id: "details-entry",
+    order: 2,
+    title: "날짜 및 정보 입력",
+    description: "예약 날짜와 고객 정보를 한 화면에서 입력하세요.",
+  },
+  {
+    id: "confirmation",
+    order: 3,
+    title: "최종 예약 확인",
+    description: "입력한 내용을 확인한 뒤 예약 요청을 보내세요.",
+  },
+];
+
+function resolveVisualStepId(currentStep: BookingFlowStepId): BookingFlowVisualStepId {
+  switch (currentStep) {
+    case "service-selection":
+      return "service-selection";
+    case "confirmation":
+      return "confirmation";
+    case "date-time-selection":
+    case "customer-details":
+    default:
+      return "details-entry";
+  }
+}
+
+function getVisualStepDefinition(stepId: BookingFlowVisualStepId): BookingFlowVisualStepDefinition {
+  return BOOKING_FLOW_VISUAL_STEPS.find((step) => step.id === stepId) ?? BOOKING_FLOW_VISUAL_STEPS[0]!;
+}
 
 export function BookingFlowSkeleton({
   initialCategory = null,
@@ -117,7 +159,10 @@ export function BookingFlowSkeleton({
           },
         }));
       } catch {
-        if (!isMounted) return;
+        if (!isMounted) {
+          return;
+        }
+
         setState((currentState) => ({
           ...currentState,
           customerDetails: {
@@ -209,6 +254,21 @@ export function BookingFlowSkeleton({
   }, [initialCategory]);
 
   useEffect(() => {
+    if (state.currentStep !== "date-time-selection") {
+      return;
+    }
+
+    setState((currentState) =>
+      currentState.currentStep === "date-time-selection"
+        ? {
+            ...currentState,
+            currentStep: "customer-details",
+          }
+        : currentState,
+    );
+  }, [state.currentStep]);
+
+  useEffect(() => {
     if (!completedImageUploadResult) {
       return;
     }
@@ -245,16 +305,27 @@ export function BookingFlowSkeleton({
     draftStateUploadedImageUrls,
   ]);
 
-  const activeStep = BOOKING_FLOW_STEP_LOOKUP[state.currentStep];
   const serviceMenu = state.category ? BOOKING_FLOW_SERVICE_MENUS[state.category] : null;
   const summary = useMemo(() => buildBookingFlowSummary(state), [state]);
-  const canMoveNext = canMoveToNextBookingFlowStep(state);
-  const isFirstStep = state.currentStep === BOOKING_FLOW_STEPS[0]!.id;
-  const selectedServiceSummary = summary.selectedServiceTitle;
-  const selectedDateSummary = summary.selectedDate;
-  const hasStoreContext = Boolean(
-    storeContext?.storeId || storeContext?.storeName || storeContext?.region,
+  const selectedCategoryLabel =
+    BOOKING_FLOW_CATEGORY_OPTIONS.find((option) => option.id === state.category)?.label ?? null;
+  const activeVisualStepId = resolveVisualStepId(state.currentStep);
+  const activeVisualStep = getVisualStepDefinition(activeVisualStepId);
+  const isConfirmationStep = activeVisualStepId === "confirmation";
+  const canAdvanceFromServiceSelection =
+    state.category !== null &&
+    (!hasConfiguredServiceItems(state.category) || state.selectedServiceId !== null);
+  const canAdvanceFromDetailsEntry = Boolean(
+    state.selectedDate &&
+      state.customerDetails.name.trim() &&
+      state.customerDetails.phone.trim(),
   );
+  const canMoveNext =
+    activeVisualStepId === "service-selection"
+      ? canAdvanceFromServiceSelection
+      : activeVisualStepId === "details-entry"
+        ? canAdvanceFromDetailsEntry
+        : false;
   const submitDraftSnapshot: BookingFlowSkeletonDraftStateSnapshot = {
     state,
     storeContext: {
@@ -264,241 +335,226 @@ export function BookingFlowSkeleton({
     },
     uploadedImageUrls: draftStateUploadedImageUrls,
   };
-  const storeContextSummary = [
-    storeContext?.storeName?.trim() || null,
-    storeContext?.storeId?.trim() || null,
-    storeContext?.region?.trim() || null,
-  ]
-    .filter((value): value is string => Boolean(value))
-    .join(" · ");
 
-  return (
-    <div className="flex flex-col gap-6 rounded-[32px] border border-neutral-200 bg-neutral-50 p-6">
-      <header className="flex flex-col gap-4">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500">
-              Booking Flow Skeleton
-            </p>
-            <h1 className="mt-1 text-2xl font-semibold text-neutral-950">{activeStep.title}</h1>
-            <p className="mt-1 text-sm text-neutral-600">{activeStep.description}</p>
-            {hasStoreContext ? (
-              <p className="mt-2 text-xs text-neutral-500">
-                Store context (read-only): {storeContextSummary}
-              </p>
-            ) : null}
-          </div>
-          <div className="rounded-full border border-neutral-300 bg-white px-3 py-1 text-sm text-neutral-700">
-            {state.category ?? "category pending"}
-          </div>
-        </div>
+  const handleNext = () => {
+    setState((currentState) => ({
+      ...currentState,
+      currentStep:
+        resolveVisualStepId(currentState.currentStep) === "service-selection"
+          ? "customer-details"
+          : "confirmation",
+    }));
+  };
 
-        <ol className="grid gap-2 md:grid-cols-4">
-          {BOOKING_FLOW_STEPS.map((step) => {
-            const isActive = step.id === state.currentStep;
-            const isComplete = step.order < activeStep.order;
-
-            return (
-              <li
-                key={step.id}
-                className={`rounded-2xl border px-4 py-3 text-sm transition ${
-                  isActive
-                    ? "border-neutral-900 bg-neutral-900 text-white"
-                    : isComplete
-                      ? "border-neutral-300 bg-white text-neutral-900"
-                      : "border-neutral-200 bg-neutral-100 text-neutral-500"
-                }`}
-              >
-                <div className="text-xs uppercase tracking-[0.14em]">{step.key}</div>
-                <div className="mt-1 font-medium">{step.title}</div>
-              </li>
-            );
-          })}
-        </ol>
-      </header>
-
-      {state.currentStep !== "service-selection" && selectedServiceSummary ? (
-        <section className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500">
-            Current selection
-          </p>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-neutral-900 px-3 py-1 text-sm font-medium text-white">
-              {selectedServiceSummary}
-            </span>
-            {selectedDateSummary ? (
-              <span className="rounded-full bg-neutral-100 px-3 py-1 text-sm font-medium text-neutral-800">
-                {selectedDateSummary}
-              </span>
-            ) : null}
-          </div>
-          <p className="mt-2 text-sm text-neutral-600">
-            Your step 1 choice stays in local skeleton state while moving through the preview.
-            {selectedDateSummary ? " The selected date stays with it." : ""}
-          </p>
-        </section>
-      ) : null}
-
-      {state.currentStep === "service-selection" ? (
-        <ServiceSelectionStepShell
-          categories={BOOKING_FLOW_CATEGORY_OPTIONS}
-          selectedCategory={state.category}
-          serviceMenu={serviceMenu}
-          selectedServiceId={state.selectedServiceId}
-          onSelectCategory={(category) =>
-            setState((currentState) => ({
-              ...currentState,
-              category,
-              selectedServiceId: null,
-              selectedDate: null,
-              selectedTime: null,
-            }))
-          }
-          onSelectService={(serviceId) =>
-            setState((currentState) => ({
-              ...currentState,
-              selectedServiceId: serviceId,
-            }))
-          }
-        />
-      ) : null}
-
-      {state.currentStep === "date-time-selection" ? (
-        <DateTimeSelectionStepShell
-          category={state.category}
-          selectedDate={state.selectedDate}
-          selectedTime={state.selectedTime}
-          onSelectDate={(selectedDate) =>
-            setState((currentState) => ({
-              ...currentState,
-              selectedDate,
-              selectedTime: null,
-            }))
-          }
-          onSelectTime={(selectedTime) =>
-            setState((currentState) => ({
-              ...currentState,
-              selectedTime,
-            }))
-          }
-        />
-      ) : null}
-
-      {state.currentStep === "customer-details" ? (
-        <CustomerDetailsStepShell
-          category={state.category}
-          details={state.customerDetails}
-          onChangeName={(name) =>
-            setState((currentState) => ({
-              ...currentState,
-              customerDetails: {
-                ...currentState.customerDetails,
-                name,
-              },
-            }))
-          }
-          onChangePhone={(phone) =>
-            setState((currentState) => ({
-              ...currentState,
-              customerDetails: {
-                ...currentState.customerDetails,
-                phone,
-              },
-            }))
-          }
-          onChangeRequestNote={(requestNote) =>
-            setState((currentState) => ({
-              ...currentState,
-              customerDetails: {
-                ...currentState.customerDetails,
-                requestNote,
-              },
-            }))
-          }
-          onSelectCurrentHairImages={(files) =>
-            appendImageDrafts("currentStateImages", files, "current-state")
-          }
-          onSelectDesiredStyleImages={(files) =>
-            appendImageDrafts("desiredStyleImages", files, "desired-style")
-          }
-          onResetCurrentHairImages={() => resetImageGroup("currentStateImages")}
-          onResetDesiredStyleImages={() => resetImageGroup("desiredStyleImages")}
-        />
-      ) : null}
-
-      {state.currentStep === "confirmation" ? (
-        <ConfirmationStepShell
-          category={state.category}
-          customerDetails={state.customerDetails}
-          confirmation={state.confirmation}
-          summary={summary}
-          onToggleBookingConfirmed={(bookingConfirmed) =>
-            setState((currentState) => ({
-              ...currentState,
-              confirmation: {
-                ...currentState.confirmation,
-                bookingConfirmed,
-              },
-            }))
-          }
-          onTogglePrivacyConsent={(privacyConsent) =>
-            setState((currentState) => ({
-              ...currentState,
-              confirmation: {
-                ...currentState.confirmation,
-                privacyConsent,
-              },
-            }))
-          }
-          onSubmitIntent={() => onSubmitIntent?.(submitDraftSnapshot)}
-        />
-      ) : null}
-
-      <footer className="flex flex-wrap items-center justify-between gap-3">
-        <button
-          type="button"
-          onClick={() =>
-            setState((currentState) => ({
-              ...currentState,
-              currentStep: getPreviousBookingFlowStep(currentState.currentStep),
-            }))
-          }
-          disabled={isFirstStep}
-          className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-            isFirstStep
-              ? "cursor-not-allowed border border-neutral-200 bg-neutral-100 text-neutral-400"
-              : "border border-neutral-300 bg-white text-neutral-800"
-          }`}
-        >
-          Back
-        </button>
-
-        <div className="flex items-center gap-3">
-          {state.currentStep === "confirmation" ? (
-            <p className="text-sm text-neutral-500">
-              Submission is intentionally left unconnected in this turn.
-            </p>
-          ) : null}
-
-          <button
-            type="button"
-            onClick={() =>
+  const renderCurrentStep = () => {
+    switch (activeVisualStepId) {
+      case "service-selection":
+        return (
+          <ServiceSelectionStepShell
+            embedded
+            categories={BOOKING_FLOW_CATEGORY_OPTIONS}
+            selectedCategory={state.category}
+            serviceMenu={serviceMenu}
+            selectedServiceId={state.selectedServiceId}
+            isCategoryLocked={Boolean(initialCategory)}
+            onSelectCategory={(category) =>
               setState((currentState) => ({
                 ...currentState,
-                currentStep: getNextBookingFlowStep(currentState.currentStep),
+                category,
+                selectedServiceId: null,
+                selectedDate: null,
+                selectedTime: null,
               }))
             }
+            onSelectService={(serviceId) =>
+              setState((currentState) => ({
+                ...currentState,
+                selectedServiceId: serviceId,
+              }))
+            }
+          />
+        );
+
+      case "details-entry":
+        return (
+          <div className="flex flex-col gap-6">
+            <div className="border-b border-neutral-200 pb-4">
+              <div className="flex flex-wrap gap-2">
+                {selectedCategoryLabel ? (
+                  <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
+                    {selectedCategoryLabel}
+                  </span>
+                ) : null}
+                {summary.selectedServiceTitle ? (
+                  <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
+                    {summary.selectedServiceTitle}
+                  </span>
+                ) : null}
+              </div>
+            </div>
+
+            <DateTimeSelectionStepShell
+              embedded
+              dateOnly
+              category={state.category}
+              categoryLabel={selectedCategoryLabel}
+              selectedServiceTitle={summary.selectedServiceTitle}
+              selectedDate={state.selectedDate}
+              selectedTime={null}
+              onSelectDate={(selectedDate) =>
+                setState((currentState) => ({
+                  ...currentState,
+                  selectedDate,
+                  selectedTime: null,
+                }))
+              }
+            />
+
+            <CustomerDetailsStepShell
+              embedded
+              hideBookingSummary
+              hideSelectedTime
+              category={state.category}
+              categoryLabel={selectedCategoryLabel}
+              selectedServiceTitle={summary.selectedServiceTitle}
+              selectedDate={summary.selectedDate}
+              selectedTime={null}
+              details={state.customerDetails}
+              onChangeName={(name) =>
+                setState((currentState) => ({
+                  ...currentState,
+                  customerDetails: {
+                    ...currentState.customerDetails,
+                    name,
+                  },
+                }))
+              }
+              onChangePhone={(phone) =>
+                setState((currentState) => ({
+                  ...currentState,
+                  customerDetails: {
+                    ...currentState.customerDetails,
+                    phone,
+                  },
+                }))
+              }
+              onChangeRequestNote={(requestNote) =>
+                setState((currentState) => ({
+                  ...currentState,
+                  customerDetails: {
+                    ...currentState.customerDetails,
+                    requestNote,
+                  },
+                }))
+              }
+              onSelectCurrentHairImages={(files) =>
+                appendImageDrafts("currentStateImages", files, "current-state")
+              }
+              onSelectDesiredStyleImages={(files) =>
+                appendImageDrafts("desiredStyleImages", files, "desired-style")
+              }
+              onResetCurrentHairImages={() => resetImageGroup("currentStateImages")}
+              onResetDesiredStyleImages={() => resetImageGroup("desiredStyleImages")}
+            />
+          </div>
+        );
+
+      case "confirmation":
+        return (
+          <ConfirmationStepShell
+            embedded
+            category={state.category}
+            customerDetails={state.customerDetails}
+            confirmation={state.confirmation}
+            summary={summary}
+            onToggleBookingConfirmed={(bookingConfirmed) =>
+              setState((currentState) => ({
+                ...currentState,
+                confirmation: {
+                  ...currentState.confirmation,
+                  bookingConfirmed,
+                },
+              }))
+            }
+            onTogglePrivacyConsent={(privacyConsent) =>
+              setState((currentState) => ({
+                ...currentState,
+                confirmation: {
+                  ...currentState.confirmation,
+                  privacyConsent,
+                },
+              }))
+            }
+            onSubmitIntent={() => onSubmitIntent?.(submitDraftSnapshot)}
+          />
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="flex flex-col bg-white px-4 pb-4">
+      <header className="border-b border-neutral-200 py-4">
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <span className="inline-flex w-fit rounded-full bg-fuchsia-50 px-3 py-1 text-[11px] font-semibold text-fuchsia-700">
+              예약 플로우
+            </span>
+            <div className="flex max-w-[22rem] flex-col items-center">
+              <h1 className="text-[1.75rem] font-semibold tracking-[-0.02em] text-neutral-950">
+                {activeVisualStep.title}
+              </h1>
+              <p className="mt-1 text-[13px] leading-5 text-neutral-500">{activeVisualStep.description}</p>
+            </div>
+          </div>
+
+          <ol className="grid grid-cols-3 gap-2">
+            {BOOKING_FLOW_VISUAL_STEPS.map((step) => {
+              const isActive = step.id === activeVisualStepId;
+              const isComplete = step.order < activeVisualStep.order;
+
+              return (
+                <li
+                  key={step.id}
+                  className={`rounded-2xl px-3 py-3 text-sm ${
+                    isActive
+                      ? "bg-fuchsia-600 text-white shadow-[0_12px_24px_rgba(192,38,211,0.18)]"
+                      : isComplete
+                        ? "bg-fuchsia-50 text-fuchsia-700"
+                        : "bg-neutral-50 text-neutral-500"
+                  }`}
+                >
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em]">
+                    {`STEP ${step.order}`}
+                  </div>
+                  <div className="mt-1 font-medium leading-5">{step.title}</div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </header>
+
+      <section className="py-4">{renderCurrentStep()}</section>
+
+      {!isConfirmationStep ? (
+        <section className="sticky bottom-0 z-10 -mx-4 mt-2 bg-gradient-to-t from-white via-white/95 to-transparent px-4 pb-[calc(env(safe-area-inset-bottom)+2rem)] pt-4 backdrop-blur">
+          <button
+            type="button"
+            onClick={() => handleNext()}
             disabled={!canMoveNext}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+            className={`inline-flex min-h-14 w-full items-center justify-center rounded-2xl px-6 text-sm font-semibold transition ${
               canMoveNext
-                ? "bg-neutral-900 text-white"
-                : "cursor-not-allowed bg-neutral-200 text-neutral-500"
+                ? "bg-fuchsia-600 text-white shadow-[0_16px_32px_rgba(192,38,211,0.22)] hover:bg-fuchsia-700"
+                : "cursor-not-allowed bg-neutral-100 text-neutral-400"
             }`}
           >
-            {state.currentStep === "customer-details" ? "Review confirmation" : "Next"}
+            {activeVisualStepId === "service-selection" ? "다음 단계로 이동" : "최종 예약 확인"}
           </button>
-        </div>
-      </footer>
+        </section>
+      ) : null}
     </div>
   );
 }

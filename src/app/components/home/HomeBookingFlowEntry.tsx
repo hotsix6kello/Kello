@@ -50,6 +50,7 @@ export default function HomeBookingFlowEntry({
   onImageUploadBridgeRequest,
   completedImageUploadResult,
   onSubmitAttemptStateChange,
+  skeletonDebugPanel,
   onResolvedMode,
 }: HomeBookingFlowEntryProps) {
   const resolvedMode = resolveHomeBookingMode({ mode, enableSkeletonMode });
@@ -224,16 +225,61 @@ export default function HomeBookingFlowEntry({
 
   // NOTE: Keep legacy as hard default until Home runtime rollout is explicitly started.
   if (resolvedMode === "skeleton") {
+    if (!isOpen) {
+      return null;
+    }
+
     // NOTE: Draft bridge hooks (store/deeplink/submit adapter) are intentionally not wired yet.
     return (
-      <BookingFlowSkeleton
-        initialCategory={skeletonInitialCategory}
-        storeContext={storeContext}
-        onImageUploadBridgeRequest={onImageUploadBridgeRequest}
-        completedImageUploadResult={completedImageUploadResult}
-        onDraftStateChange={handleDraftStateChange}
-        onSubmitIntent={handleSubmitIntent}
-      />
+      <div className="fixed inset-0 z-[400] flex justify-center bg-black/60 sm:bg-black/40">
+        <div className="relative flex h-full w-full max-w-[480px] flex-col overflow-hidden bg-white shadow-2xl animate-in slide-in-from-bottom duration-300">
+          <button
+            type="button"
+            onClick={() => onClose()}
+            className="absolute left-3 top-6 z-[50] flex items-center justify-center text-neutral-500 transition-colors hover:text-neutral-900"
+            aria-label="Close booking flow"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
+            </svg>
+          </button>
+
+          <div className="flex-1 overflow-y-auto pb-10 pt-20">
+            <div className="px-4">
+              <BookingFlowSkeleton
+                initialCategory={skeletonInitialCategory}
+                storeContext={storeContext}
+                onImageUploadBridgeRequest={onImageUploadBridgeRequest}
+                completedImageUploadResult={completedImageUploadResult}
+                onDraftStateChange={handleDraftStateChange}
+                onSubmitIntent={handleSubmitIntent}
+              />
+            </div>
+          </div>
+        </div>
+
+        {skeletonDebugPanel ? (
+          <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[430] hidden justify-end px-4 lg:flex">
+            <details className="pointer-events-auto w-full max-w-[320px] rounded-2xl border border-dashed border-neutral-300 bg-white/95 px-3 py-2 text-xs text-neutral-500 shadow-[0_18px_40px_rgba(15,23,42,0.18)] backdrop-blur">
+              <summary className="cursor-pointer font-medium text-neutral-600">
+                Debug draft panel
+              </summary>
+              <div className="mt-3">{skeletonDebugPanel}</div>
+            </details>
+          </div>
+        ) : null}
+      </div>
     );
   }
 

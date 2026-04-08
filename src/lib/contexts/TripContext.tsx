@@ -27,6 +27,51 @@ export interface SharedLocation {
     lng: number;
 }
 
+export interface SharedBusinessPhoto {
+    name?: string;
+}
+
+export interface SharedBusinessDisplayName {
+    text?: string;
+}
+
+export interface SharedBusinessLocation {
+    latitude?: number | string;
+    longitude?: number | string;
+}
+
+export interface SharedBusinessGeometryLocation {
+    lat?: number | string;
+    lng?: number | string;
+}
+
+export interface SharedBusiness {
+    id?: string;
+    place_id?: string;
+    name?: string;
+    title?: string;
+    displayName?: SharedBusinessDisplayName;
+    lat?: number | string;
+    lng?: number | string;
+    x?: number | string;
+    y?: number | string;
+    location?: SharedBusinessLocation;
+    geometry?: {
+        location?: SharedBusinessGeometryLocation;
+    };
+    category?: string;
+    types?: string[];
+    rating?: number;
+    user_ratings_total?: number;
+    vicinity?: string;
+    formatted_address?: string;
+    formattedAddress?: string;
+    address?: string;
+    imageUrl?: string;
+    image_url?: string;
+    photos?: SharedBusinessPhoto[];
+}
+
 interface TripContextType {
     tripStatus: TripMode;
     tripDays: number;
@@ -34,7 +79,7 @@ interface TripContextType {
     selectedCategory: string | null;
     searchQuery: string;
     destinationInfo: SharedLocation | null;
-    sharedBusinesses: any[];
+    sharedBusinesses: SharedBusiness[];
     lastSelectedStoreId: string | null;
     setTripStatus: (status: TripMode) => void;
     setTripDays: (days: number) => void;
@@ -44,7 +89,7 @@ interface TripContextType {
     setSelectedCategory: (category: string | null) => void;
     setSearchQuery: (query: string) => void;
     setDestinationInfo: (info: SharedLocation | null) => void;
-    setSharedBusinesses: (businesses: any[]) => void;
+    setSharedBusinesses: (businesses: SharedBusiness[]) => void;
     setLastSelectedStoreId: (id: string | null) => void;
 }
 
@@ -57,7 +102,7 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [destinationInfo, setDestinationInfo] = useState<SharedLocation | null>(null);
-    const [sharedBusinesses, setSharedBusinesses] = useState<any[]>([]);
+    const [sharedBusinesses, setSharedBusinesses] = useState<SharedBusiness[]>([]);
     const [lastSelectedStoreId, setLastSelectedStoreId] = useState<string | null>(null);
 
     useEffect(() => {
