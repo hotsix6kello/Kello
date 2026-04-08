@@ -6,12 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
 import type { LegacyBookingDraftFromSkeleton } from '@/lib/bookings/bookingFlowSkeleton/bridge';
-import { createMockBookingImageUploadBridgeAdapter } from '@/lib/bookings/bookingFlowSkeleton/mockUploadBridgeAdapter';
-import {
-  type BookingImageUploadBridgeAdapter,
-  type BookingImageUploadBridgeItem,
-  type BookingUploadedImageResultCompletion,
-} from '@/lib/bookings/bookingFlowSkeleton/uploadedImageResults';
 import {
   resolveLegacySubmitStatusCopy,
   resolveLegacySubmitUiState,
@@ -155,11 +149,6 @@ export default function HomePage() {
     useState<SubmitPreparationDebugState | null>(null);
   const [submitAttemptDebugState, setSubmitAttemptDebugState] =
     useState<SubmitAttemptDebugState | null>(null);
-  const [pendingMockImageUploadCompletions, setPendingMockImageUploadCompletions] = useState<
-    BookingUploadedImageResultCompletion[]
-  >([]);
-  const [activeMockImageUploadCompletion, setActiveMockImageUploadCompletion] =
-    useState<BookingUploadedImageResultCompletion | null>(null);
   const [bookingStoreContext, setBookingStoreContext] = useState<{
     storeId: string | null;
     storeName: string | null;
@@ -385,65 +374,6 @@ export default function HomePage() {
     [isDraftDebugEnabled],
   );
 
-  const mockImageUploadBridgeAdapter: BookingImageUploadBridgeAdapter = useMemo(
-    () =>
-      createMockBookingImageUploadBridgeAdapter({
-        resolveUploadedUrl: (item) =>
-          `https://debug.local/mock-bridge-upload/${item.stateKey}/${encodeURIComponent(item.draft.id)}`,
-      }),
-    [],
-  );
-
-  const handleImageUploadBridgeRequest = useCallback(
-    (items: BookingImageUploadBridgeItem[]) => {
-      if (!isSkeletonFlowEnabled || !isDraftDebugEnabled) {
-        return;
-      }
-
-      void mockImageUploadBridgeAdapter(items).then((nextCompletions) => {
-        if (nextCompletions.length === 0) {
-          return;
-        }
-
-        setPendingMockImageUploadCompletions((currentQueue) => [
-          ...currentQueue,
-          ...nextCompletions,
-        ]);
-      });
-    },
-    [isDraftDebugEnabled, isSkeletonFlowEnabled, mockImageUploadBridgeAdapter],
-  );
-
-  useEffect(() => {
-    if (isSkeletonFlowEnabled && isDraftDebugEnabled) {
-      return;
-    }
-
-    setPendingMockImageUploadCompletions([]);
-    setActiveMockImageUploadCompletion(null);
-  }, [isDraftDebugEnabled, isSkeletonFlowEnabled]);
-
-  useEffect(() => {
-    if (activeMockImageUploadCompletion || pendingMockImageUploadCompletions.length === 0) {
-      return;
-    }
-
-    const [nextCompletion, ...remainingQueue] = pendingMockImageUploadCompletions;
-    setActiveMockImageUploadCompletion(nextCompletion);
-    setPendingMockImageUploadCompletions(remainingQueue);
-  }, [activeMockImageUploadCompletion, pendingMockImageUploadCompletions]);
-
-  useEffect(() => {
-    if (!activeMockImageUploadCompletion) {
-      return;
-    }
-
-    const timerId = window.setTimeout(() => {
-      setActiveMockImageUploadCompletion(null);
-    }, 0);
-
-    return () => window.clearTimeout(timerId);
-  }, [activeMockImageUploadCompletion]);
 
   const submitDebugUiState = useMemo(() => {
     if (!isSkeletonFlowEnabled || !isDraftDebugEnabled) {
@@ -645,12 +575,6 @@ export default function HomePage() {
         enableSkeletonMode={isSkeletonFlowEnabled}
         storeContext={bookingStoreContext}
         uploadedImageUrls={uploadedImageUrlsOverride}
-        onImageUploadBridgeRequest={
-          isSkeletonFlowEnabled && isDraftDebugEnabled ? handleImageUploadBridgeRequest : undefined
-        }
-        completedImageUploadResult={
-          isSkeletonFlowEnabled && isDraftDebugEnabled ? activeMockImageUploadCompletion : null
-        }
         onDraftReady={isSkeletonFlowEnabled && isDraftDebugEnabled ? handleSkeletonDraftReady : undefined}
         onDraftDebugStateChange={
           isSkeletonFlowEnabled && isDraftDebugEnabled ? handleDraftDebugStateChange : undefined
