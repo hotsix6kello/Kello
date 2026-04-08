@@ -66,7 +66,7 @@ export function ServiceSelectionStepShell({
                   표시할 시술이 아직 준비되지 않았습니다.
                 </p>
               ) : (
-                <div className="grid grid-cols-1 gap-2">
+                <div className="grid grid-cols-1 gap-2 pb-32">
                   {section.items.map((item) => {
                     const isSelected = item.id === selectedServiceId;
 
