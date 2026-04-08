@@ -5,6 +5,7 @@ import {
   BookingFlowSkeleton,
   type BookingFlowSkeletonDraftStateSnapshot,
 } from "@/components/booking/flow-skeleton";
+import { type BookingImageUploadBridgeItem } from "@/lib/bookings/bookingFlowSkeleton/uploadedImageResults";
 import {
   buildHomeBookingDraftDebugState,
   resolveHomeBookingDraftReadySequence,
@@ -14,6 +15,7 @@ import {
 } from "./HomeBookingFlowEntry.helpers";
 
 import { runLegacySubmitPreparation } from "@/lib/bookings/bookingFlowSkeleton/submitRunner";
+import { uploadBookingImage } from "@/lib/bookings/SupabaseUploadAdapter";
 import { submitBeautyBooking } from "@/app/explore/beautyBooking";
 import type {
   HomeBookingDraftReadySequenceSnapshot,
@@ -54,6 +56,7 @@ export default function HomeBookingFlowEntry({
     lastEmittedSignature: null,
   });
   const submitAttemptStatusRef = useRef<SkeletonSubmitAttemptStatus>("idle");
+  const localImageFilesRef = useRef<Map<string, File>>(new Map());
 
   const skeletonInitialCategory = useMemo(
     () => resolveSkeletonCategoryFromLegacy(initialCategory),
@@ -63,6 +66,12 @@ export default function HomeBookingFlowEntry({
   useEffect(() => {
     onResolvedMode?.("skeleton");
   }, [onResolvedMode]);
+
+  const handleImageUploadBridgeRequest = useCallback((items: BookingImageUploadBridgeItem[]) => {
+    items.forEach((item) => {
+      localImageFilesRef.current.set(item.draft.id, item.file);
+    });
+  }, []);
 
   const handleDraftStateChange = useCallback(
     (snapshot: BookingFlowSkeletonDraftStateSnapshot) => {
@@ -170,24 +179,66 @@ export default function HomeBookingFlowEntry({
       submitAttemptStatusRef.current = "submitting";
       onSubmitAttemptStateChange?.({
         status: "submitting",
-        message: "Submitting booking request...",
+        message: "이미지를 업로드하고 있어요...",
         errorSummary: null,
       });
+
       try {
-        // Submit path still never uploads images here; completed upload refs must arrive via step3 bridge seam.
+        // Multi-image upload phase (Parallel)
+        const currentStateDrafts = snapshot.state.customerDetails.currentStateImages;
+        const desiredStyleDrafts = snapshot.state.customerDetails.desiredStyleImages;
+
+        const uploadPromises: Promise<{ url: string | null; error: string | null } | null>[] = [];
+        
+        // Match files with drafts from the local map
+        const currentStateFiles = currentStateDrafts
+          .map(d => localImageFilesRef.current.get(d.id))
+          .filter((f): f is File => !!f);
+        
+        const desiredStyleFiles = desiredStyleDrafts
+          .map(d => localImageFilesRef.current.get(d.id))
+          .filter((f): f is File => !!f);
+
+        // We take the first image if multiple are present, or handle according to requirement (usually one each)
+        const currentUploadPromise = currentStateFiles[0] 
+          ? uploadBookingImage(currentStateFiles[0], 'current')
+          : Promise.resolve(null);
+          
+        const styleUploadPromise = desiredStyleFiles[0]
+          ? uploadBookingImage(desiredStyleFiles[0], 'style')
+          : Promise.resolve(null);
+
+        const [currentResult, styleResult] = await Promise.all([currentUploadPromise, styleUploadPromise]);
+
+        if (currentResult?.error || styleResult?.error) {
+          throw new Error(`이미지 업로드 실패: ${currentResult?.error || styleResult?.error}`);
+        }
+
+        // Enrich the draft with the uploaded URLs
+        if (preparation.payloadCandidate) {
+          preparation.payloadCandidate.customer.currentImageUrl = currentResult?.url ?? undefined;
+          preparation.payloadCandidate.customer.styleImageUrl = styleResult?.url ?? undefined;
+        }
+
+        onSubmitAttemptStateChange?.({
+          status: "submitting",
+          message: "예약 요청을 보내는 중입니다...",
+          errorSummary: null,
+        });
+
         const result = await submitBeautyBooking(preparation.payloadCandidate);
         submitAttemptStatusRef.current = "submitted";
         onSubmitAttemptStateChange?.({
           status: "submitted",
-          message: `Submit completed with booking id ${result.bookingId}.`,
+          message: `예약이 완료되었습니다! (ID: ${result.bookingId})`,
           errorSummary: null,
         });
-      } catch {
+      } catch (err: any) {
         submitAttemptStatusRef.current = "submit-error";
         onSubmitAttemptStateChange?.({
           status: "submit-error",
-          message: "Submit failed in skeleton debug path.",
-          errorSummary: "Submit request failed.",
+          message: err.message || "예약 제출 중 오류가 발생했습니다.",
+          errorSummary: "Submission failed.",
         });
       }
     },
@@ -232,7 +283,7 @@ export default function HomeBookingFlowEntry({
             <BookingFlowSkeleton
               initialCategory={skeletonInitialCategory}
               storeContext={storeContext}
-              onImageUploadBridgeRequest={onImageUploadBridgeRequest}
+              onImageUploadBridgeRequest={handleImageUploadBridgeRequest}
               completedImageUploadResult={completedImageUploadResult}
               onDraftStateChange={handleDraftStateChange}
               onSubmitIntent={handleSubmitIntent}

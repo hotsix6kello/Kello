@@ -24,6 +24,8 @@ export type BeautyBookingPayload = {
     phone: string;
     request: string;
     imageUrls?: string[];
+    currentImageUrl?: string;
+    styleImageUrl?: string;
   };
   communication: {
     language: string;
@@ -56,7 +58,10 @@ export type BeautyBookingPayloadDraftInput = {
   addOnIds: string[];
   addOnNames: string[];
   priceSummary: BeautyBookingPayload['priceSummary'];
-  customer: BeautyBookingPayload['customer'];
+  customer: BeautyBookingPayload['customer'] & {
+    currentImageUrl?: string | null;
+    styleImageUrl?: string | null;
+  };
   communication: {
     language: string;
     intent: string;
@@ -160,6 +165,8 @@ export function buildBeautyBookingPayload(
       phone: input.customer.phone.trim(),
       request: input.customer.request.trim(),
       imageUrls: input.customer.imageUrls || [],
+      currentImageUrl: input.customer.currentImageUrl ?? undefined,
+      styleImageUrl: input.customer.styleImageUrl ?? undefined,
     },
     communication: {
       language: input.communication.language,
@@ -238,6 +245,8 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       phone: typeof customer.phone === 'string' ? customer.phone : '',
       request: typeof customer.request === 'string' ? customer.request : '',
       imageUrls: normalizeStringArray(customer.imageUrls),
+      currentImageUrl: typeof customer.currentImageUrl === 'string' ? customer.currentImageUrl : undefined,
+      styleImageUrl: typeof customer.styleImageUrl === 'string' ? customer.styleImageUrl : undefined,
     },
     communication: {
       language: typeof communication.language === 'string' ? communication.language : '',

@@ -58,6 +58,8 @@ type BeautyBookingInsertRow = {
   customer_phone: string;
   customer_request: string;
   image_urls: string[] | null;
+  current_image_url: string | null;
+  style_image_url: string | null;
   communication_language: string;
   communication_intent: string;
   korean_message: string;
@@ -129,6 +131,8 @@ export type BeautyBookingAdminSelectRow = {
   communication_intent: string;
   korean_message: string;
   localized_message: string;
+  current_image_url: string | null;
+  style_image_url: string | null;
   agreements: unknown;
   created_from_flow: string;
 };
@@ -237,6 +241,8 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     customerPhone: row.customer_phone,
     customerRequest: row.customer_request,
     imageUrls: Array.isArray((row as unknown as { image_urls?: string[] }).image_urls) ? (row as unknown as { image_urls: string[] }).image_urls : [],
+    currentImageUrl: row.current_image_url ?? null,
+    styleImageUrl: row.style_image_url ?? null,
     communicationLanguage: row.communication_language,
     communicationIntent: row.communication_intent,
     koreanMessage: row.korean_message,
@@ -298,6 +304,8 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "communication_intent",
   "korean_message",
   "localized_message",
+  "current_image_url",
+  "style_image_url",
   "agreements",
   "created_from_flow",
   "operator_status",
@@ -360,6 +368,8 @@ function mapBeautyBookingPayloadToRow(
     customer_phone: payload.customer.phone,
     customer_request: payload.customer.request,
     image_urls: payload.customer.imageUrls && payload.customer.imageUrls.length > 0 ? payload.customer.imageUrls : null,
+    current_image_url: payload.customer.currentImageUrl ?? null,
+    style_image_url: payload.customer.styleImageUrl ?? null,
     communication_language: payload.communication.language,
     communication_intent: payload.communication.intent,
     korean_message: payload.communication.messages.korean,
