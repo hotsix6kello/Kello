@@ -484,7 +484,7 @@ export function BookingFlowSkeleton({
       <header className="border-b border-neutral-200 py-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col items-center gap-2 text-center">
-            <span className="inline-flex w-fit rounded-full bg-fuchsia-50 px-3 py-1 text-[11px] font-semibold text-fuchsia-700">
+            <span className="inline-flex w-fit rounded-full bg-pink-50 px-3 py-1 text-[11px] font-semibold text-pink-700">
               예약 플로우
             </span>
             <div className="flex max-w-[22rem] flex-col items-center">
@@ -505,7 +505,7 @@ export function BookingFlowSkeleton({
                   key={step.id}
                   className={`flex-1 flex flex-col items-center justify-end pb-3 border-b-[3px] text-sm transition-colors ${
                     isActive || isComplete
-                      ? "border-fuchsia-600 text-fuchsia-700"
+                      ? "border-pink-600 text-pink-700"
                       : "border-neutral-100 text-neutral-400"
                   }`}
                 >
@@ -528,7 +528,11 @@ export function BookingFlowSkeleton({
             type="button"
             onClick={() => handleNext()}
             disabled={!canMoveNext}
-            className="inline-flex min-h-14 w-full items-center justify-center rounded-xl px-6 text-[15px] font-semibold transition bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none disabled:cursor-not-allowed"
+            className={`w-full p-4 rounded-xl font-bold transition-colors ${
+              canMoveNext
+                ? "text-white bg-pink-500 hover:bg-pink-600 shadow-lg shadow-pink-500/30"
+                : "text-neutral-400 bg-neutral-100 cursor-not-allowed"
+            }`}
           >
             {activeVisualStepId === "service-selection" ? "다음 단계로 이동" : "최종 예약 확인"}
           </button>

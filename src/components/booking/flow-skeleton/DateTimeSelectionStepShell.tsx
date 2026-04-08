@@ -58,7 +58,7 @@ export function DateTimeSelectionStepShell({
               type="date"
               value={selectedDate ?? ""}
               onChange={(event) => onSelectDate?.(event.target.value)}
-              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500 focus:bg-fuchsia-50/10"
+              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-pink-500 focus:bg-pink-50/10"
             />
           </label>
         </div>
@@ -78,8 +78,8 @@ export function DateTimeSelectionStepShell({
                     onClick={() => onSelectTime?.(timeOption)}
                     className={`rounded-xl border px-2 py-3 text-[15px] font-semibold transition ${
                       isSelected
-                        ? "border-fuchsia-500 bg-fuchsia-50 text-fuchsia-700"
-                        : "border-neutral-100 bg-white text-neutral-700 hover:border-fuchsia-300"
+                        ? "border-pink-500 bg-pink-50 text-pink-700"
+                        : "border-neutral-100 bg-white text-neutral-700 hover:border-pink-300"
                     }`}
                   >
                     {timeOption}
@@ -93,7 +93,7 @@ export function DateTimeSelectionStepShell({
                 type="time"
                 value={selectedTime ?? ""}
                 onChange={(event) => onSelectTime?.(event.target.value)}
-                className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+                className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-pink-500"
               />
             </label>
           </div>

@@ -177,7 +177,11 @@ export function ConfirmationStepShell({
           type="button"
           onClick={() => onSubmitIntent?.()}
           disabled={!canSendSubmitIntent}
-          className="inline-flex min-h-14 w-full items-center justify-center rounded-xl px-4 py-4 text-[15px] font-semibold transition bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none disabled:cursor-not-allowed"
+          className={`w-full p-4 rounded-xl font-bold transition-colors ${
+            canSendSubmitIntent
+              ? "text-white bg-pink-500 hover:bg-pink-600 shadow-lg shadow-pink-500/30"
+              : "text-neutral-400 bg-neutral-100 cursor-not-allowed"
+          }`}
         >
           예약 요청 전송
         </button>

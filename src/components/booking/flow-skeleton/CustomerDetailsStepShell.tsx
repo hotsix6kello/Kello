@@ -120,7 +120,7 @@ export function CustomerDetailsStepShell({
               type="text"
               value={details.name}
               onChange={(event) => onChangeName?.(event.target.value)}
-              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-pink-500"
               placeholder="예약자 이름"
             />
           </label>
@@ -130,7 +130,7 @@ export function CustomerDetailsStepShell({
               type="tel"
               value={details.phone}
               onChange={(event) => onChangePhone?.(event.target.value)}
-              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-pink-500"
               placeholder="연락처 (예: 010-1234-5678)"
             />
           </label>
@@ -139,7 +139,7 @@ export function CustomerDetailsStepShell({
               value={details.requestNote}
               onChange={(event) => onChangeRequestNote?.(event.target.value)}
               rows={4}
-              className="rounded-xl border border-neutral-100 bg-white px-4 py-4 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+              className="rounded-xl border border-neutral-100 bg-white px-4 py-4 text-base text-neutral-900 outline-none transition focus:border-pink-500"
               placeholder="요청사항을 남겨주세요"
             />
           </label>
@@ -159,7 +159,7 @@ export function CustomerDetailsStepShell({
               <p className="mt-1 text-sm leading-6 text-neutral-500">{groupCopy.helper}</p>
 
               <div className="mt-3 flex flex-wrap gap-2">
-                <label className="cursor-pointer rounded-xl border border-fuchsia-500 bg-fuchsia-50 px-5 py-3 text-[15px] font-semibold text-fuchsia-700 transition hover:bg-fuchsia-100">
+                <label className="cursor-pointer rounded-xl border border-pink-500 bg-pink-50 px-5 py-3 text-[15px] font-semibold text-pink-700 transition hover:bg-pink-100">
                   + {groupCopy.addButtonLabel}
                   <input
                     type="file"

@@ -40,8 +40,8 @@ export function ServiceSelectionStepShell({
                 type="button"
                 onClick={() => onSelectCategory?.(category.id)}
                 className={`rounded-full px-5 py-2.5 text-[15px] font-semibold transition ${isSelected
-                    ? "bg-fuchsia-50 border border-fuchsia-500 text-fuchsia-700"
-                    : "bg-white border border-neutral-200 text-neutral-600 hover:border-fuchsia-300 hover:text-fuchsia-600"
+                    ? "bg-pink-50 border border-pink-500 text-pink-700"
+                    : "bg-white border border-neutral-200 text-neutral-600 hover:border-pink-300 hover:text-pink-600"
                   }`}
               >
                 {category.label}
@@ -76,8 +76,8 @@ export function ServiceSelectionStepShell({
                         onClick={() => onSelectService?.(item.id)}
                         className={`cursor-pointer w-full text-left p-5 mb-4 rounded-xl border-2 transition-all duration-200 outline-none ${
                           isSelected
-                            ? "bg-fuchsia-50 border-fuchsia-500 shadow-sm"
-                            : "bg-white border-neutral-200 hover:border-fuchsia-300"
+                            ? "bg-pink-50 border-pink-500 border-2 shadow-md"
+                            : "bg-white border-neutral-200 hover:border-pink-300"
                         }`}
                       >
                         <h3 className="text-lg font-bold text-neutral-900 mb-1">
