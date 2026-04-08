@@ -113,69 +113,37 @@ export function CustomerDetailsStepShell({
         </div>
       ) : null}
 
-      <div className="border-b border-neutral-200 py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">고객 정보</h3>
-        <p className="mt-1 text-sm leading-6 text-neutral-600">
-          로그인 정보가 있으면 자동으로 채워집니다.
-        </p>
-
-        <div className="mt-3 flex flex-wrap gap-2">
-          <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-            자동 입력 {details.profileSource === "auth-profile" ? "연결됨" : "없음"}
-          </span>
-          {details.profileSnapshot?.displayName ? (
-            <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-              이름 {details.profileSnapshot.displayName}
-            </span>
-          ) : null}
-          {details.profileSnapshot?.phone ? (
-            <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-              연락처 {details.profileSnapshot.phone}
-            </span>
-          ) : null}
-        </div>
-
-        <div className="mt-4 grid grid-cols-1 gap-3">
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-neutral-700">이름</span>
+      <div className="py-2">
+        <div className="grid grid-cols-1 gap-4">
+          <label className="flex flex-col gap-1">
             <input
               type="text"
               value={details.name}
               onChange={(event) => onChangeName?.(event.target.value)}
-              className="min-h-12 rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-500"
-              placeholder="예약자 이름을 입력해 주세요"
+              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+              placeholder="예약자 이름"
             />
           </label>
 
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-neutral-700">연락처</span>
+          <label className="flex flex-col gap-1">
             <input
               type="tel"
               value={details.phone}
               onChange={(event) => onChangePhone?.(event.target.value)}
-              className="min-h-12 rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-500"
-              placeholder="문자 또는 전화 가능한 연락처를 입력해 주세요"
+              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+              placeholder="연락처 (예: 010-1234-5678)"
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <textarea
+              value={details.requestNote}
+              onChange={(event) => onChangeRequestNote?.(event.target.value)}
+              rows={4}
+              className="rounded-xl border border-neutral-100 bg-white px-4 py-4 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
+              placeholder="요청사항을 남겨주세요"
             />
           </label>
         </div>
-      </div>
-
-      <div className="border-b border-neutral-200 py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">요청사항</h3>
-        <p className="mt-1 text-sm leading-6 text-neutral-600">
-          원하는 스타일이나 전달할 메모를 남겨 주세요.
-        </p>
-
-        <label className="mt-4 flex flex-col gap-2">
-          <span className="text-sm font-medium text-neutral-700">메모</span>
-          <textarea
-            value={details.requestNote}
-            onChange={(event) => onChangeRequestNote?.(event.target.value)}
-            rows={5}
-            className="rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-500"
-            placeholder="예: 앞머리는 가볍게, 컬러는 상담 후 결정하고 싶어요"
-          />
-        </label>
       </div>
 
       <div className="divide-y divide-neutral-200">
@@ -190,9 +158,9 @@ export function CustomerDetailsStepShell({
               <p className="mt-1 text-sm leading-6 text-neutral-600">{groupCopy.description}</p>
               <p className="mt-1 text-sm leading-6 text-neutral-500">{groupCopy.helper}</p>
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                <label className="cursor-pointer rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-900">
-                  {groupCopy.addButtonLabel}
+              <div className="mt-3 flex flex-wrap gap-2">
+                <label className="cursor-pointer rounded-xl border border-fuchsia-500 bg-fuchsia-50 px-5 py-3 text-[15px] font-semibold text-fuchsia-700 transition hover:bg-fuchsia-100">
+                  + {groupCopy.addButtonLabel}
                   <input
                     type="file"
                     multiple
@@ -210,9 +178,9 @@ export function CustomerDetailsStepShell({
                 <button
                   type="button"
                   onClick={() => handlers.onReset?.()}
-                  className="rounded-full bg-neutral-100 px-4 py-2 text-sm text-neutral-700"
+                  className="rounded-xl border border-neutral-100 bg-white px-5 py-3 text-[15px] font-semibold text-neutral-600"
                 >
-                  전체 삭제
+                  모두 지우기
                 </button>
               </div>
 

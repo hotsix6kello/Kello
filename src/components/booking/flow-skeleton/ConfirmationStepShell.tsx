@@ -76,29 +76,29 @@ export function ConfirmationStepShell({
 
   const content = supportsInteractiveReview ? (
     <div className="bg-white">
-      <section className="border-b border-neutral-200 py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">예약 요약</h3>
-        <div className="mt-4 space-y-3">
+      <div className="py-2">
+        <ul className="flex flex-col gap-1">
           {receiptRows.map((row) => (
-            <div key={row.id} className="flex items-start justify-between gap-4">
-              <span className="text-sm text-neutral-500">{row.label}</span>
-              <span className="min-w-0 text-right text-sm font-semibold text-neutral-950 break-words">
+            <li key={row.id} className="flex items-start justify-between border-b border-neutral-100 py-4">
+              <span className="text-[15px] text-neutral-500">{row.label}</span>
+              <span className="min-w-0 text-right text-[15px] font-semibold text-neutral-950 break-words">
                 {row.value}
               </span>
-            </div>
+            </li>
           ))}
-        </div>
-      </section>
+          {requestNote && (
+            <li className="flex flex-col border-b border-neutral-100 py-4">
+              <span className="text-[15px] text-neutral-500 mb-2">요청사항</span>
+              <span className="text-[15px] font-medium leading-relaxed text-neutral-900 whitespace-pre-wrap">
+                {requestNote}
+              </span>
+            </li>
+          )}
+        </ul>
+      </div>
 
-      <section className="border-b border-neutral-200 py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">요청사항</h3>
-        <div className="mt-3 text-sm leading-6 text-neutral-700 whitespace-pre-wrap">
-          {requestNote || BOOKING_FLOW_REVIEW_COPY.noRequestNote}
-        </div>
-      </section>
-
-      <section className="border-b border-neutral-200 py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">첨부 이미지</h3>
+      <section className="py-6 border-b border-neutral-100">
+        <span className="text-[15px] text-neutral-500">첨부 이미지</span>
         <div className="mt-4 space-y-5">
           {imageGroups.map((group) => {
             const images = customerDetails[group.stateKey];
@@ -172,18 +172,18 @@ export function ConfirmationStepShell({
         </div>
       </section>
 
-      <section className="sticky bottom-0 z-10 -mx-4 border-t border-neutral-200 bg-white/95 px-4 pb-4 pt-4 backdrop-blur">
+      <section className="sticky bottom-0 z-10 -mx-4 bg-white px-4 pb-10 pt-4 shadow-[0_-20px_40px_rgba(255,255,255,1)]">
         <button
           type="button"
           onClick={() => onSubmitIntent?.()}
           disabled={!canSendSubmitIntent}
-          className={`inline-flex min-h-14 w-full items-center justify-center rounded-2xl px-4 py-4 text-sm font-semibold transition ${
+          className={`inline-flex min-h-14 w-full items-center justify-center rounded-xl px-4 py-4 text-[15px] font-semibold transition ${
             canSendSubmitIntent
-              ? "bg-neutral-950 text-white shadow-[0_14px_32px_rgba(15,23,42,0.18)]"
+              ? "bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700"
               : "cursor-not-allowed bg-neutral-100 text-neutral-400"
           }`}
         >
-          예약 요청 보내기
+          예약 요청 전송
         </button>
       </section>
     </div>

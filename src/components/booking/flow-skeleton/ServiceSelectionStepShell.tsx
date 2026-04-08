@@ -39,10 +39,10 @@ export function ServiceSelectionStepShell({
                 key={category.id}
                 type="button"
                 onClick={() => onSelectCategory?.(category.id)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                className={`rounded-full px-5 py-2.5 text-[15px] font-semibold transition ${
                   isSelected
-                    ? "bg-fuchsia-600 text-white shadow-[0_10px_24px_rgba(192,38,211,0.18)]"
-                    : "bg-neutral-100 text-neutral-700 hover:bg-fuchsia-50 hover:text-fuchsia-700"
+                    ? "bg-fuchsia-50 border border-fuchsia-500 text-fuchsia-700"
+                    : "bg-white border border-neutral-200 text-neutral-600 hover:border-fuchsia-300 hover:text-fuchsia-600"
                 }`}
               >
                 {category.label}
@@ -77,10 +77,10 @@ export function ServiceSelectionStepShell({
                         type="button"
                         onClick={() => onSelectService?.(item.id)}
                         aria-pressed={isSelected}
-                        className={`w-full rounded-2xl border px-4 py-3.5 text-left transition ${
+                        className={`w-full rounded-xl border px-5 py-4 text-left transition ${
                           isSelected
-                            ? "border-fuchsia-500 bg-fuchsia-50 shadow-[0_10px_24px_rgba(192,38,211,0.08)]"
-                            : "border-neutral-200 bg-white hover:border-fuchsia-300 hover:bg-fuchsia-50/40"
+                            ? "border-fuchsia-500 bg-fuchsia-50"
+                            : "border-neutral-100 bg-white hover:border-fuchsia-200"
                         }`}
                       >
                         <p
