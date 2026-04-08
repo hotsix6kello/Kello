@@ -1,6 +1,24 @@
 export {};
 
 await import("./my-page-permissions.test.ts");
+await import("./booking-flow-uploaded-image-results.test.ts");
+await import("./home-booking-flow-entry.test.ts");
+await import("./home-booking-draft-debug-visibility.test.ts");
+await import("./home-booking-submit-debug-panel.test.ts");
+await import("./home-booking-flow-entry-draft-ready.test.ts");
+await import("./home-booking-flow-entry-store-context-draft.test.ts");
+await import("./home-booking-flow-entry-draft-payload-snapshot.test.ts");
+await import("./home-booking-flow-entry-runtime-draft-ready.test.ts");
+await import("./home-booking-flow-entry-draft-timing.test.ts");
+await import("./home-booking-flow-entry-draft-emission.test.ts");
+await import("./home-booking-flow-entry-draft-sequence.test.ts");
+await import("./booking-flow-submit-adapter.test.ts");
+await import("./booking-flow-submit-invocation.test.ts");
+await import("./booking-flow-submit-orchestrator.test.ts");
+await import("./booking-flow-submit-ui-state.test.ts");
+await import("./booking-flow-submit-runner.test.ts");
+await import("./booking-flow-submit-messages.test.ts");
+await import("./booking-flow-image-submit-contract.test.ts");
 await import("../translation/tests/translation.service.test.ts");
 await import("./settings-contact.test.ts");
 await import("../translator/tests/home-translator.test.ts");
