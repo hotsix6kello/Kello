@@ -49,7 +49,7 @@ await run("skeleton flow with debug=draft shows panel", () => {
 });
 
 await run("non-skeleton flow equivalent keeps panel hidden", () => {
-  const flow = "legacy";
+  const flow: string = "legacy";
   const visible = shouldShowSkeletonDraftDebugPanel({
     isSkeletonFlowEnabled: flow === "skeleton",
     debugParam: "draft",
