@@ -75,68 +75,74 @@ export function ConfirmationStepShell({
   ];
 
   const content = supportsInteractiveReview ? (
-    <div className="bg-white">
+    <div className="w-full">
       <div className="py-2">
-        <ul className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5 px-1 mb-4">
+          <h3 className="text-[17px] font-bold text-neutral-900">예약 내역 상세</h3>
+          <p className="text-[13px] text-neutral-500">입력하신 정보를 마지막으로 확인해주세요.</p>
+        </div>
+
+        <ul className="flex flex-col gap-1 bg-neutral-50/50 rounded-2xl p-4 border border-neutral-100">
           {receiptRows.map((row) => (
-            <li key={row.id} className="flex items-start justify-between border-b border-neutral-100 py-4">
-              <span className="text-[15px] text-neutral-500">{row.label}</span>
-              <span className="min-w-0 text-right text-[15px] font-semibold text-neutral-950 break-words">
+            <li key={row.id} className="flex items-start justify-between py-3 px-1 border-b border-neutral-100 last:border-0">
+              <span className="text-[14px] font-medium text-neutral-500">{row.label}</span>
+              <span className="min-w-0 text-right text-[14px] font-bold text-neutral-900 break-words">
                 {row.value}
               </span>
             </li>
           ))}
           {requestNote && (
-            <li className="flex flex-col border-b border-neutral-100 py-4">
-              <span className="text-[15px] text-neutral-500 mb-2">요청사항</span>
-              <span className="text-[15px] font-medium leading-relaxed text-neutral-900 whitespace-pre-wrap">
+            <li className="flex flex-col pt-3 pb-1 px-1">
+              <span className="text-[14px] font-medium text-neutral-500 mb-2">요청사항</span>
+              <div className="text-[14px] font-semibold leading-relaxed text-fuchsia-900 bg-fuchsia-50/50 rounded-xl p-4 border border-fuchsia-100/50 whitespace-pre-wrap">
                 {requestNote}
-              </span>
+              </div>
             </li>
           )}
         </ul>
       </div>
 
-      <section className="py-6 border-b border-neutral-100">
-        <span className="text-[15px] text-neutral-500">첨부 이미지</span>
-        <div className="mt-4 space-y-5">
+      <section className="py-8">
+        <div className="flex items-center justify-between px-1 mb-5">
+          <h3 className="text-[17px] font-bold text-neutral-900">첨부 이미지</h3>
+          <span className="text-[12px] font-bold text-fuchsia-600 bg-fuchsia-50 px-2 py-0.5 rounded-full">
+            총 {imageGroups.reduce((acc, g) => acc + customerDetails[g.stateKey].length, 0)}장
+          </span>
+        </div>
+        
+        <div className="space-y-6">
           {imageGroups.map((group) => {
             const images = customerDetails[group.stateKey];
 
             return (
-              <div key={group.id}>
-                <div className="flex items-center justify-between gap-3">
-                  <h4 className="text-sm font-semibold text-neutral-900">{group.reviewTitle}</h4>
-                  <span className="text-xs text-neutral-500">{images.length}장</span>
+              <div key={group.id} className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 px-1">
+                  <div className="h-1.5 w-1.5 rounded-full bg-fuchsia-400" />
+                  <h4 className="text-[14px] font-bold text-neutral-800">{group.reviewTitle}</h4>
                 </div>
 
                 {images.length > 0 ? (
-                  <div className="mt-3 grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-4">
                     {images.map((item) => (
-                      <div key={item.id} className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
-                        <div className="flex aspect-[4/3] items-center justify-center border-b border-neutral-200 bg-neutral-50">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-950 text-sm font-semibold text-white">
+                      <div key={item.id} className="group overflow-hidden rounded-2xl border border-neutral-100 bg-white transition-all hover:border-fuchsia-200">
+                        <div className="flex aspect-square items-center justify-center border-b border-neutral-50 bg-neutral-50">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-600 text-sm font-bold text-white shadow-lg">
                             {item.fileName.slice(0, 1).toUpperCase()}
                           </div>
                         </div>
                         <div className="p-3">
-                          <div className="text-sm font-semibold text-neutral-900 break-all">
+                          <div className="text-[12px] font-bold text-neutral-900 truncate">
                             {item.fileName}
                           </div>
-                          <div className="mt-2 flex flex-wrap gap-2 text-xs text-neutral-500">
-                            <span className="rounded-full bg-neutral-100 px-2.5 py-1">
-                              {item.mimeType || "image/*"}
-                            </span>
-                            <span className="rounded-full bg-neutral-100 px-2.5 py-1">
-                              {formatFileSize(item.fileSize)}
-                            </span>
+                          <div className="mt-1 flex items-center gap-2 text-[10px] font-bold text-neutral-400">
+                            {formatFileSize(item.fileSize)}
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="mt-3 text-sm text-neutral-500">{BOOKING_FLOW_REVIEW_COPY.noImages}</div>
+                  <div className="text-[13px] text-neutral-400 px-1 italic">{BOOKING_FLOW_REVIEW_COPY.noImages}</div>
                 )}
               </div>
             );
@@ -144,30 +150,45 @@ export function ConfirmationStepShell({
         </div>
       </section>
 
-      <section className="py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">최종 동의</h3>
-        <p className="mt-1 text-sm leading-6 text-neutral-600">
-          아래 항목에 모두 동의해야 예약 요청을 보낼 수 있습니다.
-        </p>
+      <section className="py-6 mb-32">
+        <div className="px-1 mb-5">
+          <h3 className="text-[17px] font-bold text-neutral-900">최종 동의</h3>
+          <p className="text-[13px] text-neutral-500 mt-1">예약을 위해 필수 항목에 동의해주세요.</p>
+        </div>
 
-        <div className="mt-4 flex flex-col gap-3 text-sm text-neutral-700">
-          <label className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={confirmation.bookingConfirmed}
-              onChange={(event) => onToggleBookingConfirmed?.(event.target.checked)}
-              className="mt-1"
-            />
-            <span>{BOOKING_FLOW_CONFIRMATION_COPY.bookingConfirmedLabel}</span>
+        <div className="flex flex-col gap-3">
+          <label className={`flex items-start gap-4 p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer ${confirmation.bookingConfirmed ? "bg-fuchsia-50 border-fuchsia-200" : "bg-white border-neutral-100 hover:border-fuchsia-100"}`}>
+            <div className="relative flex items-center mt-0.5">
+              <input
+                type="checkbox"
+                checked={confirmation.bookingConfirmed}
+                onChange={(event) => onToggleBookingConfirmed?.(event.target.checked)}
+                className="peer h-5 w-5 appearance-none rounded-lg border-2 border-neutral-200 transition-all checked:border-fuchsia-600 checked:bg-fuchsia-600"
+              />
+              <svg className="absolute h-3.5 w-3.5 text-white opacity-0 peer-checked:opacity-100 left-1/2 -translate-x-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span className={`text-[14px] font-bold leading-relaxed transition-colors ${confirmation.bookingConfirmed ? "text-fuchsia-900" : "text-neutral-600"}`}>
+              {BOOKING_FLOW_CONFIRMATION_COPY.bookingConfirmedLabel}
+            </span>
           </label>
-          <label className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={confirmation.privacyConsent}
-              onChange={(event) => onTogglePrivacyConsent?.(event.target.checked)}
-              className="mt-1"
-            />
-            <span>{BOOKING_FLOW_CONFIRMATION_COPY.privacyConsentLabel}</span>
+
+          <label className={`flex items-start gap-4 p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer ${confirmation.privacyConsent ? "bg-fuchsia-50 border-fuchsia-200" : "bg-white border-neutral-100 hover:border-fuchsia-100"}`}>
+            <div className="relative flex items-center mt-0.5">
+              <input
+                type="checkbox"
+                checked={confirmation.privacyConsent}
+                onChange={(event) => onTogglePrivacyConsent?.(event.target.checked)}
+                className="peer h-5 w-5 appearance-none rounded-lg border-2 border-neutral-200 transition-all checked:border-fuchsia-600 checked:bg-fuchsia-600"
+              />
+              <svg className="absolute h-3.5 w-3.5 text-white opacity-0 peer-checked:opacity-100 left-1/2 -translate-x-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span className={`text-[14px] font-bold leading-relaxed transition-colors ${confirmation.privacyConsent ? "text-fuchsia-900" : "text-neutral-600"}`}>
+              {BOOKING_FLOW_CONFIRMATION_COPY.privacyConsentLabel}
+            </span>
           </label>
         </div>
       </section>
@@ -177,9 +198,9 @@ export function ConfirmationStepShell({
           type="button"
           onClick={() => onSubmitIntent?.()}
           disabled={!canSendSubmitIntent}
-          className="inline-flex min-h-14 w-full items-center justify-center rounded-xl px-4 py-4 text-[15px] font-semibold transition bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none disabled:cursor-not-allowed"
+          className="inline-flex min-h-[60px] w-full items-center justify-center rounded-2xl px-4 py-4 text-[16px] font-bold transition bg-fuchsia-600 text-white shadow-[0_12px_24px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none"
         >
-          예약 요청 전송
+          예약 요청하기
         </button>
       </section>
     </div>

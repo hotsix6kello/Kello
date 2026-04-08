@@ -40,7 +40,6 @@ export default function HomeBookingFlowEntry({
   isOpen,
   onClose,
   initialCategory,
-  t: _,
   storeContext,
   onDraftReady,
   onDraftDebugStateChange,

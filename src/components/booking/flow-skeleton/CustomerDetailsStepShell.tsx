@@ -11,14 +11,8 @@ import type {
 
 type CustomerDetailsStepShellProps = {
   category: BookingFlowCategory | null;
-  categoryLabel?: string | null;
-  selectedServiceTitle?: string | null;
-  selectedDate?: string | null;
-  selectedTime?: string | null;
   details: BookingCustomerDetailsState;
   embedded?: boolean;
-  hideBookingSummary?: boolean;
-  hideSelectedTime?: boolean;
   onChangeName?: (value: string) => void;
   onChangePhone?: (value: string) => void;
   onChangeRequestNote?: (value: string) => void;
@@ -34,8 +28,8 @@ function getImageGroupPurposeText(stateKey: BookingImageGroupStateKey) {
       label: "현재 상태 이미지",
       description: "현재 상태를 보여주는 사진을 첨부해 주세요.",
       helper: "상태가 잘 보이는 사진일수록 상담에 도움이 됩니다.",
-      addButtonLabel: "현재 상태 이미지 추가",
-      emptyLabel: "아직 현재 상태 이미지가 없습니다.",
+      addButtonLabel: "현재 상태 사진 추가",
+      emptyLabel: "첨부된 사진이 없습니다.",
     };
   }
 
@@ -43,8 +37,8 @@ function getImageGroupPurposeText(stateKey: BookingImageGroupStateKey) {
     label: "원하는 스타일 이미지",
     description: "원하는 스타일을 보여주는 참고 이미지를 첨부해 주세요.",
     helper: "희망하는 무드나 길이감이 잘 드러나는 이미지가 좋습니다.",
-    addButtonLabel: "스타일 이미지 추가",
-    emptyLabel: "아직 원하는 스타일 이미지가 없습니다.",
+    addButtonLabel: "스타일 사진 추가",
+    emptyLabel: "첨부된 사진이 없습니다.",
   };
 }
 
@@ -54,14 +48,8 @@ function formatFileSize(size: number) {
 
 export function CustomerDetailsStepShell({
   category,
-  categoryLabel,
-  selectedServiceTitle,
-  selectedDate,
-  selectedTime,
   details,
   embedded = false,
-  hideBookingSummary = false,
-  hideSelectedTime = false,
   onChangeName,
   onChangePhone,
   onChangeRequestNote,
@@ -92,75 +80,71 @@ export function CustomerDetailsStepShell({
   };
 
   const content = supportsCustomerDetails ? (
-    <div className="bg-white">
-      {!hideBookingSummary ? (
-        <div className="border-b border-neutral-200 py-5">
-          <h3 className="text-lg font-semibold text-neutral-950">예약 정보</h3>
-          <div className="mt-3 flex flex-wrap gap-2 text-sm text-neutral-700">
-            {categoryLabel ? (
-              <span className="rounded-full bg-neutral-100 px-3 py-1">{categoryLabel}</span>
-            ) : null}
-            {selectedServiceTitle ? (
-              <span className="rounded-full bg-neutral-100 px-3 py-1">{selectedServiceTitle}</span>
-            ) : null}
-            {selectedDate ? (
-              <span className="rounded-full bg-neutral-100 px-3 py-1">{selectedDate}</span>
-            ) : null}
-            {!hideSelectedTime && selectedTime ? (
-              <span className="rounded-full bg-neutral-100 px-3 py-1">{selectedTime}</span>
-            ) : null}
-          </div>
+    <div className="w-full">
+      {/* 2. 예약자 정보 입력 폼 */}
+      <div className="flex flex-col gap-6 mb-10">
+        <div className="flex flex-col gap-1.5 px-1">
+          <h3 className="text-[17px] font-bold text-neutral-900">예약자 정보</h3>
+          <p className="text-[13px] text-neutral-500">예약 확인을 위해 정확한 정보를 입력해주세요.</p>
         </div>
-      ) : null}
 
-      <div className="py-2">
         <div className="grid grid-cols-1 gap-4">
-          <label className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1.5">
+            <span className="text-[13px] font-bold text-neutral-700 ml-1">이름</span>
             <input
               type="text"
               value={details.name}
               onChange={(event) => onChangeName?.(event.target.value)}
-              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
-              placeholder="예약자 이름"
+              className="min-h-[60px] rounded-2xl border-2 border-neutral-100 bg-white px-5 py-3 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100"
+              placeholder="예약자 성함"
             />
-          </label>
+          </div>
 
-          <label className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1.5">
+            <span className="text-[13px] font-bold text-neutral-700 ml-1">연락처</span>
             <input
               type="tel"
               value={details.phone}
               onChange={(event) => onChangePhone?.(event.target.value)}
-              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
-              placeholder="연락처 (예: 010-1234-5678)"
+              className="min-h-[60px] rounded-2xl border-2 border-neutral-100 bg-white px-5 py-3 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100"
+              placeholder="010-1234-5678"
             />
-          </label>
-          <label className="flex flex-col gap-1">
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <span className="text-[13px] font-bold text-neutral-700 ml-1">요청사항</span>
             <textarea
               value={details.requestNote}
               onChange={(event) => onChangeRequestNote?.(event.target.value)}
               rows={4}
-              className="rounded-xl border border-neutral-100 bg-white px-4 py-4 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
-              placeholder="요청사항을 남겨주세요"
+              className="rounded-2xl border-2 border-neutral-100 bg-white px-5 py-4 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100 resize-none"
+              placeholder="매장에 전달할 요청사항을 자유롭게 남겨주세요."
             />
-          </label>
+          </div>
         </div>
       </div>
 
-      <div className="divide-y divide-neutral-200">
+      {/* 3. 사진 첨부 섹션 */}
+      <div className="flex flex-col gap-8 pb-32">
         {imageGroups.map((group) => {
           const files = details[group.stateKey];
           const handlers = imageGroupHandlers[group.stateKey];
           const groupCopy = getImageGroupPurposeText(group.stateKey);
 
           return (
-            <section key={group.id} className="py-5">
-              <h3 className="text-lg font-semibold text-neutral-950">{groupCopy.label}</h3>
-              <p className="mt-1 text-sm leading-6 text-neutral-600">{groupCopy.description}</p>
-              <p className="mt-1 text-sm leading-6 text-neutral-500">{groupCopy.helper}</p>
+            <section key={group.id} className="flex flex-col gap-4">
+              <div className="px-1">
+                <h3 className="text-[17px] font-bold text-neutral-900 mb-1">{groupCopy.label}</h3>
+                <p className="text-[13px] text-neutral-500 leading-relaxed">{groupCopy.description}</p>
+                <p className="text-[11px] text-fuchsia-500 font-semibold mt-1">{groupCopy.helper}</p>
+              </div>
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                <label className="cursor-pointer rounded-xl border border-fuchsia-500 bg-fuchsia-50 px-5 py-3 text-[15px] font-semibold text-fuchsia-700 transition hover:bg-fuchsia-100">
-                  + {groupCopy.addButtonLabel}
+              <div className="flex flex-wrap gap-2">
+                <label className="flex items-center gap-2 cursor-pointer rounded-2xl border-2 border-fuchsia-600 bg-fuchsia-600 px-6 py-3.5 text-[14px] font-bold text-white transition hover:bg-fuchsia-700 shadow-[0_8px_16px_rgba(192,38,211,0.2)]">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  {groupCopy.addButtonLabel}
                   <input
                     type="file"
                     multiple
@@ -175,42 +159,49 @@ export function CustomerDetailsStepShell({
                     }}
                   />
                 </label>
-                <button
-                  type="button"
-                  onClick={() => handlers.onReset?.()}
-                  className="rounded-xl border border-neutral-100 bg-white px-5 py-3 text-[15px] font-semibold text-neutral-600"
-                >
-                  모두 지우기
-                </button>
+
+                {files.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => handlers.onReset?.()}
+                    className="rounded-2xl border-2 border-neutral-100 bg-white px-6 py-3.5 text-[14px] font-bold text-neutral-500 transition hover:bg-neutral-50"
+                  >
+                    초기화
+                  </button>
+                )}
               </div>
 
               {files.length > 0 ? (
-                <div className="mt-4 grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-4">
                   {files.map((item) => (
-                    <div key={item.id} className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
-                      <div className="flex aspect-[4/3] items-center justify-center border-b border-neutral-200 bg-neutral-50">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-950 text-sm font-semibold text-white">
+                    <div key={item.id} className="group overflow-hidden rounded-2xl border-2 border-neutral-100 bg-white shadow-sm ring-fuchsia-400/30 transition-all hover:ring-4">
+                      <div className="flex aspect-square items-center justify-center border-b border-neutral-50 bg-neutral-50">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-fuchsia-600 text-lg font-bold text-white shadow-lg animate-pulse-subtle">
                           {item.fileName.slice(0, 1).toUpperCase()}
                         </div>
                       </div>
-                      <div className="p-3">
-                        <div className="text-sm font-semibold text-neutral-900 break-all">
+                      <div className="p-4">
+                        <div className="text-[13px] font-bold text-neutral-800 truncate">
                           {item.fileName}
                         </div>
-                        <div className="mt-2 flex flex-wrap gap-2 text-xs text-neutral-500">
-                          <span className="rounded-full bg-neutral-100 px-2.5 py-1">
-                            {item.mimeType || "image/*"}
-                          </span>
-                          <span className="rounded-full bg-neutral-100 px-2.5 py-1">
-                            {formatFileSize(item.fileSize)}
-                          </span>
+                        <div className="mt-1 text-[11px] font-medium text-neutral-400">
+                          {formatFileSize(item.fileSize)}
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="mt-4 text-sm text-neutral-500">{groupCopy.emptyLabel}</div>
+                <div className="rounded-2xl border-2 border-dashed border-neutral-200 bg-neutral-50/50 p-10 text-center">
+                  <div className="flex justify-center mb-3">
+                    <svg className="h-8 w-8 text-neutral-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <p className="text-[13px] text-neutral-400 font-medium">
+                    {groupCopy.emptyLabel}
+                  </p>
+                </div>
               )}
             </section>
           );
@@ -218,7 +209,11 @@ export function CustomerDetailsStepShell({
       </div>
     </div>
   ) : (
-    <div className="py-5 text-sm text-neutral-500">현재 카테고리에서는 고객 정보 입력 화면을 준비 중입니다.</div>
+    <div className="py-20 text-center bg-neutral-50 rounded-3xl border-2 border-dashed border-neutral-200">
+      <p className="text-neutral-400 font-medium whitespace-pre-line">
+        {"현재 카테고리에서는\n고객 정보 입력 화면을 준비 중입니다."}
+      </p>
+    </div>
   );
 
   if (embedded) {
@@ -228,8 +223,8 @@ export function CustomerDetailsStepShell({
   return (
     <BookingFlowStepFrame
       eyebrow="STEP 3"
-      title="고객 정보"
-      description="예약 정보를 확인하고 연락처, 요청사항, 참고 이미지를 입력해 주세요."
+      title="고객 정보 입력"
+      description="예약 정보를 확인하고 연락처와 요청사항을 입력해 주세요."
     >
       {content}
     </BookingFlowStepFrame>

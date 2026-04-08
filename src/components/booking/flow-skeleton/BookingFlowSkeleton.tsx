@@ -261,9 +261,9 @@ export function BookingFlowSkeleton({
     setState((currentState) =>
       currentState.currentStep === "date-time-selection"
         ? {
-            ...currentState,
-            currentStep: "customer-details",
-          }
+          ...currentState,
+          currentStep: "customer-details",
+        }
         : currentState,
     );
   }, [state.currentStep]);
@@ -307,8 +307,6 @@ export function BookingFlowSkeleton({
 
   const serviceMenu = state.category ? BOOKING_FLOW_SERVICE_MENUS[state.category] : null;
   const summary = useMemo(() => buildBookingFlowSummary(state), [state]);
-  const selectedCategoryLabel =
-    BOOKING_FLOW_CATEGORY_OPTIONS.find((option) => option.id === state.category)?.label ?? null;
   const activeVisualStepId = resolveVisualStepId(state.currentStep);
   const activeVisualStep = getVisualStepDefinition(activeVisualStepId);
   const isConfirmationStep = activeVisualStepId === "confirmation";
@@ -317,8 +315,8 @@ export function BookingFlowSkeleton({
     (!hasConfiguredServiceItems(state.category) || state.selectedServiceId !== null);
   const canAdvanceFromDetailsEntry = Boolean(
     state.selectedDate &&
-      state.customerDetails.name.trim() &&
-      state.customerDetails.phone.trim(),
+    state.customerDetails.name.trim() &&
+    state.customerDetails.phone.trim(),
   );
   const canMoveNext =
     activeVisualStepId === "service-selection"
@@ -356,7 +354,6 @@ export function BookingFlowSkeleton({
             selectedCategory={state.category}
             serviceMenu={serviceMenu}
             selectedServiceId={state.selectedServiceId}
-            isCategoryLocked={Boolean(initialCategory)}
             onSelectCategory={(category) =>
               setState((currentState) => ({
                 ...currentState,
@@ -380,12 +377,8 @@ export function BookingFlowSkeleton({
           <div className="flex flex-col gap-8">
             <DateTimeSelectionStepShell
               embedded
-              dateOnly
               category={state.category}
-              categoryLabel={selectedCategoryLabel}
-              selectedServiceTitle={summary.selectedServiceTitle}
               selectedDate={state.selectedDate}
-              selectedTime={null}
               onSelectDate={(selectedDate) =>
                 setState((currentState) => ({
                   ...currentState,
@@ -397,13 +390,7 @@ export function BookingFlowSkeleton({
 
             <CustomerDetailsStepShell
               embedded
-              hideBookingSummary
-              hideSelectedTime
               category={state.category}
-              categoryLabel={selectedCategoryLabel}
-              selectedServiceTitle={summary.selectedServiceTitle}
-              selectedDate={summary.selectedDate}
-              selectedTime={null}
               details={state.customerDetails}
               onChangeName={(name) =>
                 setState((currentState) => ({
@@ -503,11 +490,10 @@ export function BookingFlowSkeleton({
               return (
                 <li
                   key={step.id}
-                  className={`flex-1 flex flex-col items-center justify-end pb-3 border-b-[3px] text-sm transition-colors ${
-                    isActive || isComplete
+                  className={`flex-1 flex flex-col items-center justify-end pb-3 border-b-[3px] text-sm transition-colors ${isActive || isComplete
                       ? "border-fuchsia-600 text-fuchsia-700"
                       : "border-neutral-100 text-neutral-400"
-                  }`}
+                    }`}
                 >
                   <div className="text-[11px] font-bold uppercase tracking-[0.14em]">
                     {`STEP ${step.order}`}

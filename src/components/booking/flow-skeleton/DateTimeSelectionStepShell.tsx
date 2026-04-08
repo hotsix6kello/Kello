@@ -4,104 +4,54 @@ import type { BookingFlowCategory } from "@/lib/bookings/bookingFlowSkeleton/typ
 
 type DateTimeSelectionStepShellProps = {
   category: BookingFlowCategory | null;
-  categoryLabel?: string | null;
-  selectedServiceTitle?: string | null;
   selectedDate: string | null;
-  selectedTime: string | null;
   embedded?: boolean;
-  dateOnly?: boolean;
   onSelectDate?: (value: string) => void;
-  onSelectTime?: (value: string) => void;
 };
-
-const QUICK_TIME_OPTIONS = ["10:00", "11:00", "13:00", "15:00", "17:00", "19:00"] as const;
 
 export function DateTimeSelectionStepShell({
   category,
-  categoryLabel,
-  selectedServiceTitle,
   selectedDate,
-  selectedTime,
   embedded = false,
-  dateOnly = false,
   onSelectDate,
-  onSelectTime,
 }: DateTimeSelectionStepShellProps) {
   const capabilities = getBookingFlowCategoryCapabilities(category);
   const supportsDateSelection = capabilities?.interactiveDateSelection === true;
 
   const content = supportsDateSelection ? (
-    <div className="bg-white">
-      {!embedded ? (
-        <div className="border-b border-neutral-200 py-4">
-          <div className="flex flex-wrap gap-2">
-            <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-              {selectedServiceTitle ?? categoryLabel ?? "선택한 시술"}
-            </span>
-            {selectedDate ? (
-              <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-                {selectedDate}
-              </span>
-            ) : null}
-          </div>
+    <div className="w-full">
+      {/* 2. 날짜 선택 섹션 */}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1.5 px-1">
+          <h3 className="text-[17px] font-bold text-neutral-900">방문 일자 선택</h3>
+          <p className="text-[13px] text-neutral-500">예약 가능한 날짜를 선택해주세요.</p>
         </div>
-      ) : null}
 
-      <div className="border-b border-neutral-200 py-5">
-        <h3 className="text-lg font-semibold text-neutral-950">예약 날짜</h3>
-        <p className="mt-1 text-sm leading-6 text-neutral-600">
-          가능한 날짜를 선택해 주세요.
-        </p>
-        <div className="py-2">
-          <label className="flex flex-col gap-2">
-            <input
-              type="date"
-              value={selectedDate ?? ""}
-              onChange={(event) => onSelectDate?.(event.target.value)}
-              className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500 focus:bg-fuchsia-50/10"
-            />
-          </label>
+        <div className="relative group">
+          <input
+            type="date"
+            value={selectedDate ?? ""}
+            min={new Date().toISOString().split("T")[0]}
+            onChange={(event) => onSelectDate?.(event.target.value)}
+            className={`w-full min-h-[64px] rounded-2xl border-2 px-5 text-base font-medium transition-all duration-200 outline-none cursor-pointer appearance-none ${selectedDate 
+              ? "bg-fuchsia-50 border-fuchsia-400 text-fuchsia-900 shadow-[0_8px_20px_rgba(192,38,211,0.06)]" 
+              : "bg-white border-neutral-100 text-neutral-900 hover:border-fuchsia-200"
+            }`}
+          />
+          <div className={`absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${selectedDate ? "text-fuchsia-600" : "text-neutral-400"}`}>
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
         </div>
       </div>
-
-      {!dateOnly ? (
-        <div className="py-6">
-          <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-3 gap-2">
-              {QUICK_TIME_OPTIONS.map((timeOption) => {
-                const isSelected = timeOption === selectedTime;
-
-                return (
-                  <button
-                    key={timeOption}
-                    type="button"
-                    onClick={() => onSelectTime?.(timeOption)}
-                    className={`rounded-xl border px-2 py-3 text-[15px] font-semibold transition ${
-                      isSelected
-                        ? "border-fuchsia-500 bg-fuchsia-50 text-fuchsia-700"
-                        : "border-neutral-100 bg-white text-neutral-700 hover:border-fuchsia-300"
-                    }`}
-                  >
-                    {timeOption}
-                  </button>
-                );
-              })}
-            </div>
-
-            <label className="mt-2 flex flex-col gap-2">
-              <input
-                type="time"
-                value={selectedTime ?? ""}
-                onChange={(event) => onSelectTime?.(event.target.value)}
-                className="min-h-12 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-fuchsia-500"
-              />
-            </label>
-          </div>
-        </div>
-      ) : null}
     </div>
   ) : (
-    <div className="py-5 text-sm text-neutral-500">현재 카테고리에서는 날짜 선택 화면을 준비 중입니다.</div>
+    <div className="py-20 text-center bg-neutral-50 rounded-3xl border-2 border-dashed border-neutral-200">
+      <p className="text-neutral-400 font-medium whitespace-pre-line">
+        {"현재 카테고리에서는\n날짜 선택 화면을 준비 중입니다."}
+      </p>
+    </div>
   );
 
   if (embedded) {
@@ -112,7 +62,7 @@ export function DateTimeSelectionStepShell({
     <BookingFlowStepFrame
       eyebrow="STEP 2"
       title="날짜 선택"
-      description="예약 날짜를 고른 뒤 나머지 정보를 입력하세요."
+      description="원하시는 예약 날짜를 선택해 주세요."
     >
       {content}
     </BookingFlowStepFrame>
