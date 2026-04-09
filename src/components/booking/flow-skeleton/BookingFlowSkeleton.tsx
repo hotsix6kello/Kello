@@ -467,56 +467,60 @@ export function BookingFlowSkeleton({
   };
 
   return (
-    <div className="flex flex-col bg-white px-4 pb-4">
-      <header className="border-b border-neutral-200 py-4">
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col items-center gap-2 text-center">
-            <span className="inline-flex w-fit rounded-full bg-fuchsia-50 px-3 py-1 text-[11px] font-semibold text-fuchsia-700">
-              예약 플로우
-            </span>
-            <div className="flex max-w-[22rem] flex-col items-center">
-              <h1 className="text-[1.75rem] font-semibold tracking-[-0.02em] text-neutral-950">
-                {activeVisualStep.title}
-              </h1>
-              <p className="mt-1 text-[13px] leading-5 text-neutral-500">{activeVisualStep.description}</p>
-            </div>
-          </div>
-
-          <ol className="flex w-full">
-            {BOOKING_FLOW_VISUAL_STEPS.map((step) => {
-              const isActive = step.id === activeVisualStepId;
-              const isComplete = step.order < activeVisualStep.order;
-
-              return (
-                <li
-                  key={step.id}
-                  className={`flex-1 flex flex-col items-center justify-end pb-3 border-b-[3px] text-sm transition-colors ${isActive || isComplete
-                      ? "border-fuchsia-600 text-fuchsia-700"
-                      : "border-neutral-100 text-neutral-400"
-                    }`}
-                >
-                  <div className="text-[11px] font-bold uppercase tracking-[0.14em]">
-                    {`STEP ${step.order}`}
-                  </div>
-                  <div className="mt-1 font-semibold leading-5">{step.title}</div>
-                </li>
-              );
-            })}
-          </ol>
+    <div 
+      className="flex flex-col -mx-4 -mt-20 min-h-[calc(100vh+5rem)] pb-10"
+      style={{
+        background: 'linear-gradient(180deg, #ffffff 0%, #fcf7f8 100%)'
+      }}
+    >
+      <div className="flex-1 px-4 pt-20 relative">
+        <div className="absolute top-[21px] left-1/2 -translate-x-1/2 z-[60]">
+          <h1 className="text-[20px] font-black tracking-tight text-[#4b3a42]">
+            {activeVisualStep.title}
+          </h1>
         </div>
-      </header>
+        <div className="flex flex-col bg-white rounded-[32px] border border-[#f1dce4] shadow-[0_12px_40px_rgba(75,58,66,0.06)] overflow-hidden">
+          <header className="pt-6 pb-6 px-6">
+            <div className="flex flex-col gap-6">
 
-      <section className="py-4">{renderCurrentStep()}</section>
+              <ol className="flex w-full px-2">
+                {BOOKING_FLOW_VISUAL_STEPS.map((step) => {
+                  const isActive = step.id === activeVisualStepId;
+                  const isComplete = step.order < activeVisualStep.order;
+
+                  return (
+                    <li
+                      key={step.id}
+                      className={`flex-1 flex flex-col items-center justify-end pb-4 border-b-2 text-sm transition-all duration-300 ${isActive || isComplete
+                        ? "border-[#f45b87] text-[#f45b87]"
+                        : "border-[#f1dce4] text-[#af98a1]/50"
+                        }`}
+                    >
+                      <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">
+                        {`STEP ${step.order}`}
+                      </div>
+                      <div className={`mt-2 font-black leading-tight ${isActive ? "scale-105" : "scale-100"} transition-transform`}>{step.title}</div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </header>
+
+          <section className="pt-6 pb-12 px-8 flex-1">{renderCurrentStep()}</section>
+        </div>
+      </div>
 
       {!isConfirmationStep ? (
-        <section className="sticky bottom-0 z-10 -mx-4 mt-2 bg-white px-4 pb-10 pt-4 shadow-[0_-20px_40px_rgba(255,255,255,1)]">
+        <section className="sticky bottom-0 z-10 px-6 pb-12 pt-8 mt-auto">
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#fcf7f8] via-[#fcf7f8]/90 to-transparent pointer-events-none" />
           <button
             type="button"
             onClick={() => handleNext()}
             disabled={!canMoveNext}
-            className="inline-flex min-h-14 w-full items-center justify-center rounded-xl px-6 text-[15px] font-semibold transition bg-fuchsia-600 text-white shadow-[0_8px_20px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none disabled:cursor-not-allowed"
+            className="relative z-10 inline-flex min-h-[64px] w-full items-center justify-center rounded-[20px] px-8 text-[17px] font-black transition-all duration-300 bg-[#f45b87] text-white shadow-[0_12px_28px_rgba(244,91,135,0.25)] hover:bg-[#4b3a42] hover:shadow-[0_12px_32px_rgba(75,58,66,0.3)] disabled:bg-[#f1dce4] disabled:text-[#af98a1] disabled:shadow-none disabled:cursor-not-allowed transform active:scale-[0.98]"
           >
-            {activeVisualStepId === "service-selection" ? "다음 단계로 이동" : "최종 예약 확인"}
+            {activeVisualStepId === "service-selection" ? "다음 단계" : "최종 예약 확인"}
           </button>
         </section>
       ) : null}

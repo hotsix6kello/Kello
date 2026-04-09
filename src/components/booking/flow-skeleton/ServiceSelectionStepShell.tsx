@@ -108,7 +108,7 @@ export function ServiceSelectionStepShell({
     <div className="w-full">
       {/* 1. 상단 카테고리 선택 칩 (카테고리가 없을 때만 노출) */}
       {showCategorySelector ? (
-        <div className="flex flex-wrap gap-2 pb-6">
+        <div className="flex flex-wrap gap-4 pb-12">
           {categories.map((category) => {
             const isSelected = category.id === selectedCategory;
 
@@ -117,12 +117,17 @@ export function ServiceSelectionStepShell({
                 key={category.id}
                 type="button"
                 onClick={() => onSelectCategory?.(category.id)}
-                className={`rounded-full px-5 py-2.5 text-[14px] font-bold transition-all duration-200 ${isSelected
-                  ? "bg-fuchsia-100 border-2 border-fuchsia-500 text-fuchsia-700 shadow-sm"
-                  : "bg-white border-2 border-neutral-100 text-neutral-500 hover:border-fuchsia-200 hover:text-fuchsia-500"
+                className={`flex items-center justify-between p-6 rounded-[24px] border-[1.5px] transition-all duration-300 ${isSelected
+                  ? "bg-[#ffe3ec]/30 border-[#f45b87] shadow-[0_8px_20px_rgba(244,91,135,0.06)]"
+                  : "bg-white border-[#f1dce4] text-[#4b3a42] hover:border-[#e4cbd6] shadow-[0_4px_12px_rgba(75,58,66,0.03)]"
                   }`}
               >
-                {category.label}
+                <span className="text-[17px] font-extrabold">{category.label}</span>
+                <span className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${isSelected ? "border-[#f45b87] bg-[#f45b87] text-white" : "border-[#f1dce4] bg-white text-transparent"}`}>
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
               </button>
             );
           })}
@@ -131,21 +136,21 @@ export function ServiceSelectionStepShell({
 
       {/* 2. 하단 시술 목록 리스트 */}
       {effectiveMenu ? (
-        <div className="flex flex-col gap-4 pb-20">
+        <div className="flex flex-col gap-5 pb-8">
           {effectiveMenu.sections.map((section: BookingServiceMenuSection) => (
-            <div key={section.id} className="flex flex-col gap-3">
+            <div key={section.id} className="flex flex-col gap-4">
               {effectiveMenu.sections.length > 1 ? (
                 <div className="mt-2 mb-1">
-                  <h3 className="text-[15px] font-bold text-neutral-800 px-1">{section.title}</h3>
+                  <h3 className="text-[16px] font-black text-[#4b3a42] px-1 uppercase tracking-tight opacity-90">{section.title}</h3>
                 </div>
               ) : null}
 
               {section.items.length === 0 ? (
-                <p className="px-1 text-sm text-neutral-400">
+                <p className="px-1 text-sm text-[#af98a1] font-medium">
                   표시할 시술이 아직 준비되지 않았습니다.
                 </p>
               ) : (
-                <div className="grid grid-cols-1 gap-3">
+                <div className="grid grid-cols-1 gap-4">
                   {section.items.map((item: BookingServiceMenuItem) => {
                     const isSelected = item.id === selectedServiceId;
 
@@ -154,24 +159,24 @@ export function ServiceSelectionStepShell({
                         key={item.id}
                         type="button"
                         onClick={() => onSelectService?.(item.id)}
-                        className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-200 outline-none ${isSelected
-                          ? "bg-fuchsia-50 border-fuchsia-500 shadow-[0_8px_20px_rgba(192,38,211,0.08)]"
-                          : "bg-white border-neutral-100 hover:border-fuchsia-200"
+                        className={`w-full text-left p-6 rounded-[24px] border-[1.5px] transition-all duration-300 ${isSelected
+                          ? "bg-white border-[#f45b87] shadow-[0_12px_30px_rgba(244,91,135,0.08)]"
+                          : "bg-white border-[#f1dce4] hover:border-[#e4cbd6] shadow-[0_4px_12px_rgba(75,58,66,0.03)] hover:shadow-[0_8px_20px_rgba(75,58,66,0.06)]"
                           }`}
                       >
-                        <div className="flex items-center justify-between mb-1.5">
-                          <h3 className={`text-lg font-bold transition-colors ${isSelected ? "text-fuchsia-700" : "text-neutral-900"}`}>
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className={`text-[19px] font-extrabold tracking-tight transition-colors ${isSelected ? "text-[#f45b87]" : "text-[#4b3a42]"}`}>
                             {item.title}
                           </h3>
                           {isSelected && (
-                            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-fuchsia-600">
-                              <svg className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#f45b87] shadow-[0_4px_8px_rgba(244,91,135,0.3)]">
+                              <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                               </svg>
                             </span>
                           )}
                         </div>
-                        <p className={`text-[13px] leading-relaxed line-clamp-2 transition-colors ${isSelected ? "text-fuchsia-600/70" : "text-neutral-500"}`}>
+                        <p className={`text-[14px] leading-relaxed transition-colors ${isSelected ? "text-[#f45b87]/80" : "text-[#8d747d]"} font-medium`}>
                           {item.description}
                         </p>
                       </button>
