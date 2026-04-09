@@ -251,7 +251,12 @@ export default function HomeBookingFlowEntry({
   }
 
   return (
-    <div className="fixed inset-0 z-[400] flex justify-center bg-black/60 sm:bg-black/40">
+    <div 
+      className="fixed inset-0 z-[400] flex justify-center overflow-hidden"
+      style={{
+        background: 'radial-gradient(circle at top left, rgba(244, 91, 135, 0.08), transparent 35%), radial-gradient(circle at top right, rgba(75, 58, 66, 0.06), transparent 30%), linear-gradient(180deg, #ffffff 0%, #fcf7f8 100%)'
+      }}
+    >
       <div className="relative flex h-full w-full max-w-[480px] flex-col overflow-hidden bg-white shadow-2xl animate-in slide-in-from-bottom duration-300">
         <button
           type="button"
