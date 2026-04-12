@@ -139,7 +139,7 @@ export default function HomePage() {
   const [sheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [isSkeletonFlowEnabled, setIsSkeletonFlowEnabled] = useState(false);
+  const [isSkeletonFlowEnabled, setIsSkeletonFlowEnabled] = useState(true);
   const [isDraftDebugEnabled, setIsDraftDebugEnabled] = useState(false);
   const skeletonDraftDebugRef = useRef<LegacyBookingDraftFromSkeleton | null>(null);
   const [draftDebugPanelState, setDraftDebugPanelState] = useState<DraftDebugPanelState | null>(null);
@@ -245,8 +245,9 @@ export default function HomePage() {
     // [추가] URL 파라미터에 booking=true가 있으면 예약 플로우를 즉시 엽니다.
     const params = new URLSearchParams(window.location.search);
     const hasBookingQuery = params.get('booking') === 'true';
-    setIsSkeletonFlowEnabled(false);
-    setIsDraftDebugEnabled(false);
+    const isLegacyRequested = params.get('flow') === 'legacy';
+    setIsSkeletonFlowEnabled(!isLegacyRequested);
+    setIsDraftDebugEnabled(params.get('debug') === 'true');
     setDraftDebugPanelState(null);
     setSubmitPreparationDebugState(null);
     setSubmitAttemptDebugState(null);
@@ -562,6 +563,8 @@ export default function HomePage() {
         onClose={() => setIsBookingOpen(false)}
         initialCategory={selectedCategory}
         t={t}
+        mode={isSkeletonFlowEnabled ? 'skeleton' : 'legacy'}
+        enableSkeletonMode={isSkeletonFlowEnabled}
         storeContext={bookingStoreContext}
         uploadedImageUrls={uploadedImageUrlsOverride}
         onDraftReady={isSkeletonFlowEnabled && isDraftDebugEnabled ? handleSkeletonDraftReady : undefined}

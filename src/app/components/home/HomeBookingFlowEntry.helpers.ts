@@ -29,8 +29,10 @@ export function resolveHomeBookingMode(params: {
   mode?: HomeBookingFlowMode;
   enableSkeletonMode?: boolean;
 }): HomeBookingFlowMode {
-  const mode = params.mode ?? "legacy";
-  return mode === "skeleton" && params.enableSkeletonMode === true ? "skeleton" : "legacy";
+  // 기본적으로 skeleton 모드를 우선하며, 명시적으로 legacy가 요청된 경우에만 legacy를 반환합니다.
+  if (params.mode === "legacy") return "legacy";
+  if (params.enableSkeletonMode === false) return "legacy";
+  return "skeleton";
 }
 
 export function shouldShowSkeletonDraftDebugPanel(params: {

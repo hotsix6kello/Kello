@@ -49,25 +49,15 @@ export function resolveLegacySubmitImageReadiness(
     };
   }
 
-  if (!isUploadSatisfied) {
-    return {
-      kind: "images-selected-upload-pending",
-      selectedImageCount,
-      uploadedImageUrlCount,
-      expectedUploadedImageUrlCount: selectedImageCount,
-      requiresUpload,
-      isUploadSatisfied,
-      shouldBlockSubmitUntilUpload: true,
-    };
-  }
-
+  // Skeleton flow uploads images at submit time (inside handleSubmitIntent).
+  // Pre-submit preparation should not block on pending uploads.
   return {
     kind: "images-upload-ready",
     selectedImageCount,
     uploadedImageUrlCount,
     expectedUploadedImageUrlCount: selectedImageCount,
     requiresUpload,
-    isUploadSatisfied,
+    isUploadSatisfied: true,
     shouldBlockSubmitUntilUpload: false,
   };
 }
