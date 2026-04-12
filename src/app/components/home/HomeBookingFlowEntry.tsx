@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BookingFlowSkeleton,
   type BookingFlowSkeletonDraftStateSnapshot,
@@ -20,9 +20,9 @@ import { submitBeautyBooking } from "@/app/explore/beautyBooking";
 import {
   HomeBookingDraftReadySequenceSnapshot,
   HomeBookingFlowEntryProps,
-  HomeBookingFlowMode,
   SkeletonSubmitAttemptStatus,
 } from "./HomeBookingFlowEntry.types";
+import { supabase } from "@/lib/supabaseClient";
 import HomeBeautyBookingFlow from "./HomeBeautyBookingFlow";
 export {
   buildHomeBookingDraftDebugState,
@@ -51,11 +51,12 @@ export default function HomeBookingFlowEntry({
   onSubmitAttemptStateChange,
   skeletonDebugPanel,
   onResolvedMode,
+  mode,
+  enableSkeletonMode,
 }: HomeBookingFlowEntryProps) {
   const draftSequenceSnapshotRef = useRef<HomeBookingDraftReadySequenceSnapshot>({
     lastEmittedSignature: null,
   });
-  const submitAttemptStatusRef = useRef<SkeletonSubmitAttemptStatus>("idle");
   const [activeSubmitStatus, setActiveSubmitStatus] = useState<SkeletonSubmitAttemptStatus>("idle");
   const localImageFilesRef = useRef<Map<string, File>>(new Map());
 
@@ -251,10 +252,8 @@ export default function HomeBookingFlowEntry({
     },
     [
       activeSubmitStatus,
-      onClose,
       onSubmitAttemptStateChange,
       onSubmitPreparationChange,
-      storeContext,
       uploadedImageUrls,
     ]
   );
