@@ -18,12 +18,12 @@ export async function uploadBookingImage(
   purpose: BookingImagePurpose
 ): Promise<SupabaseUploadResult> {
   try {
-    const fileExt = file.name.split('.').pop();
+    const fileExt = file.name.split('.').pop() || 'jpg';
     const fileName = `${Date.now()}_${purpose}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
-    const filePath = `${fileName}`;
+    const filePath = `beauty/${fileName}`;
 
     const { error: uploadError, data } = await supabase.storage
-      .from('booking')
+      .from('beauty-bookings')
       .upload(filePath, file, {
         cacheControl: '3600',
         upsert: false,
@@ -34,7 +34,7 @@ export async function uploadBookingImage(
     }
 
     const { data: { publicUrl } } = supabase.storage
-      .from('booking')
+      .from('beauty-bookings')
       .getPublicUrl(data.path);
 
     return { url: publicUrl, error: null };

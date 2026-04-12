@@ -17,11 +17,13 @@ import {
 import { runLegacySubmitPreparation } from "@/lib/bookings/bookingFlowSkeleton/submitRunner";
 import { uploadBookingImage } from "@/lib/bookings/SupabaseUploadAdapter";
 import { submitBeautyBooking } from "@/app/explore/beautyBooking";
-import type {
+import {
   HomeBookingDraftReadySequenceSnapshot,
   HomeBookingFlowEntryProps,
+  HomeBookingFlowMode,
   SkeletonSubmitAttemptStatus,
 } from "./HomeBookingFlowEntry.types";
+import HomeBeautyBookingFlow from "./HomeBeautyBookingFlow";
 export {
   buildHomeBookingDraftDebugState,
   buildHomeBookingDraftReadyEvent,
@@ -54,7 +56,13 @@ export default function HomeBookingFlowEntry({
     lastEmittedSignature: null,
   });
   const submitAttemptStatusRef = useRef<SkeletonSubmitAttemptStatus>("idle");
+  const [activeSubmitStatus, setActiveSubmitStatus] = useState<SkeletonSubmitAttemptStatus>("idle");
   const localImageFilesRef = useRef<Map<string, File>>(new Map());
+
+  const resolvedMode = useMemo(() => {
+    if (mode === "skeleton" && enableSkeletonMode) return "skeleton";
+    return "legacy";
+  }, [mode, enableSkeletonMode]);
 
   const skeletonInitialCategory = useMemo(
     () => resolveSkeletonCategoryFromLegacy(initialCategory),
@@ -62,8 +70,8 @@ export default function HomeBookingFlowEntry({
   );
 
   useEffect(() => {
-    onResolvedMode?.("skeleton");
-  }, [onResolvedMode]);
+    onResolvedMode?.(resolvedMode);
+  }, [onResolvedMode, resolvedMode]);
 
   const handleImageUploadBridgeRequest = useCallback((items: BookingImageUploadBridgeItem[]) => {
     items.forEach((item) => {
@@ -135,7 +143,7 @@ export default function HomeBookingFlowEntry({
   const handleSubmitIntent = useCallback(
     async (snapshot: BookingFlowSkeletonDraftStateSnapshot) => {
 
-      if (submitAttemptStatusRef.current === "submitting") {
+      if (activeSubmitStatus === "submitting" || activeSubmitStatus === "submitted") {
         return;
       }
 
@@ -165,16 +173,16 @@ export default function HomeBookingFlowEntry({
         return;
       }
 
-      if (submitAttemptStatusRef.current === "submitted") {
+      if (activeSubmitStatus === "submitted") {
         onSubmitAttemptStateChange?.({
           status: "submitted",
-          message: "Submit already completed for this skeleton session.",
+          message: "이미 예약이 완료되었습니다.",
           errorSummary: null,
         });
         return;
       }
 
-      submitAttemptStatusRef.current = "submitting";
+      setActiveSubmitStatus("submitting");
       onSubmitAttemptStateChange?.({
         status: "submitting",
         message: "이미지를 업로드하고 있어요...",
@@ -222,15 +230,17 @@ export default function HomeBookingFlowEntry({
           errorSummary: null,
         });
 
-        const result = await submitBeautyBooking(preparation.payloadCandidate);
-        submitAttemptStatusRef.current = "submitted";
+        const { data: sessionData } = await supabase.auth.getSession();
+        const result = await submitBeautyBooking(preparation.payloadCandidate, sessionData.session?.access_token);
+        
+        setActiveSubmitStatus("submitted");
         onSubmitAttemptStateChange?.({
           status: "submitted",
           message: `예약이 완료되었습니다! (ID: ${result.bookingId})`,
           errorSummary: null,
         });
       } catch (err: unknown) {
-        submitAttemptStatusRef.current = "submit-error";
+        setActiveSubmitStatus("submit-error");
         const errorMessage = err instanceof Error ? err.message : "예약 제출 중 오류가 발생했습니다.";
         onSubmitAttemptStateChange?.({
           status: "submit-error",
@@ -240,14 +250,28 @@ export default function HomeBookingFlowEntry({
       }
     },
     [
+      activeSubmitStatus,
+      onClose,
       onSubmitAttemptStateChange,
       onSubmitPreparationChange,
+      storeContext,
       uploadedImageUrls,
-    ],
+    ]
   );
 
   if (!isOpen) {
     return null;
+  }
+
+  if (resolvedMode === "legacy") {
+    return (
+      <HomeBeautyBookingFlow
+        isOpen={isOpen}
+        onClose={onClose}
+        initialCategory={initialCategory === "all" ? null : initialCategory}
+        t={t}
+      />
+    );
   }
 
   return (
@@ -282,14 +306,36 @@ export default function HomeBookingFlowEntry({
 
         <div className="flex-1 overflow-y-auto pb-10 pt-20">
           <div className="px-4">
-            <BookingFlowSkeleton
-              initialCategory={skeletonInitialCategory}
-              storeContext={storeContext}
-              onImageUploadBridgeRequest={handleImageUploadBridgeRequest}
-              completedImageUploadResult={completedImageUploadResult}
-              onDraftStateChange={handleDraftStateChange}
-              onSubmitIntent={handleSubmitIntent}
-            />
+            {activeSubmitStatus === "submitted" ? (
+              <div className="flex flex-col items-center justify-center py-20 text-center animate-in fade-in zoom-in duration-500">
+                <div className="w-20 h-20 bg-fuchsia-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                  <svg className="w-10 h-10 text-fuchsia-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="text-[22px] font-black text-neutral-900 mb-2">예약 요청 완료!</h2>
+                <p className="text-[14px] font-medium text-neutral-500 leading-relaxed px-6">
+                  성공적으로 예약 요청을 보냈습니다.<br />
+                  선택하신 매장에서 확인 후 곧 연락드릴 예정입니다.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => onClose()}
+                  className="mt-12 px-10 py-4 bg-fuchsia-600 text-white font-bold rounded-2xl shadow-lg hover:bg-fuchsia-700 transition-colors"
+                >
+                  확인
+                </button>
+              </div>
+            ) : (
+              <BookingFlowSkeleton
+                initialCategory={skeletonInitialCategory}
+                storeContext={storeContext}
+                onImageUploadBridgeRequest={handleImageUploadBridgeRequest}
+                completedImageUploadResult={completedImageUploadResult}
+                onDraftStateChange={handleDraftStateChange}
+                onSubmitIntent={handleSubmitIntent}
+              />
+            )}
           </div>
         </div>
       </div>
