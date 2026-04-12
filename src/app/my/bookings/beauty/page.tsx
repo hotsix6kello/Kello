@@ -113,6 +113,29 @@ async function getCustomerAccessToken() {
   return session?.access_token ?? null;
 }
 
+function isStoreMatched(status: BeautyBookingAdminRecord['status']): boolean {
+  return status === 'confirmed' || status === 'completed';
+}
+
+function buildCategoryTitle(category: string | null | undefined, serviceName: string | null | undefined): string {
+  const parts = [category, serviceName].filter((part) => {
+    return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
+  });
+  if (parts.length === 0) {
+    return '시술 정보 확인 중';
+  }
+  return parts.join(' · ');
+}
+
+function isValidDisplayValue(val: string | null | undefined): boolean {
+  if (!val) return false;
+  const text = val.trim().toLowerCase();
+  if (!text || ['asd', 'asdf', 'test', 'sample', 'qwe', '123', '1234', 'null', 'undefined'].includes(text)) {
+    return false;
+  }
+  return true;
+}
+
 function MyBeautyBookingsContent() {
   const { t, i18n } = useTranslation('common');
   const currentLocale = i18n.language ?? 'ko';
@@ -172,15 +195,7 @@ function MyBeautyBookingsContent() {
     return map[lang] ?? lang;
   }
 
-  function getIntentLabel(intent: string) {
-    const map: Record<string, string> = {
-      booking_confirm: t('beauty_bookings.intent_booking_confirm'),
-      service_request: t('beauty_bookings.intent_service_request'),
-      allergy_notice: t('beauty_bookings.intent_allergy_notice'),
-      style_consultation: t('beauty_bookings.intent_style_consultation'),
-    };
-    return map[intent] ?? intent;
-  }
+
 
   // 동적 자유문장 번역 상태 (customerRequest, alternativeOfferNote)
   const [translatedRequest, setTranslatedRequest] = useState<string>('');
@@ -215,6 +230,7 @@ function MyBeautyBookingsContent() {
   const [changeError, setChangeError] = useState<string | null>(null);
   const [changeSuccess, setChangeSuccess] = useState<string | null>(null);
   const [isChangeSubmitting, setIsChangeSubmitting] = useState(false);
+  const [isMobileDetailVisible, setIsMobileDetailVisible] = useState(false);
   
   // Alternative offer states
   const [selectedOfferSlot, setSelectedOfferSlot] = useState<{ date: string; time: string } | null>(null);
@@ -335,6 +351,7 @@ function MyBeautyBookingsContent() {
         
         // Auto scroll for mobile
         if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+          setIsMobileDetailVisible(true);
           setTimeout(() => {
             detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 400);
@@ -398,6 +415,10 @@ function MyBeautyBookingsContent() {
     setIsAlternativeSubmitting(false);
   }, [selectedBookingId]);
 
+  useEffect(() => {
+    setIsMobileDetailVisible(false);
+  }, [activeTab]);
+
   // Dynamic Translation Effect
   useEffect(() => {
     if (!selectedBooking) {
@@ -431,12 +452,10 @@ function MyBeautyBookingsContent() {
 
   const handleSelectBooking = (bookingId: string) => {
     setSelectedBookingId(bookingId);
-
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-      window.setTimeout(() => {
-        detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
-    }
+    setIsMobileDetailVisible(true);
+    window.setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 60);
   };
 
   const handleBookingCancel = async () => {
@@ -497,6 +516,7 @@ function MyBeautyBookingsContent() {
 
       if (activeTab === 'active') {
         setActiveTab('all');
+        setIsMobileDetailVisible(false);
       }
     } catch (error) {
       setCancelError(
@@ -662,14 +682,6 @@ function MyBeautyBookingsContent() {
       </header>
 
       <main className={styles.content}>
-        <section className={styles.heroCard}>
-          <p className={styles.eyebrow}>{t('beauty_bookings.hero_eyebrow')}</p>
-          <h2 className={styles.heroTitle}>{t('beauty_bookings.hero_title')}</h2>
-          <p className={styles.heroText}>
-            {t('beauty_bookings.hero_text')}
-          </p>
-        </section>
-
         {deepLinkApplied && (
           <div style={{ 
             position: 'fixed', 
@@ -700,84 +712,96 @@ function MyBeautyBookingsContent() {
           </div>
         )}
 
-        <section className={styles.tabBar} aria-label={t('beauty_bookings.tab_aria')}>
-          {TAB_OPTIONS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              className={`${styles.tabButton} ${activeTab === tab.id ? styles.tabButtonActive : ''}`}
-              onClick={() => setActiveTab(tab.id)}
-              aria-pressed={activeTab === tab.id}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </section>
+        {!isMobileDetailVisible ? (
+          <>
 
-        <div className={styles.layout}>
-          <section className={styles.listSection}>
-            {loadError ? <div className={styles.errorState}>{loadError}</div> : null}
-            {loading ? <div className={styles.emptyState}>{t('beauty_bookings.loading')}</div> : null}
-            {!loading && !loadError && filteredBookings.length === 0 ? (
-              <div className={styles.emptyState}>
-                {t('beauty_bookings.empty')}
-              </div>
-            ) : null}
+            
+            <section className={styles.tabBar} aria-label={t('beauty_bookings.tab_aria')}>
+              {TAB_OPTIONS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  className={`${styles.tabButton} ${activeTab === tab.id ? styles.tabButtonActive : ''}`}
+                  onClick={() => setActiveTab(tab.id)}
+                  aria-pressed={activeTab === tab.id}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </section>
 
-            {!loading && filteredBookings.length > 0 ? (
-              <div className={styles.cardList}>
-                {filteredBookings.map((booking) => (
-                  <button
-                    key={booking.id}
-                    type="button"
-                    className={`${styles.bookingCard} ${selectedBookingId === booking.id ? styles.bookingCardActive : ''}`}
-                    onClick={() => handleSelectBooking(booking.id)}
-                    aria-pressed={selectedBookingId === booking.id}
-                  >
-                    <div className={styles.cardTop}>
-                      <span className={`${styles.statusBadge} ${getStatusToneClass(booking.status)}`}>
-                        {STATUS_LABELS[booking.status]}
-                      </span>
-                      <span className={styles.createdAt}>{formatDateTimeLabel(booking.createdAt, i18n.language)}</span>
-                    </div>
-                    <h3 className={styles.storeName}>{booking.storeName}</h3>
-                     <p className={styles.bookingMeta}>
-                       {getCategoryLabel(booking.beautyCategory)} ·{' '}
-                       {formatDateLabel(booking.bookingDate, i18n.language)} {booking.bookingTime}
-                     </p>
-                    <dl className={styles.cardInfoList}>
-                      <div>
-                        <dt>{t('beauty_bookings.card_primary_service')}</dt>
-                        <dd>{booking.primaryServiceName}</dd>
-                      </div>
-                      <div>
-                        <dt>{t('beauty_bookings.card_estimated_price')}</dt>
-                        <dd>{formatPrice(booking.totalPrice, i18n.language, t)}</dd>
-                      </div>
-                    </dl>
-                     <div className={styles.cardFooter}>
-                       <span className={styles.languagePill}>
-                         {getLangLabel(booking.communicationLanguage)}
-                       </span>
-                       <span className={styles.statusHint}>{STATUS_DESCRIPTIONS[booking.status]}</span>
-                     </div>
-                  </button>
-                ))}
-              </div>
-            ) : null}
-          </section>
+            <div className={styles.layout}>
+              <section className={styles.listSection}>
+                {loadError ? <div className={styles.errorState}>{loadError}</div> : null}
+                {loading ? <div className={styles.emptyState}>{t('beauty_bookings.loading')}</div> : null}
+                {!loading && !loadError && filteredBookings.length === 0 ? (
+                  <div className={styles.emptyState}>
+                    {t('beauty_bookings.empty')}
+                  </div>
+                ) : null}
 
-          <section ref={detailRef} className={styles.detailSection}>
-            {!selectedBooking ? (
-              <div className={styles.emptyState}>{t('beauty_bookings.select_prompt')}</div>
-            ) : (
+                {!loading && filteredBookings.length > 0 ? (
+                  <div className={styles.cardList}>
+                    {filteredBookings.map((booking) => (
+                      <button
+                        key={booking.id}
+                        type="button"
+                        className={`${styles.bookingCard} ${selectedBookingId === booking.id ? styles.bookingCardActive : ''}`}
+                        onClick={() => handleSelectBooking(booking.id)}
+                        aria-pressed={selectedBookingId === booking.id}
+                      >
+                        <div className={styles.cardTop}>
+                          <span className={`${styles.statusBadge} ${getStatusToneClass(booking.status)}`}>
+                            {STATUS_LABELS[booking.status]}
+                          </span>
+                        </div>
+                        <h3 className={styles.storeName}>
+                          {!isStoreMatched(booking.status)
+                            ? buildCategoryTitle(getCategoryLabel(booking.beautyCategory), booking.primaryServiceName)
+                            : booking.storeName}
+                        </h3>
+                        <p className={styles.bookingMeta}>
+                          {formatDateLabel(booking.bookingDate, i18n.language)} {booking.bookingTime}
+                        </p>
+                        <div className={styles.cardFooter} style={{ borderTop: 'none', paddingTop: 0, marginTop: 4 }}>
+                          <span className={styles.statusHint} style={{ color: !isStoreMatched(booking.status) ? '#db2777' : 'inherit', fontWeight: 500 }}>
+                            {!isStoreMatched(booking.status) ? '조건에 맞는 매장을 찾고 있어요' : STATUS_DESCRIPTIONS[booking.status]}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </section>
+            </div>
+          </>
+        ) : (
+          <div className={styles.layout}>
+            <section ref={detailRef} className={styles.detailSection}>
+              <button 
+                type="button" 
+                className={styles.detailCloseButton}
+                onClick={() => {
+                  setIsMobileDetailVisible(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                ← 목록으로 돌아가기
+              </button>
+              {!selectedBooking ? (
+                <div className={styles.emptyState}>{t('beauty_bookings.select_prompt')}</div>
+              ) : (
               <article className={styles.detailCard}>
                 <div className={styles.detailHeader}>
                   <div>
                     <p className={styles.eyebrow}>
-                      {t('beauty_bookings.hero_eyebrow')} · {t('beauty_bookings.detail_booking_id')}: {selectedBooking.id.substring(0, 8).toUpperCase()}
+                      {t('beauty_bookings.hero_eyebrow')} · {t('beauty_bookings.detail_booking_id', '예약 번호')}: {selectedBooking.id.substring(0, 8).toUpperCase()}
                     </p>
-                    <h3 className={styles.detailTitle}>{selectedBooking.storeName}</h3>
+                    <h3 className={styles.detailTitle}>
+                      {!isStoreMatched(selectedBooking.status)
+                        ? buildCategoryTitle(getCategoryLabel(selectedBooking.beautyCategory), selectedBooking.primaryServiceName)
+                        : selectedBooking.storeName}
+                    </h3>
                     <p className={styles.detailSub}>
                       {formatDateLabel(selectedBooking.bookingDate, i18n.language)} {selectedBooking.bookingTime}
                     </p>
@@ -801,47 +825,64 @@ function MyBeautyBookingsContent() {
 
                 <div className={styles.summaryGrid}>
                    <div className={styles.summaryItem}>
-                     <span>{t('beauty_bookings.detail_category')}</span>
-                     <strong>{getCategoryLabel(selectedBooking.beautyCategory)}</strong>
+                     <span>{t('beauty_bookings.detail_status', '상태')}</span>
+                     <strong>{STATUS_LABELS[selectedBooking.status]}</strong>
                    </div>
                    <div className={styles.summaryItem}>
-                     <span>{t('beauty_bookings.detail_designer')}</span>
-                     <strong>{selectedBooking.designerName ?? t('beauty_bookings.detail_designer_default')}</strong>
+                     <span>{t('beauty_bookings.detail_category', '카테고리')} / 서비스</span>
+                     <strong>{buildCategoryTitle(getCategoryLabel(selectedBooking.beautyCategory), selectedBooking.primaryServiceName)}</strong>
                    </div>
-                    <div className={styles.summaryItem}>
-                      <span>{t('beauty_bookings.detail_requested_at')}</span>
-                      <strong>{formatDateTimeLabel(selectedBooking.createdAt, i18n.language)}</strong>
-                    </div>
-                   <div className={styles.summaryItem}>
-                     <span>{t('beauty_bookings.detail_status')}</span>
-                     <strong>{STATUS_DESCRIPTIONS[selectedBooking.status]}</strong>
-                     {selectedBooking.status === 'confirmed' && (
-                       <>
-                         <p className={styles.statusHint} style={{ marginTop: 4, color: '#1d4ed8', fontWeight: 600 }}>
-                           {t('beauty_bookings.status_guide_confirmed')}
-                         </p>
-                         <a
-                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedBooking.storeName} ${selectedBooking.region} Korea`)}`}
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           className={styles.secondaryActionButton}
-                           style={{ 
-                             display: 'inline-flex', 
-                             alignItems: 'center', 
-                             justifyContent: 'center', 
-                             marginTop: 10,
-                             textDecoration: 'none',
-                             width: 'auto',
-                             gap: 6
-                           }}
-                         >
-                           📍 {t('beauty_bookings.action_view_on_map')}
-                         </a>
-                       </>
-                     )}
+                   <div className={styles.summaryItem} style={{ gridColumn: '1 / -1' }}>
+                     <span>희망 일정</span>
+                     <strong>{formatDateLabel(selectedBooking.bookingDate, i18n.language)} {selectedBooking.bookingTime}</strong>
                    </div>
                  </div>
 
+                 <div className={styles.summaryGrid} style={{ marginTop: 12 }}>
+                   <div className={styles.summaryItem} style={{ gridColumn: '1 / -1' }}>
+                     <span>매장 진행 상황</span>
+                     <strong style={{ color: !isStoreMatched(selectedBooking.status) ? '#db2777' : 'inherit' }}>
+                       {!isStoreMatched(selectedBooking.status)
+                         ? '조건에 맞는 매장을 찾고 있어요'
+                         : selectedBooking.storeName}
+                     </strong>
+                     <p className={styles.statusHint} style={{ marginTop: 4 }}>
+                       {STATUS_DESCRIPTIONS[selectedBooking.status]}
+                     </p>
+                     {selectedBooking.status === 'confirmed' && (
+                       <a
+                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedBooking.storeName} ${selectedBooking.region} Korea`)}`}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className={styles.secondaryActionButton}
+                         style={{ 
+                           display: 'inline-flex', 
+                           alignItems: 'center', 
+                           justifyContent: 'center', 
+                           marginTop: 10,
+                           textDecoration: 'none',
+                           width: 'auto',
+                           gap: 6
+                         }}
+                       >
+                         📍 {t('beauty_bookings.action_view_on_map')}
+                       </a>
+                     )}
+                   </div>
+                   {isValidDisplayValue(translatedRequest) && (
+                     <div className={styles.summaryItem} style={{ gridColumn: '1 / -1' }}>
+                       <span>요청 정보</span>
+                       <strong>{translatedRequest}</strong>
+                       <div style={{ marginTop: 8 }}>
+                         <span className={styles.languagePill}>{getLangLabel(selectedBooking.communicationLanguage)}</span>
+                       </div>
+                     </div>
+                   )}
+                 </div>
+
+                <details className={styles.moreInfoDetails}>
+                  <summary className={styles.moreInfoSummary}>추가 정보 보기 ▾</summary>
+                  <div className={styles.detailsContentWrapper}>
                 <section className={styles.timelineSection}>
                   <h4 className={styles.blockTitle}>{t('beauty_bookings.timeline_title')}</h4>
                   <div className={styles.timelineList}>
@@ -1034,10 +1075,6 @@ function MyBeautyBookingsContent() {
                          <dt>{t('beauty_bookings.service_addons')}</dt>
                          <dd>{selectedBooking.addOnNames.length ? selectedBooking.addOnNames.join(', ') : t('beauty_bookings.service_addons_empty')}</dd>
                        </div>
-                       <div>
-                         <dt>{t('beauty_bookings.service_region')}</dt>
-                         <dd>{selectedBooking.region}</dd>
-                       </div>
                     </dl>
                   </section>
 
@@ -1046,46 +1083,30 @@ function MyBeautyBookingsContent() {
                     <dl className={styles.detailList}>
                        <div>
                          <dt>{t('beauty_bookings.price_base')}</dt>
-                         <dd>{formatPrice(selectedBooking.basePrice, i18n.language, t)}</dd>
+                         <dd>{(!isStoreMatched(selectedBooking.status) && selectedBooking.basePrice === 0) ? '-' : formatPrice(selectedBooking.basePrice, i18n.language, t)}</dd>
                        </div>
                        <div>
                          <dt>{t('beauty_bookings.price_addon')}</dt>
-                         <dd>{formatPrice(selectedBooking.addOnPrice, i18n.language, t)}</dd>
+                         <dd>{(!isStoreMatched(selectedBooking.status) && selectedBooking.addOnPrice === 0) ? '-' : formatPrice(selectedBooking.addOnPrice, i18n.language, t)}</dd>
                        </div>
                        <div>
                          <dt>{t('beauty_bookings.price_surcharge')}</dt>
-                         <dd>{formatPrice(selectedBooking.designerSurcharge, i18n.language, t)}</dd>
+                         <dd>{(!isStoreMatched(selectedBooking.status) && selectedBooking.designerSurcharge === 0) ? '-' : formatPrice(selectedBooking.designerSurcharge, i18n.language, t)}</dd>
                        </div>
                        <div>
                          <dt>{t('beauty_bookings.price_total')}</dt>
-                         <dd className={styles.priceEmphasis}>{formatPrice(selectedBooking.totalPrice, i18n.language, t)}</dd>
+                         <dd className={styles.priceEmphasis}>
+                           {(!isStoreMatched(selectedBooking.status) && selectedBooking.totalPrice === 0)
+                             ? '매장 확인 후 안내'
+                             : formatPrice(selectedBooking.totalPrice, i18n.language, t)}
+                         </dd>
                        </div>
                     </dl>
                   </section>
 
-                   <section className={styles.detailBlock}>
-                     <h4 className={styles.blockTitle}>{t('beauty_bookings.request_title')}</h4>
-                     <dl className={styles.detailList}>
-                       <div>
-                         <dt>{t('beauty_bookings.request_memo')}</dt>
-                         <dd>{translatedRequest || t('beauty_bookings.request_memo_empty')}</dd>
-                       </div>
-                     </dl>
-                   </section>
+                   {/* removed redundant request memo block */}
 
-                   <section className={styles.detailBlock}>
-                     <h4 className={styles.blockTitle}>{t('beauty_bookings.delivery_title')}</h4>
-                    <dl className={styles.detailList}>
-                       <div>
-                        <dt>{t('beauty_bookings.delivery_lang')}</dt>
-                        <dd>{getLangLabel(selectedBooking.communicationLanguage)}</dd>
-                      </div>
-                      <div>
-                        <dt>{t('beauty_bookings.delivery_intent')}</dt>
-                        <dd>{getIntentLabel(selectedBooking.communicationIntent)}</dd>
-                      </div>
-                    </dl>
-                  </section>
+                   {/* removed redundant delivery details block */}
                 </div>
 
                  {selectedBooking.status === 'canceled' ? (
@@ -1108,60 +1129,62 @@ function MyBeautyBookingsContent() {
                    </section>
                  ) : null}
 
-                 <section className={styles.messageSection}>
-                   <div className={styles.messageCard}>
-                     <span className={styles.messageLabel}>{t('beauty_bookings.message_korean')}</span>
-                     <p className={styles.messageText}>{selectedBooking.koreanMessage}</p>
-                   </div>
-                   <div className={styles.messageCard}>
-                     <span className={styles.messageLabel}>{t('beauty_bookings.message_localized')}</span>
-                     <p className={styles.messageText}>{selectedBooking.localizedMessage}</p>
-                   </div>
-                 </section>
-
-                 <section className={styles.cancelSection}>
-                   <div className={styles.cancelHeader}>
-                     <div>
-                       <h4 className={styles.blockTitle}>{t('beauty_bookings.manage_title')}</h4>
-                       <p className={styles.cancelText}>
-                         {t('beauty_bookings.manage_desc')}
-                       </p>
-                     </div>
-                    {canChangeSelectedBooking || canCancelSelectedBooking ? (
-                      <div className={styles.actionButtonRow}>
-                         {canChangeSelectedBooking && (
-                           <button
-                             type="button"
-                             className={styles.secondaryActionButton}
-                             onClick={() => {
-                               setChangeSuccess(null);
-                               setChangeError(null);
-                               setIsChangePanelOpen((current) => !current);
-                               setIsCancelPanelOpen(false);
-                             }}
-                           >
-                             {t('beauty_bookings.action_change')}
-                           </button>
-                         )}
-                         {canCancelSelectedBooking && (
-                           <button
-                             type="button"
-                             className={styles.cancelButton}
-                             onClick={() => {
-                               setCancelSuccess(null);
-                               setCancelError(null);
-                               setIsCancelPanelOpen((current) => !current);
-                               setIsChangePanelOpen(false);
-                             }}
-                           >
-                             {t('beauty_bookings.action_cancel')}
-                           </button>
-                         )}
-                      </div>
-                    ) : (
-                       <span className={styles.cancelDisabledNote}>{t('beauty_bookings.manage_disabled')}</span>
-                    )}
+                 {(isValidDisplayValue(selectedBooking.koreanMessage) || isValidDisplayValue(selectedBooking.localizedMessage)) && (
+                   <section className={styles.messageSection}>
+                     {isValidDisplayValue(selectedBooking.koreanMessage) && (
+                       <div className={styles.messageCard}>
+                         <span className={styles.messageLabel}>{t('beauty_bookings.message_korean')}</span>
+                         <p className={styles.messageText}>{selectedBooking.koreanMessage}</p>
+                       </div>
+                     )}
+                     {isValidDisplayValue(selectedBooking.localizedMessage) && (
+                       <div className={styles.messageCard}>
+                         <span className={styles.messageLabel}>{t('beauty_bookings.message_localized')}</span>
+                         <p className={styles.messageText}>{selectedBooking.localizedMessage}</p>
+                       </div>
+                     )}
+                   </section>
+                 )}
                   </div>
+                </details>
+
+                 {canChangeSelectedBooking || canCancelSelectedBooking ? (
+                   <section className={styles.cancelSection}>
+                      <details className={styles.moreInfoDetails} style={{ marginTop: 0 }}>
+                        <summary className={styles.moreInfoSummary} style={{ background: 'transparent', border: 'none', color: '#6b7280', margin: 0, padding: 0 }}>예약 관리 (변경/취소) ▾</summary>
+                        <div className={styles.actionButtonRow} style={{ marginTop: 16 }}>
+                           {canChangeSelectedBooking && (
+                             <button
+                               type="button"
+                               className={styles.secondaryActionButton}
+                               onClick={() => {
+                                 setChangeSuccess(null);
+                                 setChangeError(null);
+                                 setIsChangePanelOpen((current) => !current);
+                                 setIsCancelPanelOpen(false);
+                               }}
+                             >
+                               {t('beauty_bookings.action_change')}
+                             </button>
+                           )}
+                           {canCancelSelectedBooking && (
+                             <button
+                               type="button"
+                               className={styles.cancelButton}
+                               onClick={() => {
+                                 setCancelSuccess(null);
+                                 setCancelError(null);
+                                 setIsCancelPanelOpen((current) => !current);
+                                 setIsChangePanelOpen(false);
+                               }}
+                             >
+                               {t('beauty_bookings.action_cancel')}
+                             </button>
+                           )}
+                        </div>
+                      </details>
+                   </section>
+                 ) : null}
 
                   {changeSuccess ? <div className={styles.successState}>{changeSuccess}</div> : null}
                   {changeError ? <div className={styles.errorState}>{changeError}</div> : null}
@@ -1243,12 +1266,12 @@ function MyBeautyBookingsContent() {
                          </button>
                        </div>
                     </div>
-                  ) : null}
-                </section>
+                   ) : null}
               </article>
             )}
-          </section>
-        </div>
+            </section>
+          </div>
+        )}
       </main>
     </div>
   );
