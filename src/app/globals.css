@@ -25,21 +25,21 @@
   --soft-ink: #8d747d;
 
   /* Korean Theme Foundation - Accent */
-  --dancheong-teal: #f45b87;
-  --deep-navy: #4b3a42;
-  --korean-red: #ef4d7d;
-  --muted-gold: #bd9d8c;
+  --dancheong-teal: #ff2d78; /* Hot Pink Primary */
+  --deep-navy: #3d2b32; /* Darker neutral for contrast */
+  --korean-red: #ff5294; /* Brighter Pink for accents */
+  --muted-gold: #c5a99b;
 
   /* Functional Mapping */
   --background: var(--hanji-ivory);
   --foreground: var(--ink-black);
   --primary: var(--dancheong-teal);
-  --primary-glow: #ffe3ec;
+  --primary-glow: #ffebf1;
   --secondary: var(--deep-navy);
-  --secondary-glow: rgba(75, 58, 66, 0.1);
+  --secondary-glow: rgba(61, 43, 50, 0.1);
   --accent: var(--korean-red);
-  --success: #f45b87; /* Match brand pink for consistency */
-  --warning: #bd9d8c;
+  --success: #3cb44a; /* Restore to green for semantic clarity */
+  --warning: #f59e0b;
 
   --surface: #ffffff;
   --surface-alt: var(--warm-sand);
