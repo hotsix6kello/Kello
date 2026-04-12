@@ -14,9 +14,10 @@ import {
   BeautyCategoryId,
   PRIMARY_SERVICES_BY_CATEGORY
 } from './constants';
-import { submitBeautyBooking, uploadBookingImages, BeautyBookingPayload } from '@/app/explore/beautyBooking';
+import { submitBeautyBooking, BeautyBookingPayload } from '@/app/explore/beautyBooking';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip } from '@/lib/contexts/TripContext';
+import { uploadBookingImage } from '@/lib/bookings/SupabaseUploadAdapter';
 
 interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
@@ -44,7 +45,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     phone: '',
     request: ''
   });
-  const [requestImages, setRequestImages] = useState<string[]>([]);
+  const [currentImage, setCurrentImage] = useState<{ file: File; preview: string } | null>(null);
+  const [styleImage, setStyleImage] = useState<{ file: File; preview: string } | null>(null);
   const [agreements, setAgreements] = useState({
     bookingConfirmed: false,
     privacyConsent: false
@@ -149,32 +151,25 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     setCurrentStep(2);
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, type: 'current' | 'style') => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    const remainingSlots = 2 - requestImages.length;
-    if (remainingSlots <= 0) {
-      alert('이미지는 최대 2장까지만 첨부 가능합니다.');
-      return;
-    }
-
-    const filesToProcess = Array.from(files).slice(0, remainingSlots);
-    
-    filesToProcess.forEach(file => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setRequestImages(prev => [...prev, reader.result as string]);
-      };
-      reader.readAsDataURL(file);
-    });
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const data = { file, preview: reader.result as string };
+      if (type === 'current') setCurrentImage(data);
+      else setStyleImage(data);
+    };
+    reader.readAsDataURL(file);
     
     // Reset input
     e.target.value = '';
   };
 
-  const removeImage = (index: number) => {
-    setRequestImages(prev => prev.filter((_, i) => i !== index));
+  const removeImage = (type: 'current' | 'style') => {
+    if (type === 'current') setCurrentImage(null);
+    else setStyleImage(null);
   };
 
   const handleBack = () => {
@@ -192,10 +187,19 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     
     setIsSubmitting(true);
     try {
-      // 1. Upload images to Supabase Storage if any
-      let uploadedUrls: string[] = [];
-      if (requestImages.length > 0) {
-        uploadedUrls = await uploadBookingImages(requestImages);
+      // 1. Upload images to Supabase Storage if any (Validated logic from skeleton)
+      const currentUploadPromise = currentImage?.file 
+        ? uploadBookingImage(currentImage.file, 'current')
+        : Promise.resolve({ url: null, error: null });
+        
+      const styleUploadPromise = styleImage?.file
+        ? uploadBookingImage(styleImage.file, 'style')
+        : Promise.resolve({ url: null, error: null });
+
+      const [currentResult, styleResult] = await Promise.all([currentUploadPromise, styleUploadPromise]);
+
+      if (currentResult.error || styleResult.error) {
+        throw new Error(`이미지 업로드 실패: ${currentResult.error || styleResult.error}`);
       }
 
       const service = availableServices.find((s) => s.id === selectedServiceId);
@@ -224,7 +228,9 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           name: customerForm.name,
           phone: customerForm.phone,
           request: customerForm.request,
-          imageUrls: uploadedUrls,
+          imageUrls: [currentResult.url, styleResult.url].filter((u): u is string => !!u),
+          currentImageUrl: currentResult.url ?? undefined,
+          styleImageUrl: styleResult.url ?? undefined,
         },
         communication: {
           language: 'ko',
@@ -243,8 +249,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         },
       };
 
-      const { data } = await supabase.auth.getSession();
-      await submitBeautyBooking(payload, data.session?.access_token ?? null);
+      const { data: sessionData } = await supabase.auth.getSession();
+      await submitBeautyBooking(payload, sessionData.session?.access_token ?? null);
       
       setSubmittedBooking({
         storeName: selectedStore.name,
@@ -255,7 +261,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
 
     } catch (error) {
       console.error('Booking failed', error);
-      alert('예약 요청 중 오류가 발생했습니다.');
+      alert(error instanceof Error ? error.message : '예약 요청 중 오류가 발생했습니다.');
     } finally {
       setIsSubmitting(false);
     }
@@ -462,32 +468,58 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                              />
                              
                              {/* 이미지 첨부 영역 */}
-                             <div className="mt-4">
-                               <div className="flex flex-wrap gap-3">
-                                 {requestImages.map((img, idx) => (
-                                   <div key={idx} className="relative w-20 h-20 rounded-xl overflow-hidden border border-neutral-100 group">
-                                     <Image src={img} alt="attached" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
-                                     <button 
-                                       onClick={() => removeImage(idx)}
-                                       className="absolute top-1 right-1 bg-black/50 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs backdrop-blur-sm"
-                                     >
-                                       ✕
-                                     </button>
-                                   </div>
-                                 ))}
-                                 
-                                 {requestImages.length < 2 && (
-                                   <label className="w-20 h-20 flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl bg-neutral-50 text-neutral-400 cursor-pointer hover:border-[#bb8a78] hover:bg-[#fffcfb] hover:text-[#bb8a78] transition-all">
-                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mb-1">
-                                       <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                                       <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                                     </svg>
-                                     <span className="text-[10px] font-bold uppercase tracking-wide">Add Poto</span>
-                                     <input type="file" accept="image/*" className="hidden" multiple onChange={handleImageUpload} />
-                                   </label>
-                                 )}
+                              {/* 이미지 첨부 영역: 현재 모습 & 원하는 스타일 */}
+                             <div className="mt-4 flex flex-col gap-4">
+                               <div className="flex gap-4">
+                                 {/* 현재 모습 */}
+                                 <div className="flex-1 flex flex-col gap-2">
+                                   <label className="text-[11px] font-bold text-neutral-500 uppercase">현재 내 상태</label>
+                                   {currentImage ? (
+                                      <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-neutral-100 shadow-sm group">
+                                        <Image src={currentImage.preview} alt="current" fill sizes="100vw" className="object-cover" />
+                                        <button 
+                                          onClick={() => removeImage('current')}
+                                          className="absolute top-2 right-2 bg-black/50 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs backdrop-blur-sm"
+                                        >
+                                          ✕
+                                        </button>
+                                      </div>
+                                   ) : (
+                                      <label className="w-full aspect-square flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl bg-neutral-50 text-neutral-400 cursor-pointer hover:border-[#bb8a78] hover:bg-[#fffcfb] transition-all">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mb-1">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                        </svg>
+                                        <span className="text-[10px] font-black">사진 추가</span>
+                                        <input type="file" accept="image/*" className="hidden" onChange={(e) => handleImageUpload(e, 'current')} />
+                                      </label>
+                                   )}
+                                 </div>
+
+                                 {/* 원하는 스타일 */}
+                                 <div className="flex-1 flex flex-col gap-2">
+                                   <label className="text-[11px] font-bold text-neutral-500 uppercase">원하는 스타일</label>
+                                   {styleImage ? (
+                                      <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-neutral-100 shadow-sm group">
+                                        <Image src={styleImage.preview} alt="style" fill sizes="100vw" className="object-cover" />
+                                        <button 
+                                          onClick={() => removeImage('style')}
+                                          className="absolute top-2 right-2 bg-black/50 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs backdrop-blur-sm"
+                                        >
+                                          ✕
+                                        </button>
+                                      </div>
+                                   ) : (
+                                      <label className="w-full aspect-square flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl bg-neutral-50 text-neutral-400 cursor-pointer hover:border-[#bb8a78] hover:bg-[#fffcfb] transition-all">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mb-1">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6.75a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6.75v10.5a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                        </svg>
+                                        <span className="text-[10px] font-black">사진 추가</span>
+                                        <input type="file" accept="image/*" className="hidden" onChange={(e) => handleImageUpload(e, 'style')} />
+                                      </label>
+                                   )}
+                                 </div>
                                </div>
-                               <p className="text-[10px] text-neutral-400 mt-2 font-medium">* 스타일 참고용 이미지(최대 2장)를 첨부하실 수 있습니다.</p>
+                               <p className="text-[10px] text-neutral-400 font-medium">* 시술 참고용 및 현재 상태 확인을 위해 각 1장씩 첨부 가능합니다.</p>
                              </div>
                           </div>
                        </div>
