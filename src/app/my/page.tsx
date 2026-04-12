@@ -9,8 +9,6 @@ import { getMyPageCapabilities, type PartnerStatus } from "./pagePermissions";
 import styles from "./my.module.css";
 import {
     type BeautyBookingAdminRecord,
-    isBeautyBookingCustomerCancelableStatus,
-    isBeautyBookingCustomerChangeableStatus,
 } from "@/lib/bookings/beautyBookingAdmin";
 
 interface DashboardProfileRecord {
@@ -194,6 +192,29 @@ const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> =
     change_requested: '#7c3aed',
 };
 
+const BOOKING_STATUS_DESC_KEY: Record<BeautyBookingAdminRecord['status'], string> = {
+    requested: 'beauty_bookings.status_desc_requested',
+    confirmed: 'beauty_bookings.status_desc_confirmed',
+    completed: 'beauty_bookings.status_desc_completed',
+    canceled: 'beauty_bookings.status_desc_canceled',
+    failed: 'beauty_bookings.status_desc_failed',
+    change_requested: 'beauty_bookings.status_desc_change_requested',
+};
+
+function isStoreMatched(status: BeautyBookingAdminRecord['status']): boolean {
+    return status === 'confirmed' || status === 'completed';
+}
+
+function buildCategoryTitle(category: string | null | undefined, serviceName: string | null | undefined): string {
+    const parts = [category, serviceName].filter((part) => {
+        return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
+    });
+    if (parts.length === 0) {
+        return '시술 정보 확인 중';
+    }
+    return parts.join(' · ');
+}
+
 function SectionCardSkeleton({ rows = 2 }: { rows?: number }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -317,7 +338,15 @@ function MyBookingsSection({
             )}
             {!loading && bookings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {bookings.map(b => (
+                    {bookings.slice(0, 2).map(b => {
+                        const isMatched = isStoreMatched(b.status);
+                        const categoryLabel = b.beautyCategory ? t(`beauty_bookings.category_${b.beautyCategory}`) : '';
+                        const displayCategory = categoryLabel.startsWith('beauty_bookings.') ? b.beautyCategory : categoryLabel;
+                        const title = !isMatched 
+                                      ? buildCategoryTitle(displayCategory, b.primaryServiceName)
+                                      : b.storeName;
+
+                        return (
                         <div
                             key={b.id}
                             style={{
@@ -327,7 +356,7 @@ function MyBookingsSection({
                         >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                                 <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b' }}>
-                                    {b.storeName}
+                                    {title}
                                 </span>
                                 <span style={{
                                     fontSize: '0.7rem', fontWeight: 700,
@@ -339,47 +368,19 @@ function MyBookingsSection({
                                     {t(BOOKING_STATUS_KO_KEY[b.status])}
                                 </span>
                             </div>
-                            <div style={{ fontSize: '0.85rem', color: '#475569', marginBottom: 4 }}>
-                                {b.primaryServiceName || b.beautyCategory}
-                            </div>
                             <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 4 }}>
                                 📅 {b.bookingDate} · {b.bookingTime}
                             </div>
-                            <div style={{ fontSize: '0.82rem', color: '#64748b', marginBottom: 12 }}>
-                                💰 {b.totalPrice.toLocaleString('ko-KR')}{t('beauty_explore.label_booking_unit')}
+                            <div style={{ fontSize: '0.82rem', color: !isMatched ? '#db2777' : '#64748b', fontWeight: !isMatched ? 600 : 400, marginBottom: 4 }}>
+                                {!isMatched ? '조건에 맞는 매장을 찾고 있어요' : (t(BOOKING_STATUS_DESC_KEY[b.status]) || '')}
                             </div>
-                            <div style={{ display: 'flex', gap: 8 }}>
-                                <button
-                                    onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
-                                    disabled={!isBeautyBookingCustomerChangeableStatus(b.status)}
-                                    style={{
-                                        flex: 1, padding: '9px 0', borderRadius: 10,
-                                        fontSize: '0.8rem', fontWeight: 700,
-                                        cursor: isBeautyBookingCustomerChangeableStatus(b.status) ? 'pointer' : 'not-allowed',
-                                        background: isBeautyBookingCustomerChangeableStatus(b.status) ? 'var(--primary-glow)' : '#f1f5f9',
-                                        color: isBeautyBookingCustomerChangeableStatus(b.status) ? 'var(--secondary)' : '#94a3b8',
-                                        border: '1px solid var(--warm-sand)',
-                                    }}
-                                >
-                                    {t('my_page.bookings.action_edit_request')}
-                                </button>
-                                <button
-                                    onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
-                                    disabled={!isBeautyBookingCustomerCancelableStatus(b.status)}
-                                    style={{
-                                        flex: 1, padding: '9px 0', borderRadius: 10,
-                                        fontSize: '0.8rem', fontWeight: 700,
-                                        cursor: isBeautyBookingCustomerCancelableStatus(b.status) ? 'pointer' : 'not-allowed',
-                                        background: isBeautyBookingCustomerCancelableStatus(b.status) ? '#fff1f2' : '#f1f5f9',
-                                        color: isBeautyBookingCustomerCancelableStatus(b.status) ? '#dc2626' : '#94a3b8',
-                                        border: `1px solid ${isBeautyBookingCustomerCancelableStatus(b.status) ? '#fecdd3' : '#e2e8f0'}`,
-                                    }}
-                                >
-                                    {t('my_page.bookings.action_cancel_request')}
-                                </button>
+                            <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
+                                💰 {!isMatched || b.totalPrice === 0 
+                                      ? '매장 확인 후 안내' 
+                                      : `${b.totalPrice.toLocaleString('ko-KR')}${t('beauty_explore.label_booking_unit')}`}
                             </div>
                         </div>
-                    ))}
+                    );})}
                 </div>
             )}
         </section>
@@ -412,7 +413,7 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
                 .select("id, type, title, desc, created_at, time")
                 .eq("author", authorName)
                 .order("created_at", { ascending: false })
-                .limit(3);
+                .limit(2);
 
             if (isMounted) {
                 if (data) {
@@ -435,6 +436,12 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
                  <h2 className={styles.sectionTitle}>
                      {t('my_page.community_hub.title')}
                  </h2>
+                 <button
+                     className={styles.sectionMore}
+                     onClick={() => router.push('/my/community')}
+                 >
+                     {t('common.actions.view_all')}
+                 </button>
             </div>
 
                 {loading ? (
