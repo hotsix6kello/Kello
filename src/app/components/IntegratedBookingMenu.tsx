@@ -182,7 +182,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
                       setSelectedTime('');
                     }}
                     className={`aspect-square flex items-center justify-center rounded-[var(--radius-sm)] text-[14px] font-medium transition-all duration-150 ${
-                      isSelected ? 'bg-[var(--secondary)] text-[var(--hanji-ivory)] font-bold' : isPast ? 'text-[var(--warm-sand)] cursor-not-allowed' : isToday ? 'bg-[var(--primary-glow)] text-[var(--secondary)] font-bold ring-1 ring-[var(--primary)]/20' : dayOfWeek === 0 ? 'text-[var(--korean-red)] hover:bg-[var(--korean-red)]/5' : dayOfWeek === 6 ? 'text-[var(--secondary)]/80 hover:bg-[var(--secondary)]/5' : 'text-[var(--ink-black)] hover:bg-[var(--hanji-ivory)]'
+                      isSelected ? 'bg-[var(--primary)] text-white font-bold' : isPast ? 'text-[var(--warm-sand)] cursor-not-allowed' : isToday ? 'bg-[var(--primary-glow)] text-[var(--primary)] font-bold ring-1 ring-[var(--primary)]/20' : dayOfWeek === 0 ? 'text-[var(--korean-red)] hover:bg-[var(--korean-red)]/5' : dayOfWeek === 6 ? 'text-[var(--secondary)]/80 hover:bg-[var(--secondary)]/5' : 'text-[var(--ink-black)] hover:bg-[var(--hanji-ivory)]'
                     }`}
                   >
                     {day.getDate()}
@@ -206,7 +206,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
                       key={time}
                       onClick={() => setSelectedTime(time)}
                       className={`py-2.5 rounded-[var(--radius-sm)] text-[14px] font-semibold transition-all duration-150 active:scale-95 border ${
-                        isSelected ? 'bg-[var(--secondary)] text-[var(--hanji-ivory)] border-[var(--primary)]' : 'bg-[var(--hanji-ivory)] text-[var(--ink-black)] hover:bg-[var(--warm-sand)]/30 border-[var(--warm-sand)]'
+                        isSelected ? 'bg-[var(--primary)] text-white border-[var(--primary)]' : 'bg-[var(--hanji-ivory)] text-[var(--ink-black)] hover:bg-[var(--warm-sand)]/30 border-[var(--warm-sand)]'
                       }`}
                     >
                       {time}
@@ -226,7 +226,7 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
             }}
             disabled={!selectedDate || !selectedTime}
             className={`w-full text-[16px] font-bold rounded-[var(--radius-md)] py-4 transition-all ${
-              selectedDate && selectedTime ? 'bg-[var(--secondary)] text-[var(--hanji-ivory)] shadow-[var(--shadow-md)]' : 'bg-[var(--warm-sand)]/50 text-[var(--soft-ink)]'
+              selectedDate && selectedTime ? 'bg-[var(--primary)] text-white shadow-[var(--shadow-md)]' : 'bg-[var(--warm-sand)]/50 text-[var(--soft-ink)]'
             }`}
           >
             {t('btn_complete')}
