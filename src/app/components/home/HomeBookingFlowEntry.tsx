@@ -53,6 +53,7 @@ export default function HomeBookingFlowEntry({
   onResolvedMode,
   mode,
   enableSkeletonMode,
+  t,
 }: HomeBookingFlowEntryProps) {
   const draftSequenceSnapshotRef = useRef<HomeBookingDraftReadySequenceSnapshot>({
     lastEmittedSignature: null,
@@ -169,15 +170,6 @@ export default function HomeBookingFlowEntry({
         onSubmitAttemptStateChange?.({
           status: "idle",
           message: "Submit did not start because current draft is blocked.",
-          errorSummary: null,
-        });
-        return;
-      }
-
-      if (activeSubmitStatus === "submitted") {
-        onSubmitAttemptStateChange?.({
-          status: "submitted",
-          message: "이미 예약이 완료되었습니다.",
           errorSummary: null,
         });
         return;
