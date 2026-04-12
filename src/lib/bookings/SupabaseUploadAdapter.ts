@@ -23,7 +23,7 @@ export async function uploadBookingImage(
     const filePath = `beauty/${fileName}`;
 
     const { error: uploadError, data } = await supabase.storage
-      .from('beauty-bookings')
+      .from('booking')
       .upload(filePath, file, {
         cacheControl: '3600',
         upsert: false,
@@ -34,7 +34,7 @@ export async function uploadBookingImage(
     }
 
     const { data: { publicUrl } } = supabase.storage
-      .from('beauty-bookings')
+      .from('booking')
       .getPublicUrl(data.path);
 
     return { url: publicUrl, error: null };
