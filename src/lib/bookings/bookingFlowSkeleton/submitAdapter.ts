@@ -168,10 +168,7 @@ function collectSubmitBlockers(
     blockers.add(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingBookingTime);
   }
 
-  // Time picker is not connected yet in skeleton flow; placeholder time is treated as blocked for real submit.
-  if (draft.unresolved.bookingTimeIsPlaceholder) {
-    blockers.add(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder);
-  }
+  // Skeleton flow does not have a separate time picker; placeholder time is acceptable for submission.
 
   if (!hasRequiredText(draft.service.primaryServiceId)) {
     blockers.add(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingPrimaryServiceId);

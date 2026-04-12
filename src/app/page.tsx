@@ -52,7 +52,6 @@ import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
 import HomeBookingFlowEntry from './components/home/HomeBookingFlowEntry';
 import {
   buildHomeBookingSkeletonDebugPanelDisplay,
-  shouldShowSkeletonDraftDebugPanel,
 } from './components/home/HomeBookingFlowEntry.helpers';
 import type {
   HomeBookingSkeletonDebugPanelDisplay,
@@ -140,8 +139,7 @@ export default function HomePage() {
   const [sheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [bookingFlowMode, setBookingFlowMode] = useState<'legacy' | 'skeleton'>('legacy');
-  const [isSkeletonFlowEnabled, setIsSkeletonFlowEnabled] = useState(false);
+  const [isSkeletonFlowEnabled, setIsSkeletonFlowEnabled] = useState(true);
   const [isDraftDebugEnabled, setIsDraftDebugEnabled] = useState(false);
   const skeletonDraftDebugRef = useRef<LegacyBookingDraftFromSkeleton | null>(null);
   const [draftDebugPanelState, setDraftDebugPanelState] = useState<DraftDebugPanelState | null>(null);
@@ -247,19 +245,13 @@ export default function HomePage() {
     // [추가] URL 파라미터에 booking=true가 있으면 예약 플로우를 즉시 엽니다.
     const params = new URLSearchParams(window.location.search);
     const hasBookingQuery = params.get('booking') === 'true';
-    const isSkeletonFlowQuery = hasBookingQuery && params.get('flow') === 'skeleton';
-    const isDraftDebugQuery = shouldShowSkeletonDraftDebugPanel({
-      isSkeletonFlowEnabled: isSkeletonFlowQuery,
-      debugParam: params.get('debug'),
-    });
-    setBookingFlowMode(isSkeletonFlowQuery ? 'skeleton' : 'legacy');
-    setIsSkeletonFlowEnabled(isSkeletonFlowQuery);
-    setIsDraftDebugEnabled(isDraftDebugQuery);
-    if (!isDraftDebugQuery) {
-      setDraftDebugPanelState(null);
-      setSubmitPreparationDebugState(null);
-      setSubmitAttemptDebugState(null);
-    }
+    const isLegacyRequested = params.get('flow') === 'legacy';
+    setIsSkeletonFlowEnabled(!isLegacyRequested);
+    setIsDraftDebugEnabled(params.get('debug') === 'true');
+    setDraftDebugPanelState(null);
+    setSubmitPreparationDebugState(null);
+    setSubmitAttemptDebugState(null);
+
     const cat = params.get('category');
     const nextCategory = cat ? (cat as BeautyCategoryId) : null;
     setBookingStoreContext(
@@ -571,7 +563,7 @@ export default function HomePage() {
         onClose={() => setIsBookingOpen(false)}
         initialCategory={selectedCategory}
         t={t}
-        mode={bookingFlowMode}
+        mode={isSkeletonFlowEnabled ? 'skeleton' : 'legacy'}
         enableSkeletonMode={isSkeletonFlowEnabled}
         storeContext={bookingStoreContext}
         uploadedImageUrls={uploadedImageUrlsOverride}

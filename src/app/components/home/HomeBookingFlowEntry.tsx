@@ -12,6 +12,7 @@ import {
   resolveHomeBookingUploadedImageUrls,
   resolveSkeletonCategoryFromLegacy,
   buildHomeBookingLegacyDraftFromSkeletonState,
+  resolveHomeBookingMode,
 } from "./HomeBookingFlowEntry.helpers";
 
 import { runLegacySubmitPreparation } from "@/lib/bookings/bookingFlowSkeleton/submitRunner";
@@ -61,10 +62,10 @@ export default function HomeBookingFlowEntry({
   const [activeSubmitStatus, setActiveSubmitStatus] = useState<SkeletonSubmitAttemptStatus>("idle");
   const localImageFilesRef = useRef<Map<string, File>>(new Map());
 
-  const resolvedMode = useMemo(() => {
-    if (mode === "skeleton" && enableSkeletonMode) return "skeleton";
-    return "legacy";
-  }, [mode, enableSkeletonMode]);
+  const resolvedMode = useMemo(
+    () => resolveHomeBookingMode({ mode, enableSkeletonMode }),
+    [mode, enableSkeletonMode],
+  );
 
   const skeletonInitialCategory = useMemo(
     () => resolveSkeletonCategoryFromLegacy(initialCategory),
