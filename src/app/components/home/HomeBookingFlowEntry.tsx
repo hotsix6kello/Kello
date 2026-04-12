@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BookingFlowSkeleton,
   type BookingFlowSkeletonDraftStateSnapshot,
@@ -20,9 +20,9 @@ import { submitBeautyBooking } from "@/app/explore/beautyBooking";
 import {
   HomeBookingDraftReadySequenceSnapshot,
   HomeBookingFlowEntryProps,
-  HomeBookingFlowMode,
   SkeletonSubmitAttemptStatus,
 } from "./HomeBookingFlowEntry.types";
+import { supabase } from "@/lib/supabaseClient";
 import HomeBeautyBookingFlow from "./HomeBeautyBookingFlow";
 export {
   buildHomeBookingDraftDebugState,
@@ -51,11 +51,13 @@ export default function HomeBookingFlowEntry({
   onSubmitAttemptStateChange,
   skeletonDebugPanel,
   onResolvedMode,
+  mode,
+  enableSkeletonMode,
+  t,
 }: HomeBookingFlowEntryProps) {
   const draftSequenceSnapshotRef = useRef<HomeBookingDraftReadySequenceSnapshot>({
     lastEmittedSignature: null,
   });
-  const submitAttemptStatusRef = useRef<SkeletonSubmitAttemptStatus>("idle");
   const [activeSubmitStatus, setActiveSubmitStatus] = useState<SkeletonSubmitAttemptStatus>("idle");
   const localImageFilesRef = useRef<Map<string, File>>(new Map());
 
@@ -173,15 +175,6 @@ export default function HomeBookingFlowEntry({
         return;
       }
 
-      if (activeSubmitStatus === "submitted") {
-        onSubmitAttemptStateChange?.({
-          status: "submitted",
-          message: "이미 예약이 완료되었습니다.",
-          errorSummary: null,
-        });
-        return;
-      }
-
       setActiveSubmitStatus("submitting");
       onSubmitAttemptStateChange?.({
         status: "submitting",
@@ -251,10 +244,8 @@ export default function HomeBookingFlowEntry({
     },
     [
       activeSubmitStatus,
-      onClose,
       onSubmitAttemptStateChange,
       onSubmitPreparationChange,
-      storeContext,
       uploadedImageUrls,
     ]
   );
