@@ -325,7 +325,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                    </div>
                 </div>
                 <div className={styles.beautyCompletionActions}>
-                   <button type="button" className={styles.beautySecondaryAction} onClick={onClose} style={{ background: '#bb8a78', color: 'white' }}>
+                   <button type="button" className={styles.beautySecondaryAction} onClick={onClose} style={{ background: 'var(--primary)', color: 'white' }}>
                       메인으로 돌아가기
                    </button>
                 </div>
@@ -334,7 +334,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         ) : (
           <>
             <section className={styles.beautyHero} style={{ background: '#fffcfb', borderBottom: '1px solid #f0e0d8', paddingTop: '45px', paddingBottom: '16px', paddingLeft: '20px', paddingRight: '20px' }}>
-               <span className={styles.beautyEyebrow} style={{ color: '#bb8a78', fontWeight: 900 }}>STEP {currentStep} / 4</span>
+               <span className={styles.beautyEyebrow} style={{ color: 'var(--primary)', fontWeight: 900 }}>STEP {currentStep} / 4</span>
                <h1 className={styles.beautyTitle} style={{ fontSize: '22px', fontWeight: 900, marginTop: '6px', color: '#222' }}>
                   {currentStep === 1 && (!initialCategory || initialCategory === 'all' ? "관심 있는 매장을 골라보세요" : `${tBeauty(`categories.${initialCategory}.label`)} 매장을 선택해 주세요`)}
                   {currentStep === 2 && "예약 일시를 선택해 주세요"}
@@ -355,7 +355,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                          <button
                            key={region.id}
                            className={`${styles.beautyRegionChip} ${selectedRegion === region.id ? styles.beautyRegionChipActive : ''}`}
-                           style={selectedRegion === region.id ? { background: '#bb8a78', color: 'white' } : {}}
+                           style={selectedRegion === region.id ? { background: 'var(--primary)', color: 'white' } : {}}
                            onClick={() => setSelectedRegion(region.id)}
                          >
                            {region.label}
@@ -366,7 +366,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                        {filteredStores.map((store: BeautyStore) => (
                          <article
                            key={store.id}
-                           className={`bg-white rounded-2xl transition-all duration-300 ${selectedStoreId === store.id ? 'ring-2 ring-[#bb8a78] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100'}`}
+                           className={`bg-white rounded-2xl transition-all duration-300 ${selectedStoreId === store.id ? 'ring-2 ring-[var(--primary)] shadow-md bg-[#fffbfa]' : 'shadow-sm border border-neutral-100'}`}
                            style={{ overflow: 'hidden', cursor: 'pointer' }}
                            onClick={() => handleStoreSelect(store)}
                          >
@@ -383,9 +383,9 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                               <div className="flex-1 min-w-0">
                                  <h3 className="text-base font-bold text-neutral-900 truncate">{store.name}</h3>
                                  <p className="text-xs text-neutral-500">{tBeauty(`region_${store.region}`)}</p>
-                                 <div className="text-sm font-semibold text-[#bb8a78] mt-1">{store.priceLabel}</div>
+                                 <div className="text-sm font-semibold text-[var(--primary)] mt-1">{store.priceLabel}</div>
                               </div>
-                              <div className="shrink-0 text-[#bb8a78] font-bold text-xs uppercase bg-[#fff5f0] px-3 py-1.5 rounded-lg border border-[#f0e0d8]">
+                              <div className="shrink-0 text-[var(--primary)] font-bold text-xs uppercase bg-[#fff5f0] px-3 py-1.5 rounded-lg border border-[#f0e0d8]">
                                  {tBeauty('btn_select_salon', { defaultValue: '선택' })}
                               </div>
                            </div>
@@ -404,7 +404,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                              <Image src={selectedStore.imageUrl || 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80'} alt={selectedStore.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                           </div>
                           <div className="flex-1">
-                             <span className="text-[10px] font-bold text-[#bb8a78] uppercase tracking-wider">SELECTED STORE</span>
+                             <span className="text-[10px] font-bold text-[var(--primary)] uppercase tracking-wider">SELECTED STORE</span>
                              <h3 className="font-bold text-neutral-800">{selectedStoreName}</h3>
                           </div>
                        </div>
@@ -413,15 +413,15 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                        <h3 className="font-bold text-lg mb-4">날짜와 시간을 골라주세요</h3>
                        {selectedDate && selectedTime ? (
                           <div className="flex flex-col gap-4">
-                             <div className="bg-[#fffcfb] border border-[#bb8a78]/20 rounded-xl p-4">
+                             <div className="bg-[#fffcfb] border border-[var(--primary)]/20 rounded-xl p-4">
                                 <div className="text-sm text-neutral-500 mb-1">선택된 일시</div>
                                 <div className="text-xl font-bold text-neutral-900">{selectedDate} - {selectedTime}</div>
                              </div>
                              <button onClick={() => setIsTimePickerOpen(true)} className="text-[#bb8a78] font-bold underline text-sm py-2">다른 일시로 변경하기</button>
-                             <button onClick={() => setCurrentStep(3)} className="w-full bg-[#bb8a78] text-white py-4 rounded-xl font-bold shadow-lg">다음: 상세 정보 입력</button>
+                             <button onClick={() => setCurrentStep(3)} className="w-full bg-[var(--primary)] text-white py-4 rounded-xl font-bold shadow-lg">다음: 상세 정보 입력</button>
                           </div>
                        ) : (
-                          <button onClick={() => setIsTimePickerOpen(true)} className="w-full bg-[#bb8a78] text-white py-5 rounded-xl font-bold text-lg shadow-md">날짜 및 시간 선택하기</button>
+                          <button onClick={() => setIsTimePickerOpen(true)} className="w-full bg-[var(--primary)] text-white py-5 rounded-xl font-bold text-lg shadow-md">날짜 및 시간 선택하기</button>
                        )}
                     </div>
                  </div>
@@ -431,7 +431,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                {currentStep === 3 && (
                  <div className="flex flex-col gap-6">
                     <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
-                       <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Customer Details</span>
+                       <span className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider">Customer Details</span>
                        <div className="flex flex-col gap-4">
                           <div className="flex flex-col gap-1.5">
                              <label className="text-xs font-bold text-neutral-600">이름 (영문 추천) *</label>
@@ -496,7 +496,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                     <button
                        disabled={!isFormValid}
                        onClick={() => setCurrentStep(4)}
-                       className={`w-full py-4 rounded-xl font-bold shadow-lg transition-all ${isFormValid ? 'bg-[#bb8a78] text-white hover:bg-[#a67969]' : 'bg-neutral-100 text-neutral-400 cursor-not-allowed'}`}
+                       className={`w-full py-4 rounded-xl font-bold shadow-lg transition-all ${isFormValid ? 'bg-[var(--primary)] text-white hover:opacity-90' : 'bg-neutral-100 text-neutral-400 cursor-not-allowed'}`}
                     >
                        다음: 예약 내용 확인
                     </button>
@@ -507,7 +507,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                {currentStep === 4 && (
                  <div className="flex flex-col gap-6">
                     <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm flex flex-col gap-4">
-                       <span className="text-xs font-bold text-[#bb8a78] uppercase tracking-wider">Booking Summary</span>
+                       <span className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider">Booking Summary</span>
                        <div className="flex flex-col gap-3">
                           <div className="flex justify-between items-start border-b border-neutral-50 pb-3">
                              <span className="text-sm text-neutral-400">매장</span>
@@ -561,7 +561,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                     <button
                        disabled={!isConfirmEnabled || isSubmitting}
                        onClick={handleComplete}
-                       className={`w-full py-5 rounded-xl font-bold text-lg shadow-xl transition-all ${isConfirmEnabled ? 'bg-[#bb8a78] text-white hover:bg-[#a67969]' : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'}`}
+                       className={`w-full py-5 rounded-xl font-bold text-lg shadow-xl transition-all ${isConfirmEnabled ? 'bg-[var(--primary)] text-white hover:opacity-90' : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'}`}
                     >
                        {isSubmitting ? '처리 중...' : '최종 예약 신청하기'}
                     </button>
