@@ -20,6 +20,7 @@ import arBeautyExplore from "../../../public/locales/ar/beauty_explore.json";
 
 import {
     CANONICAL_SUPPORTED_LOCALES,
+    CanonicalLocaleCode,
     DEFAULT_CLIENT_LOCALE,
     DEFAULT_LOCALE,
     isRtlLocale,
@@ -43,16 +44,24 @@ const resources = localeResources;
 export const LANGUAGE_CHANGED_EVENT = "kello-language-changed";
 
 if (!i18n.isInitialized) {
-    // 서버 환경이나 초기 렌더링 시에는 html lang 우선 참작. 
-    // 실제 동기화는 initClientLanguage에서 덮어씀
-    const fallbackInitialLang = typeof document !== "undefined" 
-        ? resolveCanonicalLocale(document.documentElement.lang, DEFAULT_CLIENT_LOCALE)
-        : DEFAULT_CLIENT_LOCALE;
+    // 1. 쿠키/스토리지를 먼저 확인하고 없으면 HTML lang, 마지막으로 기본값 사용
+    const getInitialLang = (): CanonicalLocaleCode => {
+        if (typeof window === "undefined") return DEFAULT_CLIENT_LOCALE;
+        
+        const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
+        if (stored && CANONICAL_SUPPORTED_LOCALES.includes(stored as CanonicalLocaleCode)) {
+            return stored as CanonicalLocaleCode;
+        }
+
+        return resolveCanonicalLocale(document.documentElement.lang, DEFAULT_CLIENT_LOCALE);
+    };
+
+    const initialLang = getInitialLang();
 
     i18n.use(initReactI18next).init({
         resources,
-        lng: fallbackInitialLang,
-        fallbackLng: DEFAULT_LOCALE,
+        lng: initialLang,
+        fallbackLng: 'en',
         supportedLngs: [...CANONICAL_SUPPORTED_LOCALES],
         ns: ["common", "beauty_explore"],
         defaultNS: "common",

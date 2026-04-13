@@ -19,14 +19,16 @@ type BookingTabId = 'all' | 'active' | 'completed' | 'canceled';
 const TIMELINE_STEP_IDS = ['requested', 'confirmed', 'completed', 'canceled'] as const;
 
 function formatPrice(value: number, language: string, t: TFunction) {
-  const formatted = new Intl.NumberFormat(language === 'ko' ? 'ko-KR' : 'en-US').format(value);
+  const locale = language === 'ko' ? 'ko-KR' : (language === 'ja' ? 'ja-JP' : 'en-US');
+  const formatted = new Intl.NumberFormat(locale).format(value);
   const unit = t('beauty_explore.label_booking_unit');
-  return language === 'ko' ? `${formatted}${unit}` : `${unit} ${formatted}`;
+  return language === 'ko' ? `${formatted}${unit}` : (language === 'ja' ? `${formatted}${unit}` : `${unit} ${formatted}`);
 }
 
 function formatDateLabel(value: string, language: string) {
   try {
-    return new Date(value).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
+    const locale = language === 'ko' ? 'ko-KR' : (language === 'ja' ? 'ja-JP' : 'en-US');
+    return new Date(value).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -39,7 +41,8 @@ function formatDateLabel(value: string, language: string) {
 
 function formatDateTimeLabel(value: string, language: string) {
   try {
-    return new Date(value).toLocaleString(language === 'ko' ? 'ko-KR' : 'en-US', {
+    const locale = language === 'ko' ? 'ko-KR' : (language === 'ja' ? 'ja-JP' : 'en-US');
+    return new Date(value).toLocaleString(locale, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -263,7 +266,7 @@ function MyBeautyBookingsContent() {
 
       if (!accessToken) {
         if (!cancelled) {
-          setLoadError(t('beauty_bookings.error_login_check', 'Please check your login status.'));
+          setLoadError(t('beauty_bookings.error_login'));
           setBookings([]);
         }
         return;
@@ -289,8 +292,8 @@ function MyBeautyBookingsContent() {
         if (!response.ok || body?.ok !== true || !Array.isArray(body.items)) {
           throw new Error(
             response.status === 401
-              ? t('beauty_bookings.error_login_required', 'Please log in to view your bookings.')
-              : body?.error ?? t('beauty_bookings.error_fetch_generic', 'Failed to load bookings.'),
+              ? t('beauty_bookings.error_load_401')
+              : body?.error ?? t('beauty_bookings.error_load'),
           );
         }
 
@@ -299,7 +302,7 @@ function MyBeautyBookingsContent() {
         }
       } catch (error) {
         if (!cancelled) {
-          setLoadError(error instanceof Error ? error.message : t('beauty_bookings.error_fetch_generic', 'Failed to load bookings.'));
+          setLoadError(error instanceof Error ? error.message : t('beauty_bookings.error_load'));
           setBookings([]);
         }
       } finally {
@@ -511,7 +514,7 @@ function MyBeautyBookingsContent() {
       setBookings((current) =>
         current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
       );
-      setCancelSuccess(t('beauty_bookings.success_cancel', 'Booking has been canceled.'));
+      setCancelSuccess(t('beauty_bookings.cancel_success'));
       setIsCancelPanelOpen(false);
 
       if (activeTab === 'active') {
@@ -520,7 +523,7 @@ function MyBeautyBookingsContent() {
       }
     } catch (error) {
       setCancelError(
-        error instanceof Error ? error.message : '예약을 취소하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        error instanceof Error ? error.message : t('beauty_bookings.error_cancel'),
       );
     } finally {
       setIsCancelSubmitting(false);
@@ -533,14 +536,14 @@ function MyBeautyBookingsContent() {
     }
 
     if (!changeReason.trim()) {
-      setChangeError('변경하고 싶은 내용을 입력해 주세요.');
+      setChangeError(t('beauty_bookings.error_change_reason'));
       return;
     }
 
     const accessToken = await getCustomerAccessToken();
 
     if (!accessToken) {
-      setChangeError('로그인 상태를 다시 확인해 주세요.');
+      setChangeError(t('beauty_bookings.error_login'));
       return;
     }
 
@@ -567,7 +570,7 @@ function MyBeautyBookingsContent() {
 
       if (!response.ok || body?.ok !== true || !body.item) {
         throw new Error(
-          body?.error ?? '변경 요청을 보내지 못했어요. 잠시 후 다시 시도해 주세요.',
+          body?.error ?? t('beauty_bookings.error_change'),
         );
       }
 
@@ -575,11 +578,11 @@ function MyBeautyBookingsContent() {
       setBookings((current) =>
         current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
       );
-      setChangeSuccess('변경 요청이 전달되었어요.');
+      setChangeSuccess(t('beauty_bookings.change_success'));
       setIsChangePanelOpen(false);
     } catch (error) {
       setChangeError(
-        error instanceof Error ? error.message : t('beauty_bookings.error_change_failed', 'Failed to send change request.'),
+        error instanceof Error ? error.message : t('beauty_bookings.error_change'),
       );
     } finally {
       setIsChangeSubmitting(false);
@@ -592,13 +595,13 @@ function MyBeautyBookingsContent() {
     }
 
     if (response === 'accepted' && !selectedOfferSlot) {
-      setAlternativeResponseError('제안된 일정 중 하나를 선택해 주세요.');
+      setAlternativeResponseError(t('beauty_bookings.alt_slot_select_error'));
       return;
     }
 
     const accessToken = await getCustomerAccessToken();
     if (!accessToken) {
-      setAlternativeResponseError('로그인 상태를 다시 확인해 주세요.');
+      setAlternativeResponseError(t('beauty_bookings.error_login'));
       return;
     }
 
@@ -623,7 +626,7 @@ function MyBeautyBookingsContent() {
       const body = (await apiResponse.json()) as { ok?: boolean; item?: BeautyBookingAdminRecord; error?: string };
 
       if (!apiResponse.ok || body?.ok !== true || !body.item) {
-        throw new Error(body?.error ?? '처리에 실패했어요. 잠시 후 다시 시도해 주세요.');
+        throw new Error(body?.error ?? t('common.errors.processing_failed'));
       }
 
       const updatedItem = body.item;
@@ -631,10 +634,10 @@ function MyBeautyBookingsContent() {
         current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
       );
       setAlternativeResponseSuccess(response === 'accepted' 
-        ? t('beauty_bookings.success_offer_accepted', 'Offer accepted and schedule updated.') 
-        : t('beauty_bookings.success_offer_rejected', 'Offer has been rejected.'));
+        ? t('beauty_bookings.alt_response_accepted') 
+        : t('beauty_bookings.alt_response_rejected'));
     } catch (error) {
-      setAlternativeResponseError(error instanceof Error ? error.message : '처리에 실패했어요.');
+      setAlternativeResponseError(error instanceof Error ? error.message : t('beauty_bookings.error_alt'));
     } finally {
       setIsAlternativeSubmitting(false);
     }
@@ -788,7 +791,7 @@ function MyBeautyBookingsContent() {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
               >
-                ← {t('common.actions.back_to_list', 'Back to List')}
+                ← {t('common.actions.back_to_list')}
               </button>
               {!selectedBooking ? (
                 <div className={styles.emptyState}>{t('beauty_bookings.select_prompt')}</div>
@@ -797,7 +800,7 @@ function MyBeautyBookingsContent() {
                 <div className={styles.detailHeader}>
                   <div>
                     <p className={styles.eyebrow}>
-                      {t('beauty_bookings.hero_eyebrow')} · {t('beauty_bookings.detail_booking_id', '예약 번호')}: {selectedBooking.id.substring(0, 8).toUpperCase()}
+                      {t('beauty_bookings.hero_eyebrow')} · {t('beauty_bookings.detail_booking_id')}: {selectedBooking.id.substring(0, 8).toUpperCase()}
                     </p>
                     <h3 className={styles.detailTitle}>
                       {!isStoreMatched(selectedBooking.status)
@@ -827,25 +830,25 @@ function MyBeautyBookingsContent() {
 
                 <div className={styles.summaryGrid}>
                    <div className={styles.summaryItem}>
-                     <span>{t('beauty_bookings.detail_status', '상태')}</span>
+                     <span>{t('beauty_bookings.detail_status')}</span>
                      <strong>{STATUS_LABELS[selectedBooking.status]}</strong>
                    </div>
                    <div className={styles.summaryItem}>
-                     <span>{t('beauty_bookings.detail_category', '카테고리')} / 서비스</span>
+                     <span>{t('beauty_bookings.detail_category_services')}</span>
                      <strong>{buildCategoryTitle(getCategoryLabel(selectedBooking.beautyCategory), selectedBooking.primaryServiceName)}</strong>
                    </div>
                    <div className={styles.summaryItem} style={{ gridColumn: '1 / -1' }}>
-                     <span>희망 일정</span>
+                     <span>{t('beauty_bookings.detail_requested_time')}</span>
                      <strong>{formatDateLabel(selectedBooking.bookingDate, i18n.language)} {selectedBooking.bookingTime}</strong>
                    </div>
                  </div>
 
                  <div className={styles.summaryGrid} style={{ marginTop: 12 }}>
                    <div className={styles.summaryItem} style={{ gridColumn: '1 / -1' }}>
-                     <span>매장 진행 상황</span>
+                     <span>{t('beauty_bookings.detail_shop_status')}</span>
                      <strong style={{ color: !isStoreMatched(selectedBooking.status) ? '#db2777' : 'inherit' }}>
                        {!isStoreMatched(selectedBooking.status)
-                         ? '조건에 맞는 매장을 찾고 있어요'
+                         ? t('my_page.bookings.matching_status')
                          : selectedBooking.storeName}
                      </strong>
                      <p className={styles.statusHint} style={{ marginTop: 4 }}>
@@ -873,7 +876,7 @@ function MyBeautyBookingsContent() {
                    </div>
                    {isValidDisplayValue(translatedRequest) && (
                      <div className={styles.summaryItem} style={{ gridColumn: '1 / -1' }}>
-                       <span>요청 정보</span>
+                       <span>{t('beauty_bookings.detail_request_info')}</span>
                        <strong>{translatedRequest}</strong>
                        <div style={{ marginTop: 8 }}>
                          <span className={styles.languagePill}>{getLangLabel(selectedBooking.communicationLanguage)}</span>
@@ -883,7 +886,7 @@ function MyBeautyBookingsContent() {
                  </div>
 
                 <details className={styles.moreInfoDetails}>
-                  <summary className={styles.moreInfoSummary}>추가 정보 보기 ▾</summary>
+                  <summary className={styles.moreInfoSummary}>{t('beauty_bookings.detail_more_info')} ▾</summary>
                   <div className={styles.detailsContentWrapper}>
                 <section className={styles.timelineSection}>
                   <h4 className={styles.blockTitle}>{t('beauty_bookings.timeline_title')}</h4>
@@ -1099,7 +1102,7 @@ function MyBeautyBookingsContent() {
                          <dt>{t('beauty_bookings.price_total')}</dt>
                          <dd className={styles.priceEmphasis}>
                            {(!isStoreMatched(selectedBooking.status) && selectedBooking.totalPrice === 0)
-                             ? '매장 확인 후 안내'
+                             ? t('beauty_bookings.price_pending_notice')
                              : formatPrice(selectedBooking.totalPrice, i18n.language, t)}
                          </dd>
                        </div>
@@ -1153,7 +1156,7 @@ function MyBeautyBookingsContent() {
                  {canChangeSelectedBooking || canCancelSelectedBooking ? (
                    <section className={styles.cancelSection}>
                       <details className={styles.moreInfoDetails} style={{ marginTop: 0 }}>
-                        <summary className={styles.moreInfoSummary} style={{ background: 'transparent', border: 'none', color: '#6b7280', margin: 0, padding: 0 }}>예약 관리 (변경/취소) ▾</summary>
+                        <summary className={styles.moreInfoSummary} style={{ background: 'transparent', border: 'none', color: '#6b7280', margin: 0, padding: 0 }}>{t('beauty_bookings.detail_manage_booking')} ▾</summary>
                         <div className={styles.actionButtonRow} style={{ marginTop: 16 }}>
                            {canChangeSelectedBooking && (
                              <button

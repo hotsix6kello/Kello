@@ -142,7 +142,7 @@ function ProfileSummaryCard({
                                 style={{ borderRadius: '50%', objectFit: 'cover' }} 
                             />
                         ) : (
-                            <span className={styles.profileInitials}>{initials || t("my_page.profile.avatar_placeholder", "My")}</span>
+                            <span className={styles.profileInitials}>{initials || t("my_page.profile.avatar_placeholder")}</span>
                         )}
                         <div className={styles.avatarEditOverlay} style={{
                             position: 'absolute', bottom: 0, right: 0, 
@@ -252,7 +252,7 @@ function MyBookingsSection({
     accessToken: string;
     authReady: boolean;
 }) {
-    const { t } = useTranslation("common");
+    const { t, i18n } = useTranslation("common");
     const router = useRouter();
     const [bookings, setBookings] = useState<MyBookingCardRecord[]>([]);
     const [loading, setLoading] = useState(true);
@@ -381,7 +381,7 @@ function MyBookingsSection({
                             <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
                                 💰 {!isMatched || b.totalPrice === 0 
                                       ? t('my_page.bookings.price_pending') 
-                                      : `${b.totalPrice.toLocaleString(i18n.language === 'ko' ? 'ko-KR' : 'en-US')}${t('beauty_explore.label_booking_unit')}`}
+                                      : `${b.totalPrice.toLocaleString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US'))}${t('beauty_explore.label_booking_unit')}`}
                             </div>
                         </div>
                         );
@@ -394,7 +394,7 @@ function MyBookingsSection({
 
 
 function CommunityHubSection({ authorName }: { authorName: string }) {
-    const { t } = useTranslation("common");
+    const { t, i18n } = useTranslation("common");
     const router = useRouter();
     const [posts, setPosts] = useState<CommunityPost[]>([]);
     const [loading, setLoading] = useState(true);
@@ -504,10 +504,10 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
                                         fontWeight: 800,
                                         textTransform: 'uppercase'
                                     }}>
-                                        {post.type || t('common.states.posts')}
+                                        {post.type ? (t(`common.states.${post.type.toLowerCase()}`, { defaultValue: post.type })) : t('common.states.posts')}
                                     </span>
                                     <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>
-                                        {post.created_at ? new Date(post.created_at).toLocaleDateString() : (post.time || '')}
+                                        {post.created_at ? new Date(post.created_at).toLocaleDateString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US')) : (post.time || '')}
                                     </span>
                                 </div>
                                 <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -606,7 +606,7 @@ function PartnerStatusBanner({
 
 
 function MyPageContent() {
-    const { t } = useTranslation("common");
+    const { t, i18n } = useTranslation("common");
     const router = useRouter();
     const [hasHydrated, setHasHydrated] = useState(false);
     const [cachedUserName, setCachedUserName] = useState("");
@@ -798,31 +798,17 @@ function MyPageContent() {
                             { icon: '🤝', label: t('my_page.dashboard.admin_menu.partners'), desc: t('my_page.dashboard.admin_menu.partners_desc'), path: '/admin/partners' },
                             { icon: '🛡️', label: t('my_page.dashboard.admin_menu.users'), desc: t('my_page.dashboard.admin_menu.users_desc'), path: '/admin/users' },
                         ].map((item) => (
-                            <div
-                                key={item.path}
+                            <div 
+                                key={item.path} 
+                                className={styles.adminActionCard} 
                                 onClick={() => router.push(item.path)}
-                                style={{
-                                    display: 'flex', alignItems: 'center', gap: 14,
-                                    background: 'var(--hanji-ivory)', borderRadius: 16,
-                                    border: '1px solid var(--warm-sand)',
-                                    padding: '14px 18px',
-                                    cursor: 'pointer', boxShadow: 'var(--shadow-sm)',
-                                    transition: 'transform 0.15s'
-                                }}
-                                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.985)'}
-                                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
                             >
-                                <div style={{
-                                    width: 42, height: 42, borderRadius: 12,
-                                    background: 'var(--primary-glow)',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    fontSize: '1.25rem', flexShrink: 0
-                                }}>{item.icon}</div>
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</div>
-                                    <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', marginTop: 2 }}>{item.desc}</div>
+                                <div className={styles.adminActionIcon}>{item.icon}</div>
+                                <div className={styles.adminActionInfo}>
+                                    <div className={styles.adminActionLabel}>{item.label}</div>
+                                    <div className={styles.adminActionDesc}>{item.desc}</div>
                                 </div>
-                                <span style={{ color: 'var(--gray-300)', fontSize: '1.1rem' }}>›</span>
+                                <span className={styles.adminActionArrow}>›</span>
                             </div>
                         ))}
                     </div>
@@ -837,7 +823,7 @@ function MyPageContent() {
 
 export default function MyPage() {
     return (
-        <Suspense fallback={<div style={{ padding: 24 }}>Loading...</div>}>
+        <Suspense fallback={<div style={{ padding: 24 }}>...</div>}>
             <MyPageContent />
         </Suspense>
     );

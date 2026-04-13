@@ -242,13 +242,13 @@
     "afternoon": "下午好",
     "evening": "晚上好",
     "help_nav": "Help",
-    "view_map": "Lihat Lokasi",
-    "view_map_desc": "Lihat lokasi detail di peta",
-    "taxi_call": "Panggil Taksi",
-    "route_nav": "Panduan Rute",
-    "transit_nav_desc": "Navigasi transportasi umum",
-    "copy_address": "Salin Alamat",
-    "copied": "Tersalin!"
+    "view_map": "查看位置",
+    "view_map_desc": "在地图上查看详细位置",
+    "taxi_call": "呼叫出租车",
+    "route_nav": "路线指南",
+    "transit_nav_desc": "大众交通导航",
+    "copy_address": "复制地址",
+    "copied": "已复制!"
   },
   "transport": {
     "moving_to": "正在前往 {{dest}}",

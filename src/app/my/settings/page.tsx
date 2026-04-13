@@ -456,7 +456,7 @@ const EMPTY_PARTNER: PartnerRecord = {
 
 export default function MySettingsPage() {
     const router = useRouter();
-    const { t } = useTranslation("common");
+    const { t, i18n } = useTranslation("common");
     const internationalPhoneExample = "01012345678";
     const phoneCountryOptions = getPhoneCountryOptions();
     const phonePlaceholder = t("my_page.settings.account.phone.placeholder", {
@@ -1113,7 +1113,7 @@ export default function MySettingsPage() {
             setAccount(prev => ({
                 ...prev,
                 providerLabel: prev.isLoggedIn 
-                    ? (prev.providerLabel.includes("@") || prev.providerLabel === "이메일" || prev.providerLabel === "Email"
+                    ? (prev.providerLabel.includes("@") || ["email", "이메일", "メール", "邮件"].includes(prev.providerLabel.toLowerCase())
                         ? t("settings_page.personal.login.provider_email")
                         : prev.providerLabel)
                     : t("settings_page.personal.login.value_out")
@@ -1400,7 +1400,7 @@ export default function MySettingsPage() {
                   : !canUpdate && nextAvailableDate
                     ? t("settings_page.messages.nickname_cooldown_long", {
                           limit: NICKNAME_COOLDOWN_DAYS,
-                          date: nextAvailableDate.toLocaleDateString(),
+                          date: nextAvailableDate.toLocaleDateString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US')),
                       })
                     : row.helper;
 
