@@ -194,12 +194,12 @@ const BOOKING_STATUS_KO_KEY: Record<BeautyBookingAdminRecord['status'], string> 
 };
 
 const BOOKING_STATUS_DESC_KEY: Record<BeautyBookingAdminRecord['status'], string> = {
-    requested: 'beauty_bookings.status_requested',
-    confirmed: 'beauty_bookings.status_confirmed',
-    completed: 'beauty_bookings.status_completed',
-    canceled: 'beauty_bookings.status_canceled',
-    failed: 'beauty_bookings.status_failed',
-    change_requested: 'beauty_bookings.status_change_requested',
+    requested: 'beauty_bookings.status_desc_requested',
+    confirmed: 'beauty_bookings.status_desc_confirmed',
+    completed: 'beauty_bookings.status_desc_completed',
+    canceled: 'beauty_bookings.status_desc_canceled',
+    failed: 'beauty_bookings.status_desc_failed',
+    change_requested: 'beauty_bookings.status_desc_change_requested',
 };
 
 const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> = {
@@ -211,28 +211,13 @@ const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> =
     change_requested: '#7c3aed',
 };
 
-const BOOKING_STATUS_DESC_KEY: Record<BeautyBookingAdminRecord['status'], string> = {
-    requested: 'beauty_bookings.status_desc_requested',
-    confirmed: 'beauty_bookings.status_desc_confirmed',
-    completed: 'beauty_bookings.status_desc_completed',
-    canceled: 'beauty_bookings.status_desc_canceled',
-    failed: 'beauty_bookings.status_desc_failed',
-    change_requested: 'beauty_bookings.status_desc_change_requested',
-};
+
 
 function isStoreMatched(status: BeautyBookingAdminRecord['status']): boolean {
     return status === 'confirmed' || status === 'completed';
 }
 
-function buildCategoryTitle(category: string | null | undefined, serviceName: string | null | undefined): string {
-    const parts = [category, serviceName].filter((part) => {
-        return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
-    });
-    if (parts.length === 0) {
-        return '시술 정보 확인 중';
-    }
-    return parts.join(' · ');
-}
+
 
 function SectionCardSkeleton({ rows = 2 }: { rows?: number }) {
     return (
