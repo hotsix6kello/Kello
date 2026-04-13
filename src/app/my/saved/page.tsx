@@ -443,7 +443,7 @@ function SavedHubContent() {
 
 export default function MySavedPage() {
     return (
-        <Suspense fallback={<div style={{ padding: 24 }}>Loading...</div>}>
+        <Suspense fallback={<div style={{ padding: 24 }}>로딩 중...</div>}>
             <SavedHubContent />
         </Suspense>
     );
