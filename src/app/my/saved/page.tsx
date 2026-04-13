@@ -88,7 +88,7 @@ function getTranslatedExploreField(
     id: string,
     field: "title" | "area" | "price"
 ): string {
-    return t(`explore_items.${id}.${field}`, { defaultValue: "" }).trim();
+    return t(`explore_items.${id}.${field}`).trim();
 }
 
 function SavedHubContent() {
@@ -443,7 +443,7 @@ function SavedHubContent() {
 
 export default function MySavedPage() {
     return (
-        <Suspense fallback={<div style={{ padding: 24 }}>로딩 중...</div>}>
+        <Suspense fallback={<div style={{ padding: 24 }}>Loading...</div>}>
             <SavedHubContent />
         </Suspense>
     );

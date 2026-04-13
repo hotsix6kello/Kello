@@ -1,0 +1,1513 @@
+{
+  "header": {
+    "view_app": "View in App",
+    "faq": "FAQ",
+    "recent": "Recent Activities"
+  },
+  "beauty_explore": {
+    "form_name": "姓名",
+    "form_name_placeholder": "請輸入姓名",
+    "form_phone": "聯絡方式（或 SNS ID）",
+    "form_phone_placeholder": "手機號碼或 SNS ID",
+    "form_request": "需求說明",
+    "form_request_placeholder": "過敏資訊或想要的風格",
+    "agreement_confirm": "確認內容",
+    "agreement_confirm_desc": "我已確認所選內容。",
+    "agreement_privacy": "隱私同意",
+    "agreement_privacy_desc": "我同意提供相關資訊。",
+    "region_all": "全部地區",
+    "label_today": "今天",
+    "label_tomorrow": "明天",
+    "label_booking_unit": "韓元",
+    "booking_confirmation_title": "已送出預約申請！",
+    "booking_confirmation_desc": "我們會很快通知您。",
+    "booking_confirmation_cta": "我的預約"
+  },
+  "common": {
+    "error_title": "发生错误。",
+    "error_desc": "加载页面时出现问题。",
+    "error_retry": "Try Again",
+    "actions": {
+      "view_all": "View All",
+      "browse_community": "Browse Community",
+      "apply_again": "重新申请",
+      "apply_as_partner": "成为合作伙伴",
+      "booking_help": "预约帮助",
+      "call_112": "拨打 112",
+      "call_119": "拨打 119",
+      "call_1330": "拨打 1330",
+      "close": "关闭",
+      "contact_support": "联系支持",
+      "copied": "已复制",
+      "copy": "复制",
+      "emergency_help": "紧急求助",
+      "explore_places": "探索地点",
+      "general_help": "常见帮助",
+      "get_help": "获取帮助",
+      "go_to_reviews": "查看评价",
+      "interpreter_for_booking": "预约翻译辅助",
+      "interpreter_help": "口译帮助",
+      "large_view": "大图查看",
+      "my_bookings": "我的预约",
+      "open_admin_console": "打开管理员控制台",
+      "open_help_center": "打开帮助中心",
+      "open_support": "联系客服",
+      "partner_inquiry": "合作伙伴咨询",
+      "report_issue": "报告问题",
+      "save": "保存",
+      "saved": "已保存",
+      "show_booking_phrases": "显示预订用语",
+      "show_in_korean": "显示韩文",
+      "support": "支持",
+      "travel_phrasebook": "旅行短语集",
+      "travel_phrases": "旅行短语",
+      "view_booking": "查看预约",
+      "view_bookings": "查看所有预约",
+      "add_to_plan": "添加到行程",
+      "back_to_booking_support": "返回预约支持",
+      "browse_meetups": "浏览聚会",
+      "call_clinic": "联系诊所",
+      "continue_editing": "继续编辑",
+      "create_plan": "创建行程",
+      "explore": "探索",
+      "manage": "管理",
+      "open": "打开",
+      "open_my_support": "打开我的支持",
+      "open_route": "打开路线",
+      "show_emergency_phrases": "显示紧急短语",
+      "use_this_plan": "使用此行程",
+      "view": "查看",
+      "view_place_details": "查看地点详情",
+      "view_plan": "查看行程",
+      "write_review": "撰写评价",
+      "delete": "删除",
+      "details": "Details",
+      "view_details": "View Details",
+      "emergency_phrases": "Emergency Phrases",
+      "browse_places": "Browse Places",
+      "browse_explore": "Browse Explore",
+      "explore_more": "Explore More",
+      "open_hub": "Open Hub",
+      "view_in_plan": "在计划中查看",
+      "view_again": "View Again",
+      "map": "Map",
+      "call_120": "Call 120",
+      "back_to_list": "返回列表"
+    },
+    "states": {
+      "posts": "Posts",
+      "active": "激活",
+      "approved": "已批准",
+      "favorites": "收藏",
+      "frequent": "常用",
+      "needs_review": "待评价",
+      "needs_update": "待更新",
+      "not_available_yet": "暂不可用",
+      "not_connected": "未连接",
+      "not_joined": "未加入",
+      "not_set": "未设置",
+      "not_set_yet": "尚未设置",
+      "not_verified": "未验证",
+      "pending_review": "审核中",
+      "read_only": "只读",
+      "recent": "最近",
+      "sign_in_required": "需登录",
+      "standard_account": "标准账户",
+      "verified": "已验证",
+      "no_permission": "没有权限。",
+      "error_occurred": "处理请求时发生错误。",
+      "current_trip_plan": "当前旅行计划",
+      "details_unavailable": "详细信息不可用",
+      "meetups": "聚会",
+      "planner_draft": "日程草稿",
+      "recently_viewed": "最近浏览",
+      "reviews": "评价",
+      "saved_locally": "已在本地保存",
+      "not_connected_yet": "Not connected yet",
+      "places": "Places",
+      "plans": "Plans",
+      "saved_places": "Saved Places",
+      "saved_plans": "Saved Plans",
+      "trip_days": "Trip days",
+      "plan_stops": "Plan stops",
+      "done": "Done",
+      "draft": "Draft",
+      "unavailable": "Unavailable",
+      "in_progress": "In Progress",
+      "canceled": "Cancelled",
+      "loading": "Loading...",
+      "searching": "Searching..."
+    },
+    "loading": "Loading...",
+    "retry": "重试",
+    "welcome": "欢迎，旅行者。",
+    "greeting": "早上好",
+    "login": "登录",
+    "signup": "注册",
+    "today": "今天",
+    "move": "移动",
+    "book": "预约",
+    "chat": "咨询",
+    "my": "我的",
+    "min_unit": "分钟",
+    "current_operation": "当前行程",
+    "live": "直播",
+    "recommended": "周边推荐",
+    "based_on_location": "基于当前位置",
+    "start_nav": "开始导航",
+    "delay_10m": "延迟10分钟",
+    "confirmed": "预约确认",
+    "payment_completed": "支付完成",
+    "weather_clear": "晴朗",
+    "back": "返回",
+    "select_language": "选择语言",
+    "home_nav": "首页",
+    "explore_nav": "探索",
+    "planner_nav": "行程",
+    "today_nav": "今日",
+    "my_nav": "我的",
+    "day_unit": "日",
+    "locale": "zh-CN",
+    "cities": {
+      "seoul": "首尔",
+      "busan": "釜山",
+      "jeju": "济州",
+      "gyeongju": "庆州"
+    },
+    "categories": {
+      "all": "全部",
+      "food": "美食",
+      "beauty": "美容",
+      "event": "演出",
+      "festival": "庆典",
+      "attraction": "景点",
+      "transport": "交通"
+    },
+    "badges": {
+      "english_friendly": "英语友好",
+      "vegan_certified": "纯素认证",
+      "michelin": "米其林",
+      "wait_free": "免排队",
+      "local_experience": "当地体验",
+      "k_idol_style": "K-Idol风格",
+      "tax_refund": "退税",
+      "summer_must_go": "夏季必选",
+      "non_verbal": "非语言秀",
+      "family": "家庭亲子",
+      "night_view": "夜景",
+      "photo_spot": "打卡点",
+      "hanbok_free_entry": "韩服免费入场",
+      "history": "历史",
+      "city_view": "城市景观"
+    },
+    "ingredients": {
+      "vegetables": "蔬菜",
+      "soy": "豆类",
+      "pork": "猪肉",
+      "kimchi": "泡菜",
+      "seafood": "海鲜"
+    },
+    "diet": {
+      "vegan": "纯素",
+      "gluten_free": "无麸质",
+      "meat_lover": "肉食爱好者",
+      "pescatarian": "鱼素"
+    },
+    "community_nav": "社区",
+    "runtime": {
+      "counts": {
+        "stops_zero": "{{count}} 个地点",
+        "stops_one": "{{count}} 个地点",
+        "stops_other": "{{count}} 个地点",
+        "days_zero": "{{count}} 天",
+        "days_one": "{{count}} 天",
+        "days_other": "{{count}} 天",
+        "comments": "{{count}} comments",
+        "stops": "{{count}} stops",
+        "days": "{{count}} days"
+      },
+      "relative": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}}m ago",
+        "hours_ago": "{{count}}h ago",
+        "days_ago": "{{count}}d ago"
+      },
+      "trip": {
+        "day_label": "Day {{day}}",
+        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dash": "Day {{day}} - {{time}}"
+      }
+    },
+    "morning": "早上好",
+    "afternoon": "下午好",
+    "evening": "晚上好",
+    "help_nav": "Help",
+    "view_map": "Lihat Lokasi",
+    "view_map_desc": "Lihat lokasi detail di peta",
+    "taxi_call": "Panggil Taksi",
+    "route_nav": "Panduan Rute",
+    "transit_nav_desc": "Navigasi transportasi umum",
+    "copy_address": "Salin Alamat",
+    "copied": "Tersalin!",
+    "greeting_morning": "สวัสดีตอนเช้า",
+    "greeting_afternoon": "สวัสดีตอนบ่าย",
+    "greeting_evening": "สวัสดีตอนเย็น",
+    "search_results": "ผลลัพธ์การค้นหา",
+    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
+  },
+  "home_beauty": {
+    "hero": {
+      "eyebrow": "美容預約管家",
+      "title": "將韓國之美，\n融入您的行程。",
+      "subtitle": "選擇您想要的美容服務，直接進入預約步驟。",
+      "welcome": "{{name}}，請選擇今天的服務。",
+      "welcome_user": "{{greeting}}，{{name}}！👋"
+    },
+    "booking": {
+      "step": "STEP. 01",
+      "title": "請選擇美容服務",
+      "description": ""
+    },
+    "categories": {
+      "hair": {
+        "label": "美髮",
+        "note": "剪髮、燙髮、染髮",
+        "summary": "從髮型改變到快速修剪，快速預約。"
+      },
+      "nail": {
+        "label": "美甲",
+        "note": "凝膠、護理、延長",
+        "summary": "選擇心儀的美甲設計後進入預約。"
+      },
+      "esthetic": {
+        "label": "美容",
+        "note": "皮膚護理、輪廓、舒緩",
+        "summary": "根據您的膚質比較店鋪並預約。"
+      },
+      "waxing": {
+        "label": "脫毛",
+        "note": "面部、身體、巴西式",
+        "summary": "快速找到符合您需求的脫毛店鋪。"
+      },
+      "makeup": {
+        "label": "化妝",
+        "note": "日常、拍攝、婚禮",
+        "summary": "為您的活動選擇化妝服務並預約。"
+      },
+      "lash": {
+        "label": "睫毛",
+        "note": "嫁接、燙睫毛、下睫毛",
+        "summary": "從自然款到濃密款，按需選擇。"
+      }
+    },
+    "selection": {
+      "eyebrow": "已選擇類別",
+      "tags": {
+        "mobile": "手機預約",
+        "comparison": "店鋪比較",
+        "inquiry": "即時諮詢"
+      },
+      "empty": "請先選擇類別。選擇後預約開始按鈕將會啟用。"
+    },
+    "cta": {
+      "hint": "選擇類별後即可開始預約",
+      "button": "開始預約"
+    },
+    "interpreter_entry": {
+      "title": "即時翻譯助手",
+      "description": "與店鋪員工輕鬆溝通",
+      "cta": "開啟翻譯"
+    },
+    "location_sheet": {
+      "search_title": "查找搜尋結果",
+      "search_result_count": "{{query}} 的搜尋結果 {{count}}條",
+      "view_location": "查看位置",
+      "view_location_desc": "在地圖上查看詳細位置",
+      "call_taxi": "呼叫 K.Ride",
+      "google_maps_desc": "使用谷歌地圖查看公車路線"
+    },
+    "modals": {
+      "card_title": "📍 請前往這個地址",
+      "copy": "複製地址",
+      "copy_done": "複製成功！",
+      "close": "關閉"
+    }
+  },
+  "interpreter_ui": {
+    "customer_speaks": "顧客語言",
+    "staff_speaks": "店舖語言",
+    "customer_language": "顧客使用語言",
+    "staff_language": "店舖使用語言",
+    "session": "對話",
+    "expires": "到期"
+  },
+  "home": {
+    "presets": {
+      "beauty_tour": "Beauty Tour",
+      "foodie": "Foodie",
+      "heritage": "Heritage",
+      "k_pop": "K-pop"
+    },
+    "badge": "感受韓國之美",
+    "title": "Concierge Booking · Auto Itinerary · Navigation",
+    "subtitle": "",
+    "create_trip_cta": "Start Creating Itinerary",
+    "input_label": "Where are you traveling to?",
+    "input_placeholder": "City, Area, or Accommodation",
+    "days_label": "Duration",
+    "value_props": {
+      "itinerary": {
+        "title": "Auto Itinerary",
+        "desc": "AI optimizes your route"
+      },
+      "booking": {
+        "title": "Concierge Booking",
+        "desc": "Clinics, Spas, and more"
+      },
+      "navigation": {
+        "title": "Real-time Nav",
+        "desc": "Zero language barrier"
+      }
+    },
+    "recommended_plans": "推薦旅行方案",
+    "plans": {
+      "2d": {
+        "title": "2日：首爾核心之旅",
+        "label": "2日方案"
+      },
+      "3d": {
+        "title": "3日：K-文化與潮流",
+        "label": "3日方案"
+      },
+      "5d": {
+        "title": "5日：韓國全境遊",
+        "label": "5日方案"
+      },
+      "request_custom_label": "客製化",
+      "request_custom_title": "申請 {{days}} 日客製化方案",
+      "request_custom_toast": "已申請 {{days}} 日客製化方案！我們的禮賓人員將盡快與您聯繫。"
+    }
+  },
+  "explore_page": {
+    "title": "Explore",
+    "city_changed": "City changed to {{city}}",
+    "added_to": "Added to Day {{day}}",
+    "no_items": "No items found in {{city}}",
+    "try_changing": "Try changing the category or city.",
+    "select_city": "Select City",
+    "search_placeholders": {
+      "all": "Search for beauty, food...",
+      "beauty": "Search clinics, salons...",
+      "event": "Search concerts, shows...",
+      "food": "Search restaurants, dishes...",
+      "festival": "Search festivals...",
+      "attraction": "Search palaces, parks..."
+    },
+    "add_to_plan": "+ Add to Plan",
+    "today": "Today",
+    "tonight": "Tonight",
+    "starts_from": "Starts from ₩{{price}}",
+    "indoor": "Indoor",
+    "outdoor": "Outdoor",
+    "badges": {
+      "vegan_only": "Vegan Only",
+      "vegan_option": "Vegan Option"
+    },
+    "filters_title": "Filters",
+    "apply": "Apply",
+    "reset": "Reset",
+    "adding_item_to": "Adding <strong>{{title}}</strong> to...",
+    "no_specific_filters": "No specific filters for this category.",
+    "filters": {
+      "show": "Show",
+      "price": "Price",
+      "diet": "Diet",
+      "ingredients": "Ingredients",
+      "date": "Date",
+      "type": "Type",
+      "options": {
+        "skin_care": "Skin Care",
+        "hair_makeup": "Hair & Makeup",
+        "spa": "Spa",
+        "nails": "Nails",
+        "vegan": "Vegan",
+        "vegetarian": "Vegetarian",
+        "no_pork": "No Pork",
+        "halal": "Halal",
+        "beef": "Beef",
+        "pork": "Pork",
+        "chicken": "Chicken",
+        "seafood": "Seafood",
+        "dairy": "Dairy",
+        "egg": "Egg",
+        "today": "Today",
+        "weekend": "This Weekend",
+        "select": "Select Date",
+        "concert": "Concert",
+        "show": "Show",
+        "popup": "Popup",
+        "club": "Club",
+        "exhibition": "Exhibition"
+      }
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "Incheon Airport Arrival",
+    "hotel_checkin": "Hotel Check-in/Stay",
+    "f1": {
+      "title": "Plant Cafe Seoul",
+      "area": "Itaewon",
+      "desc": "100% vegan cuisine made with fresh vegetables and healthy ingredients",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "Gold Pig BBQ",
+      "area": "Yaksu",
+      "desc": "The best samgyeopsal restaurant in Korea, selected by the Michelin Guide",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "Jagalchi Fish Market",
+      "area": "Nampo",
+      "desc": "A hearty sashimi course where you can feel the freshness of the Busan sea",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "Jenny House Cheongdam",
+      "area": "Cheongdam",
+      "desc": "Premium hair & makeup shop frequented by K-idols",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "PPEUM Clinic Gangnam",
+      "area": "Gangnam",
+      "desc": "The best value-for-money beauty clinic most visited by foreigners",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY Water Show 2024",
+      "area": "Jamsil Stadium",
+      "desc": "PSY's cool and passionate performance to blow away the summer heat",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "Nanta Show Myeongdong",
+      "area": "Myeongdong",
+      "desc": "A non-verbal performance combining traditional Korean rhythms with modern performance",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "Seoul Lantern Festival",
+      "area": "Gwanghwamun",
+      "desc": "A feast of colorful and beautiful lanterns embroidering Gwanghwamun Square",
+      "price": "Free"
+    },
+    "fs2": {
+      "title": "Film Festival",
+      "area": "Centum City",
+      "desc": "Asia's largest film festival, a meeting of film professionals from around the world",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "Gyeongbokgung",
+      "area": "Jongno",
+      "desc": "A place that preserves the history and beauty of Korea as the main palace of the Joseon Dynasty",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "Lotte World Tower",
+      "area": "Jamsil",
+      "desc": "Korea's tallest building where you can see the fantastic night view of Seoul at a glance",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "KTX to Busan",
+      "area": "Seoul Station",
+      "desc": "The fastest and most convenient way to travel from Seoul to Busan",
+      "price": "59,800"
+    }
+  },
+  "today_page": {
+    "title": "Today's Schedule",
+    "active_now": "Active Now",
+    "navigate": "Navigate",
+    "booking_ref": "Booking Ref: {{ref}}",
+    "next_up": "Next Up",
+    "minutes_left": "Starts in {{mins}}m",
+    "depart_early": "Depart Now",
+    "timeline": "Timeline",
+    "empty": {
+      "title": "No schedule for today",
+      "desc": "Explore places and add them to your trip!",
+      "cta": "Explore Places"
+    }
+  },
+  "booking_detail": {
+    "select_date": "Select Date",
+    "select_time": "Select Time",
+    "total_price": "Total Price",
+    "request_booking": "Request Booking",
+    "unavailable_title": "This place detail is not available right now",
+    "unavailable_desc": "This link does not match a supported explore detail yet. Return to Explore to browse available places."
+  },
+  "navigation_page": {
+    "title": "Today's Schedule",
+    "status": {
+      "on_trip": "Traveling",
+      "pre_trip": "Preparing",
+      "idle": "No Schedule"
+    },
+    "countdown": {
+      "today": "Today",
+      "starts_in": "Starts in {{mins}}m",
+      "traveling_to": "Traveling to {{dest}}"
+    },
+    "empty": {
+      "title": "No schedule today",
+      "subtitle": "Plan your day in Explore or Itinerary",
+      "cta": "Explore Places"
+    },
+    "actions": {
+      "directions": "Navigate",
+      "booking": "View Booking",
+      "late_risk": "Late Risk!",
+      "booking_ref": "Booking Ref: {{ref}}",
+      "departure_warning": "⚠️ {{title}} starts in {{mins}}m — Please depart now!"
+    }
+  },
+  "planner_page": {
+    "title": "Itinerary",
+    "day": "Day {{n}}",
+    "focus": {
+      "title": "Focused booking",
+      "desc": "Use these shortcuts for the booking currently highlighted in your plan."
+    },
+    "add_from_discover": "🔍 Add from Discover",
+    "auto_build": "✨ Auto-build",
+    "add_to": "Add to {{slot}}",
+    "book_all": "🎫 Request Reservation",
+    "booking_modal": {
+      "title": "Booking Request",
+      "date": "Date",
+      "people": "People",
+      "people_count": "{{n}} Person",
+      "notes": "Special Requests (Optional)",
+      "submit": "Submit Request",
+      "submitting": "Submitting...",
+      "success_title": "Request Received!",
+      "success_desc": "Our concierge will contact you within 24 hours.",
+      "unavailable_title": "Time Slot Unavailable",
+      "unavailable_desc": "We recommend these alternatives:",
+      "view_status": "View Status"
+    },
+    "status": {
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "confirmed": "Confirmed",
+      "unavailable": "Unavailable",
+      "completed": "Completed"
+    },
+    "slots": {
+      "am": "AM",
+      "pm": "PM",
+      "night": "Night"
+    }
+  },
+  "fab": {
+    "idle": "行程規劃",
+    "pre_trip": "即將出發",
+    "on_trip": "下一站去哪？",
+    "near_deadline": "遲到風險！",
+    "to": "前往 {{dest}}",
+    "kride": "呼叫 K.Ride",
+    "kride_sub": "預計 {{mins}} 分鐘後抵達",
+    "transit": "交通指南",
+    "transit_sub": "最短路線",
+    "copy": "複製地址",
+    "copy_done": "已複製！",
+    "card": "司機提示卡",
+    "card_sub": "向司機出示此卡",
+    "card_modal_title": "🗺️ 請前往此地址",
+    "cancel": "取消"
+  },
+  "transport": {
+    "moving_to": "正在前往 {{dest}}",
+    "remaining": "剩餘",
+    "line_2_direction": "2 號線 • 往市廳方向",
+    "departed": "已出發",
+    "passing_now": "正在經過...",
+    "current": "目前",
+    "get_off_at": "在此下車",
+    "exit_3": "3 號出口",
+    "getting_off_here": "我在這裏下車",
+    "stations": {
+      "samseong": "三成",
+      "seolleung": "宣陵",
+      "yeoksam": "驛三",
+      "gangnam": "江南",
+      "gyodae": "教大",
+      "seocho": "瑞草",
+      "seongsu": "聖水"
+    }
+  },
+  "community_page": {
+    "hero": {
+      "title": "Kello 社群",
+      "search_placeholder": "搜尋您感興趣的話題"
+    },
+    "categories": {
+      "all": "全部",
+      "meetup": "線下聚會",
+      "beauty_review": "美妝/美容",
+      "food_review": "美食/探店",
+      "travel_review": "旅遊/觀光",
+      "meetup_recruitment": "招募夥伴",
+      "help": "旅遊攻略"
+    },
+    "sub_filters": {
+      "all": "全部",
+      "saved": "我的收藏",
+      "reacted": "參與過的",
+      "mine": "我的發佈",
+      "recruiting": "招募中",
+      "active_reactions": "熱門動態",
+      "open_meetup": "開放中的聚會",
+      "weekend": "本週末",
+      "fresh": "最新消息"
+    },
+    "status": {
+      "reviews": "評價中",
+      "reacting": "招募中",
+      "surveying": "確認意向",
+      "drafting": "準備中",
+      "closed": "招募結束"
+    },
+    "tags": {
+      "solo_friendly": "一人友好",
+      "friends_friendly": "適合朋友",
+      "photo_spot": "拍照打卡",
+      "waiting": "需排隊",
+      "foreigner_friendly": "外國友人友好"
+    },
+    "states": {
+      "fetch_failed_desc": "內容加載失敗，請檢查網絡。",
+      "fetch_failed_title": "網絡錯誤",
+      "fetch_failed_tip": "請嘗試刷新頁面。",
+      "empty_title": "目前還沒有貼文",
+      "empty_desc": "快來發佈第一條動態吧！",
+      "empty_tip": "點擊右下角按鈕開始發佈。",
+      "no_results_title": "未找到相關結果",
+      "no_results_desc": "請嘗試更換其他關鍵詞。",
+      "cta_write": "發表第一篇貼文",
+      "cta_all": "查看全部"
+    },
+    "quality_signals": {
+      "organized": "整理精良",
+      "active": "互動活躍",
+      "asset": "資訊豐富",
+      "mate": "優秀夥伴"
+    },
+    "toasts": {
+      "save_added": "已加入收藏。",
+      "save_removed": "已移除收藏。",
+      "deleted": "已刪除。",
+      "updated": "已更新。",
+      "submitted": "發佈成功。",
+      "region_collected": "只看{{region}}的貼文"
+    },
+    "nav_summary": {
+      "all": "正在查看 {{tab}} 的全部內容",
+      "active_reactions": "{{tab}} 裡的熱門話題！",
+      "open_meetup": "{{tab}} 正在招募新夥伴",
+      "weekend": "{{tab}} 這個週末有安排嗎？",
+      "default": "{{tab}} 中按 {{sub}} 篩選的結果"
+    },
+    "form": {
+      "select_category": "選擇分類",
+      "write_guide_title": {
+        "beauty_review": "分享您的美容體驗",
+        "food_review": "發現了什麼寶藏店鋪？",
+        "travel_review": "分享您的避雷/必去心得",
+        "meetup": "尋找有趣的小夥伴",
+        "meetup_recruitment": "正在尋找旅遊搭子嗎？",
+        "help": "有什麼需要幫忙的？"
+      },
+      "write_guide_body": {
+        "beauty_review": "描述一下您的項目滿意度同店鋪服務啦。",
+        "food_review": "分享一下口味、環境同排隊資訊啦。",
+        "travel_review": "路線、必備物品、交通等實用建議。",
+        "meetup": "描述一下時間、地點同內容。",
+        "meetup_recruitment": "寫低您的行程安排同對夥伴的要求。",
+        "help": "詳細描述您的問題，等小夥伴們提供幫助。"
+      },
+      "title_label": {
+        "beauty_review": "項目/主題",
+        "default": "標題"
+      },
+      "title_placeholder": {
+        "beauty_review": "例如：江南站層次修剪體驗",
+        "default": "正在猶豫寫點什麼嗎？"
+      },
+      "desc_label": {
+        "beauty_review": "詳細評價",
+        "default": "正文"
+      },
+      "desc_placeholder": {
+        "beauty_review": "詳細描述一下過程或最終效果啦。",
+        "food_review": "推薦幾個必點菜，講下理由。",
+        "travel_review": "分享一些對其他朋友有幫助的資訊。",
+        "meetup": "詳細說明聚會的計畫。",
+        "meetup_recruitment": "描述一下您想找什麼樣的夥伴。",
+        "help": "描述越詳細，越容易得到有用的回答喔。",
+        "default": "寫下您想分享的故事吧"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "添加對比照或店鋪環境照（最多4張）",
+          "food_review": "添加美食或店鋪照片（最多4張）",
+          "travel_review": "添加現場氛圍照（最多4張）",
+          "meetup": "添加聚會地點或相關照片（最多4張）",
+          "meetup_recruitment": "目的地或參考照片（最多4張）",
+          "help": "如果有助理解問題的照片就添加啦（最多4張）"
+        },
+        "saved_name": "已保存的圖片 {{index}}",
+        "file_only_alert": "僅支持上傳圖片格式。",
+        "limit_alert": "最多可上傳 {{count}} 張圖片。",
+        "load_failed_alert": "圖片加載失敗。",
+        "limit_label": "(最多 {{count}} 張)"
+      },
+      "category_hints": {
+        "beauty_review": "自由分享您的美容體驗。",
+        "food_review": "推薦您喜歡的美食店鋪。",
+        "travel_review": "分享您的獨家旅遊攻略。",
+        "meetup": "發起一個輕社交活動啦。",
+        "meetup_recruitment": "尋找行程契合的夥伴。",
+        "help": "有疑惑儘管提問。"
+      },
+      "region_label": "區域",
+      "region_placeholder": "例如：江南, 麻浦",
+      "submit": "發佈",
+      "write_title": "寫文章",
+      "edit_title": "編輯文章",
+      "image_label": "圖片附件",
+      "add_photo": "添加照片",
+      "preparing_images": "正在準備圖片...",
+      "cancel": "取消",
+      "category_label": "類別"
+    },
+    "detail": "貼文詳情",
+    "detail_page": {
+      "loading": "內容加載中...",
+      "hidden_post": "該內容已被隱藏。",
+      "not_found": "貼文不存在。",
+      "show_hidden": "查看隱藏內容",
+      "hide_post": "隱藏此貼文",
+      "freshness": {
+        "realtime": "實時活躍中",
+        "updated": "資訊已更新",
+        "active": "活躍貼文",
+        "calm": "陳舊內容"
+      },
+      "strengths": {
+        "title": "內容亮點",
+        "organized": "邏輯清晰",
+        "active": "互動頻繁",
+        "visited_tip": "包含隱藏攻略",
+        "new": "新鮮速報"
+      },
+      "checklist": {
+        "title": "小提醒",
+        "recommended": "建議人群",
+        "required": "必讀項",
+        "comment_check": "看下評論區",
+        "read_details": "查看詳情"
+      },
+      "mini_signal_tag": "招募中",
+      "primary_action": {
+        "review": "寫評價",
+        "join": "我有興趣"
+      },
+      "save": {
+        "saved": "已收藏",
+        "default": "收藏"
+      },
+      "meetup_safety": {
+        "title": "安全社交指南",
+        "item_1": "建議在公共場所見面。",
+        "item_2": "注意保護個人隱私資訊。"
+      },
+      "body_title": "正文內容",
+      "like": "讚",
+      "dislike": "爛",
+      "like_alert": "已按讚！",
+      "dislike_alert": "已按爛。",
+      "comments_title": "評論列表",
+      "comment_input": {
+        "default": "發表評論...",
+        "optional": "想對樓主說點什麼？ (選填)",
+        "send": "發佈",
+        "open_btn": "寫評論",
+        "cancel": "取消"
+      },
+      "signal_intents": {
+        "interested": "我也想去",
+        "available_this_week": "這週有空",
+        "join_if_schedule_fits": "時間合適就一起",
+        "thanks": "感謝分享資訊",
+        "question": "我有疑問"
+      },
+      "signal_times": {
+        "this_week": "這週",
+        "this_weekend": "這週末",
+        "next_week": "下週",
+        "schedule_coordination": "時間再議"
+      },
+      "author_panel": {
+        "title": "發佈者管理平台",
+        "badge": "發佈者",
+        "stats": {
+          "total": "總互動數",
+          "total_value": "{{count}}個",
+          "time": "熱門時間",
+          "time_pending": "統計中",
+          "intent": "主要意向",
+          "recent": "24小時內",
+          "recent_value": "{{count}}個"
+        },
+        "guide": {
+          "weekend": "週末的反響最熱烈，建議發佈具體行程。",
+          "vote": "大家的空閒時間比較多元，發起個投票啦。",
+          "share": "分享更多細節來吸引關注。"
+        },
+        "action": {
+          "weekend": "建議週末行程",
+          "vote": "發起投票",
+          "share": "更新附加提示"
+        },
+        "draft": {
+          "weekend": "這週六下午兩點見面點樣呀？",
+          "vote": "大家幾時有空？投票啦！",
+          "share": "再同大家分享一個額外嘅攻略！"
+        },
+        "final_draft": "招募已完成。請加入群組方便後續聯繫！",
+        "final_action": "關閉招募",
+        "footer": "Kello 致力於打造互連、安全的社群文化。"
+      },
+      "status_controls": {
+        "title": "修改招募狀態"
+      },
+      "result": {
+        "title": "填寫反饋與建議",
+        "help": "分享您到店後的真實體驗或小貼士，這會對其他夥伴很有幫助。",
+        "placeholder": "在這裡寫下您的真實反饋...",
+        "save_visited": "保存並分享攻略",
+        "save_only": "僅保存資訊"
+      },
+      "author_safety": {
+        "title": "安全建議",
+        "item_1": "請勿在正文中直接留聯繫方式。",
+        "item_2": "提防涉及金錢的私下轉帳要求。",
+        "item_3": "首選在站內與高信譽用戶溝通。"
+      },
+      "signal_summary": {
+        "title": "參與情況彙總",
+        "status": {
+          "active": "火熱招募中",
+          "forming": "組隊中",
+          "preparing": "準備發起"
+        },
+        "time_split": "大家的意向時間較為分散。",
+        "time_focus": "大多數人意向 {{time}}。",
+        "time_flexible": "有很多時間可以靈活調整。",
+        "desc": "目前有 {{count}} 人對 {{topic}} 表示了興趣。",
+        "topic_review": "攻略分享",
+        "topic_outing": "參與組隊",
+        "schedule_title": "選擇心儀的時間"
+      },
+      "status": {
+        "REVIEWS": "評價完成",
+        "REACTING": "招募中",
+        "SURVEYING": "意向確認",
+        "DRAFTING": "準備中",
+        "CLOSED": "招募結束"
+      },
+      "tags": {
+        "solo_friendly": "一人無憂",
+        "friends_friendly": "聚會首選",
+        "photo_spot": "容易出片",
+        "waiting": "建議預留時間",
+        "foreigner_friendly": "溝通無障礙"
+      },
+      "empty_comments": "暫無評論。來搶頭香吧！",
+      "hide_comment": "隱藏此評論"
+    },
+    "actions": {
+      "delete_confirm": "確定要刪除嗎？"
+    },
+    "errors": {
+      "login_required": "請先登錄。",
+      "post_failed": "發佈失敗: {{message}}"
+    },
+    "report": {
+      "report_action": "舉報",
+      "success": "已收到您的舉報。",
+      "reasons": {
+        "ad_spam": "廣告騷擾",
+        "offensive": "不當言論",
+        "contact": "私下導流",
+        "unsafe": "危險行為",
+        "other": "其他"
+      }
+    },
+    "comments": "評論",
+    "time": {
+      "just_now": "剛剛"
+    },
+    "write_post": "發文",
+    "edit": "編輯",
+    "posting": "提交中...",
+    "defaults": {
+      "region": "首爾"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "一起做美容"
+      },
+      "flash_meetup": {
+        "label": "快閃聚會"
+      },
+      "beauty": {
+        "label": "美容評價"
+      },
+      "food": {
+        "label": "美食推薦"
+      },
+      "travel": {
+        "label": "旅行提示"
+      },
+      "write": {
+        "label": "發文"
+      },
+      "browse": {
+        "label": "瀏覽",
+        "sub": "熱門貼文"
+      },
+      "recruiting": {
+        "label": "招募中",
+        "sub": "尋找旅伴"
+      },
+      "weekend": {
+        "label": "這個週末",
+        "sub": "共享行程"
+      },
+      "record": {
+        "label": "記錄",
+        "sub": "日常分享"
+      }
+    },
+    "fab": {
+      "create_post": "發文"
+    },
+    "sort": {
+      "latest": "最新排序",
+      "reactions": "最多互動",
+      "draft": "最活躍招募"
+    },
+    "card": {
+      "default_vibe": "氣氛好",
+      "title_prefix": {
+        "beauty_review": "[美容]",
+        "food_review": "[美食]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "查看評價",
+        "join": "參與"
+      },
+      "result_badge": "評價完成",
+      "open_meetup_badge": "可聚會",
+      "fresh_badges": {
+        "comment": "實時互動中",
+        "update": "剛剛更新"
+      },
+      "draft_status": {
+        "active": "活躍交流中",
+        "forming": "人員組成中",
+        "preparing": "希望參與中"
+      },
+      "draft_desc": {
+        "active": "已經有很多人感興趣！",
+        "forming": "人們正在慢慢聚集。",
+        "preparing": "成為第一個表達興趣的人。"
+      },
+      "owner_reactions": {
+        "region": "正在與{{count}}人交流關於{{region}}",
+        "join": "{{count}}人希望參與"
+      },
+      "more_region": "查看更多關於{{region}}的故事"
+    }
+  },
+  "help_page": {
+    "title": "幫助中心",
+    "medical_title": "醫療幫助",
+    "medical_desc": "附近的診所與症狀卡片",
+    "lost_title": "遺失物品",
+    "lost_desc": "一步步找回遺失物的指南",
+    "police_title": "警察/犯罪",
+    "police_desc": "報案與獲取援助",
+    "interp_title": "口譯服務",
+    "interp_desc": "1330 熱線與翻譯應用",
+    "taxi": "出租車",
+    "subway": "地鐵",
+    "airport": "機場",
+    "street": "街道",
+    "interp_actions": {
+      "open_papago": "打開 Papago",
+      "open_google_translate": "打開 Google 翻譯"
+    },
+    "interp": {
+      "papago_desc": "打開 Naver Papago 以獲取快速翻譯與文本支持。",
+      "google_desc": "在需要另一個快速翻譯選項時打開 Google 翻譯。"
+    },
+    "medical_header": "醫療 · 急救指南",
+    "police_header": "警察 · 安全指南",
+    "interp_header": "翻譯 · 口譯指南",
+    "lost_header": "失物招領指南",
+    "call_btn": "撥打電話",
+    "emergency_119_title": "緊急救援 (119)",
+    "consult_1339_title": "醫療諮詢 (1339)",
+    "interp_chat_label": "在線諮詢",
+    "medical": {
+      "medicines": {
+        "tylenol": "泰諾",
+        "cold": "感冒藥",
+        "digestive": "助消化藥"
+      },
+      "symptoms": {
+        "stomach": "腹痛",
+        "fever": "發燒",
+        "injury": "受傷",
+        "allergy": "過敏",
+        "breathing": "呼吸困難",
+        "pain": "胸痛"
+      }
+    }
+  },
+  "interpreter_page": {
+    "back": "< 返回",
+    "title": "即時翻譯",
+    "subtitle": "遊客語言自動設置為當前應用語言，商店語言固定為韓語。",
+    "onboarding": "遊客輸入的內容將翻譯成韓語，店员輸入的韓語將翻譯成遊客的語言。",
+    "customer_lang": "遊客語言",
+    "staff_lang": "商店語言 (韓語)",
+    "mic_preparing": "正在準備麥克風",
+    "customer_transcribing": "正在識別遊客語音",
+    "customer_recording": "正在錄製遊客語音，再次點擊以結束",
+    "translating": "正在翻譯",
+    "customer_speak_btn": "遊客語音輸入",
+    "staff_transcribing": "正在識別店員語音",
+    "staff_recording": "正在錄製店員語音，再次點擊以結束",
+    "staff_speak_btn": "店員語音輸入",
+    "customer_input_label": "遊客輸入",
+    "customer_placeholder": "請輸入遊客說的話。",
+    "send": "發送",
+    "staff_input_label": "店員輸入",
+    "staff_placeholder": "請輸入店員說的韓語內容。",
+    "voice_supported_hint": "通過語音按鈕錄音或直接在下方輸入文字。",
+    "voice_not_supported_hint": "此瀏覽器不支援語音輸入。請使用文字輸入。",
+    "voice_recognizing": "正在識別語音。",
+    "voice_unrecognized_error": "無法識別語音。請說得更清晰一點。",
+    "voice_failed_error": "語音識別失敗。您可以繼續使用文字輸入。",
+    "mic_permission_status": "正在確認麥克風權限。",
+    "recording_status": "正在錄音。最長可錄製 {{seconds}} 秒。",
+    "mic_unsupported_error": "無法使用麥克風。請檢查權限或使用文字輸入。",
+    "input_required_customer": "請先輸入遊客的句子。",
+    "input_required_staff": "請先輸入店員的句子。",
+    "translating_status": "正在準備翻譯內容。",
+    "translation_failed_error": "翻譯失敗。請嘗試重新操作。",
+    "empty_history_hint": "輸入第一句話後，翻譯記錄將顯示在這裡。",
+    "customer_role": "遊客",
+    "staff_role": "店員",
+    "replay_btn_label": "重新播放翻譯語音",
+    "replay_not_supported_hint": "此瀏覽器不支援語音播放。",
+    "play": "播放",
+    "translated_status": "翻譯完成",
+    "source_only_status": "僅顯示原文",
+    "voice_too_short_error": "請多說一點，語音太短無法識別。"
+  },
+  "beauty_bookings": {
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "interpreter_visit_context": "正在 {{storeName}} 使用翻译器。",
+    "interpreter_visit_service_context": "在 {{storeName}} 进行 {{serviceName}} 服务时使用翻译器。",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский"
+  },
+  "settings_page": {
+    "hero": {
+      "avatar": {
+        "placeholder": "我",
+        "error": "更换头像失败。",
+        "change": "更换头像",
+        "register": "注册头像"
+      },
+      "default_title": "我的设置",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "login_promo": {
+        "title": "登录后查询更多设置。",
+        "desc": "个人标签可见，但链接数据需要登录。"
+      },
+      "tabs_aria": "设置标签"
+    },
+    "tabs": {
+      "personal": {
+        "label": "个人",
+        "desc": "查看电子邮件、联系方式、登录及通知设置。"
+      },
+      "partner": {
+        "label": "合伙人",
+        "desc": "查看合作伙伴状态和商店管理信息。"
+      },
+      "admin": {
+        "label": "管理员",
+        "desc": "快速查看管理员权限。"
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "昵称",
+        "helper_set": "显示在社区和简介中的名称。",
+        "helper_unset": "尚未设置昵称。",
+        "badge_set": "已设置",
+        "badge_unset": "未设置",
+        "placeholder": "输入新昵称。"
+      },
+      "email": {
+        "title": "电邮",
+        "value_none": "未连接",
+        "helper_verified": "当前验证的电子邮件地址。",
+        "helper_unverified": "需要验证电子邮件。",
+        "helper_none": "没有关联的电子邮件。",
+        "badge_verified": "已验证",
+        "badge_unverified": "未验证",
+        "badge_none": "未连接"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "未输入",
+        "helper_set": "当前保存的SNS。",
+        "helper_unset": "没有保存的SNS。",
+        "badge_set": "已保存",
+        "badge_unset": "未输入",
+        "placeholder": "输入SNS ID。"
+      },
+      "phone": {
+        "title": "电话",
+        "value_none": "未输入",
+        "helper_set": "当前保存的电话号码。",
+        "helper_unset": "未保存电话号码。",
+        "badge_set": "已保存",
+        "badge_unset": "未输入",
+        "country_label": "国家代码",
+        "number_label": "电话号码",
+        "helper_preview": "It will be saved as {{value}}.",
+        "helper_empty_fallback": "选择国家并输入号码即可用E.164保存。",
+        "helper_saved_fallback": "保存的号码保留为E.164格式。",
+        "helper_invalid_fallback": "选择国家并仅输入数字。"
+      },
+      "login": {
+        "title": "登录方式",
+        "helper_in": "目前使用的登录方式。",
+        "helper_out": "登录后查询。",
+        "badge_in": "使用中",
+        "badge_out": "待定",
+        "provider_email": "电子邮件",
+        "value_out": "需要登录"
+      },
+      "notifications": {
+        "title": "通知",
+        "value_out": "登录后查询",
+        "helper_out": "登录以查看当前提醒状态。",
+        "badge_out": "待定",
+        "value_error": "检查设置",
+        "helper_error": "加载提醒状态失败。",
+        "badge_error": "需要检查",
+        "channel_app": "应用",
+        "channel_email": "电子邮件",
+        "value_all_off": "全部提醒关闭",
+        "helper_summary": "Receiving {{count}}/3 booking related notifications.",
+        "badge_off": "关闭",
+        "value_both_on": "应用/邮件已开启",
+        "value_single_on": "{{channel}} ON",
+        "badge_all_on": "激活",
+        "badge_partial_on": "部分开启"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "伙伴状态",
+        "approved": {
+          "value": "已批准",
+          "helper": "验证为合作伙伴账号。",
+          "badge": "已批准"
+        },
+        "pending": {
+          "value": "审核中",
+          "helper": "正在审核提交的合作伙伴信息。",
+          "badge": "待定"
+        },
+        "rejected": {
+          "value": "修改并重新提交",
+          "helper": "您可以补充信息然后再次提交。",
+          "badge": "需要修改",
+          "cta": "重新提交"
+        },
+        "none": {
+          "value": "无合作伙伴信息",
+          "helper": "未注册合作伙伴状态。",
+          "badge": "无"
+        }
+      },
+      "store": {
+        "title": "门店信息",
+        "value_none": "无门店信息",
+        "helper_none": "没有保存门店摘要。",
+        "badge_set": "已注册",
+        "badge_unset": "未注册",
+        "visibility_on": "可见",
+        "visibility_off": "隐藏"
+      },
+      "hours": {
+        "title": "营业时间",
+        "value_none": "没有注册时间",
+        "helper_none": "连接后您可以在这里查看时间。",
+        "badge_unset": "未注册"
+      },
+      "bookings": {
+        "title": "预订请求",
+        "value_info": "无独立管理菜单",
+        "value_pending": "审核后查询",
+        "helper_approved": "精简的预订请求结构。",
+        "helper_pending": "审核通过后显示。",
+        "badge_info": "信息",
+        "badge_pending": "待定"
+      },
+      "pricing": {
+        "title": "价格菜单",
+        "value_none": "无独立管理菜单",
+        "helper_none": "尚无直接的定价管理视图。",
+        "badge_info": "信息"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "入驻审批",
+        "value": "查看申请",
+        "helper": "在此批准或拒绝申请。"
+      },
+      "issues": {
+        "title": "订单异动",
+        "value": "查询预订和更改",
+        "helper": "检查预订状态和修改请求。"
+      },
+      "users": {
+        "title": "用户管理",
+        "value": "检查账号权限",
+        "helper": "管理用户和管理员权限。"
+      },
+      "notices": {
+        "title": "公告管理",
+        "value": "未链接视图",
+        "helper": "代码库中尚未连接专属公告管理视图。"
+      },
+      "badge_open": "可开启",
+      "badge_unlinked": "未连接"
+    },
+    "messages": {
+      "action_contact": "联系",
+      "action_open": "开启",
+      "unauthorized": "请检查您的登录会话。",
+      "profile_not_found": "未找到资料。请重新登录。",
+      "schema_missing_sns": "SNS列尚未应用到数据库。",
+      "schema_missing_phone": "电话列尚未应用到数据库。",
+      "save_error": "保存失败。",
+      "sns_saved": "SNS ID已保存。",
+      "phone_saved": "电话号码已保存。",
+      "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
+      "nickname_empty": "请输入昵称。",
+      "nickname_saved": "昵称修改成功。",
+      "nickname_error": "保存昵称失败。请重试。",
+      "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
+      "save": "保存",
+      "saving": "保存中...",
+      "uploading": "上传中..."
+    },
+    "badges": {
+      "community": {
+        "leader": "社区领袖",
+        "trend": "趋势发现者",
+        "mate": "美容伙伴",
+        "sprout": "新芽"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "常规",
+        "new": "新"
+      },
+      "nickname_unset": "未设置"
+    },
+    "tab_aria_label": "Settings Tabs"
+  },
+  "my_page": {
+    "dashboard": {
+      "bookings_empty": "No upcoming bookings.",
+      "admin_title": "Admin Console",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Overall status and statistics",
+        "bookings": "Booking Ledger",
+        "bookings_desc": "Manage all user bookings and status",
+        "partners": "Partner Approvals",
+        "partners_desc": "Review partner applications and grants",
+        "users": "User Management",
+        "users_desc": "Member list and permission settings"
+      },
+      "partner": {
+        "none_title": "Join as a Partner",
+        "none_desc": "Become an official Kello partner and register your services.",
+        "none_cta": "Apply Now",
+        "pending_title": "Under Review",
+        "pending_desc": "We are currently reviewing your partner application.",
+        "approved_title": "Partner Approved",
+        "approved_desc": "You can now manage your services in the Partner Console.",
+        "rejected_title": "Application Rejected (Needs Revision)",
+        "rejected_desc": "Please double check your application information.",
+        "rejected_cta": "Apply Again"
+      }
+    },
+    "community": {
+      "empty_simple": "You haven't written any community posts yet."
+    },
+    "bookings": {
+      "title": "My Bookings",
+      "pending_service": "正在确认服务信息",
+      "matching_status": "正在寻找合适的店铺",
+      "matching_desc": "Waiting for salon match",
+      "price_pending": "待店铺确认价格",
+      "error_fetch": "Failed to load bookings.",
+      "browse_beauty_cta": "Browse Beauty Bookings"
+    },
+    "profile": {
+      "account_hint": "Account & Settings",
+      "avatar_placeholder": "我的"
+    },
+    "settings": {
+      "short": "Settings",
+      "account": {
+        "default_name": "Customer",
+        "phone": {
+          "placeholder": "例如 ${internationalPhoneExample}",
+          "helper_empty": "包含国家代码。例如 ${internationalPhoneExample}",
+          "helper_saved": "当前保存的国际电话号码。",
+          "helper_invalid": "输入有效的格式。例如 ${internationalPhoneExample}"
+        }
+      },
+      "admin": {
+        "enabled": "Active"
+      }
+    },
+    "community_hub": {
+      "title": "My Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture has been updated.",
+      "upload_failed": "Failed to upload. Please try again."
+    },
+    "bookings_hub": {
+      "meta": {
+        "reference": "参考"
+      }
+    }
+  },
+  "notifications": {
+    "title": "通知设置",
+    "hero_title": "定制您的预订提醒。✨",
+    "desc": "Set up channels to receive important booking changes or alerts.",
+    "groups": {
+      "booking": "Bookings & Activity",
+      "booking_desc": "Booking progress and schedule alerts",
+      "community": "Community & Offers",
+      "community_desc": "Community comments, likes, and discounts"
+    },
+    "items": {
+      "status_updates": {
+        "title": "Booking Status Updates",
+        "desc": "Alerts for booking confirmation, salon match, and schedule changes"
+      },
+      "reminders": {
+        "title": "Advance Reminders",
+        "desc": "Alerts on the day before and 1 hour prior to your visit"
+      },
+      "community_replies": {
+        "title": "Community Replies",
+        "desc": "Notifications for comments and upvotes on your posts"
+      },
+      "marketing": {
+        "title": "Events & Discounts",
+        "desc": "Useful alerts for new events and discount coupons"
+      }
+    },
+    "channel": {
+      "email_title": "通过电子邮件接收预订更新",
+      "email_desc": "我们安全地将预订详情和关键进度更新发送到您的电子邮箱。",
+      "app_push_title": "Install App for Real-time Push",
+      "app_push_desc": "Currently using temporary device alerts. Install the app for a more reliable experience.",
+      "device_enabled_title": "Device Alerts Enabled",
+      "device_enabled_desc": "You will receive important notifications on this browser or device.",
+      "title": "渠道设置",
+      "app_title": "在应用内接收预订提醒",
+      "app_desc": "重要的状态更改始终记录在应用的通知收件箱中。"
+    },
+    "actions": {
+      "save": "Save Settings",
+      "turn_on_device": "Enable Device Alerts"
+    },
+    "toast": {
+      "saving": "Saving notification settings...",
+      "success": "Your notification settings have been saved.",
+      "error": "Failed to save settings. Please try again later."
+    },
+    "save_success": "设置已保存。",
+    "save_fail": "保存失败。",
+    "login_required": "请登录后使用。",
+    "login_button": "登录",
+    "hero_desc": "设置您接收Kello高级礼宾服务更新的方式。",
+    "types": {
+      "title": "通知类型",
+      "booking_title": "接收按步骤的预订提醒",
+      "booking_desc": "接收有关收到、确认和完成等关键阶段的提醒。",
+      "change_title": "接收修改结果提醒",
+      "change_desc": "当日期/项目更改被批准或拒绝时，我们会立即通知您。",
+      "alternative_title": "接收备用时间表提醒",
+      "alternative_desc": "如果请求的时间已满且店铺建议其他时间，我们会通知您。"
+    },
+    "footer_note": "重要的预订通知可能会忽略设置发送。"
+  },
+  "error_title": "Something went wrong.",
+  "error_desc": "If the problem persists, please contact support.",
+  "error_retry": "Try Again",
+  "common_actions_view_all": "View All",
+  "common_loading": "Loading..."
+}

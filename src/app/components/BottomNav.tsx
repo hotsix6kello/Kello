@@ -20,15 +20,20 @@ interface LocalizedNavItem extends NavItem {
 }
 
 export default function BottomNav() {
-    const { t } = useTranslation('common');
+    const { t, i18n } = useTranslation('common');
     const router = useRouter();
     const pathname = usePathname();
     const [activeTab, setActiveTab] = useState("/");
 
-    const localizedNavItems = useMemo<LocalizedNavItem[]>(() => (navItems as NavItem[]).map(item => ({
-        ...item,
-        label: t(item.labelKey, { defaultValue: item.defaultLabel })
-    })), [t]);
+    const localizedNavItems = useMemo<LocalizedNavItem[]>(() => {
+        return (navItems as NavItem[]).map(item => ({
+            ...item,
+            label: t(item.labelKey, { 
+                defaultValue: item.defaultLabel,
+                lng: i18n.language 
+            })
+        }));
+    }, [t, i18n.language]);
 
     useEffect(() => {
         const matched = localizedNavItems.find((item: LocalizedNavItem) => {
