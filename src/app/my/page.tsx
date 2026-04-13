@@ -39,8 +39,8 @@ type MyBookingCardRecord = Pick<
     "id" | "status" | "storeName" | "primaryServiceName" | "beautyCategory" | "bookingDate" | "bookingTime" | "totalPrice"
 >;
 
-const SSR_SAFE_FALLBACK_NAME = "고객님";
-const SSR_SAFE_FALLBACK_SUBTITLE = "계정 및 설정";
+const SSR_SAFE_FALLBACK_NAME = "";
+const SSR_SAFE_FALLBACK_SUBTITLE = "";
 
 function buildCategoryTitle(t: ReturnType<typeof useTranslation>['t'], category: string | null | undefined, serviceName: string | null | undefined): string {
     const parts = [category, serviceName].filter((part) => {
@@ -142,7 +142,7 @@ function ProfileSummaryCard({
                                 style={{ borderRadius: '50%', objectFit: 'cover' }} 
                             />
                         ) : (
-                            <span className={styles.profileInitials}>{initials || "내"}</span>
+                            <span className={styles.profileInitials}>{initials || t("my_page.profile.avatar_placeholder", "My")}</span>
                         )}
                         <div className={styles.avatarEditOverlay} style={{
                             position: 'absolute', bottom: 0, right: 0, 
@@ -381,7 +381,7 @@ function MyBookingsSection({
                             <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
                                 💰 {!isMatched || b.totalPrice === 0 
                                       ? t('my_page.bookings.price_pending') 
-                                      : `${b.totalPrice.toLocaleString('ko-KR')}${t('beauty_explore.label_booking_unit')}`}
+                                      : `${b.totalPrice.toLocaleString(i18n.language === 'ko' ? 'ko-KR' : 'en-US')}${t('beauty_explore.label_booking_unit')}`}
                             </div>
                         </div>
                         );

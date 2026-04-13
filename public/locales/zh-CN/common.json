@@ -91,7 +91,8 @@
       "view_in_plan": "在计划中查看",
       "view_again": "View Again",
       "map": "Map",
-      "call_120": "Call 120"
+      "call_120": "Call 120",
+      "back_to_list": "返回列表"
     },
     "states": {
       "posts": "Posts",
@@ -1393,12 +1394,13 @@
       "pending_service": "正在确认服务信息",
       "matching_status": "正在寻找合适的店铺",
       "matching_desc": "Waiting for salon match",
-      "price_pending": "价格待店铺确认",
+      "price_pending": "待店铺确认价格",
       "error_fetch": "Failed to load bookings.",
       "browse_beauty_cta": "Browse Beauty Bookings"
     },
     "profile": {
-      "account_hint": "Account & Settings"
+      "account_hint": "Account & Settings",
+      "avatar_placeholder": "我的"
     },
     "settings": {
       "short": "Settings",

@@ -459,7 +459,8 @@
       "view_in_plan": "View in Plan",
       "view_again": "View Again",
       "map": "Map",
-      "call_120": "Call 120"
+      "call_120": "Call 120",
+      "back_to_list": "Back to List"
     },
     "states": {
       "posts": "Posts",
@@ -1657,12 +1658,13 @@
       "pending_service": "Checking service info",
       "matching_status": "Looking for the right store",
       "matching_desc": "Waiting for salon match",
-      "price_pending": "Price pending store confirmation",
+      "price_pending": "Price pending shop confirmation",
       "error_fetch": "Failed to load bookings.",
       "browse_beauty_cta": "Browse Beauty Bookings"
     },
     "profile": {
-      "account_hint": "Account & Settings"
+      "account_hint": "Account & Settings",
+      "avatar_placeholder": "My"
     },
     "settings": {
       "short": "Settings",

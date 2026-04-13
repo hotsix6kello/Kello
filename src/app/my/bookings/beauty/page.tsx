@@ -122,7 +122,7 @@ function buildCategoryTitle(category: string | null | undefined, serviceName: st
     return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
   });
   if (parts.length === 0) {
-    return '시술 정보 확인 중';
+    return ""; // Fallback will be handled by translation key or empty UI
   }
   return parts.join(' · ');
 }
@@ -263,7 +263,7 @@ function MyBeautyBookingsContent() {
 
       if (!accessToken) {
         if (!cancelled) {
-          setLoadError('로그인 상태를 다시 확인해 주세요.');
+          setLoadError(t('beauty_bookings.error_login_check', 'Please check your login status.'));
           setBookings([]);
         }
         return;
@@ -289,8 +289,8 @@ function MyBeautyBookingsContent() {
         if (!response.ok || body?.ok !== true || !Array.isArray(body.items)) {
           throw new Error(
             response.status === 401
-              ? '로그인 후 내 예약을 확인해 주세요.'
-              : body?.error ?? '내 예약을 불러오지 못했어요.',
+              ? t('beauty_bookings.error_login_required', 'Please log in to view your bookings.')
+              : body?.error ?? t('beauty_bookings.error_fetch_generic', 'Failed to load bookings.'),
           );
         }
 
@@ -299,7 +299,7 @@ function MyBeautyBookingsContent() {
         }
       } catch (error) {
         if (!cancelled) {
-          setLoadError(error instanceof Error ? error.message : '내 예약을 불러오지 못했어요.');
+          setLoadError(error instanceof Error ? error.message : t('beauty_bookings.error_fetch_generic', 'Failed to load bookings.'));
           setBookings([]);
         }
       } finally {
@@ -511,7 +511,7 @@ function MyBeautyBookingsContent() {
       setBookings((current) =>
         current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
       );
-      setCancelSuccess('예약이 취소되었어요.');
+      setCancelSuccess(t('beauty_bookings.success_cancel', 'Booking has been canceled.'));
       setIsCancelPanelOpen(false);
 
       if (activeTab === 'active') {
@@ -579,7 +579,7 @@ function MyBeautyBookingsContent() {
       setIsChangePanelOpen(false);
     } catch (error) {
       setChangeError(
-        error instanceof Error ? error.message : '변경 요청을 보내지 못했어요. 잠시 후 다시 시도해 주세요.',
+        error instanceof Error ? error.message : t('beauty_bookings.error_change_failed', 'Failed to send change request.'),
       );
     } finally {
       setIsChangeSubmitting(false);
@@ -630,7 +630,9 @@ function MyBeautyBookingsContent() {
       setBookings((current) =>
         current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
       );
-      setAlternativeResponseSuccess(response === 'accepted' ? '제안을 수락하여 예약 일정이 변경되었습니다.' : '제안을 거절하였습니다.');
+      setAlternativeResponseSuccess(response === 'accepted' 
+        ? t('beauty_bookings.success_offer_accepted', 'Offer accepted and schedule updated.') 
+        : t('beauty_bookings.success_offer_rejected', 'Offer has been rejected.'));
     } catch (error) {
       setAlternativeResponseError(error instanceof Error ? error.message : '처리에 실패했어요.');
     } finally {
@@ -757,7 +759,7 @@ function MyBeautyBookingsContent() {
                         </div>
                         <h3 className={styles.storeName}>
                           {!isStoreMatched(booking.status)
-                            ? buildCategoryTitle(getCategoryLabel(booking.beautyCategory), booking.primaryServiceName)
+                            ? buildCategoryTitle(getCategoryLabel(booking.beautyCategory), booking.primaryServiceName) || t('my_page.bookings.pending_service')
                             : booking.storeName}
                         </h3>
                         <p className={styles.bookingMeta}>
@@ -765,7 +767,7 @@ function MyBeautyBookingsContent() {
                         </p>
                         <div className={styles.cardFooter} style={{ borderTop: 'none', paddingTop: 0, marginTop: 4 }}>
                           <span className={styles.statusHint} style={{ color: !isStoreMatched(booking.status) ? '#db2777' : 'inherit', fontWeight: 500 }}>
-                            {!isStoreMatched(booking.status) ? '조건에 맞는 매장을 찾고 있어요' : STATUS_DESCRIPTIONS[booking.status]}
+                            {!isStoreMatched(booking.status) ? t('my_page.bookings.matching_status') : STATUS_DESCRIPTIONS[booking.status]}
                           </span>
                         </div>
                       </button>
@@ -786,7 +788,7 @@ function MyBeautyBookingsContent() {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
               >
-                ← 목록으로 돌아가기
+                ← {t('common.actions.back_to_list', 'Back to List')}
               </button>
               {!selectedBooking ? (
                 <div className={styles.emptyState}>{t('beauty_bookings.select_prompt')}</div>

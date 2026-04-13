@@ -84,41 +84,41 @@
     "error_desc": "There was a problem loading the page.",
     "error_retry": "Try Again",
     "actions": {
-      "view_all": "View All",
-      "browse_community": "Browse Community",
+      "view_all": "すべて見る",
+      "browse_community": "コミュニティを見る",
       "apply_again": "重新申请",
-      "apply_as_partner": "成为合作伙伴",
-      "booking_help": "预约帮助",
+      "apply_as_partner": "パートナーになる",
+      "booking_help": "予約ヘルプ",
       "call_112": "拨打 112",
       "call_119": "拨打 119",
       "call_1330": "拨打 1330",
-      "close": "关闭",
-      "contact_support": "联系支持",
-      "copied": "已复制",
-      "copy": "复制",
-      "emergency_help": "紧急求助",
-      "explore_places": "探索地点",
-      "general_help": "常见帮助",
-      "get_help": "获取帮助",
-      "go_to_reviews": "查看评价",
-      "interpreter_for_booking": "预约翻译辅助",
+      "close": "閉じる",
+      "contact_support": "サポートに連絡",
+      "copied": "コピーしました",
+      "copy": "コピー",
+      "emergency_help": "緊急ヘルプ",
+      "explore_places": "場所を探索",
+      "general_help": "一般的なヘルプ",
+      "get_help": "ヘルプを表示",
+      "go_to_reviews": "レビューを見る",
+      "interpreter_for_booking": "予約通訳サポート",
       "interpreter_help": "口译帮助",
       "large_view": "大图查看",
-      "my_bookings": "我的预约",
+      "my_bookings": "マイ予約",
       "open_admin_console": "打开管理员控制台",
       "open_help_center": "打开帮助中心",
-      "open_support": "联系客服",
+      "open_support": "サポートを開く",
       "partner_inquiry": "合作伙伴咨询",
       "report_issue": "报告问题",
       "save": "保存",
-      "saved": "已保存",
+      "saved": "保存済み",
       "show_booking_phrases": "Show booking phrases",
       "show_in_korean": "显示韩文",
-      "support": "支持",
+      "support": "サポート",
       "travel_phrasebook": "旅行短语集",
       "travel_phrases": "旅行短语",
-      "view_booking": "查看预约",
-      "view_bookings": "查看所有预约",
+      "view_booking": "予約を見る",
+      "view_bookings": "すべての予約を見る",
       "add_to_plan": "添加到行程",
       "back_to_booking_support": "返回预约支持",
       "browse_meetups": "浏览聚会",
@@ -127,12 +127,12 @@
       "create_plan": "创建行程",
       "explore": "探索",
       "manage": "管理",
-      "open": "打开",
+      "open": "開く",
       "open_my_support": "打开我的支持",
       "open_route": "打开路线",
       "show_emergency_phrases": "显示紧急短语",
       "use_this_plan": "使用此行程",
-      "view": "查看",
+      "view": "見る",
       "view_place_details": "查看地点详情",
       "view_plan": "查看行程",
       "write_review": "撰写评价",
@@ -147,12 +147,13 @@
       "view_in_plan": "View in Plan",
       "view_again": "View Again",
       "map": "Map",
-      "call_120": "Call 120"
+      "call_120": "Call 120",
+      "back_to_list": "一覧に戻る"
     },
     "states": {
       "posts": "Posts",
       "active": "激活",
-      "approved": "已批准",
+      "approved": "承認済み",
       "favorites": "收藏",
       "frequent": "常用",
       "needs_review": "待评价",
@@ -164,11 +165,11 @@
       "not_set_yet": "尚未设置",
       "not_verified": "未验证",
       "pending_review": "审核中",
-      "read_only": "只读",
+      "read_only": "読み取り専用",
       "recent": "最近",
       "sign_in_required": "需登录",
       "standard_account": "标准账户",
-      "verified": "已验证",
+      "verified": "認証済み",
       "no_permission": "没有权限。",
       "error_occurred": "处理请求时发生错误。",
       "current_trip_plan": "当前旅行计划",
@@ -189,8 +190,8 @@
       "draft": "Draft",
       "unavailable": "Unavailable",
       "in_progress": "In Progress",
-      "canceled": "Cancelled",
-      "loading": "Loading...",
+      "canceled": "キャンセル済み",
+      "loading": "読み込み中...",
       "searching": "Searching..."
     },
     "loading": "Loading...",
@@ -216,11 +217,11 @@
     "weather_clear": "晴朗",
     "back": "返回",
     "select_language": "选择语言",
-    "home_nav": "首页",
+    "home_nav": "ホーム",
     "explore_nav": "探索",
-    "planner_nav": "行程",
+    "planner_nav": "プラン",
     "today_nav": "今日",
-    "my_nav": "我的",
+    "my_nav": "マイ",
     "day_unit": "日",
     "locale": "zh-CN",
     "cities": {
@@ -1223,7 +1224,14 @@
     "lang_de": "Deutsch",
     "lang_ar": "العربية",
     "lang_pt": "Português",
-    "lang_ru": "Русский"
+    "lang_ru": "Русский",
+    "status_requested": "リクエスト済み",
+    "status_confirmed": "確定",
+    "status_completed": "完了",
+    "status_canceled": "キャンセル",
+    "status_failed": "失敗",
+    "status_change_requested": "変更リクエスト中",
+    "page_title": "ビューティー予約"
   },
   "settings_page": {
     "hero": {
@@ -1443,7 +1451,7 @@
   },
   "my_page": {
     "dashboard": {
-      "bookings_empty": "No upcoming bookings.",
+      "bookings_empty": "予約がありません",
       "admin_title": "Admin Console",
       "admin_menu": {
         "dashboard": "Admin Dashboard",
@@ -1469,24 +1477,25 @@
       }
     },
     "community": {
-      "empty_simple": "You haven't written any community posts yet."
+      "empty_simple": "まだ投稿がありません"
     },
     "bookings": {
-      "title": "My Bookings",
-      "pending_service": "Checking service info",
-      "matching_status": "Looking for the right store",
+      "title": "マイ予約",
+      "pending_service": "サービス情報を確認中",
+      "matching_status": "最適な店舗を探しています",
       "matching_desc": "Waiting for salon match",
-      "price_pending": "Price pending store confirmation",
+      "price_pending": "店舗確認後に案内",
       "error_fetch": "Failed to load bookings.",
-      "browse_beauty_cta": "Browse Beauty Bookings"
+      "browse_beauty_cta": "ビューティーサービスを探す"
     },
     "profile": {
-      "account_hint": "Account & Settings"
+      "account_hint": "アカウントと設定",
+      "avatar_placeholder": "マイ"
     },
     "settings": {
-      "short": "Settings",
+      "short": "設定",
       "account": {
-        "default_name": "Customer",
+        "default_name": "お客様",
         "phone": {
           "placeholder": "e.g. ${internationalPhoneExample}",
           "helper_empty": "Include country code. e.g. ${internationalPhoneExample}",
@@ -1499,7 +1508,7 @@
       }
     },
     "community_hub": {
-      "title": "My Community"
+      "title": "コミュニティ活動"
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
