@@ -24,9 +24,121 @@
     "booking_confirmation_cta": "我的预约"
   },
   "common": {
-    "error_title": "Something went wrong.",
-    "error_desc": "There was a problem loading the page.",
-    "retry": "Retry",
+    "error_title": "发生错误。",
+    "error_desc": "加载页面时出现问题。",
+    "error_retry": "Try Again",
+    "actions": {
+      "view_all": "View All",
+      "browse_community": "Browse Community",
+      "apply_again": "重新申请",
+      "apply_as_partner": "成为合作伙伴",
+      "booking_help": "预约帮助",
+      "call_112": "拨打 112",
+      "call_119": "拨打 119",
+      "call_1330": "拨打 1330",
+      "close": "关闭",
+      "contact_support": "联系支持",
+      "copied": "已复制",
+      "copy": "复制",
+      "emergency_help": "紧急求助",
+      "explore_places": "探索地点",
+      "general_help": "常见帮助",
+      "get_help": "获取帮助",
+      "go_to_reviews": "查看评价",
+      "interpreter_for_booking": "预约翻译辅助",
+      "interpreter_help": "口译帮助",
+      "large_view": "大图查看",
+      "my_bookings": "我的预约",
+      "open_admin_console": "打开管理员控制台",
+      "open_help_center": "打开帮助中心",
+      "open_support": "联系客服",
+      "partner_inquiry": "合作伙伴咨询",
+      "report_issue": "报告问题",
+      "save": "保存",
+      "saved": "已保存",
+      "show_booking_phrases": "显示预订用语",
+      "show_in_korean": "显示韩文",
+      "support": "支持",
+      "travel_phrasebook": "旅行短语集",
+      "travel_phrases": "旅行短语",
+      "view_booking": "查看预约",
+      "view_bookings": "查看所有预约",
+      "add_to_plan": "添加到行程",
+      "back_to_booking_support": "返回预约支持",
+      "browse_meetups": "浏览聚会",
+      "call_clinic": "联系诊所",
+      "continue_editing": "继续编辑",
+      "create_plan": "创建行程",
+      "explore": "探索",
+      "manage": "管理",
+      "open": "打开",
+      "open_my_support": "打开我的支持",
+      "open_route": "打开路线",
+      "show_emergency_phrases": "显示紧急短语",
+      "use_this_plan": "使用此行程",
+      "view": "查看",
+      "view_place_details": "查看地点详情",
+      "view_plan": "查看行程",
+      "write_review": "撰写评价",
+      "delete": "删除",
+      "details": "Details",
+      "view_details": "View Details",
+      "emergency_phrases": "Emergency Phrases",
+      "browse_places": "Browse Places",
+      "browse_explore": "Browse Explore",
+      "explore_more": "Explore More",
+      "open_hub": "Open Hub",
+      "view_in_plan": "在计划中查看",
+      "view_again": "View Again",
+      "map": "Map",
+      "call_120": "Call 120"
+    },
+    "states": {
+      "posts": "Posts",
+      "active": "激活",
+      "approved": "已批准",
+      "favorites": "收藏",
+      "frequent": "常用",
+      "needs_review": "待评价",
+      "needs_update": "待更新",
+      "not_available_yet": "暂不可用",
+      "not_connected": "未连接",
+      "not_joined": "未加入",
+      "not_set": "未设置",
+      "not_set_yet": "尚未设置",
+      "not_verified": "未验证",
+      "pending_review": "审核中",
+      "read_only": "只读",
+      "recent": "最近",
+      "sign_in_required": "需登录",
+      "standard_account": "标准账户",
+      "verified": "已验证",
+      "no_permission": "没有权限。",
+      "error_occurred": "处理请求时发生错误。",
+      "current_trip_plan": "当前旅行计划",
+      "details_unavailable": "详细信息不可用",
+      "meetups": "聚会",
+      "planner_draft": "日程草稿",
+      "recently_viewed": "最近浏览",
+      "reviews": "评价",
+      "saved_locally": "已在本地保存",
+      "not_connected_yet": "Not connected yet",
+      "places": "Places",
+      "plans": "Plans",
+      "saved_places": "Saved Places",
+      "saved_plans": "Saved Plans",
+      "trip_days": "Trip days",
+      "plan_stops": "Plan stops",
+      "done": "Done",
+      "draft": "Draft",
+      "unavailable": "Unavailable",
+      "in_progress": "In Progress",
+      "canceled": "Cancelled",
+      "loading": "Loading...",
+      "searching": "Searching..."
+    },
+    "loading": "Loading...",
+    "retry": "重试",
     "welcome": "欢迎，旅行者。",
     "greeting": "早上好",
     "login": "登录",
@@ -55,7 +167,6 @@
     "my_nav": "我的",
     "day_unit": "日",
     "locale": "zh-CN",
-    "loading": "加载中...",
     "cities": {
       "seoul": "首尔",
       "busan": "釜山",
@@ -102,90 +213,6 @@
       "pescatarian": "鱼素"
     },
     "community_nav": "社区",
-    "actions": {
-      "apply_again": "重新申请",
-      "apply_as_partner": "成为合作伙伴",
-      "booking_help": "预约帮助",
-      "call_112": "拨打 112",
-      "call_119": "拨打 119",
-      "call_1330": "拨打 1330",
-      "close": "关闭",
-      "contact_support": "联系支持",
-      "copied": "已复制",
-      "copy": "复制",
-      "emergency_help": "紧急求助",
-      "explore_places": "探索地点",
-      "general_help": "常见帮助",
-      "get_help": "获取帮助",
-      "go_to_reviews": "查看评价",
-      "interpreter_for_booking": "预约翻译辅助",
-      "interpreter_help": "口译帮助",
-      "large_view": "大图查看",
-      "my_bookings": "我的预约",
-      "open_admin_console": "打开管理员控制台",
-      "open_help_center": "打开帮助中心",
-      "open_support": "联系客服",
-      "partner_inquiry": "合作伙伴咨询",
-      "report_issue": "报告问题",
-      "save": "保存",
-      "saved": "已保存",
-      "show_booking_phrases": "显示预约短语",
-      "show_in_korean": "显示韩文",
-      "support": "支持",
-      "travel_phrasebook": "旅行短语集",
-      "travel_phrases": "旅行短语",
-      "view_booking": "查看预约",
-      "view_bookings": "查看所有预约",
-      "add_to_plan": "添加到行程",
-      "back_to_booking_support": "返回预约支持",
-      "browse_community": "浏览社区",
-      "browse_meetups": "浏览聚会",
-      "call_clinic": "联系诊所",
-      "continue_editing": "继续编辑",
-      "create_plan": "创建行程",
-      "explore": "探索",
-      "manage": "管理",
-      "open": "打开",
-      "open_my_support": "打开我的支持",
-      "open_route": "打开路线",
-      "show_emergency_phrases": "显示紧急短语",
-      "use_this_plan": "使用此行程",
-      "view": "查看",
-      "view_place_details": "查看地点详情",
-      "view_plan": "查看行程",
-      "write_review": "撰写评价",
-      "delete": "删除"
-    },
-    "states": {
-      "active": "激活",
-      "approved": "已批准",
-      "favorites": "收藏",
-      "frequent": "常用",
-      "needs_review": "待评价",
-      "needs_update": "待更新",
-      "not_available_yet": "暂不可用",
-      "not_connected": "未连接",
-      "not_joined": "未加入",
-      "not_set": "未设置",
-      "not_set_yet": "尚未设置",
-      "not_verified": "未验证",
-      "pending_review": "审核中",
-      "read_only": "只读",
-      "recent": "最近",
-      "sign_in_required": "需登录",
-      "standard_account": "标准账户",
-      "verified": "已验证",
-      "no_permission": "没有权限。",
-      "error_occurred": "处理请求时发生错误。",
-      "current_trip_plan": "当前旅行计划",
-      "details_unavailable": "详细信息不可用",
-      "meetups": "聚会",
-      "planner_draft": "日程草稿",
-      "posts": "帖子",
-      "recently_viewed": "最近浏览",
-      "reviews": "评价",
-      "saved_locally": "已在本地保存"
-    },
     "runtime": {
       "counts": {
         "stops_zero": "{{count}} 个地点",
@@ -193,12 +220,34 @@
         "stops_other": "{{count}} 个地点",
         "days_zero": "{{count}} 天",
         "days_one": "{{count}} 天",
-        "days_other": "{{count}} 天"
+        "days_other": "{{count}} 天",
+        "comments": "{{count}} comments",
+        "stops": "{{count}} stops",
+        "days": "{{count}} days"
+      },
+      "relative": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}}m ago",
+        "hours_ago": "{{count}}h ago",
+        "days_ago": "{{count}}d ago"
+      },
+      "trip": {
+        "day_label": "Day {{day}}",
+        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dash": "Day {{day}} - {{time}}"
       }
     },
     "morning": "早上好",
     "afternoon": "下午好",
-    "evening": "晚上好"
+    "evening": "晚上好",
+    "help_nav": "Help",
+    "view_map": "Lihat Lokasi",
+    "view_map_desc": "Lihat lokasi detail di peta",
+    "taxi_call": "Panggil Taksi",
+    "route_nav": "Panduan Rute",
+    "transit_nav_desc": "Navigasi transportasi umum",
+    "copy_address": "Salin Alamat",
+    "copied": "Tersalin!"
   },
   "transport": {
     "moving_to": "正在前往 {{dest}}",
@@ -508,432 +557,6 @@
     "focus": {
       "title": "????",
       "desc": "?????????????????????"
-    }
-  },
-  "my_page": {
-    "bookings": {
-      "pending_service": "Pending Service Review",
-      "matching_status": "We're finding a salon that matches your preferences.",
-      "matching_desc": "Waiting for salon match",
-      "price_pending": "Price will be confirmed after salon review.",
-      "title": "我的预约",
-      "date_time": "日期 / 时间",
-      "area": "区域",
-      "price": "价格",
-      "today_time": "今天, {{time}}",
-      "tomorrow_time": "明天, {{time}}",
-      "next_week_time": "下周, {{time}}",
-      "new_added": "新预约已添加！",
-      "browse_beauty_cta": "浏览美容预约",
-      "action_edit_request": "修改请求",
-      "action_cancel_request": "取消请求",
-      "error_fetch": "加载预约失败。"
-    },
-    "settings": {
-      "account": {
-        "default_name": "Customer",
-        "sign_in_title": "Sign in to manage account details",
-        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
-        "title": "Account / Profile",
-        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
-        "display_name": "Display name",
-        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
-        "email": "Email / login",
-        "email_hint": "Read from the active Supabase auth user.",
-        "joined": "Joined",
-        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
-        "last_seen": "Last sign-in",
-        "last_seen_hint": "Read-only from the auth session.",
-        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-        "phone": {
-          "placeholder": "e.g. {{example}}",
-          "helper_empty": "Includes country code. e.g. {{example}}",
-          "helper_saved": "Kept in international format.",
-          "helper_invalid": "Include country code. e.g. {{example}}"
-        }
-      },
-      "short": "??",
-      "support_short": "??",
-      "eyebrow": "?????",
-      "title": "????",
-      "subtitle": "???????????????????????? mypage ???",
-      "summary": {
-        "saved": "?????",
-        "stops": "?????",
-        "days": "????"
-      },
-      "preferences": {
-        "region_empty": "???????????????????????????",
-        "region_hint": "?????????????",
-        "style_empty": "???????????????????????????????",
-        "style_hint": "???????????",
-        "interests_saved": "?? saved_items ???????????",
-        "interests_plan": "???????????????",
-        "interests_empty": "?????????????????????",
-        "language": "??",
-        "language_hint": "????????????? kello_lang ??",
-        "region": "???? / ??",
-        "style": "????",
-        "interests": "????",
-        "title": "????",
-        "desc": "?????????????????????????????????"
-      },
-      "verification": {
-        "email": "??",
-        "email_ready": "????????????",
-        "email_missing": "?? Supabase ???????????",
-        "phone": "???",
-        "phone_ready": "????????????",
-        "phone_partial": "????????????????",
-        "phone_empty": "?????????????",
-        "provider": "????",
-        "provider_hint": "????? Supabase ?????",
-        "title": "?? / ??",
-        "desc": "??????????????????????",
-        "identity_note": "????????????????????????",
-        "email_provider": "??"
-      },
-      "links": {
-        "support_desc": "?????????????????",
-        "phrases_desc": "????????????????",
-        "saved": "????",
-        "saved_desc": "??????????????????",
-        "bookings": "??",
-        "bookings_desc": "?????????????????",
-        "community": "??",
-        "community_desc": "?????????????????",
-        "title": "???? / ????",
-        "desc": "?????????????????????",
-        "placeholder_title": "?????",
-        "placeholder_desc": "????????????????????????????????"
-      },
-      "partner": {
-        "title": "??????",
-        "approved_desc": "??????????????????????????????????",
-        "pending_desc": "???????????????????????????????",
-        "rejected_desc": "?????????????????????????????????",
-        "none_desc": "????????????????????????????"
-      },
-      "admin": {
-        "enabled": "???",
-        "enabled_desc": "?????????????????????",
-        "disabled_desc": "????????????",
-        "title": "????",
-        "source": "profiles.is_admin = true",
-        "source_none": "??????????"
-      },
-      "hero": {
-        "email_ready": "?????",
-        "email_pending": "?????"
-      },
-      "partner_admin": {
-        "title": "???? / ???",
-        "desc": "????????????? my ????????????????????"
-      }
-    },
-    "profile": {
-      "account_hint": "Account & Preferences",
-      "fallback_name": "Customer",
-      "fallback_subtitle": "Account & Preferences",
-      "fallback_initials": "ME",
-      "trust_score": "💎 信任分数",
-      "trust_level_excellent": "极好"
-    },
-    "passport": {
-      "title": "我的护照",
-      "view_all": "查看全部",
-      "seoul": "首尔",
-      "beauty": "美容",
-      "jeju": "济州"
-    },
-    "community": {
-      "title": "我的社区动态",
-      "empty": "还没有撰写任何社区动态。",
-      "empty_simple": "暂无发布文章",
-      "browse_cta": "浏览社区"
-    },
-    "support": {
-      "short": "??",
-      "eyebrow": "????",
-      "title": "????",
-      "header_cta": "??????",
-      "tabs": {
-        "booking": "????",
-        "general": "????",
-        "faq": "FAQ / ????",
-        "emergency": "?? / ????"
-      },
-      "summary": {
-        "booking": {
-          "label": "????",
-          "desc": "??????????????????"
-        },
-        "general": {
-          "label": "????",
-          "desc": "???????????????????"
-        },
-        "emergency": {
-          "label": "?????",
-          "desc": "????????????????????????????"
-        }
-      },
-      "guides": {
-        "find_booking": {
-          "q": "?????????",
-          "a": "???????????????????????????????????????????"
-        },
-        "staff_talk": {
-          "q": "???????????",
-          "a": "???????????????????????????????????????"
-        },
-        "change_time": {
-          "q": "?????????",
-          "a": "?????????????????????????????????????????"
-        },
-        "cancel_refund": {
-          "q": "???????????",
-          "a": "????????????????????????????????????????"
-        },
-        "write_review": {
-          "q": "???????????",
-          "a": "?????????? My Community > Reviews??????????????????????????"
-        },
-        "community_safety": {
-          "q": "????????????????",
-          "a": "??????????????????????????????????????????????????????",
-          "cta": "????"
-        }
-      },
-      "general": {
-        "help_center": {
-          "label": "????",
-          "desc": "??????????????????????????????"
-        },
-        "booking_cancel": {
-          "label": "???????",
-          "desc": "?????????????????????????",
-          "cta": "??????"
-        },
-        "community_safety": {
-          "label": "????",
-          "desc": "???????????????????????",
-          "cta": "??????"
-        },
-        "partner": {
-          "label": "????",
-          "desc": "????????????????????????"
-        },
-        "title": "????",
-        "desc": "???????????????????????",
-        "report_notice": "?????????????????????????????????"
-      },
-      "emergency": {
-        "overview": {
-          "label": "????",
-          "desc": "????????????????????",
-          "cta": "??????"
-        },
-        "interp": {
-          "label": "????",
-          "desc": "?????????????????????????",
-          "cta": "??????",
-          "booking_desc": "?????????????????????????????????"
-        },
-        "phrases": {
-          "label": "????",
-          "desc": "???????????????????????????",
-          "cta": "??????",
-          "booking_label": "????",
-          "booking_desc": "????????????????????????????????"
-        },
-        "medical": {
-          "label": "????",
-          "desc": "???????????????????????????",
-          "cta": "????"
-        },
-        "police": {
-          "label": "?? / ????",
-          "desc": "??????????????????????????",
-          "cta": "??????"
-        },
-        "title": "?? / ????",
-        "desc": "My Support ???????????????????????????????",
-        "interpreter_notice": "????????????????????????????",
-        "hub_notice": "????????????????/help/* ?????????????Travel Phrasebook ?????????"
-      },
-      "booking": {
-        "banner_report": "???? {{bookingName}} ?????????????????????",
-        "banner_interpreter": "??? {{bookingName}} ??????????????????????",
-        "banner_default": "???? {{bookingName}} ??????????????????",
-        "banner_fallback": "????????????????????????????",
-        "title": "????",
-        "desc": "?????????????????????",
-        "empty": {
-          "title": "???????????",
-          "desc": "???????????????????????"
-        },
-        "context_title": "??????",
-        "context_desc": "???????????????????????????????"
-      },
-      "subtitle": "???????????????????????",
-      "faq": {
-        "title": "FAQ / ????",
-        "desc": "??????????????????????????"
-      }
-    },
-    "phrases": {
-      "quick": "??",
-      "title": "?????",
-      "eyebrow": "????",
-      "favorites": {
-        "title": "??",
-        "desc": "???????????????",
-        "empty": "?????????????????????"
-      },
-      "recent": {
-        "title": "??",
-        "desc": "????????????????????????"
-      },
-      "subtitle": "?????????????????????????????????????",
-      "hero": {
-        "badge": "?????????",
-        "count": "???"
-      },
-      "context": {
-        "title": "?????",
-        "interpreter": "???????????????????????",
-        "support": "??????????????????????????????",
-        "booking": "?????????????"
-      },
-      "category": {
-        "title": "{{category}} ??"
-      },
-      "empty": {
-        "title": "?????????",
-        "desc": "??????????????????? Support?"
-      }
-    },
-    "saved": {
-      "title": "????",
-      "eyebrow": "????",
-      "header_cta": "????",
-      "subtitle": "???????????????Planner ??????????",
-      "summary": {
-        "places": "??",
-        "plans": "??",
-        "recent": "??"
-      },
-      "tabs": {
-        "places": "??",
-        "plans": "??",
-        "recent": "??"
-      },
-      "summary_hint": "地点由探索中保存的项目自动同步，行程则从当前规划中获取。",
-      "places": {
-        "source_plan": "正在与行程表同步",
-        "source_saved": "从探索保存",
-        "source_fallback": "从探索保存",
-        "source_id_only": "保存项目 ID",
-        "added": "已添加到行程表。时间可在行程表中调整。",
-        "title": "保存的地点",
-        "desc": "浏览您在探索中保存的地点。",
-        "empty": {
-          "title": "还没有保存的地点",
-          "desc": "在探索中保存地点，以便快速制定计划。",
-          "cta": "探索地点"
-        },
-        "fallback_title": "保存的地点 {{id}}"
-      },
-      "plans": {
-        "synced": "已与当前行程表同步",
-        "title": "保存的行程",
-        "desc": "此处显示您当前的行程草稿。",
-        "empty": {
-          "title": "还没有保存的行程",
-          "desc": "在行程表中创建计划后，草稿会显示在这里。"
-        },
-        "current": "当前旅行计划"
-      },
-      "recent": {
-        "title": "最近浏览",
-        "desc": "您最近查看的地点、行程和社区帖子会保存在这里。",
-        "empty": {
-          "title": "暂无浏览记录",
-          "desc": "当您查看地点、行程或社区详情时，记录会显示在这里。",
-          "fallback": "如果本地存储可用，记录将保存在此设备上。",
-          "cta": "去探索"
-        },
-        "type": {
-          "place": "地点",
-          "plan": "行程",
-          "community": "社区"
-        }
-      }
-    },
-    "community_hub": {
-      "eyebrow": "我的活动",
-      "title": "我的社区",
-      "subtitle": "集中管理您发布的帖子、评价和动态。",
-      "browse": "浏览社区",
-      "summary": {
-        "posts": "帖子",
-        "reviews": "评价",
-        "meetups": "聚会"
-      },
-      "tabs": {
-        "posts": "帖子",
-        "reviews": "评价",
-        "meetups": "聚会"
-      },
-      "empty": {
-        "reviews": {
-          "title": "还没有撰写过评价",
-          "desc": "基于已完成的预约，分享您的旅行心得吧。",
-          "no_completed": "完成预约后即可回来撰写评价。",
-          "cta": "查看已完成预约"
-        },
-        "meetups": {
-          "title": "还没有聚会活动",
-          "desc": "去社区看看大家都在发起什么活动吧。"
-        },
-        "posts": {
-          "title": "还没有发布的帖子",
-          "desc": "在社区提问或向其他旅行者分享实用小贴士吧。"
-        }
-      },
-      "summary_hint": "统计结果基于您发布的社区帖子和已完成的预约。",
-      "sync_error": "当前由于网络问题无法更新。显示为空状态。",
-      "review_prompts": {
-        "title": "为已完成的预约撰写评价",
-        "desc": "在社区中选择“评价”类别来分享您的心得。"
-      },
-      "posts_desc": "查看及管理您发布的普通社区帖子。",
-      "reviews_desc": "快速查看已发布的评价和预约历史。",
-      "meetups_desc": "包含寻找旅行搭子等聚会类动态。",
-      "loading": "正在加载动态...",
-      "no_comments": "暂无评论",
-      "type": {
-        "travel": "旅行",
-        "meetup": "聚会"
-      }
-    },
-    "messages": {
-      "upload_success": "个人主页照片已更新。",
-      "upload_failed": "上传失败。"
-    },
-    "dashboard": {
-      "admin_title": "管理员控制台",
-      "admin_desc": "打开管理员控制台与合作伙伴管理",
-      "admin_menu": {
-        "dashboard": "管理员控制台",
-        "dashboard_desc": "统计与完整菜单",
-        "bookings": "美容预约管理",
-        "bookings_desc": "预约请求与状态变更",
-        "partners": "合作伙伴管理",
-        "partners_desc": "加入申请审核管理",
-        "users": "管理员账号管理",
-        "users_desc": "权限授予与状态解除"
-      }
     }
   },
   "community_page": {
@@ -1522,232 +1145,356 @@
   "settings_page": {
     "hero": {
       "avatar": {
-        "placeholder": "ME",
-        "error": "Failed to change image."
+        "placeholder": "我",
+        "error": "更换头像失败。",
+        "change": "更换头像",
+        "register": "注册头像"
       },
-      "default_title": "My Settings",
-      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings"
+      "default_title": "我的设置",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
+      "login_promo": {
+        "title": "登录后查询更多设置。",
+        "desc": "个人标签可见，但链接数据需要登录。"
+      },
+      "tabs_aria": "设置标签"
     },
     "tabs": {
       "personal": {
-        "label": "Personal",
-        "desc": "Check your email, contact, login, and notification settings."
+        "label": "个人",
+        "desc": "查看电子邮件、联系方式、登录及通知设置。"
       },
       "partner": {
-        "label": "Partner",
-        "desc": "Check your partner status and store management items in one place."
+        "label": "合伙人",
+        "desc": "查看合作伙伴状态和商店管理信息。"
       },
       "admin": {
-        "label": "Admin",
-        "desc": "Quickly check items linked to your administrative privileges."
+        "label": "管理员",
+        "desc": "快速查看管理员权限。"
       }
     },
     "personal": {
       "nickname": {
-        "title": "Nickname",
-        "helper_set": "This name is displayed in the community and profile.",
-        "helper_unset": "No nickname set yet.",
-        "badge_set": "Set",
-        "badge_unset": "Not Set",
-        "placeholder": "Enter a new nickname."
+        "title": "昵称",
+        "helper_set": "显示在社区和简介中的名称。",
+        "helper_unset": "尚未设置昵称。",
+        "badge_set": "已设置",
+        "badge_unset": "未设置",
+        "placeholder": "输入新昵称。"
       },
       "email": {
-        "title": "Email",
-        "value_none": "Not connected",
-        "helper_verified": "This is your verified email address.",
-        "helper_unverified": "Email verification is required.",
-        "helper_none": "No email connected.",
-        "badge_verified": "Verified",
-        "badge_unverified": "Unverified",
-        "badge_none": "Not connected"
+        "title": "电邮",
+        "value_none": "未连接",
+        "helper_verified": "当前验证的电子邮件地址。",
+        "helper_unverified": "需要验证电子邮件。",
+        "helper_none": "没有关联的电子邮件。",
+        "badge_verified": "已验证",
+        "badge_unverified": "未验证",
+        "badge_none": "未连接"
       },
       "sns": {
         "title": "SNS",
-        "value_none": "Not entered",
-        "helper_set": "Currently saved SNS.",
-        "helper_unset": "No SNS saved.",
-        "badge_set": "Saved",
-        "badge_unset": "Not Entered",
-        "placeholder": "Enter your SNS ID."
+        "value_none": "未输入",
+        "helper_set": "当前保存的SNS。",
+        "helper_unset": "没有保存的SNS。",
+        "badge_set": "已保存",
+        "badge_unset": "未输入",
+        "placeholder": "输入SNS ID。"
       },
       "phone": {
-        "title": "Phone",
-        "value_none": "Not entered",
-        "helper_set": "Currently saved phone number.",
-        "helper_unset": "No phone number saved.",
-        "badge_set": "Saved",
-        "badge_unset": "Not Entered",
-        "country_label": "Country Code",
-        "number_label": "Phone Number",
-        "helper_preview": "It will be saved as {{value}}."
+        "title": "电话",
+        "value_none": "未输入",
+        "helper_set": "当前保存的电话号码。",
+        "helper_unset": "未保存电话号码。",
+        "badge_set": "已保存",
+        "badge_unset": "未输入",
+        "country_label": "国家代码",
+        "number_label": "电话号码",
+        "helper_preview": "It will be saved as {{value}}.",
+        "helper_empty_fallback": "选择国家并输入号码即可用E.164保存。",
+        "helper_saved_fallback": "保存的号码保留为E.164格式。",
+        "helper_invalid_fallback": "选择国家并仅输入数字。"
       },
       "login": {
-        "title": "Login Method",
-        "helper_in": "Current login method as being used.",
-        "helper_out": "Check after logging in.",
-        "badge_in": "In use",
-        "badge_out": "Standby",
-        "provider_email": "Email",
-        "value_out": "Login required"
+        "title": "登录方式",
+        "helper_in": "目前使用的登录方式。",
+        "helper_out": "登录后查询。",
+        "badge_in": "使用中",
+        "badge_out": "待定",
+        "provider_email": "电子邮件",
+        "value_out": "需要登录"
       },
       "notifications": {
-        "title": "Notifications",
-        "value_out": "Check after login",
-        "helper_out": "Check current notification status after login.",
-        "badge_out": "Standby",
-        "value_error": "Settings unknown",
-        "helper_error": "Failed to load notification settings.",
-        "badge_error": "Check required",
-        "channel_app": "App",
-        "channel_email": "Email",
-        "value_all_off": "All notifications OFF",
+        "title": "通知",
+        "value_out": "登录后查询",
+        "helper_out": "登录以查看当前提醒状态。",
+        "badge_out": "待定",
+        "value_error": "检查设置",
+        "helper_error": "加载提醒状态失败。",
+        "badge_error": "需要检查",
+        "channel_app": "应用",
+        "channel_email": "电子邮件",
+        "value_all_off": "全部提醒关闭",
         "helper_summary": "Receiving {{count}}/3 booking related notifications.",
-        "badge_off": "OFF",
-        "value_both_on": "App · Email ON",
+        "badge_off": "关闭",
+        "value_both_on": "应用/邮件已开启",
         "value_single_on": "{{channel}} ON",
-        "badge_all_on": "Active",
-        "badge_partial_on": "Partial ON"
+        "badge_all_on": "激活",
+        "badge_partial_on": "部分开启"
       }
     },
     "partner": {
       "status": {
-        "title": "Partner Status",
+        "title": "伙伴状态",
         "approved": {
-          "value": "Approved",
-          "helper": "Confirmed as a partner account.",
-          "badge": "Approved"
+          "value": "已批准",
+          "helper": "验证为合作伙伴账号。",
+          "badge": "已批准"
         },
         "pending": {
-          "value": "Under review",
-          "helper": "Reviewing your partner application.",
-          "badge": "Pending"
+          "value": "审核中",
+          "helper": "正在审核提交的合作伙伴信息。",
+          "badge": "待定"
         },
         "rejected": {
-          "value": "Resubmit with changes",
-          "helper": "You can resubmit after correcting your submission.",
-          "badge": "Requires correction",
-          "cta": "Resubmit"
+          "value": "修改并重新提交",
+          "helper": "您可以补充信息然后再次提交。",
+          "badge": "需要修改",
+          "cta": "重新提交"
         },
         "none": {
-          "value": "No partner info",
-          "helper": "No registered partner status.",
-          "badge": "None"
+          "value": "无合作伙伴信息",
+          "helper": "未注册合作伙伴状态。",
+          "badge": "无"
         }
       },
       "store": {
-        "title": "Store Info",
-        "value_none": "No store information registered",
-        "helper_none": "No store summary information available.",
-        "badge_set": "Registered",
-        "badge_unset": "Not Registered",
-        "visibility_on": "Visible in search",
-        "visibility_off": "Hidden in search"
+        "title": "门店信息",
+        "value_none": "无门店信息",
+        "helper_none": "没有保存门店摘要。",
+        "badge_set": "已注册",
+        "badge_unset": "未注册",
+        "visibility_on": "可见",
+        "visibility_off": "隐藏"
       },
       "hours": {
-        "title": "Operating Hours",
-        "value_none": "No registered hours",
-        "helper_none": "Operating hours will be shown here when linked.",
-        "badge_unset": "Not Registered"
+        "title": "营业时间",
+        "value_none": "没有注册时间",
+        "helper_none": "连接后您可以在这里查看时间。",
+        "badge_unset": "未注册"
       },
       "bookings": {
-        "title": "Booking Management",
-        "value_info": "No separate management menu",
-        "value_pending": "Check after partner approval",
-        "helper_approved": "Currently only booking summary is structured.",
-        "helper_pending": "Related items will be easier to check once approved.",
-        "badge_info": "Info",
-        "badge_pending": "Standby"
+        "title": "预订请求",
+        "value_info": "无独立管理菜单",
+        "value_pending": "审核后查询",
+        "helper_approved": "精简的预订请求结构。",
+        "helper_pending": "审核通过后显示。",
+        "badge_info": "信息",
+        "badge_pending": "待定"
       },
       "pricing": {
-        "title": "Treatment/Pricing",
-        "value_none": "No separate management menu",
-        "helper_none": "Currently no direct link to treatment/pricing management.",
-        "badge_info": "Info"
+        "title": "价格菜单",
+        "value_none": "无独立管理菜单",
+        "helper_none": "尚无直接的定价管理视图。",
+        "badge_info": "信息"
       }
     },
     "admin": {
       "approval": {
-        "title": "Partner Approvals",
-        "value": "Check applications",
-        "helper": "Approve or reject partner applications in the admin console."
+        "title": "入驻审批",
+        "value": "查看申请",
+        "helper": "在此批准或拒绝申请。"
       },
       "issues": {
-        "title": "Booking Issues",
-        "value": "Review items",
-        "helper": "Check booking status and change requests in the admin console."
+        "title": "订单异动",
+        "value": "查询预订和更改",
+        "helper": "检查预订状态和修改请求。"
       },
       "users": {
-        "title": "User Management",
-        "value": "Check permissions",
-        "helper": "Manage users and admin permissions in the admin console."
+        "title": "用户管理",
+        "value": "检查账号权限",
+        "helper": "管理用户和管理员权限。"
       },
       "notices": {
-        "title": "Notice Management",
-        "value": "No connected screen",
-        "helper": "Currently no notice management screen connected."
+        "title": "公告管理",
+        "value": "未链接视图",
+        "helper": "代码库中尚未连接专属公告管理视图。"
       },
-      "badge_open": "Openable",
-      "badge_unlinked": "Unlinked"
+      "badge_open": "可开启",
+      "badge_unlinked": "未连接"
     },
     "messages": {
-      "action_contact": "Enquire",
-      "action_open": "Open",
-      "unauthorized": "Please reconfirm login session.",
-      "profile_not_found": "Profile not found. Please log in again.",
-      "schema_missing_sns": "SNS column not yet applied to the database.",
-      "schema_missing_phone": "Phone column not yet applied to the database.",
-      "save_error": "Failed to save.",
-      "sns_saved": "Saved SNS ID.",
-      "phone_saved": "Saved phone number.",
+      "action_contact": "联系",
+      "action_open": "开启",
+      "unauthorized": "请检查您的登录会话。",
+      "profile_not_found": "未找到资料。请重新登录。",
+      "schema_missing_sns": "SNS列尚未应用到数据库。",
+      "schema_missing_phone": "电话列尚未应用到数据库。",
+      "save_error": "保存失败。",
+      "sns_saved": "SNS ID已保存。",
+      "phone_saved": "电话号码已保存。",
       "nickname_cooldown": "Nickname can only be changed once every 90 days. (Remaining: {{days}} days)",
-      "nickname_empty": "Please enter a nickname.",
-      "nickname_saved": "Successfully changed nickname.",
-      "nickname_error": "Failed to save nickname. Please try again.",
+      "nickname_empty": "请输入昵称。",
+      "nickname_saved": "昵称修改成功。",
+      "nickname_error": "保存昵称失败。请重试。",
       "nickname_cooldown_long": "Can only be changed every {{limit}} days. (Next available date: {{date}})",
-      "save": "Save",
-      "saving": "Saving..."
+      "save": "保存",
+      "saving": "保存中...",
+      "uploading": "上传中..."
     },
     "badges": {
       "community": {
-        "leader": "Community Leader",
-        "trend": "Trend Picker",
-        "mate": "Beauty Mate",
-        "sprout": "Sprout"
+        "leader": "社区领袖",
+        "trend": "趋势发现者",
+        "mate": "美容伙伴",
+        "sprout": "新芽"
       },
       "booking": {
         "vvip": "VVIP",
         "vip": "VIP",
-        "regular": "Regular",
-        "new": "New"
+        "regular": "常规",
+        "new": "新"
       },
-      "nickname_unset": "Not Set"
+      "nickname_unset": "未设置"
     },
     "tab_aria_label": "Settings Tabs"
   },
+  "my_page": {
+    "dashboard": {
+      "bookings_empty": "No upcoming bookings.",
+      "admin_title": "Admin Console",
+      "admin_menu": {
+        "dashboard": "Admin Dashboard",
+        "dashboard_desc": "Overall status and statistics",
+        "bookings": "Booking Ledger",
+        "bookings_desc": "Manage all user bookings and status",
+        "partners": "Partner Approvals",
+        "partners_desc": "Review partner applications and grants",
+        "users": "User Management",
+        "users_desc": "Member list and permission settings"
+      },
+      "partner": {
+        "none_title": "Join as a Partner",
+        "none_desc": "Become an official Kello partner and register your services.",
+        "none_cta": "Apply Now",
+        "pending_title": "Under Review",
+        "pending_desc": "We are currently reviewing your partner application.",
+        "approved_title": "Partner Approved",
+        "approved_desc": "You can now manage your services in the Partner Console.",
+        "rejected_title": "Application Rejected (Needs Revision)",
+        "rejected_desc": "Please double check your application information.",
+        "rejected_cta": "Apply Again"
+      }
+    },
+    "community": {
+      "empty_simple": "You haven't written any community posts yet."
+    },
+    "bookings": {
+      "title": "My Bookings",
+      "pending_service": "正在确认服务信息",
+      "matching_status": "正在寻找合适的店铺",
+      "matching_desc": "Waiting for salon match",
+      "price_pending": "价格待店铺确认",
+      "error_fetch": "Failed to load bookings.",
+      "browse_beauty_cta": "Browse Beauty Bookings"
+    },
+    "profile": {
+      "account_hint": "Account & Settings"
+    },
+    "settings": {
+      "short": "Settings",
+      "account": {
+        "default_name": "Customer",
+        "phone": {
+          "placeholder": "例如 ${internationalPhoneExample}",
+          "helper_empty": "包含国家代码。例如 ${internationalPhoneExample}",
+          "helper_saved": "当前保存的国际电话号码。",
+          "helper_invalid": "输入有效的格式。例如 ${internationalPhoneExample}"
+        }
+      },
+      "admin": {
+        "enabled": "Active"
+      }
+    },
+    "community_hub": {
+      "title": "My Community"
+    },
+    "messages": {
+      "upload_success": "Profile picture has been updated.",
+      "upload_failed": "Failed to upload. Please try again."
+    },
+    "bookings_hub": {
+      "meta": {
+        "reference": "参考"
+      }
+    }
+  },
   "notifications": {
-    "save_success": "Settings saved successfully.",
-    "save_fail": "Failed to save settings.",
-    "title": "Notification Settings",
-    "login_required": "Please log in to continue.",
-    "login_button": "Log in",
-    "hero_title": "Customize your booking updates ✨",
-    "hero_desc": "Choose how you want to receive updates for Kello's premium concierge services.",
+    "title": "通知设置",
+    "hero_title": "定制您的预订提醒。✨",
+    "desc": "Set up channels to receive important booking changes or alerts.",
+    "groups": {
+      "booking": "Bookings & Activity",
+      "booking_desc": "Booking progress and schedule alerts",
+      "community": "Community & Offers",
+      "community_desc": "Community comments, likes, and discounts"
+    },
+    "items": {
+      "status_updates": {
+        "title": "Booking Status Updates",
+        "desc": "Alerts for booking confirmation, salon match, and schedule changes"
+      },
+      "reminders": {
+        "title": "Advance Reminders",
+        "desc": "Alerts on the day before and 1 hour prior to your visit"
+      },
+      "community_replies": {
+        "title": "Community Replies",
+        "desc": "Notifications for comments and upvotes on your posts"
+      },
+      "marketing": {
+        "title": "Events & Discounts",
+        "desc": "Useful alerts for new events and discount coupons"
+      }
+    },
     "channel": {
-      "title": "Channels",
-      "email_title": "Receive updates via Email",
-      "email_desc": "We'll safely send core updates about your booking information and progress via email.",
-      "app_title": "Receive updates via App",
-      "app_desc": "Important booking status changes are always recorded in the app notification box, so you can check them anytime."
+      "email_title": "通过电子邮件接收预订更新",
+      "email_desc": "我们安全地将预订详情和关键进度更新发送到您的电子邮箱。",
+      "app_push_title": "Install App for Real-time Push",
+      "app_push_desc": "Currently using temporary device alerts. Install the app for a more reliable experience.",
+      "device_enabled_title": "Device Alerts Enabled",
+      "device_enabled_desc": "You will receive important notifications on this browser or device.",
+      "title": "渠道设置",
+      "app_title": "在应用内接收预订提醒",
+      "app_desc": "重要的状态更改始终记录在应用的通知收件箱中。"
     },
+    "actions": {
+      "save": "Save Settings",
+      "turn_on_device": "Enable Device Alerts"
+    },
+    "toast": {
+      "saving": "Saving notification settings...",
+      "success": "Your notification settings have been saved.",
+      "error": "Failed to save settings. Please try again later."
+    },
+    "save_success": "设置已保存。",
+    "save_fail": "保存失败。",
+    "login_required": "请登录后使用。",
+    "login_button": "登录",
+    "hero_desc": "设置您接收Kello高级礼宾服务更新的方式。",
     "types": {
-      "title": "Update Types",
-      "booking_title": "Progress Updates",
-      "booking_desc": "Receive notifications at key stages of service such as request, confirmation, and completion.",
-      "change_title": "Change Request Results",
-      "change_desc": "We will immediately notify you of the approval or rejection of your requested date/item changes.",
-      "alternative_title": "Alternative Offers",
-      "alternative_desc": "We will notify you when a salon suggests an alternative time due to your preferred time being fully booked."
+      "title": "通知类型",
+      "booking_title": "接收按步骤的预订提醒",
+      "booking_desc": "接收有关收到、确认和完成等关键阶段的提醒。",
+      "change_title": "接收修改结果提醒",
+      "change_desc": "当日期/项目更改被批准或拒绝时，我们会立即通知您。",
+      "alternative_title": "接收备用时间表提醒",
+      "alternative_desc": "如果请求的时间已满且店铺建议其他时间，我们会通知您。"
     },
-    "footer_note": "Essential booking-related notices may be sent regardless of your settings."
-  }
+    "footer_note": "重要的预订通知可能会忽略设置发送。"
+  },
+  "error_title": "Something went wrong.",
+  "error_desc": "If the problem persists, please contact support.",
+  "error_retry": "Try Again",
+  "common_actions_view_all": "View All",
+  "common_loading": "Loading..."
 }

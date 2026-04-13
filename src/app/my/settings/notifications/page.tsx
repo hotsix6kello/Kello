@@ -86,13 +86,13 @@ function NotificationSettingsContent() {
       });
       const body = await response.json();
       if (body.ok) {
-        setMessage({ text: t('notifications.save_success', { defaultValue: '설정이 저장되었습니다.' }), type: 'success' });
+        setMessage({ text: t('notifications.save_success'), type: 'success' });
         setTimeout(() => setMessage(null), 3000);
       } else {
         throw new Error(body.error);
       }
     } catch {
-      setMessage({ text: t('notifications.save_fail', { defaultValue: '저장에 실패했습니다.' }), type: 'error' });
+      setMessage({ text: t('notifications.save_fail'), type: 'error' });
     } finally {
       setSaving(false);
     }
@@ -111,11 +111,11 @@ function NotificationSettingsContent() {
       <div className={styles.page}>
         <header className={styles.header}>
             <button type="button" className={styles.backButton} onClick={() => router.push('/my')}>←</button>
-            <h1 className={styles.headerTitle}>{t('notifications.title', { defaultValue: '알림 설정' })}</h1>
+            <h1 className={styles.headerTitle}>{t('notifications.title')}</h1>
         </header>
         <div className={styles.content}>
-            <p>{t('notifications.login_required', { defaultValue: '로그인 후 이용 가능합니다.' })}</p>
-            <button className={styles.primaryButton} onClick={() => router.push('/auth')}>{t('notifications.login_button', { defaultValue: '로그인' })}</button>
+            <p>{t('notifications.login_required')}</p>
+            <button className={styles.primaryButton} onClick={() => router.push('/auth')}>{t('notifications.login_button')}</button>
         </div>
       </div>
     );
@@ -125,13 +125,13 @@ function NotificationSettingsContent() {
     <div className={styles.page}>
       <header className={styles.header}>
         <button type="button" className={styles.backButton} onClick={() => router.push('/my')}>←</button>
-        <h1 className={styles.headerTitle}>{t('notifications.title', { defaultValue: '알림 설정' })}</h1>
+        <h1 className={styles.headerTitle}>{t('notifications.title')}</h1>
       </header>
 
       <main className={styles.content}>
         <div className={styles.heroSection}>
-          <h2 className={styles.heroTitle}>{t('notifications.hero_title', { defaultValue: '예약 알림을 내게 맞춰 보세요. ✨' })}</h2>
-          <p className={styles.heroDescription}>{t('notifications.hero_desc', { defaultValue: 'Kello 프리미엄 대행 서비스의 예약 업데이트를 받는 방식을 정할 수 있습니다.' })}</p>
+          <h2 className={styles.heroTitle}>{t('notifications.hero_title')}</h2>
+          <p className={styles.heroDescription}>{t('notifications.hero_desc')}</p>
         </div>
 
         {message && (
@@ -141,11 +141,11 @@ function NotificationSettingsContent() {
         )}
 
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>{t('notifications.channel.title', { defaultValue: '채널 설정' })}</h3>
+          <h3 className={styles.sectionTitle}>{t('notifications.channel.title')}</h3>
           <div className={styles.optionCard}>
             <div className={styles.optionInfo}>
-              <h4 className={styles.optionTitle}>{t('notifications.channel.email_title', { defaultValue: '이메일로도 예약 진행 상황 받기' })}</h4>
-              <p className={styles.optionDescription}>{t('notifications.channel.email_desc', { defaultValue: '예약 정보와 진행 과정의 핵심 업데이트를 이메일로도 안전하게 보내드립니다.' })}</p>
+              <h4 className={styles.optionTitle}>{t('notifications.channel.email_title')}</h4>
+              <p className={styles.optionDescription}>{t('notifications.channel.email_desc')}</p>
             </div>
             <label className={styles.switch}>
               <input 
@@ -160,8 +160,8 @@ function NotificationSettingsContent() {
 
           <div className={styles.optionCard}>
             <div className={styles.optionInfo}>
-              <h4 className={styles.optionTitle}>{t('notifications.channel.app_title', { defaultValue: '앱에서 예약 알림 받기' })}</h4>
-              <p className={styles.optionDescription}>{t('notifications.channel.app_desc', { defaultValue: '중요한 예약 상태 변화는 앱 내 알림함에 항상 기록되어 언제든 확인할 수 있습니다.' })}</p>
+              <h4 className={styles.optionTitle}>{t('notifications.channel.app_title')}</h4>
+              <p className={styles.optionDescription}>{t('notifications.channel.app_desc')}</p>
             </div>
             <label className={styles.switch}>
               <input 
@@ -175,11 +175,11 @@ function NotificationSettingsContent() {
         </section>
 
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>{t('notifications.types.title', { defaultValue: '알림 종류 설정' })}</h3>
+          <h3 className={styles.sectionTitle}>{t('notifications.types.title')}</h3>
           <div className={styles.optionCard}>
             <div className={styles.optionInfo}>
-              <h4 className={styles.optionTitle}>{t('notifications.types.booking_title', { defaultValue: '예약 단계별 알림 받기' })}</h4>
-              <p className={styles.optionDescription}>{t('notifications.types.booking_desc', { defaultValue: '접수, 확정, 이용 완료 등 서비스 이용의 주요 단계마다 알림을 받습니다.' })}</p>
+              <h4 className={styles.optionTitle}>{t('notifications.types.booking_title')}</h4>
+              <p className={styles.optionDescription}>{t('notifications.types.booking_desc')}</p>
             </div>
             <label className={styles.switch}>
               <input 
@@ -194,8 +194,8 @@ function NotificationSettingsContent() {
 
           <div className={styles.optionCard}>
             <div className={styles.optionInfo}>
-              <h4 className={styles.optionTitle}>{t('notifications.types.change_title', { defaultValue: '변경 요청 결과 알림 받기' })}</h4>
-              <p className={styles.optionDescription}>{t('notifications.types.change_desc', { defaultValue: '요청하신 날짜/항목 변경의 승인 또는 반려 결과를 즉시 알려드립니다.' })}</p>
+              <h4 className={styles.optionTitle}>{t('notifications.types.change_title')}</h4>
+              <p className={styles.optionDescription}>{t('notifications.types.change_desc')}</p>
             </div>
             <label className={styles.switch}>
               <input 
@@ -210,8 +210,8 @@ function NotificationSettingsContent() {
 
           <div className={styles.optionCard}>
             <div className={styles.optionInfo}>
-              <h4 className={styles.optionTitle}>{t('notifications.types.alternative_title', { defaultValue: '대체 일정 제안 알림 받기' })}</h4>
-              <p className={styles.optionDescription}>{t('notifications.types.alternative_desc', { defaultValue: '원하시는 시간이 마감되어 매장에서 다른 대안 시간을 제안했을 때 알려드립니다.' })}</p>
+              <h4 className={styles.optionTitle}>{t('notifications.types.alternative_title')}</h4>
+              <p className={styles.optionDescription}>{t('notifications.types.alternative_desc')}</p>
             </div>
             <label className={styles.switch}>
               <input 
@@ -226,7 +226,7 @@ function NotificationSettingsContent() {
         </section>
 
         <p className={styles.footerNote}>
-          {t('notifications.footer_note', { defaultValue: '예약 관련 필수 안내사항은 설정과 관계없이 발송될 수 있습니다.' })}
+          {t('notifications.footer_note')}
         </p>
       </main>
     </div>

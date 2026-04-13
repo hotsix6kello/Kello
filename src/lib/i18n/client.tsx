@@ -5,12 +5,12 @@ import koCommon from "../../../public/locales/ko/common.json";
 import koBeautyExplore from "../../../public/locales/ko/beauty_explore.json";
 import enCommon from "../../../public/locales/en/common.json";
 import enBeautyExplore from "../../../public/locales/en/beauty_explore.json";
-import jpCommon from "../../../public/locales/jp/common.json";
-import jpBeautyExplore from "../../../public/locales/jp/beauty_explore.json";
-import cnCommon from "../../../public/locales/cn/common.json";
-import cnBeautyExplore from "../../../public/locales/cn/beauty_explore.json";
-import twCommon from "../../../public/locales/tw/common.json";
-import twBeautyExplore from "../../../public/locales/tw/beauty_explore.json";
+import jaCommon from "../../../public/locales/ja/common.json";
+import jaBeautyExplore from "../../../public/locales/ja/beauty_explore.json";
+import zhCNCommon from "../../../public/locales/zh-CN/common.json";
+import zhCNBeautyExplore from "../../../public/locales/zh-CN/beauty_explore.json";
+import zhTWCommon from "../../../public/locales/zh-TW/common.json";
+import zhTWBeautyExplore from "../../../public/locales/zh-TW/beauty_explore.json";
 import thCommon from "../../../public/locales/th/common.json";
 import thBeautyExplore from "../../../public/locales/th/beauty_explore.json";
 import viCommon from "../../../public/locales/vi/common.json";
@@ -31,9 +31,9 @@ import {
 const localeResources = {
     ko: { common: koCommon, beauty_explore: koBeautyExplore },
     en: { common: enCommon, beauty_explore: enBeautyExplore },
-    ja: { common: jpCommon, beauty_explore: jpBeautyExplore },
-    "zh-CN": { common: cnCommon, beauty_explore: cnBeautyExplore },
-    "zh-TW": { common: twCommon, beauty_explore: twBeautyExplore },
+    ja: { common: jaCommon, beauty_explore: jaBeautyExplore },
+    "zh-CN": { common: zhCNCommon, beauty_explore: zhCNBeautyExplore },
+    "zh-TW": { common: zhTWCommon, beauty_explore: zhTWBeautyExplore },
     th: { common: thCommon, beauty_explore: thBeautyExplore },
     vi: { common: viCommon, beauty_explore: viBeautyExplore },
     ar: { common: arCommon, beauty_explore: arBeautyExplore },

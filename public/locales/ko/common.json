@@ -324,46 +324,6 @@
     "lang_pt": "Português",
     "lang_ru": "Русский"
   },
-  "notifications": {
-    "save_success": "설정이 저장되었습니다.",
-    "save_fail": "저장에 실패했습니다.",
-    "title": "알림 설정",
-    "login_required": "로그인 후 이용 가능합니다.",
-    "login_button": "로그인",
-    "hero_title": "예약 알림을 내게 맞춰 보세요. ✨",
-    "hero_desc": "Kello 프리미엄 대행 서비스의 예약 업데이트를 받는 방식을 정할 수 있습니다.",
-    "channel": {
-      "title": "채널 설정",
-      "email_title": "이메일로도 예약 진행 상황 받기",
-      "email_desc": "예약 정보와 진행 과정의 핵심 업데이트를 이메일로도 안전하게 보내드립니다.",
-      "app_title": "앱에서 예약 알림 받기",
-      "app_desc": "중요한 예약 상태 변화는 앱 내 알림함에 항상 기록되어 언제든 확인할 수 있습니다."
-    },
-    "types": {
-      "title": "알림 종류 설정",
-      "booking_title": "예약 단계별 알림 받기",
-      "booking_desc": "접수, 확정, 이용 완료 등 서비스 이용의 주요 단계마다 알림을 받습니다.",
-      "change_title": "변경 요청 결과 알림 받기",
-      "change_desc": "요청하신 날짜/항목 변경의 승인 또는 반려 결과를 즉시 알려드립니다.",
-      "alternative_title": "대체 일정 제안 알림 받기",
-      "alternative_desc": "원하시는 시간이 마감되어 매장에서 다른 대안 시간을 제안했을 때 알려드립니다."
-    },
-    "footer_note": "예약 관련 필수 안내사항은 설정과 관계없이 발송될 수 있습니다.",
-    "page_title": "알림 센터",
-    "back": "← 마이 페이지",
-    "loading": "알림을 읽어오는 중입니다...",
-    "empty": "새로운 알림이 없습니다.",
-    "empty_cta": "뷰티 예약하러 가기",
-    "booking_link": "예약 내역 상세보기 →",
-    "event_booking_created": "예약 요청",
-    "event_booking_confirmed": "예약 확정",
-    "event_booking_canceled_by_customer": "예약 취소",
-    "event_booking_change_requested": "변경 요청",
-    "event_booking_change_approved": "변경 승인",
-    "event_booking_change_rejected": "변경 반려",
-    "event_booking_completed": "서비스 완료",
-    "event_default": "알림"
-  },
   "beauty_explore": {
     "hero_title": "뷰티 예약 탐색",
     "hero_desc": "원하는 카테고리를 먼저 고르면 더 정확한 예약 탐색이 가능해요. 지금은 전체 뷰티 매장을 확인할 수 있습니다.",
@@ -458,6 +418,96 @@
   "common": {
     "error_title": "오류가 발생했습니다.",
     "error_desc": "페이지를 불러오는 중 문제가 생겼습니다.",
+    "error_retry": "다시 시도",
+    "actions": {
+      "view_all": "전체 보기",
+      "browse_community": "커뮤니티 둘러보기",
+      "add_to_plan": "일정에 추가",
+      "apply_again": "다시 신청",
+      "apply_as_partner": "파트너 신청",
+      "back_to_booking_support": "예약 지원으로 돌아가기",
+      "booking_help": "예약 지원",
+      "browse_meetups": "모임 둘러보기",
+      "call_112": "112에 전화",
+      "call_119": "119에 전화",
+      "call_1330": "1330에 전화",
+      "call_clinic": "병원에 전화",
+      "close": "닫기",
+      "contact_support": "지원팀 문의",
+      "continue_editing": "계속 편집",
+      "copied": "복사됨",
+      "copy": "복사",
+      "create_plan": "일정 만들기",
+      "emergency_help": "긴급 도움",
+      "explore": "탐색",
+      "explore_places": "장소 둘러보기",
+      "general_help": "일반 도움",
+      "get_help": "도움 받기",
+      "go_to_reviews": "리뷰로 이동",
+      "interpreter_for_booking": "이 예약의 통역 도움",
+      "interpreter_help": "통역 도움",
+      "large_view": "큰 화면 보기",
+      "manage": "관리",
+      "my_bookings": "내 예약",
+      "open": "열기",
+      "open_admin_console": "관리 콘솔 열기",
+      "open_help_center": "도움말 센터 열기",
+      "open_my_support": "My Support 열기",
+      "open_route": "경로 열기",
+      "open_support": "지원 열기",
+      "partner_inquiry": "파트너 문의",
+      "report_issue": "문제 신고",
+      "save": "저장",
+      "saved": "저장됨",
+      "show_booking_phrases": "Show booking phrases",
+      "show_emergency_phrases": "긴급 문장 보기",
+      "show_in_korean": "한국어로 보기",
+      "support": "지원",
+      "travel_phrasebook": "여행 문장집",
+      "travel_phrases": "여행 문장",
+      "use_this_plan": "이 일정 사용",
+      "view": "보기",
+      "view_booking": "예약 보기",
+      "view_bookings": "예약 보기",
+      "view_place_details": "장소 상세 보기",
+      "view_plan": "일정 보기",
+      "write_review": "리뷰 쓰기",
+      "details": "상세 보기",
+      "delete": "삭제",
+      "map": "지도",
+      "view_in_plan": "View in Plan"
+    },
+    "states": {
+      "posts": "게시글",
+      "active": "활성",
+      "approved": "승인됨",
+      "current_trip_plan": "현재 여행 일정",
+      "details_unavailable": "상세 정보 없음",
+      "favorites": "즐겨찾기",
+      "frequent": "자주 사용",
+      "meetups": "모임",
+      "needs_review": "검토 필요",
+      "needs_update": "업데이트 필요",
+      "not_available_yet": "아직 제공되지 않음",
+      "not_connected": "연결되지 않음",
+      "not_joined": "미가입",
+      "not_set": "설정 안 됨",
+      "not_set_yet": "아직 설정 안 됨",
+      "not_verified": "미인증",
+      "pending_review": "검토 대기",
+      "planner_draft": "플래너 초안",
+      "read_only": "읽기 전용",
+      "recent": "최근",
+      "recently_viewed": "최근 본 항목",
+      "reviews": "리뷰",
+      "saved_locally": "로컬에 저장됨",
+      "sign_in_required": "로그인 필요",
+      "standard_account": "일반 계정",
+      "verified": "인증됨",
+      "no_permission": "권한이 없습니다.",
+      "error_occurred": "요청을 처리하는 중 오류가 발생했습니다."
+    },
+    "loading": "로딩 중...",
     "retry": "다시 시도",
     "welcome": "환영합니다, 여행자님.",
     "morning": "좋은 아침이에요",
@@ -490,7 +540,6 @@
     "my_nav": "MY",
     "day_unit": "일",
     "locale": "ko-KR",
-    "loading": "불러오는 중...",
     "cities": {
       "seoul": "서울",
       "busan": "부산",
@@ -537,94 +586,7 @@
       "pescatarian": "페스카테리언"
     },
     "community_nav": "커뮤니티",
-    "help_nav": "헬프센터",
-    "actions": {
-      "add_to_plan": "일정에 추가",
-      "apply_again": "다시 신청",
-      "apply_as_partner": "파트너 신청",
-      "back_to_booking_support": "예약 지원으로 돌아가기",
-      "booking_help": "예약 지원",
-      "browse_community": "커뮤니티 둘러보기",
-      "browse_meetups": "모임 둘러보기",
-      "call_112": "112에 전화",
-      "call_119": "119에 전화",
-      "call_1330": "1330에 전화",
-      "call_clinic": "병원에 전화",
-      "close": "닫기",
-      "contact_support": "지원팀 문의",
-      "continue_editing": "계속 편집",
-      "copied": "복사됨",
-      "copy": "복사",
-      "create_plan": "일정 만들기",
-      "emergency_help": "긴급 도움",
-      "explore": "탐색",
-      "explore_places": "장소 둘러보기",
-      "general_help": "일반 도움",
-      "get_help": "도움 받기",
-      "go_to_reviews": "리뷰로 이동",
-      "interpreter_for_booking": "이 예약의 통역 도움",
-      "interpreter_help": "통역 도움",
-      "large_view": "큰 화면 보기",
-      "manage": "관리",
-      "my_bookings": "내 예약",
-      "open": "열기",
-      "open_admin_console": "관리 콘솔 열기",
-      "open_help_center": "도움말 센터 열기",
-      "open_my_support": "My Support 열기",
-      "open_route": "경로 열기",
-      "open_support": "지원 열기",
-      "partner_inquiry": "파트너 문의",
-      "report_issue": "문제 신고",
-      "save": "저장",
-      "saved": "저장됨",
-      "show_booking_phrases": "예약 문장 보기",
-      "show_emergency_phrases": "긴급 문장 보기",
-      "show_in_korean": "한국어로 보기",
-      "support": "지원",
-      "travel_phrasebook": "여행 문장집",
-      "travel_phrases": "여행 문장",
-      "use_this_plan": "이 일정 사용",
-      "view": "보기",
-      "view_booking": "예약 보기",
-      "view_bookings": "예약 보기",
-      "view_place_details": "장소 상세 보기",
-      "view_plan": "일정 보기",
-      "write_review": "리뷰 쓰기",
-      "view_all": "전체 보기",
-      "details": "상세 보기",
-      "delete": "삭제",
-      "map": "지도"
-    },
-    "states": {
-      "active": "활성",
-      "approved": "승인됨",
-      "current_trip_plan": "현재 여행 일정",
-      "details_unavailable": "상세 정보 없음",
-      "favorites": "즐겨찾기",
-      "frequent": "자주 사용",
-      "meetups": "모임",
-      "needs_review": "검토 필요",
-      "needs_update": "업데이트 필요",
-      "not_available_yet": "아직 제공되지 않음",
-      "not_connected": "연결되지 않음",
-      "not_joined": "미가입",
-      "not_set": "설정 안 됨",
-      "not_set_yet": "아직 설정 안 됨",
-      "not_verified": "미인증",
-      "pending_review": "검토 대기",
-      "planner_draft": "플래너 초안",
-      "posts": "게시물",
-      "read_only": "읽기 전용",
-      "recent": "최근",
-      "recently_viewed": "최근 본 항목",
-      "reviews": "리뷰",
-      "saved_locally": "로컬에 저장됨",
-      "sign_in_required": "로그인 필요",
-      "standard_account": "일반 계정",
-      "verified": "인증됨",
-      "no_permission": "권한이 없습니다.",
-      "error_occurred": "요청을 처리하는 중 오류가 발생했습니다."
-    }
+    "help_nav": "헬프센터"
   },
   "transport": {
     "moving_to": "{{dest}}(으)로 이동 중",
@@ -865,463 +827,6 @@
       "price": "59,800"
     }
   },
-  "my_page": {
-    "bookings": {
-      "pending_service": "시술 정보 확인 중",
-      "matching_status": "조건에 맞는 매장을 찾고 있어요",
-      "matching_desc": "매장 매칭 대기 중",
-      "price_pending": "매장 확인 후 안내",
-      "title": "나의 예약 내역",
-      "today_time": "오늘, {{time}}",
-      "tomorrow_time": "내일, {{time}}",
-      "next_week_time": "다음 주, {{time}}",
-      "new_added": "새 예약이 추가되었습니다!",
-      "date_time": "날짜 / 시간",
-      "area": "지역",
-      "price": "가격",
-      "browse_beauty_cta": "뷰티 예약 둘러보기",
-      "action_edit_request": "수정 요청",
-      "action_cancel_request": "취소 요청",
-      "error_fetch": "예약을 불러오지 못했어요."
-    },
-    "settings": {
-      "account": {
-        "default_name": "고객님",
-        "sign_in_title": "계정 정보를 확인하려면 로그인해 주세요",
-        "sign_in_desc": "이 로그인은 활성 Supabase 세션에서 인증된 항목만 읽을 수 있습니다.",
-        "title": "계정 / 프로필",
-        "desc": "이 필드는 현재 인증된 사용자 정보와 기본 계정 메타데이터에서 가져옵니다.",
-        "display_name": "기본 이름",
-        "display_name_hint": "별명이 우선적으로 사용되며, 없을 경우 이메일 앞부분 등이 사용됩니다.",
-        "email": "이메일 / 로그인",
-        "email_hint": "현재 활성화된 Supabase 인증 계정의 이메일입니다.",
-        "joined": "가입일",
-        "joined_hint": "프로필 생성 시점 또는 인증 계정 생성 시점을 기준으로 합니다.",
-        "last_seen": "마지막 로그인",
-        "last_seen_hint": "인증 세션 정보에서 읽기 전용으로 가져옵니다.",
-        "read_only": "프로필 편집은 이 빌드에서 아직 지원되지 않습니다. 수정이 필요한 경우 지원팀에 문의해 주세요.",
-        "phone": {
-          "placeholder": "예: +82 01012345678",
-          "helper_empty": "국가번호를 포함해 입력해 주세요. 예: +82 1012345678",
-          "helper_saved": "국제 형식(E.164)으로 안전하게 저장되어 있어요.",
-          "helper_invalid": "국가번호를 포함한 형식으로 입력해 주세요. 예: +82 1012345678"
-        }
-      },
-      "short": "설정",
-      "support_short": "지원",
-      "eyebrow": "설정 및 프로필",
-      "title": "내 설정",
-      "subtitle": "계정, 언어, 파트너 상태, 연결된 마이페이지 허브를 한 곳에서 확인하세요.",
-      "summary": {
-        "saved": "저장한 장소",
-        "stops": "일정 장소",
-        "days": "여행 일수"
-      },
-      "preferences": {
-        "region_empty": "아직 선호 지역 정보가 없습니다. 여행 일정을 만들면 추정할 수 있습니다.",
-        "region_hint": "현재 플래너 초안의 지역 정보를 기준으로 합니다.",
-        "style_empty": "저장된 여행 스타일이 아직 없습니다. 계정 환경설정이 연결되기 전까지 읽기 전용으로 유지됩니다.",
-        "style_hint": "현재 플래너 카테고리를 기준으로 추정합니다.",
-        "interests_saved": "saved_items 목록의 장소 카테고리를 기준으로 합니다.",
-        "interests_plan": "현재 플래너 초안의 보조 신호입니다.",
-        "interests_empty": "장소를 저장하거나 일정을 만들면 관심 신호가 여기 표시됩니다.",
-        "language": "언어",
-        "language_hint": "기존 앱 언어 선택기와 kello_lang 값을 따릅니다.",
-        "region": "선호 지역 / 도시",
-        "style": "여행 스타일",
-        "interests": "관심 카테고리",
-        "title": "환경설정",
-        "desc": "언어는 실제 저장값을 사용합니다. 나머지 항목은 읽기 전용이며, 값이 있을 때만 플래너나 저장 항목 신호를 반영합니다."
-      },
-      "verification": {
-        "email": "이메일",
-        "email_ready": "현재 인증 세션에서 확인되었습니다.",
-        "email_missing": "Supabase 인증에서 이메일 확인 상태를 찾지 못했습니다.",
-        "phone": "전화번호",
-        "phone_ready": "이 계정에서 전화번호 인증을 사용할 수 있습니다.",
-        "phone_partial": "전화번호 값은 있지만 인증 상태는 확인되지 않았습니다.",
-        "phone_empty": "이 빌드에서는 전화번호 인증이 아직 연결되지 않았습니다.",
-        "provider": "로그인 방식",
-        "provider_hint": "현재 Supabase 인증 세션에서 읽습니다.",
-        "title": "인증 / 안전",
-        "desc": "현재 인증 세션에 이미 존재하는 확인 신호만 여기 표시합니다.",
-        "identity_note": "신분증 확인과 프로필 완성도 점수는 아직 현재 코드베이스에 연결되어 있지 않습니다.",
-        "email_provider": "이메일"
-      },
-      "links": {
-        "support_desc": "예약 지원, 긴급 지원, FAQ를 엽니다.",
-        "phrases_desc": "현장에서 바로 보여줄 수 있는 한국어 문장을 준비해 둡니다.",
-        "saved": "저장 허브",
-        "saved_desc": "저장한 장소, 현재 플랜, 최근 항목을 확인합니다.",
-        "bookings": "예약",
-        "bookings_desc": "다가오는 예약과 관련 지원 흐름을 확인합니다.",
-        "community": "커뮤니티",
-        "community_desc": "내 게시글, 후기, 모임 활동을 다시 봅니다.",
-        "title": "앱 설정 / 빠른 링크",
-        "desc": "현재 앱에서 이미 관리하거나 다시 열 수 있는 페이지들입니다.",
-        "placeholder_title": "알림 및 개인정보",
-        "placeholder_desc": "전용 알림 및 개인정보 설정은 아직 연결되지 않아 여기서는 읽기 전용 자리표시자로 유지됩니다."
-      },
-      "partner": {
-        "title": "파트너 상태",
-        "approved_desc": "파트너 신청이 승인되었습니다. 진행 중인 파트너 요청은 현재 지원 경로를 통해 계속할 수 있습니다.",
-        "pending_desc": "파트너 요청이 검토 중입니다. 이 빌드에는 별도 파트너 센터 경로가 아직 없습니다.",
-        "rejected_desc": "이전 신청이 승인되지 않았습니다. 정보가 준비되면 파트너 가입 흐름으로 다시 신청할 수 있습니다.",
-        "none_desc": "현재는 여행자 계정입니다. 사업자나 서비스를 등록하려는 경우에만 신청하세요."
-      },
-      "admin": {
-        "enabled": "관리자",
-        "enabled_desc": "이 계정은 관리자 콘솔에 접근하고 파트너 요청을 검토할 수 있습니다.",
-        "disabled_desc": "이 프로필에는 관리자 접근이 활성화되어 있지 않습니다.",
-        "title": "관리자 콘솔",
-        "source": "profiles.is_admin = true",
-        "source_none": "이 프로필에는 관리자 플래그가 없습니다."
-      },
-      "hero": {
-        "email_ready": "이메일 인증 완료",
-        "email_pending": "이메일 인증 필요"
-      },
-      "partner_admin": {
-        "title": "파트너 / 관리자",
-        "desc": "파트너와 관리자 접근은 마이 대시보드에서 이미 사용하는 파트너 상태와 profile admin 체크를 그대로 재사용합니다."
-      }
-    },
-    "profile": {
-      "account_hint": "계정 및 설정",
-      "fallback_name": "고객님",
-      "fallback_subtitle": "계정 및 설정",
-      "fallback_initials": "내",
-      "trust_score": "💎 신뢰 점수",
-      "trust_level_excellent": "최상"
-    },
-    "passport": {
-      "title": "내 여권",
-      "view_all": "전체보기",
-      "seoul": "서울",
-      "beauty": "뷰티",
-      "jeju": "제주"
-    },
-    "community": {
-      "title": "내 커뮤니티 활동",
-      "empty": "작성하신 커뮤니티 게시글이 없습니다.",
-      "empty_simple": "작성한 글이 없습니다",
-      "browse_cta": "커뮤니티 둘러보기"
-    },
-    "messages": {
-      "upload_success": "프로필 사진이 업데이트되었습니다.",
-      "upload_failed": "업로드에 실패했습니다."
-    },
-    "support": {
-      "short": "지원",
-      "eyebrow": "지원 허브",
-      "title": "내 지원",
-      "header_cta": "도움말 센터 열기",
-      "tabs": {
-        "booking": "예약 지원",
-        "general": "일반 지원",
-        "faq": "FAQ / 빠른 안내",
-        "emergency": "긴급 / 통역 지원"
-      },
-      "summary": {
-        "booking": {
-          "label": "예약 지원",
-          "desc": "최근 예약, 이슈 안내, 다음 단계 지원을 확인합니다."
-        },
-        "general": {
-          "label": "일반 지원",
-          "desc": "도움말 센터, 지원 경로, 커뮤니티 안전 진입점을 확인합니다."
-        },
-        "emergency": {
-          "label": "긴급 / 통역",
-          "desc": "먼저 이 허브에서 시작하고, 상황에 맞는 의료·경찰·통역 상세 페이지로 이동하세요."
-        }
-      },
-      "guides": {
-        "find_booking": {
-          "q": "예약 장소를 찾을 수 없어요.",
-          "a": "예약 카드에 표시된 지도와 지역 정보를 먼저 확인하세요. 그래도 찾기 어렵다면 통역 도움이나 도움말 센터를 열어 현지 지원 경로를 확인하세요."
-        },
-        "staff_talk": {
-          "q": "직원과 대화하기 어려워요.",
-          "a": "빠른 번역 도구와 핫라인 연결이 필요하면 통역 도움을 이용하세요. 상황이 급하면 바로 긴급 지원으로 이동하세요."
-        },
-        "change_time": {
-          "q": "예약 시간을 바꾸고 싶어요.",
-          "a": "앱 안에서는 아직 직접 예약 변경을 지원하지 않습니다. 매장으로 이동하기 전에 가장 안전한 다음 단계를 고를 수 있도록 예약 지원에서 시작하세요."
-        },
-        "cancel_refund": {
-          "q": "취소나 환불 문의는 어디서 하나요?",
-          "a": "앱 내 취소/환불 처리는 아직 연결되어 있지 않습니다. 내 사례에 어떤 지원 경로가 가능한지 확인하려면 도움말 센터나 예약 지원을 이용하세요."
-        },
-        "write_review": {
-          "q": "방문 후 후기는 어떻게 남기나요?",
-          "a": "완료된 예약은 내 커뮤니티 > 리뷰로 이어질 수 있습니다. 전용 후기 폼이 아직 없다면 기존 커뮤니티 작성 기능을 사용하세요."
-        },
-        "community_safety": {
-          "q": "모임이나 커뮤니티 상황이 불안해요.",
-          "a": "개인 정보를 더 이상 공유하지 말고, 필요하면 먼저 경찰 또는 긴급 지원으로 이동하세요. 커뮤니티 전용 신고 처리는 아직 제한적이므로 상황에 맞는 안전 경로를 사용하세요.",
-          "cta": "안전 지원"
-        }
-      },
-      "general": {
-        "help_center": {
-          "label": "도움말 센터",
-          "desc": "앱에 이미 있는 의료, 경찰, 통역, 분실물, 긴급 연락처 상세 페이지를 엽니다."
-        },
-        "booking_cancel": {
-          "label": "예약 / 취소 지원",
-          "desc": "시간 변경, 가능 여부 확인, 이슈 신고 안내는 여기서 먼저 시작하세요.",
-          "cta": "예약 지원 열기"
-        },
-        "community_safety": {
-          "label": "커뮤니티 안전",
-          "desc": "불안한 모임이나 불편한 상황이면 먼저 안전 경로로 이동하세요.",
-          "cta": "안전 지원 열기"
-        },
-        "partner": {
-          "label": "파트너 문의",
-          "desc": "비즈니스·파트너 온보딩은 파트너 가입 흐름에서 이어서 진행할 수 있습니다."
-        },
-        "title": "일반 지원",
-        "desc": "어디로 가야 할지 확신이 없을 때 이 진입점을 사용하세요.",
-        "report_notice": "아직 직접 이슈 티켓은 지원하지 않습니다. 예약 관련 문의는 아래 지원 경로를 이용하세요."
-      },
-      "emergency": {
-        "overview": {
-          "label": "긴급 지원",
-          "desc": "의료, 경찰, 분실물, 통역 접근이 있는 메인 긴급 도움말 페이지를 엽니다.",
-          "cta": "긴급 지원 열기"
-        },
-        "interp": {
-          "label": "통역 도움",
-          "desc": "직원과 대화가 어려울 때 번역 도구와 핫라인 링크를 사용하세요.",
-          "cta": "통역 도움 열기",
-          "booking_desc": "어떤 예약인지 직원이 이해할 수 있도록 이 예약 맥락을 통역 경로에 함께 전달합니다."
-        },
-        "phrases": {
-          "label": "긴급 문장",
-          "desc": "주변 직원, 기사, 안내 데스크에 바로 보여줄 큰 한국어 문장을 엽니다.",
-          "cta": "여행 문장 열기",
-          "booking_label": "예약 문장",
-          "booking_desc": "예약, 지연, 체크인 상황을 설명해야 하면 먼저 예약 문장을 여세요."
-        },
-        "medical": {
-          "label": "의료 지원",
-          "desc": "병원이나 응급 의료 지원이 필요하면 의료 도움말 경로를 바로 여세요.",
-          "cta": "의료 지원"
-        },
-        "police": {
-          "label": "경찰 / 안전 지원",
-          "desc": "경찰 연락, 사건 안내, 위험 상황에는 안전 경로를 사용하세요.",
-          "cta": "안전 지원 열기"
-        },
-        "title": "긴급 / 통역 지원",
-        "desc": "My Support는 허브입니다. 상황이 급하거나 소통이 어려울 때는 아래 상세 도움말 페이지를 사용하세요.",
-        "interpreter_notice": "아래 통역 링크를 사용할 수 있습니다. 일부 옵션은 통화 화면이나 외부 번역 페이지를 열 수 있습니다.",
-        "hub_notice": "이 허브에서 맞는 상세 페이지를 고르세요. /help/* 페이지는 하나의 경로를 더 자세히 설명하고, 여행 문장집은 바로 보여줄 수 있는 한국어 문구를 위한 기능입니다."
-      },
-      "booking": {
-        "banner_report": "{{bookingName}} 예약 관련 문제를 신고하려고 합니다. 상황에 맞는 지원 경로를 선택하세요.",
-        "banner_interpreter": "{{bookingName}} 예약에 언어 도움이 필요하신가요? 아래에 통역과 긴급 링크가 준비되어 있습니다.",
-        "banner_default": "{{bookingName}} 예약 도움이 필요하신가요? 아래 예약 카드에서 시작하세요.",
-        "banner_fallback": "예약 도움이 필요하신가요? 가장 가까운 예약 카드에서 시작하세요.",
-        "title": "예약 지원",
-        "desc": "최근 예약을 기준으로 가장 맞는 지원 경로를 빠르게 찾으세요.",
-        "empty": {
-          "title": "지금 문의할 예약이 없습니다.",
-          "desc": "나중에 내 예약을 다시 확인하거나 장소를 둘러보며 여행을 계획하세요."
-        },
-        "context_title": "이 예약에 대한 지원",
-        "context_desc": "예약 지원, 통역 도움, 문장 보기 사이를 이동할 때 이 예약 맥락을 유지하세요."
-      },
-      "subtitle": "예약, 일반 문의, 긴급한 여행 상황에 맞는 지원 경로를 찾으세요.",
-      "faq": {
-        "title": "FAQ / 빠른 안내",
-        "desc": "현재 앱 범위 안에서 자주 묻는 여행 질문에 대한 짧고 안전한 안내입니다."
-      }
-    },
-    "phrases": {
-      "quick": "문장",
-      "title": "여행 문장집",
-      "eyebrow": "번역 허브",
-      "favorites": {
-        "title": "즐겨찾기",
-        "desc": "여행 중 자주 보여줄 것 같은 문장을 저장하세요.",
-        "empty": "자주 쓰는 문장을 몇 개 저장해 두면 다시 열기 쉽습니다."
-      },
-      "recent": {
-        "title": "최근",
-        "desc": "최근에 열거나 복사한 문장이 빠르게 다시 열 수 있도록 여기에 남습니다."
-      },
-      "subtitle": "현장에서 빠른 답이 필요할 때 직원, 기사, 매장 직원에게 이 문장을 보여 주세요.",
-      "hero": {
-        "badge": "바로 보여주는 한국어 문장",
-        "count": "문장"
-      },
-      "context": {
-        "title": "현재 맥락",
-        "interpreter": "상황을 빨리 설명해야 한다면 긴급 문장이 준비되어 있습니다.",
-        "support": "현지 직원과 대화하기 어려울 때 이 문장집을 지원 허브와 함께 사용하세요.",
-        "booking": "이 예약에 맞는 예약 문장이 준비되어 있습니다."
-      },
-      "categories": {
-        "booking": {
-          "label": "예약",
-          "description": "예약 확인, 지연 안내, 옵션 요청에 쓰는 문장입니다.",
-          "helper": "프런트 데스크, 투어 데스크, 매장 직원에게 보여주기 좋습니다."
-        },
-        "transport": {
-          "label": "교통",
-          "description": "택시, 역, 이동 경로를 확인할 때 쓰는 문장입니다.",
-          "helper": "기사, 역무원, 길 안내 상황에 유용합니다."
-        },
-        "restaurant": {
-          "label": "식당",
-          "description": "주문, 알레르기, 메뉴 질문을 도와주는 문장입니다.",
-          "helper": "시간이 없을 때 주문 전에 바로 보여 주세요."
-        },
-        "beauty": {
-          "label": "뷰티",
-          "description": "살롱, 스파, 시술 요청을 쉽게 설명할 수 있습니다.",
-          "helper": "상담이나 금액 확인 전에 보여주면 좋습니다."
-        },
-        "emergency": {
-          "label": "긴급",
-          "description": "급한 도움 요청과 통역 관련 표현입니다.",
-          "helper": "주변 직원, 안내 데스크, 긴급 지원 연락처와 함께 사용하세요."
-        }
-      },
-      "category": {
-        "title": "{{category}} 문장"
-      },
-      "empty": {
-        "title": "지금 이 카테고리에는 문장이 없습니다.",
-        "desc": "다른 카테고리를 보거나 즉시 도움이 필요하면 지원으로 이동하세요."
-      }
-    },
-    "saved": {
-      "title": "내 저장함",
-      "view_all": "허브 열기",
-      "eyebrow": "저장 허브",
-      "header_cta": "더 둘러보기",
-      "dashboard_title": "저장 및 최근 항목",
-      "dashboard_desc": "저장한 장소, 플래너 초안, 최근 본 항목을 한 곳에서 다시 확인하세요.",
-      "summary": {
-        "places": "장소",
-        "plans": "플랜",
-        "recent": "최근"
-      },
-      "tabs": {
-        "places": "장소",
-        "plans": "플랜",
-        "recent": "최근"
-      },
-      "places": {
-        "source_plan": "현재 플래너와 연결됨",
-        "source_saved": "Explore에서 저장함",
-        "source_fallback": "Explore에서 저장함",
-        "source_id_only": "저장 항목 ID",
-        "added": "플래너에 추가되었습니다. 시간은 Planner에서 조정할 수 있습니다.",
-        "title": "저장한 장소",
-        "desc": "Explore에서 북마크한 장소를 다시 엽니다. 저장된 ID에 메타데이터가 부족한 경우에는 세부 정보를 추측하지 않고 최소한의 대체 카드만 보여 줍니다.",
-        "empty": {
-          "title": "저장한 장소가 아직 없습니다.",
-          "desc": "Explore에서 장소를 저장하면 나중에 빠르게 계획할 수 있도록 여기에 모입니다.",
-          "cta": "장소 둘러보기"
-        },
-        "fallback_title": "저장한 장소 {{id}}"
-      },
-      "plans": {
-        "synced": "현재 플래너 초안 기준",
-        "title": "저장한 플랜",
-        "desc": "이 탭은 현재 플래너 초안을 그대로 반영합니다. 별도 저장 템플릿이나 서버 플랜 레코드는 만들지 않습니다.",
-        "empty": {
-          "title": "저장한 플랜이 아직 없습니다.",
-          "desc": "Planner에서 일정을 만들면 현재 초안이 여기에 표시됩니다."
-        },
-        "current": "현재 여행 플랜"
-      },
-      "subtitle": "나중에 다시 보고 싶은 장소, 플래너 초안, 최근 본 항목을 모아 둡니다.",
-      "summary_hint": "장소는 저장한 explore item id에서, 플랜은 현재 planner 초안에서, 최근 항목은 이 기기에 저장됩니다.",
-      "recent": {
-        "title": "최근",
-        "desc": "최근에 본 장소, 플랜, 커뮤니티 게시글이 빠르게 다시 방문할 수 있도록 이 기기에 저장됩니다.",
-        "empty": {
-          "title": "최근 본 항목이 아직 없습니다.",
-          "desc": "장소, planner, 커뮤니티 상세를 열면 최근 항목이 여기에 표시됩니다.",
-          "fallback": "local storage를 사용할 수 있으면 최근 항목이 이 기기에 저장됩니다.",
-          "cta": "Explore 둘러보기"
-        },
-        "type": {
-          "place": "장소",
-          "plan": "플랜",
-          "community": "커뮤니티"
-        }
-      }
-    },
-    "community_hub": {
-      "eyebrow": "내 활동 허브",
-      "title": "내 커뮤니티",
-      "subtitle": "내가 작성한 글, 후기, 모임 활동을 한 곳에서 확인하세요.",
-      "browse": "커뮤니티 둘러보기",
-      "summary": {
-        "posts": "글",
-        "reviews": "후기",
-        "meetups": "모임"
-      },
-      "tabs": {
-        "posts": "글",
-        "reviews": "후기",
-        "meetups": "모임"
-      },
-      "empty": {
-        "reviews": {
-          "title": "아직 작성한 후기가 없습니다.",
-          "desc": "완료한 예약을 바탕으로 여행에 도움이 된 점을 남겨 보세요.",
-          "no_completed": "먼저 예약을 완료한 뒤 다시 돌아와 후기를 남겨 보세요.",
-          "cta": "완료한 예약 보기"
-        },
-        "meetups": {
-          "title": "아직 모임 활동이 없습니다.",
-          "desc": "모임 성격의 커뮤니티 글을 둘러보고 다음 계획을 여기에 남겨 보세요."
-        },
-        "posts": {
-          "title": "아직 허브에 저장된 글이 없습니다.",
-          "desc": "커뮤니티를 둘러보고 질문을 남기거나 다른 여행자에게 도움이 되는 팁을 공유해 보세요."
-        }
-      },
-      "summary_hint": "집계는 내가 작성한 커뮤니티 글과 완료한 예약을 기준으로 합니다.",
-      "sync_error": "지금은 커뮤니티 글을 새로고침할 수 없습니다. 대신 빈 상태 안내를 표시합니다.",
-      "review_prompts": {
-        "title": "완료한 예약에서 후기 쓰기",
-        "desc": "Community를 열어 기존 작성기에서 Review 유형을 선택해 후기를 작성하세요."
-      },
-      "posts_desc": "내가 작성한 일반 커뮤니티 글을 다시 보거나 관리합니다.",
-      "reviews_desc": "이미 게시한 후기와 예약 내역으로 빠르게 돌아가는 경로를 제공합니다.",
-      "meetups_desc": "함께 여행할 사람을 찾는 모임형 활동을 포함한 내 커뮤니티 글입니다.",
-      "loading": "내 활동을 불러오는 중...",
-      "no_comments": "아직 댓글이 없습니다",
-      "type": {
-        "travel": "여행 메이트",
-        "meetup": "모임"
-      }
-    },
-    "dashboard": {
-      "bookings_empty": "확정된 예약이 아직 없습니다",
-      "admin_title": "관리 콘솔",
-      "admin_desc": "관리자 대시보드와 파트너 관리를 엽니다",
-      "admin_menu": {
-        "dashboard": "관리자 대시보드",
-        "dashboard_desc": "통계 및 전체 메뉴",
-        "bookings": "뷰티 예약 관리",
-        "bookings_desc": "예약 요청 및 상태 변경",
-        "partners": "협력업체 관리",
-        "partners_desc": "가입 신청 승인 관리",
-        "users": "관리자 계정 관리",
-        "users_desc": "권한 부여 및 상태 해제"
-      }
-    }
-  },
   "help_page": {
     "title": "헬프센터",
     "medical_title": "의료 지원",
@@ -1410,10 +915,17 @@
     "hero": {
       "avatar": {
         "placeholder": "내",
-        "error": "이미지를 바꾸지 못했어요."
+        "error": "이미지를 바꾸지 못했어요.",
+        "change": "이미지 변경",
+        "register": "이미지 등록"
       },
       "default_title": "내 설정",
-      "stats": "게시글 {{postCount}} · 후기 {{reviewCount}} · 예약 {{bookingCount}}"
+      "stats": "게시글 {{postCount}} · 후기 {{reviewCount}} · 예약 {{bookingCount}}",
+      "login_promo": {
+        "title": "로그인 후 더 많은 설정을 볼 수 있어요.",
+        "desc": "개인 탭은 지금도 확인할 수 있지만, 연결된 값과 알림 상태는 로그인 후 표시돼요."
+      },
+      "tabs_aria": "설정 탭"
     },
     "tabs": {
       "personal": {
@@ -1466,7 +978,10 @@
         "badge_unset": "미입력",
         "country_label": "국가번호",
         "number_label": "전화번호",
-        "helper_preview": "저장 시 {{value}} 형태로 저장돼요."
+        "helper_preview": "저장 시 {{value}} 형태로 저장돼요.",
+        "helper_empty_fallback": "국가번호를 고른 뒤 전화번호를 입력하면 국제 형식(E.164)으로 저장돼요.",
+        "helper_saved_fallback": "현재 저장된 번호는 국제 형식(E.164)으로 유지되고 있어요.",
+        "helper_invalid_fallback": "국가번호를 선택하고 전화번호를 숫자로 입력해 주세요."
       },
       "login": {
         "title": "로그인 방식",
@@ -1592,7 +1107,8 @@
       "nickname_error": "별명을 저장하지 못했습니다. 다시 시도해 주세요.",
       "nickname_cooldown_long": "{{limit}}일에 한 번만 변경 가능합니다. (다음 변경 가능일: {{date}})",
       "save": "저장",
-      "saving": "저장 중..."
+      "saving": "저장 중...",
+      "uploading": "업로드 중..."
     },
     "badges": {
       "community": {
@@ -2009,5 +1525,144 @@
     "time": {
       "just_now": "방금 전"
     }
-  }
+  },
+  "my_page": {
+    "dashboard": {
+      "bookings_empty": "예정된 예약이 없어요.",
+      "admin_title": "관리자 콘솔",
+      "admin_menu": {
+        "dashboard": "관리자 대시보드",
+        "dashboard_desc": "전체 현황 및 통계 시각화",
+        "bookings": "예약 대장",
+        "bookings_desc": "모든 사용자 예약 내역 및 상태 관리",
+        "partners": "파트너 승인",
+        "partners_desc": "파트너 신청 내역 검토 및 권한 부여",
+        "users": "사용자 관리",
+        "users_desc": "회원 목록 및 권한 설정"
+      },
+      "partner": {
+        "none_title": "파트너십 가입",
+        "none_desc": "켈로의 공식 파트너가 되어 서비스를 등록해보세요.",
+        "none_cta": "가입하기",
+        "pending_title": "심사 중",
+        "pending_desc": "현재 파트너 신청을 검토하고 있습니다.",
+        "approved_title": "파트너 승인 완료",
+        "approved_desc": "이제 파트너 콘솔에서 서비스를 관리할 수 있습니다.",
+        "rejected_title": "승인 거절 (보완 필요)",
+        "rejected_desc": "신청 정보를 다시 확인해주세요.",
+        "rejected_cta": "다시 신청하기"
+      }
+    },
+    "community": {
+      "empty_simple": "아직 작성한 커뮤니티 글이 없어요."
+    },
+    "bookings": {
+      "title": "나의 예약",
+      "pending_service": "시술 정보 확인 중",
+      "matching_status": "조건에 맞는 매장을 찾고 있어요",
+      "matching_desc": "매장 매칭 대기 중",
+      "price_pending": "매장 확인 후 안내",
+      "error_fetch": "예약 정보를 불러오는데 실패했습니다.",
+      "browse_beauty_cta": "뷰티 예약 둘러보기"
+    },
+    "profile": {
+      "account_hint": "계정 및 설정"
+    },
+    "settings": {
+      "short": "설정",
+      "account": {
+        "default_name": "고객님",
+        "phone": {
+          "placeholder": "예: ${internationalPhoneExample}",
+          "helper_empty": "국가번호를 포함해 입력해 주세요. 예: ${internationalPhoneExample}",
+          "helper_saved": "현재 저장된 국제형 전화번호예요.",
+          "helper_invalid": "국가번호를 포함한 국제형으로 입력해 주세요. 예: ${internationalPhoneExample}"
+        }
+      },
+      "admin": {
+        "enabled": "사용 중"
+      }
+    },
+    "community_hub": {
+      "title": "나의 커뮤니티"
+    },
+    "messages": {
+      "upload_success": "프로필 사진이 업데이트되었습니다.",
+      "upload_failed": "업로드에 실패했습니다. 다시 시도해주세요."
+    },
+    "bookings_hub": {
+      "meta": {
+        "reference": "Reference"
+      }
+    }
+  },
+  "notifications": {
+    "title": "알림 설정",
+    "hero_title": "예약 알림을 내게 맞춰 보세요. ✨",
+    "desc": "중요한 예약 변경이나 알림을 받을 수 있는 채널을 설정하세요.",
+    "groups": {
+      "booking": "예약 및 활동",
+      "booking_desc": "예약 진행 상태 및 일정 알림",
+      "community": "커뮤니티 및 혜택",
+      "community_desc": "커뮤니티 댓글 및 할인 혜택 등"
+    },
+    "items": {
+      "status_updates": {
+        "title": "예약 진행 상태 알림",
+        "desc": "예약 확정, 매장 매칭, 스케줄 변경 시 알림"
+      },
+      "reminders": {
+        "title": "사전 일정 리마인더",
+        "desc": "예약 전날 및 방문 1시간 전 알림"
+      },
+      "community_replies": {
+        "title": "커뮤니티 댓글 알림",
+        "desc": "내 글에 달린 댓글, 추천 등 커뮤니티 소식 알림"
+      },
+      "marketing": {
+        "title": "이벤트 및 할인 혜택",
+        "desc": "새로운 기획전, 할인 쿠폰 등 유용한 혜택 알림"
+      }
+    },
+    "channel": {
+      "email_title": "이메일로도 예약 진행 상황 받기",
+      "email_desc": "예약 정보와 진행 과정의 핵심 업데이트를 이메일로도 안전하게 보내드립니다.",
+      "app_push_title": "앱 설치하고 실시간 푸시 받기",
+      "app_push_desc": "지금은 임시 기기 알림만 켜져 있어요. 앱을 설치하면 더 확실히 알림을 받을 수 있습니다.",
+      "device_enabled_title": "현재 기기 알림 켜짐",
+      "device_enabled_desc": "이 브라우저나 기기에서 중요한 알림을 받을 수 있습니다.",
+      "title": "채널 설정",
+      "app_title": "앱에서 예약 알림 받기",
+      "app_desc": "중요한 예약 상태 변화는 앱 내 알림함에 항상 기록되어 언제든 확인할 수 있습니다."
+    },
+    "actions": {
+      "save": "설정 저장하기",
+      "turn_on_device": "기기 알림 켜기"
+    },
+    "toast": {
+      "saving": "알림 설정을 저장하고 있어요...",
+      "success": "알림 설정이 성공적으로 저장되었습니다.",
+      "error": "알림 설정 저장에 실패했어요. 잠시 후 다시 시도해주세요."
+    },
+    "save_success": "설정이 저장되었습니다.",
+    "save_fail": "저장에 실패했습니다.",
+    "login_required": "로그인 후 이용 가능합니다.",
+    "login_button": "로그인",
+    "hero_desc": "Kello 프리미엄 대행 서비스의 예약 업데이트를 받는 방식을 정할 수 있습니다.",
+    "types": {
+      "title": "알림 종류 설정",
+      "booking_title": "예약 단계별 알림 받기",
+      "booking_desc": "접수, 확정, 이용 완료 등 서비스 이용의 주요 단계마다 알림을 받습니다.",
+      "change_title": "변경 요청 결과 알림 받기",
+      "change_desc": "요청하신 날짜/항목 변경의 승인 또는 반려 결과를 즉시 알려드립니다.",
+      "alternative_title": "대체 일정 제안 알림 받기",
+      "alternative_desc": "원하시는 시간이 마감되어 매장에서 다른 대안 시간을 제안했을 때 알려드립니다."
+    },
+    "footer_note": "예약 관련 필수 안내사항은 설정과 관계없이 발송될 수 있습니다."
+  },
+  "error_title": "오류가 발생했습니다.",
+  "error_desc": "문제가 계속되면 고객센터에 문의해 주세요.",
+  "error_retry": "다시 시도",
+  "common_actions_view_all": "전체 보기",
+  "common_loading": "로딩 중..."
 }

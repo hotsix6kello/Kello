@@ -9,7 +9,7 @@ import { supabase } from "@/lib/supabaseClient";
 // Country selection mapping (Helper)
 function toI18nKey(code: string) {
     const LANG_MAP: Record<string, string> = {
-        'ko': 'ko', 'en': 'en', 'ja': 'jp', 'zh-CN': 'cn', 'zh-TW': 'tw',
+        'ko': 'ko', 'en': 'en', 'ja': 'ja', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW',
         'vi': 'vi', 'th': 'th', 'id': 'id', 'ms': 'ms'
     };
     return LANG_MAP[code] ?? 'en';

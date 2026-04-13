@@ -18,8 +18,8 @@ export default function Error({
 
   return (
     <div style={{ padding: '24px', textAlign: 'center' }}>
-      <h2 style={{ marginBottom: '16px' }}>{t('common.error_title', { defaultValue: '오류가 발생했습니다.' })}</h2>
-      <p style={{ marginBottom: '24px', color: '#666' }}>{t('common.error_desc', { defaultValue: '페이지를 불러오는 중 문제가 생겼습니다.' })}</p>
+      <h2 style={{ marginBottom: '16px' }}>{t('common.error_title')}</h2>
+      <p style={{ marginBottom: '24px', color: '#666' }}>{t('common.error_desc')}</p>
       <button
         onClick={() => reset()}
         style={{
@@ -31,7 +31,7 @@ export default function Error({
           cursor: 'pointer'
         }}
       >
-        {t('common.retry', { defaultValue: '다시 시도' })}
+        {t('common.retry')}
       </button>
     </div>
   );

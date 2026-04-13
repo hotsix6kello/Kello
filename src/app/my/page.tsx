@@ -47,7 +47,7 @@ function buildCategoryTitle(t: ReturnType<typeof useTranslation>['t'], category:
         return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
     });
     if (parts.length === 0) {
-        return t('my_page.bookings.pending_service', { defaultValue: '시술 정보 확인 중' });
+        return t('my_page.bookings.pending_service');
     }
     return parts.join(' · ');
 }
@@ -376,11 +376,11 @@ function MyBookingsSection({
                                 📅 {b.bookingDate} · {b.bookingTime}
                             </div>
                             <div style={{ fontSize: '0.82rem', color: !isMatched ? '#db2777' : '#64748b', fontWeight: !isMatched ? 600 : 400, marginBottom: 4 }}>
-                                {!isMatched ? t('my_page.bookings.matching_status', { defaultValue: '조건에 맞는 매장을 찾고 있어요' }) : (t(BOOKING_STATUS_DESC_KEY[b.status]) || '')}
+                                {!isMatched ? t('my_page.bookings.matching_status') : (t(BOOKING_STATUS_DESC_KEY[b.status]) || '')}
                             </div>
                             <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
                                 💰 {!isMatched || b.totalPrice === 0 
-                                      ? t('my_page.bookings.price_pending', { defaultValue: '매장 확인 후 안내' }) 
+                                      ? t('my_page.bookings.price_pending') 
                                       : `${b.totalPrice.toLocaleString('ko-KR')}${t('beauty_explore.label_booking_unit')}`}
                             </div>
                         </div>
@@ -837,7 +837,7 @@ function MyPageContent() {
 
 export default function MyPage() {
     return (
-        <Suspense fallback={<div style={{ padding: 24 }}>로딩 중...</div>}>
+        <Suspense fallback={<div style={{ padding: 24 }}>Loading...</div>}>
             <MyPageContent />
         </Suspense>
     );
