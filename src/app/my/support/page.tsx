@@ -576,7 +576,7 @@ function SupportPageContent() {
 
 export default function MySupportPage() {
     return (
-        <Suspense fallback={<div style={{ padding: 24 }}>Loading...</div>}>
+        <Suspense fallback={<div style={{ padding: 24 }}>로딩 중...</div>}>
             <SupportPageContent />
         </Suspense>
     );

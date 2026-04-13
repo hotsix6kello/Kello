@@ -1668,7 +1668,7 @@ export default function MySettingsPage() {
                                     sizes="96px"
                                 />
                             ) : (
-                                initials || t("settings_page.hero.avatar.placeholder", { defaultValue: "ME" })
+                                initials || t("settings_page.hero.avatar.placeholder", { defaultValue: "내" })
                             )}
                         </div>
                     </div>

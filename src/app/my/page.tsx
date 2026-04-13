@@ -39,8 +39,8 @@ type MyBookingCardRecord = Pick<
     "id" | "status" | "storeName" | "primaryServiceName" | "beautyCategory" | "bookingDate" | "bookingTime" | "totalPrice"
 >;
 
-const SSR_SAFE_FALLBACK_NAME = "Traveler";
-const SSR_SAFE_FALLBACK_SUBTITLE = "Account & preferences";
+const SSR_SAFE_FALLBACK_NAME = "고객님";
+const SSR_SAFE_FALLBACK_SUBTITLE = "계정 및 설정";
 
 function pickString(...values: unknown[]): string {
     for (const value of values) {
@@ -132,7 +132,7 @@ function ProfileSummaryCard({
                                 style={{ borderRadius: '50%', objectFit: 'cover' }} 
                             />
                         ) : (
-                            <span className={styles.profileInitials}>{initials || "TR"}</span>
+                            <span className={styles.profileInitials}>{initials || "내"}</span>
                         )}
                         <div className={styles.avatarEditOverlay} style={{
                             position: 'absolute', bottom: 0, right: 0, 
@@ -832,7 +832,7 @@ function MyPageContent() {
 
 export default function MyPage() {
     return (
-        <Suspense fallback={<div style={{ padding: 24 }}>Loading...</div>}>
+        <Suspense fallback={<div style={{ padding: 24 }}>로딩 중...</div>}>
             <MyPageContent />
         </Suspense>
     );
