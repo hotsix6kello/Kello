@@ -1,11 +1,12 @@
 {
   "settings_page": {
     "hero": {
-      "default_title": "My Settings",
-      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
       "avatar": {
+        "placeholder": "ME",
         "error": "Failed to change image."
-      }
+      },
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings"
     },
     "tabs": {
       "personal": {
@@ -202,5 +203,55 @@
       "nickname_unset": "Not Set"
     },
     "tab_aria_label": "Settings Tabs"
+  },
+  "my_page": {
+    "bookings": {
+      "pending_service": "Pending Service Review",
+      "matching_status": "We're finding a salon that matches your preferences.",
+      "matching_desc": "Waiting for salon match",
+      "price_pending": "Price will be confirmed after salon review."
+    },
+    "settings": {
+      "account": {
+        "default_name": "Customer"
+      }
+    },
+    "profile": {
+      "account_hint": "Account & Preferences",
+      "fallback_name": "Customer",
+      "fallback_subtitle": "Account & Preferences",
+      "fallback_initials": "ME"
+    }
+  },
+  "common": {
+    "error_title": "Something went wrong.",
+    "error_desc": "There was a problem loading the page.",
+    "retry": "Retry"
+  },
+  "notifications": {
+    "save_success": "Settings saved successfully.",
+    "save_fail": "Failed to save settings.",
+    "title": "Notification Settings",
+    "login_required": "Please log in to continue.",
+    "login_button": "Log in",
+    "hero_title": "Customize your booking updates ✨",
+    "hero_desc": "Choose how you want to receive updates for Kello's premium concierge services.",
+    "channel": {
+      "title": "Channels",
+      "email_title": "Receive updates via Email",
+      "email_desc": "We'll safely send core updates about your booking information and progress via email.",
+      "app_title": "Receive updates via App",
+      "app_desc": "Important booking status changes are always recorded in the app notification box, so you can check them anytime."
+    },
+    "types": {
+      "title": "Update Types",
+      "booking_title": "Progress Updates",
+      "booking_desc": "Receive notifications at key stages of service such as request, confirmation, and completion.",
+      "change_title": "Change Request Results",
+      "change_desc": "We will immediately notify you of the approval or rejection of your requested date/item changes.",
+      "alternative_title": "Alternative Offers",
+      "alternative_desc": "We will notify you when a salon suggests an alternative time due to your preferred time being fully booked."
+    },
+    "footer_note": "Essential booking-related notices may be sent regardless of your settings."
   }
 }

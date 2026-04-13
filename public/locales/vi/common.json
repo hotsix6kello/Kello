@@ -19,145 +19,235 @@
     "booking_confirmation_cta": "Lịch hẹn của tôi"
   },
   "common": {
-    "welcome": "Chào mừng, Lữ khách.",
-    "greeting": "Chào buổi sáng",
-    "login": "Đăng nhập",
-    "today": "Hôm nay",
-    "move": "Di chuyển",
-    "book": "Đặt chỗ",
-    "chat": "Chat",
-    "my": "Của tôi",
-    "current_operation": "Đang hoạt động",
-    "live": "Trực tiếp",
-    "recommended": "Gần đây",
-    "based_on_location": "Dựa trên vị trí của bạn",
-    "start_nav": "Bắt đầu dẫn đường",
-    "delay_10m": "Trễ +10 phút",
-    "confirmed": "Đã xác nhận",
-    "payment_completed": "Thanh toán thành công",
-    "weather_clear": "Trời quang",
-    "back": "Quay lại",
-    "select_language": "Chọn ngôn ngữ",
-    "home_nav": "Trang chủ",
-    "explore_nav": "Khám phá",
-    "planner_nav": "Lịch trình",
-    "today_nav": "Hôm nay",
-    "my_nav": "Của tôi",
-    "day_unit": "n",
-    "locale": "vi-VN",
-    "loading": "Đang tải...",
+    "error_title": "Something went wrong.",
+    "error_desc": "There was a problem loading the page.",
+    "retry": "Retry",
+    "welcome": "欢迎，旅行者。",
+    "greeting": "早上好",
+    "login": "登录",
+    "signup": "注册",
+    "today": "今天",
+    "move": "移动",
+    "book": "预约",
+    "chat": "咨询",
+    "my": "我的",
+    "min_unit": "分钟",
+    "current_operation": "当前行程",
+    "live": "直播",
+    "recommended": "周边推荐",
+    "based_on_location": "基于当前位置",
+    "start_nav": "开始导航",
+    "delay_10m": "延迟10分钟",
+    "confirmed": "预约确认",
+    "payment_completed": "支付完成",
+    "weather_clear": "晴朗",
+    "back": "返回",
+    "select_language": "选择语言",
+    "home_nav": "首页",
+    "explore_nav": "探索",
+    "planner_nav": "行程",
+    "today_nav": "今日",
+    "my_nav": "我的",
+    "day_unit": "日",
+    "locale": "zh-CN",
+    "loading": "加载中...",
     "cities": {
-      "seoul": "Seoul",
-      "busan": "Busan",
-      "jeju": "Jeju",
-      "gyeongju": "Gyeongju"
+      "seoul": "首尔",
+      "busan": "釜山",
+      "jeju": "济州",
+      "gyeongju": "庆州"
     },
     "categories": {
-      "all": "Tất cả",
-      "food": "Ẩm thực",
-      "beauty": "Làm đẹp",
-      "event": "Sự kiện",
-      "festival": "Lễ hội",
-      "attraction": "Địa điểm",
-      "transport": "Giao thông"
+      "all": "全部",
+      "food": "美食",
+      "beauty": "美容",
+      "event": "演出",
+      "festival": "庆典",
+      "attraction": "景点",
+      "transport": "交通"
     },
-    "community_nav": "Cộng đồng",
+    "badges": {
+      "english_friendly": "英语友好",
+      "vegan_certified": "纯素认证",
+      "michelin": "米其林",
+      "wait_free": "免排队",
+      "local_experience": "当地体验",
+      "k_idol_style": "K-Idol风格",
+      "tax_refund": "退税",
+      "summer_must_go": "夏季必选",
+      "non_verbal": "非语言秀",
+      "family": "家庭亲子",
+      "night_view": "夜景",
+      "photo_spot": "打卡点",
+      "hanbok_free_entry": "韩服免费入场",
+      "history": "历史",
+      "city_view": "城市景观"
+    },
+    "ingredients": {
+      "vegetables": "蔬菜",
+      "soy": "豆类",
+      "pork": "猪肉",
+      "kimchi": "泡菜",
+      "seafood": "海鲜"
+    },
+    "diet": {
+      "vegan": "纯素",
+      "gluten_free": "无麸质",
+      "meat_lover": "肉食爱好者",
+      "pescatarian": "鱼素"
+    },
+    "community_nav": "社区",
     "actions": {
-      "apply_again": "Nộp lại",
-      "apply_as_partner": "Đăng ký đối tác",
-      "booking_help": "Hỗ trợ đặt chỗ",
-      "call_112": "Gọi 112",
-      "call_119": "Gọi 119",
-      "call_1330": "Gọi 1330",
-      "close": "Đóng",
-      "contact_support": "Liên hệ hỗ trợ",
-      "copied": "Đã sao chép",
-      "copy": "Sao chép",
-      "emergency_help": "Hỗ trợ khẩn cấp",
-      "explore_places": "Khám phá địa điểm",
-      "general_help": "Hỗ trợ chung",
-      "get_help": "Nhận hỗ trợ",
-      "go_to_reviews": "Đi tới đánh giá",
-      "interpreter_for_booking": "Hỗ trợ phiên dịch cho ??t ch? n?y",
-      "interpreter_help": "Hỗ trợ phiên dịch",
-      "large_view": "Xem l?n",
-      "my_bookings": "Đặt chỗ của tôi",
-      "open_admin_console": "Mở trang qu?n tr?",
-      "open_help_center": "Mở trung t?m tr? gi?p",
-      "open_support": "Mở h? tr?",
-      "partner_inquiry": "Li?n h? ??i t?c",
-      "report_issue": "B?o c?o s? c?",
-      "save": "L?u",
-      "saved": "Đã lưu",
-      "show_booking_phrases": "Hi?n th? c?u cho ??t ch?",
-      "show_in_korean": "Hi?n th? b?ng ti?ng H?n",
-      "support": "H? tr?",
-      "travel_phrasebook": "S? câu du lịch",
-      "travel_phrases": "C?u du l?ch",
-      "view_booking": "Xem ??t ch?",
-      "view_bookings": "Xem c?c ??t ch?",
-      "add_to_plan": "Thêm vào kế hoạch",
-      "back_to_booking_support": "Quay lại h? tr? ??t ch?",
-      "browse_community": "Xem c?ng Đóng",
-      "browse_meetups": "Xem meetup",
-      "call_clinic": "Gọi phòng khám",
-      "continue_editing": "Tiếp tục chỉnh sửa",
-      "create_plan": "Tạo kế hoạch",
-      "explore": "Kh?m ph?",
-      "manage": "Quản lý",
-      "open": "Mở",
-      "open_my_support": "Mở My Support",
-      "open_route": "Mở l? tr?nh",
-      "show_emergency_phrases": "Xem c?u kh?n c?p",
-      "use_this_plan": "D?ng k? ho?ch n?y",
-      "view": "Xem",
-      "view_place_details": "Xem chi tiết địa điểm",
-      "view_plan": "Xem kế hoạch",
-      "write_review": "Viết đánh giá",
-      "delete": "Xóa"
+      "apply_again": "重新申请",
+      "apply_as_partner": "成为合作伙伴",
+      "booking_help": "预约帮助",
+      "call_112": "拨打 112",
+      "call_119": "拨打 119",
+      "call_1330": "拨打 1330",
+      "close": "关闭",
+      "contact_support": "联系支持",
+      "copied": "已复制",
+      "copy": "复制",
+      "emergency_help": "紧急求助",
+      "explore_places": "探索地点",
+      "general_help": "常见帮助",
+      "get_help": "获取帮助",
+      "go_to_reviews": "查看评价",
+      "interpreter_for_booking": "预约翻译辅助",
+      "interpreter_help": "口译帮助",
+      "large_view": "大图查看",
+      "my_bookings": "我的预约",
+      "open_admin_console": "打开管理员控制台",
+      "open_help_center": "打开帮助中心",
+      "open_support": "联系客服",
+      "partner_inquiry": "合作伙伴咨询",
+      "report_issue": "报告问题",
+      "save": "保存",
+      "saved": "已保存",
+      "show_booking_phrases": "显示预约短语",
+      "show_in_korean": "显示韩文",
+      "support": "支持",
+      "travel_phrasebook": "旅行短语集",
+      "travel_phrases": "旅行短语",
+      "view_booking": "查看预约",
+      "view_bookings": "查看所有预约",
+      "add_to_plan": "添加到行程",
+      "back_to_booking_support": "返回预约支持",
+      "browse_community": "浏览社区",
+      "browse_meetups": "浏览聚会",
+      "call_clinic": "联系诊所",
+      "continue_editing": "继续编辑",
+      "create_plan": "创建行程",
+      "explore": "探索",
+      "manage": "管理",
+      "open": "打开",
+      "open_my_support": "打开我的支持",
+      "open_route": "打开路线",
+      "show_emergency_phrases": "显示紧急短语",
+      "use_this_plan": "使用此行程",
+      "view": "查看",
+      "view_place_details": "查看地点详情",
+      "view_plan": "查看行程",
+      "write_review": "撰写评价",
+      "delete": "删除",
+      "view_all": "View All",
+      "details": "Details",
+      "view_details": "View Details",
+      "emergency_phrases": "Emergency Phrases",
+      "browse_places": "Browse Places",
+      "browse_explore": "Browse Explore",
+      "explore_more": "Explore More",
+      "open_hub": "Open Hub",
+      "view_in_plan": "View in Plan",
+      "view_again": "View Again",
+      "map": "Map",
+      "call_120": "Call 120"
     },
     "states": {
-      "active": "?ang ho?t Đóng",
-      "approved": "Đã duyệt",
-      "favorites": "Yêu thích",
-      "frequent": "ThĐóng d?ng",
-      "needs_review": "Cần xem xét",
-      "needs_update": "Cần cập nhật",
-      "not_available_yet": "Chưa khả dụng",
-      "not_connected": "Chưa kết nối",
-      "not_joined": "Chưa tham gia",
-      "not_set": "Chưa thiết lập",
-      "not_set_yet": "Chưa thiết lập",
-      "not_verified": "Chưa xác minh",
-      "pending_review": "Đang chờ duyệt",
-      "read_only": "Ch? xem",
-      "recent": "Gần đây",
-      "sign_in_required": "C?n Đóng nh?p",
-      "standard_account": "T?i kho?n ti?u chu?n",
-      "verified": "Đã xác minh",
-      "current_trip_plan": "K? ho?ch chuy?n ?i hi?n t?i",
-      "details_unavailable": "Ch?a c? chi tiết",
-      "meetups": "Meetup",
-      "planner_draft": "B?n nh?p Planner",
-      "posts": "B?i vi?t",
-      "recently_viewed": "?? xem g?n ??y",
-      "labels": "Nhãn",
-      "no_permission": "Bạn không có quyền thực hiện hành động này.",
-      "error_occurred": "Đã xảy ra lỗi khi xử lý yêu cầu của bạn."
+      "active": "激活",
+      "approved": "已批准",
+      "favorites": "收藏",
+      "frequent": "常用",
+      "needs_review": "待评价",
+      "needs_update": "待更新",
+      "not_available_yet": "暂不可用",
+      "not_connected": "未连接",
+      "not_joined": "未加入",
+      "not_set": "未设置",
+      "not_set_yet": "尚未设置",
+      "not_verified": "未验证",
+      "pending_review": "审核中",
+      "read_only": "只读",
+      "recent": "最近",
+      "sign_in_required": "需登录",
+      "standard_account": "标准账户",
+      "verified": "已验证",
+      "no_permission": "没有权限。",
+      "error_occurred": "处理请求时发生错误。",
+      "current_trip_plan": "当前旅行计划",
+      "details_unavailable": "详细信息不可用",
+      "meetups": "聚会",
+      "planner_draft": "日程草稿",
+      "posts": "帖子",
+      "recently_viewed": "最近浏览",
+      "reviews": "评价",
+      "saved_locally": "已在本地保存",
+      "not_connected_yet": "Not connected yet",
+      "places": "Places",
+      "plans": "Plans",
+      "saved_places": "Saved Places",
+      "saved_plans": "Saved Plans",
+      "trip_days": "Trip days",
+      "plan_stops": "Plan stops",
+      "done": "Done",
+      "draft": "Draft",
+      "unavailable": "Unavailable",
+      "in_progress": "In Progress",
+      "canceled": "Cancelled",
+      "loading": "Loading...",
+      "searching": "Searching...",
+      "labels": "Nhãn"
     },
     "runtime": {
       "counts": {
-        "stops_zero": "{{count}} điểm dừng",
-        "stops_one": "{{count}} điểm dừng",
-        "stops_other": "{{count}} điểm dừng",
-        "days_zero": "{{count}} ngày",
-        "days_one": "{{count}} ngày",
-        "days_other": "{{count}} ngày"
+        "stops_zero": "{{count}} 个地点",
+        "stops_one": "{{count}} 个地点",
+        "stops_other": "{{count}} 个地点",
+        "days_zero": "{{count}} 天",
+        "days_one": "{{count}} 天",
+        "days_other": "{{count}} 天",
+        "comments": "{{count}} comments",
+        "stops": "{{count}} stops",
+        "days": "{{count}} days"
+      },
+      "relative": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}}m ago",
+        "hours_ago": "{{count}}h ago",
+        "days_ago": "{{count}}d ago"
+      },
+      "trip": {
+        "day_label": "Day {{day}}",
+        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dash": "Day {{day}} - {{time}}"
       }
     },
-    "morning": "Chào buổi sáng",
-    "afternoon": "Chào buổi chiều",
-    "evening": "Chào buổi tối"
+    "morning": "早上好",
+    "afternoon": "下午好",
+    "evening": "晚上好",
+    "help_nav": "Help",
+    "view_map": "Lihat Lokasi",
+    "view_map_desc": "Lihat lokasi detail di peta",
+    "taxi_call": "Panggil Taksi",
+    "route_nav": "Panduan Rute",
+    "transit_nav_desc": "Navigasi transportasi umum",
+    "copy_address": "Salin Alamat",
+    "copied": "Tersalin!",
+    "greeting_morning": "สวัสดีตอนเช้า",
+    "greeting_afternoon": "สวัสดีตอนบ่าย",
+    "greeting_evening": "สวัสดีตอนเย็น",
+    "search_results": "ผลลัพธ์การค้นหา",
+    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
   "transport": {
     "moving_to": "Đang đến {{dest}}",
@@ -352,37 +442,172 @@
   },
   "my_page": {
     "bookings": {
-      "title": "Lịch đặt của tôi",
-      "date_time": "Ngày / Giờ",
-      "area": "Khu vực",
-      "price": "Giá",
-      "new_added": "Đã thêm đơn đặt mới!",
-      "browse_beauty_cta": "Browse Beauty Bookings",
-      "action_edit_request": "Edit Request",
-      "action_cancel_request": "Cancel Request",
-      "error_fetch": "Failed to load bookings."
+      "pending_service": "Pending Service Review",
+      "matching_status": "We're finding a salon that matches your preferences.",
+      "matching_desc": "Waiting for salon match",
+      "price_pending": "Price will be confirmed after salon review.",
+      "title": "我的预约",
+      "date_time": "日期 / 时间",
+      "area": "区域",
+      "price": "价格",
+      "today_time": "今天, {{time}}",
+      "tomorrow_time": "明天, {{time}}",
+      "next_week_time": "下周, {{time}}",
+      "new_added": "新预约已添加！",
+      "browse_beauty_cta": "浏览美容预约",
+      "action_edit_request": "修改请求",
+      "action_cancel_request": "取消请求",
+      "error_fetch": "加载预约失败。"
+    },
+    "settings": {
+      "account": {
+        "default_name": "Customer",
+        "sign_in_title": "Sign in to manage account details",
+        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
+        "title": "Account / Profile",
+        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
+        "display_name": "Display name",
+        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
+        "email": "Email / login",
+        "email_hint": "Read from the active Supabase auth user.",
+        "joined": "Joined",
+        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
+        "last_seen": "Last sign-in",
+        "last_seen_hint": "Read-only from the auth session.",
+        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
+        "phone": {
+          "placeholder": "e.g. {{example}}",
+          "helper_empty": "Includes country code. e.g. {{example}}",
+          "helper_saved": "Kept in international format.",
+          "helper_invalid": "Include country code. e.g. {{example}}"
+        }
+      },
+      "short": "??",
+      "support_short": "??",
+      "eyebrow": "?????",
+      "title": "????",
+      "subtitle": "???????????????????????? mypage ???",
+      "summary": {
+        "saved": "?????",
+        "stops": "?????",
+        "days": "????"
+      },
+      "preferences": {
+        "region_empty": "???????????????????????????",
+        "region_hint": "?????????????",
+        "style_empty": "???????????????????????????????",
+        "style_hint": "???????????",
+        "interests_saved": "?? saved_items ???????????",
+        "interests_plan": "???????????????",
+        "interests_empty": "?????????????????????",
+        "language": "??",
+        "language_hint": "????????????? kello_lang ??",
+        "region": "???? / ??",
+        "style": "????",
+        "interests": "????",
+        "title": "????",
+        "desc": "?????????????????????????????????"
+      },
+      "verification": {
+        "email": "??",
+        "email_ready": "????????????",
+        "email_missing": "?? Supabase ???????????",
+        "phone": "???",
+        "phone_ready": "????????????",
+        "phone_partial": "????????????????",
+        "phone_empty": "?????????????",
+        "provider": "????",
+        "provider_hint": "????? Supabase ?????",
+        "title": "?? / ??",
+        "desc": "??????????????????????",
+        "identity_note": "????????????????????????",
+        "email_provider": "??"
+      },
+      "links": {
+        "support_desc": "?????????????????",
+        "phrases_desc": "????????????????",
+        "saved": "????",
+        "saved_desc": "??????????????????",
+        "bookings": "??",
+        "bookings_desc": "?????????????????",
+        "community": "??",
+        "community_desc": "?????????????????",
+        "title": "???? / ????",
+        "desc": "?????????????????????",
+        "placeholder_title": "?????",
+        "placeholder_desc": "????????????????????????????????"
+      },
+      "partner": {
+        "title": "??????",
+        "approved_desc": "??????????????????????????????????",
+        "pending_desc": "???????????????????????????????",
+        "rejected_desc": "?????????????????????????????????",
+        "none_desc": "????????????????????????????"
+      },
+      "admin": {
+        "enabled": "???",
+        "enabled_desc": "?????????????????????",
+        "disabled_desc": "????????????",
+        "title": "????",
+        "source": "profiles.is_admin = true",
+        "source_none": "??????????"
+      },
+      "hero": {
+        "email_ready": "?????",
+        "email_pending": "?????"
+      },
+      "partner_admin": {
+        "title": "???? / ???",
+        "desc": "????????????? my ????????????????????"
+      }
+    },
+    "profile": {
+      "account_hint": "Account & Preferences",
+      "fallback_name": "Customer",
+      "fallback_subtitle": "Account & Preferences",
+      "fallback_initials": "ME",
+      "trust_score": "💎 信任分数",
+      "trust_level_excellent": "极好",
+      "level_badge": "Lv.{{level}}",
+      "badge_korea_travel": "Korea Travel",
+      "badge_verified": "Verified"
+    },
+    "passport": {
+      "title": "我的护照",
+      "view_all": "查看全部",
+      "seoul": "首尔",
+      "beauty": "美容",
+      "jeju": "济州"
     },
     "community": {
-      "title": "Bài viết Của Tôi",
-      "empty": "Chưa có bài viết nào được tạo.",
-      "empty_simple": "No posts written yet",
-      "browse_cta": "Browse Community"
+      "title": "我的社区动态",
+      "empty": "还没有撰写任何社区动态。",
+      "empty_simple": "暂无发布文章",
+      "browse_cta": "浏览社区"
     },
     "support": {
-      "short": "H? tr?",
-      "eyebrow": "Trung t?m h? tr?",
-      "title": "H? tr? của tôi",
-      "header_cta": "Mở trung t?m tr? gi?p",
+      "short": "??",
+      "eyebrow": "????",
+      "title": "????",
+      "header_cta": "??????",
       "tabs": {
-        "booking": "Hỗ trợ đặt chỗ",
-        "general": "Hỗ trợ chung",
-        "faq": "FAQ / HĐóng d?n nhanh",
-        "emergency": "Kh?n c?p / Phi?n d?ch"
+        "booking": "????",
+        "general": "????",
+        "faq": "FAQ / ????",
+        "emergency": "?? / ????"
       },
       "summary": {
         "booking": {
-          "label": "Hỗ trợ đặt chỗ",
-          "desc": "Xem c?c ??t ch? g?n ??y, b?o c?o s? c? v? b??c ti?p theo."
+          "label": "????",
+          "desc": "??????????????????"
+        },
+        "general": {
+          "label": "????",
+          "desc": "???????????????????"
+        },
+        "emergency": {
+          "label": "?????",
+          "desc": "????????????????????????????"
         },
         "categories": {
           "all": "Tất cả",
@@ -492,6 +717,109 @@
         "transit_nav_desc": "Dẫn đường phương tiện công cộng",
         "copy_address": "Sao chép địa chỉ",
         "copied": "Đã sao chép!"
+      },
+      "guides": {
+        "find_booking": {
+          "q": "?????????",
+          "a": "???????????????????????????????????????????"
+        },
+        "staff_talk": {
+          "q": "???????????",
+          "a": "???????????????????????????????????????"
+        },
+        "change_time": {
+          "q": "?????????",
+          "a": "?????????????????????????????????????????"
+        },
+        "cancel_refund": {
+          "q": "???????????",
+          "a": "????????????????????????????????????????"
+        },
+        "write_review": {
+          "q": "???????????",
+          "a": "?????????? My Community > Reviews??????????????????????????"
+        },
+        "community_safety": {
+          "q": "????????????????",
+          "a": "??????????????????????????????????????????????????????",
+          "cta": "????"
+        }
+      },
+      "general": {
+        "help_center": {
+          "label": "????",
+          "desc": "??????????????????????????????"
+        },
+        "booking_cancel": {
+          "label": "???????",
+          "desc": "?????????????????????????",
+          "cta": "??????"
+        },
+        "community_safety": {
+          "label": "????",
+          "desc": "???????????????????????",
+          "cta": "??????"
+        },
+        "partner": {
+          "label": "????",
+          "desc": "????????????????????????"
+        },
+        "title": "????",
+        "desc": "???????????????????????",
+        "report_notice": "?????????????????????????????????"
+      },
+      "emergency": {
+        "overview": {
+          "label": "????",
+          "desc": "????????????????????",
+          "cta": "??????"
+        },
+        "interp": {
+          "label": "????",
+          "desc": "?????????????????????????",
+          "cta": "??????",
+          "booking_desc": "?????????????????????????????????"
+        },
+        "phrases": {
+          "label": "????",
+          "desc": "???????????????????????????",
+          "cta": "??????",
+          "booking_label": "????",
+          "booking_desc": "????????????????????????????????"
+        },
+        "medical": {
+          "label": "????",
+          "desc": "???????????????????????????",
+          "cta": "????"
+        },
+        "police": {
+          "label": "?? / ????",
+          "desc": "??????????????????????????",
+          "cta": "??????"
+        },
+        "title": "?? / ????",
+        "desc": "My Support ???????????????????????????????",
+        "interpreter_notice": "????????????????????????????",
+        "hub_notice": "????????????????/help/* ?????????????Travel Phrasebook ?????????"
+      },
+      "booking": {
+        "banner_report": "???? {{bookingName}} ?????????????????????",
+        "banner_interpreter": "??? {{bookingName}} ??????????????????????",
+        "banner_default": "???? {{bookingName}} ??????????????????",
+        "banner_fallback": "????????????????????????????",
+        "title": "????",
+        "desc": "?????????????????????",
+        "empty": {
+          "title": "???????????",
+          "desc": "???????????????????????"
+        },
+        "context_title": "??????",
+        "context_desc": "???????????????????????????????"
+      },
+      "subtitle": "???????????????????????",
+      "faq": {
+        "title": "FAQ / ????",
+        "desc": "??????????????????????????"
       },
       "transport": {
         "moving_to": "Đang đến {{dest}}",
@@ -1411,6 +1739,237 @@
         }
       }
     },
+    "phrases": {
+      "quick": "??",
+      "title": "?????",
+      "eyebrow": "????",
+      "favorites": {
+        "title": "??",
+        "desc": "???????????????",
+        "empty": "?????????????????????"
+      },
+      "recent": {
+        "title": "??",
+        "desc": "????????????????????????"
+      },
+      "subtitle": "?????????????????????????????????????",
+      "hero": {
+        "badge": "?????????",
+        "count": "???"
+      },
+      "context": {
+        "title": "?????",
+        "interpreter": "???????????????????????",
+        "support": "??????????????????????????????",
+        "booking": "?????????????"
+      },
+      "category": {
+        "title": "{{category}} ??"
+      },
+      "empty": {
+        "title": "?????????",
+        "desc": "??????????????????? Support?"
+      },
+      "categories": {
+        "booking": {
+          "label": "Booking",
+          "description": "Reservation check-in, delays, and option requests.",
+          "helper": "Best for front desks, tour desks, and venue staff."
+        },
+        "transport": {
+          "label": "Transport",
+          "description": "Taxi, station, and route support for moving around Korea.",
+          "helper": "Useful for drivers, station staff, and route questions."
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "description": "Ordering help, allergy notes, and menu questions.",
+          "helper": "Show these before ordering when timing is tight."
+        },
+        "beauty": {
+          "label": "Beauty",
+          "description": "Salon, spa, and treatment requests in simple Korean.",
+          "helper": "Helpful for consultations and price checks before treatment."
+        },
+        "emergency": {
+          "label": "Emergency",
+          "description": "Urgent help phrases and translation-related requests.",
+          "helper": "Use with nearby staff, help desks, or emergency support lines."
+        }
+      }
+    },
+    "saved": {
+      "title": "????",
+      "eyebrow": "????",
+      "header_cta": "????",
+      "subtitle": "???????????????Planner ??????????",
+      "summary": {
+        "places": "??",
+        "plans": "??",
+        "recent": "??"
+      },
+      "tabs": {
+        "places": "??",
+        "plans": "??",
+        "recent": "??"
+      },
+      "summary_hint": "地点由探索中保存的项目自动同步，行程则从当前规划中获取。",
+      "places": {
+        "source_plan": "正在与行程表同步",
+        "source_saved": "从探索保存",
+        "source_fallback": "从探索保存",
+        "source_id_only": "保存项目 ID",
+        "added": "已添加到行程表。时间可在行程表中调整。",
+        "title": "保存的地点",
+        "desc": "浏览您在探索中保存的地点。",
+        "empty": {
+          "title": "还没有保存的地点",
+          "desc": "在探索中保存地点，以便快速制定计划。",
+          "cta": "探索地点"
+        },
+        "fallback_title": "保存的地点 {{id}}"
+      },
+      "plans": {
+        "synced": "已与当前行程表同步",
+        "title": "保存的行程",
+        "desc": "此处显示您当前的行程草稿。",
+        "empty": {
+          "title": "还没有保存的行程",
+          "desc": "在行程表中创建计划后，草稿会显示在这里。"
+        },
+        "current": "当前旅行计划"
+      },
+      "recent": {
+        "title": "最近浏览",
+        "desc": "您最近查看的地点、行程和社区帖子会保存在这里。",
+        "empty": {
+          "title": "暂无浏览记录",
+          "desc": "当您查看地点、行程或社区详情时，记录会显示在这里。",
+          "fallback": "如果本地存储可用，记录将保存在此设备上。",
+          "cta": "去探索"
+        },
+        "type": {
+          "place": "地点",
+          "plan": "行程",
+          "community": "社区"
+        }
+      },
+      "view_all": "Open Hub",
+      "dashboard_title": "Saved & Recent",
+      "dashboard_desc": "Jump back to saved places, planner drafts, and recent items from one hub."
+    },
+    "community_hub": {
+      "eyebrow": "我的活动",
+      "title": "我的社区",
+      "subtitle": "集中管理您发布的帖子、评价和动态。",
+      "browse": "浏览社区",
+      "summary": {
+        "posts": "帖子",
+        "reviews": "评价",
+        "meetups": "聚会"
+      },
+      "tabs": {
+        "posts": "帖子",
+        "reviews": "评价",
+        "meetups": "聚会"
+      },
+      "empty": {
+        "reviews": {
+          "title": "还没有撰写过评价",
+          "desc": "基于已完成的预约，分享您的旅行心得吧。",
+          "no_completed": "完成预约后即可回来撰写评价。",
+          "cta": "查看已完成预约"
+        },
+        "meetups": {
+          "title": "还没有聚会活动",
+          "desc": "去社区看看大家都在发起什么活动吧。"
+        },
+        "posts": {
+          "title": "还没有发布的帖子",
+          "desc": "在社区提问或向其他旅行者分享实用小贴士吧。"
+        }
+      },
+      "summary_hint": "统计结果基于您发布的社区帖子和已完成的预约。",
+      "sync_error": "当前由于网络问题无法更新。显示为空状态。",
+      "review_prompts": {
+        "title": "为已完成的预约撰写评价",
+        "desc": "在社区中选择“评价”类别来分享您的心得。"
+      },
+      "posts_desc": "查看及管理您发布的普通社区帖子。",
+      "reviews_desc": "快速查看已发布的评价和预约历史。",
+      "meetups_desc": "包含寻找旅行搭子等聚会类动态。",
+      "loading": "正在加载动态...",
+      "no_comments": "暂无评论",
+      "type": {
+        "travel": "旅行",
+        "meetup": "聚会"
+      }
+    },
+    "messages": {
+      "upload_success": "个人主页照片已更新。",
+      "upload_failed": "上传失败。"
+    },
+    "dashboard": {
+      "admin_title": "管理员控制台",
+      "admin_desc": "打开管理员控制台与合作伙伴管理",
+      "admin_menu": {
+        "dashboard": "管理员控制台",
+        "dashboard_desc": "统计与完整菜单",
+        "bookings": "美容预约管理",
+        "bookings_desc": "预约请求与状态变更",
+        "partners": "合作伙伴管理",
+        "partners_desc": "加入申请审核管理",
+        "users": "管理员账号管理",
+        "users_desc": "权限授予与状态解除"
+      },
+      "bookings_empty": "No confirmed bookings yet",
+      "saved_recent_title": "Saved & Recent",
+      "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
+      "partner": {
+        "none_title": "Apply as Partner",
+        "none_desc": "Join Kello as a partner and introduce your service to more travelers.",
+        "none_cta": "Apply",
+        "pending_title": "Partner review in progress",
+        "pending_desc": "Your request is under review. We will update you after the admin check.",
+        "approved_title": "Partner approved",
+        "approved_desc": "Your Kello partner registration is complete.",
+        "rejected_title": "Partner request needs update",
+        "rejected_desc": "Update the details and apply again.",
+        "rejected_cta": "Apply Again"
+      }
+    },
+    "bookings_hub": {
+      "title": "My Bookings",
+      "summary": {
+        "upcoming": "Upcoming",
+        "history": "History"
+      },
+      "tabs": {
+        "upcoming": "Upcoming",
+        "completed": "Completed",
+        "other": "Other"
+      },
+      "meta": {
+        "time": "Time",
+        "area": "Area",
+        "total_price": "Total Price",
+        "reference": "Reference"
+      },
+      "empty": {
+        "upcoming": {
+          "title": "No upcoming bookings",
+          "desc": "Explore top-rated spots and start planning your next stop."
+        },
+        "completed": {
+          "title": "No completed bookings yet",
+          "desc": "Places you finish will be saved here, ready for a review."
+        },
+        "other": {
+          "title": "No other records",
+          "desc": "Cancelled or unavailable requests will appear here."
+        }
+      }
+    },
     "explore_items": {
       "airport_arrival": "Đến sân bay Incheon",
       "hotel_checkin": "Nhận phòng khách sạn",
@@ -1730,48 +2289,6 @@
       "event_booking_change_rejected": "Change Declined",
       "event_booking_completed": "Service Completed",
       "event_default": "Notification"
-    },
-    "messages": {
-      "upload_success": "Profile picture updated successfully.",
-      "upload_failed": "Upload failed."
-    },
-    "dashboard": {
-      "admin_title": "Admin Console",
-      "admin_desc": "Dashboard and partner management",
-      "admin_menu": {
-        "dashboard": "Admin Dashboard",
-        "dashboard_desc": "Stats & Full Menu",
-        "bookings": "Beauty Bookings",
-        "bookings_desc": "Requests & Status Management",
-        "partners": "Partner Management",
-        "partners_desc": "Registration & Approval",
-        "users": "Admin Management",
-        "users_desc": "Permissions & Access Control"
-      }
-    },
-    "settings": {
-      "account": {
-        "sign_in_title": "Sign in to manage account details",
-        "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
-        "title": "Account / Profile",
-        "desc": "These fields come from your current auth user, profile nickname, and basic account metadata.",
-        "display_name": "Display name",
-        "display_name_hint": "Nickname is preferred, then auth metadata, then your email name.",
-        "email": "Email / login",
-        "email_hint": "Read from the active Supabase auth user.",
-        "joined": "Joined",
-        "joined_hint": "Uses the profile created_at value when available, then falls back to auth created_at.",
-        "last_seen": "Last sign-in",
-        "last_seen_hint": "Read-only from the auth session.",
-        "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-        "default_name": "Traveler",
-        "phone": {
-          "placeholder": "e.g. {{example}}",
-          "helper_empty": "Includes country code. e.g. {{example}}",
-          "helper_saved": "Kept in international format.",
-          "helper_invalid": "Include country code. e.g. {{example}}"
-        }
-      }
     }
   },
   "interpreter_page": {
@@ -2309,11 +2826,12 @@
   },
   "settings_page": {
     "hero": {
-      "default_title": "My Settings",
-      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
       "avatar": {
+        "placeholder": "ME",
         "error": "Failed to change image."
-      }
+      },
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings"
     },
     "tabs": {
       "personal": {
@@ -2510,5 +3028,45 @@
       "nickname_unset": "Not Set"
     },
     "tab_aria_label": "Settings Tabs"
+  },
+  "notifications": {
+    "save_success": "Settings saved successfully.",
+    "save_fail": "Failed to save settings.",
+    "title": "Notification Settings",
+    "login_required": "Please log in to continue.",
+    "login_button": "Log in",
+    "hero_title": "Customize your booking updates ✨",
+    "hero_desc": "Choose how you want to receive updates for Kello's premium concierge services.",
+    "channel": {
+      "title": "Channels",
+      "email_title": "Receive updates via Email",
+      "email_desc": "We'll safely send core updates about your booking information and progress via email.",
+      "app_title": "Receive updates via App",
+      "app_desc": "Important booking status changes are always recorded in the app notification box, so you can check them anytime."
+    },
+    "types": {
+      "title": "Update Types",
+      "booking_title": "Progress Updates",
+      "booking_desc": "Receive notifications at key stages of service such as request, confirmation, and completion.",
+      "change_title": "Change Request Results",
+      "change_desc": "We will immediately notify you of the approval or rejection of your requested date/item changes.",
+      "alternative_title": "Alternative Offers",
+      "alternative_desc": "We will notify you when a salon suggests an alternative time due to your preferred time being fully booked."
+    },
+    "footer_note": "Essential booking-related notices may be sent regardless of your settings.",
+    "page_title": "Notification Center",
+    "back": "← My Page",
+    "loading": "Loading notifications...",
+    "empty": "No new notifications.",
+    "empty_cta": "Go to Beauty Booking",
+    "booking_link": "View booking details →",
+    "event_booking_created": "Booking Requested",
+    "event_booking_confirmed": "Booking Confirmed",
+    "event_booking_canceled_by_customer": "Booking Cancelled",
+    "event_booking_change_requested": "Change Requested",
+    "event_booking_change_approved": "Change Approved",
+    "event_booking_change_rejected": "Change Rejected",
+    "event_booking_completed": "Service Completed",
+    "event_default": "Notification"
   }
 }

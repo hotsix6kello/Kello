@@ -80,178 +80,229 @@
     "booking_confirmation_cta": "予約を確認する"
   },
   "common": {
-    "welcome": "ようこそ、旅行者様。",
-    "greeting": "おはようございます",
-    "login": "ログイン",
-    "signup": "新規登録",
-    "today": "今日",
-    "move": "移動",
-    "book": "予約",
-    "chat": "相談",
-    "my": "MY",
-    "min_unit": "分",
-    "current_operation": "現在のスケジュール",
-    "live": "LIVE",
-    "recommended": "周辺のおすすめ",
-    "based_on_location": "現在地に基づく",
-    "start_nav": "ルート案内開始",
-    "delay_10m": "10分遅らせる",
-    "confirmed": "予約確定",
-    "payment_completed": "支払い完了",
-    "weather_clear": "晴れ",
-    "back": "戻る",
-    "select_language": "言語選択",
-    "home_nav": "ホーム",
+    "error_title": "Something went wrong.",
+    "error_desc": "There was a problem loading the page.",
+    "retry": "Retry",
+    "welcome": "欢迎，旅行者。",
+    "greeting": "早上好",
+    "login": "登录",
+    "signup": "注册",
+    "today": "今天",
+    "move": "移动",
+    "book": "预约",
+    "chat": "咨询",
+    "my": "我的",
+    "min_unit": "分钟",
+    "current_operation": "当前行程",
+    "live": "直播",
+    "recommended": "周边推荐",
+    "based_on_location": "基于当前位置",
+    "start_nav": "开始导航",
+    "delay_10m": "延迟10分钟",
+    "confirmed": "预约确认",
+    "payment_completed": "支付完成",
+    "weather_clear": "晴朗",
+    "back": "返回",
+    "select_language": "选择语言",
+    "home_nav": "首页",
     "explore_nav": "探索",
-    "planner_nav": "日程表",
+    "planner_nav": "行程",
     "today_nav": "今日",
-    "my_nav": "マイ情報",
+    "my_nav": "我的",
     "day_unit": "日",
-    "locale": "ja-JP",
-    "loading": "読み込み中...",
+    "locale": "zh-CN",
+    "loading": "加载中...",
     "cities": {
-      "seoul": "ソウル",
+      "seoul": "首尔",
       "busan": "釜山",
-      "jeju": "済州",
-      "gyeongju": "慶州"
+      "jeju": "济州",
+      "gyeongju": "庆州"
     },
     "categories": {
-      "all": "すべて",
-      "food": "グルメ",
-      "beauty": "ビューティー",
-      "event": "公演",
-      "festival": "お祭り",
-      "attraction": "名所",
+      "all": "全部",
+      "food": "美食",
+      "beauty": "美容",
+      "event": "演出",
+      "festival": "庆典",
+      "attraction": "景点",
       "transport": "交通"
     },
     "badges": {
-      "english_friendly": "英語対応",
-      "vegan_certified": "ビーガン認証",
-      "michelin": "ミシュラン",
-      "wait_free": "待ち時間なし",
-      "local_experience": "現地体験",
-      "k_idol_style": "K-IDOLスタイル",
-      "tax_refund": "免税",
-      "summer_must_go": "夏のおすすめ",
-      "non_verbal": "ノンバーバル",
-      "family": "家族連れ",
+      "english_friendly": "英语友好",
+      "vegan_certified": "纯素认证",
+      "michelin": "米其林",
+      "wait_free": "免排队",
+      "local_experience": "当地体验",
+      "k_idol_style": "K-Idol风格",
+      "tax_refund": "退税",
+      "summer_must_go": "夏季必选",
+      "non_verbal": "非语言秀",
+      "family": "家庭亲子",
       "night_view": "夜景",
-      "photo_spot": "フォトスポット",
-      "hanbok_free_entry": "韓服無料入場",
-      "history": "歴史",
-      "city_view": "シティビュー"
+      "photo_spot": "打卡点",
+      "hanbok_free_entry": "韩服免费入场",
+      "history": "历史",
+      "city_view": "城市景观"
     },
     "ingredients": {
-      "vegetables": "野菜",
-      "soy": "豆",
-      "pork": "豚肉",
-      "kimchi": "キムチ",
-      "seafood": "海鮮"
+      "vegetables": "蔬菜",
+      "soy": "豆类",
+      "pork": "猪肉",
+      "kimchi": "泡菜",
+      "seafood": "海鲜"
     },
     "diet": {
-      "vegan": "ビーガン",
-      "gluten_free": "グルテンフリー",
-      "meat_lover": "お肉好き",
-      "pescatarian": "ペスカタリアン"
+      "vegan": "纯素",
+      "gluten_free": "无麸质",
+      "meat_lover": "肉食爱好者",
+      "pescatarian": "鱼素"
     },
-    "community_nav": "コミュニティ",
+    "community_nav": "社区",
     "actions": {
-      "apply_again": "再申請",
-      "apply_as_partner": "パートナー申請",
-      "booking_help": "予約サポート",
-      "call_112": "112に通報",
-      "call_119": "119に通報",
-      "call_1330": "1330に通報",
-      "close": "閉じる",
-      "contact_support": "サポートに問い合わせ",
-      "copied": "コピーしました",
-      "copy": "コピー",
-      "emergency_help": "緊急サポート",
-      "explore_places": "場所を探索",
-      "general_help": "一般サポート",
-      "get_help": "サポートを受ける",
-      "go_to_reviews": "レビューへ",
-      "interpreter_for_booking": "予約の通訳サポート",
-      "interpreter_help": "通訳サポート",
-      "large_view": "拡大表示",
-      "my_bookings": "マイ予約",
-      "open_admin_console": "管理者コンソールを開く",
-      "open_help_center": "ヘルプセンターを開く",
-      "open_support": "サポートを開く",
-      "partner_inquiry": "パートナー問い合わせ",
-      "report_issue": "問題を報告",
+      "apply_again": "重新申请",
+      "apply_as_partner": "成为合作伙伴",
+      "booking_help": "预约帮助",
+      "call_112": "拨打 112",
+      "call_119": "拨打 119",
+      "call_1330": "拨打 1330",
+      "close": "关闭",
+      "contact_support": "联系支持",
+      "copied": "已复制",
+      "copy": "复制",
+      "emergency_help": "紧急求助",
+      "explore_places": "探索地点",
+      "general_help": "常见帮助",
+      "get_help": "获取帮助",
+      "go_to_reviews": "查看评价",
+      "interpreter_for_booking": "预约翻译辅助",
+      "interpreter_help": "口译帮助",
+      "large_view": "大图查看",
+      "my_bookings": "我的预约",
+      "open_admin_console": "打开管理员控制台",
+      "open_help_center": "打开帮助中心",
+      "open_support": "联系客服",
+      "partner_inquiry": "合作伙伴咨询",
+      "report_issue": "报告问题",
       "save": "保存",
-      "saved": "保存済み",
-      "show_booking_phrases": "予約フレーズを表示",
-      "show_in_korean": "韓国語で表示",
-      "support": "サポート",
-      "travel_phrasebook": "旅行フレーズ集",
-      "travel_phrases": "旅行フレーズ",
-      "view_booking": "予約を表示",
-      "view_bookings": "予約を表示",
-      "add_to_plan": "予定に追加",
-      "back_to_booking_support": "予約サポートに戻る",
-      "browse_community": "コミュニティを見る",
-      "browse_meetups": "ミートアップを見る",
-      "call_clinic": "クリニックに電話",
-      "continue_editing": "編集を続ける",
-      "create_plan": "予定を作成",
+      "saved": "已保存",
+      "show_booking_phrases": "显示预约短语",
+      "show_in_korean": "显示韩文",
+      "support": "支持",
+      "travel_phrasebook": "旅行短语集",
+      "travel_phrases": "旅行短语",
+      "view_booking": "查看预约",
+      "view_bookings": "查看所有预约",
+      "add_to_plan": "添加到行程",
+      "back_to_booking_support": "返回预约支持",
+      "browse_community": "浏览社区",
+      "browse_meetups": "浏览聚会",
+      "call_clinic": "联系诊所",
+      "continue_editing": "继续编辑",
+      "create_plan": "创建行程",
       "explore": "探索",
       "manage": "管理",
-      "open": "開く",
-      "open_my_support": "My Supportを開く",
-      "open_route": "ルートを開く",
-      "show_emergency_phrases": "緊急フレーズを表示",
-      "use_this_plan": "この予定を使用",
-      "view": "表示",
-      "view_place_details": "詳細を表示",
-      "view_plan": "予定を表示",
-      "write_review": "レビューを書く",
-      "delete": "削除"
+      "open": "打开",
+      "open_my_support": "打开我的支持",
+      "open_route": "打开路线",
+      "show_emergency_phrases": "显示紧急短语",
+      "use_this_plan": "使用此行程",
+      "view": "查看",
+      "view_place_details": "查看地点详情",
+      "view_plan": "查看行程",
+      "write_review": "撰写评价",
+      "delete": "删除",
+      "view_all": "View All",
+      "details": "Details",
+      "view_details": "View Details",
+      "emergency_phrases": "Emergency Phrases",
+      "browse_places": "Browse Places",
+      "browse_explore": "Browse Explore",
+      "explore_more": "Explore More",
+      "open_hub": "Open Hub",
+      "view_in_plan": "View in Plan",
+      "view_again": "View Again",
+      "map": "Map",
+      "call_120": "Call 120"
     },
     "states": {
-      "active": "アクティブ",
-      "approved": "承認済み",
-      "favorites": "お気に入り",
-      "frequent": "よく使う",
-      "needs_review": "レビューが必要",
-      "needs_update": "更新が必要",
-      "not_available_yet": "未対応",
-      "not_connected": "未接続",
+      "active": "激活",
+      "approved": "已批准",
+      "favorites": "收藏",
+      "frequent": "常用",
+      "needs_review": "待评价",
+      "needs_update": "待更新",
+      "not_available_yet": "暂不可用",
+      "not_connected": "未连接",
       "not_joined": "未加入",
-      "not_set": "未設定",
-      "not_set_yet": "未設定",
-      "not_verified": "未認証",
-      "pending_review": "審査待ち",
-      "read_only": "読み取り専用",
+      "not_set": "未设置",
+      "not_set_yet": "尚未设置",
+      "not_verified": "未验证",
+      "pending_review": "审核中",
+      "read_only": "只读",
       "recent": "最近",
-      "sign_in_required": "ログインが必要",
-      "standard_account": "標準アカウント",
-      "verified": "認証済み",
-      "current_trip_plan": "現在の旅行プラン",
-      "details_unavailable": "詳細なし",
-      "meetups": "ミートアップ",
-      "planner_draft": "プランナー下書き",
-      "posts": "投稿",
-      "recently_viewed": "最近見た項目",
-      "reviews": "レビュー",
-      "saved_locally": "保存済み",
-      "no_permission": "権限がありません。",
-      "error_occurred": "リクエストの処理中にエラーが発生しました。"
+      "sign_in_required": "需登录",
+      "standard_account": "标准账户",
+      "verified": "已验证",
+      "no_permission": "没有权限。",
+      "error_occurred": "处理请求时发生错误。",
+      "current_trip_plan": "当前旅行计划",
+      "details_unavailable": "详细信息不可用",
+      "meetups": "聚会",
+      "planner_draft": "日程草稿",
+      "posts": "帖子",
+      "recently_viewed": "最近浏览",
+      "reviews": "评价",
+      "saved_locally": "已在本地保存",
+      "not_connected_yet": "Not connected yet",
+      "places": "Places",
+      "plans": "Plans",
+      "saved_places": "Saved Places",
+      "saved_plans": "Saved Plans",
+      "trip_days": "Trip days",
+      "plan_stops": "Plan stops",
+      "done": "Done",
+      "draft": "Draft",
+      "unavailable": "Unavailable",
+      "in_progress": "In Progress",
+      "canceled": "Cancelled",
+      "loading": "Loading...",
+      "searching": "Searching..."
     },
     "runtime": {
       "counts": {
-        "stops_zero": "{{count}}箇所",
-        "stops_one": "{{count}}箇所",
-        "stops_other": "{{count}}箇所",
-        "days_zero": "{{count}}日",
-        "days_one": "{{count}}日",
-        "days_other": "{{count}}日"
+        "stops_zero": "{{count}} 个地点",
+        "stops_one": "{{count}} 个地点",
+        "stops_other": "{{count}} 个地点",
+        "days_zero": "{{count}} 天",
+        "days_one": "{{count}} 天",
+        "days_other": "{{count}} 天",
+        "comments": "{{count}} comments",
+        "stops": "{{count}} stops",
+        "days": "{{count}} days"
+      },
+      "relative": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}}m ago",
+        "hours_ago": "{{count}}h ago",
+        "days_ago": "{{count}}d ago"
+      },
+      "trip": {
+        "day_label": "Day {{day}}",
+        "day_time_dot": "Day {{day}} ? {{time}}",
+        "day_time_dash": "Day {{day}} - {{time}}"
       }
     },
-    "morning": "おはようございます",
-    "afternoon": "こんにちは",
-    "evening": "こんばんは"
+    "morning": "早上好",
+    "afternoon": "下午好",
+    "evening": "晚上好",
+    "help_nav": "Help",
+    "view_map": "Lihat Lokasi",
+    "view_map_desc": "Lihat lokasi detail di peta",
+    "taxi_call": "Panggil Taksi",
+    "route_nav": "Panduan Rute",
+    "transit_nav_desc": "Navigasi transportasi umum",
+    "copy_address": "Salin Alamat",
+    "copied": "Tersalin!"
   },
   "transport": {
     "moving_to": "{{dest}}へ移動中",
@@ -564,242 +615,27 @@
     }
   },
   "my_page": {
-    "profile": {
-      "trust_score": "💎 信頼スコア",
-      "trust_level_excellent": "優秀"
-    },
-    "passport": {
-      "title": "マイパスポート",
-      "view_all": "すべて見る",
-      "seoul": "ソウル",
-      "beauty": "美容",
-      "jeju": "済州"
-    },
     "bookings": {
-      "title": "予約履歴",
-      "date_time": "日付 / 時間",
-      "area": "エリア",
-      "price": "価格",
-      "today_time": "今日, {{time}}",
-      "tomorrow_time": "明日, {{time}}",
-      "next_week_time": "来週, {{time}}",
-      "new_added": "新しい予約が追加されました！",
-      "browse_beauty_cta": "ビューティー予約を探す",
-      "action_edit_request": "修正リクエスト",
-      "action_cancel_request": "キャンセリクエスト",
-      "error_fetch": "予約の読み込みに失敗しました。"
-    },
-    "community": {
-      "title": "マイコミュニティ投稿",
-      "empty": "まだコミュニティの投稿がありません。",
-      "empty_simple": "作成した投稿がありません",
-      "browse_cta": "コミュニティを見る"
-    },
-    "support": {
-      "short": "サポート",
-      "eyebrow": "Kello サポートセンター",
-      "title": "お困りですか？",
-      "header_cta": "サポートチームに問い合わせる",
-      "tabs": {
-        "booking": "予約サポート",
-        "general": "一般サポート",
-        "faq": "FAQ / ヘルプセンター",
-        "emergency": "緊急 / 事件事故"
-      },
-      "summary": {
-        "booking": {
-          "label": "予約サポート",
-          "desc": "最近の予約に関するサポートを提供します。"
-        },
-        "general": {
-          "label": "一般サポート",
-          "desc": "よくある質問や一般的なお問い合わせはこちらから。"
-        },
-        "emergency": {
-          "label": "緊急支援",
-          "desc": "緊急時の連絡先や警察・警察への相談案内です。"
-        }
-      },
-      "guides": {
-        "find_booking": {
-          "q": "予約場所が見つかりません。",
-          "a": "予約カードに表示されている地図と地域情報をまず確認してください。それでも見つからない場合は、通訳サポートやヘルプセンターを開いて現地サポート経路を確認してください。"
-        },
-        "staff_talk": {
-          "q": "スタッフとの会話が難しいです。",
-          "a": "素早い翻訳ツールやホットラインへの接続が必要な場合は、通訳サポートを利用してください。状況が差し迫っている場合は、すぐに緊急サポートへ移動してください。"
-        },
-        "change_time": {
-          "q": "予約時間を変更したいです。",
-          "a": "アプリ内ではまだ直接の予約変更をサポートしていません。店舗に向かう前に、最も安全な次のステップを選べるよう予約サポートから始めてください。"
-        },
-        "cancel_refund": {
-          "q": "キャンセルや払い戻しの問い合わせはどこでしますか？",
-          "a": "アプリ内でのキャンセル・払い戻し処理はまだ連携されていません。自分のケースでどのサポート経路が可能か確認するには、ヘルプセンターや予約サポートを利用してください。"
-        },
-        "write_review": {
-          "q": "訪問後のレビューはどう残しますか？",
-          "a": "完了した予約はマイコミュニティ > レビューから投稿できます。専用のレビューフォームがまだない場合は、既存のコミュニティ作成機能を使用してください。"
-        },
-        "community_safety": {
-          "q": "オフ会やコミュニティの状況が不安です。",
-          "a": "個人情報をこれ以上共有せず、必要ならまず警察または緊急サポートへ移動してください。コミュニティ専用の通報処理はまだ制限的なため、状況に合った安全経路を使用してください。",
-          "cta": "安全サポート"
-        }
-      },
-      "general": {
-        "help_center": {
-          "label": "ヘルプセンター",
-          "desc": "アプリにある医療、警察、通訳、紛失物、緊急連絡先の詳細ページを開きます。"
-        },
-        "booking_cancel": {
-          "label": "予約 / キャンセルサポート",
-          "desc": "時間の変更、空き状況の確認、問題の報告案内はこちらから始めてください。",
-          "cta": "予約サポートを開く"
-        },
-        "community_safety": {
-          "label": "コミュニティの安全",
-          "desc": "不安な集まりや不快な状況であれば、まず安全経路へ移動してください。",
-          "cta": "安全サポートを開く"
-        },
-        "partner": {
-          "label": "パートナー問い合わせ",
-          "desc": "ビジネス・パートナーの登録は、パートナー加入フローから進めることができます。"
-        },
-        "title": "一般サポート",
-        "desc": "どこへ行けばいいか確信が持てないときは、この入り口を使用してください。",
-        "report_notice": "まだ直接のチケット発行はサポートしていません。予約に関するお問い合わせは以下のサポート経路を利用してください。"
-      },
-      "emergency": {
-        "overview": {
-          "label": "緊急サポート",
-          "desc": "医療、警察、紛失物、通訳へのアクセスがあるメインの緊急用ヘルプページを開きます。",
-          "cta": "緊急サポートを開く"
-        },
-        "interp": {
-          "label": "通訳サポート",
-          "desc": "スタッフとの会話が難しいとき、翻訳ツールとホットラインのリンクを使用してください。",
-          "cta": "通訳サポートを開く",
-          "booking_desc": "どの予約かスタッフが理解できるよう、この予約の文脈を通訳経路に一緒に伝えます。"
-        },
-        "phrases": {
-          "label": "緊急フレーズ",
-          "desc": "周囲のスタッフ、運転手、案内デスクにすぐ見せられる大きな韓国語フレーズを開きます。",
-          "cta": "旅行フレーズを開く",
-          "booking_label": "予約フレーズ",
-          "booking_desc": "予約、遅延、チェックインの状況を説明する必要がある場合は、まず予約フレーズを開いてください。"
-        },
-        "medical": {
-          "label": "医療サポート",
-          "desc": "病院や救急医療のサポートが必要な場合は、医療ヘルプ経路を直接開いてください。",
-          "cta": "医療サポート"
-        },
-        "police": {
-          "label": "警察 / 安全サポート",
-          "desc": "警察への連絡、事件案内、危険な状況には安全経路を使用してください。",
-          "cta": "安全サポートを開く"
-        },
-        "title": "緊急 / 通訳サポート",
-        "desc": "My Supportはハブです。状況が差し迫っている場合や、意思疎通が難しい場合は、以下の詳細ヘルプページを使用してください。",
-        "interpreter_notice": "以下の通訳リンクを使用できます。一部のオプションは通話画面や外部の翻訳ページを開くことがあります。",
-        "hub_notice": "このハブから自分に合った詳細ページを選んでください。/help/* ページは一つの経路をより詳しく説明し、旅行フレーズ集はすぐに見せられる韓国語の文言を提供します。"
-      },
-      "booking": {
-        "banner_report": "{{bookingName}} 予約に関する問題を報告しようとしています。状況に合ったサポート経路を選択してください。",
-        "banner_interpreter": "{{bookingName}} 予約に言語の助けが必要ですか？ 以下に通訳と緊急リンクが用意されています。",
-        "banner_default": "{{bookingName}} 予約の助けが必要ですか？ 以下の予約カードから始めてください。",
-        "banner_fallback": "予約の助けが必要ですか？ 最も近い予約カードから始めてください。",
-        "title": "予約サポート",
-        "desc": "最近の予約を基準に、最も適切なサポート経路を素早く見つけてください。",
-        "empty": {
-          "title": "現在、問い合わせる予約がありません。",
-          "desc": "後で自分の予約を再確認するか、場所を探索して旅行を計画してください。"
-        },
-        "context_title": "この予約に関するサポート",
-        "context_desc": "予約サポート、通訳サポート、フレーズ表示の間を移動する際、この予約の文脈を保持します。"
-      },
-      "subtitle": "予約、一般のお問い合わせ、緊急の旅行状況に合ったサポート経路を見つけてください。",
-      "faq": {
-        "title": "FAQ / クイック案内",
-        "desc": "現在のアプリの範囲内でよくある旅行の質問に対する短く安全な案内です。"
-      }
+      "pending_service": "Pending Service Review",
+      "matching_status": "We're finding a salon that matches your preferences.",
+      "matching_desc": "Waiting for salon match",
+      "price_pending": "Price will be confirmed after salon review.",
+      "title": "我的预约",
+      "date_time": "日期 / 时间",
+      "area": "区域",
+      "price": "价格",
+      "today_time": "今天, {{time}}",
+      "tomorrow_time": "明天, {{time}}",
+      "next_week_time": "下周, {{time}}",
+      "new_added": "新预约已添加！",
+      "browse_beauty_cta": "浏览美容预约",
+      "action_edit_request": "修改请求",
+      "action_cancel_request": "取消请求",
+      "error_fetch": "加载预约失败。"
     },
     "settings": {
-      "short": "設定",
-      "support_short": "サポート",
-      "eyebrow": "マイプロフィール",
-      "title": "設定",
-      "subtitle": "お好みに合わせてアプリをカスタマイズしてください。",
-      "summary": {
-        "saved": "保存済み",
-        "stops": "場所",
-        "days": "日数"
-      },
-      "preferences": {
-        "region_empty": "地域が設定されていません。",
-        "region_hint": "関心のある地域を選択してください。",
-        "style_empty": "旅行スタイルが設定されていません。",
-        "style_hint": "お好みの旅行スタイルを選んでください。",
-        "interests_saved": "保存した項目からおすすめを表示します。",
-        "interests_plan": "現在のプランに合わせたおすすめ。",
-        "interests_empty": "関心事が設定されていません。",
-        "language": "言語",
-        "language_hint": "メイン言語を `${kello_lang}` に設定します。",
-        "region": "地域 / 都市",
-        "style": "旅行スタイル",
-        "interests": "関心事",
-        "title": "好み",
-        "desc": "あなたの好みに基づいてカスタマイズされたおすすめを提供します。"
-      },
-      "verification": {
-        "email": "メール",
-        "email_ready": "認証済み",
-        "email_missing": "認証が必要です",
-        "phone": "電話番号",
-        "phone_ready": "認証済み",
-        "phone_partial": "一部認証済み",
-        "phone_empty": "未設定",
-        "provider": "プロバイダー",
-        "provider_hint": "ログインに使用したアカウント。",
-        "title": "認証 / セキュリティ",
-        "desc": "アカウントのセキュリティと認証状態を管理します。",
-        "identity_note": "この情報は本人確認のみに使用されます。",
-        "email_provider": "メールアドレス"
-      },
-      "links": {
-        "support_desc": "サポートセンターとよくある質問。",
-        "phrases_desc": "現場で役立つ韓国語フレーズ集。",
-        "saved": "保存済み",
-        "saved_desc": "保存した場所とプランの確認。",
-        "bookings": "予約",
-        "bookings_desc": "予約の内訳を確認・管理。",
-        "community": "コミュニティ",
-        "community_desc": "自分の投稿と活動を確認。",
-        "title": "ショートカット / センター",
-        "desc": "必要なメニューに素早くアクセスしてください。",
-        "placeholder_title": "追加予定メニュー",
-        "placeholder_desc": "より多くの機能が間もなく追加される予定です。"
-      },
-      "partner": {
-        "title": "パートナー",
-        "approved_desc": "パートナー承認済み。サービスの管理が可能です。",
-        "pending_desc": "パートナー申請を審査中です。",
-        "rejected_desc": "申請が却下されました。情報を修正して再申請してください。",
-        "none_desc": "Kelloのパートナーになってサービスを紹介しましょう。"
-      },
-      "admin": {
-        "enabled": "有効",
-        "enabled_desc": "管理者権限が有効です。",
-        "disabled_desc": "管理者権限がありません。",
-        "title": "管理コンソール",
-        "source": "管理者としてログイン中",
-        "source_none": "一般ユーザーとしてログイン中"
-      },
-      "hero": {
-        "email_ready": "認証済み",
-        "email_pending": "承認待ち"
-      },
       "account": {
+        "default_name": "Customer",
         "sign_in_title": "Sign in to manage account details",
         "sign_in_desc": "This hub can only read verified account and profile fields from the active Supabase session.",
         "title": "Account / Profile",
@@ -813,7 +649,6 @@
         "last_seen": "Last sign-in",
         "last_seen_hint": "Read-only from the auth session.",
         "read_only": "Profile editing is not connected yet in this build. Use support if an account detail needs manual help.",
-        "default_name": "Traveler",
         "phone": {
           "placeholder": "e.g. {{example}}",
           "helper_empty": "Includes country code. e.g. {{example}}",
@@ -821,163 +656,467 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       },
+      "short": "??",
+      "support_short": "??",
+      "eyebrow": "?????",
+      "title": "????",
+      "subtitle": "???????????????????????? mypage ???",
+      "summary": {
+        "saved": "?????",
+        "stops": "?????",
+        "days": "????"
+      },
+      "preferences": {
+        "region_empty": "???????????????????????????",
+        "region_hint": "?????????????",
+        "style_empty": "???????????????????????????????",
+        "style_hint": "???????????",
+        "interests_saved": "?? saved_items ???????????",
+        "interests_plan": "???????????????",
+        "interests_empty": "?????????????????????",
+        "language": "??",
+        "language_hint": "????????????? kello_lang ??",
+        "region": "???? / ??",
+        "style": "????",
+        "interests": "????",
+        "title": "????",
+        "desc": "?????????????????????????????????"
+      },
+      "verification": {
+        "email": "??",
+        "email_ready": "????????????",
+        "email_missing": "?? Supabase ???????????",
+        "phone": "???",
+        "phone_ready": "????????????",
+        "phone_partial": "????????????????",
+        "phone_empty": "?????????????",
+        "provider": "????",
+        "provider_hint": "????? Supabase ?????",
+        "title": "?? / ??",
+        "desc": "??????????????????????",
+        "identity_note": "????????????????????????",
+        "email_provider": "??"
+      },
+      "links": {
+        "support_desc": "?????????????????",
+        "phrases_desc": "????????????????",
+        "saved": "????",
+        "saved_desc": "??????????????????",
+        "bookings": "??",
+        "bookings_desc": "?????????????????",
+        "community": "??",
+        "community_desc": "?????????????????",
+        "title": "???? / ????",
+        "desc": "?????????????????????",
+        "placeholder_title": "?????",
+        "placeholder_desc": "????????????????????????????????"
+      },
+      "partner": {
+        "title": "??????",
+        "approved_desc": "??????????????????????????????????",
+        "pending_desc": "???????????????????????????????",
+        "rejected_desc": "?????????????????????????????????",
+        "none_desc": "????????????????????????????"
+      },
+      "admin": {
+        "enabled": "???",
+        "enabled_desc": "?????????????????????",
+        "disabled_desc": "????????????",
+        "title": "????",
+        "source": "profiles.is_admin = true",
+        "source_none": "??????????"
+      },
+      "hero": {
+        "email_ready": "?????",
+        "email_pending": "?????"
+      },
       "partner_admin": {
-        "title": "パートナー / 管理",
-        "desc": "パートナーのステータスと管理コンソールへのアクセス。"
+        "title": "???? / ???",
+        "desc": "????????????? my ????????????????????"
+      }
+    },
+    "profile": {
+      "account_hint": "Account & Preferences",
+      "fallback_name": "Customer",
+      "fallback_subtitle": "Account & Preferences",
+      "fallback_initials": "ME",
+      "trust_score": "💎 信任分数",
+      "trust_level_excellent": "极好",
+      "level_badge": "Lv.{{level}}",
+      "badge_korea_travel": "Korea Travel",
+      "badge_verified": "Verified"
+    },
+    "passport": {
+      "title": "我的护照",
+      "view_all": "查看全部",
+      "seoul": "首尔",
+      "beauty": "美容",
+      "jeju": "济州"
+    },
+    "community": {
+      "title": "我的社区动态",
+      "empty": "还没有撰写任何社区动态。",
+      "empty_simple": "暂无发布文章",
+      "browse_cta": "浏览社区"
+    },
+    "support": {
+      "short": "??",
+      "eyebrow": "????",
+      "title": "????",
+      "header_cta": "??????",
+      "tabs": {
+        "booking": "????",
+        "general": "????",
+        "faq": "FAQ / ????",
+        "emergency": "?? / ????"
+      },
+      "summary": {
+        "booking": {
+          "label": "????",
+          "desc": "??????????????????"
+        },
+        "general": {
+          "label": "????",
+          "desc": "???????????????????"
+        },
+        "emergency": {
+          "label": "?????",
+          "desc": "????????????????????????????"
+        }
+      },
+      "guides": {
+        "find_booking": {
+          "q": "?????????",
+          "a": "???????????????????????????????????????????"
+        },
+        "staff_talk": {
+          "q": "???????????",
+          "a": "???????????????????????????????????????"
+        },
+        "change_time": {
+          "q": "?????????",
+          "a": "?????????????????????????????????????????"
+        },
+        "cancel_refund": {
+          "q": "???????????",
+          "a": "????????????????????????????????????????"
+        },
+        "write_review": {
+          "q": "???????????",
+          "a": "?????????? My Community > Reviews??????????????????????????"
+        },
+        "community_safety": {
+          "q": "????????????????",
+          "a": "??????????????????????????????????????????????????????",
+          "cta": "????"
+        }
+      },
+      "general": {
+        "help_center": {
+          "label": "????",
+          "desc": "??????????????????????????????"
+        },
+        "booking_cancel": {
+          "label": "???????",
+          "desc": "?????????????????????????",
+          "cta": "??????"
+        },
+        "community_safety": {
+          "label": "????",
+          "desc": "???????????????????????",
+          "cta": "??????"
+        },
+        "partner": {
+          "label": "????",
+          "desc": "????????????????????????"
+        },
+        "title": "????",
+        "desc": "???????????????????????",
+        "report_notice": "?????????????????????????????????"
+      },
+      "emergency": {
+        "overview": {
+          "label": "????",
+          "desc": "????????????????????",
+          "cta": "??????"
+        },
+        "interp": {
+          "label": "????",
+          "desc": "?????????????????????????",
+          "cta": "??????",
+          "booking_desc": "?????????????????????????????????"
+        },
+        "phrases": {
+          "label": "????",
+          "desc": "???????????????????????????",
+          "cta": "??????",
+          "booking_label": "????",
+          "booking_desc": "????????????????????????????????"
+        },
+        "medical": {
+          "label": "????",
+          "desc": "???????????????????????????",
+          "cta": "????"
+        },
+        "police": {
+          "label": "?? / ????",
+          "desc": "??????????????????????????",
+          "cta": "??????"
+        },
+        "title": "?? / ????",
+        "desc": "My Support ???????????????????????????????",
+        "interpreter_notice": "????????????????????????????",
+        "hub_notice": "????????????????/help/* ?????????????Travel Phrasebook ?????????"
+      },
+      "booking": {
+        "banner_report": "???? {{bookingName}} ?????????????????????",
+        "banner_interpreter": "??? {{bookingName}} ??????????????????????",
+        "banner_default": "???? {{bookingName}} ??????????????????",
+        "banner_fallback": "????????????????????????????",
+        "title": "????",
+        "desc": "?????????????????????",
+        "empty": {
+          "title": "???????????",
+          "desc": "???????????????????????"
+        },
+        "context_title": "??????",
+        "context_desc": "???????????????????????????????"
+      },
+      "subtitle": "???????????????????????",
+      "faq": {
+        "title": "FAQ / ????",
+        "desc": "??????????????????????????"
       }
     },
     "phrases": {
-      "quick": "フレーズ",
-      "title": "旅行フレーズ集",
-      "eyebrow": "翻訳ハブ",
+      "quick": "??",
+      "title": "?????",
+      "eyebrow": "????",
       "favorites": {
-        "title": "お気に入り",
-        "desc": "よく使うフレーズを保存してください。",
-        "empty": "フレーズを保存すると、ここからすぐに開けます。"
+        "title": "??",
+        "desc": "???????????????",
+        "empty": "?????????????????????"
       },
       "recent": {
-        "title": "最近",
-        "desc": "最近確認またはコピーしたフレーズがここに表示されます。"
+        "title": "??",
+        "desc": "????????????????????????"
       },
-      "subtitle": "現場でスタッフや運転手、店員にこれらのフレーズを見せてください。",
+      "subtitle": "?????????????????????????????????????",
       "hero": {
-        "badge": "すぐに見せる韓国語フレーズ",
-        "count": "フレーズ"
+        "badge": "?????????",
+        "count": "???"
       },
       "context": {
-        "title": "現在の文脈",
-        "interpreter": "状況をすぐに説明する必要がある場合は緊急フレーズが用意されています。",
-        "support": "現地スタッフとの会話が難しい場合、フレーズ集をサポートハブと一緒に使用してください。",
-        "booking": "この予約に合った予約フレーズが用意されています。"
+        "title": "?????",
+        "interpreter": "???????????????????????",
+        "support": "??????????????????????????????",
+        "booking": "?????????????"
       },
       "category": {
-        "title": "{{category}} フレーズ"
+        "title": "{{category}} ??"
       },
       "empty": {
-        "title": "現在、このカテゴリにフレーズはありません。",
-        "desc": "他のカテゴリを見るか、即時の助けが必要な場合はサポートへ移動してください。"
+        "title": "?????????",
+        "desc": "??????????????????? Support?"
+      },
+      "categories": {
+        "booking": {
+          "label": "Booking",
+          "description": "Reservation check-in, delays, and option requests.",
+          "helper": "Best for front desks, tour desks, and venue staff."
+        },
+        "transport": {
+          "label": "Transport",
+          "description": "Taxi, station, and route support for moving around Korea.",
+          "helper": "Useful for drivers, station staff, and route questions."
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "description": "Ordering help, allergy notes, and menu questions.",
+          "helper": "Show these before ordering when timing is tight."
+        },
+        "beauty": {
+          "label": "Beauty",
+          "description": "Salon, spa, and treatment requests in simple Korean.",
+          "helper": "Helpful for consultations and price checks before treatment."
+        },
+        "emergency": {
+          "label": "Emergency",
+          "description": "Urgent help phrases and translation-related requests.",
+          "helper": "Use with nearby staff, help desks, or emergency support lines."
+        }
       }
     },
     "saved": {
-      "title": "保存済み",
-      "eyebrow": "保存ハブ",
-      "header_cta": "もっと見る",
-      "subtitle": "後で見返したい場所、プランのドラフト、最近見た項目をまとめています。",
+      "title": "????",
+      "eyebrow": "????",
+      "header_cta": "????",
+      "subtitle": "???????????????Planner ??????????",
       "summary": {
-        "places": "場所",
-        "plans": "プラン",
-        "recent": "履歴"
+        "places": "??",
+        "plans": "??",
+        "recent": "??"
       },
       "tabs": {
-        "places": "場所",
-        "plans": "プラン",
-        "recent": "履歴"
+        "places": "??",
+        "plans": "??",
+        "recent": "??"
       },
-      "summary_hint": "場所は保存した探索アイテムから、プランは現在のスケジュールから、履歴はこの端末に保存されます。",
+      "summary_hint": "地点由探索中保存的项目自动同步，行程则从当前规划中获取。",
       "places": {
-        "source_plan": "現在のスケジュールと連携中",
-        "source_saved": "探索から保存",
-        "source_fallback": "探索から保存",
-        "source_id_only": "保存アイテムID",
-        "added": "プランナーに追加されました。時間はPlannerで調整可能です。",
-        "title": "保存した場所",
-        "desc": "探索で保存した場所を再度開きます。",
+        "source_plan": "正在与行程表同步",
+        "source_saved": "从探索保存",
+        "source_fallback": "从探索保存",
+        "source_id_only": "保存项目 ID",
+        "added": "已添加到行程表。时间可在行程表中调整。",
+        "title": "保存的地点",
+        "desc": "浏览您在探索中保存的地点。",
         "empty": {
-          "title": "保存した場所がまだありません。",
-          "desc": "探索で場所を保存すると、ここから素早く計画を立てられます。",
-          "cta": "場所を探索する"
+          "title": "还没有保存的地点",
+          "desc": "在探索中保存地点，以便快速制定计划。",
+          "cta": "探索地点"
         },
-        "fallback_title": "保存した場所 {{id}}"
+        "fallback_title": "保存的地点 {{id}}"
       },
       "plans": {
-        "synced": "現在のプランナーと同期中",
-        "title": "保存したプラン",
-        "desc": "このタブは現在のプランナードラフトを反映しています。",
+        "synced": "已与当前行程表同步",
+        "title": "保存的行程",
+        "desc": "此处显示您当前的行程草稿。",
         "empty": {
-          "title": "保存したプランがまだありません。",
-          "desc": "Plannerで日程を作成すると、現在のドラフトがここに表示されます。"
+          "title": "还没有保存的行程",
+          "desc": "在行程表中创建计划后，草稿会显示在这里。"
         },
-        "current": "現在の旅行プラン"
+        "current": "当前旅行计划"
       },
       "recent": {
-        "title": "履歴",
-        "desc": "最近見た場所、プラン、コミュニティの投稿がここに保存されます。",
+        "title": "最近浏览",
+        "desc": "您最近查看的地点、行程和社区帖子会保存在这里。",
         "empty": {
-          "title": "最近見た項目がまだありません。",
-          "desc": "場所、Planner、コミュニティの詳細を開くと、履歴がここに表示されます。",
-          "fallback": "ローカルストレージが使用可能な場合、履歴はこの端末に保存されます。",
-          "cta": "探索へ"
+          "title": "暂无浏览记录",
+          "desc": "当您查看地点、行程或社区详情时，记录会显示在这里。",
+          "fallback": "如果本地存储可用，记录将保存在此设备上。",
+          "cta": "去探索"
         },
         "type": {
-          "place": "場所",
-          "plan": "プラン",
-          "community": "コミュニティ"
+          "place": "地点",
+          "plan": "行程",
+          "community": "社区"
         }
-      }
+      },
+      "view_all": "Open Hub",
+      "dashboard_title": "Saved & Recent",
+      "dashboard_desc": "Jump back to saved places, planner drafts, and recent items from one hub."
     },
     "community_hub": {
-      "eyebrow": "自分の活動",
-      "title": "マイコミュニティ",
-      "subtitle": "自分が作成した投稿、レビュー、活動を一箇所で確認してください。",
-      "browse": "コミュニティを見る",
+      "eyebrow": "我的活动",
+      "title": "我的社区",
+      "subtitle": "集中管理您发布的帖子、评价和动态。",
+      "browse": "浏览社区",
       "summary": {
-        "posts": "投稿",
-        "reviews": "レビュー",
-        "meetups": "集まり"
+        "posts": "帖子",
+        "reviews": "评价",
+        "meetups": "聚会"
       },
       "tabs": {
-        "posts": "投稿",
-        "reviews": "レビュー",
-        "meetups": "集まり"
+        "posts": "帖子",
+        "reviews": "评价",
+        "meetups": "聚会"
       },
       "empty": {
         "reviews": {
-          "title": "まだ作成したレビューがありません。",
-          "desc": "完了した予約をもとに、旅行に役立つ情報を残してみてください。",
-          "no_completed": "まず予約を完了してから戻ってきてレビューを残してください。",
-          "cta": "完了した予約を見る"
+          "title": "还没有撰写过评价",
+          "desc": "基于已完成的预约，分享您的旅行心得吧。",
+          "no_completed": "完成预约后即可回来撰写评价。",
+          "cta": "查看已完成预约"
         },
         "meetups": {
-          "title": "まだ集まりの活動がありません。",
-          "desc": "コミュニティの投稿をチェックして、次の計画を立ててみてください。"
+          "title": "还没有聚会活动",
+          "desc": "去社区看看大家都在发起什么活动吧。"
         },
         "posts": {
-          "title": "まだ保存された投稿がありません。",
-          "desc": "コミュニティを探索して、質問を残したり他の旅行者に役立つヒントを共有してみてください。"
+          "title": "还没有发布的帖子",
+          "desc": "在社区提问或向其他旅行者分享实用小贴士吧。"
         }
       },
-      "summary_hint": "集計は作成したコミュニティ投稿と完了した予約に基づきます。",
-      "sync_error": "現在、コミュニティ投稿を更新できませんでした。代わりに空の状態を表示します。",
+      "summary_hint": "统计结果基于您发布的社区帖子和已完成的预约。",
+      "sync_error": "当前由于网络问题无法更新。显示为空状态。",
       "review_prompts": {
-        "title": "完了した予約からレビューを書く",
-        "desc": "コミュニティを開き、Reviewを選択してレビューを作成してください。"
+        "title": "为已完成的预约撰写评价",
+        "desc": "在社区中选择“评价”类别来分享您的心得。"
       },
-      "posts_desc": "作成した一般コミュニティ投稿の確認・管理。",
-      "reviews_desc": "投稿済みのレビューと予約履歴への素早いアクセスを提供します。",
-      "meetups_desc": "一緒に旅行する人を探す集まり型の活動を含む自分の投稿です。",
-      "loading": "活動を読み込み中...",
-      "no_comments": "まだコメントはありません",
+      "posts_desc": "查看及管理您发布的普通社区帖子。",
+      "reviews_desc": "快速查看已发布的评价和预约历史。",
+      "meetups_desc": "包含寻找旅行搭子等聚会类动态。",
+      "loading": "正在加载动态...",
+      "no_comments": "暂无评论",
       "type": {
-        "travel": "旅行仲間",
-        "meetup": "集まり"
+        "travel": "旅行",
+        "meetup": "聚会"
       }
     },
     "messages": {
-      "upload_success": "プロフィール写真が更新されました。",
-      "upload_failed": "アップロードに失敗しました。"
+      "upload_success": "个人主页照片已更新。",
+      "upload_failed": "上传失败。"
     },
     "dashboard": {
-      "admin_title": "管理コンソール",
-      "admin_desc": "ダッシュボードとパートナー管理を開きます",
+      "admin_title": "管理员控制台",
+      "admin_desc": "打开管理员控制台与合作伙伴管理",
       "admin_menu": {
-        "dashboard": "管理者ダッシュボード",
-        "dashboard_desc": "統計および全体メニュー",
-        "bookings": "ビューティー予約管理",
-        "bookings_desc": "予約リクエストおよび状態変更",
-        "partners": "協力会社管理",
-        "partners_desc": "加入申請承認管理",
-        "users": "管理者アカウント管理",
-        "users_desc": "権限付与および状態解除"
+        "dashboard": "管理员控制台",
+        "dashboard_desc": "统计与完整菜单",
+        "bookings": "美容预约管理",
+        "bookings_desc": "预约请求与状态变更",
+        "partners": "合作伙伴管理",
+        "partners_desc": "加入申请审核管理",
+        "users": "管理员账号管理",
+        "users_desc": "权限授予与状态解除"
+      },
+      "bookings_empty": "No confirmed bookings yet",
+      "saved_recent_title": "Saved & Recent",
+      "saved_recent_desc": "Jump back to saved places, planner drafts, and recent items from one hub.",
+      "partner": {
+        "none_title": "Apply as Partner",
+        "none_desc": "Join Kello as a partner and introduce your service to more travelers.",
+        "none_cta": "Apply",
+        "pending_title": "Partner review in progress",
+        "pending_desc": "Your request is under review. We will update you after the admin check.",
+        "approved_title": "Partner approved",
+        "approved_desc": "Your Kello partner registration is complete.",
+        "rejected_title": "Partner request needs update",
+        "rejected_desc": "Update the details and apply again.",
+        "rejected_cta": "Apply Again"
+      }
+    },
+    "bookings_hub": {
+      "title": "My Bookings",
+      "summary": {
+        "upcoming": "Upcoming",
+        "history": "History"
+      },
+      "tabs": {
+        "upcoming": "Upcoming",
+        "completed": "Completed",
+        "other": "Other"
+      },
+      "meta": {
+        "time": "Time",
+        "area": "Area",
+        "total_price": "Total Price",
+        "reference": "Reference"
+      },
+      "empty": {
+        "upcoming": {
+          "title": "No upcoming bookings",
+          "desc": "Explore top-rated spots and start planning your next stop."
+        },
+        "completed": {
+          "title": "No completed bookings yet",
+          "desc": "Places you finish will be saved here, ready for a review."
+        },
+        "other": {
+          "title": "No other records",
+          "desc": "Cancelled or unavailable requests will appear here."
+        }
       }
     }
   },
@@ -1593,11 +1732,12 @@
   },
   "settings_page": {
     "hero": {
-      "default_title": "My Settings",
-      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings",
       "avatar": {
+        "placeholder": "ME",
         "error": "Failed to change image."
-      }
+      },
+      "default_title": "My Settings",
+      "stats": "{{postCount}} Posts · {{reviewCount}} Reviews · {{bookingCount}} Bookings"
     },
     "tabs": {
       "personal": {
@@ -1794,5 +1934,45 @@
       "nickname_unset": "Not Set"
     },
     "tab_aria_label": "Settings Tabs"
+  },
+  "notifications": {
+    "save_success": "Settings saved successfully.",
+    "save_fail": "Failed to save settings.",
+    "title": "Notification Settings",
+    "login_required": "Please log in to continue.",
+    "login_button": "Log in",
+    "hero_title": "Customize your booking updates ✨",
+    "hero_desc": "Choose how you want to receive updates for Kello's premium concierge services.",
+    "channel": {
+      "title": "Channels",
+      "email_title": "Receive updates via Email",
+      "email_desc": "We'll safely send core updates about your booking information and progress via email.",
+      "app_title": "Receive updates via App",
+      "app_desc": "Important booking status changes are always recorded in the app notification box, so you can check them anytime."
+    },
+    "types": {
+      "title": "Update Types",
+      "booking_title": "Progress Updates",
+      "booking_desc": "Receive notifications at key stages of service such as request, confirmation, and completion.",
+      "change_title": "Change Request Results",
+      "change_desc": "We will immediately notify you of the approval or rejection of your requested date/item changes.",
+      "alternative_title": "Alternative Offers",
+      "alternative_desc": "We will notify you when a salon suggests an alternative time due to your preferred time being fully booked."
+    },
+    "footer_note": "Essential booking-related notices may be sent regardless of your settings.",
+    "page_title": "Notification Center",
+    "back": "← My Page",
+    "loading": "Loading notifications...",
+    "empty": "No new notifications.",
+    "empty_cta": "Go to Beauty Booking",
+    "booking_link": "View booking details →",
+    "event_booking_created": "Booking Requested",
+    "event_booking_confirmed": "Booking Confirmed",
+    "event_booking_canceled_by_customer": "Booking Cancelled",
+    "event_booking_change_requested": "Change Requested",
+    "event_booking_change_approved": "Change Approved",
+    "event_booking_change_rejected": "Change Rejected",
+    "event_booking_completed": "Service Completed",
+    "event_default": "Notification"
   }
 }

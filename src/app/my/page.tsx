@@ -44,6 +44,16 @@ type MyBookingCardRecord = Pick<
 const SSR_SAFE_FALLBACK_NAME = "고객님";
 const SSR_SAFE_FALLBACK_SUBTITLE = "계정 및 설정";
 
+function buildCategoryTitle(t: ReturnType<typeof useTranslation>['t'], category: string | null | undefined, serviceName: string | null | undefined): string {
+    const parts = [category, serviceName].filter((part) => {
+        return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
+    });
+    if (parts.length === 0) {
+        return t('my_page.bookings.pending_service', { defaultValue: '시술 정보 확인 중' });
+    }
+    return parts.join(' · ');
+}
+
 function pickString(...values: unknown[]): string {
     for (const value of values) {
         if (typeof value === "string" && value.trim()) {
@@ -185,6 +195,15 @@ const BOOKING_STATUS_KO_KEY: Record<BeautyBookingAdminRecord['status'], string> 
     change_requested: 'beauty_bookings.status_change_requested',
 };
 
+const BOOKING_STATUS_DESC_KEY: Record<BeautyBookingAdminRecord['status'], string> = {
+    requested: 'beauty_bookings.status_requested',
+    confirmed: 'beauty_bookings.status_confirmed',
+    completed: 'beauty_bookings.status_completed',
+    canceled: 'beauty_bookings.status_canceled',
+    failed: 'beauty_bookings.status_failed',
+    change_requested: 'beauty_bookings.status_change_requested',
+};
+
 const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> = {
     requested: '#d97706',
     confirmed: '#16a34a',
@@ -317,7 +336,15 @@ function MyBookingsSection({
             )}
             {!loading && bookings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {bookings.map(b => (
+                    {bookings.map(b => {
+                        const isMatched = !!b.storeName;
+                        const categoryLabel = b.beautyCategory ? t(`beauty_bookings.category_${b.beautyCategory}`) : '';
+                        const displayCategory = categoryLabel.startsWith('beauty_bookings.') ? b.beautyCategory : categoryLabel;
+                        const title = !isMatched 
+                                      ? buildCategoryTitle(t, displayCategory, b.primaryServiceName)
+                                      : b.storeName;
+                        
+                        return (
                         <div
                             key={b.id}
                             style={{
@@ -327,7 +354,7 @@ function MyBookingsSection({
                         >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                                 <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b' }}>
-                                    {b.storeName}
+                                    {title}
                                 </span>
                                 <span style={{
                                     fontSize: '0.7rem', fontWeight: 700,
@@ -340,13 +367,18 @@ function MyBookingsSection({
                                 </span>
                             </div>
                             <div style={{ fontSize: '0.85rem', color: '#475569', marginBottom: 4 }}>
-                                {b.primaryServiceName || b.beautyCategory}
+                                {isMatched ? (b.primaryServiceName || b.beautyCategory) : t('my_page.bookings.matching_desc', { defaultValue: '매장 매칭 대기 중' })}
                             </div>
                             <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 4 }}>
                                 📅 {b.bookingDate} · {b.bookingTime}
                             </div>
-                            <div style={{ fontSize: '0.82rem', color: '#64748b', marginBottom: 12 }}>
-                                💰 {b.totalPrice.toLocaleString('ko-KR')}{t('beauty_explore.label_booking_unit')}
+                            <div style={{ fontSize: '0.82rem', color: !isMatched ? '#db2777' : '#64748b', fontWeight: !isMatched ? 600 : 400, marginBottom: 4 }}>
+                                {!isMatched ? t('my_page.bookings.matching_status', { defaultValue: '조건에 맞는 매장을 찾고 있어요' }) : (t(BOOKING_STATUS_DESC_KEY[b.status]) || '')}
+                            </div>
+                            <div style={{ fontSize: '0.82rem', color: '#94a3b8', marginBottom: 12 }}>
+                                💰 {!isMatched || b.totalPrice === 0 
+                                      ? t('my_page.bookings.price_pending', { defaultValue: '매장 확인 후 안내' }) 
+                                      : `${b.totalPrice.toLocaleString('ko-KR')}${t('beauty_explore.label_booking_unit')}`}
                             </div>
                             <div style={{ display: 'flex', gap: 8 }}>
                                 <button
@@ -379,7 +411,8 @@ function MyBookingsSection({
                                 </button>
                             </div>
                         </div>
-                    ))}
+                        );
+                    })}
                 </div>
             )}
         </section>
