@@ -187,14 +187,24 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     
     setIsSubmitting(true);
     try {
+      const requestId = crypto.randomUUID();
+
+      // 1. [Security] Check if user is logged in before uploading images
+      if (currentImage?.file || styleImage?.file) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          throw new Error("이미지를 첨부하려면 로그인이 필요합니다. 로그인 후 다시 시도해 주세요.");
+        }
+      }
+
       // 1. Upload images to Supabase Storage if any (Validated logic from skeleton)
       const currentUploadPromise = currentImage?.file 
-        ? uploadBookingImage(currentImage.file, 'current')
-        : Promise.resolve({ url: null, error: null });
+        ? uploadBookingImage(currentImage.file, 'current', requestId)
+        : Promise.resolve({ url: null, path: null, error: null });
         
       const styleUploadPromise = styleImage?.file
-        ? uploadBookingImage(styleImage.file, 'style')
-        : Promise.resolve({ url: null, error: null });
+        ? uploadBookingImage(styleImage.file, 'style', requestId)
+        : Promise.resolve({ url: null, path: null, error: null });
 
       const [currentResult, styleResult] = await Promise.all([currentUploadPromise, styleUploadPromise]);
 
@@ -205,6 +215,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
       const service = availableServices.find((s) => s.id === selectedServiceId);
       
       const payload: BeautyBookingPayload = {
+        id: requestId,
         category: 'beauty',
         beautyCategory: selectedStore.category,
         region: selectedStore.region,
@@ -228,9 +239,13 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           name: customerForm.name,
           phone: customerForm.phone,
           request: customerForm.request,
-          imageUrls: [currentResult.url, styleResult.url].filter((u): u is string => !!u),
-          currentImageUrl: currentResult.url ?? undefined,
-          styleImageUrl: styleResult.url ?? undefined,
+          imageUrls: [],
+          currentImageUrl: undefined,
+          styleImageUrl: undefined,
+          currentImagePath: currentResult.path ?? undefined,
+          styleImagePath: styleResult.path ?? undefined,
+          currentImageName: currentImage?.file.name,
+          styleImageName: styleImage?.file.name,
         },
         communication: {
           language: 'ko',

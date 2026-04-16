@@ -36,6 +36,7 @@ export type BeautyBookingStorageErrorCode =
   | "invalid_cancel_reason";
 
 type BeautyBookingInsertRow = {
+  id?: string;
   category: "beauty";
   customer_user_id: string | null;
   beauty_category: string;
@@ -346,6 +347,7 @@ function mapBeautyBookingPayloadToRow(
   customerUserId: string | null = null,
 ): BeautyBookingInsertRow {
   return {
+    id: payload.id,
     category: payload.category,
     customer_user_id: customerUserId,
     beauty_category: payload.beautyCategory,
@@ -426,6 +428,51 @@ export async function createBeautyBookingRequest(
     // Continue with existing error handling below
   } else {
     console.log("[beauty-booking-server] Insert successful", { id: data?.id });
+
+    // Insert image records into beauty_booking_request_images
+    if (data?.id && data.customer_user_id) {
+      const imagesToInsert = [];
+      if (payload.customer.currentImagePath) {
+        imagesToInsert.push({
+          request_id: data.id,
+          user_id: data.customer_user_id,
+          image_type: 'current',
+          bucket_name: 'booking',
+          storage_path: payload.customer.currentImagePath,
+          original_file_name: payload.customer.currentImageName ?? null,
+        });
+      }
+      if (payload.customer.styleImagePath) {
+        imagesToInsert.push({
+          request_id: data.id,
+          user_id: data.customer_user_id,
+          image_type: 'style',
+          bucket_name: 'booking',
+          storage_path: payload.customer.styleImagePath,
+          original_file_name: payload.customer.styleImageName ?? null,
+        });
+      }
+
+      if (imagesToInsert.length > 0) {
+        const { error: imagesError } = await client
+          .from('beauty_booking_request_images')
+          .insert(imagesToInsert);
+        
+        if (imagesError) {
+          // image metadata insert 실패 - booking은 이미 저장됨
+          // Storage 파일은 존재하지만 DB 참조가 없는 상태 (부분 orphan)
+          // cleanup은 클라이언트 레벨에서 처리됨; 여기서는 상세 로그만 남김
+          console.error('[beauty-booking-server] Image metadata insert failed', {
+            code: imagesError.code,
+            message: imagesError.message,
+            details: imagesError.details,
+            hint: imagesError.hint,
+            request_id: data.id,
+            failed_paths: imagesToInsert.map(img => img.storage_path),
+          });
+        }
+      }
+    }
   }
 
   if (error) {
@@ -1193,4 +1240,126 @@ export async function respondToAlternativeOffer(
   }
 
   return record;
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// booking bucket signed URL 발급 헬퍼
+// booking bucket은 private이므로 이미지 접근은 서버에서만 가능하다.
+// 권한: 예약자 본인(customer_user_id) 또는 admin/super_admin
+// ─────────────────────────────────────────────────────────────────────
+
+export type BookingImageSignedUrlResult = {
+  imageType: 'current' | 'style';
+  storagePath: string;
+  signedUrl: string | null;
+  error: string | null;
+};
+
+/**
+ * booking bucket의 예약 이미지에 대한 signed URL을 발급한다.
+ * 발급 전 반드시 권한을 확인한다: 예약자 본인 또는 admin/super_admin만 허용.
+ * signed URL 만료 시간: 3600초 (1시간)
+ *
+ * @param bookingId - 예약 ID
+ * @param requestingUserId - 요청한 사용자의 auth UID
+ * @returns signed URL 배열 (current/style 각각)
+ */
+export async function getBookingImageSignedUrls(
+  bookingId: string,
+  requestingUserId: string,
+): Promise<BookingImageSignedUrlResult[]> {
+  if (!hasSupabaseServerAccess()) {
+    throw new BeautyBookingStorageError('env_missing', {
+      missingEnvVars: getMissingSupabaseServerEnvVars(),
+    });
+  }
+
+  const client = getSupabaseServerClient();
+
+  // 1. 예약 소유자 확인
+  const { data: bookingRow, error: bookingError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .select('id, customer_user_id')
+    .eq('id', bookingId)
+    .maybeSingle();
+
+  if (bookingError || !bookingRow) {
+    throw new BeautyBookingStorageError('not_found');
+  }
+
+  // 2. 권한 확인: 본인 또는 admin/super_admin
+  const isOwner = bookingRow.customer_user_id === requestingUserId;
+
+  if (!isOwner) {
+    // admin/super_admin 여부 확인
+    const { data: profileRow } = await client
+      .from('profiles')
+      .select('role')
+      .eq('id', requestingUserId)
+      .maybeSingle();
+
+    const isAdmin = profileRow?.role === 'admin' || profileRow?.role === 'super_admin';
+
+    if (!isAdmin) {
+      console.warn('[getBookingImageSignedUrls] Forbidden access attempt', {
+        bookingId,
+        requestingUserId,
+        ownerUserId: bookingRow.customer_user_id,
+      });
+      throw new BeautyBookingStorageError('forbidden_owner');
+    }
+  }
+
+  // 3. 이미지 메타데이터 조회
+  const { data: imageRows, error: imageError } = await client
+    .from('beauty_booking_request_images')
+    .select('image_type, storage_path')
+    .eq('request_id', bookingId);
+
+  if (imageError) {
+    console.error('[getBookingImageSignedUrls] Failed to fetch image metadata', {
+      bookingId,
+      error: imageError.message,
+    });
+    return [];
+  }
+
+  if (!imageRows || imageRows.length === 0) {
+    return [];
+  }
+
+  // 4. signed URL 일괄 발급 (만료: 3600초 = 1시간)
+  const paths = imageRows.map((row) => row.storage_path);
+  const { data: signedData, error: signedError } = await client.storage
+    .from('booking')
+    .createSignedUrls(paths, 3600);
+
+  if (signedError) {
+    console.error('[getBookingImageSignedUrls] createSignedUrls failed', {
+      bookingId,
+      paths,
+      error: signedError.message,
+    });
+    return imageRows.map((row) => ({
+      imageType: row.image_type as 'current' | 'style',
+      storagePath: row.storage_path,
+      signedUrl: null,
+      error: signedError.message,
+    }));
+  }
+
+  // path → signedUrl 매핑
+  const signedMap = new Map<string, string>();
+  signedData?.forEach((item) => {
+    if (item.path && item.signedUrl) {
+      signedMap.set(item.path, item.signedUrl);
+    }
+  });
+
+  return imageRows.map((row) => ({
+    imageType: row.image_type as 'current' | 'style',
+    storagePath: row.storage_path,
+    signedUrl: signedMap.get(row.storage_path) ?? null,
+    error: signedMap.has(row.storage_path) ? null : 'signed URL not generated',
+  }));
 }

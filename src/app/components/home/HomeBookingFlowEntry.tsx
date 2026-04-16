@@ -184,9 +184,17 @@ export default function HomeBookingFlowEntry({
       });
 
       try {
-        // Multi-image upload phase (Parallel)
         const currentStateDrafts = snapshot.state.customerDetails.currentStateImages;
         const desiredStyleDrafts = snapshot.state.customerDetails.desiredStyleImages;
+        
+        const hasImages = currentStateDrafts.length > 0 || desiredStyleDrafts.length > 0;
+        
+        if (hasImages) {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (!session) {
+            throw new Error("이미지를 첨부하려면 로그인이 필요합니다. 로그인 후 다시 시도해 주세요.");
+          }
+        }
 
         // Match files with drafts from the local map
         const currentStateFiles = currentStateDrafts
@@ -197,13 +205,15 @@ export default function HomeBookingFlowEntry({
           .map(d => localImageFilesRef.current.get(d.id))
           .filter((f): f is File => !!f);
 
+        const requestId = crypto.randomUUID();
+
         // We take the first image if multiple are present, or handle according to requirement (usually one each)
         const currentUploadPromise = currentStateFiles[0] 
-          ? uploadBookingImage(currentStateFiles[0], 'current')
+          ? uploadBookingImage(currentStateFiles[0], 'current', requestId)
           : Promise.resolve(null);
           
         const styleUploadPromise = desiredStyleFiles[0]
-          ? uploadBookingImage(desiredStyleFiles[0], 'style')
+          ? uploadBookingImage(desiredStyleFiles[0], 'style', requestId)
           : Promise.resolve(null);
 
         const [currentResult, styleResult] = await Promise.all([currentUploadPromise, styleUploadPromise]);
@@ -212,10 +222,22 @@ export default function HomeBookingFlowEntry({
           throw new Error(`이미지 업로드 실패: ${currentResult?.error || styleResult?.error}`);
         }
 
-        // Enrich the draft with the uploaded URLs
+        // 이번 요청에서 업로드한 경로만 추적 (orphan cleanup 대상)
+        const uploadedPathsForCleanup: string[] = [
+          currentResult?.path,
+          styleResult?.path,
+        ].filter((p): p is string => !!p);
+
+        // booking bucket은 private → url은 null; path만 사용
+        // signed URL은 서버 API에서 권한 확인 후 발급
         if (preparation.payloadCandidate) {
-          preparation.payloadCandidate.customer.currentImageUrl = currentResult?.url ?? undefined;
-          preparation.payloadCandidate.customer.styleImageUrl = styleResult?.url ?? undefined;
+          preparation.payloadCandidate.id = requestId;
+          preparation.payloadCandidate.customer.currentImageUrl = undefined;
+          preparation.payloadCandidate.customer.styleImageUrl = undefined;
+          preparation.payloadCandidate.customer.currentImagePath = currentResult?.path ?? undefined;
+          preparation.payloadCandidate.customer.styleImagePath = styleResult?.path ?? undefined;
+          preparation.payloadCandidate.customer.currentImageName = currentStateFiles[0]?.name;
+          preparation.payloadCandidate.customer.styleImageName = desiredStyleFiles[0]?.name;
         }
 
         onSubmitAttemptStateChange?.({
@@ -224,8 +246,29 @@ export default function HomeBookingFlowEntry({
           errorSummary: null,
         });
 
-        const { data: sessionData } = await supabase.auth.getSession();
-        const result = await submitBeautyBooking(preparation.payloadCandidate, sessionData.session?.access_token);
+        let result;
+        try {
+          const { data: sessionData } = await supabase.auth.getSession();
+          result = await submitBeautyBooking(preparation.payloadCandidate, sessionData.session?.access_token);
+        } catch (submitErr: unknown) {
+          // 예약 insert 실패 → 이번 요청에서 업로드한 파일만 즉시 삭제 (orphan 방지)
+          if (uploadedPathsForCleanup.length > 0) {
+            const { error: cleanupError } = await supabase.storage
+              .from('booking')
+              .remove(uploadedPathsForCleanup);
+            if (cleanupError) {
+              console.error('[HomeBookingFlowEntry] Storage cleanup 실패 (orphan 파일 잔존 가능성)', {
+                paths: uploadedPathsForCleanup,
+                error: cleanupError.message,
+              });
+            } else {
+              console.warn('[HomeBookingFlowEntry] 예약 실패 → Storage 파일 cleanup 완료', {
+                paths: uploadedPathsForCleanup,
+              });
+            }
+          }
+          throw submitErr;
+        }
         
         setActiveSubmitStatus("submitted");
         onSubmitAttemptStateChange?.({
