@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabaseClient";
 export type BeautyBookingPayload = {
+  id?: string;
   category: 'beauty';
   beautyCategory: string;
   region: string;
@@ -26,6 +27,10 @@ export type BeautyBookingPayload = {
     imageUrls?: string[];
     currentImageUrl?: string;
     styleImageUrl?: string;
+    currentImagePath?: string;
+    styleImagePath?: string;
+    currentImageName?: string;
+    styleImageName?: string;
   };
   communication: {
     language: string;
@@ -61,6 +66,10 @@ export type BeautyBookingPayloadDraftInput = {
   customer: BeautyBookingPayload['customer'] & {
     currentImageUrl?: string | null;
     styleImageUrl?: string | null;
+    currentImagePath?: string | null;
+    styleImagePath?: string | null;
+    currentImageName?: string | null;
+    styleImageName?: string | null;
   };
   communication: {
     language: string;
@@ -127,7 +136,7 @@ function normalizeStringArray(value: unknown): string[] {
 }
 
 export function buildBeautyBookingPayload(
-  input: BeautyBookingPayloadDraftInput,
+  input: BeautyBookingPayloadDraftInput & { id?: string },
 ): BeautyBookingPayload | null {
   if (
     !hasRequiredText(input.beautyCategory) ||
@@ -141,6 +150,7 @@ export function buildBeautyBookingPayload(
   }
 
   return {
+    id: input.id,
     category: 'beauty',
     beautyCategory: input.beautyCategory ?? '',
     region: input.region ?? '',
@@ -167,6 +177,10 @@ export function buildBeautyBookingPayload(
       imageUrls: input.customer.imageUrls || [],
       currentImageUrl: input.customer.currentImageUrl ?? undefined,
       styleImageUrl: input.customer.styleImageUrl ?? undefined,
+      currentImagePath: input.customer.currentImagePath ?? undefined,
+      styleImagePath: input.customer.styleImagePath ?? undefined,
+      currentImageName: input.customer.currentImageName ?? undefined,
+      styleImageName: input.customer.styleImageName ?? undefined,
     },
     communication: {
       language: input.communication.language,
@@ -247,6 +261,10 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       imageUrls: normalizeStringArray(customer.imageUrls),
       currentImageUrl: typeof customer.currentImageUrl === 'string' ? customer.currentImageUrl : undefined,
       styleImageUrl: typeof customer.styleImageUrl === 'string' ? customer.styleImageUrl : undefined,
+      currentImagePath: typeof customer.currentImagePath === 'string' ? customer.currentImagePath : undefined,
+      styleImagePath: typeof customer.styleImagePath === 'string' ? customer.styleImagePath : undefined,
+      currentImageName: typeof customer.currentImageName === 'string' ? customer.currentImageName : undefined,
+      styleImageName: typeof customer.styleImageName === 'string' ? customer.styleImageName : undefined,
     },
     communication: {
       language: typeof communication.language === 'string' ? communication.language : '',
