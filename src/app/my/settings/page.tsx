@@ -457,7 +457,6 @@ const EMPTY_PARTNER: PartnerRecord = {
 export default function MySettingsPage() {
     const router = useRouter();
     const { t, i18n } = useTranslation("common");
-    const internationalPhoneExample = "01012345678";
     const phoneCountryOptions = getPhoneCountryOptions();
     const phonePlaceholder = t("my_page.settings.account.phone.placeholder", {
         

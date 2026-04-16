@@ -606,7 +606,7 @@ function PartnerStatusBanner({
 
 
 function MyPageContent() {
-    const { t, i18n } = useTranslation("common");
+    const { t } = useTranslation("common");
     const router = useRouter();
     const [hasHydrated, setHasHydrated] = useState(false);
     const [cachedUserName, setCachedUserName] = useState("");

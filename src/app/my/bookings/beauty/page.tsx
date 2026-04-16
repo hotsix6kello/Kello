@@ -317,7 +317,7 @@ function MyBeautyBookingsContent() {
     return () => {
       cancelled = true;
     };
-  }, [authReady, isLoggedIn]);
+  }, [authReady, isLoggedIn, t]);
 
   const filteredBookings = useMemo(() => {
     if (activeTab === 'all') {
