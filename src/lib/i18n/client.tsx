@@ -22,7 +22,6 @@ import {
     CANONICAL_SUPPORTED_LOCALES,
     CanonicalLocaleCode,
     DEFAULT_CLIENT_LOCALE,
-    DEFAULT_LOCALE,
     isRtlLocale,
     LOCALE_STORAGE_KEY,
     resolveCanonicalLocale,
