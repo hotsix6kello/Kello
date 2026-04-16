@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import GlobalLangButton from './GlobalLangButton';
 import BottomNav from './BottomNav';
+import VisitorTracker from './VisitorTracker';
 
 /**
  * Ensures global chrome UI (that uses next/navigation hooks) 
@@ -23,6 +24,7 @@ export default function ClientChrome() {
 
     return (
         <>
+            <VisitorTracker />
             <GlobalLangButton />
             <BottomNav />
         </>
