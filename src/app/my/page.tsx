@@ -10,6 +10,7 @@ import styles from "./my.module.css";
 import {
     type BeautyBookingAdminRecord,
 } from "@/lib/bookings/beautyBookingAdmin";
+import AdminStatsDashboard from "../components/AdminStatsDashboard";
 
 interface DashboardProfileRecord {
     display_name: string | null;
@@ -777,6 +778,10 @@ function MyPageContent() {
                     status={partnerStatus}
                     canApplyForPartner={capabilities.canApplyForPartner}
                 />
+            )}
+
+            {capabilities.canViewAdminConsole && (
+                <AdminStatsDashboard />
             )}
 
             {/* Admin Section with Shell consistency */}
