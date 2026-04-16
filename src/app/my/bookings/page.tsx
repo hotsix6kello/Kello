@@ -163,7 +163,7 @@ function BookingsPageContent() {
                   {
                       id: "view",
                       label: t("common.actions.view_in_plan", {
-                          defaultValue: "View in Plan",
+                          
                       }),
                       tone: "secondary",
                       onClick: openPlanner,
@@ -196,7 +196,7 @@ function BookingsPageContent() {
                     {
                         id: "view",
                         label: t("common.actions.view_in_plan", {
-                            defaultValue: "View in Plan",
+                            
                         }),
                         tone: "soft",
                         onClick: openPlanner,
@@ -204,7 +204,7 @@ function BookingsPageContent() {
                     {
                         id: "phrases",
                         label: t("common.actions.show_booking_phrases", {
-                            defaultValue: "Show booking phrases",
+                            
                         }),
                         tone: "soft",
                         onClick: () => router.push(phrasesUrl),
@@ -220,7 +220,7 @@ function BookingsPageContent() {
                     {
                         id: "phrases",
                         label: t("common.actions.show_booking_phrases", {
-                            defaultValue: "Show booking phrases",
+                            
                         }),
                         tone: "secondary",
                         onClick: () => router.push(phrasesUrl),
@@ -228,7 +228,7 @@ function BookingsPageContent() {
                     {
                         id: "view",
                         label: t("common.actions.view_in_plan", {
-                            defaultValue: "View in Plan",
+                            
                         }),
                         tone: "soft",
                         onClick: openPlanner,
@@ -309,7 +309,7 @@ function BookingsPageContent() {
 
                 <div className={styles.bookingId}>
                     {t("my_page.bookings_hub.meta.reference", {
-                        defaultValue: "Reference",
+                        
                     })}
                     : {bookingReference}
                 </div>

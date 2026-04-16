@@ -2,17 +2,86 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTrip } from '@/lib/contexts/TripContext';
+import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
+
+type PlacesApiResponse = {
+  data?: SharedBusiness[];
+  places?: SharedBusiness[];
+  documents?: SharedBusiness[];
+  results?: SharedBusiness[];
+};
+
+type KakaoMapCenter = {
+  getLat: () => number;
+  getLng: () => number;
+};
+
+type KakaoMapInstance = {
+  setCenter: (position: unknown) => void;
+  setBounds: (bounds: unknown) => void;
+  getCenter: () => KakaoMapCenter;
+  getLevel: () => number;
+  setLevel: (level: number) => void;
+  panTo: (position: unknown) => void;
+};
+
+type KakaoMarkerInstance = {
+  setMap: (map: unknown) => void;
+};
+
+type PreventableEvent = {
+  preventDefault?: () => void;
+};
+
+declare global {
+  interface Window {
+    _isInternalScrolling?: boolean;
+    _scrollTimer?: ReturnType<typeof window.setTimeout>;
+  }
+}
+
+function parseCoordinate(value: number | string | null | undefined): number | null {
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === 'string' && value.trim()) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
+  return null;
+}
+
+function resolveBusinessCoordinates(business: SharedBusiness): { lat: number; lng: number } | null {
+  const lat = parseCoordinate(
+    business.lat ?? business.y ?? business.location?.latitude ?? business.geometry?.location?.lat,
+  );
+  const lng = parseCoordinate(
+    business.lng ?? business.x ?? business.location?.longitude ?? business.geometry?.location?.lng,
+  );
+
+  return lat !== null && lng !== null ? { lat, lng } : null;
+}
+
+function getBusinessName(business: SharedBusiness): string {
+  return business.name || business.title || business.displayName?.text || '';
+}
+
+function getPlacesApiItems(rawData: PlacesApiResponse | SharedBusiness[]): SharedBusiness[] {
+  if (Array.isArray(rawData)) {
+    return rawData;
+  }
+
+  return rawData.data || rawData.places || rawData.documents || rawData.results || [];
+}
 
 export default function ExplorePage() {
   const { setSharedBusinesses, setLastSelectedStoreId } = useTrip();
   const [searchInput, setSearchInput] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [businessList, setBusinessList] = useState<any[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const mapInstanceRef = useRef<any>(null); // 카카오맵 인스턴스 보관용 Ref
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const markersRef = useRef<any[]>([]);     // 마커 객체 배열 보관용 Ref
+  const [businessList, setBusinessList] = useState<SharedBusiness[]>([]);
+  const mapInstanceRef = useRef<KakaoMapInstance | null>(null); // 카카오맵 인스턴스 보관용 Ref
+  const markersRef = useRef<KakaoMarkerInstance[]>([]);     // 마커 객체 배열 보관용 Ref
   const router = useRouter();
 
   // 0. 로컬 업체 리스트를 전역 상태로 전파
@@ -31,7 +100,7 @@ export default function ExplorePage() {
         console.error("❌ [KakaoMap] window.kakao.maps가 아직 없습니다. 로딩이 실패했거나 지연 중입니다.");
         return;
       }
-      
+
       console.log("[KakaoMap] 5. window.kakao.maps.load 호출 직전");
       window.kakao.maps.load(() => {
         console.log("[KakaoMap] 6. load 콜백 실행! 지도 객체 생성 시도");
@@ -41,10 +110,10 @@ export default function ExplorePage() {
           center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표. (가이드 기본값)
           level: 3 // 지도의 레벨(확대, 축소 정도)
         };
-        
+
         if (container) {
           try {
-            const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+            const map = new window.kakao.maps.Map(container, options) as KakaoMapInstance; // 지도 생성 및 객체 리턴
             mapInstanceRef.current = map; // 생성된 맵 인스턴스 저장
             console.log("✅ [KakaoMap] 7. 카카오맵 가이드 기반 렌더링 완벽 성공!");
 
@@ -60,17 +129,16 @@ export default function ExplorePage() {
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ query: '미용실', lat, lng })
                 });
-                const rawData = await res.json();
+                const rawData = (await res.json()) as PlacesApiResponse | SharedBusiness[];
 
                 // 프론트엔드 하드 필터링 (뷰티 업종만 통과)
                 const beautyKeywords = ['미용', '헤어', '네일', '왁싱', '피부', '에스테틱', '속눈썹', '뷰티'];
                 const blackList = ['식당', '찜', '라이브', '고기', '카페', '노래', '술'];
-                
+
                 // 연산자 우선순위 해결 및 안전한 배열 파싱
-                const dataToFilter = rawData.data || rawData.places || (Array.isArray(rawData) ? rawData : []);
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const filtered = dataToFilter.filter((business: any) => {
-                  const name = business.name || business.title || (business.displayName && business.displayName.text) || '';
+                const dataToFilter = getPlacesApiItems(rawData);
+                const filtered = dataToFilter.filter((business) => {
+                  const name = getBusinessName(business);
                   const category = business.category || (business.types && business.types.join(' ')) || '';
                   const text = `${name} ${category}`.toLowerCase();
                   if (blackList.some(bad => text.includes(bad))) return false;
@@ -99,7 +167,7 @@ export default function ExplorePage() {
               // 브라우저 미지원 -> 기본값 세팅
               initMapWithLocation(37.4711, 126.7010);
             }
-          } catch(e) {
+          } catch (e) {
             console.error("❌ [KakaoMap] 지도 객체(new kakao.maps.Map) 생성 중 예외 발생:", e);
           }
         } else {
@@ -125,7 +193,7 @@ export default function ExplorePage() {
       script.id = scriptId;
       script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&autoload=false&libraries=services`;
       script.async = true;
-      
+
       script.onerror = () => {
         console.error("❌ [KakaoMap] 카카오맵 스크립트 로드 실패. 카카오 디벨로퍼스(developers.kakao.com)의 [플랫폼] - [Web] 설정에 http://localhost:3000 도메인이 정상 등록되었는지 확인하세요.");
       };
@@ -147,10 +215,10 @@ export default function ExplorePage() {
           renderMap();
         }
       }, 100);
-      
+
       return () => clearInterval(timer);
     }
-  }, []);
+  }, [router, setLastSelectedStoreId]);
 
   // [마커 렌더링 로직] businessList 업데이트 시 지도에 마커(깃발) 표시
   useEffect(() => {
@@ -162,37 +230,35 @@ export default function ExplorePage() {
     markersRef.current.forEach(marker => marker.setMap(null));
     markersRef.current = [];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const newMarkers: any[] = [];
+    const newMarkers: KakaoMarkerInstance[] = [];
     const bounds = new window.kakao.maps.LatLngBounds();
     let hasPoints = false;
 
     businessList.forEach((biz, idx) => {
       // 구글/카카오/자체 API 등 다양한 위경도 응답 포맷 지원
-      const lat = biz.lat || biz.y || biz.location?.latitude || biz.geometry?.location?.lat;
-      const lng = biz.lng || biz.x || biz.location?.longitude || biz.geometry?.location?.lng;
-      
-      if (lat && lng) {
-        const markerPos = new window.kakao.maps.LatLng(lat, lng);
+      const coordinates = resolveBusinessCoordinates(biz);
+
+      if (coordinates) {
+        const markerPos = new window.kakao.maps.LatLng(coordinates.lat, coordinates.lng);
         const marker = new window.kakao.maps.Marker({
           position: markerPos,
           map: map,
-          title: biz.name || biz.title || (biz.displayName && biz.displayName.text) || ''
-        });
+          title: getBusinessName(biz)
+        }) as KakaoMarkerInstance;
 
         // 마우스 호버 시 해당 카드로 스크롤 및 하이라이트
         window.kakao.maps.event.addListener(marker, 'mouseover', () => {
           const card = document.getElementById(`biz-card-${biz.id || idx}`);
           if (card) {
             // [플래그 설정] 지도가 스크롤을 시켰으므로 onScroll 로직 무시
-            (window as any)._isInternalScrolling = true;
+            window._isInternalScrolling = true;
             card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             card.style.borderColor = '#ff3366';
             card.style.boxShadow = '0 12px 30px rgba(255, 51, 102, 0.25)';
             card.style.transform = 'scale(1.02)';
-            
+
             // 스크롤이 끝날 즈음 플래그 해제
-            setTimeout(() => { (window as any)._isInternalScrolling = false; }, 600);
+            setTimeout(() => { window._isInternalScrolling = false; }, 600);
           }
         });
 
@@ -224,7 +290,7 @@ export default function ExplorePage() {
     // 검색 완료 후 노출된 모든 마커가 화면에 꽉 차도록 지도 시점을 자동 이동(패닝/줌)
     if (hasPoints) {
       map.setBounds(bounds);
-      
+
       // 약간의 딜레이 후 줌 레벨이 너무 가깝다면 살짝 뺌 (너무 타이트하게 줌인되는 현상 방지)
       setTimeout(() => {
         if (map.getLevel() < 3) map.setLevel(3);
@@ -234,13 +300,12 @@ export default function ExplorePage() {
     // 하단 카드 슬라이더 위치를 맨 처음(0)으로 초기화
     const carousel = document.getElementById('business-carousel');
     if (carousel) carousel.scrollLeft = 0;
-  }, [businessList]);
+  }, [businessList, router, setLastSelectedStoreId]);
 
   // 2. 검색 핸들러 및 데이터 필터링
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSearch = async (e?: React.FormEvent | React.KeyboardEvent | React.MouseEvent | any) => {
-    if (e) e.preventDefault();
-    
+  const handleSearch = async (e?: PreventableEvent) => {
+    e?.preventDefault?.();
+
     const query = searchInput.trim();
     if (!query) {
       alert("검색어를 입력해주세요.");
@@ -266,23 +331,22 @@ export default function ExplorePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query, lat, lng })
       });
-      
-      const rawData = await res.json();
+
+      const rawData = (await res.json()) as PlacesApiResponse | SharedBusiness[];
       console.log("📦 [Search] 3. API 원본 응답:", rawData);
 
 
-      
-      const dataToFilter = rawData.data || rawData.places || rawData.documents || rawData.results || (Array.isArray(rawData) ? rawData : []) || [];
-      
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const filtered = dataToFilter.filter((business: any) => {
+
+      const dataToFilter = getPlacesApiItems(rawData);
+
+      const filtered = dataToFilter.filter((business) => {
         // [검색 엔진 최적화]
         // 구글 Places API V1의 응답 구조(displayName.text)를 감지하여 유효성을 판별합니다.
-        const name = business.name || business.title || (business.displayName && business.displayName.text) || '';
-        
+        const name = getBusinessName(business);
+
         if (!name) return false; // 이름조차 없는 쓰레기 데이터만 파기
-        
-        return true; 
+
+        return true;
       });
 
       console.log("✨ [Search] 4. 필터링된 결과 개수:", filtered.length);
@@ -295,23 +359,23 @@ export default function ExplorePage() {
 
   return (
     <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
-      
+
       {/* 1. 상단 플로팅 검색바 영역 (웹 표준 Form으로 통신 유실 방지 및 모바일 키보드 최적화) */}
-      <form 
+      <form
         onSubmit={handleSearch}
-        style={{ 
+        style={{
           position: 'absolute', top: '20px', left: '20px', right: '20px', zIndex: 9999,
-          display: 'flex', backgroundColor: '#fff', borderRadius: '30px', boxShadow: '0 4px 15px rgba(0,0,0,0.15)' 
+          display: 'flex', backgroundColor: '#fff', borderRadius: '30px', boxShadow: '0 4px 15px rgba(0,0,0,0.15)'
         }}
       >
-        <input 
-          type="text" 
+        <input
+          type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="뷰티, 미용실 등을 검색해 보세요..."
           style={{ flex: 1, padding: '14px 20px', border: 'none', borderRadius: '30px', outline: 'none', fontSize: '15px' }}
         />
-        <button 
+        <button
           type="submit"
           style={{ padding: '0 20px', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontWeight: 'bold', color: '#ff3366', fontSize: '15px' }}
         >
@@ -323,7 +387,7 @@ export default function ExplorePage() {
       <div id="map" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, backgroundColor: '#e5e5e5' }} />
 
       {/* 하단 바텀 시트 스타일의 가로 스크롤 리스트 */}
-      <div 
+      <div
         id="business-carousel"
         onWheel={(e) => {
           // 데스크톱 마우스 휠(상하)을 가로 스크롤(좌우)로 치환
@@ -333,17 +397,17 @@ export default function ExplorePage() {
         }}
         onScroll={(e) => {
           // [최적화] 마커 호버로 인한 자동 스크롤시에는 지도를 이동시키지 않음
-          if ((window as any)._isInternalScrolling) return;
+          if (window._isInternalScrolling) return;
 
           const carousel = e.currentTarget;
           const map = mapInstanceRef.current;
           if (!map || businessList.length === 0) return;
 
-          if ((window as any)._scrollTimer) {
-            clearTimeout((window as any)._scrollTimer);
+          if (window._scrollTimer) {
+            clearTimeout(window._scrollTimer);
           }
 
-          (window as any)._scrollTimer = setTimeout(() => {
+          window._scrollTimer = setTimeout(() => {
             const scrollLeft = carousel.scrollLeft;
             const carouselWidth = carousel.offsetWidth;
             const carouselCenter = scrollLeft + carouselWidth / 2;
@@ -351,8 +415,8 @@ export default function ExplorePage() {
             let nearestIdx = -1;
             let minDistance = Infinity;
 
-            const cards = carousel.querySelectorAll('[id^="biz-card-"]');
-            cards.forEach((card: any, idx: number) => {
+            const cards = carousel.querySelectorAll<HTMLElement>('[id^="biz-card-"]');
+            cards.forEach((card, idx) => {
               const cardCenter = card.offsetLeft + card.offsetWidth / 2;
               const distance = Math.abs(carouselCenter - cardCenter);
               if (distance < minDistance) {
@@ -363,27 +427,29 @@ export default function ExplorePage() {
 
             if (nearestIdx !== -1) {
               const biz = businessList[nearestIdx];
-              const lat = biz.lat || biz.y || biz.location?.latitude || biz.geometry?.location?.lat;
-              const lng = biz.lng || biz.x || biz.location?.longitude || biz.geometry?.location?.lng;
-              
-              if (lat && lng) {
-                const movePos = new window.kakao.maps.LatLng(lat, lng);
+              const coordinates = biz ? resolveBusinessCoordinates(biz) : null;
+
+              if (coordinates) {
+                const movePos = new window.kakao.maps.LatLng(coordinates.lat, coordinates.lng);
                 const currentCenter = map.getCenter();
-                if (Math.abs(currentCenter.getLat() - lat) > 0.0001 || Math.abs(currentCenter.getLng() - lng) > 0.0001) {
+                if (
+                  Math.abs(currentCenter.getLat() - coordinates.lat) > 0.0001 ||
+                  Math.abs(currentCenter.getLng() - coordinates.lng) > 0.0001
+                ) {
                   map.panTo(movePos);
                 }
               }
             }
           }, 150);
         }}
-        style={{ 
+        style={{
           position: 'absolute', bottom: '80px', left: 0, width: '100%', zIndex: 100,
-          display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', 
-          overflowX: 'scroll', gap: '12px', 
-          padding: '0 20px 20px', 
-          scrollSnapType: 'x mandatory', 
+          display: 'flex', flexDirection: 'row', flexWrap: 'nowrap',
+          overflowX: 'scroll', gap: '12px',
+          padding: '0 20px 20px',
+          scrollSnapType: 'x mandatory',
           WebkitOverflowScrolling: 'touch',
-          msOverflowStyle: 'none', 
+          msOverflowStyle: 'none',
           scrollbarWidth: 'none',
           touchAction: 'pan-x',
           scrollBehavior: 'smooth'
@@ -396,23 +462,23 @@ export default function ExplorePage() {
             const address = biz.address || biz.formattedAddress || biz.vicinity || biz.formatted_address || '주소 정보가 제공되지 않았습니다.';
 
             return (
-              <div 
-                key={biz.id || idx} 
+              <div
+                key={biz.id || idx}
                 id={`biz-card-${biz.id || idx}`}
                 onClick={() => {
                   const businessId = biz.id || biz.place_id || `shared-${idx}`;
                   setLastSelectedStoreId(businessId);
                   router.push(`/?booking=true&business_name=${encodeURIComponent(name)}&store_id=${encodeURIComponent(businessId)}`);
                 }}
-                style={{ 
-                  flex: '0 0 auto', 
+                style={{
+                  flex: '0 0 auto',
                   width: 'calc(100% - 60px)', // 다음 카드가 살짝 보이는 Peek Effect
                   maxWidth: '300px',           // 테블릿/PC 대응 최대 너비
-                  backgroundColor: '#fff', 
-                  borderRadius: '20px', 
-                  overflow: 'hidden', 
+                  backgroundColor: '#fff',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
                   scrollSnapAlign: 'center',    // 스크롤 시 중앙 정렬
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.12)', 
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.12)',
                   cursor: 'pointer',
                   border: '1px solid rgba(0,0,0,0.05)',
                   transition: 'transform 0.2s ease'
@@ -453,7 +519,7 @@ export default function ExplorePage() {
           </div>
         )}
       </div>
-      
+
     </div>
   );
 }

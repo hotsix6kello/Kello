@@ -26,9 +26,9 @@ export const LEGACY_LOCALE_ALIASES: Record<string, CanonicalLocaleCode> = {
 export const RESOURCE_LOCALE_CODE_BY_CANONICAL: Record<CanonicalLocaleCode, string> = {
     ko: "ko",
     en: "en",
-    ja: "jp",
-    "zh-CN": "cn",
-    "zh-TW": "tw",
+    ja: "ja",
+    "zh-CN": "zh-CN",
+    "zh-TW": "zh-TW",
     vi: "vi",
     th: "th",
     ar: "ar",

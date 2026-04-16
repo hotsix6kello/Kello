@@ -1,10 +1,16 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
+import type { LegacyBookingDraftFromSkeleton } from '@/lib/bookings/bookingFlowSkeleton/bridge';
+import {
+  resolveLegacySubmitStatusCopy,
+  resolveLegacySubmitUiState,
+} from '@/lib/bookings/bookingFlowSkeleton';
+import type { LegacySubmitPreparationResult } from '@/lib/bookings/bookingFlowSkeleton/submitRunner';
 import styles from './home.module.css';
 
 interface SheetSearchResult {
@@ -17,6 +23,24 @@ interface SheetSearchResult {
   [key: string]: unknown;
 }
 
+type DraftDebugPanelState = {
+  draftReadyPayload: LegacyBookingDraftFromSkeleton | null;
+  draftState: HomeBookingDraftDebugState | null;
+  updatedAt: string;
+};
+
+type SubmitPreparationDebugState = {
+  result: LegacySubmitPreparationResult;
+  updatedAt: string;
+};
+
+type SubmitAttemptDebugState = {
+  status: SkeletonSubmitAttemptStatus;
+  message: string | null;
+  errorSummary: string | null;
+  updatedAt: string;
+};
+
 // Home Specific Components
 import HomeTopNav from './components/home/HomeTopNav';
 import HomeHero from './components/home/HomeHero';
@@ -25,17 +49,66 @@ import HomeBookingSection from './components/home/HomeBookingSection';
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
-import HomeBeautyBookingFlow from './components/home/HomeBeautyBookingFlow';
+import HomeBookingFlowEntry from './components/home/HomeBookingFlowEntry';
+import {
+  buildHomeBookingSkeletonDebugPanelDisplay,
+} from './components/home/HomeBookingFlowEntry.helpers';
+import type {
+  HomeBookingSkeletonDebugPanelDisplay,
+  HomeBookingSkeletonDebugPanelDisplayInput,
+} from './components/home/HomeBookingFlowEntry.helpers';
+import type {
+  HomeBookingDraftDebugState,
+  SkeletonSubmitAttemptStatus,
+} from './components/home/HomeBookingFlowEntry.types';
 
-import { 
-  BEAUTY_CATEGORY_OPTIONS, 
+import {
+  BEAUTY_STORE_ITEMS,
+  BEAUTY_CATEGORY_OPTIONS,
   BeautyCategoryId
 } from './components/home/constants';
 
+const SKELETON_DEBUG_MOCK_UPLOADED_IMAGE_URLS = [
+  'https://debug.local/mock-uploaded-image-1.jpg',
+];
+
+function resolveSkeletonPreviewStoreContext(
+  category: BeautyCategoryId | null,
+  explicitStore?: {
+    storeId?: string | null;
+    storeName?: string | null;
+    region?: string | null;
+  },
+) {
+  const normalizedStoreId = explicitStore?.storeId?.trim() || null;
+  const normalizedStoreName = explicitStore?.storeName?.trim() || null;
+  const normalizedRegion = explicitStore?.region?.trim() || null;
+
+  const matchedStoreById = normalizedStoreId
+    ? BEAUTY_STORE_ITEMS.find((store) => store.id === normalizedStoreId) ?? null
+    : null;
+  const matchedStoreByCategory = category
+    ? BEAUTY_STORE_ITEMS.find((store) => store.category === category) ?? null
+    : null;
+  const fallbackStore =
+    matchedStoreById ??
+    matchedStoreByCategory ?? {
+      id: category ? `skeleton-${category}-preview` : 'skeleton-preview-store',
+      name: category ? `${category} preview store` : 'skeleton preview store',
+      region: 'seoul',
+    };
+
+  return {
+    storeId: normalizedStoreId ?? fallbackStore.id,
+    storeName: normalizedStoreName ?? fallbackStore.name,
+    region: normalizedRegion ?? fallbackStore.region,
+  };
+}
+
 export default function HomePage() {
   const { t, i18n } = useTranslation('common');
-  const { 
-    itinerary, 
+  const {
+    itinerary,
     selectedCategory: globalCategory,
     setSelectedCategory: setGlobalCategory,
     searchQuery: input,
@@ -66,6 +139,23 @@ export default function HomePage() {
   const [sheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isSkeletonFlowEnabled, setIsSkeletonFlowEnabled] = useState(true);
+  const [isDraftDebugEnabled, setIsDraftDebugEnabled] = useState(false);
+  const skeletonDraftDebugRef = useRef<LegacyBookingDraftFromSkeleton | null>(null);
+  const [draftDebugPanelState, setDraftDebugPanelState] = useState<DraftDebugPanelState | null>(null);
+  const [submitPreparationDebugState, setSubmitPreparationDebugState] =
+    useState<SubmitPreparationDebugState | null>(null);
+  const [submitAttemptDebugState, setSubmitAttemptDebugState] =
+    useState<SubmitAttemptDebugState | null>(null);
+  const [bookingStoreContext, setBookingStoreContext] = useState<{
+    storeId: string | null;
+    storeName: string | null;
+    region: string | null;
+  }>({
+    storeId: null,
+    storeName: null,
+    region: null,
+  });
 
   // Typing suggestions disabled as requested
 
@@ -154,11 +244,28 @@ export default function HomePage() {
 
     // [추가] URL 파라미터에 booking=true가 있으면 예약 플로우를 즉시 엽니다.
     const params = new URLSearchParams(window.location.search);
-    if (params.get('booking') === 'true') {
+    const hasBookingQuery = params.get('booking') === 'true';
+    const isLegacyRequested = params.get('flow') === 'legacy';
+    setIsSkeletonFlowEnabled(!isLegacyRequested);
+    setIsDraftDebugEnabled(params.get('debug') === 'true');
+    setDraftDebugPanelState(null);
+    setSubmitPreparationDebugState(null);
+    setSubmitAttemptDebugState(null);
+
+    const cat = params.get('category');
+    const nextCategory = cat ? (cat as BeautyCategoryId) : null;
+    setBookingStoreContext(
+      resolveSkeletonPreviewStoreContext(nextCategory, {
+        storeId: params.get('store_id'),
+        storeName: params.get('business_name'),
+        region: params.get('region'),
+      }),
+    );
+
+    if (hasBookingQuery) {
       setIsBookingOpen(true);
       // 필터링된 카테고리가 있다면 설정 (예: 헤어)
-      const cat = params.get('category');
-      if (cat) setSelectedCategory(cat as BeautyCategoryId);
+      if (nextCategory) setSelectedCategory(nextCategory);
     }
   }, [setSelectedCategory]);
 
@@ -195,13 +302,131 @@ export default function HomePage() {
   };
 
   const handleCategorySelect = (categoryId: string) => {
-    setSelectedCategory(categoryId as BeautyCategoryId);
+    const nextCategory = categoryId as BeautyCategoryId;
+    setSelectedCategory(nextCategory);
+    setBookingStoreContext(resolveSkeletonPreviewStoreContext(nextCategory));
     setIsBookingOpen(true);
   };
 
   const handleOpenInterpreter = () => {
     router.push('/interpreter');
   };
+
+  const handleSkeletonDraftReady = useCallback((draft: LegacyBookingDraftFromSkeleton | null) => {
+    skeletonDraftDebugRef.current = draft;
+    if (!isDraftDebugEnabled || !draft) {
+      return;
+    }
+
+    setDraftDebugPanelState((currentState) => ({
+      draftReadyPayload: draft,
+      draftState: currentState?.draftState ?? null,
+      updatedAt: new Date().toISOString(),
+    }));
+  }, [isDraftDebugEnabled]);
+
+  const handleDraftDebugStateChange = useCallback((draftState: HomeBookingDraftDebugState) => {
+    if (!isDraftDebugEnabled) {
+      return;
+    }
+
+    setDraftDebugPanelState((currentState) => ({
+      draftReadyPayload: currentState?.draftReadyPayload ?? null,
+      draftState,
+      updatedAt: new Date().toISOString(),
+    }));
+  }, [isDraftDebugEnabled]);
+
+  const handleSubmitPreparationChange = useCallback((result: LegacySubmitPreparationResult) => {
+    if (!isDraftDebugEnabled) {
+      return;
+    }
+
+    setSubmitPreparationDebugState({
+      result,
+      updatedAt: new Date().toISOString(),
+    });
+  }, [isDraftDebugEnabled]);
+
+  const handleSubmitAttemptStateChange = useCallback(
+    (state: {
+      status: SkeletonSubmitAttemptStatus;
+      message: string | null;
+      errorSummary: string | null;
+    }) => {
+      if (!isDraftDebugEnabled) {
+        return;
+      }
+
+      setSubmitAttemptDebugState({
+        ...state,
+        updatedAt: new Date().toISOString(),
+      });
+    },
+    [isDraftDebugEnabled],
+  );
+
+
+  const submitDebugUiState = useMemo(() => {
+    if (!isSkeletonFlowEnabled || !isDraftDebugEnabled) {
+      return null;
+    }
+
+    if (!submitPreparationDebugState) {
+      return resolveLegacySubmitUiState(null);
+    }
+
+    return submitPreparationDebugState.result.uiState;
+  }, [isDraftDebugEnabled, isSkeletonFlowEnabled, submitPreparationDebugState]);
+
+  const submitDebugStatusCopy = useMemo(() => {
+    if (!isSkeletonFlowEnabled || !isDraftDebugEnabled || !submitDebugUiState) {
+      return null;
+    }
+
+    return resolveLegacySubmitStatusCopy(submitDebugUiState);
+  }, [isDraftDebugEnabled, isSkeletonFlowEnabled, submitDebugUiState]);
+  const uploadedImageUrlsOverride =
+    isSkeletonFlowEnabled && isDraftDebugEnabled
+      ? SKELETON_DEBUG_MOCK_UPLOADED_IMAGE_URLS
+      : undefined;
+  const skeletonDebugPanelDisplayInput: HomeBookingSkeletonDebugPanelDisplayInput = {
+    draftReadyPayload: draftDebugPanelState?.draftReadyPayload,
+    draftState: draftDebugPanelState?.draftState,
+    updatedAt: draftDebugPanelState?.updatedAt,
+    uploadedImageUrlsOverride,
+    submitUiState: submitDebugUiState,
+    submitStatusCopy: submitDebugStatusCopy,
+    submitAttemptState: submitAttemptDebugState,
+  };
+  const skeletonDebugPanelDisplay: HomeBookingSkeletonDebugPanelDisplay = buildHomeBookingSkeletonDebugPanelDisplay(
+    skeletonDebugPanelDisplayInput,
+  );
+  const skeletonDebugPanel =
+    isSkeletonFlowEnabled && isDraftDebugEnabled ? (
+      <aside
+        style={{
+          border: '1px dashed #cbd5e1',
+          borderRadius: 12,
+          background: '#f8fafc',
+          padding: 10,
+          fontSize: 12,
+          color: '#334155',
+        }}
+      >
+        <div style={{ fontWeight: 700 }}>{skeletonDebugPanelDisplay.title}</div>
+        {skeletonDebugPanelDisplay.sections.map((section, sectionIndex) => (
+          <div
+            key={section.key}
+            style={{ marginTop: sectionIndex === 0 ? 6 : 8, lineHeight: 1.5 }}
+          >
+            {section.lines.map((line, lineIndex) => (
+              <div key={`${section.key}-${lineIndex}`}>{line}</div>
+            ))}
+          </div>
+        ))}
+      </aside>
+    ) : null;
 
   // body는 globals.css에서 overflow:hidden으로 영구 설정됨
   // JS에서 별도 제어 불필요
@@ -273,17 +498,17 @@ export default function HomePage() {
 
   return (
     <div className={styles.main}>
-      <HomeTopNav 
-        userName={userName} 
-        onSignOut={handleSignOut} 
-        t={t} 
+      <HomeTopNav
+        userName={userName}
+        onSignOut={handleSignOut}
+        t={t}
       />
 
-      <HomeHero 
-        t={t} 
+      <HomeHero
+        t={t}
       />
 
-      <HomeBookingSection 
+      <HomeBookingSection
         categories={BEAUTY_CATEGORY_OPTIONS}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategorySelect}
@@ -294,7 +519,7 @@ export default function HomePage() {
 
 
 
-      <HomeLocationSheet 
+      <HomeLocationSheet
         isOpen={openNavSheet}
         onClose={() => setOpenNavSheet(false)}
         isSearchingInSheet={isSearchingInSheet}
@@ -310,7 +535,7 @@ export default function HomePage() {
         t={t}
       />
 
-      <HomeModals 
+      <HomeModals
         isMapOpen={isMapOpen}
         onMapClose={() => setIsMapOpen(false)}
         showCard={showCard}
@@ -321,7 +546,7 @@ export default function HomePage() {
         t={t}
       />
 
-      <HomeInterpreterEntry 
+      <HomeInterpreterEntry
         onOpenInterpreter={handleOpenInterpreter}
         t={t}
       />
@@ -333,11 +558,26 @@ export default function HomePage() {
         </div>
       )}
 
-      <HomeBeautyBookingFlow 
+      <HomeBookingFlowEntry
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
         initialCategory={selectedCategory}
         t={t}
+        mode={isSkeletonFlowEnabled ? 'skeleton' : 'legacy'}
+        enableSkeletonMode={isSkeletonFlowEnabled}
+        storeContext={bookingStoreContext}
+        uploadedImageUrls={uploadedImageUrlsOverride}
+        onDraftReady={isSkeletonFlowEnabled && isDraftDebugEnabled ? handleSkeletonDraftReady : undefined}
+        onDraftDebugStateChange={
+          isSkeletonFlowEnabled && isDraftDebugEnabled ? handleDraftDebugStateChange : undefined
+        }
+        onSubmitPreparationChange={
+          isSkeletonFlowEnabled && isDraftDebugEnabled ? handleSubmitPreparationChange : undefined
+        }
+        onSubmitAttemptStateChange={
+          isSkeletonFlowEnabled && isDraftDebugEnabled ? handleSubmitAttemptStateChange : undefined
+        }
+        skeletonDebugPanel={skeletonDebugPanel}
       />
 
     </div>

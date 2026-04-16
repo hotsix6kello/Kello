@@ -23,6 +23,7 @@ import {
 import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type BeautyBookingPatchRouteResponse =
   | {

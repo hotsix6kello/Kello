@@ -88,7 +88,7 @@ function getTranslatedExploreField(
     id: string,
     field: "title" | "area" | "price"
 ): string {
-    return t(`explore_items.${id}.${field}`, { defaultValue: "" }).trim();
+    return t(`explore_items.${id}.${field}`).trim();
 }
 
 function SavedHubContent() {

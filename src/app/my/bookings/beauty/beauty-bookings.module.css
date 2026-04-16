@@ -32,12 +32,11 @@
 }
 
 .content {
-  padding: 18px 20px 0;
+  padding: 12px 20px 0;
   display: grid;
   gap: 16px;
 }
 
-.heroCard,
 .detailCard,
 .bookingCard,
 .tabBar,
@@ -47,35 +46,23 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
-.heroCard,
 .detailCard,
 .loginCard {
-  border-radius: 20px;
-  padding: 18px;
-}
-
-.heroCard {
-  background: linear-gradient(180deg, rgba(236, 72, 153, 0.08), rgba(255, 255, 255, 0.98));
-  border-color: rgba(236, 72, 153, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
 }
 
 .eyebrow {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   font-size: 0.72rem;
   font-weight: 700;
   color: #db2777;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 }
 
-.heroTitle {
-  margin: 0 0 8px;
-  font-size: 1.16rem;
-  font-weight: 700;
-  line-height: 1.35;
-}
 
-.heroText,
+
 .detailSub,
 .statusHint,
 .messageText,
@@ -84,7 +71,6 @@
   line-height: 1.6;
 }
 
-.heroText,
 .loginText {
   margin: 0;
   font-size: 0.88rem;
@@ -134,11 +120,12 @@
 .bookingCard {
   width: 100%;
   text-align: left;
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: 16px;
+  padding: 14px;
   cursor: pointer;
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
 }
 
@@ -162,12 +149,21 @@
 }
 
 .cardTop,
-.cardFooter,
 .detailHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--gray-100);
 }
 
 .statusBadge {
@@ -218,16 +214,17 @@
 
 .storeName,
 .detailTitle {
-  margin: 0;
-  font-size: 1rem;
+  margin: 0 0 2px;
+  font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.35;
 }
 
 .bookingMeta {
-  margin: 0;
-  font-size: 0.82rem;
-  color: var(--gray-500);
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-600);
 }
 
 .cardInfoList,
@@ -240,6 +237,9 @@
 
 .cardInfoList {
   grid-template-columns: 1fr 1fr;
+  background: rgba(17, 24, 39, 0.02);
+  padding: 10px 12px;
+  border-radius: 10px;
 }
 
 .cardInfoList div,
@@ -286,6 +286,22 @@
 .detailSub {
   margin: 6px 0 0;
   font-size: 0.84rem;
+}
+
+.detailCloseButton {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 0 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--foreground);
+  cursor: pointer;
 }
 
 .summaryGrid {
@@ -627,6 +643,7 @@
   }
 }
 
+
 @media (min-width: 768px) {
   .detailGrid,
   .messageSection {
@@ -643,14 +660,37 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .layout {
-    grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr);
-    align-items: start;
-  }
-
-  .detailSection {
-    position: sticky;
-    top: 88px;
-  }
+.moreInfoDetails {
+  margin-top: 16px;
 }
+
+.moreInfoSummary {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+
+.moreInfoSummary:hover {
+  background: var(--gray-100);
+}
+
+.moreInfoSummary::marker,
+.moreInfoSummary::-webkit-details-marker {
+  display: none;
+}
+
+.detailsContentWrapper {
+  display: grid;
+  gap: 16px;
+}
+
+
