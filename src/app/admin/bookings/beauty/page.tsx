@@ -2,6 +2,7 @@
 
 import { Suspense, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
 import sharedStyles from '../../admin.module.css';
 import styles from './beauty-bookings.module.css';
@@ -177,6 +178,11 @@ function AdminBeautyBookingsContent() {
   const [notifications, setNotifications] = useState<BeautyBookingNotificationRecord[]>([]);
   const [loadingNotifications, setLoadingNotifications] = useState(false);
   const [isResending, setIsResending] = useState<string | null>(null);
+  
+  // Image states
+  const [isLoadingImages, setIsLoadingImages] = useState(false);
+  const [imageError, setImageError] = useState<string | null>(null);
+  const [activeModalImage, setActiveModalImage] = useState<{ url: string; title: string } | null>(null);
 
   const [statusFilter, setStatusFilter] = useState<BeautyBookingAdminListStatus>(
     normalizeBeautyBookingAdminListStatus(searchParams.get('status')),
@@ -316,6 +322,43 @@ function AdminBeautyBookingsContent() {
       void fetchNotifications(selectedBooking.id);
     }
   }, [selectedBooking]);
+
+  const handleViewImage = async (type: 'current' | 'style') => {
+    if (!selectedBooking) return;
+
+    setIsLoadingImages(true);
+    setImageError(null);
+
+    try {
+      const accessToken = await getAdminAccessToken();
+      if (!accessToken) throw new Error("관리자 세션을 확인해 주세요.");
+
+      const response = await fetch(`/api/bookings/beauty/images/signed-url?bookingId=${selectedBooking.id}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const body = await response.json() as { ok: boolean; images: { imageType: 'current' | 'style', signedUrl: string }[], error?: string };
+
+      if (body.ok && Array.isArray(body.images)) {
+        const imgResult = body.images.find((img) => img.imageType === type);
+        if (imgResult?.signedUrl) {
+          setActiveModalImage({
+            url: imgResult.signedUrl,
+            title: type === 'current' ? '현재 상태 이미지' : '희망 스타일 이미지'
+          });
+        } else {
+          setImageError('해당 이미지를 찾을 수 없습니다.');
+        }
+      } else {
+        throw new Error(body.error ?? '이미지 정보를 불러오지 못했습니다.');
+      }
+    } catch (error) {
+      console.error('Failed to fetch signed URL:', error);
+      setImageError(error instanceof Error ? error.message : '이미지를 불러올 수 없습니다.');
+    } finally {
+      setIsLoadingImages(false);
+    }
+  };
+
 
   const fetchNotifications = async (bookingId: string) => {
     const accessToken = await getAdminAccessToken();
@@ -875,6 +918,38 @@ function AdminBeautyBookingsContent() {
                       </div>
                     </dl>
                   </section>
+                  <section className={styles.infoBlock}>
+                    <h5 className={styles.blockTitle}>참조 이미지</h5>
+                    <div className={styles.imageActions}>
+                      {!selectedBooking.currentImageUrl && !selectedBooking.styleImageUrl && (
+                        <p className={styles.sectionText} style={{ color: 'var(--gray-400)' }}>등록된 이미지가 없습니다.</p>
+                      )}
+                      
+                      {selectedBooking.currentImageUrl && (
+                        <button 
+                          type="button"
+                          className={styles.imageButton}
+                          onClick={() => void handleViewImage('current')}
+                          disabled={isLoadingImages}
+                        >
+                          <span className={styles.imageButtonIcon}>📸</span> 현재 이미지 보기
+                        </button>
+                      )}
+                      
+                      {selectedBooking.styleImageUrl && (
+                        <button 
+                          type="button"
+                          className={styles.imageButton}
+                          onClick={() => void handleViewImage('style')}
+                          disabled={isLoadingImages}
+                        >
+                          <span className={styles.imageButtonIcon}>✨</span> 스타일 이미지 보기
+                        </button>
+                      )}
+                    </div>
+                    {isLoadingImages && <p className={styles.sectionText} style={{ marginTop: 8 }}>불러오는 중...</p>}
+                    {imageError && <p className={styles.errorState} style={{ marginTop: 8, padding: '6px 12px', fontSize: '0.75rem' }}>{imageError}</p>}
+                  </section>
                 </div>
 
                 <section className={styles.messageSection}>
@@ -1299,6 +1374,26 @@ function AdminBeautyBookingsContent() {
         {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
         <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
       </div>
+      {activeModalImage && (
+        <div className={styles.modalOverlay} onClick={() => setActiveModalImage(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={() => setActiveModalImage(null)} aria-label="닫기">✕</button>
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>{activeModalImage.title}</h3>
+            </div>
+            <div className={styles.modalImageContainer}>
+              <Image 
+                src={activeModalImage.url} 
+                alt={activeModalImage.title} 
+                className={styles.modalImage}
+                width={800}
+                height={600}
+                unoptimized
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
