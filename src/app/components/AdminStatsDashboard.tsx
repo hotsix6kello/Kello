@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import styles from '../app/my/my.module.css';
+import styles from '../my/my.module.css';
 
 interface VisitorStats {
     today: number;
