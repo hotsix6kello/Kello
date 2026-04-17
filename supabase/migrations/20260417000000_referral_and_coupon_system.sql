@@ -16,7 +16,7 @@ RETURNS TEXT
 LANGUAGE plpgsql
 AS $$
 DECLARE
-  chars  TEXT    := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789456789';
+  chars  TEXT    := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   code   TEXT    := '';
   length INTEGER;
   i      INTEGER;
@@ -64,10 +64,31 @@ CREATE TRIGGER trg_set_referral_code
   WHEN (NEW.referral_code IS NULL)
   EXECUTE FUNCTION public.set_referral_code_on_profile_insert();
 
--- 기존 레코드 소급 처리
-UPDATE public.profiles
-SET    referral_code = public.generate_referral_code()
-WHERE  referral_code IS NULL;
+-- 기존 레코드 소급 처리 (건별 중복 체크 후 재시도)
+DO $$
+DECLARE
+  rec      RECORD;
+  new_code TEXT;
+  attempts INTEGER;
+BEGIN
+  FOR rec IN SELECT id FROM public.profiles WHERE referral_code IS NULL LOOP
+    attempts := 0;
+    LOOP
+      new_code := public.generate_referral_code();
+      IF NOT EXISTS (
+        SELECT 1 FROM public.profiles WHERE referral_code = new_code
+      ) THEN
+        UPDATE public.profiles SET referral_code = new_code WHERE id = rec.id;
+        EXIT;
+      END IF;
+      attempts := attempts + 1;
+      IF attempts >= 10 THEN
+        RAISE EXCEPTION 'Failed to generate unique referral_code for profile id=%', rec.id;
+      END IF;
+    END LOOP;
+  END LOOP;
+END;
+$$;
 
 
 -- ============================================================
@@ -81,7 +102,7 @@ CREATE TABLE IF NOT EXISTS public.coupons (
   discount_type  VARCHAR(20) NOT NULL
                                CHECK (discount_type IN ('percent', 'fixed')),
   discount_value INTEGER     NOT NULL DEFAULT 5,
-  issue_reason   VARCHAR(50)
+  issue_reason   VARCHAR(50) NOT NULL
                                CHECK (issue_reason IN ('signup', 'referred', 'referrer')),
   is_used        BOOLEAN     NOT NULL DEFAULT false,
   created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW()
