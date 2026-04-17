@@ -279,119 +279,119 @@
   },
   "booking_skeleton": {
     "steps": {
-      "step1_title": "Select Service",
-      "step1_desc": "Choose your treatment and move to the next step.",
-      "step2_title": "Date & Info",
-      "step2_desc": "Enter appointment date and info on one screen.",
-      "step3_title": "Final Confirmation",
-      "step3_desc": "Review details and send reservation request.",
-      "step": "STEP"
+      "step1_title": "서비스 선택",
+      "step1_desc": "원하는 시술을 선택하고 다음 단계로 이동하세요.",
+      "step2_title": "날짜 및 정보",
+      "step2_desc": "예약 일시와 정보를 한 화면에서 입력하세요.",
+      "step3_title": "최종 확인",
+      "step3_desc": "상세 내용을 확인하고 예약 요청을 보냅니다.",
+      "step": "단계"
     },
     "service_selection": {
-      "title": "Select Service",
-      "desc": "Please select the service menu you want.",
-      "no_menu": "No services available for this category yet.",
-      "select_category_first": "Please select a category first."
+      "title": "서비스 선택",
+      "desc": "원하시는 서비스 메뉴를 선택해 주세요.",
+      "no_menu": "이 카테고리에 아직 등록된 서비스가 없습니다.",
+      "select_category_first": "카테고리를 먼저 선택해 주세요."
     },
     "date_time": {
-      "title": "Select Date & Time",
-      "desc": "Please choose your preferred appointment time.",
-      "preparing": "The date selection screen is being prepared for this category.",
+      "title": "날짜 및 시간 선택",
+      "desc": "원하시는 예약 시간을 선택해 주세요.",
+      "preparing": "이 카테고리의 날짜 선택 화면을 준비 중입니다.",
       "placeholder": "연도-월-일",
       "clear": "초기화",
       "today": "오늘"
     },
     "customer_details": {
-      "title": "Customer Details",
-      "desc": "Please review your information for booking confirmation.",
-      "desc_hint": "Please enter accurate information for booking confirmation.",
-      "name_label": "Name (English recommended) *",
-      "name_placeholder": "Name as on Passport",
-      "phone_label": "Contact (SNS ID possible) *",
-      "phone_placeholder": "Phone or Instagram ID",
-      "request_label": "Special Requests",
-      "request_placeholder": "Describe your desired style or any specific concerns.",
-      "current_status": "Current Status",
-      "current_status_desc": "Please attach photos showing your current status.",
-      "current_status_helper": "The clearer the photos, the better the consultation.",
-      "add_current_photo": "Add Current Photo",
-      "desired_style": "Desired Style",
-      "desired_style_desc": "Please attach reference images of the style you want.",
-      "desired_style_helper": "Images that clearly show the desired mood or length are best.",
-      "add_style_photo": "Add Style Photo",
-      "no_photo": "No photo attached.",
-      "add_photo": "Add Photo",
-      "photo_hint": "* You can attach 1 photo each for reference and current status.",
-      "preparing": "The customer details entry screen is being prepared for this category."
+      "title": "예약 정보 입력",
+      "desc": "예약 확정을 위해 정보를 검토해 주세요.",
+      "desc_hint": "정확한 예약 확정을 위해 정보를 입력해 주세요.",
+      "name_label": "성함 (영문 추천) *",
+      "name_placeholder": "여권상의 성함",
+      "phone_label": "연락처 (SNS ID 가능) *",
+      "phone_placeholder": "휴대폰 번호 또는 인스타그램 ID",
+      "request_label": "추가 요청사항",
+      "request_placeholder": "원하는 스타일이나 특별히 신경 써야 할 부분을 설명해 주세요.",
+      "current_status": "현재 상태",
+      "current_status_desc": "현재 상태를 보여주는 사진을 첨부해 주세요.",
+      "current_status_helper": "사진이 선명할수록 더 정확한 상담이 가능합니다.",
+      "add_current_photo": "현재 사진 추가",
+      "desired_style": "원하는 스타일",
+      "desired_style_desc": "원하는 스타일의 참고 이미지를 첨부해 주세요.",
+      "desired_style_helper": "원하는 분위기나 기장이 명확히 보이는 사진이 좋습니다.",
+      "add_style_photo": "스타일 사진 추가",
+      "no_photo": "첨부된 사진이 없습니다.",
+      "add_photo": "사진 추가",
+      "photo_hint": "* 참고용과 현재 상태 사진을 각각 1장씩 첨부할 수 있습니다.",
+      "preparing": "이 카테고리의 상세 정보 입력 화면을 준비 중입니다."
     },
     "confirmation": {
-      "title": "Booking Summary",
-      "desc": "Please review the information you entered.",
-      "desc_summary": "Please review the information you entered.",
-      "desc_final": "Review the booking once more and send the request.",
-      "shop": "Shop",
-      "date_time": "Date & Time",
-      "service": "Service",
-      "customer": "Customer",
-      "agreement_title": "Agreements",
-      "agreement_desc": "Please agree to the required items for booking.",
-      "agreement_desc_hint": "Please agree to the required items for booking.",
-      "confirm_info_label": "Confirm Booking Details",
-      "confirm_info_desc": "I confirm that the selected shop, date, and service details are correct.",
-      "privacy_label": "Agree to Privacy Policy",
-      "privacy_desc": "I agree to provide my name and contact information to the shop for the reservation.",
-      "attached_images": "Attached Images",
-      "image_count_summary": "Total {{count}} images",
-      "submit_button": "Request Final Reservation",
-      "preparing": "The final confirmation screen is being prepared for this category."
+      "title": "예약 요약",
+      "desc": "입력하신 정보를 확인해 주세요.",
+      "desc_summary": "입력하신 정보를 확인해 주세요.",
+      "desc_final": "예약을 다시 한번 확인하고 요청을 보냅니다.",
+      "shop": "매장",
+      "date_time": "날짜 및 시간",
+      "service": "서비스",
+      "customer": "예약자",
+      "agreement_title": "약관 동의",
+      "agreement_desc": "예약에 필요한 필수 항목에 동의해 주세요.",
+      "agreement_desc_hint": "예약에 필요한 필수 항목에 동의해 주세요.",
+      "confirm_info_label": "예약 내용 확인",
+      "confirm_info_desc": "선택한 매장, 날짜, 서비스 정보가 정확함을 확인합니다.",
+      "privacy_label": "개인정보 수집 동의",
+      "privacy_desc": "예약 진행을 위해 매장에 성함 및 연락처 정보를 제공하는 것에 동의합니다.",
+      "attached_images": "첨부 이미지",
+      "image_count_summary": "총 {{count}}장",
+      "submit_button": "최종 예약 신청하기",
+      "preparing": "이 카테고리의 최종 확인 화면을 준비 중입니다."
     },
-    "next_step": "Next Step",
-    "check_final": "Final Confirmation",
+    "next_step": "다음 단계로",
+    "check_final": "최종 확인",
     "review": {
-      "no_request": "No special requests yet.",
-      "no_images": "No images attached.",
-      "no_service": "No service selected.",
-      "no_date": "No date selected.",
-      "no_time": "No time selected.",
-      "no_name": "Name missing.",
-      "no_contact": "Contact missing."
+      "no_request": "추가 요청사항 없음",
+      "no_images": "첨부 이미지 없음",
+      "no_service": "선택된 서비스 없음",
+      "no_date": "선택된 날짜 없음",
+      "no_time": "선택된 시간 없음",
+      "no_name": "이름 누락",
+      "no_contact": "연락처 누락"
     },
     "image_groups": {
       "hair": {
-        "current_editor": "Current hair condition",
-        "current_review": "Current hair images",
-        "style_editor": "Desired style references",
-        "style_review": "Desired style images"
+        "current_editor": "현재 모발 상태",
+        "current_review": "현재 모발 사진",
+        "style_editor": "원하는 스타일 참고",
+        "style_review": "원하는 스타일 사진"
       },
       "nail": {
-        "current_editor": "Current nail condition",
-        "current_review": "Current condition images",
-        "style_editor": "Desired nail style references",
-        "style_review": "Desired style images"
+        "current_editor": "현재 손톱 상태",
+        "current_review": "현재 상태 사진",
+        "style_editor": "원하는 네일 참고",
+        "style_review": "원하는 스타일 사진"
       },
       "aesthetic": {
-        "current_editor": "Current skin condition",
-        "current_review": "Current condition images",
-        "style_editor": "Desired result references",
-        "style_review": "Desired result images"
+        "current_editor": "현재 피부 상태",
+        "current_review": "현재 상태 사진",
+        "style_editor": "원하는 결과 참고",
+        "style_review": "원하는 결과 사진"
       },
       "eyelash": {
-        "current_editor": "Current lash condition",
-        "current_review": "Current condition images",
-        "style_editor": "Desired lash style references",
-        "style_review": "Desired style images"
+        "current_editor": "현재 속눈썹 상태",
+        "current_review": "현재 상태 사진",
+        "style_editor": "원하는 눈매 참고",
+        "style_review": "원하는 스타일 사진"
       },
       "makeup": {
-        "current_editor": "Current face condition",
-        "current_review": "Current condition images",
-        "style_editor": "Desired makeup references",
-        "style_review": "Desired reference images"
+        "current_editor": "현재 얼굴 상태",
+        "current_review": "현재 상태 사진",
+        "style_editor": "원하는 메이크업 참고",
+        "style_review": "원하는 참고 사진"
       },
       "waxing": {
-        "current_editor": "Current skin condition",
-        "current_review": "Current condition images",
-        "style_editor": "Desired result references",
-        "style_review": "Desired result images"
+        "current_editor": "현재 피부 상태",
+        "current_review": "현재 상태 사진",
+        "style_editor": "원하는 결과 참고",
+        "style_review": "원하는 결과 사진"
       }
     },
     "services": {
@@ -483,48 +483,48 @@
   },
   "categories": {
     "hair": {
-      "label": "Hair",
-      "note": "Cut, Perm, Color, Styling",
-      "summary": "Start booking everything from style changes to quick trims fastest here."
+      "label": "헤어",
+      "note": "커트, 펌, 염색, 스타일링",
+      "summary": "스타일 변신부터 가벼운 다듬기까지, 가장 빠르게 예약을 시작하세요."
     },
     "nail": {
-      "label": "Nail",
-      "note": "Gel, Care, Extension",
-      "summary": "Pick your desired mood and design, then move lightly to the booking step."
+      "label": "네일",
+      "note": "젤, 케어, 연장",
+      "summary": "원하는 무드와 디자인을 선택하고 가볍게 예약 단계로 이동하세요."
     },
     "esthetic": {
-      "label": "Esthetic",
-      "note": "Skin Care, Contouring, Soothing",
-      "summary": "Compare shops and book based on your skin condition and treatment goals."
+      "label": "에스테틱",
+      "note": "스킨 케어, 윤곽, 진정",
+      "summary": "피부 상태와 시술 목적에 맞춰 매장을 비교하고 예약하세요."
     },
     "waxing": {
-      "label": "Waxing",
-      "note": "Face, Body, Brazilian",
-      "summary": "Quickly find shops matching your area and schedule, leading into the booking flow."
+      "label": "왁싱",
+      "note": "페이스, 바디, 브라질리언",
+      "summary": "내 지역과 일정에 맞는 매장을 빠르게 찾아 예약 플로우로 이어집니다."
     },
     "makeup": {
-      "label": "Makeup",
-      "note": "Daily, Shoot, Wedding",
-      "summary": "Select a makeup service for your event date and start booking immediately."
+      "label": "메이크업",
+      "note": "데일리, 촬영, 웨딩",
+      "summary": "이벤트 날짜에 맞춘 메이크업 서비스를 선택하고 즉시 예약을 시작하세요."
     },
     "lash": {
-      "label": "Lash",
-      "note": "Extension, Perm, Underlash",
-      "summary": "Connect directly to the menu for everything from natural extensions to volume styling."
+      "label": "속눈썹",
+      "note": "연장, 펌, 언더래쉬",
+      "summary": "자연스러운 연장부터 볼륨 스타일링까지, 메뉴로 바로 연결됩니다."
     }
   },
   "selection": {
-    "eyebrow": "Selected Category",
+    "eyebrow": "선택한 카테고리",
     "tags": {
-      "mobile": "Mobile Booking",
-      "comparison": "Shop Comparison",
-      "inquiry": "Real-time Inquiry"
+      "mobile": "모바일 예약",
+      "comparison": "매장 비교",
+      "inquiry": "실시간 문의"
     },
-    "empty": "Please select a category first. The start booking button will activate after selection."
+    "empty": "카테고리를 먼저 선택해 주세요. 선택 후 예약 시작 버튼이 활성화됩니다."
   },
   "cta": {
-    "hint": "Explore available beauty services in the next screen based on the selected category.",
-    "button": "Start Booking"
+    "hint": "선택한 카테고리를 바탕으로 다음 화면에서 이용 가능한 뷰티 서비스를 확인하세요.",
+    "button": "예약 시작하기"
   },
   "interpreter_entry": {
     "title": "실시간 번역 헬퍼",
