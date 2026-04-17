@@ -2140,5 +2140,11 @@
   "error_desc": "If the problem persists, please contact support.",
   "error_retry": "Try Again",
   "common_actions_view_all": "View All",
-  "common_loading": "Loading..."
+  "common_loading": "Loading...",
+  "welcome_popup": {
+    "title": "Get a 5% coupon just for signing up!",
+    "description": "You'll receive a coupon you can use right away.",
+    "cta": "Sign up & get coupon",
+    "close": "Close"
+  }
 }

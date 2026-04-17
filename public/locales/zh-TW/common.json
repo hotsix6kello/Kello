@@ -887,5 +887,11 @@
       "weekend": "本週末",
       "fresh": "最新消息"
     }
+  },
+  "welcome_popup": {
+    "title": "註冊即送5%折扣券！",
+    "description": "註冊後可立即使用折扣券。",
+    "cta": "領券註冊",
+    "close": "關閉"
   }
 }
