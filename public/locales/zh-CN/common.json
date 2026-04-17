@@ -1710,5 +1710,18 @@
     "copy": "复制地址",
     "copy_done": "复制成功！",
     "close": "关闭"
+  },
+  "welcome_popup": {
+    "title": "注册即送5%优惠券！",
+    "description": "注册后可立即使用优惠券。",
+    "cta": "领券注册",
+    "close": "关闭"
+  },
+  "referral_popup": {
+    "title": "您有推荐码吗？",
+    "description": "输入推荐码，您和朋友都能获得5%优惠券！",
+    "placeholder": "输入推荐码",
+    "submit": "确认",
+    "skip": "稍后再说"
   }
 }

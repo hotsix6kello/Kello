@@ -544,5 +544,18 @@
     "copy": "주소 복사",
     "copy_done": "복사 완료!",
     "close": "취소"
+  },
+  "welcome_popup": {
+    "title": "지금 가입하면 즉시 사용 가능한 5% 할인 쿠폰 증정!",
+    "description": "회원가입만 해도 바로 쓸 수 있는 쿠폰을 드려요.",
+    "cta": "쿠폰 받고 가입하기",
+    "close": "닫기"
+  },
+  "referral_popup": {
+    "title": "추천인 코드가 있으신가요?",
+    "description": "코드를 입력하면 친구도 나도 5% 추가 할인 쿠폰!",
+    "placeholder": "추천인 코드 입력",
+    "submit": "입력 완료",
+    "skip": "다음에 하기"
   }
 }
