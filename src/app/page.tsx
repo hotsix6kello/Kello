@@ -130,6 +130,8 @@ export default function HomePage() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const [showReferralPopup, setShowReferralPopup] = useState(false);
+  const [referralError, setReferralError] = useState<string | null>(null);
+  const [referralToast, setReferralToast] = useState<string | null>(null);
 
   // Navigation Sheet States
   const [openNavSheet, setOpenNavSheet] = useState(false);
@@ -337,9 +339,29 @@ export default function HomePage() {
     setShowReferralPopup(false);
   };
 
-  const handleReferralSubmit = (code: string) => {
-    console.log('[ReferralCodePopup] code submitted:', code);
-    setShowReferralPopup(false);
+  const handleReferralSubmit = async (code: string) => {
+    setReferralError(null);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('/api/referral/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+        },
+        body: JSON.stringify({ code }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setShowReferralPopup(false);
+        setReferralToast('추천인 코드가 적용되었습니다! 5% 쿠폰이 발급되었어요 🎉');
+        setTimeout(() => setReferralToast(null), 3000);
+      } else {
+        setReferralError(result.error ?? '알 수 없는 오류가 발생했습니다.');
+      }
+    } catch {
+      setReferralError('일시적인 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   const handleSignOut = async () => {
@@ -637,7 +659,12 @@ export default function HomePage() {
         <ReferralCodePopup
           onClose={handleReferralClose}
           onSubmit={handleReferralSubmit}
+          errorMessage={referralError ?? undefined}
         />
+      )}
+
+      {referralToast && (
+        <div className={styles.toast}>{referralToast}</div>
       )}
     </div>
   );
