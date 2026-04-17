@@ -179,7 +179,7 @@ export default function HomeBookingFlowEntry({
       setActiveSubmitStatus("submitting");
       onSubmitAttemptStateChange?.({
         status: "submitting",
-        message: "이미지를 업로드하고 있어요...",
+        message: t("home_beauty.booking.submitting_images"),
         errorSummary: null,
       });
 
@@ -192,7 +192,7 @@ export default function HomeBookingFlowEntry({
         if (hasImages) {
           const { data: { session } } = await supabase.auth.getSession();
           if (!session) {
-            throw new Error("이미지를 첨부하려면 로그인이 필요합니다. 로그인 후 다시 시도해 주세요.");
+            throw new Error(t("home_beauty.booking.login_required"));
           }
         }
 
@@ -219,7 +219,7 @@ export default function HomeBookingFlowEntry({
         const [currentResult, styleResult] = await Promise.all([currentUploadPromise, styleUploadPromise]);
 
         if (currentResult?.error || styleResult?.error) {
-          throw new Error(`이미지 업로드 실패: ${currentResult?.error || styleResult?.error}`);
+          throw new Error(`${t("home_beauty.booking.booking_failed")}: ${currentResult?.error || styleResult?.error}`);
         }
 
         // 이번 요청에서 업로드한 경로만 추적 (orphan cleanup 대상)
@@ -242,7 +242,7 @@ export default function HomeBookingFlowEntry({
 
         onSubmitAttemptStateChange?.({
           status: "submitting",
-          message: "예약 요청을 보내는 중입니다...",
+          message: t("home_beauty.booking.sending_request"),
           errorSummary: null,
         });
 
@@ -273,12 +273,12 @@ export default function HomeBookingFlowEntry({
         setActiveSubmitStatus("submitted");
         onSubmitAttemptStateChange?.({
           status: "submitted",
-          message: `예약이 완료되었습니다! (ID: ${result.bookingId})`,
+          message: `${t("home_beauty.booking.booking_completed")} (ID: ${result.bookingId})`,
           errorSummary: null,
         });
       } catch (err: unknown) {
         setActiveSubmitStatus("submit-error");
-        const errorMessage = err instanceof Error ? err.message : "예약 제출 중 오류가 발생했습니다.";
+        const errorMessage = err instanceof Error ? err.message : t("home_beauty.booking.booking_failed");
         onSubmitAttemptStateChange?.({
           status: "submit-error",
           message: errorMessage,
@@ -291,6 +291,7 @@ export default function HomeBookingFlowEntry({
       onSubmitAttemptStateChange,
       onSubmitPreparationChange,
       uploadedImageUrls,
+      t,
     ]
   );
 
@@ -320,7 +321,7 @@ export default function HomeBookingFlowEntry({
         <button
           type="button"
           onClick={() => onClose()}
-          className="absolute left-3 top-6 z-[50] flex items-center justify-center text-neutral-500 transition-colors hover:text-neutral-900"
+          className="absolute start-3 top-6 z-[50] flex items-center justify-center text-neutral-500 transition-colors hover:text-neutral-900"
           aria-label="Close booking flow"
         >
           <svg
@@ -348,17 +349,16 @@ export default function HomeBookingFlowEntry({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h2 className="text-[22px] font-black text-neutral-900 mb-2">예약 요청 완료!</h2>
-                <p className="text-[14px] font-medium text-neutral-500 leading-relaxed px-6">
-                  성공적으로 예약 요청을 보냈습니다.<br />
-                  선택하신 매장에서 확인 후 곧 연락드릴 예정입니다.
+                <h2 className="text-[22px] font-black text-neutral-900 mb-2">{t("home_beauty.booking.completion_title")}</h2>
+                <p className="text-[14px] font-medium text-neutral-500 leading-relaxed px-6 whitespace-pre-wrap">
+                  {t("home_beauty.booking.completion_desc")}
                 </p>
                 <button
                   type="button"
                   onClick={() => onClose()}
                   className="mt-12 px-10 py-4 bg-fuchsia-600 text-white font-bold rounded-2xl shadow-lg hover:bg-fuchsia-700 transition-colors"
                 >
-                  확인
+                  {t("home_beauty.booking.confirm_button")}
                 </button>
               </div>
             ) : (

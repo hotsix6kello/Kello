@@ -52,14 +52,14 @@ export default function HomeModals({
       {showCard && (
         <div className={styles.overlay} onClick={onCardClose}>
           <div className={styles.addressCard} onClick={e => e.stopPropagation()}>
-            <div className={styles.cardTitle}>{t('home_beauty.modals.card_title')}</div>
+            <div className={styles.cardTitle}>{t('modals.card_title')}</div>
             <div className={styles.cardAddress}>{destInfo.nameKo}</div>
             <div className={styles.cardName}>{destInfo.name}</div>
             <button className={styles.cardCopyBtn} onClick={onCopy}>
-              {copied ? t('home_beauty.modals.copy_done') : t('home_beauty.modals.copy')}
+              {copied ? t('modals.copy_done') : t('modals.copy')}
             </button>
             <button className={styles.cardCloseBtn} onClick={onCardClose}>
-              {t('home_beauty.modals.close')}
+              {t('modals.close')}
             </button>
           </div>
         </div>

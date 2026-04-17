@@ -20,32 +20,32 @@ export const BOOKING_FLOW_CATEGORY_ORDER = [
 export const BOOKING_FLOW_CATEGORY_CONFIG: Record<BookingFlowCategory, BookingFlowCategoryConfig> = {
   hair: {
     id: "hair",
-    label: "헤어",
+    label: "categories.hair.label",
     legacyBeautyCategoryId: "hair",
   },
   nail: {
     id: "nail",
-    label: "네일",
+    label: "categories.nail.label",
     legacyBeautyCategoryId: "nail",
   },
   aesthetic: {
     id: "aesthetic",
-    label: "에스테틱",
-    legacyBeautyCategoryId: "esthetic",
+    label: "categories.esthetic.label",
+    legacyBeautyCategoryId: "nail",
   },
   eyelash: {
     id: "eyelash",
-    label: "속눈썹",
+    label: "categories.lash.label",
     legacyBeautyCategoryId: "lash",
   },
   makeup: {
     id: "makeup",
-    label: "메이크업",
+    label: "categories.makeup.label",
     legacyBeautyCategoryId: "makeup",
   },
   waxing: {
     id: "waxing",
-    label: "왁싱",
+    label: "categories.waxing.label",
     legacyBeautyCategoryId: "waxing",
   },
 };
@@ -99,15 +99,15 @@ export const BOOKING_FLOW_IMAGE_GROUPS: BookingImageGroupConfig[] = [
     id: "current-hair",
     kind: "current-state",
     stateKey: "currentStateImages",
-    editorTitle: "Current hair condition",
-    reviewTitle: "Current hair images",
+    editorTitle: "booking_skeleton.image_groups.hair.current_editor",
+    reviewTitle: "booking_skeleton.image_groups.hair.current_review",
   },
   {
     id: "desired-style",
     kind: "desired-style",
     stateKey: "desiredStyleImages",
-    editorTitle: "Desired style references",
-    reviewTitle: "Desired style images",
+    editorTitle: "booking_skeleton.image_groups.hair.style_editor",
+    reviewTitle: "booking_skeleton.image_groups.hair.style_review",
   },
 ];
 
@@ -117,62 +117,62 @@ const BOOKING_FLOW_IMAGE_GROUP_LABELS_BY_CATEGORY: Record<
 > = {
   hair: {
     currentStateImages: {
-      editorTitle: "Current hair condition",
-      reviewTitle: "Current hair images",
+      editorTitle: "booking_skeleton.image_groups.hair.current_editor",
+      reviewTitle: "booking_skeleton.image_groups.hair.current_review",
     },
     desiredStyleImages: {
-      editorTitle: "Desired style references",
-      reviewTitle: "Desired style images",
+      editorTitle: "booking_skeleton.image_groups.hair.style_editor",
+      reviewTitle: "booking_skeleton.image_groups.hair.style_review",
     },
   },
   nail: {
     currentStateImages: {
-      editorTitle: "Current nail condition",
-      reviewTitle: "Current condition images",
+      editorTitle: "booking_skeleton.image_groups.nail.current_editor",
+      reviewTitle: "booking_skeleton.image_groups.nail.current_review",
     },
     desiredStyleImages: {
-      editorTitle: "Desired nail style references",
-      reviewTitle: "Desired style images",
+      editorTitle: "booking_skeleton.image_groups.nail.style_editor",
+      reviewTitle: "booking_skeleton.image_groups.nail.style_review",
     },
   },
   aesthetic: {
     currentStateImages: {
-      editorTitle: "Current skin condition",
-      reviewTitle: "Current condition images",
+      editorTitle: "booking_skeleton.image_groups.aesthetic.current_editor",
+      reviewTitle: "booking_skeleton.image_groups.aesthetic.current_review",
     },
     desiredStyleImages: {
-      editorTitle: "Desired result references",
-      reviewTitle: "Desired result images",
+      editorTitle: "booking_skeleton.image_groups.aesthetic.style_editor",
+      reviewTitle: "booking_skeleton.image_groups.aesthetic.style_review",
     },
   },
   eyelash: {
     currentStateImages: {
-      editorTitle: "Current lash condition",
-      reviewTitle: "Current condition images",
+      editorTitle: "booking_skeleton.image_groups.eyelash.current_editor",
+      reviewTitle: "booking_skeleton.image_groups.eyelash.current_review",
     },
     desiredStyleImages: {
-      editorTitle: "Desired lash style references",
-      reviewTitle: "Desired style images",
+      editorTitle: "booking_skeleton.image_groups.eyelash.style_editor",
+      reviewTitle: "booking_skeleton.image_groups.eyelash.style_review",
     },
   },
   makeup: {
     currentStateImages: {
-      editorTitle: "Current face condition",
-      reviewTitle: "Current condition images",
+      editorTitle: "booking_skeleton.image_groups.makeup.current_editor",
+      reviewTitle: "booking_skeleton.image_groups.makeup.current_review",
     },
     desiredStyleImages: {
-      editorTitle: "Desired makeup references",
-      reviewTitle: "Desired reference images",
+      editorTitle: "booking_skeleton.image_groups.makeup.style_editor",
+      reviewTitle: "booking_skeleton.image_groups.makeup.style_review",
     },
   },
   waxing: {
     currentStateImages: {
-      editorTitle: "Current skin condition",
-      reviewTitle: "Current condition images",
+      editorTitle: "booking_skeleton.image_groups.waxing.current_editor",
+      reviewTitle: "booking_skeleton.image_groups.waxing.current_review",
     },
     desiredStyleImages: {
-      editorTitle: "Desired result references",
-      reviewTitle: "Desired result images",
+      editorTitle: "booking_skeleton.image_groups.waxing.style_editor",
+      reviewTitle: "booking_skeleton.image_groups.waxing.style_review",
     },
   },
 };

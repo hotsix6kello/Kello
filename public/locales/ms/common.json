@@ -80,13 +80,36 @@
     }
   },
   "categories": {
-    "all": "Semua",
-    "food": "Makanan",
-    "beauty": "Kecantikan",
-    "event": "Acara",
-    "festival": "Festival",
-    "attraction": "Tarikan",
-    "transport": "Pengangkutan"
+    "hair": {
+      "label": "Hair",
+      "note": "Cut, Perm, Color, Styling",
+      "summary": "Start booking everything from style changes to quick trims fastest here."
+    },
+    "nail": {
+      "label": "Nail",
+      "note": "Gel, Care, Extension",
+      "summary": "Pick your desired mood and design, then move lightly to the booking step."
+    },
+    "esthetic": {
+      "label": "Esthetic",
+      "note": "Skin Care, Contouring, Soothing",
+      "summary": "Compare shops and book based on your skin condition and treatment goals."
+    },
+    "waxing": {
+      "label": "Waxing",
+      "note": "Face, Body, Brazilian",
+      "summary": "Quickly find shops matching your area and schedule, leading into the booking flow."
+    },
+    "makeup": {
+      "label": "Makeup",
+      "note": "Daily, Shoot, Wedding",
+      "summary": "Select a makeup service for your event date and start booking immediately."
+    },
+    "lash": {
+      "label": "Lash",
+      "note": "Extension, Perm, Underlash",
+      "summary": "Connect directly to the menu for everything from natural extensions to volume styling."
+    }
   },
   "community_nav": "Community",
   "home_beauty": {
@@ -101,70 +124,6 @@
       "step": "LANGKAH. 01",
       "title": "Sila pilih perkhidmatan kecantikan",
       "description": ""
-    },
-    "categories": {
-      "hair": {
-        "label": "Rambut",
-        "note": "Potong, perm, warna",
-        "summary": "Tempah perkhidmatan rambut dengan pantas."
-      },
-      "nail": {
-        "label": "Kuku",
-        "note": "Gel, penjagaan, sambungan",
-        "summary": "Pilih reka bentuk dan terus tempah."
-      },
-      "esthetic": {
-        "label": "Estetik",
-        "note": "Penjagaan kulit, kontur",
-        "summary": "Bandingkan salon dan tempah."
-      },
-      "waxing": {
-        "label": "Waxing",
-        "note": "Muka, badan, Brazilian",
-        "summary": "Cari salon yang sesuai dengan pantas."
-      },
-      "makeup": {
-        "label": "Solekan",
-        "note": "Harian, penggambaran, perkahwinan",
-        "summary": "Pilih perkhidmatan solekan untuk acara anda."
-      },
-      "lash": {
-        "label": "Bulu Mata",
-        "note": "Sambungan, perm",
-        "summary": "Dari semula jadi ke volum, pilih menu anda."
-      }
-    },
-    "selection": {
-      "eyebrow": "Kategori yang Dipilih",
-      "tags": {
-        "mobile": "Tempahan mudah alih",
-        "comparison": "Bandingkan salon",
-        "inquiry": "Pertanyaan masa nyata"
-      },
-      "empty": "Sila pilih kategori terlebih dahulu. Butang mula tempahan akan diaktifkan selepas pemilihan."
-    },
-    "cta": {
-      "hint": "Pilih kategori untuk mula tempahan",
-      "button": "Mula Tempahan"
-    },
-    "interpreter_entry": {
-      "title": "Penterjemah Masa Nyata",
-      "description": "Berkomunikasi dengan mudah dengan kakitangan",
-      "cta": "Buka Penterjemah"
-    },
-    "location_sheet": {
-      "search_title": "Cari Lokasi",
-      "search_result_count": "{{count}} hasil untuk \"{{query}}\"",
-      "view_location": "Lihat Lokasi",
-      "view_location_desc": "Lihat lokasi terperinci pada peta",
-      "call_taxi": "Panggil Teksi",
-      "google_maps_desc": "Semak laluan pengangkutan awam di Google Maps"
-    },
-    "modals": {
-      "card_title": "📍 Sila pergi ke alamat ini",
-      "copy": "Salin Alamat",
-      "copy_done": "Berjaya disalin!",
-      "close": "Tutup"
     }
   },
   "interpreter_ui": {
@@ -1076,5 +1035,241 @@
       "nickname_unset": "Not Set"
     },
     "tab_aria_label": "Settings Tabs"
+  },
+  "selection": {
+    "eyebrow": "Selected Category",
+    "tags": {
+      "mobile": "Mobile Booking",
+      "comparison": "Shop Comparison",
+      "inquiry": "Real-time Inquiry"
+    },
+    "empty": "Please select a category first. The start booking button will activate after selection."
+  },
+  "cta": {
+    "hint": "Explore available beauty services in the next screen based on the selected category.",
+    "button": "Start Booking"
+  },
+  "interpreter_entry": {
+    "title": "Penterjemah Masa Nyata",
+    "description": "Berkomunikasi dengan mudah dengan kakitangan",
+    "cta": "Buka Penterjemah"
+  },
+  "location_sheet": {
+    "search_title": "Cari Lokasi",
+    "search_result_count": "{{count}} hasil untuk \"{{query}}\"",
+    "view_location": "Lihat Lokasi",
+    "view_location_desc": "Lihat lokasi terperinci pada peta",
+    "call_taxi": "Panggil Teksi",
+    "google_maps_desc": "Semak laluan pengangkutan awam di Google Maps"
+  },
+  "modals": {
+    "card_title": "📍 Sila pergi ke alamat ini",
+    "copy": "Salin Alamat",
+    "copy_done": "Berjaya disalin!",
+    "close": "Tutup"
+  },
+  "booking_skeleton": {
+    "steps": {
+      "step1_title": "Select Service",
+      "step1_desc": "Choose your treatment and move to the next step.",
+      "step2_title": "Date & Info",
+      "step2_desc": "Enter appointment date and info on one screen.",
+      "step3_title": "Final Confirmation",
+      "step3_desc": "Review details and send reservation request.",
+      "step": "STEP"
+    },
+    "service_selection": {
+      "title": "Select Service",
+      "desc": "Please select the service menu you want.",
+      "no_menu": "No services available for this category yet.",
+      "select_category_first": "Please select a category first."
+    },
+    "date_time": {
+      "title": "Select Date & Time",
+      "desc": "Please choose your preferred appointment time.",
+      "preparing": "The date selection screen is being prepared for this category.",
+      "placeholder": "YYYY-MM-DD",
+      "clear": "Clear",
+      "today": "Today"
+    },
+    "customer_details": {
+      "title": "Customer Details",
+      "desc": "Please review your information for booking confirmation.",
+      "desc_hint": "Please enter accurate information for booking confirmation.",
+      "name_label": "Name (English recommended) *",
+      "name_placeholder": "Name as on Passport",
+      "phone_label": "Contact (SNS ID possible) *",
+      "phone_placeholder": "Phone or Instagram ID",
+      "request_label": "Special Requests",
+      "request_placeholder": "Describe your desired style or any specific concerns.",
+      "current_status": "Current Status",
+      "current_status_desc": "Please attach photos showing your current status.",
+      "current_status_helper": "The clearer the photos, the better the consultation.",
+      "add_current_photo": "Add Current Photo",
+      "desired_style": "Desired Style",
+      "desired_style_desc": "Please attach reference images of the style you want.",
+      "desired_style_helper": "Images that clearly show the desired mood or length are best.",
+      "add_style_photo": "Add Style Photo",
+      "no_photo": "No photo attached.",
+      "add_photo": "Add Photo",
+      "photo_hint": "* You can attach 1 photo each for reference and current status.",
+      "preparing": "The customer details entry screen is being prepared for this category."
+    },
+    "confirmation": {
+      "title": "Booking Summary",
+      "desc": "Please review the information you entered.",
+      "desc_summary": "Please review the information you entered.",
+      "desc_final": "Review the booking once more and send the request.",
+      "shop": "Shop",
+      "date_time": "Date & Time",
+      "service": "Service",
+      "customer": "Customer",
+      "agreement_title": "Agreements",
+      "agreement_desc": "Please agree to the required items for booking.",
+      "agreement_desc_hint": "Please agree to the required items for booking.",
+      "confirm_info_label": "Confirm Booking Details",
+      "confirm_info_desc": "I confirm that the selected shop, date, and service details are correct.",
+      "privacy_label": "Agree to Privacy Policy",
+      "privacy_desc": "I agree to provide my name and contact information to the shop for the reservation.",
+      "attached_images": "Attached Images",
+      "image_count_summary": "Total {{count}} images",
+      "submit_button": "Request Final Reservation",
+      "preparing": "The final confirmation screen is being prepared for this category."
+    },
+    "next_step": "Next Step",
+    "check_final": "Final Confirmation",
+    "review": {
+      "no_request": "No special requests yet.",
+      "no_images": "No images attached.",
+      "no_service": "No service selected.",
+      "no_date": "No date selected.",
+      "no_time": "No time selected.",
+      "no_name": "Name missing.",
+      "no_contact": "Contact missing."
+    },
+    "image_groups": {
+      "hair": {
+        "current_editor": "Current hair condition",
+        "current_review": "Current hair images",
+        "style_editor": "Desired style references",
+        "style_review": "Desired style images"
+      },
+      "nail": {
+        "current_editor": "Current nail condition",
+        "current_review": "Current condition images",
+        "style_editor": "Desired nail style references",
+        "style_review": "Desired style images"
+      },
+      "aesthetic": {
+        "current_editor": "Current skin condition",
+        "current_review": "Current condition images",
+        "style_editor": "Desired result references",
+        "style_review": "Desired result images"
+      },
+      "eyelash": {
+        "current_editor": "Current lash condition",
+        "current_review": "Current condition images",
+        "style_editor": "Desired lash style references",
+        "style_review": "Desired style images"
+      },
+      "makeup": {
+        "current_editor": "Current face condition",
+        "current_review": "Current condition images",
+        "style_editor": "Desired makeup references",
+        "style_review": "Desired reference images"
+      },
+      "waxing": {
+        "current_editor": "Current skin condition",
+        "current_review": "Current condition images",
+        "style_editor": "Desired result references",
+        "style_review": "Desired result images"
+      }
+    },
+    "services": {
+      "hair": {
+        "section_title": "Hair Treatment",
+        "section_desc": "Select hair services like cut, perm, color, or clinic first.",
+        "cut_title": "Cut",
+        "cut_desc": "Basic hair cut for styling and length adjustment.",
+        "perm_title": "Perm",
+        "perm_desc": "Perm treatment for wave and volume.",
+        "color_title": "Color",
+        "color_desc": "Root touch-up, full color, or tone change.",
+        "clinic_title": "Clinic",
+        "clinic_desc": "Treatment for damage care and hair recovery.",
+        "styling_title": "Styling",
+        "styling_desc": "Dry, event styling, or final touch-ups."
+      },
+      "nail": {
+        "section_title": "Nail Treatment",
+        "section_desc": "Choose your desired nail style and type of care.",
+        "care_title": "Care",
+        "care_desc": "Basic care for cuticles, shape, and clean finish.",
+        "gel_title": "Gel",
+        "gel_desc": "One-color gel nail focusing on durability.",
+        "art_title": "Art",
+        "art_desc": "Design consultation from simple to detailed art.",
+        "ext_title": "Extension",
+        "ext_desc": "Nail extension for length and shape correction.",
+        "rem_title": "Removal",
+        "rem_desc": "Removal of existing gel, art, or extensions."
+      },
+      "aesthetic": {
+        "section_title": "Aesthetic Treatment",
+        "section_desc": "Select treatment according to your skin condition and goals.",
+        "basic_title": "Basic Care",
+        "basic_desc": "Basic skin care focusing on cleansing and hydration.",
+        "trouble_title": "Trouble Care",
+        "trouble_desc": "Care focused on skin troubles and pores.",
+        "calming_title": "Calming Care",
+        "calming_desc": "Calming care for sensitive and red skin.",
+        "lifting_title": "Lifting",
+        "lifting_desc": "Lifting care for elasticity and contour.",
+        "bright_title": "Brightening",
+        "bright_desc": "Brightening care for dull skin tone."
+      },
+      "eyelash": {
+        "section_title": "Eyelash Treatment",
+        "section_desc": "Choose from extensions, perms, or care for your lashes.",
+        "perm_title": "Perm",
+        "perm_desc": "Eyelash perm for lift and eye design.",
+        "ext_title": "Extension",
+        "ext_desc": "Eyelash extension for length and volume.",
+        "refill_title": "Refill",
+        "refill_desc": "Refill to maintain extensions.",
+        "rem_title": "Removal",
+        "rem_desc": "Safe removal of existing extensions.",
+        "care_title": "Care",
+        "care_desc": "Aftercare and condition check."
+      },
+      "makeup": {
+        "section_title": "Makeup Treatment",
+        "section_desc": "Select makeup services for daily, shooting, or wedding.",
+        "daily_title": "Daily",
+        "daily_desc": "Natural daily makeup.",
+        "interview_title": "Interview",
+        "interview_desc": "Clean and clear lookup for interviews.",
+        "wedding_title": "Wedding",
+        "wedding_desc": "Long-lasting wedding makeup.",
+        "shooting_title": "Shooting",
+        "shooting_desc": "Makeup for studio or outdoor shooting.",
+        "special_title": "Special Event",
+        "special_desc": "Point makeup for parties or events."
+      },
+      "waxing": {
+        "section_title": "Waxing Treatment",
+        "section_desc": "Select waxing services for face, body, or brazilian.",
+        "brazilian_title": "Brazilian",
+        "brazilian_desc": "Intensive brazilian waxing.",
+        "arm_title": "Arm",
+        "arm_desc": "Upper and lower arm waxing.",
+        "leg_title": "Leg",
+        "leg_desc": "Lower or full leg waxing.",
+        "face_title": "Face",
+        "face_desc": "Eyebrows, lip, and face waxing.",
+        "body_title": "Body",
+        "body_desc": "Back, chest, or body part waxing."
+      }
+    }
   }
 }

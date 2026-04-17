@@ -1015,71 +1015,15 @@
     "booking": {
       "step": "STEP. 01",
       "title": "请选择美容服务",
-      "description": ""
-    },
-    "categories": {
-      "hair": {
-        "label": "美发",
-        "note": "剪发、烫发、染发",
-        "summary": "从发型改变到快速修剪，快速预约。"
-      },
-      "nail": {
-        "label": "美甲",
-        "note": "凝胶、护理、延长",
-        "summary": "选择心仪的美甲设计后进入预约。"
-      },
-      "esthetic": {
-        "label": "美容",
-        "note": "皮肤护理、轮廓、舒缓",
-        "summary": "根据您的肤质比较店铺并预约。"
-      },
-      "waxing": {
-        "label": "脱毛",
-        "note": "面部、身体、巴西式",
-        "summary": "快速找到符合您需求的脱毛店铺。"
-      },
-      "makeup": {
-        "label": "化妆",
-        "note": "日常、拍摄、婚礼",
-        "summary": "为您的活动选择化妆服务并预约。"
-      },
-      "lash": {
-        "label": "睫毛",
-        "note": "嫁接、烫睫毛、下睫毛",
-        "summary": "从自然款到浓密款，按需选择。"
-      }
-    },
-    "selection": {
-      "eyebrow": "已选择类别",
-      "tags": {
-        "mobile": "手机预约",
-        "comparison": "店铺比较",
-        "inquiry": "实时咨询"
-      },
-      "empty": "请先选择类别。选择后预约开始按钮将会启用。"
-    },
-    "cta": {
-      "hint": "选择类别后即可开始预约",
-      "button": "开始预约"
-    },
-    "interpreter_entry": {
-      "title": "实时翻译助手",
-      "description": "与店铺员工轻松沟通",
-      "cta": "开启翻译"
-    },
-    "location_sheet": {
-      "search_title": "查找搜索结果",
-      "search_result_count": "{{query}} 的搜索结果 {{count}}条",
-      "view_location": "查看位置",
-      "view_location_desc": "在地图上查看详细位置",
-      "call_taxi": "呼叫 K.Ride",
-      "google_maps_desc": "使用谷歌地图查看公交路线"
-    },
-    "modals": {
-      "card_title": "📍 请前往这个地址",
-      "copy": "复制地址",
-      "copy_done": "复制成功！",
-      "close": "关闭"
+      "description": "",
+      "submitting_images": "正在上传图片...",
+      "sending_request": "正在发送预约请求...",
+      "booking_completed": "预约已完成！",
+      "booking_failed": "预约提交过程中发生错误。",
+      "completion_title": "预约请求已完成！",
+      "completion_desc": "成功发送预约请求。\n所选商家确认后将尽快为您联系。",
+      "confirm_button": "确认",
+      "login_required": "上传图片需要登录。请登录后重试。"
     }
   },
   "interpreter_page": {
@@ -1498,5 +1442,273 @@
   "error_desc": "If the problem persists, please contact support.",
   "error_retry": "Try Again",
   "common_actions_view_all": "View All",
-  "common_loading": "Loading..."
+  "common_loading": "Loading...",
+  "booking_skeleton": {
+    "steps": {
+      "step1_title": "选择服务",
+      "step1_desc": "选择您需要的项目并进入下一步。",
+      "step2_title": "日期和信息",
+      "step2_desc": "在同一页面填写预约日期和详细信息。",
+      "step3_title": "最终确认",
+      "step3_desc": "核对预约信息并发送请求。",
+      "step": "STEP"
+    },
+    "service_selection": {
+      "title": "选择服务",
+      "desc": "请选择您心仪的服务项目。",
+      "no_menu": "该分类下暂无服务项目。",
+      "select_category_first": "请先选择一个分类。"
+    },
+    "date_time": {
+      "title": "选择日期和时间",
+      "desc": "请选择您希望的预约时间。",
+      "preparing": "该分类的日期选择页面正在准备中。",
+      "placeholder": "年-月-日",
+      "clear": "清除",
+      "today": "今天"
+    },
+    "customer_details": {
+      "title": "客户信息",
+      "desc": "为了确认预约，请核对您的信息。",
+      "desc_hint": "为了顺利完成预约，请提供准确的信息。",
+      "name_label": "姓名（建议英文） *",
+      "name_placeholder": "与护照上的姓名一致",
+      "phone_label": "联系方式（可留社交媒体ID） *",
+      "phone_placeholder": "电话号码或Instagram ID",
+      "request_label": "特殊要求",
+      "request_placeholder": "请描述您期望的风格或任何特定需求。",
+      "current_status": "当前状态",
+      "current_status_desc": "请上传能展示您当前状态的照片。",
+      "current_status_helper": "照片越清晰，越有助于顺利接待。",
+      "add_current_photo": "添加当前照片",
+      "desired_style": "期望风格",
+      "desired_style_desc": "请上传您期望风格的参考照片。",
+      "desired_style_helper": "最能清楚展示期望的氛围或长度的照片为佳。",
+      "add_style_photo": "添加风格照片",
+      "no_photo": "未上传照片。",
+      "add_photo": "添加照片",
+      "photo_hint": "※ 参考图片和当前状态图片各限传1张。",
+      "preparing": "该分类的客户信息填写页面正在准备中。"
+    },
+    "confirmation": {
+      "title": "预约摘要",
+      "desc": "请仔细核对您填写的信息。",
+      "desc_summary": "请确认您填写的信息。",
+      "desc_final": "请再次检查预约详情并发送请求。",
+      "shop": "店铺",
+      "date_time": "日期和时间",
+      "service": "服务",
+      "customer": "客户",
+      "agreement_title": "协议",
+      "agreement_desc": "请同意预约所需的各项条款。",
+      "agreement_desc_hint": "请同意预约所需的各项条款。",
+      "confirm_info_label": "确认预约详情",
+      "confirm_info_desc": "我确认所选择的店铺、日期和服务详情均准确无误。",
+      "privacy_label": "同意隐私政策",
+      "privacy_desc": "我同意将预约所需的姓名及联系方式提供给对应店铺。",
+      "attached_images": "已上传图片",
+      "image_count_summary": "共 {{count}} 张图片",
+      "submit_button": "提交最终预约请求",
+      "preparing": "该分类的最终确认页面正在准备中。"
+    },
+    "next_step": "下一步",
+    "check_final": "最终确认",
+    "review": {
+      "no_request": "暂无特殊要求。",
+      "no_images": "未上传任何图片。",
+      "no_service": "未选择服务。",
+      "no_date": "未选择日期。",
+      "no_time": "未选择时间。",
+      "no_name": "缺少姓名。",
+      "no_contact": "缺少联系方式。"
+    },
+    "image_groups": {
+      "hair": {
+        "current_editor": "当前头发状况",
+        "current_review": "当前头发图片",
+        "style_editor": "期望风格参考",
+        "style_review": "期望风格图片"
+      },
+      "nail": {
+        "current_editor": "当前指甲状况",
+        "current_review": "当前状况图片",
+        "style_editor": "期望美甲风格参考",
+        "style_review": "期望风格图片"
+      },
+      "aesthetic": {
+        "current_editor": "当前皮肤状况",
+        "current_review": "当前状况图片",
+        "style_editor": "期望效果参考",
+        "style_review": "期望效果图片"
+      },
+      "eyelash": {
+        "current_editor": "当前睫毛状况",
+        "current_review": "当前状况图片",
+        "style_editor": "期望睫毛风格参考",
+        "style_review": "期望风格图片"
+      },
+      "makeup": {
+        "current_editor": "当前面部状况",
+        "current_review": "当前状况图片",
+        "style_editor": "期望妆容参考",
+        "style_review": "期望参考图片"
+      },
+      "waxing": {
+        "current_editor": "当前皮肤状况",
+        "current_review": "当前状况图片",
+        "style_editor": "期望效果参考",
+        "style_review": "期望效果图片"
+      }
+    },
+    "services": {
+      "hair": {
+        "section_title": "美发项目",
+        "section_desc": "首先请选择剪发、烫发、染发或护理等美发服务。",
+        "cut_title": "剪发",
+        "cut_desc": "基础造型修剪及长度调整。",
+        "perm_title": "烫发",
+        "perm_desc": "营造波浪及立体感的烫发处理。",
+        "color_title": "染发",
+        "color_desc": "补染发根、全染或改变色调。",
+        "clinic_title": "护理",
+        "clinic_desc": "针对受损发质的深层修护。",
+        "styling_title": "造型",
+        "styling_desc": "吹风、活动造型或最终定型。"
+      },
+      "nail": {
+        "section_title": "美甲项目",
+        "section_desc": "请选择您期望的美甲风格及护理类型。",
+        "care_title": "护理",
+        "care_desc": "去除死皮、修整甲型的基础护理。",
+        "gel_title": "凝胶美甲",
+        "gel_desc": "注重持久度的单色凝胶美甲。",
+        "art_title": "彩绘",
+        "art_desc": "从简易图案到精细彩绘的设计沟通。",
+        "ext_title": "延长",
+        "ext_desc": "延长指甲及调整甲型的服务。",
+        "rem_title": "卸甲",
+        "rem_desc": "安全卸除现有凝胶、彩绘或延长甲。"
+      },
+      "aesthetic": {
+        "section_title": "医美项目",
+        "section_desc": "请根据您的皮肤情况和目标选择相应护肤项目。",
+        "basic_title": "基础护理",
+        "basic_desc": "以清洁与保湿为主的基础护肤。",
+        "trouble_title": "问题肌护理",
+        "trouble_desc": "针对各类皮肤问题及毛孔的定制护理。",
+        "calming_title": "舒缓护理",
+        "calming_desc": "针对敏感、泛红肌肤的镇定护理。",
+        "lifting_title": "提拉紧致",
+        "lifting_desc": "重塑轮廓、提升弹力的紧致护理。",
+        "bright_title": "提亮肤色",
+        "bright_desc": "改善暗沉肤色的提亮护理。"
+      },
+      "eyelash": {
+        "section_title": "睫毛项目",
+        "section_desc": "请从嫁接、角蛋白烫或护理中选择。",
+        "perm_title": "角蛋白烫",
+        "perm_desc": "提升睫毛卷翘度的烫睫毛设计。",
+        "ext_title": "嫁接",
+        "ext_desc": "增加长度及浓密度的睫毛嫁接。",
+        "refill_title": "补接",
+        "refill_desc": "维持原有嫁接效果的补接服务。",
+        "rem_title": "卸除",
+        "rem_desc": "安全卸除现有的接睫毛。",
+        "care_title": "护理",
+        "care_desc": "术后保养及睫毛状态检查。"
+      },
+      "makeup": {
+        "section_title": "化妆项目",
+        "section_desc": "选择日常、拍摄或婚纱等妆容服务。",
+        "daily_title": "日常",
+        "daily_desc": "自然通透的日常妆容。",
+        "interview_title": "面试",
+        "interview_desc": "展现清新干练形象的面试妆容。",
+        "wedding_title": "婚礼",
+        "wedding_desc": "力求持久不脱妆的婚纱妆容。",
+        "shooting_title": "拍摄",
+        "shooting_desc": "适合棚拍或外景的专业妆容。",
+        "special_title": "特别活动",
+        "special_desc": "适用于派对或活动的惊艳局部妆。"
+      },
+      "waxing": {
+        "section_title": "脱毛项目",
+        "section_desc": "选择面部、身体或巴西式脱毛服务。",
+        "brazilian_title": "巴西式脱毛",
+        "brazilian_desc": "全面细致的巴西式脱毛。",
+        "arm_title": "手臂",
+        "arm_desc": "包含了上下手臂的脱毛。",
+        "leg_title": "腿部",
+        "leg_desc": "小腿或全腿脱毛服务。",
+        "face_title": "面部",
+        "face_desc": "修眉、脱唇毛及全脸脱毛。",
+        "body_title": "身体",
+        "body_desc": "背部、胸部及身体各部位脱毛。"
+      }
+    }
+  },
+  "categories": {
+    "hair": {
+      "label": "美发",
+      "note": "剪发、烫发、染发、造型",
+      "summary": "即刻在此开启预约流程，不论是改换造型还是简单修剪均能满足。"
+    },
+    "nail": {
+      "label": "美甲",
+      "note": "凝胶、护理、延长",
+      "summary": "挑选您心动的风格与设计，轻松步入预约环节。"
+    },
+    "esthetic": {
+      "label": "医美",
+      "note": "护肤、轮廓、舒缓",
+      "summary": "根据您的肤况及护肤目的，对比多家店铺后轻松预约。"
+    },
+    "waxing": {
+      "label": "脱毛",
+      "note": "面部、身体、巴西式",
+      "summary": "快速为您锁定所在区域与时间档均匹配的店铺以进行预约。"
+    },
+    "makeup": {
+      "label": "化妆",
+      "note": "日常、拍摄、婚礼",
+      "summary": "为您的重要日期选择合适的彩妆服务，即刻开启预约。"
+    },
+    "lash": {
+      "label": "美睫",
+      "note": "嫁接、角蛋白烫、下睫毛",
+      "summary": "从自然款嫁接到浓密感造型，直进对应菜单开始预约。"
+    }
+  },
+  "selection": {
+    "eyebrow": "已选分类",
+    "tags": {
+      "mobile": "手机预约",
+      "comparison": "店铺比较",
+      "inquiry": "实时咨询"
+    },
+    "empty": "请先选择一个分类。选择完毕后，开始预约按钮将激活。"
+  },
+  "cta": {
+    "hint": "根据您选择的分类，在接下来的页面中探索更多可预约的美容服务。",
+    "button": "开始预约"
+  },
+  "interpreter_entry": {
+    "title": "实时翻译助手",
+    "description": "与店铺员工轻松沟通",
+    "cta": "开启翻译"
+  },
+  "location_sheet": {
+    "search_title": "查找搜索结果",
+    "search_result_count": "{{query}} 的搜索结果 {{count}}条",
+    "view_location": "查看位置",
+    "view_location_desc": "在地图上查看详细位置",
+    "call_taxi": "呼叫 K.Ride",
+    "google_maps_desc": "使用谷歌地图查看公交路线"
+  },
+  "modals": {
+    "card_title": "📍 请前往这个地址",
+    "copy": "复制地址",
+    "copy_done": "复制成功！",
+    "close": "关闭"
+  }
 }
