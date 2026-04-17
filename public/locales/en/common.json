@@ -2146,5 +2146,12 @@
     "description": "You'll receive a coupon you can use right away.",
     "cta": "Sign up & get coupon",
     "close": "Close"
+  },
+  "referral_popup": {
+    "title": "Do you have a referral code?",
+    "description": "Enter a code and both you and your friend get a 5% coupon!",
+    "placeholder": "Enter referral code",
+    "submit": "Submit",
+    "skip": "Skip for now"
   }
 }

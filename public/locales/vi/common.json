@@ -1546,5 +1546,12 @@
     "description": "Bạn sẽ nhận được phiếu có thể dùng ngay.",
     "cta": "Đăng ký & nhận phiếu",
     "close": "Đóng"
+  },
+  "referral_popup": {
+    "title": "Bạn có mã giới thiệu không?",
+    "description": "Nhập mã để cả bạn và bạn bè đều nhận được phiếu giảm giá 5%!",
+    "placeholder": "Nhập mã giới thiệu",
+    "submit": "Xác nhận",
+    "skip": "Để sau"
   }
 }

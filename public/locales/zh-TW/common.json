@@ -893,5 +893,12 @@
     "description": "註冊後可立即使用折扣券。",
     "cta": "領券註冊",
     "close": "關閉"
+  },
+  "referral_popup": {
+    "title": "您有推薦碼嗎？",
+    "description": "輸入推薦碼，您和朋友都能獲得5%折扣券！",
+    "placeholder": "輸入推薦碼",
+    "submit": "確認",
+    "skip": "稍後再說"
   }
 }
