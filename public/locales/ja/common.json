@@ -2014,5 +2014,18 @@
     "copy": "住所をコピー",
     "copy_done": "コピー完了！",
     "close": "閉じる"
+  },
+  "welcome_popup": {
+    "title": "会員登録で5%割引クーポンプレゼント！",
+    "description": "登録するだけですぐ使えるクーポンをお届けします。",
+    "cta": "クーポンを受け取って登録",
+    "close": "閉じる"
+  },
+  "referral_popup": {
+    "title": "紹介コードはお持ちですか？",
+    "description": "コードを入力するとあなたも友達も5%クーポンGET！",
+    "placeholder": "紹介コードを入力",
+    "submit": "入力完了",
+    "skip": "あとで"
   }
 }
