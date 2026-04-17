@@ -43,9 +43,9 @@ export default function HomeLocationSheet({
         {isSearchingInSheet ? (
           <div className={styles.sheetSearchSection}>
             <div className={styles.sheetHeader} style={{ border: 'none', paddingBottom: '0' }}>
-              <div className={styles.sheetTitle}>{t('home_beauty.location_sheet.search_title')}</div>
+              <div className={styles.sheetTitle}>{t('location_sheet.search_title')}</div>
               <div className={styles.sheetSubtitle}>
-                {t('home_beauty.location_sheet.search_result_count', { query: input, count: sheetSearchResults.length })}
+                {t('location_sheet.search_result_count', { query: input, count: sheetSearchResults.length })}
               </div>
             </div>
             <div className={styles.sheetResultList} style={{ maxHeight: '65vh', overflowY: 'auto', padding: '0 24px 20px' }}>
@@ -71,13 +71,13 @@ export default function HomeLocationSheet({
             <div className={styles.quickChoices} style={{ gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
               <button className={styles.choiceBtn} onClick={onOpenMap} style={{ gridColumn: 'span 2' }}>
                 <div className={styles.choiceIcon}>📍</div>
-                <div className={styles.choiceLabel}>{t('home_beauty.location_sheet.view_location')}</div>
-                <div className={styles.choiceSubText}>{t('home_beauty.location_sheet.view_location_desc')}</div>
+                <div className={styles.choiceLabel}>{t('location_sheet.view_location')}</div>
+                <div className={styles.choiceSubText}>{t('location_sheet.view_location_desc')}</div>
               </button>
               <button className={styles.choiceBtn} onClick={onKRide}>
                 <div className={styles.choiceIcon}>🚕</div>
                 <div className={styles.choiceLabel}>K.Ride</div>
-                <div className={styles.choiceSubText}>{t('home_beauty.location_sheet.call_taxi')}</div>
+                <div className={styles.choiceSubText}>{t('location_sheet.call_taxi')}</div>
               </button>
               <button className={styles.choiceBtn} onClick={() => onTransit('google')}>
                 <div className={styles.choiceIcon}>🚇</div>
@@ -90,7 +90,7 @@ export default function HomeLocationSheet({
                 </div>
                 <div style={{ textAlign: 'left', flex: 1, paddingLeft: '12px' }}>
                   <div className={styles.choiceLabel}>Google Maps Transit</div>
-                  <div className={styles.choiceSubText}>{t('home_beauty.location_sheet.google_maps_desc')}</div>
+                  <div className={styles.choiceSubText}>{t('location_sheet.google_maps_desc')}</div>
                 </div>
               </button>
             </div>

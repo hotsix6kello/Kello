@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ConfirmationStepShell } from "@/components/booking/flow-skeleton/ConfirmationStepShell";
 import { CustomerDetailsStepShell } from "@/components/booking/flow-skeleton/CustomerDetailsStepShell";
 import { DateTimeSelectionStepShell } from "@/components/booking/flow-skeleton/DateTimeSelectionStepShell";
@@ -61,26 +62,6 @@ type BookingFlowVisualStepDefinition = {
   description: string;
 };
 
-const BOOKING_FLOW_VISUAL_STEPS: BookingFlowVisualStepDefinition[] = [
-  {
-    id: "service-selection",
-    order: 1,
-    title: "서비스 선택",
-    description: "원하는 시술을 고르고 다음 단계로 넘어가세요.",
-  },
-  {
-    id: "details-entry",
-    order: 2,
-    title: "날짜 및 정보 입력",
-    description: "예약 날짜와 고객 정보를 한 화면에서 입력하세요.",
-  },
-  {
-    id: "confirmation",
-    order: 3,
-    title: "최종 예약 확인",
-    description: "입력한 내용을 확인한 뒤 예약 요청을 보내세요.",
-  },
-];
 
 function resolveVisualStepId(currentStep: BookingFlowStepId): BookingFlowVisualStepId {
   switch (currentStep) {
@@ -95,10 +76,6 @@ function resolveVisualStepId(currentStep: BookingFlowStepId): BookingFlowVisualS
   }
 }
 
-function getVisualStepDefinition(stepId: BookingFlowVisualStepId): BookingFlowVisualStepDefinition {
-  return BOOKING_FLOW_VISUAL_STEPS.find((step) => step.id === stepId) ?? BOOKING_FLOW_VISUAL_STEPS[0]!;
-}
-
 export function BookingFlowSkeleton({
   initialCategory = null,
   storeContext,
@@ -107,7 +84,29 @@ export function BookingFlowSkeleton({
   onDraftStateChange,
   onSubmitIntent,
 }: BookingFlowSkeletonProps) {
+  const { t } = useTranslation("common");
   const [state, setState] = useState(() => createInitialBookingFlowState(initialCategory));
+
+  const localizedSteps: BookingFlowVisualStepDefinition[] = useMemo(() => [
+    {
+      id: "service-selection",
+      order: 1,
+      title: t("booking_skeleton.steps.step1_title"),
+      description: t("booking_skeleton.steps.step1_desc"),
+    },
+    {
+      id: "details-entry",
+      order: 2,
+      title: t("booking_skeleton.steps.step2_title"),
+      description: t("booking_skeleton.steps.step2_desc"),
+    },
+    {
+      id: "confirmation",
+      order: 3,
+      title: t("booking_skeleton.steps.step3_title"),
+      description: t("booking_skeleton.steps.step3_desc"),
+    },
+  ], [t]);
 
   useEffect(() => {
     let isMounted = true;
@@ -308,7 +307,7 @@ export function BookingFlowSkeleton({
   const serviceMenu = state.category ? BOOKING_FLOW_SERVICE_MENUS[state.category] : null;
   const summary = useMemo(() => buildBookingFlowSummary(state), [state]);
   const activeVisualStepId = resolveVisualStepId(state.currentStep);
-  const activeVisualStep = getVisualStepDefinition(activeVisualStepId);
+  const activeVisualStep = localizedSteps.find(s => s.id === activeVisualStepId) ?? localizedSteps[0]!;
   const isConfirmationStep = activeVisualStepId === "confirmation";
   const canAdvanceFromServiceSelection =
     state.category !== null &&
@@ -475,7 +474,7 @@ export function BookingFlowSkeleton({
     >
       <div className="flex-1 px-4 pt-20 relative">
         <div className="absolute top-[21px] left-1/2 -translate-x-1/2 z-[60]">
-          <h1 className="text-[20px] font-black tracking-tight text-[#4b3a42]">
+          <h1 className="text-[20px] font-black tracking-tight text-[#4b3a42] whitespace-nowrap">
             {activeVisualStep.title}
           </h1>
         </div>
@@ -484,7 +483,7 @@ export function BookingFlowSkeleton({
             <div className="flex flex-col gap-6">
 
               <ol className="flex w-full px-2">
-                {BOOKING_FLOW_VISUAL_STEPS.map((step) => {
+                {localizedSteps.map((step) => {
                   const isActive = step.id === activeVisualStepId;
                   const isComplete = step.order < activeVisualStep.order;
 
@@ -497,7 +496,7 @@ export function BookingFlowSkeleton({
                         }`}
                     >
                       <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">
-                        {`STEP ${step.order}`}
+                        {`${t("booking_skeleton.steps.step")} ${step.order}`}
                       </div>
                       <div className={`mt-2 font-black leading-tight ${isActive ? "scale-105" : "scale-100"} transition-transform`}>{step.title}</div>
                     </li>
@@ -520,7 +519,7 @@ export function BookingFlowSkeleton({
             disabled={!canMoveNext}
             className="relative z-10 inline-flex min-h-[64px] w-full items-center justify-center rounded-[20px] px-8 text-[17px] font-black transition-all duration-300 bg-[#f45b87] text-white shadow-[0_12px_28px_rgba(244,91,135,0.25)] hover:bg-[#4b3a42] hover:shadow-[0_12px_32px_rgba(75,58,66,0.3)] disabled:bg-[#f1dce4] disabled:text-[#af98a1] disabled:shadow-none disabled:cursor-not-allowed transform active:scale-[0.98]"
           >
-            {activeVisualStepId === "service-selection" ? "다음 단계" : "최종 예약 확인"}
+            {activeVisualStepId === "service-selection" ? t("booking_skeleton.next_step") : t("booking_skeleton.check_final")}
           </button>
         </section>
       ) : null}

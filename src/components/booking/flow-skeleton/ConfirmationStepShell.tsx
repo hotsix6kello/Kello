@@ -1,7 +1,8 @@
+'use client';
+
+import { useTranslation } from "react-i18next";
 import { BookingFlowStepFrame } from "@/components/booking/flow-skeleton/BookingFlowStepFrame";
 import {
-  BOOKING_FLOW_CONFIRMATION_COPY,
-  BOOKING_FLOW_REVIEW_COPY,
   getBookingFlowCategoryCapabilities,
   getBookingFlowImageGroups,
 } from "@/lib/bookings/bookingFlowSkeleton/constants";
@@ -56,30 +57,31 @@ export function ConfirmationStepShell({
   onTogglePrivacyConsent,
   onSubmitIntent,
 }: ConfirmationStepShellProps) {
+  const { t } = useTranslation("common");
   const capabilities = getBookingFlowCategoryCapabilities(category);
   const supportsInteractiveReview = capabilities?.interactiveReview === true;
   const imageGroups = getBookingFlowImageGroups(category);
-  const serviceLabel = summary.selectedServiceTitle ?? BOOKING_FLOW_REVIEW_COPY.noService;
-  const dateLabel = summary.selectedDate ?? BOOKING_FLOW_REVIEW_COPY.noDate;
-  const customerName = summary.customerName.trim() || BOOKING_FLOW_REVIEW_COPY.noCustomerName;
-  const customerContact = summary.contact.trim() || BOOKING_FLOW_REVIEW_COPY.noContact;
+  const serviceLabel = summary.selectedServiceTitle ? t(summary.selectedServiceTitle) : t("booking_skeleton.review.no_service");
+  const dateLabel = summary.selectedDate ?? t("booking_skeleton.review.no_date");
+  const customerName = summary.customerName.trim() || t("booking_skeleton.review.no_name");
+  const customerContact = summary.contact.trim() || t("booking_skeleton.review.no_contact");
   const requestNote = customerDetails.requestNote.trim();
   const canSendSubmitIntent = confirmation.bookingConfirmed && confirmation.privacyConsent;
 
   const receiptRows: ReceiptRow[] = [
-    { id: "category", label: "카테고리", value: summary.categoryLabel || "-" },
-    { id: "service", label: "시술", value: serviceLabel },
-    { id: "date", label: "날짜", value: dateLabel },
-    { id: "name", label: "이름", value: customerName },
-    { id: "contact", label: "연락처", value: customerContact },
+    { id: "category", label: t("booking_skeleton.confirmation.shop"), value: summary.categoryLabel ? t(summary.categoryLabel) : "-" },
+    { id: "service", label: t("booking_skeleton.confirmation.service"), value: serviceLabel },
+    { id: "date", label: t("booking_skeleton.confirmation.date_time"), value: dateLabel },
+    { id: "name", label: t("booking_skeleton.confirmation.customer"), value: customerName },
+    { id: "contact", label: t("booking_skeleton.confirmation.customer"), value: customerContact },
   ];
 
   const content = supportsInteractiveReview ? (
     <div className="w-full">
       <div className="py-2">
         <div className="flex flex-col gap-1.5 px-1 mb-4">
-          <h3 className="text-[17px] font-bold text-neutral-900">예약 내역 상세</h3>
-          <p className="text-[13px] text-neutral-500">입력하신 정보를 마지막으로 확인해주세요.</p>
+          <h3 className="text-[17px] font-bold text-neutral-900">{t("booking_skeleton.confirmation.title")}</h3>
+          <p className="text-[13px] text-neutral-500">{t("booking_skeleton.confirmation.desc_summary")}</p>
         </div>
 
         <ul className="flex flex-col gap-1 bg-neutral-50/50 rounded-2xl p-4 border border-neutral-100">
@@ -93,7 +95,7 @@ export function ConfirmationStepShell({
           ))}
           {requestNote && (
             <li className="flex flex-col pt-3 pb-1 px-1">
-              <span className="text-[14px] font-medium text-neutral-500 mb-2">요청사항</span>
+              <span className="text-[14px] font-medium text-neutral-500 mb-2">{t("booking_skeleton.customer_details.request_label")}</span>
               <div className="text-[14px] font-semibold leading-relaxed text-fuchsia-900 bg-fuchsia-50/50 rounded-xl p-4 border border-fuchsia-100/50 whitespace-pre-wrap">
                 {requestNote}
               </div>
@@ -104,9 +106,9 @@ export function ConfirmationStepShell({
 
       <section className="py-8">
         <div className="flex items-center justify-between px-1 mb-5">
-          <h3 className="text-[17px] font-bold text-neutral-900">첨부 이미지</h3>
+          <h3 className="text-[17px] font-bold text-neutral-900">{t("booking_skeleton.confirmation.attached_images")}</h3>
           <span className="text-[12px] font-bold text-fuchsia-600 bg-fuchsia-50 px-2 py-0.5 rounded-full">
-            총 {imageGroups.reduce((acc, g) => acc + customerDetails[g.stateKey].length, 0)}장
+            {t("booking_skeleton.confirmation.image_count_summary", { count: imageGroups.reduce((acc, g) => acc + customerDetails[g.stateKey].length, 0) })}
           </span>
         </div>
         
@@ -118,7 +120,7 @@ export function ConfirmationStepShell({
               <div key={group.id} className="flex flex-col gap-3">
                 <div className="flex items-center gap-2 px-1">
                   <div className="h-1.5 w-1.5 rounded-full bg-fuchsia-400" />
-                  <h4 className="text-[14px] font-bold text-neutral-800">{group.reviewTitle}</h4>
+                  <h4 className="text-[14px] font-bold text-neutral-800">{t(group.reviewTitle)}</h4>
                 </div>
 
                 {images.length > 0 ? (
@@ -142,7 +144,7 @@ export function ConfirmationStepShell({
                     ))}
                   </div>
                 ) : (
-                  <div className="text-[13px] text-neutral-400 px-1 italic">{BOOKING_FLOW_REVIEW_COPY.noImages}</div>
+                  <div className="text-[13px] text-neutral-400 px-1 italic">{t("booking_skeleton.review.no_images")}</div>
                 )}
               </div>
             );
@@ -152,8 +154,8 @@ export function ConfirmationStepShell({
 
       <section className="py-6 mb-32">
         <div className="px-1 mb-5">
-          <h3 className="text-[17px] font-bold text-neutral-900">최종 동의</h3>
-          <p className="text-[13px] text-neutral-500 mt-1">예약을 위해 필수 항목에 동의해주세요.</p>
+          <h3 className="text-[17px] font-bold text-neutral-900">{t("booking_skeleton.confirmation.agreement_title")}</h3>
+          <p className="text-[13px] text-neutral-500 mt-1">{t("booking_skeleton.confirmation.agreement_desc_hint")}</p>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -170,7 +172,7 @@ export function ConfirmationStepShell({
               </svg>
             </div>
             <span className={`text-[14px] font-bold leading-relaxed transition-colors ${confirmation.bookingConfirmed ? "text-fuchsia-900" : "text-neutral-600"}`}>
-              {BOOKING_FLOW_CONFIRMATION_COPY.bookingConfirmedLabel}
+              {t("booking_skeleton.confirmation.confirm_info_label")}
             </span>
           </label>
 
@@ -187,7 +189,7 @@ export function ConfirmationStepShell({
               </svg>
             </div>
             <span className={`text-[14px] font-bold leading-relaxed transition-colors ${confirmation.privacyConsent ? "text-fuchsia-900" : "text-neutral-600"}`}>
-              {BOOKING_FLOW_CONFIRMATION_COPY.privacyConsentLabel}
+              {t("booking_skeleton.confirmation.privacy_label")}
             </span>
           </label>
         </div>
@@ -200,12 +202,12 @@ export function ConfirmationStepShell({
           disabled={!canSendSubmitIntent}
           className="inline-flex min-h-[60px] w-full items-center justify-center rounded-2xl px-4 py-4 text-[16px] font-bold transition bg-fuchsia-600 text-white shadow-[0_12px_24px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none"
         >
-          예약 요청하기
+          {t("booking_skeleton.confirmation.submit_button")}
         </button>
       </section>
     </div>
   ) : (
-    <div className="py-5 text-sm text-neutral-500">현재 카테고리에서는 최종 확인 화면을 준비 중입니다.</div>
+    <div className="py-5 text-sm text-neutral-500">{t("booking_skeleton.confirmation.preparing")}</div>
   );
 
   if (embedded) {
@@ -214,9 +216,9 @@ export function ConfirmationStepShell({
 
   return (
     <BookingFlowStepFrame
-      eyebrow="STEP 4"
-      title="최종 예약 확인"
-      description="예약 내용을 한 번 더 확인한 뒤 요청을 보내세요."
+      eyebrow={`${t("booking_skeleton.steps.step")} 4`}
+      title={t("booking_skeleton.confirmation.title")}
+      description={t("booking_skeleton.confirmation.desc_final")}
     >
       {content}
     </BookingFlowStepFrame>

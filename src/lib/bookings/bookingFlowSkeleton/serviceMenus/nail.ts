@@ -2,45 +2,45 @@ import type { BookingServiceMenuConfig } from "@/lib/bookings/bookingFlowSkeleto
 
 export const nailServiceMenuConfig: BookingServiceMenuConfig = {
   category: "nail",
-  title: "네일 시술",
-  description: "원하는 네일 스타일과 관리 유형을 먼저 선택해 주세요.",
+  title: "booking_skeleton.services.nail.section_title",
+  description: "booking_skeleton.services.nail.section_desc",
   sections: [
     {
       id: "nail-services",
-      title: "대표 네일 메뉴",
+      title: "booking_skeleton.services.nail.section_title",
       items: [
         {
           id: "care",
-          title: "케어",
-          description: "쉐입 정리, 큐티클 관리, 깔끔한 마무리 중심의 기본 케어입니다.",
+          title: "booking_skeleton.services.nail.care_title",
+          description: "booking_skeleton.services.nail.care_desc",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "gel",
-          title: "젤",
-          description: "원컬러와 유지력 중심의 젤 네일 시술입니다.",
+          title: "booking_skeleton.services.nail.gel_title",
+          description: "booking_skeleton.services.nail.gel_desc",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "art",
-          title: "아트",
-          description: "심플 아트부터 디테일 아트까지 디자인 상담이 필요한 시술입니다.",
+          title: "booking_skeleton.services.nail.art_title",
+          description: "booking_skeleton.services.nail.art_desc",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "extension",
-          title: "연장",
-          description: "길이와 쉐입 보정을 위한 네일 연장 시술입니다.",
+          title: "booking_skeleton.services.nail.ext_title",
+          description: "booking_skeleton.services.nail.ext_desc",
           durationMinutes: null,
           priceLabel: null,
         },
         {
           id: "removal",
-          title: "제거",
-          description: "기존 젤, 아트, 연장 네일 제거가 필요한 예약입니다.",
+          title: "booking_skeleton.services.nail.rem_title",
+          description: "booking_skeleton.services.nail.rem_desc",
           durationMinutes: null,
           priceLabel: null,
         },
