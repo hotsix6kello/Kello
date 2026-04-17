@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslation } from "react-i18next";
 import { BookingFlowStepFrame } from "@/components/booking/flow-skeleton/BookingFlowStepFrame";
 import {
   getBookingFlowCategoryCapabilities,
@@ -22,26 +25,6 @@ type CustomerDetailsStepShellProps = {
   onResetDesiredStyleImages?: () => void;
 };
 
-function getImageGroupPurposeText(stateKey: BookingImageGroupStateKey) {
-  if (stateKey === "currentStateImages") {
-    return {
-      label: "현재 상태 이미지",
-      description: "현재 상태를 보여주는 사진을 첨부해 주세요.",
-      helper: "상태가 잘 보이는 사진일수록 상담에 도움이 됩니다.",
-      addButtonLabel: "현재 상태 사진 추가",
-      emptyLabel: "첨부된 사진이 없습니다.",
-    };
-  }
-
-  return {
-    label: "원하는 스타일 이미지",
-    description: "원하는 스타일을 보여주는 참고 이미지를 첨부해 주세요.",
-    helper: "희망하는 무드나 길이감이 잘 드러나는 이미지가 좋습니다.",
-    addButtonLabel: "스타일 사진 추가",
-    emptyLabel: "첨부된 사진이 없습니다.",
-  };
-}
-
 function formatFileSize(size: number) {
   return `${(size / 1024).toFixed(1)} KB`;
 }
@@ -58,6 +41,28 @@ export function CustomerDetailsStepShell({
   onResetCurrentHairImages,
   onResetDesiredStyleImages,
 }: CustomerDetailsStepShellProps) {
+  const { t } = useTranslation("common");
+
+  const getImageGroupPurposeText = (stateKey: BookingImageGroupStateKey) => {
+    if (stateKey === "currentStateImages") {
+      return {
+        label: t("booking_skeleton.customer_details.current_status"),
+        description: t("booking_skeleton.customer_details.current_status_desc"),
+        helper: t("booking_skeleton.customer_details.current_status_helper"),
+        addButtonLabel: t("booking_skeleton.customer_details.add_current_photo"),
+        emptyLabel: t("booking_skeleton.customer_details.no_photo"),
+      };
+    }
+
+    return {
+      label: t("booking_skeleton.customer_details.desired_style"),
+      description: t("booking_skeleton.customer_details.desired_style_desc"),
+      helper: t("booking_skeleton.customer_details.desired_style_helper"),
+      addButtonLabel: t("booking_skeleton.customer_details.add_style_photo"),
+      emptyLabel: t("booking_skeleton.customer_details.no_photo"),
+    };
+  };
+
   const capabilities = getBookingFlowCategoryCapabilities(category);
   const supportsCustomerDetails = capabilities?.interactiveCustomerDetails === true;
   const imageGroups = getBookingFlowImageGroups(category);
@@ -84,41 +89,41 @@ export function CustomerDetailsStepShell({
       {/* 2. 예약자 정보 입력 폼 */}
       <div className="flex flex-col gap-6 mb-10">
         <div className="flex flex-col gap-1.5 px-1">
-          <h3 className="text-[17px] font-bold text-neutral-900">예약자 정보</h3>
-          <p className="text-[13px] text-neutral-500">예약 확인을 위해 정확한 정보를 입력해주세요.</p>
+          <h3 className="text-[17px] font-bold text-neutral-900">{t("booking_skeleton.customer_details.title")}</h3>
+          <p className="text-[13px] text-neutral-500">{t("booking_skeleton.customer_details.desc_hint")}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-4">
           <div className="flex flex-col gap-1.5">
-            <span className="text-[13px] font-bold text-neutral-700 ml-1">이름</span>
+            <span className="text-[13px] font-bold text-neutral-700 ml-1">{t("booking_skeleton.customer_details.name_label")}</span>
             <input
               type="text"
               value={details.name}
               onChange={(event) => onChangeName?.(event.target.value)}
               className="min-h-[60px] rounded-2xl border-2 border-neutral-100 bg-white px-5 py-3 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100"
-              placeholder="예약자 성함"
+              placeholder={t("booking_skeleton.customer_details.name_placeholder")}
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <span className="text-[13px] font-bold text-neutral-700 ml-1">연락처</span>
+            <span className="text-[13px] font-bold text-neutral-700 ml-1">{t("booking_skeleton.customer_details.phone_label")}</span>
             <input
               type="tel"
               value={details.phone}
               onChange={(event) => onChangePhone?.(event.target.value)}
               className="min-h-[60px] rounded-2xl border-2 border-neutral-100 bg-white px-5 py-3 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100"
-              placeholder="010-1234-5678"
+              placeholder={t("booking_skeleton.customer_details.phone_placeholder")}
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <span className="text-[13px] font-bold text-neutral-700 ml-1">요청사항</span>
+            <span className="text-[13px] font-bold text-neutral-700 ml-1">{t("booking_skeleton.customer_details.request_label")}</span>
             <textarea
               value={details.requestNote}
               onChange={(event) => onChangeRequestNote?.(event.target.value)}
               rows={4}
               className="rounded-2xl border-2 border-neutral-100 bg-white px-5 py-4 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100 resize-none"
-              placeholder="매장에 전달할 요청사항을 자유롭게 남겨주세요."
+              placeholder={t("booking_skeleton.customer_details.request_placeholder")}
             />
           </div>
         </div>
@@ -166,7 +171,7 @@ export function CustomerDetailsStepShell({
                     onClick={() => handlers.onReset?.()}
                     className="rounded-2xl border-2 border-neutral-100 bg-white px-6 py-3.5 text-[14px] font-bold text-neutral-500 transition hover:bg-neutral-50"
                   >
-                    초기화
+                    {t("common.reset")}
                   </button>
                 )}
               </div>
@@ -211,7 +216,7 @@ export function CustomerDetailsStepShell({
   ) : (
     <div className="py-20 text-center bg-neutral-50 rounded-3xl border-2 border-dashed border-neutral-200">
       <p className="text-neutral-400 font-medium whitespace-pre-line">
-        {"현재 카테고리에서는\n고객 정보 입력 화면을 준비 중입니다."}
+        {t("booking_skeleton.customer_details.preparing")}
       </p>
     </div>
   );
@@ -222,9 +227,9 @@ export function CustomerDetailsStepShell({
 
   return (
     <BookingFlowStepFrame
-      eyebrow="STEP 3"
-      title="고객 정보 입력"
-      description="예약 정보를 확인하고 연락처와 요청사항을 입력해 주세요."
+      eyebrow={`${t("booking_skeleton.steps.step")} 3`}
+      title={t("booking_skeleton.customer_details.title")}
+      description={t("booking_skeleton.customer_details.desc")}
     >
       {content}
     </BookingFlowStepFrame>

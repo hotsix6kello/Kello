@@ -14,7 +14,7 @@ export default function HomeInterpreterEntry({
     <section className={styles.supportSection} style={{ paddingBottom: '32px' }}>
       <div className={styles.interpreterCard} style={{ padding: '0' }}>
         <button className={styles.mainCtaBtn} onClick={onOpenInterpreter}>
-          {t('home_beauty.interpreter_entry.cta')}
+          {t('interpreter_entry.cta')}
         </button>
       </div>
     </section>

@@ -281,71 +281,15 @@
     "booking": {
       "step": "BƯỚC. 01",
       "title": "Vui lòng chọn dịch vụ làm đẹp",
-      "description": ""
-    },
-    "categories": {
-      "hair": {
-        "label": "Tóc",
-        "note": "Cắt, uốn, nhuộm",
-        "summary": "Đặt lịch từ thay đổi kiểu tóc."
-      },
-      "nail": {
-        "label": "Móng",
-        "note": "Gel, chăm sóc, nối",
-        "summary": "Chọn thiết kế và đặt lịch."
-      },
-      "esthetic": {
-        "label": "Thẩm mỹ",
-        "note": "Chăm sóc da, tạo hình",
-        "summary": "So sánh salon và đặt lịch."
-      },
-      "waxing": {
-        "label": "Waxing",
-        "note": "Mặt, toàn thân, Brazil",
-        "summary": "Tìm salon phù hợp nhanh chóng."
-      },
-      "makeup": {
-        "label": "Trang điểm",
-        "note": "Hàng ngày, chụp ảnh, cưới",
-        "summary": "Chọn dịch vụ trang điểm cho sự kiện."
-      },
-      "lash": {
-        "label": "Mi",
-        "note": "Nối mi, uốn mi",
-        "summary": "Từ tự nhiên đến dày, tùy chọn."
-      }
-    },
-    "selection": {
-      "eyebrow": "Danh mục đã chọn",
-      "tags": {
-        "mobile": "Đặt qua điện thoại",
-        "comparison": "So sánh salon",
-        "inquiry": "Hỏi đáp trực tuyến"
-      },
-      "empty": "Vui lòng chọn danh mục trước. Nút bắt đầu đặt lịch sẽ hoạt động sau khi chọn."
-    },
-    "cta": {
-      "hint": "Chọn danh mục để bắt đầu đặt lịch",
-      "button": "Bắt đầu đặt lịch"
-    },
-    "interpreter_entry": {
-      "title": "Phiên dịch trực tuyến",
-      "description": "Giao tiếp dễ dàng với nhân viên",
-      "cta": "Mở phiên dịch"
-    },
-    "location_sheet": {
-      "search_title": "Tìm kiếm vị trí",
-      "search_result_count": "{{count}} kết quả cho \"{{query}}\"",
-      "view_location": "Xem vị trí",
-      "view_location_desc": "Xem vị trí chi tiết trên bản đồ",
-      "call_taxi": "Gọi taxi",
-      "google_maps_desc": "Xem chỉ đường phương tiện công cộng trên Google Maps"
-    },
-    "modals": {
-      "card_title": "📍 Vui lòng đến địa chỉ này",
-      "copy": "Sao chép địa chỉ",
-      "copy_done": "Đã sao chép!",
-      "close": "Đóng"
+      "description": "",
+      "submitting_images": "Đang tải ảnh lên...",
+      "sending_request": "Đang gửi yêu cầu đặt hẹn...",
+      "booking_completed": "Đặt hẹn hoàn tất!",
+      "booking_failed": "Đã xảy ra lỗi trong quá trình gửi đặt hẹn.",
+      "completion_title": "Đã gửi yêu cầu đặt hẹn!",
+      "completion_desc": "Đã gửi yêu cầu đặt hẹn thành công.\nCửa hàng đã chọn sẽ xác nhận và liên hệ với bạn sớm.",
+      "confirm_button": "Xác nhận",
+      "login_required": "Cần đăng nhập để đính kèm ảnh. Vui lòng thử lại sau khi đăng nhập."
     }
   },
   "interpreter_ui": {
@@ -1328,5 +1272,273 @@
   "error_desc": "If the problem persists, please contact support.",
   "error_retry": "Try Again",
   "common_actions_view_all": "View All",
-  "common_loading": "Loading..."
+  "common_loading": "Loading...",
+  "booking_skeleton": {
+    "steps": {
+      "step1_title": "Chọn dịch vụ",
+      "step1_desc": "Chọn dịch vụ bạn muốn và chuyển sang bước tiếp theo.",
+      "step2_title": "Ngày & Thông tin",
+      "step2_desc": "Nhập ngày hẹn và thông tin trên cùng một màn hình.",
+      "step3_title": "Xác nhận cuối",
+      "step3_desc": "Kiểm tra lại thông tin và gửi yêu cầu đặt lịch.",
+      "step": "BƯỚC"
+    },
+    "service_selection": {
+      "title": "Chọn dịch vụ",
+      "desc": "Vui lòng chọn dịch vụ bạn mong muốn.",
+      "no_menu": "Chưa có dịch vụ nào cho danh mục này.",
+      "select_category_first": "Vui lòng chọn danh mục trước."
+    },
+    "date_time": {
+      "title": "Chọn ngày & giờ",
+      "desc": "Vui lòng chọn thời gian hẹn mong muốn.",
+      "preparing": "Màn hình chọn ngày cho danh mục này đang được chuẩn bị.",
+      "placeholder": "Năm-Tháng-Ngày",
+      "clear": "Xóa",
+      "today": "Hôm nay"
+    },
+    "customer_details": {
+      "title": "Thông tin khách hàng",
+      "desc": "Vui lòng kiểm tra thông tin của bạn để xác nhận đặt lịch.",
+      "desc_hint": "Vui lòng nhập thông tin chính xác để hoàn tất đặt lịch.",
+      "name_label": "Họ tên (khuyến nghị tiếng Anh) *",
+      "name_placeholder": "Tên trên hộ chiếu",
+      "phone_label": "Liên hệ (có thể dùng ID mạng xã hội) *",
+      "phone_placeholder": "Số điện thoại hoặc ID Instagram",
+      "request_label": "Yêu cầu đặc biệt",
+      "request_placeholder": "Mô tả kiểu dáng mong muốn hoặc bất kỳ lưu ý nào.",
+      "current_status": "Tình trạng hiện tại",
+      "current_status_desc": "Vui lòng đính kèm ảnh cho thấy tình trạng hiện tại của bạn.",
+      "current_status_helper": "Ảnh càng rõ ràng, tư vấn càng chính xác.",
+      "add_current_photo": "Thêm ảnh hiện tại",
+      "desired_style": "Kiểu dáng mong muốn",
+      "desired_style_desc": "Vui lòng đính kèm ảnh tham khảo của kiểu dáng bạn muốn.",
+      "desired_style_helper": "Ảnh thể hiện rõ phong cách hoặc chiều dài mong muốn là tốt nhất.",
+      "add_style_photo": "Thêm ảnh kiểu dáng",
+      "no_photo": "Chưa đính kèm ảnh nào.",
+      "add_photo": "Thêm ảnh",
+      "photo_hint": "※ Bạn có thể đính kèm mỗi loại 1 ảnh cho ảnh tham khảo và tình trạng hiện tại.",
+      "preparing": "Màn hình nhập thông tin khách hàng cho danh mục này đang được chuẩn bị."
+    },
+    "confirmation": {
+      "title": "Tóm tắt đặt lịch",
+      "desc": "Vui lòng kiểm tra lại thông tin bạn đã nhập.",
+      "desc_summary": "Vui lòng xác nhận thông tin bạn đã nhập.",
+      "desc_final": "Kiểm tra lại lần cuối và gửi yêu cầu đặt lịch.",
+      "shop": "Cửa hàng",
+      "date_time": "Ngày & Giờ",
+      "service": "Dịch vụ",
+      "customer": "Khách hàng",
+      "agreement_title": "Điều khoản",
+      "agreement_desc": "Vui lòng đồng ý các điều khoản cần thiết để đặt lịch.",
+      "agreement_desc_hint": "Vui lòng đồng ý các điều khoản cần thiết để đặt lịch.",
+      "confirm_info_label": "Xác nhận thông tin đặt lịch",
+      "confirm_info_desc": "Tôi xác nhận cửa hàng, ngày và dịch vụ đã chọn là chính xác.",
+      "privacy_label": "Đồng ý chính sách bảo mật",
+      "privacy_desc": "Tôi đồng ý cung cấp họ tên và thông tin liên hệ cho cửa hàng để đặt lịch.",
+      "attached_images": "Ảnh đính kèm",
+      "image_count_summary": "Tổng cộng {{count}} ảnh",
+      "submit_button": "Gửi yêu cầu đặt lịch",
+      "preparing": "Màn hình xác nhận cuối cho danh mục này đang được chuẩn bị."
+    },
+    "next_step": "Bước tiếp theo",
+    "check_final": "Xác nhận cuối cùng",
+    "review": {
+      "no_request": "Chưa có yêu cầu đặc biệt.",
+      "no_images": "Chưa đính kèm ảnh.",
+      "no_service": "Chưa chọn dịch vụ.",
+      "no_date": "Chưa chọn ngày.",
+      "no_time": "Chưa chọn giờ.",
+      "no_name": "Thiếu họ tên.",
+      "no_contact": "Thiếu thông tin liên hệ."
+    },
+    "image_groups": {
+      "hair": {
+        "current_editor": "Tình trạng tóc hiện tại",
+        "current_review": "Ảnh tóc hiện tại",
+        "style_editor": "Ảnh tham khảo kiểu tóc mong muốn",
+        "style_review": "Ảnh kiểu tóc mong muốn"
+      },
+      "nail": {
+        "current_editor": "Tình trạng móng hiện tại",
+        "current_review": "Ảnh tình trạng hiện tại",
+        "style_editor": "Ảnh tham khảo kiểu móng mong muốn",
+        "style_review": "Ảnh kiểu dáng mong muốn"
+      },
+      "aesthetic": {
+        "current_editor": "Tình trạng da hiện tại",
+        "current_review": "Ảnh tình trạng hiện tại",
+        "style_editor": "Ảnh tham khảo kết quả mong muốn",
+        "style_review": "Ảnh kết quả mong muốn"
+      },
+      "eyelash": {
+        "current_editor": "Tình trạng mi hiện tại",
+        "current_review": "Ảnh tình trạng hiện tại",
+        "style_editor": "Ảnh tham khảo kiểu mi mong muốn",
+        "style_review": "Ảnh kiểu dáng mong muốn"
+      },
+      "makeup": {
+        "current_editor": "Tình trạng gương mặt hiện tại",
+        "current_review": "Ảnh tình trạng hiện tại",
+        "style_editor": "Ảnh tham khảo trang điểm mong muốn",
+        "style_review": "Ảnh tham khảo mong muốn"
+      },
+      "waxing": {
+        "current_editor": "Tình trạng da hiện tại",
+        "current_review": "Ảnh tình trạng hiện tại",
+        "style_editor": "Ảnh tham khảo kết quả mong muốn",
+        "style_review": "Ảnh kết quả mong muốn"
+      }
+    },
+    "services": {
+      "hair": {
+        "section_title": "Dịch vụ Tóc",
+        "section_desc": "Chọn dịch vụ cắt, uốn, nhuộm hoặc chăm sóc tóc.",
+        "cut_title": "Cắt tóc",
+        "cut_desc": "Cắt tóc cơ bản để tạo kiểu và điều chỉnh độ dài.",
+        "perm_title": "Uốn tóc",
+        "perm_desc": "Uốn tóc tạo sóng và thêm phồng.",
+        "color_title": "Nhuộm tóc",
+        "color_desc": "Nhuộm chân tóc, nhuộm toàn bộ hoặc đổi tông màu.",
+        "clinic_title": "Phục hồi",
+        "clinic_desc": "Chăm sóc tóc hư tổn và phục hồi.",
+        "styling_title": "Tạo kiểu",
+        "styling_desc": "Sấy tạo kiểu, tạo kiểu sự kiện hoặc hoàn thiện."
+      },
+      "nail": {
+        "section_title": "Dịch vụ Móng",
+        "section_desc": "Chọn kiểu móng và loại chăm sóc bạn muốn.",
+        "care_title": "Chăm sóc",
+        "care_desc": "Chăm sóc cơ bản: cắt da chết, tạo hình móng.",
+        "gel_title": "Gel",
+        "gel_desc": "Sơn gel một màu bền đẹp.",
+        "art_title": "Nghệ thuật",
+        "art_desc": "Tư vấn thiết kế từ đơn giản đến phức tạp.",
+        "ext_title": "Đắp bột",
+        "ext_desc": "Nối dài và chỉnh hình móng.",
+        "rem_title": "Tháo móng",
+        "rem_desc": "Tháo gel, nghệ thuật hoặc móng đắp hiện có."
+      },
+      "aesthetic": {
+        "section_title": "Dịch vụ Thẩm mỹ",
+        "section_desc": "Chọn liệu trình phù hợp với tình trạng da và mục tiêu.",
+        "basic_title": "Chăm sóc cơ bản",
+        "basic_desc": "Chăm sóc da cơ bản tập trung vào làm sạch và dưỡng ẩm.",
+        "trouble_title": "Trị mụn",
+        "trouble_desc": "Chăm sóc tập trung vào vấn đề da và lỗ chân lông.",
+        "calming_title": "Làm dịu da",
+        "calming_desc": "Chăm sóc da nhạy cảm và ửng đỏ.",
+        "lifting_title": "Nâng cơ",
+        "lifting_desc": "Chăm sóc nâng cơ, tạo đường nét và tăng độ đàn hồi.",
+        "bright_title": "Sáng da",
+        "bright_desc": "Cải thiện da xỉn màu và đều tông."
+      },
+      "eyelash": {
+        "section_title": "Dịch vụ Mi",
+        "section_desc": "Chọn nối mi, uốn mi hoặc chăm sóc mi.",
+        "perm_title": "Uốn mi",
+        "perm_desc": "Uốn mi để nâng và tạo thiết kế mắt.",
+        "ext_title": "Nối mi",
+        "ext_desc": "Nối mi để tăng chiều dài và độ dày.",
+        "refill_title": "Bổ sung",
+        "refill_desc": "Bổ sung mi để duy trì hiệu quả nối mi.",
+        "rem_title": "Tháo mi",
+        "rem_desc": "Tháo mi nối an toàn.",
+        "care_title": "Chăm sóc",
+        "care_desc": "Chăm sóc sau liệu trình và kiểm tra tình trạng."
+      },
+      "makeup": {
+        "section_title": "Dịch vụ Trang điểm",
+        "section_desc": "Chọn trang điểm hàng ngày, chụp ảnh hoặc cưới.",
+        "daily_title": "Hàng ngày",
+        "daily_desc": "Trang điểm tự nhiên hàng ngày.",
+        "interview_title": "Phỏng vấn",
+        "interview_desc": "Trang điểm sạch sẽ, chuyên nghiệp cho phỏng vấn.",
+        "wedding_title": "Cưới",
+        "wedding_desc": "Trang điểm cưới lâu trôi.",
+        "shooting_title": "Chụp ảnh",
+        "shooting_desc": "Trang điểm cho chụp ảnh studio hoặc ngoài trời.",
+        "special_title": "Sự kiện đặc biệt",
+        "special_desc": "Trang điểm điểm nhấn cho tiệc hoặc sự kiện."
+      },
+      "waxing": {
+        "section_title": "Dịch vụ Waxing",
+        "section_desc": "Chọn waxing mặt, body hoặc brazilian.",
+        "brazilian_title": "Brazilian",
+        "brazilian_desc": "Waxing brazilian chuyên sâu.",
+        "arm_title": "Tay",
+        "arm_desc": "Waxing cánh tay trên và dưới.",
+        "leg_title": "Chân",
+        "leg_desc": "Waxing bắp chân hoặc toàn bộ chân.",
+        "face_title": "Mặt",
+        "face_desc": "Waxing lông mày, môi và mặt.",
+        "body_title": "Body",
+        "body_desc": "Waxing lưng, ngực hoặc các bộ phận cơ thể."
+      }
+    }
+  },
+  "categories": {
+    "hair": {
+      "label": "Tóc",
+      "note": "Cắt, Uốn, Nhuộm, Tạo kiểu",
+      "summary": "Bắt đầu đặt lịch nhanh nhất từ thay đổi kiểu tóc đến cắt tỉa nhanh."
+    },
+    "nail": {
+      "label": "Móng",
+      "note": "Gel, Chăm sóc, Đắp bột",
+      "summary": "Chọn phong cách và thiết kế yêu thích, rồi chuyển nhẹ nhàng đến bước đặt lịch."
+    },
+    "esthetic": {
+      "label": "Thẩm mỹ",
+      "note": "Chăm sóc da, Nâng cơ, Làm dịu",
+      "summary": "So sánh cửa hàng và đặt lịch dựa trên tình trạng da và mục tiêu điều trị."
+    },
+    "waxing": {
+      "label": "Waxing",
+      "note": "Mặt, Body, Brazilian",
+      "summary": "Tìm nhanh cửa hàng phù hợp với khu vực và lịch trình của bạn."
+    },
+    "makeup": {
+      "label": "Trang điểm",
+      "note": "Hàng ngày, Chụp ảnh, Cưới",
+      "summary": "Chọn dịch vụ trang điểm cho ngày sự kiện và đặt lịch ngay."
+    },
+    "lash": {
+      "label": "Mi",
+      "note": "Nối mi, Uốn mi, Mi dưới",
+      "summary": "Kết nối trực tiếp đến menu từ nối mi tự nhiên đến tạo kiểu dày."
+    }
+  },
+  "selection": {
+    "eyebrow": "Danh mục đã chọn",
+    "tags": {
+      "mobile": "Đặt lịch di động",
+      "comparison": "So sánh cửa hàng",
+      "inquiry": "Tư vấn trực tuyến"
+    },
+    "empty": "Vui lòng chọn danh mục trước. Nút bắt đầu đặt lịch sẽ kích hoạt sau khi chọn."
+  },
+  "cta": {
+    "hint": "Khám phá các dịch vụ làm đẹp có sẵn trên màn hình tiếp theo dựa trên danh mục đã chọn.",
+    "button": "Bắt đầu đặt lịch"
+  },
+  "interpreter_entry": {
+    "title": "Phiên dịch trực tuyến",
+    "description": "Giao tiếp dễ dàng với nhân viên",
+    "cta": "Mở phiên dịch"
+  },
+  "location_sheet": {
+    "search_title": "Tìm kiếm vị trí",
+    "search_result_count": "{{count}} kết quả cho \"{{query}}\"",
+    "view_location": "Xem vị trí",
+    "view_location_desc": "Xem vị trí chi tiết trên bản đồ",
+    "call_taxi": "Gọi taxi",
+    "google_maps_desc": "Xem chỉ đường phương tiện công cộng trên Google Maps"
+  },
+  "modals": {
+    "card_title": "📍 Vui lòng đến địa chỉ này",
+    "copy": "Sao chép địa chỉ",
+    "copy_done": "Đã sao chép!",
+    "close": "Đóng"
+  }
 }

@@ -4,12 +4,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format, startOfToday } from 'date-fns';
 import type { Locale } from 'date-fns';
-import { ko, enUS, ja, zhCN, zhHK, arSA, es, fr, de, th, vi, id, pt, ru } from 'date-fns/locale';
+import { ko, enUS, ja, zhCN, zhTW, arSA, es, fr, de, th, vi, id, pt, ru } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';
 import 'react-day-picker/dist/style.css';
 
 const localeMap: Record<string, Locale> = {
-  ko, en: enUS, ja, "zh-CN": zhCN, "zh-HK": zhHK, ar: arSA, es, fr, de, th, vi, id, pt, ru
+  ko, en: enUS, ja, "zh-CN": zhCN, "zh-TW": zhTW, ar: arSA, es, fr, de, th, vi, id, pt, ru
 };
 
 interface CalendarDatePickerProps {
@@ -56,7 +56,7 @@ export default function CalendarDatePicker({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-4 py-3.5 bg-[#fffcf9] border border-[#6d533f]/10 rounded-2xl shadow-sm hover:border-[#7f4f46]/30 transition-all text-left"
+        className="w-full flex items-center justify-between px-4 py-3.5 bg-[#fffcf9] border border-[#6d533f]/10 rounded-2xl shadow-sm hover:border-[#7f4f46]/30 transition-all text-start"
       >
         <span className={selectedDate ? 'text-[#231d19] font-bold' : 'text-[#6e6259]'}>
           {selectedDate ? format(selectedDate, 'PPP', { locale: currentLocale }) : t('label_select_prompt')}
@@ -80,6 +80,7 @@ export default function CalendarDatePicker({
             onSelect={handleDaySelect}
             locale={currentLocale}
             disabled={{ before: today }}
+            dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
             modifiersClassNames={{
               selected: 'rdp-day_selected',
               disabled: 'rdp-day_disabled'
