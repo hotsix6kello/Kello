@@ -50,6 +50,8 @@ import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
 import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
 import HomeBookingFlowEntry from './components/home/HomeBookingFlowEntry';
+import WelcomeCouponPopup from './components/home/WelcomeCouponPopup';
+import ReferralCodePopup from './components/home/ReferralCodePopup';
 import {
   buildHomeBookingSkeletonDebugPanelDisplay,
 } from './components/home/HomeBookingFlowEntry.helpers';
@@ -126,6 +128,8 @@ export default function HomePage() {
 
   const [userName, setUserName] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+  const [showReferralPopup, setShowReferralPopup] = useState(false);
 
   // Navigation Sheet States
   const [openNavSheet, setOpenNavSheet] = useState(false);
@@ -292,6 +296,51 @@ export default function HomePage() {
     });
     return () => subscription.unsubscribe();
   }, [hasSupabaseAuth]);
+
+  const POPUP_TTL_MS = 24 * 60 * 60 * 1000;
+
+  const isWithin24h = (key: string) => {
+    const val = localStorage.getItem(key);
+    if (!val) return false;
+    return Date.now() - Number(val) < POPUP_TTL_MS;
+  };
+
+  useEffect(() => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!session) {
+        if (!isWithin24h('welcome_popup_closed')) {
+          setShowWelcomePopup(true);
+        }
+      } else {
+        if (!isWithin24h('referral_popup_skipped')) {
+          const { data } = await supabase
+            .from('referrals')
+            .select('id')
+            .eq('referred_id', session.user.id)
+            .limit(1);
+          if (!data || data.length === 0) {
+            setShowReferralPopup(true);
+          }
+        }
+      }
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleWelcomeClose = () => {
+    localStorage.setItem('welcome_popup_closed', String(Date.now()));
+    setShowWelcomePopup(false);
+  };
+
+  const handleReferralClose = () => {
+    localStorage.setItem('referral_popup_skipped', String(Date.now()));
+    setShowReferralPopup(false);
+  };
+
+  const handleReferralSubmit = (code: string) => {
+    console.log('[ReferralCodePopup] code submitted:', code);
+    setShowReferralPopup(false);
+  };
 
   const handleSignOut = async () => {
     try {
@@ -580,6 +629,16 @@ export default function HomePage() {
         skeletonDebugPanel={skeletonDebugPanel}
       />
 
+      {showWelcomePopup && (
+        <WelcomeCouponPopup onClose={handleWelcomeClose} />
+      )}
+
+      {showReferralPopup && (
+        <ReferralCodePopup
+          onClose={handleReferralClose}
+          onSubmit={handleReferralSubmit}
+        />
+      )}
     </div>
   );
 }
