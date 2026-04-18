@@ -1372,6 +1372,19 @@
       "meta": {
         "reference": "参考"
       }
+    },
+    "referral": {
+      "title": "推荐码",
+      "copy": "复制",
+      "copied": "已复制！",
+      "share_msg": "分享你的推荐码，双方都能获得5%优惠券！",
+      "coupons_title": "我的优惠券",
+      "no_coupons": "暂无已发放的优惠券",
+      "coupon_used": "已使用",
+      "coupon_available": "可使用",
+      "reason_signup": "注册优惠券",
+      "reason_referred": "推荐码优惠券",
+      "reason_referrer": "好友推荐优惠券"
     }
   },
   "notifications": {

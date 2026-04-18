@@ -2070,6 +2070,19 @@
       "meta": {
         "reference": "Reference"
       }
+    },
+    "referral": {
+      "title": "Referral Code",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "share_msg": "Share your code — you both get a 5% coupon!",
+      "coupons_title": "My Coupons",
+      "no_coupons": "No coupons issued yet",
+      "coupon_used": "Used",
+      "coupon_available": "Available",
+      "reason_signup": "Sign-up Coupon",
+      "reason_referred": "Referral Code Coupon",
+      "reason_referrer": "Friend Referral Coupon"
     }
   },
   "notifications": {

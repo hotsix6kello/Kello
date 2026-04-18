@@ -19,6 +19,16 @@ interface DashboardProfileRecord {
     role: string | null;
     created_at: string | null;
     avatar_url: string | null;
+    referral_code: string | null;
+}
+
+interface CouponRecord {
+    id: string;
+    discount_type: string;
+    discount_value: number;
+    issue_reason: string;
+    is_used: boolean;
+    created_at: string;
 }
 
 interface PartnerStatusRouteResponse {
@@ -182,6 +192,80 @@ function ProfileSummaryCard({
                 </div>
             </div>
         </div>
+    );
+}
+
+function ReferralSection({
+    referralCode,
+    coupons,
+}: {
+    referralCode: string | null;
+    coupons: CouponRecord[];
+}) {
+    const { t, i18n } = useTranslation("common");
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = async () => {
+        if (!referralCode) return;
+        await navigator.clipboard.writeText(referralCode);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+    };
+
+    const reasonKey = (reason: string) => {
+        const map: Record<string, string> = {
+            signup: t("my_page.referral.reason_signup"),
+            referred: t("my_page.referral.reason_referred"),
+            referrer: t("my_page.referral.reason_referrer"),
+        };
+        return map[reason] ?? reason;
+    };
+
+    return (
+        <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>{t("my_page.referral.title")}</h2>
+            </div>
+
+            {referralCode && (
+                <div className={styles.referralCodeCard}>
+                    <div>
+                        <div className={styles.referralCode}>{referralCode}</div>
+                        <div className={styles.referralShareMsg}>{t("my_page.referral.share_msg")}</div>
+                    </div>
+                    <button className={styles.referralCopyBtn} onClick={handleCopy}>
+                        {copied ? t("my_page.referral.copied") : t("my_page.referral.copy")}
+                    </button>
+                </div>
+            )}
+
+            <div className={styles.sectionHeader} style={{ marginTop: 8 }}>
+                <h2 className={styles.sectionTitle}>{t("my_page.referral.coupons_title")}</h2>
+            </div>
+
+            {coupons.length === 0 ? (
+                <div style={{ fontSize: "0.85rem", color: "var(--soft-ink)", padding: "8px 0" }}>
+                    {t("my_page.referral.no_coupons")}
+                </div>
+            ) : (
+                <div className={styles.couponList}>
+                    {coupons.map((c) => (
+                        <div key={c.id} className={`${styles.couponItem} ${c.is_used ? styles.couponItemUsed : ""}`}>
+                            <div>
+                                <div className={styles.couponDiscount}>{c.discount_value}% {c.discount_type === "percent" ? "OFF" : ""}</div>
+                                <div className={styles.couponReason}>{reasonKey(c.issue_reason)}</div>
+                                <div className={styles.couponDate}>
+                                    {new Date(c.created_at).toLocaleDateString(i18n.language === "ko" ? "ko-KR" : "en-US")}
+                                </div>
+                            </div>
+                            <span className={`${styles.couponBadge} ${c.is_used ? styles.couponBadgeUsed : ""}`}>
+                                {c.is_used ? t("my_page.referral.coupon_used") : t("my_page.referral.coupon_available")}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </section>
     );
 }
 
@@ -619,6 +703,8 @@ function MyPageContent() {
     const [permissionsResolved, setPermissionsResolved] = useState(false);
     const [profileRole, setProfileRole] = useState<string | null>(null);
     const [partnerStatus, setPartnerStatus] = useState<PartnerStatus | null>(null);
+    const [referralCode, setReferralCode] = useState<string | null>(null);
+    const [coupons, setCoupons] = useState<CouponRecord[]>([]);
 
     const fallbackUserName = hasHydrated
         ? t("my_page.settings.account.default_name")
@@ -670,11 +756,18 @@ function MyPageContent() {
                 return;
             }
 
-            const { data: profileData } = await supabase
-                .from("profiles")
-                .select("display_name, nickname, nickname_updated_at, role, created_at, avatar_url")
-                .eq("id", user.id)
-                .maybeSingle();
+            const [{ data: profileData }, { data: couponsData }] = await Promise.all([
+                supabase
+                    .from("profiles")
+                    .select("display_name, nickname, nickname_updated_at, role, created_at, avatar_url, referral_code")
+                    .eq("id", user.id)
+                    .maybeSingle(),
+                supabase
+                    .from("coupons")
+                    .select("*")
+                    .eq("user_id", user.id)
+                    .order("created_at", { ascending: false }),
+            ]);
 
             if (!isMounted) {
                 return;
@@ -682,6 +775,8 @@ function MyPageContent() {
 
             const nextProfile = (profileData as DashboardProfileRecord | null) ?? null;
             setAvatarUrl(nextProfile?.avatar_url ?? undefined);
+            setReferralCode(nextProfile?.referral_code ?? null);
+            setCoupons((couponsData as CouponRecord[] | null) ?? []);
             const email = pickString(user.email);
             const displayName = pickString(
                 nextProfile?.nickname,
@@ -765,6 +860,8 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
+
+            <ReferralSection referralCode={referralCode} coupons={coupons} />
 
             <MyBookingsSection accessToken={accessToken} authReady={authReady} />
 
