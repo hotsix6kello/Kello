@@ -2060,7 +2060,51 @@
       }
     },
     "community_hub": {
-      "title": "My Community"
+      "title": "My Community",
+      "eyebrow": "My Activity",
+      "subtitle": "See all your activity at a glance.",
+      "browse": "Browse Community",
+      "loading": "Loading...",
+      "summary_hint": "Summary of your community activity so far",
+      "sync_error": "Failed to load data.",
+      "no_comments": "No comments",
+      "posts_desc": "Posts you've written",
+      "reviews_desc": "Reviews you've written",
+      "meetups_desc": "Meetups you've joined",
+      "summary": {
+        "posts": "Posts",
+        "reviews": "Reviews",
+        "meetups": "Meetups"
+      },
+      "tabs": {
+        "posts": "Posts",
+        "reviews": "Reviews",
+        "meetups": "Meetups"
+      },
+      "type": {
+        "meetup": "Meetup",
+        "travel": "Travel"
+      },
+      "review_prompts": {
+        "title": "Leave a Review",
+        "desc": "Share your thoughts on the shops you've visited."
+      },
+      "empty": {
+        "posts": {
+          "title": "No posts yet",
+          "desc": "You haven't written any posts yet."
+        },
+        "reviews": {
+          "title": "No reviews yet",
+          "desc": "Leave a review for a shop you've visited.",
+          "no_completed": "No completed bookings.",
+          "cta": "View Booking History"
+        },
+        "meetups": {
+          "title": "No meetups joined",
+          "desc": "You haven't joined any meetups yet."
+        }
+      }
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
