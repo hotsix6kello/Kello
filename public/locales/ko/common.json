@@ -557,5 +557,20 @@
     "placeholder": "추천인 코드 입력",
     "submit": "입력 완료",
     "skip": "다음에 하기"
+  },
+  "my_page": {
+    "referral": {
+      "title": "추천인 코드",
+      "copy": "복사",
+      "copied": "복사됨!",
+      "share_msg": "내 추천인 코드를 입력하면 둘 다 5% 쿠폰!",
+      "coupons_title": "내 쿠폰",
+      "no_coupons": "아직 발급된 쿠폰이 없습니다",
+      "coupon_used": "사용완료",
+      "coupon_available": "사용가능",
+      "reason_signup": "회원가입 쿠폰",
+      "reason_referred": "추천인 입력 쿠폰",
+      "reason_referrer": "친구 추천 쿠폰"
+    }
   }
 }

@@ -873,3 +873,102 @@
     font-size: 1.1rem;
     font-weight: 800;
 }
+
+/* ── Referral Section ── */
+.referralCodeCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff0f3;
+    border: 1px solid #ffc8d2;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.referralCode {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #d6336c;
+}
+
+.referralShareMsg {
+    font-size: 0.78rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.referralCopyBtn {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    background: #ff5a5f;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.referralCopyBtn:hover {
+    background: #e04e53;
+}
+
+.couponList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.couponItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+}
+
+.couponItemUsed {
+    opacity: 0.45;
+    background: #f8fafc;
+}
+
+.couponDiscount {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ff5a5f;
+}
+
+.couponItemUsed .couponDiscount {
+    color: #94a3b8;
+}
+
+.couponReason {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+.couponDate {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
+
+.couponBadge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: #fff0f3;
+    color: #d6336c;
+}
+
+.couponBadgeUsed {
+    background: #f1f5f9;
+    color: #94a3b8;
+}
