@@ -633,7 +633,51 @@
       }
     },
     "community_hub": {
-      "title": "내 커뮤니티"
+      "title": "내 커뮤니티",
+      "eyebrow": "내 활동",
+      "subtitle": "활동 내역을 한눈에 확인하세요.",
+      "browse": "커뮤니티 둘러보기",
+      "loading": "불러오는 중...",
+      "summary_hint": "지금까지의 커뮤니티 활동 요약",
+      "sync_error": "데이터를 불러오지 못했습니다.",
+      "no_comments": "댓글 없음",
+      "posts_desc": "작성한 포스트 목록",
+      "reviews_desc": "작성한 리뷰 목록",
+      "meetups_desc": "참여한 모임 목록",
+      "summary": {
+        "posts": "포스트",
+        "reviews": "리뷰",
+        "meetups": "모임"
+      },
+      "tabs": {
+        "posts": "포스트",
+        "reviews": "리뷰",
+        "meetups": "모임"
+      },
+      "type": {
+        "meetup": "모임",
+        "travel": "여행"
+      },
+      "review_prompts": {
+        "title": "리뷰를 남겨보세요",
+        "desc": "방문한 매장에 리뷰를 남겨보세요."
+      },
+      "empty": {
+        "posts": {
+          "title": "작성한 포스트 없음",
+          "desc": "아직 작성한 포스트가 없습니다."
+        },
+        "reviews": {
+          "title": "작성한 리뷰 없음",
+          "desc": "완료된 예약 매장에 리뷰를 남겨보세요.",
+          "no_completed": "완료된 예약이 없습니다.",
+          "cta": "예약 내역 보기"
+        },
+        "meetups": {
+          "title": "참여한 모임 없음",
+          "desc": "아직 참여한 모임이 없습니다."
+        }
+      }
     },
     "messages": {
       "upload_success": "프로필 사진이 업데이트되었습니다.",
