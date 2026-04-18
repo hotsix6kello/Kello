@@ -1373,6 +1373,19 @@
       "meta": {
         "reference": "Reference"
       }
+    },
+    "referral": {
+      "title": "รหัสแนะนำ",
+      "copy": "คัดลอก",
+      "copied": "คัดลอกแล้ว!",
+      "share_msg": "แชร์รหัสของคุณ — ทั้งคู่ได้รับคูปองส่วนลด 5%!",
+      "coupons_title": "คูปองของฉัน",
+      "no_coupons": "ยังไม่มีคูปองที่ออกให้",
+      "coupon_used": "ใช้แล้ว",
+      "coupon_available": "ใช้ได้",
+      "reason_signup": "คูปองสมัครสมาชิก",
+      "reason_referred": "คูปองใส่รหัสแนะนำ",
+      "reason_referrer": "คูปองแนะนำเพื่อน"
     }
   },
   "notifications": {

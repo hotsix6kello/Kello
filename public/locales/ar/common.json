@@ -561,6 +561,19 @@
       "meta": {
         "reference": "Reference"
       }
+    },
+    "referral": {
+      "title": "رمز الإحالة",
+      "copy": "نسخ",
+      "copied": "تم النسخ!",
+      "share_msg": "شارك رمزك — كلاكما يحصل على قسيمة خصم 5%!",
+      "coupons_title": "قسائمي",
+      "no_coupons": "لا توجد قسائم صادرة بعد",
+      "coupon_used": "مستخدمة",
+      "coupon_available": "متاحة",
+      "reason_signup": "قسيمة التسجيل",
+      "reason_referred": "قسيمة إدخال رمز الإحالة",
+      "reason_referrer": "قسيمة ترشيح صديق"
     }
   },
   "notifications": {

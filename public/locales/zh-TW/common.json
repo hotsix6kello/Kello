@@ -900,5 +900,20 @@
     "placeholder": "輸入推薦碼",
     "submit": "確認",
     "skip": "稍後再說"
+  },
+  "my_page": {
+    "referral": {
+      "title": "推薦碼",
+      "copy": "複製",
+      "copied": "已複製！",
+      "share_msg": "分享你的推薦碼，雙方都能獲得5%折扣券！",
+      "coupons_title": "我的折扣券",
+      "no_coupons": "尚無已發放的折扣券",
+      "coupon_used": "已使用",
+      "coupon_available": "可使用",
+      "reason_signup": "註冊折扣券",
+      "reason_referred": "推薦碼折扣券",
+      "reason_referrer": "好友推薦折扣券"
+    }
   }
 }

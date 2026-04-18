@@ -1676,6 +1676,19 @@
       "meta": {
         "reference": "参照"
       }
+    },
+    "referral": {
+      "title": "紹介コード",
+      "copy": "コピー",
+      "copied": "コピーしました！",
+      "share_msg": "あなたのコードを入力すると、2人とも5%クーポンGET！",
+      "coupons_title": "マイクーポン",
+      "no_coupons": "まだクーポンは発行されていません",
+      "coupon_used": "使用済み",
+      "coupon_available": "利用可能",
+      "reason_signup": "会員登録クーポン",
+      "reason_referred": "紹介コード入力クーポン",
+      "reason_referrer": "友達紹介クーポン"
     }
   },
   "notifications": {

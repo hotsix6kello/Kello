@@ -1202,6 +1202,19 @@
       "meta": {
         "reference": "Reference"
       }
+    },
+    "referral": {
+      "title": "Mã giới thiệu",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép!",
+      "share_msg": "Chia sẻ mã của bạn — cả hai đều nhận được phiếu giảm giá 5%!",
+      "coupons_title": "Phiếu của tôi",
+      "no_coupons": "Chưa có phiếu nào được cấp",
+      "coupon_used": "Đã dùng",
+      "coupon_available": "Có thể dùng",
+      "reason_signup": "Phiếu đăng ký",
+      "reason_referred": "Phiếu nhập mã giới thiệu",
+      "reason_referrer": "Phiếu giới thiệu bạn bè"
     }
   },
   "notifications": {
