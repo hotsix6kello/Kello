@@ -286,8 +286,8 @@ function CommunityHubContent() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <button className={styles.backLink} onClick={() => router.push("/my")}>
-                    {t("common.back")}
+                <button className={styles.backButton} onClick={() => router.push("/my")}>
+                    ←
                 </button>
 
                 <div className={styles.headerRow}>
