@@ -222,12 +222,12 @@ function ReferralSection({
     };
 
     return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
+        <section className={styles.section} style={{ padding: "12px 16px" }}>
+            <div className={styles.sectionHeader} style={{ marginBottom: referralCode ? 8 : 0 }}>
                 <h2 className={styles.sectionTitle}>{t("my_page.referral.title")}</h2>
             </div>
 
-            {referralCode && (
+            {referralCode ? (
                 <div className={styles.referralCodeCard}>
                     <div>
                         <div className={styles.referralCode}>{referralCode}</div>
@@ -237,33 +237,34 @@ function ReferralSection({
                         {copied ? t("my_page.referral.copied") : t("my_page.referral.copy")}
                     </button>
                 </div>
+            ) : (
+                <div style={{ fontSize: "0.82rem", color: "var(--soft-ink)", padding: "4px 0 8px" }}>
+                    {t("common.loading")}
+                </div>
             )}
 
-            <div className={styles.sectionHeader} style={{ marginTop: 8 }}>
-                <h2 className={styles.sectionTitle}>{t("my_page.referral.coupons_title")}</h2>
-            </div>
-
-            {coupons.length === 0 ? (
-                <div style={{ fontSize: "0.85rem", color: "var(--soft-ink)", padding: "8px 0" }}>
-                    {t("my_page.referral.no_coupons")}
-                </div>
-            ) : (
-                <div className={styles.couponList}>
-                    {coupons.map((c) => (
-                        <div key={c.id} className={`${styles.couponItem} ${c.is_used ? styles.couponItemUsed : ""}`}>
-                            <div>
-                                <div className={styles.couponDiscount}>{c.discount_value}% {c.discount_type === "percent" ? "OFF" : ""}</div>
-                                <div className={styles.couponReason}>{reasonKey(c.issue_reason)}</div>
-                                <div className={styles.couponDate}>
-                                    {new Date(c.created_at).toLocaleDateString(i18n.language === "ko" ? "ko-KR" : "en-US")}
+            {coupons.length > 0 && (
+                <>
+                    <div className={styles.sectionHeader} style={{ marginTop: 12, marginBottom: 8 }}>
+                        <h2 className={styles.sectionTitle}>{t("my_page.referral.coupons_title")}</h2>
+                    </div>
+                    <div className={styles.couponList}>
+                        {coupons.map((c) => (
+                            <div key={c.id} className={`${styles.couponItem} ${c.is_used ? styles.couponItemUsed : ""}`}>
+                                <div>
+                                    <div className={styles.couponDiscount}>{c.discount_value}%{c.discount_type === "percent" ? " OFF" : ""}</div>
+                                    <div className={styles.couponReason}>{reasonKey(c.issue_reason)}</div>
+                                    <div className={styles.couponDate}>
+                                        {new Date(c.created_at).toLocaleDateString(i18n.language === "ko" ? "ko-KR" : "en-US")}
+                                    </div>
                                 </div>
+                                <span className={`${styles.couponBadge} ${c.is_used ? styles.couponBadgeUsed : ""}`}>
+                                    {c.is_used ? t("my_page.referral.coupon_used") : t("my_page.referral.coupon_available")}
+                                </span>
                             </div>
-                            <span className={`${styles.couponBadge} ${c.is_used ? styles.couponBadgeUsed : ""}`}>
-                                {c.is_used ? t("my_page.referral.coupon_used") : t("my_page.referral.coupon_available")}
-                            </span>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </>
             )}
         </section>
     );
