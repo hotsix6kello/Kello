@@ -1308,6 +1308,12 @@
     "lang_th": "タイ語",
     "lang_id": "インドネシア語",
     "lang_ms": "マレー語",
+    "lang_es": "スペイン語",
+    "lang_fr": "フランス語",
+    "lang_de": "ドイツ語",
+    "lang_ar": "アラビア語",
+    "lang_pt": "ポルトガル語",
+    "lang_ru": "ロシア語",
     "intent_booking_confirm": "予約確定",
     "intent_service_request": "サービスリクエスト伝達",
     "intent_allergy_notice": "敏感情報伝達",
@@ -1368,8 +1374,13 @@
     "request_memo": "リクエストメモ",
     "request_memo_empty": "特別なリクエストはありません。",
     "delivery_title": "伝達情報",
+    "delivery_lang": "伝達言語",
+    "delivery_intent": "伝達目的",
     "message_korean": "店舗への伝達内容",
     "message_localized": "お客様への伝達内容(翻訳)",
+    "manage_title": "予約管理",
+    "manage_desc": "リクエスト中または確定状態でキャンセルできます。キャンセル後は元に戻せません。",
+    "manage_disabled": "現在の状態では管理できません。",
     "action_view_on_map": "地図で見る",
     "action_change": "予約変更リクエスト",
     "action_cancel": "予約キャンセル",
@@ -1382,14 +1393,35 @@
     "error_change": "変更リクエストに失敗しました。",
     "error_change_reason": "変更理由を入力してください。",
     "cancel_panel_title": "予約キャンセル",
+    "cancel_reason_schedule": "日程変更",
+    "cancel_reason_other_shop": "別の店舗を利用",
+    "cancel_reason_mistake": "誤って予約",
+    "cancel_reason_etc": "その他",
     "cancel_details_placeholder": "キャンセルの詳細があれば入力してください。",
     "cancel_confirm": "予約をキャンセルする",
     "cancel_processing": "キャンセル中...",
+    "cancel_close": "閉じる",
     "cancel_success": "予約がキャンセルされました。",
+    "cancel_info_title": "キャンセル情報",
+    "cancel_time": "時間",
+    "cancel_time_empty": "確認中",
+    "cancel_by": "キャンセル者",
+    "cancel_by_customer": "お客様",
+    "cancel_by_admin": "店舗",
+    "cancel_by_unknown": "確認中",
+    "cancel_reason_label": "理由",
+    "cancel_reason_empty": "特定の理由なし",
     "error_cancel": "キャンセルに失敗しました。",
     "error_cancel_reason": "キャンセル理由を選択してください。",
     "error_login": "ログインが必要です。",
-    "open_interpreter": "通訳機を開く"
+    "error_load_401": "予約を確認するにはログインしてください。",
+    "error_load": "予約を読み込めませんでした。",
+    "error_cancel_400": "現在この予約はキャンセルできません。",
+    "error_cancel_403": "ご自身の予約のみキャンセルできます。",
+    "error_alt": "処理に失敗しました。",
+    "open_interpreter": "通訳機を開く",
+    "interpreter_visit_context": "{{storeName}} 訪問中に通訳機を使用中。",
+    "interpreter_visit_service_context": "{{storeName}} で {{serviceName}} サービスのための通訳機を使用中。"
   },
   "settings_page": {
     "hero": {
@@ -1666,7 +1698,51 @@
       }
     },
     "community_hub": {
-      "title": "コミュニティ活動"
+      "title": "コミュニティ活動",
+      "eyebrow": "マイアクティビティ",
+      "subtitle": "活動履歴を一目で確認できます。",
+      "browse": "コミュニティを見る",
+      "loading": "読み込み中...",
+      "summary_hint": "これまでのコミュニティ活動のまとめ",
+      "sync_error": "データを読み込めませんでした。",
+      "no_comments": "コメントなし",
+      "posts_desc": "投稿した記事の一覧",
+      "reviews_desc": "投稿したレビューの一覧",
+      "meetups_desc": "参加したミートアップの一覧",
+      "summary": {
+        "posts": "投稿",
+        "reviews": "レビュー",
+        "meetups": "ミートアップ"
+      },
+      "tabs": {
+        "posts": "投稿",
+        "reviews": "レビュー",
+        "meetups": "ミートアップ"
+      },
+      "type": {
+        "meetup": "ミートアップ",
+        "travel": "旅行"
+      },
+      "review_prompts": {
+        "title": "レビューを書いてみませんか",
+        "desc": "訪れた店舗にレビューを残しましょう。"
+      },
+      "empty": {
+        "posts": {
+          "title": "投稿がありません",
+          "desc": "まだ投稿した記事がありません。"
+        },
+        "reviews": {
+          "title": "レビューがありません",
+          "desc": "利用が完了した店舗にレビューを残しましょう。",
+          "no_completed": "完了した予約がありません。",
+          "cta": "予約履歴を見る"
+        },
+        "meetups": {
+          "title": "参加したミートアップなし",
+          "desc": "まだ参加したミートアップがありません。"
+        }
+      }
     },
     "messages": {
       "upload_success": "プロフィール写真が更新されました。",
