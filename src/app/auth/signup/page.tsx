@@ -70,6 +70,9 @@ export default function SignupPage() {
             localStorage.setItem('user', JSON.stringify({ name, email }));
             localStorage.setItem('kello_lang', i18nKey);
             setLoading(false);
+            supabase.rpc('issue_signup_coupon', { p_user_id: data.session.user.id })
+                .then(({ error }) => { if (error) console.error('[signup coupon]', error); })
+                .catch((e) => console.error('[signup coupon]', e));
             router.push('/');
             return;
         }
