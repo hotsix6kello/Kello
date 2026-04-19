@@ -757,7 +757,7 @@ function MyPageContent() {
                 return;
             }
 
-            const [{ data: profileData }, { data: couponsData }] = await Promise.all([
+            const [{ data: profileData, error: profileError }, { data: couponsData }] = await Promise.all([
                 supabase
                     .from("profiles")
                     .select("display_name, nickname, nickname_updated_at, role, created_at, avatar_url, referral_code")
@@ -769,6 +769,10 @@ function MyPageContent() {
                     .eq("user_id", user.id)
                     .order("created_at", { ascending: false }),
             ]);
+
+            if (profileError) {
+                console.debug('[my] profiles query error (RLS?):', profileError);
+            }
 
             if (!isMounted) {
                 return;
@@ -789,7 +793,7 @@ function MyPageContent() {
             );
             setUserName(displayName);
             setProfileSubtitle(email || fallbackSubtitle);
-            setProfileRole(nextProfile?.role ?? null);
+            setProfileRole(nextProfile?.role ?? (user.user_metadata?.role as string | undefined) ?? null);
 
             if (!email) {
                 setPartnerStatus("none");
