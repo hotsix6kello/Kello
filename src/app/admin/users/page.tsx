@@ -139,7 +139,12 @@ function AdminUsersContent() {
         <div className={styles.container}>
             {/* Header */}
             <header className={styles.header}>
-                <button onClick={() => router.push('/admin')} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--foreground)' }}>←</button>
+                <button onClick={() => router.push('/admin')} style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center', cursor: 'pointer' }} aria-label="뒤로가기">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
                 <h1 className={styles.headerTitle}>🛡️ 관리자 계정 관리</h1>
                 <span className={styles.adminBadge}>ADMIN</span>
             </header>
