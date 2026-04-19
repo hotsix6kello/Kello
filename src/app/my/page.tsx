@@ -866,13 +866,19 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
-            <ReferralSection referralCode={referralCode} coupons={coupons} />
+            {!capabilities.canViewAdminConsole && (
+                <ReferralSection referralCode={referralCode} coupons={coupons} />
+            )}
 
-            <MyBookingsSection accessToken={accessToken} authReady={authReady} />
+            {!capabilities.canViewAdminConsole && (
+                <MyBookingsSection accessToken={accessToken} authReady={authReady} />
+            )}
 
-            <section className={styles.section}>
-                <CommunityHubSection authorName={communityAuthorName} />
-            </section>
+            {!capabilities.canViewAdminConsole && (
+                <section className={styles.section}>
+                    <CommunityHubSection authorName={communityAuthorName} />
+                </section>
+            )}
 
             {/* Standard Partner Banner */}
             {capabilities.showPartnerBanner && (
