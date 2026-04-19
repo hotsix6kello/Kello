@@ -199,7 +199,7 @@ function AdminPartnersContent() {
             {/* Header */}
             <header className={styles.header}>
                 <button
-                    onClick={() => router.push('/admin')}
+                    onClick={() => router.back()}
                     style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     aria-label="뒤로가기"
                 >
