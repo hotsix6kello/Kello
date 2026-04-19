@@ -24,13 +24,25 @@ export default function AdminDashboard() {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) { setIsAdmin(false); return; }
 
-            const { data: profile } = await supabase
+            console.debug('[admin] user.id:', user.id);
+            console.debug('[admin] user_metadata:', user.user_metadata);
+
+            const { data: profile, error: profileError } = await supabase
                 .from('profiles')
                 .select('role')
                 .eq('id', user.id)
                 .maybeSingle();
 
-            const isAdminRole = profile?.role === 'admin' || profile?.role === 'super_admin';
+            console.debug('[admin] profile:', profile, 'error:', profileError);
+
+            const profileRole = profile?.role as string | undefined;
+            // profiles 테이블 조회 실패(RLS 등) 시 user_metadata.role로 fallback
+            const metadataRole = user.user_metadata?.role as string | undefined;
+            const resolvedRole = profileRole ?? metadataRole;
+
+            console.debug('[admin] resolvedRole:', resolvedRole, '(profile:', profileRole, ', metadata:', metadataRole, ')');
+
+            const isAdminRole = resolvedRole === 'admin' || resolvedRole === 'super_admin';
             if (!isAdminRole) { setIsAdmin(false); return; }
             setIsAdmin(true);
 
