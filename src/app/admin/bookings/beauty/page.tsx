@@ -147,6 +147,7 @@ function AdminBeautyBookingsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const detailRef = useRef<HTMLDivElement | null>(null);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [bookings, setBookings] = useState<BeautyBookingAdminRecord[]>([]);
@@ -388,12 +389,7 @@ function AdminBeautyBookingsContent() {
     setSelectedBookingId(bookingId);
     setStatusUpdateError(null);
     setStatusUpdateSuccess(null);
-
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-      window.setTimeout(() => {
-        detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
-    }
+    setIsSheetOpen(true);
   };
 
   const handleStatusUpdate = async (nextStatus: BeautyBookingAdminStatus) => {
@@ -654,7 +650,7 @@ function AdminBeautyBookingsContent() {
     <div className={sharedStyles.container}>
       <header className={sharedStyles.header}>
         <button
-          onClick={() => router.push('/admin')}
+          onClick={() => router.back()}
           style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
           aria-label="뒤로가기"
         >
@@ -668,14 +664,6 @@ function AdminBeautyBookingsContent() {
       </header>
 
       <div className={sharedStyles.content}>
-        <section className={styles.heroCard}>
-          <p className={styles.eyebrow}>Beauty Booking Admin</p>
-          <h2 className={styles.heroTitle}>예약 요청을 확인하고 매장 진행 상태를 관리하세요.</h2>
-          <p className={styles.heroText}>
-            최신 예약부터 확인할 수 있고, 접수 후에는 예약 확정·시술 완료·취소 상태로 순차 변경할 수 있습니다.
-          </p>
-        </section>
-
         <section className={styles.filterCard}>
           <div className={styles.filterGrid}>
             <label className={styles.field}>
@@ -793,14 +781,17 @@ function AdminBeautyBookingsContent() {
             ) : null}
           </section>
 
-          <section ref={detailRef} className={styles.detailSection}>
-            <div className={styles.sectionHeader}>
-              <div>
-                <h3 className={styles.sectionTitle}>예약 상세</h3>
-                <p className={styles.sectionText}>선택한 예약의 세부 정보와 전달 메모를 확인할 수 있습니다.</p>
-              </div>
+          <section ref={detailRef} className={`${styles.detailSection} ${isSheetOpen ? styles.detailSectionOpen : ''}`}>
+            {/* 모바일 바텀시트 핸들 + 닫기 버튼 */}
+            <div className={styles.sheetHandle} />
+            <div className={styles.sheetHeaderRow}>
+              <h3 className={styles.sheetHeaderTitle}>예약 상세</h3>
+              <button
+                className={styles.sheetCloseBtn}
+                onClick={() => setIsSheetOpen(false)}
+                aria-label="닫기"
+              >✕</button>
             </div>
-
             {!selectedBooking ? (
               <div className={styles.emptyState}>목록에서 예약을 선택하면 상세 정보가 표시됩니다.</div>
             ) : (
@@ -1375,6 +1366,15 @@ function AdminBeautyBookingsContent() {
           </section>
         </div>
         
+        {/* 모바일 바텀시트 백드롭 */}
+        {isSheetOpen && (
+          <div
+            className={styles.backdrop}
+            onClick={() => setIsSheetOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
         {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
         <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
       </div>
