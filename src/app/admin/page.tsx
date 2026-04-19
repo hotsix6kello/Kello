@@ -112,7 +112,12 @@ export default function AdminDashboard() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <button onClick={() => router.push('/')} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--foreground)' }} aria-label={t('common.back', { defaultValue: '뒤로가기' })}>←</button>
+                <button onClick={() => router.push('/my')} style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center', cursor: 'pointer' }} aria-label={t('common.back', { defaultValue: '뒤로가기' })}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
                 <h1 className={styles.headerTitle}>⚙️ {t('admin.dashboard_title', { defaultValue: '관리자 대시보드' })}</h1>
                 <span className={styles.adminBadge}>ADMIN</span>
             </header>
