@@ -41,7 +41,7 @@ export default function MedicalPage() {
                         <div style={{ fontWeight: 800, fontSize: '1rem', color: '#dc2626' }}>🚑 {t('help_page.emergency_119_title')}</div>
                         <div style={{ fontSize: '0.82rem', color: '#64748b' }}>{t('help_page.emergency_119_desc')}</div>
                     </div>
-                    <a href="tel:119" style={{ background: '#ef4444', color: 'white', padding: '10px 20px', borderRadius: 30, fontWeight: 700, textDecoration: 'none', boxShadow: '0 2px 6px rgba(239, 68, 68, 0.3)' }}>📞 {t('help_page.call_btn', { defaultValue: '전화하기' })}</a>
+                    <a href="tel:119" style={{ background: '#ef4444', color: 'white', padding: '10px 20px', borderRadius: 30, fontWeight: 700, textDecoration: 'none', boxShadow: '0 2px 6px rgba(239, 68, 68, 0.3)' }}>📞 {t('help_page.call_btn')}</a>
                 </div>
                 
                 <div style={{ borderTop: '1px dashed #fecaca', paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -49,7 +49,7 @@ export default function MedicalPage() {
                         <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#334155' }}>🩺 {t('help_page.consult_1339_title')}</div>
                         <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{t('help_page.consult_1339_desc')}</div>
                     </div>
-                    <a href="tel:1339" style={{ background: 'white', color: '#dc2626', padding: '7px 16px', borderRadius: 20, fontWeight: 700, textDecoration: 'none', fontSize: '0.85rem', border: '1px solid #fecaca' }}>{t('help_page.call_btn', { defaultValue: '전화하기' })}</a>
+                    <a href="tel:1339" style={{ background: 'white', color: '#dc2626', padding: '7px 16px', borderRadius: 20, fontWeight: 700, textDecoration: 'none', fontSize: '0.85rem', border: '1px solid #fecaca' }}>{t('help_page.call_btn')}</a>
                 </div>
             </div>
 
