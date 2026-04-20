@@ -5,15 +5,8 @@ import { useRouter } from "next/navigation";
 import styles from "./signup.module.css";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
-
-// Country selection mapping (Helper)
-function toI18nKey(code: string) {
-    const LANG_MAP: Record<string, string> = {
-        'ko': 'ko', 'en': 'en', 'ja': 'ja', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW',
-        'vi': 'vi', 'th': 'th', 'id': 'id', 'ms': 'ms'
-    };
-    return LANG_MAP[code] ?? 'en';
-}
+import i18n from "@/lib/i18n/client";
+import { isRtlLocale } from "@/lib/i18n/locales";
 
 const LANGUAGES = [
     { code: 'ko', label: 'South Korea', flag: '🇰🇷' },
@@ -23,8 +16,7 @@ const LANGUAGES = [
     { code: 'zh-TW', label: 'Taiwan / HK', flag: '🇭🇰' },
     { code: 'vi', label: 'Vietnam', flag: '🇻🇳' },
     { code: 'th', label: 'Thailand', flag: '🇹🇭' },
-    { code: 'id', label: 'Indonesia', flag: '🇮🇩' },
-    { code: 'ms', label: 'Malaysia', flag: '🇲🇾' },
+    { code: 'ar', label: 'Arabic / Middle East', flag: '🇸🇦' },
 ];
 
 export default function SignupPage() {
@@ -38,22 +30,25 @@ export default function SignupPage() {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
 
+    const handleCountryChange = (code: string) => {
+        setCountryCode(code);
+        void i18n.changeLanguage(code);
+        document.documentElement.dir = isRtlLocale(code) ? 'rtl' : 'ltr';
+        document.documentElement.lang = code;
+    };
+
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
         setSuccess(null);
 
-        const selectedLang = LANGUAGES.find(l => l.code === countryCode);
-        const i18nKey = selectedLang ? toI18nKey(selectedLang.code) : 'en';
-
-        // 1. Create user in Supabase Auth
         const { data, error: signUpError } = await supabase.auth.signUp({
             email,
             password,
             options: {
                 data: {
-                    full_name: name, // stored in raw_user_meta_data
+                    full_name: name,
                 },
             },
         });
@@ -64,11 +59,9 @@ export default function SignupPage() {
             return;
         }
 
-        // 2. Supabase returns a session immediately when email confirmation is disabled.
-        //    In that case the user is already logged in — save to localStorage and go home.
         if (data.session) {
             localStorage.setItem('user', JSON.stringify({ name, email }));
-            localStorage.setItem('kello_lang', i18nKey);
+            localStorage.setItem('kello_lang', countryCode);
             setLoading(false);
             void supabase.rpc('issue_signup_coupon', { p_user_id: data.session.user.id })
                 .then(
@@ -79,12 +72,8 @@ export default function SignupPage() {
             return;
         }
 
-        // 3. Email confirmation is enabled: session is null.
-        //    Do NOT attempt an immediate signInWithPassword — it will always fail
-        //    because the email hasn't been verified yet.
-        //    Just show a clear message and redirect to login.
         setLoading(false);
-        setSuccess("계정이 생성됐어요! 이메일을 확인하고 인증 후 로그인해주세요.");
+        setSuccess(t('signup.success'));
         setTimeout(() => {
             router.push('/auth/login');
         }, 3000);
@@ -99,24 +88,24 @@ export default function SignupPage() {
             <div className={styles.formCard}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>{t('common.signup')}</h1>
-                    <p className={styles.subTitle}>Experience Korea like a local</p>
+                    <p className={styles.subTitle}>{t('signup.subtitle')}</p>
                 </div>
 
                 <form onSubmit={handleSignup}>
                     <div className={styles.inputGroup}>
-                        <label className={styles.label}>Name</label>
+                        <label className={styles.label}>{t('signup.name_label')}</label>
                         <input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className={styles.input}
-                            placeholder="Enter your name"
+                            placeholder={t('signup.name_placeholder')}
                             required
                         />
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <label className={styles.label}>Email</label>
+                        <label className={styles.label}>{t('signup.email_label')}</label>
                         <input
                             type="email"
                             value={email}
@@ -128,10 +117,10 @@ export default function SignupPage() {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <label className={styles.label}>Country</label>
+                        <label className={styles.label}>{t('signup.country_label')}</label>
                         <select
                             value={countryCode}
-                            onChange={(e) => setCountryCode(e.target.value)}
+                            onChange={(e) => handleCountryChange(e.target.value)}
                             className={styles.select}
                             required
                         >
@@ -144,7 +133,7 @@ export default function SignupPage() {
                     </div>
 
                     <div className={styles.inputGroup}>
-                        <label className={styles.label}>Password</label>
+                        <label className={styles.label}>{t('signup.password_label')}</label>
                         <input
                             type="password"
                             value={password}
@@ -173,17 +162,17 @@ export default function SignupPage() {
                         disabled={loading || !!success}
                         className={styles.submitBtn}
                     >
-                        {loading ? "Creating Account..." : t('common.signup')}
+                        {loading ? t('signup.loading') : t('common.signup')}
                     </button>
                 </form>
 
                 <div className={styles.footer} style={{ marginTop: '24px', textAlign: 'center', fontSize: '0.9rem', color: 'var(--gray-500)' }}>
-                    Already have an account?{" "}
+                    {t('signup.login_prompt')}{" "}
                     <span
                         onClick={() => router.push('/auth/login')}
                         style={{ color: 'var(--primary)', cursor: 'pointer', fontWeight: '600' }}
                     >
-                        Log in
+                        {t('signup.login_link')}
                     </span>
                 </div>
             </div>

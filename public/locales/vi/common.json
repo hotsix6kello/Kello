@@ -1755,5 +1755,17 @@
     "placeholder": "Nhập mã giới thiệu",
     "submit": "Xác nhận",
     "skip": "Để sau"
+  },
+  "signup": {
+    "subtitle": "Trải nghiệm Hàn Quốc như người bản địa",
+    "name_label": "Họ và tên",
+    "name_placeholder": "Nhập họ và tên của bạn",
+    "email_label": "Email",
+    "country_label": "Quốc gia",
+    "password_label": "Mật khẩu",
+    "loading": "Đang tạo tài khoản...",
+    "success": "Tài khoản đã được tạo! Vui lòng kiểm tra email để xác minh và đăng nhập.",
+    "login_prompt": "Đã có tài khoản?",
+    "login_link": "Đăng nhập"
   }
 }

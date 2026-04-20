@@ -2210,5 +2210,17 @@
     "placeholder": "Enter referral code",
     "submit": "Submit",
     "skip": "Skip for now"
+  },
+  "signup": {
+    "subtitle": "Experience Korea like a local",
+    "name_label": "Name",
+    "name_placeholder": "Enter your name",
+    "email_label": "Email",
+    "country_label": "Country",
+    "password_label": "Password",
+    "loading": "Creating Account...",
+    "success": "Account created! Please check your email to verify and then log in.",
+    "login_prompt": "Already have an account?",
+    "login_link": "Log in"
   }
 }
