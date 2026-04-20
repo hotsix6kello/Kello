@@ -24,6 +24,7 @@ import {
     DEFAULT_CLIENT_LOCALE,
     isRtlLocale,
     LOCALE_STORAGE_KEY,
+    MANUAL_SELECTION_FLAG,
     resolveCanonicalLocale,
 } from "@/lib/i18n/locales";
 
@@ -102,6 +103,7 @@ export function changeLanguage(lang: string) {
     
     // 기기 귀속 저장을 위해 쿠키와 스토리지를 동시 업데이트
     localStorage.setItem(LOCALE_STORAGE_KEY, canonical);
+    localStorage.setItem(MANUAL_SELECTION_FLAG, "1");
     document.cookie = `${LOCALE_STORAGE_KEY}=${canonical}; path=/; max-age=31536000; samesite=lax`;
     
     if (typeof window !== "undefined") {
