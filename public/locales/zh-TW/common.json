@@ -1478,5 +1478,8 @@
     "success": "帳戶已建立！請查收郵件完成驗證後登入。",
     "login_prompt": "已有帳戶？",
     "login_link": "登入"
+  },
+  "help_page": {
+    "call_btn": "致電"
   }
 }
