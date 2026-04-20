@@ -14,6 +14,8 @@ export type CanonicalLocaleCode = (typeof CANONICAL_SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: CanonicalLocaleCode = "ko";
 export const DEFAULT_CLIENT_LOCALE: CanonicalLocaleCode = "ko";
 export const LOCALE_STORAGE_KEY = "kello_lang";
+export const MANUAL_SELECTION_FLAG = "kello_lang_manual";
+export const AUTO_INIT_FLAG = "kello_lang_auto_init";
 
 export const LEGACY_LOCALE_ALIASES: Record<string, CanonicalLocaleCode> = {
     jp: "ja",
