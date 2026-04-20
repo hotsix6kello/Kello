@@ -1141,5 +1141,404 @@
   },
   "help_page": {
     "call_btn": "전화하기"
+  },
+  "community_page": {
+    "write_post": "게시글 작성",
+    "edit": "게시글 수정",
+    "posting": "게시 중...",
+    "defaults": {
+      "region": "서울"
+    },
+    "hero": {
+      "title": "켈로 커뮤니티",
+      "search_placeholder": "관심 있는 주제를 검색해보세요"
+    },
+    "categories": {
+      "all": "전체",
+      "meetup": "모임",
+      "beauty_review": "뷰티",
+      "food_review": "맛집",
+      "travel_review": "여행",
+      "meetup_recruitment": "모집",
+      "help": "꿀팁"
+    },
+    "sub_filters": {
+      "all": "전체",
+      "saved": "저장됨",
+      "reacted": "반응함",
+      "mine": "내 게시글",
+      "recruiting": "모집 중",
+      "active_reactions": "인기",
+      "open_meetup": "오픈 모임",
+      "weekend": "주말",
+      "fresh": "최신 정보"
+    },
+    "status": {
+      "reviews": "후기",
+      "reacting": "반응 중",
+      "surveying": "조사 중",
+      "drafting": "초안",
+      "closed": "마감"
+    },
+    "tags": {
+      "solo_friendly": "혼자 가기 좋아요",
+      "friends_friendly": "친구랑 가기 좋아요",
+      "photo_spot": "사진 명소",
+      "waiting": "웨이팅 있어요",
+      "foreigner_friendly": "외국인 친화적"
+    },
+    "states": {
+      "fetch_failed_desc": "게시글을 불러오지 못했어요. 네트워크를 확인해주세요.",
+      "fetch_failed_title": "데이터 오류",
+      "fetch_failed_tip": "페이지를 새로고침해 보세요.",
+      "empty_title": "아직 게시글이 없어요",
+      "empty_desc": "첫 번째 이야기를 공유해보세요!",
+      "empty_tip": "우측 하단 작성 버튼을 눌러보세요.",
+      "no_results_title": "검색 결과가 없어요",
+      "no_results_desc": "다른 키워드로 검색해보세요.",
+      "cta_write": "첫 게시글 작성",
+      "cta_all": "전체 보기"
+    },
+    "quality_signals": {
+      "organized": "잘 정리됨",
+      "active": "매우 인기",
+      "asset": "풍부한 정보",
+      "mate": "좋은 메이트"
+    },
+    "toasts": {
+      "save_added": "저장된 게시글에 추가됐어요.",
+      "save_removed": "저장된 게시글에서 제거됐어요.",
+      "deleted": "삭제됐어요.",
+      "updated": "수정됐어요.",
+      "submitted": "게시됐어요.",
+      "region_collected": "{{region}} 게시글을 보여드릴게요"
+    },
+    "nav_summary": {
+      "all": "{{tab}}의 모든 이야기를 보는 중",
+      "active_reactions": "{{tab}}에서 뜨거운 반응 중!",
+      "open_meetup": "{{tab}}에서 새 메이트를 찾고 있어요",
+      "weekend": "{{tab}}에서 이번 주말 계획 있나요?",
+      "default": "{{tab}}에서 {{sub}}(으)로 필터링된 결과를 보는 중"
+    },
+    "form": {
+      "category_label": "카테고리",
+      "region_label": "지역",
+      "region_placeholder": "예: 강남, 마포",
+      "select_category": "카테고리 선택",
+      "write_guide_title": {
+        "beauty_review": "뷰티 경험을 공유해요",
+        "food_review": "숨겨진 맛집을 추천해요",
+        "travel_review": "여행 꿀팁을 공유해요",
+        "meetup": "함께 즐길 모임을 만들어요",
+        "meetup_recruitment": "여행 메이트를 찾고 있나요?",
+        "help": "궁금한 건 뭐든 물어보세요"
+      },
+      "write_guide_body": {
+        "beauty_review": "시술이나 서비스에 대한 솔직한 후기를 공유해요.",
+        "food_review": "맛, 분위기, 웨이팅 정보를 알려주세요.",
+        "travel_review": "코스, 짐 싸기, 이동 방법 등 유용한 팁을 알려주세요.",
+        "meetup": "언제, 어디서, 무엇을 할지 설명해주세요.",
+        "meetup_recruitment": "여행 일정, 목적지, 메이트 조건을 알려주세요.",
+        "help": "질문이나 상황을 자세히 설명해주세요."
+      },
+      "title_label": {
+        "beauty_review": "서비스/테마",
+        "default": "제목"
+      },
+      "title_placeholder": {
+        "beauty_review": "예: 강남 레이어드컷 후기",
+        "default": "제목을 입력하세요"
+      },
+      "desc_label": {
+        "beauty_review": "상세 내용",
+        "default": "내용"
+      },
+      "desc_placeholder": {
+        "beauty_review": "과정이나 결과를 자세히 설명해주세요.",
+        "food_review": "추천 메뉴와 이유를 설명해주세요.",
+        "travel_review": "다른 여행자에게 도움이 되는 정보를 공유해주세요.",
+        "meetup": "모임에 대해 자세히 설명해주세요.",
+        "meetup_recruitment": "함께 하고 싶은 것을 설명해주세요.",
+        "help": "자세한 질문이 더 좋은 답변을 받을 수 있어요.",
+        "default": "공유하고 싶은 이야기를 작성해요"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "전후 사진이나 매장 내부 사진을 추가하세요 (최대 4장)",
+          "food_review": "음식과 매장 내부 사진을 추가하세요 (최대 4장)",
+          "travel_review": "분위기를 보여주는 사진을 추가하세요 (최대 4장)",
+          "meetup": "장소나 활동 사진을 추가하세요 (최대 4장)",
+          "meetup_recruitment": "목적지나 참고 사진을 추가하세요 (최대 4장)",
+          "help": "문제 설명에 도움이 되는 사진을 추가하세요 (최대 4장)"
+        },
+        "saved_name": "저장된 이미지 {{index}}",
+        "file_only_alert": "이미지 파일만 선택할 수 있어요.",
+        "limit_alert": "최대 {{count}}장까지 업로드할 수 있어요.",
+        "load_failed_alert": "이미지를 불러오지 못했어요.",
+        "limit_label": "(최대 {{count}}장)"
+      },
+      "category_hints": {
+        "beauty_review": "뷰티샵 경험을 공유해요.",
+        "food_review": "좋아하는 맛집을 추천해요.",
+        "travel_review": "나만의 여행 노하우를 공유해요.",
+        "meetup": "함께 즐길 가벼운 모임을 만들어요.",
+        "meetup_recruitment": "일정이 맞는 여행 메이트를 찾아요.",
+        "help": "궁금한 건 뭐든 물어보세요."
+      },
+      "submit": "게시",
+      "write_title": "게시글 작성",
+      "edit_title": "게시글 수정",
+      "image_label": "이미지",
+      "add_photo": "사진 추가",
+      "preparing_images": "이미지 준비 중...",
+      "cancel": "취소"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "뷰티 동행"
+      },
+      "flash_meetup": {
+        "label": "번개 모임"
+      },
+      "beauty": {
+        "label": "뷰티 후기"
+      },
+      "food": {
+        "label": "맛집 꿀팁"
+      },
+      "travel": {
+        "label": "여행 정보"
+      },
+      "write": {
+        "label": "새 글 작성"
+      },
+      "browse": {
+        "label": "둘러보기",
+        "sub": "인기 게시글"
+      },
+      "recruiting": {
+        "label": "모집 중",
+        "sub": "메이트"
+      },
+      "weekend": {
+        "label": "주말",
+        "sub": "주간 계획"
+      },
+      "record": {
+        "label": "일기",
+        "sub": "일상"
+      }
+    },
+    "fab": {
+      "create_post": "게시글 작성"
+    },
+    "sort": {
+      "latest": "최신순",
+      "reactions": "인기순",
+      "draft": "활발한 모집"
+    },
+    "card": {
+      "default_vibe": "좋은 분위기",
+      "title_prefix": {
+        "beauty_review": "[뷰티]",
+        "food_review": "[맛집]",
+        "travel_review": "[여행]"
+      },
+      "cta": {
+        "review": "게시글 보기",
+        "join": "지금 참여"
+      },
+      "result_badge": "완료",
+      "open_meetup_badge": "모임 오픈",
+      "fresh_badges": {
+        "comment": "뜨거운 반응",
+        "update": "방금 업데이트"
+      },
+      "draft_status": {
+        "active": "채팅 활발",
+        "forming": "메이트 모집 중",
+        "preparing": "관심 있어요"
+      },
+      "draft_desc": {
+        "active": "많은 분들이 관심을 보이고 있어요!",
+        "forming": "메이트를 더 찾고 있어요.",
+        "preparing": "첫 번째로 참여해보세요!"
+      },
+      "owner_reactions": {
+        "region": "{{region}}에 대해 {{count}}명과 채팅 중",
+        "join": "{{count}}명이 관심을 보여요"
+      },
+      "more_region": "{{region}}의 더 많은 이야기 보기"
+    },
+    "detail": "게시글 상세",
+    "detail_page": {
+      "loading": "데이터를 불러오는 중...",
+      "hidden_post": "이 게시글은 숨겨져 있어요.",
+      "not_found": "게시글을 찾을 수 없어요.",
+      "show_hidden": "숨겨진 게시글 보기",
+      "hide_post": "이 게시글 숨기기",
+      "empty_comments": "아직 댓글이 없어요. 첫 번째로 생각을 나눠보세요!",
+      "hide_comment": "이 댓글 숨기기",
+      "status": {
+        "REVIEWS": "후기",
+        "REACTING": "반응 중",
+        "SURVEYING": "조사 중",
+        "DRAFTING": "초안",
+        "CLOSED": "마감"
+      },
+      "tags": {
+        "solo_friendly": "혼자 가기 좋아요",
+        "friends_friendly": "친구랑 가기 좋아요",
+        "photo_spot": "사진 명소",
+        "waiting": "웨이팅 필요",
+        "foreigner_friendly": "외국인 친화적"
+      },
+      "freshness": {
+        "realtime": "활발히 진행 중",
+        "updated": "정보 업데이트됨",
+        "active": "활성 게시글",
+        "calm": "잠잠한 게시글"
+      },
+      "strengths": {
+        "title": "게시글 강점",
+        "organized": "잘 정리됨",
+        "active": "활발한 소통",
+        "visited_tip": "꿀팁 포함",
+        "new": "새 콘텐츠"
+      },
+      "checklist": {
+        "title": "체크리스트",
+        "recommended": "추천 대상",
+        "required": "꼭 확인",
+        "comment_check": "댓글 확인",
+        "read_details": "상세 내용 읽기"
+      },
+      "mini_signal_tag": "모임 오픈",
+      "primary_action": {
+        "review": "후기 남기기",
+        "join": "관심 표현하기"
+      },
+      "save": {
+        "saved": "저장됨",
+        "default": "저장"
+      },
+      "meetup_safety": {
+        "title": "모임 안전 가이드",
+        "item_1": "공공장소에서 만나는 것을 권장해요.",
+        "item_2": "개인 정보를 조심하세요."
+      },
+      "body_title": "게시글 내용",
+      "like": "좋아요",
+      "dislike": "싫어요",
+      "like_alert": "이 게시글에 좋아요를 눌렀어요!",
+      "dislike_alert": "이 게시글에 싫어요를 눌렀어요.",
+      "comments_title": "댓글",
+      "comment_input": {
+        "default": "댓글을 입력하세요...",
+        "optional": "선택 메모를 추가하세요",
+        "send": "보내기",
+        "open_btn": "댓글",
+        "cancel": "취소"
+      },
+      "signal_intents": {
+        "interested": "관심 있어요",
+        "available_this_week": "이번 주 가능해요",
+        "join_if_schedule_fits": "일정 맞으면 참여할게요",
+        "thanks": "정보 감사해요",
+        "question": "질문이 있어요"
+      },
+      "signal_times": {
+        "this_week": "이번 주",
+        "this_weekend": "이번 주말",
+        "next_week": "다음 주",
+        "schedule_coordination": "날짜 조율 중"
+      },
+      "author_panel": {
+        "title": "작성자 대시보드",
+        "badge": "작성자",
+        "stats": {
+          "total": "총 반응",
+          "total_value": "{{count}}",
+          "time": "선호 시간",
+          "time_pending": "계산 중",
+          "intent": "주요 의도",
+          "recent": "최근 24시간",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "주말에 반응이 가장 많아요. 자세한 일정을 제안해보세요.",
+          "vote": "선호 시간이 다양해요. 투표로 확정해보세요.",
+          "share": "더 많은 관심을 받으려면 정보를 더 공유해보세요."
+        },
+        "action": {
+          "weekend": "주말 일정 제안하기",
+          "vote": "투표 올리기",
+          "share": "추가 꿀팁 공유하기"
+        },
+        "draft": {
+          "weekend": "이번 주말 오후 2시에 만나는 건 어때요?",
+          "vote": "선호하는 시간에 투표해주세요!",
+          "share": "한 가지 꿀팁을 더 알려드릴게요!"
+        },
+        "final_draft": "모집을 마감할게요. 참여하실 분들은 오픈채팅에 입장해주세요!",
+        "final_action": "모집 마감",
+        "footer": "켈로는 안전한 커뮤니티 문화를 추구합니다."
+      },
+      "status_controls": {
+        "title": "상태 변경"
+      },
+      "result": {
+        "title": "방문 후기 & 꿀팁",
+        "help": "방문 후 꿀팁이나 후기를 공유해주세요. 다른 분들에게 큰 도움이 돼요.",
+        "placeholder": "방문 후기를 여기에 작성하세요...",
+        "save_visited": "방문 & 꿀팁 저장",
+        "save_only": "정보만 저장"
+      },
+      "author_safety": {
+        "title": "작성자 안전 가이드",
+        "item_1": "개인 연락처를 직접 노출하지 마세요.",
+        "item_2": "불법 모임이나 금전 요청을 조심하세요.",
+        "item_3": "신뢰할 수 있는 사용자와 소통하세요."
+      },
+      "signal_summary": {
+        "title": "참여 현황",
+        "status": {
+          "active": "활발히 모집 중",
+          "forming": "결성 중",
+          "preparing": "시작 중"
+        },
+        "time_split": "선호 시간이 나뉘어 있어요.",
+        "time_focus": "가장 선호하는 시간: {{time}}",
+        "time_flexible": "유동적인 시간이 많아요.",
+        "desc": "{{count}}명이 {{topic}}에 관심을 표현했어요.",
+        "topic_review": "후기 공유",
+        "topic_outing": "모임 참여",
+        "schedule_title": "선호 시간 선택"
+      }
+    },
+    "actions": {
+      "delete_confirm": "정말 삭제하시겠어요?"
+    },
+    "errors": {
+      "login_required": "로그인이 필요해요.",
+      "post_failed": "게시 실패: {{message}}"
+    },
+    "report": {
+      "report_action": "신고",
+      "success": "신고됐어요.",
+      "modal_title": "신고 사유 선택",
+      "cancel": "취소",
+      "reasons": {
+        "ad_spam": "광고/스팸",
+        "offensive": "불쾌한 내용",
+        "contact": "연락처 유도",
+        "unsafe": "안전하지 않음",
+        "other": "기타"
+      }
+    },
+    "comments": "댓글",
+    "time": {
+      "just_now": "방금 전"
+    }
   }
 }
