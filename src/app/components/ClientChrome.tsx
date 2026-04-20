@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import GlobalLangButton from './GlobalLangButton';
 import BottomNav from './BottomNav';
 import VisitorTracker from './VisitorTracker';
 
@@ -25,7 +24,6 @@ export default function ClientChrome() {
     return (
         <>
             <VisitorTracker />
-            <GlobalLangButton />
             <BottomNav />
         </>
     );
