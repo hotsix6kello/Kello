@@ -190,7 +190,7 @@ export default function LoginPage() {
                             cursor: 'pointer',
                             fontWeight: 600,
                             fontSize: '0.95rem',
-                            marginBottom: '10px',
+                            marginBottom: '20px',
                             color: '#fff',
                             boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
                         }}
@@ -201,8 +201,8 @@ export default function LoginPage() {
                         {xLoading ? "연결 중..." : "X로 계속하기"}
                     </button>
 
-                    {/* Facebook 로그인 버튼 */}
-                    <button
+                    {/* TODO: Facebook 로그인 - 앱 게시 승인 후 활성화 */}
+                    {/* <button
                         type="button"
                         onClick={handleFacebookLogin}
                         disabled={googleLoading || xLoading || facebookLoading || emailLoading}
@@ -228,7 +228,7 @@ export default function LoginPage() {
                             <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796v8.437C19.612 23.095 24 18.1 24 12.073z" />
                         </svg>
                         {facebookLoading ? "연결 중..." : "Facebook으로 계속하기"}
-                    </button>
+                    </button> */}
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
                         <div style={{ flex: 1, height: '1px', background: '#e2e8f0' }} />
