@@ -2116,5 +2116,17 @@
     "placeholder": "紹介コードを入力",
     "submit": "入力完了",
     "skip": "あとで"
+  },
+  "signup": {
+    "subtitle": "現地人のように韓国を体験しよう",
+    "name_label": "名前",
+    "name_placeholder": "名前を入力してください",
+    "email_label": "メールアドレス",
+    "country_label": "国・地域",
+    "password_label": "パスワード",
+    "loading": "アカウント作成中...",
+    "success": "アカウントが作成されました！メールを確認してログインしてください。",
+    "login_prompt": "すでにアカウントをお持ちですか？",
+    "login_link": "ログイン"
   }
 }

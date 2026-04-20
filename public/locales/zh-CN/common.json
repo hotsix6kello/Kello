@@ -1919,5 +1919,17 @@
     "placeholder": "输入推荐码",
     "submit": "确认",
     "skip": "稍后再说"
+  },
+  "signup": {
+    "subtitle": "像当地人一样体验韩国",
+    "name_label": "姓名",
+    "name_placeholder": "请输入您的姓名",
+    "email_label": "邮箱",
+    "country_label": "国家/地区",
+    "password_label": "密码",
+    "loading": "创建账户中...",
+    "success": "账户已创建！请查收邮件完成验证后登录。",
+    "login_prompt": "已有账户？",
+    "login_link": "登录"
   }
 }

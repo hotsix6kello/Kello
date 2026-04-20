@@ -1126,5 +1126,17 @@
       "alternative_desc": "요청한 시간이 마감되고 매장이 다른 일정을 제안하면 알림을 드립니다."
     },
     "footer_note": "필수 예약 공지는 설정과 관계없이 발송될 수 있습니다."
+  },
+  "signup": {
+    "subtitle": "현지인처럼 한국을 경험하세요",
+    "name_label": "이름",
+    "name_placeholder": "이름을 입력하세요",
+    "email_label": "이메일",
+    "country_label": "국가",
+    "password_label": "비밀번호",
+    "loading": "계정 생성 중...",
+    "success": "계정이 생성됐어요! 이메일을 확인하고 인증 후 로그인해주세요.",
+    "login_prompt": "이미 계정이 있으신가요?",
+    "login_link": "로그인"
   }
 }

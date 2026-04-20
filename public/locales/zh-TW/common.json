@@ -1466,5 +1466,17 @@
       "alternative_desc": "若您請求的時間已滿且店家建議其他時間，將通知您。"
     },
     "footer_note": "重要的預約公告可能不受設定限制而發送。"
+  },
+  "signup": {
+    "subtitle": "像當地人一樣體驗韓國",
+    "name_label": "姓名",
+    "name_placeholder": "請輸入您的姓名",
+    "email_label": "電子郵件",
+    "country_label": "國家/地區",
+    "password_label": "密碼",
+    "loading": "建立帳戶中...",
+    "success": "帳戶已建立！請查收郵件完成驗證後登入。",
+    "login_prompt": "已有帳戶？",
+    "login_link": "登入"
   }
 }
