@@ -1140,5 +1140,407 @@
     "success": "تم إنشاء الحساب! يرجى التحقق من بريدك الإلكتروني لتأكيد الحساب وتسجيل الدخول.",
     "login_prompt": "هل لديك حساب بالفعل؟",
     "login_link": "تسجيل الدخول"
+  },
+  "help_page": {
+    "call_btn": "اتصل"
+  },
+  "community_page": {
+    "write_post": "كتابة منشور",
+    "edit": "تعديل المنشور",
+    "posting": "جارٍ النشر...",
+    "defaults": {
+      "region": "سيول"
+    },
+    "hero": {
+      "title": "مجتمع كيلو",
+      "search_placeholder": "ابحث عن الموضوعات التي تهمك"
+    },
+    "categories": {
+      "all": "الكل",
+      "meetup": "لقاءات",
+      "beauty_review": "تجميل",
+      "food_review": "مطاعم",
+      "travel_review": "سفر",
+      "meetup_recruitment": "تجنيد",
+      "help": "نصائح"
+    },
+    "sub_filters": {
+      "all": "الكل",
+      "saved": "محفوظ",
+      "reacted": "تفاعلت معه",
+      "mine": "منشوراتي",
+      "recruiting": "يجنّد",
+      "active_reactions": "رائج",
+      "open_meetup": "لقاءات مفتوحة",
+      "weekend": "عطلة نهاية الأسبوع",
+      "fresh": "معلومات حديثة"
+    },
+    "status": {
+      "reviews": "مراجعات",
+      "reacting": "يتفاعل",
+      "surveying": "يستطلع",
+      "drafting": "مسودة",
+      "closed": "مغلق"
+    },
+    "tags": {
+      "solo_friendly": "مناسب للفرد",
+      "friends_friendly": "مناسب للأصدقاء",
+      "photo_spot": "نقطة تصوير",
+      "waiting": "انتظار متوقع",
+      "foreigner_friendly": "مناسب للأجانب"
+    },
+    "states": {
+      "fetch_failed_desc": "فشل تحميل المنشورات. يرجى التحقق من الشبكة.",
+      "fetch_failed_title": "خطأ في البيانات",
+      "fetch_failed_tip": "جرّب تحديث الصفحة.",
+      "empty_title": "لا توجد منشورات بعد",
+      "empty_desc": "كن أول من يشارك قصته!",
+      "empty_tip": "اضغط على زر الكتابة في أسفل اليمين.",
+      "no_results_title": "لا توجد نتائج",
+      "no_results_desc": "جرّب البحث بكلمات مفتاحية أخرى.",
+      "cta_write": "اكتب أول منشور",
+      "cta_all": "عرض الكل"
+    },
+    "quality_signals": {
+      "organized": "منظّم جيداً",
+      "active": "شعبي جداً",
+      "asset": "معلومات غنية",
+      "mate": "رفيق جيد"
+    },
+    "toasts": {
+      "save_added": "تمت الإضافة إلى المنشورات المحفوظة.",
+      "save_removed": "تمت الإزالة من المنشورات المحفوظة.",
+      "deleted": "تم الحذف بنجاح.",
+      "updated": "تم التحديث بنجاح.",
+      "submitted": "تم النشر بنجاح.",
+      "region_collected": "عرض منشورات في {{region}}"
+    },
+    "nav_summary": {
+      "all": "عرض جميع القصص في {{tab}}",
+      "active_reactions": "تفاعلات حارة في {{tab}}!",
+      "open_meetup": "البحث عن رفاق جدد في {{tab}}",
+      "weekend": "هل لديك خطط لهذا الأسبوع في {{tab}}؟",
+      "default": "عرض النتائج المفلترة بـ {{sub}} في {{tab}}"
+    },
+    "form": {
+      "category_label": "الفئة",
+      "region_label": "المنطقة",
+      "region_placeholder": "مثال: غانغنام، مابو",
+      "select_category": "اختر فئة",
+      "write_guide_title": {
+        "beauty_review": "شارك تجربتك التجميلية",
+        "food_review": "هل لديك مطاعم مخفية للتوصية؟",
+        "travel_review": "شارك نصائح سفرك",
+        "meetup": "أنشئ لقاءً غير رسمي للاستمتاع معاً",
+        "meetup_recruitment": "هل تبحث عن رفاق سفر؟",
+        "help": "اسأل عن أي شيء"
+      },
+      "write_guide_body": {
+        "beauty_review": "شارك مراجعتك الصادقة للعلاج أو الخدمة.",
+        "food_review": "شارك معلومات عن الطعم والأجواء أو الانتظار.",
+        "travel_review": "قدّم نصائح مفيدة عن المسارات والحقائب والتنقل.",
+        "meetup": "صِف متى وأين وماذا ستفعل.",
+        "meetup_recruitment": "حدد جدول سفرك ووجهاتك وشروط الرفيق.",
+        "help": "صِف سؤالك أو موقفك بالتفصيل."
+      },
+      "title_label": {
+        "beauty_review": "الخدمة/الموضوع",
+        "default": "العنوان"
+      },
+      "title_placeholder": {
+        "beauty_review": "مثال: مراجعة قصة شعر غانغنام",
+        "default": "أدخل العنوان"
+      },
+      "desc_label": {
+        "beauty_review": "التفاصيل",
+        "default": "المحتوى"
+      },
+      "desc_placeholder": {
+        "beauty_review": "صِف العملية أو النتائج بالتفصيل.",
+        "food_review": "أوصِ بالقوائم واشرح السبب.",
+        "travel_review": "شارك معلومات مفيدة للمسافرين الآخرين.",
+        "meetup": "صِف اللقاء بالتفصيل.",
+        "meetup_recruitment": "صِف ما تريد القيام به معاً.",
+        "help": "الأسئلة التفصيلية تساعد في الحصول على إجابات أفضل.",
+        "default": "اكتب القصة التي تريد مشاركتها"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "أضف صور قبل/بعد أو داخل المحل (بحد أقصى 4)",
+          "food_review": "أضف صور الطعام وداخل المحل (بحد أقصى 4)",
+          "travel_review": "أضف صوراً تظهر الأجواء (بحد أقصى 4)",
+          "meetup": "أضف صور المكان أو النشاط (بحد أقصى 4)",
+          "meetup_recruitment": "أضف صور الوجهة أو المرجع (بحد أقصى 4)",
+          "help": "أضف صوراً تساعد في شرح المشكلة (بحد أقصى 4)"
+        },
+        "saved_name": "صورة محفوظة {{index}}",
+        "file_only_alert": "يمكن اختيار ملفات الصور فقط.",
+        "limit_alert": "يمكن تحميل {{count}} صور كحد أقصى.",
+        "load_failed_alert": "فشل تحميل الصور.",
+        "limit_label": "(بحد أقصى {{count}})"
+      },
+      "category_hints": {
+        "beauty_review": "شارك تجارب محلات التجميل.",
+        "food_review": "أوصِ بأماكنك المفضلة.",
+        "travel_review": "شارك معرفتك الخاصة بالسفر.",
+        "meetup": "أنشئ لقاءً غير رسمياً للاستمتاع معاً.",
+        "meetup_recruitment": "ابحث عن رفاق سفر بجداول مماثلة.",
+        "help": "اسأل عن أي شيء تريد معرفته."
+      },
+      "submit": "نشر",
+      "write_title": "كتابة منشور",
+      "edit_title": "تعديل المنشور",
+      "image_label": "الصور",
+      "add_photo": "إضافة صورة",
+      "preparing_images": "جارٍ تجهيز الصور...",
+      "cancel": "إلغاء"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "رحلة تجميل"
+      },
+      "flash_meetup": {
+        "label": "لقاء سريع"
+      },
+      "beauty": {
+        "label": "مراجعات التجميل"
+      },
+      "food": {
+        "label": "نصائح المطاعم"
+      },
+      "travel": {
+        "label": "معلومات السفر"
+      },
+      "write": {
+        "label": "منشور جديد"
+      },
+      "browse": {
+        "label": "تصفح",
+        "sub": "المنشورات الشعبية"
+      },
+      "recruiting": {
+        "label": "تجنيد",
+        "sub": "رفاق"
+      },
+      "weekend": {
+        "label": "نهاية الأسبوع",
+        "sub": "الخطة الأسبوعية"
+      },
+      "record": {
+        "label": "مذكرات",
+        "sub": "الحياة اليومية"
+      }
+    },
+    "fab": {
+      "create_post": "كتابة منشور"
+    },
+    "sort": {
+      "latest": "الأحدث",
+      "reactions": "الأكثر شعبية",
+      "draft": "تجنيد نشط"
+    },
+    "card": {
+      "default_vibe": "أجواء رائعة",
+      "title_prefix": {
+        "beauty_review": "[تجميل]",
+        "food_review": "[مطاعم]",
+        "travel_review": "[سفر]"
+      },
+      "cta": {
+        "review": "عرض المنشور",
+        "join": "انضم الآن"
+      },
+      "result_badge": "مكتمل",
+      "open_meetup_badge": "لقاء مفتوح",
+      "fresh_badges": {
+        "comment": "تفاعلات حارة",
+        "update": "تم التحديث الآن"
+      },
+      "draft_status": {
+        "active": "دردشة نشطة",
+        "forming": "رفاق يتشكلون",
+        "preparing": "مهتم"
+      },
+      "draft_desc": {
+        "active": "كثير من الناس مهتمون!",
+        "forming": "نبحث عن مزيد من الرفاق.",
+        "preparing": "كن أول من ينضم!"
+      },
+      "owner_reactions": {
+        "region": "يتحدث {{count}} شخص عن {{region}}",
+        "join": "{{count}} شخص مهتم"
+      },
+      "more_region": "عرض المزيد من القصص في {{region}}"
+    },
+    "detail": "تفاصيل المنشور",
+    "detail_page": {
+      "loading": "جارٍ تحميل البيانات...",
+      "hidden_post": "هذا المنشور مخفي.",
+      "not_found": "المنشور غير موجود.",
+      "show_hidden": "عرض المنشور المخفي",
+      "hide_post": "إخفاء هذا المنشور",
+      "empty_comments": "لا توجد تعليقات بعد. كن أول من يشارك أفكاره!",
+      "hide_comment": "إخفاء هذا التعليق",
+      "status": {
+        "REVIEWS": "مراجعات",
+        "REACTING": "يتفاعل",
+        "SURVEYING": "يستطلع",
+        "DRAFTING": "مسودة",
+        "CLOSED": "مغلق"
+      },
+      "tags": {
+        "solo_friendly": "مناسب للفرد",
+        "friends_friendly": "مناسب للأصدقاء",
+        "photo_spot": "نقطة تصوير",
+        "waiting": "انتظار مطلوب",
+        "foreigner_friendly": "مناسب للأجانب"
+      },
+      "freshness": {
+        "realtime": "نشط بالكامل",
+        "updated": "تم تحديث المعلومات",
+        "active": "منشور نشط",
+        "calm": "منشور هادئ"
+      },
+      "strengths": {
+        "title": "نقاط قوة المنشور",
+        "organized": "منظّم جيداً",
+        "active": "تفاعل نشط",
+        "visited_tip": "يتضمن نصائح",
+        "new": "محتوى جديد"
+      },
+      "checklist": {
+        "title": "قائمة التحقق",
+        "recommended": "موصى به لـ",
+        "required": "يجب التحقق",
+        "comment_check": "تحقق من التعليقات",
+        "read_details": "اقرأ التفاصيل"
+      },
+      "mini_signal_tag": "لقاء مفتوح",
+      "primary_action": {
+        "review": "اترك مراجعة",
+        "join": "أعرب عن اهتمامك"
+      },
+      "save": {
+        "saved": "محفوظ",
+        "default": "حفظ"
+      },
+      "meetup_safety": {
+        "title": "دليل سلامة اللقاء",
+        "item_1": "يُنصح بالاجتماع في الأماكن العامة.",
+        "item_2": "كن حذراً مع المعلومات الشخصية."
+      },
+      "body_title": "محتوى المنشور",
+      "like": "إعجاب",
+      "dislike": "عدم إعجاب",
+      "like_alert": "أعجبك هذا المنشور!",
+      "dislike_alert": "لم يعجبك هذا المنشور.",
+      "comments_title": "التعليقات",
+      "comment_input": {
+        "default": "أدخل تعليقاً...",
+        "optional": "أضف ملاحظة اختيارية",
+        "send": "إرسال",
+        "open_btn": "تعليق",
+        "cancel": "إلغاء"
+      },
+      "signal_intents": {
+        "interested": "أنا مهتم",
+        "available_this_week": "متاح هذا الأسبوع",
+        "join_if_schedule_fits": "سأنضم إذا ناسب الجدول",
+        "thanks": "شكراً على المعلومات",
+        "question": "لديّ سؤال"
+      },
+      "signal_times": {
+        "this_week": "هذا الأسبوع",
+        "this_weekend": "هذا الأسبوع",
+        "next_week": "الأسبوع القادم",
+        "schedule_coordination": "تنسيق الموعد"
+      },
+      "author_panel": {
+        "title": "لوحة تحكم الكاتب",
+        "badge": "الكاتب",
+        "stats": {
+          "total": "إجمالي التفاعلات",
+          "total_value": "{{count}}",
+          "time": "الوقت المفضل",
+          "time_pending": "جارٍ الحساب",
+          "intent": "النية الرئيسية",
+          "recent": "آخر 24 ساعة",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "نهاية الأسبوع تحظى بأكثر التفاعلات. اقترح جدولاً مفصلاً.",
+          "vote": "الأوقات المفضلة متباينة. جرّب التصويت لتحديدها.",
+          "share": "شارك المزيد من المعلومات للحصول على مزيد من الاهتمام."
+        },
+        "action": {
+          "weekend": "اقترح جدول نهاية الأسبوع",
+          "vote": "انشر تصويتاً",
+          "share": "شارك نصائح إضافية"
+        },
+        "draft": {
+          "weekend": "كيف لو التقينا هذا الأسبوع الساعة 2 ظهراً؟",
+          "vote": "صوّت على وقتك المفضل!",
+          "share": "إليك نصيحة إضافية!"
+        },
+        "final_draft": "سأغلق التجنيد. يرجى الانضمام إلى الدردشة المفتوحة إذا كنت مشاركاً!",
+        "final_action": "إغلاق التجنيد",
+        "footer": "كيلو يعزز ثقافة مجتمعية آمنة."
+      },
+      "status_controls": {
+        "title": "تغيير الحالة"
+      },
+      "result": {
+        "title": "تقرير ما بعد الزيارة ونصائح",
+        "help": "شارك النصائح أو المراجعات بعد زيارتك. يساعد ذلك الآخرين كثيراً.",
+        "placeholder": "اكتب مراجعتك بعد الزيارة هنا...",
+        "save_visited": "حفظ الزيارة والنصائح",
+        "save_only": "حفظ المعلومات فقط"
+      },
+      "author_safety": {
+        "title": "دليل سلامة الكاتب",
+        "item_1": "لا تكشف عن معلومات الاتصال الشخصية مباشرة.",
+        "item_2": "احذر من اللقاءات غير القانونية أو طلبات المال.",
+        "item_3": "تواصل مع المستخدمين الموثوقين."
+      },
+      "signal_summary": {
+        "title": "ملخص المشاركة",
+        "status": {
+          "active": "تجنيد نشط",
+          "forming": "يتشكل",
+          "preparing": "يبدأ"
+        },
+        "time_split": "الأوقات المفضلة متباينة.",
+        "time_focus": "الأكثر تفضيلاً: {{time}}",
+        "time_flexible": "أوقات مرنة كثيرة.",
+        "desc": "أعرب {{count}} شخص عن اهتمامه بـ {{topic}}.",
+        "topic_review": "مشاركة المراجعة",
+        "topic_outing": "المشاركة في اللقاء",
+        "schedule_title": "اختر الوقت المفضل"
+      }
+    },
+    "actions": {
+      "delete_confirm": "هل أنت متأكد من الحذف؟"
+    },
+    "errors": {
+      "login_required": "تسجيل الدخول مطلوب.",
+      "post_failed": "فشل النشر: {{message}}"
+    },
+    "report": {
+      "report_action": "إبلاغ",
+      "success": "تم الإبلاغ بنجاح.",
+      "modal_title": "اختر سبب الإبلاغ",
+      "cancel": "إلغاء",
+      "reasons": {
+        "ad_spam": "إعلان/بريد مزعج",
+        "offensive": "محتوى مسيء",
+        "contact": "إجبار على التواصل",
+        "unsafe": "غير آمن",
+        "other": "أخرى"
+      }
+    },
+    "comments": "التعليقات",
+    "time": {
+      "just_now": "للتو"
+    }
   }
 }
