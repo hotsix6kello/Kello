@@ -11,6 +11,8 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [emailLoading, setEmailLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
+    const [xLoading, setXLoading] = useState(false);
+    const [facebookLoading, setFacebookLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [magicLinkSent, setMagicLinkSent] = useState(false);
 
@@ -42,6 +44,51 @@ export default function LoginPage() {
             setError(err instanceof Error ? err.message : "Google login could not start. Please try again.");
         } finally {
             setGoogleLoading(false);
+        }
+    };
+
+    // --- X (Twitter) OAuth ---
+    const handleXLogin = async () => {
+        setXLoading(true);
+        setError(null);
+
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: "twitter",
+                options: {
+                    redirectTo: `${window.location.origin}/auth/callback`,
+                    scopes: "tweet.read users.read",
+                },
+            });
+
+            if (error) {
+                throw error;
+            }
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "X 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setXLoading(false);
+        }
+    };
+
+    // --- Facebook OAuth ---
+    const handleFacebookLogin = async () => {
+        setFacebookLoading(true);
+        setError(null);
+
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: "facebook",
+                options: {
+                    redirectTo: `${window.location.origin}/auth/callback`,
+                },
+            });
+
+            if (error) {
+                throw error;
+            }
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Facebook 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setFacebookLoading(false);
         }
     };
 
@@ -97,7 +144,7 @@ export default function LoginPage() {
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        disabled={googleLoading || emailLoading}
+                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
                         style={{
                             width: '100%',
                             display: 'flex',
@@ -111,7 +158,7 @@ export default function LoginPage() {
                             cursor: 'pointer',
                             fontWeight: 600,
                             fontSize: '0.95rem',
-                            marginBottom: '20px',
+                            marginBottom: '10px',
                             color: '#374151',
                             boxShadow: '0 1px 3px rgba(0,0,0,0.07)',
                         }}
@@ -123,6 +170,64 @@ export default function LoginPage() {
                             <path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.5l6.3 5.2C41.3 35.3 44 30.1 44 24c0-1.3-.1-2.7-.4-4z" />
                         </svg>
                         {googleLoading ? "연결 중..." : "Google로 계속하기"}
+                    </button>
+
+                    {/* X (Twitter) 로그인 버튼 */}
+                    <button
+                        type="button"
+                        onClick={handleXLogin}
+                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '10px',
+                            padding: '12px',
+                            borderRadius: '12px',
+                            border: '1.5px solid #000',
+                            background: '#000',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            fontSize: '0.95rem',
+                            marginBottom: '10px',
+                            color: '#fff',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.736-8.849L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                        {xLoading ? "연결 중..." : "X로 계속하기"}
+                    </button>
+
+                    {/* Facebook 로그인 버튼 */}
+                    <button
+                        type="button"
+                        onClick={handleFacebookLogin}
+                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '10px',
+                            padding: '12px',
+                            borderRadius: '12px',
+                            border: '1.5px solid #1877F2',
+                            background: '#1877F2',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            fontSize: '0.95rem',
+                            marginBottom: '20px',
+                            color: '#fff',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796v8.437C19.612 23.095 24 18.1 24 12.073z" />
+                        </svg>
+                        {facebookLoading ? "연결 중..." : "Facebook으로 계속하기"}
                     </button>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
