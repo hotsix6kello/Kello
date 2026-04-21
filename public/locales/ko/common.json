@@ -1548,5 +1548,85 @@
     "copy_btn": "링크 복사",
     "copy_btn_copied": "링크 복사됨",
     "close": "닫기"
+  },
+  "privacy_policy": {
+    "title": "개인정보 처리방침",
+    "effective_date": "시행일: 2024년 4월 21일",
+    "table": {
+      "category": "항목",
+      "items": "수집 정보",
+      "purpose": "수집 목적",
+      "retention": "보유 기간"
+    },
+    "collection": {
+      "title": "1. 개인정보의 수집 및 이용",
+      "required": "필수",
+      "required_items": "이름, 이메일, 예약 정보(날짜, 시간, 매장, 서비스), 소셜 로그인 ID",
+      "required_purpose": "회원 가입, 본인 식별, 서비스 제공(예약), 고객 상담",
+      "auto": "자동 수집",
+      "auto_items": "IP 주소, 쿠키, 기기 정보, 서비스 이용 기록",
+      "auto_purpose": "서비스 품질 개선 및 부정 이용 방지"
+    },
+    "retention": {
+      "title": "2. 보유 및 이용 기간",
+      "content": "개인정보는 원칙적으로 회원 탈퇴 시까지 보유합니다. 단, 관련 법령에 의해 보존할 필요가 있는 경우 해당 기간 동안 보관할 수 있습니다.",
+      "legal_basis": "관련 법령 준수(예: 전자상거래법)"
+    },
+    "third_party": {
+      "title": "3. 개인정보의 제3자 제공",
+      "content": "MyKello는 서비스 제공을 위해 아래의 파트너에게 개인정보를 제공합니다.",
+      "providers": "Supabase (데이터베이스), Google (본인 인증), X (본인 인증)"
+    },
+    "overseas": {
+      "title": "4. 개인정보의 국외 이전",
+      "recipient": "수신자",
+      "country": "국가",
+      "purpose": "이전 목적",
+      "items": "이전 항목",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "미국",
+      "storage_auth": "데이터 저장 및 사용자 인증(OAuth 2.0)",
+      "log_items": "이메일, 프로필 정보, 서비스 이용 로그"
+    },
+    "destruction": {
+      "title": "5. 파기 절차 및 방법",
+      "content": "개인정보는 목적 달성 후 지체 없이 파기합니다. 전자적 파일 형태는 복구가 불가능한 기술적 방법으로 삭제합니다."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "모든 약관에 동의합니다.",
+    "privacy_required": "[필수] 개인정보 수집 및 이용 동의",
+    "privacy_optional": "[선택] 마케팅 정보 수신 동의",
+    "view_detail": "보기",
+    "terms_required": "[필수] 서비스 이용약관 동의"
+  },
+  "terms_of_service": {
+    "title": "서비스 이용약관",
+    "effective_date": "시행일: 2024년 4월 21일",
+    "definitions": {
+      "title": "1. 서비스의 정의",
+      "content": "MyKello는 사용자와 뷰티 서비스 제공자 사이의 예약 및 소통을 돕는 뷰티 서비스 예약 대행 플랫폼을 제공합니다."
+    },
+    "benefits": {
+      "title": "2. 회원 혜택",
+      "signup": "신규 가입 시 5% 할인 쿠폰이 지급됩니다.",
+      "referral": "추천인 코드를 통해 가입 시, 추천인과 피추천인 모두에게 5% 할인 쿠폰이 지급됩니다."
+    },
+    "refund_policy": {
+      "title": "3. 취소 및 환불 규정",
+      "subtitle": "예약일 기준 취소 시점에 따라 다음과 같이 환불 비율이 적용됩니다.",
+      "five_days": "5일 전: 100% 환불",
+      "three_days": "3일 전: 90% 환불",
+      "two_days": "2일 전: 70% 환불",
+      "one_day": "1일 전: 50% 환불",
+      "same_day": "당일 또는 No-show: 환불 불가",
+      "note": "최종 환불 처리는 매장별 정책에 따라 상이할 수 있습니다."
+    },
+    "liability": {
+      "title": "4. 책임의 한계",
+      "interpretation": "실시간 통역 기능은 사용자 편의를 위해 제공되는 부가 도구입니다. MyKello는 AI 번역 또는 수동 통역의 불일치로 인해 발생하는 예약 오류나 분쟁에 대해 책임을 지지 않습니다.",
+      "community": "사용자가 커뮤니티 기능을 통해 자발적으로 진행한 오프라인 모임이나 개인 간 거래에서 발생하는 손해, 사고 또는 분쟁에 대해 MyKello는 책임을 지지 않습니다."
+    }
   }
 }

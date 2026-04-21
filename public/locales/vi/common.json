@@ -1775,5 +1775,85 @@
     "copy_btn": "Sao chép liên kết",
     "copy_btn_copied": "Đã sao chép",
     "close": "Đóng"
+  },
+  "privacy_policy": {
+    "title": "Chính sách Bảo mật",
+    "effective_date": "Ngày có hiệu lực: 21 tháng 4, 2024",
+    "table": {
+      "category": "Danh mục",
+      "items": "Thông tin thu thập",
+      "purpose": "Mục đích",
+      "retention": "Thời hạn lưu trữ"
+    },
+    "collection": {
+      "title": "1. Thu thập và Sử dụng Thông tin Cá nhân",
+      "required": "Bắt buộc",
+      "required_items": "Tên, Email, Thông tin đặt chỗ (Ngày, Giờ, Cửa hàng, Dịch vụ), ID đăng nhập mạng xã hội",
+      "required_purpose": "Đăng ký người dùng, Xác thực, Cung cấp dịch vụ (Đặt chỗ), Tư vấn khách hàng",
+      "auto": "Thu thập tự động",
+      "auto_items": "Địa chỉ IP, Cookies, Thông tin thiết bị, Lịch sử sử dụng dịch vụ",
+      "auto_purpose": "Cải thiện chất lượng dịch vụ và ngăn ngừa gian lận"
+    },
+    "retention": {
+      "title": "2. Thời hạn Lưu trữ và Sử dụng",
+      "content": "Về nguyên tắc, thông tin cá nhân được giữ lại cho đến khi rút khỏi tư cách thành viên. Tuy nhiên, nó có thể được giữ trong một thời gian theo yêu cầu của pháp luật liên quan nếu cần thiết.",
+      "legal_basis": "Tuân thủ các luật liên quan (ví dụ: Luật Thương mại Điện tử)"
+    },
+    "third_party": {
+      "title": "3. Cung cấp Thông tin Cá nhân cho Bên thứ ba",
+      "content": "MyKello cung cấp thông tin cá nhân cho các đối tác sau để tạo điều kiện cung cấp dịch vụ.",
+      "providers": "Supabase (Cơ sở dữ liệu), Google (Xác thực), X (Xác thực)"
+    },
+    "overseas": {
+      "title": "4. Chuyển Thông tin Cá nhân ra Nước ngoài",
+      "recipient": "Người nhận",
+      "country": "Quốc gia",
+      "purpose": "Mục đích chuyển",
+      "items": "Thông tin được chuyển",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "Hoa Kỳ",
+      "storage_auth": "Lưu trữ dữ liệu và xác thực người dùng (OAuth 2.0)",
+      "log_items": "Email, Thông tin hồ sơ, Nhật ký sử dụng dịch vụ"
+    },
+    "destruction": {
+      "title": "5. Quy trình và Phương pháp Tiêu hủy",
+      "content": "Thông tin cá nhân được tiêu hủy ngay lập tức sau khi đạt được mục đích. Các tệp điện tử được xóa bằng các phương pháp kỹ thuật khiến việc khôi phục là không thể."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "Tôi đồng ý với tất cả các điều khoản.",
+    "privacy_required": "[Bắt buộc] Đồng ý Thu thập và Sử dụng Thông tin Cá nhân",
+    "privacy_optional": "[Tùy chọn] Đồng ý Nhận Thông tin Tiếp thị",
+    "view_detail": "Chi tiết",
+    "terms_required": "[Bắt buộc] Đồng ý với Điều khoản Dịch vụ"
+  },
+  "terms_of_service": {
+    "title": "Điều khoản Dịch vụ",
+    "effective_date": "Ngày có hiệu lực: 21 tháng 4, 2024",
+    "definitions": {
+      "title": "1. Định nghĩa Dịch vụ",
+      "content": "MyKello cung cấp một nền tảng đại lý đặt chỗ dịch vụ làm đẹp nhằm tạo điều kiện thuận lợi cho việc đặt chỗ và liên lạc giữa người dùng và các nhà cung cấp dịch vụ làm đẹp."
+    },
+    "benefits": {
+      "title": "2. Quyền lợi Thành viên",
+      "signup": "Thành viên mới nhận được phiếu giảm giá 5% khi đăng ký thành công.",
+      "referral": "Khi một thành viên mới tham gia bằng mã giới thiệu, cả người giới thiệu và người được giới thiệu đều nhận được phiếu giảm giá 5%."
+    },
+    "refund_policy": {
+      "title": "3. Chính sách Hủy bỏ & Hoàn tiền",
+      "subtitle": "Số tiền hoàn lại được tính dựa trên thời gian hủy trước cuộc hẹn đã lên lịch:",
+      "five_days": "5 ngày trước: Hoàn tiền 100%",
+      "three_days": "3 ngày trước: Hoàn tiền 90%",
+      "two_days": "2 ngày trước: Hoàn tiền 70%",
+      "one_day": "1 ngày trước: Hoàn tiền 50%",
+      "same_day": "Trong ngày hoặc Không đến: Không hoàn tiền",
+      "note": "Quá trình hoàn tiền cuối cùng có thể thay đổi tùy thuộc vào chính sách của từng cửa hàng cụ thể."
+    },
+    "liability": {
+      "title": "4. Giới thiệu về Trách nhiệm pháp lý",
+      "interpretation": "Tính năng 'Thông dịch viên thời gian thực' là một công cụ bổ sung được cung cấp để thuận tiện cho người dùng. MyKello không chịu trách nhiệm về các lỗi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong bản dịch AI hoặc thông dịch thủ công.",
+      "community": "MyKello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
+    }
   }
 }

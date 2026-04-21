@@ -1,0 +1,154 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--hanji-ivory);
+  color: var(--ink-black);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(252, 247, 248, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--warm-sand);
+}
+
+.backBtn {
+  color: var(--soft-ink);
+  padding: 4px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: var(--primary);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.content {
+  flex: 1;
+  padding: 24px 20px 48px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.effectiveDate {
+  font-size: 0.875rem;
+  color: var(--soft-ink);
+  margin-bottom: 32px;
+  text-align: right;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--ink-black);
+  border-left: 4px solid #c026d3; /* Fuchsia-600 */
+  padding-left: 12px;
+}
+
+.text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-black);
+  margin-bottom: 12px;
+}
+
+.list {
+  list-style: disc;
+  padding-left: 24px;
+  font-size: 0.9375rem;
+  color: var(--soft-ink);
+  line-height: 1.6;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--warm-sand);
+  margin: 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+  font-size: 0.875rem;
+}
+
+.table th {
+  background: #fdf4ff; /* light fuchsia */
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 700;
+  color: #701a75; /* fuchsia-900 */
+  border-bottom: 1px solid #f5d0fe;
+}
+
+.table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hanji-ivory);
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.tdCategory {
+  font-weight: 600;
+  color: #c026d3; /* fuchsia-600 */
+  white-space: nowrap;
+}
+
+.providerBadgeGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.badge {
+  background: white;
+  border: 1px solid #f5d0fe;
+  color: #c026d3;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.footer {
+  padding: 32px 20px;
+  text-align: center;
+  border-top: 1px solid var(--warm-sand);
+  background: white;
+}
+
+.footer p {
+  font-size: 0.8125rem;
+  color: var(--soft-ink);
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+}

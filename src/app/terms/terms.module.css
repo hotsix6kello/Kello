@@ -1,0 +1,125 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--hanji-ivory);
+  color: var(--ink-black);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(252, 247, 248, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--warm-sand);
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--soft-ink);
+  padding: 4px;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.backBtn:hover {
+  color: var(--primary);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.content {
+  flex: 1;
+  padding: 24px 20px 48px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.effectiveDate {
+  font-size: 0.875rem;
+  color: var(--soft-ink);
+  margin-bottom: 32px;
+  text-align: right;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--ink-black);
+  border-left: 4px solid #c026d3; /* Fuchsia-600 */
+  padding-left: 12px;
+}
+
+.text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-black);
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+}
+
+.subSectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: var(--ink-black);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  font-size: 0.9375rem;
+  color: var(--soft-ink);
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding-left: 12px;
+  position: relative;
+}
+
+.listItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #c026d3;
+}
+
+.footer {
+  padding: 32px 20px;
+  text-align: center;
+  border-top: 1px solid var(--warm-sand);
+  background: white;
+}
+
+.footer p {
+  font-size: 0.8125rem;
+  color: var(--soft-ink);
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+}
