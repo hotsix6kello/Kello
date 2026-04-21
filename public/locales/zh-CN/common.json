@@ -1736,5 +1736,60 @@
     "placeholder": "输入推荐码",
     "submit": "确认",
     "skip": "稍后再说"
+  },
+  "privacy_policy": {
+    "title": "隐私政策",
+    "effective_date": "生效日期：2024年4月21일",
+    "table": {
+      "category": "类别",
+      "items": "收集项目",
+      "purpose": "收集目的",
+      "retention": "保存期限"
+    },
+    "collection": {
+      "title": "1. 个人信息的收集与使用",
+      "required": "必填项目",
+      "required_items": "姓名、电子邮件、预约信息（日期、时间、店铺、服务）、社交登录 ID",
+      "required_purpose": "用户注册、身份验证、提供服务（预约）、客户咨询",
+      "auto": "自动收集项目",
+      "auto_items": "IP 地址、Cookies、设备信息、服务使用记录",
+      "auto_purpose": "服务质量改善与预防欺诈行为"
+    },
+    "retention": {
+      "title": "2. 个人信息的保存及使用期限",
+      "content": "原则上，个人信息将保留至用户注销会员为止。但若相关法律有明确规定，则在法律规定的期限内保留。",
+      "legal_basis": "遵守相关法律（如：电子商务法等）"
+    },
+    "third_party": {
+      "title": "3. 向第三方提供个人信息",
+      "content": "为了提供流畅的服务，MyKello 向以下合作伙伴提供个人信息。",
+      "providers": "Supabase (数据库), Google (身份验证), X (身份验证)"
+    },
+    "overseas": {
+      "title": "4. 个人信息的境外转移",
+      "recipient": "受托单位",
+      "country": "接收国家",
+      "purpose": "转移目的",
+      "items": "转移项目",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "美国 (USA)",
+      "storage_auth": "数据存储与 OAuth 2.0 身份验证",
+      "log_items": "电子邮件、个人资料信息、服务使用日志"
+    },
+    "destruction": {
+      "title": "5. 个人信息的销毁程序与方法",
+      "content": "个人信息在达成目的后将立即销毁。电子文件将使用无法复原的技术方法删除。"
+    }
+  },
+  "signup_consent": {
+    "all_agree": "我同意所有条款。",
+    "privacy_required": "[必填] 同意收集与使用个人信息",
+    "privacy_optional": "[选填] 同意接收营销信息",
+    "view_detail": "查看详情",
+    "terms_required": "[必填] 同意服务条款"
+  },
+  "terms_of_service": {
+    "title": "服务条款"
   }
 }

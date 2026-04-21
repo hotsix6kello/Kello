@@ -915,5 +915,60 @@
       "reason_referred": "推薦碼折扣券",
       "reason_referrer": "好友推薦折扣券"
     }
+  },
+  "privacy_policy": {
+    "title": "隱私權政策",
+    "effective_date": "生效日期：2024年4月21일",
+    "table": {
+      "category": "類別",
+      "items": "收集項目",
+      "purpose": "收集目的",
+      "retention": "保存期限"
+    },
+    "collection": {
+      "title": "1. 個人資料的收集與使用",
+      "required": "必填項目",
+      "required_items": "姓名、電子郵件、預約資訊（日期、時間、店舖、服務）、社交登錄 ID",
+      "required_purpose": "用戶註冊、身份驗證、提供服務（預約）、客戶諮詢",
+      "auto": "自動收集項目",
+      "auto_items": "IP 地址、Cookies、設備資訊、服務使用記錄",
+      "auto_purpose": "服務品質改善與預防欺詐行為"
+    },
+    "retention": {
+      "title": "2. 個人資料的保存及使用期限",
+      "content": "原則上，個人資料將保留至用戶註銷會員為止。但若相關法律有明確規定，則在法律規定的期限內保留。",
+      "legal_basis": "遵守相關法律（如：電子商務法等）"
+    },
+    "third_party": {
+      "title": "3. 向第三方提供個人資料",
+      "content": "為了提供流暢的服務，MyKello 向以下合作夥伴提供個人資料。",
+      "providers": "Supabase (數據庫), Google (身份驗證), X (身份驗證)"
+    },
+    "overseas": {
+      "title": "4. 個人資料的境外轉移",
+      "recipient": "受託單位",
+      "country": "接收國家",
+      "purpose": "轉移目的",
+      "items": "轉移項目",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "美國 (USA)",
+      "storage_auth": "數據存儲與 OAuth 2.0 身份驗證",
+      "log_items": "電子郵件、個人檔案資訊、服務使用日誌"
+    },
+    "destruction": {
+      "title": "5. 個人資料的銷毀程序與方法",
+      "content": "個人資料在達成目的後將立即銷毀。電子文件將使用無法復原的技術方法刪除。"
+    }
+  },
+  "signup_consent": {
+    "all_agree": "我同意所有條款。",
+    "privacy_required": "[必填] 同意收集與使用個人資料",
+    "privacy_optional": "[選填] 同意接收行銷資訊",
+    "view_detail": "查看詳情",
+    "terms_required": "[必填] 同意服務條款"
+  },
+  "terms_of_service": {
+    "title": "服務條款"
   }
 }
