@@ -924,6 +924,83 @@
       "preparing_images": "画像を準備中...",
       "cancel": "キャンセル"
     },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "ビューティー同行"
+      },
+      "flash_meetup": {
+        "label": "急募集まり"
+      },
+      "beauty": {
+        "label": "ビューティーレビュー"
+      },
+      "food": {
+        "label": "グルメ情報"
+      },
+      "travel": {
+        "label": "旅行情報"
+      },
+      "write": {
+        "label": "新規投稿"
+      },
+      "browse": {
+        "label": "見てみる",
+        "sub": "人気の投稿"
+      },
+      "recruiting": {
+        "label": "募集中",
+        "sub": "メイト"
+      },
+      "weekend": {
+        "label": "週末",
+        "sub": "週間プラン"
+      },
+      "record": {
+        "label": "日記",
+        "sub": "日常"
+      }
+    },
+    "fab": {
+      "create_post": "投稿を作成"
+    },
+    "sort": {
+      "latest": "新着順",
+      "reactions": "人気順",
+      "draft": "活発な募集"
+    },
+    "card": {
+      "default_vibe": "良い雰囲気",
+      "title_prefix": {
+        "beauty_review": "[ビューティー]",
+        "food_review": "[グルメ]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "投稿を見る",
+        "join": "今すぐ参加"
+      },
+      "result_badge": "完了",
+      "open_meetup_badge": "集まりオープン",
+      "fresh_badges": {
+        "comment": "注目コメント",
+        "update": "今すぐ更新"
+      },
+      "draft_status": {
+        "active": "チャット活発",
+        "forming": "メイト募集中",
+        "preparing": "気になります"
+      },
+      "draft_desc": {
+        "active": "多くの方が関心を持っています！",
+        "forming": "まだメイトを募集しています。",
+        "preparing": "最初の参加者になってみませんか？"
+      },
+      "owner_reactions": {
+        "region": "{{region}}について{{count}}人とチャット中",
+        "join": "{{count}}人が関心を示しています"
+      },
+      "more_region": "{{region}}のストーリーをもっと見る"
+    },
     "detail": "投稿詳細",
     "detail_page": {
       "loading": "データを読み込み中...",
@@ -1122,10 +1199,28 @@
       "taxi_s1_d": "領収書に記載されたカード会社や車両番号を確認し、運転手の連絡先を見つけます。",
       "taxi_s2_t": "2. カード会社に連絡",
       "taxi_s2_d": "カードのカスタマーセンターに電話し、決済履歴の加盟店連絡先を問い合わせます。",
+      "taxi_s3_t": "3. タクシー会社に連絡",
+      "taxi_s3_d": "車両番号をもとにタクシー会社を調べ、直接連絡してみてください。",
+      "taxi_s4_t": "4. 警察に届け出",
+      "taxi_s4_d": "上記の方法がすべてうまくいかない場合は、112に通報するかLost112サイトを利用してください。",
       "subway_s1_t": "1. 駅務室",
       "subway_s1_d": "降りた直後なら、すぐに駅務室を訪れ、乗車していた車両番号を伝えます。",
       "subway_s2_t": "2. 遺失物センター",
-      "subway_s2_d": "時間が経過している場合は、該当路線の遺失物センターに連絡または訪問します。"
+      "subway_s2_d": "時間が経過している場合は、該当路線の遺失物センターに連絡または訪問します。",
+      "subway_s3_t": "3. Lost112ポータル",
+      "subway_s3_d": "警察庁遺失物総合ポータルサイトでオンラインで照会または届け出ができます。",
+      "airport_s1_t": "1. 航空会社・空港の遺失物デスク",
+      "airport_s1_d": "空港内の当該航空会社または空港公社の遺失物デスクをまず訪問してください。",
+      "airport_s2_t": "2. 仁川空港遺失物センター",
+      "airport_s2_d": "仁川空港の場合は、1階出発ロビーの手荷物保管所へお問い合わせください。",
+      "airport_s3_t": "3. Lost112オンライン届け出",
+      "airport_s3_d": "警察庁遺失物総合ポータルサイトを通じてオンラインで紛失届を提出してください。",
+      "street_s1_t": "1. 周辺を確認",
+      "street_s1_d": "紛失場所周辺のCCTVや近くのお店に問い合わせてみてください。",
+      "street_s2_t": "2. 警察署に届け出または112に通報",
+      "street_s2_d": "最寄りの警察署で紛失届を提出するか、112に電話してください。",
+      "street_s3_t": "3. Lost112に登録",
+      "street_s3_d": "警察庁遺失物総合ポータルに登録しておくと、見つかった際に連絡が届きます。"
     },
     "medical_header": "医療・救急案内",
     "emergency_119_title": "緊急通報 (119)",

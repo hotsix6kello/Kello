@@ -886,6 +886,379 @@
       "open_meetup": "開放中的聚會",
       "weekend": "本週末",
       "fresh": "最新消息"
+    },
+    "status": {
+      "reviews": "已有評論",
+      "reacting": "招募中",
+      "surveying": "確認意向",
+      "drafting": "準備中",
+      "closed": "招募結束"
+    },
+    "tags": {
+      "solo_friendly": "適合獨自前往",
+      "friends_friendly": "適合與朋友同行",
+      "photo_spot": "拍照打卡點",
+      "waiting": "需排隊",
+      "foreigner_friendly": "外國人友善"
+    },
+    "states": {
+      "fetch_failed_desc": "無法載入貼文，請確認網路連線。",
+      "fetch_failed_title": "資料錯誤",
+      "fetch_failed_tip": "請嘗試重新整理頁面。",
+      "empty_title": "目前還沒有貼文",
+      "empty_desc": "快來分享第一篇故事吧！",
+      "empty_tip": "點擊右下角的按鈕開始發文。",
+      "no_results_title": "找不到相關結果",
+      "no_results_desc": "請嘗試其他關鍵字。",
+      "cta_write": "撰寫第一篇貼文",
+      "cta_all": "查看全部"
+    },
+    "quality_signals": {
+      "organized": "整理詳細",
+      "active": "超級熱門",
+      "asset": "資訊豐富",
+      "mate": "好夥伴"
+    },
+    "toasts": {
+      "save_added": "已加入收藏。",
+      "save_removed": "已移除收藏。",
+      "deleted": "已刪除。",
+      "updated": "已更新。",
+      "submitted": "發文成功。",
+      "region_collected": "只顯示{{region}}的貼文"
+    },
+    "nav_summary": {
+      "all": "正在瀏覽 {{tab}} 的所有故事",
+      "active_reactions": "{{tab}} 的熱門話題！",
+      "open_meetup": "{{tab}} 正在尋找新夥伴",
+      "weekend": "{{tab}} 這個週末有計畫嗎？",
+      "default": "{{tab}} 中以 {{sub}} 篩選的結果"
+    },
+    "form": {
+      "category_label": "分類",
+      "region_label": "地區",
+      "region_placeholder": "例如：江南、麻浦",
+      "select_category": "選擇分類",
+      "write_guide_title": {
+        "beauty_review": "分享您的美容體驗",
+        "food_review": "發現了什麼必訪好店？",
+        "travel_review": "分享您的旅遊心得",
+        "meetup": "尋找一起同樂的夥伴",
+        "meetup_recruitment": "正在尋找旅遊同行夥伴嗎？",
+        "help": "有什麼需要幫忙的嗎？"
+      },
+      "write_guide_body": {
+        "beauty_review": "請分享施術的滿意度與店家服務的感受。",
+        "food_review": "請分享口味、環境與排隊等待的資訊。",
+        "travel_review": "路線、行李打包、交通等實用貼士。",
+        "meetup": "請說明時間、地點和活動內容。",
+        "meetup_recruitment": "請填寫行程安排、目的地及對同行夥伴的期望。",
+        "help": "請詳細描述您的問題，以便大家提供協助。"
+      },
+      "title_label": {
+        "beauty_review": "服務/主題",
+        "default": "標題"
+      },
+      "title_placeholder": {
+        "beauty_review": "例如：江南站層次剪髮體驗",
+        "default": "請輸入標題"
+      },
+      "desc_label": {
+        "beauty_review": "詳細內容",
+        "default": "內容"
+      },
+      "desc_placeholder": {
+        "beauty_review": "請詳細描述施術過程或完成效果。",
+        "food_review": "請推薦必點菜色並說明原因。",
+        "travel_review": "請分享對其他旅行者有幫助的資訊。",
+        "meetup": "請詳細說明聚會的計畫。",
+        "meetup_recruitment": "請描述您想找什麼樣的同行夥伴。",
+        "help": "問題描述越詳細，越容易獲得有用的回覆。",
+        "default": "請寫下您想分享的故事"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "請新增前後對比照或店內環境照（最多4張）",
+          "food_review": "請新增餐點或店內照片（最多4張）",
+          "travel_review": "請新增能呈現現場氛圍的照片（最多4張）",
+          "meetup": "請新增聚會地點或活動相關照片（最多4張）",
+          "meetup_recruitment": "請新增目的地或參考照片（最多4張）",
+          "help": "如有助於說明問題的照片請新增（最多4張）"
+        },
+        "saved_name": "已儲存的圖片 {{index}}",
+        "file_only_alert": "只能選擇圖片格式的檔案。",
+        "limit_alert": "最多可上傳 {{count}} 張圖片。",
+        "load_failed_alert": "圖片載入失敗。",
+        "limit_label": "(最多 {{count}} 張)"
+      },
+      "category_hints": {
+        "beauty_review": "自由分享您的美容體驗。",
+        "food_review": "推薦您喜歡的美食餐廳。",
+        "travel_review": "分享您的獨家旅遊心得。",
+        "meetup": "發起一個輕鬆的小型聚會吧。",
+        "meetup_recruitment": "尋找行程契合的旅遊夥伴。",
+        "help": "有任何疑問都歡迎提問。"
+      },
+      "submit": "發文",
+      "write_title": "撰寫貼文",
+      "edit_title": "編輯貼文",
+      "image_label": "圖片",
+      "add_photo": "新增照片",
+      "preparing_images": "正在準備圖片...",
+      "cancel": "取消"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "美容同行"
+      },
+      "flash_meetup": {
+        "label": "快閃聚會"
+      },
+      "beauty": {
+        "label": "美容評價"
+      },
+      "food": {
+        "label": "美食推薦"
+      },
+      "travel": {
+        "label": "旅遊資訊"
+      },
+      "write": {
+        "label": "新增貼文"
+      },
+      "browse": {
+        "label": "瀏覽",
+        "sub": "熱門貼文"
+      },
+      "recruiting": {
+        "label": "招募中",
+        "sub": "夥伴"
+      },
+      "weekend": {
+        "label": "週末",
+        "sub": "週間計畫"
+      },
+      "record": {
+        "label": "日記",
+        "sub": "日常"
+      }
+    },
+    "fab": {
+      "create_post": "撰寫貼文"
+    },
+    "sort": {
+      "latest": "最新排序",
+      "reactions": "最多互動",
+      "draft": "最活躍招募"
+    },
+    "card": {
+      "default_vibe": "氣氛良好",
+      "title_prefix": {
+        "beauty_review": "[美容]",
+        "food_review": "[美食]",
+        "travel_review": "[旅遊]"
+      },
+      "cta": {
+        "review": "查看貼文",
+        "join": "立即參與"
+      },
+      "result_badge": "完成",
+      "open_meetup_badge": "聚會開放",
+      "fresh_badges": {
+        "comment": "熱烈討論",
+        "update": "剛剛更新"
+      },
+      "draft_status": {
+        "active": "聊天活躍",
+        "forming": "招募夥伴中",
+        "preparing": "有興趣"
+      },
+      "draft_desc": {
+        "active": "已有很多人表示興趣！",
+        "forming": "還在尋找更多夥伴。",
+        "preparing": "成為第一個參與的人！"
+      },
+      "owner_reactions": {
+        "region": "正在與 {{count}} 人聊關於 {{region}} 的話題",
+        "join": "{{count}} 人表示有興趣"
+      },
+      "more_region": "查看更多關於 {{region}} 的故事"
+    },
+    "detail": "貼文詳情",
+    "detail_page": {
+      "loading": "資料載入中...",
+      "hidden_post": "此貼文已被隱藏。",
+      "not_found": "找不到此貼文。",
+      "show_hidden": "查看隱藏貼文",
+      "hide_post": "隱藏此貼文",
+      "empty_comments": "目前還沒有留言，來搶第一個留言吧！",
+      "hide_comment": "隱藏此留言",
+      "status": {
+        "REVIEWS": "已有評論",
+        "REACTING": "招募中",
+        "SURVEYING": "確認意向",
+        "DRAFTING": "準備中",
+        "CLOSED": "招募結束"
+      },
+      "tags": {
+        "solo_friendly": "適合獨自前往",
+        "friends_friendly": "適合與朋友同行",
+        "photo_spot": "拍照打卡點",
+        "waiting": "需排隊等待",
+        "foreigner_friendly": "外國人友善"
+      },
+      "freshness": {
+        "realtime": "即時進行中",
+        "updated": "資訊已更新",
+        "active": "活躍貼文",
+        "calm": "較少互動"
+      },
+      "strengths": {
+        "title": "貼文亮點",
+        "organized": "整理詳細",
+        "active": "互動活躍",
+        "visited_tip": "包含實用貼士",
+        "new": "最新內容"
+      },
+      "checklist": {
+        "title": "注意事項",
+        "recommended": "推薦對象",
+        "required": "必讀項目",
+        "comment_check": "查看留言",
+        "read_details": "閱讀詳情"
+      },
+      "mini_signal_tag": "聚會開放",
+      "primary_action": {
+        "review": "留下評論",
+        "join": "表達興趣"
+      },
+      "save": {
+        "saved": "已收藏",
+        "default": "收藏"
+      },
+      "meetup_safety": {
+        "title": "聚會安全指南",
+        "item_1": "建議在公共場所見面。",
+        "item_2": "請注意個人隱私資訊的保護。"
+      },
+      "body_title": "貼文內容",
+      "like": "按讚",
+      "dislike": "不喜歡",
+      "like_alert": "已對此貼文按讚！",
+      "dislike_alert": "已對此貼文按不喜歡。",
+      "comments_title": "留言",
+      "comment_input": {
+        "default": "請輸入留言...",
+        "optional": "新增備註（選填）",
+        "send": "送出",
+        "open_btn": "留言",
+        "cancel": "取消"
+      },
+      "signal_intents": {
+        "interested": "我有興趣",
+        "available_this_week": "這週可以",
+        "join_if_schedule_fits": "時間合適就一起",
+        "thanks": "感謝分享",
+        "question": "我有問題"
+      },
+      "signal_times": {
+        "this_week": "這週",
+        "this_weekend": "這個週末",
+        "next_week": "下週",
+        "schedule_coordination": "時間協調中"
+      },
+      "author_panel": {
+        "title": "發文者儀表板",
+        "badge": "發文者",
+        "stats": {
+          "total": "總互動數",
+          "total_value": "{{count}}",
+          "time": "偏好時間",
+          "time_pending": "統計中",
+          "intent": "主要意向",
+          "recent": "最近24小時",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "週末的互動最熱烈，建議提出具體行程。",
+          "vote": "偏好時間分散，發起投票來確認吧。",
+          "share": "分享更多資訊來吸引關注。"
+        },
+        "action": {
+          "weekend": "提案週末行程",
+          "vote": "發起投票",
+          "share": "分享額外貼士"
+        },
+        "draft": {
+          "weekend": "這週末下午兩點見面如何？",
+          "vote": "請投票選擇您偏好的時間！",
+          "share": "再為大家分享一個小貼士！"
+        },
+        "final_draft": "招募已截止，請有意參加的夥伴加入開放聊天室！",
+        "final_action": "截止招募",
+        "footer": "Kello 致力於打造安全友善的社群文化。"
+      },
+      "status_controls": {
+        "title": "變更狀態"
+      },
+      "result": {
+        "title": "造訪心得與貼士",
+        "help": "請分享實際造訪後的心得或貼士，對其他夥伴很有幫助。",
+        "placeholder": "請在此撰寫您的造訪心得...",
+        "save_visited": "儲存造訪心得與貼士",
+        "save_only": "僅儲存資訊"
+      },
+      "author_safety": {
+        "title": "發文者安全指南",
+        "item_1": "請勿在內文中直接透露個人聯絡方式。",
+        "item_2": "請小心非法聚會或金錢要求。",
+        "item_3": "請與可信任的用戶互動。"
+      },
+      "signal_summary": {
+        "title": "參與狀況",
+        "status": {
+          "active": "熱烈招募中",
+          "forming": "組成中",
+          "preparing": "開始招募"
+        },
+        "time_split": "偏好時間較為分散。",
+        "time_focus": "最受歡迎的時間：{{time}}",
+        "time_flexible": "有許多彈性時間可供調整。",
+        "desc": "目前有 {{count}} 人對 {{topic}} 表示興趣。",
+        "topic_review": "分享心得",
+        "topic_outing": "參與聚會",
+        "schedule_title": "選擇偏好時間"
+      }
+    },
+    "actions": {
+      "delete_confirm": "確定要刪除嗎？"
+    },
+    "errors": {
+      "login_required": "請先登入。",
+      "post_failed": "發文失敗：{{message}}"
+    },
+    "report": {
+      "report_action": "檢舉",
+      "success": "已收到您的檢舉。",
+      "modal_title": "選擇檢舉原因",
+      "cancel": "取消",
+      "reasons": {
+        "ad_spam": "廣告/垃圾訊息",
+        "offensive": "不當內容",
+        "contact": "外部導流",
+        "unsafe": "危險行為",
+        "other": "其他"
+      }
+    },
+    "comments": "留言",
+    "time": {
+      "just_now": "剛剛"
+    },
+    "write_post": "撰寫貼文",
+    "edit": "編輯",
+    "posting": "發布中...",
+    "defaults": {
+      "region": "首爾"
     }
   },
   "welcome_popup": {
@@ -1480,7 +1853,106 @@
     "login_link": "登入"
   },
   "help_page": {
-    "call_btn": "致電"
+    "title": "緊急支援",
+    "medical_title": "醫療支援",
+    "medical_desc": "查找附近醫院與症狀表達卡片",
+    "lost_title": "失物招領",
+    "lost_desc": "分步驟的失物找回指南",
+    "police_title": "警察/犯罪",
+    "police_desc": "報案及安全支援",
+    "interp_title": "口譯服務",
+    "interp_desc": "1330諮詢專線與翻譯應用程式",
+    "call_btn": "致電",
+    "medical_header": "醫療·急救指南",
+    "emergency_119_title": "緊急救援 (119)",
+    "emergency_119_desc": "緊急情況下立即救助",
+    "consult_1339_title": "醫療諮詢 (1339)",
+    "consult_1339_desc": "專業醫療諮詢",
+    "symptoms_title": "症狀",
+    "taxi": "計程車",
+    "subway": "地鐵",
+    "airport": "機場",
+    "street": "街道",
+    "lost_header": "失物找回指南",
+    "lost_where_title": "您在哪裡遺失了物品？",
+    "lost_where_desc": "選擇地點，獲取找回步驟",
+    "lost_quick_title": "快速查詢",
+    "lost112_label": "Lost112失物招領入口",
+    "embassy_label": "查詢大使館",
+    "interp_hotline_title": "1330諮詢專線",
+    "interp_hotline_desc": "旅遊中需要幫助時最快速的官方支援",
+    "interp_chat_label": "線上諮詢",
+    "lost_steps_title": "{{place}} 失物找回步驟",
+    "lost_go_lost112": "前往Lost112查詢",
+    "police_header": "警察·安全指南",
+    "police_contacts_section": "警察聯絡方式",
+    "tourism_police_section": "觀光警察",
+    "tourism_police_title": "觀光警察服務",
+    "tourism_police_desc": "明洞、仁寺洞、梨泰院等地均可使用",
+    "interp_header": "口譯·翻譯指南",
+    "interp_immediate_title": "即時支援",
+    "interp_tools_title": "翻譯工具",
+    "interp_actions": {
+      "open_papago": "開啟 Papago",
+      "open_google_translate": "開啟 Google 翻譯"
+    },
+    "interp": {
+      "papago_desc": "推薦使用 Naver Papago 進行快速的韓文文字與語音翻譯。",
+      "google_desc": "需要其他快速翻譯選項時，可開啟 Google 翻譯。"
+    },
+    "lost": {
+      "taxi_s1_t": "1. 查看收據",
+      "taxi_s1_d": "查看收據上的銀行卡公司或車牌號，找到司機聯絡方式。",
+      "taxi_s2_t": "2. 聯絡銀行卡公司",
+      "taxi_s2_d": "致電銀行客服，詢問交易紀錄中的商家聯絡方式。",
+      "taxi_s3_t": "3. 聯絡計程車公司",
+      "taxi_s3_d": "透過車牌號查找計程車公司並直接聯絡。",
+      "taxi_s4_t": "4. 報警",
+      "taxi_s4_d": "若以上方法均無效，請撥打112或使用Lost112網站。",
+      "subway_s1_t": "1. 站務室",
+      "subway_s1_d": "剛下車的話，請立即前往站務室並告知搭乘的車廂號碼。",
+      "subway_s2_t": "2. 失物招領中心",
+      "subway_s2_d": "若已過較長時間，請聯絡或前往該路線的失物招領中心。",
+      "subway_s3_t": "3. Lost112入口",
+      "subway_s3_d": "可在警察廳失物招領綜合入口網站線上查詢或申報。",
+      "airport_s1_t": "1. 航空公司/機場失物招領台",
+      "airport_s1_d": "請先前往機場內的該航空公司或機場運營方的失物招領台。",
+      "airport_s2_t": "2. 仁川機場失物招領中心",
+      "airport_s2_d": "仁川機場的話，可前往1樓出發大廳的行李寄存處詢問。",
+      "airport_s3_t": "3. Lost112線上申報",
+      "airport_s3_d": "請透過警察廳失物招領綜合入口網站線上提交失物申報。",
+      "street_s1_t": "1. 確認周邊狀況",
+      "street_s1_d": "可詢問遺失地點附近的監視器或周邊店家。",
+      "street_s2_t": "2. 前往警察局或撥打112",
+      "street_s2_d": "前往附近警察局提交失物申報，或撥打112。",
+      "street_s3_t": "3. 在Lost112登記",
+      "street_s3_d": "在警察廳失物招領綜合入口登記後，找到時可收到通知。"
+    },
+    "medical": {
+      "pharmacy_title": "常備藥 (便利商店)",
+      "medicines": {
+        "tylenol": "泰諾",
+        "tylenol_desc": "退燒、止痛、肌肉痠痛、頭痛",
+        "cold": "感冒藥",
+        "cold_desc": "流鼻水、咳嗽、發燒等感冒症狀",
+        "digestive": "助消化藥",
+        "digestive_desc": "消化不良、積食、胃灼熱"
+      },
+      "symptoms": {
+        "stomach": "肚子痛",
+        "fever": "發燒",
+        "injury": "受傷",
+        "allergy": "過敏",
+        "breathing": "呼吸困難",
+        "pain": "胸痛"
+      }
+    },
+    "police": {
+      "report_call_title": "犯罪報案 (112)",
+      "report_call_desc": "24小時服務，支援外語",
+      "official_site_title": "警察廳官方網站",
+      "official_site_desc": "網路犯罪舉報及資訊指南"
+    }
   },
   "webview_banner": {
     "title": "應用程式內瀏覽器不支援Google登入",
