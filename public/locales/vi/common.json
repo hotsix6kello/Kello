@@ -1620,6 +1620,31 @@
     "terms_required": "[Bắt buộc] Đồng ý với Điều khoản dịch vụ"
   },
   "terms_of_service": {
-    "title": "Điều khoản dịch vụ"
+    "title": "Điều khoản dịch vụ",
+    "effective_date": "Ngày có hiệu lực: 21 tháng 4 năm 2024",
+    "definitions": {
+      "title": "1. Định nghĩa dịch vụ",
+      "content": "MyKello cung cấp nền tảng đại lý đặt chỗ dịch vụ làm đẹp, nhằm tạo điều kiện thuận lợi cho việc đặt chỗ và giao tiếp giữa người dùng và các đơn vị cung cấp dịch vụ làm đẹp."
+    },
+    "benefits": {
+      "title": "2. Quyền lợi thành viên",
+      "signup": "Thành viên mới sẽ nhận được phiếu giảm giá 5% khi đăng ký thành công.",
+      "referral": "Khi đăng ký bằng mã giới thiệu, cả người giới thiệu và người được giới thiệu đều nhận được phiếu giảm giá 5%."
+    },
+    "refund_policy": {
+      "title": "3. Quy định Hủy & Hoàn tiền",
+      "subtitle": "Tỷ lệ hoàn tiền được tính dựa trên thời gian hủy trước ngày đặt chỗ:",
+      "five_days": "Trước 5 ngày: Hoàn tiền 100%",
+      "three_days": "Trước 3 ngày: Hoàn tiền 90%",
+      "two_days": "Trước 2 ngày: Hoàn tiền 70%",
+      "one_day": "Trước 1 ngày: Hoàn tiền 50%",
+      "same_day": "Trong ngày hoặc vắng mặt (No-show): Không hoàn tiền",
+      "note": "Việc xử lý hoàn tiền cuối cùng có thể thay đổi tùy theo chính sách của từng cửa hàng cụ thể."
+    },
+    "liability": {
+      "title": "4. Giới hạn trách nhiệm",
+      "interpretation": "Tính năng 'Thông dịch thời gian thực' là một công cụ hỗ trợ vì sự tiện lợi của người dùng. MyKello không chịu trách nhiệm cho các sai sót khi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong thông dịch.",
+      "community": "MyKello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa người dùng thông qua các tính năng cộng đồng."
+    }
   }
 }
