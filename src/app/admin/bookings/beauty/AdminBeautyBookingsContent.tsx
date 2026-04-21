@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useDeferredValue, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 
@@ -139,58 +139,300 @@ async function getAdminAccessToken() {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
   return session?.access_token ?? null;
+}
+
+// ===================== Group A — bookingsListReducer =====================
+type BookingsListState = {
+  bookings: BeautyBookingAdminRecord[];
+  selectedBookingId: string | null;
+  loading: boolean;
+  loadError: string | null;
+};
+
+type BookingsListAction =
+  | { type: 'FETCH_START' }
+  | { type: 'FETCH_SUCCESS'; payload: BeautyBookingAdminRecord[] }
+  | { type: 'FETCH_ERROR'; payload: string }
+  | { type: 'SELECT_BOOKING'; payload: string }
+  | { type: 'AUTO_SELECT_FIRST' }
+  | { type: 'UPDATE_BOOKING'; payload: BeautyBookingAdminRecord };
+
+function bookingsListReducer(state: BookingsListState, action: BookingsListAction): BookingsListState {
+  switch (action.type) {
+    case 'FETCH_START':
+      return { ...state, loading: true, loadError: null };
+    case 'FETCH_SUCCESS':
+      return { ...state, loading: false, bookings: action.payload };
+    case 'FETCH_ERROR':
+      return { ...state, loading: false, loadError: action.payload, bookings: [] };
+    case 'SELECT_BOOKING':
+      return { ...state, selectedBookingId: action.payload };
+    case 'AUTO_SELECT_FIRST': {
+      const nextId = state.bookings.length > 0 ? state.bookings[0].id : null;
+      if (nextId === state.selectedBookingId) return state;
+      return { ...state, selectedBookingId: nextId };
+    }
+    case 'UPDATE_BOOKING':
+      return {
+        ...state,
+        bookings: state.bookings.map((b) => (b.id === action.payload.id ? action.payload : b)),
+      };
+    default:
+      return state;
+  }
+}
+
+// ===================== Group B — operatorFormReducer =====================
+type OperatorFormState = {
+  operatorStatus: BeautyBookingOperatorStatus;
+  internalNote: string;
+  shopContacted: boolean;
+  customerContacted: boolean;
+  followUpNeeded: boolean;
+  isSaving: boolean;
+  error: string | null;
+};
+
+type OperatorFormAction =
+  | {
+      type: 'INIT_FROM_BOOKING';
+      payload: {
+        operatorStatus: BeautyBookingOperatorStatus;
+        internalNote: string;
+        shopContacted: boolean;
+        customerContacted: boolean;
+        followUpNeeded: boolean;
+      };
+    }
+  | {
+      type: 'SET_FIELD';
+      payload: Partial<
+        Pick<OperatorFormState, 'operatorStatus' | 'internalNote' | 'shopContacted' | 'customerContacted' | 'followUpNeeded'>
+      >;
+    }
+  | { type: 'SAVE_START' }
+  | { type: 'SAVE_SUCCESS' }
+  | { type: 'SAVE_ERROR'; payload: string };
+
+function operatorFormReducer(state: OperatorFormState, action: OperatorFormAction): OperatorFormState {
+  switch (action.type) {
+    case 'INIT_FROM_BOOKING':
+      return { ...state, ...action.payload, error: null };
+    case 'SET_FIELD':
+      return { ...state, ...action.payload };
+    case 'SAVE_START':
+      return { ...state, isSaving: true, error: null };
+    case 'SAVE_SUCCESS':
+      return { ...state, isSaving: false };
+    case 'SAVE_ERROR':
+      return { ...state, isSaving: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+// ===================== Group C — alternativeReducer =====================
+type AlternativeState = {
+  slots: { date: string; time: string }[];
+  note: string;
+  isSubmitting: boolean;
+  error: string | null;
+};
+
+type AlternativeAction =
+  | { type: 'SET_SLOT'; payload: { index: number; field: 'date' | 'time'; value: string } }
+  | { type: 'ADD_SLOT' }
+  | { type: 'REMOVE_SLOT'; payload: number }
+  | { type: 'SET_NOTE'; payload: string }
+  | { type: 'SUBMIT_START' }
+  | { type: 'SUBMIT_SUCCESS' }
+  | { type: 'SUBMIT_ERROR'; payload: string };
+
+function alternativeReducer(state: AlternativeState, action: AlternativeAction): AlternativeState {
+  switch (action.type) {
+    case 'SET_SLOT': {
+      const slots = state.slots.map((slot, i) =>
+        i === action.payload.index ? { ...slot, [action.payload.field]: action.payload.value } : slot,
+      );
+      return { ...state, slots };
+    }
+    case 'ADD_SLOT':
+      return { ...state, slots: [...state.slots, { date: '', time: '' }] };
+    case 'REMOVE_SLOT':
+      return { ...state, slots: state.slots.filter((_, i) => i !== action.payload) };
+    case 'SET_NOTE':
+      return { ...state, note: action.payload };
+    case 'SUBMIT_START':
+      return { ...state, isSubmitting: true, error: null };
+    case 'SUBMIT_SUCCESS':
+      return { ...state, isSubmitting: false, slots: [{ date: '', time: '' }], note: '' };
+    case 'SUBMIT_ERROR':
+      return { ...state, isSubmitting: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+// ===================== Group D — notificationsReducer =====================
+type NotificationsState = {
+  notifications: BeautyBookingNotificationRecord[];
+  loading: boolean;
+  resendingId: string | null;
+};
+
+type NotificationsAction =
+  | { type: 'FETCH_START' }
+  | { type: 'FETCH_SUCCESS'; payload: BeautyBookingNotificationRecord[] }
+  | { type: 'RESEND_START'; payload: string }
+  | { type: 'RESEND_END' };
+
+function notificationsReducer(state: NotificationsState, action: NotificationsAction): NotificationsState {
+  switch (action.type) {
+    case 'FETCH_START':
+      return { ...state, loading: true };
+    case 'FETCH_SUCCESS':
+      return { ...state, loading: false, notifications: action.payload };
+    case 'RESEND_START':
+      return { ...state, resendingId: action.payload };
+    case 'RESEND_END':
+      return { ...state, resendingId: null };
+    default:
+      return state;
+  }
+}
+
+// ===================== Group E — imageModalReducer =====================
+type ImageModalState = {
+  isLoading: boolean;
+  error: string | null;
+  activeImage: { url: string; title: string } | null;
+};
+
+type ImageModalAction =
+  | { type: 'LOADING_START' }
+  | { type: 'SHOW_IMAGE'; payload: { url: string; title: string } }
+  | { type: 'IMAGE_ERROR'; payload: string }
+  | { type: 'CLOSE' };
+
+function imageModalReducer(state: ImageModalState, action: ImageModalAction): ImageModalState {
+  switch (action.type) {
+    case 'LOADING_START':
+      return { ...state, isLoading: true, error: null };
+    case 'SHOW_IMAGE':
+      return { isLoading: false, error: null, activeImage: action.payload };
+    case 'IMAGE_ERROR':
+      return { ...state, isLoading: false, error: action.payload };
+    case 'CLOSE':
+      return { ...state, activeImage: null };
+    default:
+      return state;
+  }
+}
+
+// ===================== Group F — statusActionReducer =====================
+type StatusActionState = {
+  error: string | null;
+  success: string | null;
+  pendingStatus: BeautyBookingAdminStatus | null;
+  reviewNote: string;
+  isReviewing: boolean;
+};
+
+type StatusActionAction =
+  | { type: 'CLEAR_FEEDBACK' }
+  | { type: 'STATUS_PENDING'; payload: BeautyBookingAdminStatus }
+  | { type: 'STATUS_SUCCESS'; payload: string }
+  | { type: 'STATUS_ERROR'; payload: string }
+  | { type: 'REVIEW_START' }
+  | { type: 'REVIEW_END' }
+  | { type: 'SET_REVIEW_NOTE'; payload: string };
+
+function statusActionReducer(state: StatusActionState, action: StatusActionAction): StatusActionState {
+  switch (action.type) {
+    case 'CLEAR_FEEDBACK':
+      return { ...state, error: null, success: null };
+    case 'STATUS_PENDING':
+      return { ...state, pendingStatus: action.payload, error: null, success: null };
+    case 'STATUS_SUCCESS':
+      return { ...state, pendingStatus: null, success: action.payload };
+    case 'STATUS_ERROR':
+      return { ...state, pendingStatus: null, error: action.payload };
+    case 'REVIEW_START':
+      return { ...state, isReviewing: true, error: null, success: null };
+    case 'REVIEW_END':
+      return { ...state, isReviewing: false };
+    case 'SET_REVIEW_NOTE':
+      return { ...state, reviewNote: action.payload };
+    default:
+      return state;
+  }
 }
 
 export default function AdminBeautyBookingsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const detailRef = useRef<HTMLDivElement | null>(null);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
+  // Group G — 5개 useState 현행 유지
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [bookings, setBookings] = useState<BeautyBookingAdminRecord[]>([]);
-  const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [statusUpdateError, setStatusUpdateError] = useState<string | null>(null);
-  const [statusUpdateSuccess, setStatusUpdateSuccess] = useState<string | null>(null);
-  const [pendingStatus, setPendingStatus] = useState<BeautyBookingAdminStatus | null>(null);
-  const [reviewNote, setReviewNote] = useState("");
-  const [isReviewing, setIsReviewing] = useState(false);
-  
-  // Operator-specific internal states
-  const [operatorStatusInput, setOperatorStatusInput] = useState<BeautyBookingOperatorStatus>('pending_assignment');
-  const [internalNoteInput, setInternalNoteInput] = useState("");
-  const [shopContactedInput, setShopContactedInput] = useState(false);
-  const [customerContactedInput, setCustomerContactedInput] = useState(false);
-  const [followUpNeededInput, setFollowUpNeededInput] = useState(false);
-  const [isSavingOperatorInfo, setIsSavingOperatorInfo] = useState(false);
-  const [operatorInfoError, setOperatorInfoError] = useState<string | null>(null);
-
-  // Alternative offer states
-  const [alternativeSlots, setAlternativeSlots] = useState<{ date: string; time: string }[]>([{ date: '', time: '' }]);
-  const [alternativeNote, setAlternativeNote] = useState("");
-  const [isSubmittingAlternative, setIsSubmittingAlternative] = useState(false);
-  const [alternativeError, setAlternativeError] = useState<string | null>(null);
-
-  // Notification states
-  const [notifications, setNotifications] = useState<BeautyBookingNotificationRecord[]>([]);
-  const [loadingNotifications, setLoadingNotifications] = useState(false);
-  const [isResending, setIsResending] = useState<string | null>(null);
-  
-  // Image states
-  const [isLoadingImages, setIsLoadingImages] = useState(false);
-  const [imageError, setImageError] = useState<string | null>(null);
-  const [activeModalImage, setActiveModalImage] = useState<{ url: string; title: string } | null>(null);
-
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useState<BeautyBookingAdminListStatus>(
     normalizeBeautyBookingAdminListStatus(searchParams.get('status')),
   );
   const [beautyCategoryFilter, setBeautyCategoryFilter] = useState(searchParams.get('beautyCategory') ?? 'all');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') ?? '');
   const deferredSearchQuery = useDeferredValue(searchQuery);
+
+  // Group A
+  const [bookingsList, dispatchBookings] = useReducer(bookingsListReducer, {
+    bookings: [],
+    selectedBookingId: null,
+    loading: false,
+    loadError: null,
+  });
+
+  // Group B
+  const [operatorForm, dispatchOperatorForm] = useReducer(operatorFormReducer, {
+    operatorStatus: 'pending_assignment',
+    internalNote: '',
+    shopContacted: false,
+    customerContacted: false,
+    followUpNeeded: false,
+    isSaving: false,
+    error: null,
+  });
+
+  // Group C
+  const [alternative, dispatchAlternative] = useReducer(alternativeReducer, {
+    slots: [{ date: '', time: '' }],
+    note: '',
+    isSubmitting: false,
+    error: null,
+  });
+
+  // Group D
+  const [notifs, dispatchNotifs] = useReducer(notificationsReducer, {
+    notifications: [],
+    loading: false,
+    resendingId: null,
+  });
+
+  // Group E
+  const [imageModal, dispatchImageModal] = useReducer(imageModalReducer, {
+    isLoading: false,
+    error: null,
+    activeImage: null,
+  });
+
+  // Group F
+  const [statusAction, dispatchStatusAction] = useReducer(statusActionReducer, {
+    error: null,
+    success: null,
+    pendingStatus: null,
+    reviewNote: '',
+    isReviewing: false,
+  });
 
   useEffect(() => {
     const init = async () => {
@@ -241,13 +483,11 @@ export default function AdminBeautyBookingsContent() {
     const accessToken = await getAdminAccessToken();
 
     if (!accessToken) {
-      setLoadError('관리자 세션을 다시 확인해 주세요.');
-      setBookings([]);
+      dispatchBookings({ type: 'FETCH_ERROR', payload: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
-    setLoading(true);
-    setLoadError(null);
+    dispatchBookings({ type: 'FETCH_START' });
 
     const params = new URLSearchParams();
     if (statusFilter !== 'all') {
@@ -276,12 +516,12 @@ export default function AdminBeautyBookingsContent() {
         throw new Error(body?.error ?? '예약 목록을 불러오지 못했어요.');
       }
 
-      setBookings(body.items);
+      dispatchBookings({ type: 'FETCH_SUCCESS', payload: body.items });
     } catch (error) {
-      setLoadError(error instanceof Error ? error.message : '예약 목록을 불러오지 못했어요.');
-      setBookings([]);
-    } finally {
-      setLoading(false);
+      dispatchBookings({
+        type: 'FETCH_ERROR',
+        payload: error instanceof Error ? error.message : '예약 목록을 불러오지 못했어요.',
+      });
     }
   }, [beautyCategoryFilter, deferredSearchQuery, statusFilter]);
 
@@ -292,34 +532,33 @@ export default function AdminBeautyBookingsContent() {
   }, [fetchBookings, isAdmin]);
 
   useEffect(() => {
-    if (!bookings.length) {
-      setSelectedBookingId(null);
-      return;
+    const { bookings, selectedBookingId } = bookingsList;
+    if (!bookings.length || !selectedBookingId || !bookings.some((b) => b.id === selectedBookingId)) {
+      dispatchBookings({ type: 'AUTO_SELECT_FIRST' });
     }
-
-    if (!selectedBookingId || !bookings.some((booking) => booking.id === selectedBookingId)) {
-      setSelectedBookingId(bookings[0].id);
-    }
-  }, [bookings, selectedBookingId]);
+  }, [bookingsList.bookings, bookingsList.selectedBookingId]);
 
   useEffect(() => {
-    setStatusUpdateError(null);
-    setStatusUpdateSuccess(null);
-  }, [selectedBookingId]);
+    dispatchStatusAction({ type: 'CLEAR_FEEDBACK' });
+  }, [bookingsList.selectedBookingId]);
 
   const selectedBooking = useMemo(
-    () => bookings.find((booking) => booking.id === selectedBookingId) ?? null,
-    [bookings, selectedBookingId],
+    () => bookingsList.bookings.find((b) => b.id === bookingsList.selectedBookingId) ?? null,
+    [bookingsList.bookings, bookingsList.selectedBookingId],
   );
 
   useEffect(() => {
     if (selectedBooking) {
-      setOperatorStatusInput(selectedBooking.operatorStatus);
-      setInternalNoteInput(selectedBooking.internalNote);
-      setShopContactedInput(selectedBooking.shopContacted);
-      setCustomerContactedInput(selectedBooking.customerContacted);
-      setFollowUpNeededInput(selectedBooking.followUpNeeded);
-      setOperatorInfoError(null);
+      dispatchOperatorForm({
+        type: 'INIT_FROM_BOOKING',
+        payload: {
+          operatorStatus: selectedBooking.operatorStatus,
+          internalNote: selectedBooking.internalNote,
+          shopContacted: selectedBooking.shopContacted,
+          customerContacted: selectedBooking.customerContacted,
+          followUpNeeded: selectedBooking.followUpNeeded,
+        },
+      });
       void fetchNotifications(selectedBooking.id);
     }
   }, [selectedBooking]);
@@ -327,57 +566,63 @@ export default function AdminBeautyBookingsContent() {
   const handleViewImage = async (type: 'current' | 'style') => {
     if (!selectedBooking) return;
 
-    setIsLoadingImages(true);
-    setImageError(null);
+    dispatchImageModal({ type: 'LOADING_START' });
 
     try {
       const accessToken = await getAdminAccessToken();
-      if (!accessToken) throw new Error("관리자 세션을 확인해 주세요.");
+      if (!accessToken) throw new Error('관리자 세션을 확인해 주세요.');
 
       const response = await fetch(`/api/bookings/beauty/images/signed-url?bookingId=${selectedBooking.id}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-      const body = await response.json() as { ok: boolean; images: { imageType: 'current' | 'style', signedUrl: string }[], error?: string };
+      const body = (await response.json()) as {
+        ok: boolean;
+        images: { imageType: 'current' | 'style'; signedUrl: string }[];
+        error?: string;
+      };
 
       if (body.ok && Array.isArray(body.images)) {
         const imgResult = body.images.find((img) => img.imageType === type);
         if (imgResult?.signedUrl) {
-          setActiveModalImage({
-            url: imgResult.signedUrl,
-            title: type === 'current' ? '현재 상태 이미지' : '희망 스타일 이미지'
+          dispatchImageModal({
+            type: 'SHOW_IMAGE',
+            payload: {
+              url: imgResult.signedUrl,
+              title: type === 'current' ? '현재 상태 이미지' : '희망 스타일 이미지',
+            },
           });
         } else {
-          setImageError('해당 이미지를 찾을 수 없습니다.');
+          dispatchImageModal({ type: 'IMAGE_ERROR', payload: '해당 이미지를 찾을 수 없습니다.' });
         }
       } else {
         throw new Error(body.error ?? '이미지 정보를 불러오지 못했습니다.');
       }
     } catch (error) {
       console.error('Failed to fetch signed URL:', error);
-      setImageError(error instanceof Error ? error.message : '이미지를 불러올 수 없습니다.');
-    } finally {
-      setIsLoadingImages(false);
+      dispatchImageModal({
+        type: 'IMAGE_ERROR',
+        payload: error instanceof Error ? error.message : '이미지를 불러올 수 없습니다.',
+      });
     }
   };
-
 
   const fetchNotifications = async (bookingId: string) => {
     const accessToken = await getAdminAccessToken();
     if (!accessToken) return;
 
-    setLoadingNotifications(true);
+    dispatchNotifs({ type: 'FETCH_START' });
     try {
       const response = await fetch(`/api/bookings/beauty/${bookingId}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       const body = await response.json();
-      if (body.ok) {
-        setNotifications(body.notifications);
-      }
+      dispatchNotifs({
+        type: 'FETCH_SUCCESS',
+        payload: body.ok && Array.isArray(body.notifications) ? body.notifications : [],
+      });
     } catch (error) {
       console.error('Failed to fetch notifications:', error);
-    } finally {
-      setLoadingNotifications(false);
+      dispatchNotifs({ type: 'FETCH_SUCCESS', payload: [] });
     }
   };
 
@@ -386,27 +631,21 @@ export default function AdminBeautyBookingsContent() {
     : [];
 
   const handleSelectBooking = (bookingId: string) => {
-    setSelectedBookingId(bookingId);
-    setStatusUpdateError(null);
-    setStatusUpdateSuccess(null);
+    dispatchBookings({ type: 'SELECT_BOOKING', payload: bookingId });
+    dispatchStatusAction({ type: 'CLEAR_FEEDBACK' });
     setIsSheetOpen(true);
   };
 
   const handleStatusUpdate = async (nextStatus: BeautyBookingAdminStatus) => {
-    if (!selectedBooking) {
-      return;
-    }
+    if (!selectedBooking) return;
 
     const accessToken = await getAdminAccessToken();
-
     if (!accessToken) {
-      setStatusUpdateError('관리자 세션을 다시 확인해 주세요.');
+      dispatchStatusAction({ type: 'STATUS_ERROR', payload: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
-    setPendingStatus(nextStatus);
-    setStatusUpdateError(null);
-    setStatusUpdateSuccess(null);
+    dispatchStatusAction({ type: 'STATUS_PENDING', payload: nextStatus });
 
     try {
       const response = await fetch(`/api/bookings/beauty/${selectedBooking.id}`, {
@@ -426,45 +665,35 @@ export default function AdminBeautyBookingsContent() {
         throw new Error(body?.error ?? '예약 상태를 변경하지 못했어요.');
       }
 
-      const updatedItem = body.item;
-      setBookings((current) =>
-        current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
-      );
-      setStatusUpdateSuccess('예약 상태를 업데이트했어요.');
+      dispatchBookings({ type: 'UPDATE_BOOKING', payload: body.item });
+      dispatchStatusAction({ type: 'STATUS_SUCCESS', payload: '예약 상태를 업데이트했어요.' });
     } catch (error) {
-      setStatusUpdateError(error instanceof Error ? error.message : '예약 상태를 변경하지 못했어요.');
-    } finally {
-      setPendingStatus(null);
+      dispatchStatusAction({
+        type: 'STATUS_ERROR',
+        payload: error instanceof Error ? error.message : '예약 상태를 변경하지 못했어요.',
+      });
     }
   };
 
-  const handleReviewChangeRequest = async (action: "approved" | "rejected") => {
-    if (!selectedBooking) {
-      return;
-    }
+  const handleReviewChangeRequest = async (action: 'approved' | 'rejected') => {
+    if (!selectedBooking) return;
 
     const accessToken = await getAdminAccessToken();
-
     if (!accessToken) {
-      setStatusUpdateError("관리자 세션을 다시 확인해 주세요.");
+      dispatchStatusAction({ type: 'STATUS_ERROR', payload: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
-    setIsReviewing(true);
-    setStatusUpdateError(null);
-    setStatusUpdateSuccess(null);
+    dispatchStatusAction({ type: 'REVIEW_START' });
 
     try {
       const response = await fetch(`/api/bookings/beauty/${selectedBooking.id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ 
-          action, 
-          note: reviewNote.trim() 
-        }),
+        body: JSON.stringify({ action, note: statusAction.reviewNote.trim() }),
       });
 
       const body = (await response.json().catch(() => null)) as
@@ -472,19 +701,22 @@ export default function AdminBeautyBookingsContent() {
         | null;
 
       if (!response.ok || body?.ok !== true || !body.item) {
-        throw new Error(body?.error ?? "변경 요청 처리에 실패했어요.");
+        throw new Error(body?.error ?? '변경 요청 처리에 실패했어요.');
       }
 
-      const updatedItem = body.item;
-      setBookings((current) =>
-        current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking)),
-      );
-      setStatusUpdateSuccess(action === "approved" ? "변경 요청을 승인했어요." : "변경 요청을 반려했어요.");
-      setReviewNote("");
+      dispatchBookings({ type: 'UPDATE_BOOKING', payload: body.item });
+      dispatchStatusAction({
+        type: 'STATUS_SUCCESS',
+        payload: action === 'approved' ? '변경 요청을 승인했어요.' : '변경 요청을 반려했어요.',
+      });
+      dispatchStatusAction({ type: 'SET_REVIEW_NOTE', payload: '' });
     } catch (error) {
-      setStatusUpdateError(error instanceof Error ? error.message : "변경 요청 처리에 실패했어요.");
+      dispatchStatusAction({
+        type: 'STATUS_ERROR',
+        payload: error instanceof Error ? error.message : '변경 요청 처리에 실패했어요.',
+      });
     } finally {
-      setIsReviewing(false);
+      dispatchStatusAction({ type: 'REVIEW_END' });
     }
   };
 
@@ -493,45 +725,43 @@ export default function AdminBeautyBookingsContent() {
 
     const accessToken = await getAdminAccessToken();
     if (!accessToken) {
-      setOperatorInfoError("관리자 세션을 다시 확인해 주세요.");
+      dispatchOperatorForm({ type: 'SAVE_ERROR', payload: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
-    setIsSavingOperatorInfo(true);
-    setOperatorInfoError(null);
+    dispatchOperatorForm({ type: 'SAVE_START' });
 
     try {
       const response = await fetch(`/api/bookings/beauty/${selectedBooking.id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          action: "update_operator_info",
-          operatorStatus: operatorStatusInput,
-          internalNote: internalNoteInput,
-          shopContacted: shopContactedInput,
-          customerContacted: customerContactedInput,
-          followUpNeeded: followUpNeededInput,
+          action: 'update_operator_info',
+          operatorStatus: operatorForm.operatorStatus,
+          internalNote: operatorForm.internalNote,
+          shopContacted: operatorForm.shopContacted,
+          customerContacted: operatorForm.customerContacted,
+          followUpNeeded: operatorForm.followUpNeeded,
         }),
       });
 
       const body = (await response.json()) as { ok?: boolean; item?: BeautyBookingAdminRecord; error?: string };
 
       if (!response.ok || body?.ok !== true || !body.item) {
-        throw new Error(body?.error ?? "기록 저장에 실패했어요.");
+        throw new Error(body?.error ?? '기록 저장에 실패했어요.');
       }
 
-      const updatedItem = body.item;
-      setBookings((current) =>
-        current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking))
-      );
-      setStatusUpdateSuccess("내부 처리 상태를 저장했습니다.");
+      dispatchBookings({ type: 'UPDATE_BOOKING', payload: body.item });
+      dispatchStatusAction({ type: 'STATUS_SUCCESS', payload: '내부 처리 상태를 저장했습니다.' });
+      dispatchOperatorForm({ type: 'SAVE_SUCCESS' });
     } catch (error) {
-      setOperatorInfoError(error instanceof Error ? error.message : "기록 저장 중 오류가 발생했습니다.");
-    } finally {
-      setIsSavingOperatorInfo(false);
+      dispatchOperatorForm({
+        type: 'SAVE_ERROR',
+        payload: error instanceof Error ? error.message : '기록 저장 중 오류가 발생했습니다.',
+      });
     }
   };
 
@@ -540,50 +770,46 @@ export default function AdminBeautyBookingsContent() {
 
     const accessToken = await getAdminAccessToken();
     if (!accessToken) {
-      setAlternativeError("관리자 세션을 다시 확인해 주세요.");
+      dispatchAlternative({ type: 'SUBMIT_ERROR', payload: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
-    const validSlots = alternativeSlots.filter(s => s.date && s.time);
+    const validSlots = alternative.slots.filter((s) => s.date && s.time);
     if (validSlots.length === 0) {
-      setAlternativeError("최소 한 개의 제안 일정이 필요합니다.");
+      dispatchAlternative({ type: 'SUBMIT_ERROR', payload: '최소 한 개의 제안 일정이 필요합니다.' });
       return;
     }
 
-    setIsSubmittingAlternative(true);
-    setAlternativeError(null);
+    dispatchAlternative({ type: 'SUBMIT_START' });
 
     try {
       const response = await fetch(`/api/bookings/beauty/${selectedBooking.id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          action: "offer_alternative",
+          action: 'offer_alternative',
           alternativeItems: validSlots,
-          note: alternativeNote,
+          note: alternative.note,
         }),
       });
 
       const body = (await response.json()) as { ok?: boolean; item?: BeautyBookingAdminRecord; error?: string };
 
       if (!response.ok || body?.ok !== true || !body.item) {
-        throw new Error(body?.error ?? "제안 전송에 실패했어요.");
+        throw new Error(body?.error ?? '제안 전송에 실패했어요.');
       }
 
-      const updatedItem = body.item;
-      setBookings((current) =>
-        current.map((booking) => (booking.id === updatedItem.id ? updatedItem : booking))
-      );
-      setStatusUpdateSuccess("대체 일정 제안을 고객에게 전송했습니다.");
-      setAlternativeNote("");
-      setAlternativeSlots([{ date: '', time: '' }]);
+      dispatchBookings({ type: 'UPDATE_BOOKING', payload: body.item });
+      dispatchStatusAction({ type: 'STATUS_SUCCESS', payload: '대체 일정 제안을 고객에게 전송했습니다.' });
+      dispatchAlternative({ type: 'SUBMIT_SUCCESS' });
     } catch (error) {
-      setAlternativeError(error instanceof Error ? error.message : "제안 전송 중 오류가 발생했습니다.");
-    } finally {
-      setIsSubmittingAlternative(false);
+      dispatchAlternative({
+        type: 'SUBMIT_ERROR',
+        payload: error instanceof Error ? error.message : '제안 전송 중 오류가 발생했습니다.',
+      });
     }
   };
 
@@ -593,29 +819,29 @@ export default function AdminBeautyBookingsContent() {
     const accessToken = await getAdminAccessToken();
     if (!accessToken) return;
 
-    setIsResending(notificationId);
+    dispatchNotifs({ type: 'RESEND_START', payload: notificationId });
     try {
       const response = await fetch(`/api/bookings/beauty/${selectedBooking.id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({
-          action: "resend_notification",
-          notificationId
-        }),
+        body: JSON.stringify({ action: 'resend_notification', notificationId }),
       });
 
       const body = await response.json();
-      if (!response.ok || !body.ok) throw new Error(body.error ?? "재전송 실패");
-      
-      setStatusUpdateSuccess("알림을 재전송했습니다.");
+      if (!response.ok || !body.ok) throw new Error(body.error ?? '재전송 실패');
+
+      dispatchStatusAction({ type: 'STATUS_SUCCESS', payload: '알림을 재전송했습니다.' });
       void fetchNotifications(selectedBooking.id);
     } catch (error) {
-      setStatusUpdateError(error instanceof Error ? error.message : "알림 재전송 실패");
+      dispatchStatusAction({
+        type: 'STATUS_ERROR',
+        payload: error instanceof Error ? error.message : '알림 재전송 실패',
+      });
     } finally {
-      setIsResending(null);
+      dispatchNotifs({ type: 'RESEND_END' });
     }
   };
 
@@ -715,28 +941,28 @@ export default function AdminBeautyBookingsContent() {
                 <h3 className={styles.sectionTitle}>예약 목록</h3>
                 <p className={styles.sectionText}>최신 예약 순으로 표시됩니다.</p>
               </div>
-              <button className={styles.refreshButton} onClick={() => void fetchBookings()} disabled={loading}>
-                {loading ? '불러오는 중...' : '새로고침'}
+              <button className={styles.refreshButton} onClick={() => void fetchBookings()} disabled={bookingsList.loading}>
+                {bookingsList.loading ? '불러오는 중...' : '새로고침'}
               </button>
             </div>
 
-            {loadError ? <div className={styles.errorState}>{loadError}</div> : null}
+            {bookingsList.loadError ? <div className={styles.errorState}>{bookingsList.loadError}</div> : null}
 
-            {loading ? <div className={styles.emptyState}>예약 목록을 불러오는 중입니다.</div> : null}
+            {bookingsList.loading ? <div className={styles.emptyState}>예약 목록을 불러오는 중입니다.</div> : null}
 
-            {!loading && !loadError && bookings.length === 0 ? (
+            {!bookingsList.loading && !bookingsList.loadError && bookingsList.bookings.length === 0 ? (
               <div className={styles.emptyState}>조건에 맞는 예약 요청이 없습니다.</div>
             ) : null}
 
-            {!loading && bookings.length > 0 ? (
+            {!bookingsList.loading && bookingsList.bookings.length > 0 ? (
               <div className={styles.bookingList}>
-                {bookings.map((booking) => (
+                {bookingsList.bookings.map((booking) => (
                   <button
                     key={booking.id}
                     type="button"
-                    className={`${styles.bookingCard} ${selectedBookingId === booking.id ? styles.bookingCardActive : ''}`}
+                    className={`${styles.bookingCard} ${bookingsList.selectedBookingId === booking.id ? styles.bookingCardActive : ''}`}
                     onClick={() => handleSelectBooking(booking.id)}
-                    aria-pressed={selectedBookingId === booking.id}
+                    aria-pressed={bookingsList.selectedBookingId === booking.id}
                   >
                     <div className={styles.bookingCardTop}>
                       <span className={`${styles.statusBadge} ${getStatusToneClass(booking.status)}`}>
@@ -782,7 +1008,6 @@ export default function AdminBeautyBookingsContent() {
           </section>
 
           <section ref={detailRef} className={`${styles.detailSection} ${isSheetOpen ? styles.detailSectionOpen : ''}`}>
-            {/* 모바일 바텀시트 핸들 + 닫기 버튼 */}
             <div className={styles.sheetHandle} />
             <div className={styles.sheetHeaderRow}>
               <h3 className={styles.sheetHeaderTitle}>예약 상세</h3>
@@ -913,37 +1138,38 @@ export default function AdminBeautyBookingsContent() {
                       </div>
                     </dl>
                   </section>
+
                   <section className={styles.infoBlock}>
                     <h5 className={styles.blockTitle}>참조 이미지</h5>
                     <div className={styles.imageActions}>
                       {!selectedBooking.currentImageUrl && !selectedBooking.styleImageUrl && (
                         <p className={styles.sectionText} style={{ color: 'var(--gray-400)' }}>등록된 이미지가 없습니다.</p>
                       )}
-                      
+
                       {selectedBooking.currentImageUrl && (
-                        <button 
+                        <button
                           type="button"
                           className={styles.imageButton}
                           onClick={() => void handleViewImage('current')}
-                          disabled={isLoadingImages}
+                          disabled={imageModal.isLoading}
                         >
                           <span className={styles.imageButtonIcon}>📸</span> 현재 이미지 보기
                         </button>
                       )}
-                      
+
                       {selectedBooking.styleImageUrl && (
-                        <button 
+                        <button
                           type="button"
                           className={styles.imageButton}
                           onClick={() => void handleViewImage('style')}
-                          disabled={isLoadingImages}
+                          disabled={imageModal.isLoading}
                         >
                           <span className={styles.imageButtonIcon}>✨</span> 스타일 이미지 보기
                         </button>
                       )}
                     </div>
-                    {isLoadingImages && <p className={styles.sectionText} style={{ marginTop: 8 }}>불러오는 중...</p>}
-                    {imageError && <p className={styles.errorState} style={{ marginTop: 8, padding: '6px 12px', fontSize: '0.75rem' }}>{imageError}</p>}
+                    {imageModal.isLoading && <p className={styles.sectionText} style={{ marginTop: 8 }}>불러오는 중...</p>}
+                    {imageModal.error && <p className={styles.errorState} style={{ marginTop: 8, padding: '6px 12px', fontSize: '0.75rem' }}>{imageModal.error}</p>}
                   </section>
                 </div>
 
@@ -986,9 +1212,9 @@ export default function AdminBeautyBookingsContent() {
                           fontSize: '0.86rem',
                         }}
                         placeholder="승인/반려 관련 안내 메시지를 입력하세요 (예: 요청하신대로 오후 3시로 변경해 드렸습니다.)"
-                        value={reviewNote}
-                        onChange={(e) => setReviewNote(e.target.value)}
-                        disabled={isReviewing}
+                        value={statusAction.reviewNote}
+                        onChange={(e) => dispatchStatusAction({ type: 'SET_REVIEW_NOTE', payload: e.target.value })}
+                        disabled={statusAction.isReviewing}
                       />
                       <div style={{ display: 'flex', gap: 8 }}>
                         <button
@@ -1004,9 +1230,9 @@ export default function AdminBeautyBookingsContent() {
                             cursor: 'pointer',
                           }}
                           onClick={() => void handleReviewChangeRequest('approved')}
-                          disabled={isReviewing}
+                          disabled={statusAction.isReviewing}
                         >
-                          {isReviewing ? '처리 중...' : '요청 승인'}
+                          {statusAction.isReviewing ? '처리 중...' : '요청 승인'}
                         </button>
                         <button
                           type="button"
@@ -1021,9 +1247,9 @@ export default function AdminBeautyBookingsContent() {
                             cursor: 'pointer',
                           }}
                           onClick={() => void handleReviewChangeRequest('rejected')}
-                          disabled={isReviewing}
+                          disabled={statusAction.isReviewing}
                         >
-                          {isReviewing ? '처리 중...' : '요청 반려'}
+                          {statusAction.isReviewing ? '처리 중...' : '요청 반려'}
                         </button>
                       </div>
                     </div>
@@ -1083,14 +1309,14 @@ export default function AdminBeautyBookingsContent() {
                     <h5 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: '#701a75' }}>🛡️ 운영 전용 처리 (Admin Only)</h5>
                     <span style={{ fontSize: '0.7rem', background: '#f5d0fe', color: '#701a75', padding: '2px 8px', borderRadius: 999, fontWeight: 700 }}>운영자 전용</span>
                   </div>
-                  
+
                   <div className={styles.grid2}>
                     <label className={styles.field}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#701a75' }}>내부 핸들링 상태</span>
                       <select
                         className={styles.select}
-                        value={operatorStatusInput}
-                        onChange={(e) => setOperatorStatusInput(e.target.value as BeautyBookingOperatorStatus)}
+                        value={operatorForm.operatorStatus}
+                        onChange={(e) => dispatchOperatorForm({ type: 'SET_FIELD', payload: { operatorStatus: e.target.value as BeautyBookingOperatorStatus } })}
                         style={{ borderColor: '#f5d0fe' }}
                       >
                         {(Object.entries(BEAUTY_BOOKING_OPERATOR_STATUS_LABELS) as [BeautyBookingOperatorStatus, string][]).map(([val, label]) => (
@@ -1106,8 +1332,8 @@ export default function AdminBeautyBookingsContent() {
                       <textarea
                         className={styles.input}
                         style={{ minHeight: 80, borderColor: '#f5d0fe', fontSize: '0.86rem' }}
-                        value={internalNoteInput}
-                        onChange={(e) => setInternalNoteInput(e.target.value)}
+                        value={operatorForm.internalNote}
+                        onChange={(e) => dispatchOperatorForm({ type: 'SET_FIELD', payload: { internalNote: e.target.value } })}
                         placeholder="매장과 조율 중인 내용이나 특이 사항을 기록하세요 (고객에게 노출 안됨)"
                       />
                     </label>
@@ -1115,24 +1341,24 @@ export default function AdminBeautyBookingsContent() {
 
                   <div style={{ margin: '16px 0', display: 'flex', flexWrap: 'wrap', gap: 20 }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
-                      <input type="checkbox" checked={shopContactedInput} onChange={e => setShopContactedInput(e.target.checked)} style={{ width: 16, height: 16 }} />
+                      <input type="checkbox" checked={operatorForm.shopContacted} onChange={(e) => dispatchOperatorForm({ type: 'SET_FIELD', payload: { shopContacted: e.target.checked } })} style={{ width: 16, height: 16 }} />
                       매장 연락 완료
                     </label>
                     <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
-                      <input type="checkbox" checked={customerContactedInput} onChange={e => setCustomerContactedInput(e.target.checked)} style={{ width: 16, height: 16 }} />
+                      <input type="checkbox" checked={operatorForm.customerContacted} onChange={(e) => dispatchOperatorForm({ type: 'SET_FIELD', payload: { customerContacted: e.target.checked } })} style={{ width: 16, height: 16 }} />
                       고객 추가 안내 완료
                     </label>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600, color: followUpNeededInput ? '#dc2626' : 'inherit' }}>
-                      <input type="checkbox" checked={followUpNeededInput} onChange={e => setFollowUpNeededInput(e.target.checked)} style={{ width: 16, height: 16 }} />
+                    <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600, color: operatorForm.followUpNeeded ? '#dc2626' : 'inherit' }}>
+                      <input type="checkbox" checked={operatorForm.followUpNeeded} onChange={(e) => dispatchOperatorForm({ type: 'SET_FIELD', payload: { followUpNeeded: e.target.checked } })} style={{ width: 16, height: 16 }} />
                       사후 관리 필요 (Follow-up)
                     </label>
                   </div>
 
-                  {operatorInfoError && <p style={{ color: '#dc2626', fontSize: '0.8rem', marginBottom: 12 }}>{operatorInfoError}</p>}
+                  {operatorForm.error && <p style={{ color: '#dc2626', fontSize: '0.8rem', marginBottom: 12 }}>{operatorForm.error}</p>}
 
                   <button
                     onClick={handleUpdateOperatorInfo}
-                    disabled={isSavingOperatorInfo}
+                    disabled={operatorForm.isSaving}
                     style={{
                       width: '100%',
                       padding: '12px',
@@ -1142,10 +1368,10 @@ export default function AdminBeautyBookingsContent() {
                       borderRadius: 12,
                       fontWeight: 700,
                       cursor: 'pointer',
-                      fontSize: '0.9rem'
+                      fontSize: '0.9rem',
                     }}
                   >
-                    {isSavingOperatorInfo ? '내부 기록 저장 중...' : '내부 기록 및 상태 저장'}
+                    {operatorForm.isSaving ? '내부 기록 저장 중...' : '내부 기록 및 상태 저장'}
                   </button>
                 </section>
 
@@ -1156,42 +1382,34 @@ export default function AdminBeautyBookingsContent() {
                   </div>
 
                   <div style={{ display: 'grid', gap: 12 }}>
-                    {alternativeSlots.map((slot, index) => (
+                    {alternative.slots.map((slot, index) => (
                       <div key={index} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                         <input 
-                            type="date" 
-                            className={styles.input} 
-                            style={{ flex: 2, borderColor: '#ffedd5' }} 
-                            value={slot.date} 
-                            onChange={e => {
-                              const newSlots = [...alternativeSlots];
-                              newSlots[index].date = e.target.value;
-                              setAlternativeSlots(newSlots);
-                            }}
-                         />
-                         <input 
-                            type="time" 
-                            className={styles.input} 
-                            style={{ flex: 1, borderColor: '#ffedd5' }} 
-                            value={slot.time} 
-                            onChange={e => {
-                              const newSlots = [...alternativeSlots];
-                              newSlots[index].time = e.target.value;
-                              setAlternativeSlots(newSlots);
-                            }}
-                         />
-                         {alternativeSlots.length > 1 && (
-                           <button 
-                              onClick={() => setAlternativeSlots(alternativeSlots.filter((_, i) => i !== index))}
-                              style={{ background: 'none', border: 'none', color: '#dc2626', cursor: 'pointer', fontSize: '1.2rem' }}
-                           >×</button>
-                         )}
+                        <input
+                          type="date"
+                          className={styles.input}
+                          style={{ flex: 2, borderColor: '#ffedd5' }}
+                          value={slot.date}
+                          onChange={(e) => dispatchAlternative({ type: 'SET_SLOT', payload: { index, field: 'date', value: e.target.value } })}
+                        />
+                        <input
+                          type="time"
+                          className={styles.input}
+                          style={{ flex: 1, borderColor: '#ffedd5' }}
+                          value={slot.time}
+                          onChange={(e) => dispatchAlternative({ type: 'SET_SLOT', payload: { index, field: 'time', value: e.target.value } })}
+                        />
+                        {alternative.slots.length > 1 && (
+                          <button
+                            onClick={() => dispatchAlternative({ type: 'REMOVE_SLOT', payload: index })}
+                            style={{ background: 'none', border: 'none', color: '#dc2626', cursor: 'pointer', fontSize: '1.2rem' }}
+                          >×</button>
+                        )}
                       </div>
                     ))}
-                    
-                    {alternativeSlots.length < 3 && (
-                      <button 
-                        onClick={() => setAlternativeSlots([...alternativeSlots, { date: '', time: '' }])}
+
+                    {alternative.slots.length < 3 && (
+                      <button
+                        onClick={() => dispatchAlternative({ type: 'ADD_SLOT' })}
                         style={{ background: 'none', border: '1px dashed #9a3412', color: '#9a3412', padding: '8px', borderRadius: 8, fontSize: '0.8rem', cursor: 'pointer' }}
                       >+ 추가 제안 (최대 3개)</button>
                     )}
@@ -1203,18 +1421,18 @@ export default function AdminBeautyBookingsContent() {
                       <textarea
                         className={styles.input}
                         style={{ minHeight: 60, borderColor: '#ffedd5', fontSize: '0.86rem' }}
-                        value={alternativeNote}
-                        onChange={(e) => setAlternativeNote(e.target.value)}
+                        value={alternative.note}
+                        onChange={(e) => dispatchAlternative({ type: 'SET_NOTE', payload: e.target.value })}
                         placeholder="마감 안내 및 제안 사유를 입력하세요"
                       />
                     </label>
                   </div>
 
-                  {alternativeError && <p style={{ color: '#dc2626', fontSize: '0.8rem', marginBottom: 12, marginTop: 12 }}>{alternativeError}</p>}
+                  {alternative.error && <p style={{ color: '#dc2626', fontSize: '0.8rem', marginBottom: 12, marginTop: 12 }}>{alternative.error}</p>}
 
                   <button
                     onClick={handleOfferAlternative}
-                    disabled={isSubmittingAlternative}
+                    disabled={alternative.isSubmitting}
                     style={{
                       marginTop: 16,
                       width: '100%',
@@ -1225,17 +1443,17 @@ export default function AdminBeautyBookingsContent() {
                       borderRadius: 12,
                       fontWeight: 700,
                       cursor: 'pointer',
-                      fontSize: '0.9rem'
+                      fontSize: '0.9rem',
                     }}
                   >
-                    {isSubmittingAlternative ? '제안 전송 중...' : '대체 일정 제안 보내기'}
+                    {alternative.isSubmitting ? '제안 전송 중...' : '대체 일정 제안 보내기'}
                   </button>
 
                   {selectedBooking.alternativeOfferStatus !== 'none' && (
                     <div style={{ marginTop: 16, padding: '12px', background: 'white', borderRadius: 10, fontSize: '0.85rem', border: '1px solid #ffedd5' }}>
-                      <p style={{ margin: '0 0 4px 0', fontWeight: 700 }}>전송된 제안 상태: 
+                      <p style={{ margin: '0 0 4px 0', fontWeight: 700 }}>전송된 제안 상태:
                         <span style={{ color: selectedBooking.alternativeOfferStatus === 'accepted' ? '#059669' : selectedBooking.alternativeOfferStatus === 'rejected' ? '#dc2626' : '#9a3412', marginLeft: 6 }}>
-                          {selectedBooking.alternativeOfferStatus === 'offered' ? '고객 확인 중' : 
+                          {selectedBooking.alternativeOfferStatus === 'offered' ? '고객 확인 중' :
                            selectedBooking.alternativeOfferStatus === 'accepted' ? '고객 수락함' : '고객 거절함'}
                         </span>
                       </p>
@@ -1249,19 +1467,19 @@ export default function AdminBeautyBookingsContent() {
                 <section className={styles.operatorSection} style={{ backgroundColor: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: 16, padding: 20, marginTop: 16 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
                     <h5 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: '#1e293b' }}>
-                      📢 고객 알림 발송 이력 
+                      📢 고객 알림 발송 이력
                       <span style={{ fontWeight: 400, fontSize: '0.75rem', color: '#64748b', marginLeft: 8 }}>(동일 알림 최대 3회, 5분 간격)</span>
                     </h5>
-                    <button 
-                      onClick={() => void fetchNotifications(selectedBooking.id)} 
-                      disabled={loadingNotifications}
+                    <button
+                      onClick={() => void fetchNotifications(selectedBooking.id)}
+                      disabled={notifs.loading}
                       style={{ background: 'none', border: 'none', color: '#7c3aed', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}
                     >
-                      {loadingNotifications ? '불러오는 중...' : '새로고침'}
+                      {notifs.loading ? '불러오는 중...' : '새로고침'}
                     </button>
                   </div>
 
-                  {notifications.length === 0 ? (
+                  {notifs.notifications.length === 0 ? (
                     <p style={{ fontSize: '0.85rem', color: '#64748b', textAlign: 'center', padding: '20px 0' }}>발송된 알림 내역이 없습니다.</p>
                   ) : (
                     <div style={{ overflowX: 'auto' }}>
@@ -1274,7 +1492,7 @@ export default function AdminBeautyBookingsContent() {
                           </tr>
                         </thead>
                         <tbody>
-                          {notifications.map((notif) => (
+                          {notifs.notifications.map((notif) => (
                             <tr key={notif.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                               <td style={{ padding: '10px 4px' }}>
                                 <div style={{ fontWeight: 600 }}>{formatDateTimeLabel(notif.created_at)}</div>
@@ -1283,12 +1501,12 @@ export default function AdminBeautyBookingsContent() {
                               <td style={{ padding: '10px 4px' }}>
                                 <div style={{ fontWeight: 500 }}>{notif.title}</div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                  <span style={{ 
-                                    fontSize: '0.7rem', 
-                                    padding: '1px 6px', 
+                                  <span style={{
+                                    fontSize: '0.7rem',
+                                    padding: '1px 6px',
                                     borderRadius: 4,
                                     background: notif.dispatch_status === 'sent' ? '#dcfce7' : notif.dispatch_status === 'failed' ? '#fee2e2' : '#f1f5f9',
-                                    color: notif.dispatch_status === 'sent' ? '#166534' : notif.dispatch_status === 'failed' ? '#991b1b' : '#475569'
+                                    color: notif.dispatch_status === 'sent' ? '#166534' : notif.dispatch_status === 'failed' ? '#991b1b' : '#475569',
                                   }}>
                                     {notif.dispatch_status === 'sent' ? '발송 완료' : notif.dispatch_status === 'failed' ? '실패' : '대기 중'}
                                   </span>
@@ -1306,8 +1524,8 @@ export default function AdminBeautyBookingsContent() {
                                 <button
                                   onClick={() => handleResendNotification(notif.id)}
                                   disabled={
-                                    isResending === notif.id || 
-                                    notif.resend_count >= 3 || 
+                                    notifs.resendingId === notif.id ||
+                                    notif.resend_count >= 3 ||
                                     !!(notif.last_resent_at && (Date.now() - new Date(notif.last_resent_at).getTime() < 5 * 60 * 1000))
                                   }
                                   style={{
@@ -1318,11 +1536,11 @@ export default function AdminBeautyBookingsContent() {
                                     borderRadius: 6,
                                     fontSize: '0.75rem',
                                     fontWeight: 700,
-                                    cursor: (notif.resend_count >= 3 || !!(notif.last_resent_at && (Date.now() - new Date(notif.last_resent_at).getTime() < 5 * 60 * 1000))) ? 'not-allowed' : 'pointer'
+                                    cursor: (notif.resend_count >= 3 || !!(notif.last_resent_at && (Date.now() - new Date(notif.last_resent_at).getTime() < 5 * 60 * 1000))) ? 'not-allowed' : 'pointer',
                                   }}
                                 >
-                                  {isResending === notif.id ? '...' : 
-                                   notif.resend_count >= 3 ? '한도 초과' : 
+                                  {notifs.resendingId === notif.id ? '...' :
+                                   notif.resend_count >= 3 ? '한도 초과' :
                                    (notif.last_resent_at && (Date.now() - new Date(notif.last_resent_at).getTime() < 5 * 60 * 1000)) ? '대기 중' : '재전송'}
                                 </button>
                               </td>
@@ -1340,8 +1558,8 @@ export default function AdminBeautyBookingsContent() {
                     <p className={styles.sectionText}>접수 후에는 예약 확정, 시술 완료, 취소 상태로만 변경할 수 있습니다.</p>
                   </div>
 
-                  {statusUpdateError ? <p className={styles.actionError}>{statusUpdateError}</p> : null}
-                  {statusUpdateSuccess ? <p className={styles.actionSuccess}>{statusUpdateSuccess}</p> : null}
+                  {statusAction.error ? <p className={styles.actionError}>{statusAction.error}</p> : null}
+                  {statusAction.success ? <p className={styles.actionSuccess}>{statusAction.success}</p> : null}
 
                   {allowedTransitions.length === 0 ? (
                     <div className={styles.panelNote}>현재 상태에서는 추가로 변경할 수 있는 단계가 없습니다.</div>
@@ -1353,9 +1571,9 @@ export default function AdminBeautyBookingsContent() {
                           type="button"
                           className={`${styles.actionButton} ${nextStatus === 'canceled' ? styles.actionDanger : styles.actionPrimary}`}
                           onClick={() => void handleStatusUpdate(nextStatus)}
-                          disabled={pendingStatus !== null}
+                          disabled={statusAction.pendingStatus !== null}
                         >
-                          {pendingStatus === nextStatus ? '변경 중...' : getStatusActionLabel(nextStatus)}
+                          {statusAction.pendingStatus === nextStatus ? '변경 중...' : getStatusActionLabel(nextStatus)}
                         </button>
                       ))}
                     </div>
@@ -1365,8 +1583,7 @@ export default function AdminBeautyBookingsContent() {
             )}
           </section>
         </div>
-        
-        {/* 모바일 바텀시트 백드롭 */}
+
         {isSheetOpen && (
           <div
             className={styles.backdrop}
@@ -1375,20 +1592,20 @@ export default function AdminBeautyBookingsContent() {
           />
         )}
 
-        {/* 하단 네비게이션 바와의 겹침 방지를 위한 대형 물리적 여백 - 절대 수축 불가 */}
         <div style={{ height: '200px', minHeight: '200px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
       </div>
-      {activeModalImage && (
-        <div className={styles.modalOverlay} onClick={() => setActiveModalImage(null)}>
+
+      {imageModal.activeImage && (
+        <div className={styles.modalOverlay} onClick={() => dispatchImageModal({ type: 'CLOSE' })}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setActiveModalImage(null)} aria-label="닫기">✕</button>
+            <button className={styles.modalClose} onClick={() => dispatchImageModal({ type: 'CLOSE' })} aria-label="닫기">✕</button>
             <div className={styles.modalHeader}>
-              <h3 className={styles.modalTitle}>{activeModalImage.title}</h3>
+              <h3 className={styles.modalTitle}>{imageModal.activeImage.title}</h3>
             </div>
             <div className={styles.modalImageContainer}>
-              <Image 
-                src={activeModalImage.url} 
-                alt={activeModalImage.title} 
+              <Image
+                src={imageModal.activeImage.url}
+                alt={imageModal.activeImage.title}
                 className={styles.modalImage}
                 width={800}
                 height={600}
