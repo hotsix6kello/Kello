@@ -6,11 +6,10 @@ import type { TFunction } from 'i18next';
 import Image from 'next/image';
 import styles from '@/app/home.module.css';
 import IntegratedBookingMenu from '../IntegratedBookingMenu';
-import { 
-  BEAUTY_STORE_ITEMS, 
-  BEAUTY_REGIONS, 
-  BeautyStore, 
-  BeautyRegionId, 
+import {
+  BEAUTY_REGIONS,
+  BeautyStore,
+  BeautyRegionId,
   BeautyCategoryId,
   PRIMARY_SERVICES_BY_CATEGORY
 } from './constants';
@@ -77,11 +76,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
       imageUrl: biz.imageUrl || biz.image_url || (biz.photos && biz.photos[0] && `https://places.googleapis.com/v1/${biz.photos[0].name}/media?maxWidthPx=400&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`)
     }));
 
-    // 중복 제거 (이미 ID가 있는 경우)
-    const storeIds = new Set(dynamicStores.map(s => s.id));
-    const uniqueMockStores = BEAUTY_STORE_ITEMS.filter(s => !storeIds.has(s.id));
-
-    return [...dynamicStores, ...uniqueMockStores];
+    return dynamicStores;
   }, [sharedBusinesses, initialCategory]);
 
   const regions = BEAUTY_REGIONS(t, tBeauty);
@@ -118,13 +113,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         setSelectedStoreId(targetStore.id);
         setSelectedStoreName(targetStore.name);
         
-        // 매장 선택 시 해당 카테고리의 첫 번째 서비스를 자동으로 선택
         const services = PRIMARY_SERVICES_BY_CATEGORY[targetStore.category] || [];
-        if (services.length > 0) {
-          setSelectedServiceId(services[0].id);
-        } else {
-          setSelectedServiceId('default');
-        }
+        setSelectedServiceId(services.length > 0 ? services[0].id : 'default');
         
         // 바로 2단계(일정 선택)로 이동
         setCurrentStep(2);
@@ -142,12 +132,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     setSelectedStoreId(store.id);
     setSelectedStoreName(store.name);
     
-    // 매장 선택 시 해당 카테고리의 첫 번째 서비스를 자동으로 선택
     const services = PRIMARY_SERVICES_BY_CATEGORY[store.category] || [];
-    if (services.length > 0) {
-      setSelectedServiceId(services[0].id);
-    }
-    
+    setSelectedServiceId(services.length > 0 ? services[0].id : 'default');
     setCurrentStep(2);
   };
 
