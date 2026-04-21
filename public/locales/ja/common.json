@@ -2128,5 +2128,13 @@
     "success": "アカウントが作成されました！メールを確認してログインしてください。",
     "login_prompt": "すでにアカウントをお持ちですか？",
     "login_link": "ログイン"
+  },
+  "webview_banner": {
+    "title": "アプリ内ブラウザではGoogleログインをご利用いただけません",
+    "desc_android": "Chromeで開こうとしました。開かない場合はリンクをコピーしてChromeに貼り付けてください。",
+    "desc_ios": "SafariまたはChromeを開き、リンクを貼り付けてログインしてください。",
+    "copy_btn": "リンクをコピー",
+    "copy_btn_copied": "コピーしました",
+    "close": "閉じる"
   }
 }

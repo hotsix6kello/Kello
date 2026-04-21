@@ -1767,5 +1767,13 @@
     "success": "Tài khoản đã được tạo! Vui lòng kiểm tra email để xác minh và đăng nhập.",
     "login_prompt": "Đã có tài khoản?",
     "login_link": "Đăng nhập"
+  },
+  "webview_banner": {
+    "title": "Trình duyệt trong ứng dụng không hỗ trợ đăng nhập Google",
+    "desc_android": "Đã thử mở Chrome. Nếu không có gì xảy ra, hãy sao chép liên kết và dán vào Chrome.",
+    "desc_ios": "Vui lòng mở Safari hoặc Chrome và dán liên kết để tiếp tục.",
+    "copy_btn": "Sao chép liên kết",
+    "copy_btn_copied": "Đã sao chép",
+    "close": "Đóng"
   }
 }

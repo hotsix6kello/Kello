@@ -1540,5 +1540,13 @@
     "time": {
       "just_now": "방금 전"
     }
+  },
+  "webview_banner": {
+    "title": "카카오톡·인앱브라우저에서는 Google 로그인을 사용할 수 없어요",
+    "desc_android": "Chrome으로 열기를 시도했어요. 팝업이 뜨지 않으면 링크를 복사해 Chrome에 붙여넣어 주세요.",
+    "desc_ios": "Safari 또는 Chrome을 열고 아래 링크를 붙여넣어 로그인해 주세요.",
+    "copy_btn": "링크 복사",
+    "copy_btn_copied": "링크 복사됨",
+    "close": "닫기"
   }
 }
