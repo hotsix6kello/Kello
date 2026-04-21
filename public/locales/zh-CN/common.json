@@ -862,6 +862,8 @@
     "report": {
       "report_action": "举报",
       "success": "已收到您的举报。",
+      "modal_title": "选择举报原因",
+      "cancel": "取消",
       "reasons": {
         "ad_spam": "广告骚扰",
         "offensive": "不当言论",
