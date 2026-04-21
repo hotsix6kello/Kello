@@ -1451,7 +1451,7 @@
       },
       "signal_times": {
         "this_week": "هذا الأسبوع",
-        "this_weekend": "هذا الأسبوع",
+        "this_weekend": "نهاية هذا الأسبوع",
         "next_week": "الأسبوع القادم",
         "schedule_coordination": "تنسيق الموعد"
       },

@@ -703,12 +703,12 @@
       },
       "image": {
         "guides": {
-          "beauty_review": "Thêm ảnh (tối đa 4)",
-          "food_review": "Thêm ảnh (tối đa 4)",
-          "travel_review": "Thêm ảnh (tối đa 4)",
-          "meetup": "Thêm ảnh nhóm (tối đa 4)",
-          "meetup_recruitment": "Thêm ảnh (tối đa 4)",
-          "help": "Thêm ảnh (tối đa 4)"
+          "beauty_review": "Thêm ảnh trước/sau hoặc ảnh bên trong tiệm (tối đa 4 ảnh)",
+          "food_review": "Thêm ảnh món ăn hoặc ảnh bên trong quán (tối đa 4 ảnh)",
+          "travel_review": "Thêm ảnh thể hiện không khí nơi đó (tối đa 4 ảnh)",
+          "meetup": "Thêm ảnh địa điểm hoặc hoạt động (tối đa 4 ảnh)",
+          "meetup_recruitment": "Thêm ảnh điểm đến hoặc ảnh tham khảo (tối đa 4 ảnh)",
+          "help": "Thêm ảnh giúp mô tả vấn đề nếu có (tối đa 4 ảnh)"
         },
         "saved_name": "Ảnh đã lưu {{index}}",
         "file_only_alert": "Chỉ cho phép ảnh.",
@@ -779,8 +779,8 @@
       "body_title": "Nội dung bài viết",
       "like": "Thích",
       "dislike": "Không thích",
-      "like_alert": "Liked!",
-      "dislike_alert": "Disliked.",
+      "like_alert": "Bạn đã thích bài viết này!",
+      "dislike_alert": "Bạn đã không thích bài viết này.",
       "comments_title": "Bình luận",
       "comment_input": {
         "default": "Nhập bình luận...",
@@ -865,7 +865,7 @@
         "schedule_title": "Chọn thời gian"
       },
       "status": {
-        "REVIEWS": "Reviews Done",
+        "REVIEWS": "Đã có đánh giá",
         "REACTING": "Đang gom phản hồi",
         "SURVEYING": "Đang xác nhận",
         "DRAFTING": "Đang chuẩn bị",
@@ -873,9 +873,9 @@
       },
       "tags": {
         "solo_friendly": "Thích hợp đi một mình",
-        "friends_friendly": "With Friends",
-        "photo_spot": "Photo Spots",
-        "waiting": "Wait Exists",
+        "friends_friendly": "Thích hợp đi cùng bạn bè",
+        "photo_spot": "Điểm chụp ảnh đẹp",
+        "waiting": "Cần chờ đợi",
         "foreigner_friendly": "Thân thiện với người nước ngoài"
       },
       "empty_comments": "Chưa có bình luận. Hãy là người đầu tiên!",
@@ -891,6 +891,8 @@
     "report": {
       "report_action": "Báo cáo",
       "success": "Đã báo cáo.",
+      "modal_title": "Chọn lý do báo cáo",
+      "cancel": "Hủy",
       "reasons": {
         "ad_spam": "Quảng cáo/Rác",
         "offensive": "Nội dung không phù hợp",
