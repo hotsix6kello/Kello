@@ -318,8 +318,7 @@ export default function CommunityPage() {
     const [filter, setFilter] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [savedIds, setSavedIds] = useState<number[]>([]);
-    const [reactedIds, setReactedIds] = useState<number[]>([]);
-    const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
+    const [loggedInUserName, setLoggedInUserName] = useState("");
     const [isDragging, setIsDragging] = useState(false);
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
 
@@ -444,14 +443,17 @@ export default function CommunityPage() {
             if (storedUser) {
                 const parsed = JSON.parse(storedUser);
                 if (parsed.name) setLoggedInUserName(parsed.name);
+                else setLoggedInUserName(t('my_page.settings.account.default_name'));
+            } else {
+                setLoggedInUserName(t('my_page.settings.account.default_name'));
             }
-        } catch {}
+        } catch {
+            setLoggedInUserName(t('my_page.settings.account.default_name'));
+        }
         const saved = JSON.parse(localStorage.getItem('kello_saved_posts') || '[]');
-        const reacted = JSON.parse(localStorage.getItem('kello_reacted_posts') || '[]');
         setSavedIds(saved);
-        setReactedIds(reacted);
         fetchPosts();
-    }, [fetchPosts]);
+    }, [fetchPosts, t]);
 
     const openComposer = (category: CommunityCategory | '' = '') => {
         draftDispatch({ type: 'OPEN', payload: category || undefined });
