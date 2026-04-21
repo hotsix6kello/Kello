@@ -2166,5 +2166,60 @@
     "placeholder": "Enter referral code",
     "submit": "Submit",
     "skip": "Skip for now"
+  },
+  "privacy_policy": {
+    "title": "Privacy Policy",
+    "effective_date": "Effective Date: April 21, 2024",
+    "table": {
+      "category": "Category",
+      "items": "Items Collected",
+      "purpose": "Purpose",
+      "retention": "Retention Period"
+    },
+    "collection": {
+      "title": "1. Collection and Use of Personal Information",
+      "required": "Required",
+      "required_items": "Name, Email, Booking Info (Date, Time, Shop, Service), Social Login IDs",
+      "required_purpose": "Sign-up, Authentication, Service Delivery (Booking), Customer Consultation",
+      "auto": "Automatic",
+      "auto_items": "IP Address, Cookies, Device Info, Usage History",
+      "auto_purpose": "Service improvement and fraud prevention"
+    },
+    "retention": {
+      "title": "2. Retention and Use Period",
+      "content": "Personal information is retained until membership withdrawal. However, it may be kept for a period required by law.",
+      "legal_basis": "Compliance with relevant laws (e.g., Electronic Commerce Act)"
+    },
+    "third_party": {
+      "title": "3. Third-party Provision",
+      "content": "MyKello provides personal information to the following partners to provide the service.",
+      "providers": "Supabase (DB), Google (Auth), X (Auth)"
+    },
+    "overseas": {
+      "title": "4. Overseas Transfer of Personal Information",
+      "recipient": "Recipient",
+      "country": "Country",
+      "purpose": "Purpose",
+      "items": "Items",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "USA",
+      "storage_auth": "Data storage and user authentication (OAuth 2.0)",
+      "log_items": "Email, Profile Info, Service Logs"
+    },
+    "destruction": {
+      "title": "5. Destruction Procedure and Method",
+      "content": "Personal information is destroyed immediately after the purpose is achieved. Electronic files are deleted using technical methods that make recovery impossible."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "I agree to all terms.",
+    "privacy_required": "[Required] Consent to Collection and Use of Personal Information",
+    "privacy_optional": "[Optional] Consent to Receive Marketing Information",
+    "view_detail": "Details",
+    "terms_required": "[Required] Consent to Terms of Service"
+  },
+  "terms_of_service": {
+    "title": "Terms of Service"
   }
 }

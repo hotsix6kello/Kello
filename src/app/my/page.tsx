@@ -918,6 +918,34 @@ function MyPageContent() {
                 </section>
             )}
 
+            {/* Customer Service / Info Links */}
+            <section className={styles.section} style={{ marginTop: 24, padding: "0 16px", display: 'flex', flexDirection: 'row', gap: 24, justifyContent: 'center' }}>
+                <div 
+                    onClick={() => router.push('/privacy')}
+                    style={{ 
+                        fontSize: '0.8125rem', 
+                        color: 'var(--soft-ink)', 
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        opacity: 0.7
+                    }}
+                >
+                    {t('privacy_policy.title')}
+                </div>
+                <div 
+                    onClick={() => router.push('/terms')}
+                    style={{ 
+                        fontSize: '0.8125rem', 
+                        color: 'var(--soft-ink)', 
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        opacity: 0.7
+                    }}
+                >
+                    {t('terms_of_service.title')}
+                </div>
+            </section>
+
             {/* Bottom Spacer */}
             <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
         </div>

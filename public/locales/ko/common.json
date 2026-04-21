@@ -572,5 +572,60 @@
       "reason_referred": "추천인 입력 쿠폰",
       "reason_referrer": "친구 추천 쿠폰"
     }
+  },
+  "privacy_policy": {
+    "title": "개인정보 처리방침",
+    "effective_date": "시행일: 2024년 4월 21일",
+    "table": {
+      "category": "구분",
+      "items": "수집 항목",
+      "purpose": "수집 목적",
+      "retention": "보유 및 이용 기간"
+    },
+    "collection": {
+      "title": "1. 개인정보 수집 및 이용",
+      "required": "필수 수집",
+      "required_items": "이름, 이메일, 예약 정보(날짜, 시간, 매장, 서비스), 소셜 로그인 식별값",
+      "required_purpose": "서비스 가입 및 본인 확인, 서비스 제공(예약), 고객 상담",
+      "auto": "자동 수집",
+      "auto_items": "IP 주소, 쿠키, 기기 정보, 서비스 이용 기록",
+      "auto_purpose": "서비스 품질 개선 및 부정 이용 방지"
+    },
+    "retention": {
+      "title": "2. 개인정보의 보유 및 이용기간",
+      "content": "이용자의 개인정보는 원칙적으로 회원 탈퇴 시까지 보유 및 이용합니다. 단, 다음의 경우 명시한 기간 동안 보존합니다.",
+      "legal_basis": "관련 법령 (전자상거래법 등)에 따른 보존 의무 준수"
+    },
+    "third_party": {
+      "title": "3. 개인정보의 제3자 제공",
+      "content": "MyKello는 서비스 제공을 위해 아래와 같은 협력사에 개인정보를 제공합니다.",
+      "providers": "Supabase (데이터베이스), Google (인증), X (인증)"
+    },
+    "overseas": {
+      "title": "4. 개인정보의 국외 이전",
+      "recipient": "수탁업체",
+      "country": "이전 국가",
+      "purpose": "이전 목적",
+      "items": "이전 항목",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "미국 (USA)",
+      "storage_auth": "데이터 보관 및 사용자 인증(OAuth 2.0)",
+      "log_items": "이메일, 프로필 정보, 서비스 이용 로그"
+    },
+    "destruction": {
+      "title": "5. 개인정보 파기 절차 및 방법",
+      "content": "개인정보는 목적 달성 후 지지 없이 파기하며, 전자적 파일은 복구가 불가능한 기술적 방법으로 삭제합니다."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "약관에 모두 동의합니다.",
+    "privacy_required": "[필수] 개인정보 수집 및 이용 동의",
+    "privacy_optional": "[선택] 마케팅 정보 수신 동의",
+    "view_detail": "보기",
+    "terms_required": "[필수] 서비스 이용약관 동의"
+  },
+  "terms_of_service": {
+    "title": "서비스 이용약관"
   }
 }
