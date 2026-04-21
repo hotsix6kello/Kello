@@ -253,7 +253,10 @@
     "greeting_afternoon": "안녕하세요",
     "greeting_evening": "안녕하세요",
     "search_results": "검색 결과",
-    "search_results_for": "'{{query}}'에 대한 {{count}}개의 결과"
+    "search_results_for": "'{{query}}'에 대한 {{count}}개의 결과",
+    "errors": {
+      "processing_failed": "처리에 실패했습니다."
+    }
   },
   "home_beauty": {
     "hero": {
@@ -571,61 +574,1059 @@
       "reason_signup": "회원가입 쿠폰",
       "reason_referred": "추천인 입력 쿠폰",
       "reason_referrer": "친구 추천 쿠폰"
+    },
+    "dashboard": {
+      "bookings_empty": "예정된 예약이 없습니다.",
+      "admin_title": "관리자 콘솔",
+      "admin_menu": {
+        "dashboard": "관리자 대시보드",
+        "dashboard_desc": "전체 현황 및 통계",
+        "bookings": "예약 원장",
+        "bookings_desc": "모든 사용자 예약 및 상태 관리",
+        "partners": "파트너 승인",
+        "partners_desc": "파트너 신청 검토 및 승인",
+        "users": "사용자 관리",
+        "users_desc": "회원 목록 및 권한 설정"
+      },
+      "partner": {
+        "none_title": "파트너로 참여하기",
+        "none_desc": "켈로의 공식 파트너가 되어 서비스를 등록하세요.",
+        "none_cta": "지금 신청하기",
+        "pending_title": "검토 중",
+        "pending_desc": "파트너 신청을 검토 중입니다.",
+        "approved_title": "파트너 승인됨",
+        "approved_desc": "파트너 콘솔에서 서비스를 관리할 수 있습니다.",
+        "rejected_title": "신청 거절 (수정 필요)",
+        "rejected_desc": "신청 정보를 다시 한번 확인해 주세요.",
+        "rejected_cta": "다시 신청하기"
+      }
+    },
+    "community": {
+      "empty_simple": "아직 작성한 커뮤니티 포스트가 없습니다."
+    },
+    "bookings": {
+      "title": "내 예약",
+      "pending_service": "서비스 정보 확인 중",
+      "matching_status": "적합한 매장을 찾는 중",
+      "matching_desc": "매장 매칭 대기 중",
+      "price_pending": "매장 확인 후 금액 안내",
+      "error_fetch": "예약을 불러오지 못했습니다.",
+      "browse_beauty_cta": "뷰티 예약 둘러보기"
+    },
+    "profile": {
+      "account_hint": "계정 및 설정",
+      "avatar_placeholder": "마이"
+    },
+    "settings": {
+      "short": "설정",
+      "account": {
+        "default_name": "고객",
+        "phone": {
+          "placeholder": "예) ${internationalPhoneExample}",
+          "helper_empty": "국가 코드 포함. 예) ${internationalPhoneExample}",
+          "helper_saved": "현재 저장된 국제 전화번호입니다.",
+          "helper_invalid": "올바른 형식으로 입력하세요. 예) ${internationalPhoneExample}"
+        }
+      },
+      "admin": {
+        "enabled": "활성"
+      }
+    },
+    "community_hub": {
+      "title": "내 커뮤니티",
+      "eyebrow": "내 활동",
+      "subtitle": "활동 내역을 한눈에 확인하세요.",
+      "browse": "커뮤니티 둘러보기",
+      "loading": "불러오는 중...",
+      "summary_hint": "지금까지의 커뮤니티 활동 요약",
+      "sync_error": "데이터를 불러오지 못했습니다.",
+      "no_comments": "댓글 없음",
+      "posts_desc": "작성한 포스트 목록",
+      "reviews_desc": "작성한 리뷰 목록",
+      "meetups_desc": "참여한 모임 목록",
+      "summary": {
+        "posts": "포스트",
+        "reviews": "리뷰",
+        "meetups": "모임"
+      },
+      "tabs": {
+        "posts": "포스트",
+        "reviews": "리뷰",
+        "meetups": "모임"
+      },
+      "type": {
+        "meetup": "모임",
+        "travel": "여행"
+      },
+      "review_prompts": {
+        "title": "리뷰를 남겨보세요",
+        "desc": "방문한 매장에 리뷰를 남겨보세요."
+      },
+      "empty": {
+        "posts": {
+          "title": "작성한 포스트 없음",
+          "desc": "아직 작성한 포스트가 없습니다."
+        },
+        "reviews": {
+          "title": "작성한 리뷰 없음",
+          "desc": "완료된 예약 매장에 리뷰를 남겨보세요.",
+          "no_completed": "완료된 예약이 없습니다.",
+          "cta": "예약 내역 보기"
+        },
+        "meetups": {
+          "title": "참여한 모임 없음",
+          "desc": "아직 참여한 모임이 없습니다."
+        }
+      }
+    },
+    "messages": {
+      "upload_success": "프로필 사진이 업데이트되었습니다.",
+      "upload_failed": "업로드에 실패했습니다. 다시 시도해 주세요."
+    },
+    "bookings_hub": {
+      "meta": {
+        "reference": "참고"
+      }
     }
+  },
+  "beauty_bookings": {
+    "page_title": "내 뷰티 예약",
+    "hero_eyebrow": "내 뷰티 예약",
+    "hero_title": "예약 요청부터 전달 메모까지 한 번에 확인하세요.",
+    "hero_text": "최근 예약이 먼저 표시되며, 진행 중인 예약과 완료된 예약을 빠르게 구분할 수 있습니다.",
+    "login_title": "로그인하여 예약 내역을 확인하세요.",
+    "login_text": "로그인하면 요청한 모든 뷰티 예약과 직원 전달 메모를 한눈에 확인할 수 있습니다.",
+    "login_action": "로그인하러 가기",
+    "back_to_my": "마이 페이지로 돌아가기",
+    "deeplink_toast": "선택한 예약을 열었습니다. ✨",
+    "tab_all": "전체",
+    "tab_active": "진행 중",
+    "tab_completed": "완료",
+    "tab_canceled": "취소됨",
+    "tab_aria": "예약 상태 필터",
+    "status_requested": "예약 요청됨",
+    "status_confirmed": "예약 확정",
+    "status_completed": "완료",
+    "status_canceled": "취소됨",
+    "status_failed": "확인 필요",
+    "status_change_requested": "변경 요청됨",
+    "status_desc_requested": "매장에서 일정을 확인 중입니다.",
+    "status_desc_confirmed": "예약 시간이 확정되었습니다.",
+    "status_desc_completed": "서비스 방문이 완료되었습니다.",
+    "status_desc_canceled": "예약이 취소되었습니다.",
+    "status_desc_failed": "이 요청에 대한 확인이 필요합니다.",
+    "status_desc_change_requested": "일정 또는 서비스 변경을 요청 중입니다.",
+    "status_guide_confirmed": "예약이 확정되었습니다. 방문 전 날짜와 시간을 꼭 확인하세요.",
+    "category_hair": "헤어",
+    "category_nail": "네일",
+    "category_esthetic": "에스테틱",
+    "category_waxing": "왁싱",
+    "category_makeup": "메이크업",
+    "category_lash": "속눈썹",
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский",
+    "intent_booking_confirm": "예약 확인",
+    "intent_service_request": "서비스 요청 전달",
+    "intent_allergy_notice": "민감 정보 전달",
+    "intent_style_consultation": "스타일 상담 지원",
+    "card_primary_service": "주요 서비스",
+    "card_estimated_price": "예상 금액",
+    "loading": "예약 내역을 불러오는 중...",
+    "empty": "아직 확인할 뷰티 예약이 없습니다. 예약 완료 후 여기에 표시됩니다.",
+    "select_prompt": "예약을 선택하여 상세 정보를 확인하세요.",
+    "detail_booking_id": "예약 ID",
+    "detail_category": "카테고리",
+    "detail_designer": "디자이너",
+    "detail_requested_at": "요청 일시",
+    "detail_status": "상태",
+    "detail_category_services": "카테고리 / 서비스",
+    "detail_requested_time": "희망 일정",
+    "detail_shop_status": "매장 진행 상황",
+    "detail_request_info": "요청 정보",
+    "detail_more_info": "상세 정보 보기",
+    "detail_designer_default": "매장 선택",
+    "timeline_title": "예약 진행 현황",
+    "change_request_title": "변경 요청 정보",
+    "change_request_hint": "운영자가 요청을 검토 중입니다. 잠시만 기다려 주세요.",
+    "change_request_time": "요청 시간",
+    "change_request_reason": "사유",
+    "change_request_reason_empty": "특정 사유 없음",
+    "change_request_time_empty": "확인 중",
+    "change_result_title": "최근 변경 결과",
+    "change_result_status": "상태",
+    "change_result_approved": "✅ 승인됨",
+    "change_result_rejected": "❌ 거절됨",
+    "change_result_review_time": "검토 시간",
+    "alt_offer_title": "새 일정 제안",
+    "alt_offer_desc": "요청하신 시간이 마감되었습니다. 매장에서 아래 일정을 제안했습니다. 확인해 주세요.",
+    "alt_offer_admin_label": "매장 안내",
+    "alt_offer_accept": "수락 및 변경",
+    "alt_offer_reject": "제안 거절",
+    "alt_offer_processing": "처리 중...",
+    "alt_offer_response_title": "일정 제안 결과",
+    "alt_offer_accepted_result": "이미 수락된 제안입니다.",
+    "alt_offer_rejected_result": "이미 거절된 제안입니다.",
+    "alt_response_accepted": "제안을 수락하여 일정이 변경되었습니다.",
+    "alt_response_rejected": "제안을 거절했습니다.",
+    "alt_slot_select_error": "제안된 시간 중 하나를 선택해 주세요.",
+    "service_info_title": "서비스 정보",
+    "service_primary": "주요 서비스",
+    "service_addons": "추가 옵션",
+    "service_region": "예약 지역",
+    "service_addons_empty": "추가 선택 없음",
+    "price_title": "금액 요약",
+    "price_base": "기본 금액",
+    "price_addon": "추가 옵션 금액",
+    "price_surcharge": "디자이너 추가 요금",
+    "price_total": "예상 총액",
+    "price_pending_notice": "매장 확인 후 안내",
+    "detail_manage_booking": "예약 관리 (변경/취소)",
+    "request_title": "내 요청",
+    "request_memo": "요청 메모",
+    "request_memo_empty": "특별한 요청사항 없음.",
+    "delivery_title": "전달 정보",
+    "delivery_lang": "전달 언어",
+    "delivery_intent": "전달 목적",
+    "message_korean": "매장용 한국어 메모",
+    "message_localized": "현지어 메모",
+    "manage_title": "예약 관리",
+    "manage_desc": "요청 또는 확정 상태에서 취소할 수 있습니다. 취소 후에는 되돌릴 수 없습니다.",
+    "manage_disabled": "현재 상태에서는 관리할 수 없습니다.",
+    "action_change": "일정/정보 변경",
+    "action_cancel": "예약 취소",
+    "action_view_on_map": "지도에서 찾기",
+    "cancel_panel_title": "예약 취소",
+    "cancel_reason_schedule": "일정 변경",
+    "cancel_reason_other_shop": "다른 매장 이용",
+    "cancel_reason_mistake": "실수로 예약",
+    "cancel_reason_etc": "기타",
+    "cancel_details_placeholder": "추가 취소 사유가 있으면 입력해 주세요.",
+    "cancel_confirm": "취소 확인",
+    "cancel_processing": "취소 중...",
+    "cancel_close": "닫기",
+    "cancel_success": "예약이 취소되었습니다.",
+    "cancel_info_title": "취소 정보",
+    "cancel_time": "시간",
+    "cancel_time_empty": "확인 중",
+    "cancel_by": "취소자",
+    "cancel_by_customer": "고객",
+    "cancel_by_admin": "매장",
+    "cancel_by_unknown": "확인 중",
+    "cancel_reason_label": "사유",
+    "cancel_reason_empty": "특정 사유 없음",
+    "change_panel_title": "변경 요청",
+    "change_placeholder": "예) 3월 20일 오후 2시로 변경 원함 / 서비스 메뉴 변경 원함",
+    "change_submit": "변경 요청 전송",
+    "change_processing": "요청 중...",
+    "change_close": "닫기",
+    "change_success": "변경 요청이 전송되었습니다.",
+    "error_login": "로그인 상태를 다시 확인해 주세요.",
+    "error_load_401": "예약 확인을 위해 로그인해 주세요.",
+    "error_load": "예약을 불러올 수 없습니다.",
+    "error_cancel_400": "현재 이 예약은 취소할 수 없습니다.",
+    "error_cancel_403": "본인 예약만 취소할 수 있습니다.",
+    "error_cancel": "취소에 실패했습니다. 다시 시도해 주세요.",
+    "error_cancel_reason": "사유를 선택하거나 입력해 주세요.",
+    "error_change_reason": "변경하고 싶은 내용을 입력해 주세요.",
+    "error_change": "변경 요청에 실패했습니다.",
+    "error_alt": "처리에 실패했습니다.",
+    "open_interpreter": "통역기 열기",
+    "interpreter_visit_context": "{{storeName}} 방문 시 통역기 사용 중.",
+    "interpreter_visit_service_context": "{{storeName}}에서 {{serviceName}} 서비스를 위한 통역기 사용 중."
+  },
+  "settings_page": {
+    "hero": {
+      "avatar": {
+        "placeholder": "마이",
+        "error": "아바타 변경에 실패했습니다.",
+        "change": "이미지 변경",
+        "register": "이미지 등록"
+      },
+      "default_title": "내 설정",
+      "stats": "{{postCount}}개 포스트 · {{reviewCount}}개 리뷰 · {{bookingCount}}개 예약",
+      "login_promo": {
+        "title": "로그인 후 더 많은 설정을 확인하세요.",
+        "desc": "개인 탭은 볼 수 있지만, 연동 데이터와 알림은 로그인이 필요합니다."
+      },
+      "tabs_aria": "설정 탭"
+    },
+    "tabs": {
+      "personal": {
+        "label": "개인",
+        "desc": "이메일, 연락처, 로그인, 알림 설정을 확인하세요."
+      },
+      "partner": {
+        "label": "파트너",
+        "desc": "파트너 상태 및 매장 관리 정보를 확인하세요."
+      },
+      "admin": {
+        "label": "관리자",
+        "desc": "관리자 권한을 빠르게 확인하세요."
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "닉네임",
+        "helper_set": "커뮤니티와 프로필에 표시되는 이름입니다.",
+        "helper_unset": "아직 닉네임이 설정되지 않았습니다.",
+        "badge_set": "설정됨",
+        "badge_unset": "미설정",
+        "placeholder": "새 닉네임을 입력하세요."
+      },
+      "email": {
+        "title": "이메일",
+        "value_none": "연결되지 않음",
+        "helper_verified": "현재 인증된 이메일 주소입니다.",
+        "helper_unverified": "이메일 인증이 필요합니다.",
+        "helper_none": "연결된 이메일이 없습니다.",
+        "badge_verified": "인증됨",
+        "badge_unverified": "미인증",
+        "badge_none": "미연결"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "입력되지 않음",
+        "helper_set": "현재 저장된 SNS입니다.",
+        "helper_unset": "저장된 SNS가 없습니다.",
+        "badge_set": "저장됨",
+        "badge_unset": "미입력",
+        "placeholder": "SNS ID를 입력하세요."
+      },
+      "phone": {
+        "title": "전화번호",
+        "value_none": "입력되지 않음",
+        "helper_set": "현재 저장된 전화번호입니다.",
+        "helper_unset": "저장된 전화번호가 없습니다.",
+        "badge_set": "저장됨",
+        "badge_unset": "미입력",
+        "country_label": "국가 코드",
+        "number_label": "전화번호",
+        "helper_preview": "{{value}}로 저장됩니다.",
+        "helper_empty_fallback": "국가를 선택하고 번호를 입력하면 E.164 형식으로 저장됩니다.",
+        "helper_saved_fallback": "저장된 번호는 E.164 형식으로 유지됩니다.",
+        "helper_invalid_fallback": "국가를 선택하고 숫자만 입력하세요."
+      },
+      "login": {
+        "title": "로그인 방법",
+        "helper_in": "현재 사용 중인 로그인 방법입니다.",
+        "helper_out": "로그인 후 확인하세요.",
+        "badge_in": "사용 중",
+        "badge_out": "대기 중",
+        "provider_email": "이메일",
+        "value_out": "로그인 필요"
+      },
+      "notifications": {
+        "title": "알림",
+        "value_out": "로그인 후 확인",
+        "helper_out": "현재 알림 상태는 로그인 후 확인할 수 있습니다.",
+        "badge_out": "대기 중",
+        "value_error": "설정 확인 필요",
+        "helper_error": "알림 상태를 불러오지 못했습니다.",
+        "badge_error": "확인 필요",
+        "channel_app": "앱",
+        "channel_email": "이메일",
+        "value_all_off": "모든 알림 꺼짐",
+        "helper_summary": "예약 관련 알림 {{count}}/3개 수신 중.",
+        "badge_off": "끔",
+        "value_both_on": "앱 · 이메일 켜짐",
+        "value_single_on": "{{channel}} 켜짐",
+        "badge_all_on": "활성",
+        "badge_partial_on": "일부 켜짐"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "파트너 상태",
+        "approved": {
+          "value": "승인됨",
+          "helper": "파트너 계정으로 인증되었습니다.",
+          "badge": "승인됨"
+        },
+        "pending": {
+          "value": "검토 중",
+          "helper": "제출된 파트너 정보를 검토 중입니다.",
+          "badge": "대기 중"
+        },
+        "rejected": {
+          "value": "수정 후 재제출",
+          "helper": "정보를 보완하여 다시 제출할 수 있습니다.",
+          "badge": "수정 필요",
+          "cta": "재제출"
+        },
+        "none": {
+          "value": "파트너 정보 없음",
+          "helper": "등록된 파트너 상태가 없습니다.",
+          "badge": "없음"
+        }
+      },
+      "store": {
+        "title": "매장 정보",
+        "value_none": "매장 정보 없음",
+        "helper_none": "저장된 매장 요약이 없습니다.",
+        "badge_set": "등록됨",
+        "badge_unset": "미등록",
+        "visibility_on": "공개",
+        "visibility_off": "비공개"
+      },
+      "hours": {
+        "title": "운영 시간",
+        "value_none": "등록된 시간 없음",
+        "helper_none": "연결 후 여기에서 시간을 확인할 수 있습니다.",
+        "badge_unset": "미등록"
+      },
+      "bookings": {
+        "title": "예약 요청",
+        "value_info": "별도 관리 메뉴 없음",
+        "value_pending": "승인 후 확인",
+        "helper_approved": "요약된 예약 요청 구조입니다.",
+        "helper_pending": "파트너 승인 후 옵션이 표시됩니다.",
+        "badge_info": "정보",
+        "badge_pending": "대기 중"
+      },
+      "pricing": {
+        "title": "가격 메뉴",
+        "value_none": "별도 관리 메뉴 없음",
+        "helper_none": "아직 직접 가격 관리 화면이 없습니다.",
+        "badge_info": "정보"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "파트너 승인",
+        "value": "신청서 검토",
+        "helper": "파트너 신청을 승인하거나 거절할 수 있습니다."
+      },
+      "issues": {
+        "title": "예약 이슈",
+        "value": "예약 및 변경 내역 검토",
+        "helper": "예약 상태 및 변경 요청을 확인하세요."
+      },
+      "users": {
+        "title": "사용자 관리",
+        "value": "계정 권한 확인",
+        "helper": "사용자 및 관리자 권한을 관리하세요."
+      },
+      "notices": {
+        "title": "공지 관리",
+        "value": "연결된 화면 없음",
+        "helper": "코드베이스에 공지 관리 화면이 아직 연결되지 않았습니다."
+      },
+      "badge_open": "열기 가능",
+      "badge_unlinked": "연결 안됨"
+    },
+    "messages": {
+      "action_contact": "문의",
+      "action_open": "열기",
+      "unauthorized": "로그인 세션을 확인해 주세요.",
+      "profile_not_found": "프로필을 찾을 수 없습니다. 다시 로그인해 주세요.",
+      "schema_missing_sns": "DB에 SNS 컬럼이 아직 적용되지 않았습니다.",
+      "schema_missing_phone": "DB에 전화번호 컬럼이 아직 적용되지 않았습니다.",
+      "save_error": "저장에 실패했습니다.",
+      "sns_saved": "SNS ID가 저장되었습니다.",
+      "phone_saved": "전화번호가 저장되었습니다.",
+      "nickname_cooldown": "닉네임은 90일에 한 번만 변경할 수 있습니다. (남은 기간: {{days}}일)",
+      "nickname_empty": "닉네임을 입력해 주세요.",
+      "nickname_saved": "닉네임이 성공적으로 변경되었습니다.",
+      "nickname_error": "닉네임 저장에 실패했습니다. 다시 시도해 주세요.",
+      "nickname_cooldown_long": "{{limit}}일마다 한 번 변경할 수 있습니다. (다음 변경 가능일: {{date}})",
+      "save": "저장",
+      "saving": "저장 중...",
+      "uploading": "업로드 중..."
+    },
+    "badges": {
+      "community": {
+        "leader": "커뮤니티 리더",
+        "trend": "트렌드 피커",
+        "mate": "뷰티 메이트",
+        "sprout": "새싹"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "일반",
+        "new": "신규"
+      },
+      "nickname_unset": "미설정"
+    },
+    "tab_aria_label": "설정 탭"
+  },
+  "notifications": {
+    "title": "알림 설정",
+    "hero_title": "예약 알림을 맞춤 설정하세요. ✨",
+    "desc": "중요한 예약 변경 또는 알림을 받을 채널을 설정하세요.",
+    "hero_desc": "켈로의 프리미엄 컨시어지 서비스 업데이트를 받는 방법을 설정하세요.",
+    "groups": {
+      "booking": "예약 및 활동",
+      "booking_desc": "예약 진행 및 일정 알림",
+      "community": "커뮤니티 및 혜택",
+      "community_desc": "커뮤니티 댓글, 좋아요, 할인 혜택"
+    },
+    "items": {
+      "status_updates": {
+        "title": "예약 상태 업데이트",
+        "desc": "예약 확정, 매장 매칭, 일정 변경 알림"
+      },
+      "reminders": {
+        "title": "사전 알림",
+        "desc": "방문 전날 및 1시간 전 알림"
+      },
+      "community_replies": {
+        "title": "커뮤니티 답글",
+        "desc": "내 포스트의 댓글 및 추천 알림"
+      },
+      "marketing": {
+        "title": "이벤트 및 할인",
+        "desc": "새 이벤트와 할인 쿠폰 관련 유용한 알림"
+      }
+    },
+    "channel": {
+      "title": "채널 설정",
+      "email_title": "이메일로도 예약 업데이트 받기",
+      "email_desc": "예약 세부 정보 및 주요 진행 상황을 이메일로 안전하게 전달합니다.",
+      "app_push_title": "실시간 푸시를 위해 앱 설치하기",
+      "app_push_desc": "현재 임시 기기 알림을 사용 중입니다. 더 안정적인 경험을 위해 앱을 설치하세요.",
+      "device_enabled_title": "기기 알림 활성화됨",
+      "device_enabled_desc": "이 브라우저 또는 기기에서 중요한 알림을 받게 됩니다.",
+      "app_title": "앱에서 예약 알림 받기",
+      "app_desc": "중요한 상태 변경은 항상 앱의 알림 보관함에 기록됩니다."
+    },
+    "actions": {
+      "save": "설정 저장",
+      "turn_on_device": "기기 알림 활성화"
+    },
+    "toast": {
+      "saving": "알림 설정을 저장 중...",
+      "success": "알림 설정이 저장되었습니다.",
+      "error": "설정 저장에 실패했습니다. 잠시 후 다시 시도해 주세요."
+    },
+    "save_success": "설정이 저장되었습니다.",
+    "save_fail": "저장에 실패했습니다.",
+    "login_required": "사용하려면 로그인해 주세요.",
+    "login_button": "로그인",
+    "types": {
+      "title": "알림 유형",
+      "booking_title": "단계별 예약 알림 받기",
+      "booking_desc": "접수, 확정, 완료 등 주요 단계에서 알림을 받으세요.",
+      "change_title": "변경 결과 알림 받기",
+      "change_desc": "날짜/항목 변경이 승인 또는 거절될 때 즉시 알림을 드립니다.",
+      "alternative_title": "대체 일정 알림 받기",
+      "alternative_desc": "요청한 시간이 마감되고 매장이 다른 일정을 제안하면 알림을 드립니다."
+    },
+    "footer_note": "필수 예약 공지는 설정과 관계없이 발송될 수 있습니다."
+  },
+  "signup": {
+    "subtitle": "현지인처럼 한국을 경험하세요",
+    "name_label": "이름",
+    "name_placeholder": "이름을 입력하세요",
+    "email_label": "이메일",
+    "country_label": "국가",
+    "password_label": "비밀번호",
+    "loading": "계정 생성 중...",
+    "success": "계정이 생성됐어요! 이메일을 확인하고 인증 후 로그인해주세요.",
+    "login_prompt": "이미 계정이 있으신가요?",
+    "login_link": "로그인"
+  },
+  "help_page": {
+    "call_btn": "전화하기"
+  },
+  "community_page": {
+    "write_post": "게시글 작성",
+    "edit": "게시글 수정",
+    "posting": "게시 중...",
+    "defaults": {
+      "region": "서울"
+    },
+    "hero": {
+      "title": "켈로 커뮤니티",
+      "search_placeholder": "관심 있는 주제를 검색해보세요"
+    },
+    "categories": {
+      "all": "전체",
+      "meetup": "모임",
+      "beauty_review": "뷰티",
+      "food_review": "맛집",
+      "travel_review": "여행",
+      "meetup_recruitment": "모집",
+      "help": "꿀팁"
+    },
+    "sub_filters": {
+      "all": "전체",
+      "saved": "저장됨",
+      "reacted": "반응함",
+      "mine": "내 게시글",
+      "recruiting": "모집 중",
+      "active_reactions": "인기",
+      "open_meetup": "오픈 모임",
+      "weekend": "주말",
+      "fresh": "최신 정보"
+    },
+    "status": {
+      "reviews": "후기",
+      "reacting": "반응 중",
+      "surveying": "조사 중",
+      "drafting": "초안",
+      "closed": "마감"
+    },
+    "tags": {
+      "solo_friendly": "혼자 가기 좋아요",
+      "friends_friendly": "친구랑 가기 좋아요",
+      "photo_spot": "사진 명소",
+      "waiting": "웨이팅 있어요",
+      "foreigner_friendly": "외국인 친화적"
+    },
+    "states": {
+      "fetch_failed_desc": "게시글을 불러오지 못했어요. 네트워크를 확인해주세요.",
+      "fetch_failed_title": "데이터 오류",
+      "fetch_failed_tip": "페이지를 새로고침해 보세요.",
+      "empty_title": "아직 게시글이 없어요",
+      "empty_desc": "첫 번째 이야기를 공유해보세요!",
+      "empty_tip": "우측 하단 작성 버튼을 눌러보세요.",
+      "no_results_title": "검색 결과가 없어요",
+      "no_results_desc": "다른 키워드로 검색해보세요.",
+      "cta_write": "첫 게시글 작성",
+      "cta_all": "전체 보기"
+    },
+    "quality_signals": {
+      "organized": "잘 정리됨",
+      "active": "매우 인기",
+      "asset": "풍부한 정보",
+      "mate": "좋은 메이트"
+    },
+    "toasts": {
+      "save_added": "저장된 게시글에 추가됐어요.",
+      "save_removed": "저장된 게시글에서 제거됐어요.",
+      "deleted": "삭제됐어요.",
+      "updated": "수정됐어요.",
+      "submitted": "게시됐어요.",
+      "region_collected": "{{region}} 게시글을 보여드릴게요"
+    },
+    "nav_summary": {
+      "all": "{{tab}}의 모든 이야기를 보는 중",
+      "active_reactions": "{{tab}}에서 뜨거운 반응 중!",
+      "open_meetup": "{{tab}}에서 새 메이트를 찾고 있어요",
+      "weekend": "{{tab}}에서 이번 주말 계획 있나요?",
+      "default": "{{tab}}에서 {{sub}}(으)로 필터링된 결과를 보는 중"
+    },
+    "form": {
+      "category_label": "카테고리",
+      "region_label": "지역",
+      "region_placeholder": "예: 강남, 마포",
+      "select_category": "카테고리 선택",
+      "write_guide_title": {
+        "beauty_review": "뷰티 경험을 공유해요",
+        "food_review": "숨겨진 맛집을 추천해요",
+        "travel_review": "여행 꿀팁을 공유해요",
+        "meetup": "함께 즐길 모임을 만들어요",
+        "meetup_recruitment": "여행 메이트를 찾고 있나요?",
+        "help": "궁금한 건 뭐든 물어보세요"
+      },
+      "write_guide_body": {
+        "beauty_review": "시술이나 서비스에 대한 솔직한 후기를 공유해요.",
+        "food_review": "맛, 분위기, 웨이팅 정보를 알려주세요.",
+        "travel_review": "코스, 짐 싸기, 이동 방법 등 유용한 팁을 알려주세요.",
+        "meetup": "언제, 어디서, 무엇을 할지 설명해주세요.",
+        "meetup_recruitment": "여행 일정, 목적지, 메이트 조건을 알려주세요.",
+        "help": "질문이나 상황을 자세히 설명해주세요."
+      },
+      "title_label": {
+        "beauty_review": "서비스/테마",
+        "default": "제목"
+      },
+      "title_placeholder": {
+        "beauty_review": "예: 강남 레이어드컷 후기",
+        "default": "제목을 입력하세요"
+      },
+      "desc_label": {
+        "beauty_review": "상세 내용",
+        "default": "내용"
+      },
+      "desc_placeholder": {
+        "beauty_review": "과정이나 결과를 자세히 설명해주세요.",
+        "food_review": "추천 메뉴와 이유를 설명해주세요.",
+        "travel_review": "다른 여행자에게 도움이 되는 정보를 공유해주세요.",
+        "meetup": "모임에 대해 자세히 설명해주세요.",
+        "meetup_recruitment": "함께 하고 싶은 것을 설명해주세요.",
+        "help": "자세한 질문이 더 좋은 답변을 받을 수 있어요.",
+        "default": "공유하고 싶은 이야기를 작성해요"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "전후 사진이나 매장 내부 사진을 추가하세요 (최대 4장)",
+          "food_review": "음식과 매장 내부 사진을 추가하세요 (최대 4장)",
+          "travel_review": "분위기를 보여주는 사진을 추가하세요 (최대 4장)",
+          "meetup": "장소나 활동 사진을 추가하세요 (최대 4장)",
+          "meetup_recruitment": "목적지나 참고 사진을 추가하세요 (최대 4장)",
+          "help": "문제 설명에 도움이 되는 사진을 추가하세요 (최대 4장)"
+        },
+        "saved_name": "저장된 이미지 {{index}}",
+        "file_only_alert": "이미지 파일만 선택할 수 있어요.",
+        "limit_alert": "최대 {{count}}장까지 업로드할 수 있어요.",
+        "load_failed_alert": "이미지를 불러오지 못했어요.",
+        "limit_label": "(최대 {{count}}장)"
+      },
+      "category_hints": {
+        "beauty_review": "뷰티샵 경험을 공유해요.",
+        "food_review": "좋아하는 맛집을 추천해요.",
+        "travel_review": "나만의 여행 노하우를 공유해요.",
+        "meetup": "함께 즐길 가벼운 모임을 만들어요.",
+        "meetup_recruitment": "일정이 맞는 여행 메이트를 찾아요.",
+        "help": "궁금한 건 뭐든 물어보세요."
+      },
+      "submit": "게시",
+      "write_title": "게시글 작성",
+      "edit_title": "게시글 수정",
+      "image_label": "이미지",
+      "add_photo": "사진 추가",
+      "preparing_images": "이미지 준비 중...",
+      "cancel": "취소"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "뷰티 동행"
+      },
+      "flash_meetup": {
+        "label": "번개 모임"
+      },
+      "beauty": {
+        "label": "뷰티 후기"
+      },
+      "food": {
+        "label": "맛집 꿀팁"
+      },
+      "travel": {
+        "label": "여행 정보"
+      },
+      "write": {
+        "label": "새 글 작성"
+      },
+      "browse": {
+        "label": "둘러보기",
+        "sub": "인기 게시글"
+      },
+      "recruiting": {
+        "label": "모집 중",
+        "sub": "메이트"
+      },
+      "weekend": {
+        "label": "주말",
+        "sub": "주간 계획"
+      },
+      "record": {
+        "label": "일기",
+        "sub": "일상"
+      }
+    },
+    "fab": {
+      "create_post": "게시글 작성"
+    },
+    "sort": {
+      "latest": "최신순",
+      "reactions": "인기순",
+      "draft": "활발한 모집"
+    },
+    "card": {
+      "default_vibe": "좋은 분위기",
+      "title_prefix": {
+        "beauty_review": "[뷰티]",
+        "food_review": "[맛집]",
+        "travel_review": "[여행]"
+      },
+      "cta": {
+        "review": "게시글 보기",
+        "join": "지금 참여"
+      },
+      "result_badge": "완료",
+      "open_meetup_badge": "모임 오픈",
+      "fresh_badges": {
+        "comment": "뜨거운 반응",
+        "update": "방금 업데이트"
+      },
+      "draft_status": {
+        "active": "채팅 활발",
+        "forming": "메이트 모집 중",
+        "preparing": "관심 있어요"
+      },
+      "draft_desc": {
+        "active": "많은 분들이 관심을 보이고 있어요!",
+        "forming": "메이트를 더 찾고 있어요.",
+        "preparing": "첫 번째로 참여해보세요!"
+      },
+      "owner_reactions": {
+        "region": "{{region}}에 대해 {{count}}명과 채팅 중",
+        "join": "{{count}}명이 관심을 보여요"
+      },
+      "more_region": "{{region}}의 더 많은 이야기 보기"
+    },
+    "detail": "게시글 상세",
+    "detail_page": {
+      "loading": "데이터를 불러오는 중...",
+      "hidden_post": "이 게시글은 숨겨져 있어요.",
+      "not_found": "게시글을 찾을 수 없어요.",
+      "show_hidden": "숨겨진 게시글 보기",
+      "hide_post": "이 게시글 숨기기",
+      "empty_comments": "아직 댓글이 없어요. 첫 번째로 생각을 나눠보세요!",
+      "hide_comment": "이 댓글 숨기기",
+      "status": {
+        "REVIEWS": "후기",
+        "REACTING": "반응 중",
+        "SURVEYING": "조사 중",
+        "DRAFTING": "초안",
+        "CLOSED": "마감"
+      },
+      "tags": {
+        "solo_friendly": "혼자 가기 좋아요",
+        "friends_friendly": "친구랑 가기 좋아요",
+        "photo_spot": "사진 명소",
+        "waiting": "웨이팅 필요",
+        "foreigner_friendly": "외국인 친화적"
+      },
+      "freshness": {
+        "realtime": "활발히 진행 중",
+        "updated": "정보 업데이트됨",
+        "active": "활성 게시글",
+        "calm": "잠잠한 게시글"
+      },
+      "strengths": {
+        "title": "게시글 강점",
+        "organized": "잘 정리됨",
+        "active": "활발한 소통",
+        "visited_tip": "꿀팁 포함",
+        "new": "새 콘텐츠"
+      },
+      "checklist": {
+        "title": "체크리스트",
+        "recommended": "추천 대상",
+        "required": "꼭 확인",
+        "comment_check": "댓글 확인",
+        "read_details": "상세 내용 읽기"
+      },
+      "mini_signal_tag": "모임 오픈",
+      "primary_action": {
+        "review": "후기 남기기",
+        "join": "관심 표현하기"
+      },
+      "save": {
+        "saved": "저장됨",
+        "default": "저장"
+      },
+      "meetup_safety": {
+        "title": "모임 안전 가이드",
+        "item_1": "공공장소에서 만나는 것을 권장해요.",
+        "item_2": "개인 정보를 조심하세요."
+      },
+      "body_title": "게시글 내용",
+      "like": "좋아요",
+      "dislike": "싫어요",
+      "like_alert": "이 게시글에 좋아요를 눌렀어요!",
+      "dislike_alert": "이 게시글에 싫어요를 눌렀어요.",
+      "comments_title": "댓글",
+      "comment_input": {
+        "default": "댓글을 입력하세요...",
+        "optional": "선택 메모를 추가하세요",
+        "send": "보내기",
+        "open_btn": "댓글",
+        "cancel": "취소"
+      },
+      "signal_intents": {
+        "interested": "관심 있어요",
+        "available_this_week": "이번 주 가능해요",
+        "join_if_schedule_fits": "일정 맞으면 참여할게요",
+        "thanks": "정보 감사해요",
+        "question": "질문이 있어요"
+      },
+      "signal_times": {
+        "this_week": "이번 주",
+        "this_weekend": "이번 주말",
+        "next_week": "다음 주",
+        "schedule_coordination": "날짜 조율 중"
+      },
+      "author_panel": {
+        "title": "작성자 대시보드",
+        "badge": "작성자",
+        "stats": {
+          "total": "총 반응",
+          "total_value": "{{count}}",
+          "time": "선호 시간",
+          "time_pending": "계산 중",
+          "intent": "주요 의도",
+          "recent": "최근 24시간",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "주말에 반응이 가장 많아요. 자세한 일정을 제안해보세요.",
+          "vote": "선호 시간이 다양해요. 투표로 확정해보세요.",
+          "share": "더 많은 관심을 받으려면 정보를 더 공유해보세요."
+        },
+        "action": {
+          "weekend": "주말 일정 제안하기",
+          "vote": "투표 올리기",
+          "share": "추가 꿀팁 공유하기"
+        },
+        "draft": {
+          "weekend": "이번 주말 오후 2시에 만나는 건 어때요?",
+          "vote": "선호하는 시간에 투표해주세요!",
+          "share": "한 가지 꿀팁을 더 알려드릴게요!"
+        },
+        "final_draft": "모집을 마감할게요. 참여하실 분들은 오픈채팅에 입장해주세요!",
+        "final_action": "모집 마감",
+        "footer": "켈로는 안전한 커뮤니티 문화를 추구합니다."
+      },
+      "status_controls": {
+        "title": "상태 변경"
+      },
+      "result": {
+        "title": "방문 후기 & 꿀팁",
+        "help": "방문 후 꿀팁이나 후기를 공유해주세요. 다른 분들에게 큰 도움이 돼요.",
+        "placeholder": "방문 후기를 여기에 작성하세요...",
+        "save_visited": "방문 & 꿀팁 저장",
+        "save_only": "정보만 저장"
+      },
+      "author_safety": {
+        "title": "작성자 안전 가이드",
+        "item_1": "개인 연락처를 직접 노출하지 마세요.",
+        "item_2": "불법 모임이나 금전 요청을 조심하세요.",
+        "item_3": "신뢰할 수 있는 사용자와 소통하세요."
+      },
+      "signal_summary": {
+        "title": "참여 현황",
+        "status": {
+          "active": "활발히 모집 중",
+          "forming": "결성 중",
+          "preparing": "시작 중"
+        },
+        "time_split": "선호 시간이 나뉘어 있어요.",
+        "time_focus": "가장 선호하는 시간: {{time}}",
+        "time_flexible": "유동적인 시간이 많아요.",
+        "desc": "{{count}}명이 {{topic}}에 관심을 표현했어요.",
+        "topic_review": "후기 공유",
+        "topic_outing": "모임 참여",
+        "schedule_title": "선호 시간 선택"
+      }
+    },
+    "actions": {
+      "delete_confirm": "정말 삭제하시겠어요?"
+    },
+    "errors": {
+      "login_required": "로그인이 필요해요.",
+      "post_failed": "게시 실패: {{message}}"
+    },
+    "report": {
+      "report_action": "신고",
+      "success": "신고됐어요.",
+      "modal_title": "신고 사유 선택",
+      "cancel": "취소",
+      "reasons": {
+        "ad_spam": "광고/스팸",
+        "offensive": "불쾌한 내용",
+        "contact": "연락처 유도",
+        "unsafe": "안전하지 않음",
+        "other": "기타"
+      }
+    },
+    "comments": "댓글",
+    "time": {
+      "just_now": "방금 전"
+    }
+  },
+  "webview_banner": {
+    "title": "카카오톡·인앱브라우저에서는 Google 로그인을 사용할 수 없어요",
+    "desc_android": "Chrome으로 열기를 시도했어요. 팝업이 뜨지 않으면 링크를 복사해 Chrome에 붙여넣어 주세요.",
+    "desc_ios": "Safari 또는 Chrome을 열고 아래 링크를 붙여넣어 로그인해 주세요.",
+    "copy_btn": "링크 복사",
+    "copy_btn_copied": "링크 복사됨",
+    "close": "닫기"
   },
   "privacy_policy": {
     "title": "개인정보 처리방침",
     "effective_date": "시행일: 2024년 4월 21일",
     "table": {
-      "category": "구분",
-      "items": "수집 항목",
+      "category": "항목",
+      "items": "수집 정보",
       "purpose": "수집 목적",
-      "retention": "보유 및 이용 기간"
+      "retention": "보유 기간"
     },
     "collection": {
-      "title": "1. 개인정보 수집 및 이용",
-      "required": "필수 수집",
-      "required_items": "이름, 이메일, 예약 정보(날짜, 시간, 매장, 서비스), 소셜 로그인 식별값",
-      "required_purpose": "서비스 가입 및 본인 확인, 서비스 제공(예약), 고객 상담",
+      "title": "1. 개인정보의 수집 및 이용",
+      "required": "필수",
+      "required_items": "이름, 이메일, 예약 정보(날짜, 시간, 매장, 서비스), 소셜 로그인 ID",
+      "required_purpose": "회원 가입, 본인 식별, 서비스 제공(예약), 고객 상담",
       "auto": "자동 수집",
       "auto_items": "IP 주소, 쿠키, 기기 정보, 서비스 이용 기록",
       "auto_purpose": "서비스 품질 개선 및 부정 이용 방지"
     },
     "retention": {
-      "title": "2. 개인정보의 보유 및 이용기간",
-      "content": "이용자의 개인정보는 원칙적으로 회원 탈퇴 시까지 보유 및 이용합니다. 단, 다음의 경우 명시한 기간 동안 보존합니다.",
-      "legal_basis": "관련 법령 (전자상거래법 등)에 따른 보존 의무 준수"
+      "title": "2. 보유 및 이용 기간",
+      "content": "개인정보는 원칙적으로 회원 탈퇴 시까지 보유합니다. 단, 관련 법령에 의해 보존할 필요가 있는 경우 해당 기간 동안 보관할 수 있습니다.",
+      "legal_basis": "관련 법령 준수(예: 전자상거래법)"
     },
     "third_party": {
       "title": "3. 개인정보의 제3자 제공",
-      "content": "MyKello는 서비스 제공을 위해 아래와 같은 협력사에 개인정보를 제공합니다.",
-      "providers": "Supabase (데이터베이스), Google (인증), X (인증)"
+      "content": "MyKello는 서비스 제공을 위해 아래의 파트너에게 개인정보를 제공합니다.",
+      "providers": "Supabase (데이터베이스), Google (본인 인증), X (본인 인증)"
     },
     "overseas": {
       "title": "4. 개인정보의 국외 이전",
-      "recipient": "수탁업체",
-      "country": "이전 국가",
+      "recipient": "수신자",
+      "country": "국가",
       "purpose": "이전 목적",
       "items": "이전 항목",
       "supabase_name": "Supabase Inc.",
       "google_name": "Google LLC",
-      "usa": "미국 (USA)",
-      "storage_auth": "데이터 보관 및 사용자 인증(OAuth 2.0)",
+      "usa": "미국",
+      "storage_auth": "데이터 저장 및 사용자 인증(OAuth 2.0)",
       "log_items": "이메일, 프로필 정보, 서비스 이용 로그"
     },
     "destruction": {
-      "title": "5. 개인정보 파기 절차 및 방법",
-      "content": "개인정보는 목적 달성 후 지지 없이 파기하며, 전자적 파일은 복구가 불가능한 기술적 방법으로 삭제합니다."
+      "title": "5. 파기 절차 및 방법",
+      "content": "개인정보는 목적 달성 후 지체 없이 파기합니다. 전자적 파일 형태는 복구가 불가능한 기술적 방법으로 삭제합니다."
     }
   },
   "signup_consent": {
-    "all_agree": "약관에 모두 동의합니다.",
+    "all_agree": "모든 약관에 동의합니다.",
     "privacy_required": "[필수] 개인정보 수집 및 이용 동의",
     "privacy_optional": "[선택] 마케팅 정보 수신 동의",
     "view_detail": "보기",
     "terms_required": "[필수] 서비스 이용약관 동의"
   },
   "terms_of_service": {
-    "title": "서비스 이용약관"
+    "title": "서비스 이용약관",
+    "effective_date": "시행일: 2024년 4월 21일",
+    "definitions": {
+      "title": "1. 서비스의 정의",
+      "content": "MyKello는 사용자와 뷰티 서비스 제공자 사이의 예약 및 소통을 돕는 뷰티 서비스 예약 대행 플랫폼을 제공합니다."
+    },
+    "benefits": {
+      "title": "2. 회원 혜택",
+      "signup": "신규 가입 시 5% 할인 쿠폰이 지급됩니다.",
+      "referral": "추천인 코드를 통해 가입 시, 추천인과 피추천인 모두에게 5% 할인 쿠폰이 지급됩니다."
+    },
+    "refund_policy": {
+      "title": "3. 취소 및 환불 규정",
+      "subtitle": "예약일 기준 취소 시점에 따라 다음과 같이 환불 비율이 적용됩니다.",
+      "five_days": "5일 전: 100% 환불",
+      "three_days": "3일 전: 90% 환불",
+      "two_days": "2일 전: 70% 환불",
+      "one_day": "1일 전: 50% 환불",
+      "same_day": "당일 또는 No-show: 환불 불가",
+      "note": "최종 환불 처리는 매장별 정책에 따라 상이할 수 있습니다."
+    },
+    "liability": {
+      "title": "4. 책임의 한계",
+      "interpretation": "실시간 통역 기능은 사용자 편의를 위해 제공되는 부가 도구입니다. MyKello는 AI 번역 또는 수동 통역의 불일치로 인해 발생하는 예약 오류나 분쟁에 대해 책임을 지지 않습니다.",
+      "community": "사용자가 커뮤니티 기능을 통해 자발적으로 진행한 오프라인 모임이나 개인 간 거래에서 발생하는 손해, 사고 또는 분쟁에 대해 MyKello는 책임을 지지 않습니다."
+    }
   }
 }

@@ -2060,7 +2060,51 @@
       }
     },
     "community_hub": {
-      "title": "My Community"
+      "title": "My Community",
+      "eyebrow": "My Activity",
+      "subtitle": "See all your activity at a glance.",
+      "browse": "Browse Community",
+      "loading": "Loading...",
+      "summary_hint": "Summary of your community activity so far",
+      "sync_error": "Failed to load data.",
+      "no_comments": "No comments",
+      "posts_desc": "Posts you've written",
+      "reviews_desc": "Reviews you've written",
+      "meetups_desc": "Meetups you've joined",
+      "summary": {
+        "posts": "Posts",
+        "reviews": "Reviews",
+        "meetups": "Meetups"
+      },
+      "tabs": {
+        "posts": "Posts",
+        "reviews": "Reviews",
+        "meetups": "Meetups"
+      },
+      "type": {
+        "meetup": "Meetup",
+        "travel": "Travel"
+      },
+      "review_prompts": {
+        "title": "Leave a Review",
+        "desc": "Share your thoughts on the shops you've visited."
+      },
+      "empty": {
+        "posts": {
+          "title": "No posts yet",
+          "desc": "You haven't written any posts yet."
+        },
+        "reviews": {
+          "title": "No reviews yet",
+          "desc": "Leave a review for a shop you've visited.",
+          "no_completed": "No completed bookings.",
+          "cta": "View Booking History"
+        },
+        "meetups": {
+          "title": "No meetups joined",
+          "desc": "You haven't joined any meetups yet."
+        }
+      }
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
@@ -2167,31 +2211,51 @@
     "submit": "Submit",
     "skip": "Skip for now"
   },
+  "signup": {
+    "subtitle": "Experience Korea like a local",
+    "name_label": "Name",
+    "name_placeholder": "Enter your name",
+    "email_label": "Email",
+    "country_label": "Country",
+    "password_label": "Password",
+    "loading": "Creating Account...",
+    "success": "Account created! Please check your email to verify and then log in.",
+    "login_prompt": "Already have an account?",
+    "login_link": "Log in"
+  },
+  "webview_banner": {
+    "title": "Google login is not available in in-app browsers",
+    "desc_android": "We tried to open Chrome. If nothing happened, copy the link and paste it in Chrome.",
+    "desc_ios": "Please open Safari or Chrome and paste the link to continue.",
+    "copy_btn": "Copy Link",
+    "copy_btn_copied": "Link Copied",
+    "close": "Close"
+  },
   "privacy_policy": {
     "title": "Privacy Policy",
     "effective_date": "Effective Date: April 21, 2024",
     "table": {
       "category": "Category",
-      "items": "Items Collected",
+      "items": "Collected Items",
       "purpose": "Purpose",
       "retention": "Retention Period"
     },
     "collection": {
       "title": "1. Collection and Use of Personal Information",
       "required": "Required",
-      "required_items": "Name, Email, Booking Info (Date, Time, Shop, Service), Social Login IDs",
-      "required_purpose": "User Registration, Authentication, Service Delivery (Booking), Customer Consultation",
+      "required_items": "Name, Email, Reservation Info (Date, Time, Shop, Service), Social Login ID",
+      "required_purpose": "User Registration, Identification, Service Provision (Booking), Customer Consultation",
       "auto": "Automatic Collection",
-      "auto_items": "IP Address, Cookies, Device Info, Service Usage History",
-      "auto_purpose": "Service quality improvement and fraud prevention"
+      "auto_items": "IP Address, Cookies, Device Info, Service Usage Logs",
+      "auto_purpose": "Improving Service Quality and Preventing Fraud"
     },
     "retention": {
       "title": "2. Retention and Use Period",
       "content": "In principle, personal information is retained until membership withdrawal. However, it may be kept for a period required by relevant laws if necessary.",
-      "legal_basis": "Compliance with relevant laws (e.g., Electronic Commerce Act)"
+      "legal_basis": "Compliance with relevant laws (e.g., E-commerce Act)"
     },
     "third_party": {
-      "title": "3. Provision of Personal Information to Third Parties",
+      "title": "3. Providing Personal Information to Third Parties",
       "content": "MyKello provides personal information to the following partners to facilitate service delivery.",
       "providers": "Supabase (Database), Google (Authentication), X (Authentication)"
     },
@@ -2204,8 +2268,8 @@
       "supabase_name": "Supabase Inc.",
       "google_name": "Google LLC",
       "usa": "USA",
-      "storage_auth": "Data storage and user authentication (OAuth 2.0)",
-      "log_items": "Email, Profile Information, Service Usage Logs"
+      "storage_auth": "Data Storage and User Authentication (OAuth 2.0)",
+      "log_items": "Email, Profile Info, Service Usage Logs"
     },
     "destruction": {
       "title": "5. Destruction Procedure and Method",
@@ -2215,8 +2279,8 @@
   "signup_consent": {
     "all_agree": "I agree to all terms.",
     "privacy_required": "[Required] Consent to Collection and Use of Personal Information",
-    "privacy_optional": "[Optional] Consent to Receive Marketing Information",
-    "view_detail": "Details",
+    "privacy_optional": "[Optional] Consent to Marketing Information",
+    "view_detail": "View Detail",
     "terms_required": "[Required] Consent to Terms of Service"
   },
   "terms_of_service": {
@@ -2224,16 +2288,16 @@
     "effective_date": "Effective Date: April 21, 2024",
     "definitions": {
       "title": "1. Definition of Service",
-      "content": "MyKello provides a beauty service reservation agency platform that facilitates booking and communication between users and beauty service providers."
+      "content": "MyKello provides a beauty service reservation agency platform to facilitate bookings and communication between users and beauty service providers."
     },
     "benefits": {
-      "title": "2. Membership Benefits",
-      "signup": "New members receive a 5% discount coupon upon successful registration.",
-      "referral": "When a new member joins using a referral code, both the referrer and the referee receive a 5% discount coupon."
+      "title": "2. Member Benefits",
+      "signup": "New members receive a 5% discount coupon upon successful signup.",
+      "referral": "When a new member joins using a referral code, both the referrer and referee receive a 5% discount coupon."
     },
     "refund_policy": {
       "title": "3. Cancellation & Refund Policy",
-      "subtitle": "Refund amounts are calculated based on the time of cancellation prior to the scheduled appointment:",
+      "subtitle": "Refund rates are calculated based on the cancellation time before the scheduled appointment:",
       "five_days": "5 days prior: 100% Refund",
       "three_days": "3 days prior: 90% Refund",
       "two_days": "2 days prior: 70% Refund",

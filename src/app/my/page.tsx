@@ -757,7 +757,7 @@ function MyPageContent() {
                 return;
             }
 
-            const [{ data: profileData }, { data: couponsData }] = await Promise.all([
+            const [{ data: profileData, error: profileError }, { data: couponsData }] = await Promise.all([
                 supabase
                     .from("profiles")
                     .select("display_name, nickname, nickname_updated_at, role, created_at, avatar_url, referral_code")
@@ -769,6 +769,10 @@ function MyPageContent() {
                     .eq("user_id", user.id)
                     .order("created_at", { ascending: false }),
             ]);
+
+            if (profileError) {
+                console.debug('[my] profiles query error (RLS?):', profileError);
+            }
 
             if (!isMounted) {
                 return;
@@ -789,7 +793,7 @@ function MyPageContent() {
             );
             setUserName(displayName);
             setProfileSubtitle(email || fallbackSubtitle);
-            setProfileRole(nextProfile?.role ?? null);
+            setProfileRole(nextProfile?.role ?? (user.user_metadata?.role as string | undefined) ?? null);
 
             if (!email) {
                 setPartnerStatus("none");
@@ -862,13 +866,19 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
-            <ReferralSection referralCode={referralCode} coupons={coupons} />
+            {!capabilities.canViewAdminConsole && (
+                <ReferralSection referralCode={referralCode} coupons={coupons} />
+            )}
 
-            <MyBookingsSection accessToken={accessToken} authReady={authReady} />
+            {!capabilities.canViewAdminConsole && (
+                <MyBookingsSection accessToken={accessToken} authReady={authReady} />
+            )}
 
-            <section className={styles.section}>
-                <CommunityHubSection authorName={communityAuthorName} />
-            </section>
+            {!capabilities.canViewAdminConsole && (
+                <section className={styles.section}>
+                    <CommunityHubSection authorName={communityAuthorName} />
+                </section>
+            )}
 
             {/* Standard Partner Banner */}
             {capabilities.showPartnerBanner && (
@@ -882,36 +892,32 @@ function MyPageContent() {
                 <AdminStatsDashboard />
             )}
 
-            {/* Admin Section with Shell consistency */}
+            {/* Admin Section */}
             {capabilities.canViewAdminConsole && (
                 <section className={styles.section} style={{ marginBottom: 0, paddingBottom: 100 }}>
-                    <div className={styles.sectionHeader} style={{ justifyContent: 'flex-start', gap: 8 }}>
+                    <div className={styles.adminTitleRow}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title')}</h2>
-                        <span style={{
-                            background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                            color: 'white', fontSize: '0.65rem', fontWeight: 800,
-                            padding: '2px 8px', borderRadius: 99, textTransform: 'uppercase'
-                        }}>{t('my_page.settings.admin.enabled')}</span>
+                        <span className={styles.adminBadge}>{t('my_page.settings.admin.enabled')}</span>
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 16 }}>
+                    <div className={styles.adminMenuGrid}>
                         {[
                             { icon: '📊', label: t('my_page.dashboard.admin_menu.dashboard'), desc: t('my_page.dashboard.admin_menu.dashboard_desc'), path: '/admin' },
                             { icon: '💼', label: t('my_page.dashboard.admin_menu.bookings'), desc: t('my_page.dashboard.admin_menu.bookings_desc'), path: '/admin/bookings/beauty' },
                             { icon: '🤝', label: t('my_page.dashboard.admin_menu.partners'), desc: t('my_page.dashboard.admin_menu.partners_desc'), path: '/admin/partners' },
                             { icon: '🛡️', label: t('my_page.dashboard.admin_menu.users'), desc: t('my_page.dashboard.admin_menu.users_desc'), path: '/admin/users' },
                         ].map((item) => (
-                            <div 
-                                key={item.path} 
-                                className={styles.adminActionCard} 
+                            <div
+                                key={item.path}
+                                className={styles.adminMenuCard}
                                 onClick={() => router.push(item.path)}
                             >
-                                <div className={styles.adminActionIcon}>{item.icon}</div>
-                                <div className={styles.adminActionInfo}>
-                                    <div className={styles.adminActionLabel}>{item.label}</div>
-                                    <div className={styles.adminActionDesc}>{item.desc}</div>
+                                <div className={styles.adminMenuIconWrap}>{item.icon}</div>
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                    <div className={styles.adminMenuLabel}>{item.label}</div>
+                                    <div className={styles.adminMenuDesc}>{item.desc}</div>
                                 </div>
-                                <span className={styles.adminActionArrow}>›</span>
+                                <span className={styles.adminMenuArrow}>›</span>
                             </div>
                         ))}
                     </div>

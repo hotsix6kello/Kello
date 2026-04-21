@@ -533,7 +533,8 @@
       "browse_beauty_cta": "Browse Beauty Bookings"
     },
     "profile": {
-      "account_hint": "Account & Settings"
+      "account_hint": "Account & Settings",
+      "avatar_placeholder": "أنا"
     },
     "settings": {
       "short": "Settings",
@@ -551,7 +552,51 @@
       }
     },
     "community_hub": {
-      "title": "My Community"
+      "title": "My Community",
+      "eyebrow": "نشاطي",
+      "subtitle": "راجع ملخص نشاطك في المجتمع في مكان واحد.",
+      "browse": "تصفح المجتمع",
+      "loading": "جاري التحميل...",
+      "summary_hint": "ملخص نشاطك في المجتمع حتى الآن",
+      "sync_error": "تعذر تحميل البيانات",
+      "no_comments": "لا تعليقات",
+      "posts_desc": "قائمة المنشورات التي كتبتها",
+      "reviews_desc": "قائمة المراجعات التي كتبتها",
+      "meetups_desc": "قائمة اللقاءات التي شاركت فيها",
+      "summary": {
+        "posts": "منشورات",
+        "reviews": "مراجعات",
+        "meetups": "لقاءات"
+      },
+      "tabs": {
+        "posts": "منشورات",
+        "reviews": "مراجعات",
+        "meetups": "لقاءات"
+      },
+      "type": {
+        "meetup": "لقاء",
+        "travel": "سفر"
+      },
+      "review_prompts": {
+        "title": "اكتب مراجعة",
+        "desc": "اترك مراجعة للمتجر الذي زرته"
+      },
+      "empty": {
+        "posts": {
+          "title": "لا توجد منشورات بعد",
+          "desc": "لم تكتب أي منشورات بعد"
+        },
+        "reviews": {
+          "title": "لا توجد مراجعات بعد",
+          "desc": "اترك مراجعة للمتجر الذي أكملت حجزه",
+          "no_completed": "لا توجد حجوزات مكتملة بعد",
+          "cta": "عرض سجل الحجوزات"
+        },
+        "meetups": {
+          "title": "لم تنضم إلى أي لقاء بعد",
+          "desc": "لم تنضم إلى أي لقاء بعد"
+        }
+      }
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
@@ -575,6 +620,164 @@
       "reason_referred": "قسيمة إدخال رمز الإحالة",
       "reason_referrer": "قسيمة ترشيح صديق"
     }
+  },
+  "beauty_bookings": {
+    "page_title": "حجوزات التجميل",
+    "hero_eyebrow": "حجوزاتي في التجميل",
+    "hero_title": "تتبع طلبات الحجز وملاحظات الموظفين في مكان واحد.",
+    "hero_text": "تظهر الحجوزات الأحدث أولاً. يمكنك التمييز بسرعة بين الحجوزات النشطة والمكتملة.",
+    "login_title": "سجّل الدخول لعرض سجل حجوزاتك.",
+    "login_text": "بعد تسجيل الدخول، يمكنك رؤية جميع طلبات حجز التجميل وملاحظات الموظفين في مكان واحد.",
+    "login_action": "الذهاب لتسجيل الدخول",
+    "back_to_my": "العودة إلى صفحتي",
+    "deeplink_toast": "تم فتح الحجز المحدد. ✨",
+    "tab_all": "الكل",
+    "tab_active": "نشط",
+    "tab_completed": "مكتمل",
+    "tab_canceled": "ملغى",
+    "tab_aria": "فلتر حالة الحجز",
+    "status_requested": "في انتظار التأكيد",
+    "status_confirmed": "مؤكد",
+    "status_completed": "مكتمل",
+    "status_canceled": "ملغى",
+    "status_failed": "يحتاج انتباهاً",
+    "status_change_requested": "تم طلب تغيير",
+    "status_desc_requested": "يقوم الصالون بالتحقق من التوفر.",
+    "status_desc_confirmed": "تم تأكيد موعدك.",
+    "status_desc_completed": "تمت زيارتك بنجاح.",
+    "status_desc_canceled": "تم إلغاء حجزك.",
+    "status_desc_failed": "يحتاج طلب الحجز إلى انتباه.",
+    "status_desc_change_requested": "يتم طلب تغيير في الجدول أو الخدمة.",
+    "status_guide_confirmed": "تم تأكيد حجزك. يرجى التحقق من التاريخ والوقت قبل الزيارة.",
+    "category_hair": "شعر",
+    "category_nail": "أظافر",
+    "category_esthetic": "تجميل",
+    "category_waxing": "إزالة الشعر",
+    "category_makeup": "مكياج",
+    "category_lash": "رموش",
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский",
+    "intent_booking_confirm": "تأكيد الحجز",
+    "intent_service_request": "طلب الخدمة",
+    "intent_allergy_notice": "إشعار الحساسية",
+    "intent_style_consultation": "استشارة الأسلوب",
+    "card_primary_service": "الخدمة الأساسية",
+    "card_estimated_price": "السعر التقديري",
+    "loading": "جاري تحميل حجوزاتك...",
+    "empty": "لا توجد حجوزات تجميل بعد. ستظهر هنا بعد إتمام الحجز.",
+    "select_prompt": "اختر حجزاً لعرض تفاصيله.",
+    "detail_booking_id": "رقم الحجز",
+    "detail_category": "الفئة",
+    "detail_designer": "المصمم",
+    "detail_requested_at": "تاريخ الطلب",
+    "detail_status": "الحالة الحالية",
+    "detail_category_services": "الفئة / الخدمة",
+    "detail_requested_time": "الموعد المفضل",
+    "detail_shop_status": "حالة المتجر",
+    "detail_request_info": "معلومات الطلب",
+    "detail_more_info": "عرض المزيد من التفاصيل",
+    "detail_designer_default": "اختيار المتجر",
+    "timeline_title": "تقدم الحجز",
+    "change_request_title": "معلومات طلب التغيير",
+    "change_request_hint": "فريقنا يراجع طلبك. يرجى الانتظار لحظة.",
+    "change_request_time": "وقت الطلب",
+    "change_request_reason": "السبب",
+    "change_request_reason_empty": "لم يُذكر سبب",
+    "change_request_time_empty": "جاري الفحص",
+    "change_result_title": "نتيجة آخر طلب تغيير",
+    "change_result_status": "الحالة",
+    "change_result_approved": "✅ مقبول",
+    "change_result_rejected": "❌ مرفوض",
+    "change_result_review_time": "وقت المراجعة",
+    "alt_offer_title": "عرض جدول جديد",
+    "alt_offer_desc": "الوقت المطلوب لم يعد متاحاً. اقترح الصالون الخيارات التالية — يرجى اختيار أحدها.",
+    "alt_offer_admin_label": "ملاحظة المتجر",
+    "alt_offer_accept": "قبول وتحديث الحجز",
+    "alt_offer_reject": "رفض العرض",
+    "alt_offer_processing": "جاري المعالجة...",
+    "alt_offer_response_title": "نتيجة الرد على العرض",
+    "alt_offer_accepted_result": "لقد قبلت هذا العرض مسبقاً.",
+    "alt_offer_rejected_result": "لقد رفضت هذا العرض مسبقاً.",
+    "alt_response_accepted": "تم قبول العرض. تم تحديث جدول حجزك.",
+    "alt_response_rejected": "تم رفض العرض.",
+    "alt_slot_select_error": "يرجى اختيار أحد المواعيد المقترحة.",
+    "service_info_title": "معلومات الخدمة",
+    "service_primary": "الخدمة الأساسية",
+    "service_addons": "الإضافات",
+    "service_region": "منطقة الحجز",
+    "service_addons_empty": "لا توجد إضافات محددة",
+    "price_title": "ملخص السعر",
+    "price_base": "السعر الأساسي",
+    "price_addon": "سعر الإضافات",
+    "price_surcharge": "رسوم المصمم الإضافية",
+    "price_total": "الإجمالي التقديري",
+    "price_pending_notice": "سيتم إبلاغك بالسعر بعد تأكيد المتجر",
+    "detail_manage_booking": "إدارة الحجز (تغيير / إلغاء)",
+    "request_title": "طلباتي",
+    "request_memo": "ملاحظة الطلب",
+    "request_memo_empty": "لا توجد طلبات خاصة.",
+    "delivery_title": "معلومات التسليم",
+    "delivery_lang": "اللغة",
+    "delivery_intent": "الغرض",
+    "message_korean": "ملاحظة كورية للصالون",
+    "message_localized": "ملاحظة باللغة المحددة",
+    "manage_title": "إدارة الحجز",
+    "manage_desc": "يمكنك الإلغاء مباشرة عندما يكون الحجز في انتظار التأكيد أو مؤكداً. لا يمكن التراجع عن هذا.",
+    "manage_disabled": "لا يمكن إدارة هذا الحجز في حالته الحالية.",
+    "action_change": "طلب تغيير",
+    "action_cancel": "إلغاء الحجز",
+    "action_view_on_map": "عرض على الخريطة",
+    "cancel_panel_title": "إلغاء الحجز",
+    "cancel_reason_schedule": "تغيير الجدول",
+    "cancel_reason_other_shop": "اختيار صالون آخر",
+    "cancel_reason_mistake": "حجز بالخطأ",
+    "cancel_reason_etc": "أخرى",
+    "cancel_details_placeholder": "أي سبب إضافي تود مشاركته؟",
+    "cancel_confirm": "تأكيد الإلغاء",
+    "cancel_processing": "جاري الإلغاء...",
+    "cancel_close": "إغلاق",
+    "cancel_success": "تم إلغاء حجزك.",
+    "cancel_info_title": "معلومات الإلغاء",
+    "cancel_time": "وقت الإلغاء",
+    "cancel_time_empty": "جاري الفحص",
+    "cancel_by": "ألغى بواسطة",
+    "cancel_by_customer": "العميل",
+    "cancel_by_admin": "الصالون",
+    "cancel_by_unknown": "غير معروف",
+    "cancel_reason_label": "السبب",
+    "cancel_reason_empty": "لم يُذكر سبب",
+    "change_panel_title": "طلب تغيير",
+    "change_placeholder": "مثال: أريد تغيير الموعد إلى 20 مارس الساعة 2 مساءً. / أريد تغيير الخدمة.",
+    "change_submit": "إرسال طلب التغيير",
+    "change_processing": "جاري الإرسال...",
+    "change_close": "إغلاق",
+    "change_success": "تم إرسال طلب التغيير.",
+    "error_login": "يرجى التحقق من حالة تسجيل الدخول.",
+    "error_load_401": "سجّل الدخول لعرض حجوزاتك.",
+    "error_load": "تعذر تحميل حجوزاتك.",
+    "error_cancel_400": "لا يمكن إلغاء هذا الحجز الآن.",
+    "error_cancel_403": "يمكنك فقط إلغاء حجوزاتك الخاصة.",
+    "error_cancel": "تعذر إلغاء الحجز. يرجى المحاولة مرة أخرى لاحقاً.",
+    "error_cancel_reason": "يرجى تحديد أو إدخال سبب الإلغاء.",
+    "error_change_reason": "يرجى إدخال ما تريد تغييره.",
+    "error_change": "تعذر إرسال طلب التغيير. يرجى المحاولة مرة أخرى لاحقاً.",
+    "error_alt": "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً.",
+    "open_interpreter": "فتح المترجم",
+    "interpreter_visit_context": "جاري استخدام المترجم أثناء زيارة {{storeName}}",
+    "interpreter_visit_service_context": "جاري استخدام المترجم لخدمة {{serviceName}} في {{storeName}}"
   },
   "notifications": {
     "title": "Notification Settings",
@@ -926,10 +1129,477 @@
     "submit": "تأكيد",
     "skip": "لاحقاً"
   },
+  "signup": {
+    "subtitle": "اكتشف كوريا كالسكان المحليين",
+    "name_label": "الاسم",
+    "name_placeholder": "أدخل اسمك",
+    "email_label": "البريد الإلكتروني",
+    "country_label": "الدولة",
+    "password_label": "كلمة المرور",
+    "loading": "جارٍ إنشاء الحساب...",
+    "success": "تم إنشاء الحساب! يرجى التحقق من بريدك الإلكتروني لتأكيد الحساب وتسجيل الدخول.",
+    "login_prompt": "هل لديك حساب بالفعل؟",
+    "login_link": "تسجيل الدخول"
+  },
+  "help_page": {
+    "call_btn": "اتصل"
+  },
+  "community_page": {
+    "write_post": "كتابة منشور",
+    "edit": "تعديل المنشور",
+    "posting": "جارٍ النشر...",
+    "defaults": {
+      "region": "سيول"
+    },
+    "hero": {
+      "title": "مجتمع كيلو",
+      "search_placeholder": "ابحث عن الموضوعات التي تهمك"
+    },
+    "categories": {
+      "all": "الكل",
+      "meetup": "لقاءات",
+      "beauty_review": "تجميل",
+      "food_review": "مطاعم",
+      "travel_review": "سفر",
+      "meetup_recruitment": "تجنيد",
+      "help": "نصائح"
+    },
+    "sub_filters": {
+      "all": "الكل",
+      "saved": "محفوظ",
+      "reacted": "تفاعلت معه",
+      "mine": "منشوراتي",
+      "recruiting": "يجنّد",
+      "active_reactions": "رائج",
+      "open_meetup": "لقاءات مفتوحة",
+      "weekend": "عطلة نهاية الأسبوع",
+      "fresh": "معلومات حديثة"
+    },
+    "status": {
+      "reviews": "مراجعات",
+      "reacting": "يتفاعل",
+      "surveying": "يستطلع",
+      "drafting": "مسودة",
+      "closed": "مغلق"
+    },
+    "tags": {
+      "solo_friendly": "مناسب للفرد",
+      "friends_friendly": "مناسب للأصدقاء",
+      "photo_spot": "نقطة تصوير",
+      "waiting": "انتظار متوقع",
+      "foreigner_friendly": "مناسب للأجانب"
+    },
+    "states": {
+      "fetch_failed_desc": "فشل تحميل المنشورات. يرجى التحقق من الشبكة.",
+      "fetch_failed_title": "خطأ في البيانات",
+      "fetch_failed_tip": "جرّب تحديث الصفحة.",
+      "empty_title": "لا توجد منشورات بعد",
+      "empty_desc": "كن أول من يشارك قصته!",
+      "empty_tip": "اضغط على زر الكتابة في أسفل اليمين.",
+      "no_results_title": "لا توجد نتائج",
+      "no_results_desc": "جرّب البحث بكلمات مفتاحية أخرى.",
+      "cta_write": "اكتب أول منشور",
+      "cta_all": "عرض الكل"
+    },
+    "quality_signals": {
+      "organized": "منظّم جيداً",
+      "active": "شعبي جداً",
+      "asset": "معلومات غنية",
+      "mate": "رفيق جيد"
+    },
+    "toasts": {
+      "save_added": "تمت الإضافة إلى المنشورات المحفوظة.",
+      "save_removed": "تمت الإزالة من المنشورات المحفوظة.",
+      "deleted": "تم الحذف بنجاح.",
+      "updated": "تم التحديث بنجاح.",
+      "submitted": "تم النشر بنجاح.",
+      "region_collected": "عرض منشورات في {{region}}"
+    },
+    "nav_summary": {
+      "all": "عرض جميع القصص في {{tab}}",
+      "active_reactions": "تفاعلات حارة في {{tab}}!",
+      "open_meetup": "البحث عن رفاق جدد في {{tab}}",
+      "weekend": "هل لديك خطط لهذا الأسبوع في {{tab}}؟",
+      "default": "عرض النتائج المفلترة بـ {{sub}} في {{tab}}"
+    },
+    "form": {
+      "category_label": "الفئة",
+      "region_label": "المنطقة",
+      "region_placeholder": "مثال: غانغنام، مابو",
+      "select_category": "اختر فئة",
+      "write_guide_title": {
+        "beauty_review": "شارك تجربتك التجميلية",
+        "food_review": "هل لديك مطاعم مخفية للتوصية؟",
+        "travel_review": "شارك نصائح سفرك",
+        "meetup": "أنشئ لقاءً غير رسمي للاستمتاع معاً",
+        "meetup_recruitment": "هل تبحث عن رفاق سفر؟",
+        "help": "اسأل عن أي شيء"
+      },
+      "write_guide_body": {
+        "beauty_review": "شارك مراجعتك الصادقة للعلاج أو الخدمة.",
+        "food_review": "شارك معلومات عن الطعم والأجواء أو الانتظار.",
+        "travel_review": "قدّم نصائح مفيدة عن المسارات والحقائب والتنقل.",
+        "meetup": "صِف متى وأين وماذا ستفعل.",
+        "meetup_recruitment": "حدد جدول سفرك ووجهاتك وشروط الرفيق.",
+        "help": "صِف سؤالك أو موقفك بالتفصيل."
+      },
+      "title_label": {
+        "beauty_review": "الخدمة/الموضوع",
+        "default": "العنوان"
+      },
+      "title_placeholder": {
+        "beauty_review": "مثال: مراجعة قصة شعر غانغنام",
+        "default": "أدخل العنوان"
+      },
+      "desc_label": {
+        "beauty_review": "التفاصيل",
+        "default": "المحتوى"
+      },
+      "desc_placeholder": {
+        "beauty_review": "صِف العملية أو النتائج بالتفصيل.",
+        "food_review": "أوصِ بالقوائم واشرح السبب.",
+        "travel_review": "شارك معلومات مفيدة للمسافرين الآخرين.",
+        "meetup": "صِف اللقاء بالتفصيل.",
+        "meetup_recruitment": "صِف ما تريد القيام به معاً.",
+        "help": "الأسئلة التفصيلية تساعد في الحصول على إجابات أفضل.",
+        "default": "اكتب القصة التي تريد مشاركتها"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "أضف صور قبل/بعد أو داخل المحل (بحد أقصى 4)",
+          "food_review": "أضف صور الطعام وداخل المحل (بحد أقصى 4)",
+          "travel_review": "أضف صوراً تظهر الأجواء (بحد أقصى 4)",
+          "meetup": "أضف صور المكان أو النشاط (بحد أقصى 4)",
+          "meetup_recruitment": "أضف صور الوجهة أو المرجع (بحد أقصى 4)",
+          "help": "أضف صوراً تساعد في شرح المشكلة (بحد أقصى 4)"
+        },
+        "saved_name": "صورة محفوظة {{index}}",
+        "file_only_alert": "يمكن اختيار ملفات الصور فقط.",
+        "limit_alert": "يمكن تحميل {{count}} صور كحد أقصى.",
+        "load_failed_alert": "فشل تحميل الصور.",
+        "limit_label": "(بحد أقصى {{count}})"
+      },
+      "category_hints": {
+        "beauty_review": "شارك تجارب محلات التجميل.",
+        "food_review": "أوصِ بأماكنك المفضلة.",
+        "travel_review": "شارك معرفتك الخاصة بالسفر.",
+        "meetup": "أنشئ لقاءً غير رسمياً للاستمتاع معاً.",
+        "meetup_recruitment": "ابحث عن رفاق سفر بجداول مماثلة.",
+        "help": "اسأل عن أي شيء تريد معرفته."
+      },
+      "submit": "نشر",
+      "write_title": "كتابة منشور",
+      "edit_title": "تعديل المنشور",
+      "image_label": "الصور",
+      "add_photo": "إضافة صورة",
+      "preparing_images": "جارٍ تجهيز الصور...",
+      "cancel": "إلغاء"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "رحلة تجميل"
+      },
+      "flash_meetup": {
+        "label": "لقاء سريع"
+      },
+      "beauty": {
+        "label": "مراجعات التجميل"
+      },
+      "food": {
+        "label": "نصائح المطاعم"
+      },
+      "travel": {
+        "label": "معلومات السفر"
+      },
+      "write": {
+        "label": "منشور جديد"
+      },
+      "browse": {
+        "label": "تصفح",
+        "sub": "المنشورات الشعبية"
+      },
+      "recruiting": {
+        "label": "تجنيد",
+        "sub": "رفاق"
+      },
+      "weekend": {
+        "label": "نهاية الأسبوع",
+        "sub": "الخطة الأسبوعية"
+      },
+      "record": {
+        "label": "مذكرات",
+        "sub": "الحياة اليومية"
+      }
+    },
+    "fab": {
+      "create_post": "كتابة منشور"
+    },
+    "sort": {
+      "latest": "الأحدث",
+      "reactions": "الأكثر شعبية",
+      "draft": "تجنيد نشط"
+    },
+    "card": {
+      "default_vibe": "أجواء رائعة",
+      "title_prefix": {
+        "beauty_review": "[تجميل]",
+        "food_review": "[مطاعم]",
+        "travel_review": "[سفر]"
+      },
+      "cta": {
+        "review": "عرض المنشور",
+        "join": "انضم الآن"
+      },
+      "result_badge": "مكتمل",
+      "open_meetup_badge": "لقاء مفتوح",
+      "fresh_badges": {
+        "comment": "تفاعلات حارة",
+        "update": "تم التحديث الآن"
+      },
+      "draft_status": {
+        "active": "دردشة نشطة",
+        "forming": "رفاق يتشكلون",
+        "preparing": "مهتم"
+      },
+      "draft_desc": {
+        "active": "كثير من الناس مهتمون!",
+        "forming": "نبحث عن مزيد من الرفاق.",
+        "preparing": "كن أول من ينضم!"
+      },
+      "owner_reactions": {
+        "region": "يتحدث {{count}} شخص عن {{region}}",
+        "join": "{{count}} شخص مهتم"
+      },
+      "more_region": "عرض المزيد من القصص في {{region}}"
+    },
+    "detail": "تفاصيل المنشور",
+    "detail_page": {
+      "loading": "جارٍ تحميل البيانات...",
+      "hidden_post": "هذا المنشور مخفي.",
+      "not_found": "المنشور غير موجود.",
+      "show_hidden": "عرض المنشور المخفي",
+      "hide_post": "إخفاء هذا المنشور",
+      "empty_comments": "لا توجد تعليقات بعد. كن أول من يشارك أفكاره!",
+      "hide_comment": "إخفاء هذا التعليق",
+      "status": {
+        "REVIEWS": "مراجعات",
+        "REACTING": "يتفاعل",
+        "SURVEYING": "يستطلع",
+        "DRAFTING": "مسودة",
+        "CLOSED": "مغلق"
+      },
+      "tags": {
+        "solo_friendly": "مناسب للفرد",
+        "friends_friendly": "مناسب للأصدقاء",
+        "photo_spot": "نقطة تصوير",
+        "waiting": "انتظار مطلوب",
+        "foreigner_friendly": "مناسب للأجانب"
+      },
+      "freshness": {
+        "realtime": "نشط بالكامل",
+        "updated": "تم تحديث المعلومات",
+        "active": "منشور نشط",
+        "calm": "منشور هادئ"
+      },
+      "strengths": {
+        "title": "نقاط قوة المنشور",
+        "organized": "منظّم جيداً",
+        "active": "تفاعل نشط",
+        "visited_tip": "يتضمن نصائح",
+        "new": "محتوى جديد"
+      },
+      "checklist": {
+        "title": "قائمة التحقق",
+        "recommended": "موصى به لـ",
+        "required": "يجب التحقق",
+        "comment_check": "تحقق من التعليقات",
+        "read_details": "اقرأ التفاصيل"
+      },
+      "mini_signal_tag": "لقاء مفتوح",
+      "primary_action": {
+        "review": "اترك مراجعة",
+        "join": "أعرب عن اهتمامك"
+      },
+      "save": {
+        "saved": "محفوظ",
+        "default": "حفظ"
+      },
+      "meetup_safety": {
+        "title": "دليل سلامة اللقاء",
+        "item_1": "يُنصح بالاجتماع في الأماكن العامة.",
+        "item_2": "كن حذراً مع المعلومات الشخصية."
+      },
+      "body_title": "محتوى المنشور",
+      "like": "إعجاب",
+      "dislike": "عدم إعجاب",
+      "like_alert": "أعجبك هذا المنشور!",
+      "dislike_alert": "لم يعجبك هذا المنشور.",
+      "comments_title": "التعليقات",
+      "comment_input": {
+        "default": "أدخل تعليقاً...",
+        "optional": "أضف ملاحظة اختيارية",
+        "send": "إرسال",
+        "open_btn": "تعليق",
+        "cancel": "إلغاء"
+      },
+      "signal_intents": {
+        "interested": "أنا مهتم",
+        "available_this_week": "متاح هذا الأسبوع",
+        "join_if_schedule_fits": "سأنضم إذا ناسب الجدول",
+        "thanks": "شكراً على المعلومات",
+        "question": "لديّ سؤال"
+      },
+      "signal_times": {
+        "this_week": "هذا الأسبوع",
+        "this_weekend": "هذا الأسبوع",
+        "next_week": "الأسبوع القادم",
+        "schedule_coordination": "تنسيق الموعد"
+      },
+      "author_panel": {
+        "title": "لوحة تحكم الكاتب",
+        "badge": "الكاتب",
+        "stats": {
+          "total": "إجمالي التفاعلات",
+          "total_value": "{{count}}",
+          "time": "الوقت المفضل",
+          "time_pending": "جارٍ الحساب",
+          "intent": "النية الرئيسية",
+          "recent": "آخر 24 ساعة",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "نهاية الأسبوع تحظى بأكثر التفاعلات. اقترح جدولاً مفصلاً.",
+          "vote": "الأوقات المفضلة متباينة. جرّب التصويت لتحديدها.",
+          "share": "شارك المزيد من المعلومات للحصول على مزيد من الاهتمام."
+        },
+        "action": {
+          "weekend": "اقترح جدول نهاية الأسبوع",
+          "vote": "انشر تصويتاً",
+          "share": "شارك نصائح إضافية"
+        },
+        "draft": {
+          "weekend": "كيف لو التقينا هذا الأسبوع الساعة 2 ظهراً؟",
+          "vote": "صوّت على وقتك المفضل!",
+          "share": "إليك نصيحة إضافية!"
+        },
+        "final_draft": "سأغلق التجنيد. يرجى الانضمام إلى الدردشة المفتوحة إذا كنت مشاركاً!",
+        "final_action": "إغلاق التجنيد",
+        "footer": "كيلو يعزز ثقافة مجتمعية آمنة."
+      },
+      "status_controls": {
+        "title": "تغيير الحالة"
+      },
+      "result": {
+        "title": "تقرير ما بعد الزيارة ونصائح",
+        "help": "شارك النصائح أو المراجعات بعد زيارتك. يساعد ذلك الآخرين كثيراً.",
+        "placeholder": "اكتب مراجعتك بعد الزيارة هنا...",
+        "save_visited": "حفظ الزيارة والنصائح",
+        "save_only": "حفظ المعلومات فقط"
+      },
+      "author_safety": {
+        "title": "دليل سلامة الكاتب",
+        "item_1": "لا تكشف عن معلومات الاتصال الشخصية مباشرة.",
+        "item_2": "احذر من اللقاءات غير القانونية أو طلبات المال.",
+        "item_3": "تواصل مع المستخدمين الموثوقين."
+      },
+      "signal_summary": {
+        "title": "ملخص المشاركة",
+        "status": {
+          "active": "تجنيد نشط",
+          "forming": "يتشكل",
+          "preparing": "يبدأ"
+        },
+        "time_split": "الأوقات المفضلة متباينة.",
+        "time_focus": "الأكثر تفضيلاً: {{time}}",
+        "time_flexible": "أوقات مرنة كثيرة.",
+        "desc": "أعرب {{count}} شخص عن اهتمامه بـ {{topic}}.",
+        "topic_review": "مشاركة المراجعة",
+        "topic_outing": "المشاركة في اللقاء",
+        "schedule_title": "اختر الوقت المفضل"
+      }
+    },
+    "actions": {
+      "delete_confirm": "هل أنت متأكد من الحذف؟"
+    },
+    "errors": {
+      "login_required": "تسجيل الدخول مطلوب.",
+      "post_failed": "فشل النشر: {{message}}"
+    },
+    "report": {
+      "report_action": "إبلاغ",
+      "success": "تم الإبلاغ بنجاح.",
+      "modal_title": "اختر سبب الإبلاغ",
+      "cancel": "إلغاء",
+      "reasons": {
+        "ad_spam": "إعلان/بريد مزعج",
+        "offensive": "محتوى مسيء",
+        "contact": "إجبار على التواصل",
+        "unsafe": "غير آمن",
+        "other": "أخرى"
+      }
+    },
+    "comments": "التعليقات",
+    "time": {
+      "just_now": "للتو"
+    }
+  },
+  "webview_banner": {
+    "title": "لا يمكن استخدام تسجيل الدخول بـGoogle في المتصفح الداخلي للتطبيق",
+    "desc_android": "جرّبنا فتح Chrome. إذا لم يحدث شيء، انسخ الرابط والصقه في Chrome.",
+    "desc_ios": "يرجى فتح Safari أو Chrome، ثم لصق الرابط لمتابعة تسجيل الدخول.",
+    "copy_btn": "نسخ الرابط",
+    "copy_btn_copied": "تم النسخ",
+    "close": "إغلاق"
+  },
+  "privacy_policy": {
+    "title": "سياسة الخصوصية",
+    "effective_date": "تاريخ النفاذ: 21 أبريل 2024",
+    "table": {
+      "category": "الفئة",
+      "items": "العناصر التي تم جمعها",
+      "purpose": "الغرض",
+      "retention": "فترة الاحتفاظ"
+    },
+    "collection": {
+      "title": "1. جمع واستخدام المعلومات الشخصية",
+      "required": "مطلوب",
+      "required_items": "الاسم، البريد الإلكتروني، معلومات الحجز (التاريخ، الوقت، المتجر، الخدمة)، معرف تسجيل دخول اجتماعي",
+      "required_purpose": "تسجيل المستخدم، التعريف، توفير الخدمة (الحجز)، استشارة العملاء",
+      "auto": "الجمع التلقائي",
+      "auto_items": "عنوان IP، ملفات تعريف الارتباط، معلومات الجهاز، سجلات استخدام الخدمة",
+      "auto_purpose": "تحسين جودة الخدمة ومنع الاحتيال"
+    },
+    "retention": {
+      "title": "2. فترة الاحتفاظ والاستخدام",
+      "content": "من حيث المبدأ، يتم الاحتفاظ بالمعلومات الشخصية حتى يتم سحب العضوية. ومع ذلك، قد يتم الاحتفاظ بها لفترة تتطلبها القوانين ذات الصلة إذا لزم الأمر.",
+      "legal_basis": "الامتثال للقوانين ذات الصلة (على سبيل المثال، قانون التجارة الإلكترونية)"
+    },
+    "third_party": {
+      "title": "3. تقديم المعلومات الشخصية لأطراف ثالثة",
+      "content": "تقوم MyKello بتزويد الشركاء التاليين بالمعلومات الشخصية لتسهيل تقديم الخدمة.",
+      "providers": "Supabase (قاعدة البيانات)، Google (المصادقة)، X (المصادقة)"
+    },
+    "overseas": {
+      "title": "4. نقل المعلومات الشخصية إلى الخارج",
+      "recipient": "المستلم",
+      "country": "البلد",
+      "purpose": "الغرض من النقل",
+      "items": "العناصر المنقولة",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "الولايات المتحدة الأمريكية",
+      "storage_auth": "تخزين البيانات ومصادقة المستخدم (OAuth 2.0)",
+      "log_items": "البريد الإلكتروني، معلومات الملف الشخصي، سجلات استخدام الخدمة"
+    },
+    "destruction": {
+      "title": "5. إجراءات وطريقة الإتلاف",
+      "content": "يتم إتلاف المعلومات الشخصية فور تحقيق الغرض منها. يتم حذف الملفات الإلكترونية باستخدام طرق تقنية تجعل استعادتها مستحيلة."
+    }
+  },
   "signup_consent": {
     "all_agree": "أوافق على جميع الشروط.",
     "privacy_required": "[إلزامي] الموافقة على جمع واستخدام المعلومات الشخصية",
-    "privacy_optional": "[اختياري] الموافقة على تلقي المعلومات التسويقية",
+    "privacy_optional": "[اختياري] الموافقة على تلقي معلومات التسويق",
     "view_detail": "عرض التفاصيل",
     "terms_required": "[إلزامي] الموافقة على شروط الخدمة"
   },
@@ -938,72 +1608,27 @@
     "effective_date": "تاريخ النفاذ: 21 أبريل 2024",
     "definitions": {
       "title": "1. تعريف الخدمة",
-      "content": "توفر MyKello منصة وكالة حجز خدمات تجميل تهدف إلى تسهيل الحجز والتواصل بين المستخدمين ومزودي خدمات التجميل."
+      "content": "توفر MyKello منصة وكالة حجز خدمات التجميل لتسهيل الحجوزات والتواصل بين المستخدمين ومقدمي خدمات التجميل."
     },
     "benefits": {
-      "title": "2. مزايا العضوية",
-      "signup": "يحصل الأعضاء الجدد على قسيمة خصم 5% عند التسجيل بنجاح.",
-      "referral": "عند التسجيل باستخدام رمز إحالة، يحصل كل من المحيل والمحال إليه على قسيمة خصم 5%."
+      "title": "2. فوائد العضو",
+      "signup": "يحصل الأعضاء الجدد على كوبون خصم 5% عند التسجيل بنجاح.",
+      "referral": "عندما ينضم عضو جديد باستخدام كود إحالة، يحصل كل من المحيل والمحال على كوبون خصم 5%."
     },
     "refund_policy": {
       "title": "3. سياسة الإلغاء والاسترداد",
-      "subtitle": "يتم حساب نسب الاسترداد بناءً على وقت الإลغاء قبل موعد الحجز:",
+      "subtitle": "يتم احتساب معدلات الاسترداد بناءً على وقت الإلغاء قبل الموعد المقرر:",
       "five_days": "قبل 5 أيام: استرداد 100%",
       "three_days": "قبل 3 أيام: استرداد 90%",
       "two_days": "قبل يومين: استرداد 70%",
       "one_day": "قبل يوم واحد: استرداد 50%",
-      "same_day": "في نفس اليوم أو عدم الحضور (No-show): لا يوجد استرداد",
-      "note": "قد تختلف معالجة الاسترداد النهائية بناءً على سياسة المتجر المحددة."
+      "same_day": "في نفس اليوم أو عدم الحضور: لا استرداد",
+      "note": "قد تختلف معالجة الاسترداد النهائي اعتمادًا على سياسة المتجر المحددة."
     },
     "liability": {
-      "title": "4. تحديد المسؤولية",
-      "interpretation": "ميزة 'الترجمة الفورية' هي أداة تكميلية لراحة المستخدم. MyKello ليست مسؤولة عن أخطاء الحجز أو النزاعات الناشئة عن عدم دقة الترجمة الآلية أو اليدوية.",
-      "community": "MyKello ليست مسؤولة عن أي أضرار أو حوادث أو نزاعات ناتجة عن التجمعات التطوعية غير المتصلة بالإنترنت أو المعاملات الشخصية بين المستخدمين التي تتم من خلال ميزات المجتمع."
-    }
-  },
-  "privacy_policy": {
-    "title": "سياسة الخصوصية",
-    "effective_date": "تاريخ النفاذ: 21 أبريل 2024",
-    "table": {
-      "category": "الفئة",
-      "items": "العناصر التي يتم جمعها",
-      "purpose": "غرض الجمع",
-      "retention": "فترة الاحتفاظ"
-    },
-    "collection": {
-      "title": "1. جمع واستخدام المعلومات الشخصية",
-      "required": "العناصر المطلوبة",
-      "required_items": "الاسم، البريد الإلكتروني، معلومات الحجز (التاريخ، الوقت، المتجر، الخدمة)، معرفات تسجيل الدخول الاجتماعي",
-      "required_purpose": "تسجيل المستخدم، المصادقة، تقديم الخدمة (الحجز)، استشارة العملاء",
-      "auto": "العناصر التي يتم جمعها تلقائياً",
-      "auto_items": "عنوان IP، الكوكيز، معلومات الجهاز، سجل استخدام الخدمة",
-      "auto_purpose": "تحسين جودة الخدمة ومنع الاحتيال"
-    },
-    "retention": {
-      "title": "2. فترة الاحتفاظ بالمعلومات الشخصية واستخدامها",
-      "content": "من حيث المبدأ، يتم الاحتفاظ بالمعلومات الشخصية حتى الانسحاب من العضوية. ومع ذلك، إذا كانت القوانين ذات الصلة تفرض ذلك، فسيتم الاحتفاظ بها للفترة التي يحددها القانون.",
-      "legal_basis": "الامتثال للقوانين ذات الصلة (مثل قانون التجارة الإلكترونية، إلخ.)"
-    },
-    "third_party": {
-      "title": "3. تقديم المعلومات الشخصية لأطراف ثالثة",
-      "content": "تقدم MyKello المعلومات الشخصية للشركاء التاليين لتسهيل تقديم الخدمة.",
-      "providers": "Supabase (قاعدة بيانات)، Google (المصادقة)، X (المصادقة)"
-    },
-    "overseas": {
-      "title": "4. نقل المعلومات الشخصية للخارج",
-      "recipient": "المتلقي",
-      "country": "الدولة",
-      "purpose": "غرض النقل",
-      "items": "العناصر المنقولة",
-      "supabase_name": "Supabase Inc.",
-      "google_name": "Google LLC",
-      "usa": "الولايات المتحدة الأمريكية (USA)",
-      "storage_auth": "تخزين البيانات ومصادقة OAuth 2.0",
-      "log_items": "البريد الإلكتروني، معلومات الملف الشخصي، سجلات استخدام الخدمة"
-    },
-    "destruction": {
-      "title": "5. إجراءات وطرق إتلاف المعلومات",
-      "content": "يتم إتلاف المعلومات الشخصية فور تحقيق الغرض منها. يتم حذف الملفات الإلكترونية باستخدام طرق تقنية تجعل استعادتها مستحيلة."
+      "title": "4. حدود المسؤولية",
+      "interpretation": "ميزة 'الترجمة الفورية' هي أداة تكميلية مقدمة لراحة المستخدم. MyKello ليست مسؤولة عن أخطاء الحجز أو النزاعات الناشئة عن عدم الدقة في ترجمة الذكاء الاصطناعي أو الترجمة اليدوية.",
+      "community": "MyKello ليست مسؤولة عن أي أضرار أو حوادث أو نزاعات ناتجة عن اللقاءات التطوعية غير المتصلة بالإنترنت أو المعاملات الشخصية بين المستخدمين التي تتم من خلال ميزات المجتمع."
     }
   }
 }

@@ -1308,6 +1308,12 @@
     "lang_th": "タイ語",
     "lang_id": "インドネシア語",
     "lang_ms": "マレー語",
+    "lang_es": "スペイン語",
+    "lang_fr": "フランス語",
+    "lang_de": "ドイツ語",
+    "lang_ar": "アラビア語",
+    "lang_pt": "ポルトガル語",
+    "lang_ru": "ロシア語",
     "intent_booking_confirm": "予約確定",
     "intent_service_request": "サービスリクエスト伝達",
     "intent_allergy_notice": "敏感情報伝達",
@@ -1368,8 +1374,13 @@
     "request_memo": "リクエストメモ",
     "request_memo_empty": "特別なリクエストはありません。",
     "delivery_title": "伝達情報",
+    "delivery_lang": "伝達言語",
+    "delivery_intent": "伝達目的",
     "message_korean": "店舗への伝達内容",
     "message_localized": "お客様への伝達内容(翻訳)",
+    "manage_title": "予約管理",
+    "manage_desc": "リクエスト中または確定状態でキャンセルできます。キャンセル後は元に戻せません。",
+    "manage_disabled": "現在の状態では管理できません。",
     "action_view_on_map": "地図で見る",
     "action_change": "予約変更リクエスト",
     "action_cancel": "予約キャンセル",
@@ -1382,14 +1393,35 @@
     "error_change": "変更リクエストに失敗しました。",
     "error_change_reason": "変更理由を入力してください。",
     "cancel_panel_title": "予約キャンセル",
+    "cancel_reason_schedule": "日程変更",
+    "cancel_reason_other_shop": "別の店舗を利用",
+    "cancel_reason_mistake": "誤って予約",
+    "cancel_reason_etc": "その他",
     "cancel_details_placeholder": "キャンセルの詳細があれば入力してください。",
     "cancel_confirm": "予約をキャンセルする",
     "cancel_processing": "キャンセル中...",
+    "cancel_close": "閉じる",
     "cancel_success": "予約がキャンセルされました。",
+    "cancel_info_title": "キャンセル情報",
+    "cancel_time": "時間",
+    "cancel_time_empty": "確認中",
+    "cancel_by": "キャンセル者",
+    "cancel_by_customer": "お客様",
+    "cancel_by_admin": "店舗",
+    "cancel_by_unknown": "確認中",
+    "cancel_reason_label": "理由",
+    "cancel_reason_empty": "特定の理由なし",
     "error_cancel": "キャンセルに失敗しました。",
     "error_cancel_reason": "キャンセル理由を選択してください。",
     "error_login": "ログインが必要です。",
-    "open_interpreter": "通訳機を開く"
+    "error_load_401": "予約を確認するにはログインしてください。",
+    "error_load": "予約を読み込めませんでした。",
+    "error_cancel_400": "現在この予約はキャンセルできません。",
+    "error_cancel_403": "ご自身の予約のみキャンセルできます。",
+    "error_alt": "処理に失敗しました。",
+    "open_interpreter": "通訳機を開く",
+    "interpreter_visit_context": "{{storeName}} 訪問中に通訳機を使用中。",
+    "interpreter_visit_service_context": "{{storeName}} で {{serviceName}} サービスのための通訳機を使用中。"
   },
   "settings_page": {
     "hero": {
@@ -1666,7 +1698,51 @@
       }
     },
     "community_hub": {
-      "title": "コミュニティ活動"
+      "title": "コミュニティ活動",
+      "eyebrow": "マイアクティビティ",
+      "subtitle": "活動履歴を一目で確認できます。",
+      "browse": "コミュニティを見る",
+      "loading": "読み込み中...",
+      "summary_hint": "これまでのコミュニティ活動のまとめ",
+      "sync_error": "データを読み込めませんでした。",
+      "no_comments": "コメントなし",
+      "posts_desc": "投稿した記事の一覧",
+      "reviews_desc": "投稿したレビューの一覧",
+      "meetups_desc": "参加したミートアップの一覧",
+      "summary": {
+        "posts": "投稿",
+        "reviews": "レビュー",
+        "meetups": "ミートアップ"
+      },
+      "tabs": {
+        "posts": "投稿",
+        "reviews": "レビュー",
+        "meetups": "ミートアップ"
+      },
+      "type": {
+        "meetup": "ミートアップ",
+        "travel": "旅行"
+      },
+      "review_prompts": {
+        "title": "レビューを書いてみませんか",
+        "desc": "訪れた店舗にレビューを残しましょう。"
+      },
+      "empty": {
+        "posts": {
+          "title": "投稿がありません",
+          "desc": "まだ投稿した記事がありません。"
+        },
+        "reviews": {
+          "title": "レビューがありません",
+          "desc": "利用が完了した店舗にレビューを残しましょう。",
+          "no_completed": "完了した予約がありません。",
+          "cta": "予約履歴を見る"
+        },
+        "meetups": {
+          "title": "参加したミートアップなし",
+          "desc": "まだ参加したミートアップがありません。"
+        }
+      }
     },
     "messages": {
       "upload_success": "プロフィール写真が更新されました。",
@@ -2041,55 +2117,75 @@
     "submit": "入力完了",
     "skip": "あとで"
   },
+  "signup": {
+    "subtitle": "現地人のように韓国を体験しよう",
+    "name_label": "名前",
+    "name_placeholder": "名前を入力してください",
+    "email_label": "メールアドレス",
+    "country_label": "国・地域",
+    "password_label": "パスワード",
+    "loading": "アカウント作成中...",
+    "success": "アカウントが作成されました！メールを確認してログインしてください。",
+    "login_prompt": "すでにアカウントをお持ちですか？",
+    "login_link": "ログイン"
+  },
+  "webview_banner": {
+    "title": "アプリ内ブラウザではGoogleログインをご利用いただけません",
+    "desc_android": "Chromeで開こうとしました。開かない場合はリンクをコピーしてChromeに貼り付けてください。",
+    "desc_ios": "SafariまたはChromeを開き、リンクを貼り付けてログインしてください。",
+    "copy_btn": "リンクをコピー",
+    "copy_btn_copied": "コピーしました",
+    "close": "閉じる"
+  },
   "privacy_policy": {
-    "title": "個人情報保護方針",
+    "title": "プライバシーポリシー",
     "effective_date": "施行日：2024年4月21日",
     "table": {
-      "category": "カテゴリ",
-      "items": "収集項目",
-      "purpose": "利用目的",
+      "category": "項目",
+      "items": "収集情報",
+      "purpose": "収集目的",
       "retention": "保有期間"
     },
     "collection": {
       "title": "1. 個人情報の収集および利用",
-      "required": "必須項目",
-      "required_items": "氏名、メールアドレス、予約情報（日付、時間、店舗、サービス）、ソーシャルログインID",
-      "required_purpose": "会員登録、本人確認、サービス提供（予約）、カスタマー相談",
-      "auto": "自動収集項目",
+      "required": "必須",
+      "required_items": "氏名、メールアドレス、予約情報（日付、時間、店舗、サービス）、SNSログインID",
+      "required_purpose": "会員登録、本人識別、サービス提供（予約）、カスタマー相談",
+      "auto": "自動収集",
       "auto_items": "IPアドレス、クッキー、端末情報、サービス利用履歴",
       "auto_purpose": "サービス品質の向上および不正利用の防止"
     },
     "retention": {
-      "title": "2. 個人情報の保有および利用期間",
-      "content": "原則として、個人情報は退会時まで保持されます。ただし、関連法令により義務付けられている場合は、当該期間中保持されます。",
-      "legal_basis": "関連法令の遵守（電子商取引法など）"
+      "title": "2. 保有および利用期間",
+      "content": "個人情報は原則として会員退会時まで保有します。ただし、関連法令により保存する必要がある場合は、当該期間中保管することがあります。",
+      "legal_basis": "関連法令の遵守（例：電子商取引法など）"
     },
     "third_party": {
       "title": "3. 個人情報の第三者提供",
-      "content": "MyKelloは、円滑なサービス提供のため、以下のパートナー企業に個人情報を提供しています。",
-      "providers": "Supabase (データベース), Google (認証), X (認証)"
+      "content": "MyKelloはサービス提供のため、以下のパートナーに個人情報を提供します。",
+      "providers": "Supabase（データベース）、Google（本人認証）、X（本人認証）"
     },
     "overseas": {
       "title": "4. 個人情報の国外移転",
-      "recipient": "受託業者",
-      "country": "移転先国",
+      "recipient": "受領者",
+      "country": "国",
       "purpose": "移転目的",
       "items": "移転項目",
       "supabase_name": "Supabase Inc.",
       "google_name": "Google LLC",
-      "usa": "アメリカ (USA)",
-      "storage_auth": "データ保管およびOAuth 2.0認証",
+      "usa": "アメリカ",
+      "storage_auth": "データ保存およびユーザー認証（OAuth 2.0）",
       "log_items": "メールアドレス、プロフィール情報、サービス利用ログ"
     },
     "destruction": {
-      "title": "5. 個人情報の破棄手続きおよび方法",
-      "content": "個人情報は目的達成後、直ちに破棄されます。電子的なファイルは、復元不可能な技術的方法を用いて削除されます。"
+      "title": "5. 破棄の手順および方法",
+      "content": "個人情報は目的達成後、遅滞なく破棄します。電子的なファイル形式は、復元が不可能な技術的方法で削除します。"
     }
   },
   "signup_consent": {
     "all_agree": "すべての規約に同意します。",
     "privacy_required": "[必須] 個人情報の収集および利用への同意",
-    "privacy_optional": "[選択] マーケティング情報の受信同意",
+    "privacy_optional": "[選択] マーケティング情報の受信への同意",
     "view_detail": "詳細を見る",
     "terms_required": "[必須] サービス利用規約への同意"
   },
@@ -2098,27 +2194,27 @@
     "effective_date": "施行日：2024年4月21日",
     "definitions": {
       "title": "1. サービスの定義",
-      "content": "MyKelloは、ユーザーとビューティーサービス提供者を繋ぎ、予約およびコミュニケーションを円滑にするビューティーサービス予約代行プラットフォームを提供します。"
+      "content": "MyKelloは、ユーザーとビューティーサービス提供者の間の予約およびコミュニケーションを支援する、ビューティーサービス予約代行プラットフォームを提供します。"
     },
     "benefits": {
       "title": "2. 会員特典",
-      "signup": "新規会員登録時、5%割引クーポンを差し上げます。",
-      "referral": "招待コードを利用して登録した場合、招待した側とされた側の両方に5%割引クーポンを差し上げます。"
+      "signup": "新規登録時に5%割引クーポンが支給されます。",
+      "referral": "招待コードを通じて登録した場合、招待した側と招待された側の両方に5%割引クーポンが支給されます。"
     },
     "refund_policy": {
       "title": "3. キャンセルおよび返金規定",
-      "subtitle": "予約日を基準としたキャンセル時期によって、以下の通り返金されます：",
+      "subtitle": "予約日を基準としたキャンセル時点に応じて、以下の返金率が適用されます。",
       "five_days": "5日前：100%返金",
       "three_days": "3日前：90%返金",
       "two_days": "2日前：70%返金",
       "one_day": "1日前：50%返金",
-      "same_day": "当日またはノーショー：返金不可",
-      "note": "最終的な返金処理は、各店舗のポリシーによって異なる場合があります。"
+      "same_day": "当日または無断キャンセル（No-show）：返金不可",
+      "note": "最終的な返金処理は各店舗のポリシーにより異なる場合があります。"
     },
     "liability": {
-      "title": "4. 免責事項",
-      "interpretation": "「リアルタイム通訳」機能はユーザーの利便性のための補助ツールです。翻訳の不正確さに起因する予約ミスや紛争について、当社は一切の責任 को負いません。",
-      "community": "コミュニティ機能を通じたユーザー間の自発的なオフラインの集まりや個人取引から発生した損害、事故、紛争について、当社は一切の責任を負いません。"
+      "title": "4. 責任の制限",
+      "interpretation": "「リアルタイム通訳」機能は、ユーザーの利便性のために提供される付加的なツールです。MyKelloは、AI翻訳または手動通訳の不一致によって発生する予約エラーや紛争について責任を負いません。",
+      "community": "ユーザーがコミュニティ機能を通じて自発的に行ったオフラインの集まりや個人間の取引から発生する損害、事故、または紛争について、MyKelloは責任を負いません。"
     }
   }
 }

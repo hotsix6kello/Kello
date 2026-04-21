@@ -2,20 +2,59 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import styles from "./login.module.css";
 import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
 
+// 인앱브라우저(WebView) 감지: UA 키워드 + Android wv 플래그 + iOS Safari 없음
+function detectWebView(): boolean {
+    if (typeof navigator === "undefined") return false;
+    const ua = navigator.userAgent;
+    const inAppKeywords = /KAKAOTALK|Instagram|FBAN|FBAV|Line\/|NaverApp|MicroMessenger|Snapchat|Twitter/i;
+    if (inAppKeywords.test(ua)) return true;
+    if (/Android/i.test(ua) && /wv/.test(ua)) return true;
+    if (/iPhone|iPod|iPad/.test(ua) && !/Safari/.test(ua)) return true;
+    return false;
+}
+
+// Android: intent:// 스킴으로 Chrome 강제 오픈. iOS: 클립보드 복사 후 true 반환
+function tryOpenInExternalBrowser(url: string): "android-intent" | "ios-copy" {
+    const ua = navigator.userAgent;
+    if (/Android/i.test(ua)) {
+        const path = url.replace(/^https?:\/\//, "");
+        window.location.href = `intent://${path}#Intent;scheme=https;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.android.chrome;end`;
+        return "android-intent";
+    }
+    navigator.clipboard?.writeText(url).catch(() => {
+        // clipboard API 미지원 시 무시
+    });
+    return "ios-copy";
+}
+
 export default function LoginPage() {
     const router = useRouter();
+    const { t } = useTranslation("common");
     const [email, setEmail] = useState("");
     const [emailLoading, setEmailLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
+    const [xLoading, setXLoading] = useState(false);
+    const [facebookLoading, setFacebookLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [magicLinkSent, setMagicLinkSent] = useState(false);
+    const [webViewWarning, setWebViewWarning] = useState<"idle" | "android" | "ios">("idle");
+    const [linkCopied, setLinkCopied] = useState(false);
 
     // --- Google OAuth ---
     const handleGoogleLogin = async () => {
+        // WebView 감지 시 외부 브라우저 유도 UI 표시
+        if (detectWebView()) {
+            const currentUrl = window.location.href;
+            const result = tryOpenInExternalBrowser(currentUrl);
+            setWebViewWarning(result === "android-intent" ? "android" : "ios");
+            return;
+        }
+
         setGoogleLoading(true);
         setError(null);
 
@@ -42,6 +81,58 @@ export default function LoginPage() {
             setError(err instanceof Error ? err.message : "Google login could not start. Please try again.");
         } finally {
             setGoogleLoading(false);
+        }
+    };
+
+    const handleCopyLink = () => {
+        const url = window.location.href;
+        navigator.clipboard?.writeText(url).catch(() => {});
+        setLinkCopied(true);
+        setTimeout(() => setLinkCopied(false), 2500);
+    };
+
+    // --- X (Twitter) OAuth ---
+    const handleXLogin = async () => {
+        setXLoading(true);
+        setError(null);
+
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: "twitter",
+                options: {
+                    redirectTo: `${window.location.origin}/auth/callback`,
+                    scopes: "tweet.read users.read",
+                },
+            });
+
+            if (error) {
+                throw error;
+            }
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "X 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setXLoading(false);
+        }
+    };
+
+    // --- Facebook OAuth ---
+    const handleFacebookLogin = async () => {
+        setFacebookLoading(true);
+        setError(null);
+
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: "facebook",
+                options: {
+                    redirectTo: `${window.location.origin}/auth/callback`,
+                },
+            });
+
+            if (error) {
+                throw error;
+            }
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Facebook 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setFacebookLoading(false);
         }
     };
 
@@ -97,7 +188,7 @@ export default function LoginPage() {
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        disabled={googleLoading || emailLoading}
+                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
                         style={{
                             width: '100%',
                             display: 'flex',
@@ -111,7 +202,7 @@ export default function LoginPage() {
                             cursor: 'pointer',
                             fontWeight: 600,
                             fontSize: '0.95rem',
-                            marginBottom: '20px',
+                            marginBottom: '10px',
                             color: '#374151',
                             boxShadow: '0 1px 3px rgba(0,0,0,0.07)',
                         }}
@@ -124,6 +215,127 @@ export default function LoginPage() {
                         </svg>
                         {googleLoading ? "연결 중..." : "Google로 계속하기"}
                     </button>
+
+                    {/* WebView 감지 시 외부 브라우저 유도 배너 */}
+                    {webViewWarning !== "idle" && (
+                        <div style={{
+                            background: 'rgba(239,68,68,0.06)',
+                            border: '1.5px solid rgba(239,68,68,0.25)',
+                            borderRadius: '12px',
+                            padding: '16px',
+                            marginBottom: '10px',
+                            fontSize: '0.85rem',
+                            color: '#7f1d1d',
+                            lineHeight: 1.6,
+                        }}>
+                            <p style={{ fontWeight: 700, marginBottom: '6px' }}>
+                                🚫 {t('webview_banner.title')}
+                            </p>
+                            {webViewWarning === "android" ? (
+                                <p style={{ marginBottom: '10px' }}>
+                                    {t('webview_banner.desc_android')}
+                                </p>
+                            ) : (
+                                <p style={{ marginBottom: '10px' }}>
+                                    {t('webview_banner.desc_ios')}
+                                </p>
+                            )}
+                            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                                <button
+                                    type="button"
+                                    onClick={handleCopyLink}
+                                    style={{
+                                        flex: 1,
+                                        padding: '8px 12px',
+                                        borderRadius: '8px',
+                                        border: '1.5px solid rgba(239,68,68,0.35)',
+                                        background: linkCopied ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.08)',
+                                        color: linkCopied ? '#065f46' : '#991b1b',
+                                        fontWeight: 600,
+                                        cursor: 'pointer',
+                                        fontSize: '0.82rem',
+                                        whiteSpace: 'nowrap',
+                                    }}
+                                >
+                                    {linkCopied ? `✓ ${t('webview_banner.copy_btn_copied')}` : `🔗 ${t('webview_banner.copy_btn')}`}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setWebViewWarning("idle")}
+                                    style={{
+                                        padding: '8px 12px',
+                                        borderRadius: '8px',
+                                        border: '1.5px solid #e2e8f0',
+                                        background: 'transparent',
+                                        color: '#94a3b8',
+                                        fontWeight: 500,
+                                        cursor: 'pointer',
+                                        fontSize: '0.82rem',
+                                    }}
+                                >
+                                    {t('webview_banner.close')}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* X (Twitter) 로그인 버튼 */}
+                    <button
+                        type="button"
+                        onClick={handleXLogin}
+                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '10px',
+                            padding: '12px',
+                            borderRadius: '12px',
+                            border: '1.5px solid #000',
+                            background: '#000',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            fontSize: '0.95rem',
+                            marginBottom: '20px',
+                            color: '#fff',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.736-8.849L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                        {xLoading ? "연결 중..." : "X로 계속하기"}
+                    </button>
+
+                    {/* TODO: Facebook 로그인 - 앱 게시 승인 후 활성화 */}
+                    {/* <button
+                        type="button"
+                        onClick={handleFacebookLogin}
+                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '10px',
+                            padding: '12px',
+                            borderRadius: '12px',
+                            border: '1.5px solid #1877F2',
+                            background: '#1877F2',
+                            cursor: 'pointer',
+                            fontWeight: 600,
+                            fontSize: '0.95rem',
+                            marginBottom: '20px',
+                            color: '#fff',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796v8.437C19.612 23.095 24 18.1 24 12.073z" />
+                        </svg>
+                        {facebookLoading ? "연결 중..." : "Facebook으로 계속하기"}
+                    </button> */}
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
                         <div style={{ flex: 1, height: '1px', background: '#e2e8f0' }} />

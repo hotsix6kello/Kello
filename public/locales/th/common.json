@@ -857,6 +857,7 @@
     "status_desc_canceled": "Your booking has been canceled.",
     "status_desc_failed": "Your booking request needs attention.",
     "status_desc_change_requested": "A change to your schedule or service is being requested.",
+    "status_guide_confirmed": "การจองของคุณได้รับการยืนยันแล้ว กรุณาตรวจสอบวันและเวลาก่อนเข้าร้าน",
     "category_hair": "Hair",
     "category_nail": "Nail",
     "category_esthetic": "Esthetic",
@@ -881,10 +882,16 @@
     "loading": "Loading your bookings...",
     "empty": "No beauty bookings yet. Once you complete a booking, it will appear here.",
     "select_prompt": "Select a booking to view its details.",
+    "detail_booking_id": "รหัสการจอง",
     "detail_category": "Category",
     "detail_designer": "Designer",
     "detail_requested_at": "Requested",
     "detail_status": "Current Status",
+    "detail_category_services": "หมวดหมู่ / บริการ",
+    "detail_requested_time": "วันที่ต้องการ",
+    "detail_shop_status": "สถานะของร้าน",
+    "detail_request_info": "ข้อมูลคำขอ",
+    "detail_more_info": "ดูรายละเอียดเพิ่มเติม",
     "detail_designer_default": "Shop's Choice",
     "timeline_title": "Booking Progress",
     "change_request_title": "Change Request Info",
@@ -920,6 +927,8 @@
     "price_addon": "Add-on Price",
     "price_surcharge": "Designer Surcharge",
     "price_total": "Estimated Total",
+    "price_pending_notice": "จะแจ้งราคาหลังร้านยืนยัน",
+    "detail_manage_booking": "จัดการการจอง (เปลี่ยน/ยกเลิก)",
     "request_title": "My Requests",
     "request_memo": "Request Note",
     "request_memo_empty": "No special requests.",
@@ -933,6 +942,7 @@
     "manage_disabled": "This booking cannot be managed at its current status.",
     "action_change": "Request Change",
     "action_cancel": "Cancel Booking",
+    "action_view_on_map": "ดูบนแผนที่",
     "cancel_panel_title": "Cancel Booking",
     "cancel_reason_schedule": "Schedule change",
     "cancel_reason_other_shop": "Chose another salon",
@@ -968,6 +978,7 @@
     "error_change_reason": "Please enter what you'd like to change.",
     "error_change": "Could not send your change request. Please try again later.",
     "error_alt": "Something went wrong. Please try again later.",
+    "open_interpreter": "เปิดล่าม",
     "interpreter_visit_context": "กำลังใช้เครื่องแปลภาษาระหว่างเข้าชม {{storeName}}",
     "interpreter_visit_service_context": "กำลังใช้เครื่องแปลภาษาสำหรับ {{serviceName}} ที่ {{storeName}}",
     "lang_es": "Español",
@@ -1026,7 +1037,7 @@
     "consult_1339_title": "ปรึกษาทางการแพทย์ (1339)",
     "consult_1339_desc": "Professional medical consultation",
     "symptoms_title": "Symptoms",
-    "call_btn": "โทรออก",
+    "call_btn": "โทร",
     "medical": {
       "medicines": {
         "tylenol": "ไทเลนอล",
@@ -1345,7 +1356,8 @@
       "browse_beauty_cta": "Browse Beauty Bookings"
     },
     "profile": {
-      "account_hint": "Account & Settings"
+      "account_hint": "Account & Settings",
+      "avatar_placeholder": "ฉัน"
     },
     "settings": {
       "short": "Settings",
@@ -1363,7 +1375,51 @@
       }
     },
     "community_hub": {
-      "title": "My Community"
+      "title": "My Community",
+      "eyebrow": "กิจกรรมของฉัน",
+      "subtitle": "ดูสรุปกิจกรรมทั้งหมดของคุณได้ในที่เดียว",
+      "browse": "เข้าชมชุมชน",
+      "loading": "กำลังโหลด...",
+      "summary_hint": "สรุปกิจกรรมในชุมชนจนถึงตอนนี้",
+      "sync_error": "ไม่สามารถโหลดข้อมูลได้",
+      "no_comments": "ไม่มีความคิดเห็น",
+      "posts_desc": "รายการโพสต์ที่เขียน",
+      "reviews_desc": "รายการรีวิวที่เขียน",
+      "meetups_desc": "รายการกิจกรรมที่เข้าร่วม",
+      "summary": {
+        "posts": "โพสต์",
+        "reviews": "รีวิว",
+        "meetups": "กิจกรรม"
+      },
+      "tabs": {
+        "posts": "โพสต์",
+        "reviews": "รีวิว",
+        "meetups": "กิจกรรม"
+      },
+      "type": {
+        "meetup": "กิจกรรม",
+        "travel": "การท่องเที่ยว"
+      },
+      "review_prompts": {
+        "title": "เขียนรีวิวของคุณ",
+        "desc": "ฝากรีวิวสำหรับร้านที่คุณเคยเข้าชม"
+      },
+      "empty": {
+        "posts": {
+          "title": "ยังไม่มีโพสต์",
+          "desc": "ยังไม่มีโพสต์ที่เขียน"
+        },
+        "reviews": {
+          "title": "ยังไม่มีรีวิว",
+          "desc": "ฝากรีวิวสำหรับร้านที่คุณจองสำเร็จแล้ว",
+          "no_completed": "ยังไม่มีการจองที่เสร็จสมบูรณ์",
+          "cta": "ดูประวัติการจอง"
+        },
+        "meetups": {
+          "title": "ยังไม่ได้เข้าร่วมกิจกรรม",
+          "desc": "ยังไม่ได้เข้าร่วมกิจกรรมใด"
+        }
+      }
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
@@ -1737,6 +1793,26 @@
     "placeholder": "ใส่รหัสแนะนำ",
     "submit": "ยืนยัน",
     "skip": "ข้ามไปก่อน"
+  },
+  "signup": {
+    "subtitle": "สัมผัสประสบการณ์เกาหลีเหมือนคนท้องถิ่น",
+    "name_label": "ชื่อ-นามสกุล",
+    "name_placeholder": "กรุณากรอกชื่อของคุณ",
+    "email_label": "อีเมล",
+    "country_label": "ประเทศ",
+    "password_label": "รหัสผ่าน",
+    "loading": "กำลังสร้างบัญชี...",
+    "success": "สร้างบัญชีสำเร็จ! กรุณาตรวจสอบอีเมลเพื่อยืนยันและเข้าสู่ระบบ",
+    "login_prompt": "มีบัญชีอยู่แล้ว?",
+    "login_link": "เข้าสู่ระบบ"
+  },
+  "webview_banner": {
+    "title": "เบราว์เซอร์ในแอปไม่รองรับการเข้าสู่ระบบ Google",
+    "desc_android": "พยายามเปิด Chrome แล้ว หากไม่มีอะไรเกิดขึ้น โปรดคัดลอกลิงก์และวางใน Chrome",
+    "desc_ios": "กรุณาเปิด Safari หรือ Chrome แล้ววางลิงก์เพื่อดำเนินการต่อ",
+    "copy_btn": "คัดลอกลิงก์",
+    "copy_btn_copied": "คัดลอกแล้ว",
+    "close": "ปิด"
   },
   "privacy_policy": {
     "title": "นโยบายความเป็นส่วนตัว",

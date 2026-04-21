@@ -914,57 +914,631 @@
       "reason_signup": "註冊折扣券",
       "reason_referred": "推薦碼折扣券",
       "reason_referrer": "好友推薦折扣券"
+    },
+    "dashboard": {
+      "bookings_empty": "目前無預約。",
+      "admin_title": "管理員控制台",
+      "admin_menu": {
+        "dashboard": "管理員儀表板",
+        "dashboard_desc": "整體狀況與統計",
+        "bookings": "預約總帳",
+        "bookings_desc": "管理所有使用者預約與狀態",
+        "partners": "夥伴審核",
+        "partners_desc": "審核夥伴申請並核准",
+        "users": "使用者管理",
+        "users_desc": "會員清單與權限設定"
+      },
+      "partner": {
+        "none_title": "加入成為夥伴",
+        "none_desc": "成為 Kello 官方夥伴，登錄您的服務。",
+        "none_cta": "立即申請",
+        "pending_title": "審核中",
+        "pending_desc": "目前正在審核您的夥伴申請。",
+        "approved_title": "夥伴已核准",
+        "approved_desc": "您可以在夥伴主控台管理服務。",
+        "rejected_title": "申請被拒（需修改）",
+        "rejected_desc": "請再次確認申請資訊。",
+        "rejected_cta": "重新申請"
+      }
+    },
+    "community": {
+      "empty_simple": "您尚未撰寫任何社群貼文。"
+    },
+    "bookings": {
+      "title": "我的預約",
+      "pending_service": "確認服務資訊中",
+      "matching_status": "正在尋找合適的店家",
+      "matching_desc": "等待店家配對中",
+      "price_pending": "待店家確認後告知金額",
+      "error_fetch": "無法載入預約。",
+      "browse_beauty_cta": "瀏覽美容預約"
+    },
+    "profile": {
+      "account_hint": "帳號與設定",
+      "avatar_placeholder": "我的"
+    },
+    "settings": {
+      "short": "設定",
+      "account": {
+        "default_name": "顧客",
+        "phone": {
+          "placeholder": "例如 ${internationalPhoneExample}",
+          "helper_empty": "含國碼。例如 ${internationalPhoneExample}",
+          "helper_saved": "目前儲存的國際電話號碼。",
+          "helper_invalid": "請以正確格式輸入。例如 ${internationalPhoneExample}"
+        }
+      },
+      "admin": {
+        "enabled": "已啟用"
+      }
+    },
+    "community_hub": {
+      "title": "我的社群",
+      "eyebrow": "我的動態",
+      "subtitle": "一覽您的所有活動記錄。",
+      "browse": "瀏覽社群",
+      "loading": "載入中...",
+      "summary_hint": "迄今為止的社群活動摘要",
+      "sync_error": "資料載入失敗。",
+      "no_comments": "無留言",
+      "posts_desc": "已發佈的貼文清單",
+      "reviews_desc": "已發佈的評論清單",
+      "meetups_desc": "已參與的聚會清單",
+      "summary": {
+        "posts": "貼文",
+        "reviews": "評論",
+        "meetups": "聚會"
+      },
+      "tabs": {
+        "posts": "貼文",
+        "reviews": "評論",
+        "meetups": "聚會"
+      },
+      "type": {
+        "meetup": "聚會",
+        "travel": "旅行"
+      },
+      "review_prompts": {
+        "title": "留下您的評論",
+        "desc": "為您造訪過的店家留下評論吧。"
+      },
+      "empty": {
+        "posts": {
+          "title": "尚無貼文",
+          "desc": "還沒有發佈任何貼文。"
+        },
+        "reviews": {
+          "title": "尚無評論",
+          "desc": "為已完成預約的店家留下評論吧。",
+          "no_completed": "尚無已完成的預約。",
+          "cta": "查看預約記錄"
+        },
+        "meetups": {
+          "title": "尚無參與的聚會",
+          "desc": "還沒有參與任何聚會。"
+        }
+      }
+    },
+    "messages": {
+      "upload_success": "個人頭像已更新。",
+      "upload_failed": "上傳失敗，請再試一次。"
+    },
+    "bookings_hub": {
+      "meta": {
+        "reference": "參考"
+      }
     }
   },
+  "beauty_bookings": {
+    "page_title": "我的美容預約",
+    "hero_eyebrow": "我的美容預約",
+    "hero_title": "一站式查看預約請求到備注資訊。",
+    "hero_text": "最新的預約優先顯示，可快速區分進行中和已完成的預約。",
+    "login_title": "登入後查看預約記錄。",
+    "login_text": "登入後可一覽所有美容預約請求及工作人員備注。",
+    "login_action": "前往登入",
+    "back_to_my": "返回我的頁面",
+    "deeplink_toast": "已開啟您選擇的預約。✨",
+    "tab_all": "全部",
+    "tab_active": "進行中",
+    "tab_completed": "已完成",
+    "tab_canceled": "已取消",
+    "tab_aria": "預約狀態篩選",
+    "status_requested": "預約請求中",
+    "status_confirmed": "預約已確認",
+    "status_completed": "已完成",
+    "status_canceled": "已取消",
+    "status_failed": "需要確認",
+    "status_change_requested": "變更請求中",
+    "status_desc_requested": "店家正在確認檔期。",
+    "status_desc_confirmed": "預約時間已確認。",
+    "status_desc_completed": "服務已完成。",
+    "status_desc_canceled": "預約已取消。",
+    "status_desc_failed": "此請求需要確認。",
+    "status_desc_change_requested": "正在請求變更行程或服務。",
+    "status_guide_confirmed": "預約已確認，請在前往前再次核對日期和時間。",
+    "category_hair": "美髮",
+    "category_nail": "美甲",
+    "category_esthetic": "美容",
+    "category_waxing": "除毛",
+    "category_makeup": "彩妝",
+    "category_lash": "睫毛",
+    "lang_ko": "한국어",
+    "lang_en": "English",
+    "lang_ja": "日本語",
+    "lang_zh_cn": "简体中文",
+    "lang_zh_hk": "繁體中文",
+    "lang_vi": "Tiếng Việt",
+    "lang_th": "ไทย",
+    "lang_id": "Bahasa Indonesia",
+    "lang_ms": "Bahasa Melayu",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский",
+    "intent_booking_confirm": "確認預約",
+    "intent_service_request": "傳達服務請求",
+    "intent_allergy_notice": "傳達敏感資訊",
+    "intent_style_consultation": "造型諮詢支援",
+    "card_primary_service": "主要服務",
+    "card_estimated_price": "預估金額",
+    "loading": "正在載入預約資訊...",
+    "empty": "尚無美容預約。完成預約後將在此顯示。",
+    "select_prompt": "選擇一個預約以查看詳情。",
+    "detail_booking_id": "預約ID",
+    "detail_category": "類別",
+    "detail_designer": "設計師",
+    "detail_requested_at": "請求時間",
+    "detail_status": "狀態",
+    "detail_category_services": "類別 / 服務",
+    "detail_requested_time": "希望行程",
+    "detail_shop_status": "店家進展",
+    "detail_request_info": "請求資訊",
+    "detail_more_info": "查看詳情",
+    "detail_designer_default": "交由店家決定",
+    "timeline_title": "預約進展",
+    "change_request_title": "變更請求資訊",
+    "change_request_hint": "管理員正在審核您的請求，請稍候。",
+    "change_request_time": "請求時間",
+    "change_request_reason": "原因",
+    "change_request_reason_empty": "無特定原因",
+    "change_request_time_empty": "確認中",
+    "change_result_title": "最近變更結果",
+    "change_result_status": "狀態",
+    "change_result_approved": "✅ 已核准",
+    "change_result_rejected": "❌ 已拒絕",
+    "change_result_review_time": "審核時間",
+    "alt_offer_title": "新行程提案",
+    "alt_offer_desc": "您請求的時間已約滿，店家提出了以下行程方案，請確認。",
+    "alt_offer_admin_label": "店家通知",
+    "alt_offer_accept": "接受並變更",
+    "alt_offer_reject": "拒絕提案",
+    "alt_offer_processing": "處理中...",
+    "alt_offer_response_title": "行程提案結果",
+    "alt_offer_accepted_result": "提案已被接受。",
+    "alt_offer_rejected_result": "提案已被拒絕。",
+    "alt_response_accepted": "已接受提案，行程已變更。",
+    "alt_response_rejected": "已拒絕提案。",
+    "alt_slot_select_error": "請從提議的時段中選擇一個。",
+    "service_info_title": "服務資訊",
+    "service_primary": "主要服務",
+    "service_addons": "附加選項",
+    "service_region": "預約地區",
+    "service_addons_empty": "無附加選項",
+    "price_title": "金額明細",
+    "price_base": "基本金額",
+    "price_addon": "附加選項金額",
+    "price_surcharge": "設計師指定費",
+    "price_total": "預估總計",
+    "price_pending_notice": "待店家確認後告知",
+    "detail_manage_booking": "管理預約（變更/取消）",
+    "request_title": "我的請求",
+    "request_memo": "請求備注",
+    "request_memo_empty": "無特殊請求。",
+    "delivery_title": "傳達資訊",
+    "delivery_lang": "傳達語言",
+    "delivery_intent": "傳達目的",
+    "message_korean": "店家用韓文備注",
+    "message_localized": "本地化備注",
+    "manage_title": "管理預約",
+    "manage_desc": "可在請求中或已確認狀態下取消預約，取消後無法恢復。",
+    "manage_disabled": "目前狀態無法管理。",
+    "action_change": "變更行程/資訊",
+    "action_cancel": "取消預約",
+    "action_view_on_map": "在地圖上查看",
+    "cancel_panel_title": "取消預約",
+    "cancel_reason_schedule": "更改行程",
+    "cancel_reason_other_shop": "選擇其他店家",
+    "cancel_reason_mistake": "誤操作預約",
+    "cancel_reason_etc": "其他",
+    "cancel_details_placeholder": "如有其他取消原因，請填寫。",
+    "cancel_confirm": "確認取消",
+    "cancel_processing": "取消中...",
+    "cancel_close": "關閉",
+    "cancel_success": "預約已取消。",
+    "cancel_info_title": "取消資訊",
+    "cancel_time": "時間",
+    "cancel_time_empty": "確認中",
+    "cancel_by": "取消方",
+    "cancel_by_customer": "使用者",
+    "cancel_by_admin": "店家",
+    "cancel_by_unknown": "確認中",
+    "cancel_reason_label": "原因",
+    "cancel_reason_empty": "無特定原因",
+    "change_panel_title": "變更請求",
+    "change_placeholder": "例：希望變更為3月20日下午2點 / 希望變更服務項目",
+    "change_submit": "傳送變更請求",
+    "change_processing": "請求中...",
+    "change_close": "關閉",
+    "change_success": "變更請求已傳送。",
+    "error_login": "請再次確認登入狀態。",
+    "error_load_401": "請登入以查看預約。",
+    "error_load": "無法載入預約。",
+    "error_cancel_400": "目前無法取消此預約。",
+    "error_cancel_403": "只能取消本人的預約。",
+    "error_cancel": "取消失敗，請再試一次。",
+    "error_cancel_reason": "請選擇或填寫取消原因。",
+    "error_change_reason": "請填寫您希望變更的內容。",
+    "error_change": "變更請求失敗。",
+    "error_alt": "處理失敗。",
+    "open_interpreter": "開啟翻譯器",
+    "interpreter_visit_context": "正在 {{storeName}} 使用翻譯器。",
+    "interpreter_visit_service_context": "在 {{storeName}} 進行 {{serviceName}} 服務時使用翻譯器。"
+  },
+  "settings_page": {
+    "hero": {
+      "avatar": {
+        "placeholder": "我的",
+        "error": "更換頭像失敗。",
+        "change": "更換頭像",
+        "register": "新增頭像"
+      },
+      "default_title": "我的設定",
+      "stats": "{{postCount}} 篇貼文 · {{reviewCount}} 則評論 · {{bookingCount}} 筆預約",
+      "login_promo": {
+        "title": "登入後查看更多設定。",
+        "desc": "個人頁籤可見，但連結資料與通知需登入後確認。"
+      },
+      "tabs_aria": "設定頁籤"
+    },
+    "tabs": {
+      "personal": {
+        "label": "個人",
+        "desc": "查看電子郵件、聯絡方式、登入及通知設定。"
+      },
+      "partner": {
+        "label": "夥伴",
+        "desc": "查看夥伴狀態與店家管理資訊。"
+      },
+      "admin": {
+        "label": "管理員",
+        "desc": "快速查看管理員權限。"
+      }
+    },
+    "personal": {
+      "nickname": {
+        "title": "暱稱",
+        "helper_set": "顯示在社群和個人頁面中的名稱。",
+        "helper_unset": "尚未設定暱稱。",
+        "badge_set": "已設定",
+        "badge_unset": "未設定",
+        "placeholder": "請輸入新暱稱。"
+      },
+      "email": {
+        "title": "電子郵件",
+        "value_none": "未連結",
+        "helper_verified": "目前已驗證的電子郵件地址。",
+        "helper_unverified": "需要進行電子郵件驗證。",
+        "helper_none": "無連結的電子郵件。",
+        "badge_verified": "已驗證",
+        "badge_unverified": "未驗證",
+        "badge_none": "未連結"
+      },
+      "sns": {
+        "title": "SNS",
+        "value_none": "未輸入",
+        "helper_set": "目前儲存的SNS。",
+        "helper_unset": "無已儲存的SNS。",
+        "badge_set": "已儲存",
+        "badge_unset": "未輸入",
+        "placeholder": "請輸入SNS ID。"
+      },
+      "phone": {
+        "title": "電話號碼",
+        "value_none": "未輸入",
+        "helper_set": "目前儲存的電話號碼。",
+        "helper_unset": "無已儲存的電話號碼。",
+        "badge_set": "已儲存",
+        "badge_unset": "未輸入",
+        "country_label": "國碼",
+        "number_label": "電話號碼",
+        "helper_preview": "將以 {{value}} 的格式儲存。",
+        "helper_empty_fallback": "選擇國家並輸入號碼，即可以E.164格式儲存。",
+        "helper_saved_fallback": "儲存的號碼以E.164格式保存。",
+        "helper_invalid_fallback": "請選擇國家並只輸入數字。"
+      },
+      "login": {
+        "title": "登入方式",
+        "helper_in": "目前使用中的登入方式。",
+        "helper_out": "登入後確認。",
+        "badge_in": "使用中",
+        "badge_out": "待確認",
+        "provider_email": "電子郵件",
+        "value_out": "需要登入"
+      },
+      "notifications": {
+        "title": "通知",
+        "value_out": "登入後確認",
+        "helper_out": "登入以查看目前的通知狀態。",
+        "badge_out": "待確認",
+        "value_error": "確認設定",
+        "helper_error": "無法載入通知狀態。",
+        "badge_error": "需要確認",
+        "channel_app": "應用程式",
+        "channel_email": "電子郵件",
+        "value_all_off": "全部通知已關閉",
+        "helper_summary": "正在接收 {{count}}/3 筆預約相關通知。",
+        "badge_off": "已關閉",
+        "value_both_on": "應用程式・電子郵件已開啟",
+        "value_single_on": "{{channel}} 已開啟",
+        "badge_all_on": "已啟用",
+        "badge_partial_on": "部分已開啟"
+      }
+    },
+    "partner": {
+      "status": {
+        "title": "夥伴狀態",
+        "approved": {
+          "value": "已核准",
+          "helper": "已驗證為夥伴帳號。",
+          "badge": "已核准"
+        },
+        "pending": {
+          "value": "審核中",
+          "helper": "正在審核提交的夥伴資訊。",
+          "badge": "待確認"
+        },
+        "rejected": {
+          "value": "修改後重新提交",
+          "helper": "可補充資料後再次提交。",
+          "badge": "需修改",
+          "cta": "重新提交"
+        },
+        "none": {
+          "value": "無夥伴資訊",
+          "helper": "未登錄夥伴狀態。",
+          "badge": "無"
+        }
+      },
+      "store": {
+        "title": "店家資訊",
+        "value_none": "無店家資訊",
+        "helper_none": "無已儲存的店家摘要。",
+        "badge_set": "已登錄",
+        "badge_unset": "未登錄",
+        "visibility_on": "公開",
+        "visibility_off": "隱藏"
+      },
+      "hours": {
+        "title": "營業時間",
+        "value_none": "無已登錄的時間",
+        "helper_none": "連結後可在此查看營業時間。",
+        "badge_unset": "未登錄"
+      },
+      "bookings": {
+        "title": "預約請求",
+        "value_info": "無獨立管理選單",
+        "value_pending": "核准後確認",
+        "helper_approved": "預約請求結構摘要。",
+        "helper_pending": "夥伴核准後將顯示選項。",
+        "badge_info": "資訊",
+        "badge_pending": "待確認"
+      },
+      "pricing": {
+        "title": "價格選單",
+        "value_none": "無獨立管理選單",
+        "helper_none": "目前無直接的定價管理畫面。",
+        "badge_info": "資訊"
+      }
+    },
+    "admin": {
+      "approval": {
+        "title": "夥伴核准",
+        "value": "查看申請",
+        "helper": "可在此核准或拒絕夥伴申請。"
+      },
+      "issues": {
+        "title": "預約問題",
+        "value": "查看預約與變更",
+        "helper": "確認預約狀態與變更請求。"
+      },
+      "users": {
+        "title": "使用者管理",
+        "value": "確認帳號權限",
+        "helper": "管理使用者與管理員權限。"
+      },
+      "notices": {
+        "title": "公告管理",
+        "value": "無連結畫面",
+        "helper": "程式碼庫中尚未連結專屬公告管理畫面。"
+      },
+      "badge_open": "可開啟",
+      "badge_unlinked": "未連結"
+    },
+    "messages": {
+      "action_contact": "聯絡",
+      "action_open": "開啟",
+      "unauthorized": "請確認您的登入狀態。",
+      "profile_not_found": "找不到個人資料，請重新登入。",
+      "schema_missing_sns": "SNS欄位尚未套用至資料庫。",
+      "schema_missing_phone": "電話欄位尚未套用至資料庫。",
+      "save_error": "儲存失敗。",
+      "sns_saved": "SNS ID已儲存。",
+      "phone_saved": "電話號碼已儲存。",
+      "nickname_cooldown": "暱稱每90天只能修改一次。（剩餘：{{days}} 天）",
+      "nickname_empty": "請輸入暱稱。",
+      "nickname_saved": "暱稱修改成功。",
+      "nickname_error": "暱稱儲存失敗，請再試一次。",
+      "nickname_cooldown_long": "每 {{limit}} 天只能修改一次。（下次可修改日：{{date}}）",
+      "save": "儲存",
+      "saving": "儲存中...",
+      "uploading": "上傳中..."
+    },
+    "badges": {
+      "community": {
+        "leader": "社群領袖",
+        "trend": "趨勢發掘者",
+        "mate": "美容夥伴",
+        "sprout": "新芽"
+      },
+      "booking": {
+        "vvip": "VVIP",
+        "vip": "VIP",
+        "regular": "一般",
+        "new": "新"
+      },
+      "nickname_unset": "未設定"
+    },
+    "tab_aria_label": "設定頁籤"
+  },
+  "notifications": {
+    "title": "通知設定",
+    "hero_title": "自訂您的預約通知。✨",
+    "desc": "設定接收重要預約變更或通知的管道。",
+    "hero_desc": "設定接收 Kello 尊榮禮賓服務更新的方式。",
+    "groups": {
+      "booking": "預約與動態",
+      "booking_desc": "預約進度與行程通知",
+      "community": "社群與優惠",
+      "community_desc": "社群留言、按讚與折扣優惠"
+    },
+    "items": {
+      "status_updates": {
+        "title": "預約狀態更新",
+        "desc": "預約確認、店家配對、行程變更通知"
+      },
+      "reminders": {
+        "title": "預先提醒",
+        "desc": "前往前一天及1小時前的提醒"
+      },
+      "community_replies": {
+        "title": "社群回覆",
+        "desc": "貼文留言與推薦通知"
+      },
+      "marketing": {
+        "title": "活動與折扣",
+        "desc": "新活動與折扣券相關實用通知"
+      }
+    },
+    "channel": {
+      "title": "管道設定",
+      "email_title": "也透過電子郵件接收預約更新",
+      "email_desc": "將預約詳情與重要進度更新安全地傳送至您的電子信箱。",
+      "app_push_title": "安裝應用程式以接收即時推播",
+      "app_push_desc": "目前使用暫時性裝置通知，安裝應用程式可獲得更穩定的體驗。",
+      "device_enabled_title": "裝置通知已啟用",
+      "device_enabled_desc": "您將在此瀏覽器或裝置上接收重要通知。",
+      "app_title": "在應用程式中接收預約通知",
+      "app_desc": "重要的狀態變更將始終記錄在應用程式的通知收件匣中。"
+    },
+    "actions": {
+      "save": "儲存設定",
+      "turn_on_device": "啟用裝置通知"
+    },
+    "toast": {
+      "saving": "正在儲存通知設定...",
+      "success": "通知設定已儲存。",
+      "error": "設定儲存失敗，請稍後再試。"
+    },
+    "save_success": "設定已儲存。",
+    "save_fail": "儲存失敗。",
+    "login_required": "請登入後使用。",
+    "login_button": "登入",
+    "types": {
+      "title": "通知類型",
+      "booking_title": "接收逐步預約通知",
+      "booking_desc": "在收到、確認、完成等重要階段接收通知。",
+      "change_title": "接收變更結果通知",
+      "change_desc": "日期/項目變更被核准或拒絕時，即時通知您。",
+      "alternative_title": "接收備用行程通知",
+      "alternative_desc": "若您請求的時間已滿且店家建議其他時間，將通知您。"
+    },
+    "footer_note": "重要的預約公告可能不受設定限制而發送。"
+  },
+  "signup": {
+    "subtitle": "像當地人一樣體驗韓國",
+    "name_label": "姓名",
+    "name_placeholder": "請輸入您的姓名",
+    "email_label": "電子郵件",
+    "country_label": "國家/地區",
+    "password_label": "密碼",
+    "loading": "建立帳戶中...",
+    "success": "帳戶已建立！請查收郵件完成驗證後登入。",
+    "login_prompt": "已有帳戶？",
+    "login_link": "登入"
+  },
+  "help_page": {
+    "call_btn": "致電"
+  },
+  "webview_banner": {
+    "title": "應用程式內瀏覽器不支援Google登入",
+    "desc_android": "已嘗試在Chrome中開啟。若未反應，請複製連結並貼上到Chrome。",
+    "desc_ios": "請開啟Safari或Chrome，貼上連結後繼續登入。",
+    "copy_btn": "複製連結",
+    "copy_btn_copied": "已複製",
+    "close": "關閉"
+  },
   "privacy_policy": {
-    "title": "隱私權政策",
-    "effective_date": "生效日期：2024年4月21일",
+    "title": "隱私政策",
+    "effective_date": "生效日期：2024年4月21日",
     "table": {
-      "category": "類別",
-      "items": "收集項目",
+      "category": "項目",
+      "items": "收集資訊",
       "purpose": "收集目的",
       "retention": "保存期限"
     },
     "collection": {
-      "title": "1. 個人資料的收集與使用",
-      "required": "必填項目",
-      "required_items": "姓名、電子郵件、預約資訊（日期、時間、店舖、服務）、社交登錄 ID",
-      "required_purpose": "用戶註冊、身份驗證、提供服務（預約）、客戶諮詢",
-      "auto": "自動收集項目",
-      "auto_items": "IP 地址、Cookies、設備資訊、服務使用記錄",
-      "auto_purpose": "服務品質改善與預防欺詐行為"
+      "title": "1. 個人資訊的收集與使用",
+      "required": "必填",
+      "required_items": "姓名、電子郵件、預約資訊（日期、時間、店鋪、服務）、社交帳號登入ID",
+      "required_purpose": "會員註冊、身份識別、提供服務（預約）、客戶諮詢",
+      "auto": "自動收集",
+      "auto_items": "IP 地址、Cookie、裝置資訊、服務使用紀錄",
+      "auto_purpose": "提高服務品質及防止異常使用"
     },
     "retention": {
-      "title": "2. 個人資料的保存及使用期限",
-      "content": "原則上，個人資料將保留至用戶註銷會員為止。但若相關法律有明確規定，則在法律規定的期限內保留。",
-      "legal_basis": "遵守相關法律（如：電子商務法等）"
+      "title": "2. 保存及使用期限",
+      "content": "原則上，個人資訊將保存至註銷會員為止。但根據相關法令規定有必要保存時，可在該期限內予以保存。",
+      "legal_basis": "遵守相關法令（如《電子商務法》等）"
     },
     "third_party": {
-      "title": "3. 向第三方提供個人資料",
-      "content": "為了提供流暢的服務，MyKello 向以下合作夥伴提供個人資料。",
-      "providers": "Supabase (數據庫), Google (身份驗證), X (身份驗證)"
+      "title": "3. 向第三方提供個人資訊",
+      "content": "MyKello 為提供服務，向以下合作夥伴提供個人資訊。",
+      "providers": "Supabase（資料庫）、Google（身份驗證）、X（身份驗證）"
     },
     "overseas": {
-      "title": "4. 個人資料的境外轉移",
-      "recipient": "受託單位",
-      "country": "接收國家",
-      "purpose": "轉移目的",
-      "items": "轉移項目",
+      "title": "4. 個人資訊跨境傳輸",
+      "recipient": "接收方",
+      "country": "國家",
+      "purpose": "傳輸目的",
+      "items": "傳輸項目",
       "supabase_name": "Supabase Inc.",
       "google_name": "Google LLC",
-      "usa": "美國 (USA)",
-      "storage_auth": "數據存儲與 OAuth 2.0 身份驗證",
-      "log_items": "電子郵件、個人檔案資訊、服務使用日誌"
+      "usa": "美國",
+      "storage_auth": "資料儲存及用戶身份驗證 (OAuth 2.0)",
+      "log_items": "電子郵件、個人資料資訊、服務使用日誌"
     },
     "destruction": {
-      "title": "5. 個人資料的銷毀程序與方法",
-      "content": "個人資料在達成目的後將立即銷毀。電子文件將使用無法復原的技術方法刪除。"
+      "title": "5. 銷毀程序及方法",
+      "content": "個人資訊在達到使用目的後將立即銷毀。電子文件將透過無法還原的技术方法進行刪除。"
     }
   },
   "signup_consent": {
     "all_agree": "我同意所有條款。",
-    "privacy_required": "[必填] 同意收集與使用個人資料",
-    "privacy_optional": "[選填] 同意接收行銷資訊",
+    "privacy_required": "[必填] 同意收集並使用個人資訊",
+    "privacy_optional": "[可選] 同意接收行銷資訊",
     "view_detail": "查看詳情",
     "terms_required": "[必填] 同意服務條款"
   },
@@ -988,12 +1562,12 @@
       "two_days": "2日前：70% 退款",
       "one_day": "1日前：50% 退款",
       "same_day": "當日或未到場 (No-show)：不予退款",
-      "note": "最終退款處理可能因各店舖的政策而有所不同。"
+      "note": "最終退款處理可能因各店鋪的政策而有所不同。"
     },
     "liability": {
       "title": "4. 免責聲明",
       "interpretation": "「實時通譯」功能為提供用戶便利的輔助工具。公司對因翻譯不準確而導致的預約錯誤或糾紛不承擔責任。",
-      "community": "公司對通過社區功能進行的用戶間自發性線下聚會或個人交易中產生的損害、事故或糾紛不承擔責任。"
+      "community": "公司對透過社區功能進行的用户間自發性線下聚會或個人交易中產生的損害、事故或糾紛不承擔責任。"
     }
   }
 }

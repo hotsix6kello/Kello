@@ -36,12 +36,12 @@ export default function PrivacyPolicyPage() {
               </thead>
               <tbody>
                 <tr>
-                  <td className={styles.tdCategory}>{t('privacy_policy.collection.required')}</td>
+                  <td>{t('privacy_policy.collection.required')}</td>
                   <td>{t('privacy_policy.collection.required_items')}</td>
                   <td>{t('privacy_policy.collection.required_purpose')}</td>
                 </tr>
                 <tr>
-                  <td className={styles.tdCategory}>{t('privacy_policy.collection.auto')}</td>
+                  <td>{t('privacy_policy.collection.auto')}</td>
                   <td>{t('privacy_policy.collection.auto_items')}</td>
                   <td>{t('privacy_policy.collection.auto_purpose')}</td>
                 </tr>
@@ -53,21 +53,17 @@ export default function PrivacyPolicyPage() {
         {/* 2. Retention */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t('privacy_policy.retention.title')}</h2>
-          <p className={styles.text}>{t('privacy_policy.retention.content')}</p>
-          <ul className={styles.list}>
-            <li>{t('privacy_policy.retention.legal_basis')}</li>
-          </ul>
+          <p>{t('privacy_policy.retention.content')}</p>
+          <p className={styles.legalBasis}>{t('privacy_policy.retention.legal_basis')}</p>
         </section>
 
-        {/* 3. Third-party */}
+        {/* 3. Third Party */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t('privacy_policy.third_party.title')}</h2>
-          <p className={styles.text}>{t('privacy_policy.third_party.content')}</p>
-          <div className={styles.providerBadgeGroup}>
-            {t('privacy_policy.third_party.providers').split(',').map((p, i) => (
-              <span key={i} className={styles.badge}>{p.trim()}</span>
-            ))}
-          </div>
+          <p>{t('privacy_policy.third_party.content')}</p>
+          <ul className={styles.list}>
+            <li>{t('privacy_policy.third_party.providers')}</li>
+          </ul>
         </section>
 
         {/* 4. Overseas Transfer */}
@@ -104,13 +100,9 @@ export default function PrivacyPolicyPage() {
         {/* 5. Destruction */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t('privacy_policy.destruction.title')}</h2>
-          <p className={styles.text}>{t('privacy_policy.destruction.content')}</p>
+          <p>{t('privacy_policy.destruction.content')}</p>
         </section>
       </main>
-
-      <footer className={styles.footer}>
-        <p>© 2024 MyKello. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

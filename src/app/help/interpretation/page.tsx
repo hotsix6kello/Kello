@@ -30,7 +30,7 @@ export default function InterpretationPage() {
                                     href="tel:1330"
                                     style={{ background: '#8b5cf615', color: '#8b5cf6', padding: '7px 14px', borderRadius: 20, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}
                                 >
-                                    📞 {t('help_page.call_btn', { defaultValue: '전화하기' })}
+                                    📞 {t('help_page.call_btn')}
                                 </a>
                                 <a
                                     href="https://visitkorea.or.kr/helper/main.do"
