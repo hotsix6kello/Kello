@@ -2222,5 +2222,13 @@
     "success": "Account created! Please check your email to verify and then log in.",
     "login_prompt": "Already have an account?",
     "login_link": "Log in"
+  },
+  "webview_banner": {
+    "title": "Google login is not available in in-app browsers",
+    "desc_android": "We tried to open Chrome. If nothing happened, copy the link and paste it in Chrome.",
+    "desc_ios": "Please open Safari or Chrome and paste the link to continue.",
+    "copy_btn": "Copy Link",
+    "copy_btn_copied": "Link Copied",
+    "close": "Close"
   }
 }

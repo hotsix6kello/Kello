@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './community.module.css';
@@ -41,14 +41,8 @@ const COMMUNITY_IMAGE_META_KEY = 'IMAGE';
 const COMMUNITY_IMAGE_MAX_SIDE = 1280;
 const COMMUNITY_IMAGE_LIMIT = 4;
 
-
-
-
-
 const isCommunityCategory = (value: string): value is CommunityCategory =>
     CATEGORY_OPTIONS.includes(value as CommunityCategory);
-
-
 
 const getDatabaseTypeForCategory = (category: CommunityCategory) => {
     if (category === 'beauty_review' || category === 'food_review') return 'review';
@@ -212,59 +206,160 @@ const getCategoryLabel = (t: (key: string, options?: Record<string, unknown>) =>
 const getSubFilterLabel = (t: (key: string, options?: Record<string, unknown>) => string, subFilter: CommunitySubFilter) =>
     t(`community_page.sub_filters.${subFilter}`);
 
+// ─── Group A: Feed Reducer ────────────────────────────────────────────────────
 
+type FeedState = { posts: Post[]; loading: boolean; error: string | null };
 
+type FeedAction =
+    | { type: 'FETCH_START' }
+    | { type: 'FETCH_SUCCESS'; payload: Post[] }
+    | { type: 'FETCH_ERROR'; payload: string }
+    | { type: 'UPDATE_COMMENTS'; payload: { id: number; comments: number } };
 
+function feedReducer(state: FeedState, action: FeedAction): FeedState {
+    switch (action.type) {
+        case 'FETCH_START':
+            return { ...state, loading: true, error: null };
+        case 'FETCH_SUCCESS':
+            return { ...state, loading: false, posts: action.payload, error: null };
+        case 'FETCH_ERROR':
+            return { ...state, loading: false, error: action.payload };
+        case 'UPDATE_COMMENTS':
+            return {
+                ...state,
+                posts: state.posts.map(p =>
+                    p.id === action.payload.id ? { ...p, comments: action.payload.comments } : p
+                ),
+            };
+        default:
+            return state;
+    }
+}
+
+// ─── Group B: Draft Reducer ───────────────────────────────────────────────────
+
+type DraftField = {
+    type: CommunityCategory | '';
+    title: string;
+    desc: string;
+    region: string;
+    point: string;
+    tags: string[];
+    isOpenForMeetup: boolean;
+    images: CommunityImageDraft[];
+};
+
+type DraftState = DraftField & {
+    open: boolean;
+    editingPostId: number | null;
+    isPreparingImage: boolean;
+    isSubmitting: boolean;
+};
+
+const DRAFT_EMPTY: DraftField = {
+    type: '',
+    title: '',
+    desc: '',
+    region: '',
+    point: '',
+    tags: [],
+    isOpenForMeetup: false,
+    images: [],
+};
+
+const DRAFT_INITIAL_STATE: DraftState = {
+    ...DRAFT_EMPTY,
+    open: false,
+    editingPostId: null,
+    isPreparingImage: false,
+    isSubmitting: false,
+};
+
+type DraftAction =
+    | { type: 'OPEN'; payload?: CommunityCategory }
+    | { type: 'CLOSE' }
+    | { type: 'RESET'; payload?: CommunityCategory }
+    | { type: 'SET_FIELD'; payload: Partial<DraftField> }
+    | { type: 'IMAGES_PREPARING' }
+    | { type: 'IMAGES_READY'; payload: CommunityImageDraft[] }
+    | { type: 'SUBMIT_START' }
+    | { type: 'SUBMIT_END' };
+
+function draftReducer(state: DraftState, action: DraftAction): DraftState {
+    switch (action.type) {
+        case 'OPEN':
+            return { ...DRAFT_EMPTY, open: true, editingPostId: null, isPreparingImage: false, isSubmitting: false, type: action.payload ?? '' };
+        case 'CLOSE':
+            return { ...state, open: false };
+        case 'RESET':
+            return { ...state, ...DRAFT_EMPTY, editingPostId: null, type: action.payload ?? '' };
+        case 'SET_FIELD':
+            return { ...state, ...action.payload };
+        case 'IMAGES_PREPARING':
+            return { ...state, isPreparingImage: true };
+        case 'IMAGES_READY':
+            return { ...state, isPreparingImage: false, images: [...state.images, ...action.payload] };
+        case 'SUBMIT_START':
+            return { ...state, isSubmitting: true };
+        case 'SUBMIT_END':
+            return { ...state, isSubmitting: false };
+        default:
+            return state;
+    }
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function CommunityPage() {
     const { t } = useTranslation('common');
 
-    
-
+    // Group E (유지)
     const [mounted, setMounted] = useState(false);
-
     const [filter, setFilter] = useState<string>('all');
-    const [posts, setPosts] = useState<Post[]>(() => {
-        if (typeof window !== 'undefined') {
-            try { return JSON.parse(localStorage.getItem('kello_community_posts') || '[]'); } catch { return []; }
-        }
-        return [];
+    const [searchQuery, setSearchQuery] = useState('');
+    const [savedIds, setSavedIds] = useState<number[]>([]);
+    const [reactedIds, setReactedIds] = useState<number[]>([]);
+    const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
+    const [isDragging, setIsDragging] = useState(false);
+    const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
+
+    // Group D: subFilter는 setter 없는 상수 → const로 전환 (타입 명시로 리터럴 좁힘 방지)
+    const subFilter: CommunitySubFilter = 'all';
+
+    // Group A: feed 상태 (posts + loading + error → feedReducer)
+    const [feedState, feedDispatch] = useReducer(feedReducer, undefined, (): FeedState => {
+        const posts: Post[] = (() => {
+            if (typeof window !== 'undefined') {
+                try { return JSON.parse(localStorage.getItem('kello_community_posts') || '[]'); } catch { return []; }
+            }
+            return [];
+        })();
+        return { posts, loading: posts.length === 0, error: null };
     });
-    const [loading, setLoading] = useState(posts.length === 0);
+
+    // Group B: 컴포저/드래프트 상태 (12개 → draftReducer)
+    const [draft, draftDispatch] = useReducer(draftReducer, DRAFT_INITIAL_STATE);
+
+    const imageInputRef = useRef<HTMLInputElement | null>(null);
+    const tabsRef = useRef<HTMLDivElement>(null);
+    // Group C: startX / scrollLeft → useRef (렌더 영향 없음)
+    const dragRef = useRef({ startX: 0, scrollLeft: 0 });
 
     useEffect(() => {
         setMounted(true);
         const handlePostUpdate = (e: Event) => {
             const detail = (e as CustomEvent).detail;
             if (detail && typeof detail.id === 'number' && typeof detail.comments === 'number') {
-                setPosts(prev => prev.map(p => p.id === detail.id ? { ...p, comments: detail.comments } : p));
+                feedDispatch({ type: 'UPDATE_COMMENTS', payload: { id: detail.id, comments: detail.comments } });
             }
         };
         window.addEventListener('community_post_updated', handlePostUpdate);
         return () => window.removeEventListener('community_post_updated', handlePostUpdate);
     }, []);
 
-
-    const [searchQuery, setSearchQuery] = useState('');
-    const [subFilter] = useState('all');
-
-    const [isWriting, setIsWriting] = useState(false);
-    const [newType, setNewType] = useState<CommunityCategory | ''>('');
-    const [newTitle, setNewTitle] = useState('');
-    const [newDesc, setNewDesc] = useState('');
-    const [newRegion, setNewRegion] = useState('');
-    const [newPoint, setNewPoint] = useState('');
-    const [newTags, setNewTags] = useState<string[]>([]);
-    const [isOpenForMeetup, setIsOpenForMeetup] = useState(false);
-    const [newImages, setNewImages] = useState<CommunityImageDraft[]>([]);
-    const [isPreparingImage, setIsPreparingImage] = useState(false);
-    const [savedIds, setSavedIds] = useState<number[]>([]);
-    const [reactedIds, setReactedIds] = useState<number[]>([]);
-    const [feedError, setFeedError] = useState<string | null>(null);
-
     const communityCategories = CATEGORY_OPTIONS.map((id) => ({ id, label: getCategoryLabel(t, id) }));
     const communitySubFilters = SUB_FILTER_OPTIONS.map((id) => ({ id, label: getSubFilterLabel(t, id) }));
-    const getCategoryText = (category: CommunityCategory | '') => 
+    const getCategoryText = (category: CommunityCategory | '') =>
         category ? getCategoryLabel(t, category) : t('community_page.form.select_category');
 
     const getNavSummary = () => {
@@ -274,21 +369,11 @@ export default function CommunityPage() {
         return t('community_page.nav_summary.default', { sub: currentSub, tab: currentTab });
     };
 
-
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [editingPostId, setEditingPostId] = useState<number | null>(null);
-    const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
-    const imageInputRef = useRef<HTMLInputElement | null>(null);
-    const tabsRef = useRef<HTMLDivElement>(null);
-    const [isDragging, setIsDragging] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
-
     const handleMouseDown = (e: React.MouseEvent) => {
         if (!tabsRef.current) return;
         setIsDragging(true);
-        setStartX(e.pageX - tabsRef.current.offsetLeft);
-        setScrollLeft(tabsRef.current.scrollLeft);
+        dragRef.current.startX = e.pageX - tabsRef.current.offsetLeft;
+        dragRef.current.scrollLeft = tabsRef.current.scrollLeft;
     };
 
     const handleMouseLeave = () => setIsDragging(false);
@@ -298,8 +383,8 @@ export default function CommunityPage() {
         if (!isDragging || !tabsRef.current) return;
         e.preventDefault();
         const x = e.pageX - tabsRef.current.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll speed
-        tabsRef.current.scrollLeft = scrollLeft - walk;
+        const walk = (x - dragRef.current.startX) * 2;
+        tabsRef.current.scrollLeft = dragRef.current.scrollLeft - walk;
     };
 
     const searchParams = useSearchParams();
@@ -308,7 +393,6 @@ export default function CommunityPage() {
         if (initialSearch) setSearchQuery(initialSearch);
     }, [searchParams]);
 
-    const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
     const showToast = (message: string, type: 'success' | 'info' = 'success') => {
         setToast({ message, type });
         setTimeout(() => setToast(null), 3000);
@@ -330,7 +414,7 @@ export default function CommunityPage() {
     };
 
     const fetchPosts = useCallback(async () => {
-        setLoading(true); setFeedError(null);
+        feedDispatch({ type: 'FETCH_START' });
         try {
             const { data, error } = await supabase
                 .from('community_posts')
@@ -338,17 +422,19 @@ export default function CommunityPage() {
                 .order('created_at', { ascending: false });
 
             if (Array.isArray(data)) {
-                setPosts(data as Post[]);
                 localStorage.setItem('kello_community_posts', JSON.stringify(data));
+                feedDispatch({ type: 'FETCH_SUCCESS', payload: data as Post[] });
                 return;
             }
             const meaningfulError = getMeaningfulFetchError(error);
             const errorLogMessage = formatMeaningfulFetchError(meaningfulError);
-            if (errorLogMessage) setFeedError(t('community_page.states.fetch_failed_desc'));
+            if (errorLogMessage) {
+                feedDispatch({ type: 'FETCH_ERROR', payload: t('community_page.states.fetch_failed_desc') });
+            } else {
+                feedDispatch({ type: 'FETCH_SUCCESS', payload: [] });
+            }
         } catch {
-            setFeedError(t('community_page.states.fetch_failed_desc'));
-        } finally {
-            setLoading(false);
+            feedDispatch({ type: 'FETCH_ERROR', payload: t('community_page.states.fetch_failed_desc') });
         }
     }, [t]);
 
@@ -367,22 +453,17 @@ export default function CommunityPage() {
         fetchPosts();
     }, [fetchPosts]);
 
-    const resetDraftForm = (category: CommunityCategory | '' = '') => {
-        setEditingPostId(null); setNewType(category); setNewTitle(''); setNewDesc('');
-        setNewRegion(''); setNewPoint(''); setNewTags([]); setIsOpenForMeetup(false);
-        setNewImages([]); if (imageInputRef.current) imageInputRef.current.value = '';
-    };
-
     const openComposer = (category: CommunityCategory | '' = '') => {
-        resetDraftForm(category); setIsWriting(true);
+        draftDispatch({ type: 'OPEN', payload: category || undefined });
+        if (imageInputRef.current) imageInputRef.current.value = '';
     };
 
     const handleImageSelect = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(event.target.files ?? []);
         if (files.length === 0) return;
-        const availableSlots = COMMUNITY_IMAGE_LIMIT - newImages.length;
+        const availableSlots = COMMUNITY_IMAGE_LIMIT - draft.images.length;
         if (availableSlots <= 0) return;
-        setIsPreparingImage(true);
+        draftDispatch({ type: 'IMAGES_PREPARING' });
         try {
             const preparedImages = await Promise.all(
                 files.slice(0, availableSlots).map(async (file, index) => ({
@@ -391,20 +472,26 @@ export default function CommunityPage() {
                     name: file.name
                 }))
             );
-            setNewImages(prev => [...prev, ...preparedImages]);
-        } catch { alert(t('community_page.form.image.load_failed_alert')); } finally { setIsPreparingImage(false); event.target.value = ''; }
+            draftDispatch({ type: 'IMAGES_READY', payload: preparedImages });
+        } catch {
+            alert(t('community_page.form.image.load_failed_alert'));
+            draftDispatch({ type: 'IMAGES_READY', payload: [] });
+        } finally {
+            event.target.value = '';
+        }
     };
 
-    const handleRemoveImage = (imageId: string) => setNewImages(prev => prev.filter(img => img.id !== imageId));
+    const handleRemoveImage = (imageId: string) =>
+        draftDispatch({ type: 'SET_FIELD', payload: { images: draft.images.filter(img => img.id !== imageId) } });
 
     const handleSubmit = async () => {
-        if (!newType || !newTitle.trim() || !newDesc.trim()) return;
-        setIsSubmitting(true);
+        if (!draft.type || !draft.title.trim() || !draft.desc.trim()) return;
+        draftDispatch({ type: 'SUBMIT_START' });
         try {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) throw new Error('Login required');
 
-            const uploadedUrls = await Promise.all(newImages.map(async (img) => {
+            const uploadedUrls = await Promise.all(draft.images.map(async (img) => {
                 if (img.dataUrl.startsWith('http')) return img.dataUrl;
                 const res = await fetch(img.dataUrl); const blob = await res.blob();
                 const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -416,41 +503,36 @@ export default function CommunityPage() {
             }));
 
             const imageMeta = uploadedUrls.map(url => `\n[${COMMUNITY_IMAGE_META_KEY}:${url}]`).join('');
-            const composedDesc = `${stripCommunityMetadata(newDesc)}\n\n[CATEGORY:${newType}]\n[REGION:${newRegion}]\n[POINT:${newPoint}]\n[TAGS:${newTags.join(',')}]\n[MEETUP_OPEN:${isOpenForMeetup}]${imageMeta}`;
+            const composedDesc = `${stripCommunityMetadata(draft.desc)}\n\n[CATEGORY:${draft.type}]\n[REGION:${draft.region}]\n[POINT:${draft.point}]\n[TAGS:${draft.tags.join(',')}]\n[MEETUP_OPEN:${draft.isOpenForMeetup}]${imageMeta}`;
 
             const payload = {
                 author_user_id: user.id, author: loggedInUserName, flag: '🌍',
-                type: getDatabaseTypeForCategory(newType), title: newTitle, desc: composedDesc,
+                type: getDatabaseTypeForCategory(draft.type as CommunityCategory), title: draft.title, desc: composedDesc,
                 time: t('community_page.time.just_now'), comments: 0
             };
 
-            const { error } = editingPostId 
-                ? await supabase.from('community_posts').update(payload).eq('id', editingPostId)
+            const { error } = draft.editingPostId
+                ? await supabase.from('community_posts').update(payload).eq('id', draft.editingPostId)
                 : await supabase.from('community_posts').insert([payload]);
 
             if (error) throw error;
-            setIsWriting(false); resetDraftForm(); fetchPosts(); showToast(t('community_page.toasts.submitted'));
-        } catch (err) { alert(String(err)); } finally { setIsSubmitting(false); }
+            draftDispatch({ type: 'CLOSE' });
+            if (imageInputRef.current) imageInputRef.current.value = '';
+            fetchPosts();
+            showToast(t('community_page.toasts.submitted'));
+        } catch (err) { alert(String(err)); } finally { draftDispatch({ type: 'SUBMIT_END' }); }
     };
 
-    const filteredPosts = posts.filter(p => {
+    const filteredPosts = feedState.posts.filter(p => {
         const postCategory = getPostCategory(p);
         const matchesTab = filter === 'all' || postCategory === filter;
         const normalizedSearch = searchQuery.toLowerCase();
         const matchesSearch = p.title.toLowerCase().includes(normalizedSearch) || p.desc.toLowerCase().includes(normalizedSearch);
         if (!matchesSearch) return false;
-        if (subFilter === 'saved') return savedIds.includes(p.id);
-        if (subFilter === 'mine') return p.author === loggedInUserName;
-        if (subFilter === 'reacted') return reactedIds.includes(p.id);
-        if (subFilter === 'open_meetup') return p.desc.includes('[MEETUP_OPEN:true]');
-        if (subFilter === 'active_reactions') return p.comments > 0;
         return matchesTab;
     });
 
     if (!mounted) return null;
-
-
-
 
     return (
         <div className={styles.container}>
@@ -466,14 +548,14 @@ export default function CommunityPage() {
 
                     <div className={styles.searchBar}>
                         <span className={styles.searchIcon}>🔍</span>
-                        <input 
-                            className={styles.searchInput} 
-                            placeholder={t('community_page.hero.search_placeholder')} 
-                            value={searchQuery} 
-                            onChange={e => setSearchQuery(e.target.value)} 
+                        <input
+                            className={styles.searchInput}
+                            placeholder={t('community_page.hero.search_placeholder')}
+                            value={searchQuery}
+                            onChange={e => setSearchQuery(e.target.value)}
                         />
                     </div>
-                    <div 
+                    <div
                         className={styles.tabs}
                         ref={tabsRef}
                         onMouseDown={handleMouseDown}
@@ -482,17 +564,17 @@ export default function CommunityPage() {
                         onMouseMove={handleMouseMove}
                         style={{ cursor: isDragging ? 'grabbing' : 'pointer' }}
                     >
-                        <button 
-                            className={`${styles.tab} ${filter === 'all' ? styles.activeTab : ''}`} 
-                            onClick={() => { setFilter('all'); setLoading(true); setTimeout(()=>setLoading(false),200); }}
+                        <button
+                            className={`${styles.tab} ${filter === 'all' ? styles.activeTab : ''}`}
+                            onClick={() => { setFilter('all'); feedDispatch({ type: 'FETCH_START' }); setTimeout(() => feedDispatch({ type: 'FETCH_SUCCESS', payload: feedState.posts }), 200); }}
                         >
                             {t('community_page.categories.all')}
                         </button>
                         {communityCategories.map((category) => (
-                            <button 
-                                key={category.id} 
-                                className={`${styles.tab} ${filter === category.id ? styles.activeTab : ''}`} 
-                                onClick={() => { setFilter(category.id); setLoading(true); setTimeout(() => setLoading(false), 200); }}
+                            <button
+                                key={category.id}
+                                className={`${styles.tab} ${filter === category.id ? styles.activeTab : ''}`}
+                                onClick={() => { setFilter(category.id); feedDispatch({ type: 'FETCH_START' }); setTimeout(() => feedDispatch({ type: 'FETCH_SUCCESS', payload: feedState.posts }), 200); }}
                             >
                                 {category.label}
                             </button>
@@ -505,9 +587,9 @@ export default function CommunityPage() {
                         <div className={styles.summaryText}>{getNavSummary()}</div>
                     </div>
 
-                    {feedError ? (
-                        <div className={styles.emptyStateContainer}>{feedError}</div>
-                    ) : loading ? (
+                    {feedState.error ? (
+                        <div className={styles.emptyStateContainer}>{feedState.error}</div>
+                    ) : feedState.loading ? (
                         <div className={styles.skeletonFeed}>
                             {[1, 2, 3].map(n => <div key={n} className={styles.skeletonCard} />)}
                         </div>
@@ -523,11 +605,11 @@ export default function CommunityPage() {
                             const isFresh = post.comments >= 3;
 
                             return (
-                                <div key={post.id} className={styles.card} style={{ 
-                                    position:'relative', padding: '16px 16px 12px 16px', 
-                                    paddingRight: imagePreviewSrcList.length > 0 ? '112px' : '16px', 
-                                    borderRadius: 0, border: 'none', borderBottom: '8px solid #f8fafc', 
-                                    background: '#fff', display: 'flex', flexDirection: 'column', gap: '2px' 
+                                <div key={post.id} className={styles.card} style={{
+                                    position: 'relative', padding: '16px 16px 12px 16px',
+                                    paddingRight: imagePreviewSrcList.length > 0 ? '112px' : '16px',
+                                    borderRadius: 0, border: 'none', borderBottom: '8px solid #f8fafc',
+                                    background: '#fff', display: 'flex', flexDirection: 'column', gap: '2px'
                                 }}>
                                     <div className={styles.cardHeader} style={{ padding: 0, marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <div className={styles.authorInfo} style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#94a3b8' }}>
@@ -556,8 +638,8 @@ export default function CommunityPage() {
                                         {cleanDesc}
                                     </p>
                                     {imagePreviewSrcList.map(src => (
-                                        <div key={src} style={{ position:'absolute', top:'16px', right:'16px', width:'84px', height:'84px', borderRadius:'8px', overflow:'hidden', border: '1px solid #f1f5f9' }}>
-                                            <Image src={src} alt="" fill unoptimized style={{ objectFit:'cover' }} />
+                                        <div key={src} style={{ position: 'absolute', top: '16px', right: '16px', width: '84px', height: '84px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #f1f5f9' }}>
+                                            <Image src={src} alt="" fill unoptimized style={{ objectFit: 'cover' }} />
                                         </div>
                                     ))}
                                     <div className={styles.cardFooter} style={{ display: 'flex', gap: '12px', fontSize: '12px', color: '#64748b', marginTop: '6px', padding: 0, border: 'none', background: 'transparent' }}>
@@ -576,34 +658,34 @@ export default function CommunityPage() {
                 </div>
             </div>
 
-            {/* FAB - Absolute position within container (relative) */}
+            {/* FAB */}
             <button
                 onClick={() => openComposer()}
                 style={{
-                    position:'absolute', bottom:'88px', right:'16px',
-                    zIndex:1000, background:'#f06292', color:'#fff',
-                    border:'none', borderRadius:'28px', padding:'14px 22px',
-                    fontSize:'15px', fontWeight:700, cursor:'pointer',
-                    boxShadow:'0 8px 24px rgba(240,98,146,0.3)',
-                    display:'flex', alignItems:'center', gap:'8px',
+                    position: 'absolute', bottom: '88px', right: '16px',
+                    zIndex: 1000, background: '#f06292', color: '#fff',
+                    border: 'none', borderRadius: '28px', padding: '14px 22px',
+                    fontSize: '15px', fontWeight: 700, cursor: 'pointer',
+                    boxShadow: '0 8px 24px rgba(240,98,146,0.3)',
+                    display: 'flex', alignItems: 'center', gap: '8px',
                     transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
                 }}
             >
                 ✏️ {t('community_page.fab.create_post')}
             </button>
 
-            {isWriting && (
-                <div className={styles.modalOverlay} onClick={() => setIsWriting(false)}>
+            {draft.open && (
+                <div className={styles.modalOverlay} onClick={() => draftDispatch({ type: 'CLOSE' })}>
                     <div className={styles.modalSheet} onClick={e => e.stopPropagation()}>
                         <div className={styles.modalHeader}>
                             <h2 className={styles.modalTitle}>
-                                {editingPostId ? t('community_page.form.edit_title') : t('community_page.form.write_title')}
+                                {draft.editingPostId ? t('community_page.form.edit_title') : t('community_page.form.write_title')}
                             </h2>
                         </div>
                         <div className={styles.modalBody} style={{ padding: '16px' }}>
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>{t('community_page.form.category_label')}</label>
-                                <select className={styles.formSelect} value={newType} onChange={e => setNewType(e.target.value as CommunityCategory | '')}>
+                                <select className={styles.formSelect} value={draft.type} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { type: e.target.value as CommunityCategory | '' } })}>
                                     <option value="">{t('community_page.form.select_category')}</option>
                                     {communityCategories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
                                 </select>
@@ -611,45 +693,43 @@ export default function CommunityPage() {
 
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.region_label')}</label>
-                                <input 
-                                    className={styles.formInput} 
-                                    value={newRegion} 
-                                    onChange={e => setNewRegion(e.target.value)} 
-                                    placeholder={t('community_page.form.region_placeholder')} 
+                                <input
+                                    className={styles.formInput}
+                                    value={draft.region}
+                                    onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { region: e.target.value } })}
+                                    placeholder={t('community_page.form.region_placeholder')}
                                 />
                             </div>
 
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.title_label.default')}</label>
-                                <input className={styles.formInput} value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder={t('community_page.form.title_placeholder.default')} />
+                                <input className={styles.formInput} value={draft.title} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { title: e.target.value } })} placeholder={t('community_page.form.title_placeholder.default')} />
                             </div>
-                            
-
 
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.desc_label.default')}</label>
-                                <textarea className={styles.formTextarea} value={newDesc} onChange={e => setNewDesc(e.target.value)} placeholder={t('community_page.form.desc_placeholder.default')} />
+                                <textarea className={styles.formTextarea} value={draft.desc} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { desc: e.target.value } })} placeholder={t('community_page.form.desc_placeholder.default')} />
                             </div>
 
                             {/* Image Upload/Preview Field */}
                             <div className={styles.formGroup} style={{ marginBottom: '100px' }}>
                                 <label>{t('community_page.form.image_label')} {t('community_page.form.image.limit_label', { count: COMMUNITY_IMAGE_LIMIT })}</label>
                                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '8px' }}>
-                                    {newImages.map((img) => (
+                                    {draft.images.map((img) => (
                                         <div key={img.id} style={{ position: 'relative', width: '80px', height: '80px' }}>
-                                            <Image 
-                                                src={img.dataUrl} 
-                                                alt="" 
-                                                fill 
-                                                style={{ objectFit: 'cover', borderRadius: '8px' }} 
-                                                unoptimized 
+                                            <Image
+                                                src={img.dataUrl}
+                                                alt=""
+                                                fill
+                                                style={{ objectFit: 'cover', borderRadius: '8px' }}
+                                                unoptimized
                                             />
-                                            <button 
+                                            <button
                                                 onClick={() => handleRemoveImage(img.id)}
-                                                style={{ 
-                                                    position: 'absolute', top: '-6px', right: '-6px', 
-                                                    background: '#ef4444', color: '#fff', border: 'none', 
-                                                    borderRadius: '50%', width: '22px', height: '22px', 
+                                                style={{
+                                                    position: 'absolute', top: '-6px', right: '-6px',
+                                                    background: '#ef4444', color: '#fff', border: 'none',
+                                                    borderRadius: '50%', width: '22px', height: '22px',
                                                     cursor: 'pointer', fontSize: '12px', fontWeight: 'bold',
                                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                                                     boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
@@ -659,13 +739,13 @@ export default function CommunityPage() {
                                             </button>
                                         </div>
                                     ))}
-                                    {newImages.length < COMMUNITY_IMAGE_LIMIT && (
-                                        <button 
+                                    {draft.images.length < COMMUNITY_IMAGE_LIMIT && (
+                                        <button
                                             onClick={() => imageInputRef.current?.click()}
-                                            style={{ 
-                                                width: '80px', height: '80px', border: '1px solid #e2e8f0', 
+                                            style={{
+                                                width: '80px', height: '80px', border: '1px solid #e2e8f0',
                                                 borderRadius: '12px', cursor: 'pointer', background: '#f8fafc',
-                                                display: 'flex', flexDirection: 'column', alignItems: 'center', 
+                                                display: 'flex', flexDirection: 'column', alignItems: 'center',
                                                 justifyContent: 'center', color: '#64748b', transition: 'all 0.2s',
                                                 gap: '4px'
                                             }}
@@ -675,27 +755,27 @@ export default function CommunityPage() {
                                         </button>
                                     )}
                                 </div>
-                                <input 
-                                    type="file" 
-                                    ref={imageInputRef} 
-                                    style={{ display: 'none' }} 
-                                    onChange={handleImageSelect} 
-                                    multiple 
-                                    accept="image/*" 
+                                <input
+                                    type="file"
+                                    ref={imageInputRef}
+                                    style={{ display: 'none' }}
+                                    onChange={handleImageSelect}
+                                    multiple
+                                    accept="image/*"
                                 />
-                                {isPreparingImage && <p style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>{t('community_page.form.preparing_images')}</p>}
+                                {draft.isPreparingImage && <p style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>{t('community_page.form.preparing_images')}</p>}
                             </div>
                         </div>
-                        <div className={styles.modalFooter} style={{ 
-                            display: 'flex', gap: '8px', padding: '16px 20px 30px', 
+                        <div className={styles.modalFooter} style={{
+                            display: 'flex', gap: '8px', padding: '16px 20px 30px',
                             borderTop: '1px solid #f1f5f9', background: '#fff',
                             position: 'absolute', bottom: 0, left: 0, right: 0,
                             borderBottomLeftRadius: '24px', borderBottomRightRadius: '24px',
                             zIndex: 100
                         }}>
-                             <button 
-                                className={styles.cancelBtn} 
-                                onClick={() => setIsWriting(false)}
+                            <button
+                                className={styles.cancelBtn}
+                                onClick={() => draftDispatch({ type: 'CLOSE' })}
                                 style={{
                                     flex: 1, padding: '15px', borderRadius: '14px', border: '1px solid #e2e8f0',
                                     background: '#fff', color: '#64748b', fontSize: '15px', fontWeight: 600, cursor: 'pointer'
@@ -703,17 +783,17 @@ export default function CommunityPage() {
                             >
                                 {t('community_page.form.cancel')}
                             </button>
-                            <button 
-                                className={styles.submitBtn} 
-                                onClick={handleSubmit} 
-                                disabled={isSubmitting}
+                            <button
+                                className={styles.submitBtn}
+                                onClick={handleSubmit}
+                                disabled={draft.isSubmitting}
                                 style={{
                                     flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
                                     background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
-                                    opacity: isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+                                    opacity: draft.isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
                                 }}
                             >
-                                {isSubmitting ? '...' : t('community_page.form.submit')}
+                                {draft.isSubmitting ? '...' : t('community_page.form.submit')}
                             </button>
                         </div>
                     </div>
