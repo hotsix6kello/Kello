@@ -988,13 +988,63 @@
     "lost_header": "失物招领指南",
     "call_btn": "致电",
     "emergency_119_title": "紧急救援 (119)",
+    "emergency_119_desc": "紧急情况下立即救助",
     "consult_1339_title": "医疗咨询 (1339)",
+    "consult_1339_desc": "专业医疗咨询",
+    "symptoms_title": "症状",
     "interp_chat_label": "在线咨询",
+    "interp_immediate_title": "即时支援",
+    "interp_hotline_title": "1330热线",
+    "interp_hotline_desc": "旅行中需要帮助时最快速的官方支持",
+    "interp_tools_title": "翻译工具",
+    "police_contacts_section": "警察联系方式",
+    "tourism_police_section": "旅游警察",
+    "tourism_police_title": "旅游警察服务",
+    "tourism_police_desc": "明洞、仁寺洞、梨泰院等地均可使用",
+    "lost_where_title": "您在哪里丢失了物品？",
+    "lost_where_desc": "选择地点，获取找回步骤",
+    "lost_quick_title": "快速查询",
+    "lost112_label": "Lost112失物招领门户",
+    "embassy_label": "查找大使馆",
+    "lost_steps_title": "{{place}} 失物找回指南",
+    "lost_go_lost112": "前往Lost112查询",
+    "lost": {
+      "taxi_s1_t": "1. 查看收据",
+      "taxi_s1_d": "查看收据上的银行卡公司或车牌号，找到司机联系方式。",
+      "taxi_s2_t": "2. 联系银行卡公司",
+      "taxi_s2_d": "致电银行客服，询问交易记录中的商家联系方式。",
+      "taxi_s3_t": "3. 联系出租车公司",
+      "taxi_s3_d": "通过车牌号查找出租车公司并直接联系。",
+      "taxi_s4_t": "4. 报警",
+      "taxi_s4_d": "如以上方法均无效，请拨打112或使用Lost112网站。",
+      "subway_s1_t": "1. 站务室",
+      "subway_s1_d": "刚下车的话，请立即前往站务室并告知乘坐的车厢号。",
+      "subway_s2_t": "2. 失物招领中心",
+      "subway_s2_d": "如已过较长时间，请联系或前往该线路的失物招领中心。",
+      "subway_s3_t": "3. Lost112门户",
+      "subway_s3_d": "可在警察厅失物招领综合门户网站在线查询或申报。",
+      "airport_s1_t": "1. 航空公司/机场失物招领台",
+      "airport_s1_d": "请先前往机场内的该航空公司或机场运营方的失物招领台。",
+      "airport_s2_t": "2. 仁川机场失物招领中心",
+      "airport_s2_d": "仁川机场的话，可前往1层出发大厅的行李寄存处咨询。",
+      "airport_s3_t": "3. Lost112在线申报",
+      "airport_s3_d": "请通过警察厅失物招领综合门户网站在线提交失物申报。",
+      "street_s1_t": "1. 确认周边情况",
+      "street_s1_d": "可询问丢失地点附近的监控或周边商铺。",
+      "street_s2_t": "2. 前往警察局或拨打112",
+      "street_s2_d": "前往附近派出所提交失物申报，或拨打112。",
+      "street_s3_t": "3. 在Lost112登记",
+      "street_s3_d": "在警察厅失物招领综合门户登记后，找到时可收到通知。"
+    },
     "medical": {
+      "pharmacy_title": "常备药 (便利店)",
       "medicines": {
         "tylenol": "泰诺",
+        "tylenol_desc": "退烧、止痛、肌肉酸痛、头痛",
         "cold": "感冒药",
-        "digestive": "助消化药"
+        "cold_desc": "流鼻涕、咳嗽、发烧等感冒症状",
+        "digestive": "助消化药",
+        "digestive_desc": "消化不良、积食、胃灼热"
       },
       "symptoms": {
         "stomach": "腹痛",
@@ -1004,6 +1054,12 @@
         "breathing": "呼吸困难",
         "pain": "胸痛"
       }
+    },
+    "police": {
+      "report_call_title": "犯罪报案 (112)",
+      "report_call_desc": "24小时服务，支持外语",
+      "official_site_title": "警察厅官方网站",
+      "official_site_desc": "网络犯罪举报及信息指南"
     }
   },
   "home_beauty": {
