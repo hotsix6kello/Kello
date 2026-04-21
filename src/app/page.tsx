@@ -65,7 +65,6 @@ import type {
 } from './components/home/HomeBookingFlowEntry.types';
 
 import {
-  BEAUTY_STORE_ITEMS,
   BEAUTY_CATEGORY_OPTIONS,
   BeautyCategoryId
 } from './components/home/constants';
@@ -86,19 +85,11 @@ function resolveSkeletonPreviewStoreContext(
   const normalizedStoreName = explicitStore?.storeName?.trim() || null;
   const normalizedRegion = explicitStore?.region?.trim() || null;
 
-  const matchedStoreById = normalizedStoreId
-    ? BEAUTY_STORE_ITEMS.find((store) => store.id === normalizedStoreId) ?? null
-    : null;
-  const matchedStoreByCategory = category
-    ? BEAUTY_STORE_ITEMS.find((store) => store.category === category) ?? null
-    : null;
-  const fallbackStore =
-    matchedStoreById ??
-    matchedStoreByCategory ?? {
-      id: category ? `skeleton-${category}-preview` : 'skeleton-preview-store',
-      name: category ? `${category} preview store` : 'skeleton preview store',
-      region: 'seoul',
-    };
+  const fallbackStore = {
+    id: category ? `skeleton-${category}-preview` : 'skeleton-preview-store',
+    name: category ? `${category} preview store` : 'skeleton preview store',
+    region: 'seoul',
+  };
 
   return {
     storeId: normalizedStoreId ?? fallbackStore.id,
