@@ -1939,5 +1939,85 @@
     "copy_btn": "复制链接",
     "copy_btn_copied": "已复制",
     "close": "关闭"
+  },
+  "privacy_policy": {
+    "title": "隐私政策",
+    "effective_date": "生效日期：2024年4月21日",
+    "table": {
+      "category": "项目",
+      "items": "收集信息",
+      "purpose": "收集目的",
+      "retention": "保存期限"
+    },
+    "collection": {
+      "title": "1. 个人信息的收集与使用",
+      "required": "必选",
+      "required_items": "姓名、电子邮箱、预约信息（日期、时间、店铺、服务）、社交账号登录ID",
+      "required_purpose": "会员注册、身份识别、提供服务（预约）、客户咨询",
+      "auto": "自动收集",
+      "auto_items": "IP 地址、Cookie、设备信息、服务使用记录",
+      "auto_purpose": "提高服务质量及防止异常使用"
+    },
+    "retention": {
+      "title": "2. 保存及使用期限",
+      "content": "原则上，个人信息将保存至注销会员为止。但根据相关法令规定有必要保存时，可在该期限内予以保存。",
+      "legal_basis": "遵守相关法令（如《电子商务法》等）"
+    },
+    "third_party": {
+      "title": "3. 向第三方提供个人信息",
+      "content": "MyKello 为提供服务，向以下合作伙伴提供个人信息。",
+      "providers": "Supabase（数据库）、Google（身份验证）、X（身份验证）"
+    },
+    "overseas": {
+      "title": "4. 个人信息跨境传输",
+      "recipient": "接收方",
+      "country": "国家",
+      "purpose": "传输目的",
+      "items": "传输项目",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "美国",
+      "storage_auth": "数据存储及用户身份验证 (OAuth 2.0)",
+      "log_items": "电子邮箱、个人资料信息、服务使用日志"
+    },
+    "destruction": {
+      "title": "5. 销毁程序及方法",
+      "content": "个人信息在达到使用目的后将立即销毁。电子文件将通过无法还原的技术方法进行删除。"
+    }
+  },
+  "signup_consent": {
+    "all_agree": "我同意所有条款。",
+    "privacy_required": "[必选] 同意收集并使用个人信息",
+    "privacy_optional": "[可选] 同意接收营销信息",
+    "view_detail": "查看详情",
+    "terms_required": "[必选] 同意服务条款"
+  },
+  "terms_of_service": {
+    "title": "服务条款",
+    "effective_date": "生效日期：2024年4月21日",
+    "definitions": {
+      "title": "1. 服务定义",
+      "content": "MyKello 提供美容服务预约代行平台，旨在促进用户与美容服务提供者之间的预约及沟通。"
+    },
+    "benefits": {
+      "title": "2. 会员优惠",
+      "signup": "新用户注册成功后，即可获得 5% 折扣券。",
+      "referral": "使用推荐码注册时，推荐人与被推荐人均可获得 5% 折扣券。"
+    },
+    "refund_policy": {
+      "title": "3. 取消与退款规定",
+      "subtitle": "根据预约日期前的取消时间，退款比例如下：",
+      "five_days": "5日前：100% 退款",
+      "three_days": "3日前：90% 退款",
+      "two_days": "2日前：70% 退款",
+      "one_day": "1日前：50% 退款",
+      "same_day": "当日或未到场 (No-show)：不予退款",
+      "note": "最终退款处理可能因各店铺的政策而有所不同。"
+    },
+    "liability": {
+      "title": "4. 免责声明",
+      "interpretation": "「实时通译」功能为提供用户便利的辅助工具。公司对因翻译不准确而导致的预约错误或纠纷不承担责任。",
+      "community": "公司对通过社区功能进行的用户间自发性线下聚会或个人交易中产生的损害、事故或纠纷不承担责任。"
+    }
   }
 }
