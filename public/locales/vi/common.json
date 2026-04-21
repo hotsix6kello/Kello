@@ -1566,5 +1566,60 @@
     "placeholder": "Nhập mã giới thiệu",
     "submit": "Xác nhận",
     "skip": "Để sau"
+  },
+  "privacy_policy": {
+    "title": "Chính sách bảo mật",
+    "effective_date": "Ngày có hiệu lực: 21 tháng 4 năm 2024",
+    "table": {
+      "category": "Danh mục",
+      "items": "Thông tin thu thập",
+      "purpose": "Mục đích thu thập",
+      "retention": "Thời gian lưu trữ"
+    },
+    "collection": {
+      "title": "1. Thu thập và sử dụng thông tin cá nhân",
+      "required": "Bắt buộc",
+      "required_items": "Họ và tên, Email, Thông tin đặt chỗ (Ngày, Giờ, Cửa hàng, Dịch vụ), ID đăng nhập mạng xã hội",
+      "required_purpose": "Đăng ký người dùng, Xác thực, Cung cấp dịch vụ (Đặt chỗ), Tư vấn khách hàng",
+      "auto": "Thu thập tự động",
+      "auto_items": "Địa chỉ IP, Cookies, Thông tin thiết bị, Lịch sử sử dụng dịch vụ",
+      "auto_purpose": "Cải thiện chất lượng dịch vụ và ngăn ngừa gian lận"
+    },
+    "retention": {
+      "title": "2. Thời gian lưu trữ và sử dụng",
+      "content": "Về nguyên tắc, thông tin cá nhân sẽ được lưu trữ cho đến khi người dùng hủy tài khoản. Tuy nhiên, nó có thể được lưu giữ trong một khoảng thời gian theo yêu cầu của pháp luật liên quan nếu cần thiết.",
+      "legal_basis": "Tuân thủ các luật liên quan (ví dụ: Luật Thương mại điện tử, v.v.)"
+    },
+    "third_party": {
+      "title": "3. Cung cấp thông tin cá nhân cho bên thứ ba",
+      "content": "MyKello cung cấp thông tin cá nhân cho các đối tác sau để hỗ trợ cung cấp dịch vụ.",
+      "providers": "Supabase (Cơ sở dữ liệu), Google (Xác thực), X (Xác thực)"
+    },
+    "overseas": {
+      "title": "4. Chuyển thông tin cá nhân ra nước ngoài",
+      "recipient": "Đơn vị nhận",
+      "country": "Quốc gia",
+      "purpose": "Mục đích chuyển",
+      "items": "Thông tin chuyển",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "Hoa Kỳ (USA)",
+      "storage_auth": "Lưu trữ dữ liệu và xác thực OAuth 2.0",
+      "log_items": "Email, Thông tin hồ sơ, Nhật ký sử dụng dịch vụ"
+    },
+    "destruction": {
+      "title": "5. Quy trình và phương pháp hủy bỏ",
+      "content": "Thông tin cá nhân sẽ được hủy ngay sau khi mục đích đã đạt được. Các tệp điện tử sẽ được xóa bằng các phương pháp kỹ thuật khiến việc khôi phục là không thể."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "Tôi đồng ý với tất cả các điều khoản.",
+    "privacy_required": "[Bắt buộc] Đồng ý thu thập và sử dụng thông tin cá nhân",
+    "privacy_optional": "[Tùy chọn] Đồng ý nhận thông tin tiếp thị",
+    "view_detail": "Xem chi tiết",
+    "terms_required": "[Bắt buộc] Đồng ý với Điều khoản dịch vụ"
+  },
+  "terms_of_service": {
+    "title": "Điều khoản dịch vụ"
   }
 }
