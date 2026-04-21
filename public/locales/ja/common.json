@@ -2040,5 +2040,60 @@
     "placeholder": "紹介コードを入力",
     "submit": "入力完了",
     "skip": "あとで"
+  },
+  "privacy_policy": {
+    "title": "個人情報保護方針",
+    "effective_date": "施行日：2024年4月21日",
+    "table": {
+      "category": "カテゴリ",
+      "items": "収集項目",
+      "purpose": "利用目的",
+      "retention": "保有期間"
+    },
+    "collection": {
+      "title": "1. 個人情報の収集および利用",
+      "required": "必須項目",
+      "required_items": "氏名、メールアドレス、予約情報（日付、時間、店舗、サービス）、ソーシャルログインID",
+      "required_purpose": "会員登録、本人確認、サービス提供（予約）、カスタマー相談",
+      "auto": "自動収集項目",
+      "auto_items": "IPアドレス、クッキー、端末情報、サービス利用履歴",
+      "auto_purpose": "サービス品質の向上および不正利用の防止"
+    },
+    "retention": {
+      "title": "2. 個人情報の保有および利用期間",
+      "content": "原則として、個人情報は退会時まで保持されます。ただし、関連法令により義務付けられている場合は、当該期間中保持されます。",
+      "legal_basis": "関連法令の遵守（電子商取引法など）"
+    },
+    "third_party": {
+      "title": "3. 個人情報の第三者提供",
+      "content": "MyKelloは、円滑なサービス提供のため、以下のパートナー企業に個人情報を提供しています。",
+      "providers": "Supabase (データベース), Google (認証), X (認証)"
+    },
+    "overseas": {
+      "title": "4. 個人情報の国外移転",
+      "recipient": "受託業者",
+      "country": "移転先国",
+      "purpose": "移転目的",
+      "items": "移転項目",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "アメリカ (USA)",
+      "storage_auth": "データ保管およびOAuth 2.0認証",
+      "log_items": "メールアドレス、プロフィール情報、サービス利用ログ"
+    },
+    "destruction": {
+      "title": "5. 個人情報の破棄手続きおよび方法",
+      "content": "個人情報は目的達成後、直ちに破棄されます。電子的なファイルは、復元不可能な技術的方法を用いて削除されます。"
+    }
+  },
+  "signup_consent": {
+    "all_agree": "すべての規約に同意します。",
+    "privacy_required": "[必須] 個人情報の収集および利用への同意",
+    "privacy_optional": "[選択] マーケティング情報の受信同意",
+    "view_detail": "詳細を見る",
+    "terms_required": "[必須] サービス利用規約への同意"
+  },
+  "terms_of_service": {
+    "title": "サービス利用規約"
   }
 }
