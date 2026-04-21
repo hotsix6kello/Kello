@@ -924,6 +924,83 @@
       "preparing_images": "画像を準備中...",
       "cancel": "キャンセル"
     },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "ビューティー同行"
+      },
+      "flash_meetup": {
+        "label": "急募集まり"
+      },
+      "beauty": {
+        "label": "ビューティーレビュー"
+      },
+      "food": {
+        "label": "グルメ情報"
+      },
+      "travel": {
+        "label": "旅行情報"
+      },
+      "write": {
+        "label": "新規投稿"
+      },
+      "browse": {
+        "label": "見てみる",
+        "sub": "人気の投稿"
+      },
+      "recruiting": {
+        "label": "募集中",
+        "sub": "メイト"
+      },
+      "weekend": {
+        "label": "週末",
+        "sub": "週間プラン"
+      },
+      "record": {
+        "label": "日記",
+        "sub": "日常"
+      }
+    },
+    "fab": {
+      "create_post": "投稿を作成"
+    },
+    "sort": {
+      "latest": "新着順",
+      "reactions": "人気順",
+      "draft": "活発な募集"
+    },
+    "card": {
+      "default_vibe": "良い雰囲気",
+      "title_prefix": {
+        "beauty_review": "[ビューティー]",
+        "food_review": "[グルメ]",
+        "travel_review": "[旅行]"
+      },
+      "cta": {
+        "review": "投稿を見る",
+        "join": "今すぐ参加"
+      },
+      "result_badge": "完了",
+      "open_meetup_badge": "集まりオープン",
+      "fresh_badges": {
+        "comment": "注目コメント",
+        "update": "今すぐ更新"
+      },
+      "draft_status": {
+        "active": "チャット活発",
+        "forming": "メイト募集中",
+        "preparing": "気になります"
+      },
+      "draft_desc": {
+        "active": "多くの方が関心を持っています！",
+        "forming": "まだメイトを募集しています。",
+        "preparing": "最初の参加者になってみませんか？"
+      },
+      "owner_reactions": {
+        "region": "{{region}}について{{count}}人とチャット中",
+        "join": "{{count}}人が関心を示しています"
+      },
+      "more_region": "{{region}}のストーリーをもっと見る"
+    },
     "detail": "投稿詳細",
     "detail_page": {
       "loading": "データを読み込み中...",
