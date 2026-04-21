@@ -1931,5 +1931,13 @@
     "success": "账户已创建！请查收邮件完成验证后登录。",
     "login_prompt": "已有账户？",
     "login_link": "登录"
+  },
+  "webview_banner": {
+    "title": "应用内浏览器不支持Google登录",
+    "desc_android": "已尝试在Chrome中打开。如果没有反应，请复制链接并粘贴到Chrome中。",
+    "desc_ios": "请打开Safari或Chrome，粘贴链接后继续登录。",
+    "copy_btn": "复制链接",
+    "copy_btn_copied": "已复制",
+    "close": "关闭"
   }
 }

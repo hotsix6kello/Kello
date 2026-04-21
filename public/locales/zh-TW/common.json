@@ -1481,5 +1481,13 @@
   },
   "help_page": {
     "call_btn": "致電"
+  },
+  "webview_banner": {
+    "title": "應用程式內瀏覽器不支援Google登入",
+    "desc_android": "已嘗試在Chrome中開啟。若未反應，請複製連結並貼上到Chrome。",
+    "desc_ios": "請開啟Safari或Chrome，貼上連結後繼續登入。",
+    "copy_btn": "複製連結",
+    "copy_btn_copied": "已複製",
+    "close": "關閉"
   }
 }
