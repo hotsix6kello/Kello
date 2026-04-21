@@ -2220,6 +2220,31 @@
     "terms_required": "[Required] Consent to Terms of Service"
   },
   "terms_of_service": {
-    "title": "Terms of Service"
+    "title": "Terms of Service",
+    "effective_date": "Effective Date: April 21, 2024",
+    "definitions": {
+      "title": "1. Definition of Service",
+      "content": "MyKello provides a beauty service reservation agency platform that facilitates booking and communication between users and beauty service providers."
+    },
+    "benefits": {
+      "title": "2. Membership Benefits",
+      "signup": "New members receive a 5% discount coupon upon successful registration.",
+      "referral": "When a new member joins using a referral code, both the referrer and the referee receive a 5% discount coupon."
+    },
+    "refund_policy": {
+      "title": "3. Cancellation & Refund Policy",
+      "subtitle": "Refund amounts are calculated based on the time of cancellation prior to the scheduled appointment:",
+      "five_days": "5 days prior: 100% Refund",
+      "three_days": "3 days prior: 90% Refund",
+      "two_days": "2 days prior: 70% Refund",
+      "one_day": "1 day prior: 50% Refund",
+      "same_day": "Same-day or No-show: No Refund",
+      "note": "Final refund processing may vary depending on the specific store's policy."
+    },
+    "liability": {
+      "title": "4. Limitation of Liability",
+      "interpretation": "The 'Real-time Interpretation' feature is a supplementary tool provided for user convenience. MyKello is not liable for reservation errors or disputes arising from inaccuracies in AI translation or manual interpretation.",
+      "community": "MyKello is not responsible for any damages, incidents, or disputes resulting from voluntary offline meetups or personal transactions between users conducted through the community features."
+    }
   }
 }
