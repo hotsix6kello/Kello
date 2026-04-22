@@ -108,7 +108,8 @@ export function CustomerDetailsStepShell({
           <div className="flex flex-col gap-1.5">
             <span className="text-[13px] font-bold text-neutral-700 ml-1">{t("booking_skeleton.customer_details.phone_label")}</span>
             <input
-              type="tel"
+              type="text"
+              inputMode="text"
               value={details.phone}
               onChange={(event) => onChangePhone?.(event.target.value)}
               className="min-h-[60px] rounded-2xl border-2 border-neutral-100 bg-white px-5 py-3 text-base text-neutral-900 outline-none transition-all focus:border-fuchsia-400 focus:bg-fuchsia-50/30 shadow-sm hover:border-fuchsia-100"
