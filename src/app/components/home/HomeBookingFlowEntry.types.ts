@@ -33,8 +33,10 @@ export type HomeBookingLegacyDraftBuildInput = {
   storeContext?: Partial<HomeBookingStoreContext>;
   primaryServiceName?: string | null;
   agreements?: {
-    bookingConfirmed?: boolean;
-    privacyConsent?: boolean;
+    serviceTermsAgreed?: boolean;
+    privacyPolicyAgreed?: boolean;
+    thirdPartySharingAgreed?: boolean;
+    marketingConsentAgreed?: boolean;
   };
 };
 

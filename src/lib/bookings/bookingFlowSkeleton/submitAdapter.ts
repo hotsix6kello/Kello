@@ -120,8 +120,10 @@ function buildPayloadCandidate(
       },
     },
     agreements: {
-      bookingConfirmed: draft.agreements.bookingConfirmed,
-      privacyConsent: draft.agreements.privacyConsent,
+      serviceTermsAgreed: draft.agreements.serviceTermsAgreed,
+      privacyPolicyAgreed: draft.agreements.privacyPolicyAgreed,
+      thirdPartySharingAgreed: draft.agreements.thirdPartySharingAgreed,
+      marketingConsentAgreed: draft.agreements.marketingConsentAgreed,
     },
     createdFrom: {
       flow: "beauty-explore",
@@ -182,11 +184,11 @@ function collectSubmitBlockers(
     blockers.add(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingCustomerPhone);
   }
 
-  if (draft.agreements.bookingConfirmed !== true) {
+  if (draft.agreements.serviceTermsAgreed !== true) {
     blockers.add(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingConfirmedRequired);
   }
 
-  if (draft.agreements.privacyConsent !== true) {
+  if (draft.agreements.privacyPolicyAgreed !== true || draft.agreements.thirdPartySharingAgreed !== true) {
     blockers.add(LEGACY_SUBMIT_ADAPTER_BLOCKERS.privacyConsentRequired);
   }
 

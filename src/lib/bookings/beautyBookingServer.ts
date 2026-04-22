@@ -193,14 +193,18 @@ function normalizeDbStatus(value: string): BeautyBookingAdminStatus {
 function mapAgreements(value: unknown): BeautyBookingAdminRecord["agreements"] {
   if (!isRecord(value)) {
     return {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     };
   }
 
   return {
-    bookingConfirmed: value.bookingConfirmed === true,
-    privacyConsent: value.privacyConsent === true,
+    serviceTermsAgreed: value.serviceTermsAgreed === true,
+    privacyPolicyAgreed: value.privacyPolicyAgreed === true,
+    thirdPartySharingAgreed: value.thirdPartySharingAgreed === true,
+    marketingConsentAgreed: value.marketingConsentAgreed === true,
   };
 }
 

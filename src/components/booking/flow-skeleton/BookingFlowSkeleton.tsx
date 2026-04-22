@@ -438,21 +438,12 @@ export function BookingFlowSkeleton({
             customerDetails={state.customerDetails}
             confirmation={state.confirmation}
             summary={summary}
-            onToggleBookingConfirmed={(bookingConfirmed) =>
+            onChangeConfirmation={(patch) =>
               setState((currentState) => ({
                 ...currentState,
                 confirmation: {
                   ...currentState.confirmation,
-                  bookingConfirmed,
-                },
-              }))
-            }
-            onTogglePrivacyConsent={(privacyConsent) =>
-              setState((currentState) => ({
-                ...currentState,
-                confirmation: {
-                  ...currentState.confirmation,
-                  privacyConsent,
+                  ...patch,
                 },
               }))
             }
