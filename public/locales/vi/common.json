@@ -250,6 +250,19 @@
     "search_results": "ผลลัพธ์การค้นหา",
     "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
+  "welcome_popup": {
+    "title": "Đăng ký ngay để nhận\ncoupon giảm giá 5%!",
+    "description": "Nhận ngay coupon có thể sử dụng ngay sau khi đăng ký thành viên.",
+    "cta": "Nhận coupon và đăng ký",
+    "close": "Đóng"
+  },
+  "referral_popup": {
+    "title": "Bạn có mã giới thiệu không?",
+    "description": "Nhập mã để bạn và bạn bè cùng nhận thêm coupon giảm giá 5%!",
+    "placeholder": "Nhập mã giới thiệu",
+    "submit": "Hoàn tất",
+    "skip": "Bỏ qua"
+  },
   "transport": {
     "moving_to": "Đang đến {{dest}}",
     "remaining": "Còn lại",
@@ -1778,7 +1791,7 @@
     "close": "Đóng"
   },
   "welcome_popup": {
-    "title": "Nhận ngay phiếu giảm giá 5% khi đăng ký!",
+    "title": "Đăng ký ngay để nhận\ncoupon giảm giá 5%!",
     "description": "Bạn sẽ nhận được phiếu có thể dùng ngay.",
     "cta": "Đăng ký & nhận phiếu",
     "close": "Đóng"

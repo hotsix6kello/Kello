@@ -386,6 +386,19 @@
     "copy_address": "住所をコピー",
     "copied": "コピーしました!"
   },
+  "welcome_popup": {
+    "title": "今すぐ登録してすぐに使える\n5%OFFクーポンをゲット！",
+    "description": "会員登録するだけで、すぐにご利用いただけるクーポンをプレゼントいたします。",
+    "cta": "クーポンを受け取って登録する",
+    "close": "閉じる"
+  },
+  "referral_popup": {
+    "title": "招待コードをお持ちですか？",
+    "description": "コードを入力すると、友達もあなたもさらに5%OFFクーポンがもらえます！",
+    "placeholder": "招待コードを入力",
+    "submit": "入力完了",
+    "skip": "スキップ"
+  },
   "transport": {
     "moving_to": "{{dest}}へ移動中",
     "remaining": "残り",
@@ -2200,7 +2213,7 @@
     "close": "閉じる"
   },
   "welcome_popup": {
-    "title": "会員登録で5%割引クーポンプレゼント！",
+    "title": "会員登録で\n5%割引クーポンプレゼント！",
     "description": "登録するだけですぐ使えるクーポンをお届けします。",
     "cta": "クーポンを受け取って登録",
     "close": "閉じる"
