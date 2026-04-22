@@ -190,7 +190,7 @@ function normalizeDbStatus(value: string): BeautyBookingAdminStatus {
   return isBeautyBookingAdminStatus(value) ? value : "requested";
 }
 
-function mapAgreements(value: unknown): Record<string, boolean> {
+function mapAgreements(value: unknown): BeautyBookingAdminRecord["agreements"] {
   if (!isRecord(value)) {
     return {
       serviceTermsAgreed: false,

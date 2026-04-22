@@ -1129,12 +1129,20 @@ export default function AdminBeautyBookingsContent() {
                         <dd>{INTENT_LABELS[selectedBooking.communicationIntent] ?? selectedBooking.communicationIntent}</dd>
                       </div>
                       <div>
-                        <dt>예약 확인 동의</dt>
-                        <dd>{selectedBooking.agreements.bookingConfirmed ? '동의' : '미동의'}</dd>
+                        <dt>서비스 약관 동의</dt>
+                        <dd>{selectedBooking.agreements.serviceTermsAgreed ? '동의' : '미동의'}</dd>
                       </div>
                       <div>
-                        <dt>개인정보 안내 동의</dt>
-                        <dd>{selectedBooking.agreements.privacyConsent ? '동의' : '미동의'}</dd>
+                        <dt>개인정보 수집 동의</dt>
+                        <dd>{selectedBooking.agreements.privacyPolicyAgreed ? '동의' : '미동의'}</dd>
+                      </div>
+                      <div>
+                        <dt>제3자 제공 동의</dt>
+                        <dd>{selectedBooking.agreements.thirdPartySharingAgreed ? '동의' : '미동의'}</dd>
+                      </div>
+                      <div>
+                        <dt>마케팅 정보 수신</dt>
+                        <dd>{selectedBooking.agreements.marketingConsentAgreed ? '동의' : '미동의'}</dd>
                       </div>
                     </dl>
                   </section>
