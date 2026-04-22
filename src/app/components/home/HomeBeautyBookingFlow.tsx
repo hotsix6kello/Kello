@@ -242,8 +242,10 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           },
         },
         agreements: {
-          bookingConfirmed: agreements.bookingConfirmed,
-          privacyConsent: agreements.privacyConsent,
+          serviceTermsAgreed: agreements.bookingConfirmed,
+          privacyPolicyAgreed: agreements.privacyConsent,
+          thirdPartySharingAgreed: agreements.privacyConsent,
+          marketingConsentAgreed: false,
         },
         createdFrom: {
           flow: 'beauty-explore',

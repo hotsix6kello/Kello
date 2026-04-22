@@ -111,8 +111,10 @@ export type BookingCustomerDetailsState = {
 };
 
 export type BookingConfirmationState = {
-  bookingConfirmed: boolean;
-  privacyConsent: boolean;
+  serviceTermsAgreed: boolean;
+  privacyPolicyAgreed: boolean;
+  thirdPartySharingAgreed: boolean;
+  marketingConsentAgreed: boolean;
 };
 
 export type BookingFlowCategoryCapabilities = {
