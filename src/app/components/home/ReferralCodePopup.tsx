@@ -6,11 +6,12 @@ import styles from './ReferralCodePopup.module.css';
 
 interface ReferralCodePopupProps {
   onClose: () => void;
+  onNeverShowAgain: () => void;
   onSubmit: (code: string) => Promise<void>;
   errorMessage?: string;
 }
 
-export default function ReferralCodePopup({ onClose, onSubmit, errorMessage }: ReferralCodePopupProps) {
+export default function ReferralCodePopup({ onClose, onNeverShowAgain, onSubmit, errorMessage }: ReferralCodePopupProps) {
   const { t } = useTranslation('common');
   const [code, setCode] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,9 +48,14 @@ export default function ReferralCodePopup({ onClose, onSubmit, errorMessage }: R
         >
           {t('referral_popup.submit')}
         </button>
-        <button className={styles.skipButton} onClick={onClose} disabled={isSubmitting}>
-          {t('referral_popup.skip')}
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px' }}>
+          <button className={styles.skipButton} onClick={onClose} disabled={isSubmitting}>
+            {t('referral_popup.skip')}
+          </button>
+          <button className={styles.skipButton} onClick={onNeverShowAgain} disabled={isSubmitting}>
+            다시 보지 않기
+          </button>
+        </div>
       </div>
     </div>
   );

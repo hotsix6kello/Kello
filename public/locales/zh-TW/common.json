@@ -545,6 +545,19 @@
     "copy_done": "複製成功！",
     "close": "關閉"
   },
+  "welcome_popup": {
+    "title": "現在註冊即可獲得\n5%折扣優惠券！",
+    "description": "加入會員即可獲得立即可用的優惠券。",
+    "cta": "領取優惠券並註冊",
+    "close": "關閉"
+  },
+  "referral_popup": {
+    "title": "您有推薦碼嗎？",
+    "description": "輸入推薦碼，您和您的朋友都將獲得額外的5%優惠券！",
+    "placeholder": "輸入推薦碼",
+    "submit": "提交",
+    "skip": "略過"
+  },
   "interpreter_ui": {
     "customer_speaks": "顧客語言",
     "staff_speaks": "店舖語言",
@@ -1262,7 +1275,7 @@
     }
   },
   "welcome_popup": {
-    "title": "註冊即送5%折扣券！",
+    "title": "立即註冊即可獲得\n5%折扣優惠券！",
     "description": "註冊後可立即使用折扣券。",
     "cta": "領券註冊",
     "close": "關閉"
