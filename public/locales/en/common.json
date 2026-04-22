@@ -355,6 +355,19 @@
     "copy_done": "Copied!",
     "close": "Cancel"
   },
+  "welcome_popup": {
+    "title": "Sign up now and get a\n5% discount coupon!",
+    "description": "Get an exclusive coupon instantly available upon registration.",
+    "cta": "Sign Up & Get Coupon",
+    "close": "Close"
+  },
+  "referral_popup": {
+    "title": "Have a referral code?",
+    "description": "Enter the code and both you and your friend get an extra 5% off coupon!",
+    "placeholder": "Enter referral code",
+    "submit": "Submit",
+    "skip": "Skip for now"
+  },
   "location_sheet": {
     "search_title": "Search Results",
     "search_result_count": "{{count}} results for '{{query}}'",
@@ -2213,7 +2226,7 @@
   "common_actions_view_all": "View All",
   "common_loading": "Loading...",
   "welcome_popup": {
-    "title": "Get a 5% coupon just for signing up!",
+    "title": "Sign up now and\nget a 5% discount coupon!",
     "description": "You'll receive a coupon you can use right away.",
     "cta": "Sign up & get coupon",
     "close": "Close"
