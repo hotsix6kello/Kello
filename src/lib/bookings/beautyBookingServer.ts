@@ -190,17 +190,21 @@ function normalizeDbStatus(value: string): BeautyBookingAdminStatus {
   return isBeautyBookingAdminStatus(value) ? value : "requested";
 }
 
-function mapAgreements(value: unknown): BeautyBookingAdminRecord["agreements"] {
+function mapAgreements(value: unknown): Record<string, boolean> {
   if (!isRecord(value)) {
     return {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     };
   }
 
   return {
-    bookingConfirmed: value.bookingConfirmed === true,
-    privacyConsent: value.privacyConsent === true,
+    serviceTermsAgreed: value.serviceTermsAgreed === true,
+    privacyPolicyAgreed: value.privacyPolicyAgreed === true,
+    thirdPartySharingAgreed: value.thirdPartySharingAgreed === true,
+    marketingConsentAgreed: value.marketingConsentAgreed === true,
   };
 }
 
