@@ -114,7 +114,8 @@ export default function LoginPage() {
         }
     };
 
-    // --- Facebook OAuth ---
+    // --- Facebook OAuth (TODO: 앱 게시 승인 후 버튼 활성화) ---
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleFacebookLogin = async () => {
         setFacebookLoading(true);
         setError(null);
