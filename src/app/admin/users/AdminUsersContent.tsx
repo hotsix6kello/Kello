@@ -17,6 +17,11 @@ interface Profile {
     partnerStatus?: 'pending' | 'approved' | 'rejected' | null;
 }
 
+async function getAccessToken(): Promise<string | null> {
+    const { data: { session } } = await supabase.auth.getSession();
+    return session?.access_token ?? null;
+}
+
 export default function AdminUsersContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -51,31 +56,20 @@ export default function AdminUsersContent() {
 
     const fetchProfiles = useCallback(async () => {
         setLoading(true);
-
-        const [{ data: profileData }, { data: partnerData }] = await Promise.all([
-            supabase
-                .from('profiles')
-                .select('id, email, display_name, nickname, phone, sns, role, created_at')
-                .order('created_at', { ascending: false }),
-            supabase
-                .from('partners')
-                .select('email, status'),
-        ]);
-
-        const partnerMap = new Map<string, string>();
-        const typedPartnerData = (partnerData || []) as { email: string; status: string }[];
-        typedPartnerData.forEach((p) => partnerMap.set(p.email, p.status));
-
-        const typedProfileData = (profileData || []) as {
-            id: string; email: string; display_name: string | null; nickname: string | null;
-            phone: string | null; sns: string | null; role: string | null; created_at: string;
-        }[];
-        const merged: Profile[] = typedProfileData.map((p) => ({
-            ...p,
-            partnerStatus: (partnerMap.get(p.email) as Profile['partnerStatus']) ?? null,
-        }));
-
-        setProfiles(merged);
+        try {
+            const token = await getAccessToken();
+            const res = await fetch('/api/admin/users', {
+                headers: token ? { Authorization: `Bearer ${token}` } : {},
+            });
+            const json = await res.json() as { ok: boolean; users?: Profile[]; error?: string };
+            if (json.ok && json.users) {
+                setProfiles(json.users);
+            } else {
+                console.error('[admin-users] fetch failed:', json.error);
+            }
+        } catch (e) {
+            console.error('[admin-users] fetch error:', e);
+        }
         setLoading(false);
     }, []);
 
@@ -86,11 +80,20 @@ export default function AdminUsersContent() {
     const handleToggle = async () => {
         if (!confirmTarget) return;
         setActionLoading(true);
-        const isTargetAdmin = confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin';
-        await supabase
-            .from('profiles')
-            .update({ role: isTargetAdmin ? 'customer' : 'admin' })
-            .eq('id', confirmTarget.id);
+        try {
+            const token = await getAccessToken();
+            const isTargetAdmin = confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin';
+            await fetch('/api/admin/users', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                },
+                body: JSON.stringify({ userId: confirmTarget.id, role: isTargetAdmin ? 'customer' : 'admin' }),
+            });
+        } catch (e) {
+            console.error('[admin-users] toggle error:', e);
+        }
         setConfirmTarget(null);
         await fetchProfiles();
         setActionLoading(false);
@@ -103,12 +106,11 @@ export default function AdminUsersContent() {
 
     const displayName = (p: Profile) => p.nickname || p.display_name || '(닉네임 없음)';
 
-    const filtered = profiles
-        .filter(p =>
-            p.email?.toLowerCase().includes(search.toLowerCase()) ||
-            (p.nickname ?? '').toLowerCase().includes(search.toLowerCase()) ||
-            (p.display_name ?? '').toLowerCase().includes(search.toLowerCase())
-        );
+    const filtered = profiles.filter(p =>
+        p.email?.toLowerCase().includes(search.toLowerCase()) ||
+        (p.nickname ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        (p.display_name ?? '').toLowerCase().includes(search.toLowerCase())
+    );
 
     const tabFiltered = tab === 'admin'
         ? filtered.filter(p => p.role === 'admin' || p.role === 'super_admin')
