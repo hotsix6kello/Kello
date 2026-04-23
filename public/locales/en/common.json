@@ -350,7 +350,8 @@
   "interpreter_entry": {
     "title": "Live Translation",
     "description": "Communicate easily with staff at any shop",
-    "cta": "Start Translation"
+    "cta": "Start Translation",
+    "select_language": "Select your language"
   },
   "modals": {
     "card_title": "🗺️ Please go to this address",
@@ -359,14 +360,14 @@
     "close": "Cancel"
   },
   "welcome_popup": {
-    "title": "Sign up now and get a\n5% discount coupon!",
-    "description": "Get an exclusive coupon instantly available upon registration.",
-    "cta": "Sign Up & Get Coupon",
+    "title": "Sign up now and\nget a 5% discount coupon!",
+    "description": "You'll receive a coupon you can use right away.",
+    "cta": "Sign up & get coupon",
     "close": "Close"
   },
   "referral_popup": {
-    "title": "Have a referral code?",
-    "description": "Enter the code and both you and your friend get an extra 5% off coupon!",
+    "title": "Do you have a referral code?",
+    "description": "Enter a code and both you and your friend get a 5% coupon!",
     "placeholder": "Enter referral code",
     "submit": "Submit",
     "skip": "Skip for now"
@@ -2228,19 +2229,6 @@
   "error_retry": "Try Again",
   "common_actions_view_all": "View All",
   "common_loading": "Loading...",
-  "welcome_popup": {
-    "title": "Sign up now and\nget a 5% discount coupon!",
-    "description": "You'll receive a coupon you can use right away.",
-    "cta": "Sign up & get coupon",
-    "close": "Close"
-  },
-  "referral_popup": {
-    "title": "Do you have a referral code?",
-    "description": "Enter a code and both you and your friend get a 5% coupon!",
-    "placeholder": "Enter referral code",
-    "submit": "Submit",
-    "skip": "Skip for now"
-  },
   "signup": {
     "subtitle": "Experience Korea like a local",
     "name_label": "Name",

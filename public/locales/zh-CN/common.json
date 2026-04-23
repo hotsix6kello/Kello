@@ -251,17 +251,17 @@
     "copied": "已复制!"
   },
   "welcome_popup": {
-    "title": "现在注册即可获得\n5%折扣优惠券！",
-    "description": "加入会员即可获得立即可用的优惠券。",
-    "cta": "领取优惠券并注册",
+    "title": "立即注册即可获得\n5%折扣优惠券！",
+    "description": "注册后可立即使用优惠券。",
+    "cta": "领券注册",
     "close": "关闭"
   },
   "referral_popup": {
     "title": "您有推荐码吗？",
-    "description": "输入推荐码，您和您的朋友都将获得额外的5%优惠券！",
+    "description": "输入推荐码，您和朋友都能获得5%优惠券！",
     "placeholder": "输入推荐码",
-    "submit": "提交",
-    "skip": "跳过"
+    "submit": "确认",
+    "skip": "稍后再说"
   },
   "transport": {
     "moving_to": "正在前往 {{dest}}",
@@ -1968,7 +1968,8 @@
   "interpreter_entry": {
     "title": "实时翻译助手",
     "description": "与店铺员工轻松沟通",
-    "cta": "开启翻译"
+    "cta": "开启翻译",
+    "select_language": "请选择您的语言"
   },
   "location_sheet": {
     "search_title": "查找搜索结果",
@@ -1983,19 +1984,6 @@
     "copy": "复制地址",
     "copy_done": "复制成功！",
     "close": "关闭"
-  },
-  "welcome_popup": {
-    "title": "立即注册即可获得\n5%折扣优惠券！",
-    "description": "注册后可立即使用优惠券。",
-    "cta": "领券注册",
-    "close": "关闭"
-  },
-  "referral_popup": {
-    "title": "您有推荐码吗？",
-    "description": "输入推荐码，您和朋友都能获得5%优惠券！",
-    "placeholder": "输入推荐码",
-    "submit": "确认",
-    "skip": "稍后再说"
   },
   "signup": {
     "subtitle": "像当地人一样体验韩国",

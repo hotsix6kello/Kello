@@ -603,7 +603,6 @@ export default function HomePage() {
 
       <HomeInterpreterEntry
         onOpenInterpreter={handleOpenInterpreter}
-        t={t}
       />
 
 

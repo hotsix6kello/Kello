@@ -252,16 +252,16 @@
   },
   "welcome_popup": {
     "title": "Đăng ký ngay để nhận\ncoupon giảm giá 5%!",
-    "description": "Nhận ngay coupon có thể sử dụng ngay sau khi đăng ký thành viên.",
-    "cta": "Nhận coupon và đăng ký",
+    "description": "Bạn sẽ nhận được phiếu có thể dùng ngay.",
+    "cta": "Đăng ký & nhận phiếu",
     "close": "Đóng"
   },
   "referral_popup": {
     "title": "Bạn có mã giới thiệu không?",
-    "description": "Nhập mã để bạn và bạn bè cùng nhận thêm coupon giảm giá 5%!",
+    "description": "Nhập mã để cả bạn và bạn bè đều nhận được phiếu giảm giá 5%!",
     "placeholder": "Nhập mã giới thiệu",
-    "submit": "Hoàn tất",
-    "skip": "Bỏ qua"
+    "submit": "Xác nhận",
+    "skip": "Để sau"
   },
   "transport": {
     "moving_to": "Đang đến {{dest}}",
@@ -1780,7 +1780,8 @@
   "interpreter_entry": {
     "title": "Phiên dịch trực tuyến",
     "description": "Giao tiếp dễ dàng với nhân viên",
-    "cta": "Mở phiên dịch"
+    "cta": "Mở phiên dịch",
+    "select_language": "Chọn ngôn ngữ của bạn"
   },
   "location_sheet": {
     "search_title": "Tìm kiếm vị trí",
@@ -1795,19 +1796,6 @@
     "copy": "Sao chép địa chỉ",
     "copy_done": "Đã sao chép!",
     "close": "Đóng"
-  },
-  "welcome_popup": {
-    "title": "Đăng ký ngay để nhận\ncoupon giảm giá 5%!",
-    "description": "Bạn sẽ nhận được phiếu có thể dùng ngay.",
-    "cta": "Đăng ký & nhận phiếu",
-    "close": "Đóng"
-  },
-  "referral_popup": {
-    "title": "Bạn có mã giới thiệu không?",
-    "description": "Nhập mã để cả bạn và bạn bè đều nhận được phiếu giảm giá 5%!",
-    "placeholder": "Nhập mã giới thiệu",
-    "submit": "Xác nhận",
-    "skip": "Để sau"
   },
   "signup": {
     "subtitle": "Trải nghiệm Hàn Quốc như người bản địa",

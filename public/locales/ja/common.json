@@ -87,85 +87,206 @@
   },
   "booking_skeleton": {
     "steps": {
-      "step1_title": "サービス選択",
-      "step1_desc": "希望のメニューを選択して次のステップへ進んでください。",
-      "step2_title": "日程と情報",
-      "step2_desc": "予約日時と情報を1つの画面で入力してください。",
+      "step1_title": "メニュー選択",
+      "step1_desc": "ご希望の施術メニューを選択し、次のステップへお進みください。",
+      "step2_title": "日時・情報",
+      "step2_desc": "来店日時とご予約情報を1つの画面で入力します。",
       "step3_title": "最終確認",
-      "step3_desc": "詳細を確認し、予約リクエストを送信します。",
-      "step": "ステップ"
+      "step3_desc": "ご予約内容を確認し、リクエストを送信します。",
+      "step": "STEP"
     },
     "service_selection": {
-      "title": "サービス選択",
-      "desc": "ご希望のサービスメニューを選択してください。",
-      "no_menu": "このカテゴリーにはまだ登録されたサービスがありません。",
-      "select_category_first": "まずはカテゴリーを選択してください。"
+      "title": "メニュー選択",
+      "desc": "ご希望のメニューをお選びください。",
+      "no_menu": "このカテゴリにはまだメニューがありません。",
+      "select_category_first": "まずはカテゴリを選択してください。"
     },
     "date_time": {
-      "title": "予約日時を選択",
-      "desc": "ご希望の予約時間を選択してください。",
-      "preparing": "店舗の予約表を準備中です。",
-      "placeholder": "YYYY-MM-DD",
-      "clear": "リセット",
+      "title": "日時選択",
+      "desc": "ご希望の来店日時をお選びください。",
+      "preparing": "このカテゴリの日時選択画面は現在準備中です。",
+      "placeholder": "年-月-日",
+      "clear": "クリア",
       "today": "今日"
     },
     "customer_details": {
-      "title": "予約情報の入力",
-      "desc": "予約を確定するために情報を入力してください。",
-      "desc_hint": "正確な予約確認のため、各項目を入力してください。",
-      "name_label": "お名前 (英文字推奨) *",
-      "name_placeholder": "パスポート上の表記",
-      "phone_label": "連絡先 (SNS ID可) *",
-      "phone_placeholder": "電話番号またはSNSのアカウント名",
-      "request_label": "追加リクエスト",
-      "request_placeholder": "希望のスタイルや特に伝えたい事があれば入力してください。",
+      "title": "お客様情報",
+      "desc": "ご予約確認のため、お客様の情報をご確認ください。",
+      "desc_hint": "ご予約の確定のため、正確な情報をご入力ください。",
+      "name_label": "お名前（英語推奨） *",
+      "name_placeholder": "パスポートと同じスペル",
+      "phone_label": "連絡先（SNS ID可） *",
+      "phone_placeholder": "電話番号またはInstagram ID",
+      "request_label": "ご要望",
+      "request_placeholder": "ご希望のスタイルや気になる点をご記入ください。",
       "current_status": "現在の状態",
       "current_status_desc": "現在の状態がわかる写真を添付してください。",
-      "current_status_helper": "写真が鮮明であるほど、より正確なカウンセリングが可能です。",
+      "current_status_helper": "写真が鮮明であるほど、スムーズなご案内が可能です。",
       "add_current_photo": "現在の写真を追加",
       "desired_style": "希望のスタイル",
-      "desired_style_desc": "なりたいスタイルの参考画像を添付してください。",
-      "desired_style_helper": "希望の雰囲気や長さがはっきりわかる写真がおすすめです。",
-      "add_style_photo": "スタイル写真を追加",
-      "no_photo": "添付された写真がありません。",
+      "desired_style_desc": "ご希望のスタイルの参考画像を添付してください。",
+      "desired_style_helper": "希望するイメージや長さが明確にわかる写真が最適です。",
+      "add_style_photo": "スタイルの写真を追加",
+      "no_photo": "添付された写真はありません。",
       "add_photo": "写真を追加",
-      "photo_hint": "* 参考用と現在の状態の写真をそれぞれ1枚ずつ添付できます。",
-      "preparing": "詳細情報の入力画面を準備中です。"
+      "photo_hint": "※ 参考画像と現在の状態の写真をそれぞれ1枚ずつ添付できます。",
+      "preparing": "このカテゴリのお客様情報入力画面は現在準備中です。"
     },
     "confirmation": {
-      "title": "予約のまとめ",
-      "desc": "入力した情報を確認してください。",
-      "desc_summary": "入力した情報を確認してください。",
-      "desc_final": "予約内容を再度確認し、リクエストを送信します。",
-      "shop": "ショップ",
-      "date_time": "日付と時間",
-      "service": "サービス",
-      "customer": "予約者",
-      "agreement_title": "規約への同意",
-      "agreement_desc_hint": "予約に必要な必須項目に同意してください。",
-      "agreement_all": "すべてに同意する",
-      "agreement_service": "[必須] サービス利用規約への同意",
-      "agreement_privacy": "[必須] 個人情報の収集および利用への同意",
-      "agreement_third_party": "[必須] 個人情報の第三者提供および国外移転への同意",
-      "agreement_marketing": "[任意] マーケティング情報の収集および受信への同意 (メール/SMS等)",
-      "agreement_validation_error": "必須項目にすべて同意してください。",
-      "privacy_label": "個人情報の収集に同意",
-      "privacy_desc": "予約手続きのため、お名前と連絡先情報を店舗に提供することに同意します。",
+      "title": "ご予約の確認",
+      "desc": "入力した情報をご確認ください。",
+      "desc_summary": "ご入力いただいた内容をご確認ください。",
+      "desc_final": "ご予約内容を再度ご確認の上、リクエストを送信してください。",
+      "shop": "店舗",
+      "date_time": "日時",
+      "service": "メニュー",
+      "customer": "お客様",
+      "agreement_title": "利用規約",
+      "agreement_desc": "ご予約に必要な項目に同意してください。",
+      "agreement_desc_hint": "ご予約に必要な項目をご確認の上、同意をお願いします。",
+      "confirm_info_label": "予約内容の確認",
+      "confirm_info_desc": "選択した店舗、日時、メニュー内容が正しいことを確認しました。",
+      "privacy_label": "個人情報の取り扱いへの同意",
+      "privacy_desc": "ご予約に必要な氏名および連絡先を店舗へ提供することに同意します。",
       "attached_images": "添付画像",
-      "image_count_summary": "合計 {{count}}枚",
-      "submit_button": "最終的な予約をリクエストする",
-      "preparing": "このカテゴリーの最終確認画面を準備中です。"
+      "image_count_summary": "計 {{count}} 枚",
+      "submit_button": "予約リクエストを送信",
+      "preparing": "このカテゴリの最終確認画面は現在準備中です。"
     },
-    "next_step": "次へ進む",
-    "check_final": "最終確認",
+    "next_step": "次のステップへ",
+    "check_final": "最終確認へ移行",
     "review": {
-      "no_request": "追加のご要望なし",
-      "no_images": "添付画像なし",
-      "no_service": "未選択",
-      "no_date": "日付未選択",
-      "no_time": "時間未選択",
-      "no_name": "お名前なし",
-      "no_contact": "連絡先なし"
+      "no_request": "ご要望はまだありません。",
+      "no_images": "画像は添付されていません。",
+      "no_service": "メニューが選択されていません。",
+      "no_date": "日付が選択されていません。",
+      "no_time": "時間が選択されていません。",
+      "no_name": "お名前が入力されていません。",
+      "no_contact": "連絡先が入力されていません。"
+    },
+    "image_groups": {
+      "hair": {
+        "current_editor": "現在の髪の状態",
+        "current_review": "現在の髪の画像",
+        "style_editor": "希望するスタイルの参考画像",
+        "style_review": "希望するスタイルの画像"
+      },
+      "nail": {
+        "current_editor": "現在の爪の状態",
+        "current_review": "現在の状態の画像",
+        "style_editor": "希望するネイルの参考画像",
+        "style_review": "希望するスタイルの画像"
+      },
+      "aesthetic": {
+        "current_editor": "現在の肌の状態",
+        "current_review": "現在の状態の画像",
+        "style_editor": "希望する結果の参考画像",
+        "style_review": "希望する結果の画像"
+      },
+      "eyelash": {
+        "current_editor": "現在のまつげの状態",
+        "current_review": "現在の状態の画像",
+        "style_editor": "希望するスタイルの参考画像",
+        "style_review": "希望するスタイルの画像"
+      },
+      "makeup": {
+        "current_editor": "現在の顔の状態",
+        "current_review": "現在の状態の画像",
+        "style_editor": "希望するメイクの参考画像",
+        "style_review": "希望する参考画像"
+      },
+      "waxing": {
+        "current_editor": "現在の状態",
+        "current_review": "現在の状態の画像",
+        "style_editor": "希望する仕上がりの参考画像",
+        "style_review": "希望する仕上がりの画像"
+      }
+    },
+    "services": {
+      "hair": {
+        "section_title": "ヘアメニュー",
+        "section_desc": "カット、パーマ、カラー、トリートメントなどのメニューを選択してください。",
+        "cut_title": "カット",
+        "cut_desc": "スタイリングや長さ調整のための基本的なヘアカットです。",
+        "perm_title": "パーマ",
+        "perm_desc": "ウェーブやボリュームを出すためのパーマメニューです。",
+        "color_title": "カラー",
+        "color_desc": "リタッチ、全体カラー、またはトーンチェンジです。",
+        "clinic_title": "トリートメント",
+        "clinic_desc": "ダメージケアと髪の回復のためのトリートメントです。",
+        "styling_title": "スタイリング",
+        "styling_desc": "ブロー、イベント用スタイリング、または仕上げのセットです。"
+      },
+      "nail": {
+        "section_title": "ネイルメニュー",
+        "section_desc": "ご希望のネイルスタイルとケアの種類を選択してください。",
+        "care_title": "ケア",
+        "care_desc": "甘皮処理、形を整える基本ケアです。",
+        "gel_title": "ジェルネイル",
+        "gel_desc": "耐久性を重視したワンカラーのジェルネイルです。",
+        "art_title": "アート",
+        "art_desc": "シンプルなものから複雑なデザインまで、相談に応じたアートです。",
+        "ext_title": "長さ出し",
+        "ext_desc": "長さや形の調整のためのネイルエクステンションです。",
+        "rem_title": "オフ",
+        "rem_desc": "既存のジェル、アート、または長さ出しのオフです。"
+      },
+      "aesthetic": {
+        "section_title": "エステメニュー",
+        "section_desc": "肌の状態や目的に合わせたメニューを選択してください。",
+        "basic_title": "ベーシックケア",
+        "basic_desc": "クレンジングと保湿を中心とした基本的なスキンケアです。",
+        "trouble_title": "トラブルケア",
+        "trouble_desc": "肌トラブルや毛穴に特化した集中ケアです。",
+        "calming_title": "鎮静ケア",
+        "calming_desc": "敏感で赤みのある肌のための鎮静ケアです。",
+        "lifting_title": "リフティング",
+        "lifting_desc": "弾力と輪郭を整えるためのリフティングケアです。",
+        "bright_title": "ブライトニング",
+        "bright_desc": "くすんだ肌トーンを改善するためのブライトニングケアです。"
+      },
+      "eyelash": {
+        "section_title": "まつげメニュー",
+        "section_desc": "エクステ、パーマ、またはケアなどのメニューを選択してください。",
+        "perm_title": "パーマ",
+        "perm_desc": "まつげをリフトアップして目元をデザインするパーマです。",
+        "ext_title": "エクステ",
+        "ext_desc": "長さとボリュームを出すためのまつげエクステです。",
+        "refill_title": "リペア",
+        "refill_desc": "エクステを維持するためのリペア（付け足し）です。",
+        "rem_title": "オフ",
+        "rem_desc": "既存のエクステを安全に取り除くオフです。",
+        "care_title": "ケア",
+        "care_desc": "施術後のケアと状態の確認です。"
+      },
+      "makeup": {
+        "section_title": "メイクメニュー",
+        "section_desc": "デイリー用、撮影用、またはウェディングなどのメイクを選択してください。",
+        "daily_title": "デイリー",
+        "daily_desc": "ナチュラルな普段使いのメイクです。",
+        "interview_title": "面接用",
+        "interview_desc": "面接に向けた清潔感のあるメイクです。",
+        "wedding_title": "ウェディング",
+        "wedding_desc": "落ちにくいウェディング用メイクです。",
+        "shooting_title": "撮影用",
+        "shooting_desc": "スタジオまたは屋外撮影用のメイクです。",
+        "special_title": "特別なイベント",
+        "special_desc": "パーティーやイベントのためのポイントメイクです。"
+      },
+      "waxing": {
+        "section_title": "ワクシングメニュー",
+        "section_desc": "フェイス、ボディ、またはブラジリアンメニューを選択してください。",
+        "brazilian_title": "ブラジリアン",
+        "brazilian_desc": "丁寧なブラジリアンワクシングです。",
+        "arm_title": "腕",
+        "arm_desc": "腕（上腕・下腕）のワクシングです。",
+        "leg_title": "脚",
+        "leg_desc": "膝下または脚全体のワクシングです。",
+        "face_title": "フェイス",
+        "face_desc": "眉毛、口元、顔全体のワクシングです。",
+        "body_title": "ボディ",
+        "body_desc": "背中、胸、またはその他のボディワクシングです。"
+      }
     }
   },
   "common": {
@@ -470,17 +591,17 @@
     "copied": "コピーしました!"
   },
   "welcome_popup": {
-    "title": "今すぐ登録してすぐに使える\n5%OFFクーポンをゲット！",
-    "description": "会員登録するだけで、すぐにご利用いただけるクーポンをプレゼントいたします。",
-    "cta": "クーポンを受け取って登録する",
+    "title": "会員登録で\n5%割引クーポンプレゼント！",
+    "description": "登録するだけですぐ使えるクーポンをお届けします。",
+    "cta": "クーポンを受け取って登録",
     "close": "閉じる"
   },
   "referral_popup": {
-    "title": "招待コードをお持ちですか？",
-    "description": "コードを入力すると、友達もあなたもさらに5%OFFクーポンがもらえます！",
-    "placeholder": "招待コードを入力",
+    "title": "紹介コードはお持ちですか？",
+    "description": "コードを入力するとあなたも友達も5%クーポンGET！",
+    "placeholder": "紹介コードを入力",
     "submit": "入力完了",
-    "skip": "スキップ"
+    "skip": "あとで"
   },
   "transport": {
     "moving_to": "{{dest}}へ移動中",
@@ -1418,7 +1539,7 @@
     "back": "< 戻る",
     "title": "リアルタイム通訳",
     "subtitle": "観光客の言語は現在のアプリ言語に自動設定され、店舗の言語は韓国語に固定されます。",
-    "onboarding": "観光客が入力した内容は韓国語に、店員が入力した韓国語は観光客の言語에翻訳されます。",
+    "onboarding": "観光客が入力した内容は韓国語に、店員が入力した韓国語は観光客の言語に翻訳されます。",
     "customer_lang": "観光客の言語",
     "staff_lang": "店舗の言語 (韓国語)",
     "mic_preparing": "マイクを準備中",
@@ -2027,210 +2148,6 @@
   "error_retry": "再試行",
   "common_actions_view_all": "すべて見る",
   "common_loading": "読み込み中...",
-  "booking_skeleton": {
-    "steps": {
-      "step1_title": "メニュー選択",
-      "step1_desc": "ご希望の施術メニューを選択し、次のステップへお進みください。",
-      "step2_title": "日時・情報",
-      "step2_desc": "来店日時とご予約情報を1つの画面で入力します。",
-      "step3_title": "最終確認",
-      "step3_desc": "ご予約内容を確認し、リクエストを送信します。",
-      "step": "STEP"
-    },
-    "service_selection": {
-      "title": "メニュー選択",
-      "desc": "ご希望のメニューをお選びください。",
-      "no_menu": "このカテゴリにはまだメニューがありません。",
-      "select_category_first": "まずはカテゴリを選択してください。"
-    },
-    "date_time": {
-      "title": "日時選択",
-      "desc": "ご希望の来店日時をお選びください。",
-      "preparing": "このカテゴリの日時選択画面は現在準備中です。",
-      "placeholder": "年-月-日",
-      "clear": "クリア",
-      "today": "今日"
-    },
-    "customer_details": {
-      "title": "お客様情報",
-      "desc": "ご予約確認のため、お客様の情報をご確認ください。",
-      "desc_hint": "ご予約の確定のため、正確な情報をご入力ください。",
-      "name_label": "お名前（英語推奨） *",
-      "name_placeholder": "パスポートと同じスペル",
-      "phone_label": "連絡先（SNS ID可） *",
-      "phone_placeholder": "電話番号またはInstagram ID",
-      "request_label": "ご要望",
-      "request_placeholder": "ご希望のスタイルや気になる点をご記入ください。",
-      "current_status": "現在の状態",
-      "current_status_desc": "現在の状態がわかる写真を添付してください。",
-      "current_status_helper": "写真が鮮明であるほど、スムーズなご案内が可能です。",
-      "add_current_photo": "現在の写真を追加",
-      "desired_style": "希望のスタイル",
-      "desired_style_desc": "ご希望のスタイルの参考画像を添付してください。",
-      "desired_style_helper": "希望するイメージや長さが明確にわかる写真が最適です。",
-      "add_style_photo": "スタイルの写真を追加",
-      "no_photo": "添付された写真はありません。",
-      "add_photo": "写真を追加",
-      "photo_hint": "※ 参考画像と現在の状態の写真をそれぞれ1枚ずつ添付できます。",
-      "preparing": "このカテゴリのお客様情報入力画面は現在準備中です。"
-    },
-    "confirmation": {
-      "title": "ご予約の確認",
-      "desc": "入力した情報をご確認ください。",
-      "desc_summary": "ご入力いただいた内容をご確認ください。",
-      "desc_final": "ご予約内容を再度ご確認の上、リクエストを送信してください。",
-      "shop": "店舗",
-      "date_time": "日時",
-      "service": "メニュー",
-      "customer": "お客様",
-      "agreement_title": "利用規約",
-      "agreement_desc": "ご予約に必要な項目に同意してください。",
-      "agreement_desc_hint": "ご予約に必要な項目をご確認の上、同意をお願いします。",
-      "confirm_info_label": "予約内容の確認",
-      "confirm_info_desc": "選択した店舗、日時、メニュー内容が正しいことを確認しました。",
-      "privacy_label": "個人情報の取り扱いへの同意",
-      "privacy_desc": "ご予約に必要な氏名および連絡先を店舗へ提供することに同意します。",
-      "attached_images": "添付画像",
-      "image_count_summary": "計 {{count}} 枚",
-      "submit_button": "予約リクエストを送信",
-      "preparing": "このカテゴリの最終確認画面は現在準備中です。"
-    },
-    "next_step": "次のステップへ",
-    "check_final": "最終確認へ移行",
-    "review": {
-      "no_request": "ご要望はまだありません。",
-      "no_images": "画像は添付されていません。",
-      "no_service": "メニューが選択されていません。",
-      "no_date": "日付が選択されていません。",
-      "no_time": "時間が選択されていません。",
-      "no_name": "お名前が入力されていません。",
-      "no_contact": "連絡先が入力されていません。"
-    },
-    "image_groups": {
-      "hair": {
-        "current_editor": "現在の髪の状態",
-        "current_review": "現在の髪の画像",
-        "style_editor": "希望するスタイルの参考画像",
-        "style_review": "希望するスタイルの画像"
-      },
-      "nail": {
-        "current_editor": "現在の爪の状態",
-        "current_review": "現在の状態の画像",
-        "style_editor": "希望するネイルの参考画像",
-        "style_review": "希望するスタイルの画像"
-      },
-      "aesthetic": {
-        "current_editor": "現在の肌の状態",
-        "current_review": "現在の状態の画像",
-        "style_editor": "希望する結果の参考画像",
-        "style_review": "希望する結果の画像"
-      },
-      "eyelash": {
-        "current_editor": "現在のまつげの状態",
-        "current_review": "現在の状態の画像",
-        "style_editor": "希望するスタイルの参考画像",
-        "style_review": "希望するスタイルの画像"
-      },
-      "makeup": {
-        "current_editor": "現在の顔の状態",
-        "current_review": "現在の状態の画像",
-        "style_editor": "希望するメイクの参考画像",
-        "style_review": "希望する参考画像"
-      },
-      "waxing": {
-        "current_editor": "現在の状態",
-        "current_review": "現在の状態の画像",
-        "style_editor": "希望する仕上がりの参考画像",
-        "style_review": "希望する仕上がりの画像"
-      }
-    },
-    "services": {
-      "hair": {
-        "section_title": "ヘアメニュー",
-        "section_desc": "カット、パーマ、カラー、トリートメントなどのメニューを選択してください。",
-        "cut_title": "カット",
-        "cut_desc": "スタイリングや長さ調整のための基本的なヘアカットです。",
-        "perm_title": "パーマ",
-        "perm_desc": "ウェーブやボリュームを出すためのパーマメニューです。",
-        "color_title": "カラー",
-        "color_desc": "リタッチ、全体カラー、またはトーンチェンジです。",
-        "clinic_title": "トリートメント",
-        "clinic_desc": "ダメージケアと髪の回復のためのトリートメントです。",
-        "styling_title": "スタイリング",
-        "styling_desc": "ブロー、イベント用スタイリング、または仕上げのセットです。"
-      },
-      "nail": {
-        "section_title": "ネイルメニュー",
-        "section_desc": "ご希望のネイルスタイルとケアの種類を選択してください。",
-        "care_title": "ケア",
-        "care_desc": "甘皮処理、形を整える基本ケアです。",
-        "gel_title": "ジェルネイル",
-        "gel_desc": "耐久性を重視したワンカラーのジェルネイルです。",
-        "art_title": "アート",
-        "art_desc": "シンプルなものから複雑なデザインまで、相談に応じたアートです。",
-        "ext_title": "長さ出し",
-        "ext_desc": "長さや形の調整のためのネイルエクステンションです。",
-        "rem_title": "オフ",
-        "rem_desc": "既存のジェル、アート、または長さ出しのオフです。"
-      },
-      "aesthetic": {
-        "section_title": "エステメニュー",
-        "section_desc": "肌の状態や目的に合わせたメニューを選択してください。",
-        "basic_title": "ベーシックケア",
-        "basic_desc": "クレンジングと保湿を中心とした基本的なスキンケアです。",
-        "trouble_title": "トラブルケア",
-        "trouble_desc": "肌トラブルや毛穴に特化した集中ケアです。",
-        "calming_title": "鎮静ケア",
-        "calming_desc": "敏感で赤みのある肌のための鎮静ケアです。",
-        "lifting_title": "リフティング",
-        "lifting_desc": "弾力と輪郭を整えるためのリフティングケアです。",
-        "bright_title": "ブライトニング",
-        "bright_desc": "くすんだ肌トーンを改善するためのブライトニングケアです。"
-      },
-      "eyelash": {
-        "section_title": "まつげメニュー",
-        "section_desc": "エクステ、パーマ、またはケアなどのメニューを選択してください。",
-        "perm_title": "パーマ",
-        "perm_desc": "まつげをリフトアップして目元をデザインするパーマです。",
-        "ext_title": "エクステ",
-        "ext_desc": "長さとボリュームを出すためのまつげエクステです。",
-        "refill_title": "リペア",
-        "refill_desc": "エクステを維持するためのリペア（付け足し）です。",
-        "rem_title": "オフ",
-        "rem_desc": "既存のエクステを安全に取り除くオフです。",
-        "care_title": "ケア",
-        "care_desc": "施術後のケアと状態の確認です。"
-      },
-      "makeup": {
-        "section_title": "メイクメニュー",
-        "section_desc": "デイリー用、撮影用、またはウェディングなどのメイクを選択してください。",
-        "daily_title": "デイリー",
-        "daily_desc": "ナチュラルな普段使いのメイクです。",
-        "interview_title": "面接用",
-        "interview_desc": "面接に向けた清潔感のあるメイクです。",
-        "wedding_title": "ウェディング",
-        "wedding_desc": "落ちにくいウェディング用メイクです。",
-        "shooting_title": "撮影用",
-        "shooting_desc": "スタジオまたは屋外撮影用のメイクです。",
-        "special_title": "特別なイベント",
-        "special_desc": "パーティーやイベントのためのポイントメイクです。"
-      },
-      "waxing": {
-        "section_title": "ワクシングメニュー",
-        "section_desc": "フェイス、ボディ、またはブラジリアンメニューを選択してください。",
-        "brazilian_title": "ブラジリアン",
-        "brazilian_desc": "丁寧なブラジリアンワクシングです。",
-        "arm_title": "腕",
-        "arm_desc": "腕（上腕・下腕）のワクシングです。",
-        "leg_title": "脚",
-        "leg_desc": "膝下または脚全体のワクシングです。",
-        "face_title": "フェイス",
-        "face_desc": "眉毛、口元、顔全体のワクシングです。",
-        "body_title": "ボディ",
-        "body_desc": "背中、胸、またはその他のボディワクシングです。"
-      }
-    }
-  },
   "categories": {
     "hair": {
       "label": "ヘア",
@@ -2279,7 +2196,8 @@
   "interpreter_entry": {
     "title": "リアルタイム通訳",
     "description": "店舗スタッフとの会話を支援します",
-    "cta": "通訳を開始する"
+    "cta": "通訳を開始する",
+    "select_language": "言語を選択してください"
   },
   "location_sheet": {
     "search_title": "位置情報検索",
@@ -2294,19 +2212,6 @@
     "copy": "住所をコピー",
     "copy_done": "コピー完了！",
     "close": "閉じる"
-  },
-  "welcome_popup": {
-    "title": "会員登録で\n5%割引クーポンプレゼント！",
-    "description": "登録するだけですぐ使えるクーポンをお届けします。",
-    "cta": "クーポンを受け取って登録",
-    "close": "閉じる"
-  },
-  "referral_popup": {
-    "title": "紹介コードはお持ちですか？",
-    "description": "コードを入力するとあなたも友達も5%クーポンGET！",
-    "placeholder": "紹介コードを入力",
-    "submit": "入力完了",
-    "skip": "あとで"
   },
   "signup": {
     "subtitle": "現地人のように韓国を体験しよう",
