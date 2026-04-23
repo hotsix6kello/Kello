@@ -535,7 +535,8 @@
   "interpreter_entry": {
     "title": "即時翻譯助手",
     "description": "與店鋪員工輕鬆溝通",
-    "cta": "開啟翻譯"
+    "cta": "開啟翻譯",
+    "select_language": "請選擇您的語言"
   },
   "location_sheet": {
     "search_title": "查找搜尋結果",
@@ -552,17 +553,17 @@
     "close": "關閉"
   },
   "welcome_popup": {
-    "title": "現在註冊即可獲得\n5%折扣優惠券！",
-    "description": "加入會員即可獲得立即可用的優惠券。",
-    "cta": "領取優惠券並註冊",
+    "title": "立即註冊即可獲得\n5%折扣優惠券！",
+    "description": "註冊後可立即使用折扣券。",
+    "cta": "領券註冊",
     "close": "關閉"
   },
   "referral_popup": {
     "title": "您有推薦碼嗎？",
-    "description": "輸入推薦碼，您和您的朋友都將獲得額外的5%優惠券！",
+    "description": "輸入推薦碼，您和朋友都能獲得5%折扣券！",
     "placeholder": "輸入推薦碼",
-    "submit": "提交",
-    "skip": "略過"
+    "submit": "確認",
+    "skip": "稍後再說"
   },
   "interpreter_ui": {
     "customer_speaks": "顧客語言",
@@ -1279,19 +1280,6 @@
     "defaults": {
       "region": "首爾"
     }
-  },
-  "welcome_popup": {
-    "title": "立即註冊即可獲得\n5%折扣優惠券！",
-    "description": "註冊後可立即使用折扣券。",
-    "cta": "領券註冊",
-    "close": "關閉"
-  },
-  "referral_popup": {
-    "title": "您有推薦碼嗎？",
-    "description": "輸入推薦碼，您和朋友都能獲得5%折扣券！",
-    "placeholder": "輸入推薦碼",
-    "submit": "確認",
-    "skip": "稍後再說"
   },
   "my_page": {
     "referral": {
@@ -2060,5 +2048,47 @@
       "interpretation": "「實時通譯」功能為提供用戶便利的輔助工具。公司對因翻譯不準確而導致的預約錯誤或糾紛不承擔責任。",
       "community": "公司對透過社區功能進行的用户間自發性線下聚會或個人交易中產生的損害、事故或糾紛不承擔責任。"
     }
+  },
+  "interpreter_page": {
+    "back": "< 返回",
+    "title": "即時翻譯",
+    "subtitle": "訪客語言自動設定為目前的應用語言，店鋪語言固定為韓語。",
+    "onboarding": "訪客輸入的內容將翻譯成韓語，店員輸入的韓語將翻譯成訪客的語言。",
+    "customer_lang": "訪客語言",
+    "staff_lang": "店鋪語言（韓語）",
+    "mic_preparing": "正在準備麥克風",
+    "customer_transcribing": "正在識別訪客語音",
+    "customer_recording": "正在錄製訪客語音，再次點擊以結束",
+    "translating": "正在翻譯",
+    "customer_speak_btn": "訪客語音輸入",
+    "staff_transcribing": "正在識別店員語音",
+    "staff_recording": "正在錄製店員語音，再次點擊以結束",
+    "staff_speak_btn": "店員語音輸入",
+    "customer_input_label": "訪客輸入",
+    "customer_placeholder": "請輸入訪客說的話。",
+    "send": "傳送",
+    "staff_input_label": "店員輸入",
+    "staff_placeholder": "請輸入店員說的韓語內容。",
+    "voice_supported_hint": "透過語音按鈕錄音，或直接在下方輸入文字。",
+    "voice_not_supported_hint": "此瀏覽器不支援語音輸入，請使用文字輸入。",
+    "voice_recognizing": "正在識別語音。",
+    "voice_unrecognized_error": "無法識別語音，請說得更清晰一點。",
+    "voice_failed_error": "語音識別失敗，您可以繼續使用文字輸入。",
+    "mic_permission_status": "正在確認麥克風權限。",
+    "recording_status": "錄音中，最長可錄製 {{seconds}} 秒。",
+    "mic_unsupported_error": "無法使用麥克風，請確認權限或改用文字輸入。",
+    "input_required_customer": "請先輸入訪客的句子。",
+    "input_required_staff": "請先輸入店員的句子。",
+    "translating_status": "正在準備翻譯內容。",
+    "translation_failed_error": "翻譯失敗，請重新嘗試。",
+    "empty_history_hint": "輸入第一句話後，翻譯記錄將顯示在這裡。",
+    "customer_role": "訪客",
+    "staff_role": "店員",
+    "replay_btn_label": "重新播放翻譯語音",
+    "replay_not_supported_hint": "此瀏覽器不支援語音播放。",
+    "play": "播放",
+    "translated_status": "翻譯完成",
+    "source_only_status": "僅顯示原文",
+    "voice_too_short_error": "請多說一點，語音太短無法識別。"
   }
 }
