@@ -42,8 +42,34 @@ export async function GET(request: Request) {
     ]);
 
     if (profileError) {
-      console.error("[admin-users-route] profiles_fetch_failed", profileError);
-      return jsonFailure("failed to fetch users", 500);
+      console.error("[admin-users-route] profiles_fetch_failed", JSON.stringify(profileError));
+
+      // 컬럼 불일치 오류면 기본 컬럼만으로 재시도
+      if (profileError.code === "42703" || profileError.message?.includes("column")) {
+        console.warn("[admin-users-route] retrying with minimal columns");
+        const { data: fallbackData, error: fallbackError } = await client
+          .from("profiles")
+          .select("id, email, nickname, role, created_at")
+          .order("created_at", { ascending: false });
+
+        if (fallbackError) {
+          console.error("[admin-users-route] fallback_fetch_failed", JSON.stringify(fallbackError));
+          return jsonFailure(`DB error: ${fallbackError.message}`, 500);
+        }
+
+        const users = ((fallbackData ?? []) as {
+          id: string; email: string; nickname: string | null; role: string | null; created_at: string;
+        }[]).map((p) => ({
+          ...p,
+          display_name: null,
+          phone: null,
+          sns: null,
+          partnerStatus: null as "pending" | "approved" | "rejected" | null,
+        }));
+        return NextResponse.json({ ok: true, users, warning: "partial_columns" }, { status: 200 });
+      }
+
+      return jsonFailure(`DB error: ${profileError.message}`, 500);
     }
 
     const partnerMap = new Map<string, string>();
