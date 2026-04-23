@@ -36,6 +36,7 @@ export default function AdminUsersContent() {
     const [confirmTarget, setConfirmTarget] = useState<Profile | null>(null);
     const [detailTarget, setDetailTarget] = useState<Profile | null>(null);
     const [actionLoading, setActionLoading] = useState(false);
+    const [fetchError, setFetchError] = useState<string | null>(null);
 
     useEffect(() => {
         const init = async () => {
@@ -56,18 +57,26 @@ export default function AdminUsersContent() {
 
     const fetchProfiles = useCallback(async () => {
         setLoading(true);
+        setFetchError(null);
         try {
             const token = await getAccessToken();
+            if (!token) {
+                setFetchError('로그인 세션이 없습니다. 다시 로그인해 주세요.');
+                setLoading(false);
+                return;
+            }
             const res = await fetch('/api/admin/users', {
-                headers: token ? { Authorization: `Bearer ${token}` } : {},
+                headers: { Authorization: `Bearer ${token}` },
             });
             const json = await res.json() as { ok: boolean; users?: Profile[]; error?: string };
             if (json.ok && json.users) {
                 setProfiles(json.users);
             } else {
-                console.error('[admin-users] fetch failed:', json.error);
+                setFetchError(`서버 오류: ${json.error ?? res.status}`);
+                console.error('[admin-users] fetch failed:', json.error, 'status:', res.status);
             }
         } catch (e) {
+            setFetchError('네트워크 오류가 발생했습니다. 콘솔을 확인해 주세요.');
             console.error('[admin-users] fetch error:', e);
         }
         setLoading(false);
@@ -212,8 +221,30 @@ export default function AdminUsersContent() {
 
                 {loading && <div className={styles.empty}>불러오는 중...</div>}
 
-                {!loading && filtered.length === 0 && (
-                    <div className={styles.empty}>검색 결과가 없습니다.</div>
+                {!loading && fetchError && (
+                    <div style={{
+                        background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 12,
+                        padding: '14px 16px', marginBottom: 14, fontSize: '0.85rem', color: '#dc2626', lineHeight: 1.6,
+                    }}>
+                        ⚠️ 회원 목록을 불러오지 못했습니다.<br />
+                        <strong>{fetchError}</strong><br />
+                        <span style={{ fontSize: '0.78rem', color: '#991b1b' }}>
+                            브라우저 개발자 도구(F12) → Console 탭에서 상세 오류를 확인하세요.
+                        </span>
+                        <br />
+                        <button
+                            onClick={() => fetchProfiles()}
+                            style={{ marginTop: 8, padding: '6px 14px', background: '#dc2626', color: 'white', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem' }}
+                        >
+                            다시 시도
+                        </button>
+                    </div>
+                )}
+
+                {!loading && !fetchError && filtered.length === 0 && (
+                    <div className={styles.empty}>
+                        {profiles.length === 0 ? '회원 데이터가 없습니다. (Supabase profiles 테이블 확인 필요)' : '검색 결과가 없습니다.'}
+                    </div>
                 )}
 
                 {!loading && adminList.length > 0 && (
