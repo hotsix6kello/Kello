@@ -18,6 +18,7 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
       "*.js",
+      "scratch/**",
     ],
   },
   {

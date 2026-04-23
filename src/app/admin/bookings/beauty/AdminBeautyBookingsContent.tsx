@@ -536,6 +536,7 @@ export default function AdminBeautyBookingsContent() {
     if (!bookings.length || !selectedBookingId || !bookings.some((b) => b.id === selectedBookingId)) {
       dispatchBookings({ type: 'AUTO_SELECT_FIRST' });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingsList.bookings, bookingsList.selectedBookingId]);
 
   useEffect(() => {
