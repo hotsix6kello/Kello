@@ -31,10 +31,23 @@ export async function GET(request: Request) {
 
     const client = getSupabaseServerClient();
 
+    // auth.users에서 이메일 목록 가져오기 (profiles 테이블에 email 컬럼 없음)
+    const { data: authData, error: authError } = await client.auth.admin.listUsers({ perPage: 1000 });
+    if (authError) {
+      console.error("[admin-users-route] auth_list_failed", JSON.stringify(authError));
+      return jsonFailure(`auth error: ${authError.message}`, 500);
+    }
+
+    const emailMap = new Map<string, string>();
+    for (const u of authData.users) {
+      if (u.email) emailMap.set(u.id, u.email);
+    }
+
+    // profiles에서 가입자 정보 가져오기 (email 제외)
     const [{ data: profileData, error: profileError }, { data: partnerData }] = await Promise.all([
       client
         .from("profiles")
-        .select("id, email, display_name, nickname, phone, sns, role, created_at")
+        .select("id, display_name, nickname, phone, sns, role, created_at")
         .order("created_at", { ascending: false }),
       client
         .from("partners")
@@ -42,47 +55,47 @@ export async function GET(request: Request) {
     ]);
 
     if (profileError) {
-      console.error("[admin-users-route] profiles_fetch_failed", JSON.stringify(profileError));
+      // display_name / phone / sns 컬럼이 없으면 최소 컬럼으로 재시도
+      console.warn("[admin-users-route] profiles_fetch_failed, retrying minimal", JSON.stringify(profileError));
+      const { data: fallbackData, error: fallbackError } = await client
+        .from("profiles")
+        .select("id, nickname, role, created_at")
+        .order("created_at", { ascending: false });
 
-      // 컬럼 불일치 오류면 기본 컬럼만으로 재시도
-      if (profileError.code === "42703" || profileError.message?.includes("column")) {
-        console.warn("[admin-users-route] retrying with minimal columns");
-        const { data: fallbackData, error: fallbackError } = await client
-          .from("profiles")
-          .select("id, email, nickname, role, created_at")
-          .order("created_at", { ascending: false });
-
-        if (fallbackError) {
-          console.error("[admin-users-route] fallback_fetch_failed", JSON.stringify(fallbackError));
-          return jsonFailure(`DB error: ${fallbackError.message}`, 500);
-        }
-
-        const users = ((fallbackData ?? []) as {
-          id: string; email: string; nickname: string | null; role: string | null; created_at: string;
-        }[]).map((p) => ({
-          ...p,
-          display_name: null,
-          phone: null,
-          sns: null,
-          partnerStatus: null as "pending" | "approved" | "rejected" | null,
-        }));
-        return NextResponse.json({ ok: true, users, warning: "partial_columns" }, { status: 200 });
+      if (fallbackError) {
+        console.error("[admin-users-route] fallback_fetch_failed", JSON.stringify(fallbackError));
+        return jsonFailure(`DB error: ${fallbackError.message}`, 500);
       }
 
-      return jsonFailure(`DB error: ${profileError.message}`, 500);
+      const users = ((fallbackData ?? []) as {
+        id: string; nickname: string | null; role: string | null; created_at: string;
+      }[]).map((p) => ({
+        ...p,
+        email: emailMap.get(p.id) ?? "",
+        display_name: null,
+        phone: null,
+        sns: null,
+        partnerStatus: null as "pending" | "approved" | "rejected" | null,
+      }));
+      return NextResponse.json({ ok: true, users }, { status: 200 });
     }
 
-    const partnerMap = new Map<string, string>();
+    // partners 테이블은 이메일 기준으로 상태 매핑
+    const partnerEmailMap = new Map<string, string>();
     ((partnerData ?? []) as { email: string; status: string }[])
-      .forEach((p) => partnerMap.set(p.email, p.status));
+      .forEach((p) => partnerEmailMap.set(p.email, p.status));
 
     const users = ((profileData ?? []) as {
-      id: string; email: string; display_name: string | null; nickname: string | null;
+      id: string; display_name: string | null; nickname: string | null;
       phone: string | null; sns: string | null; role: string | null; created_at: string;
-    }[]).map((p) => ({
-      ...p,
-      partnerStatus: (partnerMap.get(p.email) ?? null) as "pending" | "approved" | "rejected" | null,
-    }));
+    }[]).map((p) => {
+      const email = emailMap.get(p.id) ?? "";
+      return {
+        ...p,
+        email,
+        partnerStatus: (partnerEmailMap.get(email) ?? null) as "pending" | "approved" | "rejected" | null,
+      };
+    });
 
     return NextResponse.json({ ok: true, users }, { status: 200 });
   } catch (error) {
