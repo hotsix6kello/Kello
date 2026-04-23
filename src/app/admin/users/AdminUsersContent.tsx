@@ -8,7 +8,10 @@ import styles from '../admin.module.css';
 interface Profile {
     id: string;
     email: string;
+    display_name: string | null;
     nickname: string | null;
+    phone: string | null;
+    sns: string | null;
     role: string | null;
     created_at: string;
     partnerStatus?: 'pending' | 'approved' | 'rejected' | null;
@@ -26,6 +29,7 @@ export default function AdminUsersContent() {
     );
     const [search, setSearch] = useState('');
     const [confirmTarget, setConfirmTarget] = useState<Profile | null>(null);
+    const [detailTarget, setDetailTarget] = useState<Profile | null>(null);
     const [actionLoading, setActionLoading] = useState(false);
 
     useEffect(() => {
@@ -51,7 +55,7 @@ export default function AdminUsersContent() {
         const [{ data: profileData }, { data: partnerData }] = await Promise.all([
             supabase
                 .from('profiles')
-                .select('id, email, nickname, role, created_at')
+                .select('id, email, display_name, nickname, phone, sns, role, created_at')
                 .order('created_at', { ascending: false }),
             supabase
                 .from('partners')
@@ -62,7 +66,10 @@ export default function AdminUsersContent() {
         const typedPartnerData = (partnerData || []) as { email: string; status: string }[];
         typedPartnerData.forEach((p) => partnerMap.set(p.email, p.status));
 
-        const typedProfileData = (profileData || []) as { id: string; email: string; nickname: string | null; role: string | null; created_at: string }[];
+        const typedProfileData = (profileData || []) as {
+            id: string; email: string; display_name: string | null; nickname: string | null;
+            phone: string | null; sns: string | null; role: string | null; created_at: string;
+        }[];
         const merged: Profile[] = typedProfileData.map((p) => ({
             ...p,
             partnerStatus: (partnerMap.get(p.email) as Profile['partnerStatus']) ?? null,
@@ -94,10 +101,13 @@ export default function AdminUsersContent() {
         catch { return iso; }
     };
 
+    const displayName = (p: Profile) => p.nickname || p.display_name || '(닉네임 없음)';
+
     const filtered = profiles
         .filter(p =>
             p.email?.toLowerCase().includes(search.toLowerCase()) ||
-            (p.nickname ?? '').toLowerCase().includes(search.toLowerCase())
+            (p.nickname ?? '').toLowerCase().includes(search.toLowerCase()) ||
+            (p.display_name ?? '').toLowerCase().includes(search.toLowerCase())
         );
 
     const tabFiltered = tab === 'admin'
@@ -131,6 +141,30 @@ export default function AdminUsersContent() {
         );
     }
 
+    const renderUserCard = (profile: Profile, idx: number, accentColor: string, avatarBg: string, badge?: React.ReactNode) => (
+        <div
+            key={profile.id}
+            className={styles.card}
+            style={{ borderLeft: `4px solid ${accentColor}`, background: `rgba(${accentColor === '#7c3aed' ? '124,58,237' : accentColor === '#f59e0b' ? '245,158,11' : `${(idx * 53) % 255},${(idx * 97) % 255},150`},0.04)`, cursor: 'pointer' }}
+            onClick={() => setDetailTarget(profile)}
+        >
+            <div className={styles.avatar} style={{ background: avatarBg }}>
+                {(profile.nickname || profile.display_name || profile.email || '?')[0].toUpperCase()}
+            </div>
+            <div className={styles.userInfo}>
+                <div className={styles.userName} style={{ color: 'inherit' }}>
+                    {displayName(profile)}
+                    {profile.id === myId && (
+                        <span style={{ marginLeft: 6, fontSize: '0.7rem', background: '#dbeafe', color: '#1d4ed8', padding: '1px 6px', borderRadius: 999, fontWeight: 700 }}>나</span>
+                    )}
+                </div>
+                <div className={styles.userEmail}>{profile.email}</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--gray-400)', marginTop: 2 }}>가입: {formatDate(profile.created_at)}</div>
+            </div>
+            {badge}
+        </div>
+    );
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -140,7 +174,7 @@ export default function AdminUsersContent() {
                         <polyline points="12 19 5 12 12 5"></polyline>
                     </svg>
                 </button>
-                <h1 className={styles.headerTitle}>🛡️ 관리자 계정 관리</h1>
+                <h1 className={styles.headerTitle}>👥 사용자 관리</h1>
                 <span className={styles.adminBadge}>ADMIN</span>
             </header>
 
@@ -166,12 +200,12 @@ export default function AdminUsersContent() {
                 </div>
 
                 <div style={{
-                    background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.18)',
+                    background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.18)',
                     borderRadius: 12, padding: '10px 14px',
-                    fontSize: '0.8rem', color: '#5b21b6', marginBottom: 14, lineHeight: 1.5,
+                    fontSize: '0.8rem', color: '#1d4ed8', marginBottom: 14, lineHeight: 1.5,
                 }}>
-                    🛡️ <strong>관리자 권한</strong>을 부여하면 협력업체 승인/거절 및 관리자 관리 페이지에 접근할 수 있습니다.<br />
-                    ⚠️ 본인 계정의 권한은 해제할 수 없습니다.
+                    👤 회원 카드를 클릭하면 상세 정보(연락처·SNS ID)를 확인할 수 있습니다.<br />
+                    🛡️ <strong>관리자 권한</strong>은 상세 모달에서 변경할 수 있습니다.
                 </div>
 
                 {loading && <div className={styles.empty}>불러오는 중...</div>}
@@ -186,31 +220,11 @@ export default function AdminUsersContent() {
                             🛡️ 관리자 &nbsp;
                             <span style={{ background: '#ede9fe', color: '#7c3aed', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{adminList.length}명</span>
                         </div>
-                        {adminList.map((profile) => (
-                            <div key={profile.id} className={styles.card} style={{ borderLeft: '4px solid #7c3aed', background: 'rgba(124,58,237,0.04)' }}>
-                                <div className={styles.avatar} style={{ background: `linear-gradient(135deg, #7c3aed, #6d28d9)` }}>
-                                    {(profile.nickname || profile.email || '?')[0].toUpperCase()}
-                                </div>
-                                <div className={styles.userInfo}>
-                                    <div className={styles.userName}>
-                                        {profile.nickname || '(닉네임 없음)'}
-                                        {profile.id === myId && (
-                                            <span style={{ marginLeft: 6, fontSize: '0.7rem', background: '#dbeafe', color: '#1d4ed8', padding: '1px 6px', borderRadius: 999, fontWeight: 700 }}>나</span>
-                                        )}
-                                    </div>
-                                    <div className={styles.userEmail}>{profile.email}</div>
-                                    <div style={{ fontSize: '0.72rem', color: '#a78bfa', marginTop: 2 }}>가입: {formatDate(profile.created_at)}</div>
-                                </div>
-                                <button
-                                    className={`${styles.adminToggle} ${styles.adminOn}`}
-                                    onClick={() => { if (profile.id !== myId) setConfirmTarget(profile); }}
-                                    disabled={profile.id === myId}
-                                    title={profile.id === myId ? '본인 권한은 변경할 수 없습니다' : '권한 해제'}
-                                >
-                                    🛡️ 관리자
-                                </button>
-                            </div>
-                        ))}
+                        {adminList.map((profile) =>
+                            renderUserCard(profile, 0, '#7c3aed', 'linear-gradient(135deg, #7c3aed, #6d28d9)',
+                                <span style={{ background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', color: 'white', fontSize: '0.72rem', fontWeight: 700, padding: '4px 10px', borderRadius: 999, flexShrink: 0 }}>🛡️ 관리자</span>
+                            )
+                        )}
                     </>
                 )}
 
@@ -220,19 +234,11 @@ export default function AdminUsersContent() {
                             🤝 협력업체 &nbsp;
                             <span style={{ background: '#fef3c7', color: '#92400e', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{partnerList.length}명</span>
                         </div>
-                        {partnerList.map((profile) => (
-                            <div key={profile.id} className={styles.card} style={{ borderLeft: '4px solid #f59e0b', background: 'rgba(245,158,11,0.04)' }}>
-                                <div className={styles.avatar} style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)' }}>
-                                    {(profile.nickname || profile.email || '?')[0].toUpperCase()}
-                                </div>
-                                <div className={styles.userInfo}>
-                                    <div className={styles.userName}>{profile.nickname || '(닉네임 없음)'}</div>
-                                    <div className={styles.userEmail}>{profile.email}</div>
-                                    <div style={{ fontSize: '0.72rem', color: '#d97706', marginTop: 2 }}>가입: {formatDate(profile.created_at)}</div>
-                                </div>
+                        {partnerList.map((profile) =>
+                            renderUserCard(profile, 0, '#f59e0b', 'linear-gradient(135deg, #f59e0b, #d97706)',
                                 <span style={{ background: '#fef3c7', color: '#92400e', fontSize: '0.72rem', fontWeight: 700, padding: '4px 10px', borderRadius: 999, flexShrink: 0 }}>🤝 협력업체</span>
-                            </div>
-                        ))}
+                            )
+                        )}
                     </>
                 )}
 
@@ -242,23 +248,81 @@ export default function AdminUsersContent() {
                             👤 일반 사용자 &nbsp;
                             <span style={{ background: 'var(--gray-100)', color: 'var(--gray-500)', padding: '1px 8px', borderRadius: 999, fontSize: '0.7rem' }}>{normalList.length}명</span>
                         </div>
-                        {normalList.map((profile, idx) => (
-                            <div key={profile.id} className={styles.card}>
-                                <div className={styles.avatar} style={{ background: `hsl(${(idx * 53) % 360}, 60%, 58%)` }}>
-                                    {(profile.nickname || profile.email || '?')[0].toUpperCase()}
-                                </div>
-                                <div className={styles.userInfo}>
-                                    <div className={styles.userName}>{profile.nickname || '(닉네임 없음)'}</div>
-                                    <div className={styles.userEmail}>{profile.email}</div>
-                                    <div style={{ fontSize: '0.72rem', color: 'var(--gray-400)', marginTop: 2 }}>가입: {formatDate(profile.created_at)}</div>
-                                </div>
-                                <button className={`${styles.adminToggle} ${styles.adminOff}`} onClick={() => setConfirmTarget(profile)}>일반</button>
-                            </div>
-                        ))}
+                        {normalList.map((profile, idx) =>
+                            renderUserCard(profile, idx, `hsl(${(idx * 53) % 360}, 60%, 58%)`, `hsl(${(idx * 53) % 360}, 60%, 58%)`,
+                                <span style={{ background: 'var(--gray-100)', color: 'var(--gray-500)', fontSize: '0.72rem', fontWeight: 600, padding: '4px 10px', borderRadius: 999, flexShrink: 0 }}>일반</span>
+                            )
+                        )}
                     </>
                 )}
             </div>
 
+            {/* 회원 상세 정보 모달 */}
+            {detailTarget && (
+                <div className={styles.confirmModal} onClick={() => setDetailTarget(null)}>
+                    <div className={styles.confirmSheet} onClick={e => e.stopPropagation()}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+                            <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>👤 회원 상세 정보</h3>
+                            <button onClick={() => setDetailTarget(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--gray-400)', fontSize: '1.2rem', lineHeight: 1 }}>✕</button>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, padding: '14px 16px', background: 'var(--gray-50,#f8f9fa)', borderRadius: 14 }}>
+                            <div style={{
+                                width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
+                                background: detailTarget.role === 'admin' || detailTarget.role === 'super_admin'
+                                    ? 'linear-gradient(135deg,#7c3aed,#6d28d9)'
+                                    : detailTarget.partnerStatus === 'approved'
+                                        ? 'linear-gradient(135deg,#f59e0b,#d97706)'
+                                        : 'linear-gradient(135deg,#64748b,#475569)',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                color: 'white', fontWeight: 700, fontSize: '1.2rem',
+                            }}>
+                                {(detailTarget.nickname || detailTarget.display_name || detailTarget.email || '?')[0].toUpperCase()}
+                            </div>
+                            <div>
+                                <div style={{ fontWeight: 700, fontSize: '1rem' }}>{displayName(detailTarget)}</div>
+                                <div style={{ fontSize: '0.78rem', color: 'var(--gray-500)', marginTop: 2 }}>
+                                    {detailTarget.role === 'admin' || detailTarget.role === 'super_admin' ? '🛡️ 관리자' : detailTarget.partnerStatus === 'approved' ? '🤝 협력업체' : '👤 일반 사용자'}
+                                    {detailTarget.id === myId && <span style={{ marginLeft: 8, background: '#dbeafe', color: '#1d4ed8', padding: '1px 6px', borderRadius: 999, fontWeight: 700, fontSize: '0.7rem' }}>나</span>}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderRadius: 14, overflow: 'hidden', border: '1px solid var(--gray-100)', marginBottom: 20 }}>
+                            {[
+                                { icon: '✏️', label: '닉네임', value: detailTarget.nickname || detailTarget.display_name || '-' },
+                                { icon: '📧', label: '이메일', value: detailTarget.email || '-' },
+                                { icon: '📱', label: '연락처', value: detailTarget.phone || '-' },
+                                { icon: '🔗', label: 'SNS ID', value: detailTarget.sns || '-' },
+                                { icon: '📅', label: '가입일', value: formatDate(detailTarget.created_at) },
+                            ].map((row, i) => (
+                                <div key={row.label} style={{
+                                    display: 'flex', alignItems: 'center', gap: 12,
+                                    padding: '12px 16px',
+                                    background: i % 2 === 0 ? 'white' : 'var(--gray-50,#f8f9fa)',
+                                    borderBottom: i < 4 ? '1px solid var(--gray-100)' : 'none',
+                                }}>
+                                    <span style={{ fontSize: '1rem', flexShrink: 0, width: 22, textAlign: 'center' }}>{row.icon}</span>
+                                    <span style={{ fontSize: '0.78rem', color: 'var(--gray-400)', fontWeight: 600, width: 56, flexShrink: 0 }}>{row.label}</span>
+                                    <span style={{ fontSize: '0.88rem', color: row.value === '-' ? 'var(--gray-300)' : 'var(--foreground)', fontWeight: row.value === '-' ? 400 : 500, flex: 1, wordBreak: 'break-all' }}>{row.value}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {detailTarget.id !== myId && (
+                            <button
+                                className={`${styles.confirmBtn} ${(detailTarget.role === 'admin' || detailTarget.role === 'super_admin') ? styles.confirmRevoke : styles.confirmGrant}`}
+                                onClick={() => { setConfirmTarget(detailTarget); setDetailTarget(null); }}
+                            >
+                                {(detailTarget.role === 'admin' || detailTarget.role === 'super_admin') ? '🔓 관리자 권한 해제' : '🛡️ 관리자 권한 부여'}
+                            </button>
+                        )}
+                        <button className={styles.cancelBtn} onClick={() => setDetailTarget(null)}>닫기</button>
+                    </div>
+                </div>
+            )}
+
+            {/* 권한 변경 확인 모달 */}
             {confirmTarget && (
                 <div className={styles.confirmModal} onClick={() => setConfirmTarget(null)}>
                     <div className={styles.confirmSheet} onClick={e => e.stopPropagation()}>
@@ -266,7 +330,7 @@ export default function AdminUsersContent() {
                             {(confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin') ? '🔓 관리자 권한 해제' : '🛡️ 관리자 권한 부여'}
                         </h3>
                         <p className={styles.confirmDesc}>
-                            <strong>{confirmTarget.nickname || confirmTarget.email}</strong> 계정의<br />
+                            <strong>{displayName(confirmTarget)}</strong> 계정의<br />
                             관리자 권한을 {(confirmTarget.role === 'admin' || confirmTarget.role === 'super_admin') ? '해제' : '부여'}하시겠습니까?
                         </p>
                         <button
