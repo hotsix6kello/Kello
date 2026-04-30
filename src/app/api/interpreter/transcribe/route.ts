@@ -74,6 +74,7 @@ export async function POST(request: Request) {
       { status: 200 },
     );
   } catch (error) {
+    console.error("[interpreter/transcribe] STT failed:", error);
     return jsonFailure(error instanceof Error ? error.message : "transcription_failed", 500);
   }
 }
