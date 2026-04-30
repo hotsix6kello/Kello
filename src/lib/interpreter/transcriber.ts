@@ -129,20 +129,7 @@ export async function transcribeInterpreterAudio(
   input: InterpreterTranscriptionInput,
   provider: InterpreterTranscriptionProvider = createInterpreterTranscriber(),
 ): Promise<InterpreterTranscriptionResult> {
-  try {
-    return await provider.transcribe(input);
-  } catch (error) {
-    if (provider.providerName === "mock-stt") {
-      throw error;
-    }
-
-    console.error(
-      `Interpreter STT provider "${provider.providerName}" failed. Falling back to mock-stt.`,
-      error,
-    );
-
-    return new MockInterpreterTranscriptionProvider().transcribe(input);
-  }
+  return provider.transcribe(input);
 }
 
 function buildGeminiTranscriptionPrompt(language: string) {
@@ -158,7 +145,9 @@ function buildGeminiTranscriptionPrompt(language: string) {
 }
 
 async function buildGeminiInlineAudioPart(audioFile: File) {
-  const mimeType = audioFile.type || DEFAULT_AUDIO_MIME_TYPE;
+  // Gemini rejects codec parameters like "audio/webm;codecs=opus" — strip them
+  const rawMimeType = audioFile.type || DEFAULT_AUDIO_MIME_TYPE;
+  const mimeType = rawMimeType.split(";")[0].trim();
   const audioBase64 = Buffer.from(await audioFile.arrayBuffer()).toString("base64");
 
   return {
