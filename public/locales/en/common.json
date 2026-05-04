@@ -70,7 +70,23 @@
       "completion_title": "Reservation Requested!",
       "completion_desc": "Successfully sent your reservation request.\nThe shop will confirm and contact you soon.",
       "confirm_button": "Confirm",
-      "login_required": "Login is required to attach images. Please try again after logging in."
+      "login_required": "Login is required to attach images. Please try again after logging in.",
+      "refund_policy_notice": "Cancellation & Refund Policy Info",
+      "refund_policy_title": "Cancellation & Refund Policy",
+      "refund_rate_label": "{{rate}}% refund",
+      "no_refund_label": "No refund",
+      "platform_fee_note": "The {{rate}}% platform fee is non-refundable regardless of cancellation timing.",
+      "platform_fee_note_always": "The {{rate}}% platform fee is non-refundable in all cases.",
+      "agreements_title": "Terms Agreement",
+      "agreement_booking_confirmed": "Booking Info Confirmation",
+      "agreement_booking_confirmed_desc": "I confirm that the selected shop, date, and service information is accurate.",
+      "agreement_privacy_consent": "Personal Information Policy Agreement",
+      "agreement_privacy_consent_desc": "I agree to provide my name and contact information to the shop for the reservation.",
+      "agreement_refund_policy": "Cancellation & Refund Policy Agreement",
+      "agreement_refund_policy_desc": "I have reviewed and agree to the cancellation and refund policy above.",
+      "submitting": "Processing...",
+      "submit_final": "Submit Final Booking Request",
+      "go_back_to_main": "Back to Main"
     }
   },
   "booking_skeleton": {
@@ -544,7 +560,17 @@
     "lang_de": "Deutsch",
     "lang_ar": "العربية",
     "lang_pt": "Português",
-    "lang_ru": "Русский"
+    "lang_ru": "Русский",
+    "cancel_days_until": "{{daysUntil}} days until appointment → {{refundRate}}% refund",
+    "cancel_no_refund_warning": "⚠ No refund is available from 1 day before the appointment",
+    "cancel_service_fee": "Service fee",
+    "cancel_penalty": "Penalty ({{rate}}%)",
+    "cancel_platform_fee_label": "Platform fee (non-refundable)",
+    "cancel_total_refund": "Total refund",
+    "cancel_platform_fee_note": "The {{rate}}% platform fee is non-refundable in all cases.",
+    "cancel_consent_no_refund": "No refund is available within 1 day of the appointment. I agree to full deduction.",
+    "cancel_consent_partial": "Cancelling now will deduct the {{platformFeeRate}}% platform fee and {{penaltyRate}}% of the service fee ({{penaltyAmount}}). I agree.",
+    "cancel_consent_default": "I agree to the cancellation and refund policy."
   },
   "beauty_explore": {
     "hero_title": "Explore Beauty Bookings",
