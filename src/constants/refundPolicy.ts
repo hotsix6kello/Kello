@@ -14,3 +14,54 @@ export function getRefundRate(daysBeforeAppointment: number): number {
   if (tier) return tier.refundRate;
   return daysBeforeAppointment >= 4 ? 100 : 0;
 }
+
+const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
+
+function toKSTDateOnly(d: Date): Date {
+  const kst = new Date(d.getTime() + KST_OFFSET_MS);
+  return new Date(Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate()));
+}
+
+export type RefundCalculation = {
+  daysUntil: number;
+  refundRate: number;
+  refundAmount: number;
+  penaltyAmount: number;
+  platformFee: number;
+  totalDeducted: number;
+  totalRefund: number;
+  isRefundable: boolean;
+};
+
+export function calculateRefund(input: {
+  appointmentDate: Date;
+  cancelDate: Date;
+  serviceFee: number;
+  platformFee: number;
+}): RefundCalculation {
+  const { appointmentDate, cancelDate, serviceFee, platformFee } = input;
+
+  const apptDay = toKSTDateOnly(appointmentDate);
+  const cancelDay = toKSTDateOnly(cancelDate);
+  const daysUntil = Math.max(
+    Math.floor((apptDay.getTime() - cancelDay.getTime()) / (24 * 60 * 60 * 1000)),
+    0,
+  );
+
+  const refundRate = getRefundRate(daysUntil);
+  const refundAmount = Math.floor((serviceFee * refundRate) / 100);
+  const penaltyAmount = serviceFee - refundAmount;
+  const totalDeducted = penaltyAmount + platformFee;
+  const totalRefund = refundAmount;
+
+  return {
+    daysUntil,
+    refundRate,
+    refundAmount,
+    penaltyAmount,
+    platformFee,
+    totalDeducted,
+    totalRefund,
+    isRefundable: refundRate > 0,
+  };
+}
