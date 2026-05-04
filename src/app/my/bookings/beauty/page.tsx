@@ -12,6 +12,7 @@ import {
   type BeautyBookingAdminRecord,
 } from '@/lib/bookings/beautyBookingAdmin.ts';
 import { useBeautyTranslation } from '@/hooks/useBeautyTranslation';
+import { PLATFORM_FEE_RATE, calculateRefund, type RefundCalculation } from '@/constants/refundPolicy';
 import styles from './beauty-bookings.module.css';
 
 type BookingTabId = 'all' | 'active' | 'completed' | 'canceled';
@@ -227,6 +228,7 @@ function MyBeautyBookingsContent() {
   const [cancelError, setCancelError] = useState<string | null>(null);
   const [cancelSuccess, setCancelSuccess] = useState<string | null>(null);
   const [isCancelSubmitting, setIsCancelSubmitting] = useState(false);
+  const [cancelRefundConsented, setCancelRefundConsented] = useState(false);
 
   const [isChangePanelOpen, setIsChangePanelOpen] = useState(false);
   const [changeReason, setChangeReason] = useState('');
@@ -394,6 +396,19 @@ function MyBeautyBookingsContent() {
     ? isBeautyBookingCustomerCancelableStatus(selectedBooking.status)
     : false;
 
+  const cancelRefundCalc = useMemo((): RefundCalculation | null => {
+    if (!selectedBooking || !isCancelPanelOpen) return null;
+    const serviceFee = selectedBooking.basePrice + selectedBooking.addOnPrice + selectedBooking.designerSurcharge;
+    const platformFee = Math.max(selectedBooking.totalPrice - serviceFee, 0);
+    if (selectedBooking.totalPrice === 0) return null;
+    return calculateRefund({
+      appointmentDate: new Date(`${selectedBooking.bookingDate}T00:00:00+09:00`),
+      cancelDate: new Date(),
+      serviceFee,
+      platformFee,
+    });
+  }, [selectedBooking, isCancelPanelOpen]);
+
   const canChangeSelectedBooking = selectedBooking
     ? isBeautyBookingCustomerChangeableStatus(selectedBooking.status)
     : false;
@@ -405,6 +420,7 @@ function MyBeautyBookingsContent() {
     setCancelError(null);
     setCancelSuccess(null);
     setIsCancelSubmitting(false);
+    setCancelRefundConsented(false);
 
     setIsChangePanelOpen(false);
     setChangeReason('');
@@ -1228,6 +1244,51 @@ function MyBeautyBookingsContent() {
 
                   {canCancelSelectedBooking && isCancelPanelOpen ? (
                     <div className={styles.cancelPanel}>
+                      {cancelRefundCalc ? (
+                        <div className={styles.cancelRefundBreakdown}>
+                          <p className={styles.cancelRefundBreakdownTitle}>
+                            {i18n.language === 'ko'
+                              ? `예약일까지 ${cancelRefundCalc.daysUntil}일 남음 → 환불 비율 ${cancelRefundCalc.refundRate}%`
+                              : `${cancelRefundCalc.daysUntil} days until appointment → ${cancelRefundCalc.refundRate}% refund`}
+                          </p>
+                          {!cancelRefundCalc.isRefundable && (
+                            <p className={styles.cancelNoRefundWarning}>
+                              {i18n.language === 'ko'
+                                ? '⚠ 예약일 1일 전부터는 환불이 불가합니다'
+                                : '⚠ No refund is available from 1 day before the appointment'}
+                            </p>
+                          )}
+                          <dl className={styles.cancelRefundDl}>
+                            <div className={styles.cancelRefundRow}>
+                              <dt>{i18n.language === 'ko' ? '시술비' : 'Service fee'}</dt>
+                              <dd>{formatPrice(cancelRefundCalc.refundAmount + cancelRefundCalc.penaltyAmount, i18n.language, t)}</dd>
+                            </div>
+                            {cancelRefundCalc.penaltyAmount > 0 && (
+                              <div className={`${styles.cancelRefundRow} ${styles.cancelRefundDeduct}`}>
+                                <dt>{i18n.language === 'ko' ? `위약금 (${100 - cancelRefundCalc.refundRate}%)` : `Penalty (${100 - cancelRefundCalc.refundRate}%)`}</dt>
+                                <dd>−{formatPrice(cancelRefundCalc.penaltyAmount, i18n.language, t)}</dd>
+                              </div>
+                            )}
+                            <div className={`${styles.cancelRefundRow} ${styles.cancelRefundDeduct}`}>
+                              <dt>{i18n.language === 'ko' ? `플랫폼 이용료 (환불 불가)` : `Platform fee (non-refundable)`}</dt>
+                              <dd>−{formatPrice(cancelRefundCalc.platformFee, i18n.language, t)}</dd>
+                            </div>
+                            <div className={`${styles.cancelRefundRow} ${styles.cancelRefundTotal}`}>
+                              <dt>{i18n.language === 'ko' ? '최종 환불 금액' : 'Total refund'}</dt>
+                              <dd className={cancelRefundCalc.isRefundable ? styles.cancelRefundAmountPositive : styles.cancelRefundAmountZero}>
+                                {formatPrice(cancelRefundCalc.totalRefund, i18n.language, t)}
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      ) : (
+                        <p className={styles.cancelRefundPolicyNote}>
+                          {i18n.language === 'ko'
+                            ? `플랫폼 이용료(${Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다.`
+                            : `The ${Math.round(PLATFORM_FEE_RATE * 100)}% platform fee is non-refundable in all cases.`}
+                        </p>
+                      )}
+
                       <div className={styles.cancelChipRow}>
                         {CANCEL_REASON_OPTIONS.map((reason) => (
                           <button
@@ -1242,34 +1303,55 @@ function MyBeautyBookingsContent() {
                         ))}
                       </div>
 
-                       <textarea
-                         className={styles.cancelTextarea}
-                         value={cancelDetails}
-                         onChange={(event) => setCancelDetails(event.target.value)}
-                         placeholder={t('beauty_bookings.cancel_details_placeholder')}
-                       />
- 
-                       <div className={styles.cancelActionRow}>
-                         <button
-                           type="button"
-                           className={styles.cancelConfirmButton}
-                           onClick={() => void handleBookingCancel()}
-                           disabled={isCancelSubmitting}
-                         >
-                           {isCancelSubmitting ? t('beauty_bookings.cancel_processing') : t('beauty_bookings.cancel_confirm')}
-                         </button>
-                         <button
-                           type="button"
-                           className={styles.cancelGhostButton}
-                           onClick={() => {
-                             setIsCancelPanelOpen(false);
-                             setCancelError(null);
-                           }}
-                           disabled={isCancelSubmitting}
-                         >
-                           {t('beauty_bookings.change_close')}
-                         </button>
-                       </div>
+                      <textarea
+                        className={styles.cancelTextarea}
+                        value={cancelDetails}
+                        onChange={(event) => setCancelDetails(event.target.value)}
+                        placeholder={t('beauty_bookings.cancel_details_placeholder')}
+                      />
+
+                      <label className={styles.cancelConsentLabel}>
+                        <input
+                          type="checkbox"
+                          className={styles.cancelConsentCheckbox}
+                          checked={cancelRefundConsented}
+                          onChange={(e) => setCancelRefundConsented(e.target.checked)}
+                        />
+                        <span>
+                          {cancelRefundCalc?.isRefundable === false
+                            ? (i18n.language === 'ko'
+                                ? '예약일 1일 전 이내 취소로 환불이 불가합니다. 전액 차감에 동의합니다.'
+                                : 'No refund is available within 1 day of the appointment. I agree to full deduction.')
+                            : cancelRefundCalc
+                              ? (i18n.language === 'ko'
+                                  ? `지금 취소하시면 플랫폼 이용료 ${formatPrice(cancelRefundCalc.platformFee, i18n.language, t)}와 시술비의 ${100 - cancelRefundCalc.refundRate}%(${formatPrice(cancelRefundCalc.penaltyAmount, i18n.language, t)})가 차감됩니다. 동의합니다.`
+                                  : `Cancelling now will deduct the ${Math.round(PLATFORM_FEE_RATE * 100)}% platform fee and ${100 - cancelRefundCalc.refundRate}% of the service fee. I agree.`)
+                              : (i18n.language === 'ko' ? '취소 및 환불 규정에 동의합니다.' : 'I agree to the cancellation and refund policy.')}
+                        </span>
+                      </label>
+
+                      <div className={styles.cancelActionRow}>
+                        <button
+                          type="button"
+                          className={styles.cancelConfirmButton}
+                          onClick={() => void handleBookingCancel()}
+                          disabled={isCancelSubmitting || !cancelRefundConsented}
+                        >
+                          {isCancelSubmitting ? t('beauty_bookings.cancel_processing') : t('beauty_bookings.cancel_confirm')}
+                        </button>
+                        <button
+                          type="button"
+                          className={styles.cancelGhostButton}
+                          onClick={() => {
+                            setIsCancelPanelOpen(false);
+                            setCancelError(null);
+                            setCancelRefundConsented(false);
+                          }}
+                          disabled={isCancelSubmitting}
+                        >
+                          {t('beauty_bookings.change_close')}
+                        </button>
+                      </div>
                     </div>
                    ) : null}
               </article>

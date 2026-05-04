@@ -197,6 +197,8 @@ function mapAgreements(value: unknown): BeautyBookingAdminRecord["agreements"] {
       privacyPolicyAgreed: false,
       thirdPartySharingAgreed: false,
       marketingConsentAgreed: false,
+      refundPolicyAgreed: false,
+      refundPolicyAgreedAt: null,
     };
   }
 
@@ -205,6 +207,8 @@ function mapAgreements(value: unknown): BeautyBookingAdminRecord["agreements"] {
     privacyPolicyAgreed: value.privacyPolicyAgreed === true,
     thirdPartySharingAgreed: value.thirdPartySharingAgreed === true,
     marketingConsentAgreed: value.marketingConsentAgreed === true,
+    refundPolicyAgreed: value.refundPolicyAgreed === true,
+    refundPolicyAgreedAt: typeof value.refundPolicyAgreedAt === 'string' ? value.refundPolicyAgreedAt : null,
   };
 }
 
