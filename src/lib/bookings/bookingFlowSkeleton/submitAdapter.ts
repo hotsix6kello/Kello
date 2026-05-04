@@ -124,6 +124,8 @@ function buildPayloadCandidate(
       privacyPolicyAgreed: draft.agreements.privacyPolicyAgreed,
       thirdPartySharingAgreed: draft.agreements.thirdPartySharingAgreed,
       marketingConsentAgreed: draft.agreements.marketingConsentAgreed,
+      refundPolicyAgreed: false,
+      refundPolicyAgreedAt: null,
     },
     createdFrom: {
       flow: "beauty-explore",

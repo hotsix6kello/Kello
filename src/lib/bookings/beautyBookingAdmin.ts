@@ -97,6 +97,8 @@ export type BeautyBookingAdminRecord = {
     privacyPolicyAgreed: boolean;
     thirdPartySharingAgreed: boolean;
     marketingConsentAgreed: boolean;
+    refundPolicyAgreed: boolean;
+    refundPolicyAgreedAt: string | null;
   };
   createdFromFlow: string;
 };

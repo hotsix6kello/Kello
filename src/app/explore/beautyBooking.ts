@@ -45,6 +45,8 @@ export type BeautyBookingPayload = {
     privacyPolicyAgreed: boolean;
     thirdPartySharingAgreed: boolean;
     marketingConsentAgreed: boolean;
+    refundPolicyAgreed: boolean;
+    refundPolicyAgreedAt: string | null;
   };
   createdFrom: {
     flow: 'beauty-explore';
@@ -197,6 +199,8 @@ export function buildBeautyBookingPayload(
       privacyPolicyAgreed: input.agreements.privacyPolicyAgreed,
       thirdPartySharingAgreed: input.agreements.thirdPartySharingAgreed,
       marketingConsentAgreed: input.agreements.marketingConsentAgreed,
+      refundPolicyAgreed: input.agreements.refundPolicyAgreed,
+      refundPolicyAgreedAt: input.agreements.refundPolicyAgreedAt,
     },
     createdFrom: {
       flow: 'beauty-explore',
@@ -286,6 +290,8 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       privacyPolicyAgreed: agreements.privacyPolicyAgreed === true,
       thirdPartySharingAgreed: agreements.thirdPartySharingAgreed === true,
       marketingConsentAgreed: agreements.marketingConsentAgreed === true,
+      refundPolicyAgreed: agreements.refundPolicyAgreed === true,
+      refundPolicyAgreedAt: typeof agreements.refundPolicyAgreedAt === 'string' ? agreements.refundPolicyAgreedAt : null,
     },
   });
 }
