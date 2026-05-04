@@ -12,6 +12,7 @@ import {
   type BeautyBookingAdminRecord,
 } from '@/lib/bookings/beautyBookingAdmin.ts';
 import { useBeautyTranslation } from '@/hooks/useBeautyTranslation';
+import { REFUND_POLICY, PLATFORM_FEE_RATE } from '@/constants/refundPolicy';
 import styles from './beauty-bookings.module.css';
 
 type BookingTabId = 'all' | 'active' | 'completed' | 'canceled';
@@ -1228,6 +1229,25 @@ function MyBeautyBookingsContent() {
 
                   {canCancelSelectedBooking && isCancelPanelOpen ? (
                     <div className={styles.cancelPanel}>
+                      <div className={styles.cancelRefundPolicy}>
+                        <p className={styles.cancelRefundPolicyTitle}>{t('beauty_bookings.cancel_info_title')}</p>
+                        <table className={styles.cancelRefundTable}>
+                          <tbody>
+                            {REFUND_POLICY.map((tier) => (
+                              <tr key={tier.daysBeforeAppointment}>
+                                <td>{i18n.language === 'ko' ? tier.label_ko : tier.label_en}</td>
+                                <td>{tier.refundRate > 0 ? `${tier.refundRate}%` : t('beauty_bookings.cancel_no_refund', '환불 불가')}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                        <p className={styles.cancelRefundPolicyNote}>
+                          {i18n.language === 'ko'
+                            ? `플랫폼 이용료(${Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다.`
+                            : `The ${Math.round(PLATFORM_FEE_RATE * 100)}% platform fee is non-refundable in all cases.`}
+                        </p>
+                      </div>
+
                       <div className={styles.cancelChipRow}>
                         {CANCEL_REASON_OPTIONS.map((reason) => (
                           <button
@@ -1248,7 +1268,7 @@ function MyBeautyBookingsContent() {
                          onChange={(event) => setCancelDetails(event.target.value)}
                          placeholder={t('beauty_bookings.cancel_details_placeholder')}
                        />
- 
+
                        <div className={styles.cancelActionRow}>
                          <button
                            type="button"
