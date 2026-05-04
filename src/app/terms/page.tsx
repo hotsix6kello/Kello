@@ -21,6 +21,11 @@ export default function TermsOfServicePage() {
       ]
     },
     {
+      title: t('terms_of_service.platform_fee.title'),
+      content: t('terms_of_service.platform_fee.content'),
+      note: t('terms_of_service.platform_fee.note')
+    },
+    {
       title: t('terms_of_service.refund_policy.title'),
       content: t('terms_of_service.refund_policy.subtitle'),
       refundSchedule: [
@@ -31,6 +36,11 @@ export default function TermsOfServicePage() {
         t('terms_of_service.refund_policy.same_day')
       ],
       note: t('terms_of_service.refund_policy.note')
+    },
+    {
+      title: t('terms_of_service.chargeback.title'),
+      content: t('terms_of_service.chargeback.content'),
+      note: t('terms_of_service.chargeback.note')
     },
     {
       title: t('terms_of_service.liability.title'),
