@@ -24,7 +24,7 @@ export default function TermsOfServicePage() {
       title: t('terms_of_service.refund_policy.title'),
       content: t('terms_of_service.refund_policy.subtitle'),
       refundSchedule: [
-        t('terms_of_service.refund_policy.five_days'),
+        t('terms_of_service.refund_policy.four_days'),
         t('terms_of_service.refund_policy.three_days'),
         t('terms_of_service.refund_policy.two_days'),
         t('terms_of_service.refund_policy.one_day'),

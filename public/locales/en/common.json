@@ -588,7 +588,7 @@
     "completion_desc2": "Please note it's not confirmed until you receive a confirmation notice.",
     "completion_desc3": "Track progress anytime in My Bookings menu.",
     "completion_flow_hint": "Your booking request has been received. It will be confirmed after the shop reviews it. Check results via notification or My Bookings.",
-    "cancel_policy_hint": "You may cancel before confirmation. Cancellations after confirmation are subject to the shop's policy.",
+    "cancel_policy_hint": "You may cancel before confirmation. Cancellations after confirmation are subject to MyKello's unified refund policy.",
     "price_estimate_hint": "Prices shown are estimates. Final amounts may vary based on options or shop policy.",
     "label_rating": "Rating",
     "label_review": "Reviews",
@@ -1221,7 +1221,7 @@
         },
         "cancel_refund": {
           "q": "What are the cancellation and refund policies?",
-          "a": "Policies may vary by service, so please check the detailed information."
+          "a": "MyKello applies a unified refund policy to all bookings. 4+ days before: 100% refund on the service fee. 3 days before: 80%. 2 days before: 60%. 1 day before or same day / No-show: no refund. The 10% platform fee is non-refundable in all cases."
         },
         "write_review": {
           "q": "How do I write a review?",
@@ -2315,13 +2315,13 @@
     },
     "refund_policy": {
       "title": "3. Cancellation & Refund Policy",
-      "subtitle": "Refund rates are calculated based on the cancellation time before the scheduled appointment:",
-      "five_days": "5 days prior: 100% Refund",
-      "three_days": "3 days prior: 90% Refund",
-      "two_days": "2 days prior: 70% Refund",
-      "one_day": "1 day prior: 50% Refund",
-      "same_day": "Same-day or No-show: No Refund",
-      "note": "Final refund processing may vary depending on the specific store's policy."
+      "subtitle": "Refund rates apply to the service fee only. The 10% platform fee is non-refundable regardless of cancellation timing:",
+      "four_days": "4+ days before appointment: 100% Refund",
+      "three_days": "3 days before appointment: 80% Refund",
+      "two_days": "2 days before appointment: 60% Refund",
+      "one_day": "1 day before appointment: No Refund",
+      "same_day": "Same day / No-show: No Refund",
+      "note": "MyKello's unified cancellation policy applies to all bookings. The 10% platform fee is non-refundable in all cases."
     },
     "liability": {
       "title": "4. Limitation of Liability",
