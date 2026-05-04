@@ -17,6 +17,7 @@ import { submitBeautyBooking, BeautyBookingPayload } from '@/app/explore/beautyB
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip } from '@/lib/contexts/TripContext';
 import { uploadBookingImage } from '@/lib/bookings/SupabaseUploadAdapter';
+import { REFUND_POLICY, PLATFORM_FEE_RATE } from '@/constants/refundPolicy';
 
 interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
@@ -48,7 +49,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   const [styleImage, setStyleImage] = useState<{ file: File; preview: string } | null>(null);
   const [agreements, setAgreements] = useState({
     bookingConfirmed: false,
-    privacyConsent: false
+    privacyConsent: false,
+    refundPolicyAgreed: false,
   });
 
   const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
@@ -246,6 +248,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           privacyPolicyAgreed: agreements.privacyConsent,
           thirdPartySharingAgreed: agreements.privacyConsent,
           marketingConsentAgreed: false,
+          refundPolicyAgreed: agreements.refundPolicyAgreed,
+          refundPolicyAgreedAt: agreements.refundPolicyAgreed ? new Date().toISOString() : null,
         },
         createdFrom: {
           flow: 'beauty-explore',
@@ -299,7 +303,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   );
 
   const isFormValid = customerForm.name.trim() && customerForm.phone.trim() && selectedServiceId;
-  const isConfirmEnabled = isFormValid && agreements.bookingConfirmed && agreements.privacyConsent;
+  const isConfirmEnabled = isFormValid && agreements.bookingConfirmed && agreements.privacyConsent && agreements.refundPolicyAgreed;
 
   return (
     <div className="fixed inset-0 z-[400] flex justify-center bg-black/60 sm:bg-black/40">
@@ -332,6 +336,18 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                          <span className={styles.beautyCompletionHeroMeta}>{submittedBooking.date} · {submittedBooking.time}</span>
                       </div>
                    </div>
+                </div>
+                <div className="mx-4 mb-4 rounded-xl border border-purple-100 bg-purple-50 p-4 text-[11px] text-neutral-600">
+                   <p className="font-bold text-purple-700 mb-1.5">취소 및 환불 규정 안내</p>
+                   {REFUND_POLICY.map((tier) => (
+                     <div key={tier.daysBeforeAppointment} className="flex justify-between py-0.5">
+                       <span>{tier.label_ko}</span>
+                       <span className={tier.refundRate === 0 ? 'font-bold text-red-600' : 'font-semibold'}>
+                         {tier.refundRate > 0 ? `${tier.refundRate}% 환불` : '환불 불가'}
+                       </span>
+                     </div>
+                   ))}
+                   <p className="mt-1.5 text-neutral-400">플랫폼 이용료({Math.round(PLATFORM_FEE_RATE * 100)}%)는 어떤 경우에도 환불되지 않습니다.</p>
                 </div>
                 <div className={styles.beautyCompletionActions}>
                    <button type="button" className={styles.beautySecondaryAction} onClick={onClose} style={{ background: 'var(--primary)', color: 'white' }}>
@@ -563,6 +579,24 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                        </div>
                     </div>
 
+                    {/* 환불 규정 요약 카드 */}
+                    <div className="rounded-2xl border border-purple-200 bg-purple-50 p-5 flex flex-col gap-3">
+                       <h4 className="text-xs font-bold text-purple-700 uppercase tracking-widest">취소 및 환불 규정</h4>
+                       <div className="flex flex-col gap-1.5 text-[12px] text-neutral-700">
+                          {REFUND_POLICY.map((tier) => (
+                            <div key={tier.daysBeforeAppointment} className="flex justify-between">
+                              <span>{tier.label_ko}</span>
+                              <span className={tier.refundRate === 0 ? 'font-bold text-red-600' : 'font-semibold text-neutral-800'}>
+                                {tier.refundRate > 0 ? `${tier.refundRate}% 환불` : '환불 불가'}
+                              </span>
+                            </div>
+                          ))}
+                       </div>
+                       <p className="text-[11px] text-neutral-500 border-t border-purple-100 pt-2">
+                          플랫폼 이용료({Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다.
+                       </p>
+                    </div>
+
                     <div className="bg-neutral-50 rounded-2xl p-5 flex flex-col gap-4">
                        <h4 className="text-xs font-bold text-neutral-600 uppercase tracking-widest">이용 동의</h4>
                        <div className="flex flex-col gap-3">
@@ -588,6 +622,18 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                              <div className="flex flex-col">
                                 <span className="text-sm font-bold text-neutral-800 leading-tight">개인정보 처리방침 동의</span>
                                 <span className="text-[11px] text-neutral-500 mt-0.5">예약 진행을 위해 성함, 연락처 등의 정보가 매장에 제공됨에 동의합니다.</span>
+                             </div>
+                          </label>
+                          <label className="flex items-start gap-3 cursor-pointer">
+                             <input
+                                type="checkbox"
+                                className="mt-1 w-4 h-4 rounded border-gray-300 text-purple-600 focus:ring-purple-400"
+                                checked={agreements.refundPolicyAgreed}
+                                onChange={() => setAgreements(prev => ({ ...prev, refundPolicyAgreed: !prev.refundPolicyAgreed }))}
+                             />
+                             <div className="flex flex-col">
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">취소 및 환불 규정 동의</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">위 취소 및 환불 규정을 확인하였으며, 이에 동의합니다.</span>
                              </div>
                           </label>
                        </div>

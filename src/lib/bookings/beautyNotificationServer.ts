@@ -1,4 +1,5 @@
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "@/lib/supabaseServer.ts";
+import { REFUND_POLICY, PLATFORM_FEE_RATE } from "@/constants/refundPolicy";
 
 export type BeautyBookingNotificationEventType =
   | "booking_created"
@@ -41,6 +42,25 @@ export const BEAUTY_NOTIFICATION_RESEND_MAX_LIMIT = 3;
 export const BEAUTY_NOTIFICATION_RESEND_COOLDOWN_MS = 5 * 60 * 1000; // 5 mins
 
 const BEAUTY_NOTIFICATION_TABLE = "beauty_booking_notifications";
+
+function buildRefundPolicyHtml(): string {
+  const rows = REFUND_POLICY.map((tier) => {
+    const noRefund = tier.refundRate === 0;
+    const color = noRefund ? "#dc2626" : "#374151";
+    const weight = noRefund ? "700" : "400";
+    const valueText = noRefund ? "환불 불가" : `시술비 ${tier.refundRate}% 환불`;
+    return `<tr>
+      <td style="padding:3px 0;font-size:12px;color:${color};font-weight:${weight};">${tier.label_ko}</td>
+      <td style="padding:3px 0;font-size:12px;color:${color};font-weight:${weight};text-align:right;">${valueText}</td>
+    </tr>`;
+  }).join("");
+
+  return `<div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:16px;margin:24px 0;">
+    <p style="font-size:13px;font-weight:700;color:#7c3aed;margin:0 0 10px 0;">취소 및 환불 규정</p>
+    <table style="width:100%;border-collapse:collapse;">${rows}</table>
+    <p style="font-size:11px;color:#9ca3af;margin:10px 0 0 0;">플랫폼 이용료(${Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다. 매장별 별도 규정은 적용되지 않습니다.</p>
+  </div>`;
+}
 
 /**
  * Notifies the admin via email about a new beauty booking request.
@@ -328,6 +348,7 @@ async function dispatchBeautyBookingNotification(
         html: `<div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 12px;">
           <h2 style="color: #7c3aed; margin-top: 0;">${template.title}</h2>
           <p style="font-size: 16px; line-height: 1.6; color: #4b5563;">${template.body}</p>
+          ${(payload.event_type === "booking_created" || payload.event_type === "booking_confirmed") ? buildRefundPolicyHtml() : ""}
           ${template.ctaLink ? `
             <div style="margin: 30px 0;">
               <a href="${template.ctaLink}" style="background-color: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">

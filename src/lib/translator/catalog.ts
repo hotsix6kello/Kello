@@ -16,7 +16,7 @@ export const BEAUTY_SERVICE_CATALOG: BeautyServiceCatalogItem[] = [
     },
     priceKrw: 79000,
     durationMinutes: 60,
-    cancellationPolicy: "예약 24시간 전까지 무료 취소, 이후 취소 시 30% 수수료가 발생합니다.",
+    cancellationPolicy: "예약일 4일 전까지 100%, 3일 전 80%, 2일 전 60% 환불. 예약일 1일 전부터는 환불 불가. 플랫폼 이용료(10%)는 취소 시점과 무관하게 환불 불가.",
     availableSlots: [
       "2026-03-18T11:00",
       "2026-03-18T14:00",
@@ -36,7 +36,7 @@ export const BEAUTY_SERVICE_CATALOG: BeautyServiceCatalogItem[] = [
     },
     priceKrw: 149000,
     durationMinutes: 45,
-    cancellationPolicy: "예약 24시간 전까지 무료 취소, 이후 취소 시 50% 수수료가 발생합니다.",
+    cancellationPolicy: "예약일 4일 전까지 100%, 3일 전 80%, 2일 전 60% 환불. 예약일 1일 전부터는 환불 불가. 플랫폼 이용료(10%)는 취소 시점과 무관하게 환불 불가.",
     availableSlots: [
       "2026-03-18T15:30",
       "2026-03-19T12:00",
@@ -55,7 +55,7 @@ export const BEAUTY_SERVICE_CATALOG: BeautyServiceCatalogItem[] = [
     },
     priceKrw: 99000,
     durationMinutes: 50,
-    cancellationPolicy: "예약 12시간 전까지 무료 취소 가능합니다.",
+    cancellationPolicy: "예약일 4일 전까지 100%, 3일 전 80%, 2일 전 60% 환불. 예약일 1일 전부터는 환불 불가. 플랫폼 이용료(10%)는 취소 시점과 무관하게 환불 불가.",
     availableSlots: [
       "2026-03-18T13:00",
       "2026-03-20T10:00",

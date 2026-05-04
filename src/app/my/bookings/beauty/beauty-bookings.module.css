@@ -483,6 +483,91 @@
   padding-top: 12px;
 }
 
+.cancelRefundBreakdown {
+  background: #fdf4ff;
+  border: 1px solid rgba(216, 180, 254, 0.5);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.cancelRefundBreakdownTitle {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.cancelNoRefundWarning {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.cancelRefundDl {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0 0;
+}
+
+.cancelRefundRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--gray-700);
+}
+
+.cancelRefundRow dt { font-weight: 400; }
+.cancelRefundRow dd { margin: 0; font-weight: 500; }
+
+.cancelRefundDeduct dd { color: #dc2626; }
+
+.cancelRefundTotal {
+  border-top: 1px solid rgba(216, 180, 254, 0.5);
+  padding-top: 4px;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.cancelRefundTotal dt { font-size: 0.82rem; }
+
+.cancelRefundAmountPositive {
+  color: #16a34a;
+  font-size: 0.95rem;
+}
+
+.cancelRefundAmountZero {
+  color: #dc2626;
+  font-size: 0.95rem;
+}
+
+.cancelRefundPolicyNote {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--gray-500);
+}
+
+.cancelConsentLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--gray-700);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.cancelConsentCheckbox {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #7c3aed;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
 .panelTitle {
   margin: 0;
   font-size: 0.86rem;
