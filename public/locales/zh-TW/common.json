@@ -261,7 +261,9 @@
       "title": "將韓國之美，\n融入您的行程。",
       "subtitle": "選擇您想要的美容服務，直接進入預約步驟。",
       "welcome": "{{name}}，請選擇今天的服務。",
-      "welcome_user": "{{greeting}}，{{name}}！👋"
+      "welcome_user": "{{greeting}}，{{name}}！👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "歡迎，{{name}}！👋"
     },
     "booking": {
       "step": "STEP. 01",
@@ -274,7 +276,23 @@
       "completion_title": "預約請求已完成！",
       "completion_desc": "成功發送預約請求。\n所選商家確認後將盡快與您聯繫。",
       "confirm_button": "確認",
-      "login_required": "上傳圖片需要登入。請登入後重試。"
+      "login_required": "上傳圖片需要登入。請登入後重試。",
+      "refund_policy_notice": "取消與退款政策說明",
+      "refund_policy_title": "取消與退款政策",
+      "refund_rate_label": "{{rate}}% 退款",
+      "no_refund_label": "不予退款",
+      "platform_fee_note": "平台服務費（{{rate}}%）不論取消時間如何均不予退款。",
+      "platform_fee_note_always": "平台服務費（{{rate}}%）在任何情況下均不予退款。",
+      "agreements_title": "條款同意",
+      "agreement_booking_confirmed": "預約資訊確認",
+      "agreement_booking_confirmed_desc": "確認所選門店、日期及服務資訊無誤。",
+      "agreement_privacy_consent": "隱私政策同意",
+      "agreement_privacy_consent_desc": "同意為完成預約，將姓名、聯絡方式等資訊提供給門店。",
+      "agreement_refund_policy": "取消與退款政策同意",
+      "agreement_refund_policy_desc": "已閱讀並同意上述取消與退款政策。",
+      "submitting": "處理中...",
+      "submit_final": "提交最終預約",
+      "go_back_to_main": "返回首頁"
     }
   },
   "booking_skeleton": {
@@ -1564,6 +1582,16 @@
     "error_change": "變更請求失敗。",
     "error_alt": "處理失敗。",
     "open_interpreter": "開啟翻譯器",
+    "cancel_days_until": "距預約日還有 {{daysUntil}} 天 → 退款比例 {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ 預約日前1天起不予退款",
+    "cancel_service_fee": "服務費",
+    "cancel_penalty": "違約金（{{rate}}%）",
+    "cancel_platform_fee_label": "平台服務費（不予退款）",
+    "cancel_total_refund": "最終退款金額",
+    "cancel_platform_fee_note": "平台服務費（{{rate}}%）不論取消時間如何均不予退款。",
+    "cancel_consent_no_refund": "預約日前1天內取消，不予退款。本人同意全額扣除。",
+    "cancel_consent_partial": "現在取消將扣除平台服務費 {{platformFee}} 及服務費的 {{penaltyRate}}%（{{penaltyAmount}}）。本人同意。",
+    "cancel_consent_default": "本人同意取消與退款政策。",
     "interpreter_visit_context": "正在 {{storeName}} 使用翻譯器。",
     "interpreter_visit_service_context": "在 {{storeName}} 進行 {{serviceName}} 服務時使用翻譯器。"
   },

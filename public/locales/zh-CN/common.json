@@ -1081,7 +1081,9 @@
       "title": "将韩国之美，\n融入您的行程。",
       "subtitle": "选择您想要的美容服务，直接进入预约步骤。",
       "welcome": "{{name}}，请选择今天的服务。",
-      "welcome_user": "{{greeting}}，{{name}}！👋"
+      "welcome_user": "{{greeting}}，{{name}}！👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "欢迎，{{name}}！👋"
     },
     "booking": {
       "step": "STEP. 01",
@@ -1094,7 +1096,23 @@
       "completion_title": "预约请求已完成！",
       "completion_desc": "成功发送预约请求。\n所选商家确认后将尽快为您联系。",
       "confirm_button": "确认",
-      "login_required": "上传图片需要登录。请登录后重试。"
+      "login_required": "上传图片需要登录。请登录后重试。",
+      "refund_policy_notice": "取消与退款政策说明",
+      "refund_policy_title": "取消与退款政策",
+      "refund_rate_label": "{{rate}}% 退款",
+      "no_refund_label": "不予退款",
+      "platform_fee_note": "平台服务费（{{rate}}%）不论取消时间如何均不予退款。",
+      "platform_fee_note_always": "平台服务费（{{rate}}%）在任何情况下均不予退款。",
+      "agreements_title": "条款同意",
+      "agreement_booking_confirmed": "预约信息确认",
+      "agreement_booking_confirmed_desc": "确认所选门店、日期及服务信息无误。",
+      "agreement_privacy_consent": "隐私政策同意",
+      "agreement_privacy_consent_desc": "同意为完成预约，将姓名、联系方式等信息提供给门店。",
+      "agreement_refund_policy": "取消与退款政策同意",
+      "agreement_refund_policy_desc": "已阅读并同意上述取消与退款政策。",
+      "submitting": "处理中...",
+      "submit_final": "提交最终预约",
+      "go_back_to_main": "返回首页"
     }
   },
   "interpreter_page": {
@@ -1295,7 +1313,17 @@
     "error_change_reason": "请填写您希望变更的内容。",
     "error_change": "变更请求失败。",
     "error_alt": "处理失败。",
-    "open_interpreter": "打开翻译器"
+    "open_interpreter": "打开翻译器",
+    "cancel_days_until": "距预约日还有 {{daysUntil}} 天 → 退款比例 {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ 预约日前1天起不予退款",
+    "cancel_service_fee": "服务费",
+    "cancel_penalty": "违约金（{{rate}}%）",
+    "cancel_platform_fee_label": "平台服务费（不予退款）",
+    "cancel_total_refund": "最终退款金额",
+    "cancel_platform_fee_note": "平台服务费（{{rate}}%）不论取消时间如何均不予退款。",
+    "cancel_consent_no_refund": "预约日前1天内取消，不予退款。本人同意全额扣除。",
+    "cancel_consent_partial": "现在取消将扣除平台服务费 {{platformFee}} 及服务费的 {{penaltyRate}}%（{{penaltyAmount}}）。本人同意。",
+    "cancel_consent_default": "本人同意取消与退款政策。"
   },
   "settings_page": {
     "hero": {
