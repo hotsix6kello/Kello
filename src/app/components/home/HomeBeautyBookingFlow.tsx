@@ -27,7 +27,7 @@ interface HomeBeautyBookingFlowProps {
 }
 
 export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory, t }: HomeBeautyBookingFlowProps) {
-  const { t: tBeauty } = useTranslation(['beauty_explore', 'home_beauty']);
+  const { t: tBeauty, i18n } = useTranslation(['beauty_explore', 'home_beauty']);
   const { sharedBusinesses, lastSelectedStoreId, setLastSelectedStoreId } = useTrip();
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
@@ -338,20 +338,20 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                    </div>
                 </div>
                 <div className="mx-4 mb-4 rounded-xl border border-purple-100 bg-purple-50 p-4 text-[11px] text-neutral-600">
-                   <p className="font-bold text-purple-700 mb-1.5">취소 및 환불 규정 안내</p>
+                   <p className="font-bold text-purple-700 mb-1.5">{t('booking.refund_policy_notice')}</p>
                    {REFUND_POLICY.map((tier) => (
                      <div key={tier.daysBeforeAppointment} className="flex justify-between py-0.5">
-                       <span>{tier.label_ko}</span>
+                       <span>{i18n.language === 'ko' ? tier.label_ko : tier.label_en}</span>
                        <span className={tier.refundRate === 0 ? 'font-bold text-red-600' : 'font-semibold'}>
-                         {tier.refundRate > 0 ? `${tier.refundRate}% 환불` : '환불 불가'}
+                         {tier.refundRate > 0 ? t('booking.refund_rate_label', { rate: tier.refundRate }) : t('booking.no_refund_label')}
                        </span>
                      </div>
                    ))}
-                   <p className="mt-1.5 text-neutral-400">플랫폼 이용료({Math.round(PLATFORM_FEE_RATE * 100)}%)는 어떤 경우에도 환불되지 않습니다.</p>
+                   <p className="mt-1.5 text-neutral-400">{t('booking.platform_fee_note_always', { rate: Math.round(PLATFORM_FEE_RATE * 100) })}</p>
                 </div>
                 <div className={styles.beautyCompletionActions}>
                    <button type="button" className={styles.beautySecondaryAction} onClick={onClose} style={{ background: 'var(--primary)', color: 'white' }}>
-                      메인으로 돌아가기
+                      {t('booking.go_back_to_main')}
                    </button>
                 </div>
              </div>
@@ -581,24 +581,24 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
 
                     {/* 환불 규정 요약 카드 */}
                     <div className="rounded-2xl border border-purple-200 bg-purple-50 p-5 flex flex-col gap-3">
-                       <h4 className="text-xs font-bold text-purple-700 uppercase tracking-widest">취소 및 환불 규정</h4>
+                       <h4 className="text-xs font-bold text-purple-700 uppercase tracking-widest">{t('booking.refund_policy_title')}</h4>
                        <div className="flex flex-col gap-1.5 text-[12px] text-neutral-700">
                           {REFUND_POLICY.map((tier) => (
                             <div key={tier.daysBeforeAppointment} className="flex justify-between">
-                              <span>{tier.label_ko}</span>
+                              <span>{i18n.language === 'ko' ? tier.label_ko : tier.label_en}</span>
                               <span className={tier.refundRate === 0 ? 'font-bold text-red-600' : 'font-semibold text-neutral-800'}>
-                                {tier.refundRate > 0 ? `${tier.refundRate}% 환불` : '환불 불가'}
+                                {tier.refundRate > 0 ? t('booking.refund_rate_label', { rate: tier.refundRate }) : t('booking.no_refund_label')}
                               </span>
                             </div>
                           ))}
                        </div>
                        <p className="text-[11px] text-neutral-500 border-t border-purple-100 pt-2">
-                          플랫폼 이용료({Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다.
+                          {t('booking.platform_fee_note', { rate: Math.round(PLATFORM_FEE_RATE * 100) })}
                        </p>
                     </div>
 
                     <div className="bg-neutral-50 rounded-2xl p-5 flex flex-col gap-4">
-                       <h4 className="text-xs font-bold text-neutral-600 uppercase tracking-widest">이용 동의</h4>
+                       <h4 className="text-xs font-bold text-neutral-600 uppercase tracking-widest">{t('booking.agreements_title')}</h4>
                        <div className="flex flex-col gap-3">
                           <label className="flex items-start gap-3 cursor-pointer">
                              <input
@@ -608,8 +608,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                 onChange={() => setAgreements(prev => ({ ...prev, bookingConfirmed: !prev.bookingConfirmed }))}
                              />
                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-neutral-800 leading-tight">예약 내용 확인</span>
-                                <span className="text-[11px] text-neutral-500 mt-0.5">선택하신 매장, 일시, 시술 정보가 정확함을 확인합니다.</span>
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_booking_confirmed')}</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">{t('booking.agreement_booking_confirmed_desc')}</span>
                              </div>
                           </label>
                           <label className="flex items-start gap-3 cursor-pointer">
@@ -620,8 +620,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                 onChange={() => setAgreements(prev => ({ ...prev, privacyConsent: !prev.privacyConsent }))}
                              />
                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-neutral-800 leading-tight">개인정보 처리방침 동의</span>
-                                <span className="text-[11px] text-neutral-500 mt-0.5">예약 진행을 위해 성함, 연락처 등의 정보가 매장에 제공됨에 동의합니다.</span>
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_privacy_consent')}</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">{t('booking.agreement_privacy_consent_desc')}</span>
                              </div>
                           </label>
                           <label className="flex items-start gap-3 cursor-pointer">
@@ -632,8 +632,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                 onChange={() => setAgreements(prev => ({ ...prev, refundPolicyAgreed: !prev.refundPolicyAgreed }))}
                              />
                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-neutral-800 leading-tight">취소 및 환불 규정 동의</span>
-                                <span className="text-[11px] text-neutral-500 mt-0.5">위 취소 및 환불 규정을 확인하였으며, 이에 동의합니다.</span>
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_refund_policy')}</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">{t('booking.agreement_refund_policy_desc')}</span>
                              </div>
                           </label>
                        </div>
@@ -644,7 +644,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                        onClick={handleComplete}
                        className={`w-full py-5 rounded-xl font-bold text-lg shadow-xl transition-all ${isConfirmEnabled ? 'bg-[var(--primary)] text-white hover:opacity-90' : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'}`}
                     >
-                       {isSubmitting ? '처리 중...' : '최종 예약 신청하기'}
+                       {isSubmitting ? t('booking.submitting') : t('booking.submit_final')}
                     </button>
                  </div>
                )}

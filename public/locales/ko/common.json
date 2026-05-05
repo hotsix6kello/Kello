@@ -277,7 +277,23 @@
       "completion_title": "예약 요청 완료!",
       "completion_desc": "예약 요청이 성공적으로 전달되었습니다.\n매장에서 확인 후 곧 연락드리겠습니다.",
       "confirm_button": "확인",
-      "login_required": "이미지 업로드를 위해 로그인이 필요합니다. 로그인 후 다시 시도해주세요."
+      "login_required": "이미지 업로드를 위해 로그인이 필요합니다. 로그인 후 다시 시도해주세요.",
+      "refund_policy_notice": "취소 및 환불 규정 안내",
+      "refund_policy_title": "취소 및 환불 규정",
+      "refund_rate_label": "{{rate}}% 환불",
+      "no_refund_label": "환불 불가",
+      "platform_fee_note": "플랫폼 이용료({{rate}}%)는 취소 시점과 무관하게 환불되지 않습니다.",
+      "platform_fee_note_always": "플랫폼 이용료({{rate}}%)는 어떤 경우에도 환불되지 않습니다.",
+      "agreements_title": "이용 동의",
+      "agreement_booking_confirmed": "예약 내용 확인",
+      "agreement_booking_confirmed_desc": "선택하신 매장, 일시, 시술 정보가 정확함을 확인합니다.",
+      "agreement_privacy_consent": "개인정보 처리방침 동의",
+      "agreement_privacy_consent_desc": "예약 진행을 위해 성함, 연락처 등의 정보가 매장에 제공됨에 동의합니다.",
+      "agreement_refund_policy": "취소 및 환불 규정 동의",
+      "agreement_refund_policy_desc": "위 취소 및 환불 규정을 확인하였으며, 이에 동의합니다.",
+      "submitting": "처리 중...",
+      "submit_final": "최종 예약 신청하기",
+      "go_back_to_main": "메인으로 돌아가기"
     }
   },
   "booking_skeleton": {
@@ -849,7 +865,17 @@
     "error_alt": "처리에 실패했습니다.",
     "open_interpreter": "통역기 열기",
     "interpreter_visit_context": "{{storeName}} 방문 시 통역기 사용 중.",
-    "interpreter_visit_service_context": "{{storeName}}에서 {{serviceName}} 서비스를 위한 통역기 사용 중."
+    "interpreter_visit_service_context": "{{storeName}}에서 {{serviceName}} 서비스를 위한 통역기 사용 중.",
+    "cancel_days_until": "예약일까지 {{daysUntil}}일 남음 → 환불 비율 {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ 예약일 1일 전부터는 환불이 불가합니다",
+    "cancel_service_fee": "시술비",
+    "cancel_penalty": "위약금 ({{rate}}%)",
+    "cancel_platform_fee_label": "플랫폼 이용료 (환불 불가)",
+    "cancel_total_refund": "최종 환불 금액",
+    "cancel_platform_fee_note": "플랫폼 이용료({{rate}}%)는 취소 시점과 무관하게 환불되지 않습니다.",
+    "cancel_consent_no_refund": "예약일 1일 전 이내 취소로 환불이 불가합니다. 전액 차감에 동의합니다.",
+    "cancel_consent_partial": "지금 취소하시면 플랫폼 이용료 {{platformFee}}와 시술비의 {{penaltyRate}}%({{penaltyAmount}})가 차감됩니다. 동의합니다.",
+    "cancel_consent_default": "취소 및 환불 규정에 동의합니다."
   },
   "settings_page": {
     "hero": {

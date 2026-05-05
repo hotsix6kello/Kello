@@ -4,7 +4,7 @@
   "form_phone": "ช่องทางติดต่อ (หรือ SNS ID)",
   "form_phone_placeholder": "เบอร์โทรหรือ SNS ID",
   "form_request": "คำขอเพิ่มเติม",
-  "form_request_placeholder": "Please leave a request for the salon",
+  "form_request_placeholder": "กรุณาฝากคำขอถึงร้าน",
   "agreement_confirm": "ยืนยันรายละเอียด",
   "agreement_confirm_desc": "ฉันยืนยันตัวเลือกนี้",
   "agreement_privacy": "ข้อตกลงความเป็นส่วนตัว",
@@ -16,370 +16,200 @@
   "booking_confirmation_title": "ส่งคำขอจองแล้ว!",
   "booking_confirmation_desc": "เราจะแจ้งให้คุณทราบเร็ว ๆ นี้",
   "booking_confirmation_cta": "การจองของฉัน",
+  "hero_eyebrow": "จองความงาม",
+  "category_all": "ทั้งหมด",
+  "hero_title": "เริ่มจอง {{category}}",
+  "hero_subtitle": "เลือกพื้นที่ เลือกร้าน และยืนยันเวลาเพื่อดำเนินการต่อ",
+  "hero_category_guide": "เลือกหมวดหมู่ที่หน้าแรกก่อนเพื่อเข้าสู่ขั้นตอนการจองที่เหมาะสม ขณะนี้แสดงร้านความงามทั้งหมด",
+  "region_filter_eyebrow": "กรองตามพื้นที่",
+  "region_filter_title": "กรุณาเลือกพื้นที่ที่ต้องการ",
+  "region_store_count": "{{count}} ร้าน",
+  "booking_review_eyebrow": "ยืนยันการจอง",
+  "designer_eyebrow": "ช่างผู้เชี่ยวชาญ",
+  "customer_details_eyebrow": "ข้อมูลลูกค้า",
+  "completion_store_label": "ร้านที่จอง",
+  "completion_total_label": "ยอดรวมโดยประมาณ",
+  "completion_booking_info_title": "ข้อมูลการจอง",
+  "completion_customer_info_title": "ข้อมูลลูกค้าและหมายเหตุ",
+  "completion_designer_label": "ช่างผู้เชี่ยวชาญ",
+  "completion_primary_service_label": "บริการหลัก",
+  "completion_addon_label": "ตัวเลือกเพิ่มเติม",
+  "completion_none": "ยังไม่ได้เลือก",
+  "region_jongno": "จงโน (종로)",
+  "region_gangnam": "กังนัม (강남)",
+  "region_hongdae": "ฮงแด (홍대)",
+  "region_seongsu": "ซองซู (성수)",
+  "region_jamsil": "จัมซิล (잠실)",
+  "region_konkuk": "คอนกุก (건대)",
+  "region_pangyo": "พังโย (판교)",
+  "label_review": "รีวิว",
+  "label_select_prompt": "กรุณาเลือกร้านที่ต้องการจอง",
+  "label_service_default": "ยังไม่ได้เลือก",
+  "label_designer_default": "ตามที่ร้านแนะนำ",
+  "label_designer_hint": "หากไม่ระบุช่าง ทางร้านจะจัดให้",
+  "label_no_designer": "ขณะนี้ไม่มีช่างให้เลือก",
+  "label_no_surcharge": "ไม่มีค่าธรรมเนียมเพิ่มเติม",
+  "label_addon_default": "ไม่มีตัวเลือกเพิ่มเติม",
+  "label_addon_limit": "เลือกได้สูงสุด 2 ตัวเลือกเพิ่มเติม",
+  "label_price_from": "เริ่มต้น",
+  "label_rating": "คะแนน",
+  "booking_panel_title": "กรุณาเลือกวันและเวลาจอง",
+  "booking_panel_desc": "ตรวจสอบตารางว่างของร้านที่เลือกและเลือกเวลาที่ต้องการ",
+  "booking_empty_title": "กรุณาเลือกร้านก่อน",
+  "booking_empty_desc": "หลังจากเลือกร้านแล้ว วันและเวลาที่ว่างจะแสดงขึ้น",
+  "booking_not_found_title": "ไม่พบข้อมูลการจอง",
+  "booking_not_found_desc": "ไม่สามารถโหลดข้อมูลการจองของร้านนี้ได้ กรุณาลองอีกครั้งภายหลัง",
+  "booking_date_label": "วันที่จอง",
+  "booking_time_label": "เวลาจอง",
+  "booking_no_date": "ขณะนี้ไม่มีวันให้เลือก",
+  "booking_no_time_wait": "กรุณาเลือกวันก่อน",
+  "booking_no_slots": "ไม่มีช่วงเวลาว่างในวันที่เลือก",
+  "confirm_title": "กรุณายืนยันข้อมูลการจอง",
+  "confirm_desc": "ยืนยันร้านและวันที่จองที่เลือก จากนั้นส่งคำขอ",
+  "confirm_empty_title": "ยังไม่มีข้อมูลการจองให้ยืนยัน",
+  "confirm_empty_desc": "กรุณาเลือกร้านและวันที่จอง รายละเอียดจะแสดงที่นี่",
+  "confirm_price_hint": "ราคาสุดท้ายอาจเปลี่ยนแปลงตามตัวเลือกหรือการยืนยันของร้าน",
+  "confirm_review_error_title": "กรุณาตรวจสอบข้อมูลการจองอีกครั้ง",
+  "confirm_review_error_desc": "ต้องเลือกร้าน วันที่ และเวลา",
+  "summary_category": "หมวดหมู่",
+  "summary_region": "พื้นที่",
+  "summary_store": "ร้าน",
+  "summary_date": "วันที่",
+  "summary_time": "เวลา",
+  "summary_hint": "กรุณายืนยันข้อมูลการจองก่อนดำเนินการต่อ",
+  "summary_btn": "ยืนยันข้อมูลการจอง",
+  "btn_select_time": "เลือกร้านนี้",
+  "btn_reselect_time": "เลือกเวลาใหม่",
+  "btn_edit": "แก้ไข",
+  "btn_submit": "ส่งคำขอจอง",
+  "btn_continue": "จองเลย",
+  "btn_reset": "แก้ไขข้อมูลการจอง",
+  "btn_close": "ปิด",
+  "completion_title": "ส่งคำขอจองแล้ว!",
+  "completion_desc1": "ทางร้านจะแจ้งให้ทราบหลังจากยืนยันเวลาว่าง",
+  "completion_desc2": "โปรดทราบว่าการจองยังไม่ได้รับการยืนยันจนกว่าจะได้รับการแจ้งเตือน",
+  "completion_desc3": "ตรวจสอบความคืบหน้าได้ที่ \"การจองของฉัน\" ตลอดเวลา",
+  "completion_flow_hint": "ได้รับคำขอจองของคุณแล้ว ผลจะแจ้งให้ทราบหลังจากร้านตรวจสอบ ดูได้ผ่านการแจ้งเตือนหรือ \"การจองของฉัน\"",
+  "price_estimate_hint": "ราคาที่แสดงเป็นการประมาณ ค่าบริการจริงอาจเปลี่ยนแปลงตามตัวเลือกหรือนโยบายของร้าน",
+  "empty_store_title": "ไม่พบร้านที่ตรงกับเงื่อนไข",
+  "empty_store_desc": "กรุณาลองพื้นที่หรือหมวดหมู่อื่น",
+  "toast_select_time": "กรุณาเลือกเวลาจอง",
+  "toast_check_info": "กรุณายืนยันข้อมูลที่จำเป็นก่อน",
+  "toast_submit_error": "ส่งคำขอจองล้มเหลว กรุณาลองอีกครั้งภายหลัง",
+  "toast_addon_limit": "เลือกได้สูงสุด 2 ตัวเลือกเพิ่มเติม",
+  "toast_copy_hint": "กดค้างที่ {{label}} เพื่อคัดลอก",
+  "filter_region_eyebrow": "กรองตามพื้นที่",
+  "filter_region_title": "กรุณาเลือกพื้นที่ที่ต้องการ",
+  "filter_store_count_suffix": " ร้าน",
+  "label_selected_datetime": "วันและเวลาที่เลือก",
+  "btn_change": "เปลี่ยน",
+  "btn_choose_datetime": "เลือกวันและเวลา",
+  "price_hair_summary": "ตัดผมเริ่มต้น 20,000 วอน | ย้อมผมเริ่มต้น 55,000 วอน | ดัดผมเริ่มต้น 60,000 วอน",
+  "price_nail_summary": "เจลเล็บเริ่มต้น 35,000 วอน | ดูแลเล็บเท้าเริ่มต้น 45,000 วอน",
+  "price_makeup_summary": "แต่งหน้าประจำวันเริ่มต้น 60,000 วอน",
+  "select_date": "เลือกวันที่",
+  "select_time": "เลือกเวลา",
+  "btn_complete": "ยืนยันการจอง",
+  "selected_confirmation": "✓ เลือกแล้ว {{date}}",
+  "weekdays": { "sun": "อา", "mon": "จ", "tue": "อ", "wed": "พ", "thu": "พฤ", "fri": "ศ", "sat": "ส" },
+  "intent_booking_confirm": "ยืนยันการจอง",
+  "intent_service_request": "ขอรับบริการ",
+  "intent_allergy_notice": "แจ้งการแพ้/ผิวแพ้ง่าย",
+  "intent_style_consultation": "ปรึกษาสไตล์",
+  "lang_ko": "ภาษาเกาหลี",
+  "lang_en": "ภาษาอังกฤษ",
+  "lang_ja": "ภาษาญี่ปุ่น",
+  "lang_zh_cn": "ภาษาจีน (ตัวย่อ)",
+  "step_1": "เลือกร้าน",
+  "step_2": "เลือกเวลา",
+  "step_3": "ยืนยัน",
+  "step_4": "กรอกข้อมูล",
+  "step_5": "เสร็จสิ้น",
   "stores": {
-    "beauty_hair_1": {
-      "name": "La Frappe Hair Gangnam",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_hair_2": {
-      "name": "Atelier Seongsu Hair Room",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_nail_1": {
-      "name": "Maison Nail Hongdae",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_nail_2": {
-      "name": "Beige Nail Jamsil",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_esthetic_1": {
-      "name": "Serin Skin Lounge Pangyo",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_esthetic_2": {
-      "name": "Glow Formula Konkuk",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_waxing_1": {
-      "name": "Bare Atelier Waxing Gangnam",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_waxing_2": {
-      "name": "Soft Strip Hongdae",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_makeup_1": {
-      "name": "Atelier Veil Makeup Seongsu",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_makeup_2": {
-      "name": "Dear Muse Makeup Jamsil",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_lash_1": {
-      "name": "Bloom Lash Boutique Gangnam",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    },
-    "beauty_lash_2": {
-      "name": "Feather Lash Konkuk",
-      "shortDescription": "A premium studio.",
-      "priceLabel": "From 55,000 KRW"
-    }
+    "beauty_hair_1": { "name": "La Frappe Hair Gangnam", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["ทรงผมออกแบบเฉพาะ", "วิเคราะห์สีส่วนตัว", "ดูแลหนังศีรษะ"] },
+    "beauty_hair_2": { "name": "Atelier Seongsu Hair Room", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["ดัดผมฟูๆ", "พื้นที่ส่วนตัว", "ปรึกษาสไตล์"] },
+    "beauty_nail_1": { "name": "Maison Nail Hongdae", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["ศิลปะเล็บรายเดือน", "ดูแลเจล", "จับคู่สี"] },
+    "beauty_nail_2": { "name": "Beige Nail Jamsil", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["เล็บสไตล์ออฟฟิศ", "เตรียมงานแต่งงาน", "ดูแลเล็บ"] },
+    "beauty_esthetic_1": { "name": "Serin Skin Lounge Pangyo", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["ดูแลผิวอ่อนโยน", "กระชับผิว", "ห้องส่วนตัว"] },
+    "beauty_esthetic_2": { "name": "Glow Formula Konkuk", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["เติมความชุ่มชื้น", "ดูแลผิวแพ้ง่าย", "ปรึกษาเฉพาะบุคคล"] },
+    "beauty_waxing_1": { "name": "Bare Atelier Waxing Gangnam", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["จัดการสุขอนามัย", "ดูแลหลังทำ", "บริเวณอ่อนไหว"] },
+    "beauty_waxing_2": { "name": "Soft Strip Hongdae", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["กำจัดขนแขน", "ทำรวดเร็ว", "สะดวกสบาย"] },
+    "beauty_makeup_1": { "name": "Atelier Veil Makeup Seongsu", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["แต่งหน้าถ่ายรูป", "แต่งหน้าประจำวัน", "สไตล์ส่วนตัว"] },
+    "beauty_makeup_2": { "name": "Dear Muse Makeup Jamsil", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["เตรียมงานแต่งงาน", "ปรึกษา 1-1", "จัดทรงผม"] },
+    "beauty_lash_1": { "name": "Bloom Lash Boutique Gangnam", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["ดีไซน์งอนสวย", "ทนทานนาน", "ขนตาธรรมชาติ"] },
+    "beauty_lash_2": { "name": "Feather Lash Konkuk", "priceLabel": "เริ่มต้น 55,000 วอน", "shortDescription": "ร้านความงามระดับพรีเมียม", "tags": ["ดัดขนตา", "ยินดีต้อนรับครั้งแรก", "งอนธรรมชาติ"] }
   },
   "designers": {
-    "designer_hair_1_a": {
-      "name": "Jia Designer",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_hair_1_b": {
-      "name": "Director Minseo",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_hair_2_a": {
-      "name": "Designer Harin",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_hair_2_b": {
-      "name": "Manager Yoona",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_nail_1_a": {
-      "name": "Artist Seoyoon",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_nail_1_b": {
-      "name": "Artist Chaerin",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_nail_2_a": {
-      "name": "Manager Nayeon",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_nail_2_b": {
-      "name": "Artist Dabin",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_esthetic_1_a": {
-      "name": "Therapist Yoojin",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_esthetic_1_b": {
-      "name": "Director Sohee",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_esthetic_2_a": {
-      "name": "Therapist Gayoung",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_esthetic_2_b": {
-      "name": "Manager Yerin",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_waxing_1_a": {
-      "name": "Manager Doyeon",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_waxing_1_b": {
-      "name": "Director Hyunah",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_waxing_2_a": {
-      "name": "Manager Sia",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_waxing_2_b": {
-      "name": "Manager Joohee",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_makeup_1_a": {
-      "name": "Artist Bora",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_makeup_1_b": {
-      "name": "Manager Sua",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_makeup_2_a": {
-      "name": "Artist Jimin",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_makeup_2_b": {
-      "name": "Director Hyewon",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_lash_1_a": {
-      "name": "Artist Sojung",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_lash_1_b": {
-      "name": "Manager Seah",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_lash_2_a": {
-      "name": "Artist Daeun",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    },
-    "designer_lash_2_b": {
-      "name": "Director Sieun",
-      "specialty": "Specialty",
-      "experienceLabel": "Experienced",
-      "shortNote": "Friendly consultation available"
-    }
+    "jia": "ช่างจีอา", "jia_specialty": "ตัดเลเยอร์ · ย้อมผม", "jia_desc": "เชี่ยวชาญการให้คำปรึกษาและออกแบบทรงผมตามรูปหน้า",
+    "minseo": "ผู้อำนวยการมินซอ", "minseo_specialty": "ดัดผมระดับพรีเมียม · ฟื้นฟูผม", "minseo_desc": "วางแผนขั้นตอนการดูแลอย่างละเอียดตามระดับความเสียหายของผม",
+    "harin": "ช่างฮารีน", "harin_specialty": "ดัดผมฟูๆ · ผมยาวปานกลาง", "harin_desc": "สร้างความฟูธรรมชาติและเส้นสายกรอบหน้า",
+    "yuna": "หัวหน้าทีมยูนา", "yuna_specialty": "ทรีทเมนต์เปลี่ยนสี", "yuna_desc": "เชี่ยวชาญการแนะนำโทนสีและฟอกผม",
+    "designer_hair_1_a": { "name": "ช่างจีอา", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_hair_1_b": { "name": "ผู้อำนวยการมินซอ", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_hair_2_a": { "name": "ช่างฮารีน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_hair_2_b": { "name": "ผู้จัดการยูนา", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_nail_1_a": { "name": "ช่างซอยุน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_nail_1_b": { "name": "ช่างแชริน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_nail_2_a": { "name": "ผู้จัดการนาย็อน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_nail_2_b": { "name": "ช่างดาบิน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_esthetic_1_a": { "name": "นักบำบัดยูจิน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_esthetic_1_b": { "name": "ผู้อำนวยการโซฮี", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_esthetic_2_a": { "name": "นักบำบัดกายอง", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_esthetic_2_b": { "name": "ผู้จัดการเยริน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_waxing_1_a": { "name": "ผู้จัดการโดย็อน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_waxing_1_b": { "name": "ผู้อำนวยการฮยูนา", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_waxing_2_a": { "name": "ผู้จัดการเซีย", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_waxing_2_b": { "name": "ผู้จัดการจูฮี", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_makeup_1_a": { "name": "ช่างโบรา", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_makeup_1_b": { "name": "ผู้จัดการซัว", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_makeup_2_a": { "name": "ช่างจีมิน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_makeup_2_b": { "name": "ผู้อำนวยการฮเยวอน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_lash_1_a": { "name": "ช่างโซจอง", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_lash_1_b": { "name": "ผู้จัดการซอา", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_lash_2_a": { "name": "ช่างแดอึน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" },
+    "designer_lash_2_b": { "name": "ผู้อำนวยการซีอึน", "specialty": "ความเชี่ยวชาญ", "experienceLabel": "มีประสบการณ์", "shortNote": "ให้คำปรึกษาด้วยใจ" }
   },
   "services": {
-    "hair_women_cut": {
-      "name": "Women's Cut",
-      "desc": "Service Description"
-    },
-    "hair_men_cut": {
-      "name": "Men's Cut",
-      "desc": "Service Description"
-    },
-    "hair_root_color": {
-      "name": "Root Color",
-      "desc": "Service Description"
-    },
-    "hair_clinic": {
-      "name": "Hair Clinic",
-      "desc": "Service Description"
-    },
-    "nail_gel": {
-      "name": "Gel Nail",
-      "desc": "Service Description"
-    },
-    "nail_care": {
-      "name": "Nail Care",
-      "desc": "Service Description"
-    },
-    "nail_pedi": {
-      "name": "Gel Pedi",
-      "desc": "Service Description"
-    },
-    "esthetic_calming": {
-      "name": "Calming Care",
-      "desc": "Service Description"
-    },
-    "esthetic_moisture": {
-      "name": "Moisture Care",
-      "desc": "Service Description"
-    },
-    "esthetic_lifting": {
-      "name": "Lifting Care",
-      "desc": "Service Description"
-    },
-    "waxing_brazilian": {
-      "name": "Brazilian Waxing",
-      "desc": "Service Description"
-    },
-    "waxing_arm": {
-      "name": "Arm Waxing",
-      "desc": "Service Description"
-    },
-    "waxing_leg": {
-      "name": "Leg Waxing",
-      "desc": "Service Description"
-    },
-    "makeup_daily": {
-      "name": "Daily Makeup",
-      "desc": "Service Description"
-    },
-    "makeup_interview": {
-      "name": "Interview Makeup",
-      "desc": "Service Description"
-    },
-    "makeup_guest": {
-      "name": "Wedding Guest Makeup",
-      "desc": "Service Description"
-    },
-    "lash_perm": {
-      "name": "Lash Perm",
-      "desc": "Service Description"
-    },
-    "lash_extension": {
-      "name": "Lash Extension",
-      "desc": "Service Description"
-    },
-    "lash_retouch": {
-      "name": "Lash Retouch",
-      "desc": "Service Description"
-    },
-    "hair_add_scalp": {
-      "name": "Scalp Scaling",
-      "desc": "Option Description"
-    },
-    "hair_add_blowdry": {
-      "name": "Blow Dry",
-      "desc": "Option Description"
-    },
-    "hair_add_ampoule": {
-      "name": "Ampoule Care",
-      "desc": "Option Description"
-    },
-    "nail_add_removal": {
-      "name": "Gel Removal",
-      "desc": "Option Description"
-    },
-    "nail_add_art": {
-      "name": "Point Art",
-      "desc": "Option Description"
-    },
-    "nail_add_strength": {
-      "name": "Strength Coating",
-      "desc": "Option Description"
-    },
-    "esthetic_add_modeling": {
-      "name": "Modeling Pack",
-      "desc": "Option Description"
-    },
-    "esthetic_add_neck": {
-      "name": "Neck Care",
-      "desc": "Option Description"
-    },
-    "esthetic_add_led": {
-      "name": "LED Care",
-      "desc": "Option Description"
-    },
-    "waxing_add_care": {
-      "name": "Soothing Care",
-      "desc": "Option Description"
-    },
-    "waxing_add_pack": {
-      "name": "Moisture Pack",
-      "desc": "Option Description"
-    },
-    "waxing_add_trim": {
-      "name": "Trimming Included",
-      "desc": "Option Description"
-    },
-    "makeup_add_hair": {
-      "name": "Hair Styling",
-      "desc": "Option Description"
-    },
-    "makeup_add_lash": {
-      "name": "Lash Attachment",
-      "desc": "Option Description"
-    },
-    "makeup_add_touchup": {
-      "name": "Touch-up Kit",
-      "desc": "Option Description"
-    },
-    "lash_add_remove": {
-      "name": "Lash Removal",
-      "desc": "Option Description"
-    },
-    "lash_add_tinting": {
-      "name": "Black Tinting",
-      "desc": "Option Description"
-    },
-    "lash_add_coating": {
-      "name": "Nutrition Coating",
-      "desc": "Option Description"
-    }
-  },
-  "intent_booking_confirm": "Booking Confirmation",
-  "intent_service_request": "Service Request",
-  "intent_allergy_notice": "Allergy/Sensitivity Notice",
-  "intent_style_consultation": "Style Consultation Help",
-  "lang_ko": "Korean",
-  "lang_en": "English",
-  "lang_ja": "Japanese",
-  "lang_zh_cn": "Chinese"
+    "women_cut": "ตัดผมสตรี", "women_cut_desc": "ตัดและจัดทรงตามความยาวผม",
+    "men_cut": "ตัดผมบุรุษ", "men_cut_desc": "ตัดและจัดทรงผมบุรุษ",
+    "root_color": "ย้อมรากผม", "root_color_desc": "ปรับสีผมใหม่บริเวณราก",
+    "hair_clinic": "ทรีทเมนต์ผม", "hair_clinic_desc": "บำรุงเข้มข้นสำหรับผมเสียหาย",
+    "daily_makeup": "แต่งหน้าประจำวัน", "daily_makeup_desc": "แต่งหน้าเบาบางสำหรับนัดหมายประจำวัน",
+    "hair_women_cut": { "name": "ตัดผมสตรี", "desc": "เนื้อหาบริการ" },
+    "hair_men_cut": { "name": "ตัดผมบุรุษ", "desc": "เนื้อหาบริการ" },
+    "hair_root_color": { "name": "ย้อมรากผม", "desc": "เนื้อหาบริการ" },
+    "nail_gel": { "name": "เจลเล็บ", "desc": "เนื้อหาบริการ" },
+    "nail_care": { "name": "ดูแลเล็บ", "desc": "เนื้อหาบริการ" },
+    "nail_pedi": { "name": "เจลเพดิเคียร์", "desc": "เนื้อหาบริการ" },
+    "esthetic_calming": { "name": "บำรุงผิวอ่อนโยน", "desc": "เนื้อหาบริการ" },
+    "esthetic_moisture": { "name": "บำรุงความชุ่มชื้น", "desc": "เนื้อหาบริการ" },
+    "esthetic_lifting": { "name": "ยกกระชับผิว", "desc": "เนื้อหาบริการ" },
+    "waxing_brazilian": { "name": "กำจัดขนบราซิลเลียน", "desc": "เนื้อหาบริการ" },
+    "waxing_arm": { "name": "กำจัดขนแขน", "desc": "เนื้อหาบริการ" },
+    "waxing_leg": { "name": "กำจัดขนขา", "desc": "เนื้อหาบริการ" },
+    "makeup_daily": { "name": "แต่งหน้าประจำวัน", "desc": "เนื้อหาบริการ" },
+    "makeup_interview": { "name": "แต่งหน้าสัมภาษณ์งาน", "desc": "เนื้อหาบริการ" },
+    "makeup_guest": { "name": "แต่งหน้าแขกงานแต่งงาน", "desc": "เนื้อหาบริการ" },
+    "lash_perm": { "name": "ดัดขนตา", "desc": "เนื้อหาบริการ" },
+    "lash_extension": { "name": "ต่อขนตา", "desc": "เนื้อหาบริการ" },
+    "lash_retouch": { "name": "เติมขนตา", "desc": "เนื้อหาบริการ" },
+    "hair_add_scalp": { "name": "สครับหนังศีรษะ", "desc": "ตัวเลือกเพิ่มเติม" },
+    "hair_add_blowdry": { "name": "เป่าจัดทรง", "desc": "ตัวเลือกเพิ่มเติม" },
+    "hair_add_ampoule": { "name": "แอมพูลบำรุงผม", "desc": "ตัวเลือกเพิ่มเติม" },
+    "nail_add_removal": { "name": "ถอดเจล", "desc": "ตัวเลือกเพิ่มเติม" },
+    "nail_add_art": { "name": "ศิลปะเล็บจุดเด่น", "desc": "ตัวเลือกเพิ่มเติม" },
+    "nail_add_strength": { "name": "เคลือบเสริมความแข็งแรง", "desc": "ตัวเลือกเพิ่มเติม" },
+    "esthetic_add_modeling": { "name": "มาส์กโมเดลลิ่ง", "desc": "ตัวเลือกเพิ่มเติม" },
+    "esthetic_add_neck": { "name": "ดูแลคอ", "desc": "ตัวเลือกเพิ่มเติม" },
+    "esthetic_add_led": { "name": "บำบัด LED", "desc": "ตัวเลือกเพิ่มเติม" },
+    "waxing_add_care": { "name": "ดูแลบรรเทา", "desc": "ตัวเลือกเพิ่มเติม" },
+    "waxing_add_pack": { "name": "มาส์กเติมความชุ่มชื้น", "desc": "ตัวเลือกเพิ่มเติม" },
+    "waxing_add_trim": { "name": "รวมการตัดแต่ง", "desc": "ตัวเลือกเพิ่มเติม" },
+    "makeup_add_hair": { "name": "จัดทรงผม", "desc": "ตัวเลือกเพิ่มเติม" },
+    "makeup_add_lash": { "name": "ขนตาปลอม", "desc": "ตัวเลือกเพิ่มเติม" },
+    "makeup_add_touchup": { "name": "ชุดแต่งหน้าซ่อม", "desc": "ตัวเลือกเพิ่มเติม" },
+    "lash_add_remove": { "name": "ถอดขนตา", "desc": "ตัวเลือกเพิ่มเติม" },
+    "lash_add_tinting": { "name": "ย้อมขนตาสีดำ", "desc": "ตัวเลือกเพิ่มเติม" },
+    "lash_add_coating": { "name": "เคลือบบำรุง", "desc": "ตัวเลือกเพิ่มเติม" }
+  }
 }

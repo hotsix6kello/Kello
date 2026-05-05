@@ -1516,7 +1516,23 @@
       "completion_title": "予約リクエスト完了！",
       "completion_desc": "予約リクエストの送信に成功しました。\n選択した店舗で確認後、すぐにご連絡いたします。",
       "confirm_button": "確認",
-      "login_required": "画像を添付するにはログインが必要です. ログイン後にもう一度お試しください。"
+      "login_required": "画像を添付するにはログインが必要です. ログイン後にもう一度お試しください。",
+      "refund_policy_notice": "キャンセル・返金ポリシーのご案内",
+      "refund_policy_title": "キャンセル・返金ポリシー",
+      "refund_rate_label": "{{rate}}% 返金",
+      "no_refund_label": "返金不可",
+      "platform_fee_note": "プラットフォーム利用料（{{rate}}%）はキャンセル時期に関係なく返金されません。",
+      "platform_fee_note_always": "プラットフォーム利用料（{{rate}}%）はいかなる場合も返金されません。",
+      "agreements_title": "利用規約への同意",
+      "agreement_booking_confirmed": "予約内容の確認",
+      "agreement_booking_confirmed_desc": "選択した店舗・日時・施術内容が正確であることを確認します。",
+      "agreement_privacy_consent": "個人情報保護方針への同意",
+      "agreement_privacy_consent_desc": "予約手続きのため、氏名・連絡先等の情報を店舗に提供することに同意します。",
+      "agreement_refund_policy": "キャンセル・返金ポリシーへの同意",
+      "agreement_refund_policy_desc": "上記のキャンセル・返金ポリシーを確認し、同意します。",
+      "submitting": "処理中...",
+      "submit_final": "最終予約を申し込む",
+      "go_back_to_main": "メインに戻る"
     },
     "interpreter": {
       "eyebrow": "通訳サポート",
@@ -1739,7 +1755,17 @@
     "error_alt": "処理に失敗しました。",
     "open_interpreter": "通訳機を開く",
     "interpreter_visit_context": "{{storeName}} 訪問中に通訳機を使用中。",
-    "interpreter_visit_service_context": "{{storeName}} で {{serviceName}} サービスのための通訳機を使用中。"
+    "interpreter_visit_service_context": "{{storeName}} で {{serviceName}} サービスのための通訳機を使用中。",
+    "cancel_days_until": "予約日まであと {{daysUntil}} 日 → 返金率 {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ 予約日の1日前からは返金できません",
+    "cancel_service_fee": "施術費",
+    "cancel_penalty": "違約金（{{rate}}%）",
+    "cancel_platform_fee_label": "プラットフォーム利用料（返金不可）",
+    "cancel_total_refund": "最終返金額",
+    "cancel_platform_fee_note": "プラットフォーム利用料（{{rate}}%）はキャンセル時期に関わらず返金されません。",
+    "cancel_consent_no_refund": "予約日の1日前以内のキャンセルのため返金できません。全額差し引きに同意します。",
+    "cancel_consent_partial": "今キャンセルすると、プラットフォーム利用料 {{platformFee}} と施術費の {{penaltyRate}}%（{{penaltyAmount}}）が差し引かれます。同意します。",
+    "cancel_consent_default": "キャンセル・返金ポリシーに同意します。"
   },
   "settings_page": {
     "hero": {
@@ -2241,7 +2267,7 @@
   },
   "privacy_policy": {
     "title": "プライバシーポリシー",
-    "effective_date": "施行日：2024年4月21日",
+    "effective_date": "施行日：2026年5月4日",
     "table": {
       "category": "項目",
       "items": "収集情報",
@@ -2293,7 +2319,7 @@
   },
   "terms_of_service": {
     "title": "サービス利用規約",
-    "effective_date": "施行日：2024年4月21日",
+    "effective_date": "施行日：2026年5月4日",
     "definitions": {
       "title": "1. サービスの定義",
       "content": "MyKelloは、ユーザーとビューティーサービス提供者の間の予約およびコミュニケーションを支援する、ビューティーサービス予約代行プラットフォームを提供します。"
@@ -2303,18 +2329,28 @@
       "signup": "新規登録時に5%割引クーポンが支給されます。",
       "referral": "招待コードを通じて登録した場合、招待した側と招待された側の両方に5%割引クーポンが支給されます。"
     },
+    "platform_fee": {
+      "title": "3. プラットフォーム利用料",
+      "content": "MyKelloは予約代行サービスの対価として、サービス料金の10%をプラットフォーム利用料として収受します。",
+      "note": "プラットフォーム利用料は予約完了時にサービス料金とあわせて徴収され、キャンセルポリシーによる返金の対象外となります。"
+    },
     "refund_policy": {
-      "title": "3. キャンセルおよび返金規定",
-      "subtitle": "予約日を基準としたキャンセル時点に応じて、以下の返金率が適用されます。",
-      "five_days": "5日前：100%返金",
-      "three_days": "3日前：90%返金",
-      "two_days": "2日前：70%返金",
-      "one_day": "1日前：50%返金",
-      "same_day": "当日または無断キャンセル（No-show）：返金不可",
-      "note": "最終的な返金処理は各店舗のポリシーにより異なる場合があります。"
+      "title": "4. キャンセルおよび返金規定",
+      "subtitle": "返金率はサービス料金のみに適用されます。プラットフォーム利用料（10%）はキャンセル時期に関係なく返金されません：",
+      "four_days": "予約日の4日以上前：サービス料金の100%返金",
+      "three_days": "予約日の3日前：サービス料金の80%返金",
+      "two_days": "予約日の2日前：サービス料金の60%返金",
+      "one_day": "予約日の1日前：返金不可",
+      "same_day": "当日 / No-show：返金不可",
+      "note": "MyKelloの統一キャンセルポリシーは、プラットフォームを通じて行われたすべての予約に均一に適用されます。店舗独自のキャンセルポリシーは適用されません。"
+    },
+    "chargeback": {
+      "title": "5. 決済キャンセルおよび異議申し立て",
+      "content": "予約決済を完了した時点で、お客様は本返金ポリシーに明示的に同意したものとみなされます。",
+      "note": "本ポリシーに基づく正当なキャンセル料の差し引きに対してチャージバックが申請された場合、MyKelloはお客様の同意記録および予約履歴を証拠として異議申し立てを行う権利を有します。"
     },
     "liability": {
-      "title": "4. 責任の制限",
+      "title": "6. 責任の制限",
       "interpretation": "「リアルタイム通訳」機能は、ユーザーの利便性のために提供される付加的なツールです。MyKelloは、AI翻訳または手動通訳の不一致によって発生する予約エラーや紛争について責任を負いません。",
       "community": "ユーザーがコミュニティ機能を通じて自発的に行ったオフラインの集まりや個人間の取引から発生する損害、事故、または紛争について、MyKelloは責任を負いません。"
     }
