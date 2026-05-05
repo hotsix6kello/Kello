@@ -289,7 +289,9 @@
       "title": "Ghi lại vẻ đẹp Hàn Quốc,\nvào lịch trình của bạn.",
       "subtitle": "Chọn dịch vụ làm đẹp và đặt lịch ngay.",
       "welcome": "{{name}}, hãy chọn dịch vụ.",
-      "welcome_user": "{{greeting}}, {{name}}! 👋"
+      "welcome_user": "{{greeting}}, {{name}}! 👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "Chào mừng, {{name}}! 👋"
     },
     "booking": {
       "step": "BƯỚC. 01",
@@ -302,7 +304,23 @@
       "completion_title": "Đã gửi yêu cầu đặt hẹn!",
       "completion_desc": "Đã gửi yêu cầu đặt hẹn thành công.\nCửa hàng đã chọn sẽ xác nhận và liên hệ với bạn sớm.",
       "confirm_button": "Xác nhận",
-      "login_required": "Cần đăng nhập để đính kèm ảnh. Vui lòng thử lại sau khi đăng nhập."
+      "login_required": "Cần đăng nhập để đính kèm ảnh. Vui lòng thử lại sau khi đăng nhập.",
+      "refund_policy_notice": "Thông báo chính sách hủy và hoàn tiền",
+      "refund_policy_title": "Chính sách hủy và hoàn tiền",
+      "refund_rate_label": "Hoàn {{rate}}%",
+      "no_refund_label": "Không hoàn tiền",
+      "platform_fee_note": "Phí dịch vụ nền tảng ({{rate}}%) sẽ không được hoàn lại bất kể thời điểm hủy.",
+      "platform_fee_note_always": "Phí dịch vụ nền tảng ({{rate}}%) không được hoàn lại trong mọi trường hợp.",
+      "agreements_title": "Đồng ý điều khoản",
+      "agreement_booking_confirmed": "Xác nhận thông tin đặt lịch",
+      "agreement_booking_confirmed_desc": "Xác nhận rằng cửa hàng, ngày và dịch vụ đã chọn là chính xác.",
+      "agreement_privacy_consent": "Đồng ý chính sách quyền riêng tư",
+      "agreement_privacy_consent_desc": "Đồng ý cung cấp tên, thông tin liên lạc cho cửa hàng để hoàn tất đặt lịch.",
+      "agreement_refund_policy": "Đồng ý chính sách hủy và hoàn tiền",
+      "agreement_refund_policy_desc": "Đã đọc và đồng ý với chính sách hủy và hoàn tiền nêu trên.",
+      "submitting": "Đang xử lý...",
+      "submit_final": "Gửi đặt lịch cuối cùng",
+      "go_back_to_main": "Về trang chủ"
     }
   },
   "interpreter_ui": {
@@ -596,7 +614,17 @@
     "error_change_reason": "Vui lòng nhập nội dung bạn muốn thay đổi.",
     "error_change": "Yêu cầu thay đổi thất bại.",
     "error_alt": "Xử lý thất bại.",
-    "open_interpreter": "Mở phiên dịch"
+    "open_interpreter": "Mở phiên dịch",
+    "cancel_days_until": "Còn {{daysUntil}} ngày đến lịch hẹn → Tỷ lệ hoàn tiền {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ Hủy trong vòng 1 ngày trước lịch hẹn sẽ không được hoàn tiền",
+    "cancel_service_fee": "Phí dịch vụ",
+    "cancel_penalty": "Phí phạt ({{rate}}%)",
+    "cancel_platform_fee_label": "Phí nền tảng (không hoàn lại)",
+    "cancel_total_refund": "Tổng số tiền hoàn lại",
+    "cancel_platform_fee_note": "Phí dịch vụ nền tảng ({{rate}}%) sẽ không được hoàn lại bất kể thời điểm hủy.",
+    "cancel_consent_no_refund": "Hủy trong vòng 1 ngày trước lịch hẹn sẽ không được hoàn tiền. Tôi đồng ý trừ toàn bộ.",
+    "cancel_consent_partial": "Hủy ngay bây giờ sẽ trừ phí nền tảng {{platformFee}} và {{penaltyRate}}% phí dịch vụ ({{penaltyAmount}}). Tôi đồng ý.",
+    "cancel_consent_default": "Tôi đồng ý với chính sách hủy và hoàn tiền."
   },
   "community_page": {
     "hero": {

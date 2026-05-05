@@ -289,7 +289,9 @@
       "title": "สัมผัสความงามของเกาหลี\nในตารางเวลาของคุณ",
       "subtitle": "เลือกบริการความงามแล้วจองได้เลย",
       "welcome": "{{name}} กรุณาเลือกบริการ",
-      "welcome_user": "{{greeting}}, {{name}}! 👋"
+      "welcome_user": "{{greeting}}, {{name}}! 👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "ยินดีต้อนรับ, {{name}}! 👋"
     },
     "booking": {
       "step": "STEP. 01",
@@ -302,7 +304,23 @@
       "completion_title": "ส่งคำขอจองสำเร็จ!",
       "completion_desc": "ส่งคำขอจองเรียบร้อยแล้ว\nร้านที่เลือกจะยืนยันและติดต่อคุณกลับโดยเร็ว",
       "confirm_button": "ยืนยัน",
-      "login_required": "ต้องเข้าสู่ระบบเพื่อแนบรูปภาพ กรุณาลองอีกครั้งหลังจากเข้าสู่ระบบ"
+      "login_required": "ต้องเข้าสู่ระบบเพื่อแนบรูปภาพ กรุณาลองอีกครั้งหลังจากเข้าสู่ระบบ",
+      "refund_policy_notice": "แจ้งนโยบายการยกเลิกและคืนเงิน",
+      "refund_policy_title": "นโยบายการยกเลิกและคืนเงิน",
+      "refund_rate_label": "คืนเงิน {{rate}}%",
+      "no_refund_label": "ไม่คืนเงิน",
+      "platform_fee_note": "ค่าธรรมเนียมแพลตฟอร์ม ({{rate}}%) ไม่สามารถขอคืนได้ไม่ว่าจะยกเลิกเมื่อใด",
+      "platform_fee_note_always": "ค่าธรรมเนียมแพลตฟอร์ม ({{rate}}%) ไม่สามารถขอคืนได้ในทุกกรณี",
+      "agreements_title": "ยอมรับข้อกำหนด",
+      "agreement_booking_confirmed": "ยืนยันข้อมูลการจอง",
+      "agreement_booking_confirmed_desc": "ยืนยันว่าร้าน วันที่ และบริการที่เลือกถูกต้อง",
+      "agreement_privacy_consent": "ยินยอมนโยบายความเป็นส่วนตัว",
+      "agreement_privacy_consent_desc": "ยินยอมให้ชื่อและข้อมูลติดต่อแก่ร้านเพื่อดำเนินการจอง",
+      "agreement_refund_policy": "ยอมรับนโยบายการยกเลิกและคืนเงิน",
+      "agreement_refund_policy_desc": "ได้อ่านและยอมรับนโยบายการยกเลิกและคืนเงินข้างต้นแล้ว",
+      "submitting": "กำลังดำเนินการ...",
+      "submit_final": "ส่งการจองสุดท้าย",
+      "go_back_to_main": "กลับหน้าหลัก"
     }
   },
   "interpreter_ui": {
@@ -994,6 +1012,16 @@
     "error_change": "Could not send your change request. Please try again later.",
     "error_alt": "Something went wrong. Please try again later.",
     "open_interpreter": "เปิดล่าม",
+    "cancel_days_until": "เหลืออีก {{daysUntil}} วันถึงวันนัด → อัตราคืนเงิน {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ ยกเลิกภายใน 1 วันก่อนวันนัดไม่ได้รับการคืนเงิน",
+    "cancel_service_fee": "ค่าบริการ",
+    "cancel_penalty": "ค่าปรับ ({{rate}}%)",
+    "cancel_platform_fee_label": "ค่าธรรมเนียมแพลตฟอร์ม (ไม่คืนเงิน)",
+    "cancel_total_refund": "ยอดเงินคืนทั้งหมด",
+    "cancel_platform_fee_note": "ค่าธรรมเนียมแพลตฟอร์ม ({{rate}}%) ไม่สามารถขอคืนได้ไม่ว่าจะยกเลิกเมื่อใด",
+    "cancel_consent_no_refund": "การยกเลิกภายใน 1 วันก่อนวันนัดไม่ได้รับการคืนเงิน ฉันยินยอมให้หักเงินทั้งหมด",
+    "cancel_consent_partial": "การยกเลิกตอนนี้จะหักค่าธรรมเนียมแพลตฟอร์ม {{platformFee}} และ {{penaltyRate}}% ของค่าบริการ ({{penaltyAmount}}) ฉันยินยอม",
+    "cancel_consent_default": "ฉันยินยอมตามนโยบายการยกเลิกและคืนเงิน",
     "interpreter_visit_context": "กำลังใช้เครื่องแปลภาษาระหว่างเข้าชม {{storeName}}",
     "interpreter_visit_service_context": "กำลังใช้เครื่องแปลภาษาสำหรับ {{serviceName}} ที่ {{storeName}}",
     "lang_es": "Español",

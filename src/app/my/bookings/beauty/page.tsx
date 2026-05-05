@@ -1247,34 +1247,30 @@ function MyBeautyBookingsContent() {
                       {cancelRefundCalc ? (
                         <div className={styles.cancelRefundBreakdown}>
                           <p className={styles.cancelRefundBreakdownTitle}>
-                            {i18n.language === 'ko'
-                              ? `예약일까지 ${cancelRefundCalc.daysUntil}일 남음 → 환불 비율 ${cancelRefundCalc.refundRate}%`
-                              : `${cancelRefundCalc.daysUntil} days until appointment → ${cancelRefundCalc.refundRate}% refund`}
+                            {t('beauty_bookings.cancel_days_until', { daysUntil: cancelRefundCalc.daysUntil, refundRate: cancelRefundCalc.refundRate })}
                           </p>
                           {!cancelRefundCalc.isRefundable && (
                             <p className={styles.cancelNoRefundWarning}>
-                              {i18n.language === 'ko'
-                                ? '⚠ 예약일 1일 전부터는 환불이 불가합니다'
-                                : '⚠ No refund is available from 1 day before the appointment'}
+                              {t('beauty_bookings.cancel_no_refund_warning')}
                             </p>
                           )}
                           <dl className={styles.cancelRefundDl}>
                             <div className={styles.cancelRefundRow}>
-                              <dt>{i18n.language === 'ko' ? '시술비' : 'Service fee'}</dt>
+                              <dt>{t('beauty_bookings.cancel_service_fee')}</dt>
                               <dd>{formatPrice(cancelRefundCalc.refundAmount + cancelRefundCalc.penaltyAmount, i18n.language, t)}</dd>
                             </div>
                             {cancelRefundCalc.penaltyAmount > 0 && (
                               <div className={`${styles.cancelRefundRow} ${styles.cancelRefundDeduct}`}>
-                                <dt>{i18n.language === 'ko' ? `위약금 (${100 - cancelRefundCalc.refundRate}%)` : `Penalty (${100 - cancelRefundCalc.refundRate}%)`}</dt>
+                                <dt>{t('beauty_bookings.cancel_penalty', { rate: 100 - cancelRefundCalc.refundRate })}</dt>
                                 <dd>−{formatPrice(cancelRefundCalc.penaltyAmount, i18n.language, t)}</dd>
                               </div>
                             )}
                             <div className={`${styles.cancelRefundRow} ${styles.cancelRefundDeduct}`}>
-                              <dt>{i18n.language === 'ko' ? `플랫폼 이용료 (환불 불가)` : `Platform fee (non-refundable)`}</dt>
+                              <dt>{t('beauty_bookings.cancel_platform_fee_label')}</dt>
                               <dd>−{formatPrice(cancelRefundCalc.platformFee, i18n.language, t)}</dd>
                             </div>
                             <div className={`${styles.cancelRefundRow} ${styles.cancelRefundTotal}`}>
-                              <dt>{i18n.language === 'ko' ? '최종 환불 금액' : 'Total refund'}</dt>
+                              <dt>{t('beauty_bookings.cancel_total_refund')}</dt>
                               <dd className={cancelRefundCalc.isRefundable ? styles.cancelRefundAmountPositive : styles.cancelRefundAmountZero}>
                                 {formatPrice(cancelRefundCalc.totalRefund, i18n.language, t)}
                               </dd>
@@ -1283,9 +1279,7 @@ function MyBeautyBookingsContent() {
                         </div>
                       ) : (
                         <p className={styles.cancelRefundPolicyNote}>
-                          {i18n.language === 'ko'
-                            ? `플랫폼 이용료(${Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다.`
-                            : `The ${Math.round(PLATFORM_FEE_RATE * 100)}% platform fee is non-refundable in all cases.`}
+                          {t('beauty_bookings.cancel_platform_fee_note', { rate: Math.round(PLATFORM_FEE_RATE * 100) })}
                         </p>
                       )}
 
@@ -1319,14 +1313,15 @@ function MyBeautyBookingsContent() {
                         />
                         <span>
                           {cancelRefundCalc?.isRefundable === false
-                            ? (i18n.language === 'ko'
-                                ? '예약일 1일 전 이내 취소로 환불이 불가합니다. 전액 차감에 동의합니다.'
-                                : 'No refund is available within 1 day of the appointment. I agree to full deduction.')
+                            ? t('beauty_bookings.cancel_consent_no_refund')
                             : cancelRefundCalc
-                              ? (i18n.language === 'ko'
-                                  ? `지금 취소하시면 플랫폼 이용료 ${formatPrice(cancelRefundCalc.platformFee, i18n.language, t)}와 시술비의 ${100 - cancelRefundCalc.refundRate}%(${formatPrice(cancelRefundCalc.penaltyAmount, i18n.language, t)})가 차감됩니다. 동의합니다.`
-                                  : `Cancelling now will deduct the ${Math.round(PLATFORM_FEE_RATE * 100)}% platform fee and ${100 - cancelRefundCalc.refundRate}% of the service fee. I agree.`)
-                              : (i18n.language === 'ko' ? '취소 및 환불 규정에 동의합니다.' : 'I agree to the cancellation and refund policy.')}
+                              ? t('beauty_bookings.cancel_consent_partial', {
+                                  platformFeeRate: Math.round(PLATFORM_FEE_RATE * 100),
+                                  penaltyRate: 100 - cancelRefundCalc.refundRate,
+                                  platformFee: formatPrice(cancelRefundCalc.platformFee, i18n.language, t),
+                                  penaltyAmount: formatPrice(cancelRefundCalc.penaltyAmount, i18n.language, t),
+                                })
+                              : t('beauty_bookings.cancel_consent_default')}
                         </span>
                       </label>
 
