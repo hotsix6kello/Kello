@@ -126,7 +126,15 @@ export default function SignupPage() {
       router.replace("/");
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      setError(msg || "오류가 발생했습니다. 다시 시도해주세요.");
+      if (msg.includes("User already registered") || msg.includes("already registered")) {
+        setError("이미 가입된 이메일입니다. 로그인 페이지로 이동해주세요.");
+      } else if (msg.includes("Password should be")) {
+        setError("비밀번호는 8자 이상이며 특수문자(!@#$% 등)를 포함해야 합니다.");
+      } else if (msg.includes("Invalid email")) {
+        setError("유효하지 않은 이메일 주소입니다.");
+      } else {
+        setError(msg || "오류가 발생했습니다. 다시 시도해주세요.");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -322,8 +330,18 @@ export default function SignupPage() {
           </div>
 
           {error && (
-            <div style={{ color: "#ef4444", fontSize: "0.875rem", textAlign: "center", marginBottom: "16px", wordBreak: "break-word" }}>
-              {error}
+            <div style={{ fontSize: "0.875rem", textAlign: "center", marginBottom: "16px" }}>
+              <span style={{ color: "#ef4444", wordBreak: "break-word" }}>{error}</span>
+              {error.includes("이미 가입된") && (
+                <div style={{ marginTop: "8px" }}>
+                  <span
+                    onClick={() => router.push("/auth/login")}
+                    style={{ color: "var(--primary)", cursor: "pointer", fontWeight: 600, textDecoration: "underline" }}
+                  >
+                    로그인하러 가기 →
+                  </span>
+                </div>
+              )}
             </div>
           )}
 
