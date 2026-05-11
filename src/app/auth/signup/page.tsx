@@ -6,39 +6,44 @@ import styles from "./signup.module.css";
 import { supabase } from "@/lib/supabaseClient";
 
 const LANGUAGES = [
-  { code: "ko", label: "한국", flag: "🇰🇷" },
-  { code: "en", label: "United States / Global", flag: "🇺🇸" },
-  { code: "ja", label: "日本", flag: "🇯🇵" },
-  { code: "zh-CN", label: "中国", flag: "🇨🇳" },
-  { code: "zh-TW", label: "台灣 / HK", flag: "🇭🇰" },
-  { code: "vi", label: "Việt Nam", flag: "🇻🇳" },
-  { code: "th", label: "ไทย", flag: "🇹🇭" },
-  { code: "ar", label: "عربي / Middle East", flag: "🇸🇦" },
+  { code: "ko", label: "한국", flag: "🇰🇷", phoneCode: "+82" },
+  { code: "en", label: "United States / Global", flag: "🇺🇸", phoneCode: "+1" },
+  { code: "ja", label: "日本", flag: "🇯🇵", phoneCode: "+81" },
+  { code: "zh-CN", label: "中国", flag: "🇨🇳", phoneCode: "+86" },
+  { code: "zh-TW", label: "台灣 / HK", flag: "🇭🇰", phoneCode: "+852" },
+  { code: "vi", label: "Việt Nam", flag: "🇻🇳", phoneCode: "+84" },
+  { code: "th", label: "ไทย", flag: "🇹🇭", phoneCode: "+66" },
+  { code: "ar", label: "عربي / Middle East", flag: "🇸🇦", phoneCode: "+966" },
 ];
+
+function validatePassword(pw: string) {
+  const hasLength = pw.length >= 8;
+  const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pw);
+  return { hasLength, hasSpecial, valid: hasLength && hasSpecial };
+}
 
 export default function SignupPage() {
   const router = useRouter();
 
-  // 폼 필드
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordTouched, setPasswordTouched] = useState(false);
   const [country, setCountry] = useState("ko");
-  const [phone, setPhone] = useState("");
+  const [phoneCode, setPhoneCode] = useState("+82");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [instagram, setInstagram] = useState("");
   const [termsRequired, setTermsRequired] = useState(false);
   const [privacyRequired, setPrivacyRequired] = useState(false);
   const [marketingOptional, setMarketingOptional] = useState(false);
 
-  // 상태
   const [isGoogleFlow, setIsGoogleFlow] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 구글 OAuth 완료 후 세션이 있는 경우 감지
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       const user = data?.session?.user;
@@ -46,16 +51,19 @@ export default function SignupPage() {
         setIsGoogleFlow(true);
         setUserId(user.id);
         setEmail(user.email ?? "");
-        setName(
-          user.user_metadata?.full_name ||
-          user.user_metadata?.name ||
-          ""
-        );
+        setName(user.user_metadata?.full_name || user.user_metadata?.name || "");
       }
       setLoading(false);
     });
   }, []);
 
+  // Sync phone code when country changes
+  useEffect(() => {
+    const lang = LANGUAGES.find((l) => l.code === country);
+    if (lang) setPhoneCode(lang.phoneCode);
+  }, [country]);
+
+  const pwValidation = validatePassword(password);
   const isAllAgreed = termsRequired && privacyRequired && marketingOptional;
 
   const handleAgreeAll = (checked: boolean) => {
@@ -70,19 +78,22 @@ export default function SignupPage() {
       setError("필수 약관에 동의해주세요.");
       return;
     }
+    if (!pwValidation.valid) {
+      setError("비밀번호는 8자 이상이며 특수문자(!@#$% 등)를 포함해야 합니다.");
+      return;
+    }
 
     setSubmitting(true);
     setError(null);
 
     try {
       let uid = userId;
+      const fullPhone = phoneNumber ? `${phoneCode} ${phoneNumber}` : "";
 
       if (isGoogleFlow) {
-        // 구글 유저 → 비밀번호 설정
         const { error: pwError } = await supabase.auth.updateUser({ password });
         if (pwError) throw pwError;
       } else {
-        // 이메일 + 비밀번호 신규 가입
         const { data, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
@@ -96,7 +107,6 @@ export default function SignupPage() {
         }
       }
 
-      // 프로필 저장 (트리거가 id만 생성했으므로 나머지 필드 upsert)
       if (uid) {
         const { error: profileError } = await supabase
           .from("profiles")
@@ -104,7 +114,7 @@ export default function SignupPage() {
             id: uid,
             display_name: name,
             nickname,
-            phone,
+            phone: fullPhone,
             sns: instagram,
             country,
           });
@@ -115,7 +125,8 @@ export default function SignupPage() {
       localStorage.setItem("kello_lang", country);
       router.replace("/");
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "오류가 발생했습니다. 다시 시도해주세요.");
+      const msg = err instanceof Error ? err.message : String(err);
+      setError(msg || "오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setSubmitting(false);
     }
@@ -198,16 +209,29 @@ export default function SignupPage() {
             </select>
           </div>
 
-          {/* 핸드폰번호 */}
+          {/* 핸드폰번호 (국가번호 + 번호) */}
           <div className={styles.inputGroup}>
             <label className={styles.label}>핸드폰번호</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className={styles.input}
-              placeholder="010-0000-0000"
-            />
+            <div className={styles.phoneRow}>
+              <select
+                value={phoneCode}
+                onChange={(e) => setPhoneCode(e.target.value)}
+                className={styles.phoneCodeSelect}
+              >
+                {LANGUAGES.map((lang) => (
+                  <option key={lang.code} value={lang.phoneCode}>
+                    {lang.flag} {lang.phoneCode}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="tel"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className={styles.phoneInput}
+                placeholder="010-0000-0000"
+              />
+            </div>
           </div>
 
           {/* 인스타그램 */}
@@ -225,17 +249,31 @@ export default function SignupPage() {
           {/* 비밀번호 */}
           <div className={styles.inputGroup}>
             <label className={styles.label}>
-              비밀번호 * {isGoogleFlow && <span style={{ color: "var(--gray-400)", fontWeight: 400 }}>(이메일 로그인용)</span>}
+              비밀번호 *{" "}
+              {isGoogleFlow && (
+                <span style={{ color: "var(--gray-400)", fontWeight: 400 }}>(이메일 로그인용)</span>
+              )}
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onBlur={() => setPasswordTouched(true)}
               className={styles.input}
               placeholder="••••••••"
               required
-              minLength={6}
             />
+            {/* 비밀번호 검증 가이드 */}
+            {(passwordTouched || password.length > 0) && (
+              <div className={styles.pwGuide}>
+                <span className={pwValidation.hasLength ? styles.pwOk : styles.pwFail}>
+                  {pwValidation.hasLength ? "✓" : "✗"} 8자 이상
+                </span>
+                <span className={pwValidation.hasSpecial ? styles.pwOk : styles.pwFail}>
+                  {pwValidation.hasSpecial ? "✓" : "✗"} 특수문자 포함 (!@#$% 등)
+                </span>
+              </div>
+            )}
           </div>
 
           {/* 약관 동의 */}
@@ -256,12 +294,9 @@ export default function SignupPage() {
                 checked={termsRequired}
                 onChange={(e) => setTermsRequired(e.target.checked)}
                 className={styles.checkbox}
-                required
               />
               <span className={styles.consentText}>[필수] 이용약관 동의</span>
-              <span onClick={() => router.push("/terms")} className={styles.link}>
-                보기
-              </span>
+              <span onClick={() => router.push("/terms")} className={styles.link}>보기</span>
             </div>
 
             <div className={styles.consentItem}>
@@ -270,12 +305,9 @@ export default function SignupPage() {
                 checked={privacyRequired}
                 onChange={(e) => setPrivacyRequired(e.target.checked)}
                 className={styles.checkbox}
-                required
               />
               <span className={styles.consentText}>[필수] 개인정보 처리방침 동의</span>
-              <span onClick={() => router.push("/privacy")} className={styles.link}>
-                보기
-              </span>
+              <span onClick={() => router.push("/privacy")} className={styles.link}>보기</span>
             </div>
 
             <label className={styles.consentItem}>
@@ -290,7 +322,7 @@ export default function SignupPage() {
           </div>
 
           {error && (
-            <div style={{ color: "#ef4444", fontSize: "0.875rem", textAlign: "center", marginBottom: "16px" }}>
+            <div style={{ color: "#ef4444", fontSize: "0.875rem", textAlign: "center", marginBottom: "16px", wordBreak: "break-word" }}>
               {error}
             </div>
           )}

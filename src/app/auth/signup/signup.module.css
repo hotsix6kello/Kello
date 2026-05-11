@@ -226,3 +226,64 @@
     border-bottom: 1px solid var(--warm-sand);
     margin-bottom: 4px;
 }
+
+/* Phone row */
+.phoneRow {
+    display: flex;
+    gap: 8px;
+}
+
+.phoneCodeSelect {
+    width: 110px;
+    flex-shrink: 0;
+    padding: 14px 8px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--foreground);
+    font-size: 0.9rem;
+    appearance: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.phoneCodeSelect:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.phoneInput {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--warm-sand);
+    color: var(--foreground);
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+.phoneInput:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Password guide */
+.pwGuide {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.pwOk {
+    font-size: 0.78rem;
+    color: #22c55e;
+    font-weight: 500;
+}
+
+.pwFail {
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    font-weight: 500;
+}
