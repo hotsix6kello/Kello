@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
 
 type PlacesApiResponse = {
@@ -485,12 +486,9 @@ export default function ExplorePage() {
                 }}
               >
                 {/* [중요] Kello 서비스 규정: 16/9 비율, overflow: hidden 및 object-fit: cover 무조건 유지 */}
-                <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
                   {imageUrl ? (
-                    <>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imageUrl} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </>
+                    <Image src={imageUrl} alt={name} fill style={{ objectFit: 'cover' }} sizes="(max-width: 480px) 100vw, 480px" />
                   ) : (
                     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f0f0', color: '#ccc' }}>
                       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

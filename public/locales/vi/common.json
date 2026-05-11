@@ -250,6 +250,19 @@
     "search_results": "ผลลัพธ์การค้นหา",
     "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
+  "welcome_popup": {
+    "title": "Đăng ký ngay để nhận\ncoupon giảm giá 5%!",
+    "description": "Bạn sẽ nhận được phiếu có thể dùng ngay.",
+    "cta": "Đăng ký & nhận phiếu",
+    "close": "Đóng"
+  },
+  "referral_popup": {
+    "title": "Bạn có mã giới thiệu không?",
+    "description": "Nhập mã để cả bạn và bạn bè đều nhận được phiếu giảm giá 5%!",
+    "placeholder": "Nhập mã giới thiệu",
+    "submit": "Xác nhận",
+    "skip": "Để sau"
+  },
   "transport": {
     "moving_to": "Đang đến {{dest}}",
     "remaining": "Còn lại",
@@ -276,7 +289,9 @@
       "title": "Ghi lại vẻ đẹp Hàn Quốc,\nvào lịch trình của bạn.",
       "subtitle": "Chọn dịch vụ làm đẹp và đặt lịch ngay.",
       "welcome": "{{name}}, hãy chọn dịch vụ.",
-      "welcome_user": "{{greeting}}, {{name}}! 👋"
+      "welcome_user": "{{greeting}}, {{name}}! 👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "Chào mừng, {{name}}! 👋"
     },
     "booking": {
       "step": "BƯỚC. 01",
@@ -289,7 +304,23 @@
       "completion_title": "Đã gửi yêu cầu đặt hẹn!",
       "completion_desc": "Đã gửi yêu cầu đặt hẹn thành công.\nCửa hàng đã chọn sẽ xác nhận và liên hệ với bạn sớm.",
       "confirm_button": "Xác nhận",
-      "login_required": "Cần đăng nhập để đính kèm ảnh. Vui lòng thử lại sau khi đăng nhập."
+      "login_required": "Cần đăng nhập để đính kèm ảnh. Vui lòng thử lại sau khi đăng nhập.",
+      "refund_policy_notice": "Thông báo chính sách hủy và hoàn tiền",
+      "refund_policy_title": "Chính sách hủy và hoàn tiền",
+      "refund_rate_label": "Hoàn {{rate}}%",
+      "no_refund_label": "Không hoàn tiền",
+      "platform_fee_note": "Phí dịch vụ nền tảng ({{rate}}%) sẽ không được hoàn lại bất kể thời điểm hủy.",
+      "platform_fee_note_always": "Phí dịch vụ nền tảng ({{rate}}%) không được hoàn lại trong mọi trường hợp.",
+      "agreements_title": "Đồng ý điều khoản",
+      "agreement_booking_confirmed": "Xác nhận thông tin đặt lịch",
+      "agreement_booking_confirmed_desc": "Xác nhận rằng cửa hàng, ngày và dịch vụ đã chọn là chính xác.",
+      "agreement_privacy_consent": "Đồng ý chính sách quyền riêng tư",
+      "agreement_privacy_consent_desc": "Đồng ý cung cấp tên, thông tin liên lạc cho cửa hàng để hoàn tất đặt lịch.",
+      "agreement_refund_policy": "Đồng ý chính sách hủy và hoàn tiền",
+      "agreement_refund_policy_desc": "Đã đọc và đồng ý với chính sách hủy và hoàn tiền nêu trên.",
+      "submitting": "Đang xử lý...",
+      "submit_final": "Gửi đặt lịch cuối cùng",
+      "go_back_to_main": "Về trang chủ"
     }
   },
   "interpreter_ui": {
@@ -583,7 +614,17 @@
     "error_change_reason": "Vui lòng nhập nội dung bạn muốn thay đổi.",
     "error_change": "Yêu cầu thay đổi thất bại.",
     "error_alt": "Xử lý thất bại.",
-    "open_interpreter": "Mở phiên dịch"
+    "open_interpreter": "Mở phiên dịch",
+    "cancel_days_until": "Còn {{daysUntil}} ngày đến lịch hẹn → Tỷ lệ hoàn tiền {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ Hủy trong vòng 1 ngày trước lịch hẹn sẽ không được hoàn tiền",
+    "cancel_service_fee": "Phí dịch vụ",
+    "cancel_penalty": "Phí phạt ({{rate}}%)",
+    "cancel_platform_fee_label": "Phí nền tảng (không hoàn lại)",
+    "cancel_total_refund": "Tổng số tiền hoàn lại",
+    "cancel_platform_fee_note": "Phí dịch vụ nền tảng ({{rate}}%) sẽ không được hoàn lại bất kể thời điểm hủy.",
+    "cancel_consent_no_refund": "Hủy trong vòng 1 ngày trước lịch hẹn sẽ không được hoàn tiền. Tôi đồng ý trừ toàn bộ.",
+    "cancel_consent_partial": "Hủy ngay bây giờ sẽ trừ phí nền tảng {{platformFee}} và {{penaltyRate}}% phí dịch vụ ({{penaltyAmount}}). Tôi đồng ý.",
+    "cancel_consent_default": "Tôi đồng ý với chính sách hủy và hoàn tiền."
   },
   "community_page": {
     "hero": {
@@ -703,12 +744,12 @@
       },
       "image": {
         "guides": {
-          "beauty_review": "Thêm ảnh (tối đa 4)",
-          "food_review": "Thêm ảnh (tối đa 4)",
-          "travel_review": "Thêm ảnh (tối đa 4)",
-          "meetup": "Thêm ảnh nhóm (tối đa 4)",
-          "meetup_recruitment": "Thêm ảnh (tối đa 4)",
-          "help": "Thêm ảnh (tối đa 4)"
+          "beauty_review": "Thêm ảnh trước/sau hoặc ảnh bên trong tiệm (tối đa 4 ảnh)",
+          "food_review": "Thêm ảnh món ăn hoặc ảnh bên trong quán (tối đa 4 ảnh)",
+          "travel_review": "Thêm ảnh thể hiện không khí nơi đó (tối đa 4 ảnh)",
+          "meetup": "Thêm ảnh địa điểm hoặc hoạt động (tối đa 4 ảnh)",
+          "meetup_recruitment": "Thêm ảnh điểm đến hoặc ảnh tham khảo (tối đa 4 ảnh)",
+          "help": "Thêm ảnh giúp mô tả vấn đề nếu có (tối đa 4 ảnh)"
         },
         "saved_name": "Ảnh đã lưu {{index}}",
         "file_only_alert": "Chỉ cho phép ảnh.",
@@ -779,8 +820,8 @@
       "body_title": "Nội dung bài viết",
       "like": "Thích",
       "dislike": "Không thích",
-      "like_alert": "Liked!",
-      "dislike_alert": "Disliked.",
+      "like_alert": "Bạn đã thích bài viết này!",
+      "dislike_alert": "Bạn đã không thích bài viết này.",
       "comments_title": "Bình luận",
       "comment_input": {
         "default": "Nhập bình luận...",
@@ -865,7 +906,7 @@
         "schedule_title": "Chọn thời gian"
       },
       "status": {
-        "REVIEWS": "Reviews Done",
+        "REVIEWS": "Đã có đánh giá",
         "REACTING": "Đang gom phản hồi",
         "SURVEYING": "Đang xác nhận",
         "DRAFTING": "Đang chuẩn bị",
@@ -873,9 +914,9 @@
       },
       "tags": {
         "solo_friendly": "Thích hợp đi một mình",
-        "friends_friendly": "With Friends",
-        "photo_spot": "Photo Spots",
-        "waiting": "Wait Exists",
+        "friends_friendly": "Thích hợp đi cùng bạn bè",
+        "photo_spot": "Điểm chụp ảnh đẹp",
+        "waiting": "Cần chờ đợi",
         "foreigner_friendly": "Thân thiện với người nước ngoài"
       },
       "empty_comments": "Chưa có bình luận. Hãy là người đầu tiên!",
@@ -891,6 +932,8 @@
     "report": {
       "report_action": "Báo cáo",
       "success": "Đã báo cáo.",
+      "modal_title": "Chọn lý do báo cáo",
+      "cancel": "Hủy",
       "reasons": {
         "ad_spam": "Quảng cáo/Rác",
         "offensive": "Nội dung không phù hợp",
@@ -988,21 +1031,90 @@
     }
   },
   "help_page": {
+    "title": "Hỗ trợ khẩn cấp",
+    "medical_title": "Hỗ trợ y tế",
+    "medical_desc": "Bệnh viện gần đây và thẻ diễn đạt triệu chứng",
+    "police_title": "Cảnh sát/Tội phạm",
+    "police_desc": "Báo cáo và hỗ trợ an toàn",
+    "interp_title": "Dịch vụ thông dịch",
+    "interp_desc": "Đường dây 1330 và ứng dụng dịch thuật",
+    "lost_title": "Đồ bị mất",
+    "lost_desc": "Hướng dẫn từng bước để tìm lại đồ",
+    "call_btn": "Gọi điện",
     "medical_header": "Y tế & Cấp cứu",
     "emergency_119_title": "Cứu hộ khẩn cấp (119)",
-    "emergency_119_desc": "Immediate rescue for emergencies",
+    "emergency_119_desc": "Cứu hộ ngay lập tức trong trường hợp khẩn cấp",
     "consult_1339_title": "Tư vấn y tế (1339)",
-    "consult_1339_desc": "Professional medical consultation",
-    "symptoms_title": "Symptoms",
-    "call_btn": "Gọi điện",
+    "consult_1339_desc": "Tư vấn y tế chuyên nghiệp",
+    "symptoms_title": "Triệu chứng",
+    "taxi": "Taxi",
+    "subway": "Tàu điện ngầm",
+    "airport": "Sân bay",
+    "street": "Đường phố",
+    "lost_header": "Hướng dẫn tìm đồ thất lạc",
+    "lost_where_title": "Bạn đã mất đồ ở đâu?",
+    "lost_where_desc": "Chọn địa điểm để xem hướng dẫn tìm lại",
+    "lost_quick_title": "Tra cứu nhanh",
+    "lost112_label": "Cổng thông tin Lost112",
+    "embassy_label": "Tìm đại sứ quán",
+    "interp_hotline_title": "Đường dây 1330",
+    "interp_hotline_desc": "Hỗ trợ chính thức nhanh nhất khi cần giúp đỡ trong chuyến du lịch",
+    "interp_chat_label": "Hỏi qua chat",
+    "lost_steps_title": "Hướng dẫn tìm đồ thất lạc tại {{place}}",
+    "lost_go_lost112": "Truy cập trang Lost112",
+    "police_header": "Cảnh sát & An toàn",
+    "police_contacts_section": "Liên hệ cảnh sát",
+    "tourism_police_section": "Cảnh sát du lịch",
+    "tourism_police_title": "Dịch vụ cảnh sát du lịch",
+    "tourism_police_desc": "Có mặt tại Myeongdong, Insadong, Itaewon và các khu vực khác",
+    "interp_header": "Thông dịch & Dịch thuật",
+    "interp_immediate_title": "Hỗ trợ ngay lập tức",
+    "interp_tools_title": "Công cụ dịch thuật",
+    "interp_actions": {
+      "open_papago": "Mở Papago",
+      "open_google_translate": "Mở Google Dịch"
+    },
+    "interp": {
+      "papago_desc": "Mở Naver Papago để dịch nhanh văn bản và hỗ trợ tiếng Hàn.",
+      "google_desc": "Mở Google Dịch khi cần thêm tùy chọn dịch nhanh khác."
+    },
+    "lost": {
+      "taxi_s1_t": "1. Kiểm tra hóa đơn",
+      "taxi_s1_d": "Kiểm tra công ty thẻ hoặc biển số xe trên hóa đơn để tìm thông tin liên lạc của tài xế.",
+      "taxi_s2_t": "2. Liên hệ công ty thẻ",
+      "taxi_s2_d": "Gọi điện cho trung tâm khách hàng của thẻ để hỏi thông tin liên lạc của đơn vị trong lịch sử giao dịch.",
+      "taxi_s3_t": "3. Liên hệ hãng taxi",
+      "taxi_s3_d": "Dùng biển số xe để tìm và liên hệ trực tiếp với hãng taxi.",
+      "taxi_s4_t": "4. Trình báo cảnh sát",
+      "taxi_s4_d": "Nếu tất cả các phương pháp trên đều không hiệu quả, hãy gọi 112 hoặc sử dụng trang web Lost112.",
+      "subway_s1_t": "1. Phòng nhân viên nhà ga",
+      "subway_s1_d": "Nếu vừa xuống tàu, hãy đến ngay phòng nhân viên nhà ga và thông báo số toa xe bạn đã đi.",
+      "subway_s2_t": "2. Trung tâm đồ thất lạc",
+      "subway_s2_d": "Nếu đã qua một thời gian, hãy liên hệ hoặc đến trung tâm đồ thất lạc của tuyến đó.",
+      "subway_s3_t": "3. Cổng thông tin Lost112",
+      "subway_s3_d": "Có thể tra cứu hoặc khai báo trực tuyến tại cổng thông tin đồ thất lạc tổng hợp của Cảnh sát quốc gia.",
+      "airport_s1_t": "1. Quầy đồ thất lạc hãng hàng không/sân bay",
+      "airport_s1_d": "Đến quầy đồ thất lạc của hãng hàng không hoặc cơ quan quản lý sân bay trước.",
+      "airport_s2_t": "2. Trung tâm đồ thất lạc sân bay Incheon",
+      "airport_s2_d": "Đối với sân bay Incheon, hãy đến phòng lưu giữ hành lý ở tầng 1 khu vực check-in.",
+      "airport_s3_t": "3. Khai báo trực tuyến qua Lost112",
+      "airport_s3_d": "Nộp đơn khai báo đồ thất lạc trực tuyến qua cổng thông tin đồ thất lạc tổng hợp của Cảnh sát quốc gia.",
+      "street_s1_t": "1. Kiểm tra khu vực xung quanh",
+      "street_s1_d": "Hỏi camera an ninh hoặc các cửa hàng gần nơi bạn mất đồ.",
+      "street_s2_t": "2. Đến đồn cảnh sát hoặc gọi 112",
+      "street_s2_d": "Đến đồn cảnh sát gần nhất để khai báo mất đồ hoặc gọi 112.",
+      "street_s3_t": "3. Đăng ký trên Lost112",
+      "street_s3_d": "Đăng ký trên cổng thông tin đồ thất lạc tổng hợp để được thông báo khi tìm thấy."
+    },
     "medical": {
+      "pharmacy_title": "Thuốc thông dụng (cửa hàng tiện lợi)",
       "medicines": {
         "tylenol": "Tylenol",
-        "tylenol_desc": "해열, 진통, 근육통, 두통",
+        "tylenol_desc": "Hạ sốt, giảm đau, đau cơ, đau đầu",
         "cold": "Thuốc cảm",
-        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
+        "cold_desc": "Chảy nước mũi, ho, sốt và các triệu chứng cảm khác",
         "digestive": "Thuốc tiêu hóa",
-        "digestive_desc": "소화불량, 식체, 속쓰림"
+        "digestive_desc": "Khó tiêu, đầy bụng, ợ chua"
       },
       "symptoms": {
         "stomach": "Đau bụng",
@@ -1013,49 +1125,12 @@
         "pain": "Đau ngực"
       }
     },
-    "police_header": "Cảnh sát & An toàn",
-    "police_contacts_section": "Police Contacts",
-    "police.report_call_title": "Police Report (112)",
-    "police.report_call_desc": "24/7 service, foreign language available",
-    "police.official_site_title": "Official Police Site",
-    "police.official_site_desc": "Cyber crime report & info",
-    "tourism_police_section": "Tourist Police",
-    "tourism_police_title": "Tourist Police Service",
-    "tourism_police_desc": "Available in Myeongdong, Insadong, Itaewon, etc.",
-    "interp_header": "Thông dịch & Dịch thuật",
-    "interp_immediate_title": "Immediate Help",
-    "interp_hotline_title": "1330 Helpline",
-    "interp_hotline_desc": "Fastest official help for tourism help",
-    "interp_chat_label": "Hỏi qua chat",
-    "interp_tools_title": "Translation Tools",
-    "lost_header": "Tìm đồ thất lạc",
-    "lost_where_title": "Where did you lose it?",
-    "lost_where_desc": "Select location for recovery steps",
-    "lost_quick_title": "Quick Lookup",
-    "lost112_label": "Lost112 Portal",
-    "embassy_label": "Find Embassy",
-    "lost_steps_title": "Lost in {{place}}",
-    "lost_go_lost112": "Search in Lost112",
-    "lost": {
-      "taxi_s1_t": "1. 영수증 확인",
-      "taxi_s1_d": "영수증에 기재된 카드사 번호나 차량번호로 기사님 연락처를 확보하세요.",
-      "taxi_s2_t": "2. 카드사 연락",
-      "taxi_s2_d": "결제한 카드의 고객센터에 전화하여 택시 승인 내역의 업체 연락처를 요청하세요.",
-      "subway_s1_t": "1. 역무실 방문",
-      "subway_s1_d": "내린 직후라면 해당 역의 역무실을 즉시 방문하여 열차 칸 번호를 알리세요.",
-      "subway_s2_t": "2. 유실물 센터",
-      "subway_s2_d": "시간이 지났다면 각 호선별 유실물 센터에 연락하거나 방문하세요."
-    },
     "police": {
-      "report_call_title": "범죄 신고 (긴급)",
-      "report_call_desc": "24시간 서비스, 외국어 대응 가능",
-      "official_site_title": "경찰청 공식 사이트",
-      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
-    },
-    "medical_title": "Hỗ trợ y tế",
-    "police_title": "Cảnh sát/Tội phạm",
-    "interp_title": "Dịch vụ thông dịch",
-    "lost_title": "Đồ bị mất"
+      "report_call_title": "Báo án (112)",
+      "report_call_desc": "Dịch vụ 24/7, hỗ trợ tiếng nước ngoài",
+      "official_site_title": "Trang web chính thức của Cảnh sát",
+      "official_site_desc": "Báo cáo tội phạm mạng và hướng dẫn thông tin"
+    }
   },
   "settings_page": {
     "hero": {
@@ -1533,7 +1608,13 @@
       "customer": "Khách hàng",
       "agreement_title": "Điều khoản",
       "agreement_desc": "Vui lòng đồng ý các điều khoản cần thiết để đặt lịch.",
-      "agreement_desc_hint": "Vui lòng đồng ý các điều khoản cần thiết để đặt lịch.",
+      "agreement_desc_hint": "Vui lòng đồng ý với các mục bắt buộc để đặt lịch.",
+      "agreement_all": "Đồng ý tất cả",
+      "agreement_service": "[Bắt buộc] Đồng ý Điều khoản dịch vụ",
+      "agreement_privacy": "[Bắt buộc] Đồng ý Thu thập và sử dụng thông tin cá nhân",
+      "agreement_third_party": "[Bắt buộc] Đồng ý Cung cấp cho bên thứ ba và chuyển giao dữ liệu ra nước ngoài",
+      "agreement_marketing": "[Tùy chọn] Đồng ý Thu thập và nhận thông tin tiếp thị (Email/SMS...)",
+      "agreement_validation_error": "Vui lòng đồng ý với tất cả các mục bắt buộc.",
       "confirm_info_label": "Xác nhận thông tin đặt lịch",
       "confirm_info_desc": "Tôi xác nhận cửa hàng, ngày và dịch vụ đã chọn là chính xác.",
       "privacy_label": "Đồng ý chính sách bảo mật",
@@ -1727,7 +1808,8 @@
   "interpreter_entry": {
     "title": "Phiên dịch trực tuyến",
     "description": "Giao tiếp dễ dàng với nhân viên",
-    "cta": "Mở phiên dịch"
+    "cta": "Mở phiên dịch",
+    "select_language": "Chọn ngôn ngữ của bạn"
   },
   "location_sheet": {
     "search_title": "Tìm kiếm vị trí",
@@ -1743,19 +1825,6 @@
     "copy_done": "Đã sao chép!",
     "close": "Đóng"
   },
-  "welcome_popup": {
-    "title": "Nhận ngay phiếu giảm giá 5% khi đăng ký!",
-    "description": "Bạn sẽ nhận được phiếu có thể dùng ngay.",
-    "cta": "Đăng ký & nhận phiếu",
-    "close": "Đóng"
-  },
-  "referral_popup": {
-    "title": "Bạn có mã giới thiệu không?",
-    "description": "Nhập mã để cả bạn và bạn bè đều nhận được phiếu giảm giá 5%!",
-    "placeholder": "Nhập mã giới thiệu",
-    "submit": "Xác nhận",
-    "skip": "Để sau"
-  },
   "signup": {
     "subtitle": "Trải nghiệm Hàn Quốc như người bản địa",
     "name_label": "Họ và tên",
@@ -1767,5 +1836,93 @@
     "success": "Tài khoản đã được tạo! Vui lòng kiểm tra email để xác minh và đăng nhập.",
     "login_prompt": "Đã có tài khoản?",
     "login_link": "Đăng nhập"
+  },
+  "webview_banner": {
+    "title": "Trình duyệt trong ứng dụng không hỗ trợ đăng nhập Google",
+    "desc_android": "Đã thử mở Chrome. Nếu không có gì xảy ra, hãy sao chép liên kết và dán vào Chrome.",
+    "desc_ios": "Vui lòng mở Safari hoặc Chrome và dán liên kết để tiếp tục.",
+    "copy_btn": "Sao chép liên kết",
+    "copy_btn_copied": "Đã sao chép",
+    "close": "Đóng"
+  },
+  "privacy_policy": {
+    "title": "Chính sách Bảo mật",
+    "effective_date": "Ngày có hiệu lực: 21 tháng 4, 2024",
+    "table": {
+      "category": "Danh mục",
+      "items": "Thông tin thu thập",
+      "purpose": "Mục đích",
+      "retention": "Thời hạn lưu trữ"
+    },
+    "collection": {
+      "title": "1. Thu thập và Sử dụng Thông tin Cá nhân",
+      "required": "Bắt buộc",
+      "required_items": "Tên, Email, Thông tin đặt chỗ (Ngày, Giờ, Cửa hàng, Dịch vụ), ID đăng nhập mạng xã hội",
+      "required_purpose": "Đăng ký người dùng, Xác thực, Cung cấp dịch vụ (Đặt chỗ), Tư vấn khách hàng",
+      "auto": "Thu thập tự động",
+      "auto_items": "Địa chỉ IP, Cookies, Thông tin thiết bị, Lịch sử sử dụng dịch vụ",
+      "auto_purpose": "Cải thiện chất lượng dịch vụ và ngăn ngừa gian lận"
+    },
+    "retention": {
+      "title": "2. Thời hạn Lưu trữ và Sử dụng",
+      "content": "Về nguyên tắc, thông tin cá nhân được giữ lại cho đến khi rút khỏi tư cách thành viên. Tuy nhiên, nó có thể được giữ trong một thời gian theo yêu cầu của pháp luật liên quan nếu cần thiết.",
+      "legal_basis": "Tuân thủ các luật liên quan (ví dụ: Luật Thương mại Điện tử)"
+    },
+    "third_party": {
+      "title": "3. Cung cấp Thông tin Cá nhân cho Bên thứ ba",
+      "content": "MyKello cung cấp thông tin cá nhân cho các đối tác sau để tạo điều kiện cung cấp dịch vụ.",
+      "providers": "Supabase (Cơ sở dữ liệu), Google (Xác thực), X (Xác thực)"
+    },
+    "overseas": {
+      "title": "4. Chuyển Thông tin Cá nhân ra Nước ngoài",
+      "recipient": "Người nhận",
+      "country": "Quốc gia",
+      "purpose": "Mục đích chuyển",
+      "items": "Thông tin được chuyển",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "Hoa Kỳ",
+      "storage_auth": "Lưu trữ dữ liệu và xác thực người dùng (OAuth 2.0)",
+      "log_items": "Email, Thông tin hồ sơ, Nhật ký sử dụng dịch vụ"
+    },
+    "destruction": {
+      "title": "5. Quy trình và Phương pháp Tiêu hủy",
+      "content": "Thông tin cá nhân được tiêu hủy ngay lập tức sau khi đạt được mục đích. Các tệp điện tử được xóa bằng các phương pháp kỹ thuật khiến việc khôi phục là không thể."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "Tôi đồng ý với tất cả các điều khoản.",
+    "privacy_required": "[Bắt buộc] Đồng ý Thu thập và Sử dụng Thông tin Cá nhân",
+    "privacy_optional": "[Tùy chọn] Đồng ý Nhận Thông tin Tiếp thị",
+    "view_detail": "Chi tiết",
+    "terms_required": "[Bắt buộc] Đồng ý với Điều khoản Dịch vụ"
+  },
+  "terms_of_service": {
+    "title": "Điều khoản Dịch vụ",
+    "effective_date": "Ngày có hiệu lực: 21 tháng 4, 2024",
+    "definitions": {
+      "title": "1. Định nghĩa Dịch vụ",
+      "content": "MyKello cung cấp một nền tảng đại lý đặt chỗ dịch vụ làm đẹp nhằm tạo điều kiện thuận lợi cho việc đặt chỗ và liên lạc giữa người dùng và các nhà cung cấp dịch vụ làm đẹp."
+    },
+    "benefits": {
+      "title": "2. Quyền lợi Thành viên",
+      "signup": "Thành viên mới nhận được phiếu giảm giá 5% khi đăng ký thành công.",
+      "referral": "Khi một thành viên mới tham gia bằng mã giới thiệu, cả người giới thiệu và người được giới thiệu đều nhận được phiếu giảm giá 5%."
+    },
+    "refund_policy": {
+      "title": "3. Chính sách Hủy bỏ & Hoàn tiền",
+      "subtitle": "Số tiền hoàn lại được tính dựa trên thời gian hủy trước cuộc hẹn đã lên lịch:",
+      "five_days": "5 ngày trước: Hoàn tiền 100%",
+      "three_days": "3 ngày trước: Hoàn tiền 90%",
+      "two_days": "2 ngày trước: Hoàn tiền 70%",
+      "one_day": "1 ngày trước: Hoàn tiền 50%",
+      "same_day": "Trong ngày hoặc Không đến: Không hoàn tiền",
+      "note": "Quá trình hoàn tiền cuối cùng có thể thay đổi tùy thuộc vào chính sách của từng cửa hàng cụ thể."
+    },
+    "liability": {
+      "title": "4. Giới thiệu về Trách nhiệm pháp lý",
+      "interpretation": "Tính năng 'Thông dịch viên thời gian thực' là một công cụ bổ sung được cung cấp để thuận tiện cho người dùng. MyKello không chịu trách nhiệm về các lỗi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong bản dịch AI hoặc thông dịch thủ công.",
+      "community": "MyKello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
+    }
   }
 }

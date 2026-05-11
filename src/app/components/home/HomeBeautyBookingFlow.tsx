@@ -6,11 +6,10 @@ import type { TFunction } from 'i18next';
 import Image from 'next/image';
 import styles from '@/app/home.module.css';
 import IntegratedBookingMenu from '../IntegratedBookingMenu';
-import { 
-  BEAUTY_STORE_ITEMS, 
-  BEAUTY_REGIONS, 
-  BeautyStore, 
-  BeautyRegionId, 
+import {
+  BEAUTY_REGIONS,
+  BeautyStore,
+  BeautyRegionId,
   BeautyCategoryId,
   PRIMARY_SERVICES_BY_CATEGORY
 } from './constants';
@@ -18,6 +17,7 @@ import { submitBeautyBooking, BeautyBookingPayload } from '@/app/explore/beautyB
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip } from '@/lib/contexts/TripContext';
 import { uploadBookingImage } from '@/lib/bookings/SupabaseUploadAdapter';
+import { REFUND_POLICY, PLATFORM_FEE_RATE } from '@/constants/refundPolicy';
 
 interface HomeBeautyBookingFlowProps {
   isOpen: boolean;
@@ -27,7 +27,7 @@ interface HomeBeautyBookingFlowProps {
 }
 
 export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory, t }: HomeBeautyBookingFlowProps) {
-  const { t: tBeauty } = useTranslation(['beauty_explore', 'home_beauty']);
+  const { t: tBeauty, i18n } = useTranslation(['beauty_explore', 'home_beauty']);
   const { sharedBusinesses, lastSelectedStoreId, setLastSelectedStoreId } = useTrip();
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedRegion, setSelectedRegion] = useState<BeautyRegionId>('all');
@@ -49,7 +49,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   const [styleImage, setStyleImage] = useState<{ file: File; preview: string } | null>(null);
   const [agreements, setAgreements] = useState({
     bookingConfirmed: false,
-    privacyConsent: false
+    privacyConsent: false,
+    refundPolicyAgreed: false,
   });
 
   const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
@@ -77,11 +78,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
       imageUrl: biz.imageUrl || biz.image_url || (biz.photos && biz.photos[0] && `https://places.googleapis.com/v1/${biz.photos[0].name}/media?maxWidthPx=400&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`)
     }));
 
-    // 중복 제거 (이미 ID가 있는 경우)
-    const storeIds = new Set(dynamicStores.map(s => s.id));
-    const uniqueMockStores = BEAUTY_STORE_ITEMS.filter(s => !storeIds.has(s.id));
-
-    return [...dynamicStores, ...uniqueMockStores];
+    return dynamicStores;
   }, [sharedBusinesses, initialCategory]);
 
   const regions = BEAUTY_REGIONS(t, tBeauty);
@@ -118,13 +115,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         setSelectedStoreId(targetStore.id);
         setSelectedStoreName(targetStore.name);
         
-        // 매장 선택 시 해당 카테고리의 첫 번째 서비스를 자동으로 선택
         const services = PRIMARY_SERVICES_BY_CATEGORY[targetStore.category] || [];
-        if (services.length > 0) {
-          setSelectedServiceId(services[0].id);
-        } else {
-          setSelectedServiceId('default');
-        }
+        setSelectedServiceId(services.length > 0 ? services[0].id : 'default');
         
         // 바로 2단계(일정 선택)로 이동
         setCurrentStep(2);
@@ -142,12 +134,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
     setSelectedStoreId(store.id);
     setSelectedStoreName(store.name);
     
-    // 매장 선택 시 해당 카테고리의 첫 번째 서비스를 자동으로 선택
     const services = PRIMARY_SERVICES_BY_CATEGORY[store.category] || [];
-    if (services.length > 0) {
-      setSelectedServiceId(services[0].id);
-    }
-    
+    setSelectedServiceId(services.length > 0 ? services[0].id : 'default');
     setCurrentStep(2);
   };
 
@@ -256,8 +244,12 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           },
         },
         agreements: {
-          bookingConfirmed: agreements.bookingConfirmed,
-          privacyConsent: agreements.privacyConsent,
+          serviceTermsAgreed: agreements.bookingConfirmed,
+          privacyPolicyAgreed: agreements.privacyConsent,
+          thirdPartySharingAgreed: agreements.privacyConsent,
+          marketingConsentAgreed: false,
+          refundPolicyAgreed: agreements.refundPolicyAgreed,
+          refundPolicyAgreedAt: agreements.refundPolicyAgreed ? new Date().toISOString() : null,
         },
         createdFrom: {
           flow: 'beauty-explore',
@@ -311,7 +303,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   );
 
   const isFormValid = customerForm.name.trim() && customerForm.phone.trim() && selectedServiceId;
-  const isConfirmEnabled = isFormValid && agreements.bookingConfirmed && agreements.privacyConsent;
+  const isConfirmEnabled = isFormValid && agreements.bookingConfirmed && agreements.privacyConsent && agreements.refundPolicyAgreed;
 
   return (
     <div className="fixed inset-0 z-[400] flex justify-center bg-black/60 sm:bg-black/40">
@@ -345,9 +337,21 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                       </div>
                    </div>
                 </div>
+                <div className="mx-4 mb-4 rounded-xl border border-purple-100 bg-purple-50 p-4 text-[11px] text-neutral-600">
+                   <p className="font-bold text-purple-700 mb-1.5">{t('booking.refund_policy_notice')}</p>
+                   {REFUND_POLICY.map((tier) => (
+                     <div key={tier.daysBeforeAppointment} className="flex justify-between py-0.5">
+                       <span>{i18n.language === 'ko' ? tier.label_ko : tier.label_en}</span>
+                       <span className={tier.refundRate === 0 ? 'font-bold text-red-600' : 'font-semibold'}>
+                         {tier.refundRate > 0 ? t('booking.refund_rate_label', { rate: tier.refundRate }) : t('booking.no_refund_label')}
+                       </span>
+                     </div>
+                   ))}
+                   <p className="mt-1.5 text-neutral-400">{t('booking.platform_fee_note_always', { rate: Math.round(PLATFORM_FEE_RATE * 100) })}</p>
+                </div>
                 <div className={styles.beautyCompletionActions}>
                    <button type="button" className={styles.beautySecondaryAction} onClick={onClose} style={{ background: 'var(--primary)', color: 'white' }}>
-                      메인으로 돌아가기
+                      {t('booking.go_back_to_main')}
                    </button>
                 </div>
              </div>
@@ -575,8 +579,26 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                        </div>
                     </div>
 
+                    {/* 환불 규정 요약 카드 */}
+                    <div className="rounded-2xl border border-purple-200 bg-purple-50 p-5 flex flex-col gap-3">
+                       <h4 className="text-xs font-bold text-purple-700 uppercase tracking-widest">{t('booking.refund_policy_title')}</h4>
+                       <div className="flex flex-col gap-1.5 text-[12px] text-neutral-700">
+                          {REFUND_POLICY.map((tier) => (
+                            <div key={tier.daysBeforeAppointment} className="flex justify-between">
+                              <span>{i18n.language === 'ko' ? tier.label_ko : tier.label_en}</span>
+                              <span className={tier.refundRate === 0 ? 'font-bold text-red-600' : 'font-semibold text-neutral-800'}>
+                                {tier.refundRate > 0 ? t('booking.refund_rate_label', { rate: tier.refundRate }) : t('booking.no_refund_label')}
+                              </span>
+                            </div>
+                          ))}
+                       </div>
+                       <p className="text-[11px] text-neutral-500 border-t border-purple-100 pt-2">
+                          {t('booking.platform_fee_note', { rate: Math.round(PLATFORM_FEE_RATE * 100) })}
+                       </p>
+                    </div>
+
                     <div className="bg-neutral-50 rounded-2xl p-5 flex flex-col gap-4">
-                       <h4 className="text-xs font-bold text-neutral-600 uppercase tracking-widest">이용 동의</h4>
+                       <h4 className="text-xs font-bold text-neutral-600 uppercase tracking-widest">{t('booking.agreements_title')}</h4>
                        <div className="flex flex-col gap-3">
                           <label className="flex items-start gap-3 cursor-pointer">
                              <input
@@ -586,8 +608,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                 onChange={() => setAgreements(prev => ({ ...prev, bookingConfirmed: !prev.bookingConfirmed }))}
                              />
                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-neutral-800 leading-tight">예약 내용 확인</span>
-                                <span className="text-[11px] text-neutral-500 mt-0.5">선택하신 매장, 일시, 시술 정보가 정확함을 확인합니다.</span>
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_booking_confirmed')}</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">{t('booking.agreement_booking_confirmed_desc')}</span>
                              </div>
                           </label>
                           <label className="flex items-start gap-3 cursor-pointer">
@@ -598,8 +620,20 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                                 onChange={() => setAgreements(prev => ({ ...prev, privacyConsent: !prev.privacyConsent }))}
                              />
                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-neutral-800 leading-tight">개인정보 처리방침 동의</span>
-                                <span className="text-[11px] text-neutral-500 mt-0.5">예약 진행을 위해 성함, 연락처 등의 정보가 매장에 제공됨에 동의합니다.</span>
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_privacy_consent')}</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">{t('booking.agreement_privacy_consent_desc')}</span>
+                             </div>
+                          </label>
+                          <label className="flex items-start gap-3 cursor-pointer">
+                             <input
+                                type="checkbox"
+                                className="mt-1 w-4 h-4 rounded border-gray-300 text-purple-600 focus:ring-purple-400"
+                                checked={agreements.refundPolicyAgreed}
+                                onChange={() => setAgreements(prev => ({ ...prev, refundPolicyAgreed: !prev.refundPolicyAgreed }))}
+                             />
+                             <div className="flex flex-col">
+                                <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_refund_policy')}</span>
+                                <span className="text-[11px] text-neutral-500 mt-0.5">{t('booking.agreement_refund_policy_desc')}</span>
                              </div>
                           </label>
                        </div>
@@ -610,7 +644,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                        onClick={handleComplete}
                        className={`w-full py-5 rounded-xl font-bold text-lg shadow-xl transition-all ${isConfirmEnabled ? 'bg-[var(--primary)] text-white hover:opacity-90' : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'}`}
                     >
-                       {isSubmitting ? '처리 중...' : '최종 예약 신청하기'}
+                       {isSubmitting ? t('booking.submitting') : t('booking.submit_final')}
                     </button>
                  </div>
                )}

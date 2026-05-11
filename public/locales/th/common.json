@@ -250,6 +250,19 @@
     "search_results": "ผลลัพธ์การค้นหา",
     "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
+  "welcome_popup": {
+    "title": "สมัครสมาชิกตอนนี้\nรับคูปองส่วนลด 5% ทันที!",
+    "description": "คุณจะได้รับคูปองที่ใช้ได้ทันที",
+    "cta": "รับคูปองและสมัคร",
+    "close": "ปิด"
+  },
+  "referral_popup": {
+    "title": "คุณมีรหัสแนะนำไหม?",
+    "description": "ใส่รหัสเพื่อรับคูปองส่วนลด 5% ทั้งคุณและเพื่อน!",
+    "placeholder": "ใส่รหัสแนะนำ",
+    "submit": "ยืนยัน",
+    "skip": "ข้ามไปก่อน"
+  },
   "transport": {
     "moving_to": "กำลังไปที่ {{dest}}",
     "remaining": "เหลือ",
@@ -276,7 +289,9 @@
       "title": "สัมผัสความงามของเกาหลี\nในตารางเวลาของคุณ",
       "subtitle": "เลือกบริการความงามแล้วจองได้เลย",
       "welcome": "{{name}} กรุณาเลือกบริการ",
-      "welcome_user": "{{greeting}}, {{name}}! 👋"
+      "welcome_user": "{{greeting}}, {{name}}! 👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "ยินดีต้อนรับ, {{name}}! 👋"
     },
     "booking": {
       "step": "STEP. 01",
@@ -289,7 +304,23 @@
       "completion_title": "ส่งคำขอจองสำเร็จ!",
       "completion_desc": "ส่งคำขอจองเรียบร้อยแล้ว\nร้านที่เลือกจะยืนยันและติดต่อคุณกลับโดยเร็ว",
       "confirm_button": "ยืนยัน",
-      "login_required": "ต้องเข้าสู่ระบบเพื่อแนบรูปภาพ กรุณาลองอีกครั้งหลังจากเข้าสู่ระบบ"
+      "login_required": "ต้องเข้าสู่ระบบเพื่อแนบรูปภาพ กรุณาลองอีกครั้งหลังจากเข้าสู่ระบบ",
+      "refund_policy_notice": "แจ้งนโยบายการยกเลิกและคืนเงิน",
+      "refund_policy_title": "นโยบายการยกเลิกและคืนเงิน",
+      "refund_rate_label": "คืนเงิน {{rate}}%",
+      "no_refund_label": "ไม่คืนเงิน",
+      "platform_fee_note": "ค่าธรรมเนียมแพลตฟอร์ม ({{rate}}%) ไม่สามารถขอคืนได้ไม่ว่าจะยกเลิกเมื่อใด",
+      "platform_fee_note_always": "ค่าธรรมเนียมแพลตฟอร์ม ({{rate}}%) ไม่สามารถขอคืนได้ในทุกกรณี",
+      "agreements_title": "ยอมรับข้อกำหนด",
+      "agreement_booking_confirmed": "ยืนยันข้อมูลการจอง",
+      "agreement_booking_confirmed_desc": "ยืนยันว่าร้าน วันที่ และบริการที่เลือกถูกต้อง",
+      "agreement_privacy_consent": "ยินยอมนโยบายความเป็นส่วนตัว",
+      "agreement_privacy_consent_desc": "ยินยอมให้ชื่อและข้อมูลติดต่อแก่ร้านเพื่อดำเนินการจอง",
+      "agreement_refund_policy": "ยอมรับนโยบายการยกเลิกและคืนเงิน",
+      "agreement_refund_policy_desc": "ได้อ่านและยอมรับนโยบายการยกเลิกและคืนเงินข้างต้นแล้ว",
+      "submitting": "กำลังดำเนินการ...",
+      "submit_final": "ส่งการจองสุดท้าย",
+      "go_back_to_main": "กลับหน้าหลัก"
     }
   },
   "interpreter_ui": {
@@ -470,12 +501,12 @@
       },
       "image": {
         "guides": {
-          "beauty_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
-          "food_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
-          "travel_review": "เพิ่มภาพถ่าย (สูงสุด 4)",
-          "meetup": "เพิ่มภาพกิจกรรม (ไม่เกิน 4)",
-          "meetup_recruitment": "เพิ่มภาพถ่าย (สูงสุด 4)",
-          "help": "เพิ่มภาพถ่าย (สูงสุด 4)"
+          "beauty_review": "เพิ่มรูปก่อน/หลัง หรือรูปภายในร้าน (สูงสุด 4 รูป)",
+          "food_review": "เพิ่มรูปอาหารหรือบรรยากาศร้าน (สูงสุด 4 รูป)",
+          "travel_review": "เพิ่มรูปที่สะท้อนบรรยากาศสถานที่ (สูงสุด 4 รูป)",
+          "meetup": "เพิ่มรูปสถานที่หรือกิจกรรม (สูงสุด 4 รูป)",
+          "meetup_recruitment": "เพิ่มรูปจุดหมายหรือรูปอ้างอิง (สูงสุด 4 รูป)",
+          "help": "เพิ่มรูปที่ช่วยอธิบายปัญหาถ้ามี (สูงสุด 4 รูป)"
         },
         "saved_name": "รูปภาพที่บันทึก {{index}}",
         "file_only_alert": "อนุญาตไฟล์รูปภาพเท่านั้น",
@@ -608,7 +639,7 @@
         "help": "แชร์ข้อคิดเห็น",
         "placeholder": "เขียนรีวิว...",
         "save_visited": "บันทึกผลและทิปส์",
-        "save_only": "บันทึกอินโฟ മാത്രം"
+        "save_only": "บันทึกเฉพาะข้อมูล"
       },
       "author_safety": {
         "title": "แนวทางความปลอดภัย",
@@ -632,7 +663,7 @@
         "schedule_title": "เลือกเวลา"
       },
       "status": {
-        "REVIEWS": "Reviews Done",
+        "REVIEWS": "มีรีวิวแล้ว",
         "REACTING": "กำลังรวบรวม",
         "SURVEYING": "กำลังยืนยัน",
         "DRAFTING": "กำลังเตรียม",
@@ -640,9 +671,9 @@
       },
       "tags": {
         "solo_friendly": "เหมาะไปคนเดียว",
-        "friends_friendly": "With Friends",
-        "photo_spot": "Photo Spots",
-        "waiting": "Wait Exists",
+        "friends_friendly": "เหมาะไปกับเพื่อน",
+        "photo_spot": "จุดถ่ายรูป",
+        "waiting": "ต้องรอคิว",
         "foreigner_friendly": "เป็นมิตรกับชาวต่างชาติ"
       },
       "empty_comments": "ยังไม่มีความคิดเห็น. เป็นคนแรกเลย!",
@@ -658,6 +689,8 @@
     "report": {
       "report_action": "รายงาน",
       "success": "รายงานแล้ว",
+      "modal_title": "เลือกเหตุผลในการรายงาน",
+      "cancel": "ยกเลิก",
       "reasons": {
         "ad_spam": "โฆษณา/สแปม",
         "offensive": "เนื้อหาไม่เหมาะสม",
@@ -979,6 +1012,16 @@
     "error_change": "Could not send your change request. Please try again later.",
     "error_alt": "Something went wrong. Please try again later.",
     "open_interpreter": "เปิดล่าม",
+    "cancel_days_until": "เหลืออีก {{daysUntil}} วันถึงวันนัด → อัตราคืนเงิน {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ ยกเลิกภายใน 1 วันก่อนวันนัดไม่ได้รับการคืนเงิน",
+    "cancel_service_fee": "ค่าบริการ",
+    "cancel_penalty": "ค่าปรับ ({{rate}}%)",
+    "cancel_platform_fee_label": "ค่าธรรมเนียมแพลตฟอร์ม (ไม่คืนเงิน)",
+    "cancel_total_refund": "ยอดเงินคืนทั้งหมด",
+    "cancel_platform_fee_note": "ค่าธรรมเนียมแพลตฟอร์ม ({{rate}}%) ไม่สามารถขอคืนได้ไม่ว่าจะยกเลิกเมื่อใด",
+    "cancel_consent_no_refund": "การยกเลิกภายใน 1 วันก่อนวันนัดไม่ได้รับการคืนเงิน ฉันยินยอมให้หักเงินทั้งหมด",
+    "cancel_consent_partial": "การยกเลิกตอนนี้จะหักค่าธรรมเนียมแพลตฟอร์ม {{platformFee}} และ {{penaltyRate}}% ของค่าบริการ ({{penaltyAmount}}) ฉันยินยอม",
+    "cancel_consent_default": "ฉันยินยอมตามนโยบายการยกเลิกและคืนเงิน",
     "interpreter_visit_context": "กำลังใช้เครื่องแปลภาษาระหว่างเข้าชม {{storeName}}",
     "interpreter_visit_service_context": "กำลังใช้เครื่องแปลภาษาสำหรับ {{serviceName}} ที่ {{storeName}}",
     "lang_es": "Español",
@@ -1031,21 +1074,90 @@
     "voice_too_short_error": "โปรดพูดให้ยาวกว่านี้อีกนิด"
   },
   "help_page": {
+    "title": "การสนับสนุนฉุกเฉิน",
+    "medical_title": "ความช่วยเหลือทางการแพทย์",
+    "medical_desc": "โรงพยาบาลใกล้เคียงและการ์ดแสดงอาการ",
+    "police_title": "ตำรวจ/อาชญากรรม",
+    "police_desc": "การแจ้งความและความปลอดภัย",
+    "interp_title": "บริการล่าม",
+    "interp_desc": "สายด่วน 1330 และแอปแปลภาษา",
+    "lost_title": "ของหาย",
+    "lost_desc": "คู่มือค้นหาของหายทีละขั้นตอน",
+    "call_btn": "โทร",
     "medical_header": "การแพทย์และฉุกเฉิน",
     "emergency_119_title": "หน่วยกู้ภัยฉุกเฉิน (119)",
-    "emergency_119_desc": "Immediate rescue for emergencies",
+    "emergency_119_desc": "ช่วยเหลือฉุกเฉินทันที",
     "consult_1339_title": "ปรึกษาทางการแพทย์ (1339)",
-    "consult_1339_desc": "Professional medical consultation",
-    "symptoms_title": "Symptoms",
-    "call_btn": "โทรออก",
+    "consult_1339_desc": "ปรึกษาแพทย์เฉพาะทาง",
+    "symptoms_title": "อาการ",
+    "taxi": "แท็กซี่",
+    "subway": "รถไฟใต้ดิน",
+    "airport": "สนามบิน",
+    "street": "บนท้องถนน",
+    "lost_header": "ช่วยเหลือของหาย",
+    "lost_where_title": "คุณทำของหายที่ไหน?",
+    "lost_where_desc": "เลือกสถานที่เพื่อรับคำแนะนำเฉพาะ",
+    "lost_quick_title": "ความช่วยเหลือด่วน",
+    "lost112_label": "ศูนย์ของหาย Lost112",
+    "embassy_label": "ข้อมูลสถานทูต",
+    "interp_hotline_title": "1330 สายด่วน",
+    "interp_hotline_desc": "สายด่วนอย่างเป็นทางการที่เร็วที่สุดสำหรับนักท่องเที่ยว",
+    "interp_chat_label": "สอบถามทางแชท",
+    "lost_steps_title": "วิธีตามหาของหาย {{place}}",
+    "lost_go_lost112": "ไปที่ศูนย์ของหาย Lost112",
+    "police_header": "ตำรวจและความปลอดภัย",
+    "police_contacts_section": "ช่องทางติดต่อตำรวจ",
+    "tourism_police_section": "ตำรวจท่องเที่ยว",
+    "tourism_police_title": "บริการตำรวจท่องเที่ยว",
+    "tourism_police_desc": "ให้บริการที่เมียงดง อินซาดง อีแทวอน เป็นต้น",
+    "interp_header": "ล่ามและแปลภาษา",
+    "interp_immediate_title": "ความช่วยเหลือทันที",
+    "interp_tools_title": "แอปแปลภาษา",
+    "interp_actions": {
+      "open_papago": "เปิด Papago",
+      "open_google_translate": "เปิด Google Translate"
+    },
+    "interp": {
+      "papago_desc": "เปิด Naver Papago เพื่อการแปลที่รวดเร็วและรองรับข้อความ",
+      "google_desc": "เปิด Google Translate สำหรับการแปลอื่นๆ ที่รวดเร็ว"
+    },
+    "lost": {
+      "taxi_s1_t": "1. ตรวจสอบใบเสร็จ",
+      "taxi_s1_d": "ตรวจสอบหมายเลขรถหรือบัตรเครดิตในใบเสร็จเพื่อหาข้อมูลติดต่อคนขับ",
+      "taxi_s2_t": "2. ติดต่อบริษัทบัตรเครดิต",
+      "taxi_s2_d": "โทรหาศูนย์บริการบัตรเครดิตเพื่อขอข้อมูลติดต่อร้านค้าจากประวัติการชำระเงิน",
+      "taxi_s3_t": "3. ติดต่อบริษัทแท็กซี่",
+      "taxi_s3_d": "ค้นหาบริษัทแท็กซี่จากหมายเลขรถและติดต่อโดยตรง",
+      "taxi_s4_t": "4. แจ้งตำรวจ",
+      "taxi_s4_d": "หากทุกวิธีข้างต้นไม่ได้ผล โทร 112 หรือใช้เว็บไซต์ Lost112",
+      "subway_s1_t": "1. ห้องเจ้าหน้าที่สถานี",
+      "subway_s1_d": "หากเพิ่งลงรถ ไปที่ห้องเจ้าหน้าที่สถานีทันทีและแจ้งหมายเลขตู้โดยสาร",
+      "subway_s2_t": "2. ศูนย์ของหาย",
+      "subway_s2_d": "หากเวลาผ่านไปแล้ว ติดต่อหรือไปที่ศูนย์ของหายของสายรถไฟนั้น",
+      "subway_s3_t": "3. Lost112",
+      "subway_s3_d": "สืบค้นหรือแจ้งออนไลน์ผ่านพอร์ทัลของหายของสำนักงานตำรวจแห่งชาติ",
+      "airport_s1_t": "1. เคาน์เตอร์ของหายสายการบิน/สนามบิน",
+      "airport_s1_d": "ไปที่เคาน์เตอร์ของหายของสายการบินหรือสนามบินก่อน",
+      "airport_s2_t": "2. ศูนย์ของหายสนามบินอินชอน",
+      "airport_s2_d": "สำหรับสนามบินอินชอน สามารถสอบถามได้ที่ห้องเก็บของหายชั้น 1 ผู้โดยสารขาออก",
+      "airport_s3_t": "3. แจ้งออนไลน์ผ่าน Lost112",
+      "airport_s3_d": "แจ้งของหายออนไลน์ผ่านพอร์ทัลของหายของสำนักงานตำรวจแห่งชาติ",
+      "street_s1_t": "1. ตรวจสอบบริเวณโดยรอบ",
+      "street_s1_d": "สอบถามกล้อง CCTV บริเวณที่หายหรือร้านค้าใกล้เคียง",
+      "street_s2_t": "2. ไปสถานีตำรวจหรือโทร 112",
+      "street_s2_d": "แจ้งของหายที่สถานีตำรวจใกล้เคียงหรือโทร 112",
+      "street_s3_t": "3. ลงทะเบียน Lost112",
+      "street_s3_d": "ลงทะเบียนแจ้งของหายในพอร์ทัลของหายของสำนักงานตำรวจแห่งชาติ เพื่อรับการติดต่อเมื่อพบของ"
+    },
     "medical": {
+      "pharmacy_title": "ยาสามัญประจำบ้าน (ร้านสะดวกซื้อ)",
       "medicines": {
         "tylenol": "ไทเลนอล",
-        "tylenol_desc": "해열, 진통, 근육통, 두통",
+        "tylenol_desc": "ลดไข้ บรรเทาปวด ปวดกล้ามเนื้อ ปวดหัว",
         "cold": "ยาแก้หวัด",
-        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
+        "cold_desc": "น้ำมูกไหล ไอ มีไข้และอาการหวัดอื่นๆ",
         "digestive": "ยาช่วยย่อย",
-        "digestive_desc": "소화불량, 식체, 속쓰림"
+        "digestive_desc": "อาหารไม่ย่อย ท้องอืด แสบกระเพาะ"
       },
       "symptoms": {
         "stomach": "ปวดท้อง",
@@ -1056,49 +1168,12 @@
         "pain": "เจ็บหน้าอก"
       }
     },
-    "police_header": "ตำรวจและความปลอดภัย",
-    "police_contacts_section": "Police Contacts",
-    "police.report_call_title": "Police Report (112)",
-    "police.report_call_desc": "24/7 service, foreign language available",
-    "police.official_site_title": "Official Police Site",
-    "police.official_site_desc": "Cyber crime report & info",
-    "tourism_police_section": "Tourist Police",
-    "tourism_police_title": "Tourist Police Service",
-    "tourism_police_desc": "Available in Myeongdong, Insadong, Itaewon, etc.",
-    "interp_header": "ล่ามและแปลภาษา",
-    "interp_immediate_title": "Immediate Help",
-    "interp_hotline_title": "1330 Helpline",
-    "interp_hotline_desc": "Fastest official help for tourism help",
-    "interp_chat_label": "สอบถามทางแชท",
-    "interp_tools_title": "Translation Tools",
-    "lost_header": "ช่วยเหลือของหาย",
-    "lost_where_title": "Where did you lose it?",
-    "lost_where_desc": "Select location for recovery steps",
-    "lost_quick_title": "Quick Lookup",
-    "lost112_label": "Lost112 Portal",
-    "embassy_label": "Find Embassy",
-    "lost_steps_title": "Lost in {{place}}",
-    "lost_go_lost112": "Search in Lost112",
-    "lost": {
-      "taxi_s1_t": "1. 영수증 확인",
-      "taxi_s1_d": "영수증에 기재된 카드사 번호나 차량번호로 기사님 연락처를 확보하세요.",
-      "taxi_s2_t": "2. 카드사 연락",
-      "taxi_s2_d": "결제한 카드의 고객센터에 전화하여 택시 승인 내역의 업체 연락처를 요청하세요.",
-      "subway_s1_t": "1. 역무실 방문",
-      "subway_s1_d": "내린 직후라면 해당 역의 역무실을 즉시 방문하여 열차 칸 번호를 알리세요.",
-      "subway_s2_t": "2. 유실물 센터",
-      "subway_s2_d": "시간이 지났다면 각 호선별 유실물 센터에 연락하거나 방문하세요."
-    },
     "police": {
-      "report_call_title": "범죄 신고 (긴급)",
-      "report_call_desc": "24시간 서비스, 외국어 대응 가능",
-      "official_site_title": "경찰청 공식 사이트",
-      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
-    },
-    "medical_title": "ความช่วยเหลือทางการแพทย์",
-    "police_title": "ตำรวจ/อาชญากรรม",
-    "interp_title": "บริการล่าม",
-    "lost_title": "ของหาย"
+      "report_call_title": "แจ้งอาชญากรรม (112)",
+      "report_call_desc": "บริการ 24 ชั่วโมง รองรับภาษาต่างประเทศ",
+      "official_site_title": "เว็บไซต์ตำรวจอย่างเป็นทางการ",
+      "official_site_desc": "แจ้งอาชญากรรมไซเบอร์และข้อมูลต่างๆ"
+    }
   },
   "settings_page": {
     "hero": {
@@ -1571,7 +1646,13 @@
       "customer": "ลูกค้า",
       "agreement_title": "ข้อตกลง",
       "agreement_desc": "โปรดยอมรับเงื่อนไขในการจอง",
-      "agreement_desc_hint": "โปรดยอมรับเงื่อนไขในการจอง",
+      "agreement_desc_hint": "โปรดยอมรับรายการที่จำเป็นสำหรับการจอง",
+      "agreement_all": "ยอมรับทั้งหมด",
+      "agreement_service": "[จำเป็น] ยอมรับเงื่อนไขการใช้บริการ",
+      "agreement_privacy": "[จำเป็น] ยอมรับการเก็บรวบรวมและการใช้ข้อมูลส่วนบุคคล",
+      "agreement_third_party": "[จำเป็น] ยอมรับการให้ข้อมูลแก่บุคคลที่สามและการโอนข้อมูลระหว่างประเทศ",
+      "agreement_marketing": "[ทางเลือก] ยอมรับการเก็บรวบรวมและรับข้อมูลทางการตลาด (อีเมล/SMS ฯลฯ)",
+      "agreement_validation_error": "โปรดยอมรับรายการที่จำเป็นทั้งหมด",
       "confirm_info_label": "ยืนยันรายละเอียดการจอง",
       "confirm_info_desc": "ฉันยืนยันว่าร้านค้า วันที่ และรายละเอียดบริการที่เลือกถูกต้อง",
       "privacy_label": "ยอมรับนโยบายความเป็นส่วนตัว",
@@ -1765,7 +1846,8 @@
   "interpreter_entry": {
     "title": "ล่ามแบบเรียลไทม์",
     "description": "สื่อสารกับพนักงานได้ง่ายๆ",
-    "cta": "เปิดล่าม"
+    "cta": "เปิดล่าม",
+    "select_language": "เลือกภาษาของคุณ"
   },
   "location_sheet": {
     "search_title": "ค้นหาตำแหน่ง",
@@ -1781,19 +1863,6 @@
     "copy_done": "คัดลอกแล้ว!",
     "close": "ปิด"
   },
-  "welcome_popup": {
-    "title": "สมัครสมาชิกรับคูปองส่วนลด 5% ทันที!",
-    "description": "คุณจะได้รับคูปองที่ใช้ได้ทันที",
-    "cta": "รับคูปองและสมัคร",
-    "close": "ปิด"
-  },
-  "referral_popup": {
-    "title": "คุณมีรหัสแนะนำไหม?",
-    "description": "ใส่รหัสเพื่อรับคูปองส่วนลด 5% ทั้งคุณและเพื่อน!",
-    "placeholder": "ใส่รหัสแนะนำ",
-    "submit": "ยืนยัน",
-    "skip": "ข้ามไปก่อน"
-  },
   "signup": {
     "subtitle": "สัมผัสประสบการณ์เกาหลีเหมือนคนท้องถิ่น",
     "name_label": "ชื่อ-นามสกุล",
@@ -1805,5 +1874,93 @@
     "success": "สร้างบัญชีสำเร็จ! กรุณาตรวจสอบอีเมลเพื่อยืนยันและเข้าสู่ระบบ",
     "login_prompt": "มีบัญชีอยู่แล้ว?",
     "login_link": "เข้าสู่ระบบ"
+  },
+  "webview_banner": {
+    "title": "เบราว์เซอร์ในแอปไม่รองรับการเข้าสู่ระบบ Google",
+    "desc_android": "พยายามเปิด Chrome แล้ว หากไม่มีอะไรเกิดขึ้น โปรดคัดลอกลิงก์และวางใน Chrome",
+    "desc_ios": "กรุณาเปิด Safari หรือ Chrome แล้ววางลิงก์เพื่อดำเนินการต่อ",
+    "copy_btn": "คัดลอกลิงก์",
+    "copy_btn_copied": "คัดลอกแล้ว",
+    "close": "ปิด"
+  },
+  "privacy_policy": {
+    "title": "นโยบายความเป็นส่วนตัว",
+    "effective_date": "วันที่เข้าผล: 21 เมษายน 2024",
+    "table": {
+      "category": "หมวดหมู่",
+      "items": "ข้อมูลที่เก็บรวบรวม",
+      "purpose": "วัตถุประสงค์ในการเก็บรวบรวม",
+      "retention": "ระยะเวลาการเก็บรักษา"
+    },
+    "collection": {
+      "title": "1. การเก็บรวบรวมและการใช้ข้อมูลส่วนบุคคล",
+      "required": "จำเป็น",
+      "required_items": "ชื่อ-นามสกุล, อีเมล, ข้อมูลการจอง (วันที่, เวลา, ร้านค้า, บริการ), ไอดีเข้าสู่ระบบโซเชียล",
+      "required_purpose": "ลงทะเบียนผู้ใช้, ยืนยันตัวตน, ให้บริการ (การจอง), ปรึกษาลูกค้า",
+      "auto": "การเก็บรวบรวมอัตโนมัติ",
+      "auto_items": "ที่อยู่ IP, คุกกี้, ข้อมูลจากอุปกรณ์, ประวัติการใช้บริการ",
+      "auto_purpose": "การปรับปรุงคุณภาพบริการและการป้องกันการฉ้อโกง"
+    },
+    "retention": {
+      "title": "2. ระยะเวลาการเก็บรักษาและการใช้",
+      "content": "ตามหลักการ ข้อมูลส่วนบุคคลจะถูกเก็บรักษาไว้จนกว่าจะถอนตัวจากการเป็นสมาชิก อย่างไรก็ตาม หากมีความจำเป็นตามกฎหมายที่เกี่ยวข้อง ข้อมูลอาจถูกเก็บรักษาไว้ตามระยะเวลาที่กฎหมายกำหนด",
+      "legal_basis": "การปฏิบัติตามกฎหมายที่เกี่ยวข้อง (เช่น กฎหมายพาณิชย์อิเล็กทรอนิกส์ เป็นต้น)"
+    },
+    "third_party": {
+      "title": "3. การให้ข้อมูลส่วนบุคคลแก่บุคคลที่สาม",
+      "content": "MyKello ให้ข้อมูลส่วนบุคคลแก่พันธมิตรดังต่อไปนี้เพื่ออำนวยความสะดวกในการจัดส่งบริการ",
+      "providers": "Supabase (ฐานข้อมูล), Google (การยืนยันตัวตน), X (การยืนยันตัวตน)"
+    },
+    "overseas": {
+      "title": "4. การโอนข้อมูลส่วนบุคคลไปต่างประเทศ",
+      "recipient": "ผู้รับ",
+      "country": "ประเทศ",
+      "purpose": "วัตถุประสงค์การโอน",
+      "items": "ข้อมูลที่โอน",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "สหรัฐอเมริกา (USA)",
+      "storage_auth": "การจัดเก็บข้อมูลและการยืนยันตัวตน OAuth 2.0",
+      "log_items": "อีเมล, ข้อมูลโปรไฟล์, บันทึกการใช้บริการ"
+    },
+    "destruction": {
+      "title": "5. ขั้นตอนและวิธีการทำลายข้อมูล",
+      "content": "ข้อมูลส่วนบุคคลจะถูกทำลายทันทีหลังจากบรรลุวัตถุประสงค์แล้ว ไฟล์อิเล็กทรอนิกส์จะถูกลบโดยใช้วิธีการทางเทคนิคที่ทำให้การกู้คืนเป็นไปไม่ได้"
+    }
+  },
+  "signup_consent": {
+    "all_agree": "ฉันยอมรับข้อกำหนดทั้งหมด",
+    "privacy_required": "[จำเป็น] ยอมรับการเก็บรวบรวมและการใช้ข้อมูลส่วนบุคคล",
+    "privacy_optional": "[ทางเลือก] ยอมรับการรับข้อมูลทางการตลาด",
+    "view_detail": "ดูรายละเอียด",
+    "terms_required": "[จำเป็น] ยอมรับเงื่อนไขการใช้บริการ"
+  },
+  "terms_of_service": {
+    "title": "เงื่อนไขการใช้บริการ",
+    "effective_date": "วันที่เข้าผล: 21 เมษายน 2024",
+    "definitions": {
+      "title": "1. คำนิยามของบริการ",
+      "content": "MyKello ให้บริการแพลตฟอร์มตัวแทนรับจองบริการความงาม เพื่ออำนวยความสะดวกในการจองและการสื่อสารระหว่างผู้ใช้และผู้ให้บริการความงาม"
+    },
+    "benefits": {
+      "title": "2. สิทธิประโยชน์ของสมาชิก",
+      "signup": "สมาชิกใหม่จะได้รับคูปองส่วนลด 5% เมื่อลงทะเบียนสำเร็จ",
+      "referral": "เมื่อลงทะเบียนด้วยรหัสแนะนำ ทั้งผู้แนะนำและผู้สมัครใหม่จะได้รับคูปองส่วนลด 5%"
+    },
+    "refund_policy": {
+      "title": "3. นโนบายการยกเลิกและคืนเงิน",
+      "subtitle": "อัตราการคืนเงินถูกคำนวณตามระยะเวลาการยกเลิกก่อนถึงวันจองดังนี้:",
+      "five_days": "5 วันล่วงหน้า: คืนเงิน 100%",
+      "three_days": "3 วันล่วงหน้า: คืนเงิน 90%",
+      "two_days": "2 วันล่วงหน้า: คืนเงิน 70%",
+      "one_day": "1 วันล่วงหน้า: คืนเงิน 50%",
+      "same_day": "วันจองหรือกรณี No-show: ไม่มีการคืนเงิน",
+      "note": "การคืนเงินขั้นสุดท้ายอาจแตกต่างกันไปตามนโยบายของแต่ละร้านค้า"
+    },
+    "liability": {
+      "title": "4. ข้อจำกัดความรับผิดชอบ",
+      "interpretation": "ฟีเจอร์ 'การแปลภาษาแบบเรียลไทม์' เป็นเครื่องมือเสริมเพื่อความสะดวกของผู้ใช้ MyKello จะไม่รับผิดชอบต่อความล่าช้าหรือข้อผิดพลาดในการจองที่เกิดจากความไม่ถูกต้องของการแปล",
+      "community": "MyKello จะไม่รับผิดชอบต่อความเสียหาย อุบัติเหตุ หรือข้อพิพาทใดๆ ที่เกิดจากการพบปะออฟไลน์หรือการทำธุรกรรมส่วนตัวระหว่างผู้ใช้ผ่านฟีเจอร์ชุมชน"
+    }
   }
 }

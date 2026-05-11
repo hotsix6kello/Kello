@@ -133,10 +133,11 @@ export function flattenSkeletonImageDrafts(
   }));
 }
 
-export type LegacyDraftAgreements = Pick<
-  BookingConfirmationState,
-  "bookingConfirmed" | "privacyConsent"
-> & {
+export type LegacyDraftAgreements = {
+  serviceTermsAgreed: boolean;
+  privacyPolicyAgreed: boolean;
+  thirdPartySharingAgreed: boolean;
+  marketingConsentAgreed: boolean;
   source: "explicit-input" | "placeholder-default";
 };
 
@@ -190,7 +191,7 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
   storeName?: string | null;
   region?: string | null;
   primaryServiceName?: string | null;
-  agreements?: Partial<Pick<BookingConfirmationState, "bookingConfirmed" | "privacyConsent">>;
+  agreements?: Partial<BookingConfirmationState>;
   bookingTimePolicy?: {
     placeholderTime?: string;
   };
@@ -208,10 +209,17 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
   );
   const flattenedImages = flattenSkeletonImageDrafts(state.customerDetails);
 
-  const bookingConfirmed = params.agreements?.bookingConfirmed ?? false;
-  const privacyConsent = params.agreements?.privacyConsent ?? false;
+  const serviceTermsAgreed = params.agreements?.serviceTermsAgreed ?? false;
+  const privacyPolicyAgreed = params.agreements?.privacyPolicyAgreed ?? false;
+  const thirdPartySharingAgreed = params.agreements?.thirdPartySharingAgreed ?? false;
+  const marketingConsentAgreed = params.agreements?.marketingConsentAgreed ?? false;
+
   const agreementSource: LegacyDraftAgreements["source"] =
-    params.agreements && ("bookingConfirmed" in params.agreements || "privacyConsent" in params.agreements)
+    params.agreements &&
+    ("serviceTermsAgreed" in params.agreements ||
+      "privacyPolicyAgreed" in params.agreements ||
+      "thirdPartySharingAgreed" in params.agreements ||
+      "marketingConsentAgreed" in params.agreements)
       ? "explicit-input"
       : "placeholder-default";
 
@@ -245,8 +253,10 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed,
-      privacyConsent,
+      serviceTermsAgreed,
+      privacyPolicyAgreed,
+      thirdPartySharingAgreed,
+      marketingConsentAgreed,
       source: agreementSource,
     },
     unresolved: {

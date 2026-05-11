@@ -178,3 +178,51 @@
 .socialBtn:hover {
     background: var(--gray-200);
 }
+
+/* Consent Section */
+.consentSection {
+    margin: 24px 0;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--warm-sand);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.consentItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid var(--warm-sand);
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.consentText {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--ink-black);
+    font-weight: 500;
+}
+
+.link {
+    font-size: 0.75rem;
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.allAgree {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--warm-sand);
+    margin-bottom: 4px;
+}

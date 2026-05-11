@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import dynamic from 'next/dynamic';
 import styles from './HomeTranslatorHub.module.css';
 import { getLocaleLabel, INTERPRETER_SUPPORTED_LOCALES } from '@/lib/translator/catalog.ts';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +11,18 @@ import type {
   ConciergeResponse,
 } from '@/lib/translator/types.ts';
 
-import { InShopInterpreterMvp } from './interpreter';
+const InShopInterpreterMvp = dynamic(
+  () => import('./interpreter').then(mod => ({ default: mod.InShopInterpreterMvp })),
+  {
+    loading: () => (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 0' }}>
+        <div style={{ width: 28, height: 28, border: '3px solid var(--primary)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    ),
+    ssr: false,
+  }
+);
 
 type TranslatorMode = 'booking' | 'interpreter';
 

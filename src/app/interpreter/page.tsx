@@ -129,6 +129,7 @@ export default function InterpreterPage() {
   const activeRecordingRoleRef = useRef<SpeakerRole | null>(null);
   const recordingStartedAtRef = useRef<number | null>(null);
   const recordingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedMessages = localStorage.getItem('interpreter_history');
@@ -151,6 +152,7 @@ export default function InterpreterPage() {
   useEffect(() => {
     if (messages.length > 0) {
       localStorage.setItem('interpreter_history', JSON.stringify(messages));
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
 
@@ -888,6 +890,7 @@ export default function InterpreterPage() {
             ))}
           </div>
         )}
+        <div ref={messagesEndRef} />
       </section>
     </main>
   );

@@ -65,7 +65,6 @@ import type {
 } from './components/home/HomeBookingFlowEntry.types';
 
 import {
-  BEAUTY_STORE_ITEMS,
   BEAUTY_CATEGORY_OPTIONS,
   BeautyCategoryId
 } from './components/home/constants';
@@ -86,19 +85,11 @@ function resolveSkeletonPreviewStoreContext(
   const normalizedStoreName = explicitStore?.storeName?.trim() || null;
   const normalizedRegion = explicitStore?.region?.trim() || null;
 
-  const matchedStoreById = normalizedStoreId
-    ? BEAUTY_STORE_ITEMS.find((store) => store.id === normalizedStoreId) ?? null
-    : null;
-  const matchedStoreByCategory = category
-    ? BEAUTY_STORE_ITEMS.find((store) => store.category === category) ?? null
-    : null;
-  const fallbackStore =
-    matchedStoreById ??
-    matchedStoreByCategory ?? {
-      id: category ? `skeleton-${category}-preview` : 'skeleton-preview-store',
-      name: category ? `${category} preview store` : 'skeleton preview store',
-      region: 'seoul',
-    };
+  const fallbackStore = {
+    id: category ? `skeleton-${category}-preview` : 'skeleton-preview-store',
+    name: category ? `${category} preview store` : 'skeleton preview store',
+    region: 'seoul',
+  };
 
   return {
     storeId: normalizedStoreId ?? fallbackStore.id,
@@ -299,22 +290,13 @@ export default function HomePage() {
     return () => subscription.unsubscribe();
   }, [hasSupabaseAuth]);
 
-  const POPUP_TTL_MS = 24 * 60 * 60 * 1000;
-
-  const isWithin24h = (key: string) => {
-    const val = localStorage.getItem(key);
-    if (!val) return false;
-    return Date.now() - Number(val) < POPUP_TTL_MS;
-  };
-
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!session) {
-        if (!isWithin24h('welcome_popup_closed')) {
-          setShowWelcomePopup(true);
-        }
+        setShowWelcomePopup(true);
       } else {
-        if (!isWithin24h('referral_popup_skipped')) {
+        const hidePopup = localStorage.getItem('hideReferralPopup') === 'true';
+        if (!hidePopup) {
           const { data } = await supabase
             .from('referrals')
             .select('id')
@@ -326,16 +308,18 @@ export default function HomePage() {
         }
       }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleWelcomeClose = () => {
-    localStorage.setItem('welcome_popup_closed', String(Date.now()));
     setShowWelcomePopup(false);
   };
 
   const handleReferralClose = () => {
-    localStorage.setItem('referral_popup_skipped', String(Date.now()));
+    setShowReferralPopup(false);
+  };
+
+  const handleReferralNeverShow = () => {
+    localStorage.setItem('hideReferralPopup', 'true');
     setShowReferralPopup(false);
   };
 
@@ -619,7 +603,6 @@ export default function HomePage() {
 
       <HomeInterpreterEntry
         onOpenInterpreter={handleOpenInterpreter}
-        t={t}
       />
 
 
@@ -658,6 +641,7 @@ export default function HomePage() {
       {showReferralPopup && (
         <ReferralCodePopup
           onClose={handleReferralClose}
+          onNeverShowAgain={handleReferralNeverShow}
           onSubmit={handleReferralSubmit}
           errorMessage={referralError ?? undefined}
         />

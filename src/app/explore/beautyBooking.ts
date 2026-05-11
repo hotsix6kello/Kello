@@ -41,8 +41,12 @@ export type BeautyBookingPayload = {
     };
   };
   agreements: {
-    bookingConfirmed: boolean;
-    privacyConsent: boolean;
+    serviceTermsAgreed: boolean;
+    privacyPolicyAgreed: boolean;
+    thirdPartySharingAgreed: boolean;
+    marketingConsentAgreed: boolean;
+    refundPolicyAgreed: boolean;
+    refundPolicyAgreedAt: string | null;
   };
   createdFrom: {
     flow: 'beauty-explore';
@@ -191,8 +195,12 @@ export function buildBeautyBookingPayload(
       },
     },
     agreements: {
-      bookingConfirmed: input.agreements.bookingConfirmed,
-      privacyConsent: input.agreements.privacyConsent,
+      serviceTermsAgreed: input.agreements.serviceTermsAgreed,
+      privacyPolicyAgreed: input.agreements.privacyPolicyAgreed,
+      thirdPartySharingAgreed: input.agreements.thirdPartySharingAgreed,
+      marketingConsentAgreed: input.agreements.marketingConsentAgreed,
+      refundPolicyAgreed: input.agreements.refundPolicyAgreed,
+      refundPolicyAgreedAt: input.agreements.refundPolicyAgreedAt,
     },
     createdFrom: {
       flow: 'beauty-explore',
@@ -231,7 +239,12 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
     return null;
   }
 
-  if (!isBoolean(agreements.bookingConfirmed) || !isBoolean(agreements.privacyConsent)) {
+  if (
+    !isBoolean(agreements.serviceTermsAgreed) ||
+    !isBoolean(agreements.privacyPolicyAgreed) ||
+    !isBoolean(agreements.thirdPartySharingAgreed) ||
+    !isBoolean(agreements.marketingConsentAgreed)
+  ) {
     return null;
   }
 
@@ -273,8 +286,12 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       localizedMessage: typeof messages.localized === 'string' ? messages.localized : '',
     },
     agreements: {
-      bookingConfirmed: agreements.bookingConfirmed,
-      privacyConsent: agreements.privacyConsent,
+      serviceTermsAgreed: agreements.serviceTermsAgreed === true,
+      privacyPolicyAgreed: agreements.privacyPolicyAgreed === true,
+      thirdPartySharingAgreed: agreements.thirdPartySharingAgreed === true,
+      marketingConsentAgreed: agreements.marketingConsentAgreed === true,
+      refundPolicyAgreed: agreements.refundPolicyAgreed === true,
+      refundPolicyAgreedAt: typeof agreements.refundPolicyAgreedAt === 'string' ? agreements.refundPolicyAgreedAt : null,
     },
   });
 }

@@ -4,50 +4,51 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 
-// This page handles the OAuth redirect from Google back into the app.
-// Supabase PKCE flow: exchange the code for a session, then redirect home.
 export default function AuthCallbackPage() {
     const router = useRouter();
 
     useEffect(() => {
         let redirected = false;
 
-        // Listen for the SIGNED_IN event which fires once the code has been
-        // exchanged for a session (including PKCE flows).
+        async function handleUser(userId: string, email: string | undefined, metadata: Record<string, string>) {
+            if (redirected) return;
+            redirected = true;
+
+            // Check if this is a new user (profile has no display_name yet)
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('display_name')
+                .eq('id', userId)
+                .single();
+
+            const name =
+                metadata?.full_name ||
+                metadata?.name ||
+                email?.split('@')[0] ||
+                'User';
+
+            localStorage.setItem('user', JSON.stringify({ name, email }));
+
+            // New user: display_name is null → send to signup form to complete profile
+            if (!profile?.display_name) {
+                router.replace('/auth/signup');
+            } else {
+                router.replace('/');
+            }
+        }
+
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            if (redirected) return;
-
             if (event === 'SIGNED_IN' && session?.user) {
-                redirected = true;
-                const user = session.user;
-                const name =
-                    user.user_metadata?.full_name ||
-                    user.user_metadata?.name ||
-                    user.email?.split('@')[0] ||
-                    'User';
-                localStorage.setItem('user', JSON.stringify({ name, email: user.email }));
-                router.replace('/');
+                handleUser(session.user.id, session.user.email, session.user.user_metadata);
             }
         });
 
-        // Also try getSession immediately in case the session is already ready
-        // (e.g. hash-based OAuth or a page reload).
         supabase.auth.getSession().then(({ data }) => {
-            if (redirected) return;
             if (data?.session?.user) {
-                redirected = true;
-                const user = data.session.user;
-                const name =
-                    user.user_metadata?.full_name ||
-                    user.user_metadata?.name ||
-                    user.email?.split('@')[0] ||
-                    'User';
-                localStorage.setItem('user', JSON.stringify({ name, email: user.email }));
-                router.replace('/');
+                handleUser(data.session.user.id, data.session.user.email, data.session.user.user_metadata);
             }
         });
 
-        // Fallback: if nothing happens within 8 seconds just go home
         const fallback = setTimeout(() => {
             if (!redirected) {
                 redirected = true;

@@ -94,8 +94,10 @@ export function createInitialBookingFlowState(
     selectedTime: null,
     customerDetails: createInitialCustomerDetailsState(),
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }

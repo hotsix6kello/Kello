@@ -112,7 +112,7 @@ export default function CommunityDetailPage() {
     const [newComment, setNewComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isInitialFetchDone, setIsInitialFetchDone] = useState(false);
-    const [loggedInUserName, setLoggedInUserName] = useState("Jessie Kim");
+    const [loggedInUserName, setLoggedInUserName] = useState("");
     const [userReaction, setUserReaction] = useState<'like' | 'dislike' | null>(null);
     const [likesCount, setLikesCount] = useState(0);
     const [dislikesCount, setDislikesCount] = useState(0);
@@ -195,9 +195,12 @@ export default function CommunityDetailPage() {
             if (storedUser) {
                 const parsed = JSON.parse(storedUser);
                 if (parsed.name) setLoggedInUserName(parsed.name);
+                else setLoggedInUserName(t('my_page.settings.account.default_name'));
+            } else {
+                setLoggedInUserName(t('my_page.settings.account.default_name'));
             }
         } catch {
-            // ignore
+            setLoggedInUserName(t('my_page.settings.account.default_name'));
         }
 
         if (id) {
@@ -467,7 +470,7 @@ export default function CommunityDetailPage() {
                                     <div key={idx} className={styles.imageWrapper}>
                                         <Image 
                                             src={src} 
-                                            alt={`post image ${idx + 1}`} 
+                                            alt={t('community_page.form.image.saved_name', { index: idx + 1 })} 
                                             width={800} 
                                             height={800} 
                                             style={{ width: '100%', height: 'auto', maxHeight: '480px', objectFit: 'contain', display: 'block' }} 

@@ -10,6 +10,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import LanguageInitializer from "./components/LanguageInitializer";
+import AutoLanguageDetector from "./components/AutoLanguageDetector";
 import { TripProvider } from "@/lib/contexts/TripContext";
 import ClientChrome from "./components/ClientChrome";
 import { DEFAULT_CLIENT_LOCALE, resolveCanonicalLocale } from "@/lib/i18n/locales";
@@ -96,6 +97,7 @@ export default async function RootLayout({
         <style>{`body[data-i18n-ready="false"] .mobile-wrapper{visibility:hidden}`}</style>
         <TripProvider>
           <LanguageInitializer locale={locale} />
+          <AutoLanguageDetector />
           <div className="mobile-wrapper">
             <main className="scroll-container">
               {children}

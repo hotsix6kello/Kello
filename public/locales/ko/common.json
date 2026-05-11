@@ -277,7 +277,23 @@
       "completion_title": "예약 요청 완료!",
       "completion_desc": "예약 요청이 성공적으로 전달되었습니다.\n매장에서 확인 후 곧 연락드리겠습니다.",
       "confirm_button": "확인",
-      "login_required": "이미지 업로드를 위해 로그인이 필요합니다. 로그인 후 다시 시도해주세요."
+      "login_required": "이미지 업로드를 위해 로그인이 필요합니다. 로그인 후 다시 시도해주세요.",
+      "refund_policy_notice": "취소 및 환불 규정 안내",
+      "refund_policy_title": "취소 및 환불 규정",
+      "refund_rate_label": "{{rate}}% 환불",
+      "no_refund_label": "환불 불가",
+      "platform_fee_note": "플랫폼 이용료({{rate}}%)는 취소 시점과 무관하게 환불되지 않습니다.",
+      "platform_fee_note_always": "플랫폼 이용료({{rate}}%)는 어떤 경우에도 환불되지 않습니다.",
+      "agreements_title": "이용 동의",
+      "agreement_booking_confirmed": "예약 내용 확인",
+      "agreement_booking_confirmed_desc": "선택하신 매장, 일시, 시술 정보가 정확함을 확인합니다.",
+      "agreement_privacy_consent": "개인정보 처리방침 동의",
+      "agreement_privacy_consent_desc": "예약 진행을 위해 성함, 연락처 등의 정보가 매장에 제공됨에 동의합니다.",
+      "agreement_refund_policy": "취소 및 환불 규정 동의",
+      "agreement_refund_policy_desc": "위 취소 및 환불 규정을 확인하였으며, 이에 동의합니다.",
+      "submitting": "처리 중...",
+      "submit_final": "최종 예약 신청하기",
+      "go_back_to_main": "메인으로 돌아가기"
     }
   },
   "booking_skeleton": {
@@ -337,10 +353,13 @@
       "service": "서비스",
       "customer": "예약자",
       "agreement_title": "약관 동의",
-      "agreement_desc": "예약에 필요한 필수 항목에 동의해 주세요.",
       "agreement_desc_hint": "예약에 필요한 필수 항목에 동의해 주세요.",
-      "confirm_info_label": "예약 내용 확인",
-      "confirm_info_desc": "선택한 매장, 날짜, 서비스 정보가 정확함을 확인합니다.",
+      "agreement_all": "전체 동의",
+      "agreement_service": "[필수] 서비스 이용약관 동의",
+      "agreement_privacy": "[필수] 개인정보 수집 및 이용 동의",
+      "agreement_third_party": "[필수] 개인정보 제3자 제공 및 국외 이전 동의",
+      "agreement_marketing": "[선택] 마케팅 정보 수집 및 수신 동의 (이메일/SMS 등)",
+      "agreement_validation_error": "필수 항목에 모두 동의해 주세요.",
       "privacy_label": "개인정보 수집 동의",
       "privacy_desc": "예약 진행을 위해 매장에 성함 및 연락처 정보를 제공하는 것에 동의합니다.",
       "attached_images": "첨부 이미지",
@@ -532,7 +551,8 @@
   "interpreter_entry": {
     "title": "실시간 번역 헬퍼",
     "description": "어떤 매장에서도 직원과 편하게 소통하세요",
-    "cta": "번역 시작하기"
+    "cta": "번역 시작하기",
+    "select_language": "내 언어를 선택하세요"
   },
   "location_sheet": {
     "search_title": "위치 정보 검색",
@@ -549,7 +569,7 @@
     "close": "취소"
   },
   "welcome_popup": {
-    "title": "지금 가입하면 즉시 사용 가능한 5% 할인 쿠폰 증정!",
+    "title": "지금 가입하시면 즉시 사용가능한\n5% 할인 쿠폰 증정",
     "description": "회원가입만 해도 바로 쓸 수 있는 쿠폰을 드려요.",
     "cta": "쿠폰 받고 가입하기",
     "close": "닫기"
@@ -845,7 +865,17 @@
     "error_alt": "처리에 실패했습니다.",
     "open_interpreter": "통역기 열기",
     "interpreter_visit_context": "{{storeName}} 방문 시 통역기 사용 중.",
-    "interpreter_visit_service_context": "{{storeName}}에서 {{serviceName}} 서비스를 위한 통역기 사용 중."
+    "interpreter_visit_service_context": "{{storeName}}에서 {{serviceName}} 서비스를 위한 통역기 사용 중.",
+    "cancel_days_until": "예약일까지 {{daysUntil}}일 남음 → 환불 비율 {{refundRate}}%",
+    "cancel_no_refund_warning": "⚠ 예약일 1일 전부터는 환불이 불가합니다",
+    "cancel_service_fee": "시술비",
+    "cancel_penalty": "위약금 ({{rate}}%)",
+    "cancel_platform_fee_label": "플랫폼 이용료 (환불 불가)",
+    "cancel_total_refund": "최종 환불 금액",
+    "cancel_platform_fee_note": "플랫폼 이용료({{rate}}%)는 취소 시점과 무관하게 환불되지 않습니다.",
+    "cancel_consent_no_refund": "예약일 1일 전 이내 취소로 환불이 불가합니다. 전액 차감에 동의합니다.",
+    "cancel_consent_partial": "지금 취소하시면 플랫폼 이용료 {{platformFee}}와 시술비의 {{penaltyRate}}%({{penaltyAmount}})가 차감됩니다. 동의합니다.",
+    "cancel_consent_default": "취소 및 환불 규정에 동의합니다."
   },
   "settings_page": {
     "hero": {
@@ -1138,5 +1168,646 @@
     "success": "계정이 생성됐어요! 이메일을 확인하고 인증 후 로그인해주세요.",
     "login_prompt": "이미 계정이 있으신가요?",
     "login_link": "로그인"
+  },
+  "help_page": {
+    "title": "긴급 지원",
+    "medical_title": "의료 지원",
+    "medical_desc": "가까운 병원과 증상 표현 카드",
+    "police_title": "경찰/범죄",
+    "police_desc": "신고 및 안전 지원",
+    "interp_title": "통역 서비스",
+    "interp_desc": "1330 안내 및 번역 앱",
+    "lost_title": "분실물",
+    "lost_desc": "단계별 분실물 찾기 가이드",
+    "call_btn": "전화하기",
+    "medical_header": "의료·응급 안내",
+    "emergency_119_title": "긴급 구조 (119)",
+    "emergency_119_desc": "응급 상황 즉시 구조",
+    "consult_1339_title": "의료 상담 (1339)",
+    "consult_1339_desc": "전문 의료 상담",
+    "symptoms_title": "증상",
+    "taxi": "택시",
+    "subway": "지하철",
+    "airport": "공항",
+    "street": "길거리",
+    "lost_header": "분실물 찾기 안내",
+    "lost_where_title": "어디서 잃어버리셨나요?",
+    "lost_where_desc": "장소를 선택하면 맞춤 안내를 드릴게요.",
+    "lost_quick_title": "빠른 도움",
+    "lost112_label": "경찰청 유실물 센터 (Lost112)",
+    "embassy_label": "대사관/외교부 안내",
+    "interp_hotline_title": "1330 헬프라인",
+    "interp_hotline_desc": "여행 중 도움이 필요할 때 가장 빠른 공식 지원",
+    "interp_chat_label": "온라인 채팅",
+    "lost_steps_title": "{{place}} 분실물 찾는 법",
+    "lost_go_lost112": "경찰청 유실물 센터 바로가기",
+    "police_header": "경찰·안전 안내",
+    "police_contacts_section": "경찰 연락처",
+    "tourism_police_section": "관광 경찰",
+    "tourism_police_title": "관광 경찰 서비스",
+    "tourism_police_desc": "명동, 인사동, 이태원 등에서 이용 가능",
+    "interp_header": "통역·번역 안내",
+    "interp_immediate_title": "즉시 지원",
+    "interp_tools_title": "번역 앱",
+    "interp_actions": {
+      "open_papago": "Papago 열기",
+      "open_google_translate": "Google 번역 열기"
+    },
+    "interp": {
+      "papago_desc": "빠른 번역과 텍스트 지원을 위해 Naver Papago를 열어드려요.",
+      "google_desc": "다른 빠른 번역이 필요하시면 Google 번역을 열어드려요."
+    },
+    "lost": {
+      "taxi_s1_t": "1. 영수증 확인",
+      "taxi_s1_d": "영수증에 있는 카드사나 차량 번호를 확인하고 기사 연락처를 찾아보세요.",
+      "taxi_s2_t": "2. 카드사 문의",
+      "taxi_s2_d": "카드 고객센터에 전화하여 결제 내역의 가맹점 연락처를 문의하세요.",
+      "taxi_s3_t": "3. 택시 회사 연락",
+      "taxi_s3_d": "차량 번호로 택시 회사를 찾아 직접 연락해보세요.",
+      "taxi_s4_t": "4. 경찰 신고",
+      "taxi_s4_d": "위의 방법이 모두 안 될 경우 112에 신고하거나 Lost112 사이트를 이용하세요.",
+      "subway_s1_t": "1. 역무실",
+      "subway_s1_d": "내린 직후라면 즉시 역무실을 찾아가 탑승 차량 번호를 알려주세요.",
+      "subway_s2_t": "2. 유실물 센터",
+      "subway_s2_d": "시간이 지난 경우 해당 노선 유실물 센터에 연락하거나 방문하세요.",
+      "subway_s3_t": "3. Lost112",
+      "subway_s3_d": "경찰청 유실물 통합 포털에서 온라인으로 조회하거나 신고할 수 있어요.",
+      "airport_s1_t": "1. 항공사/공항 분실물 데스크",
+      "airport_s1_d": "공항 내 해당 항공사 또는 공항공사 분실물 데스크를 먼저 방문하세요.",
+      "airport_s2_t": "2. 인천공항 분실물 센터",
+      "airport_s2_d": "인천공항의 경우 1층 출국장 분실물 보관소에 문의할 수 있어요.",
+      "airport_s3_t": "3. Lost112 온라인 신고",
+      "airport_s3_d": "경찰청 유실물 통합 포털을 통해 온라인으로 분실 신고를 하세요.",
+      "street_s1_t": "1. 주변 확인",
+      "street_s1_d": "분실 장소 주변 CCTV나 인근 가게에 문의해보세요.",
+      "street_s2_t": "2. 경찰서 방문 또는 112 신고",
+      "street_s2_d": "가까운 경찰서에 분실 신고를 하거나 112에 전화하세요.",
+      "street_s3_t": "3. Lost112 등록",
+      "street_s3_d": "경찰청 유실물 통합 포털에 분실 신고를 등록하면 찾았을 때 연락을 받을 수 있어요."
+    },
+    "medical": {
+      "pharmacy_title": "상비약 (편의점)",
+      "medicines": {
+        "tylenol": "타이레놀",
+        "tylenol_desc": "해열, 진통, 근육통, 두통",
+        "cold": "감기약",
+        "cold_desc": "콧물, 기침, 발열 등 감기 증상",
+        "digestive": "소화제",
+        "digestive_desc": "소화불량, 식체, 속쓰림"
+      },
+      "symptoms": {
+        "stomach": "배가 아파요",
+        "fever": "열이 나요",
+        "injury": "다쳤어요",
+        "allergy": "알레르기가 있어요",
+        "breathing": "숨이 가빠요",
+        "pain": "가슴이 아파요"
+      }
+    },
+    "police": {
+      "report_call_title": "범죄 신고 (112)",
+      "report_call_desc": "24시간 운영, 외국어 지원 가능",
+      "official_site_title": "경찰청 공식 사이트",
+      "official_site_desc": "사이버 범죄 신고 및 정보 안내"
+    }
+  },
+  "community_page": {
+    "write_post": "게시글 작성",
+    "edit": "게시글 수정",
+    "posting": "게시 중...",
+    "defaults": {
+      "region": "서울"
+    },
+    "hero": {
+      "title": "켈로 커뮤니티",
+      "search_placeholder": "관심 있는 주제를 검색해보세요"
+    },
+    "categories": {
+      "all": "전체",
+      "meetup": "모임",
+      "beauty_review": "뷰티",
+      "food_review": "맛집",
+      "travel_review": "여행",
+      "meetup_recruitment": "모집",
+      "help": "꿀팁"
+    },
+    "sub_filters": {
+      "all": "전체",
+      "saved": "저장됨",
+      "reacted": "반응함",
+      "mine": "내 게시글",
+      "recruiting": "모집 중",
+      "active_reactions": "인기",
+      "open_meetup": "오픈 모임",
+      "weekend": "주말",
+      "fresh": "최신 정보"
+    },
+    "status": {
+      "reviews": "후기",
+      "reacting": "반응 중",
+      "surveying": "조사 중",
+      "drafting": "초안",
+      "closed": "마감"
+    },
+    "tags": {
+      "solo_friendly": "혼자 가기 좋아요",
+      "friends_friendly": "친구랑 가기 좋아요",
+      "photo_spot": "사진 명소",
+      "waiting": "웨이팅 있어요",
+      "foreigner_friendly": "외국인 친화적"
+    },
+    "states": {
+      "fetch_failed_desc": "게시글을 불러오지 못했어요. 네트워크를 확인해주세요.",
+      "fetch_failed_title": "데이터 오류",
+      "fetch_failed_tip": "페이지를 새로고침해 보세요.",
+      "empty_title": "아직 게시글이 없어요",
+      "empty_desc": "첫 번째 이야기를 공유해보세요!",
+      "empty_tip": "우측 하단 작성 버튼을 눌러보세요.",
+      "no_results_title": "검색 결과가 없어요",
+      "no_results_desc": "다른 키워드로 검색해보세요.",
+      "cta_write": "첫 게시글 작성",
+      "cta_all": "전체 보기"
+    },
+    "quality_signals": {
+      "organized": "잘 정리됨",
+      "active": "매우 인기",
+      "asset": "풍부한 정보",
+      "mate": "좋은 메이트"
+    },
+    "toasts": {
+      "save_added": "저장된 게시글에 추가됐어요.",
+      "save_removed": "저장된 게시글에서 제거됐어요.",
+      "deleted": "삭제됐어요.",
+      "updated": "수정됐어요.",
+      "submitted": "게시됐어요.",
+      "region_collected": "{{region}} 게시글을 보여드릴게요"
+    },
+    "nav_summary": {
+      "all": "{{tab}}의 모든 이야기를 보는 중",
+      "active_reactions": "{{tab}}에서 뜨거운 반응 중!",
+      "open_meetup": "{{tab}}에서 새 메이트를 찾고 있어요",
+      "weekend": "{{tab}}에서 이번 주말 계획 있나요?",
+      "default": "{{tab}}에서 {{sub}}(으)로 필터링된 결과를 보는 중"
+    },
+    "form": {
+      "category_label": "카테고리",
+      "region_label": "지역",
+      "region_placeholder": "예: 강남, 마포",
+      "select_category": "카테고리 선택",
+      "write_guide_title": {
+        "beauty_review": "뷰티 경험을 공유해요",
+        "food_review": "숨겨진 맛집을 추천해요",
+        "travel_review": "여행 꿀팁을 공유해요",
+        "meetup": "함께 즐길 모임을 만들어요",
+        "meetup_recruitment": "여행 메이트를 찾고 있나요?",
+        "help": "궁금한 건 뭐든 물어보세요"
+      },
+      "write_guide_body": {
+        "beauty_review": "시술이나 서비스에 대한 솔직한 후기를 공유해요.",
+        "food_review": "맛, 분위기, 웨이팅 정보를 알려주세요.",
+        "travel_review": "코스, 짐 싸기, 이동 방법 등 유용한 팁을 알려주세요.",
+        "meetup": "언제, 어디서, 무엇을 할지 설명해주세요.",
+        "meetup_recruitment": "여행 일정, 목적지, 메이트 조건을 알려주세요.",
+        "help": "질문이나 상황을 자세히 설명해주세요."
+      },
+      "title_label": {
+        "beauty_review": "서비스/테마",
+        "default": "제목"
+      },
+      "title_placeholder": {
+        "beauty_review": "예: 강남 레이어드컷 후기",
+        "default": "제목을 입력하세요"
+      },
+      "desc_label": {
+        "beauty_review": "상세 내용",
+        "default": "내용"
+      },
+      "desc_placeholder": {
+        "beauty_review": "과정이나 결과를 자세히 설명해주세요.",
+        "food_review": "추천 메뉴와 이유를 설명해주세요.",
+        "travel_review": "다른 여행자에게 도움이 되는 정보를 공유해주세요.",
+        "meetup": "모임에 대해 자세히 설명해주세요.",
+        "meetup_recruitment": "함께 하고 싶은 것을 설명해주세요.",
+        "help": "자세한 질문이 더 좋은 답변을 받을 수 있어요.",
+        "default": "공유하고 싶은 이야기를 작성해요"
+      },
+      "image": {
+        "guides": {
+          "beauty_review": "전후 사진이나 매장 내부 사진을 추가하세요 (최대 4장)",
+          "food_review": "음식과 매장 내부 사진을 추가하세요 (최대 4장)",
+          "travel_review": "분위기를 보여주는 사진을 추가하세요 (최대 4장)",
+          "meetup": "장소나 활동 사진을 추가하세요 (최대 4장)",
+          "meetup_recruitment": "목적지나 참고 사진을 추가하세요 (최대 4장)",
+          "help": "문제 설명에 도움이 되는 사진을 추가하세요 (최대 4장)"
+        },
+        "saved_name": "저장된 이미지 {{index}}",
+        "file_only_alert": "이미지 파일만 선택할 수 있어요.",
+        "limit_alert": "최대 {{count}}장까지 업로드할 수 있어요.",
+        "load_failed_alert": "이미지를 불러오지 못했어요.",
+        "limit_label": "(최대 {{count}}장)"
+      },
+      "category_hints": {
+        "beauty_review": "뷰티샵 경험을 공유해요.",
+        "food_review": "좋아하는 맛집을 추천해요.",
+        "travel_review": "나만의 여행 노하우를 공유해요.",
+        "meetup": "함께 즐길 가벼운 모임을 만들어요.",
+        "meetup_recruitment": "일정이 맞는 여행 메이트를 찾아요.",
+        "help": "궁금한 건 뭐든 물어보세요."
+      },
+      "submit": "게시",
+      "write_title": "게시글 작성",
+      "edit_title": "게시글 수정",
+      "image_label": "이미지",
+      "add_photo": "사진 추가",
+      "preparing_images": "이미지 준비 중...",
+      "cancel": "취소"
+    },
+    "quick_entry": {
+      "beauty_together": {
+        "label": "뷰티 동행"
+      },
+      "flash_meetup": {
+        "label": "번개 모임"
+      },
+      "beauty": {
+        "label": "뷰티 후기"
+      },
+      "food": {
+        "label": "맛집 꿀팁"
+      },
+      "travel": {
+        "label": "여행 정보"
+      },
+      "write": {
+        "label": "새 글 작성"
+      },
+      "browse": {
+        "label": "둘러보기",
+        "sub": "인기 게시글"
+      },
+      "recruiting": {
+        "label": "모집 중",
+        "sub": "메이트"
+      },
+      "weekend": {
+        "label": "주말",
+        "sub": "주간 계획"
+      },
+      "record": {
+        "label": "일기",
+        "sub": "일상"
+      }
+    },
+    "fab": {
+      "create_post": "게시글 작성"
+    },
+    "sort": {
+      "latest": "최신순",
+      "reactions": "인기순",
+      "draft": "활발한 모집"
+    },
+    "card": {
+      "default_vibe": "좋은 분위기",
+      "title_prefix": {
+        "beauty_review": "[뷰티]",
+        "food_review": "[맛집]",
+        "travel_review": "[여행]"
+      },
+      "cta": {
+        "review": "게시글 보기",
+        "join": "지금 참여"
+      },
+      "result_badge": "완료",
+      "open_meetup_badge": "모임 오픈",
+      "fresh_badges": {
+        "comment": "뜨거운 반응",
+        "update": "방금 업데이트"
+      },
+      "draft_status": {
+        "active": "채팅 활발",
+        "forming": "메이트 모집 중",
+        "preparing": "관심 있어요"
+      },
+      "draft_desc": {
+        "active": "많은 분들이 관심을 보이고 있어요!",
+        "forming": "메이트를 더 찾고 있어요.",
+        "preparing": "첫 번째로 참여해보세요!"
+      },
+      "owner_reactions": {
+        "region": "{{region}}에 대해 {{count}}명과 채팅 중",
+        "join": "{{count}}명이 관심을 보여요"
+      },
+      "more_region": "{{region}}의 더 많은 이야기 보기"
+    },
+    "detail": "게시글 상세",
+    "detail_page": {
+      "loading": "데이터를 불러오는 중...",
+      "hidden_post": "이 게시글은 숨겨져 있어요.",
+      "not_found": "게시글을 찾을 수 없어요.",
+      "show_hidden": "숨겨진 게시글 보기",
+      "hide_post": "이 게시글 숨기기",
+      "empty_comments": "아직 댓글이 없어요. 첫 번째로 생각을 나눠보세요!",
+      "hide_comment": "이 댓글 숨기기",
+      "status": {
+        "REVIEWS": "후기",
+        "REACTING": "반응 중",
+        "SURVEYING": "조사 중",
+        "DRAFTING": "초안",
+        "CLOSED": "마감"
+      },
+      "tags": {
+        "solo_friendly": "혼자 가기 좋아요",
+        "friends_friendly": "친구랑 가기 좋아요",
+        "photo_spot": "사진 명소",
+        "waiting": "웨이팅 필요",
+        "foreigner_friendly": "외국인 친화적"
+      },
+      "freshness": {
+        "realtime": "활발히 진행 중",
+        "updated": "정보 업데이트됨",
+        "active": "활성 게시글",
+        "calm": "잠잠한 게시글"
+      },
+      "strengths": {
+        "title": "게시글 강점",
+        "organized": "잘 정리됨",
+        "active": "활발한 소통",
+        "visited_tip": "꿀팁 포함",
+        "new": "새 콘텐츠"
+      },
+      "checklist": {
+        "title": "체크리스트",
+        "recommended": "추천 대상",
+        "required": "꼭 확인",
+        "comment_check": "댓글 확인",
+        "read_details": "상세 내용 읽기"
+      },
+      "mini_signal_tag": "모임 오픈",
+      "primary_action": {
+        "review": "후기 남기기",
+        "join": "관심 표현하기"
+      },
+      "save": {
+        "saved": "저장됨",
+        "default": "저장"
+      },
+      "meetup_safety": {
+        "title": "모임 안전 가이드",
+        "item_1": "공공장소에서 만나는 것을 권장해요.",
+        "item_2": "개인 정보를 조심하세요."
+      },
+      "body_title": "게시글 내용",
+      "like": "좋아요",
+      "dislike": "싫어요",
+      "like_alert": "이 게시글에 좋아요를 눌렀어요!",
+      "dislike_alert": "이 게시글에 싫어요를 눌렀어요.",
+      "comments_title": "댓글",
+      "comment_input": {
+        "default": "댓글을 입력하세요...",
+        "optional": "선택 메모를 추가하세요",
+        "send": "보내기",
+        "open_btn": "댓글",
+        "cancel": "취소"
+      },
+      "signal_intents": {
+        "interested": "관심 있어요",
+        "available_this_week": "이번 주 가능해요",
+        "join_if_schedule_fits": "일정 맞으면 참여할게요",
+        "thanks": "정보 감사해요",
+        "question": "질문이 있어요"
+      },
+      "signal_times": {
+        "this_week": "이번 주",
+        "this_weekend": "이번 주말",
+        "next_week": "다음 주",
+        "schedule_coordination": "날짜 조율 중"
+      },
+      "author_panel": {
+        "title": "작성자 대시보드",
+        "badge": "작성자",
+        "stats": {
+          "total": "총 반응",
+          "total_value": "{{count}}",
+          "time": "선호 시간",
+          "time_pending": "계산 중",
+          "intent": "주요 의도",
+          "recent": "최근 24시간",
+          "recent_value": "{{count}}"
+        },
+        "guide": {
+          "weekend": "주말에 반응이 가장 많아요. 자세한 일정을 제안해보세요.",
+          "vote": "선호 시간이 다양해요. 투표로 확정해보세요.",
+          "share": "더 많은 관심을 받으려면 정보를 더 공유해보세요."
+        },
+        "action": {
+          "weekend": "주말 일정 제안하기",
+          "vote": "투표 올리기",
+          "share": "추가 꿀팁 공유하기"
+        },
+        "draft": {
+          "weekend": "이번 주말 오후 2시에 만나는 건 어때요?",
+          "vote": "선호하는 시간에 투표해주세요!",
+          "share": "한 가지 꿀팁을 더 알려드릴게요!"
+        },
+        "final_draft": "모집을 마감할게요. 참여하실 분들은 오픈채팅에 입장해주세요!",
+        "final_action": "모집 마감",
+        "footer": "켈로는 안전한 커뮤니티 문화를 추구합니다."
+      },
+      "status_controls": {
+        "title": "상태 변경"
+      },
+      "result": {
+        "title": "방문 후기 & 꿀팁",
+        "help": "방문 후 꿀팁이나 후기를 공유해주세요. 다른 분들에게 큰 도움이 돼요.",
+        "placeholder": "방문 후기를 여기에 작성하세요...",
+        "save_visited": "방문 & 꿀팁 저장",
+        "save_only": "정보만 저장"
+      },
+      "author_safety": {
+        "title": "작성자 안전 가이드",
+        "item_1": "개인 연락처를 직접 노출하지 마세요.",
+        "item_2": "불법 모임이나 금전 요청을 조심하세요.",
+        "item_3": "신뢰할 수 있는 사용자와 소통하세요."
+      },
+      "signal_summary": {
+        "title": "참여 현황",
+        "status": {
+          "active": "활발히 모집 중",
+          "forming": "결성 중",
+          "preparing": "시작 중"
+        },
+        "time_split": "선호 시간이 나뉘어 있어요.",
+        "time_focus": "가장 선호하는 시간: {{time}}",
+        "time_flexible": "유동적인 시간이 많아요.",
+        "desc": "{{count}}명이 {{topic}}에 관심을 표현했어요.",
+        "topic_review": "후기 공유",
+        "topic_outing": "모임 참여",
+        "schedule_title": "선호 시간 선택"
+      }
+    },
+    "actions": {
+      "delete_confirm": "정말 삭제하시겠어요?"
+    },
+    "errors": {
+      "login_required": "로그인이 필요해요.",
+      "post_failed": "게시 실패: {{message}}"
+    },
+    "report": {
+      "report_action": "신고",
+      "success": "신고됐어요.",
+      "modal_title": "신고 사유 선택",
+      "cancel": "취소",
+      "reasons": {
+        "ad_spam": "광고/스팸",
+        "offensive": "불쾌한 내용",
+        "contact": "연락처 유도",
+        "unsafe": "안전하지 않음",
+        "other": "기타"
+      }
+    },
+    "comments": "댓글",
+    "time": {
+      "just_now": "방금 전"
+    }
+  },
+  "webview_banner": {
+    "title": "카카오톡·인앱브라우저에서는 Google 로그인을 사용할 수 없어요",
+    "desc_android": "Chrome으로 열기를 시도했어요. 팝업이 뜨지 않으면 링크를 복사해 Chrome에 붙여넣어 주세요.",
+    "desc_ios": "Safari 또는 Chrome을 열고 아래 링크를 붙여넣어 로그인해 주세요.",
+    "copy_btn": "링크 복사",
+    "copy_btn_copied": "링크 복사됨",
+    "close": "닫기"
+  },
+  "privacy_policy": {
+    "title": "개인정보 처리방침",
+    "effective_date": "시행일: 2026년 5월 4일",
+    "table": {
+      "category": "항목",
+      "items": "수집 정보",
+      "purpose": "수집 목적",
+      "retention": "보유 기간"
+    },
+    "collection": {
+      "title": "1. 개인정보의 수집 및 이용",
+      "required": "필수",
+      "required_items": "이름, 이메일, 예약 정보(날짜, 시간, 매장, 서비스), 소셜 로그인 ID",
+      "required_purpose": "회원 가입, 본인 식별, 서비스 제공(예약), 고객 상담",
+      "auto": "자동 수집",
+      "auto_items": "IP 주소, 쿠키, 기기 정보, 서비스 이용 기록",
+      "auto_purpose": "서비스 품질 개선 및 부정 이용 방지"
+    },
+    "retention": {
+      "title": "2. 보유 및 이용 기간",
+      "content": "개인정보는 원칙적으로 회원 탈퇴 시까지 보유합니다. 단, 관련 법령에 의해 보존할 필요가 있는 경우 해당 기간 동안 보관할 수 있습니다.",
+      "legal_basis": "관련 법령 준수(예: 전자상거래법)"
+    },
+    "third_party": {
+      "title": "3. 개인정보의 제3자 제공",
+      "content": "MyKello는 서비스 제공을 위해 아래의 파트너에게 개인정보를 제공합니다.",
+      "providers": "Supabase (데이터베이스), Google (본인 인증), X (본인 인증)"
+    },
+    "overseas": {
+      "title": "4. 개인정보의 국외 이전",
+      "recipient": "수신자",
+      "country": "국가",
+      "purpose": "이전 목적",
+      "items": "이전 항목",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "미국",
+      "storage_auth": "데이터 저장 및 사용자 인증(OAuth 2.0)",
+      "log_items": "이메일, 프로필 정보, 서비스 이용 로그"
+    },
+    "destruction": {
+      "title": "5. 파기 절차 및 방법",
+      "content": "개인정보는 목적 달성 후 지체 없이 파기합니다. 전자적 파일 형태는 복구가 불가능한 기술적 방법으로 삭제합니다."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "모든 약관에 동의합니다.",
+    "privacy_required": "[필수] 개인정보 수집 및 이용 동의",
+    "privacy_optional": "[선택] 마케팅 정보 수신 동의",
+    "view_detail": "보기",
+    "terms_required": "[필수] 서비스 이용약관 동의"
+  },
+  "terms_of_service": {
+    "title": "서비스 이용약관",
+    "effective_date": "시행일: 2026년 5월 4일",
+    "definitions": {
+      "title": "1. 서비스의 정의",
+      "content": "MyKello는 사용자와 뷰티 서비스 제공자 사이의 예약 및 소통을 돕는 뷰티 서비스 예약 대행 플랫폼을 제공합니다."
+    },
+    "benefits": {
+      "title": "2. 회원 혜택",
+      "signup": "신규 가입 시 5% 할인 쿠폰이 지급됩니다.",
+      "referral": "추천인 코드를 통해 가입 시, 추천인과 피추천인 모두에게 5% 할인 쿠폰이 지급됩니다."
+    },
+    "platform_fee": {
+      "title": "3. 플랫폼 이용료",
+      "content": "MyKello는 예약 대행 서비스에 대해 시술비의 10%를 플랫폼 이용료로 부과합니다.",
+      "note": "플랫폼 이용료는 예약 완료 시점에 시술비와 함께 결제되며, 취소 및 환불 시 플랫폼 이용료는 환불 대상에서 제외됩니다."
+    },
+    "refund_policy": {
+      "title": "4. 취소 및 환불 규정",
+      "subtitle": "환불 비율은 시술비에만 적용됩니다. 플랫폼 이용료(10%)는 취소 시점과 무관하게 환불되지 않습니다:",
+      "four_days": "예약일 4일 전까지: 시술비 100% 환불",
+      "three_days": "예약일 3일 전: 시술비 80% 환불",
+      "two_days": "예약일 2일 전: 시술비 60% 환불",
+      "one_day": "예약일 1일 전: 환불 불가",
+      "same_day": "당일 / No-show: 환불 불가",
+      "note": "본 환불 규정은 MyKello 플랫폼을 통한 모든 예약에 동일하게 적용되며, 매장별 별도 규정은 적용되지 않습니다."
+    },
+    "chargeback": {
+      "title": "5. 결제 취소 및 분쟁",
+      "content": "고객은 예약 결제 시 본 환불 규정에 명시적으로 동의한 것으로 간주됩니다.",
+      "note": "본 규정에 따른 정당한 취소 수수료 차감에 대해 카드사를 통한 결제 취소 이의제기(Chargeback)를 제기할 경우, MyKello는 고객의 동의 기록 및 예약 내역을 근거로 분쟁에 대응할 수 있습니다."
+    },
+    "liability": {
+      "title": "6. 책임의 한계",
+      "interpretation": "실시간 통역 기능은 사용자 편의를 위해 제공되는 부가 도구입니다. MyKello는 AI 번역 또는 수동 통역의 불일치로 인해 발생하는 예약 오류나 분쟁에 대해 책임을 지지 않습니다.",
+      "community": "사용자가 커뮤니티 기능을 통해 자발적으로 진행한 오프라인 모임이나 개인 간 거래에서 발생하는 손해, 사고 또는 분쟁에 대해 MyKello는 책임을 지지 않습니다."
+    }
+  },
+  "interpreter_page": {
+    "back": "뒤로",
+    "title": "실시간 통역",
+    "subtitle": "방문객 언어는 앱 언어로 설정되며, 매장 언어는 한국어로 고정됩니다.",
+    "onboarding": "방문객이 입력하면 한국어로 번역되고, 직원이 한국어로 입력하면 방문객 언어로 번역됩니다.",
+    "customer_lang": "방문객 언어",
+    "staff_lang": "매장 언어 (한국어)",
+    "mic_preparing": "마이크 준비 중",
+    "customer_transcribing": "방문객 음성 인식 중...",
+    "customer_recording": "방문객 녹음 중... 다시 클릭하면 완료",
+    "translating": "번역 중...",
+    "customer_speak_btn": "방문객 음성 입력",
+    "staff_transcribing": "직원 음성 인식 중...",
+    "staff_recording": "직원 녹음 중... 다시 클릭하면 완료",
+    "staff_speak_btn": "직원 음성 입력",
+    "customer_input_label": "방문객 입력",
+    "customer_placeholder": "방문객이 말한 내용을 입력하세요.",
+    "send": "전송",
+    "staff_input_label": "직원 입력",
+    "staff_placeholder": "직원이 한국어로 말한 내용을 입력하세요.",
+    "voice_supported_hint": "마이크로 녹음하거나 아래에 텍스트를 입력하세요.",
+    "voice_not_supported_hint": "음성 입력이 지원되지 않습니다. 텍스트를 사용하세요.",
+    "voice_recognizing": "음성 인식 중.",
+    "voice_unrecognized_error": "음성을 인식할 수 없습니다.",
+    "voice_failed_error": "음성 인식에 실패했습니다.",
+    "mic_permission_status": "마이크 권한 확인 중.",
+    "recording_status": "녹음 중... 최대 {{seconds}}초.",
+    "mic_unsupported_error": "마이크에 접근할 수 없습니다.",
+    "input_required_customer": "방문객 문장을 먼저 입력하세요.",
+    "input_required_staff": "직원 문장을 먼저 입력하세요.",
+    "translating_status": "번역 준비 중.",
+    "translation_failed_error": "번역에 실패했습니다. 다시 시도하세요.",
+    "empty_history_hint": "대화 기록이 여기에 표시됩니다.",
+    "customer_role": "방문객",
+    "staff_role": "직원",
+    "replay_btn_label": "번역 재생",
+    "replay_not_supported_hint": "오디오 재생이 지원되지 않습니다.",
+    "play": "재생",
+    "translated_status": "번역됨",
+    "source_only_status": "원문만",
+    "voice_too_short_error": "조금 더 길게 말씀해 주세요."
   }
 }

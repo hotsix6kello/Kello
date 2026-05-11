@@ -70,7 +70,23 @@
       "completion_title": "Reservation Requested!",
       "completion_desc": "Successfully sent your reservation request.\nThe shop will confirm and contact you soon.",
       "confirm_button": "Confirm",
-      "login_required": "Login is required to attach images. Please try again after logging in."
+      "login_required": "Login is required to attach images. Please try again after logging in.",
+      "refund_policy_notice": "Cancellation & Refund Policy Info",
+      "refund_policy_title": "Cancellation & Refund Policy",
+      "refund_rate_label": "{{rate}}% refund",
+      "no_refund_label": "No refund",
+      "platform_fee_note": "The {{rate}}% platform fee is non-refundable regardless of cancellation timing.",
+      "platform_fee_note_always": "The {{rate}}% platform fee is non-refundable in all cases.",
+      "agreements_title": "Terms Agreement",
+      "agreement_booking_confirmed": "Booking Info Confirmation",
+      "agreement_booking_confirmed_desc": "I confirm that the selected shop, date, and service information is accurate.",
+      "agreement_privacy_consent": "Personal Information Policy Agreement",
+      "agreement_privacy_consent_desc": "I agree to provide my name and contact information to the shop for the reservation.",
+      "agreement_refund_policy": "Cancellation & Refund Policy Agreement",
+      "agreement_refund_policy_desc": "I have reviewed and agree to the cancellation and refund policy above.",
+      "submitting": "Processing...",
+      "submit_final": "Submit Final Booking Request",
+      "go_back_to_main": "Back to Main"
     }
   },
   "booking_skeleton": {
@@ -129,11 +145,14 @@
       "date_time": "Date & Time",
       "service": "Service",
       "customer": "Customer",
-      "agreement_title": "Agreements",
-      "agreement_desc": "Please agree to the required items for booking.",
-      "agreement_desc_hint": "Please agree to the required items for booking.",
-      "confirm_info_label": "Confirm Booking Details",
-      "confirm_info_desc": "I confirm that the selected shop, date, and service details are correct.",
+      "agreement_title": "Consent to Terms",
+      "agreement_desc_hint": "Please agree to the required items for your booking.",
+      "agreement_all": "Agree to All",
+      "agreement_service": "[Required] Agree to Terms of Service",
+      "agreement_privacy": "[Required] Consent to Collection and Use of Personal Information",
+      "agreement_third_party": "[Required] Consent to Third-Party Provision and Overseas Transfer of Personal Information",
+      "agreement_marketing": "[Optional] Consent to Receive Marketing Information (Email/SMS, etc.)",
+      "agreement_validation_error": "Please agree to all required items.",
       "privacy_label": "Agree to Privacy Policy",
       "privacy_desc": "I agree to provide my name and contact information to the shop for the reservation.",
       "attached_images": "Attached Images",
@@ -347,13 +366,27 @@
   "interpreter_entry": {
     "title": "Live Translation",
     "description": "Communicate easily with staff at any shop",
-    "cta": "Start Translation"
+    "cta": "Start Translation",
+    "select_language": "Select your language"
   },
   "modals": {
     "card_title": "🗺️ Please go to this address",
     "copy": "Copy Address",
     "copy_done": "Copied!",
     "close": "Cancel"
+  },
+  "welcome_popup": {
+    "title": "Sign up now and\nget a 5% discount coupon!",
+    "description": "You'll receive a coupon you can use right away.",
+    "cta": "Sign up & get coupon",
+    "close": "Close"
+  },
+  "referral_popup": {
+    "title": "Do you have a referral code?",
+    "description": "Enter a code and both you and your friend get a 5% coupon!",
+    "placeholder": "Enter referral code",
+    "submit": "Submit",
+    "skip": "Skip for now"
   },
   "location_sheet": {
     "search_title": "Search Results",
@@ -527,7 +560,17 @@
     "lang_de": "Deutsch",
     "lang_ar": "العربية",
     "lang_pt": "Português",
-    "lang_ru": "Русский"
+    "lang_ru": "Русский",
+    "cancel_days_until": "{{daysUntil}} days until appointment → {{refundRate}}% refund",
+    "cancel_no_refund_warning": "⚠ No refund is available from 1 day before the appointment",
+    "cancel_service_fee": "Service fee",
+    "cancel_penalty": "Penalty ({{rate}}%)",
+    "cancel_platform_fee_label": "Platform fee (non-refundable)",
+    "cancel_total_refund": "Total refund",
+    "cancel_platform_fee_note": "The {{rate}}% platform fee is non-refundable in all cases.",
+    "cancel_consent_no_refund": "No refund is available within 1 day of the appointment. I agree to full deduction.",
+    "cancel_consent_partial": "Cancelling now will deduct the {{platformFeeRate}}% platform fee and {{penaltyRate}}% of the service fee ({{penaltyAmount}}). I agree.",
+    "cancel_consent_default": "I agree to the cancellation and refund policy."
   },
   "beauty_explore": {
     "hero_title": "Explore Beauty Bookings",
@@ -571,7 +614,6 @@
     "completion_desc2": "Please note it's not confirmed until you receive a confirmation notice.",
     "completion_desc3": "Track progress anytime in My Bookings menu.",
     "completion_flow_hint": "Your booking request has been received. It will be confirmed after the shop reviews it. Check results via notification or My Bookings.",
-    "cancel_policy_hint": "You may cancel before confirmation. Cancellations after confirmation are subject to the shop's policy.",
     "price_estimate_hint": "Prices shown are estimates. Final amounts may vary based on options or shop policy.",
     "label_rating": "Rating",
     "label_review": "Reviews",
@@ -1204,7 +1246,7 @@
         },
         "cancel_refund": {
           "q": "What are the cancellation and refund policies?",
-          "a": "Policies may vary by service, so please check the detailed information."
+          "a": "MyKello applies a unified refund policy to all bookings. 4+ days before: 100% refund on the service fee. 3 days before: 80%. 2 days before: 60%. 1 day before or same day / No-show: no refund. The 10% platform fee is non-refundable in all cases."
         },
         "write_review": {
           "q": "How do I write a review?",
@@ -1722,12 +1764,30 @@
     "lost": {
       "taxi_s1_t": "1. Check Receipt",
       "taxi_s1_d": "Check the card company or vehicle number on the receipt to find the driver's contact info.",
-      "taxi_s2_t": "2. Contact Card Co.",
+      "taxi_s2_t": "2. Contact Card Company",
       "taxi_s2_d": "Call your card's customer center and ask for the merchant contact in the transaction history.",
+      "taxi_s3_t": "3. Contact Taxi Company",
+      "taxi_s3_d": "Use the vehicle number to find and contact the taxi company directly.",
+      "taxi_s4_t": "4. File a Police Report",
+      "taxi_s4_d": "If none of the above work, call 112 or use the Lost112 website.",
       "subway_s1_t": "1. Station Office",
       "subway_s1_d": "If you just got off, visit the station office immediately and inform them of your car number.",
-      "subway_s2_t": "2. Lost & Found",
-      "subway_s2_d": "If time has passed, contact or visit the Lost & Found center for that line."
+      "subway_s2_t": "2. Lost & Found Center",
+      "subway_s2_d": "If time has passed, contact or visit the Lost & Found center for that line.",
+      "subway_s3_t": "3. Lost112 Portal",
+      "subway_s3_d": "Search or register your lost item online at the National Police Lost & Found Portal.",
+      "airport_s1_t": "1. Airline / Airport Lost Property Desk",
+      "airport_s1_d": "Visit the airline or airport authority's lost property desk inside the airport first.",
+      "airport_s2_t": "2. Incheon Airport Lost & Found Center",
+      "airport_s2_d": "For Incheon Airport, inquire at the luggage storage area on the 1st floor departure hall.",
+      "airport_s3_t": "3. Report Online via Lost112",
+      "airport_s3_d": "Submit a lost item report online through the National Police Lost & Found Portal.",
+      "street_s1_t": "1. Check the Area",
+      "street_s1_d": "Ask nearby shops or check if any CCTV footage is available near where you lost the item.",
+      "street_s2_t": "2. Visit Police Station or Call 112",
+      "street_s2_d": "File a lost item report at the nearest police station or call 112.",
+      "street_s3_t": "3. Register on Lost112",
+      "street_s3_d": "Registering on the National Police Lost & Found Portal means you'll be contacted when your item is found."
     },
     "medical_header": "Medical & Emergency",
     "emergency_119_title": "Emergency (119)",
@@ -1757,10 +1817,6 @@
     },
     "police_header": "Police & Safety",
     "police_contacts_section": "Police Contacts",
-    "police.report_call_title": "Police Report (112)",
-    "police.report_call_desc": "24/7 service, foreign language available",
-    "police.official_site_title": "Official Police Site",
-    "police.official_site_desc": "Cyber crime report & info",
     "tourism_police_section": "Tourist Police",
     "tourism_police_title": "Tourist Police Service",
     "tourism_police_desc": "Available in Myeongdong, Insadong, Itaewon, etc.",
@@ -2198,19 +2254,6 @@
   "error_retry": "Try Again",
   "common_actions_view_all": "View All",
   "common_loading": "Loading...",
-  "welcome_popup": {
-    "title": "Get a 5% coupon just for signing up!",
-    "description": "You'll receive a coupon you can use right away.",
-    "cta": "Sign up & get coupon",
-    "close": "Close"
-  },
-  "referral_popup": {
-    "title": "Do you have a referral code?",
-    "description": "Enter a code and both you and your friend get a 5% coupon!",
-    "placeholder": "Enter referral code",
-    "submit": "Submit",
-    "skip": "Skip for now"
-  },
   "signup": {
     "subtitle": "Experience Korea like a local",
     "name_label": "Name",
@@ -2222,5 +2265,103 @@
     "success": "Account created! Please check your email to verify and then log in.",
     "login_prompt": "Already have an account?",
     "login_link": "Log in"
+  },
+  "webview_banner": {
+    "title": "Google login is not available in in-app browsers",
+    "desc_android": "We tried to open Chrome. If nothing happened, copy the link and paste it in Chrome.",
+    "desc_ios": "Please open Safari or Chrome and paste the link to continue.",
+    "copy_btn": "Copy Link",
+    "copy_btn_copied": "Link Copied",
+    "close": "Close"
+  },
+  "privacy_policy": {
+    "title": "Privacy Policy",
+    "effective_date": "Effective Date: May 4, 2026",
+    "table": {
+      "category": "Category",
+      "items": "Collected Items",
+      "purpose": "Purpose",
+      "retention": "Retention Period"
+    },
+    "collection": {
+      "title": "1. Collection and Use of Personal Information",
+      "required": "Required",
+      "required_items": "Name, Email, Reservation Info (Date, Time, Shop, Service), Social Login ID",
+      "required_purpose": "User Registration, Identification, Service Provision (Booking), Customer Consultation",
+      "auto": "Automatic Collection",
+      "auto_items": "IP Address, Cookies, Device Info, Service Usage Logs",
+      "auto_purpose": "Improving Service Quality and Preventing Fraud"
+    },
+    "retention": {
+      "title": "2. Retention and Use Period",
+      "content": "In principle, personal information is retained until membership withdrawal. However, it may be kept for a period required by relevant laws if necessary.",
+      "legal_basis": "Compliance with relevant laws (e.g., E-commerce Act)"
+    },
+    "third_party": {
+      "title": "3. Providing Personal Information to Third Parties",
+      "content": "MyKello provides personal information to the following partners to facilitate service delivery.",
+      "providers": "Supabase (Database), Google (Authentication), X (Authentication)"
+    },
+    "overseas": {
+      "title": "4. Overseas Transfer of Personal Information",
+      "recipient": "Recipient",
+      "country": "Country",
+      "purpose": "Transfer Purpose",
+      "items": "Transferred Items",
+      "supabase_name": "Supabase Inc.",
+      "google_name": "Google LLC",
+      "usa": "USA",
+      "storage_auth": "Data Storage and User Authentication (OAuth 2.0)",
+      "log_items": "Email, Profile Info, Service Usage Logs"
+    },
+    "destruction": {
+      "title": "5. Destruction Procedure and Method",
+      "content": "Personal information is destroyed immediately after the purpose is achieved. Electronic files are deleted using technical methods that make recovery impossible."
+    }
+  },
+  "signup_consent": {
+    "all_agree": "I agree to all terms.",
+    "privacy_required": "[Required] Consent to Collection and Use of Personal Information",
+    "privacy_optional": "[Optional] Consent to Marketing Information",
+    "view_detail": "View Detail",
+    "terms_required": "[Required] Consent to Terms of Service"
+  },
+  "terms_of_service": {
+    "title": "Terms of Service",
+    "effective_date": "Effective Date: May 4, 2026",
+    "definitions": {
+      "title": "1. Definition of Service",
+      "content": "MyKello provides a beauty service reservation agency platform to facilitate bookings and communication between users and beauty service providers."
+    },
+    "benefits": {
+      "title": "2. Member Benefits",
+      "signup": "New members receive a 5% discount coupon upon successful signup.",
+      "referral": "When a new member joins using a referral code, both the referrer and referee receive a 5% discount coupon."
+    },
+    "platform_fee": {
+      "title": "3. Platform Fee",
+      "content": "MyKello charges a platform fee of 10% of the service fee for its reservation agency service.",
+      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+    },
+    "refund_policy": {
+      "title": "4. Cancellation & Refund Policy",
+      "subtitle": "Refund rates apply to the service fee only. The 10% platform fee is non-refundable regardless of cancellation timing:",
+      "four_days": "4+ days before appointment: 100% service fee refund",
+      "three_days": "3 days before appointment: 80% service fee refund",
+      "two_days": "2 days before appointment: 60% service fee refund",
+      "one_day": "1 day before appointment: No Refund",
+      "same_day": "Same day / No-show: No Refund",
+      "note": "MyKello's unified cancellation policy applies equally to all bookings made through the platform. No store-specific cancellation policy applies."
+    },
+    "chargeback": {
+      "title": "5. Payment Cancellation & Disputes",
+      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
+      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, MyKello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+    },
+    "liability": {
+      "title": "6. Limitation of Liability",
+      "interpretation": "The 'Real-time Interpretation' feature is a supplementary tool provided for user convenience. MyKello is not liable for reservation errors or disputes arising from inaccuracies in AI translation or manual interpretation.",
+      "community": "MyKello is not responsible for any damages, incidents, or disputes resulting from voluntary offline meetups or personal transactions between users conducted through the community features."
+    }
   }
 }

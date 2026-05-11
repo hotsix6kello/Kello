@@ -93,8 +93,12 @@ export type BeautyBookingAdminRecord = {
   koreanMessage: string;
   localizedMessage: string;
   agreements: {
-    bookingConfirmed: boolean;
-    privacyConsent: boolean;
+    serviceTermsAgreed: boolean;
+    privacyPolicyAgreed: boolean;
+    thirdPartySharingAgreed: boolean;
+    marketingConsentAgreed: boolean;
+    refundPolicyAgreed: boolean;
+    refundPolicyAgreedAt: string | null;
   };
   createdFromFlow: string;
 };
