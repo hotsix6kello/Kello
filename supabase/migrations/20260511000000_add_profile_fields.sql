@@ -1,0 +1,3 @@
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS nickname TEXT,
+  ADD COLUMN IF NOT EXISTS country  TEXT NOT NULL DEFAULT 'ko';
