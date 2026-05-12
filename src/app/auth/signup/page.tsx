@@ -125,10 +125,18 @@ export default function SignupPage() {
       localStorage.setItem("kello_lang", country);
       router.replace("/");
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
+      let msg = "";
+      if (err instanceof Error) {
+        msg = err.message;
+      } else if (err && typeof err === "object") {
+        const e = err as Record<string, unknown>;
+        msg = (e.message as string) || (e.error_description as string) || (e.code as string) || JSON.stringify(e);
+      } else {
+        msg = String(err);
+      }
       if (msg.includes("User already registered") || msg.includes("already registered")) {
         setError("이미 가입된 이메일입니다. 로그인 페이지로 이동해주세요.");
-      } else if (msg.includes("Password should be")) {
+      } else if (msg.includes("Password should be") || msg.includes("password")) {
         setError("비밀번호는 8자 이상이며 특수문자(!@#$% 등)를 포함해야 합니다.");
       } else if (msg.includes("Invalid email")) {
         setError("유효하지 않은 이메일 주소입니다.");
