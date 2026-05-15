@@ -2,62 +2,73 @@
 
 ## Current Code State Summary
 
-- Home booking currently resolves to the skeleton flow by default, while the legacy home modal still remains as an explicit fallback path.
-- Booking API validation and storage already expect canonical agreement keys such as `serviceTermsAgreed`, `privacyPolicyAgreed`, and `thirdPartySharingAgreed`.
-- Several tests were still pinned to older legacy agreement keys and legacy-default mode behavior, which no longer matched the runtime.
-- `/explore` existed and built successfully, but `next.config.ts` redirected it back to `/`, which blocked map MVP access.
-- Explore detail still exposed a mock payment success alert that could be mistaken for a real payment completion.
+- Home booking now enters through `HomeBookingFlowEntry`, which delegates directly to the currently used `HomeBeautyBookingFlow`.
+- The old `BookingFlowSkeleton` path was a deprecated experiment and is no longer part of the home booking runtime or preview routes.
+- Booking API validation and storage still use the canonical agreement keys `serviceTermsAgreed`, `privacyPolicyAgreed`, and `thirdPartySharingAgreed`.
+- `/explore` remains available for future map MVP work after the earlier redirect cleanup.
+- Explore detail still contains only payment-preview messaging and does not implement a real checkout flow.
 
 ## Booking Flow Cleanup Result
 
-- Kept `skeleton` as the primary booking flow and treated legacy home booking as fallback-only.
-- Aligned the legacy home booking agreement state to the same canonical keys used by the booking payload and API layer.
-- Preserved the current legacy single privacy checkbox by mirroring it into both `privacyPolicyAgreed` and `thirdPartySharingAgreed` until the shared skeleton fully replaces the legacy modal.
-- Updated booking-related tests to follow the skeleton-default runtime and the canonical agreement field names.
+- Deprecated the past skeleton booking flow and removed its runtime entry, preview page, supporting library, and skeleton-only tests.
+- Kept the current booking implementation on `HomeBeautyBookingFlow` instead of introducing another booking rewrite.
+- Left the current agreement mapping in `HomeBeautyBookingFlow` intact so existing booking payloads still match the beauty booking API contract.
+- Simplified `HomeBookingFlowEntry` into a thin wrapper so future map/payment work attaches to one runtime path only.
 
 ## Remaining Issues Before Map MVP
 
-- Explore currently mixes multiple map implementations:
-  - `src/app/explore/components/ExploreMap.tsx`: active Kakao-based map used by home modal flows.
-  - `src/app/explore/components/KakaoMapContainer.tsx`: legacy standalone Kakao container with unclear active usage.
-  - `src/app/components/Map.tsx`: Leaflet-based generic map component that appears unused in the current booking flow.
-- Google Places API routes exist and build, but explore page behavior still depends on client-side Kakao SDK loading and geolocation handling.
-- Explore map/search code still contains duplicated client-side data shaping that should be consolidated before a broader map rollout.
+- Explore still mixes multiple map implementations:
+  - `src/app/explore/components/ExploreMap.tsx`: active Kakao-based map path.
+  - `src/app/explore/components/KakaoMapContainer.tsx`: older Kakao container with unclear remaining usage.
+  - `src/app/components/Map.tsx`: Leaflet-based component that appears separate from the active explore flow.
+- Google Places API routes and client-side search shaping still need consolidation before map actions are added to booking.
+- Map runtime selection is still a product/engineering decision; this pass only removed the booking skeleton dependency, not map duplication.
 
 ## Remaining Issues Before Payment Work
 
-- Real payment state transitions are not modeled yet beyond the current booking request lifecycle.
-- Explore detail remains a placeholder preview surface and should not be used as the eventual checkout entry point.
-- Skeleton submit flow still sends `refundPolicyAgreed: false` because the shared skeleton does not yet collect refund consent explicitly.
-- No dedicated payment persistence layer exists yet; any `payments` table work should stay separate from this stabilization pass.
+- Booking statuses still need a payment-aware lifecycle before PayPal can be added safely.
+- No payment persistence layer exists yet; payment API routes and DB work should be introduced in a separate pass.
+- Explore detail is still a preview surface and should not be treated as the eventual checkout entry point.
+- Refund-policy capture is still limited by the current booking UI and should be finalized before real payment capture is introduced.
 
 ## Files Updated In This Pass
 
-- `next.config.ts`
-- `src/app/components/home/HomeBeautyBookingFlow.tsx`
-- `src/app/components/home/HomeBookingFlowEntry.types.ts`
-- `src/app/explore/detail/page.tsx`
-- Booking and home booking test files under `src/lib/tests`
+- `docs/kello-mvp-stabilization-report.md`
+- `src/app/page.tsx`
+- `src/app/components/home/HomeBookingFlowEntry.tsx`
+- `src/lib/tests/home-booking-flow-entry.test.ts`
+- `src/lib/tests/run-all.ts`
+
+## Deleted Skeleton Files And References
+
+- `src/app/booking-skeleton/page.tsx`
+- `src/components/booking/flow-skeleton/*`
+- `src/lib/bookings/bookingFlowSkeleton/*`
+- Skeleton-only booking tests under `src/lib/tests`:
+  - `booking-flow-*`
+  - `home-booking-draft-debug-visibility.test.ts`
+  - `home-booking-flow-entry-draft-*.test.ts`
+  - `home-booking-flow-entry-runtime-draft-ready.test.ts`
+  - `home-booking-flow-entry-store-context-draft.test.ts`
+  - `home-booking-submit-debug-panel.test.ts`
 
 ## Files Not Updated And Why
 
-- `src/app/explore/components/ExploreMap.tsx`
-  Current active map surface is large and legacy-heavy; this pass only removed the route-level blocker instead of refactoring the full map runtime.
-- `src/app/explore/components/KakaoMapContainer.tsx`
-  Left in place because active usage is unclear and deleting it now would expand scope.
-- `src/app/components/Map.tsx`
-  Left untouched because it appears unused but may still be part of future map experiments.
+- `src/app/components/home/HomeBeautyBookingFlow.tsx`
+  This is the active booking implementation, so this pass left its logic intact and only changed the route that reaches it.
 - `src/app/api/bookings/beauty/*`
-  API payload validation was already aligned with canonical agreement keys, so no route contract change was required.
+  The active API contract already matches the current booking flow, so no additional route change was required.
 - `src/app/my/*` and `src/app/admin/bookings/beauty/*`
-  Reviewed for booking status and agreement consumption; no minimal stabilization patch was required in this pass.
+  Reviewed as downstream consumers of booking data; no skeleton dependency remained there that required a code patch in this pass.
+- `src/app/explore/components/*` and `src/app/components/Map.tsx`
+  Map duplication remains a separate cleanup task and was intentionally kept out of this booking-only removal.
 
 ## Recommended Next Step Order
 
-1. Move all home booking entry points onto the skeleton flow without relying on the legacy modal fallback.
-2. Define payment-aware booking statuses and UI state transitions before adding any PayPal API calls.
-3. Pick a single map runtime for MVP browse/search and archive the unused alternatives after usage is confirmed.
-4. Add focused integration tests for booking creation and customer booking retrieval.
+1. Add focused integration coverage for `HomeBeautyBookingFlow -> /api/bookings/beauty` so the now-single booking path is protected.
+2. Define payment-aware booking statuses before any PayPal API work starts.
+3. Choose one map runtime for MVP and mark the others deprecated before adding booking-on-map actions.
+4. Add reservation status checks in my/admin views once payment states are introduced.
 
 ## PayPal Preparation: API And DB Proposal
 
@@ -90,13 +101,18 @@ Suggested future payment persistence fields:
 - `payments.created_at`
 - `payments.updated_at`
 
-These are documentation-only suggestions. No migration was added in this stabilization pass.
+These are documentation-only suggestions. No migration was added in this cleanup pass.
 
 ## Map MVP File Cleanup Proposal
 
-- Keep `src/app/explore/page.tsx` as the MVP browse entry point now that the redirect blocker is removed.
-- Choose between:
-  - `src/app/explore/components/ExploreMap.tsx` as the active Kakao MVP path, or
-  - `src/app/components/Map.tsx` only if a Leaflet-based fallback is intentionally adopted.
-- After the active map path is chosen, mark the other map components as deprecated in code comments or archive them in a follow-up cleanup PR.
-- Consolidate coordinate parsing and business marker shaping into a shared helper before adding booking-on-map actions.
+- Keep `src/app/explore/page.tsx` as the MVP browse entry point.
+- Pick one active map runtime before wiring booking or payment actions onto map cards.
+- If Kakao stays primary, archive or clearly deprecate the unused Leaflet path.
+- Consolidate business marker shaping and coordinate parsing into shared helpers before expanding browse-to-book behavior.
+
+## Remaining Skeleton Keywords
+
+- `src/app/components/home/HomeBookingFlowEntry.tsx`
+  A single comment keeps the word `BookingFlowSkeleton` to document that the old route is deprecated and should not return.
+- `src/app/community/page.tsx`
+  The word `skeleton` remains only for generic loading placeholders and is unrelated to the deprecated booking flow.

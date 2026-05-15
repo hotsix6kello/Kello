@@ -186,7 +186,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         }
       }
 
-      // 1. Upload images to Supabase Storage if any (Validated logic from skeleton)
+      // 1. Upload images to Supabase Storage if any.
       const currentUploadPromise = currentImage?.file 
         ? uploadBookingImage(currentImage.file, 'current', requestId)
         : Promise.resolve({ url: null, path: null, error: null });
@@ -248,7 +248,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           serviceTermsAgreed: agreements.serviceTermsAgreed,
           privacyPolicyAgreed: agreements.privacyPolicyAgreed,
           // Legacy home flow still collects one privacy checkbox, so mirror it to
-          // the third-party sharing field until the shared skeleton replaces it.
+          // the third-party sharing field until a dedicated separate consent UI exists.
           thirdPartySharingAgreed: agreements.thirdPartySharingAgreed,
           marketingConsentAgreed: false,
           refundPolicyAgreed: agreements.refundPolicyAgreed,
