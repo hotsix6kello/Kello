@@ -14,6 +14,8 @@
 - Kept the current booking implementation on `HomeBeautyBookingFlow` instead of introducing another booking rewrite.
 - Left the current agreement mapping in `HomeBeautyBookingFlow` intact so existing booking payloads still match the beauty booking API contract.
 - Simplified `HomeBookingFlowEntry` into a thin wrapper so future map/payment work attaches to one runtime path only.
+- Added a focused home booking API-contract test so future map/payment work attaches to the current payload shape rather than the removed skeleton flow.
+- Map and payment work should treat this current `HomeBeautyBookingFlow -> /api/bookings/beauty` contract as the integration baseline.
 
 ## Remaining Issues Before Map MVP
 
