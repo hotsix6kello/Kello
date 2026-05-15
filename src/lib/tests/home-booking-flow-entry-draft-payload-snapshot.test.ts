@@ -46,8 +46,10 @@ await run("draft emission snapshot keeps final payload policy for complete skele
       ],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 
@@ -143,8 +145,10 @@ await run("draft emission snapshot keeps final payload policy for complete skele
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
       source: "placeholder-default",
     },
     unresolved: {
@@ -154,3 +158,6 @@ await run("draft emission snapshot keeps final payload policy for complete skele
     },
   });
 });
+
+
+

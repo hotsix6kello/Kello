@@ -40,21 +40,23 @@ function createTestState(category: BookingFlowCategory): BookingFlowState {
       desiredStyleImages: [],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
 
-await run("home booking mode falls back to legacy when mode is omitted", () => {
-  assert.equal(resolveHomeBookingMode({}), "legacy");
+await run("home booking mode defaults to skeleton when mode is omitted", () => {
+  assert.equal(resolveHomeBookingMode({}), "skeleton");
 });
 
 await run("home booking mode keeps legacy when skeleton mode is not enabled", () => {
   assert.equal(resolveHomeBookingMode({ mode: "skeleton", enableSkeletonMode: false }), "legacy");
 });
 
-await run("home booking mode enables skeleton only when explicit flag is true", () => {
+await run("home booking mode keeps skeleton when it is explicitly requested", () => {
   assert.equal(resolveHomeBookingMode({ mode: "skeleton", enableSkeletonMode: true }), "skeleton");
 });
 
@@ -108,8 +110,10 @@ await run("bridge draft builds legacy shape with placeholder booking time and fl
     },
     primaryServiceName: "Cut",
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
     },
   });
 
@@ -197,7 +201,7 @@ await run("draft debug state exposes raw uploaded refs separately from step3-der
   ]);
 });
 
-await run("HomeBookingFlowEntry seam forwards uploadedImageUrls at both preparation/intent boundaries and keeps image blocker behavior consistent", () => {
+await run("HomeBookingFlowEntry seam forwards uploadedImageUrls at both preparation/intent boundaries without introducing a pre-submit blocker", () => {
   const entrySource = readFileSync(
     new URL("../../app/components/home/HomeBookingFlowEntry.tsx", import.meta.url),
     "utf8",
@@ -253,8 +257,9 @@ await run("HomeBookingFlowEntry seam forwards uploadedImageUrls at both preparat
       mimeType: "image/jpeg",
     },
   ];
-  state.confirmation.bookingConfirmed = true;
-  state.confirmation.privacyConsent = true;
+  state.confirmation.serviceTermsAgreed = true;
+  state.confirmation.privacyPolicyAgreed = true;
+  state.confirmation.thirdPartySharingAgreed = true;
 
   const draft = buildHomeBookingLegacyDraftFromSkeletonState({
     state,
@@ -265,19 +270,21 @@ await run("HomeBookingFlowEntry seam forwards uploadedImageUrls at both preparat
     },
     primaryServiceName: "Cut",
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
     },
   });
 
-  const blockedWithoutUploadedUrls = runLegacySubmitPreparation({
+  const readyWithoutUploadedUrls = runLegacySubmitPreparation({
     draft,
     uploadedImageUrls: [],
   });
-  assert.equal(blockedWithoutUploadedUrls.canAttemptSubmit, false);
+  assert.equal(readyWithoutUploadedUrls.canAttemptSubmit, true);
   assert.equal(
-    blockedWithoutUploadedUrls.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls),
-    true,
+    readyWithoutUploadedUrls.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls),
+    false,
   );
 
   const readyWithInjectedUploadedUrl = runLegacySubmitPreparation({
@@ -292,3 +299,6 @@ await run("HomeBookingFlowEntry seam forwards uploadedImageUrls at both preparat
   assert.equal(readyWithInjectedUploadedUrl.uiState.uiState, "submit-ready");
   assert.equal(readyWithInjectedUploadedUrl.canAttemptSubmit, true);
 });
+
+
+
