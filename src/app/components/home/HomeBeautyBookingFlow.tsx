@@ -48,8 +48,9 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   const [currentImage, setCurrentImage] = useState<{ file: File; preview: string } | null>(null);
   const [styleImage, setStyleImage] = useState<{ file: File; preview: string } | null>(null);
   const [agreements, setAgreements] = useState({
-    bookingConfirmed: false,
-    privacyConsent: false,
+    serviceTermsAgreed: false,
+    privacyPolicyAgreed: false,
+    thirdPartySharingAgreed: false,
     refundPolicyAgreed: false,
   });
 
@@ -244,9 +245,11 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
           },
         },
         agreements: {
-          serviceTermsAgreed: agreements.bookingConfirmed,
-          privacyPolicyAgreed: agreements.privacyConsent,
-          thirdPartySharingAgreed: agreements.privacyConsent,
+          serviceTermsAgreed: agreements.serviceTermsAgreed,
+          privacyPolicyAgreed: agreements.privacyPolicyAgreed,
+          // Legacy home flow still collects one privacy checkbox, so mirror it to
+          // the third-party sharing field until the shared skeleton replaces it.
+          thirdPartySharingAgreed: agreements.thirdPartySharingAgreed,
           marketingConsentAgreed: false,
           refundPolicyAgreed: agreements.refundPolicyAgreed,
           refundPolicyAgreedAt: agreements.refundPolicyAgreed ? new Date().toISOString() : null,
@@ -303,7 +306,12 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
   );
 
   const isFormValid = customerForm.name.trim() && customerForm.phone.trim() && selectedServiceId;
-  const isConfirmEnabled = isFormValid && agreements.bookingConfirmed && agreements.privacyConsent && agreements.refundPolicyAgreed;
+  const isConfirmEnabled =
+    isFormValid &&
+    agreements.serviceTermsAgreed &&
+    agreements.privacyPolicyAgreed &&
+    agreements.thirdPartySharingAgreed &&
+    agreements.refundPolicyAgreed;
 
   return (
     <div className="fixed inset-0 z-[400] flex justify-center bg-black/60 sm:bg-black/40">
@@ -604,8 +612,13 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                              <input
                                 type="checkbox"
                                 className="mt-1 w-4 h-4 rounded border-gray-300 text-[#bb8a78] focus:ring-[#bb8a78]"
-                                checked={agreements.bookingConfirmed}
-                                onChange={() => setAgreements(prev => ({ ...prev, bookingConfirmed: !prev.bookingConfirmed }))}
+                                checked={agreements.serviceTermsAgreed}
+                                onChange={() =>
+                                  setAgreements((prev) => ({
+                                    ...prev,
+                                    serviceTermsAgreed: !prev.serviceTermsAgreed,
+                                  }))
+                                }
                              />
                              <div className="flex flex-col">
                                 <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_booking_confirmed')}</span>
@@ -616,8 +629,17 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
                              <input
                                 type="checkbox"
                                 className="mt-1 w-4 h-4 rounded border-gray-300 text-[#bb8a78] focus:ring-[#bb8a78]"
-                                checked={agreements.privacyConsent}
-                                onChange={() => setAgreements(prev => ({ ...prev, privacyConsent: !prev.privacyConsent }))}
+                                checked={agreements.privacyPolicyAgreed}
+                                onChange={() =>
+                                  setAgreements((prev) => {
+                                    const nextValue = !prev.privacyPolicyAgreed;
+                                    return {
+                                      ...prev,
+                                      privacyPolicyAgreed: nextValue,
+                                      thirdPartySharingAgreed: nextValue,
+                                    };
+                                  })
+                                }
                              />
                              <div className="flex flex-col">
                                 <span className="text-sm font-bold text-neutral-800 leading-tight">{t('booking.agreement_privacy_consent')}</span>

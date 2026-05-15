@@ -123,7 +123,7 @@ export type HomeBookingFlowEntryProps = {
   initialCategory: BeautyCategoryId | "all" | null;
   t: TFunction;
   mode?: HomeBookingFlowMode;
-  // Keep default false until runtime rollout is explicitly started.
+  // Skeleton is the current default path; set false only to force the legacy fallback.
   enableSkeletonMode?: boolean;
   storeContext?: Partial<HomeBookingStoreContext>;
   deepLinkContext?: HomeBookingDeepLinkContext;

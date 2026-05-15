@@ -53,8 +53,10 @@ function createReadyDraft(): LegacyBookingDraftFromSkeleton {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
       source: "explicit-input",
     },
     unresolved: {
@@ -137,7 +139,7 @@ await run("submit invocation: multiple blockers are passed through unchanged", (
   assert.notEqual(plan.payloadCandidate, null);
 });
 
-await run("submit invocation: uploaded image url mismatch blocker is preserved and invocation is denied", () => {
+await run("submit invocation: uploaded image url mismatch stays invocable because uploads happen during submit intent", () => {
   const draft = createReadyDraft();
   draft.images.flattened = [
     {
@@ -171,7 +173,10 @@ await run("submit invocation: uploaded image url mismatch blocker is preserved a
   });
   const plan = resolveLegacySubmitInvocationPlan(adapterResult);
 
-  assert.equal(plan.canInvokeSubmit, false);
-  assert.equal(plan.reason, "blocked");
-  assert.ok(plan.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls));
+  assert.equal(plan.canInvokeSubmit, true);
+  assert.equal(plan.reason, "ready");
+  assert.equal(plan.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls), false);
 });
+
+
+

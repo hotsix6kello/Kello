@@ -31,8 +31,10 @@ function createTestState(category: BookingFlowCategory | null): BookingFlowState
       desiredStyleImages: [],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
@@ -168,3 +170,6 @@ await run("payload-unavailable edge case blocks final emission when timing is re
   assert.equal(result.reason, "payload-unavailable");
   assert.equal(result.payload, null);
 });
+
+
+

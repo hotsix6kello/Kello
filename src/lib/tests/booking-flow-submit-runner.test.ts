@@ -52,8 +52,10 @@ function createReadyDraft(): LegacyBookingDraftFromSkeleton {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
       source: "explicit-input",
     },
     unresolved: {
@@ -64,20 +66,21 @@ function createReadyDraft(): LegacyBookingDraftFromSkeleton {
   };
 }
 
-await run("submit runner: placeholder time and missing agreements are blocked", () => {
+await run("submit runner: missing agreements are blocked even when placeholder time is allowed", () => {
   const draft = createReadyDraft();
   draft.schedule.bookingTime = "10:00";
   draft.schedule.usesPlaceholderTime = true;
   draft.unresolved.bookingTimeIsPlaceholder = true;
-  draft.agreements.bookingConfirmed = false;
-  draft.agreements.privacyConsent = false;
+  draft.agreements.serviceTermsAgreed = false;
+  draft.agreements.privacyPolicyAgreed = false;
+  draft.agreements.thirdPartySharingAgreed = false;
 
   const result = runLegacySubmitPreparation({ draft });
 
   assert.equal(result.canAttemptSubmit, false);
   assert.equal(result.status, "blocked");
   assert.equal(result.uiState.uiState, "show-blockers");
-  assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder));
+  assert.equal(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder), false);
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingConfirmedRequired));
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.privacyConsentRequired));
   assert.notEqual(result.payloadCandidate, null);
@@ -109,7 +112,7 @@ await run("submit runner: missing store id is blocked with missing-store-id bloc
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingStoreId));
 });
 
-await run("submit runner: uploaded image urls mismatch is blocked", () => {
+await run("submit runner: uploaded image urls mismatch stays submit-ready because uploads happen during submit intent", () => {
   const draft = createReadyDraft();
   draft.images.flattened = [
     {
@@ -142,10 +145,10 @@ await run("submit runner: uploaded image urls mismatch is blocked", () => {
     uploadedImageUrls: ["https://cdn.example.com/current-only.jpg"],
   });
 
-  assert.equal(result.canAttemptSubmit, false);
-  assert.equal(result.status, "blocked");
-  assert.equal(result.uiState.uiState, "show-blockers");
-  assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls));
+  assert.equal(result.canAttemptSubmit, true);
+  assert.equal(result.status, "ready-to-submit");
+  assert.equal(result.uiState.uiState, "submit-ready");
+  assert.equal(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls), false);
 });
 
 await run("submit runner: invalid payload candidate fallback resolves to invalid-plan", () => {
@@ -167,3 +170,6 @@ await run("submit runner: invalid payload candidate fallback resolves to invalid
   assert.equal(result.uiState.uiState, "invalid-plan");
   assert.equal(result.payloadCandidate, null);
 });
+
+
+

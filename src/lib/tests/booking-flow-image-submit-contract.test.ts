@@ -68,8 +68,10 @@ function createDraft(imageCount: number): LegacyBookingDraftFromSkeleton {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
       source: "explicit-input",
     },
     unresolved: {
@@ -92,17 +94,18 @@ await run("image contract: no selected images keeps upload-unrequired and unbloc
   assert.equal(readiness.isUploadSatisfied, true);
 });
 
-await run("image contract: selected images without uploaded urls is pending and blocked", () => {
+await run("image contract: selected images without uploaded urls are treated as submit-time uploads", () => {
   const readiness = resolveLegacySubmitImageReadiness({
     draft: createDraft(2),
     uploadedImageUrls: [],
   });
 
-  assert.equal(readiness.kind, "images-selected-upload-pending");
+  assert.equal(readiness.kind, "images-upload-ready");
   assert.equal(readiness.requiresUpload, true);
   assert.equal(readiness.selectedImageCount, 2);
   assert.equal(readiness.uploadedImageUrlCount, 0);
-  assert.equal(readiness.shouldBlockSubmitUntilUpload, true);
+  assert.equal(readiness.shouldBlockSubmitUntilUpload, false);
+  assert.equal(readiness.isUploadSatisfied, true);
 });
 
 await run("image contract: selected images with uploaded urls matched is upload-ready", () => {
@@ -128,17 +131,17 @@ await run("submit adapter: no selected images can stay ready without uploaded ur
   assert.equal(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls), false);
 });
 
-await run("submit adapter: selected images stay blocked until uploaded urls are provided", () => {
+await run("submit adapter: selected images stay ready because uploads happen during submit intent", () => {
   const result = buildLegacySubmitPayloadCandidate({
     draft: createDraft(2),
     uploadedImageUrls: [],
   });
 
-  assert.equal(result.status, "blocked");
-  assert.equal(result.ready, false);
-  assert.equal(
-    result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls),
-    true,
-  );
+  assert.equal(result.status, "ready");
+  assert.equal(result.ready, true);
+  assert.equal(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls), false);
 });
+
+
+
 

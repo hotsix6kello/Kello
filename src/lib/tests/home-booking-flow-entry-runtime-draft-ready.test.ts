@@ -53,8 +53,10 @@ function createBaseState(category: BookingFlowCategory): BookingFlowState {
       ],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
@@ -355,3 +357,6 @@ await run("runtime wiring: step4 -> step3 edit -> step4 re-entry emits once more
   assert.equal(secondPayload.schedule.bookingTime, "10:00");
   assert.equal(secondPayload.store.storeId, "store-lash-101");
 });
+
+
+

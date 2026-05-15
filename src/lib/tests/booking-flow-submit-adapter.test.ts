@@ -52,8 +52,10 @@ function createReadyDraft(): LegacyBookingDraftFromSkeleton {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
       source: "explicit-input",
     },
     unresolved: {
@@ -104,8 +106,12 @@ await run("submit adapter: complete draft is ready and yields payload candidate 
         imageUrls: [],
       },
       agreements: {
-        bookingConfirmed: true,
-        privacyConsent: true,
+        serviceTermsAgreed: true,
+        privacyPolicyAgreed: true,
+        thirdPartySharingAgreed: true,
+        marketingConsentAgreed: false,
+        refundPolicyAgreed: false,
+        refundPolicyAgreedAt: null,
       },
       createdFrom: {
         flow: "beauty-explore",
@@ -131,22 +137,24 @@ await run("submit adapter: missing store fields are blocked and payload candidat
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.payloadEssentialFieldMissing));
 });
 
-await run("submit adapter: placeholder booking time is blocked", () => {
+await run("submit adapter: placeholder booking time remains submittable in the current MVP flow", () => {
   const draft = createReadyDraft();
   draft.schedule.bookingTime = "10:00";
   draft.schedule.usesPlaceholderTime = true;
   draft.unresolved.bookingTimeIsPlaceholder = true;
 
   const result = buildLegacySubmitPayloadCandidate({ draft });
-  assert.equal(result.ready, false);
-  assert.equal(result.status, "blocked");
-  assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder));
+  assert.equal(result.ready, true);
+  assert.equal(result.status, "ready");
+  assert.equal(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder), false);
+  assert.notEqual(result.payloadCandidate, null);
 });
 
 await run("submit adapter: missing agreements are blocked", () => {
   const draft = createReadyDraft();
-  draft.agreements.bookingConfirmed = false;
-  draft.agreements.privacyConsent = false;
+  draft.agreements.serviceTermsAgreed = false;
+  draft.agreements.privacyPolicyAgreed = false;
+  draft.agreements.thirdPartySharingAgreed = false;
 
   const result = buildLegacySubmitPayloadCandidate({ draft });
   assert.equal(result.ready, false);
@@ -155,7 +163,7 @@ await run("submit adapter: missing agreements are blocked", () => {
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.privacyConsentRequired));
 });
 
-await run("submit adapter: uploaded image urls mismatch is blocked", () => {
+await run("submit adapter: uploaded image url mismatch does not block because uploads happen at submit time", () => {
   const draft = createReadyDraft();
   draft.images.flattened = [
     {
@@ -188,9 +196,10 @@ await run("submit adapter: uploaded image urls mismatch is blocked", () => {
     uploadedImageUrls: ["https://cdn.example.com/current.jpg"],
   });
 
-  assert.equal(result.ready, false);
-  assert.equal(result.status, "blocked");
-  assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls));
+  assert.equal(result.ready, true);
+  assert.equal(result.status, "ready");
+  assert.equal(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls), false);
+  assert.notEqual(result.payloadCandidate, null);
 });
 
 await run("submit adapter: essential text missing is blocked with corresponding blockers", () => {
@@ -206,3 +215,6 @@ await run("submit adapter: essential text missing is blocked with corresponding 
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingCustomerPhone));
   assert.ok(result.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.payloadEssentialFieldMissing));
 });
+
+
+
