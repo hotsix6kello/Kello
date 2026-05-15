@@ -63,8 +63,10 @@ function createReadyDraft(): LegacyBookingDraftFromSkeleton {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
       source: "explicit-input",
     },
     unresolved: {
@@ -304,7 +306,7 @@ await run("submit debug panel uses safe idle placeholder when draft is not avail
   assert.equal(state?.hasPayload, false);
 });
 
-await run("submit debug panel shows show-blockers when adapter chain reports blockers", () => {
+await run("submit debug panel shows submit-ready when placeholder time is the only unresolved scheduling detail", () => {
   const draft = createReadyDraft();
   draft.schedule.bookingTime = "10:00";
   draft.schedule.usesPlaceholderTime = true;
@@ -317,12 +319,12 @@ await run("submit debug panel shows show-blockers when adapter chain reports blo
   });
 
   assert.notEqual(state, null);
-  assert.equal(state?.uiState, "show-blockers");
-  assert.equal(state?.canSubmit, false);
-  assert.ok(state?.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder));
+  assert.equal(state?.uiState, "submit-ready");
+  assert.equal(state?.canSubmit, true);
+  assert.equal(state?.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.bookingTimePlaceholder), false);
 });
 
-await run("submit debug panel consumes status copy helper for read-only message fields", () => {
+await run("submit debug panel consumes status copy helper for a ready placeholder-time draft", () => {
   const draft = createReadyDraft();
   draft.schedule.bookingTime = "10:00";
   draft.schedule.usesPlaceholderTime = true;
@@ -336,9 +338,9 @@ await run("submit debug panel consumes status copy helper for read-only message 
   const statusCopy = resolveLegacySubmitStatusCopy(state);
 
   assert.notEqual(state, null);
-  assert.equal(statusCopy.title, "Submit blocked");
-  assert.equal(statusCopy.tone, "warning");
-  assert.ok(statusCopy.message.includes("Resolve blockers"));
+  assert.equal(statusCopy.title, "Submit ready (preview)");
+  assert.equal(statusCopy.tone, "success");
+  assert.equal(statusCopy.message, "Validation passed. This does not mean the request was submitted.");
 });
 
 await run("submit attempt read-only fields are visible only under skeleton+debug gate", () => {
@@ -436,14 +438,14 @@ await run("section-level debug panel helper keeps draft/upload/submit sections i
   });
   assert.equal(hiddenForLegacy, null);
 
-  const blockedDraft = createReadyDraft();
-  blockedDraft.schedule.bookingTime = "10:00";
-  blockedDraft.schedule.usesPlaceholderTime = true;
-  blockedDraft.unresolved.bookingTimeIsPlaceholder = true;
-  const blockedUiState = resolveSubmitUiStateForDebugPanel({
+  const readyDraft = createReadyDraft();
+  readyDraft.schedule.bookingTime = "10:00";
+  readyDraft.schedule.usesPlaceholderTime = true;
+  readyDraft.unresolved.bookingTimeIsPlaceholder = true;
+  const readyUiState = resolveSubmitUiStateForDebugPanel({
     isSkeletonFlowEnabled: true,
     debugParam: "draft",
-    draft: blockedDraft,
+    draft: readyDraft,
   });
   const panel = resolveSkeletonDebugPanelSections({
     isSkeletonFlowEnabled: true,
@@ -453,8 +455,8 @@ await run("section-level debug panel helper keeps draft/upload/submit sections i
     desiredStyleUploadedRefCount: 2,
     draftStateUploadedImageUrls: ["https://cdn.test/from-step3.jpg"],
     uploadedImageUrlsOverride: ["https://debug.local/mock-uploaded-image-1.jpg"],
-    submitUiState: blockedUiState,
-    submitStatusCopy: resolveLegacySubmitStatusCopy(blockedUiState),
+    submitUiState: readyUiState,
+    submitStatusCopy: resolveLegacySubmitStatusCopy(readyUiState),
     submitAttemptState: {
       status: "submit-error",
       message: "Submit failed.",
@@ -488,14 +490,12 @@ await run("section-level debug panel helper keeps draft/upload/submit sections i
   ]);
   assert.deepEqual(panel?.sections[2]?.lines, [
     "Read-only status: true",
-    "Submit state: show-blockers",
-    "Title: Submit blocked",
-    "Message: Resolve blockers before attempting submit.",
-    "Tone: warning",
-    "Can submit: no",
+    "Submit state: submit-ready",
+    "Title: Submit ready (preview)",
+    "Message: Validation passed. This does not mean the request was submitted.",
+    "Tone: success",
+    "Can submit: yes",
     "Has payload: yes",
-    "Blocker summary: Booking time is still placeholder",
-    "Blockers: booking-time-placeholder",
   ]);
   assert.deepEqual(panel?.sections[3]?.lines, [
     "Submit attempt status: submit-error",
@@ -520,20 +520,20 @@ await run("submit debug display helper keeps preparation and attempt read-only l
   });
   assert.equal(hiddenForLegacy, null);
 
-  const blockedDraft = createReadyDraft();
-  blockedDraft.schedule.bookingTime = "10:00";
-  blockedDraft.schedule.usesPlaceholderTime = true;
-  blockedDraft.unresolved.bookingTimeIsPlaceholder = true;
-  const blockedUiState = resolveSubmitUiStateForDebugPanel({
+  const readyDraft = createReadyDraft();
+  readyDraft.schedule.bookingTime = "10:00";
+  readyDraft.schedule.usesPlaceholderTime = true;
+  readyDraft.unresolved.bookingTimeIsPlaceholder = true;
+  const readyUiState = resolveSubmitUiStateForDebugPanel({
     isSkeletonFlowEnabled: true,
     debugParam: "draft",
-    draft: blockedDraft,
+    draft: readyDraft,
   });
   const display = resolveSubmitDisplayPanelFields({
     isSkeletonFlowEnabled: true,
     debugParam: "draft",
-    submitUiState: blockedUiState,
-    submitStatusCopy: resolveLegacySubmitStatusCopy(blockedUiState),
+    submitUiState: readyUiState,
+    submitStatusCopy: resolveLegacySubmitStatusCopy(readyUiState),
     submitAttemptState: {
       status: "submit-error",
       message: "Submit failed.",
@@ -545,14 +545,12 @@ await run("submit debug display helper keeps preparation and attempt read-only l
   assert.notEqual(display, null);
   assert.deepEqual(display?.preparationLines, [
     "Read-only status: true",
-    "Submit state: show-blockers",
-    "Title: Submit blocked",
-    "Message: Resolve blockers before attempting submit.",
-    "Tone: warning",
-    "Can submit: no",
+    "Submit state: submit-ready",
+    "Title: Submit ready (preview)",
+    "Message: Validation passed. This does not mean the request was submitted.",
+    "Tone: success",
+    "Can submit: yes",
     "Has payload: yes",
-    "Blocker summary: Booking time is still placeholder",
-    "Blockers: booking-time-placeholder",
   ]);
   assert.deepEqual(display?.attemptLines, [
     "Submit attempt status: submit-error",
@@ -602,7 +600,7 @@ await run("debug panel keeps step3-derived uploaded urls separate from page-leve
   assert.equal(shownWithOverride?.submitChainSourceLine, "Current submit chain source: page-override");
 });
 
-await run("submit debug panel reflects image blocker release when mock uploaded urls are injected", () => {
+await run("submit debug panel keeps image uploads out of pre-submit blockers while still accepting injected uploaded urls", () => {
   const draft = createReadyDraft();
   draft.images = {
     flattened: [
@@ -623,18 +621,16 @@ await run("submit debug panel reflects image blocker release when mock uploaded 
     preserveSourceMetadata: true,
   };
 
-  const blockedWithoutUploadedUrls = resolveSubmitUiStateForDebugPanel({
+  const readyWithoutUploadedUrls = resolveSubmitUiStateForDebugPanel({
     isSkeletonFlowEnabled: true,
     debugParam: "draft",
     draft,
     uploadedImageUrls: [],
   });
-  assert.notEqual(blockedWithoutUploadedUrls, null);
-  assert.equal(blockedWithoutUploadedUrls?.uiState, "show-blockers");
+  assert.notEqual(readyWithoutUploadedUrls, null);
+  assert.equal(readyWithoutUploadedUrls?.uiState, "submit-ready");
   assert.ok(
-    blockedWithoutUploadedUrls?.blockers.includes(
-      LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls,
-    ),
+    !readyWithoutUploadedUrls?.blockers.includes(LEGACY_SUBMIT_ADAPTER_BLOCKERS.missingUploadedImageUrls),
   );
 
   const readyWithMockUploadedUrl = resolveSubmitUiStateForDebugPanel({
@@ -652,7 +648,7 @@ await run("submit debug panel reflects image blocker release when mock uploaded 
   );
 });
 
-await run("image blocker release and submit-attempt statuses can coexist in debug consumption", () => {
+await run("submit-attempt statuses can coexist with injected upload refs without a pre-submit image blocker", () => {
   const draft = createReadyDraft();
   draft.images = {
     flattened: [
@@ -725,3 +721,6 @@ await run("image blocker release and submit-attempt statuses can coexist in debu
   assert.equal(errorAttempt?.submitAttemptStatus, "submit-error");
   assert.equal(errorAttempt?.submitError, "Submit request failed.");
 });
+
+
+

@@ -34,8 +34,10 @@ function createState(category: BookingFlowCategory): BookingFlowState {
       desiredStyleImages: [],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
@@ -220,3 +222,6 @@ await run("sequence 6: category change to eyelash uses legacy lash mapping and a
   assert.equal(next.payload?.category.legacyCategory, "lash");
   assert.notEqual(next.signature, first.signature);
 });
+
+
+

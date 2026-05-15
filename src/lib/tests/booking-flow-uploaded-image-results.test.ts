@@ -65,8 +65,10 @@ function createFlowState(): BookingFlowState {
     selectedTime: "14:30",
     customerDetails: createCustomerDetails(),
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
@@ -254,3 +256,6 @@ await run("mock upload bridge adapter keeps the same request-to-completion seam 
     },
   ]);
 });
+
+
+

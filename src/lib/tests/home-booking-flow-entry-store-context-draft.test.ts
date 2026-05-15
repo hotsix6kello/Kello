@@ -37,8 +37,10 @@ function createCompleteState(category: BookingFlowCategory): BookingFlowState {
       desiredStyleImages: [],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
@@ -163,3 +165,6 @@ await run("duplicate/no-change suppression still wins even when storeContext.sto
   assert.equal(duplicate.reason, "duplicate-state");
   assert.equal(duplicate.payload, null);
 });
+
+
+

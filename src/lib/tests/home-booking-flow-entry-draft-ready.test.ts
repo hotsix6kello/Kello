@@ -30,8 +30,10 @@ function createTestState(category: BookingFlowCategory): BookingFlowState {
       desiredStyleImages: [],
     },
     confirmation: {
-      bookingConfirmed: false,
-      privacyConsent: false,
+      serviceTermsAgreed: false,
+      privacyPolicyAgreed: false,
+      thirdPartySharingAgreed: false,
+      marketingConsentAgreed: false,
     },
   };
 }
@@ -80,7 +82,7 @@ await run("draft-ready event emits when skeleton mode is enabled with valid skel
       state,
       storeContext: { storeId: "store-3", storeName: "Preview Shop", region: "Seoul" },
       primaryServiceName: "Cut",
-      agreements: { bookingConfirmed: true, privacyConsent: true },
+      agreements: { serviceTermsAgreed: true, privacyPolicyAgreed: true },
     },
   });
 
@@ -210,3 +212,6 @@ await run("draft-ready payload includes minimum callback contract fields", () =>
   assert.equal(typeof payload.images.totalCount, "number");
   assert.equal(typeof payload.unresolved.missingStoreId, "boolean");
 });
+
+
+

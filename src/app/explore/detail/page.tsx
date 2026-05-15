@@ -45,7 +45,7 @@ export default function BookingDetail() {
     const handlePayment = () => {
         setStep("payment");
         setTimeout(() => {
-            alert("Payment Successful! (Mock)");
+            alert("Mock payment preview completed. No real payment was processed.");
             setIsModalOpen(false);
             router.push("/"); // Go back home
         }, 2000);
@@ -193,7 +193,7 @@ export default function BookingDetail() {
                                     style={{ width: '100%' }}
                                     onClick={handlePayment}
                                 >
-                                    Pay ₩{shop.services.find(s => s.id === selectedService)?.price.toLocaleString()}
+                                    Preview Mock Payment ₩{shop.services.find(s => s.id === selectedService)?.price.toLocaleString()}
                                 </button>
                             </div>
                         )}
@@ -201,8 +201,8 @@ export default function BookingDetail() {
                         {step === 'payment' && (
                             <div style={{ textAlign: 'center', padding: '40px 0' }}>
                                 <div style={{ fontSize: '3rem', marginBottom: '16px' }}>⏳</div>
-                                <h3>Processing Payment...</h3>
-                                <p style={{ color: '#888' }}>Please do not close this window.</p>
+                                <h3>Mock payment preview only</h3>
+                                <p style={{ color: '#888' }}>No charge is made here. This screen is only a placeholder before real payment work starts.</p>
                             </div>
                         )}
                     </div>

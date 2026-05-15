@@ -56,8 +56,10 @@ function createReadyDraft(): LegacyBookingDraftFromSkeleton {
       preserveSourceMetadata: true,
     },
     agreements: {
-      bookingConfirmed: true,
-      privacyConsent: true,
+      serviceTermsAgreed: true,
+      privacyPolicyAgreed: true,
+      thirdPartySharingAgreed: true,
+      marketingConsentAgreed: false,
       source: "explicit-input",
     },
     unresolved: {
@@ -162,3 +164,6 @@ await run("submit ui-state: ready payload preview is passed through for UI usage
     },
   );
 });
+
+
+
