@@ -22,6 +22,7 @@ export type BeautyBookingPayload = {
   };
   customer: {
     name: string;
+    email?: string;
     phone: string;
     request: string;
     imageUrls?: string[];
@@ -176,6 +177,10 @@ export function buildBeautyBookingPayload(
     },
     customer: {
       name: input.customer.name.trim(),
+      email:
+        typeof input.customer.email === "string" && input.customer.email.trim().length > 0
+          ? input.customer.email.trim()
+          : undefined,
       phone: input.customer.phone.trim(),
       request: input.customer.request.trim(),
       imageUrls: input.customer.imageUrls || [],
@@ -269,6 +274,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
     },
     customer: {
       name: typeof customer.name === 'string' ? customer.name : '',
+      email: typeof customer.email === 'string' ? customer.email : undefined,
       phone: typeof customer.phone === 'string' ? customer.phone : '',
       request: typeof customer.request === 'string' ? customer.request : '',
       imageUrls: normalizeStringArray(customer.imageUrls),

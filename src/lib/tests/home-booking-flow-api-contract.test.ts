@@ -44,6 +44,7 @@ await run("HomeBeautyBookingFlow builds a payload with the active booking core f
   assert.match(homeFlowSource, /primaryServiceName:/);
   assert.match(homeFlowSource, /customer: \{/);
   assert.match(homeFlowSource, /name: customerForm\.name/);
+  assert.match(homeFlowSource, /email: sessionData\.session\?\.user\?\.email \?\? undefined/);
   assert.match(homeFlowSource, /phone: customerForm\.phone/);
   assert.match(homeFlowSource, /request: customerForm\.request/);
 });
@@ -89,7 +90,10 @@ await run("submit helper contract still defines canonical payload fields for map
 await run("beauty booking route still coerces the same payload shape before persistence", () => {
   assert.match(bookingRouteSource, /const payload = coerceBeautyBookingPayload\(body\);/);
   assert.match(bookingRouteSource, /error: "valid beauty booking payload is required"/);
-  assert.match(bookingRouteSource, /createBeautyBookingRequest\(payload, auth\?\.userId \?\? null\)/);
+  assert.match(
+    bookingRouteSource,
+    /createBeautyBookingRequest\(\s*payload,\s*auth\?\.userId \?\? null,\s*auth\?\.email \?\? null,\s*\)/,
+  );
 });
 
 await run("beauty booking route coercion requires the canonical agreement keys", () => {
@@ -106,10 +110,21 @@ await run("storage mapping still persists the same front-end payload fields expe
   assert.match(bookingServerSource, /booking_date: payload\.bookingDate/);
   assert.match(bookingServerSource, /booking_time: payload\.bookingTime/);
   assert.match(bookingServerSource, /customer_name: payload\.customer\.name/);
+  assert.match(bookingServerSource, /customer_email: payload\.customer\.email \?\? customerEmail/);
   assert.match(bookingServerSource, /customer_phone: payload\.customer\.phone/);
   assert.match(bookingServerSource, /current_image_url: payload\.customer\.currentImageUrl \?\? null/);
   assert.match(bookingServerSource, /style_image_url: payload\.customer\.styleImageUrl \?\? null/);
   assert.match(bookingServerSource, /agreements: payload\.agreements/);
   assert.match(bookingServerSource, /created_from_flow: payload\.createdFrom\.flow/);
   assert.match(bookingServerSource, /payload_json: payload/);
+});
+
+await run("booking storage still writes current/style image metadata rows for admin review", () => {
+  assert.match(bookingServerSource, /from\('beauty_booking_request_images'\)/);
+  assert.match(bookingServerSource, /image_type: 'current'/);
+  assert.match(bookingServerSource, /image_type: 'style'/);
+  assert.match(bookingServerSource, /storage_path: payload\.customer\.currentImagePath/);
+  assert.match(bookingServerSource, /storage_path: payload\.customer\.styleImagePath/);
+  assert.match(bookingServerSource, /original_file_name: payload\.customer\.currentImageName \?\? null/);
+  assert.match(bookingServerSource, /original_file_name: payload\.customer\.styleImageName \?\? null/);
 });

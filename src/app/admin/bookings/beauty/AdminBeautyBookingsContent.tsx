@@ -547,6 +547,13 @@ export default function AdminBeautyBookingsContent() {
     () => bookingsList.bookings.find((b) => b.id === bookingsList.selectedBookingId) ?? null,
     [bookingsList.bookings, bookingsList.selectedBookingId],
   );
+  const selectedBookingHasImages = Boolean(
+    selectedBooking &&
+      (selectedBooking.hasCurrentImage ||
+        selectedBooking.hasStyleImage ||
+        selectedBooking.currentImageUrl ||
+        selectedBooking.styleImageUrl),
+  );
 
   useEffect(() => {
     if (selectedBooking) {
@@ -578,7 +585,7 @@ export default function AdminBeautyBookingsContent() {
       });
       const body = (await response.json()) as {
         ok: boolean;
-        images: { imageType: 'current' | 'style'; signedUrl: string }[];
+        images: { imageType: 'current' | 'style'; signedUrl: string | null }[];
         error?: string;
       };
 
@@ -991,6 +998,10 @@ export default function AdminBeautyBookingsContent() {
                         <dd>{booking.customerPhone}</dd>
                       </div>
                       <div>
+                        <dt>Email</dt>
+                        <dd>{booking.customerEmail ?? '-'}</dd>
+                      </div>
+                      <div>
                         <dt>예상 금액</dt>
                         <dd>₩{formatPrice(booking.totalPrice)}</dd>
                       </div>
@@ -1000,7 +1011,9 @@ export default function AdminBeautyBookingsContent() {
                       <span className={styles.languagePill}>
                         {LANGUAGE_LABELS[booking.communicationLanguage] ?? booking.communicationLanguage}
                       </span>
-                      <span className={styles.regionText}>{booking.region}</span>
+                      <span className={styles.regionText}>
+                        {booking.hasCurrentImage || booking.hasStyleImage ? '?대?吏 泥⑤? ?덉쓬' : '泥⑤???놁쓬'}
+                      </span>
                     </div>
                   </button>
                 ))}
@@ -1112,6 +1125,10 @@ export default function AdminBeautyBookingsContent() {
                         <dd>{selectedBooking.customerPhone}</dd>
                       </div>
                       <div>
+                        <dt>Email</dt>
+                        <dd>{selectedBooking.customerEmail ?? '媛?ν븳 ?대찓???놁쓬'}</dd>
+                      </div>
+                      <div>
                         <dt>요청사항</dt>
                         <dd>{selectedBooking.customerRequest || '별도 요청 없음'}</dd>
                       </div>
@@ -1150,12 +1167,26 @@ export default function AdminBeautyBookingsContent() {
 
                   <section className={styles.infoBlock}>
                     <h5 className={styles.blockTitle}>참조 이미지</h5>
+                    <dl className={styles.detailList}>
+                      <div>
+                        <dt>Attachment</dt>
+                        <dd>{selectedBookingHasImages ? 'Attached' : 'None'}</dd>
+                      </div>
+                      <div>
+                        <dt>Current image file</dt>
+                        <dd>{selectedBooking.currentImageName ?? (selectedBooking.hasCurrentImage ? 'Stored image' : 'None')}</dd>
+                      </div>
+                      <div>
+                        <dt>Style image file</dt>
+                        <dd>{selectedBooking.styleImageName ?? (selectedBooking.hasStyleImage ? 'Stored image' : 'None')}</dd>
+                      </div>
+                    </dl>
                     <div className={styles.imageActions}>
-                      {!selectedBooking.currentImageUrl && !selectedBooking.styleImageUrl && (
+                      {!selectedBookingHasImages && (
                         <p className={styles.sectionText} style={{ color: 'var(--gray-400)' }}>등록된 이미지가 없습니다.</p>
                       )}
 
-                      {selectedBooking.currentImageUrl && (
+                      {selectedBooking.hasCurrentImage && (
                         <button
                           type="button"
                           className={styles.imageButton}
@@ -1166,7 +1197,7 @@ export default function AdminBeautyBookingsContent() {
                         </button>
                       )}
 
-                      {selectedBooking.styleImageUrl && (
+                      {selectedBooking.hasStyleImage && (
                         <button
                           type="button"
                           className={styles.imageButton}

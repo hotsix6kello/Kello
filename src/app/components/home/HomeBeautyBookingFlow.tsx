@@ -203,6 +203,8 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
 
       const service = availableServices.find((s) => s.id === selectedServiceId);
       
+      const { data: sessionData } = await supabase.auth.getSession();
+
       const payload: BeautyBookingPayload = {
         id: requestId,
         category: 'beauty',
@@ -226,6 +228,7 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         },
         customer: {
           name: customerForm.name,
+          email: sessionData.session?.user?.email ?? undefined,
           phone: customerForm.phone,
           request: customerForm.request,
           imageUrls: [],
@@ -259,7 +262,6 @@ export default function HomeBeautyBookingFlow({ isOpen, onClose, initialCategory
         },
       };
 
-      const { data: sessionData } = await supabase.auth.getSession();
       await submitBeautyBooking(payload, sessionData.session?.access_token ?? null);
       
       setSubmittedBooking({
