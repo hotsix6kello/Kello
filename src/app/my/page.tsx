@@ -925,30 +925,49 @@ function MyPageContent() {
             )}
 
             {/* Customer Service / Info Links */}
-            <section className={styles.section} style={{ marginTop: 24, padding: "0 16px", display: 'flex', flexDirection: 'row', gap: 24, justifyContent: 'center' }}>
-                <div 
-                    onClick={() => router.push('/privacy')}
-                    style={{ 
-                        fontSize: '0.8125rem', 
-                        color: 'var(--soft-ink)', 
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        opacity: 0.7
-                    }}
+            <section className={styles.section} style={{ marginTop: 24, padding: '16px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <button
+                    type="button"
+                    className={styles.savedHubCard}
+                    onClick={() => router.push('/help')}
+                    style={{ textAlign: 'left' }}
                 >
-                    {t('privacy_policy.title')}
-                </div>
-                <div 
-                    onClick={() => router.push('/terms')}
-                    style={{ 
-                        fontSize: '0.8125rem', 
-                        color: 'var(--soft-ink)', 
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        opacity: 0.7
-                    }}
-                >
-                    {t('terms_of_service.title')}
+                    <div className={styles.savedHubText}>
+                        <div className={styles.savedHubTitle}>
+                            {t('my_page.help_center.title', { defaultValue: '헬프센터' })}
+                        </div>
+                        <div className={styles.savedHubDesc}>
+                            {t('my_page.help_center.description', { defaultValue: '자주 묻는 질문과 긴급 도움말을 확인하세요' })}
+                        </div>
+                    </div>
+                    <span className={styles.savedHubArrow}>&gt;</span>
+                </button>
+
+                <div style={{ display: 'flex', flexDirection: 'row', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <div
+                        onClick={() => router.push('/privacy')}
+                        style={{
+                            fontSize: '0.8125rem',
+                            color: 'var(--soft-ink)',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                            opacity: 0.7
+                        }}
+                    >
+                        {t('privacy_policy.title')}
+                    </div>
+                    <div
+                        onClick={() => router.push('/terms')}
+                        style={{
+                            fontSize: '0.8125rem',
+                            color: 'var(--soft-ink)',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                            opacity: 0.7
+                        }}
+                    >
+                        {t('terms_of_service.title')}
+                    </div>
                 </div>
             </section>
 
