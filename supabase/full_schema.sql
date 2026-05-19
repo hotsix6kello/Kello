@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS public.beauty_booking_requests (
   designer_surcharge           INTEGER     NOT NULL DEFAULT 0,
   total_price                  INTEGER     NOT NULL DEFAULT 0,
   customer_name                TEXT        NOT NULL,
+  customer_email               TEXT,
   customer_phone               TEXT        NOT NULL,
   customer_request             TEXT        NOT NULL DEFAULT '',
   current_image_url            TEXT,

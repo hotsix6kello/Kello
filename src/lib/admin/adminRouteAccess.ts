@@ -52,6 +52,7 @@ export async function requireAuthenticatedRouteAccess(request: Request) {
 
   return {
     userId: user.id,
+    email: user.email ?? null,
   };
 }
 
@@ -80,6 +81,7 @@ export async function getOptionalAuthenticatedRouteAccess(request: Request) {
 
   return {
     userId: user.id,
+    email: user.email ?? null,
   };
 }
 

@@ -146,7 +146,11 @@ export async function POST(request: Request) {
       userId: auth?.userId,
     });
 
-    const result = await createBeautyBookingRequest(payload, auth?.userId ?? null);
+    const result = await createBeautyBookingRequest(
+      payload,
+      auth?.userId ?? null,
+      auth?.email ?? null,
+    );
     
     console.log("[beauty-booking-route] Result from createBeautyBookingRequest", {
       success: !!result,

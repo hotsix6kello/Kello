@@ -39,6 +39,7 @@ type BeautyBookingInsertRow = {
   id?: string;
   category: "beauty";
   customer_user_id: string | null;
+  customer_email: string | null;
   beauty_category: string;
   region: string;
   store_id: string;
@@ -84,6 +85,7 @@ type BeautyBookingInsertRow = {
 export type BeautyBookingAdminSelectRow = {
   id: string;
   customer_user_id: string | null;
+  customer_email: string | null;
   created_at: string;
   updated_at: string;
   status: string;
@@ -136,6 +138,14 @@ export type BeautyBookingAdminSelectRow = {
   style_image_url: string | null;
   agreements: unknown;
   created_from_flow: string;
+};
+
+type BeautyBookingImageSelectRow = {
+  request_id: string;
+  image_type: "current" | "style";
+  storage_path: string;
+  original_file_name: string | null;
+  bucket_name: string;
 };
 
 type BeautyBookingSummarySelectRow = Pick<
@@ -247,11 +257,18 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     designerSurcharge: row.designer_surcharge,
     totalPrice: row.total_price,
     customerName: row.customer_name,
+    customerEmail: row.customer_email ?? null,
     customerPhone: row.customer_phone,
     customerRequest: row.customer_request,
     imageUrls: Array.isArray((row as unknown as { image_urls?: string[] }).image_urls) ? (row as unknown as { image_urls: string[] }).image_urls : [],
     currentImageUrl: row.current_image_url ?? null,
     styleImageUrl: row.style_image_url ?? null,
+    hasCurrentImage: Boolean(row.current_image_url),
+    hasStyleImage: Boolean(row.style_image_url),
+    currentImagePath: null,
+    styleImagePath: null,
+    currentImageName: null,
+    styleImageName: null,
     communicationLanguage: row.communication_language,
     communicationIntent: row.communication_intent,
     koreanMessage: row.korean_message,
@@ -275,6 +292,7 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
 export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "id",
   "customer_user_id",
+  "customer_email",
   "created_at",
   "updated_at",
   "status",
@@ -353,11 +371,13 @@ function mapBeautyBookingRowToSummaryRecord(
 function mapBeautyBookingPayloadToRow(
   payload: BeautyBookingPayload,
   customerUserId: string | null = null,
+  customerEmail: string | null = null,
 ): BeautyBookingInsertRow {
   return {
     id: payload.id,
     category: payload.category,
     customer_user_id: customerUserId,
+    customer_email: payload.customer.email ?? customerEmail,
     beauty_category: payload.beautyCategory,
     region: payload.region,
     store_id: payload.storeId,
@@ -404,6 +424,7 @@ function mapBeautyBookingPayloadToRow(
 export async function createBeautyBookingRequest(
   payload: BeautyBookingPayload,
   customerUserId: string | null = null,
+  customerEmail: string | null = null,
 ): Promise<PersistedBeautyBookingRecord> {
   if (!hasSupabaseServerAccess()) {
     throw new BeautyBookingStorageError("env_missing", {
@@ -412,7 +433,7 @@ export async function createBeautyBookingRequest(
   }
 
   const client = getSupabaseServerClient();
-  const insertData = mapBeautyBookingPayloadToRow(payload, customerUserId);
+  const insertData = mapBeautyBookingPayloadToRow(payload, customerUserId, customerEmail);
   console.log("[beauty-booking-server] Attempting insert", {
     store_id: insertData.store_id,
     beauty_category: insertData.beauty_category,
@@ -527,6 +548,67 @@ export async function createBeautyBookingRequest(
   };
 }
 
+function mergeBookingImageMetadata(
+  booking: BeautyBookingAdminRecord,
+  imageRows: BeautyBookingImageSelectRow[],
+): BeautyBookingAdminRecord {
+  const currentImage = imageRows.find((row) => row.image_type === "current") ?? null;
+  const styleImage = imageRows.find((row) => row.image_type === "style") ?? null;
+
+  return {
+    ...booking,
+    hasCurrentImage: booking.hasCurrentImage || Boolean(currentImage?.storage_path),
+    hasStyleImage: booking.hasStyleImage || Boolean(styleImage?.storage_path),
+    currentImagePath: currentImage?.storage_path ?? null,
+    styleImagePath: styleImage?.storage_path ?? null,
+    currentImageName: currentImage?.original_file_name ?? null,
+    styleImageName: styleImage?.original_file_name ?? null,
+  };
+}
+
+async function attachBookingImageMetadata(
+  client: ReturnType<typeof getSupabaseServerClient>,
+  bookings: BeautyBookingAdminRecord[],
+): Promise<BeautyBookingAdminRecord[]> {
+  if (bookings.length === 0) {
+    return bookings;
+  }
+
+  const bookingIds = bookings.map((booking) => booking.id);
+  const { data, error } = await client
+    .from("beauty_booking_request_images")
+    .select("request_id, image_type, storage_path, original_file_name, bucket_name")
+    .in("request_id", bookingIds);
+
+  if (error || !data) {
+    console.warn("[beauty-booking-server] image_metadata_fetch_failed", {
+      code: error?.code,
+      message: error?.message,
+      bookingIds,
+    });
+    return bookings;
+  }
+
+  const imageRowsByBookingId = new Map<string, BeautyBookingImageSelectRow[]>();
+  for (const row of data as BeautyBookingImageSelectRow[]) {
+    const currentRows = imageRowsByBookingId.get(row.request_id) ?? [];
+    currentRows.push(row);
+    imageRowsByBookingId.set(row.request_id, currentRows);
+  }
+
+  return bookings.map((booking) =>
+    mergeBookingImageMetadata(booking, imageRowsByBookingId.get(booking.id) ?? []),
+  );
+}
+
+async function attachSingleBookingImageMetadata(
+  client: ReturnType<typeof getSupabaseServerClient>,
+  booking: BeautyBookingAdminRecord,
+): Promise<BeautyBookingAdminRecord> {
+  const [enriched] = await attachBookingImageMetadata(client, [booking]);
+  return enriched ?? booking;
+}
+
 export async function listBeautyBookingRequests(
   filters: BeautyBookingAdminListFilters = {},
 ): Promise<BeautyBookingAdminRecord[]> {
@@ -567,9 +649,9 @@ export async function listBeautyBookingRequests(
   }
 
   const normalizedQuery = filters.query?.trim().toLowerCase() ?? "";
-  const items = ((data as unknown as BeautyBookingAdminSelectRow[] | null) ?? []).map(
+  const items = await attachBookingImageMetadata(client, ((data as unknown as BeautyBookingAdminSelectRow[] | null) ?? []).map(
     mapBeautyBookingRowToAdminRecord,
-  );
+  ));
 
   if (!normalizedQuery) {
     return items;
@@ -578,7 +660,12 @@ export async function listBeautyBookingRequests(
   return items.filter((item) => {
     const storeName = item.storeName.toLowerCase();
     const customerName = item.customerName.toLowerCase();
-    return storeName.includes(normalizedQuery) || customerName.includes(normalizedQuery);
+    const customerEmail = item.customerEmail?.toLowerCase() ?? "";
+    return (
+      storeName.includes(normalizedQuery) ||
+      customerName.includes(normalizedQuery) ||
+      customerEmail.includes(normalizedQuery)
+    );
   });
 }
 
@@ -612,8 +699,11 @@ export async function listBeautyBookingRequestsForUser(
     });
   }
 
-  return ((data as unknown as BeautyBookingAdminSelectRow[] | null) ?? []).map(
-    mapBeautyBookingRowToAdminRecord,
+  return attachBookingImageMetadata(
+    client,
+    ((data as unknown as BeautyBookingAdminSelectRow[] | null) ?? []).map(
+      mapBeautyBookingRowToAdminRecord,
+    ),
   );
 }
 
@@ -737,7 +827,10 @@ export async function updateBeautyBookingRequestStatus(
     });
   }
 
-  const updatedRecord = mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  const updatedRecord = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 
   // Dispatch Notification
   if (updatedRecord.customerUserId) {
@@ -860,7 +953,10 @@ export async function cancelBeautyBookingRequestAsCustomer(
     });
   }
 
-  const updatedRecord = mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  const updatedRecord = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 
   // Dispatch Notification to customer
   if (updatedRecord.customerUserId) {
@@ -966,7 +1062,10 @@ export async function requestChangeBeautyBookingAsCustomer(
     });
   }
 
-  const updatedRecord = mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  const updatedRecord = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 
   // Dispatch Notification to customer (Acknowledgement)
   if (updatedRecord.customerUserId) {
@@ -1051,7 +1150,10 @@ export async function reviewBeautyBookingChangeRequest(
     });
   }
 
-  const updatedRecord = mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  const updatedRecord = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 
   // Dispatch Notification
   if (updatedRecord.customerUserId) {
@@ -1119,7 +1221,10 @@ export async function updateBeautyBookingOperatorInfo(
     });
   }
 
-  return mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  return attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 }
 
 /**
@@ -1155,7 +1260,10 @@ export async function offerAlternativeSchedule(
     throw new BeautyBookingStorageError("update_failed");
   }
 
-  const record = mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  const record = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 
   // Notify customer
   if (record.customerUserId) {
@@ -1228,7 +1336,10 @@ export async function respondToAlternativeOffer(
     throw new BeautyBookingStorageError("update_failed");
   }
 
-  const record = mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow);
+  const record = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 
   // Notify customer
   if (record.customerUserId) {
