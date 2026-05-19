@@ -1,8 +1,7 @@
 export const navItems = [
-    { id: 'home', path: "/", icon: "✦", labelKey: 'common.home_nav', defaultLabel: 'Home', activeKey: "/" },
-    // TODO: 추후 탐색 기능 업데이트 시 활성화
-    // { id: 'explore', path: "/explore", icon: "🔍", labelKey: 'common.explore_nav', defaultLabel: 'Explore', activeKey: "/explore" },
-    { id: 'community', path: "/community", icon: "💬", labelKey: 'common.community_nav', defaultLabel: 'Community', activeKey: "/community" },
-    { id: 'help', path: "/help", icon: "🆘", labelKey: 'common.help_nav', defaultLabel: 'Help', activeKey: "/help" },
-    { id: 'my', path: "/my", icon: "👤", labelKey: 'common.my_nav', defaultLabel: 'My Info', activeKey: "/my" },
+    { id: 'home', path: "/", icon: "✦", labelKey: 'common.home_nav', defaultLabel: '홈', activeKey: "/" },
+    { id: 'talk', path: "/talk", icon: "🗣️", labelKey: 'common.talk_nav', defaultLabel: '소통', activeKey: "/talk" },
+    { id: 'explore', path: "/explore", icon: "🗺️", labelKey: 'common.map_nav', defaultLabel: '지도', activeKey: "/explore" },
+    { id: 'community', path: "/community", icon: "💬", labelKey: 'common.community_nav', defaultLabel: '커뮤니티', activeKey: "/community" },
+    { id: 'my', path: "/my", icon: "👤", labelKey: 'common.my_nav', defaultLabel: '마이', activeKey: "/my" },
 ];

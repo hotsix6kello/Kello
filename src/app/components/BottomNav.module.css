@@ -10,9 +10,11 @@
     /* Reduced from 80px */
     background: var(--background);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding-inline: 6px;
     padding-bottom: env(safe-area-inset-bottom, 12px);
+    box-sizing: border-box;
     z-index: 9999;
     transition: transform 0.3s ease;
 }
@@ -21,14 +23,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 2px;
     color: var(--gray-500);
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     flex: 1;
     min-width: 0;
-    padding: 0 4px;
+    padding: 0 2px;
 }
 
 .navItem.active {
@@ -42,12 +44,12 @@
 }
 
 .navIcon {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     transition: transform 0.2s;
 }
 
 .navLabel {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     opacity: 0.6;
