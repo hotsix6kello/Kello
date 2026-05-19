@@ -83,11 +83,18 @@ export type BeautyBookingAdminRecord = {
   designerSurcharge: number;
   totalPrice: number;
   customerName: string;
+  customerEmail: string | null;
   customerPhone: string;
   customerRequest: string;
   imageUrls: string[];
   currentImageUrl: string | null;
   styleImageUrl: string | null;
+  hasCurrentImage: boolean;
+  hasStyleImage: boolean;
+  currentImagePath: string | null;
+  styleImagePath: string | null;
+  currentImageName: string | null;
+  styleImageName: string | null;
   communicationLanguage: string;
   communicationIntent: string;
   koreanMessage: string;
