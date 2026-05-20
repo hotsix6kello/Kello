@@ -269,7 +269,7 @@ export default function HomePage() {
   };
 
   const handleOpenInterpreter = () => {
-    router.push('/interpreter');
+    router.push('/talk');
   };
 
 
