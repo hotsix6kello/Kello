@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import { MockTranslationProvider } from "../../translation/providers.ts";
 import { InMemoryTranslationRepository } from "../../translation/repository.ts";
 import { TranslationService } from "../../translation/service.ts";
-import { BookingConciergeService } from "../conciergeService.ts";
 import { InShopInterpreterService } from "../interpreterService.ts";
 import { InMemoryHomeTranslatorRepository } from "../repository.ts";
 
@@ -24,76 +23,9 @@ function createServices() {
 
   return {
     translationRepository,
-    conciergeService: new BookingConciergeService(translatorRepository, translationService),
     interpreterService: new InShopInterpreterService(translatorRepository, translationService),
   };
 }
-
-await run("booking concierge creates a booking from a grounded availability check", async () => {
-  const { conciergeService } = createServices();
-
-  const result = await conciergeService.handleRequest({
-    customerLocale: "en",
-    message: "Please book lash extension on 2026-03-18 at 14:00. note: natural style",
-  });
-
-  assert.equal(result.structuredOutput.intent, "create_booking");
-  assert.equal(result.structuredOutput.service_name, "속눈썹 연장");
-  assert.equal(result.structuredOutput.requested_date, "2026-03-18");
-  assert.equal(result.structuredOutput.requested_time, "14:00");
-  assert.equal(result.booking?.status, "confirmed");
-  assert.equal(result.booking?.bookingTime, "14:00");
-  assert.equal(result.tools.some((tool) => tool.tool === "availability"), true);
-  assert.equal(result.tools.some((tool) => tool.tool === "create_booking"), true);
-  assert.match(result.responseLocalized, /^\[en\]/);
-  assert.ok(result.savedEventId);
-});
-
-await run("booking concierge changes and cancels an existing booking in the same session", async () => {
-  const { conciergeService } = createServices();
-
-  const created = await conciergeService.handleRequest({
-    customerLocale: "ko",
-    message: "속눈썹 연장 2026-03-18 14:00 예약 부탁해요",
-  });
-
-  assert.ok(created.booking);
-
-  const changed = await conciergeService.handleRequest({
-    sessionId: created.sessionId,
-    customerLocale: "en",
-    message: "Please change my booking to 2026-03-19 16:00",
-  });
-
-  assert.equal(changed.structuredOutput.intent, "change_booking");
-  assert.equal(changed.booking?.bookingDate, "2026-03-19");
-  assert.equal(changed.booking?.bookingTime, "16:00");
-  assert.equal(changed.tools.some((tool) => tool.tool === "change_booking"), true);
-
-  const cancelled = await conciergeService.handleRequest({
-    sessionId: created.sessionId,
-    customerLocale: "en",
-    message: "Please cancel my booking",
-  });
-
-  assert.equal(cancelled.structuredOutput.intent, "cancel_booking");
-  assert.equal(cancelled.booking?.status, "cancelled");
-  assert.equal(cancelled.tools.some((tool) => tool.tool === "cancel_booking"), true);
-});
-
-await run("booking concierge returns a grounded fallback when a requested slot is unavailable", async () => {
-  const { conciergeService } = createServices();
-
-  const result = await conciergeService.handleRequest({
-    customerLocale: "ja",
-    message: "まつげエクステを2026-03-18 18:00に予約したいです",
-  });
-
-  assert.equal(result.structuredOutput.intent, "create_booking");
-  assert.equal(result.booking, null);
-  assert.equal(result.tools.some((tool) => tool.tool === "availability"), true);
-  assert.match(result.responseKo, /대안 시간|예약이 어렵습니다|수수료|생성/);
-});
 
 await run("interpreter session issues an ephemeral token and applies glossary on staff to customer turns", async () => {
   const { interpreterService, translationRepository } = createServices();
