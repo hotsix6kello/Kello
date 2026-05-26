@@ -1,3 +1,5 @@
+> Archived note: 이 문서는 현재 구조가 아니라, 제거된 legacy home translator hub / concierge 설계 기록입니다. 현재 런타임은 `/interpreter` 페이지와 `/api/interpreter/*` 경로를 기준으로 동작합니다.
+
 # Home Translator Hub
 
 ## Architecture

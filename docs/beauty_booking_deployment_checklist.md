@@ -122,7 +122,6 @@
 - 현재 `tsc --noEmit` 실패 항목 중 아래는 beauty booking 저장 경로와 무관한 기존 이슈다.
   - `src/app/explore/page.tsx` nearby place 타입 불일치
   - `src/lib/translation/tests/translation.service.test.ts`
-  - `src/lib/translator/tests/interpreter.routes.test.ts`
 - 위 이슈와 별개로, beauty booking 배포 판단은 아래 4가지만 우선 본다.
   - env 설정 완료
   - SQL 적용 완료
