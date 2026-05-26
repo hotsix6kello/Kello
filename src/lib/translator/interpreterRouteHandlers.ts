@@ -13,14 +13,6 @@ type TurnRouteService = {
   translateTurn: (request: InterpreterTurnRequest) => Promise<unknown>;
 };
 
-type SttRouteService = {
-  transcribe: (request: {
-    language: InterpreterSessionRequest["customerLocale"];
-    audioBuffer: Uint8Array;
-    mimeType: string;
-  }) => Promise<unknown>;
-};
-
 interface RouteResult<TBody = unknown> {
   status: number;
   body: TBody;
@@ -100,53 +92,6 @@ export async function processInterpreterTurnPost(
     return {
       status: 500,
       body: { error: error instanceof Error ? error.message : "interpreter_turn_failed" },
-    };
-  }
-}
-
-export async function processInterpreterSttPost(
-  request: Request,
-  routeService: SttRouteService,
-): Promise<RouteResult> {
-  try {
-    const formData = await request.formData();
-    const audio = formData.get("audio");
-    const language = formData.get("language");
-
-    if (!(audio instanceof File)) {
-      return {
-        status: 400,
-        body: { error: "audio file is required" },
-      };
-    }
-
-    if (typeof language !== "string" || !isSupportedTranslationLocale(language)) {
-      return {
-        status: 400,
-        body: { error: `language must be one of ${SUPPORTED_LOCALE_LIST_LABEL}` },
-      };
-    }
-
-    const arrayBuffer = await audio.arrayBuffer();
-    if (arrayBuffer.byteLength === 0) {
-      return {
-        status: 400,
-        body: { error: "audio payload is empty" },
-      };
-    }
-
-    return {
-      status: 200,
-      body: await routeService.transcribe({
-        language,
-        audioBuffer: new Uint8Array(arrayBuffer),
-        mimeType: audio.type || "audio/webm",
-      }),
-    };
-  } catch (error) {
-    return {
-      status: 500,
-      body: { error: error instanceof Error ? error.message : "interpreter_stt_failed" },
     };
   }
 }
