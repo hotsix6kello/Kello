@@ -6,7 +6,6 @@ import { TranslationService } from "../../translation/service.ts";
 import { BookingConciergeService } from "../conciergeService.ts";
 import { InShopInterpreterService } from "../interpreterService.ts";
 import { InMemoryHomeTranslatorRepository } from "../repository.ts";
-import { InterpreterSttService, MockInterpreterSttProvider } from "../stt.ts";
 
 async function run(name: string, fn: () => Promise<void>) {
   try {
@@ -159,19 +158,4 @@ await run("interpreter flow rejects invalid ephemeral tokens", async () => {
       }),
     /invalid/i,
   );
-});
-
-await run("mock STT service returns a transcript for supported interpreter languages", async () => {
-  const service = new InterpreterSttService(new MockInterpreterSttProvider());
-
-  const result = await service.transcribe({
-    language: "zh-CN",
-    audioBuffer: new Uint8Array([10, 20, 30, 40]),
-    mimeType: "audio/webm",
-  });
-
-  assert.equal(result.locale, "zh-CN");
-  assert.equal(result.fallbackUsed, true);
-  assert.match(result.engine, /mock/i);
-  assert.match(result.text, /自然|蓬松/);
 });

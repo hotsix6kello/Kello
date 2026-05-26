@@ -14,5 +14,4 @@ export {
   getSalonTermTranslation,
   mergeSalonGlossaryEntries,
 } from "./salonGlossary.ts";
-export { InterpreterSttService, MockInterpreterSttProvider, HttpInterpreterSttProvider } from "./stt.ts";
 export type * from "./types.ts";
