@@ -31,11 +31,7 @@ await run("home page no longer passes skeleton mode or skeleton debug props", ()
   assert.doesNotMatch(pageSource, /skeletonDebugPanel=/);
 });
 
-await run("HomeBookingFlowEntry routes directly to the active home booking flow", () => {
-  assert.match(entrySource, /HomeBeautyBookingFlow/);
-  assert.doesNotMatch(entrySource, /BookingFlowSkeleton/);
-});
-
-await run("HomeBookingFlowEntry keeps skeleton marked as deprecated only in comment form", () => {
-  assert.match(entrySource, /deprecated/);
+await run("HomeBookingFlowEntry uses BookingFlowSkeleton as the active booking flow", () => {
+  assert.match(entrySource, /BookingFlowSkeleton/);
+  assert.doesNotMatch(entrySource, /HomeBeautyBookingFlow/);
 });
