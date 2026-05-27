@@ -266,6 +266,19 @@
       "welcome": "{{name}}님, 오늘 어떤 서비스를 원하시나요?",
       "welcome_user": "{{greeting}}, {{name}}님! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "한국에서 K-뷰티 예약,",
+      "slide1_subtitle": "스트레스 없이.",
+      "slide2_title": "스타일 사진을\n업로드하세요",
+      "slide2_subtitle": "날짜, 지역, 원하는 스타일을 알려주세요.",
+      "slide3_title": "워크인 대기 없음",
+      "slide3_subtitle": "Kello가 결제 전에 예약 가능 여부와 가격을 확인해 드려요.",
+      "badge_no_calls": "한국어 통화 없음",
+      "badge_price": "가격 확인",
+      "badge_photo": "사진 요청",
+      "cta": "예약 요청 시작하기",
+      "hint": "스타일 사진과 원하는 날짜를 업로드하세요. Kello가 이용 가능한 살롱, 가격, 예약 옵션을 알아봐 드려요."
+    },
     "booking": {
       "step": "STEP. 01",
       "title": "뷰티 서비스를 선택해주세요",

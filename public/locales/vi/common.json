@@ -293,6 +293,19 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "Chào mừng, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Đặt lịch K-Beauty\ntại Hàn Quốc,",
+      "slide1_subtitle": "không lo, không stress.",
+      "slide2_title": "Tải ảnh phong cách\nưa thích lên",
+      "slide2_subtitle": "Cho chúng tôi biết ngày, khu vực và phong cách bạn muốn.",
+      "slide3_title": "Không cần xếp hàng\nwalk-in",
+      "slide3_subtitle": "Kello kiểm tra lịch trống và giá trước khi thanh toán.",
+      "badge_no_calls": "Không gọi tiếng Hàn",
+      "badge_price": "Đã kiểm tra giá",
+      "badge_photo": "Yêu cầu ảnh",
+      "cta": "Bắt đầu đặt lịch",
+      "hint": "Tải ảnh phong cách và ngày mong muốn. Kello tìm salon, giá và tùy chọn đặt lịch phù hợp cho bạn."
+    },
     "booking": {
       "step": "BƯỚC. 01",
       "title": "Vui lòng chọn dịch vụ làm đẹp",

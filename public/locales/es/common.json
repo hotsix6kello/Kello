@@ -259,6 +259,19 @@
       "welcome": "{{name}}, selecciona un servicio.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Reserva K-Beauty\nen Corea,",
+      "slide1_subtitle": "sin estrés.",
+      "slide2_title": "Sube tu foto\nde estilo",
+      "slide2_subtitle": "Dinos tu fecha, zona y estilo.",
+      "slide3_title": "Sin esperas\nsin cita previa",
+      "slide3_subtitle": "Kello verifica disponibilidad y precio antes del pago.",
+      "badge_no_calls": "Sin llamadas en coreano",
+      "badge_price": "Precio verificado",
+      "badge_photo": "Solicitud de foto",
+      "cta": "Iniciar solicitud de reserva",
+      "hint": "Sube tu foto de estilo y fecha deseada. Kello busca salones disponibles, precios y opciones de reserva."
+    },
     "booking": {
       "step": "PASO. 01",
       "title": "Selecciona el servicio de belleza",

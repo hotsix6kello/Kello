@@ -1505,6 +1505,19 @@
       "welcome": "{{name}}様、サービスをお選びください。",
       "welcome_user": "{{greeting}}、{{name}}様！👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "韓国でK-뷰티予約、",
+      "slide1_subtitle": "ストレスなし。",
+      "slide2_title": "スタイル写真を\nアップロード",
+      "slide2_subtitle": "日程・エリア・スタイルを教えてください。",
+      "slide3_title": "ウォークイン待ち\nなし",
+      "slide3_subtitle": "Kelloが支払い前に空き状況と料金を確認します。",
+      "badge_no_calls": "韓国語通話なし",
+      "badge_price": "料金確認済み",
+      "badge_photo": "写真リクエスト",
+      "cta": "予約リクエストを開始",
+      "hint": "スタイル写真と希望日をアップロードしてください。Kelloが利用可能なサロン・料金・予約オプションを調べます。"
+    },
     "booking": {
       "step": "STEP. 01",
       "title": "美容サービスを選択してください",
