@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
@@ -24,7 +23,6 @@ import HomeBookingSection from './components/home/HomeBookingSection';
 
 import HomeLocationSheet from './components/home/HomeLocationSheet';
 import HomeModals from './components/home/HomeModals';
-import HomeInterpreterEntry from './components/home/HomeInterpreterEntry';
 import HomeBookingFlowEntry from './components/home/HomeBookingFlowEntry';
 import WelcomeCouponPopup from './components/home/WelcomeCouponPopup';
 import ReferralCodePopup from './components/home/ReferralCodePopup';
@@ -46,8 +44,6 @@ export default function HomePage() {
 
   const selectedCategory = globalCategory as BeautyCategoryId | null;
   const setSelectedCategory = setGlobalCategory as (category: BeautyCategoryId | null) => void;
-
-  const router = useRouter();
 
   const hasSupabaseAuth = Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -268,11 +264,6 @@ export default function HomePage() {
     setIsBookingOpen(true);
   };
 
-  const handleOpenInterpreter = () => {
-    router.push('/talk');
-  };
-
-
 
 
   // body는 globals.css에서 overflow:hidden으로 영구 설정됨
@@ -392,11 +383,6 @@ export default function HomePage() {
         copied={copied}
         t={t}
       />
-
-      <HomeInterpreterEntry
-        onOpenInterpreter={handleOpenInterpreter}
-      />
-
 
       {loadingNav && (
         <div className={styles.toast}>
