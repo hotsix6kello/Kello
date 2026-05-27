@@ -147,7 +147,167 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   HERO SECTION
+   K-BEAUTY LOOKBOOK HERO (new)
+   ────────────────────────────────────────────────────────────────────────── */
+.heroNew {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding-bottom: 4px;
+}
+
+.heroSlideArea {
+  position: relative;
+  min-height: 230px;
+  padding: 76px 20px 24px; /* 76px = topNav clearance */
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
+
+/* Decorative card — right side placeholder */
+.heroCardWrap {
+  position: absolute;
+  top: 20px;
+  right: -18px;
+  width: 148px;
+  height: 196px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroCard {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(244, 91, 135, 0.18);
+  box-shadow: 0 16px 48px rgba(244, 91, 135, 0.12), 0 4px 12px rgba(43, 35, 29, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(7deg);
+  /* When image assets are ready:
+     background-image: url('/images/home/hero/slide-01.jpg');
+     background-size: cover;
+     background-position: center; */
+}
+
+.heroCardIcon {
+  font-size: 3.2rem;
+  filter: saturate(1.15);
+}
+
+.heroSlideText {
+  position: relative;
+  z-index: 2;
+  max-width: 210px;
+}
+
+.heroSlideTitle {
+  margin: 0 0 8px;
+  font-size: 27px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+  color: #1e293b;
+}
+
+.heroSlideSubtitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+/* Dot navigation */
+.heroDots {
+  display: flex;
+  gap: 6px;
+  padding: 10px 20px 6px;
+  align-items: center;
+}
+
+.heroDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.heroDotActive {
+  width: 22px;
+  background: #F45B87;
+}
+
+/* Trust badges */
+.heroBadgeRow {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 14px;
+  flex-wrap: wrap;
+}
+
+.heroBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(244, 91, 135, 0.2);
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+/* CTA */
+.heroCtaWrap {
+  padding: 0 20px 12px;
+}
+
+.heroCtaBtn {
+  width: 100%;
+  height: 52px;
+  border-radius: 16px;
+  background: #F45B87;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.heroCtaBtn:hover {
+  background: #DB2777;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(244, 91, 135, 0.35);
+}
+
+.heroCtaBtn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.heroCtaHint {
+  margin: 10px 0 0;
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   HERO SECTION (legacy — kept for reference)
    ────────────────────────────────────────────────────────────────────────── */
 .heroSection {
   padding: 0 0 12px;
