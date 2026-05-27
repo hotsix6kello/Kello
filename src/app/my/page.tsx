@@ -11,6 +11,12 @@ import {
     type BeautyBookingAdminRecord,
 } from "@/lib/bookings/beautyBookingAdmin";
 import AdminStatsDashboard from "../components/AdminStatsDashboard";
+import {
+    CITY_COORDS,
+    type CityKey,
+    getNextUpcomingBooking,
+    normalizeCityFromBooking,
+} from "./travelHelper";
 
 interface DashboardProfileRecord {
     display_name: string | null;
@@ -328,6 +334,155 @@ function SectionCardSkeleton({ rows = 2 }: { rows?: number }) {
                 </div>
             ))}
         </div>
+    );
+}
+
+function TravelHelperCard({
+    accessToken,
+    authReady,
+}: {
+    accessToken: string;
+    authReady: boolean;
+}) {
+    const { i18n } = useTranslation('common');
+    const [nextBooking, setNextBooking] = useState<MyBookingCardRecord | null>(null);
+    const [city, setCity] = useState<CityKey>('Seoul');
+    const [weather, setWeather] = useState<{ temp: number; icon: string } | null>(null);
+    const [loadingWeather, setLoadingWeather] = useState(true);
+    const [currency, setCurrency] = useState<string>('USD');
+
+    useEffect(() => {
+        const saved = typeof window !== 'undefined' ? localStorage.getItem('kello_currency') : null;
+        if (saved) setCurrency(saved);
+
+        const handler = (e: Event) => {
+            const code = (e as CustomEvent<string>).detail;
+            if (code) setCurrency(code);
+        };
+        window.addEventListener('kello_currency_change', handler);
+        return () => window.removeEventListener('kello_currency_change', handler);
+    }, []);
+
+    useEffect(() => {
+        if (!authReady) {
+            setLoadingWeather(false);
+            return;
+        }
+        if (!accessToken) {
+            setLoadingWeather(false);
+            return;
+        }
+
+        let cancelled = false;
+        const load = async () => {
+            try {
+                const res = await fetch('/api/bookings/beauty/mine?view=summary', {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                    cache: 'no-store',
+                });
+                const body = await res.json().catch(() => null) as
+                    | { ok?: boolean; items?: MyBookingCardRecord[] }
+                    | null;
+
+                if (!cancelled && body?.ok && Array.isArray(body.items)) {
+                    const next = getNextUpcomingBooking(body.items);
+                    setNextBooking(next);
+                    if (next?.storeName) {
+                        setCity(normalizeCityFromBooking(next.storeName));
+                    }
+                }
+            } catch { /* keep Seoul default */ }
+        };
+
+        void load();
+        return () => { cancelled = true; };
+    }, [accessToken, authReady]);
+
+    useEffect(() => {
+        const coords = CITY_COORDS[city] ?? CITY_COORDS.Seoul;
+        let cancelled = false;
+
+        const fetchWeather = async () => {
+            setLoadingWeather(true);
+            try {
+                const res = await fetch(`/api/weather?lat=${coords.lat}&lng=${coords.lng}`);
+                const data = await res.json() as { ok: boolean; temp?: number; icon?: string };
+                if (!cancelled && data.ok && data.temp !== undefined && data.icon) {
+                    setWeather({ temp: data.temp, icon: data.icon });
+                }
+            } catch { /* keep null */ } finally {
+                if (!cancelled) setLoadingWeather(false);
+            }
+        };
+
+        void fetchWeather();
+        return () => { cancelled = true; };
+    }, [city]);
+
+    const formatDate = (dateStr: string) => {
+        try {
+            return new Date(dateStr + 'T00:00:00').toLocaleDateString(
+                i18n.language === 'ko' ? 'ko-KR' : 'en-US',
+                { month: 'short', day: 'numeric' },
+            );
+        } catch { return dateStr; }
+    };
+
+    const bookingLabel = nextBooking
+        ? [
+            nextBooking.beautyCategory,
+            nextBooking.storeName || nextBooking.primaryServiceName,
+            formatDate(nextBooking.bookingDate),
+            nextBooking.bookingTime?.slice(0, 5),
+          ].filter(Boolean).join(' · ')
+        : '';
+
+    return (
+        <section className={styles.section}>
+            <div className={styles.travelHelperHeader}>
+                <span className={styles.travelHelperTag}>✈ Travel Helper</span>
+            </div>
+
+            <div className={styles.travelHelperGrid}>
+                <div className={styles.travelHelperCell}>
+                    <div className={styles.travelHelperCellLabel}>🌤 Weather</div>
+                    <div className={styles.travelHelperCellMain}>
+                        {loadingWeather
+                            ? `${city} · ···°C`
+                            : weather
+                                ? `${weather.icon} ${city} · ${weather.temp}°C`
+                                : city}
+                    </div>
+                    <div className={styles.travelHelperCellSub}>
+                        {nextBooking
+                            ? 'Based on your next booking'
+                            : 'No upcoming booking yet'}
+                    </div>
+                </div>
+
+                <div className={styles.travelHelperSep} />
+
+                <div className={styles.travelHelperCell}>
+                    <div className={styles.travelHelperCellLabel}>💱 Currency</div>
+                    <div className={styles.travelHelperCellMain}>KRW → {currency}</div>
+                    <div className={styles.travelHelperCellSub}>
+                        Prices are shown in Korean won with approximate conversion.
+                    </div>
+                </div>
+            </div>
+
+            {nextBooking && (
+                <div className={styles.travelHelperNextRow}>
+                    <span className={styles.travelHelperNextBadge}>📅 Next</span>
+                    <span className={styles.travelHelperNextText}>{bookingLabel}</span>
+                </div>
+            )}
+
+            <div className={styles.travelHelperFootnote}>
+                Weather and currency are shown for your Korea beauty trip.
+                Final exchange rate may vary by payment provider.
+            </div>
+        </section>
     );
 }
 
@@ -865,6 +1020,10 @@ function MyPageContent() {
                 onOpenSettings={() => router.push("/my/settings")}
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
+
+            {!capabilities.canViewAdminConsole && (
+                <TravelHelperCard accessToken={accessToken} authReady={authReady} />
+            )}
 
             {!capabilities.canViewAdminConsole && (
                 <ReferralSection referralCode={referralCode} coupons={coupons} />
