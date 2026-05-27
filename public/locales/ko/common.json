@@ -280,7 +280,7 @@
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "원하는 K-뷰티 예약을 선택해주세요",
+      "title": "한국에서 경험하는 완벽한 K-뷰티 여정 Kello가 도와드릴게요",
       "description": "카테고리를 선택하면 날짜, 지역, 원하는 스타일 사진을 입력할 수 있어요.",
       "submitting_images": "이미지를 업로드 중입니다...",
       "sending_request": "예약 요청을 전송 중입니다...",
