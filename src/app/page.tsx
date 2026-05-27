@@ -346,12 +346,14 @@ export default function HomePage() {
         t={t}
       />
 
-      <HomeBookingSection
-        categories={BEAUTY_CATEGORY_OPTIONS}
-        selectedCategory={selectedCategory}
-        onSelectCategory={handleCategorySelect}
-        t={t}
-      />
+      <div id="beauty-booking">
+        <HomeBookingSection
+          categories={BEAUTY_CATEGORY_OPTIONS}
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleCategorySelect}
+          t={t}
+        />
+      </div>
 
 
 
