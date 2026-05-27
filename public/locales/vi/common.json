@@ -303,8 +303,7 @@
       "badge_no_calls": "Không gọi tiếng Hàn",
       "badge_price": "Đã kiểm tra giá",
       "badge_photo": "Yêu cầu ảnh",
-      "cta": "Bắt đầu đặt lịch",
-      "hint": "Tải ảnh phong cách và ngày mong muốn. Kello tìm salon, giá và tùy chọn đặt lịch phù hợp cho bạn."
+      "nudge": "Chọn dịch vụ làm đẹp bên dưới ↓"
     },
     "booking": {
       "step": "BƯỚC. 01",

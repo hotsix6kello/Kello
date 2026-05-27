@@ -1095,8 +1095,7 @@
       "badge_no_calls": "无需韩语电话",
       "badge_price": "价格已确认",
       "badge_photo": "照片需求",
-      "cta": "开始预约请求",
-      "hint": "上传风格照片和期望日期。Kello为您查找可用的美容院、价格和预约选项。"
+      "nudge": "在下方选择您的美容服务 ↓"
     },
     "booking": {
       "step": "STEP. 01",

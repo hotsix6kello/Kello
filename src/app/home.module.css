@@ -269,8 +269,13 @@
 }
 
 /* CTA */
-.heroCtaWrap {
-  padding: 0 20px 12px;
+.heroNudge {
+  margin: 0;
+  padding: 4px 20px 16px;
+  font-size: 12px;
+  color: #b0bec5;
+  text-align: center;
+  letter-spacing: -0.01em;
 }
 
 .heroCtaBtn {
