@@ -421,6 +421,15 @@
   color: var(--ink-black);
 }
 
+.sectionTagline {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink-black);
+  line-height: 1.45;
+}
+
 .categoryGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

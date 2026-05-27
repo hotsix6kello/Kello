@@ -59,12 +59,6 @@ export default function HomeHero({ t }: HomeHeroProps) {
     },
   ];
 
-  const badges = [
-    { icon: '📵', label: t('home_beauty.lookbook_hero.badge_no_calls') },
-    { icon: '💰', label: t('home_beauty.lookbook_hero.badge_price') },
-    { icon: '📸', label: t('home_beauty.lookbook_hero.badge_photo') },
-  ];
-
   const slide = slides[current];
 
   return (
@@ -104,21 +98,6 @@ export default function HomeHero({ t }: HomeHeroProps) {
           />
         ))}
       </div>
-
-      {/* ── Trust badges ── */}
-      <div className={styles.heroBadgeRow}>
-        {badges.map(b => (
-          <div key={b.label} className={styles.heroBadge}>
-            <span aria-hidden="true">{b.icon}</span>
-            <span>{b.label}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* ── Nudge ── */}
-      <p className={styles.heroNudge}>
-        {t('home_beauty.lookbook_hero.nudge')}
-      </p>
     </section>
   );
 }
