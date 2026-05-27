@@ -38,10 +38,6 @@ export default function HomeHero({ t }: HomeHeroProps) {
     resetTimer();
   };
 
-  const handleCta = () => {
-    document.getElementById('beauty-booking')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   const slides = [
     {
       title: t('home_beauty.lookbook_hero.slide1_title'),
@@ -119,15 +115,10 @@ export default function HomeHero({ t }: HomeHeroProps) {
         ))}
       </div>
 
-      {/* ── CTA ── */}
-      <div className={styles.heroCtaWrap}>
-        <button className={styles.heroCtaBtn} onClick={handleCta}>
-          {t('home_beauty.lookbook_hero.cta')}
-        </button>
-        <p className={styles.heroCtaHint}>
-          {t('home_beauty.lookbook_hero.hint')}
-        </p>
-      </div>
+      {/* ── Nudge ── */}
+      <p className={styles.heroNudge}>
+        {t('home_beauty.lookbook_hero.nudge')}
+      </p>
     </section>
   );
 }

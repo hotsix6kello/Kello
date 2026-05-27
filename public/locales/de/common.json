@@ -284,8 +284,7 @@
       "badge_no_calls": "Kein Koreanisch-Anruf",
       "badge_price": "Preis geprüft",
       "badge_photo": "Fotoanfrage",
-      "cta": "Buchungsanfrage starten",
-      "hint": "Laden Sie Ihr Stilfoto und Wunschdatum hoch. Kello sucht verfügbare Salons, Preise und Buchungsoptionen."
+      "nudge": "Wählen Sie Ihren Service unten ↓"
     },
     "booking": {
       "step": "SCHRITT. 01",

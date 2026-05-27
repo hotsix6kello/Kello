@@ -237,8 +237,7 @@
       "badge_no_calls": "Sem ligações em coreano",
       "badge_price": "Preço verificado",
       "badge_photo": "Solicitação de foto",
-      "cta": "Iniciar pedido de reserva",
-      "hint": "Envie sua foto de estilo e data preferida. Kello busca salões disponíveis, preços e opções de reserva."
+      "nudge": "Escolha seu serviço de beleza abaixo ↓"
     },
     "booking": {
       "step": "PASSO. 01",

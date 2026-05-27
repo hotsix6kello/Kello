@@ -69,8 +69,7 @@
       "badge_no_calls": "No Korean calls",
       "badge_price": "Price checked",
       "badge_photo": "Photo request",
-      "cta": "Start booking request",
-      "hint": "Upload your style photo and preferred date. Kello checks available salons, prices, and reservation options for you."
+      "nudge": "Choose your beauty service below ↓"
     },
     "booking": {
       "step": "Step 1",

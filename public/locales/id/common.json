@@ -130,8 +130,7 @@
       "badge_no_calls": "Tanpa telepon Korea",
       "badge_price": "Harga dicek",
       "badge_photo": "Permintaan foto",
-      "cta": "Mulai permintaan booking",
-      "hint": "Upload foto gaya dan tanggal yang diinginkan. Kello mencari salon, harga, dan opsi booking untukmu."
+      "nudge": "Pilih layanan kecantikan di bawah ↓"
     },
     "booking": {
       "step": "LANGKAH. 01",
