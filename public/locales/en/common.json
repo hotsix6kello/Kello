@@ -73,8 +73,8 @@
     },
     "booking": {
       "step": "Step 1",
-      "title": "Choose your beauty service",
-      "description": "",
+      "title": "Choose your K-Beauty service",
+      "description": "Select a category to enter your date, area, and style photo.",
       "submitting_images": "Uploading images...",
       "sending_request": "Sending reservation request...",
       "booking_completed": "Booking completed!",

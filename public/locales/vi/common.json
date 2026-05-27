@@ -307,8 +307,8 @@
     },
     "booking": {
       "step": "BƯỚC. 01",
-      "title": "Vui lòng chọn dịch vụ làm đẹp",
-      "description": "",
+      "title": "Chọn dịch vụ K-Beauty của bạn",
+      "description": "Chọn danh mục để nhập ngày, khu vực và ảnh phong cách yêu thích.",
       "submitting_images": "Đang tải ảnh lên...",
       "sending_request": "Đang gửi yêu cầu đặt hẹn...",
       "booking_completed": "Đặt hẹn hoàn tất!",

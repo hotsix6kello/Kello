@@ -288,8 +288,8 @@
     },
     "booking": {
       "step": "ÉTAPE. 01",
-      "title": "Veuillez choisir votre service beauté",
-      "description": ""
+      "title": "Choisissez votre service K-Beauty",
+      "description": "Sélectionnez une catégorie pour saisir date, zone et photo de style."
     }
   },
   "interpreter_page": {
