@@ -23,8 +23,8 @@
     },
     "booking": {
       "step": "الخطوة 1",
-      "title": "اختر خدمة التجميل الخاصة بك",
-      "description": "",
+      "title": "اختر خدمة K-Beauty المناسبة لك",
+      "description": "اختر فئة لإدخال التاريخ والمنطقة وصورة الأسلوب المفضل.",
       "submitting_images": "جاري رفع الصور...",
       "sending_request": "جاري إرسال طلب الحجز...",
       "booking_completed": "تم الحجز بنجاح!",

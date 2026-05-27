@@ -280,8 +280,8 @@
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "뷰티 서비스를 선택해주세요",
-      "description": "",
+      "title": "원하는 K-뷰티 예약을 선택해주세요",
+      "description": "카테고리를 선택하면 날짜, 지역, 원하는 스타일 사진을 입력할 수 있어요.",
       "submitting_images": "이미지를 업로드 중입니다...",
       "sending_request": "예약 요청을 전송 중입니다...",
       "booking_completed": "예약 신청이 완료되었습니다!",
