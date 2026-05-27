@@ -1,8 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { TFunction } from 'i18next';
-import LanguagePicker from '../LanguagePicker';
-import CurrencySelector from '../CurrencySelector';
-import WeatherWidget from '../WeatherWidget';
+import HomeSettingsButton from './HomeSettingsButton';
 import styles from '../../home.module.css';
 
 interface HomeTopNavProps {
@@ -16,12 +14,10 @@ export default function HomeTopNav({ userName, onSignOut, t }: HomeTopNavProps) 
 
   return (
     <div className={styles.topNav}>
-      <LanguagePicker compact />
+      <HomeSettingsButton />
       <div style={{ flexGrow: 1 }} />
-      <WeatherWidget />
-      <CurrencySelector />
       {!userName ? (
-        <button className={`${styles.navBtn} ${styles.navBtnPrimary}`} onClick={() => router.push('/auth/login')}>
+        <button className={styles.navBtn} onClick={() => router.push('/auth/login')}>
           {t('common.login')}
         </button>
       ) : (
