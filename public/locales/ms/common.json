@@ -134,8 +134,8 @@
     },
     "booking": {
       "step": "LANGKAH. 01",
-      "title": "Sila pilih perkhidmatan kecantikan",
-      "description": ""
+      "title": "Pilih perkhidmatan K-Beauty anda",
+      "description": "Pilih kategori untuk masukkan tarikh, kawasan dan foto gaya pilihan."
     }
   },
   "interpreter_ui": {

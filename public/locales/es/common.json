@@ -273,8 +273,8 @@
     },
     "booking": {
       "step": "PASO. 01",
-      "title": "Selecciona el servicio de belleza",
-      "description": ""
+      "title": "Elige tu servicio de K-Beauty",
+      "description": "Selecciona una categoría para indicar fecha, zona y foto de estilo."
     }
   },
   "interpreter_page": {

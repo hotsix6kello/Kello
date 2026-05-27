@@ -1099,8 +1099,8 @@
     },
     "booking": {
       "step": "STEP. 01",
-      "title": "请选择美容服务",
-      "description": "",
+      "title": "请选择您的K-Beauty服务",
+      "description": "选择类别后，可输入日期、地区和喜欢的发型照片。",
       "submitting_images": "正在上传图片...",
       "sending_request": "正在发送预约请求...",
       "booking_completed": "预约已完成！",
