@@ -265,6 +265,19 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "歡迎，{{name}}！👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "在韓國預約K-Beauty，",
+      "slide1_subtitle": "輕鬆無壓力。",
+      "slide2_title": "上傳您的\n髮型參考照片",
+      "slide2_subtitle": "告訴我們您的日期、地區和風格。",
+      "slide3_title": "無需現場等待",
+      "slide3_subtitle": "Kello在付款前確認可預約時間和價格。",
+      "badge_no_calls": "無需韓語電話",
+      "badge_price": "價格已確認",
+      "badge_photo": "照片需求",
+      "cta": "開始預約請求",
+      "hint": "上傳風格照片和期望日期。Kello為您查找可用的美容院、價格和預約選項。"
+    },
     "booking": {
       "step": "STEP. 01",
       "title": "請選擇美容服務",

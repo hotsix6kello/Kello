@@ -120,6 +120,19 @@
       "welcome": "{{name}}, sila pilih perkhidmatan.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Tempah K-Beauty\ndi Korea,",
+      "slide1_subtitle": "tanpa tekanan.",
+      "slide2_title": "Muat naik foto\ngaya pilihan",
+      "slide2_subtitle": "Beritahu kami tarikh, kawasan dan gaya anda.",
+      "slide3_title": "Tiada tunggu\ntanpa temujanji",
+      "slide3_subtitle": "Kello semak ketersediaan dan harga sebelum bayaran.",
+      "badge_no_calls": "Tiada panggilan Korea",
+      "badge_price": "Harga disemak",
+      "badge_photo": "Permintaan foto",
+      "cta": "Mulakan permintaan tempahan",
+      "hint": "Muat naik foto gaya dan tarikh pilihan. Kello cari salon, harga dan pilihan tempahan untuk anda."
+    },
     "booking": {
       "step": "LANGKAH. 01",
       "title": "Sila pilih perkhidmatan kecantikan",

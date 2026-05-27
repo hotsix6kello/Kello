@@ -227,6 +227,19 @@
       "welcome": "{{name}}, selecione um serviço.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Reserve K-Beauty\nna Coreia,",
+      "slide1_subtitle": "sem estresse.",
+      "slide2_title": "Envie sua foto\nde estilo",
+      "slide2_subtitle": "Informe data, região e estilo desejado.",
+      "slide3_title": "Sem espera\nsem hora marcada",
+      "slide3_subtitle": "Kello verifica disponibilidade e preço antes do pagamento.",
+      "badge_no_calls": "Sem ligações em coreano",
+      "badge_price": "Preço verificado",
+      "badge_photo": "Solicitação de foto",
+      "cta": "Iniciar pedido de reserva",
+      "hint": "Envie sua foto de estilo e data preferida. Kello busca salões disponíveis, preços e opções de reserva."
+    },
     "booking": {
       "step": "PASSO. 01",
       "title": "Selecione o serviço de beleza",

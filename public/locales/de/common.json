@@ -274,6 +274,19 @@
       "welcome": "{{name}}, bitte wählen Sie einen Service.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "K-Beauty in Korea buchen,",
+      "slide1_subtitle": "ganz stressfrei.",
+      "slide2_title": "Stilfoto\nhochladen",
+      "slide2_subtitle": "Sagen Sie uns Datum, Gegend und Stil.",
+      "slide3_title": "Kein Walk-in-\nWarten",
+      "slide3_subtitle": "Kello prüft Verfügbarkeit und Preis vor der Zahlung.",
+      "badge_no_calls": "Kein Koreanisch-Anruf",
+      "badge_price": "Preis geprüft",
+      "badge_photo": "Fotoanfrage",
+      "cta": "Buchungsanfrage starten",
+      "hint": "Laden Sie Ihr Stilfoto und Wunschdatum hoch. Kello sucht verfügbare Salons, Preise und Buchungsoptionen."
+    },
     "booking": {
       "step": "SCHRITT. 01",
       "title": "Bitte wählen Sie Ihren Schönheitsservice",

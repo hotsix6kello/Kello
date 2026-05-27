@@ -4,39 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 
-interface Slide {
-  title: string;
-  subtitle: string;
-  icon: string;
-  bg: string;
-  // image: string; // e.g. '/images/home/hero/slide-01.jpg' — add when assets ready
-}
-
-const SLIDES: Slide[] = [
-  {
-    title: 'Book K-Beauty\nin Korea,',
-    subtitle: 'without the stress.',
-    icon: '💅',
-    bg: 'linear-gradient(140deg, #FFF0F5 0%, #FFF8FA 60%, #FDEEF5 100%)',
-  },
-  {
-    title: 'Upload your\nstyle photo',
-    subtitle: 'Tell us your date, area, and style.',
-    icon: '📸',
-    bg: 'linear-gradient(140deg, #FFF5F9 0%, #FFF0F8 60%, #FDE8F3 100%)',
-  },
-  {
-    title: 'No walk-in\nwaiting',
-    subtitle: 'Kello checks availability and price before payment.',
-    icon: '✅',
-    bg: 'linear-gradient(140deg, #FDF0F5 0%, #FFF5F8 60%, #FDEAF3 100%)',
-  },
-];
-
-const BADGES = [
-  { icon: '📵', label: 'No Korean calls' },
-  { icon: '💰', label: 'Price checked' },
-  { icon: '📸', label: 'Photo request' },
+const SLIDE_ICONS = ['💅', '📸', '✅'];
+const SLIDE_BGS = [
+  'linear-gradient(140deg, #FFF0F5 0%, #FFF8FA 60%, #FDEEF5 100%)',
+  'linear-gradient(140deg, #FFF5F9 0%, #FFF0F8 60%, #FDE8F3 100%)',
+  'linear-gradient(140deg, #FDF0F5 0%, #FFF5F8 60%, #FDEAF3 100%)',
 ];
 
 const INTERVAL_MS = 4200;
@@ -45,14 +17,14 @@ interface HomeHeroProps {
   t: TFunction;
 }
 
-export default function HomeHero({ t: _t }: HomeHeroProps) { // eslint-disable-line @typescript-eslint/no-unused-vars
+export default function HomeHero({ t }: HomeHeroProps) {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setCurrent(prev => (prev + 1) % SLIDES.length);
+      setCurrent(prev => (prev + 1) % 3);
     }, INTERVAL_MS);
   };
 
@@ -70,7 +42,34 @@ export default function HomeHero({ t: _t }: HomeHeroProps) { // eslint-disable-l
     document.getElementById('beauty-booking')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const slide = SLIDES[current];
+  const slides = [
+    {
+      title: t('home_beauty.lookbook_hero.slide1_title'),
+      subtitle: t('home_beauty.lookbook_hero.slide1_subtitle'),
+      icon: SLIDE_ICONS[0],
+      bg: SLIDE_BGS[0],
+    },
+    {
+      title: t('home_beauty.lookbook_hero.slide2_title'),
+      subtitle: t('home_beauty.lookbook_hero.slide2_subtitle'),
+      icon: SLIDE_ICONS[1],
+      bg: SLIDE_BGS[1],
+    },
+    {
+      title: t('home_beauty.lookbook_hero.slide3_title'),
+      subtitle: t('home_beauty.lookbook_hero.slide3_subtitle'),
+      icon: SLIDE_ICONS[2],
+      bg: SLIDE_BGS[2],
+    },
+  ];
+
+  const badges = [
+    { icon: '📵', label: t('home_beauty.lookbook_hero.badge_no_calls') },
+    { icon: '💰', label: t('home_beauty.lookbook_hero.badge_price') },
+    { icon: '📸', label: t('home_beauty.lookbook_hero.badge_photo') },
+  ];
+
+  const slide = slides[current];
 
   return (
     <section className={styles.heroNew}>
@@ -98,7 +97,7 @@ export default function HomeHero({ t: _t }: HomeHeroProps) { // eslint-disable-l
 
       {/* ── Dot nav ── */}
       <div className={styles.heroDots} role="tablist" aria-label="Hero slides">
-        {SLIDES.map((_, i) => (
+        {slides.map((_, i) => (
           <button
             key={i}
             role="tab"
@@ -112,7 +111,7 @@ export default function HomeHero({ t: _t }: HomeHeroProps) { // eslint-disable-l
 
       {/* ── Trust badges ── */}
       <div className={styles.heroBadgeRow}>
-        {BADGES.map(b => (
+        {badges.map(b => (
           <div key={b.label} className={styles.heroBadge}>
             <span aria-hidden="true">{b.icon}</span>
             <span>{b.label}</span>
@@ -123,11 +122,10 @@ export default function HomeHero({ t: _t }: HomeHeroProps) { // eslint-disable-l
       {/* ── CTA ── */}
       <div className={styles.heroCtaWrap}>
         <button className={styles.heroCtaBtn} onClick={handleCta}>
-          Start booking request
+          {t('home_beauty.lookbook_hero.cta')}
         </button>
         <p className={styles.heroCtaHint}>
-          Upload your style photo and preferred date.
-          Kello checks available salons, prices, and reservation options for you.
+          {t('home_beauty.lookbook_hero.hint')}
         </p>
       </div>
     </section>
