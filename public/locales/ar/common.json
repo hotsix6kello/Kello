@@ -668,6 +668,9 @@
       "badge_police": "112 شرطة",
       "badge_interp": "1330 ترجمة",
       "badge_lost": "مفقودات"
+    },
+    "travel_info": {
+      "title": "معلومات السفر"
     }
   },
   "beauty_bookings": {

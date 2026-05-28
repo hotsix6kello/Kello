@@ -223,6 +223,9 @@
       "badge_police": "112 Полиция",
       "badge_interp": "1330 Переводчик",
       "badge_lost": "Потери"
+    },
+    "travel_info": {
+      "title": "Информация о поездке"
     }
   },
   "community_page": {

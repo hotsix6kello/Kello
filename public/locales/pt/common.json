@@ -176,6 +176,9 @@
       "badge_police": "112 Polícia",
       "badge_interp": "1330 Interpretação",
       "badge_lost": "Achados Perdidos"
+    },
+    "travel_info": {
+      "title": "Info de viagem"
     }
   },
   "community_page": {

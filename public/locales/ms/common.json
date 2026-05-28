@@ -297,6 +297,9 @@
       "badge_police": "112 Polis",
       "badge_interp": "1330 Penterjemah",
       "badge_lost": "Barang Hilang"
+    },
+    "travel_info": {
+      "title": "Maklumat perjalanan"
     }
   },
   "community_page": {

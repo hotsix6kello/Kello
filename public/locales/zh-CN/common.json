@@ -1687,6 +1687,9 @@
       "badge_police": "112 警察",
       "badge_interp": "1330 翻译",
       "badge_lost": "遗失物"
+    },
+    "travel_info": {
+      "title": "旅行信息"
     }
   },
   "notifications": {

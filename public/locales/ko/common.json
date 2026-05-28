@@ -727,6 +727,9 @@
       "badge_police": "112 경찰",
       "badge_interp": "1330 통역",
       "badge_lost": "분실물"
+    },
+    "travel_info": {
+      "title": "여행 정보"
     }
   },
   "beauty_bookings": {

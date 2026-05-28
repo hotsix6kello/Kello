@@ -1445,6 +1445,9 @@
       "badge_police": "112 警察",
       "badge_interp": "1330 口譯",
       "badge_lost": "遺失物"
+    },
+    "travel_info": {
+      "title": "旅遊資訊"
     }
   },
   "beauty_bookings": {
