@@ -1499,6 +1499,9 @@
       "badge_police": "112 Cảnh sát",
       "badge_interp": "1330 Thông dịch",
       "badge_lost": "Đồ thất lạc"
+    },
+    "travel_info": {
+      "title": "Thông tin du lịch"
     }
   },
   "notifications": {

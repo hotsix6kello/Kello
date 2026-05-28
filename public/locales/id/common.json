@@ -277,6 +277,9 @@
       "badge_police": "112 Polisi",
       "badge_interp": "1330 Interpretasi",
       "badge_lost": "Barang Hilang"
+    },
+    "travel_info": {
+      "title": "Info perjalanan"
     }
   },
   "community_page": {

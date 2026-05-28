@@ -2203,6 +2203,9 @@
       "badge_police": "112 Police",
       "badge_interp": "1330 Interpret",
       "badge_lost": "Lost Item"
+    },
+    "travel_info": {
+      "title": "Travel info"
     }
   },
   "notifications": {

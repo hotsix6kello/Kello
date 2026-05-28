@@ -223,6 +223,9 @@
       "badge_police": "112 Polizei",
       "badge_interp": "1330 Dolmetscher",
       "badge_lost": "Fundsachen"
+    },
+    "travel_info": {
+      "title": "Reiseinfo"
     }
   },
   "community_page": {

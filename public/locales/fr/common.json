@@ -223,6 +223,9 @@
       "badge_police": "112 Police",
       "badge_interp": "1330 Interprét.",
       "badge_lost": "Objets perdus"
+    },
+    "travel_info": {
+      "title": "Infos voyage"
     }
   },
   "community_page": {

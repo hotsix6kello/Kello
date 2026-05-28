@@ -1537,6 +1537,9 @@
       "badge_police": "112 ตำรวจ",
       "badge_interp": "1330 การแปล",
       "badge_lost": "ของหาย"
+    },
+    "travel_info": {
+      "title": "ข้อมูลการเดินทาง"
     }
   },
   "notifications": {

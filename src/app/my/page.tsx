@@ -344,12 +344,13 @@ function TravelHelperCard({
     accessToken: string;
     authReady: boolean;
 }) {
-    const { i18n } = useTranslation('common');
-    const [nextBooking, setNextBooking] = useState<MyBookingCardRecord | null>(null);
+    const { t } = useTranslation('common');
     const [city, setCity] = useState<CityKey>('Seoul');
     const [weather, setWeather] = useState<{ temp: number; icon: string } | null>(null);
     const [loadingWeather, setLoadingWeather] = useState(true);
     const [currency, setCurrency] = useState<string>('USD');
+    const [exchangeKrwAmount, setExchangeKrwAmount] = useState<number | null>(null);
+    const [loadingExchangeRate, setLoadingExchangeRate] = useState(false);
 
     useEffect(() => {
         const saved = typeof window !== 'undefined' ? localStorage.getItem('kello_currency') : null;
@@ -386,7 +387,6 @@ function TravelHelperCard({
 
                 if (!cancelled && body?.ok && Array.isArray(body.items)) {
                     const next = getNextUpcomingBooking(body.items);
-                    setNextBooking(next);
                     if (next?.storeName) {
                         setCity(normalizeCityFromBooking(next.storeName));
                     }
@@ -419,68 +419,64 @@ function TravelHelperCard({
         return () => { cancelled = true; };
     }, [city]);
 
-    const formatDate = (dateStr: string) => {
-        try {
-            return new Date(dateStr + 'T00:00:00').toLocaleDateString(
-                i18n.language === 'ko' ? 'ko-KR' : 'en-US',
-                { month: 'short', day: 'numeric' },
-            );
-        } catch { return dateStr; }
-    };
+    useEffect(() => {
+        if (currency === 'KRW') {
+            setExchangeKrwAmount(null);
+            setLoadingExchangeRate(false);
+            return;
+        }
 
-    const bookingLabel = nextBooking
-        ? [
-            nextBooking.beautyCategory,
-            nextBooking.storeName || nextBooking.primaryServiceName,
-            formatDate(nextBooking.bookingDate),
-            nextBooking.bookingTime?.slice(0, 5),
-          ].filter(Boolean).join(' · ')
-        : '';
+        let cancelled = false;
+        setLoadingExchangeRate(true);
+
+        const fetchRate = async () => {
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/KRW');
+                const data = await res.json() as { result?: string; rates?: Record<string, number> };
+                if (!cancelled && data.result === 'success' && data.rates?.[currency]) {
+                    const krwPerOne = 1 / data.rates[currency];
+                    setExchangeKrwAmount(krwPerOne);
+                } else if (!cancelled) {
+                    setExchangeKrwAmount(null);
+                }
+            } catch {
+                if (!cancelled) setExchangeKrwAmount(null);
+            } finally {
+                if (!cancelled) setLoadingExchangeRate(false);
+            }
+        };
+
+        void fetchRate();
+        return () => { cancelled = true; };
+    }, [currency]);
+
+    const exchangeLabel = (() => {
+        if (currency === 'KRW') return '💱 KRW 기준';
+        if (loadingExchangeRate) return `💱 ${currency} ···`;
+        if (exchangeKrwAmount !== null) {
+            const formatted = exchangeKrwAmount >= 1
+                ? Math.round(exchangeKrwAmount).toLocaleString('ko-KR')
+                : exchangeKrwAmount.toFixed(2);
+            return `💱 1 ${currency} ≈ ₩${formatted}`;
+        }
+        return `💱 ${currency}`;
+    })();
 
     return (
-        <section className={styles.section}>
-            <div className={styles.travelHelperHeader}>
-                <span className={styles.travelHelperTag}>✈ Travel Helper</span>
-            </div>
-
-            <div className={styles.travelHelperGrid}>
-                <div className={styles.travelHelperCell}>
-                    <div className={styles.travelHelperCellLabel}>🌤 Weather</div>
-                    <div className={styles.travelHelperCellMain}>
-                        {loadingWeather
-                            ? `${city} · ···°C`
-                            : weather
-                                ? `${weather.icon} ${city} · ${weather.temp}°C`
-                                : city}
-                    </div>
-                    <div className={styles.travelHelperCellSub}>
-                        {nextBooking
-                            ? 'Based on your next booking'
-                            : 'No upcoming booking yet'}
-                    </div>
-                </div>
-
-                <div className={styles.travelHelperSep} />
-
-                <div className={styles.travelHelperCell}>
-                    <div className={styles.travelHelperCellLabel}>💱 Currency</div>
-                    <div className={styles.travelHelperCellMain}>KRW → {currency}</div>
-                    <div className={styles.travelHelperCellSub}>
-                        Prices are shown in Korean won with approximate conversion.
-                    </div>
-                </div>
-            </div>
-
-            {nextBooking && (
-                <div className={styles.travelHelperNextRow}>
-                    <span className={styles.travelHelperNextBadge}>📅 Next</span>
-                    <span className={styles.travelHelperNextText}>{bookingLabel}</span>
-                </div>
-            )}
-
-            <div className={styles.travelHelperFootnote}>
-                Weather and currency are shown for your Korea beauty trip.
-                Final exchange rate may vary by payment provider.
+        <section className={styles.travelInfoCard}>
+            <span className={styles.travelInfoLabel}>
+                {t('my_page.travel_info.title', { defaultValue: '여행 정보' })}
+            </span>
+            <div className={styles.travelInfoRow}>
+                <span className={styles.travelInfoItem}>
+                    {loadingWeather
+                        ? `${city} ···°C`
+                        : weather
+                            ? `${weather.icon} ${city} · ${weather.temp}°C`
+                            : `🌤 ${city}`}
+                </span>
+                <span className={styles.travelInfoDot}>·</span>
+                <span className={styles.travelInfoItem}>{exchangeLabel}</span>
             </div>
         </section>
     );
