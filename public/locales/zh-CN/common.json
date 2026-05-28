@@ -1679,6 +1679,14 @@
       "reason_signup": "注册优惠券",
       "reason_referred": "推荐码优惠券",
       "reason_referrer": "好友推荐优惠券"
+    },
+    "help_center": {
+      "title": "韩国旅行帮助中心",
+      "description": "一站式查看医疗、警察、翻译和遗失物信息",
+      "badge_medical": "119 医疗",
+      "badge_police": "112 警察",
+      "badge_interp": "1330 翻译",
+      "badge_lost": "遗失物"
     }
   },
   "notifications": {

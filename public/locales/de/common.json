@@ -215,6 +215,14 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Korea Reise-Hilfezentrum",
+      "description": "Medizin, Polizei, Dolmetschen & Fundsachen — alles an einem Ort",
+      "badge_medical": "119 Medizin",
+      "badge_police": "112 Polizei",
+      "badge_interp": "1330 Dolmetscher",
+      "badge_lost": "Fundsachen"
     }
   },
   "community_page": {

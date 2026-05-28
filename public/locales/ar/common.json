@@ -660,6 +660,14 @@
       "reason_signup": "قسيمة التسجيل",
       "reason_referred": "قسيمة إدخال رمز الإحالة",
       "reason_referrer": "قسيمة ترشيح صديق"
+    },
+    "help_center": {
+      "title": "مركز مساعدة السفر إلى كوريا",
+      "description": "اعثر على الدعم الطبي والشرطي والترجمة والأشياء المفقودة في مكان واحد",
+      "badge_medical": "119 طبي",
+      "badge_police": "112 شرطة",
+      "badge_interp": "1330 ترجمة",
+      "badge_lost": "مفقودات"
     }
   },
   "beauty_bookings": {

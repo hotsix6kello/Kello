@@ -2121,6 +2121,14 @@
       "reason_signup": "会員登録クーポン",
       "reason_referred": "紹介コード入力クーポン",
       "reason_referrer": "友達紹介クーポン"
+    },
+    "help_center": {
+      "title": "韓国旅行ヘルプセンター",
+      "description": "医療・警察・通訳・遺失物のご案内をまとめて確認",
+      "badge_medical": "119 医療",
+      "badge_police": "112 警察",
+      "badge_interp": "1330 通訳",
+      "badge_lost": "遺失物"
     }
   },
   "notifications": {
