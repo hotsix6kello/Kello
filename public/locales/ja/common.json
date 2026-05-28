@@ -2129,6 +2129,9 @@
       "badge_police": "112 警察",
       "badge_interp": "1330 通訳",
       "badge_lost": "遺失物"
+    },
+    "travel_info": {
+      "title": "旅行情報"
     }
   },
   "notifications": {
