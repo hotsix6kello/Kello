@@ -200,6 +200,14 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Centro de ayuda para viajeros en Corea",
+      "description": "Asistencia médica, policía, interpretación y objetos perdidos en un lugar",
+      "badge_medical": "119 Médico",
+      "badge_police": "112 Policía",
+      "badge_interp": "1330 Intérprete",
+      "badge_lost": "Objetos perdidos"
     }
   },
   "community_page": {

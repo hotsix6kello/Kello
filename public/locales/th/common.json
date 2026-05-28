@@ -1529,6 +1529,14 @@
       "reason_signup": "คูปองสมัครสมาชิก",
       "reason_referred": "คูปองใส่รหัสแนะนำ",
       "reason_referrer": "คูปองแนะนำเพื่อน"
+    },
+    "help_center": {
+      "title": "ศูนย์ช่วยเหลือการท่องเที่ยวเกาหลี",
+      "description": "ค้นหาความช่วยเหลือด้านการแพทย์ ตำรวจ การแปล และของหาย ในที่เดียว",
+      "badge_medical": "119 การแพทย์",
+      "badge_police": "112 ตำรวจ",
+      "badge_interp": "1330 การแปล",
+      "badge_lost": "ของหาย"
     }
   },
   "notifications": {

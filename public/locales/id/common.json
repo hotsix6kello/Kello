@@ -269,6 +269,14 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Pusat Bantuan Perjalanan Korea",
+      "description": "Bantuan medis, polisi, interpretasi & barang hilang di satu tempat",
+      "badge_medical": "119 Medis",
+      "badge_police": "112 Polisi",
+      "badge_interp": "1330 Interpretasi",
+      "badge_lost": "Barang Hilang"
     }
   },
   "community_page": {
