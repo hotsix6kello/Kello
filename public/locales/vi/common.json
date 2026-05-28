@@ -1491,6 +1491,14 @@
       "reason_signup": "Phiếu đăng ký",
       "reason_referred": "Phiếu nhập mã giới thiệu",
       "reason_referrer": "Phiếu giới thiệu bạn bè"
+    },
+    "help_center": {
+      "title": "Trung tâm hỗ trợ du lịch Hàn Quốc",
+      "description": "Hỗ trợ y tế, cảnh sát, thông dịch & đồ thất lạc — tất cả trong một nơi",
+      "badge_medical": "119 Y tế",
+      "badge_police": "112 Cảnh sát",
+      "badge_interp": "1330 Thông dịch",
+      "badge_lost": "Đồ thất lạc"
     }
   },
   "notifications": {

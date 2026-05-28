@@ -719,6 +719,14 @@
       "meta": {
         "reference": "참고"
       }
+    },
+    "help_center": {
+      "title": "한국 여행 도움센터",
+      "description": "의료·경찰·통역·분실물 안내를 한 곳에서 확인하세요",
+      "badge_medical": "119 의료",
+      "badge_police": "112 경찰",
+      "badge_interp": "1330 통역",
+      "badge_lost": "분실물"
     }
   },
   "beauty_bookings": {

@@ -1093,10 +1093,16 @@ function MyPageContent() {
                 >
                     <div className={styles.savedHubText}>
                         <div className={styles.savedHubTitle}>
-                            {t('my_page.help_center.title', { defaultValue: '헬프센터' })}
+                            {t('my_page.help_center.title', { defaultValue: '한국 여행 도움센터' })}
                         </div>
                         <div className={styles.savedHubDesc}>
-                            {t('my_page.help_center.description', { defaultValue: '자주 묻는 질문과 긴급 도움말을 확인하세요' })}
+                            {t('my_page.help_center.description', { defaultValue: '의료·경찰·통역·분실물 안내를 한 곳에서 확인하세요' })}
+                        </div>
+                        <div className={styles.helpCenterBadges}>
+                            <span className={styles.helpCenterBadge}>{t('my_page.help_center.badge_medical', { defaultValue: '119 의료' })}</span>
+                            <span className={styles.helpCenterBadge}>{t('my_page.help_center.badge_police', { defaultValue: '112 경찰' })}</span>
+                            <span className={styles.helpCenterBadge}>{t('my_page.help_center.badge_interp', { defaultValue: '1330 통역' })}</span>
+                            <span className={styles.helpCenterBadge}>{t('my_page.help_center.badge_lost', { defaultValue: '분실물' })}</span>
                         </div>
                     </div>
                     <span className={styles.savedHubArrow}>&gt;</span>

@@ -215,6 +215,14 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Центр помощи путешественникам в Корее",
+      "description": "Медицина, полиция, переводчик и потерянные вещи — всё в одном месте",
+      "badge_medical": "119 Медицина",
+      "badge_police": "112 Полиция",
+      "badge_interp": "1330 Переводчик",
+      "badge_lost": "Потери"
     }
   },
   "community_page": {

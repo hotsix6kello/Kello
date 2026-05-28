@@ -215,6 +215,14 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Centre d'aide voyage en Corée",
+      "description": "Urgences, police, interprétation et objets perdus en un seul endroit",
+      "badge_medical": "119 Médical",
+      "badge_police": "112 Police",
+      "badge_interp": "1330 Interprét.",
+      "badge_lost": "Objets perdus"
     }
   },
   "community_page": {

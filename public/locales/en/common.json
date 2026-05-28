@@ -2195,6 +2195,14 @@
       "reason_signup": "Sign-up Coupon",
       "reason_referred": "Referral Code Coupon",
       "reason_referrer": "Friend Referral Coupon"
+    },
+    "help_center": {
+      "title": "Korea Travel Help Center",
+      "description": "Medical, police, interpretation & lost items — all in one place",
+      "badge_medical": "119 Medical",
+      "badge_police": "112 Police",
+      "badge_interp": "1330 Interpret",
+      "badge_lost": "Lost Item"
     }
   },
   "notifications": {

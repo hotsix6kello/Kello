@@ -1437,6 +1437,14 @@
       "meta": {
         "reference": "參考"
       }
+    },
+    "help_center": {
+      "title": "韓國旅遊幫助中心",
+      "description": "一站式查看醫療、警察、口譯和遺失物資訊",
+      "badge_medical": "119 醫療",
+      "badge_police": "112 警察",
+      "badge_interp": "1330 口譯",
+      "badge_lost": "遺失物"
     }
   },
   "beauty_bookings": {
