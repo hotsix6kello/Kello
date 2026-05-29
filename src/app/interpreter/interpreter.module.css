@@ -628,3 +628,126 @@
     border: 1px solid var(--dancheong-teal);
     animation: pulse 1.5s infinite;
 }
+
+/* Soft premium reskin overrides */
+.main {
+    background:
+        radial-gradient(circle at top center, rgba(224, 198, 190, 0.24) 0%, rgba(224, 198, 190, 0) 26%),
+        linear-gradient(180deg, rgba(255, 253, 250, 0.98) 0%, rgba(246, 237, 230, 0.96) 100%);
+    padding: 8px 18px 136px;
+}
+
+.header {
+    padding: 18px 0 8px;
+}
+
+.backBtn {
+    min-width: 42px;
+    min-height: 42px;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 999px;
+    background: rgba(255, 250, 246, 0.84);
+    border: 1px solid rgba(219, 202, 194, 0.76);
+    box-shadow: 0 12px 24px rgba(103, 79, 76, 0.08);
+}
+
+.title {
+    font-size: 28px;
+    color: var(--secondary-strong);
+    letter-spacing: -0.04em;
+}
+
+.subtitle,
+.onboardingNote,
+.langRole,
+.placeholderText,
+.messageRole,
+.timestamp {
+    color: var(--soft-ink);
+}
+
+.onboardingNote,
+.languageSection,
+.actionCard,
+.placeholderBox,
+.messageItem,
+.visitorContext {
+    background: linear-gradient(180deg, rgba(255, 253, 250, 0.97) 0%, rgba(248, 241, 236, 0.94) 100%);
+    border-color: rgba(219, 202, 194, 0.82);
+    box-shadow: 0 16px 30px rgba(103, 79, 76, 0.08);
+}
+
+.languageSection,
+.actionCard,
+.messageItem {
+    border-radius: 28px;
+}
+
+.langCard,
+.langCardActive,
+.textInput,
+.replayBtn {
+    background: rgba(255, 252, 248, 0.9);
+    border-color: rgba(219, 202, 194, 0.86);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+}
+
+.langCard:hover,
+.langCard:focus-within,
+.textInput:focus {
+    border-color: rgba(199, 142, 149, 0.62);
+    box-shadow: 0 0 0 4px rgba(199, 142, 149, 0.12), 0 14px 26px rgba(103, 79, 76, 0.08);
+}
+
+.langCurrent,
+.sourceText,
+.translatedText {
+    color: var(--secondary-strong);
+}
+
+.visitorContext,
+.translatingText,
+.sttStatusLabel {
+    background: rgba(247, 233, 234, 0.84);
+    border-color: rgba(199, 142, 149, 0.34);
+    color: var(--primary-strong);
+}
+
+.sendBtn,
+.customerBtn {
+    background: linear-gradient(135deg, #c88c93 0%, #b67982 100%);
+    color: #fffdfa;
+    border-color: transparent;
+    box-shadow: 0 16px 28px rgba(183, 128, 136, 0.22);
+}
+
+.sendBtn:hover:not(:disabled),
+.customerBtn:active {
+    background: linear-gradient(135deg, #b57a81 0%, #8d686d 100%);
+}
+
+.staffBtn {
+    background: rgba(255, 252, 248, 0.92);
+    color: var(--secondary-strong);
+    border-color: rgba(219, 202, 194, 0.86);
+}
+
+.messageCustomer {
+    background: rgba(255, 253, 250, 0.98);
+}
+
+.messageStaff {
+    background: rgba(247, 233, 234, 0.54);
+    border-color: rgba(219, 202, 194, 0.84);
+}
+
+.replayBtn {
+    color: var(--primary-strong);
+}
+
+.errorText {
+    background: rgba(248, 232, 233, 0.88);
+    border-color: rgba(183, 120, 129, 0.34);
+    color: var(--primary-strong);
+}

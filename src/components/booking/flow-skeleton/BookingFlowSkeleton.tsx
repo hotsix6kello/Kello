@@ -458,7 +458,7 @@ export function BookingFlowSkeleton({
 
   return (
     <div 
-      className="flex flex-col -mx-4 -mt-20 min-h-[calc(100vh+5rem)] pb-10"
+      className="kello-soft-booking-flow-skeleton flex flex-col -mx-4 -mt-20 min-h-[calc(100vh+5rem)] pb-10"
       style={{
         background: 'linear-gradient(180deg, #ffffff 0%, #fcf7f8 100%)'
       }}
@@ -469,7 +469,7 @@ export function BookingFlowSkeleton({
             {activeVisualStep.title}
           </h1>
         </div>
-        <div className="flex flex-col bg-white rounded-[32px] border border-[#f1dce4] shadow-[0_12px_40px_rgba(75,58,66,0.06)] overflow-hidden">
+        <div className="kello-soft-booking-flow-card flex flex-col bg-white rounded-[32px] border border-[#f1dce4] shadow-[0_12px_40px_rgba(75,58,66,0.06)] overflow-hidden">
           <header className="pt-6 pb-6 px-6">
             <div className="flex flex-col gap-6">
 
@@ -502,7 +502,7 @@ export function BookingFlowSkeleton({
       </div>
 
       {!isConfirmationStep ? (
-        <section className="sticky bottom-0 z-10 px-6 pb-12 pt-8 mt-auto">
+        <section className="kello-soft-booking-flow-footer sticky bottom-0 z-10 px-6 pb-12 pt-8 mt-auto">
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#fcf7f8] via-[#fcf7f8]/90 to-transparent pointer-events-none" />
           <button
             type="button"
