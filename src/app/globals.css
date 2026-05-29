@@ -16,48 +16,58 @@
 
 :root {
   /* Korean Theme Foundation - Base */
-  --hanji-ivory: #fcf7f8;
-  --warm-sand: #f1dce4;
-  --soft-stone: #e4cbd6;
+  --hanji-ivory: #fbf6f0;
+  --warm-sand: #eadcd3;
+  --soft-stone: #dac7bf;
 
   /* Korean Theme Foundation - Text */
-  --ink-black: #4b3a42;
-  --soft-ink: #8d747d;
+  --ink-black: #584648;
+  --soft-ink: #8c7575;
 
   /* Korean Theme Foundation - Accent */
-  --dancheong-teal: #ff2d78; /* Hot Pink Primary */
-  --deep-navy: #3d2b32; /* Darker neutral for contrast */
-  --korean-red: #ff5294; /* Brighter Pink for accents */
-  --muted-gold: #c5a99b;
+  --dancheong-teal: #c78e95;
+  --deep-navy: #665153;
+  --korean-red: #b77881;
+  --muted-gold: #c8b19c;
 
   /* Functional Mapping */
   --background: var(--hanji-ivory);
   --foreground: var(--ink-black);
   --primary: var(--dancheong-teal);
-  --primary-glow: #ffebf1;
+  --primary-strong: #b57a81;
+  --primary-glow: #f7e9ea;
   --secondary: var(--deep-navy);
-  --secondary-glow: rgba(61, 43, 50, 0.1);
+  --secondary-strong: #4f3e40;
+  --secondary-glow: rgba(102, 81, 83, 0.08);
   --accent: var(--korean-red);
   --success: #3cb44a; /* Restore to green for semantic clarity */
   --warning: #f59e0b;
 
-  --surface: #ffffff;
-  --surface-alt: var(--warm-sand);
+  --surface: #fffdfa;
+  --surface-alt: #f5ede7;
+  --surface-soft: rgba(255, 250, 246, 0.84);
   
-  --glass-bg: rgba(252, 247, 248, 0.9);
-  --glass-border: rgba(75, 58, 66, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.5);
+  --glass-bg: rgba(255, 250, 246, 0.8);
+  --glass-border: rgba(102, 81, 83, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.76);
 
-  --gray-100: #f9eef2;
+  --gray-100: #f8f1eb;
   --gray-200: var(--warm-sand);
-  --gray-300: #e4cbd6;
-  --gray-400: #af98a1;
+  --gray-300: #decfc7;
+  --gray-400: #b7a29d;
   --gray-500: var(--soft-ink);
+
+  --shadow-xs: 0 6px 18px rgba(103, 79, 76, 0.05);
+  --shadow-sm: 0 12px 32px rgba(103, 79, 76, 0.08);
+  --shadow-md: 0 20px 44px rgba(103, 79, 76, 0.12);
+  --shadow-lg: 0 32px 70px rgba(103, 79, 76, 0.16);
+  --shadow-xl: 0 44px 96px rgba(103, 79, 76, 0.2);
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 100px;
+  --radius-full: 999px;
 
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -130,12 +140,19 @@ body::-webkit-scrollbar,
 
 body {
   background-color: var(--background);
+  background-image:
+    radial-gradient(circle at top center, rgba(221, 191, 183, 0.35) 0%, rgba(221, 191, 183, 0) 28%),
+    radial-gradient(circle at 84% 14%, rgba(199, 142, 149, 0.14) 0%, rgba(199, 142, 149, 0) 24%),
+    linear-gradient(180deg, #fffdf9 0%, #faf5ef 46%, #f4ece5 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: var(--font-main);
   max-width: 100vw;
   overflow: hidden;            /* 브라우저 레벨 스크롤바 완전 차단 */
   overscroll-behavior-y: none;
   height: 100%;
+  position: relative;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -196,14 +213,14 @@ button {
   flex-direction: column;
   position: relative;
   background-color: var(--background);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 @media (min-width: 480px) {
   .layout-shell, .mobile-wrapper {
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
-    border-left: 1px solid var(--gray-200);
-    border-right: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-xl);
+    border-left: 1px solid rgba(218, 199, 191, 0.72);
+    border-right: 1px solid rgba(218, 199, 191, 0.72);
   }
 }
 
@@ -722,4 +739,160 @@ button {
   height: 1px;
   background: var(--warm-sand);
   margin: 24px 0;
+}
+
+/* Soft premium booking flow overrides */
+.kello-soft-booking-flow {
+  z-index: 12020 !important;
+  background:
+    radial-gradient(circle at top center, rgba(221, 191, 183, 0.34) 0%, rgba(221, 191, 183, 0) 30%),
+    radial-gradient(circle at 86% 10%, rgba(199, 142, 149, 0.16) 0%, rgba(199, 142, 149, 0) 24%),
+    linear-gradient(180deg, #fffdf9 0%, #f9f3ee 58%, #f4ece5 100%) !important;
+}
+
+.kello-soft-booking-flow-panel {
+  background: linear-gradient(180deg, rgba(255, 253, 249, 0.98) 0%, rgba(247, 239, 232, 0.98) 100%) !important;
+  box-shadow: var(--shadow-xl);
+  border-left: 1px solid rgba(218, 199, 191, 0.68);
+  border-right: 1px solid rgba(218, 199, 191, 0.68);
+  max-height: 100dvh;
+}
+
+.kello-soft-booking-flow-skeleton {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0) 34%),
+    linear-gradient(180deg, rgba(255, 253, 250, 0.96) 0%, rgba(247, 238, 231, 0.92) 100%) !important;
+  color: var(--secondary-strong);
+}
+
+.kello-soft-booking-flow-card {
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.98) 0%, rgba(250, 243, 237, 0.98) 100%) !important;
+  border-color: rgba(221, 206, 198, 0.88) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.kello-soft-booking-flow-card > section {
+  padding-bottom: 168px !important;
+}
+
+.kello-soft-booking-flow-footer {
+  z-index: 30;
+  padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 18px) !important;
+  background: linear-gradient(to top, rgba(249, 243, 238, 0.98) 72%, rgba(249, 243, 238, 0.9) 88%, transparent 100%) !important;
+  backdrop-filter: blur(10px);
+}
+
+.kello-soft-booking-flow input[type="text"],
+.kello-soft-booking-flow textarea,
+.kello-soft-booking-flow select {
+  background: rgba(255, 252, 249, 0.94) !important;
+  border-color: rgba(207, 185, 178, 0.98) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 10px 24px rgba(103, 79, 76, 0.05);
+  color: var(--secondary-strong) !important;
+}
+
+.kello-soft-booking-flow input[type="text"]:focus,
+.kello-soft-booking-flow textarea:focus,
+.kello-soft-booking-flow select:focus {
+  background: #fffdfb !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(199, 142, 149, 0.14), 0 12px 28px rgba(103, 79, 76, 0.08) !important;
+}
+
+.kello-soft-booking-flow input::placeholder,
+.kello-soft-booking-flow textarea::placeholder {
+  color: var(--gray-400) !important;
+}
+
+.kello-soft-booking-flow input[type="checkbox"] {
+  border-color: rgba(218, 199, 191, 0.94);
+  background: rgba(255, 250, 246, 0.94);
+}
+
+.kello-soft-booking-flow input[type="checkbox"]:checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.kello-soft-booking-flow [class~="bg-white"] {
+  background: rgba(255, 253, 250, 0.96) !important;
+}
+
+.kello-soft-booking-flow [class~="bg-neutral-50"],
+.kello-soft-booking-flow [class~="bg-neutral-50/50"],
+.kello-soft-booking-flow [class~="bg-fuchsia-50"],
+.kello-soft-booking-flow [class~="bg-fuchsia-50/30"],
+.kello-soft-booking-flow [class~="bg-fuchsia-100"] {
+  background: rgba(246, 235, 233, 0.7) !important;
+}
+
+.kello-soft-booking-flow [class~="bg-fuchsia-600"],
+.kello-soft-booking-flow [class~="bg-neutral-900"] {
+  background: linear-gradient(135deg, #c88c93 0%, #b67982 52%, #9b7479 100%) !important;
+}
+
+.kello-soft-booking-flow [class*="hover:bg-fuchsia-700"]:hover,
+.kello-soft-booking-flow [class*="hover:bg-neutral-800"]:hover {
+  background: linear-gradient(135deg, #b57a81 0%, #8f6a6f 100%) !important;
+}
+
+.kello-soft-booking-flow [class~="border-neutral-100"],
+.kello-soft-booking-flow [class~="border-neutral-200"],
+.kello-soft-booking-flow [class~="border-[#f1dce4]"],
+.kello-soft-booking-flow [class~="border-[#f45b87]"],
+.kello-soft-booking-flow [class~="border-fuchsia-400"],
+.kello-soft-booking-flow [class~="border-fuchsia-600"] {
+  border-color: rgba(218, 199, 191, 0.92) !important;
+}
+
+.kello-soft-booking-flow [class~="text-neutral-900"],
+.kello-soft-booking-flow [class~="text-neutral-800"],
+.kello-soft-booking-flow [class~="text-[#4b3a42]"],
+.kello-soft-booking-flow [class~="text-fuchsia-900"] {
+  color: var(--secondary-strong) !important;
+}
+
+.kello-soft-booking-flow [class~="text-neutral-700"],
+.kello-soft-booking-flow [class~="text-neutral-600"],
+.kello-soft-booking-flow [class~="text-neutral-500"],
+.kello-soft-booking-flow [class~="text-neutral-400"],
+.kello-soft-booking-flow [class~="text-[#8d747d]"],
+.kello-soft-booking-flow [class~="text-fuchsia-600"],
+.kello-soft-booking-flow [class~="text-fuchsia-500"] {
+  color: var(--soft-ink) !important;
+}
+
+.kello-soft-booking-flow [class~="text-white"] {
+  color: #fffdfa !important;
+}
+
+.kello-soft-booking-flow [class~="shadow-sm"],
+.kello-soft-booking-flow [class~="shadow-lg"] {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.kello-soft-booking-flow .rdp {
+  --rdp-accent-color: var(--primary);
+  --rdp-background-color: var(--primary-glow);
+  color: var(--secondary-strong);
+}
+
+.kello-soft-booking-flow .rdp-caption_label,
+.kello-soft-booking-flow .rdp-head_cell {
+  color: var(--secondary-strong);
+}
+
+.kello-soft-booking-flow .rdp-day_today {
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
+.kello-soft-booking-flow .rdp-day_selected {
+  background: linear-gradient(135deg, #c88c93 0%, #b67982 100%) !important;
+  color: #fffdfa !important;
+}
+
+.kello-soft-booking-flow .rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
+  background: rgba(247, 233, 234, 0.9) !important;
+  color: var(--primary-strong) !important;
 }
