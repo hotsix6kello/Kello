@@ -29,7 +29,7 @@ export class MockTranslationProvider implements TranslationProvider {
     }
 
     const glossary = injectGlossaryTokens(request.text, request.glossary);
-    const translatedText = glossary.restore(`[${request.targetLocale}] ${glossary.tokenizedText}`);
+    const translatedText = glossary.restore(glossary.tokenizedText);
 
     return {
       translatedText,
@@ -101,10 +101,14 @@ export class GeminiTranslationProvider implements TranslationProvider {
   }
 
   async translateText(request: TranslationTextRequest): Promise<TranslationProviderResult> {
-    const sourceLanguage = TRANSLATION_LANGUAGE_LABELS[request.sourceLocale] ?? request.sourceLocale;
-    const targetLanguage = TRANSLATION_LANGUAGE_LABELS[request.targetLocale] ?? request.targetLocale;
+    const sourceLanguage = (request.sourceLocale as string) === "auto" ? "any language" : (TRANSLATION_LANGUAGE_LABELS[request.sourceLocale as string] ?? request.sourceLocale);
+    const targetLanguage = TRANSLATION_LANGUAGE_LABELS[request.targetLocale as string] ?? request.targetLocale;
+    const translationDirection = (request.sourceLocale as string) === "auto" 
+      ? `into ${targetLanguage} (detect the source language automatically)` 
+      : `from ${sourceLanguage} to ${targetLanguage}`;
+
     const prompt = `
-      Translate the following text from ${sourceLanguage} to ${targetLanguage}.
+      Translate the following text ${translationDirection}.
       Context: ${request.domain} / ${request.contentType}
       Text to translate:
       ${request.text}
@@ -131,7 +135,7 @@ export function createTranslationProvider(): TranslationProvider {
   const apiKey = process.env.TRANSLATION_PROVIDER_API_KEY || process.env.GEMINI_API_KEY;
   const engineName = getTranslationEngineName();
 
-  if (engineName === "gemini" && apiKey) {
+  if ((engineName === "gemini" || apiKey) && apiKey) {
     return new GeminiTranslationProvider(apiKey);
   }
 
