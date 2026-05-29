@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, Image as ImageIcon, Camera, Mic, Smile, Send, ArrowRightLeft, Pencil, Trash2, Settings, Sparkles, X, Link2, Pin, BellOff, LogOut, Bell, Plus, Volume2, Maximize2, RefreshCw } from 'lucide-react';
-import DrawingModal from '../../components/DrawingModal';
+import DrawingModal from '@/app/components/DrawingModal';
 
 type Message = {
   id: string;
