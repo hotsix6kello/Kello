@@ -7,7 +7,6 @@
     width: 100%;
     max-width: 480px;
     height: 72px;
-    /* Reduced from 80px */
     background: var(--background);
     display: flex;
     justify-content: space-between;
@@ -17,13 +16,14 @@
     box-sizing: border-box;
     z-index: 9999;
     transition: transform 0.3s ease;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
 }
 
 .navItem {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     color: var(--gray-500);
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -35,32 +35,26 @@
 
 .navItem.active {
     color: var(--foreground);
-    transform: translateY(-4px);
-}
-
-.navItem.active .navIcon {
-    text-shadow: 0 0 12px var(--primary-glow);
-    filter: drop-shadow(0 0 5px var(--primary));
+    transform: translateY(-2px);
 }
 
 .navIcon {
     font-size: 1.3rem;
     transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navLabel {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    opacity: 0.6;
+    opacity: 0.8;
     transition: opacity 0.2s;
     text-align: center;
-    line-height: 1.1;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    line-height: 1.2;
+    white-space: pre-line;
 }
 
 .navItem.active .navLabel {
@@ -70,9 +64,63 @@
 .indicator {
     position: absolute;
     top: -12px;
-    width: 20px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 2px;
-    box-shadow: 0 0 8px var(--primary);
+    width: 24px;
+    height: 4px;
+    background: #B9935A;
+    border-radius: 100px;
+    box-shadow: 0 0 10px rgba(185, 147, 90, 0.5);
+}
+
+.navItem.active .navIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navItem.active .navIcon::before {
+    content: '';
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(185, 147, 90, 0.25) 0%, rgba(185, 147, 90, 0) 70%);
+    z-index: -1;
+    pointer-events: none;
+    animation: glowPulse 2s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1.2;
+    }
+}
+
+/* Center Item Style */
+.centerItem {
+    overflow: visible;
+}
+
+.centerItem.active {
+    transform: translateY(-2px);
+}
+
+.centerIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centerItem.active .centerIcon {
+    transform: scale(1.1);
+}
+
+.centerItem .navLabel {
+    margin-top: 0;
 }
