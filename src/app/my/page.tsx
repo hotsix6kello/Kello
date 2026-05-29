@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
@@ -10,7 +10,6 @@ import styles from "./my.module.css";
 import {
     type BeautyBookingAdminRecord,
 } from "@/lib/bookings/beautyBookingAdmin";
-import AdminStatsDashboard from "../components/AdminStatsDashboard";
 
 interface DashboardProfileRecord {
     display_name: string | null;
@@ -77,24 +76,19 @@ function ProfileSummaryCard({
     userName,
     subtitle,
     avatarUrl,
-    onOpenSettings,
     onAvatarUpdate,
+    noBorder = false,
 }: {
     userName: string;
     subtitle?: string;
     avatarUrl?: string;
-    onOpenSettings: () => void;
     onAvatarUpdate?: (url: string) => void;
+    noBorder?: boolean;
 }) {
     const { t } = useTranslation("common");
     const [uploading, setUploading] = useState(false);
-    
-    const initials = userName
-        .split(" ")
-        .map((part) => part[0] || "")
-        .join("")
-        .toUpperCase()
-        .slice(0, 2);
+    const [showMenu, setShowMenu] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
@@ -119,7 +113,6 @@ function ProfileSummaryCard({
             const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
             const publicUrl = data.publicUrl;
 
-            // 1. Update Profile in DB
             const { error: updateError } = await supabase
                 .from('profiles')
                 .update({ avatar_url: publicUrl })
@@ -127,70 +120,167 @@ function ProfileSummaryCard({
 
             if (updateError) throw updateError;
 
-            // 2. Callback
             if (onAvatarUpdate) onAvatarUpdate(publicUrl);
-            
-            alert(t('my_page.messages.upload_success'));
+            alert(t('my_page.messages.upload_success', { defaultValue: '프로필 사진이 업데이트 되었습니다.' }));
         } catch (error) {
             console.error('Error uploading avatar:', error);
-            alert(t('my_page.messages.upload_failed'));
+            alert(t('my_page.messages.upload_failed', { defaultValue: '업로드에 실패했습니다.' }));
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    const handleRemoveAvatar = async () => {
+        try {
+            setUploading(true);
+            const { data: userData } = await supabase.auth.getUser();
+            const user = userData.user;
+            if (!user) throw new Error("Not authenticated");
+
+            const { error } = await supabase
+                .from('profiles')
+                .update({ avatar_url: null })
+                .eq('id', user.id);
+
+            if (error) throw error;
+            if (onAvatarUpdate) onAvatarUpdate('');
+            alert(t('my_page.messages.avatar_removed', { defaultValue: '프로필 이미지가 삭제되었습니다.' }));
+        } catch (err) {
+            console.error('Error removing avatar:', err);
+            alert(t('my_page.messages.remove_failed', { defaultValue: '이미지 제거에 실패했습니다.' }));
         } finally {
             setUploading(false);
         }
     };
 
     return (
-        <div className={styles.profileCard}>
-            <div className={styles.profileAvatarWrap} style={{ position: 'relative', cursor: 'pointer' }}>
-                <label style={{ cursor: 'pointer' }}>
-                    <div className={styles.profileAvatar}>
+        <div className={styles.profileCard} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', background: noBorder ? 'transparent' : 'white', borderRadius: noBorder ? 0 : 16, border: noBorder ? 'none' : '1px solid var(--warm-sand, #E8E3D9)', boxShadow: noBorder ? 'none' : '0 2px 8px rgba(0,0,0,0.02)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <div 
+                    onClick={() => setShowMenu(true)} 
+                    style={{ position: 'relative', width: 64, height: 64, cursor: 'pointer', borderRadius: '50%', overflow: 'visible' }}
+                >
+                    <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', background: '#F1F5F9', border: '1.5px solid var(--warm-sand, #E8E3D9)' }}>
                         {avatarUrl ? (
                             <Image 
                                 src={avatarUrl} 
                                 alt={userName} 
-                                fill
+                                width={64}
+                                height={64}
                                 className={styles.avatarImg} 
                                 style={{ borderRadius: '50%', objectFit: 'cover' }} 
                             />
                         ) : (
-                            <span className={styles.profileInitials}>{initials || t("my_page.profile.avatar_placeholder")}</span>
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="32" fill="#E2E8F0"/>
+                                <path d="M32 36C38.6274 36 44 30.6274 44 24C44 17.3726 38.6274 12 32 12C25.3726 12 20 17.3726 20 24C20 30.6274 25.3726 36 32 36Z" fill="#94A3B8"/>
+                                <path d="M32 40C20.9543 40 12 48.9543 12 60H52C52 48.9543 43.0457 40 32 40Z" fill="#94A3B8"/>
+                            </svg>
                         )}
-                        <div className={styles.avatarEditOverlay} style={{
-                            position: 'absolute', bottom: 0, right: 0, 
-                            background: 'var(--primary)', padding: 6, borderRadius: '50%',
-                            boxShadow: '0 2px 5px rgba(0,0,0,0.2)', border: '2px solid white'
-                        }}>
-                            📸
-                        </div>
                     </div>
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handleFileChange} 
-                        style={{ display: 'none' }} 
-                        disabled={uploading}
-                    />
-                </label>
-                {uploading && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.7)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 700 }}>...</div>}
-            </div>
-
-            <div className={styles.profileInfo}>
-                <div className={styles.profileTopRow}>
-                    <div>
-                        <h1 className={styles.profileName}>{userName}</h1>
-                        <div className={styles.profileSubtext}>
-                            {subtitle || t("my_page.profile.account_hint")}
+                    {uploading && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.7)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 700 }}>
+                            ...
                         </div>
-                    </div>
+                    )}
+                </div>
 
-                    <button
-                        className={styles.profileSettingsButton}
-                        onClick={onOpenSettings}
-                    >
-                        {t("my_page.settings.short")}
-                    </button>
+                <div className={styles.profileInfo}>
+                    <h1 className={styles.profileName} style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--foreground, #2A2624)' }}>{userName}</h1>
+                    <div className={styles.profileSubtext} style={{ fontSize: '0.75rem', color: 'var(--soft-ink, #8A847F)' }}>
+                        {subtitle}
+                    </div>
                 </div>
             </div>
+
+            <div style={{ color: 'var(--soft-ink, #8A847F)', fontSize: '1.2rem', paddingRight: 4, pointerEvents: 'none' }}>
+                &gt;
+            </div>
+
+            <input 
+                type="file" 
+                ref={fileInputRef}
+                accept="image/*" 
+                onChange={handleFileChange} 
+                style={{ display: 'none' }} 
+                disabled={uploading}
+            />
+
+            {showMenu && (
+                <>
+                    <div 
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setShowMenu(false);
+                        }}
+                        style={{
+                            position: 'fixed',
+                            top: 0, left: 0, right: 0, bottom: 0,
+                            zIndex: 999,
+                            background: 'transparent'
+                        }}
+                    />
+                    <div style={{
+                        position: 'absolute',
+                        top: 70,
+                        left: 16,
+                        background: 'white',
+                        border: '1px solid var(--warm-sand, #E8E3D9)',
+                        borderRadius: 12,
+                        padding: '6px',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 4,
+                        zIndex: 1000
+                    }}>
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowMenu(false);
+                                fileInputRef.current?.click();
+                            }}
+                            style={{
+                                background: 'none', border: 'none', padding: '8px 16px',
+                                textAlign: 'left', fontSize: '0.8rem', fontWeight: 700,
+                                color: '#334155', cursor: 'pointer', borderRadius: 8,
+                                display: 'flex', alignItems: 'center', gap: 6
+                            }}
+                        >
+                            📷 이미지 변경
+                        </button>
+                        <button 
+                            onClick={async (e) => {
+                                e.stopPropagation();
+                                setShowMenu(false);
+                                await handleRemoveAvatar();
+                            }}
+                            style={{
+                                background: 'none', border: 'none', padding: '8px 16px',
+                                textAlign: 'left', fontSize: '0.8rem', fontWeight: 700,
+                                color: '#EF4444', cursor: 'pointer', borderRadius: 8,
+                                display: 'flex', alignItems: 'center', gap: 6
+                            }}
+                        >
+                            🗑️ 이미지 없음
+                        </button>
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowMenu(false);
+                            }}
+                            style={{
+                                background: 'none', border: 'none', padding: '8px 16px',
+                                textAlign: 'left', fontSize: '0.8rem', fontWeight: 500,
+                                color: '#64748B', cursor: 'pointer', borderRadius: 8,
+                                display: 'flex', alignItems: 'center', gap: 6
+                            }}
+                        >
+                            취소
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
@@ -214,59 +304,83 @@ function ReferralSection({
 
     const reasonKey = (reason: string) => {
         const map: Record<string, string> = {
-            signup: t("my_page.referral.reason_signup"),
-            referred: t("my_page.referral.reason_referred"),
-            referrer: t("my_page.referral.reason_referrer"),
+            signup: t("my_page.referral.reason_signup_new", { defaultValue: '가입 환영 쿠폰' }),
+            referred: t("my_page.referral.reason_referred_new", { defaultValue: '추천인 입력 쿠폰' }),
+            referrer: t("my_page.referral.reason_referrer_new", { defaultValue: '친구 추천 쿠폰' }),
         };
         return map[reason] ?? reason;
     };
 
     return (
-        <section className={styles.section} style={{ padding: "12px 16px" }}>
-            <div className={styles.sectionHeader} style={{ marginBottom: referralCode ? 8 : 0 }}>
-                <h2 className={styles.sectionTitle}>{t("my_page.referral.title")}</h2>
-            </div>
-
+        <div style={{ 
+            background: 'white', 
+            borderRadius: 16, 
+            border: '1px solid var(--warm-sand, #E8E3D9)', 
+            padding: '16px', 
+            boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12
+        }}>
             {referralCode ? (
-                <div className={styles.referralCodeCard}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                        <div className={styles.referralCode}>{referralCode}</div>
-                        <div className={styles.referralShareMsg}>{t("my_page.referral.share_msg")}</div>
+                        <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary, #B8913A)', letterSpacing: 0.5 }}>{referralCode}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--soft-ink, #8A847F)', marginTop: 2 }}>{t("my_page.referral.share_msg_new", { defaultValue: '친구에게 공유하고 5% 쿠폰을 받으세요!' })}</div>
                     </div>
-                    <button className={styles.referralCopyBtn} onClick={handleCopy}>
-                        {copied ? t("my_page.referral.copied") : t("my_page.referral.copy")}
+                    <button 
+                        onClick={handleCopy}
+                        style={{
+                            background: 'var(--primary, #B8913A)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: 10,
+                            padding: '8px 16px',
+                            fontSize: '0.8rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                        }}
+                    >
+                        {copied ? t("my_page.referral.copied_new", { defaultValue: '복사됨!' }) : t("my_page.referral.copy_new", { defaultValue: '복사' })}
                     </button>
                 </div>
             ) : (
-                <div style={{ fontSize: "0.82rem", color: "var(--soft-ink)", padding: "4px 0 8px" }}>
+                <div style={{ fontSize: "0.82rem", color: "var(--soft-ink)", padding: "4px 0" }}>
                     {t("common.loading")}
                 </div>
             )}
 
             {coupons.length > 0 && (
-                <>
-                    <div className={styles.sectionHeader} style={{ marginTop: 12, marginBottom: 8 }}>
-                        <h2 className={styles.sectionTitle}>{t("my_page.referral.coupons_title")}</h2>
+                <div style={{ borderTop: '1px dashed var(--warm-sand, #E8E3D9)', paddingTop: 12, marginTop: 4 }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--foreground, #2A2624)', marginBottom: 8 }}>
+                        {t("my_page.referral.coupons_title_new", { defaultValue: '내 쿠폰' })}
                     </div>
-                    <div className={styles.couponList}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                         {coupons.map((c) => (
-                            <div key={c.id} className={`${styles.couponItem} ${c.is_used ? styles.couponItemUsed : ""}`}>
+                            <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', background: '#FDFBF7', borderRadius: 10, border: '1px solid var(--warm-sand, #E8E3D9)' }}>
                                 <div>
-                                    <div className={styles.couponDiscount}>{c.discount_value}%{c.discount_type === "percent" ? " OFF" : ""}</div>
-                                    <div className={styles.couponReason}>{reasonKey(c.issue_reason)}</div>
-                                    <div className={styles.couponDate}>
+                                    <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--foreground, #2A2624)' }}>{c.discount_value}%{c.discount_type === "percent" ? " OFF" : ""}</div>
+                                    <div style={{ fontSize: '0.72rem', color: 'var(--soft-ink, #8A847F)' }}>{reasonKey(c.issue_reason)}</div>
+                                    <div style={{ fontSize: '0.68rem', color: 'var(--soft-ink, #8A847F)', opacity: 0.8 }}>
                                         {new Date(c.created_at).toLocaleDateString(i18n.language === "ko" ? "ko-KR" : "en-US")}
                                     </div>
                                 </div>
-                                <span className={`${styles.couponBadge} ${c.is_used ? styles.couponBadgeUsed : ""}`}>
-                                    {c.is_used ? t("my_page.referral.coupon_used") : t("my_page.referral.coupon_available")}
+                                <span style={{
+                                    fontSize: '0.68rem', fontWeight: 700,
+                                    padding: '2px 6px', borderRadius: 4,
+                                    background: c.is_used ? 'none' : 'rgba(184,145,58,0.1)',
+                                    color: c.is_used ? 'var(--soft-ink, #8A847F)' : '#B8913A',
+                                    border: c.is_used ? '1px solid var(--warm-sand, #E8E3D9)' : '1px solid rgba(184,145,58,0.2)'
+                                }}>
+                                    {c.is_used ? t("my_page.referral.coupon_used_new", { defaultValue: '사용완료' }) : t("my_page.referral.coupon_available_new", { defaultValue: '사용가능' })}
                                 </span>
                             </div>
                         ))}
                     </div>
-                </>
+                </div>
             )}
-        </section>
+        </div>
     );
 }
 
@@ -279,14 +393,7 @@ const BOOKING_STATUS_KO_KEY: Record<BeautyBookingAdminRecord['status'], string> 
     change_requested: 'beauty_bookings.status_change_requested',
 };
 
-const BOOKING_STATUS_DESC_KEY: Record<BeautyBookingAdminRecord['status'], string> = {
-    requested: 'beauty_bookings.status_desc_requested',
-    confirmed: 'beauty_bookings.status_desc_confirmed',
-    completed: 'beauty_bookings.status_desc_completed',
-    canceled: 'beauty_bookings.status_desc_canceled',
-    failed: 'beauty_bookings.status_desc_failed',
-    change_requested: 'beauty_bookings.status_desc_change_requested',
-};
+
 
 const BOOKING_STATUS_COLOR: Record<BeautyBookingAdminRecord['status'], string> = {
     requested: '#d97706',
@@ -338,7 +445,7 @@ function MyBookingsSection({
     accessToken: string;
     authReady: boolean;
 }) {
-    const { t, i18n } = useTranslation("common");
+    const { t } = useTranslation("common");
     const router = useRouter();
     const [bookings, setBookings] = useState<MyBookingCardRecord[]>([]);
     const [loading, setLoading] = useState(true);
@@ -392,37 +499,33 @@ function MyBookingsSection({
     }, [accessToken, authReady, t]);
 
     return (
-        <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>{t('my_page.bookings.title')}</h2>
-                <button
-                    className={styles.sectionMore}
-                    onClick={() => router.push('/my/bookings/beauty')}
-                >
-                    {t('common.actions.view_all')}
-                </button>
-            </div>
-
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {loading && <SectionCardSkeleton />}
             {!loading && fetchError && (
-                <div style={{ textAlign: 'center', padding: '12px 0', color: '#ef4444', fontSize: '0.85rem' }}>
+                <div style={{ textAlign: 'center', padding: '16px', background: 'white', borderRadius: 16, border: '1px solid var(--warm-sand, #E8E3D9)', color: '#ef4444', fontSize: '0.85rem' }}>
                     {fetchError}
                 </div>
             )}
             {!loading && !fetchError && bookings.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '32px 0', background: '#f8fafc', borderRadius: 16 }}>
+                <div style={{ textAlign: 'center', padding: '32px 16px', background: 'white', border: '1px solid var(--warm-sand, #E8E3D9)', borderRadius: 16, boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                     <div style={{ fontSize: '2rem', marginBottom: 8 }}>📅</div>
-                    <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>{t('my_page.dashboard.bookings_empty')}</div>
+                    <div style={{ color: 'var(--soft-ink, #8A847F)', fontSize: '0.85rem', marginBottom: 16, fontWeight: 700 }}>
+                        {t('my_page.bookings.empty_text', { defaultValue: '아직 예약 내역이 없습니다.' })}
+                    </div>
                     <button
-                        onClick={() => router.push('/beauty')}
+                        onClick={() => router.push('/')}
                         style={{
-                            background: 'white', border: '1px solid #e2e8f0',
+                            background: 'white', border: '1px solid var(--warm-sand, #E8E3D9)',
                             padding: '10px 20px', borderRadius: 12,
-                            fontSize: '0.85rem', color: '#334155',
-                            fontWeight: 600, cursor: 'pointer',
+                            fontSize: '0.8rem', color: 'var(--foreground, #2A2624)',
+                            fontWeight: 700, cursor: 'pointer',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                            transition: 'background 0.1s'
                         }}
+                        onMouseEnter={e => e.currentTarget.style.background = '#FDFBF7'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'white'}
                     >
-                        {t('my_page.bookings.browse_beauty_cta')}
+                        {t('my_page.bookings.browse_beauty_cta_new', { defaultValue: '예약하러 가기' })}
                     </button>
                 </div>
             )}
@@ -437,47 +540,41 @@ function MyBookingsSection({
                                       : b.storeName;
 
                         return (
-                        <div
-                            key={b.id}
-                            style={{
-                                background: '#f8fafc', borderRadius: 14,
-                                border: '1px solid #e2e8f0', padding: '14px 16px',
-                            }}
-                        >
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b' }}>
-                                    {title}
-                                </span>
-                                <span style={{
-                                    fontSize: '0.7rem', fontWeight: 700,
-                                    padding: '3px 8px', borderRadius: 20,
-                                    background: `${BOOKING_STATUS_COLOR[b.status]}18`,
-                                    color: BOOKING_STATUS_COLOR[b.status],
-                                    border: `1px solid ${BOOKING_STATUS_COLOR[b.status]}40`,
-                                }}>
-                                    {t(BOOKING_STATUS_KO_KEY[b.status])}
-                                </span>
+                            <div
+                                key={b.id}
+                                style={{
+                                    background: 'white', borderRadius: 16,
+                                    border: '1px solid var(--warm-sand, #E8E3D9)', padding: '16px',
+                                    boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
+                                }}
+                            >
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                                    <span style={{ fontWeight: 800, fontSize: '0.9rem', color: 'var(--foreground, #2A2624)' }}>
+                                        {title}
+                                    </span>
+                                    <span style={{
+                                        fontSize: '0.7rem', fontWeight: 700,
+                                        padding: '3px 8px', borderRadius: 20,
+                                        background: `${BOOKING_STATUS_COLOR[b.status]}18`,
+                                        color: BOOKING_STATUS_COLOR[b.status],
+                                        border: `1px solid ${BOOKING_STATUS_COLOR[b.status]}40`,
+                                    }}>
+                                        {t(BOOKING_STATUS_KO_KEY[b.status])}
+                                    </span>
+                                </div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--soft-ink, #8A847F)', marginBottom: 4 }}>
+                                    📅 {b.bookingDate} · {b.bookingTime}
+                                </div>
+                                <div style={{ fontSize: '0.78rem', color: !isMatched ? '#B8913A' : 'var(--soft-ink, #8A847F)', fontWeight: !isMatched ? 700 : 500, marginBottom: 4 }}>
+                                 </div>
                             </div>
-                            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 4 }}>
-                                📅 {b.bookingDate} · {b.bookingTime}
-                            </div>
-                            <div style={{ fontSize: '0.82rem', color: !isMatched ? '#db2777' : '#64748b', fontWeight: !isMatched ? 600 : 400, marginBottom: 4 }}>
-                                {!isMatched ? t('my_page.bookings.matching_status') : (t(BOOKING_STATUS_DESC_KEY[b.status]) || '')}
-                            </div>
-                            <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
-                                💰 {!isMatched || b.totalPrice === 0 
-                                      ? t('my_page.bookings.price_pending') 
-                                      : `${b.totalPrice.toLocaleString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US'))}${t('beauty_explore.label_booking_unit')}`}
-                            </div>
-                        </div>
                         );
                     })}
                 </div>
             )}
-        </section>
+        </div>
     );
 }
-
 
 function CommunityHubSection({ authorName }: { authorName: string }) {
     const { t, i18n } = useTranslation("common");
@@ -522,93 +619,87 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
     }, [authorName]);
 
     return (
-        <>
-            <div className={styles.sectionHeader}>
-                 <h2 className={styles.sectionTitle}>
-                     {t('my_page.community_hub.title')}
-                 </h2>
-                 <button
-                     className={styles.sectionMore}
-                     onClick={() => router.push('/my/community')}
-                 >
-                     {t('common.actions.view_all')}
-                 </button>
-            </div>
-
-                {loading ? (
-                    <SectionCardSkeleton rows={2} />
-                ) : posts.length === 0 ? (
-                    <div style={{ 
-                        textAlign: 'center', 
-                        padding: '32px 0px',
-                        background: '#f8fafc',
-                        borderRadius: 16
-                    }}>
-                        <div style={{ fontSize: '2rem', marginBottom: 8 }}>💬</div>
-                        <div style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: 16, fontWeight: 600 }}>{t('my_page.community.empty_simple')}</div>
-                        <button 
-                            onClick={() => router.push("/community")}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {loading ? (
+                <SectionCardSkeleton rows={2} />
+            ) : posts.length === 0 ? (
+                <div style={{ 
+                    textAlign: 'center', 
+                    padding: '32px 16px',
+                    background: 'white',
+                    border: '1px solid var(--warm-sand, #E8E3D9)',
+                    borderRadius: 16,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
+                }}>
+                    <div style={{ fontSize: '2rem', marginBottom: 8 }}>💬</div>
+                    <div style={{ color: 'var(--soft-ink, #8A847F)', fontSize: '0.85rem', marginBottom: 16, fontWeight: 700 }}>
+                        {t('my_page.community.empty_simple', { defaultValue: '아직 커뮤니티 작성글이 없습니다.' })}
+                    </div>
+                    <button 
+                        onClick={() => router.push("/community")}
+                        style={{
+                            background: 'white',
+                            border: '1px solid var(--warm-sand, #E8E3D9)',
+                            padding: '10px 20px',
+                            borderRadius: 12,
+                            fontSize: '0.8rem',
+                            color: 'var(--foreground, #2A2624)',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+                        }}
+                    >
+                        {t('common.actions.browse_community', { defaultValue: '커뮤니티 둘러보기' })}
+                    </button>
+                </div>
+            ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {posts.map(post => (
+                        <div 
+                            key={post.id}
+                            onClick={() => router.push(`/community/${post.id}`)}
                             style={{
+                                padding: '16px',
+                                borderRadius: 16,
                                 background: 'white',
-                                border: '1px solid #e2e8f0',
-                                padding: '10px 20px',
-                                borderRadius: 12,
-                                fontSize: '0.85rem',
-                                color: '#334155',
-                                fontWeight: 600,
+                                border: '1px solid var(--warm-sand, #E8E3D9)',
                                 cursor: 'pointer',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+                                boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+                                transition: 'transform 0.1s'
                             }}
+                            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+                            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
                         >
-                            {t('common.actions.browse_community')}
-                        </button>
-                    </div>
-                ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                        {posts.map(post => (
-                            <div 
-                                key={post.id}
-                                onClick={() => router.push(`/community/${post.id}`)}
-                                style={{
-                                    padding: '16px',
-                                    borderRadius: 16,
-                                    background: '#f8fafc',
-                                    cursor: 'pointer',
-                                    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)',
-                                    transition: 'transform 0.1s'
-                                }}
-                                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
-                                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                            >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-                                    <span style={{ 
-                                        padding: '4px 8px', 
-                                        borderRadius: 6, 
-                                        background: 'rgba(124,58,237,0.1)', 
-                                        color: '#7c3aed', 
-                                        fontSize: '0.7rem', 
-                                        fontWeight: 800,
-                                        textTransform: 'uppercase'
-                                    }}>
-                                        {post.type ? (t(`common.states.${post.type.toLowerCase()}`, { defaultValue: post.type })) : t('common.states.posts')}
-                                    </span>
-                                    <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>
-                                        {post.created_at ? new Date(post.created_at).toLocaleDateString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US')) : (post.time || '')}
-                                    </span>
-                                </div>
-                                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                    {post.title}
-                                </div>
-                                <div style={{ fontSize: '0.85rem', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                    {post.desc}
-                                </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                                <span style={{ 
+                                    padding: '4px 8px', 
+                                    borderRadius: 6, 
+                                    background: 'rgba(184,145,58,0.1)', 
+                                    color: '#B8913A', 
+                                    fontSize: '0.7rem', 
+                                    fontWeight: 800,
+                                    textTransform: 'uppercase'
+                                }}>
+                                    {post.type ? (t(`common.states.${post.type.toLowerCase()}`, { defaultValue: post.type })) : t('common.states.posts')}
+                                </span>
+                                <span style={{ fontSize: '0.72rem', color: 'var(--soft-ink, #8A847F)', fontWeight: 600 }}>
+                                    {post.created_at ? new Date(post.created_at).toLocaleDateString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US')) : (post.time || '')}
+                                </span>
                             </div>
-                        ))}
-                    </div>
-                )}
-        </>
+                            <div style={{ fontWeight: 800, color: 'var(--foreground, #2A2624)', fontSize: '0.9rem', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {post.title}
+                            </div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--soft-ink, #8A847F)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {post.desc}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
     );
 }
+
 
 function PartnerStatusBanner({
     status,
@@ -753,7 +844,14 @@ function MyPageContent() {
             setPartnerStatus(null);
 
             if (!user) {
-                router.push("/auth/login?redirect=/my");
+                setAccessToken("");
+                setAuthReady(true);
+                setPermissionsResolved(true);
+                setUserName("");
+                setProfileSubtitle("");
+                setAvatarUrl(undefined);
+                setReferralCode(null);
+                setCoupons([]);
                 return;
             }
 
@@ -843,8 +941,11 @@ function MyPageContent() {
         partnerStatus,
     });
 
-
-
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        localStorage.removeItem("user");
+        router.refresh();
+    };
 
     if (!hasHydrated) {
         return (
@@ -858,38 +959,274 @@ function MyPageContent() {
 
     return (
         <div className={styles.container}>
-            <ProfileSummaryCard
-                userName={displayUserName}
-                subtitle={displayProfileSubtitle}
-                avatarUrl={avatarUrl}
-                onOpenSettings={() => router.push("/my/settings")}
-                onAvatarUpdate={(url) => setAvatarUrl(url)}
-            />
+            {/* Upper Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, padding: '0 4px' }}>
+                <h1 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--foreground, #2A2624)', margin: 0, letterSpacing: '-0.5px' }}>나의 Kello</h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    {/* Settings Cog Button */}
+                    <button
+                        onClick={() => router.push("/my/settings")}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            padding: 6,
+                            color: 'var(--foreground, #2A2624)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '50%',
+                            transition: 'background 0.15s'
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.03)'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                        aria-label="Settings"
+                    >
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </button>
 
-            {!capabilities.canViewAdminConsole && (
-                <ReferralSection referralCode={referralCode} coupons={coupons} />
+                    {/* Logout / Login Button */}
+                    {accessToken ? (
+                        <button
+                            onClick={handleLogout}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: 6,
+                                color: 'var(--foreground, #2A2624)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '50%',
+                                transition: 'background 0.15s'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.03)'}
+                            onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                            aria-label="Logout"
+                            title="로그아웃"
+                        >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => router.push("/auth/login?redirect=/my")}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: 6,
+                                color: 'var(--foreground, #2A2624)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '50%',
+                                transition: 'background 0.15s'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.03)'}
+                            onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                            aria-label="Login"
+                            title="로그인"
+                        >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                <polyline points="10 17 15 12 10 7"></polyline>
+                                <line x1="15" y1="12" x2="3" y2="12"></line>
+                            </svg>
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {/* Account & Help Center Combined Card Container */}
+            <div style={{ 
+                background: 'white', 
+                borderRadius: 16, 
+                border: '1px solid var(--warm-sand, #E8E3D9)', 
+                boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+                display: 'flex',
+                flexDirection: 'column',
+                marginBottom: 12
+            }}>
+                {/* ProfileCard */}
+                {accessToken ? (
+                    <div style={{ borderBottom: '1px solid var(--warm-sand, #E8E3D9)' }}>
+                        <ProfileSummaryCard
+                            userName={displayUserName}
+                            subtitle={displayProfileSubtitle}
+                            avatarUrl={avatarUrl}
+                            onAvatarUpdate={(url) => setAvatarUrl(url)}
+                            noBorder
+                        />
+                    </div>
+                ) : (
+                    <div style={{ borderBottom: '1px solid var(--warm-sand, #E8E3D9)', display: 'flex', alignItems: 'center', padding: '16px', gap: 16 }}>
+                        <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', background: '#F1F5F9', border: '1.5px solid var(--warm-sand, #E8E3D9)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="32" fill="#E2E8F0"/>
+                                <path d="M32 36C38.6274 36 44 30.6274 44 24C44 17.3726 38.6274 12 32 12C25.3726 12 20 17.3726 20 24C20 30.6274 25.3726 36 32 36Z" fill="#94A3B8"/>
+                                <path d="M32 40C20.9543 40 12 48.9543 12 60H52C52 48.9543 43.0457 40 32 40Z" fill="#94A3B8"/>
+                            </svg>
+                        </div>
+                        <div style={{ flex: 1, display: 'flex' }}>
+                            <button
+                                onClick={() => router.push("/auth/login?redirect=/my")}
+                                style={{
+                                    width: '100%',
+                                    background: 'var(--primary, #B8913A)',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: 10,
+                                    padding: '12px 16px',
+                                    fontSize: '0.9rem',
+                                    fontWeight: 800,
+                                    cursor: 'pointer',
+                                    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                                    transition: 'background 0.1s',
+                                    textAlign: 'center'
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.background = '#A57F2F'}
+                                onMouseLeave={e => e.currentTarget.style.background = 'var(--primary, #B8913A)'}
+                            >
+                                {t('common.actions.login', { defaultValue: '로그인' })}
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Help Center Section */}
+                <div style={{ 
+                    padding: '16px 12px 12px 12px', 
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gap: 8
+                }}>
+                    {/* Medical */}
+                    <div 
+                        onClick={() => router.push('/help/medical')}
+                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', gap: 6 }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: 12, background: '#FFF5F5', border: '1px solid #FEE2E2' }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="9.5" y="3" width="5" height="18" fill="#EF4444" rx="1.5"/>
+                                <rect x="3" y="9.5" width="18" height="5" fill="#EF4444" rx="1.5"/>
+                            </svg>
+                        </div>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#000000', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                            {t('my_page.help_medical', { defaultValue: '의료' })}
+                        </div>
+                    </div>
+
+                    {/* Interpreter */}
+                    <div 
+                        onClick={() => router.push('/help/interpretation')}
+                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', gap: 6 }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: 12, background: '#F0FDF4', border: '1px solid #DCFCE7' }}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h5.75L22 22h2l-5.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" fill="#10B981" />
+                            </svg>
+                        </div>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#000000', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                            {t('my_page.help_interpreter', { defaultValue: '통역' })}
+                        </div>
+                    </div>
+
+                    {/* Police */}
+                    <div 
+                        onClick={() => router.push('/help/police')}
+                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', gap: 6 }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: 12, background: '#EFF6FF', border: '1px solid #DBEAFE' }}>
+                            <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>🚨</span>
+                        </div>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#000000', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                            {t('my_page.help_police', { defaultValue: '경찰' })}
+                        </div>
+                    </div>
+
+                    {/* Lost & Found */}
+                    <div 
+                        onClick={() => router.push('/help/lost')}
+                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', gap: 6 }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: 12, background: '#FEF9C3', border: '1px solid #FEF08A' }}>
+                            <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>🔍</span>
+                        </div>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#000000', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                            {t('my_page.help_lost', { defaultValue: '분실물' })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Referral Section - Logged In Only */}
+            {accessToken && !capabilities.canViewAdminConsole && (
+                <div style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 8, paddingLeft: 4 }}>
+                        <h2 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--foreground, #2A2624)', margin: 0 }}>
+                            {t("my_page.referral.title_new", { defaultValue: '추천인 코드' })}
+                        </h2>
+                    </div>
+                    <ReferralSection referralCode={referralCode} coupons={coupons} />
+                </div>
             )}
 
+            {/* Bookings Section */}
             {!capabilities.canViewAdminConsole && (
-                <MyBookingsSection accessToken={accessToken} authReady={authReady} />
+                <div style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 8, paddingLeft: 4 }}>
+                        <h2 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--foreground, #2A2624)', margin: 0 }}>
+                            {t('my_page.bookings.title_new', { defaultValue: '내 예약' })}
+                        </h2>
+                        {accessToken && (
+                            <button
+                                onClick={() => router.push('/my/bookings/beauty')}
+                                style={{ background: 'none', border: 'none', color: '#B8913A', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+                            >
+                                {t('common.actions.view_all')}
+                            </button>
+                        )}
+                    </div>
+                    <MyBookingsSection accessToken={accessToken} authReady={authReady} />
+                </div>
             )}
 
+            {/* Community Section */}
             {!capabilities.canViewAdminConsole && (
-                <section className={styles.section}>
+                <div style={{ marginBottom: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12, marginBottom: 8, paddingLeft: 4 }}>
+                        <h2 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--foreground, #2A2624)', margin: 0 }}>
+                            {t('my_page.community_hub.title_new', { defaultValue: '내 커뮤니티' })}
+                        </h2>
+                        {accessToken && (
+                            <button
+                                onClick={() => router.push('/my/community')}
+                                style={{ background: 'none', border: 'none', color: '#B8913A', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+                            >
+                                {t('common.actions.view_all')}
+                            </button>
+                        )}
+                    </div>
                     <CommunityHubSection authorName={communityAuthorName} />
-                </section>
+                </div>
             )}
 
             {/* Standard Partner Banner */}
-            {capabilities.showPartnerBanner && (
-                <PartnerStatusBanner
-                    status={partnerStatus}
-                    canApplyForPartner={capabilities.canApplyForPartner}
-                />
-            )}
-
-            {capabilities.canViewAdminConsole && (
-                <AdminStatsDashboard />
+            {capabilities.showPartnerBanner && accessToken && (
+                <div style={{ marginBottom: 12 }}>
+                    <PartnerStatusBanner
+                        status={partnerStatus}
+                        canApplyForPartner={capabilities.canApplyForPartner}
+                    />
+                </div>
             )}
 
             {/* Admin Section */}
@@ -924,52 +1261,37 @@ function MyPageContent() {
                 </section>
             )}
 
-            {/* Customer Service / Info Links */}
-            <section className={styles.section} style={{ marginTop: 24, padding: '16px', display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <button
-                    type="button"
-                    className={styles.savedHubCard}
-                    onClick={() => router.push('/help')}
-                    style={{ textAlign: 'left' }}
-                >
-                    <div className={styles.savedHubText}>
-                        <div className={styles.savedHubTitle}>
-                            {t('my_page.help_center.title', { defaultValue: '헬프센터' })}
-                        </div>
-                        <div className={styles.savedHubDesc}>
-                            {t('my_page.help_center.description', { defaultValue: '자주 묻는 질문과 긴급 도움말을 확인하세요' })}
-                        </div>
-                    </div>
-                    <span className={styles.savedHubArrow}>&gt;</span>
-                </button>
 
-                <div style={{ display: 'flex', flexDirection: 'row', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <div
-                        onClick={() => router.push('/privacy')}
-                        style={{
-                            fontSize: '0.8125rem',
-                            color: 'var(--soft-ink)',
-                            textDecoration: 'underline',
-                            cursor: 'pointer',
-                            opacity: 0.7
-                        }}
-                    >
-                        {t('privacy_policy.title')}
-                    </div>
-                    <div
-                        onClick={() => router.push('/terms')}
-                        style={{
-                            fontSize: '0.8125rem',
-                            color: 'var(--soft-ink)',
-                            textDecoration: 'underline',
-                            cursor: 'pointer',
-                            opacity: 0.7
-                        }}
-                    >
-                        {t('terms_of_service.title')}
-                    </div>
+
+            {/* Legal Links (No Card/Section wrapper) */}
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 24, justifyContent: 'center', marginTop: 28, flexWrap: 'wrap' }}>
+                <div
+                    onClick={() => router.push('/privacy')}
+                    style={{
+                        fontSize: '0.75rem',
+                        color: 'var(--soft-ink, #8A847F)',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        opacity: 0.8
+                    }}
+                >
+                    {t('privacy_policy.title')}
                 </div>
-            </section>
+                <div
+                    onClick={() => router.push('/terms')}
+                    style={{
+                        fontSize: '0.75rem',
+                        color: 'var(--soft-ink, #8A847F)',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        opacity: 0.8
+                    }}
+                >
+                    {t('terms_of_service.title')}
+                </div>
+            </div>
 
             {/* Bottom Spacer */}
             <div style={{ height: '160px', minHeight: '160px', flexShrink: 0, width: '100%', pointerEvents: 'none' }} />
