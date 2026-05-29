@@ -1893,7 +1893,7 @@
     },
     "third_party": {
       "title": "3. Cung cấp Thông tin Cá nhân cho Bên thứ ba",
-      "content": "MyKello cung cấp thông tin cá nhân cho các đối tác sau để tạo điều kiện cung cấp dịch vụ.",
+      "content": "Wekello cung cấp thông tin cá nhân cho các đối tác sau để tạo điều kiện cung cấp dịch vụ.",
       "providers": "Supabase (Cơ sở dữ liệu), Google (Xác thực), X (Xác thực)"
     },
     "overseas": {
@@ -1925,7 +1925,7 @@
     "effective_date": "Ngày có hiệu lực: 21 tháng 4, 2024",
     "definitions": {
       "title": "1. Định nghĩa Dịch vụ",
-      "content": "MyKello cung cấp một nền tảng đại lý đặt chỗ dịch vụ làm đẹp nhằm tạo điều kiện thuận lợi cho việc đặt chỗ và liên lạc giữa người dùng và các nhà cung cấp dịch vụ làm đẹp."
+      "content": "Wekello cung cấp một nền tảng đại lý đặt chỗ dịch vụ làm đẹp nhằm tạo điều kiện thuận lợi cho việc đặt chỗ và liên lạc giữa người dùng và các nhà cung cấp dịch vụ làm đẹp."
     },
     "benefits": {
       "title": "2. Quyền lợi Thành viên",
@@ -1944,8 +1944,8 @@
     },
     "liability": {
       "title": "4. Giới thiệu về Trách nhiệm pháp lý",
-      "interpretation": "Tính năng 'Thông dịch viên thời gian thực' là một công cụ bổ sung được cung cấp để thuận tiện cho người dùng. MyKello không chịu trách nhiệm về các lỗi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong bản dịch AI hoặc thông dịch thủ công.",
-      "community": "MyKello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
+      "interpretation": "Tính năng 'Thông dịch viên thời gian thực' là một công cụ bổ sung được cung cấp để thuận tiện cho người dùng. Wekello không chịu trách nhiệm về các lỗi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong bản dịch AI hoặc thông dịch thủ công.",
+      "community": "Wekello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
     }
   }
 }

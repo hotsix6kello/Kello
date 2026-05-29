@@ -1258,7 +1258,7 @@
         },
         "cancel_refund": {
           "q": "What are the cancellation and refund policies?",
-          "a": "MyKello applies a unified refund policy to all bookings. 4+ days before: 100% refund on the service fee. 3 days before: 80%. 2 days before: 60%. 1 day before or same day / No-show: no refund. The 10% platform fee is non-refundable in all cases."
+          "a": "Wekello applies a unified refund policy to all bookings. 4+ days before: 100% refund on the service fee. 3 days before: 80%. 2 days before: 60%. 1 day before or same day / No-show: no refund. The 10% platform fee is non-refundable in all cases."
         },
         "write_review": {
           "q": "How do I write a review?",
@@ -2322,7 +2322,7 @@
     },
     "third_party": {
       "title": "3. Providing Personal Information to Third Parties",
-      "content": "MyKello provides personal information to the following partners to facilitate service delivery.",
+      "content": "Wekello provides personal information to the following partners to facilitate service delivery.",
       "providers": "Supabase (Database), Google (Authentication), X (Authentication)"
     },
     "overseas": {
@@ -2354,7 +2354,7 @@
     "effective_date": "Effective Date: May 4, 2026",
     "definitions": {
       "title": "1. Definition of Service",
-      "content": "MyKello provides a beauty service reservation agency platform to facilitate bookings and communication between users and beauty service providers."
+      "content": "Wekello provides a beauty service reservation agency platform to facilitate bookings and communication between users and beauty service providers."
     },
     "benefits": {
       "title": "2. Member Benefits",
@@ -2363,7 +2363,7 @@
     },
     "platform_fee": {
       "title": "3. Platform Fee",
-      "content": "MyKello charges a platform fee of 10% of the service fee for its reservation agency service.",
+      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
       "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
     },
     "refund_policy": {
@@ -2374,17 +2374,17 @@
       "two_days": "2 days before appointment: 60% service fee refund",
       "one_day": "1 day before appointment: No Refund",
       "same_day": "Same day / No-show: No Refund",
-      "note": "MyKello's unified cancellation policy applies equally to all bookings made through the platform. No store-specific cancellation policy applies."
+      "note": "Wekello's unified cancellation policy applies equally to all bookings made through the platform. No store-specific cancellation policy applies."
     },
     "chargeback": {
       "title": "5. Payment Cancellation & Disputes",
       "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
-      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, MyKello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
     },
     "liability": {
       "title": "6. Limitation of Liability",
-      "interpretation": "The 'Real-time Interpretation' feature is a supplementary tool provided for user convenience. MyKello is not liable for reservation errors or disputes arising from inaccuracies in AI translation or manual interpretation.",
-      "community": "MyKello is not responsible for any damages, incidents, or disputes resulting from voluntary offline meetups or personal transactions between users conducted through the community features."
+      "interpretation": "The 'Real-time Interpretation' feature is a supplementary tool provided for user convenience. Wekello is not liable for reservation errors or disputes arising from inaccuracies in AI translation or manual interpretation.",
+      "community": "Wekello is not responsible for any damages, incidents, or disputes resulting from voluntary offline meetups or personal transactions between users conducted through the community features."
     }
   }
 }
