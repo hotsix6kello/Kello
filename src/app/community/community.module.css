@@ -160,18 +160,21 @@
     margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .summaryText {
-    flex: 1 1 180px;
+    flex: 1 1 auto;
     min-width: 0;
     font-size: 13px;
     font-weight: 700;
     color: #475569;
     line-height: 1.45;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .sortSelect {
@@ -640,8 +643,8 @@
 
 @media (max-width: 480px) {
     .navSummaryBox {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        align-items: center;
     }
 
     .sortSelect {
@@ -1653,4 +1656,30 @@
     flex-direction: column;
     gap: 8px;
     margin-bottom: 8px;
+}
+
+/* ── Write Pill Button ── */
+.writeBtn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: none;
+    background: #9B4D6D;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.writeBtn:hover {
+    background: #843D5A;
+}
+
+.writeBtn:active {
+    transform: scale(0.96);
 }
