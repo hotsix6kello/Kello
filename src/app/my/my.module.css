@@ -1034,3 +1034,152 @@
     font-size: 0.82rem;
     flex-shrink: 0;
 }
+
+/* Soft premium reskin overrides */
+.container {
+    background:
+        radial-gradient(circle at top center, rgba(224, 198, 190, 0.26) 0%, rgba(224, 198, 190, 0) 28%),
+        linear-gradient(180deg, rgba(255, 253, 250, 0.98) 0%, rgba(246, 238, 231, 0.96) 100%);
+    gap: 14px;
+}
+
+.profileCard,
+.section,
+.travelInfoCard,
+.partnerBanner,
+.adminShortcut,
+.adminMenuCard,
+.savedHubCard {
+    background: linear-gradient(180deg, rgba(255, 253, 250, 0.97) 0%, rgba(248, 241, 236, 0.95) 100%);
+    border-color: rgba(219, 202, 194, 0.82);
+    box-shadow: 0 18px 34px rgba(103, 79, 76, 0.08);
+    backdrop-filter: blur(14px);
+}
+
+.profileCard {
+    border-radius: 30px;
+    padding: 20px 18px;
+}
+
+.profileAvatar {
+    background: linear-gradient(135deg, #7d6062 0%, #b27c84 100%);
+    border-color: rgba(255, 250, 246, 0.9);
+    box-shadow: 0 16px 26px rgba(103, 79, 76, 0.16);
+}
+
+.avatarEditOverlay {
+    background: linear-gradient(135deg, #c88c93 0%, #b67982 100%);
+    border-color: rgba(255, 253, 250, 0.96);
+}
+
+.profileName,
+.sectionTitle,
+.ticketTitle,
+.savedHubTitle,
+.adminMenuLabel,
+.partnerBannerTitle,
+.travelInfoItem {
+    color: var(--secondary-strong);
+}
+
+.profileSubtext,
+.savedHubDesc,
+.adminMenuDesc,
+.partnerBannerDesc,
+.ticketMeta,
+.communityDesc,
+.communityTime,
+.couponReason,
+.couponDate,
+.travelInfoLabel,
+.travelInfoDot {
+    color: var(--soft-ink);
+}
+
+.profileSettingsButton,
+.ticketActionBtn,
+.referralCopyBtn,
+.partnerBannerBtn,
+.emptyBtn {
+    background: linear-gradient(135deg, #c88c93 0%, #b67982 100%);
+    color: #fffdfa;
+    border-color: transparent;
+    box-shadow: 0 14px 24px rgba(183, 128, 136, 0.22);
+}
+
+.profileSettingsButton {
+    padding: 8px 14px;
+}
+
+.profileSettingsButton:active,
+.ticketActionBtn:active,
+.referralCopyBtn:active,
+.partnerBannerBtn:active,
+.emptyBtn:active {
+    background: linear-gradient(135deg, #b57a81 0%, #8d686d 100%);
+}
+
+.bookingTicket,
+.communityCard,
+.savedSummaryCard,
+.beautyQuickLink,
+.beautyQuickIcon,
+.adminMenuIconWrap {
+    background: rgba(255, 252, 248, 0.88);
+    border-color: rgba(219, 202, 194, 0.78);
+    box-shadow: 0 12px 22px rgba(103, 79, 76, 0.06);
+}
+
+.bookingTicket {
+    border-left-color: var(--primary);
+}
+
+.ticketStatus,
+.communityBadge,
+.helpCenterBadge,
+.couponBadge {
+    background: rgba(199, 142, 149, 0.12);
+    color: var(--secondary-strong);
+    border-color: rgba(199, 142, 149, 0.18);
+}
+
+.statusConfirmed {
+    background: rgba(199, 142, 149, 0.16);
+    color: var(--secondary-strong);
+}
+
+.savedHubCard {
+    align-items: flex-start;
+}
+
+.savedHubArrow,
+.adminMenuArrow,
+.sectionMore,
+.beautyQuickArrow {
+    color: var(--primary-strong);
+}
+
+.referralCodeCard {
+    background: linear-gradient(180deg, rgba(248, 236, 235, 0.94) 0%, rgba(255, 250, 246, 0.98) 100%);
+    border-color: rgba(199, 142, 149, 0.28);
+    border-radius: 20px;
+    box-shadow: 0 16px 30px rgba(183, 128, 136, 0.1);
+}
+
+.referralCode,
+.couponDiscount {
+    color: var(--primary-strong);
+}
+
+.couponItem {
+    border-color: rgba(219, 202, 194, 0.78);
+    background: rgba(255, 253, 250, 0.96);
+}
+
+.couponItemUsed {
+    background: rgba(245, 237, 231, 0.72);
+}
+
+.travelInfoCard {
+    border-radius: 22px;
+}

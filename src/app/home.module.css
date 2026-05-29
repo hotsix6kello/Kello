@@ -1458,4 +1458,310 @@
   border: 1px solid #ddd;
   background: #fff;
   color: #555;
-}
+}
+
+/* Soft premium reskin overrides */
+.main {
+  background:
+    radial-gradient(circle at top center, rgba(224, 198, 190, 0.28) 0%, rgba(224, 198, 190, 0) 30%),
+    radial-gradient(circle at 86% 14%, rgba(199, 142, 149, 0.14) 0%, rgba(199, 142, 149, 0) 22%),
+    linear-gradient(180deg, rgba(255, 253, 250, 0.96) 0%, rgba(249, 244, 238, 0.98) 52%, #f4ece5 100%);
+  padding-bottom: calc(var(--total-nav-height) + env(safe-area-inset-bottom, 12px) + 40px);
+}
+
+.topNav {
+  padding: 22px 20px 0;
+}
+
+.navBtn,
+.navItemWrap,
+.navLinkBtn {
+  background: rgba(255, 250, 246, 0.84);
+  border-color: rgba(219, 202, 194, 0.76);
+  color: var(--secondary-strong);
+  box-shadow: 0 12px 24px rgba(103, 79, 76, 0.08);
+}
+
+.navBtn:hover,
+.navItemWrap:hover {
+  background: rgba(255, 253, 250, 0.96);
+  border-color: rgba(199, 142, 149, 0.36);
+  transform: translateY(-1px);
+}
+
+.heroNew {
+  padding-bottom: 18px;
+}
+
+.heroSlideArea {
+  min-height: 320px;
+  border-radius: 0 0 40px 40px;
+  overflow: hidden;
+  box-shadow: inset 0 -24px 44px rgba(255, 255, 255, 0.66);
+}
+
+.heroSlideArea::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 24% 32%, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 28%),
+    linear-gradient(180deg, rgba(255, 252, 249, 0.2) 0%, rgba(255, 247, 241, 0.52) 100%);
+  pointer-events: none;
+}
+
+.heroCardWrap {
+  top: 34px;
+  right: 12px;
+  width: 166px;
+  height: 214px;
+}
+
+.heroCard {
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(247, 233, 234, 0.96) 100%);
+  border: 1px solid rgba(199, 142, 149, 0.2);
+  box-shadow: 0 22px 46px rgba(183, 128, 136, 0.18), 0 10px 24px rgba(103, 79, 76, 0.08);
+  transform: rotate(8deg);
+}
+
+.heroCardIcon {
+  font-size: 3.6rem;
+  opacity: 0.72;
+  filter: saturate(0.9);
+}
+
+.heroSlideText {
+  max-width: 232px;
+  padding-top: 34px;
+}
+
+.heroSlideTitle {
+  font-size: 31px;
+  line-height: 1.08;
+  letter-spacing: -0.05em;
+  color: var(--secondary-strong);
+  text-shadow: 0 10px 28px rgba(255, 255, 255, 0.75);
+}
+
+.heroSlideSubtitle {
+  max-width: 206px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--soft-ink);
+}
+
+.heroDots {
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 20px 4px;
+}
+
+.heroDot {
+  width: 8px;
+  height: 8px;
+  background: rgba(170, 145, 141, 0.28);
+}
+
+.heroDotActive {
+  width: 30px;
+  background: linear-gradient(90deg, #c88c93 0%, #b67b83 100%);
+  box-shadow: 0 10px 18px rgba(183, 128, 136, 0.22);
+}
+
+.bookingShell {
+  margin-top: -28px;
+  padding: 0 18px 120px;
+}
+
+.bookingCard {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 22px 26px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 249, 244, 0.98) 100%);
+  border: 1px solid rgba(219, 202, 194, 0.82);
+  border-radius: 30px;
+  box-shadow: 0 28px 56px rgba(103, 79, 76, 0.12);
+}
+
+.bookingCard::before {
+  content: "";
+  position: absolute;
+  top: -72px;
+  right: -36px;
+  width: 184px;
+  height: 184px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(199, 142, 149, 0.15) 0%, rgba(199, 142, 149, 0) 70%);
+  pointer-events: none;
+}
+
+.sectionTagline {
+  font-size: 1.52rem;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  color: var(--secondary-strong);
+}
+
+.sectionDescription {
+  max-width: 24rem;
+  color: var(--soft-ink);
+}
+
+.categoryGrid {
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.categoryButton {
+  min-height: 148px;
+  border-radius: 24px;
+  padding: 22px 14px;
+  background: linear-gradient(180deg, rgba(255, 254, 252, 0.96) 0%, rgba(248, 241, 235, 0.94) 100%);
+  border-color: rgba(221, 206, 198, 0.92);
+  box-shadow: 0 14px 26px rgba(103, 79, 76, 0.06);
+}
+
+.categoryButton:hover {
+  transform: translateY(-3px);
+  border-color: rgba(199, 142, 149, 0.42);
+  box-shadow: 0 22px 34px rgba(183, 128, 136, 0.14);
+}
+
+.categoryButtonActive {
+  background: linear-gradient(180deg, rgba(255, 248, 246, 1) 0%, rgba(246, 235, 233, 0.98) 100%);
+  border-color: rgba(199, 142, 149, 0.5);
+  box-shadow: 0 20px 32px rgba(183, 128, 136, 0.16);
+}
+
+.categoryIconWrap {
+  width: 70px;
+  height: 70px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86), 0 14px 22px rgba(103, 79, 76, 0.08);
+}
+
+.categoryLabel {
+  font-size: 15px;
+  color: var(--secondary-strong);
+}
+
+.selectionPanel {
+  background: rgba(255, 251, 247, 0.92);
+  border-color: rgba(219, 202, 194, 0.82);
+  border-radius: 24px;
+  box-shadow: 0 16px 30px rgba(103, 79, 76, 0.07);
+}
+
+.selectionTag {
+  background: rgba(199, 142, 149, 0.14);
+  color: var(--secondary-strong);
+}
+
+.mainCtaBtn,
+.heroCtaBtn {
+  background: linear-gradient(135deg, #c88c93 0%, #b67982 52%, #9e767b 100%);
+  border: 1px solid rgba(182, 121, 130, 0.28);
+  box-shadow: 0 18px 34px rgba(183, 128, 136, 0.24);
+}
+
+.mainCtaBtn:hover:not(:disabled),
+.heroCtaBtn:hover {
+  background: linear-gradient(135deg, #b57a81 0%, #8d686d 100%);
+  box-shadow: 0 22px 36px rgba(103, 79, 76, 0.22);
+}
+
+.mainCtaBtn:disabled {
+  background: linear-gradient(135deg, #e9ddd6 0%, #dccbc4 100%);
+  color: rgba(88, 70, 72, 0.5);
+}
+
+.supportSection {
+  padding: 8px 18px 0;
+}
+
+.interpreterCard {
+  background: linear-gradient(135deg, #7b6062 0%, #5c474a 56%, #4a3a3d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 30px;
+  box-shadow: 0 30px 58px rgba(83, 63, 66, 0.22);
+}
+
+.interpreterDescription {
+  color: rgba(255, 247, 244, 0.78);
+}
+
+.secondaryBtn {
+  background: rgba(255, 249, 246, 0.14);
+  border-color: rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+}
+
+.assuranceCard {
+  background: rgba(255, 253, 250, 0.96);
+  border-color: rgba(219, 202, 194, 0.72);
+  box-shadow: 0 14px 28px rgba(103, 79, 76, 0.08);
+}
+
+.sheet,
+.mapModal {
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.98) 0%, rgba(247, 238, 231, 0.98) 100%);
+  border: 1px solid rgba(221, 206, 198, 0.82);
+  box-shadow: 0 -14px 42px rgba(103, 79, 76, 0.16);
+}
+
+.sheetHandle {
+  background: rgba(183, 162, 157, 0.76);
+}
+
+.toast {
+  background: linear-gradient(135deg, #c88c93 0%, #b67982 100%);
+  color: #fffdfa;
+  box-shadow: 0 18px 32px rgba(103, 79, 76, 0.18);
+}
+
+@media (max-width: 390px) {
+  .heroSlideArea {
+    min-height: 296px;
+    padding: 74px 18px 20px;
+  }
+
+  .heroCardWrap {
+    right: 8px;
+    width: 152px;
+    height: 198px;
+  }
+
+  .heroSlideText {
+    max-width: 214px;
+    padding-top: 30px;
+  }
+
+  .heroSlideTitle {
+    font-size: 28px;
+  }
+
+  .bookingShell {
+    padding: 0 14px 124px;
+  }
+
+  .bookingCard {
+    padding: 24px 18px 24px;
+    border-radius: 28px;
+  }
+
+  .categoryGrid {
+    gap: 12px;
+  }
+
+  .categoryButton {
+    min-height: 136px;
+    padding: 18px 12px;
+  }
+
+  .categoryIconWrap {
+    width: 64px;
+    height: 64px;
+  }
+}
