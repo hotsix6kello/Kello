@@ -5,7 +5,7 @@ import styles from "./BottomNav.module.css";
 import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "./navigationConfig";
-import { Home, Search, MessagesSquare, Users, User } from "lucide-react";
+import { Home, Search, Users, User } from "lucide-react";
 
 interface NavItem {
     id: string;

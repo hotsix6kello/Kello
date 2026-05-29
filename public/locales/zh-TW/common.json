@@ -2045,7 +2045,7 @@
     },
     "third_party": {
       "title": "3. 向第三方提供個人資訊",
-      "content": "MyKello 為提供服務，向以下合作夥伴提供個人資訊。",
+      "content": "Wekello 為提供服務，向以下合作夥伴提供個人資訊。",
       "providers": "Supabase（資料庫）、Google（身份驗證）、X（身份驗證）"
     },
     "overseas": {
@@ -2077,7 +2077,7 @@
     "effective_date": "生效日期：2024年4月21日",
     "definitions": {
       "title": "1. 服務定義",
-      "content": "MyKello 提供美容服務預約代行平台，旨在促進用戶與美容服務提供者之間的預約及溝通。"
+      "content": "Wekello 提供美容服務預約代行平台，旨在促進用戶與美容服務提供者之間的預約及溝通。"
     },
     "benefits": {
       "title": "2. 會員優惠",
