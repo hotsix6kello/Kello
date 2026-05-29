@@ -1,0 +1,2040 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ChevronLeft, Image as ImageIcon, Camera, Mic, Smile, Send, ArrowRightLeft, Pencil, Trash2, Settings, Sparkles, X, Link2, Pin, BellOff, LogOut, Bell, Plus, Volume2, Maximize2, RefreshCw } from 'lucide-react';
+import DrawingModal from '../../components/DrawingModal';
+
+type Message = {
+  id: string;
+  sender: 'visitor' | 'system';
+  original: string;
+  translated?: string;
+  isTranslating?: boolean;
+  timestamp?: Date;
+  reaction?: string;
+  read?: boolean;
+  imageUrl?: string;
+  icon?: string;
+};
+
+const PurpleChatIcon = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M45 22C28.43 22 15 32.75 15 46C15 52.88 18.47 59.1 24 63.5L20.5 76L33.5 73.5C37.05 74.47 40.91 75 45 75C61.57 75 75 64.25 75 51C75 37.75 61.57 22 45 22Z" fill="#E8DBFF" />
+    <circle cx="34" cy="48" r="3" fill="#7C3AED" />
+    <circle cx="45" cy="48" r="3" fill="#7C3AED" />
+    <circle cx="56" cy="48" r="3" fill="#7C3AED" />
+    <path d="M72 52C62.06 52 54 58.72 54 67C54 71.3 56.16 75.19 59.6 78.1L57 86L64.8 84.44C67 85.12 69.41 85.5 72 85.5C81.94 85.5 90 78.78 90 70.5C90 62.22 81.94 52 72 52Z" fill="#7C3AED" />
+    <circle cx="65" cy="69" r="2.2" fill="#FFFFFF" />
+    <circle cx="72" cy="69" r="2.2" fill="#FFFFFF" />
+    <circle cx="79" cy="69" r="2.2" fill="#FFFFFF" />
+    <path d="M75 14C75 18 78 21 82 21C78 21 75 24 75 28C75 24 72 21 68 21C72 21 75 18 75 14Z" fill="#B28DFF" />
+    <path d="M86 25C86 28 88 30 91 30C88 30 86 32 86 35C86 32 84 30 81 30C84 30 86 28 86 25Z" fill="#B28DFF" />
+  </svg>
+);
+
+const DEFAULT_CHATS = [
+  {
+    id: "kello-center",
+    name: "Kello Talk",
+    avatarText: "K",
+    avatarColor: "#B8913A",
+    defaultMessages: [
+      { id: 'welcome', sender: 'system', original: '안녕! 난 뷰티서비스 이용을 도와주는 한국인 친구 Kello야.\n무엇을 도와줄까?', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), read: true }
+    ]
+  },
+  {
+    id: "jenny-hair",
+    name: "제니헤어살롱 (Jenny Hair Salon)",
+    avatarText: "J",
+    avatarColor: "#8C6A3C",
+    defaultMessages: [
+      { id: '1', sender: 'system', original: '안녕하세요! 제니헤어살롱입니다. 예약 문의해 주셔서 감사합니다.', translated: 'Hello! This is Jenny Hair Salon. Thank you for your reservation inquiry.', timestamp: new Date(Date.now() - 1000 * 60 * 120).toISOString(), read: false },
+      { id: '2', sender: 'system', original: '예약이 완료되었습니다. 내일 뵙겠습니다!', translated: 'Your reservation has been completed. See you tomorrow!', timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(), read: false }
+    ]
+  },
+  {
+    id: "gold-nail",
+    name: "골드네일라운지 (Gold Nail Lounge)",
+    avatarText: "G",
+    avatarColor: "#6A5837",
+    defaultMessages: [
+      { id: '1', sender: 'visitor', original: '네일 디자인 추천해주실 수 있나요?', translated: 'Can you recommend a nail design?', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 10).toISOString(), read: true },
+      { id: '2', sender: 'system', original: '디자인 시안 확인 부탁드려요.', translated: 'Please check the design draft.', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 9).toISOString(), read: true }
+    ]
+  },
+  {
+    id: "spa-aesthetic",
+    name: "스파에스테틱 (Spa Aesthetic)",
+    avatarText: "S",
+    avatarColor: "#5A4C30",
+    defaultMessages: [
+      { id: '1', sender: 'system', original: '10분 늦으실 경우 automatic 취소됩니다.', translated: 'It will be automatically canceled if you are 10 minutes late.', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 25).toISOString(), read: false }
+    ]
+  }
+];
+
+const COLORS = {
+  bg: '#FDFBF7',
+  header: '#FFFFFF',
+  border: '#E8E3D9',
+  primary: '#B8913A',
+  primaryLight: '#F5EDD9',
+  opponentLight: '#F0F4F8',
+  textMain: '#2A2624',
+  textSub: '#8A847F',
+  bubble: {
+    visitor: '#FFFFFF',
+    visitorText: '#2A2624',
+    system: '#F0EBE1',
+    systemText: '#5A544F',
+  },
+  sendEnabled: '#B8913A',
+  sendDisabled: '#DCD6CC',
+};
+
+const LOCAL_DICTIONARY: Record<string, { ko: string; icon: string }> = {
+  "사진에 있는 스타일로 똑같이 가능한가요?": { ko: "사진에 있는 스타일로 똑같이 가능한가요?", icon: "📷" },
+  "이 사진처럼 해주세요.": { ko: "이 사진처럼 해주세요.", icon: "📷" },
+  "조금만 더 짧게 해주세요.": { ko: "조금만 더 짧게 해주세요.", icon: "✂️" },
+  "숱 조금만 쳐주세요.": { ko: "숱 조금만 쳐주세요.", icon: "✂️" },
+  "앞머리 다듬어주세요.": { ko: "앞머리 다듬어주세요.", icon: "✂️" },
+  "너무 뜨거워요.": { ko: "너무 뜨거워요.", icon: "🌡️" },
+  "조금 아파요.": { ko: "조금 아파요.", icon: "🌡️" },
+  "물이 차가워요.": { ko: "물이 차가워요.", icon: "🌡️" },
+  "전부 해서 얼마인가요?": { ko: "전부 해서 얼마인가요?", icon: "💳" },
+  "카드 결제 할게요.": { ko: "카드 결제 할게요.", icon: "💳" }
+};
+
+const LANGUAGES = [
+  { code: 'ko', label: '한국어', short: 'KOR' },
+  { code: 'en', label: 'English', short: 'ENG' },
+  { code: 'zh', label: '中文', short: 'CHN' },
+  { code: 'ja', label: '日本語', short: 'JPN' },
+  { code: 'vi', label: 'Tiếng Việt', short: 'VIE' },
+  { code: 'th', label: 'ภาษาไทย', short: 'THA' },
+];
+
+const QUICK_CATEGORIES = [
+  { id: 'style', icon: '📷', label: 'Style', phrases: ['사진에 있는 스타일로 똑같이 가능한가요?', '이 사진처럼 해주세요.'] },
+  { id: 'detail', icon: '✂️', label: 'Detail', phrases: ['조금만 더 짧게 해주세요.', '숱 조금만 쳐주세요.', '앞머리 다듬어주세요.'] },
+  { id: 'comfort', icon: '🌡️', label: 'Comfort', phrases: ['너무 뜨거워요.', '조금 아파요.', '물이 차가워요.'] },
+  { id: 'payment', icon: '💳', label: 'Payment', phrases: ['전부 해서 얼마인가요?', '카드 결제 할게요.'] }
+];
+
+export default function TalkChatPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const shopIdFromUrl = searchParams.get('shopId') || 'jenny-hair';
+  const [shopId, setShopId] = useState('jenny-hair');
+  const [quickSuggestions, setQuickSuggestions] = useState<string[]>([]);
+  const [isEditingSuggestions, setIsEditingSuggestions] = useState(false);
+  const [isAiRecommending, setIsAiRecommending] = useState(false);
+  const [isStaffShowMode, setIsStaffShowMode] = useState(false);
+  const [selectedQuickCategory, setSelectedQuickCategory] = useState<string | null>(null);
+  const [drawingImage, setDrawingImage] = useState<string | null>(null);
+  const [liveTranslation, setLiveTranslation] = useState('');
+  const [showStaffModal, setShowStaffModal] = useState(false);
+  const [staffModalText, setStaffModalText] = useState('');
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [shopName, setShopName] = useState('상대방(가게 사장님)');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputText, setInputText] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [sourceLocale, setSourceLocale] = useState('ko');
+
+  const startSpeechRecognition = () => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("이 브라우저에서는 음성 인식을 지원하지 않습니다.");
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = sourceLocale === 'ko' ? 'ko-KR' : 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => setIsRecording(true);
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInputText(prev => prev + (prev ? ' ' : '') + transcript);
+    };
+    recognition.onerror = (event: any) => {
+      console.error("Speech recognition error", event.error);
+      setIsRecording(false);
+    };
+    recognition.onend = () => setIsRecording(false);
+    recognition.start();
+  };
+  const [targetLocale, setTargetLocale] = useState('en');
+  const [showSourcePicker, setShowSourcePicker] = useState(false);
+  const [showTargetPicker, setShowTargetPicker] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [hoveredMessageId, setHoveredMessageId] = useState<string | null>(null);
+  const [hoveredReactionId, setHoveredReactionId] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showNotificationsDropdown, setShowNotificationsDropdown] = useState(false);
+  const [notifications, setNotifications] = useState<Array<{ id: string; text: string; date: string; read: boolean; type?: string; shopId?: string }>>([
+    { id: 'noti-1', text: '제니헤어살롱: 예약이 확정되었습니다! (내일 오전 11:00)', date: '방금 전', read: false, type: 'reservation', shopId: 'jenny-hair' },
+    { id: 'noti-2', text: '골드네일라운지: 디자인 시안 확인 부탁드립니다.', date: '10분 전', read: false, type: 'chat', shopId: 'gold-nail' },
+    { id: 'noti-3', text: '스파에스테틱: 10분 이상 지각 시 자동 취소될 수 있습니다.', date: '1시간 전', read: true, type: 'warning', shopId: 'spa-aesthetic' },
+  ]);
+  const [confirmModal, setConfirmModal] = useState<{
+    isOpen: boolean;
+    type: 'edit' | 'delete' | null;
+    messageId: string | null;
+  }>({
+    isOpen: false,
+    type: null,
+    messageId: null,
+  });
+  const [pinnedShops, setPinnedShops] = useState<string[]>([]);
+  const [mutedShops, setMutedShops] = useState<string[]>([]);
+  const [hiddenShops, setHiddenShops] = useState<string[]>([]);
+  const [otherUnreadCount, setOtherUnreadCount] = useState(0);
+  const [incomingAlert, setIncomingAlert] = useState<{ show: boolean; shopName: string; shopId: string; message: string } | null>(null);
+  const [shopContextMenu, setShopContextMenu] = useState<{ x: number; y: number; shopId: string } | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isLoaded = useRef(false);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+  const [newSuggestion, setNewSuggestion] = useState('');
+
+  const REACTIONS = ['👍', '❤️', '😊', '😂', '🙏', '👏', '🔥', '✨', '😍', '🤔'];
+
+  const handleReaction = (emoji: string) => {
+    const id = `reaction-${Date.now()}`;
+    setMessages((prev) => [
+      ...prev,
+      { id, sender: 'visitor', original: emoji, translated: emoji, isTranslating: false, timestamp: new Date() },
+    ]);
+    setShowEmojiPicker(false);
+  };
+
+  const handleDeleteMessage = (id: string) => {
+    setMessages(prev => {
+      const idx = prev.findIndex(m => m.id === id);
+      if (idx === -1) return prev;
+
+      const idsToRemove = [id];
+      for (let i = idx + 1; i < prev.length; i++) {
+        const nextMsg = prev[i];
+        if (nextMsg.sender !== 'visitor') {
+          idsToRemove.push(nextMsg.id);
+        } else {
+          break;
+        }
+      }
+      return prev.filter(m => !idsToRemove.includes(m.id));
+    });
+  };
+
+  const handleEditMessage = (id: string) => {
+    const msg = messages.find(m => m.id === id);
+    if (msg) {
+      setInputText(msg.original);
+      handleDeleteMessage(id);
+    }
+  };
+
+  const handleReactToMessage = (id: string) => {
+    setMessages(prev => prev.map(m => m.id === id ? { ...m, reaction: m.reaction ? undefined : '❤️' } : m));
+  };
+
+  const handleConfirmAction = () => {
+    if (!confirmModal.messageId) return;
+    if (confirmModal.type === 'delete') {
+      handleDeleteMessage(confirmModal.messageId);
+    } else if (confirmModal.type === 'edit') {
+      handleEditMessage(confirmModal.messageId);
+    }
+    setConfirmModal({ isOpen: false, type: null, messageId: null });
+  };
+
+  const getUnreadTotal = () => {
+    let total = 0;
+    DEFAULT_CHATS.forEach(shop => {
+      if (shop.id === 'kello-center') return;
+      try {
+        const stored = localStorage.getItem(`kello_chats_${shop.id}`);
+        if (stored) {
+          const msgs = JSON.parse(stored);
+          total += msgs.filter((m: any) => m.sender === 'system' && !m.read).length;
+        }
+      } catch { }
+    });
+    return total;
+  };
+
+  const updateUnreadTotal = () => {
+    const unread = getUnreadTotal();
+    setOtherUnreadCount(unread);
+    window.dispatchEvent(new CustomEvent('update-unread-count', { detail: unread }));
+  };
+
+  useEffect(() => {
+    try {
+      setPinnedShops(JSON.parse(localStorage.getItem('kello_pinned') || '[]'));
+      setMutedShops(JSON.parse(localStorage.getItem('kello_muted') || '[]'));
+      setHiddenShops(JSON.parse(localStorage.getItem('kello_hidden') || '[]'));
+    } catch { }
+    updateUnreadTotal();
+  }, [shopId, showLinkModal]);
+
+  useEffect(() => {
+    const handleClickOutside = () => setShopContextMenu(null);
+    if (shopContextMenu) document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [shopContextMenu]);
+
+  useEffect(() => {
+    if (shopId !== 'kello-center') return;
+    const timer = setTimeout(() => {
+      const shopKey = 'kello_chats_jenny-hair';
+      let currentMsgs = [];
+      try {
+        currentMsgs = JSON.parse(localStorage.getItem(shopKey) || '[]');
+      } catch { }
+
+      const newMsg = {
+        id: `simulated-${Date.now()}`,
+        sender: 'system',
+        original: '안녕하세요! 문의하신 디자인 시안 발송해 드렸습니다. 확인 부탁드립니다.',
+        translated: 'Hello! We have sent the design draft you requested. Please check it.',
+        timestamp: new Date().toISOString(),
+        read: false
+      };
+
+      localStorage.setItem(shopKey, JSON.stringify([...currentMsgs, newMsg]));
+      updateUnreadTotal();
+
+      setNotifications(prev => [
+        {
+          id: `noti-${Date.now()}`,
+          text: '제니헤어살롱: 안녕하세요! 문의하신 디자인 시안 발송해 드렸습니다. 확인 부탁드립니다.',
+          date: '방금 전',
+          read: false,
+          type: 'chat',
+          shopId: 'jenny-hair'
+        },
+        ...prev
+      ]);
+
+      setIncomingAlert({
+        show: true,
+        shopName: '제니헤어살롱 (Jenny Hair Salon)',
+        shopId: 'jenny-hair',
+        message: '안녕하세요! 문의하신 디자인 시안 발송해 드렸습니다. 확인 부탁드립니다.'
+      });
+      setTimeout(() => {
+        setIncomingAlert(null);
+      }, 10000);
+    }, 7000);
+
+    return () => clearTimeout(timer);
+  }, [shopId]);
+
+  const toggleShopPin = (id: string) => {
+    setPinnedShops(prev => {
+      const next = prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id];
+      localStorage.setItem('kello_pinned', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const toggleShopMute = (id: string) => {
+    setMutedShops(prev => {
+      const next = prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id];
+      localStorage.setItem('kello_muted', JSON.stringify(next));
+      return next;
+    });
+    updateUnreadTotal();
+  };
+
+  const leaveShopRoom = (id: string) => {
+    setHiddenShops(prev => {
+      const next = [...prev, id];
+      localStorage.setItem('kello_hidden', JSON.stringify(next));
+      return next;
+    });
+    localStorage.removeItem(`kello_chats_${id}`);
+    updateUnreadTotal();
+  };
+
+  // Load shop data on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('shopId') || 'jenny-hair';
+    setShopId(id);
+
+    const namesMap: Record<string, string> = {
+      'kello-center': 'Kello Talk',
+      'jenny-hair': '제니헤어살롱 (Jenny Hair Salon)',
+      'gold-nail': '골드네일라운지 (Gold Nail Lounge)',
+      'spa-aesthetic': '스파에스테틱 (Spa Aesthetic)',
+    };
+    setShopName(namesMap[id] || '상대방(가게 사장님)');
+
+    setQuickSuggestions([
+      "얼마나 걸릴까요?",
+      "예약 시간 변경 가능할까요?",
+      "주차 가능한가요?",
+      "안녕하세요!",
+      "감사합니다.",
+      "고맙습니다.",
+      "너무 마음에 들어요.",
+      "다음에 또 올게요!"
+    ]);
+
+    if (typeof window !== 'undefined' && !localStorage.getItem('kello_chats_reset_v4')) {
+      localStorage.removeItem('kello_chats_kello-center');
+      localStorage.setItem('kello_chats_reset_v4', 'true');
+    }
+
+    const stored = localStorage.getItem(`kello_chats_${id}`);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored).map((m: Omit<Message, 'timestamp'> & { timestamp: string }) => ({
+          ...m,
+          timestamp: new Date(m.timestamp)
+        }));
+        setMessages(parsed);
+      } catch {
+        setMessages([]);
+      }
+    } else {
+      const defaultShop = DEFAULT_CHATS.find(s => s.id === id);
+      let defaultMsgs: Message[] = defaultShop ? defaultShop.defaultMessages.map(m => ({
+        ...m,
+        sender: m.sender as 'system' | 'visitor',
+        timestamp: new Date(m.timestamp)
+      })) : [];
+
+      if (id === 'kello-center') {
+        defaultMsgs = [{
+          id: 'welcome',
+          sender: 'system',
+          original: '안녕! 난 뷰티서비스 이용을 도와주는 한국인 친구 Kello야.\n무엇을 도와줄까?',
+          timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
+          read: true
+        }];
+      }
+
+      setMessages(defaultMsgs);
+    }
+    isLoaded.current = true;
+  }, [shopIdFromUrl]);
+
+  // Close suggestions edit mode when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (isEditingSuggestions && suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setIsEditingSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isEditingSuggestions]);
+
+  // Mark system messages as read
+  useEffect(() => {
+    const unreadExist = messages.some(m => m.sender === 'system' && !m.read);
+    if (unreadExist && shopId) {
+      setMessages(prev => prev.map(m => m.sender === 'system' ? { ...m, read: true } : m));
+    }
+  }, [messages, shopId]);
+
+  // Save to localStorage when messages change and update global unread count
+  useEffect(() => {
+    if (isLoaded.current && shopId) {
+      localStorage.setItem(`kello_chats_${shopId}`, JSON.stringify(messages));
+
+      // Update global unread count
+      const ids = ['jenny-hair', 'gold-nail', 'spa-aesthetic'];
+      let total = 0;
+      ids.forEach(id => {
+        if (id === shopId) {
+          total += messages.filter(m => m.sender === 'system' && !m.read).length;
+        } else {
+          const stored = localStorage.getItem(`kello_chats_${id}`);
+          if (stored) {
+            try {
+              const parsed = JSON.parse(stored) as Message[];
+              total += parsed.filter((m) => m.sender === 'system' && !m.read).length;
+            } catch { }
+          } else {
+            const defaultShop = DEFAULT_CHATS.find(s => s.id === id);
+            if (defaultShop) {
+              total += defaultShop.defaultMessages.filter(m => m.sender === 'system' && !m.read).length;
+            }
+          }
+        }
+      });
+      window.dispatchEvent(new CustomEvent('update-unread-count', { detail: total }));
+    }
+  }, [messages, shopId]);
+
+  const handleAiRecommend = async () => {
+    setIsAiRecommending(true);
+    await new Promise(r => setTimeout(r, 1200));
+    setQuickSuggestions(prev => {
+      const newSuggestions = ['얼마나 걸릴까요?', '예약 시간 변경 가능할까요?', '주차 가능한가요?'];
+      const uniqueNew = newSuggestions.filter(s => !prev.includes(s));
+      return [...uniqueNew, ...prev].slice(0, 10);
+    });
+    setIsAiRecommending(false);
+  };
+
+  const handleSwapLangs = () => {
+    setSourceLocale(targetLocale);
+    setTargetLocale(sourceLocale);
+    setShowSourcePicker(false);
+    setShowTargetPicker(false);
+  };
+
+  const sourceLang = LANGUAGES.find((l) => l.code === sourceLocale) ?? LANGUAGES[0];
+  const targetLang = LANGUAGES.find((l) => l.code === targetLocale) ?? LANGUAGES[1];
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleTextToSpeech = (text: string, lang: string) => {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = lang;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // Live translation for staff show mode
+  useEffect(() => {
+    if (!isStaffShowMode || !inputText.trim()) {
+      setLiveTranslation('');
+      return;
+    }
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch('/api/talk/chat-translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: inputText, sourceLocale: 'auto', targetLocale: 'ko' }),
+        });
+        const data = await res.json();
+        setLiveTranslation(data.translatedText || '');
+      } catch (err) {
+        console.error(err);
+      }
+    }, 450);
+    return () => clearTimeout(timer);
+  }, [inputText, isStaffShowMode, sourceLocale, targetLocale]);
+
+  const sendMessage = async (text: string) => {
+    if (!text || isSending) return;
+
+    const id = Date.now().toString();
+    const matchedDict = LOCAL_DICTIONARY[text];
+    const defaultIcon = matchedDict ? matchedDict.icon : '💬';
+
+    setMessages((prev) => [...prev, { id, sender: 'visitor', original: text, isTranslating: true, timestamp: new Date(), icon: defaultIcon }]);
+    setIsSending(true);
+    inputRef.current?.focus();
+
+    const activeTargetLocale = targetLocale;
+    let translatedText = '';
+
+    if (matchedDict) {
+      translatedText = matchedDict.ko;
+    } else {
+      const cacheKey = `kello_cache_${sourceLocale}_${activeTargetLocale}_${text}`;
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        translatedText = cached;
+      }
+    }
+
+    if (translatedText) {
+      await new Promise(r => setTimeout(r, 400));
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === id ? { ...m, translated: translatedText, isTranslating: false } : m
+        )
+      );
+    } else {
+      try {
+        const res = await fetch('/api/talk/chat-translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, sourceLocale: 'auto', targetLocale: activeTargetLocale }),
+        });
+        const data = await res.json();
+        translatedText = data.translatedText ?? '번역 실패';
+
+        if (translatedText !== '번역 실패') {
+          const cacheKey = `kello_cache_${sourceLocale}_${activeTargetLocale}_${text}`;
+          localStorage.setItem(cacheKey, translatedText);
+        }
+
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === id ? { ...m, translated: translatedText, isTranslating: false } : m
+          )
+        );
+      } catch (err) {
+        console.error(err);
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === id ? { ...m, translated: '번역에 실패했습니다.', isTranslating: false } : m
+          )
+        );
+      }
+    }
+
+    if (shopId === 'kello-center') {
+      try {
+        const aiRes = await fetch('/api/talk/kello-ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const aiData = await aiRes.json();
+
+        await new Promise(r => setTimeout(r, 600));
+
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `kello-reply-${Date.now()}`,
+            sender: 'system',
+            original: sourceLocale === 'ko' ? aiData.replyKo : aiData.replyEn,
+            timestamp: new Date(),
+            read: true
+          }
+        ]);
+      } catch (err) {
+        console.error("Kello AI Error", err);
+      }
+    }
+
+    setIsSending(false);
+  };
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = inputText.trim();
+    if (!text || isSending) return;
+    setInputText('');
+    if (inputRef.current) {
+      inputRef.current.style.height = '24px';
+    }
+    sendMessage(text);
+  };
+
+  const handleRegenerateKello = async (msgId: string) => {
+    const idx = messages.findIndex(m => m.id === msgId);
+    if (idx === -1) return;
+
+    let visitorText = '';
+    for (let i = idx - 1; i >= 0; i--) {
+      if (messages[i].sender === 'visitor') {
+        visitorText = messages[i].original;
+        break;
+      }
+    }
+    if (!visitorText) return;
+
+    setMessages(prev => prev.map(m => m.id === msgId ? { ...m, isTranslating: true, translated: undefined } : m));
+
+    try {
+      const aiRes = await fetch('/api/talk/kello-ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: visitorText }),
+      });
+      const data = await aiRes.json();
+      if (data.replyKo) {
+        setMessages(prev => prev.map(m => m.id === msgId ? {
+          ...m,
+          original: sourceLocale === 'ko' ? data.replyKo : data.replyEn,
+          translated: undefined,
+          isTranslating: false
+        } : m));
+      } else {
+        throw new Error('No reply');
+      }
+    } catch (err) {
+      console.error(err);
+      setMessages(prev => prev.map(m => m.id === msgId ? {
+        ...m,
+        translated: '번역에 실패했습니다.',
+        isTranslating: false
+      } : m));
+    }
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result as string;
+      setDrawingImage(dataUrl);
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  useEffect(() => {
+    const scrollContainer = document.querySelector('.scroll-container') as HTMLElement;
+    if (scrollContainer) {
+      const originalPadding = scrollContainer.style.paddingBottom;
+      scrollContainer.style.paddingBottom = '0px';
+      return () => {
+        scrollContainer.style.paddingBottom = originalPadding;
+      };
+    }
+  }, []);
+
+  const isKello = shopId === 'kello-center';
+  const pageBg = isKello ? COLORS.bg : '#F2EFE9';
+  const headerBg = isKello ? COLORS.header : '#EBE6DA';
+
+
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        paddingBottom: 'var(--nav-height, 72px)',
+        boxSizing: 'border-box',
+        background: pageBg,
+        fontFamily: "'Pretendard', 'Inter', sans-serif",
+      }}
+    >
+      {/* Global Overlays for click-away */}
+      {showNotificationsDropdown && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 90 }} onClick={() => setShowNotificationsDropdown(false)} />
+      )}
+      {shopContextMenu && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 190 }} onClick={() => setShopContextMenu(null)} />
+      )}
+      {/* Header */}
+      <header
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '12px 16px',
+          background: headerBg,
+          borderBottom: `1px solid ${COLORS.border}`,
+          flexShrink: 0,
+          position: 'relative',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {!isKello && (
+            <button
+              type="button"
+              onClick={() => router.push('/talk/chat?shopId=kello-center')}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex' }}
+              aria-label="뒤로가기"
+            >
+              <ChevronLeft size={24} color={COLORS.textMain} />
+            </button>
+          )}
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {isKello ? (
+              <PurpleChatIcon size={36} />
+            ) : (
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: COLORS.primaryLight, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: COLORS.primary, flexShrink: 0 }}>
+                {shopName.charAt(0)}
+              </div>
+            )}
+            <div style={{ fontWeight: 600, fontSize: '1rem', color: COLORS.textMain }}>
+              {isKello ? 'Kello Talk' : shopName}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          {/* Show to Staff Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fff', padding: '4px 8px', borderRadius: 20, border: `1px solid ${COLORS.border}`, boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.textMain }}>한국어 뷰어 모드</span>
+            <button
+              type="button"
+              onClick={() => setIsStaffShowMode(!isStaffShowMode)}
+              style={{
+                width: 32,
+                height: 18,
+                borderRadius: 9,
+                background: isStaffShowMode ? COLORS.primary : COLORS.sendDisabled,
+                border: 'none',
+                position: 'relative',
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                padding: 0,
+              }}
+            >
+              <span style={{
+                position: 'absolute',
+                top: 2,
+                left: isStaffShowMode ? 16 : 2,
+                width: 14,
+                height: 14,
+                borderRadius: '50%',
+                background: '#FFF',
+                transition: 'left 0.2s',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.2)'
+              }} />
+            </button>
+          </div>
+
+          {shopId === 'kello-center' && (
+            <>
+              {/* 업체 연결하기 */}
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <button
+                  onClick={() => setShowLinkModal(true)}
+                  style={{
+                    background: COLORS.primaryLight,
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: 32,
+                    height: 32,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    color: COLORS.primary,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                    transition: 'transform 0.15s ease',
+                  }}
+                  title="업체 연결하기"
+                >
+                  <Link2 size={16} />
+                </button>
+
+                {otherUnreadCount > 0 && (
+                  <div style={{
+                    position: 'absolute',
+                    top: -4,
+                    right: -4,
+                    background: '#EF4444',
+                    color: 'white',
+                    fontSize: '0.65rem',
+                    fontWeight: 'bold',
+                    borderRadius: '50%',
+                    minWidth: '16px',
+                    height: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 4px',
+                    border: '2px solid white',
+                    zIndex: 10,
+                  }}>
+                    {otherUnreadCount}
+                  </div>
+                )}
+              </div>
+
+              {/* 알림 종모양 아이콘 (최우측) */}
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <button
+                  onClick={() => setShowNotificationsDropdown(!showNotificationsDropdown)}
+                  style={{
+                    background: COLORS.primaryLight,
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: 32,
+                    height: 32,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    color: COLORS.primary,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                    transition: 'transform 0.15s ease',
+                  }}
+                  title="알림"
+                >
+                  <Bell size={16} />
+                </button>
+
+                {notifications.filter(n => !n.read).length > 0 && (
+                  <div style={{
+                    position: 'absolute',
+                    top: -4,
+                    right: -4,
+                    background: '#EF4444',
+                    color: 'white',
+                    fontSize: '0.65rem',
+                    fontWeight: 'bold',
+                    borderRadius: '50%',
+                    minWidth: '16px',
+                    height: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 4px',
+                    border: '2px solid white',
+                    zIndex: 10,
+                  }}>
+                    {notifications.filter(n => !n.read).length}
+                  </div>
+                )}
+
+                {showNotificationsDropdown && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '120%',
+                    right: 0,
+                    background: '#FFF',
+                    border: `1px solid ${COLORS.border}`,
+                    borderRadius: 16,
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                    zIndex: 1000,
+                    width: 280,
+                    maxHeight: 350,
+                    overflowY: 'auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: '8px 0',
+                  }}>
+                    <div style={{ padding: '8px 16px', borderBottom: `1px solid ${COLORS.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: COLORS.textMain }}>알림 목록</span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                        }}
+                        style={{ background: 'none', border: 'none', fontSize: '0.7rem', color: COLORS.primary, cursor: 'pointer', fontWeight: 600 }}
+                      >
+                        모두 읽음
+                      </button>
+                    </div>
+                    {notifications.length === 0 ? (
+                      <div style={{ padding: '24px 16px', textAlign: 'center', fontSize: '0.75rem', color: COLORS.textSub }}>알림이 없습니다.</div>
+                    ) : (
+                      notifications.map((noti) => (
+                        <div
+                          key={noti.id}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setNotifications(prev => prev.map(n => n.id === noti.id ? { ...n, read: true } : n));
+                            setShowNotificationsDropdown(false);
+                            if (noti.shopId) {
+                              router.push(`/talk/chat?shopId=${noti.shopId}`);
+                            }
+                          }}
+                          style={{
+                            padding: '12px 16px',
+                            borderBottom: `1px solid ${COLORS.border}`,
+                            cursor: 'pointer',
+                            background: noti.read ? 'transparent' : `${COLORS.primaryLight}44`,
+                            transition: 'background 0.2s',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 4,
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <span style={{
+                              width: 6,
+                              height: 6,
+                              borderRadius: '50%',
+                              background: noti.read ? 'transparent' : '#EF4444',
+                              flexShrink: 0
+                            }} />
+                            <span style={{ fontSize: '0.78rem', color: COLORS.textMain, fontWeight: noti.read ? 400 : 600, lineHeight: 1.3, textAlign: 'left' }}>
+                              {noti.text}
+                            </span>
+                          </div>
+                          <span style={{ fontSize: '0.65rem', color: COLORS.textSub, paddingLeft: 12, textAlign: 'left' }}>{noti.date}</span>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
+
+                {/* Small notice below the Bell icon - removed from here */}
+              </div>
+            </>
+          )}
+        </div>
+      </header>
+
+      {/* Full width incoming alert banner under header */}
+      {incomingAlert && incomingAlert.show && (
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setIncomingAlert(null);
+            router.push(`/talk/chat?shopId=${incomingAlert.shopId}`);
+          }}
+          style={{
+            width: '100%',
+            background: COLORS.primaryLight,
+            borderBottom: `1px solid ${COLORS.border}`,
+            padding: '12px 16px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            zIndex: 90,
+            boxSizing: 'border-box',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            animation: 'slideDown 0.3s ease-out'
+          }}
+        >
+          <style>{`
+            @keyframes slideDown {
+              from { transform: translateY(-100%); opacity: 0; }
+              to { transform: translateY(0); opacity: 1; }
+            }
+          `}</style>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.primary }}>새 메시지 도착!</span>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: COLORS.textMain, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {incomingAlert.shopName.split(' ')[0]}
+              </span>
+            </div>
+            <div style={{ fontSize: '0.7rem', color: COLORS.textSub, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {incomingAlert.message}
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+            <span style={{ fontSize: '0.7rem', color: COLORS.primary, fontWeight: 700 }}>이동 &gt;</span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIncomingAlert(null);
+              }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }}
+            >
+              <X size={16} color={COLORS.textSub} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Chat Area */}
+      <section
+        style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: '20px 16px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16,
+          position: 'relative'
+        }}
+        onClick={() => { setShowSourcePicker(false); setShowTargetPicker(false); setShowEmojiPicker(false); }}
+      >
+        {/* Watermark Background */}
+        {shopId !== 'kello-center' && (
+          <div style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.1, pointerEvents: 'none', textAlign: 'center', width: '85%', zIndex: 0 }}>
+            <div style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: 8, color: COLORS.primary }}>💡 Kello Tip</div>
+            <div style={{ fontSize: '0.95rem', fontWeight: 700, wordBreak: 'keep-all', color: COLORS.textMain }}>시술 전 샴푸는 한국의 기본 매너예요. 사장님께 '정말 예뻐요!'라고 말해보세요.</div>
+          </div>
+        )}
+
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+          <div style={{ flex: 1, height: 1, background: COLORS.border }} />
+          <span style={{ fontSize: '0.75rem', color: COLORS.textSub, whiteSpace: 'nowrap' }}>
+            {new Date().toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
+          </span>
+          <div style={{ flex: 1, height: 1, background: COLORS.border }} />
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
+          <div
+            style={{
+              background: COLORS.primaryLight,
+              color: COLORS.primary,
+              padding: '8px 14px',
+              borderRadius: 12,
+              fontSize: '0.78rem',
+              fontWeight: 500,
+              textAlign: 'center',
+              lineHeight: 1.35,
+              border: `1px solid ${COLORS.border}`,
+              maxWidth: '90%',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            💡 직원에게 보여주려면 <b>한국어 뷰어모드</b>를 켜세요.
+          </div>
+        </div>
+
+        {messages.map((msg) => {
+          const isSystem = msg.sender === 'system';
+          return (
+            <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isSystem ? 'flex-start' : 'flex-end', width: '100%' }}>
+              {isSystem ? (
+                <div
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4, maxWidth: msg.id === 'welcome' ? '92%' : '82%' }}
+                  onMouseEnter={() => setHoveredMessageId(msg.id)}
+                  onMouseLeave={() => setHoveredMessageId(null)}
+                >
+                  <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                      <div style={{ background: COLORS.bubble.system, color: COLORS.bubble.systemText, padding: '10px 16px', borderRadius: '4px 20px 20px 20px', fontSize: msg.id === 'welcome' ? '0.81rem' : '0.85rem', textAlign: 'left', position: 'relative' }}>
+                        {(isStaffShowMode || (msg.translated && !msg.isTranslating)) && (
+                          <div style={{ position: 'absolute', top: -10, right: -10, opacity: (isStaffShowMode || hoveredMessageId === msg.id) ? 1 : 0, transition: 'opacity 0.2s', zIndex: 10 }}>
+                            <button type="button" onMouseDown={(e) => { e.preventDefault(); setStaffModalText(isStaffShowMode ? (msg.original || '') : (msg.translated || '')); setShowStaffModal(true); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center' }} title="크게 보기">
+                              <Maximize2 size={14} color={isStaffShowMode ? COLORS.primary : "#F59E0B"} strokeWidth={2.5} />
+                            </button>
+                          </div>
+                        )}
+                        {msg.imageUrl && (
+                          <div style={{ marginBottom: 4 }}>
+                            <img src={msg.imageUrl} alt="attached" style={{ maxWidth: '100%', borderRadius: 8, objectFit: 'cover' }} />
+                          </div>
+                        )}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
+                          <div style={{ fontWeight: 700, textAlign: 'left', wordBreak: 'break-word', whiteSpace: 'pre-wrap', flex: 1 }}>
+                            {msg.translated || (msg.isTranslating ? <TranslatingDots /> : msg.original)}
+                          </div>
+                          {msg.translated && (
+                            <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.translated!, sourceLocale); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0 }} title="음성 듣기">
+                              <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
+                            </button>
+                          )}
+                        </div>
+
+                        {isStaffShowMode && (
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 8, borderTop: `1px solid rgba(0,0,0,0.05)` }}>
+                            <div style={{ color: COLORS.primary, fontSize: '0.9rem', fontWeight: 800, flex: 1, marginRight: 8, textAlign: 'left', wordBreak: 'break-word' }}>{msg.original}</div>
+                            <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.original, 'ko'); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0, marginBottom: -2 }} title="음성 듣기">
+                              <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
+                            </button>
+                          </div>
+                        )}
+
+                        {msg.id === 'welcome' && (
+                          <div style={{
+                            marginTop: 12,
+                            background: '#FFFFFF',
+                            borderRadius: '16px',
+                            padding: '16px 12px',
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                            width: '100%',
+                            boxSizing: 'border-box'
+                          }}>
+                            <div style={{
+                              display: 'grid',
+                              gridTemplateColumns: 'repeat(3, 1fr)',
+                              gap: 6,
+                            }}>
+                              {[
+                                { img: '/images/home/categories/hair-category.png', label: '헤어', labelEn: 'Hair', q: 'I am interested in hair services and would like to consult about the style.', qKo: '헤어 서비스에 관심 있어. 스타일이나 시술 관련해서 상담하고 싶어.' },
+                                { img: '/images/home/categories/makeup-category.png', label: '메이크업', labelEn: 'Makeup', q: 'I want makeup done in Korea. I would like to consult about the process and style.', qKo: '한국에서 메이크업 받고 싶어. 과정이나 스타일에 대해 상담하고 싶어.' },
+                                { img: '/images/home/categories/care-category.png', label: '피부(에스테틱)', labelEn: 'Skin Care', q: 'I want a facial or skin care treatment. I want to consult about my skin condition.', qKo: '한국에서 피부관리 받고 싶어. 내 피부 상태에 맞는 시술을 상담하고 싶어.' },
+                                { img: '/images/home/categories/wax-category.png', label: '왁싱', labelEn: 'Waxing', q: 'I want a waxing service. I would like to consult about the details.', qKo: '한국에서 왁싱 받고 싶어. 주의사항이나 시술에 대해 상담하고 싶어.' },
+                                { img: '/images/home/categories/nail-category.png', label: '네일아트', labelEn: 'Nail Art', q: 'I want to get nail art. I want to consult about the design and price.', qKo: '한국에서 네일아트 받고 싶어. 디자인이나 가격에 대해 상담하고 싶어.' },
+                                { img: '/images/home/categories/lash-category.png', label: '속눈썹', labelEn: 'Eyelash', q: 'I want eyelash extensions. I would like to consult about the style.', qKo: '한국에서 속눈썹 시술 받고 싶어. 어울리는 스타일에 대해 상담하고 싶어.' },
+                              ].map((item) => (
+                                <button
+                                  key={item.label}
+                                  type="button"
+                                  onClick={() => sendMessage(sourceLocale === 'ko' ? item.qKo : item.q)}
+                                  style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    padding: '4px',
+                                    fontSize: '0.7rem',
+                                    color: COLORS.textMain,
+                                    fontWeight: 600,
+                                    cursor: 'pointer',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: 6,
+                                    transition: 'transform 0.2s',
+                                  }}
+                                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+                                >
+                                  <div style={{
+                                    width: 44,
+                                    height: 44,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                  }}>
+                                    <img
+                                      src={item.img}
+                                      alt={item.label}
+                                      style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'contain',
+                                        mixBlendMode: 'multiply'
+                                      }}
+                                    />
+                                  </div>
+                                  <span style={{ lineHeight: 1.2, wordBreak: 'keep-all' }}>
+                                    {sourceLocale === 'ko' ? item.label : item.labelEn}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingBottom: 2, marginLeft: 2 }}>
+                      <span style={{ fontSize: '0.65rem', color: COLORS.textSub, whiteSpace: 'nowrap' }}>
+                        {msg.timestamp ? msg.timestamp.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' }) : new Date().toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' })}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4, maxWidth: '82%' }}
+                  onMouseEnter={() => setHoveredMessageId(msg.id)}
+                  onMouseLeave={() => setHoveredMessageId(null)}
+                >
+                  <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', paddingBottom: 2, marginRight: 2, marginBottom: 33 }}>
+                      <span style={{ fontSize: '0.65rem', color: COLORS.textSub, whiteSpace: 'nowrap' }}>
+                        {msg.timestamp ? msg.timestamp.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' }) : new Date().toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' })}
+                      </span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                      <div
+                        style={{
+                          background: COLORS.bubble.visitor,
+                          padding: '12px 16px',
+                          borderRadius: '16px',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+                          border: `1px solid ${COLORS.border}`,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 6,
+                          minWidth: 180,
+                          position: 'relative',
+                          textAlign: 'left'
+                        }}
+                      >
+                        {isStaffShowMode && msg.translated && !msg.isTranslating && (
+                          <div style={{ position: 'absolute', top: -10, left: -10, zIndex: 10 }}>
+                            <button type="button" onMouseDown={(e) => { e.preventDefault(); setStaffModalText(msg.translated || ''); setShowStaffModal(true); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center' }} title="크게 보기">
+                              <Maximize2 size={14} color={COLORS.primary} strokeWidth={2.5} style={{ transform: 'rotate(90deg)' }} />
+                            </button>
+                          </div>
+                        )}
+                        {msg.imageUrl && (
+                          <div style={{ marginBottom: msg.original ? 4 : 0 }}>
+                            <img src={msg.imageUrl} alt="attached" style={{ maxWidth: '100%', borderRadius: 8, objectFit: 'cover', display: 'block' }} />
+                          </div>
+                        )}
+                        {msg.original ? (
+                          msg.isTranslating ? (
+                            <div style={{ padding: '8px 4px' }}><TranslatingDots /></div>
+                          ) : (
+                            <>
+                              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#111', flex: 1, wordBreak: 'break-word', lineHeight: 1.4 }}>
+                                  {isStaffShowMode ? msg.original : (msg.translated || msg.original)}
+                                </span>
+                                {(!isStaffShowMode || !msg.translated) && (
+                                  <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.translated || msg.original, targetLocale); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0 }} title="음성 듣기">
+                                    <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
+                                  </button>
+                                )}
+                              </div>
+                              {isStaffShowMode && msg.translated && (
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 8, borderTop: `1px solid rgba(0,0,0,0.05)` }}>
+                                  <div style={{ color: COLORS.primary, fontSize: '0.9rem', fontWeight: 500, flex: 1, marginRight: 8, textAlign: 'left', wordBreak: 'break-word' }}>{msg.translated}</div>
+                                  <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.translated!, 'ko'); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0, marginBottom: -2 }} title="음성 듣기">
+                                    <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
+                                  </button>
+                                </div>
+                              )}
+                              {!isStaffShowMode && msg.original && msg.original !== msg.translated && (
+                                <div style={{ fontSize: '0.75rem', color: COLORS.textSub, wordBreak: 'break-word', paddingLeft: 2, marginTop: 4 }}>
+                                  {msg.original}
+                                </div>
+                              )}
+                            </>
+                          )
+                        ) : null}
+
+                      </div>
+                      <div style={{
+                        display: 'flex',
+                        gap: 4,
+                        marginTop: 4,
+                        opacity: hoveredMessageId === msg.id ? 1 : 0,
+                        pointerEvents: hoveredMessageId === msg.id ? 'auto' : 'none',
+                        transition: 'opacity 0.15s',
+                        background: 'rgba(255,255,255,0.92)',
+                        borderRadius: 12,
+                        padding: '3px 5px',
+                        boxShadow: hoveredMessageId === msg.id ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
+                        alignSelf: 'flex-end',
+                      }}>
+                        <button type="button" onMouseDown={(e) => { e.preventDefault(); setConfirmModal({ isOpen: true, type: 'edit', messageId: msg.id }); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }} aria-label="수정">
+                          <Pencil size={15} color={COLORS.textSub} strokeWidth={2.5} />
+                        </button>
+                        <button type="button" onMouseDown={(e) => { e.preventDefault(); setConfirmModal({ isOpen: true, type: 'delete', messageId: msg.id }); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }} aria-label="삭제">
+                          <Trash2 size={15} color={COLORS.textSub} strokeWidth={2.5} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+        <div ref={messagesEndRef} />
+      </section>
+
+      {/* Input Area */}
+      <footer
+        style={{
+          position: 'relative',
+          padding: '14px 4px 10px 4px',
+          background: COLORS.header,
+          borderTop: `1px solid ${COLORS.border}`,
+          flexShrink: 0,
+        }}
+      >
+        {/* Toggle Button Overlapping Section Top Line */}
+        <button
+          type="button"
+          onClick={() => setShowSuggestions(!showSuggestions)}
+          style={{
+            position: 'absolute',
+            top: -11,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: COLORS.header,
+            border: `1px solid ${COLORS.border}`,
+            borderRadius: '12px',
+            width: 36,
+            height: 22,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            color: COLORS.textSub,
+            zIndex: 10,
+            boxShadow: '0 -2px 4px rgba(0,0,0,0.02)',
+          }}
+          title={showSuggestions ? '접기' : '펼치기'}
+        >
+          <ChevronLeft size={14} style={{ transform: showSuggestions ? 'rotate(90deg)' : 'rotate(-90deg)' }} />
+        </button>
+
+        {showSuggestions && (
+          <div ref={suggestionsRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 8, paddingBottom: 4 }}>
+            <div style={{ display: 'flex', width: '100%', alignItems: 'center', gap: 8 }}>
+              {/* Settings Button */}
+              <button
+                type="button"
+                onClick={() => setIsEditingSuggestions(!isEditingSuggestions)}
+                style={{
+                  background: isEditingSuggestions ? COLORS.primary : 'none',
+                  color: isEditingSuggestions ? '#FFF' : COLORS.textSub,
+                  border: `1px solid ${isEditingSuggestions ? COLORS.primary : COLORS.border}`,
+                  borderRadius: '50%',
+                  width: 28,
+                  height: 28,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  flexShrink: 0,
+                }}
+                title="자주쓰는 문구 설정"
+              >
+                <Settings size={14} />
+              </button>
+
+              {/* Suggestions Container - Kept as horizontal scroll in both modes */}
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 8,
+                overflowX: 'auto',
+                scrollbarWidth: 'none',
+                paddingRight: 4,
+                paddingTop: 6,
+                paddingBottom: 6
+              }}>
+                {[0, 1].map(rowIndex => (
+                  <div key={rowIndex} style={{ display: 'flex', gap: 8, width: 'max-content', alignItems: 'center' }}>
+                    {quickSuggestions.filter((_, i) => i % 2 === rowIndex).map((text) => (
+                      <div key={text} style={{ position: 'relative', display: 'flex', flexShrink: 0 }}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!isEditingSuggestions) {
+                              setInputText(text);
+                            }
+                          }}
+                          style={{
+                            background: COLORS.bubble.system,
+                            color: COLORS.textMain,
+                            border: `1px solid ${COLORS.border}`,
+                            borderRadius: '12px',
+                            padding: '6px 12px',
+                            fontSize: '0.75rem',
+                            fontWeight: 500,
+                            cursor: isEditingSuggestions ? 'default' : 'pointer',
+                            whiteSpace: 'nowrap',
+                            transition: 'all 0.2s',
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}
+                        >
+                          {text}
+                        </button>
+                        {isEditingSuggestions && (
+                          <button
+                            type="button"
+                            onClick={() => setQuickSuggestions(prev => prev.filter(s => s !== text))}
+                            style={{
+                              position: 'absolute',
+                              right: -4,
+                              top: -6,
+                              background: '#FFFFFF',
+                              border: '1px solid #EF4444',
+                              borderRadius: '50%',
+                              width: 16,
+                              height: 16,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: '#EF4444',
+                              cursor: 'pointer',
+                              boxShadow: '0 2px 4px rgba(0,0,0,0.15)',
+                              zIndex: 20
+                            }}
+                            title="삭제"
+                          >
+                            <X size={10} strokeWidth={3.5} />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Edit Input (Below if active) */}
+            {isEditingSuggestions && (
+              <div style={{ display: 'flex', gap: 6, marginTop: 4, padding: '0 4px' }}>
+                <input
+                  type="text"
+                  value={newSuggestion}
+                  onChange={(e) => setNewSuggestion(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && newSuggestion.trim()) {
+                      setQuickSuggestions(prev => [...prev, newSuggestion.trim()]);
+                      setNewSuggestion('');
+                    }
+                  }}
+                  placeholder="새로운 자주쓰는 문구 입력..."
+                  style={{ flex: 1, padding: '8px 12px', borderRadius: '16px', border: `1px solid ${COLORS.border}`, fontSize: '0.8rem', outline: 'none' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (newSuggestion.trim()) {
+                      setQuickSuggestions(prev => [...prev, newSuggestion.trim()]);
+                      setNewSuggestion('');
+                    }
+                  }}
+                  style={{ background: COLORS.primary, color: '#fff', border: 'none', borderRadius: '16px', padding: '0 16px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  추가
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Live Translation Preview */}
+        {isStaffShowMode && inputText.trim() && (
+          <div style={{
+            background: COLORS.primaryLight,
+            border: `1px solid ${COLORS.border}`,
+            borderRadius: 12,
+            padding: '10px 14px',
+            marginBottom: 8,
+            fontSize: '0.85rem',
+            color: COLORS.primary,
+            fontWeight: 500,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <span style={{ flex: 1, marginRight: 8 }}>번역: {liveTranslation || '번역 중...'}</span>
+            <button
+              type="button"
+              onClick={() => {
+                if (liveTranslation) {
+                  setStaffModalText(liveTranslation);
+                  setShowStaffModal(true);
+                }
+              }}
+              style={{
+                background: COLORS.primary,
+                color: '#FFF',
+                border: 'none',
+                borderRadius: 12,
+                padding: '4px 8px',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              보기
+            </button>
+          </div>
+        )}
+
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, padding: '0 8px' }}>
+          <div style={{ display: 'flex', gap: 8, paddingBottom: 5 }}>
+            <input ref={fileInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFileUpload} />
+            <button type="button" onClick={() => fileInputRef.current?.click()} style={{ background: 'none', border: 'none', padding: 4, cursor: 'pointer', color: COLORS.textSub, display: 'flex' }} aria-label="이미지/카메라 첨부">
+              <Plus size={24} strokeWidth={2} />
+            </button>
+          </div>
+
+          <form
+            onSubmit={handleSend}
+            style={{ flex: 1, display: 'flex', alignItems: 'flex-end', background: COLORS.bg, borderRadius: 20, padding: '6px 6px 6px 14px', border: `1px solid ${COLORS.border}`, gap: 8 }}
+          >
+            <button type="button" onClick={startSpeechRecognition} style={{ background: 'none', border: 'none', padding: 2, paddingBottom: 5, cursor: 'pointer', color: isRecording ? '#EF4444' : COLORS.primary, display: 'flex' }} aria-label="음성 입력"><Mic size={20} strokeWidth={2} /></button>
+            <textarea
+              ref={inputRef}
+              value={inputText}
+              onChange={(e) => {
+                setInputText(e.target.value);
+                e.target.style.height = '24px';
+                e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend(e as any);
+                }
+              }}
+              placeholder="메시지 입력..."
+              disabled={isSending}
+              rows={1}
+              style={{ flex: 1, border: 'none', background: 'transparent', outline: 'none', fontSize: '0.95rem', color: COLORS.textMain, minWidth: 0, resize: 'none', height: 24, padding: '3px 0', fontFamily: 'inherit', lineHeight: '18px', overflowY: 'auto' }}
+            />
+
+            <button type="button" onClick={() => setShowEmojiPicker(!showEmojiPicker)} style={{ background: 'none', border: 'none', padding: 2, paddingBottom: 5, cursor: 'pointer', color: COLORS.textSub, display: 'flex' }} aria-label="이모티콘"><Smile size={20} strokeWidth={1.5} /></button>
+
+            <button
+              type="submit"
+              disabled={!inputText.trim() || isSending}
+              style={{
+                background: inputText.trim() && !isSending ? COLORS.sendEnabled : COLORS.sendDisabled,
+                border: 'none',
+                width: 34,
+                height: 34,
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: inputText.trim() && !isSending ? 'pointer' : 'not-allowed',
+                color: '#fff',
+                transition: 'background 0.2s',
+                flexShrink: 0
+              }}
+              aria-label="전송"
+            >
+              <Send size={16} style={{ marginLeft: 2, marginTop: 1 }} strokeWidth={2.5} />
+            </button>
+          </form>
+        </div>
+      </footer>
+
+      {/* Confirmation Modal */}
+      {confirmModal.isOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.4)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        }}>
+          <div style={{
+            background: '#fff',
+            padding: '24px',
+            borderRadius: '16px',
+            width: '85%',
+            maxWidth: '320px',
+            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+            textAlign: 'center',
+          }}>
+            <h3 style={{ margin: '0 0 8px 0', fontSize: '1.05rem', fontWeight: 600, color: COLORS.textMain }}>
+              {confirmModal.type === 'edit' ? '메시지 수정' : '메시지 삭제'}
+            </h3>
+            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: COLORS.textSub, lineHeight: 1.4 }}>
+              {confirmModal.type === 'edit'
+                ? '이 메시지를 수정하시겠습니까? 메시지가 입력창으로 이동합니다.'
+                : '이 메시지를 영구적으로 삭제하시겠습니까?'}
+            </p>
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+              <button
+                onClick={() => setConfirmModal({ isOpen: false, type: null, messageId: null })}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  borderRadius: '10px',
+                  border: `1px solid ${COLORS.border}`,
+                  background: '#fff',
+                  fontSize: '0.85rem',
+                  fontWeight: 500,
+                  color: COLORS.textSub,
+                  cursor: 'pointer',
+                }}
+              >
+                취소
+              </button>
+              <button
+                onClick={handleConfirmAction}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  borderRadius: '10px',
+                  border: 'none',
+                  background: confirmModal.type === 'edit' ? '#3B82F6' : '#EF4444',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Staff Screen Card Modal */}
+      {showStaffModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: '#FDFDF5',
+          zIndex: 10000,
+          display: 'flex',
+          flexDirection: 'column',
+          boxSizing: 'border-box',
+        }}>
+          {/* Scrollable Content Container */}
+          <div style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: '24px 24px 16px 24px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 20,
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setShowStaffModal(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: COLORS.textSub,
+                  padding: 8,
+                }}
+                aria-label="닫기"
+              >
+                <X size={28} />
+              </button>
+            </div>
+
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', minHeight: 250 }}>
+              <div style={{
+                background: '#FFFFFF',
+                border: `2px solid ${COLORS.primary}`,
+                borderRadius: 24,
+                padding: '40px 24px',
+                width: '100%',
+                boxShadow: '0 12px 40px rgba(184, 145, 58, 0.12)',
+                boxSizing: 'border-box',
+                position: 'relative',
+              }}>
+                <button
+                  type="button"
+                  onClick={() => handleTextToSpeech(staffModalText, targetLocale)}
+                  style={{
+                    position: 'absolute',
+                    top: 16,
+                    right: 20,
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: COLORS.primary,
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: 4,
+                  }}
+                  title="음성 듣기"
+                >
+                  <Volume2 size={24} strokeWidth={2.5} />
+                </button>
+
+                <p style={{
+                  margin: '0 0 24px 0',
+                  fontSize: '0.95rem',
+                  fontWeight: 700,
+                  color: COLORS.primary,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}>
+                  [ 직원분께 보여주세요 / Show to staff ]
+                </p>
+
+                <h2 style={{
+                  margin: 0,
+                  fontSize: '2.2rem',
+                  fontWeight: 800,
+                  color: COLORS.textMain,
+                  lineHeight: 1.4,
+                  wordBreak: 'break-word',
+                }}>
+                  {staffModalText}
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          {/* Sticky Bottom Button with Safe Area Padding */}
+          <div style={{ padding: '0 24px 24px 24px' }}>
+            <button
+              onClick={() => setShowStaffModal(false)}
+              style={{
+                width: '100%',
+                background: COLORS.primary,
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: 16,
+                padding: '16px',
+                fontSize: '1.1rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(184, 145, 58, 0.2)',
+              }}
+            >
+              돌아가기 (Go Back)
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Link Selector Modal */}
+      {showLinkModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.4)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        }}>
+          <div style={{
+            background: '#fff',
+            padding: '24px',
+            borderRadius: '16px',
+            width: '85%',
+            maxWidth: '340px',
+            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+            display: 'flex',
+            flexDirection: 'column',
+            maxHeight: '80vh',
+          }}>
+            <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 700, color: COLORS.textMain, textAlign: 'center' }}>
+              업체 연결하기
+            </h3>
+            <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: COLORS.textSub, textAlign: 'center', lineHeight: 1.4 }}>
+              연결할 업체를 선택해 주세요.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'auto', flex: 1, paddingRight: 4 }}>
+              {(() => {
+                const sortedShops = DEFAULT_CHATS
+                  .filter(s => s.id !== 'kello-center')
+                  .sort((a, b) => {
+                    const aHidden = hiddenShops.includes(a.id);
+                    const bHidden = hiddenShops.includes(b.id);
+                    if (aHidden && !bHidden) return 1;
+                    if (!aHidden && bHidden) return -1;
+
+                    const aPinned = pinnedShops.includes(a.id);
+                    const bPinned = pinnedShops.includes(b.id);
+                    if (aPinned && !bPinned) return -1;
+                    if (!aPinned && bPinned) return 1;
+                    return 0;
+                  });
+
+                return sortedShops.map(shop => {
+                  let unread = 0;
+                  let lastMsg = hiddenShops.includes(shop.id) ? '연결이 끊긴 대화방입니다.' : '대화 내역이 없습니다.';
+                  let lastTime = '';
+                  try {
+                    const stored = localStorage.getItem(`kello_chats_${shop.id}`);
+                    if (stored) {
+                      const msgs = JSON.parse(stored);
+                      unread = msgs.filter((m: any) => m.sender === 'system' && !m.read).length;
+                      if (msgs.length > 0) {
+                        const lastMsgObj = msgs[msgs.length - 1];
+                        lastMsg = lastMsgObj.original;
+                        const date = new Date(lastMsgObj.timestamp);
+                        lastTime = date.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
+                      }
+                    }
+                  } catch { }
+
+                  const handleShopContextMenu = (e: React.MouseEvent) => {
+                    e.preventDefault();
+                    setShopContextMenu({ x: e.clientX, y: e.clientY, shopId: shop.id });
+                  };
+
+                  return (
+                    <div
+                      key={shop.id}
+                      onClick={() => {
+                        if (hiddenShops.includes(shop.id)) {
+                          setHiddenShops(prev => {
+                            const next = prev.filter(h => h !== shop.id);
+                            localStorage.setItem('kello_hidden', JSON.stringify(next));
+                            return next;
+                          });
+                        }
+                        setShowLinkModal(false);
+                        router.push(`/talk/chat?shopId=${shop.id}`);
+                      }}
+                      onContextMenu={handleShopContextMenu}
+                      style={{
+                        padding: '12px',
+                        borderRadius: 12,
+                        border: `1px solid ${COLORS.border}`,
+                        background: hiddenShops.includes(shop.id) ? '#FAF9F6' : '#FFF',
+                        opacity: hiddenShops.includes(shop.id) ? 0.7 : 1,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 10,
+                        position: 'relative',
+                        transition: 'all 0.2s',
+                        userSelect: 'none',
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.primary; e.currentTarget.style.background = COLORS.primaryLight; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.background = hiddenShops.includes(shop.id) ? '#FAF9F6' : '#FFF'; }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0 }}>
+                        <span style={{ width: 10, height: 10, borderRadius: '50%', background: shop.avatarColor, flexShrink: 0 }} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <span style={{ fontWeight: 700, fontSize: '0.85rem', color: COLORS.textMain, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shop.name}</span>
+                            {pinnedShops.includes(shop.id) && <Pin size={12} color={COLORS.primary} style={{ transform: 'rotate(45deg)', flexShrink: 0 }} />}
+                            {mutedShops.includes(shop.id) && <BellOff size={12} color={COLORS.textSub} style={{ flexShrink: 0 }} />}
+                          </div>
+                          <div style={{ fontSize: '0.75rem', color: COLORS.textSub, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginTop: 2 }}>
+                            {lastMsg}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                        {lastTime && <span style={{ fontSize: '0.65rem', color: COLORS.textSub }}>{lastTime}</span>}
+                        {unread > 0 && !mutedShops.includes(shop.id) && (
+                          <span style={{
+                            background: '#EF4444',
+                            color: '#FFF',
+                            fontSize: '0.7rem',
+                            fontWeight: 700,
+                            borderRadius: '50%',
+                            minWidth: 18,
+                            height: 18,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: '0 4px',
+                          }}>
+                            {unread}
+                          </span>
+                        )}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            setShopContextMenu({ x: rect.left, y: rect.bottom, shopId: shop.id });
+                          }}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: COLORS.textSub,
+                            padding: 2,
+                            display: 'flex',
+                          }}
+                        >
+                          <Settings size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+
+            <button
+              onClick={() => setShowLinkModal(false)}
+              style={{
+                width: '100%',
+                marginTop: 16,
+                padding: '10px',
+                borderRadius: 10,
+                border: 'none',
+                background: COLORS.primaryLight,
+                color: COLORS.primary,
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
+
+
+      {/* Shop Context Menu Modal */}
+      {shopContextMenu && (
+        <div
+          style={{
+            position: 'fixed',
+            top: shopContextMenu.y,
+            left: shopContextMenu.x - 100,
+            background: '#fff',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+            borderRadius: 12,
+            padding: 8,
+            zIndex: 2001,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+            minWidth: 150,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => { toggleShopPin(shopContextMenu.shopId); setShopContextMenu(null); }}
+            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: '0.85rem', color: COLORS.textMain, borderRadius: 8, transition: 'background 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.background = COLORS.primaryLight}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
+          >
+            <Pin size={14} />
+            {pinnedShops.includes(shopContextMenu.shopId) ? '고정 해제' : '상단 고정핀'}
+          </button>
+          <button
+            onClick={() => { toggleShopMute(shopContextMenu.shopId); setShopContextMenu(null); }}
+            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: '0.85rem', color: COLORS.textMain, borderRadius: 8, transition: 'background 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.background = COLORS.primaryLight}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
+          >
+            <BellOff size={14} />
+            {mutedShops.includes(shopContextMenu.shopId) ? '알림 켜기' : '알림 끄기'}
+          </button>
+          <button
+            onClick={() => { leaveShopRoom(shopContextMenu.shopId); setShopContextMenu(null); }}
+            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: '0.85rem', color: '#EF4444', borderRadius: 8, transition: 'background 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.background = '#FEE2E2'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
+          >
+            <LogOut size={14} />
+            채팅방 나가기
+          </button>
+        </div>
+      )}
+
+      {/* Drawing Modal */}
+      {drawingImage && (
+        <DrawingModal
+          imageUrl={drawingImage}
+          onClose={() => setDrawingImage(null)}
+          onSend={(drawnImageUrl) => {
+            const id = Date.now().toString();
+            setMessages((prev) => [...prev, { id, sender: 'visitor', original: '', imageUrl: drawnImageUrl, timestamp: new Date() }]);
+            setDrawingImage(null);
+
+            if (shopId === 'kello-center') {
+              setTimeout(() => {
+                setMessages((prev) => [
+                  ...prev,
+                  { id: `kello-reply-${Date.now()}`, sender: 'system', original: sourceLocale === 'ko' ? '사진을 확인했어요! 어떤 도움이 필요하신가요?' : 'I checked the photo! How can I help you?', timestamp: new Date(), read: true }
+                ]);
+              }, 1000);
+            }
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function TranslatingDots() {
+  return (
+    <span style={{ display: 'inline-flex', gap: 4, alignItems: 'center', padding: '4px 0' }}>
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          style={{ width: 6, height: 6, borderRadius: '50%', background: COLORS.primary, animation: `dotBounce 1s ${i * 0.2}s infinite`, display: 'inline-block' }}
+        />
+      ))}
+      <style>{`
+        @keyframes dotBounce {
+          0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+          40% { opacity: 1; transform: scale(1.1); }
+        }
+      `}</style>
+    </span>
+  );
+}
