@@ -585,8 +585,11 @@ export default function CommunityPage() {
                 </header>
 
                 <div className={styles.feed} style={{ background: '#f8fafc', padding: 0 }}>
-                    <div className={styles.navSummaryBox} style={{ background: '#fff' }}>
+                    <div className={styles.navSummaryBox} style={{ background: '#fff', alignItems: 'center' }}>
                         <div className={styles.summaryText}>{getNavSummary()}</div>
+                        <button className={styles.writeBtn} onClick={() => openComposer()}>
+                            ✍ 글쓰기
+                        </button>
                     </div>
 
                     {feedState.error ? (
@@ -596,7 +599,26 @@ export default function CommunityPage() {
                             {[1, 2, 3].map(n => <div key={n} className={styles.skeletonCard} />)}
                         </div>
                     ) : filteredPosts.length === 0 ? (
-                        <div className={styles.emptyStateContainer}>{t('community_page.states.no_results_title')}</div>
+                        <div className={styles.emptyStateContainer}>
+                            <div className={styles.emptyIcon}>{searchQuery ? '🔍' : '✍'}</div>
+                            <div className={styles.emptyTitle}>
+                                {searchQuery ? t('community_page.states.no_results_title') : '아직 이야기가 없어요'}
+                            </div>
+                            <div className={styles.emptyDesc}>
+                                {searchQuery
+                                    ? `"${searchQuery}"에 해당하는 게시글이 없어요.`
+                                    : '첫 번째 K-뷰티 이야기나 여행 질문을 남겨보세요.'}
+                            </div>
+                            <div className={styles.emptyCtaGroup}>
+                                <button
+                                    className={`${styles.emptyCta} ${styles.emptyCtaPrimary}`}
+                                    onClick={() => openComposer()}
+                                    style={{ background: '#9B4D6D' }}
+                                >
+                                    ✍ 게시글 작성
+                                </button>
+                            </div>
+                        </div>
                     ) : (
                         filteredPosts.map(post => {
                             const postCategory = getPostCategory(post);
@@ -659,22 +681,6 @@ export default function CommunityPage() {
                     )}
                 </div>
             </div>
-
-            {/* FAB */}
-            <button
-                onClick={() => openComposer()}
-                style={{
-                    position: 'absolute', bottom: '88px', right: '16px',
-                    zIndex: 1000, background: '#f06292', color: '#fff',
-                    border: 'none', borderRadius: '28px', padding: '14px 22px',
-                    fontSize: '15px', fontWeight: 700, cursor: 'pointer',
-                    boxShadow: '0 8px 24px rgba(240,98,146,0.3)',
-                    display: 'flex', alignItems: 'center', gap: '8px',
-                    transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                }}
-            >
-                ✏️ {t('community_page.fab.create_post')}
-            </button>
 
             {draft.open && (
                 <div className={styles.modalOverlay} onClick={() => draftDispatch({ type: 'CLOSE' })}>

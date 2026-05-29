@@ -1654,3 +1654,29 @@
     gap: 8px;
     margin-bottom: 8px;
 }
+
+/* ── Write Pill Button ── */
+.writeBtn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: none;
+    background: #9B4D6D;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.writeBtn:hover {
+    background: #843D5A;
+}
+
+.writeBtn:active {
+    transform: scale(0.96);
+}
