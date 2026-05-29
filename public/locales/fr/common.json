@@ -215,6 +215,17 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Centre d'aide voyage en Corée",
+      "description": "Urgences, police, interprétation et objets perdus en un seul endroit",
+      "badge_medical": "119 Médical",
+      "badge_police": "112 Police",
+      "badge_interp": "1330 Interprét.",
+      "badge_lost": "Objets perdus"
+    },
+    "travel_info": {
+      "title": "Infos voyage"
     }
   },
   "community_page": {
@@ -274,10 +285,22 @@
       "welcome": "Bienvenue {{name}}, veuillez choisir un service.",
       "welcome_user": "{{greeting}}, {{name}} ! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Réservez K-Beauty\nen Corée,",
+      "slide1_subtitle": "sans stress.",
+      "slide2_title": "Importez votre\nphoto de style",
+      "slide2_subtitle": "Indiquez votre date, quartier et style.",
+      "slide3_title": "Pas d'attente\nsans rendez-vous",
+      "slide3_subtitle": "Kello vérifie la disponibilité et le prix avant le paiement.",
+      "badge_no_calls": "Pas d'appel en coréen",
+      "badge_price": "Prix vérifié",
+      "badge_photo": "Demande de photo",
+      "nudge": "Votre parcours K-Beauty parfait en Corée — Kello vous accompagne"
+    },
     "booking": {
       "step": "ÉTAPE. 01",
-      "title": "Veuillez choisir votre service beauté",
-      "description": ""
+      "title": "Votre parcours K-Beauty parfait en Corée — Kello vous accompagne",
+      "description": "Sélectionnez une catégorie pour saisir date, zone et photo de style."
     }
   },
   "interpreter_page": {

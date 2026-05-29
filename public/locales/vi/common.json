@@ -293,10 +293,22 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "Chào mừng, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Đặt lịch K-Beauty\ntại Hàn Quốc,",
+      "slide1_subtitle": "không lo, không stress.",
+      "slide2_title": "Tải ảnh phong cách\nưa thích lên",
+      "slide2_subtitle": "Cho chúng tôi biết ngày, khu vực và phong cách bạn muốn.",
+      "slide3_title": "Không cần xếp hàng\nwalk-in",
+      "slide3_subtitle": "Kello kiểm tra lịch trống và giá trước khi thanh toán.",
+      "badge_no_calls": "Không gọi tiếng Hàn",
+      "badge_price": "Đã kiểm tra giá",
+      "badge_photo": "Yêu cầu ảnh",
+      "nudge": "Hành trình K-Beauty hoàn hảo tại Hàn Quốc — Kello đồng hành cùng bạn"
+    },
     "booking": {
       "step": "BƯỚC. 01",
-      "title": "Vui lòng chọn dịch vụ làm đẹp",
-      "description": "",
+      "title": "Hành trình K-Beauty hoàn hảo tại Hàn Quốc — Kello đồng hành cùng bạn",
+      "description": "Chọn danh mục để nhập ngày, khu vực và ảnh phong cách yêu thích.",
       "submitting_images": "Đang tải ảnh lên...",
       "sending_request": "Đang gửi yêu cầu đặt hẹn...",
       "booking_completed": "Đặt hẹn hoàn tất!",
@@ -1479,6 +1491,17 @@
       "reason_signup": "Phiếu đăng ký",
       "reason_referred": "Phiếu nhập mã giới thiệu",
       "reason_referrer": "Phiếu giới thiệu bạn bè"
+    },
+    "help_center": {
+      "title": "Trung tâm hỗ trợ du lịch Hàn Quốc",
+      "description": "Hỗ trợ y tế, cảnh sát, thông dịch & đồ thất lạc — tất cả trong một nơi",
+      "badge_medical": "119 Y tế",
+      "badge_police": "112 Cảnh sát",
+      "badge_interp": "1330 Thông dịch",
+      "badge_lost": "Đồ thất lạc"
+    },
+    "travel_info": {
+      "title": "Thông tin du lịch"
     }
   },
   "notifications": {

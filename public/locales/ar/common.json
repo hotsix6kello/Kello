@@ -9,10 +9,22 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "أهلاً بك، {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "احجز K-Beauty\nفي كوريا،",
+      "slide1_subtitle": "بدون أي توتر.",
+      "slide2_title": "ارفعي صورة\nإطلالتك المفضلة",
+      "slide2_subtitle": "أخبرينا بالتاريخ والمنطقة والأسلوب.",
+      "slide3_title": "لا انتظار\nbدون موعد",
+      "slide3_subtitle": "Kello يتحقق من المواعيد المتاحة والأسعار قبل الدفع.",
+      "badge_no_calls": "بدون مكالمات كورية",
+      "badge_price": "تم التحقق من السعر",
+      "badge_photo": "طلب صور",
+      "nudge": "رحلتك المثالية في K-Beauty بكوريا — Kello هنا لمساعدتك"
+    },
     "booking": {
       "step": "الخطوة 1",
-      "title": "اختر خدمة التجميل الخاصة بك",
-      "description": "",
+      "title": "رحلتك المثالية في K-Beauty بكوريا — Kello هنا لمساعدتك",
+      "description": "اختر فئة لإدخال التاريخ والمنطقة وصورة الأسلوب المفضل.",
       "submitting_images": "جاري رفع الصور...",
       "sending_request": "جاري إرسال طلب الحجز...",
       "booking_completed": "تم الحجز بنجاح!",
@@ -648,6 +660,17 @@
       "reason_signup": "قسيمة التسجيل",
       "reason_referred": "قسيمة إدخال رمز الإحالة",
       "reason_referrer": "قسيمة ترشيح صديق"
+    },
+    "help_center": {
+      "title": "مركز مساعدة السفر إلى كوريا",
+      "description": "اعثر على الدعم الطبي والشرطي والترجمة والأشياء المفقودة في مكان واحد",
+      "badge_medical": "119 طبي",
+      "badge_police": "112 شرطة",
+      "badge_interp": "1330 ترجمة",
+      "badge_lost": "مفقودات"
+    },
+    "travel_info": {
+      "title": "معلومات السفر"
     }
   },
   "beauty_bookings": {

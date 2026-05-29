@@ -265,10 +265,22 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "歡迎，{{name}}！👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "在韓國預約K-Beauty，",
+      "slide1_subtitle": "輕鬆無壓力。",
+      "slide2_title": "上傳您的\n髮型參考照片",
+      "slide2_subtitle": "告訴我們您的日期、地區和風格。",
+      "slide3_title": "無需現場等待",
+      "slide3_subtitle": "Kello在付款前確認可預約時間和價格。",
+      "badge_no_calls": "無需韓語電話",
+      "badge_price": "價格已確認",
+      "badge_photo": "照片需求",
+      "nudge": "在韓國享受完美K-Beauty之旅 Kello全程陪伴"
+    },
     "booking": {
       "step": "STEP. 01",
-      "title": "請選擇美容服務",
-      "description": "",
+      "title": "在韓國體驗完美K-Beauty之旅，Kello全程為您服務",
+      "description": "選擇類別後，可輸入日期、地區和喜歡的髮型照片。",
       "submitting_images": "正在上傳圖片...",
       "sending_request": "正在發送預約請求...",
       "booking_completed": "預約已完成！",
@@ -1425,6 +1437,17 @@
       "meta": {
         "reference": "參考"
       }
+    },
+    "help_center": {
+      "title": "韓國旅遊幫助中心",
+      "description": "一站式查看醫療、警察、口譯和遺失物資訊",
+      "badge_medical": "119 醫療",
+      "badge_police": "112 警察",
+      "badge_interp": "1330 口譯",
+      "badge_lost": "遺失物"
+    },
+    "travel_info": {
+      "title": "旅遊資訊"
     }
   },
   "beauty_bookings": {

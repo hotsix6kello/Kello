@@ -59,10 +59,22 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "Welcome, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Book K-Beauty\nin Korea,",
+      "slide1_subtitle": "without the stress.",
+      "slide2_title": "Upload your\nstyle photo",
+      "slide2_subtitle": "Tell us your date, area, and style.",
+      "slide3_title": "No walk-in\nwaiting",
+      "slide3_subtitle": "Kello checks availability and price before payment.",
+      "badge_no_calls": "No Korean calls",
+      "badge_price": "Price checked",
+      "badge_photo": "Photo request",
+      "nudge": "Your perfect K-Beauty journey in Korea — Kello's got you covered"
+    },
     "booking": {
       "step": "Step 1",
-      "title": "Choose your beauty service",
-      "description": "",
+      "title": "Your perfect K-Beauty journey in Korea — Kello's got you covered",
+      "description": "Select a category to enter your date, area, and style photo.",
       "submitting_images": "Uploading images...",
       "sending_request": "Sending reservation request...",
       "booking_completed": "Booking completed!",
@@ -2183,6 +2195,17 @@
       "reason_signup": "Sign-up Coupon",
       "reason_referred": "Referral Code Coupon",
       "reason_referrer": "Friend Referral Coupon"
+    },
+    "help_center": {
+      "title": "Korea Travel Help Center",
+      "description": "Medical, police, interpretation & lost items — all in one place",
+      "badge_medical": "119 Medical",
+      "badge_police": "112 Police",
+      "badge_interp": "1330 Interpret",
+      "badge_lost": "Lost Item"
+    },
+    "travel_info": {
+      "title": "Travel info"
     }
   },
   "notifications": {

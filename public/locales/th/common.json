@@ -293,10 +293,22 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "ยินดีต้อนรับ, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "จอง K-Beauty\nในเกาหลี",
+      "slide1_subtitle": "ไม่ยุ่งยาก ไม่ต้องเครียด",
+      "slide2_title": "อัพโหลดรูปสไตล์\nที่คุณชอบ",
+      "slide2_subtitle": "บอกวันที่ พื้นที่ และสไตล์ที่ต้องการ",
+      "slide3_title": "ไม่ต้องรอ\nแบบ Walk-in",
+      "slide3_subtitle": "Kello ตรวจสอบตารางว่างและราคาก่อนชำระเงิน",
+      "badge_no_calls": "ไม่ต้องโทรเกาหลี",
+      "badge_price": "ตรวจสอบราคา",
+      "badge_photo": "ส่งรูปสไตล์",
+      "nudge": "ทริป K-Beauty สุดพิเศษในเกาหลี Kello พร้อมดูแลคุณ"
+    },
     "booking": {
       "step": "STEP. 01",
-      "title": "กรุณาเลือกบริการความงาม",
-      "description": "",
+      "title": "ทริป K-Beauty สุดพิเศษในเกาหลี Kello พร้อมดูแลทุกขั้นตอน",
+      "description": "เลือกหมวดหมู่เพื่อกรอกวันที่ พื้นที่ และรูปสไตล์ที่ชอบ",
       "submitting_images": "กำลังอัปโหลดรูปภาพ...",
       "sending_request": "กำลังส่งคำขอจอง...",
       "booking_completed": "การจองเสร็จสมบูรณ์!",
@@ -1517,6 +1529,17 @@
       "reason_signup": "คูปองสมัครสมาชิก",
       "reason_referred": "คูปองใส่รหัสแนะนำ",
       "reason_referrer": "คูปองแนะนำเพื่อน"
+    },
+    "help_center": {
+      "title": "ศูนย์ช่วยเหลือการท่องเที่ยวเกาหลี",
+      "description": "ค้นหาความช่วยเหลือด้านการแพทย์ ตำรวจ การแปล และของหาย ในที่เดียว",
+      "badge_medical": "119 การแพทย์",
+      "badge_police": "112 ตำรวจ",
+      "badge_interp": "1330 การแปล",
+      "badge_lost": "ของหาย"
+    },
+    "travel_info": {
+      "title": "ข้อมูลการเดินทาง"
     }
   },
   "notifications": {

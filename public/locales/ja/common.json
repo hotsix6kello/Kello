@@ -1505,10 +1505,22 @@
       "welcome": "{{name}}様、サービスをお選びください。",
       "welcome_user": "{{greeting}}、{{name}}様！👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "韓国でK-뷰티予約、",
+      "slide1_subtitle": "ストレスなし。",
+      "slide2_title": "スタイル写真を\nアップロード",
+      "slide2_subtitle": "日程・エリア・スタイルを教えてください。",
+      "slide3_title": "ウォークイン待ち\nなし",
+      "slide3_subtitle": "Kelloが支払い前に空き状況と料金を確認します。",
+      "badge_no_calls": "韓国語通話なし",
+      "badge_price": "料金確認済み",
+      "badge_photo": "写真リクエスト",
+      "nudge": "韓国で叶える完璧なK-뷰티体験 Kelloがサポートします"
+    },
     "booking": {
       "step": "STEP. 01",
-      "title": "美容サービスを選択してください",
-      "description": "",
+      "title": "韓国で叶える完璧なK-Beautyの旅をKelloがサポート",
+      "description": "カテゴリを選ぶと日程・エリア・スタイル写真を入力できます。",
       "submitting_images": "画像をアップロードしています...",
       "sending_request": "予約リクエストを送信しています...",
       "booking_completed": "予約が完了しました！",
@@ -2109,6 +2121,17 @@
       "reason_signup": "会員登録クーポン",
       "reason_referred": "紹介コード入力クーポン",
       "reason_referrer": "友達紹介クーポン"
+    },
+    "help_center": {
+      "title": "韓国旅行ヘルプセンター",
+      "description": "医療・警察・通訳・遺失物のご案内をまとめて確認",
+      "badge_medical": "119 医療",
+      "badge_police": "112 警察",
+      "badge_interp": "1330 通訳",
+      "badge_lost": "遺失物"
+    },
+    "travel_info": {
+      "title": "旅行情報"
     }
   },
   "notifications": {

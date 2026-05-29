@@ -1085,10 +1085,22 @@
       "welcome_header": "{{name}}",
       "welcome_hero": "欢迎，{{name}}！👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "在韩国预约K-Beauty，",
+      "slide1_subtitle": "轻松无压力。",
+      "slide2_title": "上传您的\n发型参考照片",
+      "slide2_subtitle": "告诉我们您的日期、地区和风格。",
+      "slide3_title": "无需现场等待",
+      "slide3_subtitle": "Kello在付款前确认可预约时间和价格。",
+      "badge_no_calls": "无需韩语电话",
+      "badge_price": "价格已确认",
+      "badge_photo": "照片需求",
+      "nudge": "在韩国享受完美K-Beauty之旅 Kello全程陪伴"
+    },
     "booking": {
       "step": "STEP. 01",
-      "title": "请选择美容服务",
-      "description": "",
+      "title": "在韩国体验完美K-Beauty之旅，Kello全程为您服务",
+      "description": "选择类别后，可输入日期、地区和喜欢的发型照片。",
       "submitting_images": "正在上传图片...",
       "sending_request": "正在发送预约请求...",
       "booking_completed": "预约已完成！",
@@ -1667,6 +1679,17 @@
       "reason_signup": "注册优惠券",
       "reason_referred": "推荐码优惠券",
       "reason_referrer": "好友推荐优惠券"
+    },
+    "help_center": {
+      "title": "韩国旅行帮助中心",
+      "description": "一站式查看医疗、警察、翻译和遗失物信息",
+      "badge_medical": "119 医疗",
+      "badge_police": "112 警察",
+      "badge_interp": "1330 翻译",
+      "badge_lost": "遗失物"
+    },
+    "travel_info": {
+      "title": "旅行信息"
     }
   },
   "notifications": {

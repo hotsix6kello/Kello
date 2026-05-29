@@ -266,10 +266,22 @@
       "welcome": "{{name}}님, 오늘 어떤 서비스를 원하시나요?",
       "welcome_user": "{{greeting}}, {{name}}님! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "한국에서 K-뷰티 예약,",
+      "slide1_subtitle": "스트레스 없이.",
+      "slide2_title": "스타일 사진을\n업로드하세요",
+      "slide2_subtitle": "날짜, 지역, 원하는 스타일을 알려주세요.",
+      "slide3_title": "워크인 대기 없음",
+      "slide3_subtitle": "Kello가 결제 전에 예약 가능 여부와 가격을 확인해 드려요.",
+      "badge_no_calls": "한국어 통화 없음",
+      "badge_price": "가격 확인",
+      "badge_photo": "사진 요청",
+      "nudge": "한국에서 경험하는 완벽한 K-뷰티 여정 Kello가 도와드릴게요"
+    },
     "booking": {
       "step": "STEP. 01",
-      "title": "뷰티 서비스를 선택해주세요",
-      "description": "",
+      "title": "한국에서 경험하는 완벽한 K-뷰티 여정 Kello가 도와드릴게요",
+      "description": "카테고리를 선택하면 날짜, 지역, 원하는 스타일 사진을 입력할 수 있어요.",
       "submitting_images": "이미지를 업로드 중입니다...",
       "sending_request": "예약 요청을 전송 중입니다...",
       "booking_completed": "예약 신청이 완료되었습니다!",
@@ -707,6 +719,17 @@
       "meta": {
         "reference": "참고"
       }
+    },
+    "help_center": {
+      "title": "한국 여행 도움센터",
+      "description": "의료·경찰·통역·분실물 안내를 한 곳에서 확인하세요",
+      "badge_medical": "119 의료",
+      "badge_police": "112 경찰",
+      "badge_interp": "1330 통역",
+      "badge_lost": "분실물"
+    },
+    "travel_info": {
+      "title": "여행 정보"
     }
   },
   "beauty_bookings": {

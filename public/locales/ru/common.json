@@ -215,6 +215,17 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Центр помощи путешественникам в Корее",
+      "description": "Медицина, полиция, переводчик и потерянные вещи — всё в одном месте",
+      "badge_medical": "119 Медицина",
+      "badge_police": "112 Полиция",
+      "badge_interp": "1330 Переводчик",
+      "badge_lost": "Потери"
+    },
+    "travel_info": {
+      "title": "Информация о поездке"
     }
   },
   "community_page": {
@@ -274,10 +285,22 @@
       "welcome": "{{name}}, выберите услугу.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Запишитесь на K-Beauty\nв Корее,",
+      "slide1_subtitle": "без лишних хлопот.",
+      "slide2_title": "Загрузите фото\nвашего стиля",
+      "slide2_subtitle": "Укажите дату, район и желаемый стиль.",
+      "slide3_title": "Без ожидания\nбез записи",
+      "slide3_subtitle": "Kello проверяет наличие мест и цену до оплаты.",
+      "badge_no_calls": "Без звонков на корейском",
+      "badge_price": "Цена проверена",
+      "badge_photo": "Запрос фото",
+      "nudge": "Идеальное K-Beauty путешествие в Корее — Kello поможет вам"
+    },
     "booking": {
       "step": "ШАГ. 01",
-      "title": "Выберите бьюти-услугу",
-      "description": ""
+      "title": "Идеальное K-Beauty путешествие в Корее — Kello поможет вам",
+      "description": "Выберите категорию, чтобы указать дату, район и фото стиля."
     }
   },
   "interpreter_page": {

@@ -120,10 +120,22 @@
       "welcome": "{{name}}, silakan pilih layanan.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Booking K-Beauty\ndi Korea,",
+      "slide1_subtitle": "tanpa ribet.",
+      "slide2_title": "Upload foto\ngaya favoritmu",
+      "slide2_subtitle": "Beri tahu kami tanggal, area, dan gayamu.",
+      "slide3_title": "Tidak perlu\nantri walk-in",
+      "slide3_subtitle": "Kello mengecek ketersediaan dan harga sebelum pembayaran.",
+      "badge_no_calls": "Tanpa telepon Korea",
+      "badge_price": "Harga dicek",
+      "badge_photo": "Permintaan foto",
+      "nudge": "Perjalanan K-Beauty sempurna di Korea — Kello siap membantu"
+    },
     "booking": {
       "step": "LANGKAH. 01",
-      "title": "Silakan pilih layanan kecantikan",
-      "description": ""
+      "title": "Perjalanan K-Beauty sempurna di Korea — Kello siap membantu",
+      "description": "Pilih kategori untuk memasukkan tanggal, area, dan foto gaya favoritmu."
     }
   },
   "interpreter_ui": {
@@ -257,6 +269,17 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Pusat Bantuan Perjalanan Korea",
+      "description": "Bantuan medis, polisi, interpretasi & barang hilang di satu tempat",
+      "badge_medical": "119 Medis",
+      "badge_police": "112 Polisi",
+      "badge_interp": "1330 Interpretasi",
+      "badge_lost": "Barang Hilang"
+    },
+    "travel_info": {
+      "title": "Info perjalanan"
     }
   },
   "community_page": {

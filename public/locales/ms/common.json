@@ -120,10 +120,22 @@
       "welcome": "{{name}}, sila pilih perkhidmatan.",
       "welcome_user": "{{greeting}}, {{name}}! 👋"
     },
+    "lookbook_hero": {
+      "slide1_title": "Tempah K-Beauty\ndi Korea,",
+      "slide1_subtitle": "tanpa tekanan.",
+      "slide2_title": "Muat naik foto\ngaya pilihan",
+      "slide2_subtitle": "Beritahu kami tarikh, kawasan dan gaya anda.",
+      "slide3_title": "Tiada tunggu\ntanpa temujanji",
+      "slide3_subtitle": "Kello semak ketersediaan dan harga sebelum bayaran.",
+      "badge_no_calls": "Tiada panggilan Korea",
+      "badge_price": "Harga disemak",
+      "badge_photo": "Permintaan foto",
+      "nudge": "Perjalanan K-Beauty sempurna di Korea — Kello sedia membantu"
+    },
     "booking": {
       "step": "LANGKAH. 01",
-      "title": "Sila pilih perkhidmatan kecantikan",
-      "description": ""
+      "title": "Perjalanan K-Beauty sempurna di Korea — Kello sedia membantu",
+      "description": "Pilih kategori untuk masukkan tarikh, kawasan dan foto gaya pilihan."
     }
   },
   "interpreter_ui": {
@@ -277,6 +289,17 @@
           "helper_invalid": "Include country code. e.g. {{example}}"
         }
       }
+    },
+    "help_center": {
+      "title": "Pusat Bantuan Pelancongan Korea",
+      "description": "Bantuan perubatan, polis, penterjemah & barang hilang di satu tempat",
+      "badge_medical": "119 Perubatan",
+      "badge_police": "112 Polis",
+      "badge_interp": "1330 Penterjemah",
+      "badge_lost": "Barang Hilang"
+    },
+    "travel_info": {
+      "title": "Maklumat perjalanan"
     }
   },
   "community_page": {
