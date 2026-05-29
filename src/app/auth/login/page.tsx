@@ -91,23 +91,32 @@ export default function LoginPage() {
         setTimeout(() => setLinkCopied(false), 2500);
     };
 
-    // --- X (Twitter) OAuth ---
+    // --- X OAuth ---
     const handleXLogin = async () => {
+        if (detectWebView()) {
+            const currentUrl = window.location.href;
+            const result = tryOpenInExternalBrowser(currentUrl);
+            setWebViewWarning(result === "android-intent" ? "android" : "ios");
+            return;
+        }
+
         setXLoading(true);
         setError(null);
 
         try {
-            const { error } = await supabase.auth.signInWithOAuth({
-                provider: "twitter",
+            const redirectTo = new URL("/auth/callback", window.location.origin).toString();
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: "x",
                 options: {
-                    redirectTo: `${window.location.origin}/auth/callback`,
-                    scopes: "tweet.read users.read",
+                    redirectTo,
+                    skipBrowserRedirect: true,
                 },
             });
 
-            if (error) {
-                throw error;
-            }
+            if (error) throw error;
+            if (!data?.url) throw new Error("X 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+
+            window.location.assign(data.url);
         } catch (err: unknown) {
             setError(err instanceof Error ? err.message : "X 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
             setXLoading(false);
