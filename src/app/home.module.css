@@ -197,6 +197,55 @@
   filter: saturate(1.15);
 }
 
+/* ── Photo carousel card (replaces icon placeholder) ── */
+.heroPhotoCardWrap {
+  position: absolute;
+  top: 20px;
+  right: -18px;
+  width: 148px;
+  height: 196px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroPhotoCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(244, 91, 135, 0.12), 0 4px 12px rgba(43, 35, 29, 0.06);
+  transform: rotate(7deg);
+}
+
+.heroPhotoImg {
+  object-fit: cover;
+  animation: heroImgFadeIn 0.35s ease;
+}
+
+.heroPhotoBadge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-7deg);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #3B2430;
+  white-space: nowrap;
+  border: 1px solid rgba(244, 91, 135, 0.2);
+  box-shadow: 0 4px 12px rgba(244, 91, 135, 0.1);
+  z-index: 2;
+}
+
+@keyframes heroImgFadeIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
 .heroSlideText {
   position: relative;
   z-index: 2;
@@ -1537,6 +1586,27 @@
   filter: saturate(0.9);
 }
 
+.heroPhotoCardWrap {
+  top: 34px;
+  right: 12px;
+  width: 166px;
+  height: 214px;
+}
+
+.heroPhotoCard {
+  border-radius: 28px;
+  border: 1px solid rgba(199, 142, 149, 0.2);
+  box-shadow: 0 22px 46px rgba(183, 128, 136, 0.18), 0 10px 24px rgba(103, 79, 76, 0.08);
+  transform: rotate(8deg);
+}
+
+.heroPhotoBadge {
+  transform: translateX(-50%) rotate(-8deg);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(199, 142, 149, 0.2);
+  box-shadow: 0 4px 12px rgba(183, 128, 136, 0.12);
+}
+
 .heroSlideText {
   max-width: 232px;
   padding-top: 34px;
@@ -1738,6 +1808,12 @@
   }
 
   .heroCardWrap {
+    right: 8px;
+    width: 152px;
+    height: 198px;
+  }
+
+  .heroPhotoCardWrap {
     right: 8px;
     width: 152px;
     height: 198px;
