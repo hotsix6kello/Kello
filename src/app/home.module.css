@@ -1272,7 +1272,7 @@
 }
 
 .bookingShell {
-  margin-top: -28px;
+  margin-top: 0;
   padding: 0 18px 120px;
 }
 
@@ -1453,36 +1453,308 @@
 
 .heroNew {
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  overflow: visible;
+  padding-bottom: 24px;
 }
 
 .heroFullCarousel {
   position: relative;
   width: 100%;
-  height: 320px;
+  aspect-ratio: 4 / 5;
+  min-height: 340px;
+  max-height: 560px;
   overflow: hidden;
   border-radius: 0 0 36px 36px;
-  box-shadow: 0 12px 36px rgba(103, 79, 76, 0.14);
-  background: #f8f0ee;
+  box-shadow: 0 18px 42px rgba(103, 79, 76, 0.16);
+  background:
+    radial-gradient(circle at top center, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 34%),
+    linear-gradient(180deg, #f7efea 0%, #f3e6df 100%);
+  isolation: isolate;
 }
 
 .heroSliderTrack {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.heroSlide {
   position: relative;
   width: 100%;
   height: 100%;
-  flex-shrink: 0;
+  overflow: hidden;
+  perspective: 1600px;
+  transform-style: preserve-3d;
+  --hero-card-width: clamp(214px, 62%, 344px);
+  --hero-side-offset: clamp(104px, 31%, 156px);
+  will-change: transform;
+}
+
+.heroSlide {
+  position: absolute;
+  top: 18px;
+  bottom: 24px;
+  left: 50%;
+  width: var(--hero-card-width);
+  transform-origin: center center;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.4s ease,
+    filter 0.4s ease;
+  will-change: transform, opacity, filter;
+}
+
+.heroSlideCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #f1e8e3;
+  box-shadow: 0 22px 44px rgba(74, 55, 60, 0.16);
+}
+
+.heroSlideShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16, 10, 12, 0.08) 0%, rgba(16, 10, 12, 0.14) 52%, rgba(16, 10, 12, 0.3) 100%);
+  transition: background 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
 }
 
 .heroFullImg {
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center center;
 }
 
+.heroSlideCurrent {
+  transform: translate3d(-50%, 0, 0) scale(1) rotateY(0deg);
+  opacity: 1;
+  z-index: 3;
+  filter: none;
+}
+
+.heroSlideCurrent .heroSlideCard {
+  box-shadow: 0 28px 60px rgba(74, 55, 60, 0.18);
+}
+
+.heroSlideCurrent .heroSlideShade {
+  background: linear-gradient(180deg, rgba(16, 10, 12, 0.02) 0%, rgba(16, 10, 12, 0.08) 52%, rgba(16, 10, 12, 0.28) 100%);
+}
+
+.heroSlidePrev {
+  transform: translate3d(calc(-50% - var(--hero-side-offset)), 8px, -160px) scale(0.78) rotateY(18deg);
+  opacity: 0.76;
+  z-index: 2;
+  filter: saturate(0.9);
+}
+
+.heroSlideNext {
+  transform: translate3d(calc(-50% + var(--hero-side-offset)), 8px, -160px) scale(0.78) rotateY(-18deg);
+  opacity: 0.76;
+  z-index: 2;
+  filter: saturate(0.9);
+}
+
+.heroSlidePrev .heroSlideShade,
+.heroSlideNext .heroSlideShade {
+  background: linear-gradient(180deg, rgba(16, 10, 12, 0.2) 0%, rgba(16, 10, 12, 0.26) 46%, rgba(16, 10, 12, 0.54) 100%);
+}
+
+.heroSlideHidden {
+  transform: translate3d(-50%, 16px, -260px) scale(0.68);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroCaptionOverlay {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  min-height: 120px;
+  padding: 56px 22px 22px;
+  background: linear-gradient(180deg, rgba(36, 25, 29, 0) 0%, rgba(36, 25, 29, 0.56) 58%, rgba(36, 25, 29, 0.84) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.heroSlideCurrent .heroCaptionOverlay {
+  opacity: 1;
+}
+
+.heroCaption {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 249, 246, 0.18);
+  backdrop-filter: blur(10px);
+  padding: 9px 15px;
+  color: #fffdfa;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.heroArrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
+  min-height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  background: rgba(255, 251, 247, 0.82);
+  color: var(--secondary-strong);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 26px rgba(103, 79, 76, 0.14);
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.heroArrow:hover {
+  background: rgba(255, 253, 250, 0.96);
+  box-shadow: 0 18px 30px rgba(103, 79, 76, 0.18);
+}
+
+.heroArrow:active {
+  transform: translateY(-50%) scale(0.97);
+}
+
+.heroArrow:focus-visible {
+  outline: 2px solid rgba(183, 128, 136, 0.7);
+  outline-offset: 3px;
+}
+
+.heroArrowPrev {
+  left: 12px;
+}
+
+.heroArrowNext {
+  right: 12px;
+}
+
+.heroArrow span {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.heroDots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+}
+
+.heroDot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 999px;
+  background: rgba(170, 145, 141, 0.28);
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.heroDot:focus-visible {
+  outline: 2px solid rgba(183, 128, 136, 0.7);
+  outline-offset: 3px;
+}
+
+.heroDotActive {
+  width: 30px;
+  background: linear-gradient(90deg, #c88c93 0%, #b67b83 100%);
+  box-shadow: 0 10px 18px rgba(183, 128, 136, 0.22);
+}
+
+@media (max-width: 390px) {
+  .heroNew {
+    gap: 12px;
+    padding-bottom: 18px;
+  }
+
+  .heroFullCarousel {
+    min-height: 310px;
+    border-radius: 0 0 30px 30px;
+  }
+
+  .heroSliderTrack {
+    --hero-card-width: clamp(196px, 64%, 270px);
+    --hero-side-offset: clamp(84px, 27%, 112px);
+  }
+
+  .heroSlide {
+    top: 16px;
+    bottom: 20px;
+  }
+
+  .heroSlidePrev {
+    transform: translate3d(calc(-50% - var(--hero-side-offset)), 6px, -140px) scale(0.76) rotateY(16deg);
+  }
+
+  .heroSlideNext {
+    transform: translate3d(calc(-50% + var(--hero-side-offset)), 6px, -140px) scale(0.76) rotateY(-16deg);
+  }
+
+  .heroSlideCard {
+    border-radius: 24px;
+  }
+
+  .heroCaptionOverlay {
+    min-height: 104px;
+    padding: 44px 16px 16px;
+  }
+
+  .heroCaption {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .heroArrow {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+  }
+
+  .heroArrowPrev {
+    left: 8px;
+  }
+
+  .heroArrowNext {
+    right: 8px;
+  }
+
+  .heroArrow span {
+    font-size: 24px;
+  }
+
+  .heroDots {
+    gap: 7px;
+    padding: 0 16px;
+  }
+
+  .heroDotActive {
+    width: 24px;
+  }
+}
 
 
