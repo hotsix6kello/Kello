@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <!-- Leaf / lotus at top (spa / esthetic) -->
+  <path d="M 48,10 C 56,10 62,16 60,23 C 58,30 48,27 48,27 C 48,27 38,30 36,23 C 34,16 40,10 48,10 Z"
+        stroke="#8A5F5A" stroke-width="2.5" stroke-linejoin="round" fill="rgba(185,138,132,0.18)"/>
+  <!-- Leaf vein -->
+  <line x1="48" y1="12" x2="48" y2="26" stroke="#8A5F5A" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Face oval -->
+  <ellipse cx="48" cy="62" rx="22" ry="26" stroke="#8A5F5A" stroke-width="2.5" fill="rgba(185,138,132,0.08)"/>
+  <!-- Left eye (closed / peaceful) -->
+  <path d="M 37,55 Q 40.5,52 44,55" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <!-- Right eye (closed / peaceful) -->
+  <path d="M 52,55 Q 55.5,52 59,55" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <!-- Soft smile -->
+  <path d="M 41,67 Q 48,72 55,67" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+</svg>
