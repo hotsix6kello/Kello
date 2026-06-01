@@ -84,12 +84,14 @@ function ProfileSummaryCard({
     subtitle,
     avatarUrl,
     onOpenSettings,
+    onLogout,
     onAvatarUpdate,
 }: {
     userName: string;
     subtitle?: string;
     avatarUrl?: string;
     onOpenSettings: () => void;
+    onLogout: () => void;
     onAvatarUpdate?: (url: string) => void;
 }) {
     const { t } = useTranslation("common");
@@ -189,12 +191,20 @@ function ProfileSummaryCard({
                         </div>
                     </div>
 
-                    <button
-                        className={styles.profileSettingsButton}
-                        onClick={onOpenSettings}
-                    >
-                        {t("my_page.settings.short")}
-                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+                        <button
+                            className={styles.profileSettingsButton}
+                            onClick={onOpenSettings}
+                        >
+                            {t("my_page.settings.short")}
+                        </button>
+                        <button
+                            className={styles.profileLogoutButton}
+                            onClick={onLogout}
+                        >
+                            {t("my_page.settings.logout", { defaultValue: "로그아웃" })}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -994,6 +1004,15 @@ function MyPageContent() {
         partnerStatus,
     });
 
+    const handleLogout = async () => {
+        try {
+            await supabase.auth.signOut();
+            router.replace("/");
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+    };
+
 
 
 
@@ -1014,6 +1033,7 @@ function MyPageContent() {
                 subtitle={displayProfileSubtitle}
                 avatarUrl={avatarUrl}
                 onOpenSettings={() => router.push("/my/settings")}
+                onLogout={handleLogout}
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
             />
 
