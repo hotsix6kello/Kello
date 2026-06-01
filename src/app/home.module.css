@@ -161,37 +161,6 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* Dot navigation */
-.heroDots {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 50%;
-  bottom: 44px;
-  transform: translateX(-50%);
-  z-index: 3;
-  padding: 0;
-}
-
-.heroDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: #e2e8f0;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: width 0.3s ease, background 0.3s ease;
-  flex-shrink: 0;
-}
-
-.heroDotActive {
-  width: 22px;
-  background: #F45B87;
-}
-
 /* ──────────────────────────────────────────────────────────────────────────
    BOOKING CARD / BEAUTY CATEGORIES
    ────────────────────────────────────────────────────────────────────────── */
@@ -1302,24 +1271,6 @@
   padding-bottom: 18px;
 }
 
-.heroDots {
-  gap: 8px;
-  bottom: 44px;
-  padding: 0;
-}
-
-.heroDot {
-  width: 8px;
-  height: 8px;
-  background: rgba(170, 145, 141, 0.28);
-}
-
-.heroDotActive {
-  width: 30px;
-  background: linear-gradient(90deg, #c88c93 0%, #b67b83 100%);
-  box-shadow: 0 10px 18px rgba(183, 128, 136, 0.22);
-}
-
 .bookingShell {
   margin-top: -28px;
   padding: 0 18px 120px;
@@ -1471,10 +1422,6 @@
 }
 
 @media (max-width: 390px) {
-  .heroDots {
-    bottom: 40px;
-  }
-
   .bookingShell {
     padding: 0 14px 124px;
   }
@@ -1505,11 +1452,8 @@
    ────────────────────────────────────────────────────────────────────────── */
 
 .heroNew {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: visible;
-  padding-bottom: 44px;
+  position: relative;
+  overflow: hidden;
 }
 
 .heroFullCarousel {
@@ -1540,13 +1484,5 @@
   object-fit: contain;
 }
 
-/* Reset dots to normal flow */
-.heroDots {
-  position: relative;
-  left: auto;
-  bottom: auto;
-  transform: none;
-  margin-top: 10px;
-  padding: 0;
-}
+
 
