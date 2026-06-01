@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     return [];
   },
   images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'inline',
     remotePatterns: [
       {
         protocol: "https",

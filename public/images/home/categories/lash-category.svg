@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <!-- Eye shape (almond) -->
+  <path d="M 12,50 Q 30,28 48,28 Q 66,28 84,50 Q 66,72 48,72 Q 30,72 12,50 Z"
+        stroke="#8A5F5A" stroke-width="2.5" stroke-linejoin="round" fill="rgba(185,138,132,0.08)"/>
+  <!-- Iris -->
+  <circle cx="48" cy="50" r="13" stroke="#8A5F5A" stroke-width="2.5" fill="rgba(185,138,132,0.12)"/>
+  <!-- Pupil -->
+  <circle cx="48" cy="50" r="5.5" fill="rgba(138,95,90,0.2)"/>
+  <!-- Upper lashes (6 lashes radiating upward) -->
+  <line x1="22" y1="38" x2="18" y2="24" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="31" x2="30" y2="17" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="42" y1="28" x2="42" y2="14" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="54" y1="28" x2="56" y2="14" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="64" y1="31" x2="68" y2="17" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="74" y1="38" x2="80" y2="24" stroke="#8A5F5A" stroke-width="2" stroke-linecap="round"/>
+</svg>
