@@ -224,8 +224,14 @@
 .heroDots {
   display: flex;
   gap: 6px;
-  padding: 10px 20px 6px;
   align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  bottom: 44px;
+  transform: translateX(-50%);
+  z-index: 3;
+  padding: 0;
 }
 
 .heroDot {
@@ -1552,9 +1558,9 @@
 }
 
 .heroDots {
-  justify-content: center;
   gap: 8px;
-  padding: 18px 20px 4px;
+  bottom: 44px;
+  padding: 0;
 }
 
 .heroDot {
@@ -1722,6 +1728,10 @@
 }
 
 @media (max-width: 390px) {
+  .heroDots {
+    bottom: 40px;
+  }
+
   .heroSlideArea {
     min-height: 296px;
     padding: 74px 18px 20px;
