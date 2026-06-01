@@ -8,22 +8,22 @@ import styles from '../../home.module.css';
 const INTERVAL_MS = 3000;
 
 const HERO_SLIDES = [
-  { src: '/images/home/hero/hair-01.png', category: '헤어', badge: '여신 웨이브' },
-  { src: '/images/home/hero/hair-02.png', category: '헤어', badge: '여신 웨이브' },
-  { src: '/images/home/hero/hair-03.png', category: '헤어', badge: '여신 웨이브' },
-  { src: '/images/home/hero/hair-04.png', category: '헤어', badge: '여신 웨이브' },
-  { src: '/images/home/hero/nail-01.png', category: '네일', badge: '글로시 네일' },
-  { src: '/images/home/hero/nail-02.png', category: '네일', badge: '글로시 네일' },
-  { src: '/images/home/hero/nail-03.png', category: '네일', badge: '글로시 네일' },
-  { src: '/images/home/hero/nail-04.png', category: '네일', badge: '글로시 네일' },
-  { src: '/images/home/hero/makeup-01.png', category: '메이크업', badge: '아이돌 메이크업' },
-  { src: '/images/home/hero/makeup-02.png', category: '메이크업', badge: '아이돌 메이크업' },
-  { src: '/images/home/hero/makeup-03.png', category: '메이크업', badge: '아이돌 메이크업' },
-  { src: '/images/home/hero/makeup-04.png', category: '메이크업', badge: '아이돌 메이크업' },
-  { src: '/images/home/hero/eyelash-01.png', category: '속눈썹', badge: '내추럴 래쉬' },
-  { src: '/images/home/hero/eyelash-02.png', category: '속눈썹', badge: '내추럴 래쉬' },
-  { src: '/images/home/hero/eyelash-03.png', category: '속눈썹', badge: '내추럴 래쉬' },
-  { src: '/images/home/hero/eyelash-04.png', category: '속눈썹', badge: '내추럴 래쉬' },
+  { src: '/images/home/hero/hair-01.png', category: '헤어' },
+  { src: '/images/home/hero/hair-02.png', category: '헤어' },
+  { src: '/images/home/hero/hair-03.png', category: '헤어' },
+  { src: '/images/home/hero/hair-04.png', category: '헤어' },
+  { src: '/images/home/hero/nail-01.png', category: '네일' },
+  { src: '/images/home/hero/nail-02.png', category: '네일' },
+  { src: '/images/home/hero/nail-03.png', category: '네일' },
+  { src: '/images/home/hero/nail-04.png', category: '네일' },
+  { src: '/images/home/hero/makeup-01.png', category: '메이크업' },
+  { src: '/images/home/hero/makeup-02.png', category: '메이크업' },
+  { src: '/images/home/hero/makeup-03.png', category: '메이크업' },
+  { src: '/images/home/hero/makeup-04.png', category: '메이크업' },
+  { src: '/images/home/hero/eyelash-01.png', category: '속눈썹' },
+  { src: '/images/home/hero/eyelash-02.png', category: '속눈썹' },
+  { src: '/images/home/hero/eyelash-03.png', category: '속눈썹' },
+  { src: '/images/home/hero/eyelash-04.png', category: '속눈썹' },
 ];
 
 const CATEGORIES = ['헤어', '네일', '메이크업', '속눈썹'];
@@ -62,21 +62,23 @@ export default function HomeHero(_props: HomeHeroProps) {
 
   return (
     <section className={styles.heroNew}>
-      {/* Full-width photo carousel */}
+      {/* Full-width photo carousel — crossfade */}
       <div className={styles.heroFullCarousel}>
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.category}
-          fill
-          sizes="(max-width: 440px) 100vw, 440px"
-          className={styles.heroFullImg}
-          priority={current === 0}
-        />
-        <div className={styles.heroFullOverlay} />
-        <div className={styles.heroFullBadge}>
-          ✨ {slide.category} / {slide.badge}
-        </div>
+        {HERO_SLIDES.map((s, i) => (
+          <div
+            key={s.src}
+            className={`${styles.heroSlide} ${i === current ? styles.heroSlideActive : ''}`}
+          >
+            <Image
+              src={s.src}
+              alt={s.category}
+              fill
+              sizes="(max-width: 440px) 100vw, 440px"
+              className={styles.heroFullImg}
+              priority={i < 2}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Category dot nav */}
