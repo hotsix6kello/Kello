@@ -62,23 +62,25 @@ export default function HomeHero(_props: HomeHeroProps) {
 
   return (
     <section className={styles.heroNew}>
-      {/* Full-width photo carousel — crossfade */}
+      {/* Full-width photo slider */}
       <div className={styles.heroFullCarousel}>
-        {HERO_SLIDES.map((s, i) => (
-          <div
-            key={s.src}
-            className={`${styles.heroSlide} ${i === current ? styles.heroSlideActive : ''}`}
-          >
-            <Image
-              src={s.src}
-              alt={s.category}
-              fill
-              sizes="(max-width: 440px) 100vw, 440px"
-              className={styles.heroFullImg}
-              priority={i < 2}
-            />
-          </div>
-        ))}
+        <div
+          className={styles.heroSliderTrack}
+          style={{ transform: `translateX(-${current * 100}%)` }}
+        >
+          {HERO_SLIDES.map((s, i) => (
+            <div key={s.src} className={styles.heroSlide}>
+              <Image
+                src={s.src}
+                alt={s.category}
+                fill
+                sizes="(max-width: 440px) 100vw, 440px"
+                className={styles.heroFullImg}
+                priority={i < 2}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Category dot nav */}
