@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 
@@ -26,7 +26,12 @@ const HERO_SLIDES = [
   { src: '/images/home/hero/eyelash-04.png', category: '속눈썹' },
 ];
 
-const CATEGORIES = ['헤어', '네일', '메이크업', '속눈썹'];
+// 무한 루프: [마지막 복사본, ...원본 16장, 첫 번째 복사본]
+const EXTENDED = [
+  HERO_SLIDES[HERO_SLIDES.length - 1],
+  ...HERO_SLIDES,
+  HERO_SLIDES[0],
+];
 
 interface HomeHeroProps {
   t: TFunction;
@@ -34,67 +39,51 @@ interface HomeHeroProps {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function HomeHero(_props: HomeHeroProps) {
-  const [current, setCurrent] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const resetTimer = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setCurrent(prev => (prev + 1) % HERO_SLIDES.length);
-    }, INTERVAL_MS);
-  };
+  const [pos, setPos] = useState(1);
+  const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
-    resetTimer();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    const timer = setInterval(() => {
+      setAnimate(true);
+      setPos(p => p + 1);
+    }, INTERVAL_MS);
+    return () => clearInterval(timer);
   }, []);
 
-  const goToCategory = (catIdx: number) => {
-    const firstIdx = HERO_SLIDES.findIndex(s => s.category === CATEGORIES[catIdx]);
-    if (firstIdx !== -1) {
-      setCurrent(firstIdx);
-      resetTimer();
+  const onTransitionEnd = () => {
+    if (pos >= HERO_SLIDES.length + 1) {
+      setAnimate(false);
+      setPos(1);
+    } else if (pos <= 0) {
+      setAnimate(false);
+      setPos(HERO_SLIDES.length);
     }
   };
 
-  const slide = HERO_SLIDES[current];
-  const activeCatIdx = CATEGORIES.indexOf(slide.category);
-
   return (
     <section className={styles.heroNew}>
-      {/* Full-width photo slider */}
       <div className={styles.heroFullCarousel}>
         <div
           className={styles.heroSliderTrack}
-          style={{ transform: `translateX(-${current * 100}%)` }}
+          style={{
+            transform: `translateX(-${pos * 100}%)`,
+            transition: animate ? 'transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
+          }}
+          onTransitionEnd={onTransitionEnd}
         >
-          {HERO_SLIDES.map((s, i) => (
-            <div key={s.src} className={styles.heroSlide}>
+          {EXTENDED.map((s, i) => (
+            <div key={`${s.src}-${i}`} className={styles.heroSlide}>
               <Image
                 src={s.src}
                 alt={s.category}
                 fill
                 sizes="(max-width: 440px) 100vw, 440px"
                 className={styles.heroFullImg}
-                priority={i < 2}
+                priority={i < 3}
               />
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Category dot nav */}
-      <div className={styles.heroDots} role="tablist" aria-label="Hero categories">
-        {CATEGORIES.map((cat, i) => (
-          <button
-            key={cat}
-            role="tab"
-            aria-selected={i === activeCatIdx}
-            aria-label={cat}
-            className={`${styles.heroDot} ${i === activeCatIdx ? styles.heroDotActive : ''}`}
-            onClick={() => goToCategory(i)}
-          />
-        ))}
       </div>
     </section>
   );
