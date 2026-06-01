@@ -1638,8 +1638,8 @@
   width: 70px;
   height: 70px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.76);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86), 0 14px 22px rgba(103, 79, 76, 0.08);
+  background: linear-gradient(180deg, rgba(255, 249, 245, 0.96) 0%, rgba(246, 237, 230, 0.96) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 14px 22px rgba(124, 101, 94, 0.1);
 }
 
 .categoryLabel {
