@@ -13,37 +13,37 @@ export const BEAUTY_CATEGORY_OPTIONS: BeautyCategoryOption[] = [
   {
     id: 'hair',
     label: 'categories.hair.label',
-    image: '/images/home/categories/hair-category.svg',
+    image: '/images/home/categories/hair-category.png',
     iconScale: 1.0,
   },
   {
     id: 'nail',
     label: 'categories.nail.label',
-    image: '/images/home/categories/nail-category.svg',
+    image: '/images/home/categories/nail-category.png',
     iconScale: 1.0,
   },
   {
     id: 'esthetic',
     label: 'categories.esthetic.label',
-    image: '/images/home/categories/care-category.svg',
+    image: '/images/home/categories/care-category.png',
     iconScale: 1.0,
   },
   {
     id: 'waxing',
     label: 'categories.waxing.label',
-    image: '/images/home/categories/wax-category.svg',
+    image: '/images/home/categories/wax-category.png',
     iconScale: 1.0,
   },
   {
     id: 'makeup',
     label: 'categories.makeup.label',
-    image: '/images/home/categories/makeup-category.svg',
+    image: '/images/home/categories/makeup-category.png',
     iconScale: 1.0,
   },
   {
     id: 'lash',
     label: 'categories.lash.label',
-    image: '/images/home/categories/lash-category.svg',
+    image: '/images/home/categories/lash-category.png',
     iconScale: 1.0,
   },
 ];
