@@ -28,18 +28,12 @@ const HERO_SLIDES = [
 
 const CATEGORIES = ['헤어', '네일', '메이크업', '속눈썹'];
 
-const CATEGORY_TEXT_IDX: Record<string, number> = {
-  '헤어': 0,
-  '네일': 1,
-  '메이크업': 2,
-  '속눈썹': 0,
-};
-
 interface HomeHeroProps {
   t: TFunction;
 }
 
-export default function HomeHero({ t }: HomeHeroProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function HomeHero(_props: HomeHeroProps) {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -66,55 +60,26 @@ export default function HomeHero({ t }: HomeHeroProps) {
   const slide = HERO_SLIDES[current];
   const activeCatIdx = CATEGORIES.indexOf(slide.category);
 
-  const textSlides = [
-    {
-      title: t('home_beauty.lookbook_hero.slide1_title'),
-      subtitle: t('home_beauty.lookbook_hero.slide1_subtitle'),
-    },
-    {
-      title: t('home_beauty.lookbook_hero.slide2_title'),
-      subtitle: t('home_beauty.lookbook_hero.slide2_subtitle'),
-    },
-    {
-      title: t('home_beauty.lookbook_hero.slide3_title'),
-      subtitle: t('home_beauty.lookbook_hero.slide3_subtitle'),
-    },
-  ];
-  const textIdx = CATEGORY_TEXT_IDX[slide.category] ?? 0;
-  const text = textSlides[textIdx];
-
   return (
     <section className={styles.heroNew}>
-      {/* ── Slide area ── */}
-      <div className={styles.heroSlideArea}>
-        {/* Photo carousel card */}
-        <div className={styles.heroPhotoCardWrap} aria-hidden="true">
-          <div className={styles.heroPhotoCard}>
-            <Image
-              key={slide.src}
-              src={slide.src}
-              alt={slide.category}
-              fill
-              sizes="(max-width: 390px) 152px, 166px"
-              className={styles.heroPhotoImg}
-              priority={current === 0}
-            />
-            <div className={styles.heroPhotoBadge}>
-              ✨ {slide.category} / {slide.badge}
-            </div>
-          </div>
-        </div>
-
-        {/* Text */}
-        <div className={styles.heroSlideText}>
-          <h1 className={styles.heroSlideTitle} style={{ whiteSpace: 'pre-line' }}>
-            {text.title}
-          </h1>
-          <p className={styles.heroSlideSubtitle}>{text.subtitle}</p>
+      {/* Full-width photo carousel */}
+      <div className={styles.heroFullCarousel}>
+        <Image
+          key={slide.src}
+          src={slide.src}
+          alt={slide.category}
+          fill
+          sizes="(max-width: 440px) 100vw, 440px"
+          className={styles.heroFullImg}
+          priority={current === 0}
+        />
+        <div className={styles.heroFullOverlay} />
+        <div className={styles.heroFullBadge}>
+          ✨ {slide.category} / {slide.badge}
         </div>
       </div>
 
-      {/* ── Category dot nav ── */}
+      {/* Category dot nav */}
       <div className={styles.heroDots} role="tablist" aria-label="Hero categories">
         {CATEGORIES.map((cat, i) => (
           <button
