@@ -1,17 +1,39 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { TFunction } from 'i18next';
 import styles from '../../home.module.css';
 
-const SLIDE_ICONS = ['💅', '📸', '✅'];
-const SLIDE_BGS = [
-  'linear-gradient(140deg, #FFF0F5 0%, #FFF8FA 60%, #FDEEF5 100%)',
-  'linear-gradient(140deg, #FFF5F9 0%, #FFF0F8 60%, #FDE8F3 100%)',
-  'linear-gradient(140deg, #FDF0F5 0%, #FFF5F8 60%, #FDEAF3 100%)',
+const INTERVAL_MS = 3000;
+
+const HERO_SLIDES = [
+  { src: '/images/home/hero/hair-01.png', category: '헤어', badge: '여신 웨이브' },
+  { src: '/images/home/hero/hair-02.png', category: '헤어', badge: '여신 웨이브' },
+  { src: '/images/home/hero/hair-03.png', category: '헤어', badge: '여신 웨이브' },
+  { src: '/images/home/hero/hair-04.png', category: '헤어', badge: '여신 웨이브' },
+  { src: '/images/home/hero/nail-01.png', category: '네일', badge: '글로시 네일' },
+  { src: '/images/home/hero/nail-02.png', category: '네일', badge: '글로시 네일' },
+  { src: '/images/home/hero/nail-03.png', category: '네일', badge: '글로시 네일' },
+  { src: '/images/home/hero/nail-04.png', category: '네일', badge: '글로시 네일' },
+  { src: '/images/home/hero/makeup-01.png', category: '메이크업', badge: '아이돌 메이크업' },
+  { src: '/images/home/hero/makeup-02.png', category: '메이크업', badge: '아이돌 메이크업' },
+  { src: '/images/home/hero/makeup-03.png', category: '메이크업', badge: '아이돌 메이크업' },
+  { src: '/images/home/hero/makeup-04.png', category: '메이크업', badge: '아이돌 메이크업' },
+  { src: '/images/home/hero/eyelash-01.png', category: '속눈썹', badge: '내추럴 래쉬' },
+  { src: '/images/home/hero/eyelash-02.png', category: '속눈썹', badge: '내추럴 래쉬' },
+  { src: '/images/home/hero/eyelash-03.png', category: '속눈썹', badge: '내추럴 래쉬' },
+  { src: '/images/home/hero/eyelash-04.png', category: '속눈썹', badge: '내추럴 래쉬' },
 ];
 
-const INTERVAL_MS = 4200;
+const CATEGORIES = ['헤어', '네일', '메이크업', '속눈썹'];
+
+const CATEGORY_TEXT_IDX: Record<string, number> = {
+  '헤어': 0,
+  '네일': 1,
+  '메이크업': 2,
+  '속눈썹': 0,
+};
 
 interface HomeHeroProps {
   t: TFunction;
@@ -24,7 +46,7 @@ export default function HomeHero({ t }: HomeHeroProps) {
   const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setCurrent(prev => (prev + 1) % 3);
+      setCurrent(prev => (prev + 1) % HERO_SLIDES.length);
     }, INTERVAL_MS);
   };
 
@@ -33,68 +55,75 @@ export default function HomeHero({ t }: HomeHeroProps) {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
-  const goTo = (idx: number) => {
-    setCurrent(idx);
-    resetTimer();
+  const goToCategory = (catIdx: number) => {
+    const firstIdx = HERO_SLIDES.findIndex(s => s.category === CATEGORIES[catIdx]);
+    if (firstIdx !== -1) {
+      setCurrent(firstIdx);
+      resetTimer();
+    }
   };
 
-  const slides = [
+  const slide = HERO_SLIDES[current];
+  const activeCatIdx = CATEGORIES.indexOf(slide.category);
+
+  const textSlides = [
     {
       title: t('home_beauty.lookbook_hero.slide1_title'),
       subtitle: t('home_beauty.lookbook_hero.slide1_subtitle'),
-      icon: SLIDE_ICONS[0],
-      bg: SLIDE_BGS[0],
     },
     {
       title: t('home_beauty.lookbook_hero.slide2_title'),
       subtitle: t('home_beauty.lookbook_hero.slide2_subtitle'),
-      icon: SLIDE_ICONS[1],
-      bg: SLIDE_BGS[1],
     },
     {
       title: t('home_beauty.lookbook_hero.slide3_title'),
       subtitle: t('home_beauty.lookbook_hero.slide3_subtitle'),
-      icon: SLIDE_ICONS[2],
-      bg: SLIDE_BGS[2],
     },
   ];
-
-  const slide = slides[current];
+  const textIdx = CATEGORY_TEXT_IDX[slide.category] ?? 0;
+  const text = textSlides[textIdx];
 
   return (
     <section className={styles.heroNew}>
       {/* ── Slide area ── */}
-      <div
-        className={styles.heroSlideArea}
-        style={{ background: slide.bg }}
-      >
-        {/* Decorative placeholder card — replace inner content with next/image when assets ready */}
-        <div className={styles.heroCardWrap} aria-hidden="true">
-          <div className={styles.heroCard}>
-            {/* image: slide.image → future next/image goes here */}
-            <span className={styles.heroCardIcon}>{slide.icon}</span>
+      <div className={styles.heroSlideArea}>
+        {/* Photo carousel card */}
+        <div className={styles.heroPhotoCardWrap} aria-hidden="true">
+          <div className={styles.heroPhotoCard}>
+            <Image
+              key={slide.src}
+              src={slide.src}
+              alt={slide.category}
+              fill
+              sizes="(max-width: 390px) 152px, 166px"
+              className={styles.heroPhotoImg}
+              priority={current === 0}
+            />
+            <div className={styles.heroPhotoBadge}>
+              ✨ {slide.category} / {slide.badge}
+            </div>
           </div>
         </div>
 
         {/* Text */}
         <div className={styles.heroSlideText}>
           <h1 className={styles.heroSlideTitle} style={{ whiteSpace: 'pre-line' }}>
-            {slide.title}
+            {text.title}
           </h1>
-          <p className={styles.heroSlideSubtitle}>{slide.subtitle}</p>
+          <p className={styles.heroSlideSubtitle}>{text.subtitle}</p>
         </div>
       </div>
 
-      {/* ── Dot nav ── */}
-      <div className={styles.heroDots} role="tablist" aria-label="Hero slides">
-        {slides.map((_, i) => (
+      {/* ── Category dot nav ── */}
+      <div className={styles.heroDots} role="tablist" aria-label="Hero categories">
+        {CATEGORIES.map((cat, i) => (
           <button
-            key={i}
+            key={cat}
             role="tab"
-            aria-selected={i === current}
-            aria-label={`Slide ${i + 1}`}
-            className={`${styles.heroDot} ${i === current ? styles.heroDotActive : ''}`}
-            onClick={() => goTo(i)}
+            aria-selected={i === activeCatIdx}
+            aria-label={cat}
+            className={`${styles.heroDot} ${i === activeCatIdx ? styles.heroDotActive : ''}`}
+            onClick={() => goToCategory(i)}
           />
         ))}
       </div>
