@@ -115,6 +115,8 @@ export type BookingConfirmationState = {
   privacyPolicyAgreed: boolean;
   thirdPartySharingAgreed: boolean;
   marketingConsentAgreed: boolean;
+  refundPolicyAgreed: boolean;
+  refundPolicyAgreedAt: string | null;
 };
 
 export type BookingFlowCategoryCapabilities = {
