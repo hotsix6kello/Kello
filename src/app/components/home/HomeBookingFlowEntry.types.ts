@@ -37,6 +37,8 @@ export type HomeBookingLegacyDraftBuildInput = {
     privacyPolicyAgreed?: boolean;
     thirdPartySharingAgreed?: boolean;
     marketingConsentAgreed?: boolean;
+    refundPolicyAgreed?: boolean;
+    refundPolicyAgreedAt?: string | null;
   };
 };
 

@@ -100,16 +100,18 @@ export function ConfirmationStepShell({
   const requestNote = customerDetails.requestNote.trim();
 
   // Validation: Required items must be checked
-  const canSendSubmitIntent = 
-    confirmation.serviceTermsAgreed && 
-    confirmation.privacyPolicyAgreed && 
-    confirmation.thirdPartySharingAgreed;
+  const canSendSubmitIntent =
+    confirmation.serviceTermsAgreed &&
+    confirmation.privacyPolicyAgreed &&
+    confirmation.thirdPartySharingAgreed &&
+    confirmation.refundPolicyAgreed;
 
-  const isAllAgreed = 
-    confirmation.serviceTermsAgreed && 
-    confirmation.privacyPolicyAgreed && 
-    confirmation.thirdPartySharingAgreed && 
-    confirmation.marketingConsentAgreed;
+  const isAllAgreed =
+    confirmation.serviceTermsAgreed &&
+    confirmation.privacyPolicyAgreed &&
+    confirmation.thirdPartySharingAgreed &&
+    confirmation.marketingConsentAgreed &&
+    confirmation.refundPolicyAgreed;
 
   const handleToggleAll = (checked: boolean) => {
     onChangeConfirmation?.({
@@ -117,6 +119,8 @@ export function ConfirmationStepShell({
       privacyPolicyAgreed: checked,
       thirdPartySharingAgreed: checked,
       marketingConsentAgreed: checked,
+      refundPolicyAgreed: checked,
+      refundPolicyAgreedAt: checked ? new Date().toISOString() : null,
     });
   };
 
@@ -335,8 +339,8 @@ export function ConfirmationStepShell({
                   {t("booking_skeleton.confirmation.agreement_marketing")}
                 </span>
               </label>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="p-2 text-neutral-400 hover:text-fuchsia-600 transition-all active:scale-90"
                 onClick={() => setActiveTermId('marketing')}
               >
@@ -345,11 +349,34 @@ export function ConfirmationStepShell({
                 </svg>
               </button>
             </div>
+
+            {/* Refund Policy Consent */}
+            <div className="flex items-center py-2 group">
+              <label className="flex items-start gap-3 cursor-pointer flex-1">
+                <div className="relative flex items-center mt-0.5 shrink-0">
+                  <input
+                    type="checkbox"
+                    checked={confirmation.refundPolicyAgreed}
+                    onChange={(e) => onChangeConfirmation?.({
+                      refundPolicyAgreed: e.target.checked,
+                      refundPolicyAgreedAt: e.target.checked ? new Date().toISOString() : null,
+                    })}
+                    className="peer h-5 w-5 appearance-none rounded-md border-2 border-neutral-200 transition-all checked:border-fuchsia-500 checked:bg-fuchsia-500"
+                  />
+                  <svg className="absolute h-3.5 w-3.5 text-white opacity-0 peer-checked:opacity-100 left-1/2 -translate-x-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span className="text-[13.5px] font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors leading-relaxed">
+                  {t("booking_skeleton.confirmation.agreement_refund_policy")}
+                </span>
+              </label>
+            </div>
           </div>
         </div>
 
         {/* Validation Error Message */}
-        {!canSendSubmitIntent && (isAllAgreed || confirmation.marketingConsentAgreed || confirmation.serviceTermsAgreed || confirmation.privacyPolicyAgreed || confirmation.thirdPartySharingAgreed) && (
+        {!canSendSubmitIntent && (isAllAgreed || confirmation.marketingConsentAgreed || confirmation.refundPolicyAgreed || confirmation.serviceTermsAgreed || confirmation.privacyPolicyAgreed || confirmation.thirdPartySharingAgreed) && (
           <p className="mt-4 px-1 text-[12px] font-bold text-red-500 animate-pulse">
             {t("booking_skeleton.confirmation.agreement_validation_error")}
           </p>

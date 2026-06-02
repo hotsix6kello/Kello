@@ -169,8 +169,9 @@
       "privacy_desc": "I agree to provide my name and contact information to the shop for the reservation.",
       "attached_images": "Attached Images",
       "image_count_summary": "Total {{count}} images",
-      "submit_button": "Request Final Reservation",
-      "preparing": "The final confirmation screen is being prepared for this category."
+      "submit_button": "Send booking request",
+      "preparing": "The final confirmation screen is being prepared for this category.",
+      "agreement_refund_policy": "[Required] I understand that cancellation and refund conditions may vary depending on the partner shop policy after quote confirmation and payment."
     },
     "next_step": "Next Step",
     "check_final": "Final Confirmation",
