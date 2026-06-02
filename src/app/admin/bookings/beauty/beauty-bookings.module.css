@@ -87,6 +87,27 @@
   gap: 16px;
 }
 
+.adminDetailPage {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.adminDetailColumns {
+  display: grid;
+  gap: 16px;
+}
+
+.adminDetailMainColumn,
+.adminDetailSideColumn {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  align-content: start;
+}
+
 .listSection {
   display: grid;
   gap: 12px;
@@ -306,6 +327,15 @@
   gap: 16px;
 }
 
+.adminDetailHeaderTitle {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.adminDetailHeaderBadge {
+  flex-shrink: 0;
+}
+
 .detailHeader {
   display: flex;
   align-items: flex-start;
@@ -313,10 +343,15 @@
   gap: 12px;
 }
 
+.detailHeaderCopy {
+  min-width: 0;
+}
+
 .detailTitle {
   margin: 0 0 4px;
   font-size: 1.15rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .detailSub {
@@ -324,6 +359,18 @@
   font-size: 0.84rem;
   color: var(--gray-500);
   line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.adminHeroActions {
+  display: grid;
+  gap: 8px;
+}
+
+.heroActionButton {
+  width: 100%;
+  white-space: normal;
+  text-align: center;
 }
 
 .summaryGrid,
@@ -399,6 +446,7 @@
   font-size: 0.86rem;
   line-height: 1.55;
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .priceEmphasis {
@@ -425,6 +473,7 @@
   line-height: 1.65;
   white-space: pre-wrap;
   color: var(--foreground);
+  overflow-wrap: anywhere;
 }
 
 .actionSection {
@@ -441,6 +490,8 @@
   padding: 0 16px;
   font-weight: 700;
   cursor: pointer;
+  white-space: normal;
+  text-align: center;
 }
 
 .actionPrimary {
@@ -486,7 +537,76 @@
   color: var(--gray-500);
 }
 
+.alternativeSlotRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+}
+
+.alternativeRemoveButton {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 1.2rem;
+  justify-self: end;
+}
+
+.notificationsMobileList {
+  display: grid;
+  gap: 10px;
+}
+
+.notificationsMobileCard {
+  border: 1px solid var(--gray-100);
+  border-radius: 16px;
+  padding: 14px;
+  background: white;
+  display: grid;
+  gap: 10px;
+}
+
+.notificationsMobileRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.notificationsMobileTitle {
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.notificationsMobileError {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #991b1b;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.notificationsMobileButton {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.notificationsDesktopTable {
+  display: none;
+}
+
 @media (min-width: 768px) {
+  .adminHeroActions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .blockGrid {
     grid-template-columns: 1fr 1fr;
   }
@@ -497,6 +617,36 @@
 
   .actionRow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .alternativeSlotRow {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .notificationsMobileList {
+    display: none;
+  }
+
+  .notificationsDesktopTable {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .adminDetailColumns {
+    grid-template-columns: minmax(0, 1.18fr) minmax(400px, 0.92fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .adminDetailSideColumn .blockGrid,
+  .adminDetailSideColumn .actionRow {
+    grid-template-columns: 1fr;
+  }
+
+  .adminHeroActions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

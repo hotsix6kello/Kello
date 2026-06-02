@@ -4,7 +4,9 @@ import type { BeautyBookingAdminSelectRow } from "@/lib/bookings/beautyBookingSe
 import { AdminRouteAccessError, requireAdminRouteAccess } from "@/lib/admin/adminRouteAccess.ts";
 import {
   BEAUTY_BOOKING_TABLE,
+  BEAUTY_BOOKING_ADMIN_SELECT,
   BeautyBookingStorageError,
+  mapBeautyBookingRowToAdminRecord,
   updateBeautyBookingRequestStatus,
   reviewBeautyBookingChangeRequest,
   updateBeautyBookingOperatorInfo,
@@ -20,7 +22,7 @@ import {
   type BeautyBookingOperatorStatus,
   type BeautyBookingAlternativeOfferItem
 } from "@/lib/bookings/beautyBookingAdmin.ts";
-import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
+import { getMissingSupabaseServerEnvVars, getSupabaseServerClient } from "@/lib/supabaseServer.ts";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -29,6 +31,17 @@ type BeautyBookingPatchRouteResponse =
   | {
       ok: true;
       item: BeautyBookingAdminRecord;
+    }
+  | {
+      ok: false;
+      error: string;
+    };
+
+type BeautyBookingGetRouteResponse =
+  | {
+      ok: true;
+      item: BeautyBookingAdminRecord;
+      notifications: Awaited<ReturnType<typeof listNotificationsByBooking>>;
     }
   | {
       ok: false;
@@ -82,17 +95,70 @@ export async function GET(
       return jsonFailure("booking id is required", 400);
     }
 
+    const client = getSupabaseServerClient();
+    const { data, error } = await client
+      .from(BEAUTY_BOOKING_TABLE)
+      .select(BEAUTY_BOOKING_ADMIN_SELECT)
+      .eq("id", id)
+      .maybeSingle();
+
+    if (error) {
+      if (error.code === "42P01") {
+        console.error("[beauty-booking-get-route] schema_missing", {
+          table: BEAUTY_BOOKING_TABLE,
+        });
+        return jsonFailure("booking storage is not ready", 500);
+      }
+
+      console.error("[beauty-booking-get-route] read_failed", {
+        code: error.code,
+        message: error.message,
+      });
+      return jsonFailure("failed to fetch booking detail", 500);
+    }
+
+    if (!data) {
+      return jsonFailure("booking request was not found", 404);
+    }
+
+    const item = mapBeautyBookingRowToAdminRecord(data as unknown as BeautyBookingAdminSelectRow);
+
+    const { data: imageRows, error: imageError } = await client
+      .from("beauty_booking_request_images")
+      .select("request_id, image_type, storage_path, original_file_name, bucket_name")
+      .eq("request_id", id);
+
+    const currentImage = imageRows?.find((row) => row.image_type === "current") ?? null;
+    const styleImage = imageRows?.find((row) => row.image_type === "style") ?? null;
+
+    if (imageError) {
+      console.warn("[beauty-booking-get-route] image_metadata_fetch_failed", {
+        code: imageError.code,
+        message: imageError.message,
+        bookingId: id,
+      });
+    }
+
     const notifications = await listNotificationsByBooking(id);
 
     return NextResponse.json({
       ok: true,
+      item: {
+        ...item,
+        hasCurrentImage: item.hasCurrentImage || Boolean(currentImage?.storage_path),
+        hasStyleImage: item.hasStyleImage || Boolean(styleImage?.storage_path),
+        currentImagePath: currentImage?.storage_path ?? null,
+        styleImagePath: styleImage?.storage_path ?? null,
+        currentImageName: currentImage?.original_file_name ?? null,
+        styleImageName: styleImage?.original_file_name ?? null,
+      },
       notifications,
-    });
+    } satisfies BeautyBookingGetRouteResponse);
   } catch (error) {
     const adminFailure = handleAdminRouteError(error);
     if (adminFailure) return adminFailure;
 
-    return jsonFailure("failed to fetch notification history", 500);
+    return jsonFailure("failed to fetch booking detail", 500);
   }
 }
 

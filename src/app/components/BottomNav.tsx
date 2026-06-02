@@ -86,7 +86,7 @@ export default function BottomNav() {
     }, [pathname, localizedNavItems]);
 
     // auth 페이지 및 lang-test에서는 숨김
-    if (pathname.startsWith("/auth") || pathname.startsWith("/lang-test")) return null;
+    if (pathname.startsWith("/auth") || pathname.startsWith("/lang-test") || pathname.startsWith("/admin")) return null;
 
     return (
         <nav className={styles.navBar}>
