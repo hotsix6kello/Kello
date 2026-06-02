@@ -12,7 +12,7 @@ async function run(name: string, fn: () => Promise<void> | void) {
 }
 
 const adminContentSource = readFileSync(
-  new URL("../../app/admin/bookings/beauty/AdminBeautyBookingsContent.tsx", import.meta.url),
+  new URL("../../app/admin/bookings/beauty/[id]/AdminBeautyBookingDetailContent.tsx", import.meta.url),
   "utf8",
 );
 
@@ -21,7 +21,7 @@ const bookingServerSource = readFileSync(
   "utf8",
 );
 
-await run("admin booking list/detail show attachment state from image metadata instead of URL fields only", () => {
+await run("admin booking detail shows attachment state from image metadata instead of URL fields only", () => {
   assert.match(adminContentSource, /selectedBookingHasImages/);
   assert.match(adminContentSource, /selectedBooking\.hasCurrentImage/);
   assert.match(adminContentSource, /selectedBooking\.hasStyleImage/);
