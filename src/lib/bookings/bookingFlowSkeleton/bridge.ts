@@ -138,6 +138,8 @@ export type LegacyDraftAgreements = {
   privacyPolicyAgreed: boolean;
   thirdPartySharingAgreed: boolean;
   marketingConsentAgreed: boolean;
+  refundPolicyAgreed: boolean;
+  refundPolicyAgreedAt: string | null;
   source: "explicit-input" | "placeholder-default";
 };
 
@@ -213,13 +215,16 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
   const privacyPolicyAgreed = params.agreements?.privacyPolicyAgreed ?? false;
   const thirdPartySharingAgreed = params.agreements?.thirdPartySharingAgreed ?? false;
   const marketingConsentAgreed = params.agreements?.marketingConsentAgreed ?? false;
+  const refundPolicyAgreed = params.agreements?.refundPolicyAgreed ?? false;
+  const refundPolicyAgreedAt = params.agreements?.refundPolicyAgreedAt ?? null;
 
   const agreementSource: LegacyDraftAgreements["source"] =
     params.agreements &&
     ("serviceTermsAgreed" in params.agreements ||
       "privacyPolicyAgreed" in params.agreements ||
       "thirdPartySharingAgreed" in params.agreements ||
-      "marketingConsentAgreed" in params.agreements)
+      "marketingConsentAgreed" in params.agreements ||
+      "refundPolicyAgreed" in params.agreements)
       ? "explicit-input"
       : "placeholder-default";
 
@@ -257,6 +262,8 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
       privacyPolicyAgreed,
       thirdPartySharingAgreed,
       marketingConsentAgreed,
+      refundPolicyAgreed,
+      refundPolicyAgreedAt,
       source: agreementSource,
     },
     unresolved: {

@@ -98,6 +98,8 @@ export function createInitialBookingFlowState(
       privacyPolicyAgreed: false,
       thirdPartySharingAgreed: false,
       marketingConsentAgreed: false,
+      refundPolicyAgreed: false,
+      refundPolicyAgreedAt: null,
     },
   };
 }
