@@ -216,6 +216,16 @@ button {
   box-shadow: var(--shadow-lg);
 }
 
+@media (min-width: 1024px) {
+  .mobile-wrapper.admin-booking-detail-wide {
+    max-width: none;
+    width: 100%;
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+  }
+}
+
 @media (min-width: 480px) {
   .layout-shell, .mobile-wrapper {
     box-shadow: var(--shadow-xl);
