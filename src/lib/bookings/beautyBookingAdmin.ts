@@ -1,3 +1,9 @@
+export type BeautyBookingQuoteStatus = "pending" | "accepted" | "rejected" | "expired";
+
+export function isBeautyBookingQuoteStatus(value: unknown): value is BeautyBookingQuoteStatus {
+  return value === "pending" || value === "accepted" || value === "rejected" || value === "expired";
+}
+
 export type BeautyBookingAdminStatus =
   | "requested"
   | "confirmed"
@@ -108,6 +114,20 @@ export type BeautyBookingAdminRecord = {
     refundPolicyAgreedAt: string | null;
   };
   createdFromFlow: string;
+  // Quote fields
+  quoteShopName: string | null;
+  quoteShopAddress: string | null;
+  quoteServiceName: string | null;
+  quoteDate: string | null;
+  quoteTime: string | null;
+  quoteTotalPrice: number | null;
+  quoteCurrency: string | null;
+  quoteNote: string | null;
+  quoteRefundPolicy: string | null;
+  quoteExpiresAt: string | null;
+  quoteStatus: BeautyBookingQuoteStatus | null;
+  quoteSentAt: string | null;
+  quoteRespondedAt: string | null;
 };
 
 export type BeautyBookingAdminListFilters = {

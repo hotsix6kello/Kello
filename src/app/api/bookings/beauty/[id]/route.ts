@@ -11,6 +11,8 @@ import {
   reviewBeautyBookingChangeRequest,
   updateBeautyBookingOperatorInfo,
   offerAlternativeSchedule,
+  sendBookingQuote,
+  type SendBookingQuotePayload,
 } from "@/lib/bookings/beautyBookingServer.ts";
 import {
   listNotificationsByBooking,
@@ -169,9 +171,9 @@ export async function PATCH(
   try {
     const { userId: adminId } = await requireAdminRouteAccess(request);
     const { id } = await params;
-    const body = (await request.json()) as { 
-      status?: unknown; 
-      action?: "approved" | "rejected" | "update_operator_info" | "offer_alternative" | "resend_notification";
+    const body = (await request.json()) as {
+      status?: unknown;
+      action?: "approved" | "rejected" | "update_operator_info" | "offer_alternative" | "resend_notification" | "send_quote";
       notificationId?: string;
       note?: string;
       operatorStatus?: BeautyBookingOperatorStatus;
@@ -180,6 +182,7 @@ export async function PATCH(
       customerContacted?: boolean;
       followUpNeeded?: boolean;
       alternativeItems?: BeautyBookingAlternativeOfferItem[];
+      quote?: SendBookingQuotePayload;
     };
 
     if (!id) {
@@ -202,6 +205,15 @@ export async function PATCH(
         return jsonFailure("at least one alternative time slot is required", 400);
       }
       item = await offerAlternativeSchedule(id, adminId, body.alternativeItems, body.note ?? "");
+    } else if (body.action === "send_quote") {
+      if (!body.quote) {
+        return jsonFailure("quote payload is required for send_quote action", 400);
+      }
+      const q = body.quote;
+      if (!q.quoteShopName || !q.quoteDate || !q.quoteTime || typeof q.quoteTotalPrice !== "number") {
+        return jsonFailure("quoteShopName, quoteDate, quoteTime, quoteTotalPrice are required", 400);
+      }
+      item = await sendBookingQuote(id, q);
     } else if (body.action === "resend_notification") {
       if (!body.notificationId) {
         return jsonFailure("notificationId is required for resending", 400);
