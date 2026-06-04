@@ -101,8 +101,10 @@ export class TranslationService {
 
       translatedText = result.translatedText;
       engine = result.engine;
-    } catch {
+    } catch (error) {
+      console.error("Translation provider error:", error);
       fallbackUsed = true;
+      translatedText = request.message;
     }
 
     const response: ChatTranslateResponse = {

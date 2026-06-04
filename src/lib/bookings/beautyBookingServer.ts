@@ -3,6 +3,7 @@ import {
   BEAUTY_BOOKING_ALLOWED_TRANSITIONS,
   isBeautyBookingCancelActor,
   isBeautyBookingAdminStatus,
+  isBeautyBookingQuoteStatus,
   type BeautyBookingAdminListFilters,
   type BeautyBookingAdminRecord,
   type BeautyBookingAdminStatus,
@@ -10,16 +11,17 @@ import {
   type BeautyBookingOperatorStatus,
   type BeautyBookingAlternativeOfferStatus,
   type BeautyBookingAlternativeOfferItem,
+  type BeautyBookingQuoteStatus,
 } from "@/lib/bookings/beautyBookingAdmin.ts";
 import {
   getMissingSupabaseServerEnvVars,
   getSupabaseServerClient,
   hasSupabaseServerAccess,
 } from "@/lib/supabaseServer.ts";
-import { 
+import {
   createBeautyBookingNotification,
   notifyAdminNewBooking,
-  type BeautyBookingNotificationEventType 
+  type BeautyBookingNotificationEventType
 } from "./beautyNotificationServer.ts";
 
 export const BEAUTY_BOOKING_TABLE = "beauty_booking_requests";
@@ -119,6 +121,19 @@ export type BeautyBookingAdminSelectRow = {
   shop_contacted: boolean;
   customer_contacted: boolean;
   follow_up_needed: boolean;
+  quote_shop_name: string | null;
+  quote_shop_address: string | null;
+  quote_service_name: string | null;
+  quote_date: string | null;
+  quote_time: string | null;
+  quote_total_price: number | null;
+  quote_currency: string | null;
+  quote_note: string | null;
+  quote_refund_policy: string | null;
+  quote_expires_at: string | null;
+  quote_status: string | null;
+  quote_sent_at: string | null;
+  quote_responded_at: string | null;
   primary_service_id: string | null;
   primary_service_name: string | null;
   add_on_ids: string[] | null;
@@ -275,6 +290,19 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     localizedMessage: row.localized_message,
     agreements: mapAgreements(row.agreements),
     createdFromFlow: row.created_from_flow,
+    quoteShopName: row.quote_shop_name ?? null,
+    quoteShopAddress: row.quote_shop_address ?? null,
+    quoteServiceName: row.quote_service_name ?? null,
+    quoteDate: row.quote_date ?? null,
+    quoteTime: row.quote_time ?? null,
+    quoteTotalPrice: row.quote_total_price ?? null,
+    quoteCurrency: row.quote_currency ?? null,
+    quoteNote: row.quote_note ?? null,
+    quoteRefundPolicy: row.quote_refund_policy ?? null,
+    quoteExpiresAt: row.quote_expires_at ?? null,
+    quoteStatus: isBeautyBookingQuoteStatus(row.quote_status) ? row.quote_status : null,
+    quoteSentAt: row.quote_sent_at ?? null,
+    quoteRespondedAt: row.quote_responded_at ?? null,
     alternativeOfferStatus: (row.alternative_offer_status as BeautyBookingAlternativeOfferStatus) ?? "none",
     alternativeOfferItems: Array.isArray(row.alternative_offer_items) ? row.alternative_offer_items : [],
     alternativeOfferNote: row.alternative_offer_note ?? "",
@@ -340,6 +368,19 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "shop_contacted",
   "customer_contacted",
   "follow_up_needed",
+  "quote_shop_name",
+  "quote_shop_address",
+  "quote_service_name",
+  "quote_date",
+  "quote_time",
+  "quote_total_price",
+  "quote_currency",
+  "quote_note",
+  "quote_refund_policy",
+  "quote_expires_at",
+  "quote_status",
+  "quote_sent_at",
+  "quote_responded_at",
 ].join(", ");
 
 const BEAUTY_BOOKING_SUMMARY_SELECT = [
@@ -1481,4 +1522,87 @@ export async function getBookingImageSignedUrls(
     signedUrl: signedMap.get(row.storage_path) ?? null,
     error: signedMap.has(row.storage_path) ? null : 'signed URL not generated',
   }));
+}
+
+export type SendBookingQuotePayload = {
+  quoteShopName: string;
+  quoteShopAddress: string;
+  quoteServiceName: string;
+  quoteDate: string;
+  quoteTime: string;
+  quoteTotalPrice: number;
+  quoteCurrency: string;
+  quoteNote: string;
+  quoteRefundPolicy: string;
+  quoteExpiresAt: string | null;
+};
+
+/**
+ * 운영자가 예약 제안서를 저장/발송한다.
+ * quote_status = "pending", quote_sent_at = now, quote_responded_at = null
+ * booking status 및 payment_status는 변경하지 않는다.
+ */
+export async function sendBookingQuote(
+  bookingId: string,
+  payload: SendBookingQuotePayload,
+): Promise<BeautyBookingAdminRecord> {
+  if (!hasSupabaseServerAccess()) {
+    throw new BeautyBookingStorageError("env_missing", {
+      missingEnvVars: getMissingSupabaseServerEnvVars(),
+    });
+  }
+
+  const client = getSupabaseServerClient();
+
+  const { data: existing, error: readError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .select("id")
+    .eq("id", bookingId)
+    .maybeSingle();
+
+  if (readError) {
+    if (isRecord(readError) && readError.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", { table: BEAUTY_BOOKING_TABLE, code: readError.code });
+    }
+    throw new BeautyBookingStorageError("read_failed", { code: isRecord(readError) && typeof readError.code === "string" ? readError.code : undefined });
+  }
+
+  if (!existing) {
+    throw new BeautyBookingStorageError("not_found");
+  }
+
+  const now = new Date().toISOString();
+  const { data: updatedRow, error: updateError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .update({
+      quote_shop_name: payload.quoteShopName,
+      quote_shop_address: payload.quoteShopAddress,
+      quote_service_name: payload.quoteServiceName,
+      quote_date: payload.quoteDate,
+      quote_time: payload.quoteTime,
+      quote_total_price: payload.quoteTotalPrice,
+      quote_currency: payload.quoteCurrency || 'KRW',
+      quote_note: payload.quoteNote,
+      quote_refund_policy: payload.quoteRefundPolicy,
+      quote_expires_at: payload.quoteExpiresAt ?? null,
+      quote_status: "pending" satisfies BeautyBookingQuoteStatus,
+      quote_sent_at: now,
+      quote_responded_at: null,
+      updated_at: now,
+    })
+    .eq("id", bookingId)
+    .select(BEAUTY_BOOKING_ADMIN_SELECT)
+    .single();
+
+  if (updateError) {
+    if (isRecord(updateError) && updateError.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", { table: BEAUTY_BOOKING_TABLE, code: updateError.code });
+    }
+    throw new BeautyBookingStorageError("update_failed", { code: isRecord(updateError) && typeof updateError.code === "string" ? updateError.code : undefined });
+  }
+
+  return attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
 }

@@ -32,12 +32,23 @@ export default function LostFoundPage() {
 
     return (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: '#f8fafc', paddingBottom: 24 }}>
-            <header style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', padding: '20px 20px 24px', color: 'white' }}>
+            <header style={{ 
+                background: '#FEF9C3', 
+                borderBottom: '1px solid #FEF08A',
+                padding: '16px 20px', 
+                color: '#000000',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12
+            }}>
                 <button
                     onClick={step === 'steps' ? () => setStep('where') : () => router.back()}
-                    style={{ background: 'none', border: 'none', color: 'white', fontSize: '1.4rem', cursor: 'pointer', marginBottom: 8 }}
+                    style={{ background: 'none', border: 'none', color: '#000000', fontSize: '1.4rem', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                 >←</button>
-                <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🔍 {t('help_page.lost_header')}</h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontSize: '1.25rem', lineHeight: 1 }}>🔍</span>
+                    <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#000000' }}>{t('my_page.help_lost', { defaultValue: '분실물' })}</h1>
+                </div>
             </header>
 
             {step === 'where' ? (
@@ -78,13 +89,17 @@ export default function LostFoundPage() {
                         
                         {/* 1330 Dual Action Card */}
                         <div style={{ background: 'white', borderRadius: 14, padding: '16px', marginBottom: 10, border: '2px solid #f59e0b30', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
-                            <div style={{ fontWeight: 700, color: '#f59e0b', fontSize: '0.9rem', marginBottom: 10 }}>📞 {t('help_page.interp_hotline_title')}</div>
-                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                                <a href="tel:1330" style={{ background: '#f59e0b15', color: '#d97706', padding: '8px 14px', borderRadius: 18, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}>
-                                    {t('help_page.call_btn', { defaultValue: '전화 연결' })}
-                                </a>
-                                <a href="https://visitkorea.or.kr/helper/main.do" target="_blank" rel="noopener noreferrer" style={{ background: '#fffbeb', color: '#b45309', padding: '8px 14px', borderRadius: 18, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', border: '1px solid #fde68a' }}>
-                                    💬 {t('help_page.interp_chat_label')}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontWeight: 700, color: '#f59e0b', fontSize: '0.9rem', marginBottom: 4 }}>📞 {t('help_page.interp_hotline_title')}</div>
+                                    <a href="https://visitkorea.or.kr/helper/main.do" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', background: '#fffbeb', color: '#b45309', padding: '6px 12px', borderRadius: 14, fontWeight: 700, fontSize: '0.8rem', textDecoration: 'none', border: '1px solid #fde68a', marginTop: 4 }}>
+                                        💬 {t('help_page.interp_chat_label')}
+                                    </a>
+                                </div>
+                                <a href="tel:1330" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: '50%', background: '#22C55E', color: 'white', textDecoration: 'none', boxShadow: '0 2px 8px rgba(34, 197, 94, 0.3)', flexShrink: 0 }}>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.58c0-.56-.45-1.04-1-1.04z" />
+                                    </svg>
                                 </a>
                             </div>
                         </div>

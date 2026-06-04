@@ -29,9 +29,23 @@ export default function MedicalPage() {
 
     return (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: '#f8fafc', paddingBottom: 24 }}>
-            <header style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)', padding: '20px 20px 24px', color: 'white' }}>
-                <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: 'white', fontSize: '1.4rem', cursor: 'pointer', marginBottom: 8 }}>←</button>
-                <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>🏥 {t('help_page.medical_header')}</h1>
+            <header style={{ 
+                background: '#FFF5F5', 
+                borderBottom: '1px solid #FEE2E2',
+                padding: '16px 20px', 
+                color: '#000000',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12
+            }}>
+                <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: '#000000', fontSize: '1.4rem', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>←</button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="9.5" y="3" width="5" height="18" fill="#EF4444" rx="1.5"/>
+                        <rect x="3" y="9.5" width="18" height="5" fill="#EF4444" rx="1.5"/>
+                    </svg>
+                    <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#000000' }}>{t('my_page.help_medical', { defaultValue: '의료' })}</h1>
+                </div>
             </header>
 
             {/* Quick call */}
@@ -41,7 +55,11 @@ export default function MedicalPage() {
                         <div style={{ fontWeight: 800, fontSize: '1rem', color: '#dc2626' }}>🚑 {t('help_page.emergency_119_title')}</div>
                         <div style={{ fontSize: '0.82rem', color: '#64748b' }}>{t('help_page.emergency_119_desc')}</div>
                     </div>
-                    <a href="tel:119" style={{ background: '#ef4444', color: 'white', padding: '10px 20px', borderRadius: 30, fontWeight: 700, textDecoration: 'none', boxShadow: '0 2px 6px rgba(239, 68, 68, 0.3)' }}>📞 {t('help_page.call_btn')}</a>
+                    <a href="tel:119" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: '50%', background: '#22C55E', color: 'white', textDecoration: 'none', boxShadow: '0 2px 8px rgba(34, 197, 94, 0.3)', flexShrink: 0 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.58c0-.56-.45-1.04-1-1.04z" />
+                        </svg>
+                    </a>
                 </div>
                 
                 <div style={{ borderTop: '1px dashed #fecaca', paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -49,7 +67,11 @@ export default function MedicalPage() {
                         <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#334155' }}>🩺 {t('help_page.consult_1339_title')}</div>
                         <div style={{ fontSize: '0.78rem', color: '#64748b' }}>{t('help_page.consult_1339_desc')}</div>
                     </div>
-                    <a href="tel:1339" style={{ background: 'white', color: '#dc2626', padding: '7px 16px', borderRadius: 20, fontWeight: 700, textDecoration: 'none', fontSize: '0.85rem', border: '1px solid #fecaca' }}>{t('help_page.call_btn')}</a>
+                    <a href="tel:1339" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: '50%', background: '#22C55E', color: 'white', textDecoration: 'none', boxShadow: '0 2px 8px rgba(34, 197, 94, 0.3)', flexShrink: 0 }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.58c0-.56-.45-1.04-1-1.04z" />
+                        </svg>
+                    </a>
                 </div>
             </div>
 

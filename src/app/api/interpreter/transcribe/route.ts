@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-
-import { transcribeInterpreterAudio } from "@/lib/interpreter/transcriber.ts";
+import { transcribeInterpreterAudio } from "@/lib/interpreter/transcriber";
 
 export const runtime = "nodejs";
 

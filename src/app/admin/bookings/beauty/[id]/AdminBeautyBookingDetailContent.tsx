@@ -96,6 +96,21 @@ type AlternativeState = {
   error: string | null;
 };
 
+type QuoteFormState = {
+  shopName: string;
+  shopAddress: string;
+  serviceName: string;
+  date: string;
+  time: string;
+  totalPrice: string;
+  currency: string;
+  note: string;
+  refundPolicy: string;
+  expiresAt: string;
+  isSubmitting: boolean;
+  error: string | null;
+};
+
 type ImageModalState = {
   isLoading: boolean;
   error: string | null;
@@ -235,6 +250,20 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     isSubmitting: false,
     error: null,
   });
+  const [quoteForm, setQuoteForm] = useState<QuoteFormState>({
+    shopName: '',
+    shopAddress: '',
+    serviceName: '',
+    date: '',
+    time: '',
+    totalPrice: '',
+    currency: 'KRW',
+    note: '',
+    refundPolicy: '',
+    expiresAt: '',
+    isSubmitting: false,
+    error: null,
+  });
 
   useEffect(() => {
     const mobileWrapper = document.querySelector('.mobile-wrapper');
@@ -343,6 +372,22 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     setAlternative({
       slots: selectedBooking.alternativeOfferItems.length > 0 ? selectedBooking.alternativeOfferItems : [{ date: '', time: '' }],
       note: selectedBooking.alternativeOfferNote,
+      isSubmitting: false,
+      error: null,
+    });
+    setQuoteForm({
+      shopName: selectedBooking.quoteShopName ?? '',
+      shopAddress: selectedBooking.quoteShopAddress ?? '',
+      serviceName: selectedBooking.quoteServiceName ?? '',
+      date: selectedBooking.quoteDate ?? '',
+      time: selectedBooking.quoteTime ?? '',
+      totalPrice: selectedBooking.quoteTotalPrice !== null ? String(selectedBooking.quoteTotalPrice) : '',
+      currency: selectedBooking.quoteCurrency ?? 'KRW',
+      note: selectedBooking.quoteNote ?? '',
+      refundPolicy: selectedBooking.quoteRefundPolicy ?? '',
+      expiresAt: selectedBooking.quoteExpiresAt
+        ? selectedBooking.quoteExpiresAt.slice(0, 16)
+        : '',
       isSubmitting: false,
       error: null,
     });
@@ -624,6 +669,51 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
         ...current,
         isSubmitting: false,
       }));
+    }
+  };
+
+  const handleSendQuote = async () => {
+    if (!selectedBooking) return;
+
+    if (!quoteForm.shopName.trim() || !quoteForm.date.trim() || !quoteForm.time.trim()) {
+      setQuoteForm((c) => ({ ...c, error: '매장명, 제안 날짜, 제안 시간은 필수입니다.' }));
+      return;
+    }
+    const parsedPrice = parseInt(quoteForm.totalPrice, 10);
+    if (isNaN(parsedPrice) || parsedPrice < 0) {
+      setQuoteForm((c) => ({ ...c, error: '총 금액은 0 이상의 숫자여야 합니다.' }));
+      return;
+    }
+
+    clearFeedback();
+    setQuoteForm((c) => ({ ...c, isSubmitting: true, error: null }));
+
+    try {
+      const item = await sendPatch(
+        {
+          action: 'send_quote',
+          quote: {
+            quoteShopName: quoteForm.shopName.trim(),
+            quoteShopAddress: quoteForm.shopAddress.trim(),
+            quoteServiceName: quoteForm.serviceName.trim(),
+            quoteDate: quoteForm.date,
+            quoteTime: quoteForm.time,
+            quoteTotalPrice: parsedPrice,
+            quoteCurrency: quoteForm.currency.trim() || 'KRW',
+            quoteNote: quoteForm.note.trim(),
+            quoteRefundPolicy: quoteForm.refundPolicy.trim(),
+            quoteExpiresAt: quoteForm.expiresAt ? new Date(quoteForm.expiresAt).toISOString() : null,
+          },
+        },
+        '예약 제안서를 저장하지 못했어요.',
+      );
+      setSelectedBooking(item);
+      setActionSuccess('예약 제안서를 저장/발송했어요.');
+      void loadBooking(false);
+    } catch (error) {
+      setQuoteForm((c) => ({ ...c, error: error instanceof Error ? error.message : '예약 제안서를 저장하지 못했어요.' }));
+    } finally {
+      setQuoteForm((c) => ({ ...c, isSubmitting: false }));
     }
   };
 
@@ -1378,6 +1468,157 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                 ) : null}
               </section>
             </div>
+              </section>
+
+              <section className={styles.detailCard}>
+                <div>
+                  <h3 className={styles.blockTitle}>예약 제안서</h3>
+                  <p className={styles.sectionText}>고객에게 보낼 확정 예약 제안 정보를 입력하세요.</p>
+                </div>
+
+                {selectedBooking.quoteStatus ? (
+                  <div
+                    style={{
+                      marginBottom: 16,
+                      padding: '10px 14px',
+                      background: selectedBooking.quoteStatus === 'pending' ? '#fef9c3' : selectedBooking.quoteStatus === 'accepted' ? '#dcfce7' : '#fee2e2',
+                      borderRadius: 8,
+                      fontSize: '0.82rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    }}
+                  >
+                    <span style={{ fontWeight: 700 }}>
+                      제안 상태:{' '}
+                      {selectedBooking.quoteStatus === 'pending' ? '고객 확인 중' :
+                       selectedBooking.quoteStatus === 'accepted' ? '수락됨' :
+                       selectedBooking.quoteStatus === 'rejected' ? '거절됨' : '만료됨'}
+                    </span>
+                    {selectedBooking.quoteSentAt ? (
+                      <span style={{ color: '#64748b' }}>제안 발송일: {formatDateTimeLabel(selectedBooking.quoteSentAt)}</span>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                <div className={styles.grid2}>
+                  <label className={styles.field}>
+                    <span>매장명 *</span>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      value={quoteForm.shopName}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, shopName: e.target.value }))}
+                      placeholder={selectedBooking.storeName}
+                    />
+                  </label>
+                  <label className={styles.field}>
+                    <span>매장 주소</span>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      value={quoteForm.shopAddress}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, shopAddress: e.target.value }))}
+                      placeholder="예: 서울 강남구 ..."
+                    />
+                  </label>
+                  <label className={styles.field}>
+                    <span>확정 시술명</span>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      value={quoteForm.serviceName}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, serviceName: e.target.value }))}
+                      placeholder={selectedBooking.primaryServiceName ?? ''}
+                    />
+                  </label>
+                  <label className={styles.field}>
+                    <span>제안 날짜 *</span>
+                    <input
+                      type="date"
+                      className={styles.input}
+                      value={quoteForm.date}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, date: e.target.value }))}
+                    />
+                  </label>
+                  <label className={styles.field}>
+                    <span>제안 시간 *</span>
+                    <input
+                      type="time"
+                      className={styles.input}
+                      value={quoteForm.time}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, time: e.target.value }))}
+                    />
+                  </label>
+                  <label className={styles.field}>
+                    <span>총 금액 *</span>
+                    <input
+                      type="number"
+                      min="0"
+                      className={styles.input}
+                      value={quoteForm.totalPrice}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, totalPrice: e.target.value }))}
+                      placeholder="0"
+                    />
+                  </label>
+                  <label className={styles.field}>
+                    <span>통화</span>
+                    <select
+                      className={styles.select}
+                      value={quoteForm.currency}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, currency: e.target.value }))}
+                    >
+                      <option value="KRW">KRW</option>
+                      <option value="USD">USD</option>
+                      <option value="JPY">JPY</option>
+                    </select>
+                  </label>
+                  <label className={styles.field}>
+                    <span>제안 만료 시각</span>
+                    <input
+                      type="datetime-local"
+                      className={styles.input}
+                      value={quoteForm.expiresAt}
+                      onChange={(e) => setQuoteForm((c) => ({ ...c, expiresAt: e.target.value }))}
+                    />
+                  </label>
+                </div>
+
+                <label className={styles.field} style={{ marginTop: 12 }}>
+                  <span>운영자 안내 메모</span>
+                  <textarea
+                    className={styles.input}
+                    style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
+                    value={quoteForm.note}
+                    onChange={(e) => setQuoteForm((c) => ({ ...c, note: e.target.value }))}
+                    placeholder="고객에게 전달할 안내 메모를 입력해 주세요."
+                  />
+                </label>
+
+                <label className={styles.field} style={{ marginTop: 12 }}>
+                  <span>환불/취소 정책</span>
+                  <textarea
+                    className={styles.input}
+                    style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
+                    value={quoteForm.refundPolicy}
+                    onChange={(e) => setQuoteForm((c) => ({ ...c, refundPolicy: e.target.value }))}
+                    placeholder="예: 시술 3일 전까지 전액 환불 가능, 이후 50% 환불"
+                  />
+                </label>
+
+                {quoteForm.error ? (
+                  <p style={{ color: '#dc2626', fontSize: '0.8rem', marginTop: 12, marginBottom: 0 }}>{quoteForm.error}</p>
+                ) : null}
+
+                <button
+                  type="button"
+                  onClick={() => void handleSendQuote()}
+                  disabled={quoteForm.isSubmitting}
+                  className={`${styles.actionButton} ${styles.actionPrimary}`}
+                  style={{ width: '100%', marginTop: 16 }}
+                >
+                  {quoteForm.isSubmitting ? '저장 중...' : '예약 제안서 저장/발송'}
+                </button>
               </section>
 
               <section className={styles.detailCard}>
