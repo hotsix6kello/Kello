@@ -631,16 +631,16 @@ function TravelHelperCard({
 
     return (
         <section style={{
-            background: 'var(--hanji-ivory)',
-            border: 'none',
-            padding: '10px 16px',
+            background: 'transparent',
+            borderBottom: '1px solid var(--warm-sand)',
+            padding: '12px 16px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             fontSize: '0.8rem',
             fontWeight: 800,
             color: 'var(--foreground)',
-            margin: '0 0 -8px 0',
+            margin: 0,
             boxShadow: 'none',
         }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -1272,10 +1272,6 @@ function MyPageContent() {
                 </div>
             </header>
 
-            {!capabilities.canViewAdminConsole && (
-                <TravelHelperCard accessToken={accessToken} authReady={authReady} />
-            )}
-
             <ProfileSummaryCard
                 userName={displayUserName}
                 subtitle={displayProfileSubtitle}
@@ -1293,57 +1289,59 @@ function MyPageContent() {
                 }}
             />
 
-            {/* Help Center Quick Access Icons */}
-            <div className={styles.quickActionBar} style={{
-                marginTop: 0,
-                marginBottom: 12,
+            {/* Help Center Section */}
+            <div style={{
                 background: '#FFFFFF',
                 border: '1px solid var(--warm-sand)',
-                borderRadius: '24px',
-                padding: '4px 8px',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 4,
-                boxShadow: 'var(--shadow-sm)'
+                borderRadius: '16px',
+                marginBottom: 16,
+                marginTop: 4,
+                boxShadow: 'var(--shadow-sm)',
+                overflow: 'hidden'
             }}>
+                {!capabilities.canViewAdminConsole && (
+                    <TravelHelperCard accessToken={accessToken} authReady={authReady} />
+                )}
+                <div className={styles.quickActionBar} style={{
+                    padding: '8px 16px',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                }}>
                 {[
                     { 
                         icon: (
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="#EF4444" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#EF4444" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 2H15V9H22V15H15V22H9V15H2V9H9V2Z" />
                             </svg>
                         ), 
-                        label: "의료", 
                         path: "/help/medical", 
                         color: "#FEE2E2", 
                         borderColor: "#FCA5A5", 
                     },
                     { 
                         icon: (
-                            <Shield size={22} color="#3B82F6" strokeWidth={2.5} />
+                            <Shield size={18} color="#3B82F6" strokeWidth={2.5} />
                         ), 
-                        label: "경찰", 
                         path: "/help/police", 
                         color: "#EFF6FF", 
                         borderColor: "#BFDBFE", 
                     },
                     { 
                         icon: (
-                            <Languages size={22} color="#10B981" strokeWidth={2.5} />
+                            <Languages size={18} color="#10B981" strokeWidth={2.5} />
                         ), 
-                        label: "통역", 
                         path: "/help/interpretation", 
                         color: "#ECFDF5", 
                         borderColor: "#A7F3D0", 
                     },
                     { 
                         icon: (
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="11" cy="11" r="8" />
                                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                             </svg>
                         ), 
-                        label: "분실물", 
                         path: "/help/lost", 
                         color: "#FEF9C3", 
                         borderColor: "#FEF08A", 
@@ -1354,33 +1352,29 @@ function MyPageContent() {
                         onClick={() => router.push(item.path)}
                         style={{
                             display: 'flex',
-                            flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
                             cursor: 'pointer',
-                            padding: '2px 4px',
-                            borderRadius: '12px',
-                            transition: 'background-color 0.2s',
+                            transition: 'transform 0.1s',
                         }}
+                        onMouseDown={e => e.currentTarget.style.transform = 'scale(0.92)'}
+                        onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
                     >
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: 36,
-                            height: 36,
-                            borderRadius: '10px',
+                            width: 34,
+                            height: 34,
+                            borderRadius: '50%',
                             background: item.color,
                             border: `1px solid ${item.borderColor}`,
-                            marginBottom: 2,
                         }}>
                             {item.icon}
                         </div>
-                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--foreground)' }}>
-                            {item.label}
-                        </div>
                     </div>
                 ))}
+                </div>
             </div>
 
             {!capabilities.canViewAdminConsole && (
