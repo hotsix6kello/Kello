@@ -741,7 +741,7 @@ function MyBookingsSection({
                 <div style={{
                     textAlign: 'center',
                     padding: '32px 0',
-                    background: '#F0EBE1',
+                    background: '#FFFFFF',
                     border: '1px solid var(--warm-sand)',
                     borderRadius: 16
                 }}>
@@ -791,7 +791,7 @@ function MyBookingsSection({
                         <div
                             key={b.id}
                             style={{
-                                background: '#F0EBE1', borderRadius: 14,
+                                background: '#FFFFFF', borderRadius: 14,
                                 border: '1px solid var(--warm-sand)', padding: '14px 16px',
                             }}
                         >
@@ -892,7 +892,7 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
                 <div style={{ 
                     textAlign: 'center', 
                     padding: '32px 0px',
-                    background: '#F0EBE1',
+                    background: '#FFFFFF',
                     border: '1px solid var(--warm-sand)',
                     borderRadius: 16
                 }}>
@@ -924,7 +924,7 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
                             style={{
                                 padding: '16px',
                                 borderRadius: 16,
-                                background: '#F0EBE1',
+                                background: '#FFFFFF',
                                 border: '1px solid var(--warm-sand)',
                                 cursor: 'pointer',
                                 boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.01)',
