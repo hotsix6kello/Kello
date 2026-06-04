@@ -202,7 +202,7 @@ function ProfileSummaryCard({
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: 16, 
-                background: 'var(--surface)', 
+                background: '#F0EBE1', 
                 padding: '18px 16px', 
                 borderRadius: '16px', 
                 border: '1px solid var(--warm-sand)', 
