@@ -1289,7 +1289,7 @@ function MyPageContent() {
                     boxShadow: 'var(--shadow-sm)',
                     marginTop: 0,
                     marginBottom: 0,
-                    background: 'var(--surface)',
+                    background: '#F0EBE1',
                 }}
             />
 
