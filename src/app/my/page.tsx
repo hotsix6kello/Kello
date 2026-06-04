@@ -720,10 +720,11 @@ function MyBookingsSection({
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
-                <h2 className={styles.sectionTitle}>내 예약</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: -4 }}>
+                <h2 className={styles.sectionTitle} style={{ margin: 0, padding: 0 }}>내 예약</h2>
                 <button
                     className={styles.sectionMore}
+                    style={{ margin: 0, padding: 0 }}
                     onClick={() => router.push('/my/bookings/beauty')}
                 >
                     전체 보기
@@ -872,12 +873,13 @@ function CommunityHubSection({ authorName }: { authorName: string }) {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
-                 <h2 className={styles.sectionTitle}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: -4 }}>
+                 <h2 className={styles.sectionTitle} style={{ margin: 0, padding: 0 }}>
                      {t('my_page.community_hub.title_new', { defaultValue: '내 커뮤니티' })}
                  </h2>
                  <button
                      className={styles.sectionMore}
+                     style={{ margin: 0, padding: 0 }}
                      onClick={() => router.push('/my/community')}
                  >
                      {t('common.actions.view_all_new', { defaultValue: '전체 보기' })}
