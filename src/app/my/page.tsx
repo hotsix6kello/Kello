@@ -630,20 +630,16 @@ function TravelHelperCard({
     const weatherIcon = loadingWeather ? '🌤' : (weather ? weather.icon : '🌤');
 
     return (
-        <section style={{
-            background: 'transparent',
-            padding: '12px 16px',
+        <div style={{
             display: 'flex',
-            justifyContent: 'flex-start',
-            gap: 16,
             alignItems: 'center',
-            fontSize: '0.8rem',
+            gap: 12,
+            fontSize: '0.75rem',
             fontWeight: 800,
             color: 'var(--foreground)',
-            margin: 0,
-            boxShadow: 'none',
+            flexShrink: 0,
         }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 <span>{weatherIcon}</span>
                 <span>{cityKo}</span>
                 <span>
@@ -653,7 +649,7 @@ function TravelHelperCard({
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 {exchangeLabel}
             </div>
-        </section>
+        </div>
     );
 }
 
@@ -1297,25 +1293,33 @@ function MyPageContent() {
                 marginBottom: 16,
                 marginTop: 4,
                 boxShadow: 'var(--shadow-sm)',
-                overflow: 'hidden',
+                padding: '10px 12px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                overflowX: 'auto',
+                scrollbarWidth: 'none',
+                WebkitOverflowScrolling: 'touch',
             }}>
+                {/* 왼쪽: 날씨/환율 (존재할 경우) */}
                 {!capabilities.canViewAdminConsole && (
-                    <TravelHelperCard accessToken={accessToken} authReady={authReady} />
+                    <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                        <TravelHelperCard accessToken={accessToken} authReady={authReady} />
+                        {/* 구분선 */}
+                        <div style={{ width: 1, height: 20, background: 'var(--warm-sand)', margin: '0 12px', flexShrink: 0 }} />
+                    </div>
                 )}
-                <div className={styles.quickActionBar} style={{
-                    padding: '8px 16px 8px 0',
+                
+                {/* 오른쪽: 헬프센터 퀵 액션 */}
+                <div style={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
                     alignItems: 'center',
                     gap: 8,
+                    flexShrink: 0,
                 }}>
                 {[
                     { 
                         icon: (
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#EF4444" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#EF4444" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 2H15V9H22V15H15V22H9V15H2V9H9V2Z" />
                             </svg>
                         ), 
@@ -1325,7 +1329,7 @@ function MyPageContent() {
                     },
                     { 
                         icon: (
-                            <Shield size={18} color="#3B82F6" strokeWidth={2.5} />
+                            <Shield size={16} color="#3B82F6" strokeWidth={2.5} />
                         ), 
                         path: "/help/police", 
                         color: "#EFF6FF", 
@@ -1333,7 +1337,7 @@ function MyPageContent() {
                     },
                     { 
                         icon: (
-                            <Languages size={18} color="#10B981" strokeWidth={2.5} />
+                            <Languages size={16} color="#10B981" strokeWidth={2.5} />
                         ), 
                         path: "/help/interpretation", 
                         color: "#ECFDF5", 
@@ -1341,7 +1345,7 @@ function MyPageContent() {
                     },
                     { 
                         icon: (
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="11" cy="11" r="8" />
                                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                             </svg>
@@ -1368,8 +1372,8 @@ function MyPageContent() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: 34,
-                            height: 34,
+                            width: 30,
+                            height: 30,
                             borderRadius: '50%',
                             background: item.color,
                             border: `1px solid ${item.borderColor}`,
