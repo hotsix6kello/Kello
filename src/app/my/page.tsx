@@ -203,7 +203,7 @@ function ProfileSummaryCard({
                 alignItems: 'center', 
                 gap: 16, 
                 background: '#F0EBE1', 
-                padding: '18px 16px', 
+                padding: '36px 16px', 
                 borderRadius: '16px', 
                 border: '1px solid var(--warm-sand)', 
                 boxShadow: 'var(--shadow-sm)',
@@ -1296,11 +1296,11 @@ function MyPageContent() {
             {/* Help Center Quick Access Icons */}
             <div className={styles.quickActionBar} style={{
                 marginTop: 0,
-                marginBottom: 16,
-                background: '#F0EBE1',
+                marginBottom: 12,
+                background: '#FFFFFF',
                 border: '1px solid var(--warm-sand)',
                 borderRadius: '24px',
-                padding: '6px 8px',
+                padding: '4px 8px',
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: 4,
@@ -1358,7 +1358,7 @@ function MyPageContent() {
                             alignItems: 'center',
                             justifyContent: 'center',
                             cursor: 'pointer',
-                            padding: '4px 4px',
+                            padding: '2px 4px',
                             borderRadius: '12px',
                             transition: 'background-color 0.2s',
                         }}
@@ -1367,16 +1367,16 @@ function MyPageContent() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: 40,
-                            height: 40,
-                            borderRadius: '12px',
+                            width: 36,
+                            height: 36,
+                            borderRadius: '10px',
                             background: item.color,
                             border: `1px solid ${item.borderColor}`,
-                            marginBottom: 4,
+                            marginBottom: 2,
                         }}>
                             {item.icon}
                         </div>
-                        <div style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--foreground)' }}>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--foreground)' }}>
                             {item.label}
                         </div>
                     </div>
