@@ -98,7 +98,7 @@ export default function ExplorePage() {
     const renderMap = () => {
       console.log("[KakaoMap] 4. renderMap 함수 내부 진입. window.kakao 상태:", typeof window !== 'undefined' ? window.kakao : 'undefined');
       if (typeof window === 'undefined' || !window.kakao || !window.kakao.maps) {
-        console.error("❌ [KakaoMap] window.kakao.maps가 아직 없습니다. 로딩이 실패했거나 지연 중입니다.");
+        console.warn("⚠️ [KakaoMap] window.kakao.maps가 아직 없습니다. 로딩이 실패했거나 지연 중입니다.");
         return;
       }
 
@@ -169,10 +169,10 @@ export default function ExplorePage() {
               initMapWithLocation(37.4711, 126.7010);
             }
           } catch (e) {
-            console.error("❌ [KakaoMap] 지도 객체(new kakao.maps.Map) 생성 중 예외 발생:", e);
+            console.warn("⚠️ [KakaoMap] 지도 객체(new kakao.maps.Map) 생성 중 예외 발생:", e);
           }
         } else {
-          console.error("❌ [KakaoMap] id가 'map'인 컨테이너가 DOM에 존재하지 않습니다!");
+          console.warn("⚠️ [KakaoMap] id가 'map'인 컨테이너가 DOM에 존재하지 않습니다!");
         }
       });
     };
@@ -196,7 +196,8 @@ export default function ExplorePage() {
       script.async = true;
 
       script.onerror = () => {
-        console.error("❌ [KakaoMap] 카카오맵 스크립트 로드 실패. 카카오 디벨로퍼스(developers.kakao.com)의 [플랫폼] - [Web] 설정에 http://localhost:3000 도메인이 정상 등록되었는지 확인하세요.");
+        console.warn("⚠️ [KakaoMap] 카카오맵 스크립트 로드 실패. API 키나 도메인 설정을 확인하세요.");
+        // 에러 발생 시 UI가 터지지 않도록 경고만 남김
       };
 
       // 스크립트 다운로드가 끝나면 무조건 renderMap 실행

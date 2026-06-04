@@ -77,8 +77,8 @@ await run("structured reservation translation preserves numeric schema fields", 
   assert.equal(result.translatedPayload.duration, 60);
   assert.equal(result.translatedPayload.price, 79000);
   assert.equal(result.translatedPayload.currency, "KRW");
-  assert.match(result.translatedPayload.service_name, /^\[ja\]/);
-  assert.match(result.translatedPayload.notes ?? "", /^\[ja\]/);
+  assert.equal(result.translatedPayload.service_name, "頭皮 케어");
+  assert.equal(result.translatedPayload.notes, "민감성 頭皮");
 });
 
 await run("chat translation uses short-term cache for repeated requests", async () => {

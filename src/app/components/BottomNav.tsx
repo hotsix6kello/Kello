@@ -5,7 +5,7 @@ import styles from "./BottomNav.module.css";
 import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { navItems } from "./navigationConfig";
-import { Home, Search, MessagesSquare, Users, User } from "lucide-react";
+import { Home, Search, Users, User } from "lucide-react";
 
 interface NavItem {
     id: string;
@@ -49,8 +49,7 @@ const renderIcon = (iconName: string, isActive: boolean) => {
         case "search":
             return <Search size={24} strokeWidth={strokeWidth} color={color} />;
         case "talk":
-            // 커스텀 보라색 말풍선 아이콘 적용 (크기 44로 최적화)
-            return <PurpleChatIcon size={44} />; 
+            return <PurpleChatIcon size={52} />; 
         case "community":
             return <Users size={24} strokeWidth={strokeWidth} color={color} />;
         case "my":
@@ -98,13 +97,19 @@ export default function BottomNav() {
                         key={item.path}
                         className={`${styles.navItem} ${isActive ? styles.active : ""} ${isCenter ? styles.centerItem : ""}`}
                         onClick={() => router.push(item.path)}
+                        style={isCenter ? { overflow: 'visible' } : undefined}
                     >
-                        {isActive && <div className={styles.indicator} />}
-                        <span className={`${styles.navIcon} ${isCenter ? styles.centerIcon : ""}`}>
-                            {renderIcon(item.icon, isActive)}
-
-                        </span>
-                        <span className={styles.navLabel}>{item.label}</span>
+                        {isActive && !isCenter && <div className={styles.indicator} />}
+                        {isCenter ? (
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 38 }}>
+                                {renderIcon(item.icon, isActive)}
+                            </div>
+                        ) : (
+                            <span className={styles.navIcon}>
+                                {renderIcon(item.icon, isActive)}
+                            </span>
+                        )}
+                        <span className={styles.navLabel} style={isCenter ? { marginTop: 4 } : undefined}>{item.label}</span>
                     </div>
                 );
             })}
