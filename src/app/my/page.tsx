@@ -1297,7 +1297,7 @@ function MyPageContent() {
             <div className={styles.quickActionBar} style={{
                 marginTop: 0,
                 marginBottom: 16,
-                background: 'var(--surface)',
+                background: '#F0EBE1',
                 border: '1px solid var(--warm-sand)',
                 borderRadius: '24px',
                 padding: '6px 8px',

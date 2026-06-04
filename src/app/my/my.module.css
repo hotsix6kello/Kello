@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    background: var(--surface);
+    background: #F0EBE1;
     border: 1px solid var(--warm-sand);
     border-radius: var(--radius-lg);
     padding: 28px 16px;
