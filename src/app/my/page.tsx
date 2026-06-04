@@ -211,7 +211,7 @@ function ProfileSummaryCard({
             }}
         >
             <div className={styles.profileAvatarWrap} style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setShowMenu(!showMenu)}>
-                <div className={styles.profileAvatar} style={{ width: 72, height: 72, borderRadius: '50%', background: '#E8E3D9', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2.5px solid var(--primary-glow)', overflow: 'hidden', position: 'relative' }}>
+                <div className={styles.profileAvatar} style={{ width: 72, height: 72, borderRadius: '50%', background: '#E0F2FE', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2.5px solid var(--primary-glow)', overflow: 'hidden', position: 'relative' }}>
                     {avatarUrl ? (
                         <Image 
                             src={avatarUrl} 
@@ -221,7 +221,7 @@ function ProfileSummaryCard({
                             style={{ borderRadius: '50%', objectFit: 'cover' }} 
                         />
                     ) : (
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#8A847F', width: '55%', height: '55%' }}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0ea5e9', width: '55%', height: '55%' }}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     )}
                 </div>
                 {flagUrl && (
