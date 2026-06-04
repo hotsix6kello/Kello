@@ -632,10 +632,10 @@ function TravelHelperCard({
     return (
         <section style={{
             background: 'transparent',
-            borderBottom: '1px solid var(--warm-sand)',
             padding: '12px 16px',
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-start',
+            gap: 16,
             alignItems: 'center',
             fontSize: '0.8rem',
             fontWeight: 800,
@@ -1297,16 +1297,20 @@ function MyPageContent() {
                 marginBottom: 16,
                 marginTop: 4,
                 boxShadow: 'var(--shadow-sm)',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
             }}>
                 {!capabilities.canViewAdminConsole && (
                     <TravelHelperCard accessToken={accessToken} authReady={authReady} />
                 )}
                 <div className={styles.quickActionBar} style={{
-                    padding: '8px 16px',
+                    padding: '8px 16px 8px 0',
                     display: 'flex',
-                    justifyContent: 'space-around',
+                    justifyContent: 'flex-end',
                     alignItems: 'center',
+                    gap: 8,
                 }}>
                 {[
                     { 
