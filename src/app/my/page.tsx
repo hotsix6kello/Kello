@@ -1268,53 +1268,29 @@ function MyPageContent() {
                 </div>
             </header>
 
-            <ProfileSummaryCard
-                userName={displayUserName}
-                subtitle={displayProfileSubtitle}
-                avatarUrl={avatarUrl}
-                onAvatarUpdate={(url) => setAvatarUrl(url)}
-                referralCode={referralCode}
-                countryCode={profileCountry}
-                style={{
-                    borderRadius: '24px',
-                    border: '1px solid var(--warm-sand)',
-                    boxShadow: 'var(--shadow-sm)',
-                    marginTop: 0,
-                    marginBottom: 0,
-                    background: '#F0EBE1',
-                }}
-            />
-
-            {/* Help Center Section */}
+            {/* Help Center Bar — 계정섹션 위에 위치 */}
             <div style={{
                 background: '#FFFFFF',
-                border: '1px solid var(--warm-sand)',
                 borderRadius: '16px',
-                marginBottom: 16,
-                marginTop: 4,
+                marginBottom: 4,
+                marginTop: 0,
                 boxShadow: 'var(--shadow-sm)',
                 padding: '10px 12px',
                 display: 'flex',
                 alignItems: 'center',
-                overflowX: 'auto',
-                scrollbarWidth: 'none',
-                WebkitOverflowScrolling: 'touch',
+                justifyContent: 'space-between',
             }}>
-                {/* 왼쪽: 날씨/환율 (존재할 경우) */}
+                {/* 왼쪽: 날씨/환율 */}
                 {!capabilities.canViewAdminConsole && (
-                    <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-                        <TravelHelperCard accessToken={accessToken} authReady={authReady} />
-                        {/* 구분선 */}
-                        <div style={{ width: 1, height: 20, background: 'var(--warm-sand)', margin: '0 12px', flexShrink: 0 }} />
-                    </div>
+                    <TravelHelperCard accessToken={accessToken} authReady={authReady} />
                 )}
-                
-                {/* 오른쪽: 헬프센터 퀵 액션 */}
+
+                {/* 오른쪽: 헬프센터 퀵 액션 — 오른쪽 정렬 */}
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: 8,
-                    flexShrink: 0,
+                    marginLeft: 'auto',
                 }}>
                 {[
                     { 
@@ -1384,6 +1360,23 @@ function MyPageContent() {
                 ))}
                 </div>
             </div>
+
+            <ProfileSummaryCard
+                userName={displayUserName}
+                subtitle={displayProfileSubtitle}
+                avatarUrl={avatarUrl}
+                onAvatarUpdate={(url) => setAvatarUrl(url)}
+                referralCode={referralCode}
+                countryCode={profileCountry}
+                style={{
+                    borderRadius: '24px',
+                    border: '1px solid var(--warm-sand)',
+                    boxShadow: 'var(--shadow-sm)',
+                    marginTop: 0,
+                    marginBottom: 0,
+                    background: '#F0EBE1',
+                }}
+            />
 
             {!capabilities.canViewAdminConsole && (
                 <ReferralSection coupons={coupons} />
