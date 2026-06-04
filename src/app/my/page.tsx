@@ -1270,12 +1270,10 @@ function MyPageContent() {
 
             {/* Help Center Bar — 계정섹션 위에 위치 */}
             <div style={{
-                background: '#FFFFFF',
-                borderRadius: '16px',
+                background: 'transparent',
                 marginBottom: 4,
                 marginTop: 0,
-                boxShadow: 'var(--shadow-sm)',
-                padding: '10px 12px',
+                padding: '6px 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -1348,9 +1346,9 @@ function MyPageContent() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: 30,
+                            width: 44,
                             height: 30,
-                            borderRadius: '50%',
+                            borderRadius: '10px',
                             background: item.color,
                             border: `1px solid ${item.borderColor}`,
                         }}>
