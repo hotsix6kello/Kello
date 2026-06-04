@@ -224,6 +224,29 @@ function ProfileSummaryCard({
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#8A847F', width: '55%', height: '55%' }}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     )}
                 </div>
+                {flagUrl && (
+                    <span style={{
+                        position: 'absolute',
+                        top: '-4px',
+                        right: '-4px',
+                        width: '22px',
+                        height: '16px',
+                        animation: 'flagBounce 1s ease infinite',
+                        display: 'inline-block',
+                        zIndex: 2,
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.15)',
+                        borderRadius: '3px',
+                        overflow: 'hidden'
+                    }}>
+                        <Image
+                            src={flagUrl}
+                            alt={countryCode || ""}
+                            width={22}
+                            height={16}
+                            className="object-cover"
+                        />
+                    </span>
+                )}
                 {uploading && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.7)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 700 }}>...</div>}
             </div>
 
@@ -231,25 +254,6 @@ function ProfileSummaryCard({
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <h1 className={styles.profileName} style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: 'var(--foreground)', position: 'relative' }}>
                         {userName}
-                        {flagUrl && (
-                            <span style={{
-                                position: 'absolute',
-                                top: '-6px',
-                                right: '-24px',
-                                width: '20px',
-                                height: '14px',
-                                animation: 'flagBounce 1s ease infinite',
-                                display: 'inline-block',
-                            }}>
-                                <Image
-                                    src={flagUrl}
-                                    alt={countryCode || ""}
-                                    width={20}
-                                    height={14}
-                                    className="object-cover rounded-[2px]"
-                                />
-                            </span>
-                        )}
                     </h1>
                 </div>
                 <div className={styles.profileSubtext} style={{ fontSize: '0.75rem', color: 'var(--gray-500)', wordBreak: 'break-all' }}>
@@ -1294,7 +1298,7 @@ function MyPageContent() {
                 background: 'var(--surface)',
                 border: '1px solid var(--warm-sand)',
                 borderRadius: '24px',
-                padding: '8px 8px',
+                padding: '6px 8px',
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: 4,
@@ -1352,7 +1356,7 @@ function MyPageContent() {
                             alignItems: 'center',
                             justifyContent: 'center',
                             cursor: 'pointer',
-                            padding: '8px 4px',
+                            padding: '4px 4px',
                             borderRadius: '12px',
                             transition: 'background-color 0.2s',
                         }}
@@ -1361,12 +1365,12 @@ function MyPageContent() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: 44,
-                            height: 44,
+                            width: 40,
+                            height: 40,
                             borderRadius: '12px',
                             background: item.color,
                             border: `1px solid ${item.borderColor}`,
-                            marginBottom: 6,
+                            marginBottom: 4,
                         }}>
                             {item.icon}
                         </div>
