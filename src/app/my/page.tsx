@@ -1271,9 +1271,9 @@ function MyPageContent() {
             {/* Help Center Bar — 계정섹션 위에 위치 */}
             <div style={{
                 background: 'transparent',
-                marginBottom: 4,
+                marginBottom: -6,
                 marginTop: 0,
-                padding: '6px 0',
+                padding: '4px 0 0 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
