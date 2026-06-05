@@ -1689,7 +1689,7 @@ export async function sendBookingQuote(
       quote_date: payload.quoteDate,
       quote_time: payload.quoteTime,
       quote_total_price: payload.quoteTotalPrice,
-      quote_currency: payload.quoteCurrency || 'KRW',
+      quote_currency: payload.quoteCurrency || 'USD',
       quote_note: payload.quoteNote,
       quote_refund_policy: payload.quoteRefundPolicy,
       quote_expires_at: payload.quoteExpiresAt ?? null,

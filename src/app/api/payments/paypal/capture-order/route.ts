@@ -106,8 +106,8 @@ export async function POST(request: NextRequest) {
       return jsonFailure("booking is already paid", 400);
     }
 
-    if (booking.quoteCurrency !== "KRW") {
-      return jsonFailure("only KRW payments are supported at this time", 400);
+    if (booking.quoteCurrency !== "USD") {
+      return jsonFailure("only USD payments are supported at this time", 400);
     }
 
     const accessToken = await getPayPalAccessToken();

@@ -109,8 +109,8 @@ export async function POST(request: NextRequest) {
       return jsonFailure("proposal price is not available", 400);
     }
 
-    if (booking.quoteCurrency !== "KRW") {
-      return jsonFailure("only KRW payments are supported at this time", 400);
+    if (booking.quoteCurrency !== "USD") {
+      return jsonFailure("only USD payments are supported at this time", 400);
     }
 
     const accessToken = await getPayPalAccessToken();
@@ -121,8 +121,8 @@ export async function POST(request: NextRequest) {
         {
           reference_id: booking.id,
           amount: {
-            currency_code: "KRW",
-            value: String(booking.quoteTotalPrice),
+            currency_code: "USD",
+            value: booking.quoteTotalPrice.toFixed(2),
           },
           description: booking.quoteServiceName ?? booking.primaryServiceName ?? "Beauty Service",
         },

@@ -1138,84 +1138,85 @@ function MyBeautyBookingsContent() {
                             <p style={{ marginTop: 12, fontSize: '0.88rem', color: '#065f46', fontWeight: 700, background: '#dcfce7', padding: '10px 14px', borderRadius: 10 }}>
                               💳 {t('beauty_bookings.payment_status_paid')} · {t('beauty_bookings.payment_success')}
                             </p>
-                          ) : (
-                            selectedBooking.quoteCurrency === 'KRW' &&
+                          ) : selectedBooking.quoteCurrency === 'USD' &&
                             selectedBooking.quoteTotalPrice !== null &&
                             PAYPAL_CLIENT_ID ? (
-                              <div style={{ marginTop: 16 }}>
-                                <p style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: 8 }}>
-                                  {t('beauty_bookings.payment_section_title')} · {new Intl.NumberFormat('ko-KR').format(selectedBooking.quoteTotalPrice)} KRW
-                                </p>
-                                {paymentError && (
-                                  <p style={{ color: '#dc2626', fontSize: '0.82rem', marginBottom: 8 }}>{paymentError}</p>
-                                )}
-                                <PayPalScriptProvider
-                                  options={{
-                                    clientId: PAYPAL_CLIENT_ID,
-                                    currency: 'KRW',
-                                    intent: 'capture',
+                            <div style={{ marginTop: 16 }}>
+                              <p style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: 8 }}>
+                                {t('beauty_bookings.payment_section_title')} · {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(selectedBooking.quoteTotalPrice)} USD
+                              </p>
+                              {paymentError && (
+                                <p style={{ color: '#dc2626', fontSize: '0.82rem', marginBottom: 8 }}>{paymentError}</p>
+                              )}
+                              <PayPalScriptProvider
+                                options={{
+                                  clientId: PAYPAL_CLIENT_ID,
+                                  currency: 'USD',
+                                  intent: 'capture',
+                                }}
+                              >
+                                <PayPalButtons
+                                  style={{ layout: 'vertical', height: 45 }}
+                                  createOrder={async () => {
+                                    const accessToken = await getCustomerAccessToken();
+                                    const res = await fetch('/api/payments/paypal/create-order', {
+                                      method: 'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json',
+                                        Authorization: `Bearer ${accessToken ?? ''}`,
+                                      },
+                                      body: JSON.stringify({ bookingId: selectedBooking.id }),
+                                    });
+                                    const data = (await res.json()) as { ok?: boolean; orderId?: string; error?: string };
+                                    if (!res.ok || !data.ok || !data.orderId) {
+                                      throw new Error(data.error ?? t('beauty_bookings.payment_error'));
+                                    }
+                                    return data.orderId;
                                   }}
-                                >
-                                  <PayPalButtons
-                                    style={{ layout: 'vertical', height: 45 }}
-                                    createOrder={async () => {
-                                      const accessToken = await getCustomerAccessToken();
-                                      const res = await fetch('/api/payments/paypal/create-order', {
-                                        method: 'POST',
-                                        headers: {
-                                          'Content-Type': 'application/json',
-                                          Authorization: `Bearer ${accessToken ?? ''}`,
-                                        },
-                                        body: JSON.stringify({ bookingId: selectedBooking.id }),
+                                  onApprove={async (data) => {
+                                    const accessToken = await getCustomerAccessToken();
+                                    const res = await fetch('/api/payments/paypal/capture-order', {
+                                      method: 'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json',
+                                        Authorization: `Bearer ${accessToken ?? ''}`,
+                                      },
+                                      body: JSON.stringify({ bookingId: selectedBooking.id, orderId: data.orderID }),
+                                    });
+                                    const result = (await res.json()) as { ok?: boolean; error?: string };
+                                    if (!res.ok || !result.ok) {
+                                      setPaymentError(result.error ?? t('beauty_bookings.payment_error'));
+                                      return;
+                                    }
+                                    setPaymentSuccess(t('beauty_bookings.payment_success'));
+                                    setPaymentError(null);
+                                    const token = await getCustomerAccessToken();
+                                    if (token) {
+                                      const listRes = await fetch('/api/bookings/beauty/mine', {
+                                        headers: { Authorization: `Bearer ${token}` },
+                                        cache: 'no-store',
                                       });
-                                      const data = (await res.json()) as { ok?: boolean; orderId?: string; error?: string };
-                                      if (!res.ok || !data.ok || !data.orderId) {
-                                        throw new Error(data.error ?? t('beauty_bookings.payment_error'));
+                                      const listBody = (await listRes.json().catch(() => null)) as { ok?: boolean; items?: BeautyBookingAdminRecord[] } | null;
+                                      if (listBody?.ok && Array.isArray(listBody.items)) {
+                                        setBookings(listBody.items);
                                       }
-                                      return data.orderId;
-                                    }}
-                                    onApprove={async (data) => {
-                                      const accessToken = await getCustomerAccessToken();
-                                      const res = await fetch('/api/payments/paypal/capture-order', {
-                                        method: 'POST',
-                                        headers: {
-                                          'Content-Type': 'application/json',
-                                          Authorization: `Bearer ${accessToken ?? ''}`,
-                                        },
-                                        body: JSON.stringify({ bookingId: selectedBooking.id, orderId: data.orderID }),
-                                      });
-                                      const result = (await res.json()) as { ok?: boolean; error?: string };
-                                      if (!res.ok || !result.ok) {
-                                        setPaymentError(result.error ?? t('beauty_bookings.payment_error'));
-                                        return;
-                                      }
-                                      setPaymentSuccess(t('beauty_bookings.payment_success'));
-                                      setPaymentError(null);
-                                      // 예약 목록 재조회
-                                      const token = await getCustomerAccessToken();
-                                      if (token) {
-                                        const listRes = await fetch('/api/bookings/beauty/mine', {
-                                          headers: { Authorization: `Bearer ${token}` },
-                                          cache: 'no-store',
-                                        });
-                                        const listBody = (await listRes.json().catch(() => null)) as { ok?: boolean; items?: BeautyBookingAdminRecord[] } | null;
-                                        if (listBody?.ok && Array.isArray(listBody.items)) {
-                                          setBookings(listBody.items);
-                                        }
-                                      }
-                                    }}
-                                    onError={(err) => {
-                                      console.error('[PayPal] error', err);
-                                      setPaymentError(t('beauty_bookings.payment_error'));
-                                    }}
-                                  />
-                                </PayPalScriptProvider>
-                                {paymentSuccess && (
-                                  <p style={{ color: '#059669', fontSize: '0.88rem', fontWeight: 600, marginTop: 10 }}>{paymentSuccess}</p>
-                                )}
-                              </div>
-                            ) : null
-                          )}
+                                    }
+                                  }}
+                                  onError={(err) => {
+                                    console.error('[PayPal] error', err);
+                                    setPaymentError(t('beauty_bookings.payment_error'));
+                                  }}
+                                />
+                              </PayPalScriptProvider>
+                              {paymentSuccess && (
+                                <p style={{ color: '#059669', fontSize: '0.88rem', fontWeight: 600, marginTop: 10 }}>{paymentSuccess}</p>
+                              )}
+                            </div>
+                          ) : selectedBooking.quoteCurrency !== 'USD' && selectedBooking.quoteTotalPrice !== null ? (
+                            <p style={{ marginTop: 12, fontSize: '0.82rem', color: '#92400e', background: '#fef3c7', padding: '10px 14px', borderRadius: 10 }}>
+                              {t('beauty_bookings.payment_currency_usd_only')}
+                            </p>
+                          ) : null}
                         </>
                       )}
 
