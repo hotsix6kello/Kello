@@ -243,6 +243,11 @@ function MyBeautyBookingsContent() {
   const [alternativeResponseError, setAlternativeResponseError] = useState<string | null>(null);
   const [alternativeResponseSuccess, setAlternativeResponseSuccess] = useState<string | null>(null);
 
+  // Quote response states
+  const [isQuoteResponding, setIsQuoteResponding] = useState(false);
+  const [quoteRespondError, setQuoteRespondError] = useState<string | null>(null);
+  const [quoteRespondSuccess, setQuoteRespondSuccess] = useState<string | null>(null);
+
   useEffect(() => {
     const init = async () => {
       const {
@@ -432,6 +437,10 @@ function MyBeautyBookingsContent() {
     setAlternativeResponseError(null);
     setAlternativeResponseSuccess(null);
     setIsAlternativeSubmitting(false);
+
+    setIsQuoteResponding(false);
+    setQuoteRespondError(null);
+    setQuoteRespondSuccess(null);
   }, [selectedBookingId]);
 
   useEffect(() => {
@@ -656,6 +665,50 @@ function MyBeautyBookingsContent() {
       setAlternativeResponseError(error instanceof Error ? error.message : t('beauty_bookings.error_alt'));
     } finally {
       setIsAlternativeSubmitting(false);
+    }
+  };
+
+  const handleRespondQuote = async (response: 'accepted' | 'rejected') => {
+    if (!selectedBooking || isQuoteResponding) return;
+
+    const accessToken = await getCustomerAccessToken();
+    if (!accessToken) {
+      setQuoteRespondError(t('beauty_bookings.error_login'));
+      return;
+    }
+
+    setIsQuoteResponding(true);
+    setQuoteRespondError(null);
+    setQuoteRespondSuccess(null);
+
+    try {
+      const apiResponse = await fetch(`/api/bookings/beauty/mine/${selectedBooking.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ action: 'respond_quote', response }),
+      });
+
+      const body = (await apiResponse.json()) as { ok?: boolean; item?: BeautyBookingAdminRecord; error?: string };
+
+      if (!apiResponse.ok || body?.ok !== true || !body.item) {
+        throw new Error(body?.error ?? t('beauty_bookings.quote_error_respond'));
+      }
+
+      setBookings((current) =>
+        current.map((booking) => (booking.id === body.item!.id ? body.item! : booking)),
+      );
+      setQuoteRespondSuccess(
+        response === 'accepted'
+          ? t('beauty_bookings.quote_accepted_message')
+          : t('beauty_bookings.quote_rejected_message'),
+      );
+    } catch (error) {
+      setQuoteRespondError(error instanceof Error ? error.message : t('beauty_bookings.quote_error_respond'));
+    } finally {
+      setIsQuoteResponding(false);
     }
   };
 
@@ -900,6 +953,184 @@ function MyBeautyBookingsContent() {
                      </div>
                    )}
                  </div>
+
+                {selectedBooking.quoteStatus !== null && (() => {
+                  const qs = selectedBooking.quoteStatus;
+                  const isExpiredByTime =
+                    qs === 'pending' &&
+                    selectedBooking.quoteExpiresAt !== null &&
+                    new Date(selectedBooking.quoteExpiresAt) < new Date();
+
+                  const borderColor =
+                    qs === 'accepted' ? '#059669' :
+                    qs === 'rejected' ? '#dc2626' :
+                    '#7c3aed';
+
+                  return (
+                    <section
+                      style={{
+                        border: `2px solid ${borderColor}`,
+                        borderRadius: 16,
+                        padding: 20,
+                        marginBottom: 20,
+                        background: qs === 'accepted' ? '#f0fdf4' : qs === 'rejected' ? '#fff1f2' : '#f5f3ff',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                        <span style={{ fontSize: '1.2rem' }}>📋</span>
+                        <h4 className={styles.blockTitle} style={{ margin: 0, color: borderColor }}>
+                          {t('beauty_bookings.quote_section_title')}
+                        </h4>
+                        <span style={{
+                          marginLeft: 'auto',
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                          padding: '2px 10px',
+                          borderRadius: 99,
+                          background: borderColor,
+                          color: 'white',
+                        }}>
+                          {qs === 'pending' ? t('beauty_bookings.quote_status_pending') :
+                           qs === 'accepted' ? t('beauty_bookings.quote_status_accepted') :
+                           qs === 'rejected' ? t('beauty_bookings.quote_status_rejected') :
+                           t('beauty_bookings.quote_status_expired')}
+                        </span>
+                      </div>
+
+                      {isExpiredByTime && (
+                        <p style={{ fontSize: '0.8rem', color: '#b45309', background: '#fef3c7', borderRadius: 8, padding: '6px 12px', marginBottom: 12 }}>
+                          ⚠ {t('beauty_bookings.quote_expired_notice')}
+                        </p>
+                      )}
+
+                      <dl className={styles.detailList}>
+                        {selectedBooking.quoteShopName && (
+                          <div>
+                            <dt>{t('beauty_bookings.quote_shop_name')}</dt>
+                            <dd style={{ fontWeight: 700 }}>{selectedBooking.quoteShopName}</dd>
+                          </div>
+                        )}
+                        {selectedBooking.quoteShopAddress && (
+                          <div>
+                            <dt>{t('beauty_bookings.quote_shop_address')}</dt>
+                            <dd>{selectedBooking.quoteShopAddress}</dd>
+                          </div>
+                        )}
+                        {selectedBooking.quoteServiceName && (
+                          <div>
+                            <dt>{t('beauty_bookings.quote_service_name')}</dt>
+                            <dd>{selectedBooking.quoteServiceName}</dd>
+                          </div>
+                        )}
+                        {(selectedBooking.quoteDate || selectedBooking.quoteTime) && (
+                          <div>
+                            <dt>{t('beauty_bookings.quote_date_time')}</dt>
+                            <dd>
+                              {selectedBooking.quoteDate ? formatDateLabel(selectedBooking.quoteDate, i18n.language) : ''}
+                              {selectedBooking.quoteTime ? ` ${selectedBooking.quoteTime}` : ''}
+                            </dd>
+                          </div>
+                        )}
+                        {selectedBooking.quoteTotalPrice !== null && (
+                          <div>
+                            <dt>{t('beauty_bookings.quote_total_price')}</dt>
+                            <dd style={{ fontWeight: 700, fontSize: '1.05rem' }}>
+                              {new Intl.NumberFormat(i18n.language === 'ko' ? 'ko-KR' : 'en-US').format(selectedBooking.quoteTotalPrice)}
+                              {selectedBooking.quoteCurrency ? ` ${selectedBooking.quoteCurrency}` : ''}
+                            </dd>
+                          </div>
+                        )}
+                        {selectedBooking.quoteNote && (
+                          <div style={{ gridColumn: '1 / -1' }}>
+                            <dt>{t('beauty_bookings.quote_note')}</dt>
+                            <dd style={{ background: 'white', padding: '8px 12px', borderRadius: 8, fontSize: '0.85rem', lineHeight: 1.5 }}>
+                              {selectedBooking.quoteNote}
+                            </dd>
+                          </div>
+                        )}
+                        {selectedBooking.quoteRefundPolicy && (
+                          <div style={{ gridColumn: '1 / -1' }}>
+                            <dt>{t('beauty_bookings.quote_refund_policy')}</dt>
+                            <dd style={{ background: 'white', padding: '8px 12px', borderRadius: 8, fontSize: '0.82rem', lineHeight: 1.5, color: '#374151' }}>
+                              {selectedBooking.quoteRefundPolicy}
+                            </dd>
+                          </div>
+                        )}
+                        {selectedBooking.quoteExpiresAt && (
+                          <div>
+                            <dt>{t('beauty_bookings.quote_expires_at')}</dt>
+                            <dd style={{ color: isExpiredByTime ? '#b45309' : 'inherit' }}>
+                              {formatDateTimeLabel(selectedBooking.quoteExpiresAt, i18n.language)}
+                            </dd>
+                          </div>
+                        )}
+                      </dl>
+
+                      {qs === 'pending' && !isExpiredByTime && (
+                        <>
+                          {quoteRespondError && (
+                            <p style={{ color: '#dc2626', fontSize: '0.82rem', margin: '12px 0 0' }}>{quoteRespondError}</p>
+                          )}
+                          {quoteRespondSuccess && (
+                            <p style={{ color: '#059669', fontSize: '0.82rem', margin: '12px 0 0' }}>{quoteRespondSuccess}</p>
+                          )}
+                          {!quoteRespondSuccess && (
+                            <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
+                              <button
+                                type="button"
+                                onClick={() => void handleRespondQuote('accepted')}
+                                disabled={isQuoteResponding}
+                                style={{
+                                  flex: 2,
+                                  padding: '14px',
+                                  background: '#7c3aed',
+                                  color: 'white',
+                                  border: 'none',
+                                  borderRadius: 12,
+                                  fontWeight: 700,
+                                  cursor: isQuoteResponding ? 'not-allowed' : 'pointer',
+                                  opacity: isQuoteResponding ? 0.7 : 1,
+                                }}
+                              >
+                                {isQuoteResponding ? t('beauty_bookings.quote_processing') : t('beauty_bookings.quote_action_accept')}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => void handleRespondQuote('rejected')}
+                                disabled={isQuoteResponding}
+                                style={{
+                                  flex: 1,
+                                  padding: '14px',
+                                  background: 'white',
+                                  color: '#dc2626',
+                                  border: '1px solid #fecaca',
+                                  borderRadius: 12,
+                                  fontWeight: 600,
+                                  cursor: isQuoteResponding ? 'not-allowed' : 'pointer',
+                                  opacity: isQuoteResponding ? 0.7 : 1,
+                                }}
+                              >
+                                {t('beauty_bookings.quote_action_reject')}
+                              </button>
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      {qs === 'accepted' && (
+                        <p style={{ marginTop: 14, fontSize: '0.88rem', color: '#065f46', fontWeight: 600, background: 'white', padding: '10px 14px', borderRadius: 10 }}>
+                          ✅ {t('beauty_bookings.quote_accepted_message')}
+                        </p>
+                      )}
+
+                      {qs === 'rejected' && (
+                        <p style={{ marginTop: 14, fontSize: '0.88rem', color: '#991b1b', fontWeight: 600, background: 'white', padding: '10px 14px', borderRadius: 10 }}>
+                          ❌ {t('beauty_bookings.quote_rejected_message')}
+                        </p>
+                      )}
+                    </section>
+                  );
+                })()}
 
                 <details className={styles.moreInfoDetails}>
                   <summary className={styles.moreInfoSummary}>{t('beauty_bookings.detail_more_info')} ▾</summary>
