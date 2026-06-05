@@ -1524,6 +1524,96 @@ export async function getBookingImageSignedUrls(
   }));
 }
 
+/**
+ * 고객이 예약 제안서(quote)에 수락 또는 거절로 응답한다.
+ * booking status, payment_status는 변경하지 않는다.
+ */
+export async function respondToQuote(
+  bookingId: string,
+  customerUserId: string,
+  response: "accepted" | "rejected",
+): Promise<BeautyBookingAdminRecord> {
+  if (!hasSupabaseServerAccess()) {
+    throw new BeautyBookingStorageError("env_missing", {
+      missingEnvVars: getMissingSupabaseServerEnvVars(),
+    });
+  }
+
+  const client = getSupabaseServerClient();
+
+  const { data: currentRow, error: readError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .select("id, customer_user_id, quote_status")
+    .eq("id", bookingId)
+    .maybeSingle();
+
+  if (readError) {
+    if (isRecord(readError) && readError.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", { table: BEAUTY_BOOKING_TABLE, code: readError.code });
+    }
+    throw new BeautyBookingStorageError("read_failed", { code: isRecord(readError) && typeof readError.code === "string" ? readError.code : undefined });
+  }
+
+  if (!currentRow) {
+    throw new BeautyBookingStorageError("not_found");
+  }
+
+  if (currentRow.customer_user_id !== customerUserId) {
+    throw new BeautyBookingStorageError("forbidden_owner");
+  }
+
+  if (currentRow.quote_status !== "pending") {
+    throw new BeautyBookingStorageError("transition_not_allowed", {
+      currentQuoteStatus: currentRow.quote_status,
+      reason: "quote_status must be pending to respond",
+    });
+  }
+
+  const now = new Date().toISOString();
+  const { data: updatedRow, error: updateError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .update({
+      quote_status: response satisfies BeautyBookingQuoteStatus,
+      quote_responded_at: now,
+      updated_at: now,
+    })
+    .eq("id", bookingId)
+    .select(BEAUTY_BOOKING_ADMIN_SELECT)
+    .single();
+
+  if (updateError) {
+    if (isRecord(updateError) && updateError.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", { table: BEAUTY_BOOKING_TABLE, code: updateError.code });
+    }
+    throw new BeautyBookingStorageError("update_failed", { code: isRecord(updateError) && typeof updateError.code === "string" ? updateError.code : undefined });
+  }
+
+  const record = await attachSingleBookingImageMetadata(
+    client,
+    mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
+  );
+
+  if (record.customerUserId) {
+    void createBeautyBookingNotification({
+      user_id: record.customerUserId,
+      booking_id: bookingId,
+      event_type: response === "accepted" ? "alternative_offer_accepted" : "alternative_offer_rejected",
+      title: response === "accepted" ? "예약 제안서를 수락하셨습니다" : "예약 제안서를 거절하셨습니다",
+      message: response === "accepted"
+        ? "제안을 수락하셨습니다. 다음 단계에서 결제를 진행해 주세요."
+        : "제안을 거절하셨습니다. Kello가 다시 확인할 예정입니다.",
+      metadata_json: {
+        quoteShopName: record.quoteShopName,
+        quoteDate: record.quoteDate,
+        quoteTime: record.quoteTime,
+        response,
+      },
+    }).catch(console.error);
+  }
+
+  return record;
+}
+
 export type SendBookingQuotePayload = {
   quoteShopName: string;
   quoteShopAddress: string;

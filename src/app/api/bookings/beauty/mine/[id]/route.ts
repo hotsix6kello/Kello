@@ -7,6 +7,7 @@ import {
   cancelBeautyBookingRequestAsCustomer,
   requestChangeBeautyBookingAsCustomer,
   respondToAlternativeOffer,
+  respondToQuote,
 } from "@/lib/bookings/beautyBookingServer.ts";
 import { type BeautyBookingAlternativeOfferItem } from "@/lib/bookings/beautyBookingAdmin.ts";
 import { getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
@@ -51,19 +52,21 @@ export async function PATCH(
     const action = body.action || "cancel";
     const reason = typeof body.reason === "string" ? body.reason.trim() : "";
 
-    if (!id || !reason) {
-      return jsonFailure(`${action} reason is required`, 400);
-    }
-
     let item;
-    if (action === "request_change") {
+    if (action === "respond_quote") {
+      const quoteResponse = body.response;
+      if (quoteResponse !== "accepted" && quoteResponse !== "rejected") {
+        return jsonFailure("response must be 'accepted' or 'rejected'", 400);
+      }
+      item = await respondToQuote(id, userId, quoteResponse);
+    } else if (action === "request_change") {
       if (!reason) return jsonFailure("reason is required", 400);
       item = await requestChangeBeautyBookingAsCustomer(id, userId, reason);
     } else if (action === "respond_alternative") {
       if (!body.response) return jsonFailure("response is required", 400);
       item = await respondToAlternativeOffer(id, userId, body.response, body.selectedItem);
     } else {
-      if (!reason) return jsonFailure("reason is required", 400);
+      if (!reason) return jsonFailure("cancel reason is required", 400);
       item = await cancelBeautyBookingRequestAsCustomer(id, userId, reason);
     }
 
