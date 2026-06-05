@@ -605,7 +605,16 @@
     "quote_accepted_message": "You have accepted the proposal. Payment will be processed in the next step.",
     "quote_rejected_message": "You have rejected the proposal. Kello can review it again.",
     "quote_expired_notice": "This proposal may have expired.",
-    "quote_error_respond": "Processing failed. Please try again."
+    "quote_error_respond": "Processing failed. Please try again.",
+    "payment_section_title": "Payment",
+    "payment_paypal_button_label": "Pay with PayPal",
+    "payment_processing": "Processing payment...",
+    "payment_success": "Payment complete. Your booking is confirmed.",
+    "payment_already_paid": "This booking has already been paid.",
+    "payment_error": "An error occurred during payment. Please try again.",
+    "payment_currency_unsupported": "This currency is not supported at this time.",
+    "payment_status_paid": "Paid",
+    "payment_status_pending": "Payment Pending"
   },
   "beauty_explore": {
     "hero_title": "Explore Beauty Bookings",

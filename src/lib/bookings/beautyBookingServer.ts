@@ -153,6 +153,12 @@ export type BeautyBookingAdminSelectRow = {
   style_image_url: string | null;
   agreements: unknown;
   created_from_flow: string;
+  payment_status: string | null;
+  payment_method: string | null;
+  payment_transaction_id: string | null;
+  paypal_order_id: string | null;
+  paypal_capture_id: string | null;
+  paid_at: string | null;
 };
 
 type BeautyBookingImageSelectRow = {
@@ -303,6 +309,12 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     quoteStatus: isBeautyBookingQuoteStatus(row.quote_status) ? row.quote_status : null,
     quoteSentAt: row.quote_sent_at ?? null,
     quoteRespondedAt: row.quote_responded_at ?? null,
+    paymentStatus: row.payment_status ?? null,
+    paymentMethod: row.payment_method ?? null,
+    paymentTransactionId: row.payment_transaction_id ?? null,
+    paypalOrderId: row.paypal_order_id ?? null,
+    paypalCaptureId: row.paypal_capture_id ?? null,
+    paidAt: row.paid_at ?? null,
     alternativeOfferStatus: (row.alternative_offer_status as BeautyBookingAlternativeOfferStatus) ?? "none",
     alternativeOfferItems: Array.isArray(row.alternative_offer_items) ? row.alternative_offer_items : [],
     alternativeOfferNote: row.alternative_offer_note ?? "",
@@ -381,6 +393,12 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "quote_status",
   "quote_sent_at",
   "quote_responded_at",
+  "payment_status",
+  "payment_method",
+  "payment_transaction_id",
+  "paypal_order_id",
+  "paypal_capture_id",
+  "paid_at",
 ].join(", ");
 
 const BEAUTY_BOOKING_SUMMARY_SELECT = [
