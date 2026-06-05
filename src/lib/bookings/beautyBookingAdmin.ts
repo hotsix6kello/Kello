@@ -128,6 +128,13 @@ export type BeautyBookingAdminRecord = {
   quoteStatus: BeautyBookingQuoteStatus | null;
   quoteSentAt: string | null;
   quoteRespondedAt: string | null;
+  // Payment fields
+  paymentStatus: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
+  paypalOrderId: string | null;
+  paypalCaptureId: string | null;
+  paidAt: string | null;
 };
 
 export type BeautyBookingAdminListFilters = {
