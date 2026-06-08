@@ -51,6 +51,9 @@ type BookingFlowSkeletonProps = {
   completedImageUploadResult?: BookingUploadedImageResultCompletion | null;
   onDraftStateChange?: (snapshot: BookingFlowSkeletonDraftStateSnapshot) => void;
   onSubmitIntent?: (snapshot: BookingFlowSkeletonDraftStateSnapshot) => void;
+  submitFeedbackMessage?: string | null;
+  submitFeedbackTone?: "info" | "error" | null;
+  isSubmitting?: boolean;
 };
 
 type BookingFlowVisualStepId = "service-selection" | "details-entry" | "confirmation";
@@ -83,6 +86,9 @@ export function BookingFlowSkeleton({
   completedImageUploadResult,
   onDraftStateChange,
   onSubmitIntent,
+  submitFeedbackMessage = null,
+  submitFeedbackTone = null,
+  isSubmitting = false,
 }: BookingFlowSkeletonProps) {
   const { t } = useTranslation("common");
   const [state, setState] = useState(() => createInitialBookingFlowState(initialCategory));
@@ -438,6 +444,7 @@ export function BookingFlowSkeleton({
             customerDetails={state.customerDetails}
             confirmation={state.confirmation}
             summary={summary}
+            isSubmitting={isSubmitting}
             onChangeConfirmation={(patch) =>
               setState((currentState) => ({
                 ...currentState,
@@ -448,6 +455,8 @@ export function BookingFlowSkeleton({
               }))
             }
             onSubmitIntent={() => onSubmitIntent?.(submitDraftSnapshot)}
+            submitFeedbackMessage={submitFeedbackMessage}
+            submitFeedbackTone={submitFeedbackTone}
           />
         );
 
