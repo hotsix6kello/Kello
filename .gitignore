@@ -37,6 +37,7 @@ yarn-error.log*
 # Temporary folders
 .turbo/
 .vercel/
+supabase/.temp/
 *.patch
 *.txt
 *.json
