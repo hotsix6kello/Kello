@@ -14,7 +14,7 @@
 
 1. **[보안-Critical]** `/api/places/*`, `/api/routes/compute`, `/api/talk/kello-ai` 등 유료 외부 API(Google Maps/Places, Gemini)를 호출하는 라우트에 인증/요청 제한이 전혀 없어 비용 남용에 노출되어 있음
 2. **[문서 정합성-High]** `docs/kello-mvp-stabilization-report.md`가 "BookingFlowSkeleton은 폐기되었다"고 기술하지만, 이후 커밋(`02c40e9`)에서 해당 플로우가 **부활하여 현재 기본 예약 플로우로 운영 중** — 신규 개발자에게 잘못된 정보를 줄 수 있음
-3. **[죽은 코드]** `src/lib/translator/interpreterTranslator.ts` 전체와 concierge 관련 인터페이스가 사용처 없이 방치됨 (약 130 LOC)
+3. **[죽은 코드]** concierge 관련 인터페이스(`saveConciergeEvent`, `listBookings`, `BookingRecord` 등)가 제거된 concierge 라우트의 잔재로 사용처 없이 방치됨 (약 130 LOC) — ※ `interpreterTranslator.ts`는 최초 grep 분석에서 죽은 코드로 오판되었으나, 재검증 결과 `/api/interpreter/translate` 라우트와 테스트에서 실제로 사용 중인 활성 코드로 정정됨 (아래 2.1절 참고)
 4. **[중복 코드]** PayPal `create-order`/`capture-order` 라우트가 `getPayPalBaseUrl()`, `getPayPalAccessToken()`을 각각 구현 — 공용 모듈화 필요
 5. **[i18n]** `id`, `ms` 로케일이 "9개 언어 지원 대상"으로 선언되어 있으나 실제로는 영어 대비 약 1,100개 키 누락 (마이페이지 영역 미번역)
 
@@ -57,13 +57,13 @@ git 브랜치 목록에 `chore/audit-legacy-translator-*`, `chore/prune-translat
 | 성격 | 통역(인터프리터) 도메인 특화 | 범용 다국어 번역 인프라 |
 | 상태 | 일부 활성, 일부 죽은 코드 | 전체 활성 (서비스의 중심) |
 
-**확인된 죽은 코드 (사용처 0건, grep으로 검증):**
-- `src/lib/translator/interpreterTranslator.ts` 전체 — `MockInterpreterTranslationProvider`, `GeminiInterpreterTranslationProvider`, `translateInterpreterText()` 모두 어디서도 import되지 않음. `InShopInterpreterService`는 대신 `TranslationService`(translation/)를 사용 중 → **리팩터링 후 지우지 않은 잔재**
-- `src/lib/translator/types.ts:178-179`, `repository.ts:25-34, 82-100`의 `saveConciergeEvent()` / concierge 이벤트 타입 — concierge 라우트가 이미 제거됨(커밋 `82c520d`)에도 인터페이스만 잔존
-- `src/lib/translator/tests/home-translator.test.ts` — 삭제된 concierge 코드를 참조
+> **[정정 — 2026-06-08]** 최초 작성 시 본 절은 `interpreterTranslator.ts` 전체를 "사용처 0건의 죽은 코드"로 기재했으나, 정리 작업 착수 전 재검증한 결과 이는 **오판**으로 확인되었습니다. 실제로는 `/api/interpreter/translate/route.ts:7,54`가 `translateInterpreterText()`를 직접 import·호출하고, `interpreter.translator.test.ts`에 3개의 통과 테스트가 있으며, `docs/in_shop_interpreter_mvp.md:84-85`에 설계된 API 라우트로 문서화되어 있는 **활성 코드**입니다. 따라서 삭제 대상에서 제외했습니다 (3절 표·4절 권장사항 5번도 함께 정정).
 
-**아키텍처 비일관성:**
-- `/api/interpreter/session`, `/api/interpreter/turn`은 `InShopInterpreterService`를 거치는데, `/api/interpreter/translate/route.ts:7`은 죽은 `interpreterTranslator.ts`의 `translateInterpreterText()`를 직접 호출 — 패턴이 갈라짐
+**확인된 죽은 코드 (사용처 0건, grep + 테스트로 재검증):**
+- `src/lib/translator/types.ts:3-11, 17-29, 42-58, 60-95`, `repository.ts`의 `saveConciergeEvent()`/`listBookings()`/`saveBooking()` 메서드와 `ConciergeIntent`/`ExtractedBookingFields`/`ConciergeToolTrace`/`ServiceInfoResult`/`AvailabilityToolResult`/`BookingRecord`/`BookingMutationResult`/`ConciergeRequest`/`ConciergeResponse`/`ConciergeEventRecord` 등 concierge 관련 타입 — concierge 라우트가 이미 제거됨(커밋 `82c520d`)에도 인터페이스만 잔존
+
+**아키텍처 비일관성 (죽은 코드 아님 — 설계 분기):**
+- `/api/interpreter/session`, `/api/interpreter/turn`은 `InShopInterpreterService`를 거치는데, `/api/interpreter/translate/route.ts:7`은 `interpreterTranslator.ts`의 `translateInterpreterText()`를 직접 호출 — 두 라우트군이 서로 다른 번역 경로를 사용하는 설계상 분기점(정리 대상은 아니며, 향후 일원화 검토 권장)
 - `/api/talk/chat-translate`와 `/api/interpreter/translate`는 유사한 일을 하면서도 응답 형태(`translatedText` vs `translatedPayload`)가 다름
 
 **TODO/FIXME:** `src/lib/interpreter/transcriber.ts`를 포함해 이 영역에는 TODO/FIXME 주석이 더 이상 없음 (이전 정리 과정에서 모두 해소된 것으로 보임).
@@ -138,8 +138,8 @@ git 브랜치 목록에 `chore/audit-legacy-translator-*`, `chore/prune-translat
 | `.next/` (507MB), `node_modules/` | git 추적 0건, `.gitignore` 정상 등록 | 조치 불필요 (정상) |
 | `supabase/.temp/` | 이번 세션에서 추적 해제 완료 (커밋 `038b7a0`) | 완료 |
 | `src/lib/bookings/bookingFlowSkeleton/mockUploadBridgeAdapter.ts` | **고아 파일** — `createMockBookingImageUploadBridgeAdapter` 사용처 0건 (grep 검증), barrel(`index.ts`)에도 미등록 | 삭제 가능 |
-| `src/lib/translator/interpreterTranslator.ts` | **고아 파일** (전체) — 위 2.1절 참조 | 삭제 가능 |
-| `src/lib/translator/types.ts`, `repository.ts`의 concierge 관련 타입/메서드 | 죽은 인터페이스 (~50 LOC) | 삭제 가능 |
+| `src/lib/translator/interpreterTranslator.ts` | ~~고아 파일~~ → **[정정] 활성 코드** — `/api/interpreter/translate` 라우트·테스트에서 사용 중, 위 2.1절 정정 박스 참조 | 삭제 금지 |
+| `src/lib/translator/types.ts`, `repository.ts`의 concierge 관련 타입/메서드 (`saveConciergeEvent`, `listBookings`, `saveBooking`, `ConciergeEventRecord` 등 ~10종) | 죽은 인터페이스 (~130 LOC) | 삭제 가능 |
 | `docs/archive/legacy/home_translator_hub.md` | 문서 자체에 "현재 구조가 아님" 명시 | `archive/` 유지 또는 삭제 |
 | `docs/kello-mvp-stabilization-report.md` | **stale** — 2.2절의 문서-코드 불일치 참조 | 갱신 또는 archive 이동 후 최신 상태로 재작성 |
 | `docs/booking-deeplink-audit.md`, `external-*-audit.md`, `mypage-qa-*`, `*-provenance-audit.md` 등 약 12개 | 목적을 다한 감사/스냅샷 문서 | `docs/archive/`로 이동 (22개 → 약 8개로 정리) |
@@ -154,7 +154,7 @@ git에 잘못 커밋된 대용량/바이너리 파일은 없으며(최대 추적
 2. **[High/문서]** `docs/kello-mvp-stabilization-report.md`를 현재 코드 상태(`BookingFlowSkeleton`이 부활하여 기본 플로우로 운영 중)에 맞게 갱신하거나 archive로 이동 — 그대로 두면 향후 개발자에게 잘못된 가이드가 됨
 3. **[Medium/리팩터]** PayPal `create-order`/`capture-order`의 `getPayPalBaseUrl`/`getPayPalAccessToken` 중복을 `lib/paypal/` 공용 모듈로 추출
 4. **[Medium/안정성]** 견적(quote) 생성 시점에 통화를 USD로 고정/검증하여, 결제 시점 거부가 아닌 생성 시점 차단으로 전환
-5. **[Low~Medium/정리]** `interpreterTranslator.ts`, concierge 잔재 타입, `mockUploadBridgeAdapter.ts` 등 고아 코드(~180 LOC) 삭제
+5. **[Low~Medium/정리]** concierge 잔재 타입(`saveConciergeEvent`, `BookingRecord` 등 ~130 LOC), `mockUploadBridgeAdapter.ts` 등 고아 코드 삭제 — ※ `interpreterTranslator.ts`는 활성 코드로 정정되어 본 항목에서 제외
 6. **[Low/i18n]** `id`, `ms` 로케일의 마이페이지 영역(약 1,100개 키) 번역을 우선 진행하거나, "9개 언어" 목표에서 제외 여부를 명확히 결정. `zh-TW`/`zh-HK` 식별 방식도 단일화
 7. **[Low/문서 정리]** `docs/` 최상위에 쌓인 12개 안팎의 1회성 감사/체크리스트 문서를 `docs/archive/`로 이동하고, Supabase 타입(`supabase gen types`)을 생성·커밋하여 최신 스키마와 동기화
 
