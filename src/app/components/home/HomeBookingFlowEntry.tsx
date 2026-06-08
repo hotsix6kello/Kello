@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   BookingFlowSkeleton,
   type BookingFlowSkeletonDraftStateSnapshot,
@@ -17,6 +18,8 @@ import {
 import { runLegacySubmitPreparation } from "@/lib/bookings/bookingFlowSkeleton/submitRunner";
 import { uploadBookingImage } from "@/lib/bookings/SupabaseUploadAdapter";
 import { submitBeautyBooking } from "@/app/explore/beautyBooking";
+import type { LegacySubmitAdapterBlocker } from "@/lib/bookings/bookingFlowSkeleton/submitAdapter";
+import { useTrip, type SharedBusiness } from "@/lib/contexts/TripContext";
 import {
   HomeBookingDraftReadySequenceSnapshot,
   HomeBookingFlowEntryProps,
@@ -38,6 +41,103 @@ export {
   resolveSkeletonCategoryFromLegacy,
 } from "./HomeBookingFlowEntry.helpers";
 
+type SubmitFeedbackTone = "info" | "error";
+
+const HOME_CONCIERGE_STORE_ID = "kello-concierge-home";
+const HOME_CONCIERGE_STORE_NAME = "Kello Concierge";
+const HOME_CONCIERGE_REGION = "Seoul";
+
+function normalizeText(value: string | null | undefined): string | null {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : null;
+}
+
+function resolveBusinessStoreId(business: SharedBusiness | null | undefined): string | null {
+  return normalizeText(business?.id) ?? normalizeText(business?.place_id);
+}
+
+function resolveBusinessStoreName(business: SharedBusiness | null | undefined): string | null {
+  return (
+    normalizeText(business?.name) ??
+    normalizeText(business?.title) ??
+    normalizeText(business?.displayName?.text)
+  );
+}
+
+function resolveBusinessAddress(business: SharedBusiness | null | undefined): string | null {
+  return (
+    normalizeText(business?.address) ??
+    normalizeText(business?.formattedAddress) ??
+    normalizeText(business?.formatted_address) ??
+    normalizeText(business?.vicinity)
+  );
+}
+
+function resolveRegionFromAddress(address: string | null): string | null {
+  const normalizedAddress = normalizeText(address);
+
+  if (!normalizedAddress) {
+    return null;
+  }
+
+  const primarySegment = normalizedAddress.split(",")[0]?.trim() ?? normalizedAddress;
+  const tokens = primarySegment.split(/\s+/).filter(Boolean);
+
+  if (tokens.length >= 2) {
+    return `${tokens[0]} ${tokens[1]}`;
+  }
+
+  return tokens[0] ?? null;
+}
+
+function resolveBlockedSubmitMessage(params: {
+  blockers: LegacySubmitAdapterBlocker[];
+  t: HomeBookingFlowEntryProps["t"];
+}): string {
+  const { blockers, t } = params;
+
+  if (
+    blockers.includes("missing-store-id") ||
+    blockers.includes("missing-store-name") ||
+    blockers.includes("missing-region")
+  ) {
+    return t("home_beauty.booking.submit_blocked_store", {
+      defaultValue: "선택된 매장 정보가 없어 예약 요청을 보낼 수 없습니다. 매장을 다시 선택한 뒤 다시 시도해 주세요.",
+    });
+  }
+
+  if (blockers.includes("missing-primary-service-id")) {
+    return t("home_beauty.booking.submit_blocked_service", {
+      defaultValue: "시술 메뉴를 선택한 뒤 다시 시도해 주세요.",
+    });
+  }
+
+  if (blockers.includes("missing-booking-date") || blockers.includes("missing-booking-time")) {
+    return t("home_beauty.booking.submit_blocked_schedule", {
+      defaultValue: "예약 날짜 정보를 확인한 뒤 다시 시도해 주세요.",
+    });
+  }
+
+  if (blockers.includes("missing-customer-name") || blockers.includes("missing-customer-phone")) {
+    return t("home_beauty.booking.submit_blocked_customer", {
+      defaultValue: "이름과 연락처를 모두 입력한 뒤 다시 시도해 주세요.",
+    });
+  }
+
+  if (
+    blockers.includes("booking-confirmed-required") ||
+    blockers.includes("privacy-consent-required")
+  ) {
+    return t("home_beauty.booking.submit_blocked_agreements", {
+      defaultValue: "필수 약관 동의 후 다시 시도해 주세요.",
+    });
+  }
+
+  return t("home_beauty.booking.submit_blocked_generic", {
+    defaultValue: "예약 요청을 시작할 수 없습니다. 입력한 정보를 다시 확인해 주세요.",
+  });
+}
+
 export default function HomeBookingFlowEntry({
   isOpen,
   onClose,
@@ -52,21 +152,71 @@ export default function HomeBookingFlowEntry({
   skeletonDebugPanel,
   t,
 }: HomeBookingFlowEntryProps) {
+  const searchParams = useSearchParams();
+  const { sharedBusinesses } = useTrip();
   const draftSequenceSnapshotRef = useRef<HomeBookingDraftReadySequenceSnapshot>({
     lastEmittedSignature: null,
   });
   const [activeSubmitStatus, setActiveSubmitStatus] = useState<SkeletonSubmitAttemptStatus>("idle");
+  const [submitFeedback, setSubmitFeedback] = useState<{
+    tone: SubmitFeedbackTone;
+    message: string;
+  } | null>(null);
   const localImageFilesRef = useRef<Map<string, File>>(new Map());
 
   const skeletonInitialCategory = useMemo(
     () => resolveSkeletonCategoryFromLegacy(initialCategory),
     [initialCategory],
   );
+  const queryStoreId = searchParams.get("store_id");
+  const queryBusinessName = searchParams.get("business_name");
+
+  const resolvedLinkedBusiness = useMemo(() => {
+    const targetStoreId =
+      normalizeText(storeContext?.storeId) ??
+      normalizeText(queryStoreId);
+
+    if (!targetStoreId) {
+      return null;
+    }
+
+    return (
+      sharedBusinesses.find((business) => resolveBusinessStoreId(business) === targetStoreId) ?? null
+    );
+  }, [queryStoreId, sharedBusinesses, storeContext?.storeId]);
+
+  const resolvedStoreContext = useMemo(
+    () => ({
+      storeId:
+        normalizeText(storeContext?.storeId) ??
+        normalizeText(queryStoreId) ??
+        resolveBusinessStoreId(resolvedLinkedBusiness) ??
+        HOME_CONCIERGE_STORE_ID,
+      storeName:
+        normalizeText(storeContext?.storeName) ??
+        normalizeText(queryBusinessName) ??
+        resolveBusinessStoreName(resolvedLinkedBusiness) ??
+        HOME_CONCIERGE_STORE_NAME,
+      region:
+        normalizeText(storeContext?.region) ??
+        resolveRegionFromAddress(resolveBusinessAddress(resolvedLinkedBusiness)) ??
+        HOME_CONCIERGE_REGION,
+    }),
+    [
+      queryBusinessName,
+      queryStoreId,
+      resolvedLinkedBusiness,
+      storeContext?.region,
+      storeContext?.storeId,
+      storeContext?.storeName,
+    ],
+  );
 
   // Reset submit status when flow closes
   useEffect(() => {
     if (!isOpen) {
       setActiveSubmitStatus("idle");
+      setSubmitFeedback(null);
       localImageFilesRef.current.clear();
     }
   }, [isOpen]);
@@ -158,17 +308,34 @@ export default function HomeBookingFlowEntry({
       });
 
       onSubmitPreparationChange?.(preparation);
+      setSubmitFeedback(null);
 
       if (!preparation.canAttemptSubmit || !preparation.payloadCandidate) {
+        const blockedMessage = resolveBlockedSubmitMessage({
+          blockers: preparation.blockers,
+          t,
+        });
+
+        setSubmitFeedback({
+          tone: "error",
+          message: blockedMessage,
+        });
         onSubmitAttemptStateChange?.({
           status: "idle",
-          message: "Submit did not start because current draft is blocked.",
-          errorSummary: null,
+          message: blockedMessage,
+          errorSummary: blockedMessage,
         });
+        window.alert(blockedMessage);
         return;
       }
 
       setActiveSubmitStatus("submitting");
+      setSubmitFeedback({
+        tone: "info",
+        message: t("home_beauty.booking.submit_in_progress", {
+          defaultValue: "예약 요청을 보내는 중입니다.",
+        }),
+      });
       onSubmitAttemptStateChange?.({
         status: "submitting",
         message: t("home_beauty.booking.submitting_images"),
@@ -253,6 +420,7 @@ export default function HomeBookingFlowEntry({
         }
 
         setActiveSubmitStatus("submitted");
+        setSubmitFeedback(null);
         onSubmitAttemptStateChange?.({
           status: "submitted",
           message: `${t("home_beauty.booking.booking_completed")} (ID: ${result.bookingId})`,
@@ -261,11 +429,16 @@ export default function HomeBookingFlowEntry({
       } catch (err: unknown) {
         setActiveSubmitStatus("submit-error");
         const errorMessage = err instanceof Error ? err.message : t("home_beauty.booking.booking_failed");
+        setSubmitFeedback({
+          tone: "error",
+          message: errorMessage,
+        });
         onSubmitAttemptStateChange?.({
           status: "submit-error",
           message: errorMessage,
-          errorSummary: "Submission failed.",
+          errorSummary: errorMessage,
         });
+        window.alert(errorMessage);
       }
     },
     [
@@ -335,11 +508,14 @@ export default function HomeBookingFlowEntry({
             ) : (
               <BookingFlowSkeleton
                 initialCategory={skeletonInitialCategory}
-                storeContext={storeContext}
+                storeContext={resolvedStoreContext}
                 onImageUploadBridgeRequest={handleImageUploadBridgeRequest}
                 completedImageUploadResult={completedImageUploadResult}
                 onDraftStateChange={handleDraftStateChange}
                 onSubmitIntent={handleSubmitIntent}
+                submitFeedbackMessage={submitFeedback?.message ?? null}
+                submitFeedbackTone={submitFeedback?.tone ?? null}
+                isSubmitting={activeSubmitStatus === "submitting"}
               />
             )}
           </div>
