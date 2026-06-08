@@ -20,8 +20,11 @@ type ConfirmationStepShellProps = {
   confirmation: BookingConfirmationState;
   summary: BookingFlowSummary;
   embedded?: boolean;
+  isSubmitting?: boolean;
   onChangeConfirmation?: (patch: Partial<BookingConfirmationState>) => void;
   onSubmitIntent?: () => void;
+  submitFeedbackMessage?: string | null;
+  submitFeedbackTone?: "info" | "error" | null;
 };
 
 type ReceiptRow = {
@@ -72,8 +75,11 @@ export function ConfirmationStepShell({
   confirmation,
   summary,
   embedded = false,
+  isSubmitting = false,
   onChangeConfirmation,
   onSubmitIntent,
+  submitFeedbackMessage = null,
+  submitFeedbackTone = null,
 }: ConfirmationStepShellProps) {
   const { t } = useTranslation("common");
   const capabilities = getBookingFlowCategoryCapabilities(category);
@@ -384,13 +390,28 @@ export function ConfirmationStepShell({
       </section>
 
       <section className="sticky bottom-0 z-10 -mx-4 bg-white px-4 pb-10 pt-4 shadow-[0_-20px_40px_rgba(255,255,255,1)]">
+        {submitFeedbackMessage ? (
+          <p
+            className={`mb-3 rounded-2xl px-4 py-3 text-[13px] font-semibold ${
+              submitFeedbackTone === "error"
+                ? "bg-red-50 text-red-600"
+                : "bg-fuchsia-50 text-fuchsia-700"
+            }`}
+          >
+            {submitFeedbackMessage}
+          </p>
+        ) : null}
         <button
           type="button"
           onClick={() => onSubmitIntent?.()}
-          disabled={!canSendSubmitIntent}
+          disabled={!canSendSubmitIntent || isSubmitting}
           className="inline-flex min-h-[60px] w-full items-center justify-center rounded-2xl px-4 py-4 text-[16px] font-bold transition bg-fuchsia-600 text-white shadow-[0_12px_24px_rgba(192,38,211,0.25)] hover:bg-fuchsia-700 disabled:bg-fuchsia-100 disabled:text-fuchsia-300 disabled:shadow-none"
         >
-          {t("booking_skeleton.confirmation.submit_button")}
+          {isSubmitting
+            ? t("home_beauty.booking.submit_in_progress", {
+                defaultValue: "예약 요청을 보내는 중입니다.",
+              })
+            : t("booking_skeleton.confirmation.submit_button")}
         </button>
       </section>
 
