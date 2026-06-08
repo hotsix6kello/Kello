@@ -3,35 +3,18 @@ import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "../supabaseServer.ts";
 import type {
-  BookingRecord,
-  ConciergeEventRecord,
   HomeTranslatorRepository,
   InterpreterSession,
   InterpreterTurnRecord,
 } from "./types.ts";
-
-
 
 function nowIso() {
   return new Date().toISOString();
 }
 
 export class InMemoryHomeTranslatorRepository implements HomeTranslatorRepository {
-  private readonly conciergeEvents = new Map<string, ConciergeEventRecord>();
   private readonly interpreterSessions = new Map<string, InterpreterSession>();
   private readonly interpreterTurns = new Map<string, InterpreterTurnRecord>();
-  private readonly bookingsBySession = new Map<string, BookingRecord[]>();
-
-  async saveConciergeEvent(event: Omit<ConciergeEventRecord, "id" | "createdAt">) {
-    const record: ConciergeEventRecord = {
-      ...event,
-      id: randomUUID(),
-      createdAt: nowIso(),
-    };
-
-    this.conciergeEvents.set(record.id, record);
-    return record;
-  }
 
   async createInterpreterSession(session: Omit<InterpreterSession, "id" | "createdAt">) {
     const record: InterpreterSession = {
@@ -58,18 +41,6 @@ export class InMemoryHomeTranslatorRepository implements HomeTranslatorRepositor
     this.interpreterTurns.set(record.id, record);
     return record;
   }
-
-  async listBookings(sessionId: string) {
-    return [...(this.bookingsBySession.get(sessionId) ?? [])];
-  }
-
-  async saveBooking(booking: BookingRecord) {
-    const current = this.bookingsBySession.get(booking.sessionId) ?? [];
-    const next = current.filter((item) => item.id !== booking.id);
-    next.push(booking);
-    this.bookingsBySession.set(booking.sessionId, next);
-    return booking;
-  }
 }
 
 export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepository {
@@ -77,30 +48,6 @@ export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepositor
 
   constructor() {
     this.client = getSupabaseServerClient();
-  }
-
-  async saveConciergeEvent(event: Omit<ConciergeEventRecord, "id" | "createdAt">) {
-    const { data, error } = await this.client
-      .from("booking_concierge_events")
-      .insert({
-        session_id: event.sessionId,
-        customer_locale: event.customerLocale,
-        original_text: event.originalText,
-        normalized_text: event.normalizedText,
-        response_ko: event.responseKo,
-        response_localized: event.responseLocalized,
-        structured_output: event.structuredOutput,
-        tools: event.tools,
-        booking_id: event.bookingId,
-      })
-      .select("*")
-      .maybeSingle();
-
-    if (error || !data) {
-      throw new Error("Failed to save concierge event.");
-    }
-
-    return mapConciergeEvent(data);
   }
 
   async createInterpreterSession(session: Omit<InterpreterSession, "id" | "createdAt">) {
@@ -157,44 +104,6 @@ export class SupabaseHomeTranslatorRepository implements HomeTranslatorRepositor
 
     return mapInterpreterTurn(data);
   }
-
-  async listBookings(sessionId: string) {
-    const { data, error } = await this.client
-      .from("booking_records")
-      .select("*")
-      .eq("session_id", sessionId)
-      .order("created_at", { ascending: true });
-
-    if (error || !Array.isArray(data)) {
-      return [];
-    }
-
-    return data.map(mapBooking);
-  }
-
-  async saveBooking(booking: BookingRecord) {
-    const { data, error } = await this.client
-      .from("booking_records")
-      .upsert({
-        id: booking.id,
-        session_id: booking.sessionId,
-        service_name: booking.serviceName,
-        booking_date: booking.bookingDate,
-        booking_time: booking.bookingTime,
-        status: booking.status,
-        notes: booking.notes,
-        created_at: booking.createdAt,
-        updated_at: booking.updatedAt,
-      })
-      .select("*")
-      .maybeSingle();
-
-    if (error || !data) {
-      throw new Error("Failed to save booking.");
-    }
-
-    return mapBooking(data);
-  }
 }
 
 export function createHomeTranslatorRepository(): HomeTranslatorRepository {
@@ -203,22 +112,6 @@ export function createHomeTranslatorRepository(): HomeTranslatorRepository {
   }
 
   return new InMemoryHomeTranslatorRepository();
-}
-
-function mapConciergeEvent(data: Record<string, unknown>): ConciergeEventRecord {
-  return {
-    id: String(data.id),
-    sessionId: String(data.session_id),
-    customerLocale: String(data.customer_locale) as ConciergeEventRecord["customerLocale"],
-    originalText: String(data.original_text),
-    normalizedText: String(data.normalized_text),
-    responseKo: String(data.response_ko),
-    responseLocalized: String(data.response_localized),
-    structuredOutput: data.structured_output as ConciergeEventRecord["structuredOutput"],
-    tools: (data.tools as ConciergeEventRecord["tools"]) ?? [],
-    bookingId: typeof data.booking_id === "string" ? data.booking_id : null,
-    createdAt: String(data.created_at),
-  };
 }
 
 function mapInterpreterSession(data: Record<string, unknown>): InterpreterSession {
@@ -243,19 +136,5 @@ function mapInterpreterTurn(data: Record<string, unknown>): InterpreterTurnRecor
     originalText: String(data.original_text),
     translatedText: String(data.translated_text),
     createdAt: String(data.created_at),
-  };
-}
-
-function mapBooking(data: Record<string, unknown>): BookingRecord {
-  return {
-    id: String(data.id),
-    sessionId: String(data.session_id),
-    serviceName: String(data.service_name),
-    bookingDate: String(data.booking_date),
-    bookingTime: String(data.booking_time),
-    status: String(data.status) as BookingRecord["status"],
-    notes: typeof data.notes === "string" ? data.notes : null,
-    createdAt: String(data.created_at),
-    updatedAt: String(data.updated_at),
   };
 }
