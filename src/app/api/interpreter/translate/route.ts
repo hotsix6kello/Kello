@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from "@/lib/admin/adminRouteAccess.ts";
 import {
   getSupportedTranslationLocaleListLabel,
   isSupportedTranslationLocale,
@@ -17,6 +18,15 @@ type InterpreterTranslateRequest = {
 };
 
 export async function POST(request: Request) {
+  try {
+    await requireAuthenticatedRouteAccess(request);
+  } catch (error) {
+    if (error instanceof AdminRouteAccessError) {
+      return NextResponse.json({ ok: false, error: "login_required" }, { status: 401 });
+    }
+    throw error;
+  }
+
   try {
     const body = (await request.json()) as InterpreterTranslateRequest;
 
