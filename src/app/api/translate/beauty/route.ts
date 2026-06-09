@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from "@/lib/admin/adminRouteAccess.ts";
+
 export const runtime = "nodejs";
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -90,6 +92,15 @@ function getCacheKey(text: string, targetLocale: string, contentType: string) {
 // Body: { text: string, targetLocale: string, contentType: string, sourceLocale?: string }
 // ──────────────────────────────────────────────────────────────────────────
 export async function POST(request: Request) {
+  try {
+    await requireAuthenticatedRouteAccess(request);
+  } catch (error) {
+    if (error instanceof AdminRouteAccessError) {
+      return NextResponse.json({ error: "login_required" }, { status: 401 });
+    }
+    throw error;
+  }
+
   try {
     const body = (await request.json()) as {
       text?: unknown;

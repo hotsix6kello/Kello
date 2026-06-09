@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from '@/lib/admin/adminRouteAccess.ts';
+
 const CATEGORY_TYPE_MAP: Record<string, string[]> = {
     beauty: [
         'skin_care_clinic', 'spa', 'massage', 'beauty_salon',
@@ -17,6 +19,15 @@ const CATEGORY_TYPE_MAP: Record<string, string[]> = {
 };
 
 export async function POST(request: Request) {
+    try {
+        await requireAuthenticatedRouteAccess(request);
+    } catch (error) {
+        if (error instanceof AdminRouteAccessError) {
+            return NextResponse.json({ error: 'login_required' }, { status: 401 });
+        }
+        throw error;
+    }
+
     const { lat, lng, category, query } = await request.json();
     const fixedRadius = 50000; // Increased to 50km to remove strict restriction
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;

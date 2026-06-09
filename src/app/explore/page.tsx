@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
+import { supabase } from '@/lib/supabaseClient';
 
 type PlacesApiResponse = {
   data?: SharedBusiness[];
@@ -81,6 +82,7 @@ export default function ExplorePage() {
   const { setSharedBusinesses, setLastSelectedStoreId } = useTrip();
   const [searchInput, setSearchInput] = useState('');
   const [businessList, setBusinessList] = useState<SharedBusiness[]>([]);
+  const [needsLoginToExplore, setNeedsLoginToExplore] = useState(false);
   const mapInstanceRef = useRef<KakaoMapInstance | null>(null); // 카카오맵 인스턴스 보관용 Ref
   const markersRef = useRef<KakaoMarkerInstance[]>([]);     // 마커 객체 배열 보관용 Ref
   const router = useRouter();
@@ -123,11 +125,22 @@ export default function ExplorePage() {
               const currentPos = new window.kakao.maps.LatLng(lat, lng);
               map.setCenter(currentPos); // 1. 지도 중심 이동
 
+              // 로그인하지 않은 사용자는 지도 구경까지만 가능, 자동 검색 API는 호출하지 않음
+              const { data: { session } } = await supabase.auth.getSession();
+              if (!session) {
+                setNeedsLoginToExplore(true);
+                return;
+              }
+              setNeedsLoginToExplore(false);
+
               // 2. 주변 뷰티 매장 자동 검색 API 호출
               try {
                 const res = await fetch('/api/places/nearby', {
                   method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${session.access_token}`,
+                  },
                   body: JSON.stringify({ query: '미용실', lat, lng })
                 });
                 const rawData = (await res.json()) as PlacesApiResponse | SharedBusiness[];
@@ -314,6 +327,12 @@ export default function ExplorePage() {
       return;
     }
 
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      alert("로그인 후 이용할 수 있는 기능이에요. 로그인하면 주변 명소를 검색할 수 있어요!");
+      return;
+    }
+
     console.log("🔍 [Search] 1. 검색 시작:", query);
 
     try {
@@ -330,7 +349,10 @@ export default function ExplorePage() {
 
       const res = await fetch('/api/places/nearby', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify({ query, lat, lng })
       });
 
@@ -510,6 +532,22 @@ export default function ExplorePage() {
               </div>
             );
           })
+        ) : needsLoginToExplore ? (
+          <div style={{ flex: '0 0 auto', width: 'calc(100% - 40px)', backgroundColor: '#fff', padding: '30px 20px', borderRadius: '20px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', textAlign: 'center', scrollSnapAlign: 'center' }}>
+            <div style={{ marginBottom: '12px' }}>🔐</div>
+            <p style={{ fontSize: '15px', fontWeight: 'bold', color: '#333', marginBottom: '4px' }}>로그인하면 주변 명소를 보여드려요.</p>
+            <p style={{ fontSize: '12px', color: '#888', marginBottom: '14px' }}>지도 구경은 누구나 가능하고, 검색은 로그인 후 이용할 수 있어요.</p>
+            <button
+              type="button"
+              onClick={() => router.push('/auth/login')}
+              style={{
+                border: 'none', borderRadius: '999px', padding: '10px 24px',
+                backgroundColor: '#ff3366', color: '#fff', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer'
+              }}
+            >
+              로그인하기
+            </button>
+          </div>
         ) : (
           <div style={{ flex: '0 0 auto', width: 'calc(100% - 40px)', backgroundColor: '#fff', padding: '30px 20px', borderRadius: '20px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', textAlign: 'center', scrollSnapAlign: 'center' }}>
             <div style={{ marginBottom: '12px' }}>🔍</div>

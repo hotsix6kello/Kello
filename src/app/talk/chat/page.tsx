@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, Mic, Smile, Send, Pencil, Trash2, Settings, X, Link2, Pin, BellOff, LogOut, Bell, Plus, Volume2, Maximize2 } from 'lucide-react';
 import DrawingModal from '@/app/components/DrawingModal';
+import { supabase } from '@/lib/supabaseClient';
 
 type Message = {
   id: string;
@@ -519,9 +520,14 @@ export default function TalkChatPage() {
     }
     const timer = setTimeout(async () => {
       try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) return;
         const res = await fetch('/api/talk/chat-translate', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
           body: JSON.stringify({ message: inputText, sourceLocale: 'auto', targetLocale: 'ko' }),
         });
         const data = await res.json();
@@ -566,9 +572,13 @@ export default function TalkChatPage() {
       );
     } else {
       try {
+        const { data: { session: translateSession } } = await supabase.auth.getSession();
         const res = await fetch('/api/talk/chat-translate', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            ...(translateSession?.access_token ? { Authorization: `Bearer ${translateSession.access_token}` } : {}),
+          },
           body: JSON.stringify({ message: text, sourceLocale: 'auto', targetLocale: activeTargetLocale }),
         });
         const data = await res.json();
@@ -595,10 +605,31 @@ export default function TalkChatPage() {
     }
 
     if (shopId === 'kello-center') {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `kello-login-${Date.now()}`,
+            sender: 'system',
+            original: sourceLocale === 'ko'
+              ? '로그인 후에 Kello AI와 대화할 수 있어요. 로그인하면 바로 이어서 대화할 수 있어요!'
+              : 'Please log in to chat with Kello AI. Once you log in, you can continue right where you left off!',
+            timestamp: new Date(),
+            read: true
+          }
+        ]);
+        setIsSending(false);
+        return;
+      }
+
       try {
         const aiRes = await fetch('/api/talk/kello-ai', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+          },
           body: JSON.stringify({ message: text })
         });
         const aiData = await aiRes.json();
@@ -647,12 +678,21 @@ export default function TalkChatPage() {
     }
     if (!visitorText) return;
 
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      alert(sourceLocale === 'ko' ? '로그인 후 이용할 수 있는 기능이에요.' : 'Please log in to use this feature.');
+      return;
+    }
+
     setMessages(prev => prev.map(m => m.id === msgId ? { ...m, isTranslating: true, translated: undefined } : m));
 
     try {
       const aiRes = await fetch('/api/talk/kello-ai', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+        },
         body: JSON.stringify({ message: visitorText }),
       });
       const data = await aiRes.json();

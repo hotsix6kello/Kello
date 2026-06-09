@@ -16,6 +16,7 @@ import {
 import type { ConciergeLocale, SpeakerRole } from '@/lib/translator/types.ts';
 import { LOCALE_STORAGE_KEY, resolveCanonicalLocale, CANONICAL_SUPPORTED_LOCALES, type CanonicalLocaleCode } from '@/lib/i18n/locales.ts';
 import { LANGUAGE_CHANGED_EVENT } from '@/lib/i18n/client.tsx';
+import { supabase } from '@/lib/supabaseClient';
 
 const STAFF_LOCALE: ConciergeLocale = 'ko';
 const FALLBACK_CUSTOMER_LOCALE: CanonicalLocaleCode = 'en';
@@ -162,9 +163,14 @@ export default function InterpreterPage() {
       if (sessionId) return;
       
       try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) return;
         const res = await fetch('/api/interpreter/session', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
           body: JSON.stringify({
             customerLocale,
             staffLocale,
@@ -358,11 +364,13 @@ export default function InterpreterPage() {
     inputMode: 'voice' | 'text';
     text: string;
   }) => {
+    const { data: { session } } = await supabase.auth.getSession();
     const response = await fetch('/api/interpreter/turn', {
       method: 'POST',
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
+        ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
       },
       body: JSON.stringify(params),
     });
@@ -464,9 +472,19 @@ export default function InterpreterPage() {
     setVoiceStatus(t('interpreter_page.voice_recognizing'));
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setVoiceStatus(null);
+        setVoiceError(t('common.login_required_for_feature'));
+        return;
+      }
+
       const response = await fetch('/api/interpreter/transcribe', {
         method: 'POST',
         cache: 'no-store',
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
         body: formData,
       });
 
@@ -597,7 +615,15 @@ export default function InterpreterPage() {
       return;
     }
 
-    void startRecording(speaker);
+    void (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setVoiceError(t('common.login_required_for_feature'));
+        return;
+      }
+
+      void startRecording(speaker);
+    })();
   };
 
   const handleReplayMessage = (message: InterpreterMessage) => {

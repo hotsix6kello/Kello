@@ -701,6 +701,7 @@
     "error_title": "An error occurred.",
     "error_desc": "There was a problem loading the page.",
     "error_retry": "Try Again",
+    "login_required_for_feature": "Please log in to use this feature.",
     "actions": {
       "view_all": "View All",
       "browse_community": "Browse Community",
