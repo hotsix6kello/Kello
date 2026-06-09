@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from "@/lib/admin/adminRouteAccess.ts";
 import { transcribeInterpreterAudio } from "@/lib/interpreter/transcriber";
 
 export const runtime = "nodejs";
@@ -38,6 +40,15 @@ async function methodNotAllowed() {
 }
 
 export async function POST(request: Request) {
+  try {
+    await requireAuthenticatedRouteAccess(request);
+  } catch (error) {
+    if (error instanceof AdminRouteAccessError) {
+      return jsonFailure("login is required", 401);
+    }
+    throw error;
+  }
+
   const multipart = await readMultipartFormData(request);
   if (multipart.errorResponse) {
     return multipart.errorResponse;

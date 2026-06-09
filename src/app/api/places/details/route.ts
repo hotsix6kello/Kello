@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 
+import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from '@/lib/admin/adminRouteAccess.ts';
+
 export async function GET(request: Request) {
+    try {
+        await requireAuthenticatedRouteAccess(request);
+    } catch (error) {
+        if (error instanceof AdminRouteAccessError) {
+            return NextResponse.json({ error: 'login_required' }, { status: 401 });
+        }
+        throw error;
+    }
+
     const { searchParams } = new URL(request.url);
     const placeId = searchParams.get('placeId');
     const language = searchParams.get('language') || 'en';

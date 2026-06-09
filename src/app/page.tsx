@@ -73,10 +73,20 @@ export default function HomePage() {
 
   const handleSelectPlace = async (place: { title: string; area: string; lat?: number; lng?: number; placeId?: string }) => {
     if (place.placeId && !place.lat) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        alert(t('common.login_required_for_feature'));
+        return;
+      }
+
       setLoadingNav(true);
       try {
         const lang = i18n.language || 'en';
-        const res = await fetch(`/api/places/details?placeId=${place.placeId}&language=${lang}`);
+        const res = await fetch(`/api/places/details?placeId=${place.placeId}&language=${lang}`, {
+          headers: {
+            ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+          },
+        });
         const data = await res.json();
         if (data && data.location) {
           const selected = {

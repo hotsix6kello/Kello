@@ -2,6 +2,8 @@
 
 import { useCallback, useRef, useState } from 'react';
 
+import { supabase } from '@/lib/supabaseClient';
+
 /**
  * useBeautyTranslation
  * 고객용 beauty 자유문장을 /api/translate/beauty 경유로 번역하는 훅.
@@ -53,9 +55,13 @@ export function useBeautyTranslation(): UseBeautyTranslationReturn {
     setIsTranslating(true);
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch('/api/translate/beauty', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+        },
         body: JSON.stringify({ text, targetLocale, contentType, sourceLocale }),
       });
 
