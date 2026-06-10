@@ -1337,6 +1337,11 @@
     "write_post": "게시글 작성",
     "edit": "게시글 수정",
     "posting": "게시 중...",
+    "login_required": {
+      "title": "게시글 작성은 로그인 후 이용할 수 있어요",
+      "description": "로그인하면 Kello 커뮤니티에 글을 작성하고, 여행 정보와 뷰티 경험을 나눌 수 있어요.",
+      "cta": "로그인하고 작성하기"
+    },
     "defaults": {
       "region": "서울"
     },

@@ -467,8 +467,6 @@ export function BookingFlowSkeleton({
               <BookingLoginRequiredNotice
                 title={t("booking_skeleton.login_required.title")}
                 description={t("booking_skeleton.login_required.description")}
-                ctaLabel={t("booking_skeleton.login_required.cta")}
-                onCtaClick={() => router.push("/auth/login")}
               />
             )}
           </div>

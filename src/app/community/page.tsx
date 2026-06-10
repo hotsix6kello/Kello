@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ChangeEvent, useCallback, useEffect, useReducer, useRef, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './community.module.css';
 import { useTranslation } from 'react-i18next';
@@ -321,6 +321,7 @@ export default function CommunityPage() {
     const [loggedInUserName, setLoggedInUserName] = useState("");
     const [isDragging, setIsDragging] = useState(false);
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
     // Group D: subFilter는 setter 없는 상수 → const로 전환 (타입 명시로 리터럴 좁힘 방지)
     const subFilter: CommunitySubFilter = 'all';
@@ -386,7 +387,28 @@ export default function CommunityPage() {
         tabsRef.current.scrollLeft = dragRef.current.scrollLeft - walk;
     };
 
+    const router = useRouter();
     const searchParams = useSearchParams();
+
+    useEffect(() => {
+        let isMounted = true;
+
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (isMounted) setIsAuthenticated(!!session);
+        });
+
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (isMounted) setIsAuthenticated(!!session);
+        });
+
+        return () => {
+            isMounted = false;
+            subscription.unsubscribe();
+        };
+    }, []);
+
     useEffect(() => {
         const initialSearch = searchParams.get('search');
         if (initialSearch) setSearchQuery(initialSearch);
@@ -488,11 +510,13 @@ export default function CommunityPage() {
 
     const handleSubmit = async () => {
         if (!draft.type || !draft.title.trim() || !draft.desc.trim()) return;
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            // UI prevents reaching this state when logged out; bail out quietly without an alert.
+            return;
+        }
         draftDispatch({ type: 'SUBMIT_START' });
         try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) throw new Error('Login required');
-
             const uploadedUrls = await Promise.all(draft.images.map(async (img) => {
                 if (img.dataUrl.startsWith('http')) return img.dataUrl;
                 const res = await fetch(img.dataUrl); const blob = await res.blob();
@@ -691,6 +715,20 @@ export default function CommunityPage() {
                             </h2>
                         </div>
                         <div className={styles.modalBody} style={{ padding: '16px' }}>
+                            {isAuthenticated !== true ? (
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', padding: '48px 20px', textAlign: 'center' }}>
+                                    <div style={{ display: 'flex', height: '56px', width: '56px', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', background: '#fdf2f8' }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" style={{ height: '28px', width: '28px', color: '#db2777' }}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                        </svg>
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                        <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: 0 }}>{t('community_page.login_required.title')}</h3>
+                                        <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#64748b', margin: 0 }}>{t('community_page.login_required.description')}</p>
+                                    </div>
+                                </div>
+                            ) : (
+                            <>
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>{t('community_page.form.category_label')}</label>
                                 <select className={styles.formSelect} value={draft.type} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { type: e.target.value as CommunityCategory | '' } })}>
@@ -773,6 +811,8 @@ export default function CommunityPage() {
                                 />
                                 {draft.isPreparingImage && <p style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>{t('community_page.form.preparing_images')}</p>}
                             </div>
+                            </>
+                            )}
                         </div>
                         <div className={styles.modalFooter} style={{
                             display: 'flex', gap: '8px', padding: '16px 20px 30px',
@@ -791,18 +831,35 @@ export default function CommunityPage() {
                             >
                                 {t('community_page.form.cancel')}
                             </button>
-                            <button
-                                className={styles.submitBtn}
-                                onClick={handleSubmit}
-                                disabled={draft.isSubmitting}
-                                style={{
-                                    flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
-                                    background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
-                                    opacity: draft.isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
-                                }}
-                            >
-                                {draft.isSubmitting ? '...' : t('community_page.form.submit')}
-                            </button>
+                            {isAuthenticated !== true ? (
+                                <button
+                                    className={styles.submitBtn}
+                                    onClick={() => {
+                                        draftDispatch({ type: 'CLOSE' });
+                                        router.push('/auth/login');
+                                    }}
+                                    style={{
+                                        flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
+                                        background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
+                                        boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+                                    }}
+                                >
+                                    {t('community_page.login_required.cta')}
+                                </button>
+                            ) : (
+                                <button
+                                    className={styles.submitBtn}
+                                    onClick={handleSubmit}
+                                    disabled={draft.isSubmitting}
+                                    style={{
+                                        flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
+                                        background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
+                                        opacity: draft.isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+                                    }}
+                                >
+                                    {draft.isSubmitting ? '...' : t('community_page.form.submit')}
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
