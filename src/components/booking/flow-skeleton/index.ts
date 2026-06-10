@@ -4,3 +4,4 @@ export { ServiceSelectionStepShell } from "./ServiceSelectionStepShell";
 export { DateTimeSelectionStepShell } from "./DateTimeSelectionStepShell";
 export { CustomerDetailsStepShell } from "./CustomerDetailsStepShell";
 export { ConfirmationStepShell } from "./ConfirmationStepShell";
+export { BookingLoginRequiredNotice } from "./BookingLoginRequiredNotice";

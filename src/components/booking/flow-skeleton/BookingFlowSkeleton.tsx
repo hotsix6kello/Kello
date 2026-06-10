@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { BookingLoginRequiredNotice } from "@/components/booking/flow-skeleton/BookingLoginRequiredNotice";
 import { ConfirmationStepShell } from "@/components/booking/flow-skeleton/ConfirmationStepShell";
 import { CustomerDetailsStepShell } from "@/components/booking/flow-skeleton/CustomerDetailsStepShell";
 import { DateTimeSelectionStepShell } from "@/components/booking/flow-skeleton/DateTimeSelectionStepShell";
@@ -91,7 +93,9 @@ export function BookingFlowSkeleton({
   isSubmitting = false,
 }: BookingFlowSkeletonProps) {
   const { t } = useTranslation("common");
+  const router = useRouter();
   const [state, setState] = useState(() => createInitialBookingFlowState(initialCategory));
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   const localizedSteps: BookingFlowVisualStepDefinition[] = useMemo(() => [
     {
@@ -113,6 +117,29 @@ export function BookingFlowSkeleton({
       description: t("booking_skeleton.steps.step3_desc"),
     },
   ], [t]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (isMounted) {
+        setIsAuthenticated(!!session);
+      }
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (isMounted) {
+        setIsAuthenticated(!!session);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -319,6 +346,7 @@ export function BookingFlowSkeleton({
     state.category !== null &&
     (!hasConfiguredServiceItems(state.category) || state.selectedServiceId !== null);
   const canAdvanceFromDetailsEntry = Boolean(
+    isAuthenticated === true &&
     state.selectedDate &&
     state.customerDetails.name.trim() &&
     state.customerDetails.phone.trim(),
@@ -329,6 +357,7 @@ export function BookingFlowSkeleton({
       : activeVisualStepId === "details-entry"
         ? canAdvanceFromDetailsEntry
         : false;
+  const showDetailsLoginGate = activeVisualStepId === "details-entry" && isAuthenticated !== true;
   const submitDraftSnapshot: BookingFlowSkeletonDraftStateSnapshot = {
     state,
     storeContext: {
@@ -393,46 +422,55 @@ export function BookingFlowSkeleton({
               }
             />
 
-            <CustomerDetailsStepShell
-              embedded
-              category={state.category}
-              details={state.customerDetails}
-              onChangeName={(name) =>
-                setState((currentState) => ({
-                  ...currentState,
-                  customerDetails: {
-                    ...currentState.customerDetails,
-                    name,
-                  },
-                }))
-              }
-              onChangePhone={(phone) =>
-                setState((currentState) => ({
-                  ...currentState,
-                  customerDetails: {
-                    ...currentState.customerDetails,
-                    phone,
-                  },
-                }))
-              }
-              onChangeRequestNote={(requestNote) =>
-                setState((currentState) => ({
-                  ...currentState,
-                  customerDetails: {
-                    ...currentState.customerDetails,
-                    requestNote,
-                  },
-                }))
-              }
-              onSelectCurrentHairImages={(files) =>
-                appendImageDrafts("currentStateImages", files, "current-state")
-              }
-              onSelectDesiredStyleImages={(files) =>
-                appendImageDrafts("desiredStyleImages", files, "desired-style")
-              }
-              onResetCurrentHairImages={() => resetImageGroup("currentStateImages")}
-              onResetDesiredStyleImages={() => resetImageGroup("desiredStyleImages")}
-            />
+            {isAuthenticated === true ? (
+              <CustomerDetailsStepShell
+                embedded
+                category={state.category}
+                details={state.customerDetails}
+                onChangeName={(name) =>
+                  setState((currentState) => ({
+                    ...currentState,
+                    customerDetails: {
+                      ...currentState.customerDetails,
+                      name,
+                    },
+                  }))
+                }
+                onChangePhone={(phone) =>
+                  setState((currentState) => ({
+                    ...currentState,
+                    customerDetails: {
+                      ...currentState.customerDetails,
+                      phone,
+                    },
+                  }))
+                }
+                onChangeRequestNote={(requestNote) =>
+                  setState((currentState) => ({
+                    ...currentState,
+                    customerDetails: {
+                      ...currentState.customerDetails,
+                      requestNote,
+                    },
+                  }))
+                }
+                onSelectCurrentHairImages={(files) =>
+                  appendImageDrafts("currentStateImages", files, "current-state")
+                }
+                onSelectDesiredStyleImages={(files) =>
+                  appendImageDrafts("desiredStyleImages", files, "desired-style")
+                }
+                onResetCurrentHairImages={() => resetImageGroup("currentStateImages")}
+                onResetDesiredStyleImages={() => resetImageGroup("desiredStyleImages")}
+              />
+            ) : (
+              <BookingLoginRequiredNotice
+                title={t("booking_skeleton.login_required.title")}
+                description={t("booking_skeleton.login_required.description")}
+                ctaLabel={t("booking_skeleton.login_required.cta")}
+                onCtaClick={() => router.push("/auth/login")}
+              />
+            )}
           </div>
         );
 
@@ -513,14 +551,24 @@ export function BookingFlowSkeleton({
       {!isConfirmationStep ? (
         <section className="kello-soft-booking-flow-footer sticky bottom-0 z-10 px-6 pb-12 pt-8 mt-auto">
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#fcf7f8] via-[#fcf7f8]/90 to-transparent pointer-events-none" />
-          <button
-            type="button"
-            onClick={() => handleNext()}
-            disabled={!canMoveNext}
-            className="relative z-10 inline-flex min-h-[64px] w-full items-center justify-center rounded-[20px] px-8 text-[17px] font-black transition-all duration-300 bg-[#f45b87] text-white shadow-[0_12px_28px_rgba(244,91,135,0.25)] hover:bg-[#4b3a42] hover:shadow-[0_12px_32px_rgba(75,58,66,0.3)] disabled:bg-[#f1dce4] disabled:text-[#af98a1] disabled:shadow-none disabled:cursor-not-allowed transform active:scale-[0.98]"
-          >
-            {activeVisualStepId === "service-selection" ? t("booking_skeleton.next_step") : t("booking_skeleton.check_final")}
-          </button>
+          {showDetailsLoginGate ? (
+            <button
+              type="button"
+              onClick={() => router.push("/auth/login")}
+              className="relative z-10 inline-flex min-h-[64px] w-full items-center justify-center rounded-[20px] px-8 text-[17px] font-black transition-all duration-300 bg-[#f45b87] text-white shadow-[0_12px_28px_rgba(244,91,135,0.25)] hover:bg-[#4b3a42] hover:shadow-[0_12px_32px_rgba(75,58,66,0.3)] transform active:scale-[0.98]"
+            >
+              {t("booking_skeleton.login_required.cta")}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => handleNext()}
+              disabled={!canMoveNext}
+              className="relative z-10 inline-flex min-h-[64px] w-full items-center justify-center rounded-[20px] px-8 text-[17px] font-black transition-all duration-300 bg-[#f45b87] text-white shadow-[0_12px_28px_rgba(244,91,135,0.25)] hover:bg-[#4b3a42] hover:shadow-[0_12px_32px_rgba(75,58,66,0.3)] disabled:bg-[#f1dce4] disabled:text-[#af98a1] disabled:shadow-none disabled:cursor-not-allowed transform active:scale-[0.98]"
+            >
+              {activeVisualStepId === "service-selection" ? t("booking_skeleton.next_step") : t("booking_skeleton.check_final")}
+            </button>
+          )}
         </section>
       ) : null}
     </div>
