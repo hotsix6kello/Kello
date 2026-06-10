@@ -1395,6 +1395,11 @@
     "write_post": "Write Post",
     "edit": "Edit Post",
     "posting": "Posting...",
+    "login_required": {
+      "title": "Sign in to write a post",
+      "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
+      "cta": "Sign in to write"
+    },
     "defaults": {
       "region": "Seoul"
     },
