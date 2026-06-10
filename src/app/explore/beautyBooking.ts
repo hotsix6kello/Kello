@@ -331,7 +331,7 @@ export function buildBeautyBookingCompletionDisplay(
 
 export async function submitBeautyBooking(
   payload: BeautyBookingPayload,
-  accessToken?: string | null,
+  accessToken: string,
 ): Promise<BeautyBookingSubmitResult> {
   let response: Response;
 
@@ -340,7 +340,7 @@ export async function submitBeautyBooking(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(payload),
     });
@@ -353,6 +353,10 @@ export async function submitBeautyBooking(
     | null;
 
   if (!response.ok || body?.ok !== true || !body.bookingId || !body.createdAt) {
+    if (response.status === 401) {
+      throw new Error('로그인이 필요해요. 로그인 후 다시 시도해 주세요.');
+    }
+
     throw new Error(
       response.status === 400
         ? '예약 정보를 다시 확인해 주세요.'

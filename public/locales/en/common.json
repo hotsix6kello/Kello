@@ -111,6 +111,11 @@
       "step3_desc": "Review details and send reservation request.",
       "step": "STEP"
     },
+    "login_required": {
+      "title": "Sign in to send your booking request",
+      "description": "Sign in to track your request and receive your proposal and payment details safely.",
+      "cta": "Sign in to continue"
+    },
     "service_selection": {
       "title": "Select Service",
       "desc": "Please select the service menu you want.",

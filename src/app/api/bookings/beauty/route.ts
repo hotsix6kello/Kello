@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 import { coerceBeautyBookingPayload } from "@/app/explore/beautyBooking.ts";
 import {
   AdminRouteAccessError,
-  getOptionalAuthenticatedRouteAccess,
   requireAdminRouteAccess,
+  requireAuthenticatedRouteAccess,
 } from "@/lib/admin/adminRouteAccess.ts";
 import {
   BEAUTY_BOOKING_TABLE,
@@ -123,6 +123,8 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const auth = await requireAuthenticatedRouteAccess(request);
+
     const body = (await request.json()) as unknown;
     console.log("[beauty-booking-route] Raw body received", JSON.stringify(body).substring(0, 100) + "...");
 
@@ -139,17 +141,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const auth = await getOptionalAuthenticatedRouteAccess(request);
-    
     console.log("[beauty-booking-route] POST request received", {
       hasPayload: !!payload,
-      userId: auth?.userId,
+      userId: auth.userId,
     });
 
     const result = await createBeautyBookingRequest(
       payload,
-      auth?.userId ?? null,
-      auth?.email ?? null,
+      auth.userId,
+      auth.email,
     );
     
     console.log("[beauty-booking-route] Result from createBeautyBookingRequest", {
@@ -201,6 +201,16 @@ export async function POST(request: Request) {
           error: "booking storage is not ready",
         } satisfies BeautyBookingRouteResponse,
         { status: 500 },
+      );
+    }
+
+    if (error instanceof AdminRouteAccessError && error.code === "missing_token") {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "customer session is required",
+        } satisfies BeautyBookingRouteResponse,
+        { status: 401 },
       );
     }
 

@@ -329,6 +329,26 @@ export default function HomeBookingFlowEntry({
         return;
       }
 
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session) {
+        const loginRequiredMessage = t("booking_skeleton.login_required.title");
+
+        setSubmitFeedback({
+          tone: "error",
+          message: loginRequiredMessage,
+        });
+        onSubmitAttemptStateChange?.({
+          status: "idle",
+          message: loginRequiredMessage,
+          errorSummary: loginRequiredMessage,
+        });
+        window.alert(loginRequiredMessage);
+        return;
+      }
+
       setActiveSubmitStatus("submitting");
       setSubmitFeedback({
         tone: "info",
@@ -345,15 +365,6 @@ export default function HomeBookingFlowEntry({
       try {
         const currentStateDrafts = snapshot.state.customerDetails.currentStateImages;
         const desiredStyleDrafts = snapshot.state.customerDetails.desiredStyleImages;
-
-        const hasImages = currentStateDrafts.length > 0 || desiredStyleDrafts.length > 0;
-
-        if (hasImages) {
-          const { data: { session } } = await supabase.auth.getSession();
-          if (!session) {
-            throw new Error(t("home_beauty.booking.login_required"));
-          }
-        }
 
         const currentStateFiles = currentStateDrafts
           .map(d => localImageFilesRef.current.get(d.id))
@@ -402,8 +413,7 @@ export default function HomeBookingFlowEntry({
 
         let result;
         try {
-          const { data: sessionData } = await supabase.auth.getSession();
-          result = await submitBeautyBooking(preparation.payloadCandidate, sessionData.session?.access_token);
+          result = await submitBeautyBooking(preparation.payloadCandidate, session.access_token);
         } catch (submitErr: unknown) {
           if (uploadedPathsForCleanup.length > 0) {
             const { error: cleanupError } = await supabase.storage
