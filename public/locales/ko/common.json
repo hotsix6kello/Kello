@@ -937,6 +937,13 @@
     "payment_currency_unsupported": "현재 PayPal 결제는 USD 제안서만 지원합니다.",
     "payment_currency_usd_only": "현재 PayPal 결제는 USD 제안서만 지원합니다. Kello에 결제 통화 변경을 요청해 주세요.",
     "payment_status_paid": "결제 완료",
+    "payment_consent_title": "결제 전 확인 및 동의",
+    "payment_refund_policy_title": "취소 및 환불 규정",
+    "payment_refund_rate_label": "{{rate}}% 환불",
+    "payment_no_refund_label": "환불 불가",
+    "payment_consent_privacy_label": "개인정보 처리방침 동의",
+    "payment_consent_refund_label": "취소 및 환불 규정 동의",
+    "payment_consent_hint": "결제를 진행하려면 위 두 항목에 모두 동의해 주세요.",
     "payment_status_pending": "결제 대기 중"
   },
   "settings_page": {
