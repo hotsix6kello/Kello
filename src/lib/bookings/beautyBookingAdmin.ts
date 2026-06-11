@@ -123,7 +123,6 @@ export type BeautyBookingAdminRecord = {
   quoteTotalPrice: number | null;
   quoteCurrency: string | null;
   quoteNote: string | null;
-  quoteRefundPolicy: string | null;
   quoteExpiresAt: string | null;
   quoteStatus: BeautyBookingQuoteStatus | null;
   quoteSentAt: string | null;

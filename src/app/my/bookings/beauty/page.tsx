@@ -13,7 +13,7 @@ import {
   type BeautyBookingAdminRecord,
 } from '@/lib/bookings/beautyBookingAdmin.ts';
 import { useBeautyTranslation } from '@/hooks/useBeautyTranslation';
-import { PLATFORM_FEE_RATE, calculateRefund, type RefundCalculation } from '@/constants/refundPolicy';
+import { PLATFORM_FEE_RATE, REFUND_POLICY, calculateRefund, type RefundCalculation } from '@/constants/refundPolicy';
 import styles from './beauty-bookings.module.css';
 
 const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '';
@@ -255,6 +255,9 @@ function MyBeautyBookingsContent() {
   const [paymentSuccess, setPaymentSuccess] = useState<string | null>(null);
   const [paymentError, setPaymentError] = useState<string | null>(null);
 
+  // Pre-payment consent states
+  const [paymentConsent, setPaymentConsent] = useState({ privacy: false, refundPolicy: false });
+
   useEffect(() => {
     const init = async () => {
       const {
@@ -451,6 +454,8 @@ function MyBeautyBookingsContent() {
 
     setPaymentSuccess(null);
     setPaymentError(null);
+
+    setPaymentConsent({ privacy: false, refundPolicy: false });
   }, [selectedBookingId]);
 
   useEffect(() => {
@@ -1058,14 +1063,6 @@ function MyBeautyBookingsContent() {
                             </dd>
                           </div>
                         )}
-                        {selectedBooking.quoteRefundPolicy && (
-                          <div style={{ gridColumn: '1 / -1' }}>
-                            <dt>{t('beauty_bookings.quote_refund_policy')}</dt>
-                            <dd style={{ background: 'white', padding: '8px 12px', borderRadius: 8, fontSize: '0.82rem', lineHeight: 1.5, color: '#374151' }}>
-                              {selectedBooking.quoteRefundPolicy}
-                            </dd>
-                          </div>
-                        )}
                         {selectedBooking.quoteExpiresAt && (
                           <div>
                             <dt>{t('beauty_bookings.quote_expires_at')}</dt>
@@ -1145,6 +1142,53 @@ function MyBeautyBookingsContent() {
                               <p style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: 8 }}>
                                 {t('beauty_bookings.payment_section_title')} · {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(selectedBooking.quoteTotalPrice)} USD
                               </p>
+
+                              {!(paymentConsent.privacy && paymentConsent.refundPolicy) ? (
+                                <div className={styles.paymentConsentPanel}>
+                                  <p className={styles.paymentConsentTitle}>{t('beauty_bookings.payment_consent_title')}</p>
+
+                                  <div className={styles.cancelRefundBreakdown}>
+                                    <p className={styles.cancelRefundBreakdownTitle}>{t('beauty_bookings.payment_refund_policy_title')}</p>
+                                    <dl className={styles.cancelRefundDl}>
+                                      {REFUND_POLICY.map((tier) => (
+                                        <div className={styles.cancelRefundRow} key={tier.daysBeforeAppointment}>
+                                          <dt>{i18n.language === 'ko' ? tier.label_ko : tier.label_en}</dt>
+                                          <dd>
+                                            {tier.refundRate > 0
+                                              ? t('beauty_bookings.payment_refund_rate_label', { rate: tier.refundRate })
+                                              : t('beauty_bookings.payment_no_refund_label')}
+                                          </dd>
+                                        </div>
+                                      ))}
+                                    </dl>
+                                    <p className={styles.cancelRefundPolicyNote}>
+                                      {t('beauty_bookings.cancel_platform_fee_note', { rate: Math.round(PLATFORM_FEE_RATE * 100) })}
+                                    </p>
+                                  </div>
+
+                                  <label className={styles.cancelConsentLabel}>
+                                    <input
+                                      type="checkbox"
+                                      className={styles.cancelConsentCheckbox}
+                                      checked={paymentConsent.privacy}
+                                      onChange={(e) => setPaymentConsent((c) => ({ ...c, privacy: e.target.checked }))}
+                                    />
+                                    <span>{t('beauty_bookings.payment_consent_privacy_label')}</span>
+                                  </label>
+                                  <label className={styles.cancelConsentLabel}>
+                                    <input
+                                      type="checkbox"
+                                      className={styles.cancelConsentCheckbox}
+                                      checked={paymentConsent.refundPolicy}
+                                      onChange={(e) => setPaymentConsent((c) => ({ ...c, refundPolicy: e.target.checked }))}
+                                    />
+                                    <span>{t('beauty_bookings.payment_consent_refund_label')}</span>
+                                  </label>
+
+                                  <p className={styles.paymentConsentHint}>{t('beauty_bookings.payment_consent_hint')}</p>
+                                </div>
+                              ) : (
+                              <>
                               {paymentError && (
                                 <p style={{ color: '#dc2626', fontSize: '0.82rem', marginBottom: 8 }}>{paymentError}</p>
                               )}
@@ -1210,6 +1254,8 @@ function MyBeautyBookingsContent() {
                               </PayPalScriptProvider>
                               {paymentSuccess && (
                                 <p style={{ color: '#059669', fontSize: '0.88rem', fontWeight: 600, marginTop: 10 }}>{paymentSuccess}</p>
+                              )}
+                              </>
                               )}
                             </div>
                           ) : selectedBooking.quoteCurrency !== 'USD' && selectedBooking.quoteTotalPrice !== null ? (
