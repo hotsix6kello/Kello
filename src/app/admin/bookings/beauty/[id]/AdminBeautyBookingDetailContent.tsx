@@ -148,6 +148,47 @@ function formatPrice(value: number) {
   return new Intl.NumberFormat('ko-KR').format(value);
 }
 
+function toDateInputValue(value: string | null | undefined): string {
+  if (!value) return '';
+  const match = value.match(/^\d{4}-\d{2}-\d{2}/);
+  return match ? match[0] : '';
+}
+
+function toTimeInputValue(value: string | null | undefined): string {
+  if (!value) return '';
+  const match = value.match(/^(\d{2}:\d{2})/);
+  return match ? match[1] : '';
+}
+
+function toDateTimeLocalInputValue(value: string | null | undefined): string {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+function dateTimeLocalInputToIso(value: string): string | null {
+  if (!value.trim()) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
+function mapBookingToQuoteFields(booking: BeautyBookingAdminRecord) {
+  return {
+    shopName: booking.quoteShopName ?? '',
+    shopAddress: booking.quoteShopAddress ?? '',
+    serviceName: booking.quoteServiceName ?? '',
+    date: toDateInputValue(booking.quoteDate),
+    time: toTimeInputValue(booking.quoteTime),
+    totalPrice: booking.quoteTotalPrice !== null ? String(booking.quoteTotalPrice) : '',
+    currency: booking.quoteCurrency ?? 'USD',
+    note: booking.quoteNote ?? '',
+    refundPolicy: booking.quoteRefundPolicy ?? '',
+    expiresAt: toDateTimeLocalInputValue(booking.quoteExpiresAt),
+  };
+}
+
 function buildBookingTitle(
   categoryLabel: string | null | undefined,
   serviceName: string | null | undefined,
@@ -224,6 +265,7 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
   const [refreshing, setRefreshing] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [selectedBooking, setSelectedBooking] = useState<BeautyBookingAdminRecord | null>(null);
+  const selectedBookingRef = useRef<BeautyBookingAdminRecord | null>(null);
   const [notifications, setNotifications] = useState<BeautyBookingNotificationRecord[]>([]);
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
@@ -337,7 +379,7 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
       } catch (error) {
         const message = error instanceof Error ? error.message : '예약 상세 정보를 불러오지 못했어요.';
 
-        if (showLoading || !selectedBooking) {
+        if (showLoading || !selectedBookingRef.current) {
           setLoadError(message);
         } else {
           setActionError(message);
@@ -347,8 +389,12 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
         setRefreshing(false);
       }
     },
-    [bookingId, selectedBooking],
+    [bookingId],
   );
+
+  useEffect(() => {
+    selectedBookingRef.current = selectedBooking;
+  }, [selectedBooking]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -376,22 +422,14 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
       error: null,
     });
     setQuoteForm({
-      shopName: selectedBooking.quoteShopName ?? '',
-      shopAddress: selectedBooking.quoteShopAddress ?? '',
-      serviceName: selectedBooking.quoteServiceName ?? '',
-      date: selectedBooking.quoteDate ?? '',
-      time: selectedBooking.quoteTime ?? '',
-      totalPrice: selectedBooking.quoteTotalPrice !== null ? String(selectedBooking.quoteTotalPrice) : '',
-      currency: selectedBooking.quoteCurrency ?? 'USD',
-      note: selectedBooking.quoteNote ?? '',
-      refundPolicy: selectedBooking.quoteRefundPolicy ?? '',
-      expiresAt: selectedBooking.quoteExpiresAt
-        ? selectedBooking.quoteExpiresAt.slice(0, 16)
-        : '',
+      ...mapBookingToQuoteFields(selectedBooking),
       isSubmitting: false,
       error: null,
     });
-  }, [selectedBooking]);
+    // Initialize draft form state only when the viewed booking changes, not on every
+    // refetch/update of the same booking - otherwise in-progress edits get wiped.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedBooking?.id]);
 
   const sendPatch = useCallback(
     async (payload: Record<string, unknown>, fallbackError: string) => {
@@ -702,18 +740,26 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
             quoteCurrency: quoteForm.currency.trim() || 'USD',
             quoteNote: quoteForm.note.trim(),
             quoteRefundPolicy: quoteForm.refundPolicy.trim(),
-            quoteExpiresAt: quoteForm.expiresAt ? new Date(quoteForm.expiresAt).toISOString() : null,
+            quoteExpiresAt: dateTimeLocalInputToIso(quoteForm.expiresAt),
           },
         },
         '예약 제안서를 저장하지 못했어요.',
       );
       setSelectedBooking(item);
+      setQuoteForm((c) => ({
+        ...c,
+        ...mapBookingToQuoteFields(item),
+        isSubmitting: false,
+        error: null,
+      }));
       setActionSuccess('예약 제안서를 저장/발송했어요.');
       void loadBooking(false);
     } catch (error) {
-      setQuoteForm((c) => ({ ...c, error: error instanceof Error ? error.message : '예약 제안서를 저장하지 못했어요.' }));
-    } finally {
-      setQuoteForm((c) => ({ ...c, isSubmitting: false }));
+      setQuoteForm((c) => ({
+        ...c,
+        isSubmitting: false,
+        error: error instanceof Error ? error.message : '예약 제안서를 저장하지 못했어요.',
+      }));
     }
   };
 
