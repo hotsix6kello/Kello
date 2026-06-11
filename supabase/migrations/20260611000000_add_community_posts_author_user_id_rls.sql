@@ -9,6 +9,12 @@ ALTER TABLE public.community_posts
 -- Remove the previous policy that allowed anyone (including anon) to insert.
 DROP POLICY IF EXISTS "Enable insert for all users" ON public.community_posts;
 
+-- Remove any alternately-named policies that may already exist (e.g. applied
+-- directly to production), so this migration doesn't create duplicates.
+DROP POLICY IF EXISTS "Allow authenticated users to insert own posts" ON public.community_posts;
+DROP POLICY IF EXISTS "Allow users to update their own posts" ON public.community_posts;
+DROP POLICY IF EXISTS "Allow users to delete their own posts" ON public.community_posts;
+
 -- Safety net for re-runs: drop the policies this migration creates if they already exist.
 DROP POLICY IF EXISTS "Authenticated users can insert their own posts" ON public.community_posts;
 DROP POLICY IF EXISTS "Authors can update their own posts" ON public.community_posts;
