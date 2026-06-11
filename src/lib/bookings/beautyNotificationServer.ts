@@ -277,6 +277,20 @@ async function dispatchBeautyBookingNotification(
   payload: BeautyBookingNotificationInsert
 ) {
   const client = getSupabaseServerClient();
+
+  // In-app notifications are delivered by being persisted to the table above;
+  // there is no external channel to dispatch to, so mark them sent right away.
+  if ((payload.channel ?? "in_app") === "in_app") {
+    await client
+      .from(BEAUTY_NOTIFICATION_TABLE)
+      .update({
+        dispatch_status: "sent",
+        dispatched_at: new Date().toISOString(),
+      })
+      .eq("id", notificationId);
+    return;
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
 
   try {
