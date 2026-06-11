@@ -56,23 +56,47 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   SITE HEADER (독립 헤더 섹션)
+   ────────────────────────────────────────────────────────────────────────── */
+.siteHeader {
+  position: relative;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid rgba(184, 164, 90, 0.2);
+  margin: 0;
+  margin-top: 0;
+  padding: 0;
+  padding-top: 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   HERO BANNER IMAGE
+   ────────────────────────────────────────────────────────────────────────── */
+.heroBannerWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  min-height: 180px;
+  max-height: 280px;
+  overflow: hidden;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    TOP NAVIGATION
    ────────────────────────────────────────────────────────────────────────── */
 .topNav {
-  position: absolute; /* 히어로 이미지 위에 띄움 */
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px;
+  padding: 6px 20px;
+  margin-top: 0;
   background: transparent;
 }
 
 .topNav::before {
-  display: none; /* 배경 제거 */
+  display: none;
 }
 
 .navTools {
@@ -1313,7 +1337,7 @@
 }
 
 .topNav {
-  padding: 22px 20px 0;
+  padding: 6px 20px;
 }
 
 .navBtn,

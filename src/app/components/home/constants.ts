@@ -19,17 +19,10 @@ export const BEAUTY_CATEGORY_OPTIONS: BeautyCategoryOption[] = [
     iconScale: 1.0,
   },
   {
-    id: 'lash',
-    label: 'categories.lash.label',
-    labelKo: '속눈썹',
-    image: '/images/home/categories/lash-category.png',
-    iconScale: 1.0,
-  },
-  {
-    id: 'makeup',
-    label: 'categories.makeup.label',
-    labelKo: '메이크업',
-    image: '/images/home/categories/makeup-category.png',
+    id: 'hair',
+    label: 'categories.hair.label',
+    labelKo: '헤어',
+    image: '/images/home/categories/hair-category.png',
     iconScale: 1.0,
   },
   {
@@ -40,10 +33,17 @@ export const BEAUTY_CATEGORY_OPTIONS: BeautyCategoryOption[] = [
     iconScale: 1.0,
   },
   {
-    id: 'hair',
-    label: 'categories.hair.label',
-    labelKo: '헤어',
-    image: '/images/home/categories/hair-category.png',
+    id: 'makeup',
+    label: 'categories.makeup.label',
+    labelKo: '메이크업',
+    image: '/images/home/categories/makeup-category.png',
+    iconScale: 1.0,
+  },
+  {
+    id: 'lash',
+    label: 'categories.lash.label',
+    labelKo: '속눈썹',
+    image: '/images/home/categories/lash-category.png',
     iconScale: 1.0,
   },
   {
