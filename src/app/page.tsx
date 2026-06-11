@@ -49,6 +49,7 @@ export default function HomePage() {
     process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userName, setUserName] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
@@ -260,6 +261,7 @@ export default function HomePage() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSignOut = async () => {
     try {
       await supabase.auth.signOut();
@@ -346,11 +348,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.main}>
-      <HomeTopNav
-        userName={userName}
-        onSignOut={handleSignOut}
-        t={t}
-      />
+      <HomeTopNav />
 
       <HomeHero
         t={t}

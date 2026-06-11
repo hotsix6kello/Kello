@@ -5,45 +5,52 @@ export type BeautyCategoryId = 'hair' | 'nail' | 'esthetic' | 'waxing' | 'makeup
 export type BeautyCategoryOption = {
   id: BeautyCategoryId;
   label: string;
+  labelKo: string;
   image: string;
   iconScale?: number;
 };
 
 export const BEAUTY_CATEGORY_OPTIONS: BeautyCategoryOption[] = [
   {
-    id: 'hair',
-    label: 'categories.hair.label',
-    image: '/images/home/categories/hair-category.png',
-    iconScale: 1.0,
-  },
-  {
-    id: 'nail',
-    label: 'categories.nail.label',
-    image: '/images/home/categories/nail-category.png',
-    iconScale: 1.0,
-  },
-  {
     id: 'esthetic',
     label: 'categories.esthetic.label',
+    labelKo: '에스테틱',
     image: '/images/home/categories/care-category.png',
-    iconScale: 1.0,
-  },
-  {
-    id: 'waxing',
-    label: 'categories.waxing.label',
-    image: '/images/home/categories/wax-category.png',
-    iconScale: 1.0,
-  },
-  {
-    id: 'makeup',
-    label: 'categories.makeup.label',
-    image: '/images/home/categories/makeup-category.png',
     iconScale: 1.0,
   },
   {
     id: 'lash',
     label: 'categories.lash.label',
+    labelKo: '속눈썹',
     image: '/images/home/categories/lash-category.png',
+    iconScale: 1.0,
+  },
+  {
+    id: 'makeup',
+    label: 'categories.makeup.label',
+    labelKo: '메이크업',
+    image: '/images/home/categories/makeup-category.png',
+    iconScale: 1.0,
+  },
+  {
+    id: 'nail',
+    label: 'categories.nail.label',
+    labelKo: '네일',
+    image: '/images/home/categories/nail-category.png',
+    iconScale: 1.0,
+  },
+  {
+    id: 'hair',
+    label: 'categories.hair.label',
+    labelKo: '헤어',
+    image: '/images/home/categories/hair-category.png',
+    iconScale: 1.0,
+  },
+  {
+    id: 'waxing',
+    label: 'categories.waxing.label',
+    labelKo: '왁싱',
+    image: '/images/home/categories/wax-category.png',
     iconScale: 1.0,
   },
 ];
