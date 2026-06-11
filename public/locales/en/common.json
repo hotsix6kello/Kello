@@ -620,7 +620,14 @@
     "payment_currency_unsupported": "PayPal payment is currently available only for USD quotes.",
     "payment_currency_usd_only": "PayPal payment is currently available only for USD quotes. Please ask Kello to update the payment currency.",
     "payment_status_paid": "Paid",
-    "payment_status_pending": "Payment Pending"
+    "payment_status_pending": "Payment Pending",
+    "payment_consent_title": "Review and agree before payment",
+    "payment_refund_policy_title": "Cancellation & Refund Policy",
+    "payment_refund_rate_label": "{{rate}}% refund",
+    "payment_no_refund_label": "No refund",
+    "payment_consent_privacy_label": "I agree to the Privacy Policy",
+    "payment_consent_refund_label": "I agree to the Cancellation & Refund Policy",
+    "payment_consent_hint": "Please agree to both items above to proceed with payment."
   },
   "beauty_explore": {
     "hero_title": "Explore Beauty Bookings",

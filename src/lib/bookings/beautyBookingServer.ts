@@ -304,7 +304,6 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     quoteTotalPrice: row.quote_total_price ?? null,
     quoteCurrency: row.quote_currency ?? null,
     quoteNote: row.quote_note ?? null,
-    quoteRefundPolicy: row.quote_refund_policy ?? null,
     quoteExpiresAt: row.quote_expires_at ?? null,
     quoteStatus: isBeautyBookingQuoteStatus(row.quote_status) ? row.quote_status : null,
     quoteSentAt: row.quote_sent_at ?? null,
@@ -1641,7 +1640,6 @@ export type SendBookingQuotePayload = {
   quoteTotalPrice: number;
   quoteCurrency: string;
   quoteNote: string;
-  quoteRefundPolicy: string;
   quoteExpiresAt: string | null;
 };
 
@@ -1691,7 +1689,6 @@ export async function sendBookingQuote(
       quote_total_price: payload.quoteTotalPrice,
       quote_currency: payload.quoteCurrency || 'USD',
       quote_note: payload.quoteNote,
-      quote_refund_policy: payload.quoteRefundPolicy,
       quote_expires_at: payload.quoteExpiresAt ?? null,
       quote_status: "pending" satisfies BeautyBookingQuoteStatus,
       quote_sent_at: now,

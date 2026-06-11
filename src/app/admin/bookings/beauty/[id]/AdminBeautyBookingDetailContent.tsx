@@ -105,7 +105,6 @@ type QuoteFormState = {
   totalPrice: string;
   currency: string;
   note: string;
-  refundPolicy: string;
   expiresAt: string;
   isSubmitting: boolean;
   error: string | null;
@@ -184,7 +183,6 @@ function mapBookingToQuoteFields(booking: BeautyBookingAdminRecord) {
     totalPrice: booking.quoteTotalPrice !== null ? String(booking.quoteTotalPrice) : '',
     currency: booking.quoteCurrency ?? 'USD',
     note: booking.quoteNote ?? '',
-    refundPolicy: booking.quoteRefundPolicy ?? '',
     expiresAt: toDateTimeLocalInputValue(booking.quoteExpiresAt),
   };
 }
@@ -301,7 +299,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     totalPrice: '',
     currency: 'USD',
     note: '',
-    refundPolicy: '',
     expiresAt: '',
     isSubmitting: false,
     error: null,
@@ -739,7 +736,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
             quoteTotalPrice: parsedPrice,
             quoteCurrency: quoteForm.currency.trim() || 'USD',
             quoteNote: quoteForm.note.trim(),
-            quoteRefundPolicy: quoteForm.refundPolicy.trim(),
             quoteExpiresAt: dateTimeLocalInputToIso(quoteForm.expiresAt),
           },
         },
@@ -1638,17 +1634,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                     value={quoteForm.note}
                     onChange={(e) => setQuoteForm((c) => ({ ...c, note: e.target.value }))}
                     placeholder="고객에게 전달할 안내 메모를 입력해 주세요."
-                  />
-                </label>
-
-                <label className={styles.field} style={{ marginTop: 12 }}>
-                  <span>환불/취소 정책</span>
-                  <textarea
-                    className={styles.input}
-                    style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
-                    value={quoteForm.refundPolicy}
-                    onChange={(e) => setQuoteForm((c) => ({ ...c, refundPolicy: e.target.value }))}
-                    placeholder="예: 시술 3일 전까지 전액 환불 가능, 이후 50% 환불"
                   />
                 </label>
 

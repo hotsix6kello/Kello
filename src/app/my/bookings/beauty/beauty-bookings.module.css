@@ -568,6 +568,28 @@
   cursor: pointer;
 }
 
+.paymentConsentPanel {
+  display: grid;
+  gap: 12px;
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.paymentConsentTitle {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gray-700);
+}
+
+.paymentConsentHint {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--gray-400);
+}
+
 .panelTitle {
   margin: 0;
   font-size: 0.86rem;
