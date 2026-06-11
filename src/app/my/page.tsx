@@ -786,9 +786,11 @@ function MyBookingsSection({
                         return (
                         <div
                             key={b.id}
+                            onClick={() => router.push(`/my/bookings/beauty?bookingId=${b.id}`)}
                             style={{
                                 background: '#FFFFFF', borderRadius: 14,
                                 border: '1px solid var(--warm-sand)', padding: '14px 16px',
+                                cursor: 'pointer',
                             }}
                         >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
