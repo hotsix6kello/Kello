@@ -17,8 +17,8 @@ interface SheetSearchResult {
 }
 
 // Home Specific Components
-import Image from 'next/image';
 import HomeTopNav from './components/home/HomeTopNav';
+import HomeHeroBanner from './components/home/HomeHeroBanner';
 import HomeHero from './components/home/HomeHero';
 import HomeBookingSection from './components/home/HomeBookingSection';
 
@@ -354,16 +354,8 @@ export default function HomePage() {
         <HomeTopNav />
       </header>
 
-      {/* ── 메인 배너 이미지 ── */}
-      <div className={styles.heroBannerWrap}>
-        <Image
-          src="/images/home/hero-banner.png"
-          alt="Kello Beauty Banner"
-          fill
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-      </div>
+      {/* ── 다국어 메인 배너 ── */}
+      <HomeHeroBanner />
 
       {/* ── 카테고리 아이콘 행 ── */}
       <div id="beauty-booking">
