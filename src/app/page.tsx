@@ -266,14 +266,9 @@ export default function HomePage() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCategorySelect = (categoryId: string) => {
-    const nextCategory = categoryId as BeautyCategoryId;
-    if (nextCategory === 'esthetic') {
-      router.push('/booking/aesthetic');
-      return;
-    }
-    setSelectedCategory(nextCategory);
-    setIsBookingOpen(true);
+    router.push('/booking/aesthetic');
   };
 
 

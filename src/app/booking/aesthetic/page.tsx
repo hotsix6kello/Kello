@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import styles from './page.module.css';
 
 interface AestheticItem {
@@ -13,7 +14,7 @@ export default function AestheticCategoryDetailPage() {
   const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  // 시안과 100% 동일한 8개 스킨케어 항목 정의
+  // 8개 스킨케어 항목 정의
   const items: AestheticItem[] = [
     { id: 'soothing', label: '피부 진정' },
     { id: 'hydration', label: '수분 관리' },
@@ -61,11 +62,33 @@ export default function AestheticCategoryDetailPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        {/* Header */}
+        {/* Header with Back Button and Home Kello Logo */}
         <header className={styles.header}>
-          <span className={styles.stepIndicator}>STEP 1</span>
-          <span className={styles.logo}>KELLO</span>
-          <span></span> {/* 우측 균형을 위한 빈 공간 */}
+          <button 
+            className={styles.backButton} 
+            onClick={() => router.back()} 
+            aria-label="뒤로가기"
+          >
+            <ArrowLeft size={20} strokeWidth={2.5} />
+          </button>
+          
+          <div className={styles.logoWrapper}>
+            <svg width="76" height="30" viewBox="0 0 76 30" aria-label="Kello" style={{ display: 'block' }}>
+              <text
+                x="2"
+                y="22"
+                fontFamily="'Nunito', 'Quicksand', 'Pretendard', 'Inter', sans-serif"
+                fontWeight="800"
+                fontSize="24"
+                fill="#FF3566"
+                letterSpacing="-0.5"
+              >
+                Kello
+              </text>
+            </svg>
+          </div>
+          
+          <div className={styles.placeholder}></div> {/* 우측 균형을 위한 빈 공간 */}
         </header>
 
         {/* Scrollable Main Section */}

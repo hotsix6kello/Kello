@@ -9,7 +9,7 @@
 
 .container {
   width: 100%;
-  max-width: 400px; /* 시안처럼 슬림한 뷰포트 비율 */
+  max-width: 400px;
   min-height: 100vh;
   background-color: #FFFFFF;
   display: flex;
@@ -20,41 +20,53 @@
   box-sizing: border-box;
 }
 
-/* Header */
+/* Header with Grid layout for exact alignment */
 .header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 44px 1fr 44px;
   align-items: center;
-  padding: 24px 20px 16px 20px;
+  padding: 16px 20px;
   background-color: #FFFFFF;
   border-bottom: 1px solid #F3F3F3;
 }
 
-.stepIndicator {
-  font-size: 13px;
-  font-weight: 600;
-  color: #E25B77; /* 로즈 핑크 계열 */
-  text-transform: uppercase;
+.backButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #1F1F1F;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: opacity 0.2s ease;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  color: #E25B77; /* KELLO 로고 핑크 */
-  text-align: center;
-  letter-spacing: 0.5px;
+.backButton:hover {
+  opacity: 0.7;
 }
 
-/* Scroll Area */
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder {
+  width: 44px;
+  height: 44px;
+}
+
+/* Scroll Area with narrowed bottom spacing */
 .scrollArea {
   flex: 1;
-  padding: 32px 24px 100px 24px;
+  padding: 28px 24px 68px 24px; /* 기존 100px -> 68px로 좁힘 */
   overflow-y: auto;
 }
 
 /* Question Section */
 .questionSection {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .questionTitle {
@@ -62,7 +74,7 @@
   font-weight: 700;
   color: #1F1F1F;
   line-height: 1.35;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   letter-spacing: -0.5px;
 }
 
@@ -104,28 +116,28 @@
 
 /* Selected State */
 .bubbleCard.selected {
-  background-color: #FFF0F2; /* 매우 연한 분홍 배경 */
-  border-color: #F8D3DA; /* 보정된 부드러운 핑크 테두리 */
+  background-color: #FFF0F2;
+  border-color: #F8D3DA;
 }
 
 .bubbleCard.selected .label {
-  color: #E25B77; /* 강조된 로즈 핑크 글씨 */
+  color: #E25B77;
 }
 
-/* Bottom CTA Fixed Box */
+/* Bottom CTA Fixed Box with narrower spacing */
 .ctaContainer {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px 24px 28px 24px;
+  padding: 8px 24px 20px 24px; /* 기존 16px/28px -> 8px/20px로 대폭 좁힘 */
   background-color: #FFFFFF;
 }
 
 .nextButton {
   width: 100%;
   height: 52px;
-  background-color: #E25B77; /* 따뜻한 로즈 핑크 */
+  background-color: #E25B77;
   border: none;
   border-radius: 16px;
   color: #FFFFFF;
