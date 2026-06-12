@@ -205,10 +205,13 @@ export default function HomePage() {
   }, [hasSupabaseAuth]);
 
   useEffect(() => {
+    const hideWelcome = localStorage.getItem('hideWelcomeCoupon_v2') === 'true';
+    if (!hideWelcome) {
+      setShowWelcomePopup(true);
+    }
+
     supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!session) {
-        setShowWelcomePopup(true);
-      } else {
+      if (session) {
         const hidePopup = localStorage.getItem('hideReferralPopup') === 'true';
         if (!hidePopup) {
           const { data } = await supabase
@@ -225,6 +228,7 @@ export default function HomePage() {
   }, []);
 
   const handleWelcomeClose = () => {
+    localStorage.setItem('hideWelcomeCoupon_v2', 'true');
     setShowWelcomePopup(false);
   };
 
