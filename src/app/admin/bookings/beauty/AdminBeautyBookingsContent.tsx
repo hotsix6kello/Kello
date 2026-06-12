@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useDeferredValue, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import sharedStyles from '../../admin.module.css';
@@ -304,7 +305,13 @@ export default function AdminBeautyBookingsContent() {
           </svg>
         </button>
         <h1 className={sharedStyles.headerTitle}>뷰티 예약 관리</h1>
-        <span className={sharedStyles.adminBadge}>ADMIN</span>
+        <div className={sharedStyles.headerActions}>
+          <Link href="/my" className={sharedStyles.headerNavButton}>
+            <span className={sharedStyles.headerNavButtonFull}>마이페이지</span>
+            <span className={sharedStyles.headerNavButtonShort}>마이</span>
+          </Link>
+          <span className={sharedStyles.adminBadge}>ADMIN</span>
+        </div>
       </header>
 
       <div className={sharedStyles.content}>

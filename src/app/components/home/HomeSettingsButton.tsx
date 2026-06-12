@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 import { changeLanguage } from '@/lib/i18n/client';
 import { resolveCanonicalLocale } from '@/lib/i18n/locales';
 import { LANGUAGES, type LangOption } from '../LanguagePicker';
@@ -16,15 +18,14 @@ const LANG_TO_CURRENCY: Record<string, string> = {
 const BTN_STYLE: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: 5,
-    height: 36,
-    padding: '0 13px',
+    gap: 4,
+    height: 30,
+    padding: '0 8px',
     borderRadius: 999,
-    background: 'rgba(255,255,255,0.72)',
-    backdropFilter: 'blur(12px)',
-    border: '1px solid rgba(255,255,255,0.65)',
-    color: '#3B2430',
-    fontSize: 12,
+    background: 'transparent',
+    border: 'none',
+    color: '#6B5C28',
+    fontSize: 11,
     fontWeight: 600,
     cursor: 'pointer',
     whiteSpace: 'nowrap',
@@ -33,10 +34,11 @@ const BTN_STYLE: React.CSSProperties = {
 export default function HomeSettingsButton() {
     const { t, i18n } = useTranslation('common');
     const [isOpen, setIsOpen] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [currency, setCurrency] = useState('USD');
 
     const currentCode = resolveCanonicalLocale(i18n.language, 'ko');
-    const langShort = currentCode.split('-')[0].toUpperCase();
+    const currentLang = LANGUAGES.find(lang => lang.code === currentCode) || LANGUAGES[0];
 
     useEffect(() => {
         const saved = localStorage.getItem('kello_currency');
@@ -66,15 +68,22 @@ export default function HomeSettingsButton() {
     };
 
     return (
-        <div style={{ position: 'relative', zIndex: 200, display: 'inline-block' }}>
+        <div style={{ position: 'relative', zIndex: 200, display: 'flex', alignItems: 'center' }}>
             <button
                 style={BTN_STYLE}
                 onClick={() => setIsOpen(v => !v)}
                 aria-label={t('common.select_language', { defaultValue: 'Language & Currency' })}
             >
-                <span style={{ fontSize: 14, lineHeight: 1 }}>🌐</span>
-                <span>{langShort} · {currency}</span>
-                <span style={{ fontSize: 9, opacity: 0.6 }}>▾</span>
+                <Image 
+                    src={currentLang.flag} 
+                    alt={currentLang.label} 
+                    width={18} 
+                    height={12} 
+                    className="object-cover rounded-[2px]"
+                    style={{ objectFit: 'cover' }}
+                />
+                <span>{currentLang.label}</span>
+                <ChevronDown size={11} style={{ marginLeft: 2, opacity: 0.8 }} />
             </button>
 
             {isOpen && (

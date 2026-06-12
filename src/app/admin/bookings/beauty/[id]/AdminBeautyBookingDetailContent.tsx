@@ -2,6 +2,7 @@
 
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import sharedStyles from '../../../admin.module.css';
@@ -864,7 +865,17 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
             </svg>
           </button>
           <h1 className={sharedStyles.headerTitle}>뷰티 예약 상세</h1>
-          <span className={sharedStyles.adminBadge}>ADMIN</span>
+          <div className={sharedStyles.headerActions}>
+            <Link href="/admin/bookings/beauty" className={sharedStyles.headerNavButton}>
+              <span className={sharedStyles.headerNavButtonFull}>예약 목록</span>
+              <span className={sharedStyles.headerNavButtonShort}>목록</span>
+            </Link>
+            <Link href="/my" className={sharedStyles.headerNavButton}>
+              <span className={sharedStyles.headerNavButtonFull}>마이페이지</span>
+              <span className={sharedStyles.headerNavButtonShort}>마이</span>
+            </Link>
+            <span className={sharedStyles.adminBadge}>ADMIN</span>
+          </div>
         </header>
         <div className={sharedStyles.content}>
           <div className={styles.errorState} style={{ marginBottom: 16 }}>
@@ -901,7 +912,17 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
           </svg>
         </button>
         <h1 className={`${sharedStyles.headerTitle} ${styles.adminDetailHeaderTitle}`}>뷰티 예약 상세</h1>
-        <span className={`${sharedStyles.adminBadge} ${styles.adminDetailHeaderBadge}`}>ADMIN</span>
+        <div className={sharedStyles.headerActions}>
+          <Link href="/admin/bookings/beauty" className={sharedStyles.headerNavButton}>
+            <span className={sharedStyles.headerNavButtonFull}>예약 목록</span>
+            <span className={sharedStyles.headerNavButtonShort}>목록</span>
+          </Link>
+          <Link href="/my" className={sharedStyles.headerNavButton}>
+            <span className={sharedStyles.headerNavButtonFull}>마이페이지</span>
+            <span className={sharedStyles.headerNavButtonShort}>마이</span>
+          </Link>
+          <span className={`${sharedStyles.adminBadge} ${styles.adminDetailHeaderBadge}`}>ADMIN</span>
+        </div>
       </header>
 
       <div className={sharedStyles.content}>

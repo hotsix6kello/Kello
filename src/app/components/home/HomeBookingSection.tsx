@@ -1,4 +1,3 @@
-import { TFunction } from 'i18next';
 import Image from 'next/image';
 import { BeautyCategoryOption, BeautyCategoryId } from './constants';
 import styles from '../../home.module.css';
@@ -7,7 +6,8 @@ interface HomeBookingSectionProps {
   categories: BeautyCategoryOption[];
   selectedCategory: BeautyCategoryId | null;
   onSelectCategory: (id: BeautyCategoryId) => void;
-  t: TFunction;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  t: any;
 }
 
 export default function HomeBookingSection({
@@ -18,46 +18,30 @@ export default function HomeBookingSection({
 }: HomeBookingSectionProps) {
   return (
     <section className={styles.bookingShell}>
-      <div className={styles.bookingCard}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTagline}>{t('home_beauty.booking.title')}</h2>
-          {t('home_beauty.booking.description') && (
-            <p className={styles.sectionDescription}>
-              {t('home_beauty.booking.description')}
-            </p>
-          )}
-        </div>
+      <div className={styles.categoryRow}>
+        {categories.map((option) => {
+          const isActive = selectedCategory === option.id;
 
-        <div className={styles.categoryGrid}>
-          {categories.map((option) => {
-            const isActive = selectedCategory === option.id;
-
-            return (
-              <button
-                key={option.id}
-                type="button"
-                className={`${styles.categoryButton} ${isActive ? styles.categoryButtonActive : ''}`}
-                onClick={() => onSelectCategory(option.id)}
-              >
-                <div 
-                  className={styles.categoryIconWrap}
-                  style={{ '--icon-base-scale': option.iconScale ?? 1 } as React.CSSProperties}
-                >
-                  <Image 
-                    src={option.image} 
-                    alt={t(option.label)} 
-                    width={64} 
-                    height={64} 
-                    className={styles.categoryIcon}
-                  />
-                </div>
-                <span className={styles.categoryLabel}>{t(option.label)}</span>
-              </button>
-            );
-          })}
-        </div>
-
-
+          return (
+            <button
+              key={option.id}
+              type="button"
+              className={`${styles.categoryCircleBtn} ${isActive ? styles.categoryCircleBtnActive : ''}`}
+              onClick={() => onSelectCategory(option.id)}
+            >
+              <div className={styles.categoryCircleIcon}>
+                <Image
+                  src={option.image}
+                  alt={t(option.label)}
+                  width={44}
+                  height={44}
+                  className={styles.categoryIcon}
+                />
+              </div>
+              <span className={styles.categoryCircleLabel}>{option.labelKo}</span>
+            </button>
+          );
+        })}
       </div>
     </section>
   );

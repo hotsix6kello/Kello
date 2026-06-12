@@ -101,30 +101,6 @@
     }
 }
 
-/* Center Item Style */
-.centerItem {
-    overflow: visible;
-}
-
-.centerItem.active {
-    transform: translateY(-2px);
-}
-
-.centerIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.centerItem.active .centerIcon {
-    transform: scale(1.1);
-}
-
-.centerItem .navLabel {
-    margin-top: 0;
-}
-
 /* Soft premium reskin overrides */
 .navBar {
     height: 82px;
@@ -151,14 +127,15 @@
 }
 
 .navIcon {
-    width: 36px;
-    height: 36px;
-    border-radius: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.18rem;
     background: transparent;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navItem.active .navIcon {
@@ -166,6 +143,7 @@
     box-shadow: 0 10px 18px rgba(183, 128, 136, 0.16);
     filter: none;
     text-shadow: none;
+    transform: scale(1.05);
 }
 
 .navLabel {
