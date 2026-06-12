@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
@@ -34,6 +35,7 @@ import {
 } from './components/home/constants';
 
 export default function HomePage() {
+  const router = useRouter();
   const { t, i18n } = useTranslation('common');
   const {
     itinerary,
@@ -264,10 +266,9 @@ export default function HomePage() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCategorySelect = (categoryId: string) => {
-    const nextCategory = categoryId as BeautyCategoryId;
-    setSelectedCategory(nextCategory);
-    setIsBookingOpen(true);
+    router.push('/booking/aesthetic');
   };
 
 

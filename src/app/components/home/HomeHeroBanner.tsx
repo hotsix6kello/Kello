@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { resolveCanonicalLocale } from '@/lib/i18n/locales';
 import { Star, ShieldCheck, MessageCircle, Lock } from 'lucide-react';
@@ -147,6 +148,7 @@ const DEFAULT_LOCALE = 'en-US';
 /* ────────────────────────────────────────────────────────── */
 export default function HomeHeroBanner() {
   const { i18n } = useTranslation('common');
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -214,10 +216,18 @@ export default function HomeHeroBanner() {
             className={styles.heroBannerCtaRow}
             style={{ justifyContent: isRTL ? 'flex-end' : 'flex-start' }}
           >
-            <button type="button" className={styles.heroBannerCtaPrimary}>
+            <button 
+              type="button" 
+              className={styles.heroBannerCtaPrimary}
+              onClick={() => router.push('/booking/process')}
+            >
               {copy.primaryCta}
             </button>
-            <button type="button" className={styles.heroBannerCtaSecondary}>
+            <button 
+              type="button" 
+              className={styles.heroBannerCtaSecondary}
+              onClick={() => router.push('/talk')}
+            >
               {copy.secondaryCta}
             </button>
           </div>

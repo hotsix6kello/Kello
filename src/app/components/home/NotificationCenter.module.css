@@ -24,8 +24,8 @@
 
 .badge {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: -2px;
+  right: -2px;
   background-color: #FF3566; /* Kello 브랜드 핑크 계열 */
   color: white;
   font-size: 9px;
