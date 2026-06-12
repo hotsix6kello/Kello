@@ -18,6 +18,7 @@ interface SheetSearchResult {
 
 // Home Specific Components
 import HomeTopNav from './components/home/HomeTopNav';
+import HomeHeroBanner from './components/home/HomeHeroBanner';
 import HomeHero from './components/home/HomeHero';
 import HomeBookingSection from './components/home/HomeBookingSection';
 
@@ -49,6 +50,7 @@ export default function HomePage() {
     process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userName, setUserName] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
@@ -260,6 +262,7 @@ export default function HomePage() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSignOut = async () => {
     try {
       await supabase.auth.signOut();
@@ -346,16 +349,15 @@ export default function HomePage() {
 
   return (
     <div className={styles.main}>
-      <HomeTopNav
-        userName={userName}
-        onSignOut={handleSignOut}
-        t={t}
-      />
+      {/* ── 독립 헤더 영역 ── */}
+      <header className={styles.siteHeader}>
+        <HomeTopNav />
+      </header>
 
-      <HomeHero
-        t={t}
-      />
+      {/* ── 다국어 메인 배너 ── */}
+      <HomeHeroBanner />
 
+      {/* ── 카테고리 아이콘 행 ── */}
       <div id="beauty-booking">
         <HomeBookingSection
           categories={BEAUTY_CATEGORY_OPTIONS}
@@ -364,6 +366,11 @@ export default function HomePage() {
           t={t}
         />
       </div>
+
+      {/* ── 슬라이드 갤러리 (카테고리 아래로 이동) ── */}
+      <HomeHero
+        t={t}
+      />
 
 
 

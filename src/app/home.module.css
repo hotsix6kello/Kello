@@ -56,23 +56,197 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   SITE HEADER (독립 헤더 섹션)
+   ────────────────────────────────────────────────────────────────────────── */
+.siteHeader {
+  position: relative;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid rgba(184, 164, 90, 0.2);
+  margin: 0;
+  margin-top: 0;
+  padding: 0;
+  padding-top: 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   HERO BANNER IMAGE
+   ────────────────────────────────────────────────────────────────────────── */
+.heroBannerWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  min-height: 180px;
+  max-height: 320px;
+  overflow: hidden;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   MULTILINGUAL HERO BANNER SECTION
+   ────────────────────────────────────────────────────────────────────────── */
+.heroBannerSection {
+  position: relative;
+  width: 100%;
+}
+
+
+/* 그라디언트 오버레이 */
+.heroBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 250, 248, 0.92) 0%,
+    rgba(255, 245, 242, 0.75) 45%,
+    rgba(255, 240, 240, 0.15) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 텍스트 레이어 */
+.heroBannerText {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px 20px;
+  max-width: 65%;
+}
+
+.heroBannerTitle {
+  margin: 0 0 8px;
+  font-size: clamp(14px, 4vw, 22px);
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+  color: #2a1a20;
+  word-break: keep-all;
+}
+
+.heroBannerSubtitle {
+  margin: 0 0 14px;
+  font-size: clamp(10px, 2.6vw, 13px);
+  font-weight: 500;
+  line-height: 1.55;
+  color: #5a4050;
+  word-break: keep-all;
+}
+
+/* CTA 버튼 행 */
+.heroBannerCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.heroBannerCtaPrimary {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #B8A45A;
+  color: #fff;
+  font-size: clamp(11px, 2.8vw, 13px);
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.18s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(184, 164, 90, 0.28);
+}
+
+.heroBannerCtaPrimary:hover {
+  background: #a18e47;
+  transform: translateY(-1px);
+}
+
+.heroBannerCtaSecondary {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(184, 164, 90, 0.45);
+  background: rgba(255, 255, 255, 0.82);
+  color: #B8A45A;
+  font-size: clamp(11px, 2.8vw, 13px);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(4px);
+}
+
+.heroBannerCtaSecondary:hover {
+  background: rgba(184, 164, 90, 0.08);
+}
+
+/* 신뢰 포인트 행 */
+.heroBannerTrustRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: #fff;
+  border-top: 1px solid rgba(184, 164, 90, 0.12);
+}
+
+.heroBannerTrustItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  justify-content: center;
+  padding: 10px 8px;
+  border-right: 1px solid rgba(184, 164, 90, 0.12);
+}
+
+.heroBannerTrustItem:last-child {
+  border-right: none;
+}
+
+.heroBannerTrustIcon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.heroBannerTrustText {
+  font-size: clamp(9px, 2.4vw, 11px);
+  font-weight: 700;
+  color: #5a4050;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 360px) {
+  .heroBannerText {
+    max-width: 72%;
+    padding: 12px 14px;
+  }
+  .heroBannerTitle {
+    font-size: 13px;
+  }
+  .heroBannerSubtitle {
+    font-size: 10px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    TOP NAVIGATION
    ────────────────────────────────────────────────────────────────────────── */
 .topNav {
-  position: absolute; /* 히어로 이미지 위에 띄움 */
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px;
+  padding: 6px 20px;
+  margin-top: 0;
   background: transparent;
 }
 
 .topNav::before {
-  display: none; /* 배경 제거 */
+  display: none;
 }
 
 .navTools {
@@ -165,9 +339,74 @@
    BOOKING CARD / BEAUTY CATEGORIES
    ────────────────────────────────────────────────────────────────────────── */
 .bookingShell {
-  padding: 0 20px 24px;
+  padding: 12px 20px 16px;
   position: relative;
   z-index: 1;
+}
+
+/* 가로 한 줄 아이콘 행 */
+.categoryRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 0;
+}
+
+.categoryRow::-webkit-scrollbar {
+  display: none;
+}
+
+/* 원형 아이콘 버튼 */
+.categoryCircleBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.categoryCircleBtn:active {
+  transform: scale(0.94);
+}
+
+.categoryCircleIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: var(--surface, #fff);
+  border: 1.5px solid var(--warm-sand, #eadcd3);
+  box-shadow: 0 4px 12px rgba(43, 35, 29, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.categoryCircleBtnActive .categoryCircleIcon {
+  border-color: var(--accent, #b8913a);
+  box-shadow: 0 6px 18px rgba(184, 145, 58, 0.22);
+}
+
+.categoryCircleLabel {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-black, #2a2624);
+  text-align: center;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .bookingCard {
@@ -1248,7 +1487,7 @@
 }
 
 .topNav {
-  padding: 22px 20px 0;
+  padding: 6px 20px;
 }
 
 .navBtn,
@@ -1464,9 +1703,9 @@
 .heroFullCarousel {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  min-height: 340px;
-  max-height: 560px;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
+  max-height: 360px;
   overflow: hidden;
   border-radius: 0 0 36px 36px;
   box-shadow: 0 18px 42px rgba(103, 79, 76, 0.16);
