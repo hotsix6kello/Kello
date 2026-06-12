@@ -266,6 +266,10 @@ export default function HomePage() {
 
   const handleCategorySelect = (categoryId: string) => {
     const nextCategory = categoryId as BeautyCategoryId;
+    if (nextCategory === 'esthetic') {
+      router.push('/booking/aesthetic');
+      return;
+    }
     setSelectedCategory(nextCategory);
     setIsBookingOpen(true);
   };
