@@ -53,7 +53,6 @@ export default function HomePage() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userName, setUserName] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const [showReferralPopup, setShowReferralPopup] = useState(false);
   const [referralError, setReferralError] = useState<string | null>(null);
   const [referralToast, setReferralToast] = useState<string | null>(null);
@@ -205,11 +204,6 @@ export default function HomePage() {
   }, [hasSupabaseAuth]);
 
   useEffect(() => {
-    const hideWelcome = localStorage.getItem('hideWelcomeCoupon_v2') === 'true';
-    if (!hideWelcome) {
-      setShowWelcomePopup(true);
-    }
-
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (session) {
         const hidePopup = localStorage.getItem('hideReferralPopup') === 'true';
@@ -226,11 +220,6 @@ export default function HomePage() {
       }
     });
   }, []);
-
-  const handleWelcomeClose = () => {
-    localStorage.setItem('hideWelcomeCoupon_v2', 'true');
-    setShowWelcomePopup(false);
-  };
 
   const handleReferralClose = () => {
     setShowReferralPopup(false);
@@ -376,6 +365,9 @@ export default function HomePage() {
         t={t}
       />
 
+      {/* ── 할인쿠폰 인라인 배너 ── */}
+      <WelcomeCouponPopup />
+
 
 
 
@@ -419,10 +411,6 @@ export default function HomePage() {
         initialCategory={selectedCategory}
         t={t}
       />
-
-      {showWelcomePopup && (
-        <WelcomeCouponPopup onClose={handleWelcomeClose} />
-      )}
 
       {showReferralPopup && (
         <ReferralCodePopup

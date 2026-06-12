@@ -1,12 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { X } from 'lucide-react';
 import Image from 'next/image';
 import styles from './WelcomeCouponPopup.module.css';
 
 interface WelcomeCouponPopupProps {
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps) {
@@ -15,7 +14,7 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
   const handleSignUp = (e: React.MouseEvent) => {
     e.stopPropagation();
     router.push('/auth/signup');
-    onClose();
+    if (onClose) onClose();
   };
 
   return (
@@ -35,17 +34,6 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
           className={styles.couponImage} 
         />
       </div>
-      <button 
-        type="button" 
-        className={styles.closeButton} 
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        aria-label="Close banner"
-      >
-        <X size={15} strokeWidth={2.5} />
-      </button>
     </div>
   );
 }
