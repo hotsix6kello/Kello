@@ -4,16 +4,15 @@ import HomeSettingsButton from './HomeSettingsButton';
 import styles from '../../home.module.css';
 
 const ICON_BTN_STYLE: React.CSSProperties = {
-  width: 30,
-  height: 30,
+  width: 24,
+  height: 24,
   padding: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: 999,
   background: 'transparent',
   border: 'none',
-  color: '#B8A45A',
+  color: '#FF3566',
   cursor: 'pointer',
 };
 
@@ -45,7 +44,7 @@ export default function HomeTopNav() {
           aria-label="Notifications"
           style={ICON_BTN_STYLE}
         >
-          <Bell size={22} fill="#B8A45A" />
+          <Bell size={18} stroke="#FF3566" />
         </button>
       </div>
     </div>

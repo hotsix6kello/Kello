@@ -1,7 +1,8 @@
 'use client';
 
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
+import { X } from 'lucide-react';
+import Image from 'next/image';
 import styles from './WelcomeCouponPopup.module.css';
 
 interface WelcomeCouponPopupProps {
@@ -9,25 +10,42 @@ interface WelcomeCouponPopupProps {
 }
 
 export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps) {
-  const { t } = useTranslation('common');
   const router = useRouter();
 
-  const handleSignUp = () => {
+  const handleSignUp = (e: React.MouseEvent) => {
+    e.stopPropagation();
     router.push('/auth/signup');
+    onClose();
   };
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.card} onClick={e => e.stopPropagation()}>
-        <h2 className={styles.title}>{t('welcome_popup.title')}</h2>
-        <p className={styles.description}>{t('welcome_popup.description')}</p>
-        <button className={styles.ctaButton} onClick={handleSignUp}>
-          {t('welcome_popup.cta')}
-        </button>
-        <button className={styles.closeButton} onClick={onClose}>
-          {t('welcome_popup.close')}
-        </button>
+    <div className={styles.floatingBanner} onClick={handleSignUp}>
+      <div className={styles.textContainer}>
+        <div className={styles.line1}>지금 가입하시면 즉시 사용가능한 5% 할인 쿠폰 증정</div>
+        <div className={styles.line2}>
+          <span className={styles.highlight}>Kello</span>와 함께 회원가입만 해도 바로 쓸 수 있는 쿠폰을 드려요.
+        </div>
       </div>
+      <div className={styles.couponContainer}>
+        <Image 
+          src="/images/home/coupon_ticket.png" 
+          alt="5% Coupon" 
+          width={72}
+          height={51}
+          className={styles.couponImage} 
+        />
+      </div>
+      <button 
+        type="button" 
+        className={styles.closeButton} 
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        aria-label="Close banner"
+      >
+        <X size={15} strokeWidth={2.5} />
+      </button>
     </div>
   );
 }

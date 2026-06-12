@@ -18,6 +18,7 @@ export default function HomeBookingSection({
 }: HomeBookingSectionProps) {
   return (
     <section className={styles.bookingShell}>
+      <h3 className={styles.sectionSubtitle}>어떤 K-뷰티 서비스를 찾고 있나요?</h3>
       <div className={styles.categoryRow}>
         {categories.map((option) => {
           const isActive = selectedCategory === option.id;
