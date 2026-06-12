@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Edit2, Trash2, MapPin, WonSign, Gift, Store } from 'lucide-react';
+import { ArrowLeft, Edit2, Trash2, MapPin, Gift, Store } from 'lucide-react';
 import styles from './page.module.css';
 
 interface StoreInfo {
@@ -214,7 +214,7 @@ export default function BeautyStoreManagementPage() {
                         {store.location}
                       </span>
                       <span className={`${styles.metaBadge} ${styles.metaPrice}`}>
-                        <WonSign size={11} style={{ display: 'inline', marginRight: 2, verticalAlign: 'middle' }} />
+                        <span style={{ marginRight: 2, fontWeight: 700 }}>₩</span>
                         {store.price}
                       </span>
                       <span className={`${styles.metaBadge} ${styles.metaOffer}`}>
