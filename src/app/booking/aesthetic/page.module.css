@@ -9,9 +9,9 @@
 
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px; /* 기능 확장을 위해 440px로 부드럽게 조정 */
   min-height: 100vh;
-  background-color: #FFFFFF;
+  background-color: #FCFAF8; /* Ivory background */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -20,14 +20,17 @@
   box-sizing: border-box;
 }
 
-/* Header with Grid layout for exact alignment */
+/* Header */
 .header {
   display: grid;
   grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: 16px 20px;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #F3F3F3;
+  background-color: #FCFAF8;
+  border-bottom: 1px solid #F3F1ED;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .backButton {
@@ -39,11 +42,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  transition: opacity 0.2s ease;
-}
-
-.backButton:hover {
-  opacity: 0.7;
 }
 
 .logoWrapper {
@@ -57,105 +55,334 @@
   height: 44px;
 }
 
-/* Scroll Area with narrowed bottom spacing */
+/* Mode Switcher Segment */
+.modeSwitcher {
+  display: flex;
+  background-color: #F0EDE9;
+  border-radius: 12px;
+  padding: 4px;
+  margin: 16px 20px 8px 20px;
+}
+
+.modeButton {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #8C8780;
+}
+
+.modeButton.active {
+  background-color: #FFFFFF;
+  color: #FF3566; /* Kello Pink */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Scroll Area */
 .scrollArea {
   flex: 1;
-  padding: 28px 24px 68px 24px; /* 기존 100px -> 68px로 좁힘 */
+  padding: 16px 20px 40px 20px;
   overflow-y: auto;
 }
 
-/* Question Section */
-.questionSection {
-  margin-bottom: 24px;
+/* Subtitle Header */
+.sectionHeader {
+  margin-bottom: 20px;
 }
 
-.questionTitle {
-  font-size: 24px;
-  font-weight: 700;
-  color: #1F1F1F;
-  line-height: 1.35;
-  margin: 0 0 8px 0;
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin: 0 0 6px 0;
   letter-spacing: -0.5px;
 }
 
-.subTitle {
+.sectionDesc {
   font-size: 13px;
-  font-weight: 500;
-  color: #8C8C8C;
+  color: #8C867E;
   margin: 0;
 }
 
-/* 2-Column Grid Layout */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+/* Partner Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #EDEAE6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
 }
 
-/* Bubble Card (Rounded card) */
-.bubbleCard {
-  background-color: #FFFFFF;
-  border: 1px solid #EAEAEA;
-  border-radius: 16px;
-  height: 54px;
+.formGroup {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: all 0.2s ease;
-  user-select: none;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4A453F;
+}
+
+.input, .select, .textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #E3DFD9;
+  background-color: #FCFAF8;
   font-size: 14px;
-  font-weight: 600;
-  color: #333333;
-  text-align: center;
+  color: #1A1A1A;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
-/* Selected State */
-.bubbleCard.selected {
-  background-color: #FFF0F2;
-  border-color: #F8D3DA;
-}
-
-.bubbleCard.selected .label {
-  color: #E25B77;
-}
-
-/* Bottom CTA Fixed Box with narrower spacing */
-.ctaContainer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 8px 24px 20px 24px; /* 기존 16px/28px -> 8px/20px로 대폭 좁힘 */
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: #FF3566;
   background-color: #FFFFFF;
 }
 
-.nextButton {
-  width: 100%;
-  height: 52px;
-  background-color: #E25B77;
-  border: none;
-  border-radius: 16px;
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.submitButton {
+  margin-top: 8px;
+  background-color: #FF3566;
   color: #FFFFFF;
-  font-size: 16px;
+  font-weight: 700;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 15px;
+}
+
+.submitButton:hover {
+  background-color: #E02855;
+}
+
+/* Registered Store Status Card */
+.registeredCard {
+  background-color: #FFFFFF;
+  border: 1.5px solid #FFCCD6;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(255, 53, 102, 0.03);
+}
+
+.cardTag {
+  align-self: flex-start;
+  background-color: #FFF0F2;
+  color: #FF3566;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin: 0 0 10px 0;
+}
+
+.cardInfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.cardInfoItem {
+  font-size: 13px;
+  color: #5C564E;
+  display: flex;
+  gap: 8px;
+}
+
+.cardInfoLabel {
+  font-weight: 700;
+  color: #8C867E;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.cardActions {
+  display: flex;
+  gap: 10px;
+}
+
+.actionButton {
+  flex: 1;
+  height: 42px;
+  border-radius: 10px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #EDEAE6;
+}
+
+.editButton {
+  background-color: #FCFAF8;
+  color: #4A453F;
+}
+
+.editButton:hover {
+  background-color: #F3F1ED;
+  border-color: #D3CFC9;
+}
+
+.deleteButton {
+  background-color: #FFF0F2;
+  color: #FF3566;
+  border-color: #FFCCD6;
+}
+
+.deleteButton:hover {
+  background-color: #FFE0E4;
+}
+
+/* Category Filter Chips for Customers */
+.filterContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  scrollbar-width: none; /* Firefox */
 }
 
-.nextButton:hover {
-  background-color: #D14A65;
+.filterContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
-.nextButton:disabled {
-  background-color: #F5EAEB;
-  color: #C0B0B3;
-  cursor: not-allowed;
+.filterChip {
+  flex-shrink: 0;
+  border: 1px solid #EDEAE6;
+  background-color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #5C564E;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterChip.active {
+  background-color: #FF3566;
+  color: #FFFFFF;
+  border-color: #FF3566;
+}
+
+/* Customer Store Card List */
+.storeList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.storeCard {
+  background-color: #FFFFFF;
+  border: 1px solid #EDEAE6;
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
+}
+
+.storeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.storeCategoryBadge {
+  background-color: #F0EDE9;
+  color: #5C564E;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.storeName {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+.storeIntro {
+  font-size: 13px;
+  color: #5C564E;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.storeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1px solid #F3F1ED;
+  padding-top: 12px;
+}
+
+.metaBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.metaLocation {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+.metaPrice {
+  background-color: #E3F2FD;
+  color: #1565C0;
+}
+
+.metaOffer {
+  background-color: #FFF3E0;
+  color: #E65100;
+  font-weight: 700;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: #8C867E;
+}
+
+.emptyTitle {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #4A453F;
+}
+
+.emptyDesc {
+  font-size: 13px;
 }
