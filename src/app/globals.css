@@ -240,7 +240,7 @@ button {
   -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
-  padding-bottom: 88px;
+  padding-bottom: 82px;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

@@ -145,77 +145,74 @@ export default function BeautyStoreManagementPage() {
           <div className={styles.placeholder}></div>
         </header>
 
+        {/* 상단에 고정될 검색 및 필터 패널 */}
+        <div className={styles.topFixedPanel}>
+          
+          {/* 검색바 */}
+          <div className={styles.searchBarWrapper}>
+            <Search size={16} className={styles.searchIcon} />
+            <input 
+              type="text" 
+              className={styles.searchInput} 
+              placeholder="매장명, 업종 또는 소개글을 검색해보세요"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          {/* 지역 필터 칩 */}
+          <div className={styles.filterContainer}>
+            {regionsMap.map((reg) => (
+              <button
+                key={reg.id}
+                className={`${styles.filterChip} ${selectedRegion === reg.id ? styles.active : ''}`}
+                onClick={() => setSelectedRegion(reg.id)}
+              >
+                {reg.ko}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Scroll Area */}
         <div className={styles.scrollArea}>
           
-          {/* 제휴 업체 둘러보기 공간 */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>제휴 업체 둘러보기</h2>
-              
-              {/* 기존 소제목 텍스트를 제거하고 검색바 배치 */}
-              <div className={styles.searchBarWrapper}>
-                <Search size={16} className={styles.searchIcon} />
-                <input 
-                  type="text" 
-                  className={styles.searchInput} 
-                  placeholder="매장명, 업종 또는 소개글을 검색해보세요"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-            </div>
-
-            {/* 에스테틱/헤어 필터 대신 "서울/경기/인천/부산/제주" 지역 필터 칩 */}
-            <div className={styles.filterContainer}>
-              {regionsMap.map((reg) => (
-                <button
-                  key={reg.id}
-                  className={`${styles.filterChip} ${selectedRegion === reg.id ? styles.active : ''}`}
-                  onClick={() => setSelectedRegion(reg.id)}
-                >
-                  {reg.ko}
-                </button>
-              ))}
-            </div>
-
-            {/* 제휴업체 카드 목록 */}
-            <div className={styles.storeList}>
-              {filteredStores.length > 0 ? (
-                filteredStores.map((store) => (
-                  <div key={store.id} className={styles.storeCard}>
-                    <div className={styles.storeHeader}>
-                      <h3 className={styles.storeName}>{store.name}</h3>
-                      <span className={styles.storeCategoryBadge}>
-                        {store.category}
-                      </span>
-                    </div>
-                    <p className={styles.storeIntro}>{store.intro}</p>
-                    
-                    <div className={styles.storeMeta}>
-                      <span className={`${styles.metaBadge} ${styles.metaLocation}`}>
-                        <MapPin size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
-                        {store.location}
-                      </span>
-                      <span className={`${styles.metaBadge} ${styles.metaPrice}`}>
-                        <span style={{ marginRight: 2, fontWeight: 700 }}>₩</span>
-                        {store.price}
-                      </span>
-                      <span className={`${styles.metaBadge} ${styles.metaOffer}`}>
-                        <Gift size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
-                        {store.specialOffer}
-                      </span>
-                    </div>
+          {/* 제휴업체 카드 목록 */}
+          <div className={styles.storeList}>
+            {filteredStores.length > 0 ? (
+              filteredStores.map((store) => (
+                <div key={store.id} className={styles.storeCard}>
+                  <div className={styles.storeHeader}>
+                    <h3 className={styles.storeName}>{store.name}</h3>
+                    <span className={styles.storeCategoryBadge}>
+                      {store.category}
+                    </span>
                   </div>
-                ))
-              ) : (
-                <div className={styles.emptyState}>
-                  <p className={styles.emptyTitle}>검색된 매장이 없습니다.</p>
-                  <p className={styles.emptyDesc}>지역 필터 혹은 다른 검색어를 입력해보세요.</p>
+                  <p className={styles.storeIntro}>{store.intro}</p>
+                  
+                  <div className={styles.storeMeta}>
+                    <span className={`${styles.metaBadge} ${styles.metaLocation}`}>
+                      <MapPin size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
+                      {store.location}
+                    </span>
+                    <span className={`${styles.metaBadge} ${styles.metaPrice}`}>
+                      <span style={{ marginRight: 2, fontWeight: 700 }}>₩</span>
+                      {store.price}
+                    </span>
+                    <span className={`${styles.metaBadge} ${styles.metaOffer}`}>
+                      <Gift size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
+                      {store.specialOffer}
+                    </span>
+                  </div>
                 </div>
-              )}
-            </div>
-          </section>
+              ))
+            ) : (
+              <div className={styles.emptyState}>
+                <p className={styles.emptyTitle}>검색된 매장이 없습니다.</p>
+                <p className={styles.emptyDesc}>지역 필터 혹은 다른 검색어를 입력해보세요.</p>
+              </div>
+            )}
+          </div>
 
         </div>
       </div>

@@ -29,8 +29,8 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
         <Image 
           src="/images/home/coupon_ticket.png" 
           alt="5% Coupon" 
-          width={72}
-          height={51}
+          width={140}
+          height={100}
           className={styles.couponImage} 
         />
       </div>

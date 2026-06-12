@@ -1,0 +1,191 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #F8F9FA;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  background-color: #FCFAF8; /* 아이보리계열 부드러운 배경 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #FCFAF8;
+  flex-shrink: 0;
+}
+
+.backButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #4A4A4A;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.headerTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #332D2D;
+  text-align: center;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.placeholder {
+  width: 44px;
+}
+
+/* Scroll Area */
+.scrollArea {
+  flex: 1;
+  padding: 16px 24px 120px 24px;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollArea::-webkit-scrollbar {
+  display: none;
+}
+
+/* Process Box */
+.processBox {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  border: 1px solid #EDEAE6;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Steps */
+.stepContainer {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #EBEBEB;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stepLabel {
+  font-size: 11px;
+  font-weight: 800;
+  color: #C2BABA;
+}
+.stepTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #C2BABA;
+}
+
+.stepItem.active .stepLabel,
+.stepItem.active .stepTitle {
+  color: #FF3566;
+}
+
+/* Service Options */
+.serviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.serviceCard {
+  background-color: #FFFFFF;
+  border: 1.5px solid #F3F1ED;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.serviceCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+}
+
+.serviceCard.selected {
+  border-color: #FF3566;
+  background-color: #FFF5F8;
+}
+
+.serviceName {
+  font-size: 17px;
+  font-weight: 800;
+  color: #332D2D;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.serviceDesc {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6A6262;
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+}
+
+/* Bottom Button */
+.bottomArea {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 20px 32px 20px;
+  background: linear-gradient(to top, #FCFAF8 80%, rgba(252, 250, 248, 0));
+}
+
+.nextButton {
+  width: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nextButton:disabled {
+  background-color: #EEDBE3;
+  color: #FFFFFF;
+  cursor: not-allowed;
+}
+
+.nextButton:not(:disabled) {
+  background-color: #FF3566;
+  color: #FFFFFF;
+}

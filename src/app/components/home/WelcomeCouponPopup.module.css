@@ -1,50 +1,45 @@
 .floatingBanner {
   position: relative;
   width: 100%;
-  max-width: 100%;
-  margin: 24px 0 0 0;
-  z-index: 10;
-  background: #F4E8ED;
-  border-top: 1px solid #EAD4DD;
-  border-bottom: 1px solid #EAD4DD;
-  border-left: none;
-  border-right: none;
+  margin: 0;
+  margin-top: 16px;
+  background: transparent;
+  border: none;
   border-radius: 0;
-  padding: 18px 24px;
+  padding: 24px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: none;
   cursor: pointer;
   box-sizing: border-box;
-  transition: background-color 0.2s ease;
+  transition: transform 0.2s ease;
+  z-index: 10;
 }
 
 .floatingBanner:hover {
-  background-color: #F0E2E8;
+  transform: translateY(-2px);
 }
 
 .textContainer {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .line1 {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: #1F1F1F;
-  line-height: 1.4;
-  letter-spacing: -0.04em;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #1A1A1A;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
 }
 
 .line2 {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: #666666;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4A4A4A;
   line-height: 1.4;
-  letter-spacing: -0.04em;
-  margin-top: 2px;
+  letter-spacing: -0.3px;
 }
 
 .highlight {
@@ -54,13 +49,15 @@
 .couponContainer {
   display: flex;
   align-items: center;
-  margin-right: 12px;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 
 .couponImage {
-  width: 72px;
+  width: 140px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(255, 53, 102, 0.15));
+  transform: rotate(-4deg);
+  mix-blend-mode: multiply;
 }
 

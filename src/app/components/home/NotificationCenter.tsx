@@ -23,36 +23,36 @@ const MOCK_NOTIFICATIONS: NotificationItem[] = [
     id: 'n1',
     category: 'Booking',
     subType: 'confirmed',
-    title: 'Appointment Confirmed',
-    description: 'Your appointment for Premium Hair Clinic has been confirmed.',
-    time: '10 min ago',
+    title: '예약 확정 완료',
+    description: '프리미엄 헤어 클리닉 예약이 정상적으로 확정되었습니다.',
+    time: '10분 전',
     status: 'unread',
   },
   {
     id: 'n2',
     category: 'Updates',
     subType: 'message',
-    title: 'New Message from Beauty Studio',
-    description: 'Your stylist sent you a message regarding your visit.',
-    time: '1 hour ago',
+    title: '매장 메시지 도착',
+    description: '담당 디자이너가 예약 확인 관련 신규 메시지를 발송했습니다.',
+    time: '1시간 전',
     status: 'unread',
   },
   {
     id: 'n3',
     category: 'Booking',
     subType: 'remind',
-    title: 'Upcoming Appointment',
-    description: 'Reminder: You have a booking tomorrow at 10:00 AM.',
-    time: '1 day ago',
+    title: '예약 리마인드 알림',
+    description: '안내: 내일 오전 10:00에 예정된 뷰티 예약 일정이 있습니다.',
+    time: '1일 전',
     status: 'unread',
   },
   {
     id: 'n4',
     category: 'Updates',
     subType: 'promo',
-    title: 'Special K-Beauty Offer',
-    description: 'New exclusive beauty experiences available for you.',
-    time: '2 days ago',
+    title: '특별 K-뷰티 혜택 제안',
+    description: '회원님만을 위한 전용 시크릿 뷰티 스파 패키지를 확인해 보세요.',
+    time: '2일 전',
     status: 'read',
   },
 ];
@@ -105,6 +105,12 @@ export default function NotificationCenter() {
     }
   };
 
+  const tabs = [
+    { id: 'All', label: '전체' },
+    { id: 'Booking', label: '예약' },
+    { id: 'Updates', label: '소식' }
+  ] as const;
+
   return (
     <div className={styles.container} ref={panelRef}>
       <button 
@@ -121,15 +127,15 @@ export default function NotificationCenter() {
       {isOpen && (
         <div className={styles.panel}>
           <div className={styles.header}>
-            <h3 className={styles.headerTitle}>Notifications</h3>
+            <h3 className={styles.headerTitle}>알림 센터</h3>
             <div className={styles.tabs}>
-              {['All', 'Booking', 'Updates'].map(tab => (
+              {tabs.map(tab => (
                 <button
-                  key={tab}
-                  className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
-                  onClick={() => setActiveTab(tab as 'All' | 'Booking' | 'Updates')}
+                  key={tab.id}
+                  className={`${styles.tab} ${activeTab === tab.id ? styles.active : ''}`}
+                  onClick={() => setActiveTab(tab.id)}
                 >
-                  {tab}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -158,7 +164,7 @@ export default function NotificationCenter() {
               ))
             ) : (
               <div className={styles.emptyState}>
-                No notifications to show.
+                새로운 알림이 없습니다.
               </div>
             )}
           </ul>
