@@ -1,26 +1,27 @@
 .floatingBanner {
-  position: fixed;
-  bottom: calc(82px + 12px); /* BottomNav height + margins */
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 448px;
-  z-index: 10000;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 24px 0 0 0;
+  z-index: 10;
   background: #F4E8ED;
-  border: 1.5px solid #EAD4DD;
-  border-radius: 16px;
-  padding: 16px 20px;
+  border-top: 1px solid #EAD4DD;
+  border-bottom: 1px solid #EAD4DD;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  padding: 18px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 10px 30px rgba(255, 53, 102, 0.08);
+  box-shadow: none;
   cursor: pointer;
   box-sizing: border-box;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .floatingBanner:hover {
-  transform: translateX(-50%) scale(1.01);
+  background-color: #F0E2E8;
 }
 
 .textContainer {
@@ -61,26 +62,5 @@
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 4px 8px rgba(255, 53, 102, 0.15));
-}
-
-.closeButton {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: transparent;
-  border: none;
-  color: #A08C90;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  border-radius: 50%;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.closeButton:hover {
-  background-color: rgba(255, 53, 102, 0.08);
-  color: #FF3566;
 }
 
