@@ -9,7 +9,7 @@
 
 .container {
   width: 100%;
-  max-width: 440px; /* 기능 확장을 위해 440px로 부드럽게 조정 */
+  max-width: 440px;
   min-height: 100vh;
   background-color: #FCFAF8; /* Ivory background */
   display: flex;
@@ -55,48 +55,32 @@
   height: 44px;
 }
 
-/* Mode Switcher Segment */
-.modeSwitcher {
-  display: flex;
-  background-color: #F0EDE9;
-  border-radius: 12px;
-  padding: 4px;
-  margin: 16px 20px 8px 20px;
-}
-
-.modeButton {
-  flex: 1;
-  border: none;
-  background: transparent;
-  padding: 10px 0;
-  font-size: 13px;
-  font-weight: 700;
-  border-radius: 9px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #8C8780;
-}
-
-.modeButton.active {
-  background-color: #FFFFFF;
-  color: #FF3566; /* Kello Pink */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
 /* Scroll Area */
 .scrollArea {
   flex: 1;
-  padding: 16px 20px 40px 20px;
+  padding: 24px 20px 48px 20px;
   overflow-y: auto;
 }
 
-/* Subtitle Header */
+/* Divider line between Sections */
+.divider {
+  height: 1px;
+  background-color: #EAE6DF;
+  margin: 32px 0 24px 0;
+}
+
+/* Section Group */
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
 .sectionHeader {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .sectionTitle {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: #1A1A1A;
   margin: 0 0 6px 0;
@@ -106,6 +90,7 @@
 .sectionDesc {
   font-size: 13px;
   color: #8C867E;
+  line-height: 1.4;
   margin: 0;
 }
 
@@ -113,10 +98,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   background-color: #FFFFFF;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 18px;
+  border-radius: 18px;
   border: 1px solid #EDEAE6;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
 }
@@ -135,8 +120,8 @@
 
 .input, .select, .textarea {
   width: 100%;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 11px 12px;
+  border-radius: 9px;
   border: 1px solid #E3DFD9;
   background-color: #FCFAF8;
   font-size: 14px;
@@ -157,16 +142,16 @@
 }
 
 .submitButton {
-  margin-top: 8px;
+  margin-top: 6px;
   background-color: #FF3566;
   color: #FFFFFF;
   font-weight: 700;
-  height: 48px;
+  height: 46px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .submitButton:hover {
@@ -177,8 +162,8 @@
 .registeredCard {
   background-color: #FFFFFF;
   border: 1.5px solid #FFCCD6;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 18px;
+  border-radius: 18px;
   box-shadow: 0 6px 16px rgba(255, 53, 102, 0.03);
 }
 
@@ -195,7 +180,7 @@
 }
 
 .cardTitle {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
   color: #1A1A1A;
   margin: 0 0 10px 0;
@@ -205,7 +190,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .cardInfoItem {
@@ -213,12 +198,13 @@
   color: #5C564E;
   display: flex;
   gap: 8px;
+  line-height: 1.4;
 }
 
 .cardInfoLabel {
   font-weight: 700;
   color: #8C867E;
-  width: 70px;
+  width: 65px;
   flex-shrink: 0;
 }
 
@@ -229,8 +215,8 @@
 
 .actionButton {
   flex: 1;
-  height: 42px;
-  border-radius: 10px;
+  height: 40px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -258,26 +244,26 @@
   background-color: #FFE0E4;
 }
 
-/* Category Filter Chips for Customers */
+/* Category Filter Chips */
 .filterContainer {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-  scrollbar-width: none; /* Firefox */
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  scrollbar-width: none;
 }
 
 .filterContainer::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 .filterChip {
   flex-shrink: 0;
   border: 1px solid #EDEAE6;
   background-color: #FFFFFF;
-  padding: 8px 14px;
-  border-radius: 20px;
+  padding: 7px 12px;
+  border-radius: 18px;
   font-size: 13px;
   font-weight: 700;
   color: #5C564E;
@@ -295,24 +281,24 @@
 .storeList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .storeCard {
   background-color: #FFFFFF;
   border: 1px solid #EDEAE6;
-  border-radius: 20px;
-  padding: 16px;
+  border-radius: 18px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
 }
 
 .storeHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .storeCategoryBadge {
@@ -320,13 +306,12 @@
   color: #5C564E;
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 6px;
-  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 5px;
 }
 
 .storeName {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: #1A1A1A;
   margin: 0;
@@ -342,16 +327,16 @@
 .storeMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   border-top: 1px solid #F3F1ED;
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .metaBadge {
   font-size: 11px;
   font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 3px 6px;
+  border-radius: 5px;
 }
 
 .metaLocation {
@@ -372,17 +357,17 @@
 
 .emptyState {
   text-align: center;
-  padding: 40px 20px;
+  padding: 32px 16px;
   color: #8C867E;
 }
 
 .emptyTitle {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   margin-bottom: 6px;
   color: #4A453F;
 }
 
 .emptyDesc {
-  font-size: 13px;
+  font-size: 12px;
 }

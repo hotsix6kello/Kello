@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Edit2, Trash2, MapPin, DollarSign, Award, Store } from 'lucide-react';
+import { ArrowLeft, Edit2, Trash2, MapPin, WonSign, Gift, Store } from 'lucide-react';
 import styles from './page.module.css';
 
 interface StoreInfo {
@@ -18,49 +18,45 @@ interface StoreInfo {
 export default function BeautyStoreManagementPage() {
   const router = useRouter();
   
-  // 1. 모드 선택 상태 ('customer' = 외국인 고객용 둘러보기, 'partner' = 제휴업체 사장님 관리용)
-  const [activeMode, setActiveMode] = useState<'customer' | 'partner'>('customer');
-  
-  // 2. 고객 모드용 카테고리 필터 상태
+  // 고객 모드용 카테고리 필터 상태
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  // 3. 업체 정보 목록 (가상 데이터 탑재 및 파트너 CRUD 연동)
+  // 모의 매장 데이터 (완벽한 한국어 표기화)
   const [stores, setStores] = useState<StoreInfo[]>([
     {
       id: 'demo-1',
-      name: 'Luxe K-Esthetic Gangnam (강남 럭스 에스테틱)',
+      name: '강남 럭스 에스테틱 (Luxe K-Esthetic Gangnam)',
       category: 'esthetic',
-      location: 'Gangnam (강남)',
-      intro: 'Premium skin treatment and customized soothing care specialized for global visitors.',
-      price: '₩120,000 ~',
-      specialOffer: 'Free 1:1 skin analyzer consultation (1:1 피부 진단 무료)'
+      location: '서울 강남구',
+      intro: '글로벌 고객을 위한 맞춤형 피부 관리 및 저자극 진정 전문 케어 서비스입니다.',
+      price: '120,000원 ~',
+      specialOffer: '1:1 정밀 피부 진단 및 맞춤 화장품 추천 서비스 무료 제공'
     },
     {
       id: 'demo-2',
-      name: 'SOONSOO Hair Salon Hongdae (순수 헤어 홍대)',
+      name: '순수 헤어 홍대본점 (SOONSOO Hair Hongdae)',
       category: 'hair',
-      location: 'Hongdae (홍대)',
-      intro: 'Trendy K-pop hair styling, color dye, and magic volume perm services.',
-      price: '₩80,000 ~',
-      specialOffer: '10% discount for international customers (외국인 고객 10% 할인)'
+      location: '서울 마포구 홍대',
+      intro: '트렌디한 K-뷰티 레이어드 컷, 스페셜 염색 및 볼륨 매직 펌 전문 헤어샵입니다.',
+      price: '80,000원 ~',
+      specialOffer: '신규 방문 외국인/Kello 회원 대상 10% 즉시 할인'
     },
     {
       id: 'demo-3',
-      name: 'Myeongdong Nail Art Studio (명동 네일아트)',
+      name: '명동 네일아트 스튜디오 (Myeongdong Nail Art)',
       category: 'nail',
-      location: 'Myeongdong (명동)',
-      intro: 'Delicate hand nail styling and customized premium gel art design.',
-      price: '₩50,000 ~',
-      specialOffer: 'Complimentary cuticle oil service (큐티클 영양 오일 무료)'
+      location: '서울 중구 명동',
+      intro: '화려하고 섬세한 젤네일 아트 디자인 및 프리미엄 손발톱 위생 관리 전문 네일숍입니다.',
+      price: '50,000원 ~',
+      specialOffer: '네일 시술 시 큐티클 전용 영양 오일 무료 증정'
     }
   ]);
 
-  // 4. 파트너 전용 상태 (한 계정당 최대 1개 등록 제한)
-  // 사장님의 고유 등록 가게 아이디를 관리 ('my-partner-store' 고정)
+  // 파트너 전용 상태 (1 ID당 1 매장 제한)
   const myStoreId = 'my-partner-store';
   const partnerStore = stores.find(s => s.id === myStoreId);
 
-  // 5. 등록 및 수정 폼 상태
+  // 등록 및 수정 폼 상태
   const [isEditing, setIsEditing] = useState(false);
   const [formName, setFormName] = useState('');
   const [formCategory, setFormCategory] = useState<'esthetic' | 'hair' | 'nail' | 'makeup' | 'lash' | 'waxing'>('esthetic');
@@ -69,9 +65,8 @@ export default function BeautyStoreManagementPage() {
   const [formPrice, setFormPrice] = useState('');
   const [formSpecialOffer, setFormSpecialOffer] = useState('');
 
-  // 6. 파트너 CRUD 핸들러
+  // 파트너 CRUD 핸들러
   const handleOpenRegister = () => {
-    // 폼 초기화
     setFormName('');
     setFormCategory('esthetic');
     setFormLocation('');
@@ -103,10 +98,10 @@ export default function BeautyStoreManagementPage() {
       id: myStoreId,
       name: formName,
       category: formCategory,
-      location: formLocation || 'Seoul',
+      location: formLocation || '서울',
       intro: formIntro,
-      price: formPrice || 'Consultation required',
-      specialOffer: formSpecialOffer || 'Welcome Gift'
+      price: formPrice || '상담 후 결정',
+      specialOffer: formSpecialOffer || '웰컴 사은품 제공'
     };
 
     setStores((prev) => {
@@ -118,24 +113,23 @@ export default function BeautyStoreManagementPage() {
     });
 
     setIsEditing(false);
-    alert('업체 정보가 성공적으로 반영되었습니다.');
+    alert('업체 정보 등록/수정이 정상 완료되었습니다.');
   };
 
   const handleDeleteStore = () => {
     if (window.confirm('등록된 업체 정보를 완전히 삭제하시겠습니까? (삭제 시 다시 새로 등록해야 합니다)')) {
       setStores((prev) => prev.filter(s => s.id !== myStoreId));
       setIsEditing(false);
-      alert('업체 정보가 삭제되었습니다.');
+      alert('업체 정보가 정상적으로 삭제되었습니다.');
     }
   };
 
-  // 7. 카테고리 필터링 적용 목록
+  // 카테고리 필터링 목록
   const filteredStores = stores.filter(s => {
     if (selectedCategory === 'all') return true;
     return s.category === selectedCategory;
   });
 
-  // 카테고리 한글/영어 매핑 상수
   const categoriesMap = [
     { id: 'all', ko: '전체', en: 'All' },
     { id: 'esthetic', ko: '에스테틱', en: 'Esthetic' },
@@ -178,243 +172,225 @@ export default function BeautyStoreManagementPage() {
           <div className={styles.placeholder}></div>
         </header>
 
-        {/* Mode Switcher Segment Control */}
-        <div className={styles.modeSwitcher}>
-          <button 
-            className={`${styles.modeButton} ${activeMode === 'customer' ? styles.active : ''}`}
-            onClick={() => {
-              setActiveMode('customer');
-              setIsEditing(false);
-            }}
-          >
-            둘러보기 (Customer Browse)
-          </button>
-          <button 
-            className={`${styles.modeButton} ${activeMode === 'partner' ? styles.active : ''}`}
-            onClick={() => setActiveMode('partner')}
-          >
-            사장님 공간 (Partner Area)
-          </button>
-        </div>
-
-        {/* Scrollable Content */}
+        {/* Scroll Area */}
         <div className={styles.scrollArea}>
           
-          {/* A. 외국인 고객 둘러보기 뷰 */}
-          {activeMode === 'customer' && (
-            <div>
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>K-Beauty Partners</h2>
-                <p className={styles.sectionDesc}>Browse high-quality beauty shops for global tourists.</p>
-              </div>
-
-              {/* 6대 카테고리 필터 칩 */}
-              <div className={styles.filterContainer}>
-                {categoriesMap.map((cat) => (
-                  <button
-                    key={cat.id}
-                    className={`${styles.filterChip} ${selectedCategory === cat.id ? styles.active : ''}`}
-                    onClick={() => setSelectedCategory(cat.id)}
-                  >
-                    {cat.en} ({cat.ko})
-                  </button>
-                ))}
-              </div>
-
-              {/* 가게 정보 리스트 */}
-              <div className={styles.storeList}>
-                {filteredStores.length > 0 ? (
-                  filteredStores.map((store) => (
-                    <div key={store.id} className={styles.storeCard}>
-                      <div className={styles.storeHeader}>
-                        <h3 className={styles.storeName}>{store.name}</h3>
-                        <span className={styles.storeCategoryBadge}>
-                          {categoriesMap.find(c => c.id === store.category)?.en}
-                        </span>
-                      </div>
-                      <p className={styles.storeIntro}>{store.intro}</p>
-                      
-                      <div className={styles.storeMeta}>
-                        <span className={`${styles.metaBadge} styles.metaLocation`}>
-                          <MapPin size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
-                          {store.location}
-                        </span>
-                        <span className={`${styles.metaBadge} styles.metaPrice`}>
-                          <DollarSign size={11} style={{ display: 'inline', marginRight: 2, verticalAlign: 'middle' }} />
-                          {store.price}
-                        </span>
-                        <span className={`${styles.metaBadge} styles.metaOffer`}>
-                          <Award size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
-                          {store.specialOffer}
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className={styles.emptyState}>
-                    <p className={styles.emptyTitle}>No Stores Found</p>
-                    <p className={styles.emptyDesc}>Be the first store in this category!</p>
-                  </div>
-                )}
-              </div>
+          {/* SECTION 1: 제휴 업체 둘러보기 공간 */}
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>제휴 업체 둘러보기</h2>
+              <p className={styles.sectionDesc}>원하는 뷰티 서비스 매장의 상세 정보를 확인해 보세요.</p>
             </div>
-          )}
 
-          {/* B. 제휴업체 사장님 파트너 뷰 */}
-          {activeMode === 'partner' && (
-            <div>
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>Partner Center</h2>
-                <p className={styles.sectionDesc}>제휴업체 전용 정보 등록 및 관리 공간 (1 ID당 1 매장 제한)</p>
-              </div>
+            {/* 6대 카테고리 필터 칩 */}
+            <div className={styles.filterContainer}>
+              {categoriesMap.map((cat) => (
+                <button
+                  key={cat.id}
+                  className={`${styles.filterChip} ${selectedCategory === cat.id ? styles.active : ''}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  {cat.ko} ({cat.en})
+                </button>
+              ))}
+            </div>
 
-              {/* B-1. 등록된 매장이 없을 때 등록 전 폼 작성창 혹은 등록유도카드 */}
-              {!partnerStore && !isEditing && (
-                <div className={styles.emptyState} style={{ backgroundColor: '#FFFFFF', borderRadius: 20, border: '1px dashed #EDEAE6' }}>
-                  <Store size={36} color="#FF3566" style={{ marginBottom: 12 }} />
+            {/* 제휴업체 카드 목록 */}
+            <div className={styles.storeList}>
+              {filteredStores.length > 0 ? (
+                filteredStores.map((store) => (
+                  <div key={store.id} className={styles.storeCard}>
+                    <div className={styles.storeHeader}>
+                      <h3 className={styles.storeName}>{store.name}</h3>
+                      <span className={styles.storeCategoryBadge}>
+                        {categoriesMap.find(c => c.id === store.category)?.ko}
+                      </span>
+                    </div>
+                    <p className={styles.storeIntro}>{store.intro}</p>
+                    
+                    <div className={styles.storeMeta}>
+                      <span className={`${styles.metaBadge} ${styles.metaLocation}`}>
+                        <MapPin size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
+                        {store.location}
+                      </span>
+                      <span className={`${styles.metaBadge} ${styles.metaPrice}`}>
+                        <WonSign size={11} style={{ display: 'inline', marginRight: 2, verticalAlign: 'middle' }} />
+                        {store.price}
+                      </span>
+                      <span className={`${styles.metaBadge} ${styles.metaOffer}`}>
+                        <Gift size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
+                        {store.specialOffer}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className={styles.emptyState}>
                   <p className={styles.emptyTitle}>등록된 업체가 없습니다.</p>
-                  <p className={styles.emptyDesc} style={{ marginBottom: 16 }}>가게를 등록하여 외국인 관광객들에게 샵을 홍보하세요!</p>
-                  <button className={styles.submitButton} style={{ width: '80%' }} onClick={handleOpenRegister}>
-                    신규 업체 정보 등록하기
-                  </button>
-                </div>
-              )}
-
-              {/* B-2. 폼 입력/수정 활성화 시 */}
-              {isEditing && (
-                <form onSubmit={handleSaveStore} className={styles.form}>
-                  <h3 className={styles.label} style={{ fontSize: 16, color: '#FF3566', marginBottom: 4 }}>
-                    {partnerStore ? '업체 정보 수정 (Edit Store)' : '신규 업체 등록 (Register Store)'}
-                  </h3>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>업체명 (Store Name) *</label>
-                    <input 
-                      type="text" 
-                      className={styles.input} 
-                      placeholder="예: Kello Hair Gangnam" 
-                      value={formName} 
-                      onChange={(e) => setFormName(e.target.value)} 
-                      required
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>뷰티 카테고리 (Category) *</label>
-                    <select 
-                      className={styles.select}
-                      value={formCategory}
-                      onChange={(e) => setFormCategory(e.target.value as typeof formCategory)}
-                    >
-                      <option value="esthetic">Esthetic (에스테틱)</option>
-                      <option value="hair">Hair (헤어)</option>
-                      <option value="nail">Nail (네일)</option>
-                      <option value="makeup">Makeup (메이크업)</option>
-                      <option value="lash">Lash (속눈썹)</option>
-                      <option value="waxing">Waxing (왁싱)</option>
-                    </select>
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>위치 (Location)</label>
-                    <input 
-                      type="text" 
-                      className={styles.input} 
-                      placeholder="예: Myeongdong (명동)" 
-                      value={formLocation} 
-                      onChange={(e) => setFormLocation(e.target.value)} 
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>매장 한줄 소개 (English Introduction)</label>
-                    <textarea 
-                      className={styles.textarea} 
-                      placeholder="외국인 관광객을 위한 영어 소개글을 작성해보세요." 
-                      value={formIntro} 
-                      onChange={(e) => setFormIntro(e.target.value)}
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>기본 가격대 (Price Range)</label>
-                    <input 
-                      type="text" 
-                      className={styles.input} 
-                      placeholder="예: ₩50,000 ~" 
-                      value={formPrice} 
-                      onChange={(e) => setFormPrice(e.target.value)} 
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>특별 제공 혜택 (Special Benefit for Kello user)</label>
-                    <input 
-                      type="text" 
-                      className={styles.input} 
-                      placeholder="예: Free welcome drink (웰컴 드링크 무료 제공)" 
-                      value={formSpecialOffer} 
-                      onChange={(e) => setFormSpecialOffer(e.target.value)} 
-                    />
-                  </div>
-
-                  <button type="submit" className={styles.submitButton}>
-                    저장 완료 (Save Settings)
-                  </button>
-                  <button 
-                    type="button" 
-                    className={styles.actionButton} 
-                    style={{ marginTop: 4 }}
-                    onClick={() => setIsEditing(false)}
-                  >
-                    취소 (Cancel)
-                  </button>
-                </form>
-              )}
-
-              {/* B-3. 등록된 내 가게 정보 현황 출력 */}
-              {partnerStore && !isEditing && (
-                <div className={styles.registeredCard}>
-                  <div className={styles.cardTag}>본인 소유 업체 (1개 한도 활성화 중)</div>
-                  <h3 className={styles.cardTitle}>{partnerStore.name}</h3>
-                  
-                  <div className={styles.cardInfoList}>
-                    <div className={styles.cardInfoItem}>
-                      <span className={styles.cardInfoLabel}>카테고리</span>
-                      <span>{categoriesMap.find(c => c.id === partnerStore.category)?.en} ({categoriesMap.find(c => c.id === partnerStore.category)?.ko})</span>
-                    </div>
-                    <div className={styles.cardInfoItem}>
-                      <span className={styles.cardInfoLabel}>가게위치</span>
-                      <span>{partnerStore.location}</span>
-                    </div>
-                    <div className={styles.cardInfoItem}>
-                      <span className={styles.cardInfoLabel}>매장소개</span>
-                      <span>{partnerStore.intro || '(소개글 없음)'}</span>
-                    </div>
-                    <div className={styles.cardInfoItem}>
-                      <span className={styles.cardInfoLabel}>가격정보</span>
-                      <span>{partnerStore.price}</span>
-                    </div>
-                    <div className={styles.cardInfoItem}>
-                      <span className={styles.cardInfoLabel}>특별혜택</span>
-                      <span>{partnerStore.specialOffer}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.cardActions}>
-                    <button className={`${styles.actionButton} ${styles.editButton}`} onClick={handleOpenEdit}>
-                      <Edit2 size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
-                      정보 수정
-                    </button>
-                    <button className={`${styles.actionButton} ${styles.deleteButton}`} onClick={handleDeleteStore}>
-                      <Trash2 size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
-                      업체 정보 삭제
-                    </button>
-                  </div>
+                  <p className={styles.emptyDesc}>해당 카테고리의 첫 번째 입점 매장이 되어보세요!</p>
                 </div>
               )}
             </div>
-          )}
+          </section>
+
+          {/* 수직 단락을 나누는 미세한 디바이더 선 */}
+          <div className={styles.divider}></div>
+
+          {/* SECTION 2: 사장님 제휴 정보 등록 및 관리 공간 */}
+          <section className={styles.section} style={{ marginTop: 8 }}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>사장님 전용 공간</h2>
+              <p className={styles.sectionDesc}>가게를 입점시켜 외국인 관광객들에게 매장을 홍보하세요. (1계정당 1매장 제한)</p>
+            </div>
+
+            {/* B-1. 미등록 상태 */}
+            {!partnerStore && !isEditing && (
+              <div className={styles.emptyState} style={{ backgroundColor: '#FFFFFF', borderRadius: 20, border: '1px dashed #EDEAE6' }}>
+                <Store size={36} color="#FF3566" style={{ marginBottom: 12 }} />
+                <p className={styles.emptyTitle}>현재 등록한 매장이 없습니다.</p>
+                <p className={styles.emptyDesc} style={{ marginBottom: 16 }}>아래 버튼을 눌러 빠르게 입점 신청서를 완성하세요!</p>
+                <button className={styles.submitButton} style={{ width: '80%' }} onClick={handleOpenRegister}>
+                  제휴 업체 신규 등록하기
+                </button>
+              </div>
+            )}
+
+            {/* B-2. 등록/수정 폼 입력 화면 */}
+            {isEditing && (
+              <form onSubmit={handleSaveStore} className={styles.form}>
+                <h3 className={styles.label} style={{ fontSize: 15, color: '#FF3566', marginBottom: 4 }}>
+                  {partnerStore ? '내 제휴 매장 정보 수정하기' : '신규 제휴 매장 등록하기'}
+                </h3>
+
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>매장명 (업체명) *</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    placeholder="예: 켈로에스테틱 강남점" 
+                    value={formName} 
+                    onChange={(e) => setFormName(e.target.value)} 
+                    required
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>업종 카테고리 *</label>
+                  <select 
+                    className={styles.select}
+                    value={formCategory}
+                    onChange={(e) => setFormCategory(e.target.value as typeof formCategory)}
+                  >
+                    <option value="esthetic">에스테틱 (Esthetic)</option>
+                    <option value="hair">헤어 (Hair)</option>
+                    <option value="nail">네일 (Nail)</option>
+                    <option value="makeup">메이크업 (Makeup)</option>
+                    <option value="lash">속눈썹 (Lash)</option>
+                    <option value="waxing">왁싱 (Waxing)</option>
+                  </select>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>상세 주소 (위치) *</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    placeholder="예: 서울 강남구 테헤란로 12" 
+                    value={formLocation} 
+                    onChange={(e) => setFormLocation(e.target.value)} 
+                    required
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>매장 한줄 소개글 *</label>
+                  <textarea 
+                    className={styles.textarea} 
+                    placeholder="매장을 매력적으로 표현할 소개글을 작성해 주세요." 
+                    value={formIntro} 
+                    onChange={(e) => setFormIntro(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>대표 서비스 가격 정보</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    placeholder="예: 기본 네일 35,000원" 
+                    value={formPrice} 
+                    onChange={(e) => setFormPrice(e.target.value)} 
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>Kello 고객 전용 특별 혜택</label>
+                  <input 
+                    type="text" 
+                    className={styles.input} 
+                    placeholder="예: 웰컴 티 무료 제공 또는 추가 서비스" 
+                    value={formSpecialOffer} 
+                    onChange={(e) => setFormSpecialOffer(e.target.value)} 
+                  />
+                </div>
+
+                <button type="submit" className={styles.submitButton}>
+                  매장 정보 저장하기
+                </button>
+                <button 
+                  type="button" 
+                  className={styles.actionButton} 
+                  style={{ marginTop: 4 }}
+                  onClick={() => setIsEditing(false)}
+                >
+                  취소
+                </button>
+              </form>
+            )}
+
+            {/* B-3. 내 제휴 매장 등록 완료 현황 확인 및 수정/삭제 */}
+            {partnerStore && !isEditing && (
+              <div className={styles.registeredCard}>
+                <div className={styles.cardTag}>내 등록 업체 (1매장 소유 한도 사용 중)</div>
+                <h3 className={styles.cardTitle}>{partnerStore.name}</h3>
+                
+                <div className={styles.cardInfoList}>
+                  <div className={styles.cardInfoItem}>
+                    <span className={styles.cardInfoLabel}>카테고리</span>
+                    <span>{categoriesMap.find(c => c.id === partnerStore.category)?.ko} ({categoriesMap.find(c => c.id === partnerStore.category)?.en})</span>
+                  </div>
+                  <div className={styles.cardInfoItem}>
+                    <span className={styles.cardInfoLabel}>가게주소</span>
+                    <span>{partnerStore.location}</span>
+                  </div>
+                  <div className={styles.cardInfoItem}>
+                    <span className={styles.cardInfoLabel}>한줄소개</span>
+                    <span>{partnerStore.intro}</span>
+                  </div>
+                  <div className={styles.cardInfoItem}>
+                    <span className={styles.cardInfoLabel}>가격대</span>
+                    <span>{partnerStore.price}</span>
+                  </div>
+                  <div className={styles.cardInfoItem}>
+                    <span className={styles.cardInfoLabel}>고객혜택</span>
+                    <span>{partnerStore.specialOffer}</span>
+                  </div>
+                </div>
+
+                <div className={styles.cardActions}>
+                  <button className={`${styles.actionButton} ${styles.editButton}`} onClick={handleOpenEdit}>
+                    <Edit2 size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
+                    정보 수정하기
+                  </button>
+                  <button className={`${styles.actionButton} ${styles.deleteButton}`} onClick={handleDeleteStore}>
+                    <Trash2 size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
+                    매장 등록 삭제
+                  </button>
+                </div>
+              </div>
+            )}
+          </section>
 
         </div>
       </div>
