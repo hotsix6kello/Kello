@@ -61,6 +61,46 @@ type MyBookingCardRecord = Pick<
 const SSR_SAFE_FALLBACK_NAME = "";
 const SSR_SAFE_FALLBACK_SUBTITLE = "";
 
+const HELP_CENTER_SHORTCUTS = [
+    {
+        icon: (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#EF4444" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 2H15V9H22V15H15V22H9V15H2V9H9V2Z" />
+            </svg>
+        ),
+        path: "/help/medical",
+        color: "#FEE2E2",
+        borderColor: "#FCA5A5",
+        label: "의료 도움",
+    },
+    {
+        icon: <Shield size={14} color="#3B82F6" strokeWidth={2.5} />,
+        path: "/help/police",
+        color: "#EFF6FF",
+        borderColor: "#BFDBFE",
+        label: "경찰 도움",
+    },
+    {
+        icon: <Languages size={14} color="#10B981" strokeWidth={2.5} />,
+        path: "/help/interpretation",
+        color: "#ECFDF5",
+        borderColor: "#A7F3D0",
+        label: "통역 도움",
+    },
+    {
+        icon: (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+        ),
+        path: "/help/lost",
+        color: "#FEF9C3",
+        borderColor: "#FEF08A",
+        label: "분실물 도움",
+    },
+];
+
 function buildCategoryTitle(t: ReturnType<typeof useTranslation>['t'], category: string | null | undefined, serviceName: string | null | undefined): string {
     const parts = [category, serviceName].filter((part) => {
         return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
@@ -81,6 +121,50 @@ function pickString(...values: unknown[]): string {
     return "";
 }
 
+function HelpCenterShortcutGrid({ onNavigate }: { onNavigate: (path: string) => void }) {
+    return (
+        <div
+            style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 32px)',
+                gap: 6,
+                flexShrink: 0,
+            }}
+        >
+            {HELP_CENTER_SHORTCUTS.map((item) => (
+                <button
+                    key={item.path}
+                    type="button"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onNavigate(item.path);
+                    }}
+                    aria-label={item.label}
+                    title={item.label}
+                    style={{
+                        width: 32,
+                        height: 26,
+                        borderRadius: '9px',
+                        background: item.color,
+                        border: `1px solid ${item.borderColor}`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        padding: 0,
+                        transition: 'transform 0.1s',
+                    }}
+                    onMouseDown={e => e.currentTarget.style.transform = 'scale(0.92)'}
+                    onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    {item.icon}
+                </button>
+            ))}
+        </div>
+    );
+}
+
 function ProfileSummaryCard({
     userName,
     subtitle,
@@ -88,6 +172,7 @@ function ProfileSummaryCard({
     onAvatarUpdate,
     referralCode,
     countryCode,
+    onHelpShortcutClick,
     style,
 }: {
     userName: string;
@@ -96,6 +181,7 @@ function ProfileSummaryCard({
     onAvatarUpdate?: (url: string) => void;
     referralCode: string | null;
     countryCode?: string | null;
+    onHelpShortcutClick: (path: string) => void;
     style?: React.CSSProperties;
 }) {
     const [uploading, setUploading] = useState(false);
@@ -296,7 +382,7 @@ function ProfileSummaryCard({
                 )}
             </div>
 
-            <span style={{ color: 'var(--gray-400)', fontSize: '1.2rem', fontWeight: 700 }}>&gt;</span>
+            <HelpCenterShortcutGrid onNavigate={onHelpShortcutClick} />
 
             <input 
                 type="file" 
@@ -1270,96 +1356,9 @@ function MyPageContent() {
                 </div>
             </header>
 
-            {/* Help Center Bar — 계정섹션 위에 위치 */}
-            <div style={{
-                background: 'transparent',
-                marginBottom: -6,
-                marginTop: 0,
-                padding: '4px 0 0 0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-            }}>
-                {/* 왼쪽: 날씨/환율 */}
-                {!capabilities.canViewAdminConsole && (
-                    <TravelHelperCard accessToken={accessToken} authReady={authReady} />
-                )}
-
-                {/* 오른쪽: 헬프센터 퀵 액션 — 오른쪽 정렬 */}
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    marginLeft: 'auto',
-                }}>
-                {[
-                    { 
-                        icon: (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#EF4444" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2H15V9H22V15H15V22H9V15H2V9H9V2Z" />
-                            </svg>
-                        ), 
-                        path: "/help/medical", 
-                        color: "#FEE2E2", 
-                        borderColor: "#FCA5A5", 
-                    },
-                    { 
-                        icon: (
-                            <Shield size={16} color="#3B82F6" strokeWidth={2.5} />
-                        ), 
-                        path: "/help/police", 
-                        color: "#EFF6FF", 
-                        borderColor: "#BFDBFE", 
-                    },
-                    { 
-                        icon: (
-                            <Languages size={16} color="#10B981" strokeWidth={2.5} />
-                        ), 
-                        path: "/help/interpretation", 
-                        color: "#ECFDF5", 
-                        borderColor: "#A7F3D0", 
-                    },
-                    { 
-                        icon: (
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="11" cy="11" r="8" />
-                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                            </svg>
-                        ), 
-                        path: "/help/lost", 
-                        color: "#FEF9C3", 
-                        borderColor: "#FEF08A", 
-                    }
-                ].map((item) => (
-                    <div
-                        key={item.path}
-                        onClick={() => router.push(item.path)}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer',
-                            transition: 'transform 0.1s',
-                        }}
-                        onMouseDown={e => e.currentTarget.style.transform = 'scale(0.92)'}
-                        onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-                    >
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: 44,
-                            height: 30,
-                            borderRadius: '10px',
-                            background: item.color,
-                            border: `1px solid ${item.borderColor}`,
-                        }}>
-                            {item.icon}
-                        </div>
-                    </div>
-                ))}
-                </div>
-            </div>
+            {!capabilities.canViewAdminConsole && (
+                <TravelHelperCard accessToken={accessToken} authReady={authReady} />
+            )}
 
             <ProfileSummaryCard
                 userName={displayUserName}
@@ -1368,6 +1367,7 @@ function MyPageContent() {
                 onAvatarUpdate={(url) => setAvatarUrl(url)}
                 referralCode={referralCode}
                 countryCode={profileCountry}
+                onHelpShortcutClick={(path) => router.push(path)}
                 style={{
                     borderRadius: '24px',
                     border: '1px solid var(--warm-sand)',
