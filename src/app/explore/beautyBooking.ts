@@ -6,6 +6,7 @@ export type BeautyBookingPayload = {
   region: string;
   storeId: string;
   storeName: string;
+  storeSource?: 'google' | 'partner';
   bookingDate: string;
   bookingTime: string;
   designerId: string | null;
@@ -59,6 +60,7 @@ export type BeautyBookingPayloadDraftInput = {
   region: string | null;
   storeId: string | null;
   storeName: string | null;
+  storeSource?: 'google' | 'partner';
   bookingDate: string | null;
   bookingTime: string | null;
   designerId: string | null;
@@ -161,6 +163,7 @@ export function buildBeautyBookingPayload(
     region: input.region ?? '',
     storeId: input.storeId ?? '',
     storeName: (input.storeName ?? '').trim(),
+    storeSource: input.storeSource === 'partner' ? 'partner' : 'google',
     bookingDate: input.bookingDate ?? '',
     bookingTime: input.bookingTime ?? '',
     designerId: hasRequiredText(input.designerId) ? input.designerId : null,
@@ -258,6 +261,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
     region: typeof candidate.region === 'string' ? candidate.region : null,
     storeId: typeof candidate.storeId === 'string' ? candidate.storeId : null,
     storeName: typeof candidate.storeName === 'string' ? candidate.storeName : null,
+    storeSource: candidate.storeSource === 'partner' ? 'partner' : 'google',
     bookingDate: typeof candidate.bookingDate === 'string' ? candidate.bookingDate : null,
     bookingTime: typeof candidate.bookingTime === 'string' ? candidate.bookingTime : null,
     designerId: typeof candidate.designerId === 'string' ? candidate.designerId : null,

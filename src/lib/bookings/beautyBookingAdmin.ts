@@ -76,6 +76,7 @@ export type BeautyBookingAdminRecord = {
   region: string;
   storeId: string;
   storeName: string;
+  storeSource: "google" | "partner";
   bookingDate: string;
   bookingTime: string;
   designerId: string | null;

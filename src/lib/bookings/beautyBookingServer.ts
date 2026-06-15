@@ -46,6 +46,7 @@ type BeautyBookingInsertRow = {
   region: string;
   store_id: string;
   store_name: string;
+  store_source: string;
   booking_date: string;
   booking_time: string;
   designer_id: string | null;
@@ -106,6 +107,7 @@ export type BeautyBookingAdminSelectRow = {
   region: string;
   store_id: string;
   store_name: string;
+  store_source: string;
   booking_date: string;
   booking_time: string;
   designer_id: string | null;
@@ -265,6 +267,7 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     region: row.region,
     storeId: row.store_id,
     storeName: row.store_name,
+    storeSource: row.store_source === "partner" ? "partner" : "google",
     bookingDate: row.booking_date,
     bookingTime: row.booking_time,
     designerId: row.designer_id,
@@ -350,6 +353,7 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "region",
   "store_id",
   "store_name",
+  "store_source",
   "booking_date",
   "booking_time",
   "designer_id",
@@ -440,6 +444,7 @@ function mapBeautyBookingPayloadToRow(
     region: payload.region,
     store_id: payload.storeId,
     store_name: payload.storeName,
+    store_source: payload.storeSource === "partner" ? "partner" : "google",
     booking_date: payload.bookingDate,
     booking_time: payload.bookingTime,
     designer_id: payload.designerId,
