@@ -22,7 +22,6 @@ export default function PartnerSignupPage() {
         description: '',
         business_license_url: '',
     });
-    const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
@@ -60,13 +59,11 @@ export default function PartnerSignupPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
         setError(null);
 
         // 사업자 등록증 필수 체크
         if (!form.business_license_url) {
             setError('사업자 등록증 또는 증빙 서류를 업로드해주세요.');
-            setLoading(false);
             return;
         }
 
@@ -85,7 +82,6 @@ export default function PartnerSignupPage() {
             } else {
                 setError('이 이메일로 이미 가입 신청 이력이 있습니다. 문의: admin@kello.app');
             }
-            setLoading(false);
             return;
         }
 
@@ -100,12 +96,10 @@ export default function PartnerSignupPage() {
 
         if (insertError) {
             setError('신청 중 오류가 발생했습니다: ' + insertError.message);
-            setLoading(false);
             return;
         }
 
         setSuccess(true);
-        setLoading(false);
     };
 
     if (success) {
@@ -414,13 +408,6 @@ export default function PartnerSignupPage() {
                         </div>
                     )}
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className={styles.submitBtn}
-                    >
-                        {loading ? '신청 중...' : '🤝 협력업체 가입 신청'}
-                    </button>
                 </form>
 
                 <div className={styles.footer}>
