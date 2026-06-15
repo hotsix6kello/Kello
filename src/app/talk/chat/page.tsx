@@ -1381,7 +1381,7 @@ export default function TalkChatPage() {
           }}
           title={showSuggestions ? '접기' : '펼치기'}
         >
-          <ChevronLeft size={14} style={{ transform: showSuggestions ? 'rotate(90deg)' : 'rotate(-90deg)' }} />
+          <ChevronLeft size={14} style={{ transform: showSuggestions ? 'rotate(-90deg)' : 'rotate(90deg)' }} />
         </button>
 
         {showSuggestions && (
