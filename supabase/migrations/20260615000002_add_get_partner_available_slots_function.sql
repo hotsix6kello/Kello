@@ -69,7 +69,7 @@ BEGIN
     RETURN v_slots;
   END IF;
 
-  v_earliest := now() + (v_lead_time_hours || ' hours')::interval;
+  v_earliest := (now() AT TIME ZONE 'Asia/Seoul') + (v_lead_time_hours || ' hours')::interval;
   v_slot_time := v_hours.start_time;
 
   WHILE (v_slot_time + (p_duration_min || ' minutes')::interval) <= v_hours.end_time LOOP
