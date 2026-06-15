@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import styles from "./login.module.css";
 import { supabase } from "@/lib/supabaseClient";
@@ -33,7 +32,6 @@ function tryOpenInExternalBrowser(url: string): "android-intent" | "ios-copy" {
 }
 
 export default function LoginPage() {
-    const router = useRouter();
     const { t } = useTranslation("common");
     const [email, setEmail] = useState("");
     const [emailLoading, setEmailLoading] = useState(false);
@@ -416,38 +414,6 @@ export default function LoginPage() {
                         </form>
                     )}
 
-                    {/* 협력업체 가입 신청 */}
-                    <div style={{
-                        marginTop: '16px',
-                        paddingTop: '16px',
-                        borderTop: '1px solid rgba(0,0,0,0.06)',
-                        textAlign: 'center',
-                    }}>
-                        <button
-                            type="button"
-                            onClick={() => router.push('/auth/partner-signup')}
-                            style={{
-                                background: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.06))',
-                                border: '1.5px solid rgba(245,158,11,0.35)',
-                                borderRadius: '12px',
-                                padding: '10px 20px',
-                                cursor: 'pointer',
-                                fontSize: '0.85rem',
-                                fontWeight: 600,
-                                color: '#b45309',
-                                width: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '6px',
-                                transition: 'background 0.2s, transform 0.15s',
-                            }}
-                            onMouseOver={e => (e.currentTarget.style.background = 'linear-gradient(135deg, rgba(245,158,11,0.15), rgba(217,119,6,0.1))')}
-                            onMouseOut={e => (e.currentTarget.style.background = 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.06))')}
-                        >
-                            🤝 협력업체 가입 신청
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
