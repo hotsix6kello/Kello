@@ -368,6 +368,8 @@ export default function ExplorePage() {
   const visiblePlaces = activeList === 'beauty' ? [] : places;
   const activeTitle =
     activeList === 'beauty' ? 'Kello 제휴 뷰티샵' : activeList === 'restaurant' ? '주변 맛집' : '주변 숙소';
+  const resultCount = activeList === 'beauty' ? partners.length : places.length;
+  const hasResults = resultCount > 0;
 
   return (
     <main
@@ -589,54 +591,62 @@ export default function ExplorePage() {
           style={{
             overflow: 'hidden',
             borderRadius: '24px 24px 0 0',
-            background: 'rgba(255, 252, 248, 0.96)',
-            boxShadow: '0 -16px 34px rgba(48, 37, 27, 0.16)',
-            border: '1px solid rgba(218, 204, 187, 0.86)',
-            padding: '14px 14px 14px',
+            background: hasResults ? 'rgba(255, 252, 248, 0.96)' : 'transparent',
+            boxShadow: hasResults ? '0 -16px 34px rgba(48, 37, 27, 0.16)' : 'none',
+            border: hasResults ? '1px solid rgba(218, 204, 187, 0.86)' : 'none',
+            padding: hasResults ? '14px 14px 14px' : 0,
             pointerEvents: 'auto',
           }}
         >
-          <div style={{ width: 38, height: 4, borderRadius: 999, background: '#d5c5b2', margin: '0 auto 12px' }} />
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
-            <h2 style={{ margin: 0, color: '#2d2823', fontSize: 16, fontWeight: 900 }}>{activeTitle}</h2>
-            <span style={{ color: '#967d61', fontSize: 12, fontWeight: 800 }}>
-              {activeList === 'beauty' ? partners.length : places.length}곳
-            </span>
+          <div
+            style={{
+              borderRadius: hasResults ? 0 : 24,
+              background: hasResults ? 'transparent' : 'rgba(255, 252, 248, 0.96)',
+              boxShadow: hasResults ? 'none' : '0 -12px 28px rgba(48, 37, 27, 0.14)',
+              border: hasResults ? 'none' : '1px solid rgba(218, 204, 187, 0.86)',
+              padding: hasResults ? 0 : '14px 14px 16px',
+            }}
+          >
+            <div style={{ width: 38, height: 4, borderRadius: 999, background: '#d5c5b2', margin: '0 auto 12px' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
+              <h2 style={{ margin: 0, color: '#2d2823', fontSize: 16, fontWeight: 900 }}>{activeTitle}</h2>
+              <span style={{ color: '#967d61', fontSize: 12, fontWeight: 800 }}>{resultCount}곳</span>
+            </div>
+
+            {needsLoginToExplore && (
+              <div style={{ marginTop: 12, padding: 16, borderRadius: 18, background: '#fff5f2', color: '#6b352b' }}>
+                <strong style={{ display: 'block', marginBottom: 6 }}>로그인이 필요합니다.</strong>
+                <p style={{ margin: '0 0 12px', fontSize: 13 }}>로그인하면 내 주변 Kello 제휴샵을 볼 수 있어요.</p>
+                <button
+                  type="button"
+                  onClick={() => router.push('/auth/login?redirect=/explore')}
+                  style={{
+                    border: 'none',
+                    borderRadius: 999,
+                    padding: '10px 18px',
+                    background: '#c4942f',
+                    color: '#fff',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                  }}
+                >
+                  로그인하기
+                </button>
+              </div>
+            )}
+
+            {!needsLoginToExplore && locationDenied && (
+              <div style={{ marginTop: 12, padding: 16, borderRadius: 18, background: '#fff7e8', color: '#6b5537' }}>
+                위치 권한을 허용하면 내 주변 매장을 볼 수 있어요. 또는 숙소명/지역을 검색해 주변 K-Beauty
+                제휴샵을 찾아보세요.
+              </div>
+            )}
+
+            {loadingMessage && (
+              <p style={{ margin: '12px 0 0', color: '#806f5d', fontSize: 13, fontWeight: 700 }}>{loadingMessage}</p>
+            )}
+            {notice && <p style={{ margin: '12px 0 0', color: '#9a5b30', fontSize: 13, fontWeight: 700 }}>{notice}</p>}
           </div>
-
-          {needsLoginToExplore && (
-            <div style={{ marginTop: 12, padding: 16, borderRadius: 18, background: '#fff5f2', color: '#6b352b' }}>
-              <strong style={{ display: 'block', marginBottom: 6 }}>로그인이 필요합니다.</strong>
-              <p style={{ margin: '0 0 12px', fontSize: 13 }}>로그인하면 내 주변 Kello 제휴샵을 볼 수 있어요.</p>
-              <button
-                type="button"
-                onClick={() => router.push('/auth/login?redirect=/explore')}
-                style={{
-                  border: 'none',
-                  borderRadius: 999,
-                  padding: '10px 18px',
-                  background: '#c4942f',
-                  color: '#fff',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                }}
-              >
-                로그인하기
-              </button>
-            </div>
-          )}
-
-          {!needsLoginToExplore && locationDenied && (
-            <div style={{ marginTop: 12, padding: 16, borderRadius: 18, background: '#fff7e8', color: '#6b5537' }}>
-              위치 권한을 허용하면 내 주변 매장을 볼 수 있어요. 또는 숙소명/지역을 검색해 주변 K-Beauty
-              제휴샵을 찾아보세요.
-            </div>
-          )}
-
-          {loadingMessage && (
-            <p style={{ margin: '12px 0 0', color: '#806f5d', fontSize: 13, fontWeight: 700 }}>{loadingMessage}</p>
-          )}
-          {notice && <p style={{ margin: '12px 0 0', color: '#9a5b30', fontSize: 13, fontWeight: 700 }}>{notice}</p>}
 
           {!needsLoginToExplore && activeList === 'beauty' && partners.length > 0 && (
             <div
