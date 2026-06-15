@@ -90,6 +90,7 @@ function buildPayloadCandidate(
     region: normalizeText(draft.store.region),
     storeId: normalizeText(draft.store.storeId),
     storeName: normalizeText(draft.store.storeName),
+    storeSource: draft.store.storeSource === 'partner' ? 'partner' : 'google',
     bookingDate: normalizeText(draft.schedule.bookingDate),
     bookingTime: normalizeText(draft.schedule.bookingTime),
     designerId: null,
@@ -98,12 +99,7 @@ function buildPayloadCandidate(
     primaryServiceName: draft.service.primaryServiceName,
     addOnIds: [],
     addOnNames: [],
-    priceSummary: {
-      basePrice: 0,
-      addOnPrice: 0,
-      designerSurcharge: 0,
-      totalPrice: 0,
-    },
+    priceSummary: draft.priceSummary,
     customer: {
       name: draft.customer.name.trim(),
       phone: draft.customer.phone.trim(),

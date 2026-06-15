@@ -31,6 +31,7 @@ import type {
   BookingImageGroupStateKey,
   BookingImageKind,
 } from "@/lib/bookings/bookingFlowSkeleton/types";
+import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenu";
 
 export type BookingFlowSkeletonDraftStateSnapshot = {
   state: BookingFlowState;
@@ -38,6 +39,7 @@ export type BookingFlowSkeletonDraftStateSnapshot = {
     storeId: string | null;
     storeName: string | null;
     region: string | null;
+    storeSource: 'google' | 'partner' | null;
   };
   uploadedImageUrls: string[];
 };
@@ -48,7 +50,11 @@ type BookingFlowSkeletonProps = {
     storeId?: string | null;
     storeName?: string | null;
     region?: string | null;
+    storeSource?: 'google' | 'partner' | null;
   };
+  // Kello Partner 제휴 매장의 실제 메뉴. storeContext.storeSource === 'partner'이고
+  // partnerServiceMenu.category가 선택된 category와 일치할 때만 표시 메뉴로 사용된다.
+  partnerServiceMenu?: PartnerMenuServiceConfig | null;
   onImageUploadBridgeRequest?: (items: BookingImageUploadBridgeItem[]) => void;
   completedImageUploadResult?: BookingUploadedImageResultCompletion | null;
   onDraftStateChange?: (snapshot: BookingFlowSkeletonDraftStateSnapshot) => void;
@@ -84,6 +90,7 @@ function resolveVisualStepId(currentStep: BookingFlowStepId): BookingFlowVisualS
 export function BookingFlowSkeleton({
   initialCategory = null,
   storeContext,
+  partnerServiceMenu,
   onImageUploadBridgeRequest,
   completedImageUploadResult,
   onDraftStateChange,
@@ -325,6 +332,7 @@ export function BookingFlowSkeleton({
         storeId: storeContext?.storeId ?? null,
         storeName: storeContext?.storeName ?? null,
         region: storeContext?.region ?? null,
+        storeSource: storeContext?.storeSource ?? null,
       },
       uploadedImageUrls: draftStateUploadedImageUrls,
     });
@@ -334,10 +342,17 @@ export function BookingFlowSkeleton({
     storeContext?.storeId,
     storeContext?.storeName,
     storeContext?.region,
+    storeContext?.storeSource,
     draftStateUploadedImageUrls,
   ]);
 
-  const serviceMenu = state.category ? BOOKING_FLOW_SERVICE_MENUS[state.category] : null;
+  const serviceMenu = state.category
+    ? (storeContext?.storeSource === 'partner' &&
+        partnerServiceMenu &&
+        partnerServiceMenu.category === state.category
+        ? partnerServiceMenu
+        : BOOKING_FLOW_SERVICE_MENUS[state.category])
+    : null;
   const summary = useMemo(() => buildBookingFlowSummary(state), [state]);
   const activeVisualStepId = resolveVisualStepId(state.currentStep);
   const activeVisualStep = localizedSteps.find(s => s.id === activeVisualStepId) ?? localizedSteps[0]!;
@@ -364,6 +379,7 @@ export function BookingFlowSkeleton({
       storeId: storeContext?.storeId ?? null,
       storeName: storeContext?.storeName ?? null,
       region: storeContext?.region ?? null,
+      storeSource: storeContext?.storeSource ?? null,
     },
     uploadedImageUrls: draftStateUploadedImageUrls,
   };

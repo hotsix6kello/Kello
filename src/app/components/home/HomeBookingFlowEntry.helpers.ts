@@ -10,6 +10,10 @@ import type {
 import type { LegacyBookingDraftFromSkeleton } from "../../../lib/bookings/bookingFlowSkeleton/bridge.ts";
 import type { LegacySubmitStatusCopy } from "../../../lib/bookings/bookingFlowSkeleton/submitMessages.ts";
 import type { LegacySubmitUiState } from "../../../lib/bookings/bookingFlowSkeleton/submitUiState.ts";
+import {
+  findPartnerMenuItemById,
+  resolvePartnerMenuItemPriceSummary,
+} from "../../../lib/bookings/partnerMenu.ts";
 import type { BeautyCategoryId } from "./constants";
 import type {
   HomeBookingDraftDebugState,
@@ -59,14 +63,23 @@ export function resolveLegacyCategoryFromSkeleton(category: BookingFlowCategory)
 export function buildHomeBookingLegacyDraftFromSkeletonState(
   input: HomeBookingLegacyDraftBuildInput,
 ): LegacyBookingDraftFromSkeleton | null {
+  const selectedPartnerMenuItem = findPartnerMenuItemById(
+    input.partnerServiceMenu,
+    input.state.selectedServiceId,
+  );
+
   // HomeBookingFlowEntry helper is the single injection point for storeContext -> legacy draft candidate.
   return buildLegacyBookingDraftFromSkeleton({
     state: input.state,
     storeId: input.storeContext?.storeId ?? null,
     storeName: input.storeContext?.storeName ?? null,
     region: input.storeContext?.region ?? null,
+    storeSource: input.storeContext?.storeSource ?? null,
     primaryServiceName: input.primaryServiceName ?? null,
     agreements: input.agreements,
+    priceSummary: selectedPartnerMenuItem
+      ? resolvePartnerMenuItemPriceSummary(selectedPartnerMenuItem)
+      : undefined,
   });
 }
 
