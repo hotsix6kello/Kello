@@ -10,9 +10,8 @@ interface HomeLocationSheetProps {
   sheetSearchResults: Array<{ title: string; area: string; [key: string]: unknown }>;
   destInfo: { name: string; nameKo: string; [key: string]: unknown };
   onSelectPlace: (place: { title: string; area: string; [key: string]: unknown }) => void;
-  onOpenMap: () => void;
   onKRide: () => void;
-  onTransit: (provider: 'kakao' | 'google') => void;
+  onTransit: () => void;
   onCopy: () => void;
   copied: boolean;
   t: TFunction;
@@ -26,7 +25,6 @@ export default function HomeLocationSheet({
   sheetSearchResults,
   destInfo,
   onSelectPlace,
-  onOpenMap,
   onKRide,
   onTransit,
   onCopy,
@@ -69,22 +67,17 @@ export default function HomeLocationSheet({
             </div>
 
             <div className={styles.quickChoices} style={{ gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-              <button className={styles.choiceBtn} onClick={onOpenMap} style={{ gridColumn: 'span 2' }}>
-                <div className={styles.choiceIcon}>📍</div>
-                <div className={styles.choiceLabel}>{t('location_sheet.view_location')}</div>
-                <div className={styles.choiceSubText}>{t('location_sheet.view_location_desc')}</div>
-              </button>
               <button className={styles.choiceBtn} onClick={onKRide}>
                 <div className={styles.choiceIcon}>🚕</div>
                 <div className={styles.choiceLabel}>K.Ride</div>
                 <div className={styles.choiceSubText}>{t('location_sheet.call_taxi')}</div>
               </button>
-              <button className={styles.choiceBtn} onClick={() => onTransit('google')}>
+              <button className={styles.choiceBtn} onClick={onTransit}>
                 <div className={styles.choiceIcon}>🚇</div>
                 <div className={styles.choiceLabel}>{t('fab.transit')}</div>
                 <div className={styles.choiceSubText}>Google Maps</div>
               </button>
-              <button className={styles.choiceBtn} onClick={() => onTransit('google')} style={{ gridColumn: 'span 2', flexDirection: 'row', padding: '16px' }}>
+              <button className={styles.choiceBtn} onClick={onTransit} style={{ gridColumn: 'span 2', flexDirection: 'row', padding: '16px' }}>
                 <div className={styles.choiceIcon} style={{ width: '40px', height: '40px', fontSize: '20px' }}>
                   <Image src="https://www.google.com/images/branding/product/ico/maps15_bnuw32.ico" width={24} height={24} alt="G" />
                 </div>
