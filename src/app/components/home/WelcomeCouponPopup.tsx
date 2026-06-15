@@ -19,21 +19,14 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
 
   return (
     <div className={styles.floatingBanner} onClick={handleSignUp}>
-      <div className={styles.textContainer}>
-        <div className={styles.line1}>지금 가입하시면 즉시 사용가능한 5% 할인 쿠폰 증정</div>
-        <div className={styles.line2}>
-          <span className={styles.highlight}>Kello</span>와 함께 회원가입만 해도 바로 쓸 수 있는 쿠폰을 드려요.
-        </div>
-      </div>
-      <div className={styles.couponContainer}>
-        <Image 
-          src="/images/home/coupon_ticket.png" 
-          alt="5% Coupon" 
-          width={140}
-          height={100}
-          className={styles.couponImage} 
-        />
-      </div>
+      <Image 
+        src="/images/home/bottom_coupon_banner.png" 
+        alt="10% Coupon Banner" 
+        width={480}
+        height={144}
+        className={styles.bannerImage} 
+        priority
+      />
     </div>
   );
 }

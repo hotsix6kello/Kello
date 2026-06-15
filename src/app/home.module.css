@@ -1489,7 +1489,7 @@
 /* Soft premium reskin overrides */
 .main {
   background: #ffffff;
-  padding-bottom: calc(var(--total-nav-height) + env(safe-area-inset-bottom, 12px) + 40px);
+  padding-bottom: 0;
 }
 
 .topNav {
