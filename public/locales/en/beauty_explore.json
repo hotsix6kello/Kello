@@ -537,6 +537,8 @@
   },
   "select_date": "Select Date",
   "select_time": "Select Time",
+  "loading": "Loading...",
+  "no_available_times": "No available times for the selected date.",
   "btn_complete": "Complete Booking",
   "selected_confirmation": "✓ {{date}} selected",
   "weekdays": {

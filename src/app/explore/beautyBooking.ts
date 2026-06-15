@@ -6,6 +6,7 @@ export type BeautyBookingPayload = {
   region: string;
   storeId: string;
   storeName: string;
+  storeSource?: 'google' | 'partner';
   bookingDate: string;
   bookingTime: string;
   designerId: string | null;
@@ -20,6 +21,9 @@ export type BeautyBookingPayload = {
     designerSurcharge: number;
     totalPrice: number;
   };
+  // Kello Partner 제휴 매장 예약의 시술 소요 시간(분). 중복예약(겹침) 검사에 사용된다.
+  // google 매장 예약은 null.
+  serviceDurationMin: number | null;
   customer: {
     name: string;
     email?: string;
@@ -59,6 +63,7 @@ export type BeautyBookingPayloadDraftInput = {
   region: string | null;
   storeId: string | null;
   storeName: string | null;
+  storeSource?: 'google' | 'partner';
   bookingDate: string | null;
   bookingTime: string | null;
   designerId: string | null;
@@ -68,6 +73,7 @@ export type BeautyBookingPayloadDraftInput = {
   addOnIds: string[];
   addOnNames: string[];
   priceSummary: BeautyBookingPayload['priceSummary'];
+  serviceDurationMin?: number | null;
   customer: BeautyBookingPayload['customer'] & {
     currentImageUrl?: string | null;
     styleImageUrl?: string | null;
@@ -161,6 +167,7 @@ export function buildBeautyBookingPayload(
     region: input.region ?? '',
     storeId: input.storeId ?? '',
     storeName: (input.storeName ?? '').trim(),
+    storeSource: input.storeSource === 'partner' ? 'partner' : 'google',
     bookingDate: input.bookingDate ?? '',
     bookingTime: input.bookingTime ?? '',
     designerId: hasRequiredText(input.designerId) ? input.designerId : null,
@@ -175,6 +182,7 @@ export function buildBeautyBookingPayload(
       designerSurcharge: input.priceSummary.designerSurcharge,
       totalPrice: input.priceSummary.totalPrice,
     },
+    serviceDurationMin: input.serviceDurationMin ?? null,
     customer: {
       name: input.customer.name.trim(),
       email:
@@ -258,6 +266,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
     region: typeof candidate.region === 'string' ? candidate.region : null,
     storeId: typeof candidate.storeId === 'string' ? candidate.storeId : null,
     storeName: typeof candidate.storeName === 'string' ? candidate.storeName : null,
+    storeSource: candidate.storeSource === 'partner' ? 'partner' : 'google',
     bookingDate: typeof candidate.bookingDate === 'string' ? candidate.bookingDate : null,
     bookingTime: typeof candidate.bookingTime === 'string' ? candidate.bookingTime : null,
     designerId: typeof candidate.designerId === 'string' ? candidate.designerId : null,
@@ -272,6 +281,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       designerSurcharge: isFiniteNumber(priceSummary.designerSurcharge) ? priceSummary.designerSurcharge : Number.NaN,
       totalPrice: isFiniteNumber(priceSummary.totalPrice) ? priceSummary.totalPrice : Number.NaN,
     },
+    serviceDurationMin: isFiniteNumber(candidate.serviceDurationMin) ? candidate.serviceDurationMin : null,
     customer: {
       name: typeof customer.name === 'string' ? customer.name : '',
       email: typeof customer.email === 'string' ? customer.email : undefined,

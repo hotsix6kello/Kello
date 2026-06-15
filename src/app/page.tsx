@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 import { useTrip, ItineraryItem } from '@/lib/contexts/TripContext';
@@ -34,6 +35,7 @@ import {
 } from './components/home/constants';
 
 export default function HomePage() {
+  const router = useRouter();
   const { t, i18n } = useTranslation('common');
   const {
     itinerary,
@@ -53,7 +55,6 @@ export default function HomePage() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userName, setUserName] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const [showReferralPopup, setShowReferralPopup] = useState(false);
   const [referralError, setReferralError] = useState<string | null>(null);
   const [referralToast, setReferralToast] = useState<string | null>(null);
@@ -206,9 +207,7 @@ export default function HomePage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!session) {
-        setShowWelcomePopup(true);
-      } else {
+      if (session) {
         const hidePopup = localStorage.getItem('hideReferralPopup') === 'true';
         if (!hidePopup) {
           const { data } = await supabase
@@ -223,10 +222,6 @@ export default function HomePage() {
       }
     });
   }, []);
-
-  const handleWelcomeClose = () => {
-    setShowWelcomePopup(false);
-  };
 
   const handleReferralClose = () => {
     setShowReferralPopup(false);
@@ -271,10 +266,9 @@ export default function HomePage() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCategorySelect = (categoryId: string) => {
-    const nextCategory = categoryId as BeautyCategoryId;
-    setSelectedCategory(nextCategory);
-    setIsBookingOpen(true);
+    router.push('/booking/aesthetic');
   };
 
 
@@ -372,6 +366,9 @@ export default function HomePage() {
         t={t}
       />
 
+      {/* ── 할인쿠폰 인라인 배너 ── */}
+      <WelcomeCouponPopup />
+
 
 
 
@@ -415,10 +412,6 @@ export default function HomePage() {
         initialCategory={selectedCategory}
         t={t}
       />
-
-      {showWelcomePopup && (
-        <WelcomeCouponPopup onClose={handleWelcomeClose} />
-      )}
 
       {showReferralPopup && (
         <ReferralCodePopup

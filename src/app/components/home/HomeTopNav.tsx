@@ -1,25 +1,8 @@
-import { useRouter } from 'next/navigation';
-import { Bell } from 'lucide-react';
 import HomeSettingsButton from './HomeSettingsButton';
+import NotificationCenter from './NotificationCenter';
 import styles from '../../home.module.css';
 
-const ICON_BTN_STYLE: React.CSSProperties = {
-  width: 30,
-  height: 30,
-  padding: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: 999,
-  background: 'transparent',
-  border: 'none',
-  color: '#B8A45A',
-  cursor: 'pointer',
-};
-
 export default function HomeTopNav() {
-  const router = useRouter();
-
   return (
     <div className={styles.topNav}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -38,15 +21,9 @@ export default function HomeTopNav() {
         </svg>
       </div>
       <div style={{ flexGrow: 1 }} />
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <HomeSettingsButton />
-        <button 
-          onClick={() => router.push('/my/notifications')}
-          aria-label="Notifications"
-          style={ICON_BTN_STYLE}
-        >
-          <Bell size={22} fill="#B8A45A" />
-        </button>
+        <NotificationCenter />
       </div>
     </div>
   );

@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { resolveCanonicalLocale } from '@/lib/i18n/locales';
+import { Star, ShieldCheck, MessageCircle, Lock } from 'lucide-react';
 import styles from '../../home.module.css';
 
 /* ────────────────────────────────────────────────────────── */
@@ -17,7 +19,7 @@ interface HeroCopy {
 }
 
 interface TrustPoint {
-  icon: string;
+  iconType: 'star' | 'shield' | 'message' | 'lock';
   text: string;
 }
 
@@ -39,50 +41,50 @@ const CODE_TO_HERO_LOCALE: Record<string, string> = {
 
 const HERO_COPY: Record<string, HeroCopy> = {
   'ko-KR': {
-    title: '한국어 몰라도,\nK-뷰티 예약은 KELLO로',
+    title: '한국어 몰라도,<br/><span style="color: #FF3566">K-뷰티 예약은 Kello로</span>',
     subtitle: '헤어·네일·피부관리 예약부터 번역 상담까지 한 번에 도와드려요.',
     primaryCta: '지금 예약하기',
     secondaryCta: '번역 요청하기',
   },
   'en-US': {
-    title: 'Book K-Beauty in Korea,\neven without speaking Korean',
-    subtitle: 'From hair and nails to skincare and translation support, KELLO helps you book with ease.',
+    title: 'Book <span style="color: #FF3566">K-Beauty</span> in Korea,<br/>even without speaking Korean',
+    subtitle: 'From hair and nails to skincare and translation support, Kello helps you book with ease.',
     primaryCta: 'Book Now',
     secondaryCta: 'Ask for Translation',
   },
   'ja-JP': {
-    title: '韓国語がわからなくても、\nKビューティー予約はKELLOで',
-    subtitle: 'ヘア・ネイル・スキンケア의 예약부터 번역 상담까지, KELLO가 지원합니다.',
+    title: '韓国語がわからなくても、<br/><span style="color: #FF3566">Kビューティー予約はKello로</span>',
+    subtitle: 'ヘア・ネイル・スキンケア의 예약부터 번역 상담까지, Kello가 지원합니다.',
     primaryCta: '今すぐ予約',
     secondaryCta: '翻訳を依頼',
   },
   'zh-CN': {
-    title: '不懂韩语也可以，\n用 KELLO 预约韩式美妆',
-    subtitle: '从发型、美甲、皮肤管理预约到翻译咨询，KELLO 一次帮你完成。',
+    title: '不懂韩语也可以，<br/>用 <span style="color: #FF3566">Kello</span> 预约韩式美妆',
+    subtitle: '从发型、美甲、皮肤管理预约到翻译咨询，Kello 一次帮你完成。',
     primaryCta: '立即预约',
     secondaryCta: '请求翻译',
   },
   'zh-TW': {
-    title: '不懂韓語也可以，\n用 KELLO 預約韓式美妝',
-    subtitle: '從髮型、美甲、皮膚管理預約到翻譯諮詢，KELLO 一次幫你完成。',
+    title: '不懂韓語也可以，<br/>用 <span style="color: #FF3566">Kello</span> 預約韓式美妝',
+    subtitle: '從髮型、美甲、皮膚管理預約到翻譯諮詢，Kello 一次幫你完成。',
     primaryCta: '立即預約',
     secondaryCta: '請求翻譯',
   },
   'vi-VN': {
-    title: 'Không biết tiếng Hàn,\nvẫn đặt lịch K-Beauty với KELLO',
-    subtitle: 'Từ tóc, nail, chăm sóc da đến hỗ trợ dịch thuật, KELLO giúp bạn đặt lịch dễ dàng.',
+    title: 'Không biết tiếng Hàn,<br/>vẫn đặt lịch <span style="color: #FF3566">K-Beauty với Kello</span>',
+    subtitle: 'Từ tóc, nail, chăm sóc da đến hỗ trợ dịch thuật, Kello giúp bạn đặt lịch dễ dàng.',
     primaryCta: 'Đặt lịch ngay',
     secondaryCta: 'Yêu cầu dịch thuật',
   },
   'th-TH': {
-    title: 'ไม่รู้ภาษาเกาหลี\nก็จอง K-Beauty ผ่าน KELLO ได้',
-    subtitle: 'ตั้งแต่ทำผม ทำเล็บ ดูแลผิว ไปจนถึงบริการช่วยแปล KELLO ช่วยให้จองได้ง่ายขึ้น',
+    title: 'ไม่รู้ภาษาเกาหลี<br/>ก็จอง <span style="color: #FF3566">K-Beauty ผ่าน Kello</span> ได้',
+    subtitle: 'ตั้งแต่ทำผม ทำเล็บ ดูแลผิว ไปจนถึงบริการช่วยแปล Kello ช่วยให้จองได้ง่ายขึ้น',
     primaryCta: 'จองตอนนี้',
     secondaryCta: 'ขอความช่วยเหลือด้านการแปล',
   },
   'ar-SA': {
-    title: 'احجزي K-Beauty في كوريا\nمع KELLO حتى بدون الكورية',
-    subtitle: 'من الشعر والأظافر والعناية بالبشرة إلى دعم الترجمة، يساعدك KELLO على الحجز بسهولة.',
+    title: 'احجزي <span style="color: #FF3566">K-Beauty</span> في كوريا<br/>مع Kello حتى بدون الكورية',
+    subtitle: 'من الشعر والأظافر والعناية بالبشرة إلى دعم الترجمة، يساعدك Kello على الحجز بسهولة.',
     primaryCta: 'احجزي الآن',
     secondaryCta: 'اطلبي الترجمة',
   },
@@ -90,44 +92,52 @@ const HERO_COPY: Record<string, HeroCopy> = {
 
 const TRUST_POINTS: Record<string, TrustPoint[]> = {
   'ko-KR': [
-    { icon: '🤖', text: 'AI 번역 지원' },
-    { icon: '💳', text: '100% 선결제' },
-    { icon: '🌏', text: '외국인 친화 샵' },
+    { iconType: 'star', text: '100%\n실제 후기' },
+    { iconType: 'shield', text: '예약 즉시\n확정' },
+    { iconType: 'message', text: '전문 통역\n지원' },
+    { iconType: 'lock', text: '안심 결제\n시스템' },
   ],
   'en-US': [
-    { icon: '🤖', text: 'AI Translation' },
-    { icon: '💳', text: '100% Prepaid' },
-    { icon: '🌏', text: 'Foreigner-Friendly' },
+    { iconType: 'star', text: '100%\nReal Reviews' },
+    { iconType: 'shield', text: 'Instant\nConfirmation' },
+    { iconType: 'message', text: 'Professional\nTranslation' },
+    { iconType: 'lock', text: 'Secure\nPayment' },
   ],
   'ja-JP': [
-    { icon: '🤖', text: 'AI翻訳サポート' },
-    { icon: '💳', text: '100%前払い' },
-    { icon: '🌏', text: '外国人対応ショップ' },
+    { iconType: 'star', text: '100%\nリアルレビュー' },
+    { iconType: 'shield', text: '即時予約\n確定' },
+    { iconType: 'message', text: '専門通訳\nサポート' },
+    { iconType: 'lock', text: '安心決済\nシステム' },
   ],
   'zh-CN': [
-    { icon: '🤖', text: 'AI翻译支持' },
-    { icon: '💳', text: '100%预付款' },
-    { icon: '🌏', text: '外国人友好门店' },
+    { iconType: 'star', text: '100%\n真实评价' },
+    { iconType: 'shield', text: '即时\n确认' },
+    { iconType: 'message', text: '专业翻译\n支持' },
+    { iconType: 'lock', text: '安全支付\n系统' },
   ],
   'zh-TW': [
-    { icon: '🤖', text: 'AI翻譯支援' },
-    { icon: '💳', text: '100%預付款' },
-    { icon: '🌏', text: '外國人友善門店' },
+    { iconType: 'star', text: '100%\n真實評價' },
+    { iconType: 'shield', text: '即時\n確認' },
+    { iconType: 'message', text: '專業翻譯\n支援' },
+    { iconType: 'lock', text: '安全支付\n系統' },
   ],
   'vi-VN': [
-    { icon: '🤖', text: 'Hỗ trợ AI dịch thuật' },
-    { icon: '💳', text: 'Thanh toán trước 100%' },
-    { icon: '🌏', text: 'Thân thiện với người nước ngoài' },
+    { iconType: 'star', text: '100%\nĐánh giá thật' },
+    { iconType: 'shield', text: 'Xác nhận\nngay' },
+    { iconType: 'message', text: 'Hỗ trợ\nphiên dịch' },
+    { iconType: 'lock', text: 'Thanh toán\nan toàn' },
   ],
   'th-TH': [
-    { icon: '🤖', text: 'การแปลด้วย AI' },
-    { icon: '💳', text: 'ชำระล่วงหน้า 100%' },
-    { icon: '🌏', text: 'ร้านที่เป็นมิตรกับชาวต่างชาติ' },
+    { iconType: 'star', text: 'รีวิว\nจริง 100%' },
+    { iconType: 'shield', text: 'ยืนยัน\nทันที' },
+    { iconType: 'message', text: 'ล่ามมืออาชีพ\nช่วยเหลือ' },
+    { iconType: 'lock', text: 'ระบบชำระเงิน\nปลอดภัย' },
   ],
   'ar-SA': [
-    { icon: '🤖', text: 'دعم الترجمة بالذكاء الاصطناعي' },
-    { icon: '💳', text: 'دفع مسبق 100%' },
-    { icon: '🌏', text: 'صالونات ودية للأجانب' },
+    { iconType: 'star', text: '100%\nتقييمات حقيقية' },
+    { iconType: 'shield', text: 'تأكيد\nفوري' },
+    { iconType: 'message', text: 'ترجمة\nاحترافية' },
+    { iconType: 'lock', text: 'دفع\nآمن' },
   ],
 };
 
@@ -138,6 +148,7 @@ const DEFAULT_LOCALE = 'en-US';
 /* ────────────────────────────────────────────────────────── */
 export default function HomeHeroBanner() {
   const { i18n } = useTranslation('common');
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -156,6 +167,23 @@ export default function HomeHeroBanner() {
   const copy: HeroCopy = HERO_COPY[heroLocale] ?? HERO_COPY[DEFAULT_LOCALE];
   const trustPoints: TrustPoint[] = TRUST_POINTS[heroLocale] ?? TRUST_POINTS[DEFAULT_LOCALE];
   const isRTL = heroLocale === 'ar-SA';
+
+  function renderTrustIcon(type: string) {
+    const size = 20;
+    const strokeColor = '#FF3566';
+    switch (type) {
+      case 'star':
+        return <Star size={size} stroke={strokeColor} strokeWidth={1.5} fill="none" />;
+      case 'shield':
+        return <ShieldCheck size={size} stroke={strokeColor} strokeWidth={1.5} fill="none" />;
+      case 'message':
+        return <MessageCircle size={size} stroke={strokeColor} strokeWidth={1.5} fill="none" />;
+      case 'lock':
+        return <Lock size={size} stroke={strokeColor} strokeWidth={1.5} fill="none" />;
+      default:
+        return null;
+    }
+  }
 
   return (
     <div className={styles.heroBannerSection}>
@@ -181,19 +209,25 @@ export default function HomeHeroBanner() {
         >
           <h1
             className={styles.heroBannerTitle}
-            style={{ whiteSpace: 'pre-line' }}
-          >
-            {copy.title}
-          </h1>
+            dangerouslySetInnerHTML={{ __html: copy.title }}
+          />
           <p className={styles.heroBannerSubtitle}>{copy.subtitle}</p>
           <div
             className={styles.heroBannerCtaRow}
             style={{ justifyContent: isRTL ? 'flex-end' : 'flex-start' }}
           >
-            <button type="button" className={styles.heroBannerCtaPrimary}>
+            <button 
+              type="button" 
+              className={styles.heroBannerCtaPrimary}
+              onClick={() => router.push('/booking/process')}
+            >
               {copy.primaryCta}
             </button>
-            <button type="button" className={styles.heroBannerCtaSecondary}>
+            <button 
+              type="button" 
+              className={styles.heroBannerCtaSecondary}
+              onClick={() => router.push('/talk')}
+            >
               {copy.secondaryCta}
             </button>
           </div>
@@ -204,7 +238,7 @@ export default function HomeHeroBanner() {
       <div className={styles.heroBannerTrustRow} dir={isRTL ? 'rtl' : 'ltr'}>
         {trustPoints.map((tp, i) => (
           <div key={i} className={styles.heroBannerTrustItem}>
-            <span className={styles.heroBannerTrustIcon}>{tp.icon}</span>
+            <span className={styles.heroBannerTrustIcon}>{renderTrustIcon(tp.iconType)}</span>
             <span className={styles.heroBannerTrustText}>{tp.text}</span>
           </div>
         ))}

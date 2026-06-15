@@ -1,69 +1,63 @@
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+.floatingBanner {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  margin-top: 16px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 24px 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  justify-content: space-between;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.2s ease;
+  z-index: 10;
 }
 
-.card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px 24px;
-  width: min(360px, calc(100vw - 40px));
+.floatingBanner:hover {
+  transform: translateY(-2px);
+}
+
+.textContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  text-align: center;
+  gap: 4px;
 }
 
-.title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0;
-  line-height: 1.4;
-  white-space: pre-line;
+.line1 {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #1A1A1A;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
 }
 
-.description {
-  font-size: 14px;
-  color: #555;
-  margin: 0;
-  line-height: 1.6;
-}
-
-.ctaButton {
-  margin-top: 8px;
-  width: 100%;
-  padding: 14px 0;
-  background: #ff5a5f;
-  color: #fff;
-  font-size: 15px;
+.line2 {
+  font-size: 13px;
   font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+  color: #4A4A4A;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
 }
 
-.ctaButton:hover {
-  background: #e04e53;
+.highlight {
+  color: #FF3566;
 }
 
-.closeButton {
-  width: 100%;
-  padding: 12px 0;
-  background: transparent;
-  color: #999;
-  font-size: 14px;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  cursor: pointer;
+.couponContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 
-.closeButton:hover {
-  background: #f5f5f5;
+.couponImage {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  transform: rotate(-4deg);
+  mix-blend-mode: multiply;
 }
+

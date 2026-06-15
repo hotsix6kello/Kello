@@ -7,6 +7,7 @@ import type {
   BookingImageGroupStateKey,
   LegacyBeautyCategoryId,
 } from "@/lib/bookings/bookingFlowSkeleton/types";
+import type { BeautyBookingPayload } from "@/app/explore/beautyBooking";
 
 export const BOOKING_FLOW_NEW_TO_LEGACY_CATEGORY_MAP: Record<
   BookingFlowCategory,
@@ -153,6 +154,8 @@ export type LegacyBookingDraftFromSkeleton = {
     storeId: string | null;
     storeName: string | null;
     region: string | null;
+    // Kello Partner 제휴 매장 연동: 'partner'면 storeId가 stores.id(uuid)를 가리킨다.
+    storeSource: 'google' | 'partner' | null;
   };
   schedule: LegacyBookingTimeDraft;
   service: {
@@ -174,6 +177,10 @@ export type LegacyBookingDraftFromSkeleton = {
     preserveSourceMetadata: true;
   };
   agreements: LegacyDraftAgreements;
+  // Kello Partner 제휴 매장의 메뉴 가격(price_type별)을 반영한 요약. 일반 매장은 0으로 채워진다.
+  priceSummary: BeautyBookingPayload['priceSummary'];
+  // Kello Partner 제휴 매장 선택 시술의 소요 시간(분). 일반 매장은 null.
+  serviceDurationMin: number | null;
   unresolved: {
     missingStoreId: boolean;
     missingBookingDate: boolean;
@@ -192,8 +199,13 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
   storeId: string | null;
   storeName?: string | null;
   region?: string | null;
+  storeSource?: 'google' | 'partner' | null;
   primaryServiceName?: string | null;
   agreements?: Partial<BookingConfirmationState>;
+  // Kello Partner 제휴 매장 메뉴 가격 요약. 미지정 시 0으로 채워진다.
+  priceSummary?: BeautyBookingPayload['priceSummary'];
+  // Kello Partner 제휴 매장 선택 시술의 소요 시간(분). 미지정 시 null.
+  serviceDurationMin?: number | null;
   bookingTimePolicy?: {
     placeholderTime?: string;
   };
@@ -239,6 +251,7 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
       storeId,
       storeName: normalizeOptionalText(params.storeName),
       region: normalizeOptionalText(params.region),
+      storeSource: params.storeSource ?? null,
     },
     schedule,
     service: {
@@ -266,6 +279,13 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
       refundPolicyAgreedAt,
       source: agreementSource,
     },
+    priceSummary: params.priceSummary ?? {
+      basePrice: 0,
+      addOnPrice: 0,
+      designerSurcharge: 0,
+      totalPrice: 0,
+    },
+    serviceDurationMin: params.serviceDurationMin ?? null,
     unresolved: {
       missingStoreId: !storeId,
       missingBookingDate: schedule.bookingDate === null,

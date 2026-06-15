@@ -11,6 +11,7 @@ import type {
   LegacyBookingDraftFromSkeleton,
 } from "@/lib/bookings/bookingFlowSkeleton/bridge";
 import type { LegacySubmitPreparationResult } from "@/lib/bookings/bookingFlowSkeleton/submitRunner";
+import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenuShared";
 import type { BeautyCategoryId } from "./constants";
 
 export type HomeBookingFlowMode = "legacy" | "skeleton";
@@ -20,6 +21,8 @@ export type HomeBookingStoreContext = {
   storeId: string | null;
   storeName?: string | null;
   region?: string | null;
+  // Kello Partner 제휴 매장 연동: 'partner'면 storeId가 stores.id(uuid)를 가리킨다.
+  storeSource?: 'google' | 'partner' | null;
 };
 
 export type HomeBookingDeepLinkContext = {
@@ -32,6 +35,8 @@ export type HomeBookingLegacyDraftBuildInput = {
   state: BookingFlowState;
   storeContext?: Partial<HomeBookingStoreContext>;
   primaryServiceName?: string | null;
+  // Kello Partner 제휴 매장의 실제 메뉴(가격 계산에 사용). google/concierge 매장은 null.
+  partnerServiceMenu?: PartnerMenuServiceConfig | null;
   agreements?: {
     serviceTermsAgreed?: boolean;
     privacyPolicyAgreed?: boolean;

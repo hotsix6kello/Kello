@@ -70,6 +70,9 @@ export interface SharedBusiness {
     imageUrl?: string;
     image_url?: string;
     photos?: SharedBusinessPhoto[];
+    // Kello Partner 제휴 매장 연동: 'partner'면 store_id가 stores.id(uuid)를 가리킨다. 없으면 'google'로 취급.
+    source?: 'google' | 'partner';
+    store_id?: string;
 }
 
 interface TripContextType {

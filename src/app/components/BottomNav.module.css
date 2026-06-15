@@ -84,7 +84,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(185, 147, 90, 0.25) 0%, rgba(185, 147, 90, 0) 70%);
+    background: radial-gradient(circle, rgba(255, 53, 102, 0.2) 0%, rgba(255, 53, 102, 0) 70%);
     z-index: -1;
     pointer-events: none;
     animation: glowPulse 2s infinite ease-in-out;
@@ -107,12 +107,12 @@
     padding-inline: 10px;
     padding-top: 8px;
     padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 8px);
-    background: rgba(255, 250, 246, 0.88);
-    border: 1px solid rgba(219, 202, 194, 0.76);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-bottom: none;
     border-top-left-radius: 28px;
     border-top-right-radius: 28px;
-    box-shadow: 0 -18px 40px rgba(103, 79, 76, 0.12);
+    box-shadow: 0 -18px 40px rgba(103, 79, 76, 0.06);
     backdrop-filter: blur(18px);
 }
 
@@ -139,8 +139,8 @@
 }
 
 .navItem.active .navIcon {
-    background: rgba(199, 142, 149, 0.14);
-    box-shadow: 0 10px 18px rgba(183, 128, 136, 0.16);
+    background: rgba(255, 53, 102, 0.08);
+    box-shadow: 0 10px 18px rgba(255, 53, 102, 0.1);
     filter: none;
     text-shadow: none;
     transform: scale(1.05);
@@ -157,6 +157,6 @@
     width: 28px;
     height: 4px;
     border-radius: 999px;
-    background: linear-gradient(90deg, #c88c93 0%, #b67982 100%);
-    box-shadow: 0 10px 18px rgba(183, 128, 136, 0.22);
+    background: linear-gradient(90deg, #FF3566 0%, #FF5A82 100%);
+    box-shadow: 0 10px 18px rgba(255, 53, 102, 0.22);
 }
