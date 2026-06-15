@@ -66,7 +66,6 @@ export default function HomePage() {
 
   // Navigation Search States
   const [selectedDest, setSelectedDest] = useState<{ title: string; area: string; lat: number; lng: number } | null>(null);
-  const [isMapOpen, setIsMapOpen] = useState(false);
   const [isSearchingInSheet, setIsSearchingInSheet] = useState(false);
   const [sheetSearchResults] = useState<SheetSearchResult[]>([]);
   const [loadingNav, setLoadingNav] = useState(false);
@@ -303,21 +302,14 @@ export default function HomePage() {
     setOpenNavSheet(false);
   };
 
-  const handleTransit = (provider: 'kakao' | 'google' = 'google') => {
+  const handleTransit = () => {
     if (!destInfo) return;
     const address = destInfo.name || destInfo.nameKo;
     const { lat, lng } = destInfo;
     const navigateToTransit = (sLat?: number, sLng?: number) => {
-      if (provider === 'google') {
-        const origin = sLat && sLng ? `${sLat},${sLng}` : 'My Location';
-        const lang = i18n.language;
-        window.open(`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${lat},${lng}&destination_place_id=${encodeURIComponent(address)}&travelmode=transit&hl=${lang}`, '_blank');
-      } else {
-        const appUrl = sLat && sLng ? `kakaomap://route?sp=${sLat},${sLng}&ep=${lat},${lng}&by=PUBLICTRANSIT` : `kakaomap://route?ep=${lat},${lng}&by=PUBLICTRANSIT`;
-        const webUrl = sLat && sLng ? `https://map.kakao.com/link/from/My Location,${sLat},${sLng}/to/${encodeURIComponent(destInfo.nameKo)},${lat},${lng}` : `https://map.kakao.com/link/to/${encodeURIComponent(destInfo.nameKo)},${lat},${lng}`;
-        window.location.href = appUrl;
-        setTimeout(() => { if (!document.hidden) window.open(webUrl, '_blank'); }, 2500);
-      }
+      const origin = sLat && sLng ? `${sLat},${sLng}` : 'My Location';
+      const lang = i18n.language;
+      window.open(`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${lat},${lng}&destination_place_id=${encodeURIComponent(address)}&travelmode=transit&hl=${lang}`, '_blank');
     };
     if (navigator.geolocation) {
       setLoadingNav(true);
@@ -381,7 +373,6 @@ export default function HomePage() {
         sheetSearchResults={sheetSearchResults}
         destInfo={destInfo}
         onSelectPlace={handleSelectPlace}
-        onOpenMap={() => { setOpenNavSheet(false); setIsMapOpen(true); }}
         onKRide={handleKRide}
         onTransit={handleTransit}
         onCopy={handleCopy}
@@ -390,8 +381,6 @@ export default function HomePage() {
       />
 
       <HomeModals
-        isMapOpen={isMapOpen}
-        onMapClose={() => setIsMapOpen(false)}
         showCard={showCard}
         onCardClose={() => setShowCard(false)}
         destInfo={destInfo}
