@@ -10,9 +10,16 @@ ALTER TABLE IF EXISTS public.stores
   ADD COLUMN IF NOT EXISTS latitude       double precision,
   ADD COLUMN IF NOT EXISTS longitude      double precision;
 
-ALTER TABLE IF EXISTS public.stores
-  ADD CONSTRAINT IF NOT EXISTS stores_review_status_check
-  CHECK (review_status IN ('pending', 'approved', 'rejected'));
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'stores_review_status_check'
+  ) THEN
+    ALTER TABLE public.stores
+      ADD CONSTRAINT stores_review_status_check
+      CHECK (review_status IN ('pending', 'approved', 'rejected'));
+  END IF;
+END $$;
 
 COMMENT ON COLUMN public.stores.published     IS 'Kello(고객 앱) 노출 여부. true일 때만 고객 앱 검색/예약 후보가 됨';
 COMMENT ON COLUMN public.stores.review_status IS 'Kello 운영팀의 매장 검수 상태: pending | approved | rejected';

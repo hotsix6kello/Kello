@@ -6,8 +6,15 @@
 ALTER TABLE beauty_booking_requests
   ADD COLUMN IF NOT EXISTS store_source text NOT NULL DEFAULT 'google';
 
-ALTER TABLE beauty_booking_requests
-  ADD CONSTRAINT IF NOT EXISTS beauty_booking_requests_store_source_check
-  CHECK (store_source IN ('google', 'partner'));
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'beauty_booking_requests_store_source_check'
+  ) THEN
+    ALTER TABLE public.beauty_booking_requests
+      ADD CONSTRAINT beauty_booking_requests_store_source_check
+      CHECK (store_source IN ('google', 'partner'));
+  END IF;
+END $$;
 
 COMMENT ON COLUMN beauty_booking_requests.store_source IS '예약 매장 출처: google = Google Places 매장, partner = Kello Partner 제휴 매장(stores.id 참조)';
