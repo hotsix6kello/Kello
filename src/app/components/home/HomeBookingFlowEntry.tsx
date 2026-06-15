@@ -20,7 +20,7 @@ import { uploadBookingImage } from "@/lib/bookings/SupabaseUploadAdapter";
 import { submitBeautyBooking } from "@/app/explore/beautyBooking";
 import type { LegacySubmitAdapterBlocker } from "@/lib/bookings/bookingFlowSkeleton/submitAdapter";
 import type { BookingFlowCategory } from "@/lib/bookings/bookingFlowSkeleton/types";
-import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenu";
+import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenuShared";
 import { useTrip, type SharedBusiness } from "@/lib/contexts/TripContext";
 import {
   HomeBookingDraftReadySequenceSnapshot,

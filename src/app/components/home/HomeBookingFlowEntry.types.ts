@@ -11,7 +11,7 @@ import type {
   LegacyBookingDraftFromSkeleton,
 } from "@/lib/bookings/bookingFlowSkeleton/bridge";
 import type { LegacySubmitPreparationResult } from "@/lib/bookings/bookingFlowSkeleton/submitRunner";
-import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenu";
+import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenuShared";
 import type { BeautyCategoryId } from "./constants";
 
 export type HomeBookingFlowMode = "legacy" | "skeleton";

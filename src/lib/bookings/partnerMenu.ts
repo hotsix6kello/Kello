@@ -1,36 +1,17 @@
-import type { BeautyBookingPayload } from "@/app/explore/beautyBooking";
 import type {
   BookingFlowCategory,
-  BookingServiceMenuConfig,
-  BookingServiceMenuItem,
-  BookingServiceMenuSection,
 } from "@/lib/bookings/bookingFlowSkeleton/types";
+import {
+  formatPartnerMenuItemPriceLabel,
+  normalizePartnerMenuPriceType,
+  type PartnerMenuItemOption,
+  type PartnerMenuServiceConfig,
+  type PartnerMenuServiceItem,
+  type PartnerMenuServiceSection,
+} from "@/lib/bookings/partnerMenuShared";
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "@/lib/supabaseServer";
 
-export type PartnerMenuPriceType = "fixed" | "from" | "range";
-
-export type PartnerMenuItemOption = {
-  id: string;
-  name: string;
-  price: number;
-};
-
-export type PartnerMenuServiceItem = BookingServiceMenuItem & {
-  priceType: PartnerMenuPriceType;
-  price: number | null;
-  priceMin: number | null;
-  priceMax: number | null;
-  durationMin: number | null;
-  addOns: PartnerMenuItemOption[];
-};
-
-export type PartnerMenuServiceSection = Omit<BookingServiceMenuSection, "items"> & {
-  items: PartnerMenuServiceItem[];
-};
-
-export type PartnerMenuServiceConfig = Omit<BookingServiceMenuConfig, "sections"> & {
-  sections: PartnerMenuServiceSection[];
-};
+export * from "@/lib/bookings/partnerMenuShared";
 
 type CategoryRow = {
   id: string;
@@ -58,36 +39,6 @@ type MenuItemOptionRow = {
 };
 
 const UNCATEGORIZED_SECTION_ID = "uncategorized";
-
-function normalizePriceType(value: string | null): PartnerMenuPriceType {
-  return value === "from" || value === "range" ? value : "fixed";
-}
-
-function formatWon(amount: number): string {
-  return `${amount.toLocaleString("ko-KR")}원`;
-}
-
-/** 메뉴 항목의 price_type에 따라 화면에 보여줄 가격 라벨을 만든다. */
-export function formatPartnerMenuItemPriceLabel(item: {
-  priceType: PartnerMenuPriceType;
-  price: number | null;
-  priceMin: number | null;
-  priceMax: number | null;
-}): string | null {
-  switch (item.priceType) {
-    case "fixed":
-      return item.price !== null ? formatWon(item.price) : null;
-    case "from":
-      return item.price !== null ? `${formatWon(item.price)}~ (최소가)` : null;
-    case "range":
-      if (item.priceMin !== null && item.priceMax !== null) {
-        return `${formatWon(item.priceMin)} ~ ${formatWon(item.priceMax)} (예상 범위)`;
-      }
-      return item.priceMin !== null ? `${formatWon(item.priceMin)}~ (예상 범위)` : null;
-    default:
-      return null;
-  }
-}
 
 /**
  * Kello Partner의 categories/menu_items/menu_item_options를 읽어
@@ -156,7 +107,7 @@ export async function loadPartnerServiceMenu(
   }
 
   function toServiceItem(row: MenuItemRow): PartnerMenuServiceItem {
-    const priceType = normalizePriceType(row.price_type);
+    const priceType = normalizePartnerMenuPriceType(row.price_type);
     const priceLabel = formatPartnerMenuItemPriceLabel({
       priceType,
       price: row.price,
@@ -203,64 +154,5 @@ export async function loadPartnerServiceMenu(
     title: "",
     description: "",
     sections,
-  };
-}
-
-/** id로 메뉴 항목을 찾는다 (선택된 시술의 가격 계산 등에 사용). */
-export function findPartnerMenuItemById(
-  menu: PartnerMenuServiceConfig | null | undefined,
-  itemId: string | null | undefined,
-): PartnerMenuServiceItem | null {
-  if (!menu || !itemId) {
-    return null;
-  }
-
-  for (const section of menu.sections) {
-    const found = section.items.find((item) => item.id === itemId);
-    if (found) {
-      return found;
-    }
-  }
-
-  return null;
-}
-
-/**
- * 선택된 제휴 매장 메뉴 항목의 price_type에 따라 예약 결제 요약(priceSummary)을 계산한다.
- * - fixed: price를 그대로 사용
- * - from : price를 "최소가"로 사용
- * - range: price_min을 기준가로 사용 (price_max는 "예상 범위"로 화면 표시용, 합계에는 포함하지 않음)
- * 최종 확정 금액은 이후 견적/운영자 플로우에서 조정된다.
- */
-export function resolvePartnerMenuItemPriceSummary(
-  item: PartnerMenuServiceItem | null | undefined,
-  selectedAddOnIds: string[] = [],
-): BeautyBookingPayload["priceSummary"] {
-  if (!item) {
-    return { basePrice: 0, addOnPrice: 0, designerSurcharge: 0, totalPrice: 0 };
-  }
-
-  let basePrice = 0;
-  switch (item.priceType) {
-    case "fixed":
-      basePrice = item.price ?? 0;
-      break;
-    case "from":
-      basePrice = item.price ?? 0;
-      break;
-    case "range":
-      basePrice = item.priceMin ?? 0;
-      break;
-  }
-
-  const addOnPrice = item.addOns
-    .filter((option) => selectedAddOnIds.includes(option.id))
-    .reduce((sum, option) => sum + (option.price ?? 0), 0);
-
-  return {
-    basePrice,
-    addOnPrice,
-    designerSurcharge: 0,
-    totalPrice: basePrice + addOnPrice,
   };
 }

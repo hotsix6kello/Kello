@@ -13,7 +13,7 @@ import type { LegacySubmitUiState } from "../../../lib/bookings/bookingFlowSkele
 import {
   findPartnerMenuItemById,
   resolvePartnerMenuItemPriceSummary,
-} from "../../../lib/bookings/partnerMenu.ts";
+} from "../../../lib/bookings/partnerMenuShared.ts";
 import type { BeautyCategoryId } from "./constants";
 import type {
   HomeBookingDraftDebugState,

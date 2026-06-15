@@ -31,7 +31,7 @@ import type {
   BookingImageGroupStateKey,
   BookingImageKind,
 } from "@/lib/bookings/bookingFlowSkeleton/types";
-import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenu";
+import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenuShared";
 
 export type BookingFlowSkeletonDraftStateSnapshot = {
   state: BookingFlowState;

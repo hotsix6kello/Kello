@@ -176,7 +176,10 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
   }, [storeSource, storeId, durationMin, selectedDate]);
 
   // 제휴 매장이면 실제 예약 가능 시간을, 그 외(구글/컨시어지)에는 기존 고정 시간을 사용한다.
-  const timeSlots = storeSource === 'partner' ? (partnerSlots ?? []) : DEFAULT_TIME_SLOTS;
+  const timeSlots = useMemo(
+    () => (storeSource === 'partner' ? (partnerSlots ?? []) : DEFAULT_TIME_SLOTS),
+    [storeSource, partnerSlots],
+  );
 
   // 선택된 시간이 더 이상 유효하지 않으면(슬롯 목록 변경 등) 초기화한다.
   useEffect(() => {
