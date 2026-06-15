@@ -70,6 +70,11 @@ function getBusinessName(business: SharedBusiness): string {
   return business.name || business.title || business.displayName?.text || '';
 }
 
+// Kello Partner 제휴 매장이면 'partner', 그 외(Google Places 등)는 기존과 동일하게 'google'로 취급한다.
+function resolveStoreSource(business: SharedBusiness): 'google' | 'partner' {
+  return business.source === 'partner' ? 'partner' : 'google';
+}
+
 function getPlacesApiItems(rawData: PlacesApiResponse | SharedBusiness[]): SharedBusiness[] {
   if (Array.isArray(rawData)) {
     return rawData;
@@ -291,7 +296,7 @@ export default function ExplorePage() {
         window.kakao.maps.event.addListener(marker, 'click', () => {
           const businessId = biz.id || biz.place_id || `shared-${idx}`;
           setLastSelectedStoreId(businessId);
-          router.push(`/?booking=true&business_name=${encodeURIComponent(biz.name || '')}&store_id=${encodeURIComponent(businessId)}`);
+          router.push(`/?booking=true&business_name=${encodeURIComponent(biz.name || '')}&store_id=${encodeURIComponent(businessId)}&store_source=${resolveStoreSource(biz)}`);
         });
 
         newMarkers.push(marker);
@@ -492,7 +497,7 @@ export default function ExplorePage() {
                 onClick={() => {
                   const businessId = biz.id || biz.place_id || `shared-${idx}`;
                   setLastSelectedStoreId(businessId);
-                  router.push(`/?booking=true&business_name=${encodeURIComponent(name)}&store_id=${encodeURIComponent(businessId)}`);
+                  router.push(`/?booking=true&business_name=${encodeURIComponent(name)}&store_id=${encodeURIComponent(businessId)}&store_source=${resolveStoreSource(biz)}`);
                 }}
                 style={{
                   flex: '0 0 auto',
