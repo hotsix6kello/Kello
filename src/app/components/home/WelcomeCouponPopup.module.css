@@ -1,19 +1,18 @@
 .floatingBanner {
   position: relative;
-  width: calc(100% - 36px);
-  margin: 0 18px;
-  background: linear-gradient(135deg, #fff5f7 0%, #fff0f3 100%);
-  border: 1px solid rgba(255, 53, 102, 0.15);
-  border-radius: 16px;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  margin-top: 12px;
+  margin-bottom: 0;
+  background: #FDF0F3;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   cursor: pointer;
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 10;
-  box-shadow: 0 2px 12px rgba(255, 53, 102, 0.08);
+  overflow: hidden;
 }
 
 .floatingBanner:hover {
@@ -21,44 +20,8 @@
   box-shadow: 0 4px 16px rgba(255, 53, 102, 0.14);
 }
 
-.textContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.line1 {
-  font-size: 13px;
-  font-weight: 800;
-  color: #1A1A1A;
-  line-height: 1.3;
-  letter-spacing: -0.4px;
-}
-
-.line2 {
-  font-size: 11px;
-  font-weight: 600;
-  color: #4A4A4A;
-  line-height: 1.4;
-  letter-spacing: -0.2px;
-}
-
-.highlight {
-  color: #FF3566;
-}
-
-.couponContainer {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  margin-left: 8px;
-}
-
-.couponImage {
-  width: 72px;
+.bannerImage {
+  width: 100%;
   height: auto;
-  object-fit: contain;
-  transform: rotate(-4deg);
-  mix-blend-mode: multiply;
+  display: block;
 }
-
