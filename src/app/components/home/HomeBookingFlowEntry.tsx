@@ -19,6 +19,8 @@ import { runLegacySubmitPreparation } from "@/lib/bookings/bookingFlowSkeleton/s
 import { uploadBookingImage } from "@/lib/bookings/SupabaseUploadAdapter";
 import { submitBeautyBooking } from "@/app/explore/beautyBooking";
 import type { LegacySubmitAdapterBlocker } from "@/lib/bookings/bookingFlowSkeleton/submitAdapter";
+import type { BookingFlowCategory } from "@/lib/bookings/bookingFlowSkeleton/types";
+import type { PartnerMenuServiceConfig } from "@/lib/bookings/partnerMenuShared";
 import { useTrip, type SharedBusiness } from "@/lib/contexts/TripContext";
 import {
   HomeBookingDraftReadySequenceSnapshot,
@@ -50,6 +52,12 @@ const HOME_CONCIERGE_REGION = "Seoul";
 function normalizeText(value: string | null | undefined): string | null {
   const trimmed = value?.trim();
   return trimmed ? trimmed : null;
+}
+
+function resolveStoreSourceFromQuery(value: string | null | undefined): 'google' | 'partner' | null {
+  if (value === 'partner') return 'partner';
+  if (value === 'google') return 'google';
+  return null;
 }
 
 function resolveBusinessStoreId(business: SharedBusiness | null | undefined): string | null {
@@ -170,6 +178,7 @@ export default function HomeBookingFlowEntry({
   );
   const queryStoreId = searchParams.get("store_id");
   const queryBusinessName = searchParams.get("business_name");
+  const queryStoreSource = searchParams.get("store_source");
 
   const resolvedLinkedBusiness = useMemo(() => {
     const targetStoreId =
@@ -201,16 +210,27 @@ export default function HomeBookingFlowEntry({
         normalizeText(storeContext?.region) ??
         resolveRegionFromAddress(resolveBusinessAddress(resolvedLinkedBusiness)) ??
         HOME_CONCIERGE_REGION,
+      storeSource:
+        storeContext?.storeSource ??
+        resolveStoreSourceFromQuery(queryStoreSource) ??
+        (resolvedLinkedBusiness?.source === 'partner' ? 'partner' : 'google'),
     }),
     [
       queryBusinessName,
       queryStoreId,
+      queryStoreSource,
       resolvedLinkedBusiness,
       storeContext?.region,
       storeContext?.storeId,
       storeContext?.storeName,
+      storeContext?.storeSource,
     ],
   );
+
+  const [skeletonCategory, setSkeletonCategory] = useState<BookingFlowCategory | null>(
+    skeletonInitialCategory,
+  );
+  const [partnerServiceMenu, setPartnerServiceMenu] = useState<PartnerMenuServiceConfig | null>(null);
 
   // Reset submit status when flow closes
   useEffect(() => {
@@ -221,6 +241,59 @@ export default function HomeBookingFlowEntry({
     }
   }, [isOpen]);
 
+  // 제휴 매장(store_source=partner)이면 해당 매장의 실제 메뉴를 불러와 기본 시술 메뉴 대신 사용한다.
+  useEffect(() => {
+    const storeId = resolvedStoreContext.storeId;
+
+    if (resolvedStoreContext.storeSource !== "partner" || !storeId || !skeletonCategory) {
+      setPartnerServiceMenu(null);
+      return;
+    }
+
+    let isMounted = true;
+
+    const loadPartnerMenu = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        if (!session) {
+          if (isMounted) setPartnerServiceMenu(null);
+          return;
+        }
+
+        const response = await fetch(
+          `/api/partner-stores/${encodeURIComponent(storeId)}/menu?category=${skeletonCategory}`,
+          {
+            headers: {
+              Authorization: `Bearer ${session.access_token}`,
+            },
+          },
+        );
+
+        if (!response.ok) {
+          if (isMounted) setPartnerServiceMenu(null);
+          return;
+        }
+
+        const data = await response.json();
+        if (isMounted) {
+          setPartnerServiceMenu(data?.ok ? data.menu ?? null : null);
+        }
+      } catch (error) {
+        console.error("[HomeBookingFlowEntry] Failed to load partner menu", error);
+        if (isMounted) setPartnerServiceMenu(null);
+      }
+    };
+
+    void loadPartnerMenu();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [resolvedStoreContext.storeId, resolvedStoreContext.storeSource, skeletonCategory]);
+
   const handleImageUploadBridgeRequest = useCallback((items: BookingImageUploadBridgeItem[]) => {
     items.forEach((item) => {
       localImageFilesRef.current.set(item.draft.id, item.file);
@@ -229,10 +302,13 @@ export default function HomeBookingFlowEntry({
 
   const handleDraftStateChange = useCallback(
     (snapshot: BookingFlowSkeletonDraftStateSnapshot) => {
+      setSkeletonCategory(snapshot.state.category);
+
       const draftCandidate = buildHomeBookingLegacyDraftFromSkeletonState({
         state: snapshot.state,
         storeContext: snapshot.storeContext,
         agreements: snapshot.state.confirmation,
+        partnerServiceMenu,
       });
       const resolvedUploadedImageUrls = resolveHomeBookingUploadedImageUrls({
         draftStateUploadedImageUrls: snapshot.uploadedImageUrls,
@@ -282,6 +358,7 @@ export default function HomeBookingFlowEntry({
       onDraftDebugStateChange,
       onDraftReady,
       onSubmitPreparationChange,
+      partnerServiceMenu,
       uploadedImageUrls,
     ],
   );
@@ -296,6 +373,7 @@ export default function HomeBookingFlowEntry({
         state: snapshot.state,
         storeContext: snapshot.storeContext,
         agreements: snapshot.state.confirmation,
+        partnerServiceMenu,
       });
       const resolvedUploadedImageUrls = resolveHomeBookingUploadedImageUrls({
         draftStateUploadedImageUrls: snapshot.uploadedImageUrls,
@@ -455,6 +533,7 @@ export default function HomeBookingFlowEntry({
       activeSubmitStatus,
       onSubmitAttemptStateChange,
       onSubmitPreparationChange,
+      partnerServiceMenu,
       uploadedImageUrls,
       t,
     ]
@@ -519,6 +598,7 @@ export default function HomeBookingFlowEntry({
               <BookingFlowSkeleton
                 initialCategory={skeletonInitialCategory}
                 storeContext={resolvedStoreContext}
+                partnerServiceMenu={partnerServiceMenu}
                 onImageUploadBridgeRequest={handleImageUploadBridgeRequest}
                 completedImageUploadResult={completedImageUploadResult}
                 onDraftStateChange={handleDraftStateChange}

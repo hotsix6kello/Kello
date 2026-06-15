@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
+import { supabase } from '@/lib/supabaseClient';
 
 // Props 인터페이스
 interface IntegratedBookingMenuProps {
@@ -11,7 +12,18 @@ interface IntegratedBookingMenuProps {
   onConfirm: (date: string, time: string) => void;
   initialDate?: string | null;  // 추가
   initialTime?: string | null;  // 추가
+  // Kello Partner 제휴 매장 연동: storeSource가 'partner'이면 storeId/durationMin으로
+  // 실제 예약 가능 시간을 조회한다. google/concierge 매장은 기존 고정 시간을 사용한다.
+  storeId?: string | null;
+  storeSource?: 'google' | 'partner' | null;
+  durationMin?: number | null;
 }
+
+const DEFAULT_TIME_SLOTS = [
+  '10:00', '11:00', '12:00', '13:00',
+  '14:00', '15:00', '16:00', '17:00',
+  '18:00', '19:00'
+];
 
 // 날짜 포맷 유틸
 function formatDateLocalized(date: Date, lang: string, t: TFunction): string {
@@ -34,7 +46,7 @@ function isSameDay(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 }
 
-export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, initialDate, initialTime }: IntegratedBookingMenuProps) {
+export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, initialDate, initialTime, storeId, storeSource, durationMin }: IntegratedBookingMenuProps) {
   const { t, i18n } = useTranslation('beauty_explore');
   const lang = i18n.language || 'ko';
   const today = useMemo(() => new Date(), []);
@@ -42,6 +54,8 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>('');
+  const [partnerSlots, setPartnerSlots] = useState<string[] | null>(null);
+  const [isLoadingPartnerSlots, setIsLoadingPartnerSlots] = useState(false);
 
   // 애니메이션 및 초기화 제어
   const [isVisible, setIsVisible] = useState(false);
@@ -107,12 +121,72 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
     else setViewMonth(viewMonth + 1);
   };
 
-  // 10:00 ~ 19:00 시간 슬롯 (1시간 단위)
-  const timeSlots = [
-    '10:00', '11:00', '12:00', '13:00',
-    '14:00', '15:00', '16:00', '17:00',
-    '18:00', '19:00'
-  ];
+  // Kello Partner 제휴 매장: 선택한 날짜의 실제 예약 가능 시간을 조회한다.
+  useEffect(() => {
+    if (storeSource !== 'partner' || !storeId || !durationMin || !selectedDate) {
+      setPartnerSlots(null);
+      return;
+    }
+
+    let isMounted = true;
+    setIsLoadingPartnerSlots(true);
+
+    const loadSlots = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        if (!session) {
+          if (isMounted) setPartnerSlots([]);
+          return;
+        }
+
+        const response = await fetch(
+          `/api/partner-stores/${encodeURIComponent(storeId)}/slots?date=${toDateKey(selectedDate)}&duration_min=${durationMin}`,
+          {
+            headers: {
+              Authorization: `Bearer ${session.access_token}`,
+            },
+          },
+        );
+
+        if (!response.ok) {
+          if (isMounted) setPartnerSlots([]);
+          return;
+        }
+
+        const data = await response.json();
+        if (isMounted) {
+          setPartnerSlots(data?.ok && Array.isArray(data.slots) ? data.slots : []);
+        }
+      } catch (error) {
+        console.error('[IntegratedBookingMenu] Failed to load partner slots', error);
+        if (isMounted) setPartnerSlots([]);
+      } finally {
+        if (isMounted) setIsLoadingPartnerSlots(false);
+      }
+    };
+
+    void loadSlots();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [storeSource, storeId, durationMin, selectedDate]);
+
+  // 제휴 매장이면 실제 예약 가능 시간을, 그 외(구글/컨시어지)에는 기존 고정 시간을 사용한다.
+  const timeSlots = useMemo(
+    () => (storeSource === 'partner' ? (partnerSlots ?? []) : DEFAULT_TIME_SLOTS),
+    [storeSource, partnerSlots],
+  );
+
+  // 선택된 시간이 더 이상 유효하지 않으면(슬롯 목록 변경 등) 초기화한다.
+  useEffect(() => {
+    if (selectedTime && !timeSlots.includes(selectedTime)) {
+      setSelectedTime('');
+    }
+  }, [timeSlots, selectedTime]);
 
   if (!isVisible && !isOpen) return null;
 
@@ -198,22 +272,28 @@ export default function IntegratedBookingMenu({ isOpen, onClose, onConfirm, init
           {selectedDate && (
             <div className="mb-2 animate-[fadeIn_0.3s_ease-out]">
               <h3 className="text-[15px] font-bold text-[var(--ink-black)] mb-3">{t('select_time')}</h3>
-              <div className="grid grid-cols-4 gap-2">
-                {timeSlots.map((time) => {
-                  const isSelected = selectedTime === time;
-                  return (
-                    <button
-                      key={time}
-                      onClick={() => setSelectedTime(time)}
-                      className={`py-2.5 rounded-[var(--radius-sm)] text-[14px] font-semibold transition-all duration-150 active:scale-95 border ${
-                        isSelected ? 'bg-[var(--primary)] text-white border-[var(--primary)]' : 'bg-[var(--hanji-ivory)] text-[var(--ink-black)] hover:bg-[var(--warm-sand)]/30 border-[var(--warm-sand)]'
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  );
-                })}
-              </div>
+              {storeSource === 'partner' && isLoadingPartnerSlots ? (
+                <div className="py-4 text-center text-[13px] text-[var(--soft-ink)]">{t('loading')}</div>
+              ) : timeSlots.length === 0 ? (
+                <div className="py-4 text-center text-[13px] text-[var(--soft-ink)]">{t('no_available_times')}</div>
+              ) : (
+                <div className="grid grid-cols-4 gap-2">
+                  {timeSlots.map((time) => {
+                    const isSelected = selectedTime === time;
+                    return (
+                      <button
+                        key={time}
+                        onClick={() => setSelectedTime(time)}
+                        className={`py-2.5 rounded-[var(--radius-sm)] text-[14px] font-semibold transition-all duration-150 active:scale-95 border ${
+                          isSelected ? 'bg-[var(--primary)] text-white border-[var(--primary)]' : 'bg-[var(--hanji-ivory)] text-[var(--ink-black)] hover:bg-[var(--warm-sand)]/30 border-[var(--warm-sand)]'
+                        }`}
+                      >
+                        {time}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
         </div>

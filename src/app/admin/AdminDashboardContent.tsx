@@ -11,13 +11,14 @@ interface Stats {
     adminUsers: number;
     pendingPartners: number;
     approvedPartners: number;
+    pendingPartnerStores: number;
 }
 
 export default function AdminDashboardContent() {
     const { t } = useTranslation();
     const router = useRouter();
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-    const [stats, setStats] = useState<Stats>({ totalUsers: 0, adminUsers: 0, pendingPartners: 0, approvedPartners: 0 });
+    const [stats, setStats] = useState<Stats>({ totalUsers: 0, adminUsers: 0, pendingPartners: 0, approvedPartners: 0, pendingPartnerStores: 0 });
 
     useEffect(() => {
         const init = async () => {
@@ -52,11 +53,30 @@ export default function AdminDashboardContent() {
                 supabase.from('partners').select('*', { count: 'exact', head: true }).eq('status', 'approved'),
             ]);
 
+            // stores 테이블은 owner-only RLS이므로 service_role 기반 admin API를 통해 조회한다.
+            let pendingPartnerStores = 0;
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.access_token) {
+                try {
+                    const response = await fetch('/api/admin/partner-stores?status=pending', {
+                        headers: { Authorization: `Bearer ${session.access_token}` },
+                        cache: 'no-store',
+                    });
+                    const body = await response.json().catch(() => null) as { ok?: boolean; items?: unknown[] } | null;
+                    if (response.ok && body?.ok === true && Array.isArray(body.items)) {
+                        pendingPartnerStores = body.items.length;
+                    }
+                } catch (fetchError) {
+                    console.error('[admin] pending_partner_stores_fetch_failed', fetchError);
+                }
+            }
+
             setStats({
                 totalUsers: totalUsers ?? 0,
                 adminUsers: adminUsers ?? 0,
                 pendingPartners: pendingPartners ?? 0,
                 approvedPartners: approvedPartners ?? 0,
+                pendingPartnerStores,
             });
         };
         init();
@@ -87,6 +107,7 @@ export default function AdminDashboardContent() {
         { icon: '🛡️', value: stats.adminUsers, label: t('admin.stats_admin_users', { defaultValue: '관리자' }), color: '#7c3aed', path: '/admin/users?tab=admin' },
         { icon: '⏳', value: stats.pendingPartners, label: t('admin.stats_pending_partners', { defaultValue: '승인 대기' }), color: '#f59e0b', path: '/admin/partners?tab=pending' },
         { icon: '✅', value: stats.approvedPartners, label: t('admin.stats_approved_partners', { defaultValue: '승인 업체' }), color: '#10b981', path: '/admin/partners?tab=approved' },
+        { icon: '🏪', value: stats.pendingPartnerStores, label: t('admin.stats_pending_partner_stores', { defaultValue: '제휴 매장 검수대기' }), color: '#ec4899', path: '/admin/partner-stores' },
     ];
 
     const MENU_ITEMS = [
@@ -104,6 +125,11 @@ export default function AdminDashboardContent() {
             icon: '💼', bg: 'rgba(236,72,153,0.1)', title: t('admin.menu_bookings_title', { defaultValue: '뷰티 예약 관리' }),
             desc: t('admin.menu_bookings_desc', { defaultValue: '예약 요청 조회 및 진행 상태 변경' }), path: '/admin/bookings/beauty',
             highlight: null,
+        },
+        {
+            icon: '🏪', bg: 'rgba(236,72,153,0.1)', title: t('admin.menu_partner_stores_title', { defaultValue: '제휴 매장 검수' }),
+            desc: t('admin.menu_partner_stores_desc', { defaultValue: '제휴 매장/메뉴/사진 승인 · 반려 처리' }), path: '/admin/partner-stores',
+            highlight: stats.pendingPartnerStores > 0 ? t('admin.menu_partner_stores_pending_count', { count: stats.pendingPartnerStores, defaultValue: `${stats.pendingPartnerStores}건 대기 중` }) : null,
         },
     ];
 
