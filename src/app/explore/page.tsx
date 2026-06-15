@@ -370,7 +370,15 @@ export default function ExplorePage() {
     activeList === 'beauty' ? 'Kello 제휴 뷰티샵' : activeList === 'restaurant' ? '주변 맛집' : '주변 숙소';
 
   return (
-    <main style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', background: '#f7f1ea' }}>
+    <main
+      style={{
+        position: 'relative',
+        height: '100dvh',
+        maxHeight: '100dvh',
+        overflow: 'hidden',
+        background: '#f7f1ea',
+      }}
+    >
       <section
         style={{
           position: 'absolute',
@@ -579,13 +587,12 @@ export default function ExplorePage() {
       >
         <div
           style={{
-            maxHeight: 270,
-            overflowY: 'auto',
+            overflow: 'hidden',
             borderRadius: '24px 24px 0 0',
             background: 'rgba(255, 252, 248, 0.96)',
             boxShadow: '0 -16px 34px rgba(48, 37, 27, 0.16)',
             border: '1px solid rgba(218, 204, 187, 0.86)',
-            padding: '14px 14px 18px',
+            padding: '14px 14px 14px',
             pointerEvents: 'auto',
           }}
         >
@@ -632,11 +639,25 @@ export default function ExplorePage() {
           {notice && <p style={{ margin: '12px 0 0', color: '#9a5b30', fontSize: 13, fontWeight: 700 }}>{notice}</p>}
 
           {!needsLoginToExplore && activeList === 'beauty' && partners.length > 0 && (
-            <div style={{ display: 'grid', gap: 10, marginTop: 12 }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: 10,
+                marginTop: 12,
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                paddingBottom: 2,
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+              }}
+            >
               {partners.map((partner) => (
                 <article
                   key={partner.id}
                   style={{
+                    flex: '0 0 calc(100% - 26px)',
+                    maxWidth: 360,
                     display: 'grid',
                     gridTemplateColumns: '1fr auto',
                     gap: 12,
@@ -644,6 +665,7 @@ export default function ExplorePage() {
                     border: '1px solid #eadccc',
                     background: '#fff',
                     padding: 14,
+                    scrollSnapAlign: 'start',
                   }}
                 >
                   <div style={{ minWidth: 0 }}>
@@ -690,15 +712,30 @@ export default function ExplorePage() {
           )}
 
           {!needsLoginToExplore && activeList !== 'beauty' && places.length > 0 && (
-            <div style={{ display: 'grid', gap: 10, marginTop: 12 }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: 10,
+                marginTop: 12,
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                paddingBottom: 2,
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+              }}
+            >
               {places.map((place) => (
                 <article
                   key={place.id}
                   style={{
+                    flex: '0 0 calc(100% - 26px)',
+                    maxWidth: 360,
                     borderRadius: 18,
                     border: '1px solid #eadccc',
                     background: '#fff',
                     padding: 14,
+                    scrollSnapAlign: 'start',
                   }}
                 >
                   <strong style={{ display: 'block', color: '#2f2923', fontSize: 15 }}>{place.name}</strong>
