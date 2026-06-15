@@ -6,6 +6,11 @@
 ALTER TABLE beauty_booking_requests
   ADD COLUMN IF NOT EXISTS store_source text NOT NULL DEFAULT 'google';
 
+-- Kello Partner 제휴 매장 예약의 시술 소요 시간(분). 슬롯 중복예약(겹침) 검사에 사용된다.
+-- google 예약은 NULL로 둔다.
+ALTER TABLE beauty_booking_requests
+  ADD COLUMN IF NOT EXISTS service_duration_min int;
+
 DO $$
 BEGIN
   IF NOT EXISTS (
@@ -18,3 +23,4 @@ BEGIN
 END $$;
 
 COMMENT ON COLUMN beauty_booking_requests.store_source IS '예약 매장 출처: google = Google Places 매장, partner = Kello Partner 제휴 매장(stores.id 참조)';
+COMMENT ON COLUMN beauty_booking_requests.service_duration_min IS 'Kello Partner 제휴 매장 예약의 시술 소요 시간(분). 슬롯 중복예약(겹침) 검사용. google 예약은 NULL';

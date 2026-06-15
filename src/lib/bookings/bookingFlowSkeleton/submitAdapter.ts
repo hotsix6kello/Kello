@@ -100,6 +100,7 @@ function buildPayloadCandidate(
     addOnIds: [],
     addOnNames: [],
     priceSummary: draft.priceSummary,
+    serviceDurationMin: draft.serviceDurationMin,
     customer: {
       name: draft.customer.name.trim(),
       phone: draft.customer.phone.trim(),

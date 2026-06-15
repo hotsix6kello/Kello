@@ -80,6 +80,7 @@ export function buildHomeBookingLegacyDraftFromSkeletonState(
     priceSummary: selectedPartnerMenuItem
       ? resolvePartnerMenuItemPriceSummary(selectedPartnerMenuItem)
       : undefined,
+    serviceDurationMin: selectedPartnerMenuItem?.durationMin ?? null,
   });
 }
 

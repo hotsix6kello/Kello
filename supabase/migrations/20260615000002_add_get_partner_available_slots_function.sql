@@ -84,13 +84,18 @@ BEGIN
 
       -- 준비 시간(lead_time_hours) 이전 슬롯은 제외
       IF v_slot_datetime >= v_earliest THEN
+        -- 시술 길이가 겹치는 기존 예약 수를 카운트한다 (정확히 같은 시작 시간만 보지 않음).
+        -- 기존 예약의 길이는 service_duration_min, 없으면 slot_interval_minutes로 가정한다.
         SELECT count(*) INTO v_booked_count
         FROM public.beauty_booking_requests
         WHERE store_id = p_store_id::text
           AND store_source = 'partner'
           AND booking_date = p_date
-          AND booking_time = to_char(v_slot_time, 'HH24:MI')
-          AND status NOT IN ('canceled', 'failed');
+          AND status NOT IN ('canceled', 'failed')
+          AND (booking_time::time) < v_slot_end
+          AND (booking_time::time
+                + (COALESCE(service_duration_min, v_slot_interval) || ' minutes')::interval)
+                > v_slot_time;
 
         IF v_booked_count < v_capacity THEN
           v_slots := array_append(v_slots, to_char(v_slot_time, 'HH24:MI'));

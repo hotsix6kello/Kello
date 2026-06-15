@@ -179,6 +179,8 @@ export type LegacyBookingDraftFromSkeleton = {
   agreements: LegacyDraftAgreements;
   // Kello Partner 제휴 매장의 메뉴 가격(price_type별)을 반영한 요약. 일반 매장은 0으로 채워진다.
   priceSummary: BeautyBookingPayload['priceSummary'];
+  // Kello Partner 제휴 매장 선택 시술의 소요 시간(분). 일반 매장은 null.
+  serviceDurationMin: number | null;
   unresolved: {
     missingStoreId: boolean;
     missingBookingDate: boolean;
@@ -202,6 +204,8 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
   agreements?: Partial<BookingConfirmationState>;
   // Kello Partner 제휴 매장 메뉴 가격 요약. 미지정 시 0으로 채워진다.
   priceSummary?: BeautyBookingPayload['priceSummary'];
+  // Kello Partner 제휴 매장 선택 시술의 소요 시간(분). 미지정 시 null.
+  serviceDurationMin?: number | null;
   bookingTimePolicy?: {
     placeholderTime?: string;
   };
@@ -281,6 +285,7 @@ export function buildLegacyBookingDraftFromSkeleton(params: {
       designerSurcharge: 0,
       totalPrice: 0,
     },
+    serviceDurationMin: params.serviceDurationMin ?? null,
     unresolved: {
       missingStoreId: !storeId,
       missingBookingDate: schedule.bookingDate === null,

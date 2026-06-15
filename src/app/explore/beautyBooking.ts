@@ -21,6 +21,9 @@ export type BeautyBookingPayload = {
     designerSurcharge: number;
     totalPrice: number;
   };
+  // Kello Partner 제휴 매장 예약의 시술 소요 시간(분). 중복예약(겹침) 검사에 사용된다.
+  // google 매장 예약은 null.
+  serviceDurationMin: number | null;
   customer: {
     name: string;
     email?: string;
@@ -70,6 +73,7 @@ export type BeautyBookingPayloadDraftInput = {
   addOnIds: string[];
   addOnNames: string[];
   priceSummary: BeautyBookingPayload['priceSummary'];
+  serviceDurationMin?: number | null;
   customer: BeautyBookingPayload['customer'] & {
     currentImageUrl?: string | null;
     styleImageUrl?: string | null;
@@ -178,6 +182,7 @@ export function buildBeautyBookingPayload(
       designerSurcharge: input.priceSummary.designerSurcharge,
       totalPrice: input.priceSummary.totalPrice,
     },
+    serviceDurationMin: input.serviceDurationMin ?? null,
     customer: {
       name: input.customer.name.trim(),
       email:
@@ -276,6 +281,7 @@ export function coerceBeautyBookingPayload(input: unknown): BeautyBookingPayload
       designerSurcharge: isFiniteNumber(priceSummary.designerSurcharge) ? priceSummary.designerSurcharge : Number.NaN,
       totalPrice: isFiniteNumber(priceSummary.totalPrice) ? priceSummary.totalPrice : Number.NaN,
     },
+    serviceDurationMin: isFiniteNumber(candidate.serviceDurationMin) ? candidate.serviceDurationMin : null,
     customer: {
       name: typeof customer.name === 'string' ? customer.name : '',
       email: typeof customer.email === 'string' ? customer.email : undefined,

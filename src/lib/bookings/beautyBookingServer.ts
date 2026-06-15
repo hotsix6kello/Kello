@@ -59,6 +59,7 @@ type BeautyBookingInsertRow = {
   add_on_price: number;
   designer_surcharge: number;
   total_price: number;
+  service_duration_min: number | null;
   customer_name: string;
   customer_phone: string;
   customer_request: string;
@@ -457,6 +458,7 @@ function mapBeautyBookingPayloadToRow(
     add_on_price: payload.priceSummary.addOnPrice,
     designer_surcharge: payload.priceSummary.designerSurcharge,
     total_price: payload.priceSummary.totalPrice,
+    service_duration_min: payload.storeSource === "partner" ? (payload.serviceDurationMin ?? null) : null,
     customer_name: payload.customer.name,
     customer_phone: payload.customer.phone,
     customer_request: payload.customer.request,
