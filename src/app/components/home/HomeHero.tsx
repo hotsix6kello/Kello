@@ -116,7 +116,7 @@ export default function HomeHero(_props: HomeHeroProps) {
                     alt={`${slide.category} ${slide.caption}`}
                     fill
                     sizes="(max-width: 440px) 100vw, 440px"
-                    className={styles.heroFullImg}
+                    className={`${styles.heroFullImg} ${slide.category === '헤어' ? styles.heroFullImgHair : ''}`}
                     priority={index < 3}
                   />
                   <div className={styles.heroSlideShade} />
