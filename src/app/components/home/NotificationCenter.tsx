@@ -1,15 +1,18 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bell, CalendarCheck, MessageSquare, Gift, Info, CalendarClock, CalendarX } from 'lucide-react';
 import styles from './NotificationCenter.module.css';
+import { supabase } from '@/lib/supabaseClient';
+import type { BeautyBookingNotificationRecord } from '@/lib/bookings/beautyNotificationServer.ts';
 
 type NotiCategory = 'Booking' | 'Updates';
 type NotiStatus = 'unread' | 'read';
 
 interface NotificationItem {
   id: string;
+  bookingId?: string;
   category: NotiCategory;
   subType: string;
   title: string;
@@ -18,54 +21,117 @@ interface NotificationItem {
   status: NotiStatus;
 }
 
-const MOCK_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: 'n1',
-    category: 'Booking',
-    subType: 'confirmed',
-    title: '예약 확정 완료',
-    description: '프리미엄 헤어 클리닉 예약이 정상적으로 확정되었습니다.',
-    time: '10분 전',
-    status: 'unread',
-  },
-  {
-    id: 'n2',
-    category: 'Updates',
-    subType: 'message',
-    title: '매장 메시지 도착',
-    description: '담당 디자이너가 예약 확인 관련 신규 메시지를 발송했습니다.',
-    time: '1시간 전',
-    status: 'unread',
-  },
-  {
-    id: 'n3',
-    category: 'Booking',
-    subType: 'remind',
-    title: '예약 리마인드 알림',
-    description: '안내: 내일 오전 10:00에 예정된 뷰티 예약 일정이 있습니다.',
-    time: '1일 전',
-    status: 'unread',
-  },
-  {
-    id: 'n4',
-    category: 'Updates',
-    subType: 'promo',
-    title: '특별 K-뷰티 혜택 제안',
-    description: '회원님만을 위한 전용 시크릿 뷰티 스파 패키지를 확인해 보세요.',
-    time: '2일 전',
-    status: 'read',
-  },
-];
+const BOOKING_EVENT_TYPES = new Set([
+  'booking_created', 'booking_confirmed', 'booking_canceled_by_customer',
+  'booking_cancel_review_required', 'booking_change_requested',
+  'booking_change_approved', 'booking_change_rejected', 'booking_completed',
+  'alternative_offer_sent', 'alternative_offer_accepted', 'alternative_offer_rejected',
+]);
+
+function getSubType(eventType: string): string {
+  if (eventType === 'booking_canceled_by_customer' || eventType === 'booking_cancel_review_required') return 'cancel';
+  if (eventType === 'booking_confirmed' || eventType === 'booking_created' || eventType === 'booking_completed') return 'confirmed';
+  return 'remind';
+}
+
+function formatRelativeTime(dateStr: string): string {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 60) return `${Math.max(1, minutes)}분 전`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}시간 전`;
+  const days = Math.floor(hours / 24);
+  return `${days}일 전`;
+}
+
+function recordToItem(record: BeautyBookingNotificationRecord): NotificationItem {
+  return {
+    id: record.id,
+    bookingId: record.booking_id,
+    category: BOOKING_EVENT_TYPES.has(record.event_type) ? 'Booking' : 'Updates',
+    subType: getSubType(record.event_type),
+    title: record.title,
+    description: record.message,
+    time: formatRelativeTime(record.created_at),
+    status: record.read_at ? 'read' : 'unread',
+  };
+}
+
+function SkeletonItem() {
+  return (
+    <li className={styles.skeletonItem}>
+      <div className={`${styles.skeletonCircle} ${styles.shimmer}`} />
+      <div className={styles.skeletonContent}>
+        <div className={`${styles.skeletonLine} ${styles.skeletonTitle} ${styles.shimmer}`} />
+        <div className={`${styles.skeletonLine} ${styles.skeletonDesc} ${styles.shimmer}`} />
+      </div>
+    </li>
+  );
+}
 
 export default function NotificationCenter() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'All' | 'Booking' | 'Updates'>('All');
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  const unreadCount = MOCK_NOTIFICATIONS.filter(n => n.status === 'unread').length;
+  const fetchNotifications = useCallback(async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
 
-  const filteredNotis = MOCK_NOTIFICATIONS.filter(n => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/notifications/beauty', {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (!res.ok) return;
+      const body = await res.json() as { ok: boolean; items?: BeautyBookingNotificationRecord[] };
+      if (body.ok && body.items) {
+        setNotifications(body.items.map(recordToItem));
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void fetchNotifications();
+  }, [fetchNotifications]);
+
+  const handleBellClick = () => {
+    const opening = !isOpen;
+    setIsOpen(opening);
+    if (opening) void fetchNotifications();
+  };
+
+  const handleMarkAllRead = async () => {
+    const unread = notifications.filter(n => n.status === 'unread');
+    if (unread.length === 0) return;
+
+    setNotifications(prev => prev.map(n => ({ ...n, status: 'read' as NotiStatus })));
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+
+    await Promise.allSettled(
+      unread.map(n =>
+        fetch('/api/notifications/beauty', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ notificationId: n.id }),
+        })
+      )
+    );
+  };
+
+  const unreadCount = notifications.filter(n => n.status === 'unread').length;
+
+  const filteredNotis = notifications.filter(n => {
     if (activeTab === 'All') return true;
     return n.category === activeTab;
   });
@@ -84,12 +150,32 @@ export default function NotificationCenter() {
     };
   }, [isOpen]);
 
-  const handleNotiClick = (category: NotiCategory) => {
+  const handleNotiClick = async (item: NotificationItem) => {
     setIsOpen(false);
-    if (category === 'Booking') {
-      router.push('/my/bookings'); // 임시 경로 (Reservation Detail)
+
+    if (item.status === 'unread') {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        void fetch('/api/notifications/beauty', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ notificationId: item.id }),
+        });
+        setNotifications(prev =>
+          prev.map(n => n.id === item.id ? { ...n, status: 'read' as NotiStatus } : n)
+        );
+      }
+    }
+
+    if (item.category === 'Booking' && item.bookingId) {
+      router.push(`/my/bookings/beauty?bookingId=${item.bookingId}`);
+    } else if (item.category === 'Booking') {
+      router.push('/my/bookings');
     } else {
-      router.push('/my/notifications'); // 임시 경로 (Message / Promotion Detail)
+      router.push('/my/notifications');
     }
   };
 
@@ -113,9 +199,9 @@ export default function NotificationCenter() {
 
   return (
     <div className={styles.container} ref={panelRef}>
-      <button 
-        className={styles.bellButton} 
-        onClick={() => setIsOpen(!isOpen)}
+      <button
+        className={styles.bellButton}
+        onClick={handleBellClick}
         aria-label="Notifications"
       >
         <Bell size={22} strokeWidth={1.5} />
@@ -127,7 +213,14 @@ export default function NotificationCenter() {
       {isOpen && (
         <div className={styles.panel}>
           <div className={styles.header}>
-            <h3 className={styles.headerTitle}>알림 센터</h3>
+            <div className={styles.headerRow}>
+              <h3 className={styles.headerTitle}>알림 센터</h3>
+              {unreadCount > 0 && (
+                <button className={styles.markAllButton} onClick={() => void handleMarkAllRead()}>
+                  모두 읽음
+                </button>
+              )}
+            </div>
             <div className={styles.tabs}>
               {tabs.map(tab => (
                 <button
@@ -140,14 +233,20 @@ export default function NotificationCenter() {
               ))}
             </div>
           </div>
-          
+
           <ul className={styles.list}>
-            {filteredNotis.length > 0 ? (
+            {isLoading ? (
+              <>
+                <SkeletonItem />
+                <SkeletonItem />
+                <SkeletonItem />
+              </>
+            ) : filteredNotis.length > 0 ? (
               filteredNotis.map(noti => (
-                <li 
-                  key={noti.id} 
+                <li
+                  key={noti.id}
                   className={`${styles.item} ${styles[noti.status]}`}
-                  onClick={() => handleNotiClick(noti.category)}
+                  onClick={() => void handleNotiClick(noti)}
                 >
                   {noti.status === 'unread' && <div className={styles.unreadDot} />}
                   <div className={styles.iconWrapper}>
