@@ -102,7 +102,7 @@ export default function HomePartnerStores() {
         <button
           type="button"
           className={styles.viewAllBtn}
-          onClick={() => router.push('/explore')}
+          onClick={() => router.push('/stores')}
         >
           전체 보기 →
         </button>
