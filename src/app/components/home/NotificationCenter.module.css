@@ -73,11 +73,33 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
 .headerTitle {
   font-size: 18px;
   font-weight: 700;
   color: #1A1A1A;
-  margin: 0 0 16px 0;
+  margin: 0;
+}
+
+.markAllButton {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8C8C8C;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.markAllButton:hover {
+  color: #1A1A1A;
 }
 
 .tabs {
@@ -235,4 +257,52 @@
   text-align: center;
   color: #8C8C8C;
   font-size: 14px;
+}
+
+/* Skeleton */
+.skeletonItem {
+  display: flex;
+  padding: 16px 20px;
+  gap: 16px;
+  align-items: center;
+}
+
+.skeletonCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: #EEEBE8;
+}
+
+.skeletonContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeletonLine {
+  border-radius: 6px;
+  background-color: #EEEBE8;
+}
+
+.skeletonTitle {
+  height: 14px;
+  width: 60%;
+}
+
+.skeletonDesc {
+  height: 12px;
+  width: 85%;
+}
+
+@keyframes shimmer {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.shimmer {
+  animation: shimmer 1.4s ease-in-out infinite;
 }
