@@ -43,10 +43,29 @@ function SkeletonCard() {
   );
 }
 
+const EMPTY_CARDS = [
+  {
+    title: '헤어 제휴샵 준비 중',
+    description: '외국인 고객 응대가 가능한 K-뷰티샵을 선별하고 있어요.',
+    type: 'hair',
+  },
+  {
+    title: '네일 제휴샵 준비 중',
+    description: '사진 견적과 예약 확정이 가능한 제휴샵을 준비 중이에요.',
+    type: 'nail',
+  },
+  {
+    title: '속눈썹·메이크업 준비 중',
+    description: '방문 전 상담이 가능한 제휴샵을 모집하고 있어요.',
+    type: 'makeup',
+  },
+];
+
 export default function HomePartnerStores() {
   const router = useRouter();
   const [stores, setStores] = useState<PublishedStoreItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
     fetch('/api/stores/published', { cache: 'no-store' })
@@ -54,23 +73,32 @@ export default function HomePartnerStores() {
       .then((body: { ok?: boolean; items?: PublishedStoreItem[] }) => {
         if (body.ok && Array.isArray(body.items)) {
           setStores(body.items);
+          setFetchError(false);
+        } else {
+          setFetchError(true);
         }
       })
-      .catch(() => {})
+      .catch(() => setFetchError(true))
       .finally(() => setLoading(false));
   }, []);
 
-  // 로딩 중도 아니고 매장도 없으면 섹션 자체를 숨김
-  if (!loading && stores.length === 0) {
-    return null;
-  }
-
   const firstType = (types: string[]) => types[0] ?? '';
+  const handleStartBooking = () => router.push('/booking/aesthetic');
+  const handlePartnerBooking = (store: PublishedStoreItem) => {
+    const params = new URLSearchParams({
+      booking: 'true',
+      business_name: store.name ?? '제휴 매장',
+      store_id: store.id,
+      store_source: 'partner',
+    });
+
+    router.push(`/?${params.toString()}`);
+  };
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <span className={styles.title}>🏪 제휴 매장</span>
+        <span className={styles.title}>추천 제휴샵</span>
         <button
           type="button"
           className={styles.viewAllBtn}
@@ -81,18 +109,23 @@ export default function HomePartnerStores() {
       </div>
 
       <div className={styles.scrollTrack}>
-        {loading
-          ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
-          : stores.map((store) => {
+        {loading && Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)}
+
+        {!loading && fetchError && (
+          <div className={styles.errorCard}>제휴샵 정보를 불러오지 못했어요.</div>
+        )}
+
+        {!loading &&
+          !fetchError &&
+          stores.length > 0 &&
+          stores.map((store) => {
               const type = firstType(store.businessTypes);
               const emoji = TYPE_EMOJIS[type] ?? '🏪';
 
               return (
-                <button
+                <article
                   key={store.id}
-                  type="button"
                   className={styles.card}
-                  onClick={() => router.push(`/booking/partner/${store.id}`)}
                 >
                   <div className={styles.cardThumb}>
                     {store.thumbnailUrl ? (
@@ -120,10 +153,31 @@ export default function HomePartnerStores() {
                     {store.address && (
                       <div className={styles.cardAddress}>{getAddressShort(store.address)}</div>
                     )}
+                    <button
+                      type="button"
+                      className={styles.cardCta}
+                      onClick={() => handlePartnerBooking(store)}
+                    >
+                      예약 문의하기
+                    </button>
                   </div>
-                </button>
+                </article>
               );
             })}
+
+        {!loading &&
+          !fetchError &&
+          stores.length === 0 &&
+          EMPTY_CARDS.map((card) => (
+            <article key={card.title} className={styles.emptyCard}>
+              <div className={styles.emptyIcon}>{TYPE_EMOJIS[card.type] ?? '🏪'}</div>
+              <div className={styles.emptyTitle}>{card.title}</div>
+              <p className={styles.emptyDesc}>{card.description}</p>
+              <button type="button" className={styles.emptyCta} onClick={handleStartBooking}>
+                예약 문의하기
+              </button>
+            </article>
+          ))}
       </div>
     </section>
   );
