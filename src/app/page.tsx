@@ -28,6 +28,7 @@ import HomeModals from './components/home/HomeModals';
 import HomeBookingFlowEntry from './components/home/HomeBookingFlowEntry';
 import WelcomeCouponPopup from './components/home/WelcomeCouponPopup';
 import ReferralCodePopup from './components/home/ReferralCodePopup';
+import HomePartnerStores from './components/home/HomePartnerStores';
 
 import {
   BEAUTY_CATEGORY_OPTIONS,
@@ -353,13 +354,16 @@ export default function HomePage() {
         />
       </div>
 
-      {/* ── 슬라이드 갤러리 (카테고리 아래로 이동) ── */}
+      {/* ── 할인쿠폰 compact 배너 (카테고리 바로 아래) ── */}
+      <WelcomeCouponPopup />
+
+      {/* ── 슬라이드 갤러리 ── */}
       <HomeHero
         t={t}
       />
 
-      {/* ── 할인쿠폰 인라인 배너 ── */}
-      <WelcomeCouponPopup />
+      {/* ── 제휴 매장 리스트 (갤러리 아래) ── */}
+      <HomePartnerStores />
 
 
 
