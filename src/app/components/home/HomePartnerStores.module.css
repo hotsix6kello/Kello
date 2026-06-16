@@ -1,5 +1,5 @@
 .section {
-  padding: 20px 0 8px;
+  padding: 18px 0 10px;
 }
 
 .header {
@@ -53,13 +53,7 @@
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 4px 16px rgba(103, 79, 76, 0.08);
-  cursor: pointer;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:active {
-  transform: scale(0.97);
 }
 
 .cardThumb {
@@ -126,13 +120,70 @@
   text-overflow: ellipsis;
 }
 
-/* 빈 상태 */
-.empty {
-  padding: 24px 18px;
-  text-align: center;
-  font-size: 13px;
-  color: #aaa;
+.cardCta,
+.emptyCta {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff6f9f 0%, #ff3566 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.emptyCard {
+  flex-shrink: 0;
+  width: 210px;
+  min-height: 178px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #fff 0%, #fff6f8 100%);
+  border: 1px solid rgba(255, 126, 160, 0.2);
+  box-shadow: 0 8px 24px rgba(103, 79, 76, 0.08);
+  padding: 16px 14px 14px;
+}
+
+.emptyIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 126, 160, 0.12);
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.emptyTitle {
+  font-size: 14px;
+  font-weight: 850;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  margin-bottom: 7px;
+}
+
+.emptyDesc {
+  margin: 0;
+  min-height: 38px;
+  color: #7e6e70;
+  font-size: 12px;
+  line-height: 1.45;
   font-weight: 600;
+}
+
+.errorCard {
+  flex-shrink: 0;
+  width: calc(100% - 36px);
+  border-radius: 20px;
+  background: #fff7f8;
+  border: 1px solid rgba(255, 126, 160, 0.2);
+  color: #9b4b5b;
+  padding: 18px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 /* 스켈레톤 */

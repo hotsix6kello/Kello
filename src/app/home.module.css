@@ -1528,7 +1528,7 @@
 
 .bookingShell {
   margin-top: 0;
-  padding: 0 18px 120px;
+  padding: 0 18px 24px;
 }
 
 .bookingCard {
@@ -1678,7 +1678,7 @@
 
 @media (max-width: 390px) {
   .bookingShell {
-    padding: 0 14px 124px;
+    padding: 0 14px 22px;
   }
 
   .bookingCard {
