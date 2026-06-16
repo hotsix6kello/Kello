@@ -370,6 +370,8 @@ export default function ExplorePage() {
     activeList === 'beauty' ? 'Kello 제휴 뷰티샵' : activeList === 'restaurant' ? '주변 맛집' : '주변 숙소';
   const resultCount = activeList === 'beauty' ? partners.length : places.length;
   const hasResults = resultCount > 0;
+  const showEmptyBeauty = !needsLoginToExplore && !loadingMessage && activeList === 'beauty' && partners.length === 0;
+  const showEmptyPlaces = !needsLoginToExplore && !loadingMessage && activeList !== 'beauty' && places.length === 0;
 
   return (
     <main
@@ -455,16 +457,6 @@ export default function ExplorePage() {
         >
           <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
             내 위치
-          </button>
-          <button
-            type="button"
-            style={chipStyle}
-            onClick={() => {
-              searchInputRef.current?.focus();
-              setNotice('숙소명, 호텔, 지역을 검색한 뒤 후보를 선택해주세요.');
-            }}
-          >
-            숙소 주변
           </button>
           <button type="button" style={chipStyle} onClick={() => void fetchPartners(activeBaseLocation)}>
             뷰티샵
@@ -604,7 +596,7 @@ export default function ExplorePage() {
               background: hasResults ? 'transparent' : 'rgba(255, 252, 248, 0.96)',
               boxShadow: hasResults ? 'none' : '0 -12px 28px rgba(48, 37, 27, 0.14)',
               border: hasResults ? 'none' : '1px solid rgba(218, 204, 187, 0.86)',
-              padding: hasResults ? 0 : '14px 14px 16px',
+              padding: hasResults ? 0 : '12px 14px 14px',
             }}
           >
             <div style={{ width: 38, height: 4, borderRadius: 999, background: '#d5c5b2', margin: '0 auto 12px' }} />
@@ -636,7 +628,7 @@ export default function ExplorePage() {
             )}
 
             {!needsLoginToExplore && locationDenied && (
-              <div style={{ marginTop: 12, padding: 16, borderRadius: 18, background: '#fff7e8', color: '#6b5537' }}>
+              <div style={{ marginTop: 10, padding: '11px 14px', borderRadius: 16, background: '#fff7e8', color: '#6b5537', fontSize: 13, lineHeight: 1.5 }}>
                 위치 권한을 허용하면 내 주변 매장을 볼 수 있어요. 또는 숙소명/지역을 검색해 주변 K-Beauty
                 제휴샵을 찾아보세요.
               </div>
@@ -646,6 +638,16 @@ export default function ExplorePage() {
               <p style={{ margin: '12px 0 0', color: '#806f5d', fontSize: 13, fontWeight: 700 }}>{loadingMessage}</p>
             )}
             {notice && <p style={{ margin: '12px 0 0', color: '#9a5b30', fontSize: 13, fontWeight: 700 }}>{notice}</p>}
+            {showEmptyBeauty && !locationDenied && (
+              <p style={{ margin: '10px 0 0', color: '#897967', fontSize: 13 }}>
+                이 위치 주변에 표시할 Kello 제휴 뷰티샵이 아직 없습니다.
+              </p>
+            )}
+            {showEmptyPlaces && (
+              <p style={{ margin: '10px 0 0', color: '#897967', fontSize: 13 }}>
+                맛집 또는 숙소 칩을 누르면 주변 장소를 불러옵니다.
+              </p>
+            )}
           </div>
 
           {!needsLoginToExplore && activeList === 'beauty' && partners.length > 0 && (
@@ -763,16 +765,6 @@ export default function ExplorePage() {
             </div>
           )}
 
-          {!needsLoginToExplore && !loadingMessage && activeList === 'beauty' && partners.length === 0 && (
-            <p style={{ margin: '12px 0 0', color: '#897967', fontSize: 13 }}>
-              이 위치 주변에 표시할 Kello 제휴 뷰티샵이 아직 없습니다.
-            </p>
-          )}
-          {!needsLoginToExplore && !loadingMessage && activeList !== 'beauty' && places.length === 0 && (
-            <p style={{ margin: '12px 0 0', color: '#897967', fontSize: 13 }}>
-              맛집 또는 숙소 칩을 누르면 주변 장소를 불러옵니다.
-            </p>
-          )}
         </div>
       </section>
     </main>
