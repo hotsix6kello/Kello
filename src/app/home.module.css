@@ -1779,6 +1779,12 @@
   object-position: center center;
 }
 
+.heroFullImgHair {
+  object-fit: contain;
+  object-position: center center;
+  transform: scale(0.94);
+}
+
 .heroSlideCurrent {
   transform: translate3d(-50%, 0, 0) scale(1) rotateY(0deg);
   opacity: 1;
