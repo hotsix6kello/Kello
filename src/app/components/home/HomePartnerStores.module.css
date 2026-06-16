@@ -1,0 +1,174 @@
+.section {
+  padding: 20px 0 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+}
+
+.viewAllBtn {
+  font-size: 12px;
+  font-weight: 700;
+  color: #FF3566;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 가로 스크롤 트랙 */
+.scrollTrack {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 18px 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollTrack::-webkit-scrollbar {
+  display: none;
+}
+
+/* 카드 */
+.card {
+  flex-shrink: 0;
+  width: 160px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 16px rgba(103, 79, 76, 0.08);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:active {
+  transform: scale(0.97);
+}
+
+.cardThumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f5f0ee;
+  overflow: hidden;
+}
+
+.cardThumbImg {
+  object-fit: cover;
+}
+
+.cardThumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fdf0ee 0%, #f5e6e8 100%);
+  font-size: 32px;
+}
+
+.cardBody {
+  padding: 10px 12px 12px;
+}
+
+.cardName {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.tagRow {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #c88c93;
+  background: rgba(200, 140, 147, 0.12);
+  border-radius: 6px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+.cardAddress {
+  font-size: 11px;
+  font-weight: 500;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 빈 상태 */
+.empty {
+  padding: 24px 18px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  font-weight: 600;
+}
+
+/* 스켈레톤 */
+.skeleton {
+  flex-shrink: 0;
+  width: 160px;
+  border-radius: 20px;
+  background: #f5f0ee;
+  overflow: hidden;
+  animation: shimmer 1.4s ease infinite;
+}
+
+.skeletonThumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #ece6e4;
+}
+
+.skeletonBody {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeletonLine {
+  height: 10px;
+  border-radius: 6px;
+  background: #ece6e4;
+}
+
+.skeletonLineShort {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
