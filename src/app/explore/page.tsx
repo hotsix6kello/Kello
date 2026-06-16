@@ -418,7 +418,7 @@ export default function ExplorePage() {
         )}
       </section>
 
-      <section style={{ position: 'absolute', inset: 0, paddingBottom: 96 }}>
+      <section style={{ position: 'absolute', inset: 0 }}>
         {mapsApiKey && isLoaded && !loadError ? (
           <GoogleMap
             center={center}
