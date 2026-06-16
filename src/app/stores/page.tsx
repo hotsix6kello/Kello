@@ -90,38 +90,56 @@ export default function StoresPage() {
 
   return (
     <main style={{ background: '#faf7f4', minHeight: '100dvh', paddingBottom: 100 }}>
-      <header style={{ padding: '52px 20px 0' }}>
+      {/* 상단 네비바 */}
+      <header
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '52px 20px 16px',
+          background: '#faf7f4',
+        }}
+      >
         <button
           type="button"
           onClick={() => router.back()}
           style={{
-            display: 'inline-flex',
+            flexShrink: 0,
+            display: 'flex',
             alignItems: 'center',
-            gap: 4,
             background: 'none',
             border: 'none',
-            padding: '4px 0',
+            padding: '4px 2px',
             color: '#6b5f56',
-            fontSize: 15,
-            fontWeight: 700,
+            fontSize: 18,
             cursor: 'pointer',
           }}
+          aria-label="뒤로"
         >
-          ← 뒤로
+          ←
         </button>
         <h1
-          style={{ margin: '14px 0 0', fontSize: 22, fontWeight: 900, color: '#1a1614', letterSpacing: -0.5 }}
+          style={{
+            margin: 0,
+            fontSize: 20,
+            fontWeight: 900,
+            color: '#1a1614',
+            letterSpacing: -0.5,
+          }}
         >
           Kello 제휴 뷰티샵
         </h1>
-        <p style={{ margin: '8px 0 0', fontSize: 14, color: '#6b5f56', lineHeight: 1.55 }}>
-          외국인 방문객도 안심하고 예약할 수 있는 K-Beauty 제휴샵을 모아봤어요.
+      </header>
+
+      {/* 부제목 + 지도 버튼 */}
+      <div style={{ padding: '0 20px 4px' }}>
+        <p style={{ margin: '0 0 12px', fontSize: 13, color: '#8a7a6e', lineHeight: 1.5 }}>
+          영어 응대 OK · 사진 견적 · 예약 확정 가능한 K-뷰티샵
         </p>
         <button
           type="button"
           onClick={() => router.push('/explore')}
           style={{
-            marginTop: 14,
             display: 'inline-flex',
             alignItems: 'center',
             gap: 5,
@@ -137,7 +155,7 @@ export default function StoresPage() {
         >
           🗺️ 지도에서 보기
         </button>
-      </header>
+      </div>
 
       <div
         style={{
