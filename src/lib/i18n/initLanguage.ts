@@ -51,7 +51,8 @@ async function detectFromIP(): Promise<CanonicalLocaleCode | null> {
         const res = await fetch("https://ipapi.co/json/", { signal: controller.signal });
         if (!res.ok) return null;
         const data: { country_code?: string } = await res.json();
-        return data.country_code ? (COUNTRY_TO_LOCALE[data.country_code] ?? null) : null;
+        // 매핑된 국가 → 해당 언어, 매핑되지 않은 국가 → 영어
+        return data.country_code ? (COUNTRY_TO_LOCALE[data.country_code] ?? "en") : null;
     } catch {
         return null;
     } finally {
@@ -77,12 +78,13 @@ export async function initLanguage(): Promise<void> {
     // 최초 1회만 실행
     if (localStorage.getItem(AUTO_INIT_FLAG)) return;
 
-    // 1순위: 기기 설정
-    let detected: CanonicalLocaleCode | null = detectFromNavigator();
+    // 1순위: IP 기반 지오로케이션 — 접속 국가로 언어 결정
+    // 매핑된 국가 → 해당 언어, 매핑 없는 국가 → "en" 반환
+    let detected: CanonicalLocaleCode | null = await detectFromIP();
 
-    // 2순위: IP 기반 지오로케이션
+    // 2순위: IP 호출 자체 실패 시에만 기기 언어 설정으로 폴백
     if (!detected) {
-        detected = await detectFromIP();
+        detected = detectFromNavigator();
     }
 
     // 기본값: en
