@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import styles from './WelcomeCouponPopup.module.css';
 
 interface WelcomeCouponPopupProps {
@@ -10,6 +11,7 @@ interface WelcomeCouponPopupProps {
 
 export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps) {
   const router = useRouter();
+  const { t } = useTranslation('common');
 
   const handleSignUp = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -20,18 +22,18 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
   return (
     <div className={styles.floatingBanner} onClick={handleSignUp}>
       <div className={styles.textContainer}>
-        <div className={styles.line1}>지금 가입하시면 즉시 사용가능한 5% 할인 쿠폰 증정</div>
+        <div className={styles.line1}>{t('welcome_popup.title')}</div>
         <div className={styles.line2}>
-          <span className={styles.highlight}>Kello</span>와 함께 회원가입만 해도 바로 쓸 수 있는 쿠폰을 드려요.
+          <span className={styles.highlight}>Kello</span>{t('welcome_popup.description')}
         </div>
       </div>
       <div className={styles.couponContainer}>
-        <Image 
-          src="/images/home/coupon_ticket.png" 
-          alt="5% Coupon" 
+        <Image
+          src="/images/home/coupon_ticket.png"
+          alt="5% Coupon"
           width={140}
           height={100}
-          className={styles.couponImage} 
+          className={styles.couponImage}
         />
       </div>
     </div>

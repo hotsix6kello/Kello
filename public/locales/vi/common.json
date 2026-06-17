@@ -86,7 +86,8 @@
       "view_in_plan": "View in Plan",
       "view_again": "View Again",
       "map": "Map",
-      "call_120": "Call 120"
+      "call_120": "Call 120",
+      "send": "Gửi"
     },
     "states": {
       "posts": "Posts",
@@ -332,7 +333,14 @@
       "agreement_refund_policy_desc": "Đã đọc và đồng ý với chính sách hủy và hoàn tiền nêu trên.",
       "submitting": "Đang xử lý...",
       "submit_final": "Gửi đặt lịch cuối cùng",
-      "go_back_to_main": "Về trang chủ"
+      "go_back_to_main": "Về trang chủ",
+      "submit_blocked_store": "Chưa chọn cửa hàng. Vui lòng chọn lại cửa hàng và thử lại.",
+      "submit_blocked_service": "Vui lòng chọn dịch vụ và thử lại.",
+      "submit_blocked_schedule": "Vui lòng kiểm tra ngày đặt lịch và thử lại.",
+      "submit_blocked_customer": "Vui lòng nhập tên và liên hệ rồi thử lại.",
+      "submit_blocked_agreements": "Vui lòng đồng ý các điều khoản bắt buộc rồi thử lại.",
+      "submit_blocked_generic": "Không thể gửi yêu cầu đặt lịch. Vui lòng kiểm tra thông tin và thử lại.",
+      "section_subtitle": "Chọn dịch vụ K-Beauty và đặt lịch ngay."
     }
   },
   "interpreter_ui": {
@@ -1566,7 +1574,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "Đặt lịch",
+    "tab_updates": "Cập nhật"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -1858,7 +1868,27 @@
     "loading": "Đang tạo tài khoản...",
     "success": "Tài khoản đã được tạo! Vui lòng kiểm tra email để xác minh và đăng nhập.",
     "login_prompt": "Đã có tài khoản?",
-    "login_link": "Đăng nhập"
+    "login_link": "Đăng nhập",
+    "title_new": "Đăng ký Kello",
+    "title_google": "Hoàn thiện hồ sơ",
+    "subtitle_new": "Nhập email và thông tin để đăng ký",
+    "subtitle_google": "Nhập thêm thông tin để bắt đầu với Kello",
+    "nickname_label": "Biệt danh",
+    "nickname_placeholder": "Biệt danh của bạn",
+    "phone_label": "Số điện thoại",
+    "instagram_label": "Tài khoản Instagram",
+    "password_for_email": "(dùng để đăng nhập bằng email)",
+    "pw_min_length": "8 ký tự trở lên",
+    "pw_special": "Bao gồm ký tự đặc biệt (!@#$% v.v.)",
+    "submit": "Đăng ký",
+    "submit_google": "Hoàn thiện hồ sơ",
+    "processing": "Đang xử lý...",
+    "go_to_login": "Đến trang đăng nhập →",
+    "error_terms": "Vui lòng đồng ý với các điều khoản bắt buộc.",
+    "error_password": "Mật khẩu phải có ít nhất 8 ký tự và bao gồm ký tự đặc biệt.",
+    "error_duplicate_email": "Email này đã được đăng ký. Vui lòng đến trang đăng nhập.",
+    "error_invalid_email": "Địa chỉ email không hợp lệ.",
+    "error_generic": "Đã xảy ra lỗi. Vui lòng thử lại."
   },
   "webview_banner": {
     "title": "Trình duyệt trong ứng dụng không hỗ trợ đăng nhập Google",
@@ -2172,5 +2202,57 @@
         }
       }
     }
+  },
+  "stores_page": {
+    "section_title": "Salon đối tác được đề xuất",
+    "page_title": "Salon làm đẹp đối tác Kello",
+    "subtitle": "OK tiếng Anh · Báo giá qua ảnh · Xác nhận đặt lịch K-Beauty",
+    "view_on_map": "🗺️ Xem trên bản đồ",
+    "booking_inquiry": "Hỏi về đặt lịch",
+    "booking_inquiry_short": "Đặt lịch",
+    "view_all": "Xem tất cả →",
+    "fetch_error": "Không thể tải thông tin salon đối tác.",
+    "no_category_stores": "Chưa có salon đối tác trong danh mục này.",
+    "default_store_name": "Cửa hàng đối tác",
+    "empty_hair_title": "Salon tóc đối tác sắp ra mắt",
+    "empty_hair_desc": "Chúng tôi đang tuyển chọn các salon K-Beauty có nhân viên biết tiếng Anh.",
+    "empty_nail_title": "Salon nail đối tác sắp ra mắt",
+    "empty_nail_desc": "Chúng tôi đang chuẩn bị các salon có thể báo giá qua ảnh và xác nhận đặt lịch.",
+    "empty_lash_title": "Mi & trang điểm sắp ra mắt",
+    "empty_lash_desc": "Chúng tôi đang tuyển các salon đối tác cho phép tư vấn trước khi đến."
+  },
+  "explore_map": {
+    "search_placeholder": "Tìm kiếm chỗ ở, khách sạn, khu vực",
+    "search_btn": "Tìm kiếm",
+    "my_location": "Vị trí của tôi",
+    "beauty_shop": "Salon làm đẹp",
+    "restaurant": "Nhà hàng",
+    "accommodation": "Lưu trú"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "Chế độ xem tiếng Hàn",
+    "korean_viewer_hint": "💡 Bật Chế độ xem tiếng Hàn để cho nhân viên xem."
+  },
+  "home_hero": {
+    "wave_hair": "Tóc sóng",
+    "bob_hair": "Tóc bob",
+    "curly_hair": "Tóc xoăn",
+    "dandy_hair": "Tóc dandy",
+    "ice_nail": "Nail băng",
+    "nude_nail": "Nail nude",
+    "mint_nail": "Nail bạc hà",
+    "black_nail": "Nail đen",
+    "red_lip": "Môi đỏ",
+    "pure_look": "Vẻ trong sáng",
+    "idol_look": "Vẻ idol",
+    "glow_look": "Vẻ rạng rỡ",
+    "natural_lash": "Mi tự nhiên",
+    "volume_lash": "Mi dày",
+    "curl_lash": "Mi cong",
+    "clean_lash": "Mi gọn"
+  },
+  "business_page": {
+    "desc1": "Đây là cửa hàng đối tác cao cấp được Kello tuyển chọn.",
+    "desc2": "Trải nghiệm tư vấn tận tâm và tạo kiểu thời thượng từ các chuyên gia."
   }
 }

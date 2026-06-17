@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
+import { useTranslation } from 'react-i18next';
 
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
 import { supabase } from '@/lib/supabaseClient';
@@ -103,6 +104,7 @@ function toSharedBusiness(partner: PartnerResult): SharedBusiness {
 export default function ExplorePage() {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const { setSharedBusinesses } = useTrip();
+  const { t } = useTranslation('common');
 
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
@@ -327,7 +329,7 @@ export default function ExplorePage() {
             type="search"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}
-            placeholder="숙소명, 호텔, 지역을 검색해보세요"
+            placeholder={t('explore_map.search_placeholder')}
             style={{
               minWidth: 0,
               flex: 1,
@@ -352,7 +354,7 @@ export default function ExplorePage() {
               cursor: 'pointer',
             }}
           >
-            검색
+            {t('explore_map.search_btn')}
           </button>
         </form>
 
@@ -367,16 +369,16 @@ export default function ExplorePage() {
           }}
         >
           <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
-            내 위치
+            {t('explore_map.my_location')}
           </button>
           <button type="button" style={chipStyle} onClick={() => void fetchPartners(activeBaseLocation)}>
-            뷰티샵
+            {t('explore_map.beauty_shop')}
           </button>
           <button type="button" style={chipStyle} onClick={() => void fetchNearbyPlaces('restaurant')}>
-            맛집
+            {t('explore_map.restaurant')}
           </button>
           <button type="button" style={chipStyle} onClick={() => void fetchNearbyPlaces('lodging')}>
-            숙소
+            {t('explore_map.accommodation')}
           </button>
         </div>
 

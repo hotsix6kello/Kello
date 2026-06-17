@@ -48,7 +48,14 @@
       "agreement_refund_policy_desc": "لقد قرأت ووافقت على سياسة الإلغاء والاسترداد المذكورة أعلاه.",
       "submitting": "جاري المعالجة...",
       "submit_final": "إرسال الحجز النهائي",
-      "go_back_to_main": "العودة إلى الصفحة الرئيسية"
+      "go_back_to_main": "العودة إلى الصفحة الرئيسية",
+      "submit_blocked_store": "لم يتم اختيار متجر. يرجى اختيار متجر مجدداً والمحاولة.",
+      "submit_blocked_service": "يرجى اختيار قائمة الخدمة والمحاولة مجدداً.",
+      "submit_blocked_schedule": "يرجى التحقق من تاريخ الحجز والمحاولة مجدداً.",
+      "submit_blocked_customer": "يرجى إدخال الاسم وجهة الاتصال والمحاولة مجدداً.",
+      "submit_blocked_agreements": "يرجى الموافقة على الشروط المطلوبة والمحاولة مجدداً.",
+      "submit_blocked_generic": "تعذر إرسال طلب الحجز. يرجى مراجعة معلوماتك والمحاولة مجدداً.",
+      "section_subtitle": "اختر خدمة K-Beauty وابدأ الحجز فوراً."
     },
     "interpreter": {
       "eyebrow": "دعم اللغة",
@@ -357,7 +364,8 @@
       "view_in_plan": "View in Plan",
       "view_again": "View Again",
       "map": "Map",
-      "call_120": "Call 120"
+      "call_120": "Call 120",
+      "send": "إرسال"
     },
     "states": {
       "posts": "Posts",
@@ -903,7 +911,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "الحجوزات",
+    "tab_updates": "تحديثات"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -1195,7 +1205,27 @@
     "loading": "جارٍ إنشاء الحساب...",
     "success": "تم إنشاء الحساب! يرجى التحقق من بريدك الإلكتروني لتأكيد الحساب وتسجيل الدخول.",
     "login_prompt": "هل لديك حساب بالفعل؟",
-    "login_link": "تسجيل الدخول"
+    "login_link": "تسجيل الدخول",
+    "title_new": "التسجيل في Kello",
+    "title_google": "إكمال الملف الشخصي",
+    "subtitle_new": "أدخل بريدك الإلكتروني ومعلوماتك للتسجيل",
+    "subtitle_google": "أدخل معلومات إضافية للبدء مع Kello",
+    "nickname_label": "الاسم المستعار",
+    "nickname_placeholder": "اسمك المستعار",
+    "phone_label": "رقم الهاتف",
+    "instagram_label": "حساب Instagram",
+    "password_for_email": "(لتسجيل الدخول بالبريد الإلكتروني)",
+    "pw_min_length": "8 أحرف على الأقل",
+    "pw_special": "يتضمن أحرفاً خاصة (!@#$% إلخ)",
+    "submit": "التسجيل",
+    "submit_google": "إكمال الملف الشخصي",
+    "processing": "جارٍ المعالجة...",
+    "go_to_login": "الذهاب إلى تسجيل الدخول →",
+    "error_terms": "يرجى الموافقة على الشروط المطلوبة.",
+    "error_password": "يجب أن تكون كلمة المرور 8 أحرف على الأقل وتتضمن أحرفاً خاصة.",
+    "error_duplicate_email": "هذا البريد الإلكتروني مسجل بالفعل. يرجى الذهاب إلى صفحة تسجيل الدخول.",
+    "error_invalid_email": "عنوان البريد الإلكتروني غير صالح.",
+    "error_generic": "حدث خطأ. يرجى المحاولة مرة أخرى."
   },
   "help_page": {
     "title": "الدعم الطارئ",
@@ -2420,5 +2450,57 @@
       "seocho": "Seocho",
       "seongsu": "Seongsu"
     }
+  },
+  "stores_page": {
+    "section_title": "صالونات الشراكة الموصى بها",
+    "page_title": "صالونات تجميل شركاء Kello",
+    "subtitle": "الإجابة بالإنجليزية OK · عروض أسعار بالصور · تأكيد حجز K-Beauty",
+    "view_on_map": "🗺️ عرض على الخريطة",
+    "booking_inquiry": "الاستفسار عن الحجز",
+    "booking_inquiry_short": "حجز",
+    "view_all": "عرض الكل →",
+    "fetch_error": "تعذر تحميل معلومات صالونات الشراكة.",
+    "no_category_stores": "لا توجد صالونات شراكة في هذه الفئة بعد.",
+    "default_store_name": "متجر شريك",
+    "empty_hair_title": "صالون الشعر الشريك قادم قريباً",
+    "empty_hair_desc": "نحن نختار صالونات K-Beauty التي لديها موظفون يتحدثون الإنجليزية.",
+    "empty_nail_title": "صالون الأظافر الشريك قادم قريباً",
+    "empty_nail_desc": "نحن نحضر صالونات يمكنها تقديم عروض أسعار بالصور وتأكيد الحجز.",
+    "empty_lash_title": "الرموش والمكياج قادم قريباً",
+    "empty_lash_desc": "نحن نجند صالونات شريكة حيث يمكنك الاستشارة قبل الزيارة."
+  },
+  "explore_map": {
+    "search_placeholder": "ابحث عن الإقامة، الفندق، المنطقة",
+    "search_btn": "بحث",
+    "my_location": "موقعي",
+    "beauty_shop": "صالون التجميل",
+    "restaurant": "مطعم",
+    "accommodation": "إقامة"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "وضع العرض بالكورية",
+    "korean_viewer_hint": "💡 فعّل وضع العرض بالكورية لإظهاره للموظفين."
+  },
+  "home_hero": {
+    "wave_hair": "شعر موجي",
+    "bob_hair": "قصة بوب",
+    "curly_hair": "شعر مجعد",
+    "dandy_hair": "شعر دندي",
+    "ice_nail": "أظافر آيس",
+    "nude_nail": "أظافر نود",
+    "mint_nail": "أظافر نعناع",
+    "black_nail": "أظافر سوداء",
+    "red_lip": "شفاه حمراء",
+    "pure_look": "مظهر بريء",
+    "idol_look": "مظهر آيدول",
+    "glow_look": "مظهر متألق",
+    "natural_lash": "رموش طبيعية",
+    "volume_lash": "رموش مكثفة",
+    "curl_lash": "رموش منحنية",
+    "clean_lash": "رموش نظيفة"
+  },
+  "business_page": {
+    "desc1": "هذا متجر شريك متميز اختاره Kello بعناية.",
+    "desc2": "اختبر الاستشارات الشخصية الدقيقة والتصفيف العصري من مصمميينا المتخصصين."
   }
 }

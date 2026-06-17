@@ -358,7 +358,8 @@
       "view_in_plan": "プランで表示",
       "view_again": "もう一度見る",
       "call_120": "120に電話",
-      "back_to_list": "一覧に戻る"
+      "back_to_list": "一覧に戻る",
+      "send": "送信"
     },
     "community": {
       "posts": "私の投稿",
@@ -1547,7 +1548,14 @@
       "agreement_refund_policy_desc": "上記のキャンセル・返金ポリシーを確認し、同意します。",
       "submitting": "処理中...",
       "submit_final": "最終予約を申し込む",
-      "go_back_to_main": "メインに戻る"
+      "go_back_to_main": "メインに戻る",
+      "submit_blocked_store": "選択されたお店の情報がありません。お店を再選択してお試しください。",
+      "submit_blocked_service": "メニューを選択してからお試しください。",
+      "submit_blocked_schedule": "予約日時を確認してからお試しください。",
+      "submit_blocked_customer": "お名前と連絡先を入力してからお試しください。",
+      "submit_blocked_agreements": "必須項目に同意してからお試しください。",
+      "submit_blocked_generic": "予約リクエストを送信できません。入力内容を確認してください。",
+      "section_subtitle": "K-Beautyサービスを選んですぐ予約を始めましょう。"
     },
     "interpreter": {
       "eyebrow": "通訳サポート",
@@ -2199,7 +2207,9 @@
       "alternative_title": "代替スケジュールの通知を受け取る",
       "alternative_desc": "希望時間が満席で店舗から別の時間を提案された際に通知します。"
     },
-    "footer_note": "重要な予約通知は設定にかかわらず送信される場合があります。"
+    "footer_note": "重要な予約通知は設定にかかわらず送信される場合があります。",
+    "tab_booking": "予約",
+    "tab_updates": "お知らせ"
   },
   "error_title": "問題が発生しました。",
   "error_desc": "問題が解決しない場合はサポートにお問い合わせください。",
@@ -2281,7 +2291,27 @@
     "loading": "アカウント作成中...",
     "success": "アカウントが作成されました！メールを確認してログインしてください。",
     "login_prompt": "すでにアカウントをお持ちですか？",
-    "login_link": "ログイン"
+    "login_link": "ログイン",
+    "title_new": "Kelloに登録",
+    "title_google": "プロフィールを完成させる",
+    "subtitle_new": "メールアドレスと情報を入力して登録してください",
+    "subtitle_google": "追加情報を入力してKelloを始めましょう",
+    "nickname_label": "ニックネーム",
+    "nickname_placeholder": "使用するニックネーム",
+    "phone_label": "電話番号",
+    "instagram_label": "Instagramアカウント",
+    "password_for_email": "（メールログイン用）",
+    "pw_min_length": "8文字以上",
+    "pw_special": "特殊文字を含む (!@#$% など)",
+    "submit": "登録する",
+    "submit_google": "プロフィールを完成させる",
+    "processing": "処理中...",
+    "go_to_login": "ログインページへ →",
+    "error_terms": "必須規約に同意してください。",
+    "error_password": "パスワードは8文字以上で特殊文字を含む必要があります。",
+    "error_duplicate_email": "このメールアドレスはすでに登録されています。ログインページへ移動してください。",
+    "error_invalid_email": "無効なメールアドレスです。",
+    "error_generic": "エラーが発生しました。もう一度お試しください。"
   },
   "webview_banner": {
     "title": "アプリ内ブラウザではGoogleログインをご利用いただけません",
@@ -2430,5 +2460,57 @@
     "card_sub": "ドライバーに見せる",
     "card_modal_title": "🗺️ このアドレスまでお願いします",
     "cancel": "キャンセル"
+  },
+  "stores_page": {
+    "section_title": "おすすめ提携サロン",
+    "page_title": "Kello提携ビューティーサロン",
+    "subtitle": "英語対応OK · 写真見積もり · 予約確定可能なK-Beautyサロン",
+    "view_on_map": "🗺️ 地図で見る",
+    "booking_inquiry": "予約のお問い合わせ",
+    "booking_inquiry_short": "予約",
+    "view_all": "すべて見る →",
+    "fetch_error": "提携サロン情報を読み込めませんでした。",
+    "no_category_stores": "このカテゴリーの提携サロンはまだありません。",
+    "default_store_name": "提携店舗",
+    "empty_hair_title": "ヘアサロン準備中",
+    "empty_hair_desc": "外国人対応可能なK-Beautyサロンを選定しています。",
+    "empty_nail_title": "ネイルサロン準備中",
+    "empty_nail_desc": "写真見積もりと予約確定ができる提携サロンを準備中です。",
+    "empty_lash_title": "まつ毛・メイク準備中",
+    "empty_lash_desc": "来店前に相談できる提携サロンを募集しています。"
+  },
+  "explore_map": {
+    "search_placeholder": "宿泊施設、ホテル、地域を検索",
+    "search_btn": "検索",
+    "my_location": "現在地",
+    "beauty_shop": "ビューティー",
+    "restaurant": "グルメ",
+    "accommodation": "宿泊"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "韓国語ビューアーモード",
+    "korean_viewer_hint": "💡 スタッフに見せるには韓国語ビューアーモードをオンにしてください。"
+  },
+  "home_hero": {
+    "wave_hair": "ウェーブヘア",
+    "bob_hair": "ボブカット",
+    "curly_hair": "カーリーヘア",
+    "dandy_hair": "ダンディヘア",
+    "ice_nail": "アイスネイル",
+    "nude_nail": "ヌードネイル",
+    "mint_nail": "ミントネイル",
+    "black_nail": "ブラックネイル",
+    "red_lip": "レッドリップ",
+    "pure_look": "ピュアルック",
+    "idol_look": "アイドルルック",
+    "glow_look": "グロウルック",
+    "natural_lash": "ナチュラルラッシュ",
+    "volume_lash": "ボリュームラッシュ",
+    "curl_lash": "カールラッシュ",
+    "clean_lash": "クリーンラッシュ"
+  },
+  "business_page": {
+    "desc1": "Kelloが厳選したプレミアム提携サロンです。",
+    "desc2": "専門デザイナーによる丁寧なカウンセリングとトレンディなスタイリングをご体験ください。"
   }
 }

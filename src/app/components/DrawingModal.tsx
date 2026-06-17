@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { X, Undo, PenTool, Eraser, Send } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface DrawingModalProps {
   imageUrl: string;
@@ -10,6 +11,7 @@ interface DrawingModalProps {
 }
 
 export default function DrawingModal({ imageUrl, onClose, onSend }: DrawingModalProps) {
+  const { t } = useTranslation('common');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -150,7 +152,7 @@ export default function DrawingModal({ imageUrl, onClose, onSend }: DrawingModal
           </button>
         </div>
         <button onClick={handleSend} style={{ background: '#B8913A', border: 'none', color: '#FFF', cursor: 'pointer', padding: '8px 16px', borderRadius: 20, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
-          <Send size={16} /> 전송
+          <Send size={16} /> {t('common.actions.send')}
         </button>
       </div>
 

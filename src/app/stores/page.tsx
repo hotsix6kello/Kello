@@ -3,28 +3,12 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import type { PublishedStoreItem } from '@/app/api/stores/published/route';
 
 type FilterKey = 'all' | 'hair' | 'nail' | 'eyelash' | 'makeup' | 'esthetic' | 'waxing';
 
-const FILTERS: { key: FilterKey; label: string }[] = [
-  { key: 'all', label: '전체' },
-  { key: 'hair', label: '헤어' },
-  { key: 'nail', label: '네일' },
-  { key: 'eyelash', label: '속눈썹' },
-  { key: 'makeup', label: '메이크업' },
-  { key: 'esthetic', label: '에스테틱' },
-  { key: 'waxing', label: '왁싱' },
-];
-
-const TYPE_LABELS: Record<string, string> = {
-  hair: '헤어',
-  nail: '네일',
-  eyelash: '속눈썹',
-  makeup: '메이크업',
-  esthetic: '에스테틱',
-  waxing: '왁싱',
-};
+const FILTER_KEYS: FilterKey[] = ['all', 'hair', 'nail', 'eyelash', 'makeup', 'esthetic', 'waxing'];
 
 const TYPE_EMOJIS: Record<string, string> = {
   hair: '✂️',
@@ -35,30 +19,24 @@ const TYPE_EMOJIS: Record<string, string> = {
   waxing: '🌸',
 };
 
-const EMPTY_CARDS = [
-  {
-    title: '헤어 제휴샵 준비 중',
-    description: '외국인 고객 응대가 가능한 K-뷰티샵을 선별하고 있어요.',
-    type: 'hair',
-  },
-  {
-    title: '네일 제휴샵 준비 중',
-    description: '사진 견적과 예약 확정이 가능한 제휴샵을 준비 중이에요.',
-    type: 'nail',
-  },
-  {
-    title: '속눈썹·메이크업 준비 중',
-    description: '방문 전 상담이 가능한 제휴샵을 모집하고 있어요.',
-    type: 'makeup',
-  },
-];
-
 export default function StoresPage() {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [stores, setStores] = useState<PublishedStoreItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
   const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
+
+  const FILTERS = FILTER_KEYS.map((key) => ({
+    key,
+    label: key === 'all' ? t('common.categories.all') : t(`categories.${key}.label`, { defaultValue: key }),
+  }));
+
+  const EMPTY_CARDS = [
+    { title: t('stores_page.empty_hair_title'), description: t('stores_page.empty_hair_desc'), type: 'hair' },
+    { title: t('stores_page.empty_nail_title'), description: t('stores_page.empty_nail_desc'), type: 'nail' },
+    { title: t('stores_page.empty_lash_title'), description: t('stores_page.empty_lash_desc'), type: 'makeup' },
+  ];
 
   useEffect(() => {
     fetch('/api/stores/published', { cache: 'no-store' })
@@ -81,7 +59,7 @@ export default function StoresPage() {
   const handleBooking = (store: PublishedStoreItem) => {
     const params = new URLSearchParams({
       booking: 'true',
-      business_name: store.name ?? '제휴 매장',
+      business_name: store.name ?? t('stores_page.default_store_name'),
       store_id: store.id,
       store_source: 'partner',
     });
@@ -114,7 +92,7 @@ export default function StoresPage() {
             fontSize: 18,
             cursor: 'pointer',
           }}
-          aria-label="뒤로"
+          aria-label={t('common.back')}
         >
           ←
         </button>
@@ -127,14 +105,14 @@ export default function StoresPage() {
             letterSpacing: -0.5,
           }}
         >
-          Kello 제휴 뷰티샵
+          {t('stores_page.page_title')}
         </h1>
       </header>
 
       {/* 부제목 + 지도 버튼 */}
       <div style={{ padding: '0 20px 4px' }}>
         <p style={{ margin: '0 0 12px', fontSize: 13, color: '#8a7a6e', lineHeight: 1.5 }}>
-          영어 응대 OK · 사진 견적 · 예약 확정 가능한 K-뷰티샵
+          {t('stores_page.subtitle')}
         </p>
         <button
           type="button"
@@ -153,7 +131,7 @@ export default function StoresPage() {
             cursor: 'pointer',
           }}
         >
-          🗺️ 지도에서 보기
+          {t('stores_page.view_on_map')}
         </button>
       </div>
 
@@ -218,7 +196,7 @@ export default function StoresPage() {
               fontSize: 14,
             }}
           >
-            제휴샵 정보를 불러오지 못했어요.
+            {t('stores_page.fetch_error')}
           </div>
         )}
 
@@ -284,7 +262,7 @@ export default function StoresPage() {
 
         {!loading && !fetchError && stores.length > 0 && filteredStores.length === 0 && (
           <p style={{ padding: '32px 0', textAlign: 'center', color: '#8a7a6e', fontSize: 14 }}>
-            해당 카테고리의 제휴샵이 아직 없어요.
+            {t('stores_page.no_category_stores')}
           </p>
         )}
 
@@ -364,12 +342,12 @@ export default function StoresPage() {
                         whiteSpace: 'nowrap',
                       }}
                     >
-                      {store.name ?? '제휴 매장'}
+                      {store.name ?? t('stores_page.default_store_name')}
                     </strong>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 5 }}>
-                      {store.businessTypes.slice(0, 3).map((t) => (
+                      {store.businessTypes.slice(0, 3).map((btype) => (
                         <span
-                          key={t}
+                          key={btype}
                           style={{
                             fontSize: 10,
                             fontWeight: 700,
@@ -379,7 +357,7 @@ export default function StoresPage() {
                             padding: '2px 6px',
                           }}
                         >
-                          {TYPE_LABELS[t] ?? t}
+                          {t(`categories.${btype}.label`, { defaultValue: btype })}
                         </span>
                       ))}
                     </div>
@@ -417,7 +395,7 @@ export default function StoresPage() {
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    예약 문의
+                    {t('stores_page.booking_inquiry_short')}
                   </button>
                 </article>
               );
