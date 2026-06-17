@@ -87,7 +87,8 @@
       "view_again": "View Again",
       "map": "Map",
       "call_120": "Call 120",
-      "send": "Gửi"
+      "send": "Gửi",
+      "logout": "Đăng xuất"
     },
     "states": {
       "posts": "Posts",
@@ -168,7 +169,9 @@
       "seoul": "首尔",
       "busan": "釜山",
       "jeju": "济州",
-      "gyeongju": "庆州"
+      "gyeongju": "庆州",
+      "daegu": "Daegu",
+      "incheon": "Incheon"
     },
     "categories": {
       "all": "全部",
@@ -1510,7 +1513,12 @@
     },
     "travel_info": {
       "title": "Thông tin du lịch"
-    }
+    },
+    "title": "Kello của tôi",
+    "exchange_rate_base": "Cơ sở KRW",
+    "no_email": "Không có thông tin email",
+    "referral_code_label": "Mã giới thiệu",
+    "price_negotiating": "Đang thương lượng giá"
   },
   "notifications": {
     "title": "Notification Settings",
@@ -2291,7 +2299,30 @@
     "translation_failed_msg": "Dịch thất bại.",
     "login_required_chat": "Đăng nhập để trò chuyện với Kello AI. Bạn có thể tiếp tục ngay sau khi đăng nhập!",
     "select_store": "Chọn cửa hàng để kết nối.",
-    "disconnected": "Phòng chat này đã ngắt kết nối."
+    "disconnected": "Phòng chat này đã ngắt kết nối.",
+    "collapse": "Thu gọn",
+    "expand": "Mở rộng",
+    "manage_phrases": "Quản lý cụm từ nhanh",
+    "delete": "Xóa",
+    "translating": "Đang dịch...",
+    "translation_label": "Dịch",
+    "message_placeholder": "Nhập tin nhắn...",
+    "send_aria": "Gửi",
+    "close_aria": "Đóng",
+    "listen_aria": "Nghe",
+    "edit_message": "Chỉnh sửa tin nhắn",
+    "delete_message": "Xóa tin nhắn",
+    "edit_confirm": "Chỉnh sửa tin nhắn này? Nó sẽ chuyển vào ô nhập.",
+    "delete_confirm": "Xóa vĩnh viễn tin nhắn này?",
+    "new_phrase_placeholder": "Thêm cụm từ nhanh mới...",
+    "default_shop_name": "Nhân viên cửa hàng",
+    "large_view": "Xem lớn",
+    "attach_image": "Đính kèm ảnh",
+    "voice_input": "Nhập giọng nói",
+    "emoji": "Biểu tượng",
+    "edit_action": "Sửa",
+    "delete_action": "Xóa",
+    "beauty_tip": "Gội đầu trước khi làm dịch vụ là phép lịch sự phổ biến ở Hàn Quốc. Hãy nói \"정말 예뻐요！\" với nhân viên nhé!"
   },
   "help_labels": {
     "medical": "Hỗ trợ y tế",
@@ -2311,5 +2342,66 @@
     "region_jeju": "Jeju",
     "no_partners_title": "Salon đối tác sắp ra mắt",
     "no_partners_desc": "Các salon K-Beauty được tuyển chọn kỹ lưỡng sẽ sớm được đăng ký."
+  },
+  "beauty_booking_errors": {
+    "login_required": "Cần đăng nhập. Vui lòng đăng nhập và thử lại.",
+    "save_failed": "Không thể lưu yêu cầu đặt lịch. Vui lòng thử lại sau.",
+    "review_info": "Vui lòng kiểm tra lại thông tin đặt lịch."
+  },
+  "notification_center": {
+    "title": "Trung tâm thông báo"
+  },
+  "partner_signup": {
+    "badge": "🤝 Đăng ký đối tác",
+    "title": "Đăng ký làm đối tác",
+    "subtitle": "Được giới thiệu đến nhiều du khách hơn cùng Kello",
+    "info": "Sau khi nộp đơn, bạn sẽ được đăng ký là đối tác sau khi quản trị viên phê duyệt. Quá trình phê duyệt có thể mất 1–3 ngày làm việc.",
+    "section_basic": "📋 Thông tin cơ bản",
+    "section_contact": "👤 Thông tin liên hệ",
+    "section_desc": "📝 Giới thiệu doanh nghiệp",
+    "company_name": "Tên doanh nghiệp",
+    "company_placeholder": "Ví dụ: Nhà khách Seoul",
+    "business_type": "Loại hình",
+    "business_type_placeholder": "Chọn loại hình kinh doanh",
+    "group_beauty": "💅 Làm đẹp",
+    "opt_hair": "✂️ Tóc",
+    "opt_nail": "💅 Móng",
+    "opt_body": "🛁 Cơ thể",
+    "opt_makeup": "💄 Trang điểm",
+    "group_food": "🍽️ Ẩm thực",
+    "opt_food_general": "🍽️ Thông thường",
+    "opt_food_vegan": "🥗 Thuần chay",
+    "opt_food_halal": "🕌 Halal",
+    "opt_landmark": "🗺️ Địa danh",
+    "opt_other": "📋 Khác",
+    "license_label": "Giấy phép kinh doanh / Tài liệu chứng minh",
+    "license_uploaded": "✅ Tài liệu đã tải lên thành công.",
+    "license_view": "Xem tệp",
+    "license_hint": "Tải lên tệp ảnh (JPG, PNG) hoặc PDF.",
+    "uploading": "Đang tải lên...",
+    "choose_file": "Chọn tệp",
+    "address": "Địa chỉ",
+    "address_placeholder": "Ví dụ: 123 Đường chính, Seoul",
+    "website": "Website",
+    "contact_name": "Tên người liên hệ",
+    "contact_placeholder": "Họ và tên",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "desc_label": "Giới thiệu doanh nghiệp",
+    "desc_placeholder": "Giới thiệu ngắn về dịch vụ và đặc điểm của bạn...",
+    "success_title": "Đã nộp đơn!",
+    "success_body": "Đơn đăng ký đối tác của bạn đã được nhận. Chúng tôi sẽ thông báo cho {email} sau khi xem xét. Quá trình phê duyệt có thể mất 1–3 ngày làm việc.",
+    "pending_notice": "⏳ Đăng nhập đối tác bị hạn chế cho đến khi được phê duyệt.",
+    "go_login": "Đến trang đăng nhập",
+    "already_account": "Đã có tài khoản được phê duyệt?",
+    "login_link": "Đăng nhập",
+    "error_upload": "Lỗi tải tài liệu lên: ",
+    "error_no_license": "Vui lòng tải lên giấy phép kinh doanh hoặc tài liệu chứng minh.",
+    "error_pending": "Email này đã có đơn đang chờ xét duyệt. Vui lòng chờ quản trị viên phê duyệt.",
+    "error_approved": "Email này đã được phê duyệt. Vui lòng sử dụng đăng nhập đối tác.",
+    "error_exists": "Email này đã có lịch sử đăng ký. Liên hệ: admin@kello.app",
+    "error_submit": "Lỗi nộp đơn: ",
+    "back": "← Quay lại",
+    "home": "🏠 Trang chủ"
   }
 }

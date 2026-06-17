@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -299,7 +299,7 @@ export default function StoresPage() {
                     {store.thumbnailUrl ? (
                       <Image
                         src={store.thumbnailUrl}
-                        alt={store.name ?? '제휴 매장'}
+                        alt={store.name ?? t("stores_page.default_store_name")}
                         fill
                         sizes="80px"
                         style={{ objectFit: 'cover' }}
@@ -406,3 +406,4 @@ export default function StoresPage() {
     </main>
   );
 }
+

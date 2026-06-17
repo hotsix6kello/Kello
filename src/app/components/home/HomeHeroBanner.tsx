@@ -53,8 +53,8 @@ const HERO_COPY: Record<string, HeroCopy> = {
     secondaryCta: 'Ask for Translation',
   },
   'ja-JP': {
-    title: '韓国語がわからなくても、<br/><span style="color: #FF3566">Kビューティー予約はKello로</span>',
-    subtitle: 'ヘア・ネイル・スキンケア의 예약부터 번역 상담까지, Kello가 지원합니다.',
+    title: '韓国語がわからなくても、<br/><span style="color: #FF3566">KビューティーはKelloで</span>',
+    subtitle: 'ヘア・ネイル・スキンケアの予約から翻訳サポートまで、Kelloがサポートします。',
     primaryCta: '今すぐ予約',
     secondaryCta: '翻訳を依頼',
   },

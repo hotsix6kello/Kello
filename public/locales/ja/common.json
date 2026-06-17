@@ -359,7 +359,8 @@
       "view_again": "もう一度見る",
       "call_120": "120に電話",
       "back_to_list": "一覧に戻る",
-      "send": "送信"
+      "send": "送信",
+      "logout": "ログアウト"
     },
     "community": {
       "posts": "私の投稿",
@@ -521,7 +522,9 @@
       "seoul": "ソウル",
       "busan": "釜山",
       "jeju": "済州",
-      "gyeongju": "慶州"
+      "gyeongju": "慶州",
+      "daegu": "大邱 (テグ)",
+      "incheon": "仁川 (インチョン)"
     },
     "categories": {
       "all": "すべて",
@@ -2143,7 +2146,12 @@
     },
     "travel_info": {
       "title": "旅行情報"
-    }
+    },
+    "title": "マイKello",
+    "exchange_rate_base": "KRW基準",
+    "no_email": "メール情報なし",
+    "referral_code_label": "紹介コード",
+    "price_negotiating": "価格調整中"
   },
   "notifications": {
     "title": "通知設定",
@@ -2549,7 +2557,30 @@
     "translation_failed_msg": "翻訳に失敗しました。",
     "login_required_chat": "ログイン後にKello AIと会話できます。ログインするとすぐに続けられます！",
     "select_store": "連携するお店を選択してください。",
-    "disconnected": "接続が切れたチャットルームです。"
+    "disconnected": "接続が切れたチャットルームです。",
+    "collapse": "折りたたむ",
+    "expand": "展開する",
+    "manage_phrases": "よく使うフレーズを管理",
+    "delete": "削除",
+    "translating": "翻訳中...",
+    "translation_label": "翻訳",
+    "message_placeholder": "メッセージを入力...",
+    "send_aria": "送信",
+    "close_aria": "閉じる",
+    "listen_aria": "音声を聞く",
+    "edit_message": "メッセージを編集",
+    "delete_message": "メッセージを削除",
+    "edit_confirm": "このメッセージを編集しますか？入力欄に移動します。",
+    "delete_confirm": "このメッセージを完全に削除しますか？",
+    "new_phrase_placeholder": "新しいフレーズを追加...",
+    "default_shop_name": "お店のスタッフ",
+    "large_view": "拡大表示",
+    "attach_image": "画像を添付",
+    "voice_input": "音声入力",
+    "emoji": "絵文字",
+    "edit_action": "編集",
+    "delete_action": "削除",
+    "beauty_tip": "施術前のシャンプーは韓国の基本マナーです。スタッフに「정말 예뻐요！」と伝えてみてください。"
   },
   "help_labels": {
     "medical": "医療サポート",
@@ -2569,5 +2600,66 @@
     "region_jeju": "済州",
     "no_partners_title": "提携ビューティーサロン準備中",
     "no_partners_desc": "厳選されたK-Beautyパートナーサロンが近日中に登録されます。"
+  },
+  "beauty_booking_errors": {
+    "login_required": "ログインが必要です。ログイン後に再度お試しください。",
+    "save_failed": "予約リクエストを保存できませんでした。しばらくしてから再度お試しください。",
+    "review_info": "予約情報を再度確認してください。"
+  },
+  "notification_center": {
+    "title": "通知センター"
+  },
+  "partner_signup": {
+    "badge": "🤝 提携業者申請",
+    "title": "パートナー登録申請",
+    "subtitle": "Kelloで多くの旅行者にご紹介いただけます",
+    "info": "申請書提出後、管理者承認が完了すると提携業者として登録されます。承認まで1〜3営業日かかる場合があります。",
+    "section_basic": "📋 基本情報",
+    "section_contact": "👤 担当者情報",
+    "section_desc": "📝 業者紹介",
+    "company_name": "業者名",
+    "company_placeholder": "例: ソウルゲストハウス",
+    "business_type": "業種",
+    "business_type_placeholder": "業種を選択してください",
+    "group_beauty": "💅 ビューティー",
+    "opt_hair": "✂️ ヘア",
+    "opt_nail": "💅 ネイル",
+    "opt_body": "🛁 ボディ",
+    "opt_makeup": "💄 メイク",
+    "group_food": "🍽️ グルメ",
+    "opt_food_general": "🍽️ 一般",
+    "opt_food_vegan": "🥗 ビーガン",
+    "opt_food_halal": "🕌 ハラール",
+    "opt_landmark": "🗺️ ランドマーク",
+    "opt_other": "📋 その他",
+    "license_label": "事業者登録証 / 証明書類",
+    "license_uploaded": "✅ 書類が正常にアップロードされました。",
+    "license_view": "ファイルを見る",
+    "license_hint": "画像ファイル(JPG, PNG)またはPDFをアップロードしてください。",
+    "uploading": "アップロード中...",
+    "choose_file": "ファイルを選択",
+    "address": "住所",
+    "address_placeholder": "例: 東京都渋谷区...",
+    "website": "ウェブサイト",
+    "contact_name": "担当者名",
+    "contact_placeholder": "山田太郎",
+    "email": "メール",
+    "phone": "電話番号",
+    "desc_label": "業者紹介",
+    "desc_placeholder": "サービスや特徴を簡単にご紹介ください...",
+    "success_title": "申請が完了しました！",
+    "success_body": "の提携業者申請を受け付けました。管理者確認後、{email}に結果をお知らせします。承認まで1〜3営業日かかる場合があります。",
+    "pending_notice": "⏳ 承認前は提携業者ログインが制限されます。",
+    "go_login": "ログインページへ",
+    "already_account": "すでに承認済みアカウントをお持ちですか？",
+    "login_link": "ログイン",
+    "error_upload": "書類アップロード中にエラーが発生しました: ",
+    "error_no_license": "事業者登録証または証明書類をアップロードしてください。",
+    "error_pending": "すでに申請済みのメールアドレスです。管理者の承認をお待ちください。",
+    "error_approved": "すでに承認済みのメールアドレスです。提携業者ログインをご利用ください。",
+    "error_exists": "このメールアドレスで申請履歴があります。お問い合わせ: admin@kello.app",
+    "error_submit": "申請中にエラーが発生しました: ",
+    "back": "← 戻る",
+    "home": "🏠 ホーム"
   }
 }

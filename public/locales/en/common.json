@@ -781,7 +781,8 @@
       "view_again": "View Again",
       "call_120": "Call 120",
       "back_to_list": "Back to List",
-      "send": "Send"
+      "send": "Send",
+      "logout": "Log out"
     },
     "states": {
       "posts": "Posts",
@@ -863,7 +864,9 @@
       "seoul": "Seoul",
       "busan": "Busan",
       "jeju": "Jeju",
-      "gyeongju": "Gyeongju"
+      "gyeongju": "Gyeongju",
+      "daegu": "Daegu",
+      "incheon": "Incheon"
     },
     "categories": {
       "all": "All",
@@ -2286,7 +2289,12 @@
     },
     "travel_info": {
       "title": "Travel info"
-    }
+    },
+    "title": "My Kello",
+    "exchange_rate_base": "KRW base",
+    "no_email": "No email info",
+    "referral_code_label": "Referral Code",
+    "price_negotiating": "Price pending"
   },
   "notifications": {
     "title": "Notification Settings",
@@ -2577,7 +2585,30 @@
     "translation_failed_msg": "Translation failed.",
     "login_required_chat": "Sign in to chat with Kello AI. You can continue right away after signing in!",
     "select_store": "Select a store to connect.",
-    "disconnected": "This chat room is disconnected."
+    "disconnected": "This chat room is disconnected.",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "manage_phrases": "Manage quick phrases",
+    "delete": "Delete",
+    "translating": "Translating...",
+    "translation_label": "Translation",
+    "message_placeholder": "Enter message...",
+    "send_aria": "Send",
+    "close_aria": "Close",
+    "listen_aria": "Listen",
+    "edit_message": "Edit message",
+    "delete_message": "Delete message",
+    "edit_confirm": "Edit this message? It will be moved to the input field.",
+    "delete_confirm": "Permanently delete this message?",
+    "new_phrase_placeholder": "Add a new quick phrase...",
+    "default_shop_name": "Shop Staff",
+    "large_view": "Large View",
+    "attach_image": "Attach image",
+    "voice_input": "Voice input",
+    "emoji": "Emoji",
+    "edit_action": "Edit",
+    "delete_action": "Delete",
+    "beauty_tip": "Shampooing before your service is common courtesy in Korea. Try saying \"Really pretty!\" to the staff."
   },
   "help_labels": {
     "medical": "Medical Help",
@@ -2597,5 +2628,66 @@
     "region_jeju": "Jeju",
     "no_partners_title": "Partner Beauty Shops Coming Soon",
     "no_partners_desc": "Selected K-Beauty partner shops will be listed soon."
+  },
+  "beauty_booking_errors": {
+    "login_required": "Login required. Please log in and try again.",
+    "save_failed": "Could not save the booking request. Please try again shortly.",
+    "review_info": "Please review your booking information."
+  },
+  "notification_center": {
+    "title": "Notifications"
+  },
+  "partner_signup": {
+    "badge": "🤝 Partner Application",
+    "title": "Apply as Partner",
+    "subtitle": "Get featured to more travelers with Kello",
+    "info": "Once submitted, you will be registered as a partner after admin approval. Approval may take 1–3 business days.",
+    "section_basic": "📋 Basic Info",
+    "section_contact": "👤 Contact Info",
+    "section_desc": "📝 About Your Business",
+    "company_name": "Business Name",
+    "company_placeholder": "e.g. Seoul Guest House",
+    "business_type": "Business Type",
+    "business_type_placeholder": "Select a business type",
+    "group_beauty": "💅 Beauty",
+    "opt_hair": "✂️ Hair",
+    "opt_nail": "💅 Nail",
+    "opt_body": "🛁 Body",
+    "opt_makeup": "💄 Makeup",
+    "group_food": "🍽️ Food",
+    "opt_food_general": "🍽️ General",
+    "opt_food_vegan": "🥗 Vegan",
+    "opt_food_halal": "🕌 Halal",
+    "opt_landmark": "🗺️ Landmark",
+    "opt_other": "📋 Other",
+    "license_label": "Business License / Supporting Documents",
+    "license_uploaded": "✅ Document uploaded successfully.",
+    "license_view": "View file",
+    "license_hint": "Upload an image file (JPG, PNG) or PDF.",
+    "uploading": "Uploading...",
+    "choose_file": "Choose file",
+    "address": "Address",
+    "address_placeholder": "e.g. 123 Main Street, Seoul",
+    "website": "Website",
+    "contact_name": "Contact Name",
+    "contact_placeholder": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "desc_label": "About Your Business",
+    "desc_placeholder": "Briefly introduce your services and features...",
+    "success_title": "Application submitted!",
+    "success_body": "Your partner application has been received. We will notify {email} after admin review. Approval may take 1–3 business days.",
+    "pending_notice": "⏳ Partner login is restricted until approval.",
+    "go_login": "Go to Login",
+    "already_account": "Already have an approved account?",
+    "login_link": "Log in",
+    "error_upload": "Error uploading document: ",
+    "error_no_license": "Please upload your business license or supporting document.",
+    "error_pending": "This email already has a pending application. Please wait for admin approval.",
+    "error_approved": "This email is already approved. Please use partner login.",
+    "error_exists": "An application already exists for this email. Contact: admin@kello.app",
+    "error_submit": "Error submitting application: ",
+    "back": "← Back",
+    "home": "🏠 Home"
   }
 }

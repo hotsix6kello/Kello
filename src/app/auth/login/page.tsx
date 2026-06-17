@@ -139,7 +139,7 @@ export default function LoginPage() {
                 throw error;
             }
         } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : "Facebook 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setError(err instanceof Error ? err.message : t('login.error_facebook_login'));
             setFacebookLoading(false);
         }
     };

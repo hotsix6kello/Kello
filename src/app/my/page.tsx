@@ -185,6 +185,7 @@ function ProfileSummaryCard({
     onHelpShortcutClick: (path: string) => void;
     style?: React.CSSProperties;
 }) {
+    const { t } = useTranslation("common");
     const [uploading, setUploading] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -344,16 +345,16 @@ function ProfileSummaryCard({
                     </h1>
                 </div>
                 <div className={styles.profileSubtext} style={{ fontSize: '0.75rem', color: 'var(--gray-500)', wordBreak: 'break-all' }}>
-                    {subtitle || "이메일 정보 없음"}
+                    {subtitle || t('my_page.no_email')}
                 </div>
                 {referralCode && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
                         <span style={{ fontSize: '0.72rem', color: 'var(--gray-500)', fontWeight: 600 }}>
-                            추천코드: <strong style={{ color: 'var(--foreground)' }}>{referralCode}</strong>
+                            {t('my_page.referral_code_label')}: <strong style={{ color: 'var(--foreground)' }}>{referralCode}</strong>
                         </span>
                         <button
                             onClick={handleCopy}
-                            title={copied ? '복사됨' : '복사'}
+                            title={copied ? t('my_page.referral.copied') : t('my_page.referral.copy')}
                             style={{
                                 background: copied ? '#D1FAE5' : 'var(--primary-glow)',
                                 border: '1px solid var(--warm-sand)',
@@ -558,13 +559,7 @@ function SectionCardSkeleton({ rows = 2 }: { rows?: number }) {
     );
 }
 
-const CITY_NAME_KO: Record<string, string> = {
-    Seoul: '서울',
-    Busan: '부산',
-    Jeju: '제주',
-    Daegu: '대구',
-    Incheon: '인천'
-};
+// CITY_NAME_KO는 컴포넌트 내에서 t()로 대체됨
 
 function TravelHelperCard({
     accessToken,
@@ -573,6 +568,7 @@ function TravelHelperCard({
     accessToken: string;
     authReady: boolean;
 }) {
+    const { t } = useTranslation("common");
     const [city, setCity] = useState<CityKey>('Seoul');
     const [weather, setWeather] = useState<{ temp: number; icon: string } | null>(null);
     const [loadingWeather, setLoadingWeather] = useState(true);
@@ -702,7 +698,7 @@ function TravelHelperCard({
     }, [currency]);
 
     const exchangeLabel = (() => {
-        if (currency === 'KRW') return '💱 KRW 기준';
+        if (currency === 'KRW') return `💱 ${t('my_page.exchange_rate_base')}`;
         if (loadingExchangeRate) return `💱 ${currency} ···`;
         if (exchangeKrwAmount !== null) {
             const formatted = exchangeKrwAmount >= 1
@@ -713,7 +709,7 @@ function TravelHelperCard({
         return `💱 ${currency}`;
     })();
 
-    const cityKo = CITY_NAME_KO[city] || city;
+    const cityKo = t(`common.cities.${city.toLowerCase()}`, { defaultValue: city });
     const weatherIcon = loadingWeather ? '🌤' : (weather ? weather.icon : '🌤');
 
     return (
@@ -804,7 +800,7 @@ function MyBookingsSection({
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: -4 }}>
-                <h2 className={styles.sectionTitle} style={{ margin: 0, padding: 0 }}>내 예약</h2>
+                <h2 className={styles.sectionTitle} style={{ margin: 0, padding: 0 }}>{t('my_page.bookings.title')}</h2>
                 <button
                     className={styles.sectionMore}
                     style={{ margin: 0, padding: 0 }}
@@ -854,20 +850,20 @@ function MyBookingsSection({
                                       : b.storeName;
 
                         const STATUS_KO: Record<string, string> = {
-                            requested: '예약 요청',
-                            confirmed: '예약 확정',
-                            completed: '이용 완료',
-                            canceled: '예약 취소',
-                            failed: '예약 실패',
-                            change_requested: '변경 요청',
+                            requested: t('beauty_bookings.status_requested'),
+                            confirmed: t('beauty_bookings.status_confirmed'),
+                            completed: t('beauty_bookings.status_completed'),
+                            canceled: t('beauty_bookings.status_canceled'),
+                            failed: t('beauty_bookings.status_failed'),
+                            change_requested: t('beauty_bookings.status_change_requested'),
                         };
                         const STATUS_DESC_KO: Record<string, string> = {
-                            requested: '파트너 매칭 대기 중',
-                            confirmed: '방문 날짜를 확인해 주세요',
-                            completed: '서비스 이용 완료',
-                            canceled: '예약이 취소되었습니다',
-                            failed: '예약에 실패하였습니다',
-                            change_requested: '변경 요청을 검토 중',
+                            requested: t('beauty_bookings.status_desc_requested'),
+                            confirmed: t('beauty_bookings.status_desc_confirmed'),
+                            completed: t('beauty_bookings.status_desc_completed'),
+                            canceled: t('beauty_bookings.status_desc_canceled'),
+                            failed: t('beauty_bookings.status_desc_failed'),
+                            change_requested: t('beauty_bookings.status_desc_change_requested'),
                         };
 
                         return (
@@ -898,11 +894,11 @@ function MyBookingsSection({
                                 📅 {b.bookingDate} · {b.bookingTime}
                             </div>
                             <div style={{ fontSize: '0.82rem', color: !isMatched ? '#db2777' : '#64748b', fontWeight: !isMatched ? 600 : 400, marginBottom: 4 }}>
-                                {!isMatched ? '파트너 매칭 대기 중' : (STATUS_DESC_KO[b.status] ?? '')}
+                                {!isMatched ? t('my_page.bookings.matching_status') : (STATUS_DESC_KO[b.status] ?? '')}
                             </div>
                             <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
-                                💰 {!isMatched || b.totalPrice === 0 
-                                      ? '가격 협의 중' 
+                                💰 {!isMatched || b.totalPrice === 0
+                                      ? t('my_page.price_negotiating')
                                       : `${b.totalPrice.toLocaleString(i18n.language === 'ko' ? 'ko-KR' : (i18n.language === 'ja' ? 'ja-JP' : 'en-US'))}${t('beauty_explore.label_booking_unit')}`}
                             </div>
                         </div>
@@ -1326,12 +1322,12 @@ function MyPageContent() {
         } as React.CSSProperties}>
             {/* Header with Title and Settings Gear / Logout */}
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, padding: '0 4px' }}>
-                <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--foreground)', margin: 0 }}>나의 Kello</h1>
+                <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--foreground)', margin: 0 }}>{t('my_page.title')}</h1>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <button
                         onClick={() => router.push("/my/settings")}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--foreground)', display: 'flex', alignItems: 'center', padding: 4 }}
-                        aria-label="설정"
+                        aria-label={t('my_page.settings.short')}
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
@@ -1346,7 +1342,7 @@ function MyPageContent() {
                             alignItems: 'center',
                             padding: 4
                         }}
-                        aria-label="로그아웃"
+                        aria-label={t('common.actions.logout')}
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

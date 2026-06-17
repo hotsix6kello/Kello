@@ -365,7 +365,8 @@
       "view_again": "View Again",
       "map": "Map",
       "call_120": "Call 120",
-      "send": "إرسال"
+      "send": "إرسال",
+      "logout": "تسجيل الخروج"
     },
     "states": {
       "posts": "Posts",
@@ -446,7 +447,9 @@
       "seoul": "首尔",
       "busan": "釜山",
       "jeju": "济州",
-      "gyeongju": "庆州"
+      "gyeongju": "庆州",
+      "daegu": "ديغو",
+      "incheon": "إنتشون"
     },
     "categories": {
       "all": "全部",
@@ -679,7 +682,12 @@
     },
     "travel_info": {
       "title": "معلومات السفر"
-    }
+    },
+    "title": "Kello الخاص بي",
+    "exchange_rate_base": "قاعدة KRW",
+    "no_email": "لا توجد معلومات بريد إلكتروني",
+    "referral_code_label": "رمز الإحالة",
+    "price_negotiating": "جارٍ التفاوض على السعر"
   },
   "beauty_bookings": {
     "page_title": "حجوزات التجميل",
@@ -2539,7 +2547,30 @@
     "translation_failed_msg": "فشل الترجمة.",
     "login_required_chat": "سجل الدخول للدردشة مع Kello AI. يمكنك المتابعة فوراً بعد تسجيل الدخول!",
     "select_store": "اختر المتجر للربط.",
-    "disconnected": "غرفة الدردشة هذه غير متصلة."
+    "disconnected": "غرفة الدردشة هذه غير متصلة.",
+    "collapse": "طي",
+    "expand": "توسيع",
+    "manage_phrases": "إدارة العبارات السريعة",
+    "delete": "حذف",
+    "translating": "جارٍ الترجمة...",
+    "translation_label": "ترجمة",
+    "message_placeholder": "أدخل رسالة...",
+    "send_aria": "إرسال",
+    "close_aria": "إغلاق",
+    "listen_aria": "استماع",
+    "edit_message": "تعديل الرسالة",
+    "delete_message": "حذف الرسالة",
+    "edit_confirm": "تعديل هذه الرسالة؟ ستنتقل إلى حقل الإدخال.",
+    "delete_confirm": "حذف هذه الرسالة نهائياً؟",
+    "new_phrase_placeholder": "أضف عبارة سريعة جديدة...",
+    "default_shop_name": "موظف المتجر",
+    "large_view": "عرض كبير",
+    "attach_image": "إرفاق صورة",
+    "voice_input": "إدخال صوتي",
+    "emoji": "رمز تعبيري",
+    "edit_action": "تعديل",
+    "delete_action": "حذف",
+    "beauty_tip": "غسل الشعر قبل الخدمة أدب شائع في كوريا. جربي قول \"정말 예뻐요！\" للموظف."
   },
   "help_labels": {
     "medical": "مساعدة طبية",
@@ -2559,5 +2590,66 @@
     "region_jeju": "جيجو",
     "no_partners_title": "صالونات التجميل الشريكة قريباً",
     "no_partners_desc": "سيتم إدراج صالونات K-Beauty المختارة بعناية قريباً."
+  },
+  "beauty_booking_errors": {
+    "login_required": "يلزم تسجيل الدخول. يرجى تسجيل الدخول والمحاولة مجدداً.",
+    "save_failed": "تعذر حفظ طلب الحجز. يرجى المحاولة بعد قليل.",
+    "review_info": "يرجى مراجعة معلومات الحجز مجدداً."
+  },
+  "notification_center": {
+    "title": "مركز الإشعارات"
+  },
+  "partner_signup": {
+    "badge": "🤝 طلب شراكة",
+    "title": "التقديم كشريك",
+    "subtitle": "تعرّف على المزيد من المسافرين مع Kello",
+    "info": "بعد تقديم الطلب، ستُسجَّل كشريك بعد موافقة المسؤول. قد تستغرق الموافقة 1-3 أيام عمل.",
+    "section_basic": "📋 المعلومات الأساسية",
+    "section_contact": "👤 معلومات الاتصال",
+    "section_desc": "📝 نبذة عن العمل",
+    "company_name": "اسم الشركة",
+    "company_placeholder": "مثال: نزل سيول",
+    "business_type": "نوع النشاط",
+    "business_type_placeholder": "اختر نوع النشاط",
+    "group_beauty": "💅 التجميل",
+    "opt_hair": "✂️ شعر",
+    "opt_nail": "💅 أظافر",
+    "opt_body": "🛁 جسم",
+    "opt_makeup": "💄 مكياج",
+    "group_food": "🍽️ طعام",
+    "opt_food_general": "🍽️ عام",
+    "opt_food_vegan": "🥗 نباتي",
+    "opt_food_halal": "🕌 حلال",
+    "opt_landmark": "🗺️ معلم سياحي",
+    "opt_other": "📋 أخرى",
+    "license_label": "رخصة تجارية / وثائق داعمة",
+    "license_uploaded": "✅ تم رفع الوثيقة بنجاح.",
+    "license_view": "عرض الملف",
+    "license_hint": "ارفع ملف صورة (JPG, PNG) أو PDF.",
+    "uploading": "جارٍ الرفع...",
+    "choose_file": "اختر ملفاً",
+    "address": "العنوان",
+    "address_placeholder": "مثال: شارع رئيسي، سيول",
+    "website": "الموقع الإلكتروني",
+    "contact_name": "اسم جهة الاتصال",
+    "contact_placeholder": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "desc_label": "نبذة عن العمل",
+    "desc_placeholder": "قدّم نبذة مختصرة عن خدماتك ومميزاتك...",
+    "success_title": "تم تقديم الطلب!",
+    "success_body": "تم استلام طلب شراكتك. سنخطر {email} بعد المراجعة. قد تستغرق الموافقة 1-3 أيام عمل.",
+    "pending_notice": "⏳ تسجيل دخول الشريك مقيّد حتى الموافقة.",
+    "go_login": "الذهاب لصفحة تسجيل الدخول",
+    "already_account": "هل لديك حساب معتمد بالفعل؟",
+    "login_link": "تسجيل الدخول",
+    "error_upload": "خطأ في رفع الوثيقة: ",
+    "error_no_license": "يرجى رفع رخصتك التجارية أو وثائق داعمة.",
+    "error_pending": "هذا البريد الإلكتروني لديه طلب معلّق. يرجى انتظار موافقة المسؤول.",
+    "error_approved": "تمت الموافقة على هذا البريد الإلكتروني. يرجى استخدام تسجيل دخول الشريك.",
+    "error_exists": "يوجد سجل طلب لهذا البريد الإلكتروني. تواصل: admin@kello.app",
+    "error_submit": "خطأ في تقديم الطلب: ",
+    "back": "← رجوع",
+    "home": "🏠 الرئيسية"
   }
 }
