@@ -612,7 +612,7 @@ export default function CommunityPage() {
                     <div className={styles.navSummaryBox} style={{ background: '#fff', alignItems: 'center' }}>
                         <div className={styles.summaryText}>{getNavSummary()}</div>
                         <button className={styles.writeBtn} onClick={() => openComposer()}>
-                            ✍ 글쓰기
+                            ✍ {t('community_page.write_post')}
                         </button>
                     </div>
 
@@ -626,7 +626,7 @@ export default function CommunityPage() {
                         <div className={styles.emptyStateContainer}>
                             <div className={styles.emptyIcon}>{searchQuery ? '🔍' : '✍'}</div>
                             <div className={styles.emptyTitle}>
-                                {searchQuery ? t('community_page.states.no_results_title') : '아직 이야기가 없어요'}
+                                {searchQuery ? t('community_page.states.no_results_title') : t('community_page.states.empty_title')}
                             </div>
                             <div className={styles.emptyDesc}>
                                 {searchQuery
@@ -639,7 +639,7 @@ export default function CommunityPage() {
                                     onClick={() => openComposer()}
                                     style={{ background: '#9B4D6D' }}
                                 >
-                                    ✍ 게시글 작성
+                                    ✍ {t('community_page.states.cta_write')}
                                 </button>
                             </div>
                         </div>
