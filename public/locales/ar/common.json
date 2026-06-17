@@ -48,7 +48,13 @@
       "agreement_refund_policy_desc": "لقد قرأت ووافقت على سياسة الإلغاء والاسترداد المذكورة أعلاه.",
       "submitting": "جاري المعالجة...",
       "submit_final": "إرسال الحجز النهائي",
-      "go_back_to_main": "العودة إلى الصفحة الرئيسية"
+      "go_back_to_main": "العودة إلى الصفحة الرئيسية",
+      "submit_blocked_store": "لم يتم اختيار متجر. يرجى اختيار متجر مجدداً والمحاولة.",
+      "submit_blocked_service": "يرجى اختيار قائمة الخدمة والمحاولة مجدداً.",
+      "submit_blocked_schedule": "يرجى التحقق من تاريخ الحجز والمحاولة مجدداً.",
+      "submit_blocked_customer": "يرجى إدخال الاسم وجهة الاتصال والمحاولة مجدداً.",
+      "submit_blocked_agreements": "يرجى الموافقة على الشروط المطلوبة والمحاولة مجدداً.",
+      "submit_blocked_generic": "تعذر إرسال طلب الحجز. يرجى مراجعة معلوماتك والمحاولة مجدداً."
     },
     "interpreter": {
       "eyebrow": "دعم اللغة",
@@ -903,7 +909,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "الحجوزات",
+    "tab_updates": "تحديثات"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -2450,5 +2458,23 @@
   "talk_page": {
     "korean_viewer_mode": "وضع العرض بالكورية",
     "korean_viewer_hint": "💡 فعّل وضع العرض بالكورية لإظهاره للموظفين."
+  },
+  "home_hero": {
+    "wave_hair": "شعر موجي",
+    "bob_hair": "قصة بوب",
+    "curly_hair": "شعر مجعد",
+    "dandy_hair": "شعر دندي",
+    "ice_nail": "أظافر آيس",
+    "nude_nail": "أظافر نود",
+    "mint_nail": "أظافر نعناع",
+    "black_nail": "أظافر سوداء",
+    "red_lip": "شفاه حمراء",
+    "pure_look": "مظهر بريء",
+    "idol_look": "مظهر آيدول",
+    "glow_look": "مظهر متألق",
+    "natural_lash": "رموش طبيعية",
+    "volume_lash": "رموش مكثفة",
+    "curl_lash": "رموش منحنية",
+    "clean_lash": "رموش نظيفة"
   }
 }

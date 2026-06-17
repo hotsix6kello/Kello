@@ -1547,7 +1547,13 @@
       "agreement_refund_policy_desc": "上記のキャンセル・返金ポリシーを確認し、同意します。",
       "submitting": "処理中...",
       "submit_final": "最終予約を申し込む",
-      "go_back_to_main": "メインに戻る"
+      "go_back_to_main": "メインに戻る",
+      "submit_blocked_store": "選択されたお店の情報がありません。お店を再選択してお試しください。",
+      "submit_blocked_service": "メニューを選択してからお試しください。",
+      "submit_blocked_schedule": "予約日時を確認してからお試しください。",
+      "submit_blocked_customer": "お名前と連絡先を入力してからお試しください。",
+      "submit_blocked_agreements": "必須項目に同意してからお試しください。",
+      "submit_blocked_generic": "予約リクエストを送信できません。入力内容を確認してください。"
     },
     "interpreter": {
       "eyebrow": "通訳サポート",
@@ -2199,7 +2205,9 @@
       "alternative_title": "代替スケジュールの通知を受け取る",
       "alternative_desc": "希望時間が満席で店舗から別の時間を提案された際に通知します。"
     },
-    "footer_note": "重要な予約通知は設定にかかわらず送信される場合があります。"
+    "footer_note": "重要な予約通知は設定にかかわらず送信される場合があります。",
+    "tab_booking": "予約",
+    "tab_updates": "お知らせ"
   },
   "error_title": "問題が発生しました。",
   "error_desc": "問題が解決しない場合はサポートにお問い合わせください。",
@@ -2460,5 +2468,23 @@
   "talk_page": {
     "korean_viewer_mode": "韓国語ビューアーモード",
     "korean_viewer_hint": "💡 スタッフに見せるには韓国語ビューアーモードをオンにしてください。"
+  },
+  "home_hero": {
+    "wave_hair": "ウェーブヘア",
+    "bob_hair": "ボブカット",
+    "curly_hair": "カーリーヘア",
+    "dandy_hair": "ダンディヘア",
+    "ice_nail": "アイスネイル",
+    "nude_nail": "ヌードネイル",
+    "mint_nail": "ミントネイル",
+    "black_nail": "ブラックネイル",
+    "red_lip": "レッドリップ",
+    "pure_look": "ピュアルック",
+    "idol_look": "アイドルルック",
+    "glow_look": "グロウルック",
+    "natural_lash": "ナチュラルラッシュ",
+    "volume_lash": "ボリュームラッシュ",
+    "curl_lash": "カールラッシュ",
+    "clean_lash": "クリーンラッシュ"
   }
 }

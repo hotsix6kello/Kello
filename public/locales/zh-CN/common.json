@@ -1127,7 +1127,13 @@
       "agreement_refund_policy_desc": "已阅读并同意上述取消与退款政策。",
       "submitting": "处理中...",
       "submit_final": "提交最终预约",
-      "go_back_to_main": "返回首页"
+      "go_back_to_main": "返回首页",
+      "submit_blocked_store": "未选择门店。请重新选择门店后重试。",
+      "submit_blocked_service": "请选择服务菜单后重试。",
+      "submit_blocked_schedule": "请确认预约日期后重试。",
+      "submit_blocked_customer": "请输入姓名和联系方式后重试。",
+      "submit_blocked_agreements": "请同意必填条款后重试。",
+      "submit_blocked_generic": "无法发送预约请求。请检查您的信息后重试。"
     }
   },
   "interpreter_page": {
@@ -1757,7 +1763,9 @@
       "alternative_title": "接收备用时间表提醒",
       "alternative_desc": "如果请求的时间已满且店铺建议其他时间，我们会通知您。"
     },
-    "footer_note": "重要的预订通知可能会忽略设置发送。"
+    "footer_note": "重要的预订通知可能会忽略设置发送。",
+    "tab_booking": "预约",
+    "tab_updates": "动态"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -2201,5 +2209,23 @@
   "talk_page": {
     "korean_viewer_mode": "韩语查看模式",
     "korean_viewer_hint": "💡 请开启韩语查看模式向店员展示。"
+  },
+  "home_hero": {
+    "wave_hair": "波浪卷发",
+    "bob_hair": "鲍伯短发",
+    "curly_hair": "卷发",
+    "dandy_hair": "绅士发型",
+    "ice_nail": "冰晶美甲",
+    "nude_nail": "裸色美甲",
+    "mint_nail": "薄荷美甲",
+    "black_nail": "黑色美甲",
+    "red_lip": "红唇妆",
+    "pure_look": "清纯妆",
+    "idol_look": "偶像妆",
+    "glow_look": "光泽妆",
+    "natural_lash": "自然款睫毛",
+    "volume_lash": "浓密款睫毛",
+    "curl_lash": "卷翘款睫毛",
+    "clean_lash": "干净款睫毛"
   }
 }

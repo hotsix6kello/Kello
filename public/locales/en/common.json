@@ -98,7 +98,13 @@
       "agreement_refund_policy_desc": "I have reviewed and agree to the cancellation and refund policy above.",
       "submitting": "Processing...",
       "submit_final": "Submit Final Booking Request",
-      "go_back_to_main": "Back to Main"
+      "go_back_to_main": "Back to Main",
+      "submit_blocked_store": "No shop selected. Please select a shop and try again.",
+      "submit_blocked_service": "Please select a service menu and try again.",
+      "submit_blocked_schedule": "Please check the booking date and try again.",
+      "submit_blocked_customer": "Please enter your name and contact info, then try again.",
+      "submit_blocked_agreements": "Please agree to the required terms and try again.",
+      "submit_blocked_generic": "Cannot send booking request. Please check your information and try again."
     }
   },
   "booking_skeleton": {
@@ -2342,7 +2348,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "Bookings",
+    "tab_updates": "Updates"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -2488,5 +2496,23 @@
   "talk_page": {
     "korean_viewer_mode": "Korean Viewer Mode",
     "korean_viewer_hint": "💡 Turn on Korean Viewer Mode to show staff."
+  },
+  "home_hero": {
+    "wave_hair": "Wave Hair",
+    "bob_hair": "Bob Cut",
+    "curly_hair": "Curly Hair",
+    "dandy_hair": "Dandy Hair",
+    "ice_nail": "Ice Nail",
+    "nude_nail": "Nude Nail",
+    "mint_nail": "Mint Nail",
+    "black_nail": "Black Nail",
+    "red_lip": "Red Lip",
+    "pure_look": "Pure Look",
+    "idol_look": "Idol Look",
+    "glow_look": "Glow Look",
+    "natural_lash": "Natural Lash",
+    "volume_lash": "Volume Lash",
+    "curl_lash": "Curl Lash",
+    "clean_lash": "Clean Lash"
   }
 }

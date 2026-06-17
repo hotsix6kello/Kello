@@ -332,7 +332,13 @@
       "agreement_refund_policy_desc": "Đã đọc và đồng ý với chính sách hủy và hoàn tiền nêu trên.",
       "submitting": "Đang xử lý...",
       "submit_final": "Gửi đặt lịch cuối cùng",
-      "go_back_to_main": "Về trang chủ"
+      "go_back_to_main": "Về trang chủ",
+      "submit_blocked_store": "Chưa chọn cửa hàng. Vui lòng chọn lại cửa hàng và thử lại.",
+      "submit_blocked_service": "Vui lòng chọn dịch vụ và thử lại.",
+      "submit_blocked_schedule": "Vui lòng kiểm tra ngày đặt lịch và thử lại.",
+      "submit_blocked_customer": "Vui lòng nhập tên và liên hệ rồi thử lại.",
+      "submit_blocked_agreements": "Vui lòng đồng ý các điều khoản bắt buộc rồi thử lại.",
+      "submit_blocked_generic": "Không thể gửi yêu cầu đặt lịch. Vui lòng kiểm tra thông tin và thử lại."
     }
   },
   "interpreter_ui": {
@@ -1566,7 +1572,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "Đặt lịch",
+    "tab_updates": "Cập nhật"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -2202,5 +2210,23 @@
   "talk_page": {
     "korean_viewer_mode": "Chế độ xem tiếng Hàn",
     "korean_viewer_hint": "💡 Bật Chế độ xem tiếng Hàn để cho nhân viên xem."
+  },
+  "home_hero": {
+    "wave_hair": "Tóc sóng",
+    "bob_hair": "Tóc bob",
+    "curly_hair": "Tóc xoăn",
+    "dandy_hair": "Tóc dandy",
+    "ice_nail": "Nail băng",
+    "nude_nail": "Nail nude",
+    "mint_nail": "Nail bạc hà",
+    "black_nail": "Nail đen",
+    "red_lip": "Môi đỏ",
+    "pure_look": "Vẻ trong sáng",
+    "idol_look": "Vẻ idol",
+    "glow_look": "Vẻ rạng rỡ",
+    "natural_lash": "Mi tự nhiên",
+    "volume_lash": "Mi dày",
+    "curl_lash": "Mi cong",
+    "clean_lash": "Mi gọn"
   }
 }

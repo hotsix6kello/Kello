@@ -304,7 +304,13 @@
       "agreement_refund_policy_desc": "已閱讀並同意上述取消與退款政策。",
       "submitting": "處理中...",
       "submit_final": "提交最終預約",
-      "go_back_to_main": "返回首頁"
+      "go_back_to_main": "返回首頁",
+      "submit_blocked_store": "未選擇門店。請重新選擇門店後重試。",
+      "submit_blocked_service": "請選擇服務菜單後重試。",
+      "submit_blocked_schedule": "請確認預約日期後重試。",
+      "submit_blocked_customer": "請輸入姓名和聯絡方式後重試。",
+      "submit_blocked_agreements": "請同意必填條款後重試。",
+      "submit_blocked_generic": "無法發送預約請求。請檢查您的資訊後重試。"
     }
   },
   "booking_skeleton": {
@@ -1896,7 +1902,9 @@
       "alternative_title": "接收備用行程通知",
       "alternative_desc": "若您請求的時間已滿且店家建議其他時間，將通知您。"
     },
-    "footer_note": "重要的預約公告可能不受設定限制而發送。"
+    "footer_note": "重要的預約公告可能不受設定限制而發送。",
+    "tab_booking": "預約",
+    "tab_updates": "動態"
   },
   "signup": {
     "subtitle": "像當地人一樣體驗韓國",
@@ -2201,5 +2209,23 @@
   "talk_page": {
     "korean_viewer_mode": "韓語查看模式",
     "korean_viewer_hint": "💡 請開啟韓語查看模式向店員展示。"
+  },
+  "home_hero": {
+    "wave_hair": "波浪捲髮",
+    "bob_hair": "鮑伯短髮",
+    "curly_hair": "捲髮",
+    "dandy_hair": "紳士髮型",
+    "ice_nail": "冰晶美甲",
+    "nude_nail": "裸色美甲",
+    "mint_nail": "薄荷美甲",
+    "black_nail": "黑色美甲",
+    "red_lip": "紅唇妝",
+    "pure_look": "清純妝",
+    "idol_look": "偶像妝",
+    "glow_look": "光澤妝",
+    "natural_lash": "自然款睫毛",
+    "volume_lash": "濃密款睫毛",
+    "curl_lash": "捲翹款睫毛",
+    "clean_lash": "乾淨款睫毛"
   }
 }

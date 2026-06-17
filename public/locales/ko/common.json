@@ -307,7 +307,13 @@
       "agreement_refund_policy_desc": "위 취소 및 환불 규정을 확인하였으며, 이에 동의합니다.",
       "submitting": "처리 중...",
       "submit_final": "최종 예약 신청하기",
-      "go_back_to_main": "메인으로 돌아가기"
+      "go_back_to_main": "메인으로 돌아가기",
+      "submit_blocked_store": "선택된 매장 정보가 없어 예약 요청을 보낼 수 없습니다. 매장을 다시 선택한 뒤 시도해 주세요.",
+      "submit_blocked_service": "시술 메뉴를 선택한 뒤 다시 시도해 주세요.",
+      "submit_blocked_schedule": "예약 날짜 정보를 확인한 뒤 다시 시도해 주세요.",
+      "submit_blocked_customer": "이름과 연락처를 모두 입력한 뒤 다시 시도해 주세요.",
+      "submit_blocked_agreements": "필수 약관 동의 후 다시 시도해 주세요.",
+      "submit_blocked_generic": "예약 요청을 시작할 수 없습니다. 입력한 정보를 다시 확인해 주세요."
     }
   },
   "booking_skeleton": {
@@ -1230,7 +1236,9 @@
       "alternative_title": "대체 일정 알림 받기",
       "alternative_desc": "요청한 시간이 마감되고 매장이 다른 일정을 제안하면 알림을 드립니다."
     },
-    "footer_note": "필수 예약 공지는 설정과 관계없이 발송될 수 있습니다."
+    "footer_note": "필수 예약 공지는 설정과 관계없이 발송될 수 있습니다.",
+    "tab_booking": "예약",
+    "tab_updates": "소식"
   },
   "signup": {
     "subtitle": "현지인처럼 한국을 경험하세요",
@@ -1919,5 +1927,23 @@
   "talk_page": {
     "korean_viewer_mode": "한국어 뷰어 모드",
     "korean_viewer_hint": "💡 직원에게 보여주려면 한국어 뷰어모드를 켜세요."
+  },
+  "home_hero": {
+    "wave_hair": "웨이브 헤어",
+    "bob_hair": "단발 헤어",
+    "curly_hair": "컬리 헤어",
+    "dandy_hair": "댄디 헤어",
+    "ice_nail": "아이스 네일",
+    "nude_nail": "누드 네일",
+    "mint_nail": "민트 네일",
+    "black_nail": "블랙 네일",
+    "red_lip": "레드립 형",
+    "pure_look": "청순 형",
+    "idol_look": "아이돌 형",
+    "glow_look": "글로우 형",
+    "natural_lash": "내추럴 형",
+    "volume_lash": "볼륨 형",
+    "curl_lash": "컬링 형",
+    "clean_lash": "클린 형"
   }
 }

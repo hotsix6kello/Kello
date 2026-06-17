@@ -332,7 +332,13 @@
       "agreement_refund_policy_desc": "ได้อ่านและยอมรับนโยบายการยกเลิกและคืนเงินข้างต้นแล้ว",
       "submitting": "กำลังดำเนินการ...",
       "submit_final": "ส่งการจองสุดท้าย",
-      "go_back_to_main": "กลับหน้าหลัก"
+      "go_back_to_main": "กลับหน้าหลัก",
+      "submit_blocked_store": "ไม่มีร้านที่เลือก กรุณาเลือกร้านใหม่แล้วลองอีกครั้ง",
+      "submit_blocked_service": "กรุณาเลือกเมนูบริการแล้วลองอีกครั้ง",
+      "submit_blocked_schedule": "กรุณาตรวจสอบวันที่จองแล้วลองอีกครั้ง",
+      "submit_blocked_customer": "กรุณากรอกชื่อและช่องทางติดต่อแล้วลองอีกครั้ง",
+      "submit_blocked_agreements": "กรุณายินยอมข้อกำหนดที่จำเป็นแล้วลองอีกครั้ง",
+      "submit_blocked_generic": "ไม่สามารถส่งคำขอจองได้ กรุณาตรวจสอบข้อมูลแล้วลองอีกครั้ง"
     }
   },
   "interpreter_ui": {
@@ -1604,7 +1610,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "การจอง",
+    "tab_updates": "อัปเดต"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -2087,5 +2095,23 @@
   "talk_page": {
     "korean_viewer_mode": "โหมดดูภาษาเกาหลี",
     "korean_viewer_hint": "💡 เปิดโหมดดูภาษาเกาหลีเพื่อแสดงให้พนักงานดู"
+  },
+  "home_hero": {
+    "wave_hair": "ทรงเวฟ",
+    "bob_hair": "ทรงบ็อบ",
+    "curly_hair": "ทรงลอน",
+    "dandy_hair": "ทรงแดนดี้",
+    "ice_nail": "เล็บไอซ์",
+    "nude_nail": "เล็บนู้ด",
+    "mint_nail": "เล็บมิ้นต์",
+    "black_nail": "เล็บดำ",
+    "red_lip": "ลิปแดง",
+    "pure_look": "ลุคบริสุทธิ์",
+    "idol_look": "ลุคไอดอล",
+    "glow_look": "ลุคกลอว์",
+    "natural_lash": "ขนตาธรรมชาติ",
+    "volume_lash": "ขนตาวอลลุ่ม",
+    "curl_lash": "ขนตางอน",
+    "clean_lash": "ขนตาเรียบ"
   }
 }
