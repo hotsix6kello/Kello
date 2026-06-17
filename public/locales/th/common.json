@@ -2183,5 +2183,16 @@
     "police": "ความช่วยเหลือตำรวจ",
     "interpreter": "ความช่วยเหลือล่าม",
     "lost": "ความช่วยเหลือของหาย"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "ค้นหาชื่อร้าน หมวดหมู่ หรือคำแนะนำ",
+    "empty_title": "ไม่พบร้าน",
+    "empty_desc": "ลองเปลี่ยนตัวกรองพื้นที่หรือใช้คำค้นหาอื่น",
+    "region_all": "ทั้งหมด",
+    "region_seoul": "โซล",
+    "region_gyeonggi": "คยองกี",
+    "region_incheon": "อินชอน",
+    "region_busan": "ปูซาน",
+    "region_jeju": "เชจู"
   }
 }

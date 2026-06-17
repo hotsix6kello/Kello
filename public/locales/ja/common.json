@@ -2556,5 +2556,16 @@
     "police": "警察サポート",
     "interpreter": "通訳サポート",
     "lost": "遺失物サポート"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "店舗名、業種または紹介文で検索",
+    "empty_title": "店舗が見つかりません。",
+    "empty_desc": "地域フィルターを変更するか、別のキーワードで検索してください。",
+    "region_all": "すべて",
+    "region_seoul": "ソウル",
+    "region_gyeonggi": "京畿道",
+    "region_incheon": "仁川",
+    "region_busan": "釜山",
+    "region_jeju": "済州"
   }
 }

@@ -2015,5 +2015,16 @@
     "police": "경찰 도움",
     "interpreter": "통역 도움",
     "lost": "분실물 도움"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "매장명, 업종 또는 소개글을 검색해보세요",
+    "empty_title": "검색된 매장이 없습니다.",
+    "empty_desc": "지역 필터 혹은 다른 검색어를 입력해보세요.",
+    "region_all": "전체",
+    "region_seoul": "서울",
+    "region_gyeonggi": "경기",
+    "region_incheon": "인천",
+    "region_busan": "부산",
+    "region_jeju": "제주"
   }
 }

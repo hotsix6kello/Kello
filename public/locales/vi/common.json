@@ -2298,5 +2298,16 @@
     "police": "Hỗ trợ cảnh sát",
     "interpreter": "Hỗ trợ phiên dịch",
     "lost": "Hỗ trợ đồ thất lạc"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "Tìm theo tên cửa hàng, danh mục hoặc mô tả",
+    "empty_title": "Không tìm thấy cửa hàng.",
+    "empty_desc": "Thử thay đổi bộ lọc khu vực hoặc từ khóa khác.",
+    "region_all": "Tất cả",
+    "region_seoul": "Seoul",
+    "region_gyeonggi": "Gyeonggi",
+    "region_incheon": "Incheon",
+    "region_busan": "Busan",
+    "region_jeju": "Jeju"
   }
 }

@@ -2584,5 +2584,16 @@
     "police": "Police Help",
     "interpreter": "Interpretation Help",
     "lost": "Lost & Found Help"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "Search by shop name, category or description",
+    "empty_title": "No shops found.",
+    "empty_desc": "Try a different region or search term.",
+    "region_all": "All",
+    "region_seoul": "Seoul",
+    "region_gyeonggi": "Gyeonggi",
+    "region_incheon": "Incheon",
+    "region_busan": "Busan",
+    "region_jeju": "Jeju"
   }
 }

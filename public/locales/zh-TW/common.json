@@ -2297,5 +2297,16 @@
     "police": "警察幫助",
     "interpreter": "翻譯幫助",
     "lost": "失物幫助"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "搜尋店家名稱、類別或簡介",
+    "empty_title": "未找到門店。",
+    "empty_desc": "請嘗試更改地區篩選或使用其他搜尋詞。",
+    "region_all": "全部",
+    "region_seoul": "首爾",
+    "region_gyeonggi": "京畿道",
+    "region_incheon": "仁川",
+    "region_busan": "釜山",
+    "region_jeju": "濟州"
   }
 }

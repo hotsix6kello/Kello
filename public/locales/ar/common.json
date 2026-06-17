@@ -2546,5 +2546,16 @@
     "police": "مساعدة الشرطة",
     "interpreter": "مساعدة الترجمة",
     "lost": "مساعدة المفقودات"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "ابحث باسم المتجر أو الفئة أو الوصف",
+    "empty_title": "لم يتم العثور على متاجر.",
+    "empty_desc": "جرب تغيير فلتر المنطقة أو استخدم كلمة بحث أخرى.",
+    "region_all": "الكل",
+    "region_seoul": "سيول",
+    "region_gyeonggi": "كيونغي",
+    "region_incheon": "إنتشون",
+    "region_busan": "بوسان",
+    "region_jeju": "جيجو"
   }
 }
