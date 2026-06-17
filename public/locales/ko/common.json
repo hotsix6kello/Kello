@@ -2025,6 +2025,8 @@
     "region_gyeonggi": "경기",
     "region_incheon": "인천",
     "region_busan": "부산",
-    "region_jeju": "제주"
+    "region_jeju": "제주",
+    "no_partners_title": "파트너 뷰티샵 준비 중",
+    "no_partners_desc": "곧 엄선된 K-뷰티 파트너샵이 등록될 예정이에요."
   }
 }

@@ -2594,6 +2594,8 @@
     "region_gyeonggi": "Gyeonggi",
     "region_incheon": "Incheon",
     "region_busan": "Busan",
-    "region_jeju": "Jeju"
+    "region_jeju": "Jeju",
+    "no_partners_title": "Partner Beauty Shops Coming Soon",
+    "no_partners_desc": "Selected K-Beauty partner shops will be listed soon."
   }
 }

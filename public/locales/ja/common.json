@@ -2566,6 +2566,8 @@
     "region_gyeonggi": "京畿道",
     "region_incheon": "仁川",
     "region_busan": "釜山",
-    "region_jeju": "済州"
+    "region_jeju": "済州",
+    "no_partners_title": "提携ビューティーサロン準備中",
+    "no_partners_desc": "厳選されたK-Beautyパートナーサロンが近日中に登録されます。"
   }
 }
