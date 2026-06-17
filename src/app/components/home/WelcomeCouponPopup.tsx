@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
 import styles from './WelcomeCouponPopup.module.css';
 
 interface WelcomeCouponPopupProps {
@@ -11,7 +10,6 @@ interface WelcomeCouponPopupProps {
 
 export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps) {
   const router = useRouter();
-  const { t } = useTranslation('common');
 
   const handleSignUp = (e: React.MouseEvent) => {
     e.stopPropagation();
