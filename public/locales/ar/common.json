@@ -2502,5 +2502,49 @@
   "business_page": {
     "desc1": "هذا متجر شريك متميز اختاره Kello بعناية.",
     "desc2": "اختبر الاستشارات الشخصية الدقيقة والتصفيف العصري من مصمميينا المتخصصين."
+  },
+  "login": {
+    "title": "ابدأ مع Kello",
+    "subtitle": "سجل الدخول بـ Google أو البريد الإلكتروني\nلبدء الحجز",
+    "home_shortcut": "العودة للرئيسية",
+    "connecting": "جارٍ الاتصال...",
+    "google_cta": "المتابعة مع Google",
+    "x_cta": "المتابعة مع X",
+    "email_cta": "المتابعة بالبريد الإلكتروني",
+    "sending": "جارٍ إرسال الرابط...",
+    "magic_link_sent": "أرسلنا رابط تسجيل الدخول إلى بريدك الإلكتروني.",
+    "magic_link_desc": "تحقق من صندوق الوارد وانقر على الرابط للمتابعة.",
+    "magic_link_retry": "جرب بريداً آخر",
+    "error_x_login": "تعذر بدء تسجيل الدخول بـ X. يرجى المحاولة مجدداً.",
+    "error_facebook_login": "تعذر بدء تسجيل الدخول بـ Facebook. يرجى المحاولة مجدداً."
+  },
+  "referral_page": {
+    "applied_toast": "تم تطبيق رمز الإحالة! تم إصدار كوبون خصم 5% 🎉",
+    "error_unknown": "حدث خطأ غير معروف.",
+    "error_retry": "حدث خطأ مؤقت. يرجى المحاولة مجدداً."
+  },
+  "talk_ui": {
+    "notification_list": "الإشعارات",
+    "mark_all_read": "تعيين الكل كمقروء",
+    "no_notifications": "لا توجد إشعارات.",
+    "connect_store": "ربط المتجر",
+    "leave_chat": "مغادرة غرفة الدردشة",
+    "notifications_on": "تشغيل الإشعارات",
+    "notifications_off": "إيقاف الإشعارات",
+    "pin_message": "تثبيت في الأعلى",
+    "unpin_message": "إلغاء التثبيت",
+    "new_message": "رسالة جديدة!",
+    "go": "انتقال",
+    "translation_failed": "فشل الترجمة",
+    "translation_failed_msg": "فشل الترجمة.",
+    "login_required_chat": "سجل الدخول للدردشة مع Kello AI. يمكنك المتابعة فوراً بعد تسجيل الدخول!",
+    "select_store": "اختر المتجر للربط.",
+    "disconnected": "غرفة الدردشة هذه غير متصلة."
+  },
+  "help_labels": {
+    "medical": "مساعدة طبية",
+    "police": "مساعدة الشرطة",
+    "interpreter": "مساعدة الترجمة",
+    "lost": "مساعدة المفقودات"
   }
 }

@@ -2254,5 +2254,49 @@
   "business_page": {
     "desc1": "Đây là cửa hàng đối tác cao cấp được Kello tuyển chọn.",
     "desc2": "Trải nghiệm tư vấn tận tâm và tạo kiểu thời thượng từ các chuyên gia."
+  },
+  "login": {
+    "title": "Bắt đầu với Kello",
+    "subtitle": "Đăng nhập bằng Google hoặc email\nđể bắt đầu đặt lịch",
+    "home_shortcut": "Về trang chủ",
+    "connecting": "Đang kết nối...",
+    "google_cta": "Tiếp tục với Google",
+    "x_cta": "Tiếp tục với X",
+    "email_cta": "Tiếp tục với Email",
+    "sending": "Đang gửi liên kết...",
+    "magic_link_sent": "Chúng tôi đã gửi liên kết đăng nhập đến email của bạn.",
+    "magic_link_desc": "Kiểm tra hộp thư và nhấp vào liên kết để tiếp tục.",
+    "magic_link_retry": "Thử email khác",
+    "error_x_login": "Không thể bắt đầu đăng nhập X. Vui lòng thử lại.",
+    "error_facebook_login": "Không thể bắt đầu đăng nhập Facebook. Vui lòng thử lại."
+  },
+  "referral_page": {
+    "applied_toast": "Mã giới thiệu đã được áp dụng! Phiếu giảm giá 5% đã được phát 🎉",
+    "error_unknown": "Đã xảy ra lỗi không xác định.",
+    "error_retry": "Đã xảy ra lỗi tạm thời. Vui lòng thử lại."
+  },
+  "talk_ui": {
+    "notification_list": "Thông báo",
+    "mark_all_read": "Đánh dấu tất cả đã đọc",
+    "no_notifications": "Không có thông báo.",
+    "connect_store": "Kết nối cửa hàng",
+    "leave_chat": "Rời phòng chat",
+    "notifications_on": "Bật thông báo",
+    "notifications_off": "Tắt thông báo",
+    "pin_message": "Ghim tin nhắn",
+    "unpin_message": "Bỏ ghim",
+    "new_message": "Tin nhắn mới!",
+    "go": "Đến",
+    "translation_failed": "Dịch thất bại",
+    "translation_failed_msg": "Dịch thất bại.",
+    "login_required_chat": "Đăng nhập để trò chuyện với Kello AI. Bạn có thể tiếp tục ngay sau khi đăng nhập!",
+    "select_store": "Chọn cửa hàng để kết nối.",
+    "disconnected": "Phòng chat này đã ngắt kết nối."
+  },
+  "help_labels": {
+    "medical": "Hỗ trợ y tế",
+    "police": "Hỗ trợ cảnh sát",
+    "interpreter": "Hỗ trợ phiên dịch",
+    "lost": "Hỗ trợ đồ thất lạc"
   }
 }

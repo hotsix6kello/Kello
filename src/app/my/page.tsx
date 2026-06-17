@@ -71,21 +71,21 @@ const HELP_CENTER_SHORTCUTS = [
         path: "/help/medical",
         color: "#FEE2E2",
         borderColor: "#FCA5A5",
-        label: "의료 도움",
+        labelKey: "help_labels.medical",
     },
     {
         icon: <Shield size={14} color="#3B82F6" strokeWidth={2.5} />,
         path: "/help/police",
         color: "#EFF6FF",
         borderColor: "#BFDBFE",
-        label: "경찰 도움",
+        labelKey: "help_labels.police",
     },
     {
         icon: <Languages size={14} color="#10B981" strokeWidth={2.5} />,
         path: "/help/interpretation",
         color: "#ECFDF5",
         borderColor: "#A7F3D0",
-        label: "통역 도움",
+        labelKey: "help_labels.interpreter",
     },
     {
         icon: (
@@ -97,7 +97,7 @@ const HELP_CENTER_SHORTCUTS = [
         path: "/help/lost",
         color: "#FEF9C3",
         borderColor: "#FEF08A",
-        label: "분실물 도움",
+        labelKey: "help_labels.lost",
     },
 ];
 
@@ -122,6 +122,7 @@ function pickString(...values: unknown[]): string {
 }
 
 function HelpCenterShortcutGrid({ onNavigate }: { onNavigate: (path: string) => void }) {
+    const { t } = useTranslation("common");
     return (
         <div
             style={{
@@ -139,8 +140,8 @@ function HelpCenterShortcutGrid({ onNavigate }: { onNavigate: (path: string) => 
                         e.stopPropagation();
                         onNavigate(item.path);
                     }}
-                    aria-label={item.label}
-                    title={item.label}
+                    aria-label={t(item.labelKey)}
+                    title={t(item.labelKey)}
                     style={{
                         width: 32,
                         height: 26,

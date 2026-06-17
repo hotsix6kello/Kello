@@ -2540,5 +2540,49 @@
   "business_page": {
     "desc1": "A premium partner shop handpicked by Kello.",
     "desc2": "Experience personalized consultations and trendy styling from our expert designers."
+  },
+  "login": {
+    "title": "Get Started with Kello",
+    "subtitle": "Sign in with Google or email\nto start booking",
+    "home_shortcut": "Back to Home",
+    "connecting": "Connecting...",
+    "google_cta": "Continue with Google",
+    "x_cta": "Continue with X",
+    "email_cta": "Continue with Email",
+    "sending": "Sending link...",
+    "magic_link_sent": "We sent a login link to your email.",
+    "magic_link_desc": "Check your inbox and click the link to continue.",
+    "magic_link_retry": "Try a different email",
+    "error_x_login": "Could not start X login. Please try again.",
+    "error_facebook_login": "Could not start Facebook login. Please try again."
+  },
+  "referral_page": {
+    "applied_toast": "Referral code applied! A 5% coupon has been issued 🎉",
+    "error_unknown": "An unknown error occurred.",
+    "error_retry": "A temporary error occurred. Please try again."
+  },
+  "talk_ui": {
+    "notification_list": "Notifications",
+    "mark_all_read": "Mark all read",
+    "no_notifications": "No notifications.",
+    "connect_store": "Connect Store",
+    "leave_chat": "Leave Chat",
+    "notifications_on": "Turn on alerts",
+    "notifications_off": "Turn off alerts",
+    "pin_message": "Pin to top",
+    "unpin_message": "Unpin",
+    "new_message": "New message!",
+    "go": "Go",
+    "translation_failed": "Translation failed",
+    "translation_failed_msg": "Translation failed.",
+    "login_required_chat": "Sign in to chat with Kello AI. You can continue right away after signing in!",
+    "select_store": "Select a store to connect.",
+    "disconnected": "This chat room is disconnected."
+  },
+  "help_labels": {
+    "medical": "Medical Help",
+    "police": "Police Help",
+    "interpreter": "Interpretation Help",
+    "lost": "Lost & Found Help"
   }
 }

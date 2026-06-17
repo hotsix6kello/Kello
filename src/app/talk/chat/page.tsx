@@ -584,9 +584,9 @@ export default function TalkChatPage() {
           body: JSON.stringify({ message: text, sourceLocale: 'auto', targetLocale: activeTargetLocale }),
         });
         const data = await res.json();
-        translatedText = data.translatedText ?? '번역 실패';
+        translatedText = data.translatedText ?? t('talk_ui.translation_failed');
 
-        if (translatedText !== '번역 실패') {
+        if (data.translatedText) {
           const cacheKey = `kello_cache_${sourceLocale}_${activeTargetLocale}_${text}`;
           localStorage.setItem(cacheKey, translatedText);
         }
@@ -600,7 +600,7 @@ export default function TalkChatPage() {
         console.error(err);
         setMessages((prev) =>
           prev.map((m) =>
-            m.id === id ? { ...m, translated: '번역에 실패했습니다.', isTranslating: false } : m
+            m.id === id ? { ...m, translated: t('talk_ui.translation_failed_msg'), isTranslating: false } : m
           )
         );
       }
@@ -615,7 +615,7 @@ export default function TalkChatPage() {
             id: `kello-login-${Date.now()}`,
             sender: 'system',
             original: sourceLocale === 'ko'
-              ? '로그인 후에 Kello AI와 대화할 수 있어요. 로그인하면 바로 이어서 대화할 수 있어요!'
+              ? t('talk_ui.login_required_chat')
               : 'Please log in to chat with Kello AI. Once you log in, you can continue right where you left off!',
             timestamp: new Date(),
             read: true
@@ -712,7 +712,7 @@ export default function TalkChatPage() {
       console.error(err);
       setMessages(prev => prev.map(m => m.id === msgId ? {
         ...m,
-        translated: '번역에 실패했습니다.',
+        translated: t('talk_ui.translation_failed_msg'),
         isTranslating: false
       } : m));
     }
@@ -860,7 +860,7 @@ export default function TalkChatPage() {
                     boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
                     transition: 'transform 0.15s ease',
                   }}
-                  title="업체 연결하기"
+                  title={t('talk_ui.connect_store')}
                 >
                   <Link2 size={16} />
                 </button>
@@ -953,7 +953,7 @@ export default function TalkChatPage() {
                     padding: '8px 0',
                   }}>
                     <div style={{ padding: '8px 16px', borderBottom: `1px solid ${COLORS.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: COLORS.textMain }}>알림 목록</span>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: COLORS.textMain }}>{t('talk_ui.notification_list')}</span>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -961,11 +961,11 @@ export default function TalkChatPage() {
                         }}
                         style={{ background: 'none', border: 'none', fontSize: '0.7rem', color: COLORS.primary, cursor: 'pointer', fontWeight: 600 }}
                       >
-                        모두 읽음
+                        {t('talk_ui.mark_all_read')}
                       </button>
                     </div>
                     {notifications.length === 0 ? (
-                      <div style={{ padding: '24px 16px', textAlign: 'center', fontSize: '0.75rem', color: COLORS.textSub }}>알림이 없습니다.</div>
+                      <div style={{ padding: '24px 16px', textAlign: 'center', fontSize: '0.75rem', color: COLORS.textSub }}>{t('talk_ui.no_notifications')}</div>
                     ) : (
                       notifications.map((noti) => (
                         <div
@@ -1046,7 +1046,7 @@ export default function TalkChatPage() {
           `}</style>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, overflow: 'hidden' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.primary }}>새 메시지 도착!</span>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.primary }}>{t('talk_ui.new_message')}</span>
               <span style={{ fontSize: '0.8rem', fontWeight: 700, color: COLORS.textMain, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {incomingAlert.shopName.split(' ')[0]}
               </span>
@@ -1056,7 +1056,7 @@ export default function TalkChatPage() {
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <span style={{ fontSize: '0.7rem', color: COLORS.primary, fontWeight: 700 }}>이동 &gt;</span>
+            <span style={{ fontSize: '0.7rem', color: COLORS.primary, fontWeight: 700 }}>{t('talk_ui.go')} &gt;</span>
             <button
               type="button"
               onClick={(e) => {
@@ -1831,10 +1831,10 @@ export default function TalkChatPage() {
             maxHeight: '80vh',
           }}>
             <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 700, color: COLORS.textMain, textAlign: 'center' }}>
-              업체 연결하기
+              {t('talk_ui.connect_store')}
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: COLORS.textSub, textAlign: 'center', lineHeight: 1.4 }}>
-              연결할 업체를 선택해 주세요.
+              {t('talk_ui.select_store')}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'auto', flex: 1, paddingRight: 4 }}>
@@ -1856,7 +1856,7 @@ export default function TalkChatPage() {
 
                 return sortedShops.map(shop => {
                   let unread = 0;
-                  let lastMsg = hiddenShops.includes(shop.id) ? '연결이 끊긴 대화방입니다.' : '대화 내역이 없습니다.';
+                  let lastMsg = hiddenShops.includes(shop.id) ? t('talk_ui.disconnected') : t('common.states.not_connected_yet');
                   let lastTime = '';
                   try {
                     const stored = localStorage.getItem(`kello_chats_${shop.id}`);
@@ -2015,7 +2015,7 @@ export default function TalkChatPage() {
             onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
           >
             <Pin size={14} />
-            {pinnedShops.includes(shopContextMenu.shopId) ? '고정 해제' : '상단 고정핀'}
+            {pinnedShops.includes(shopContextMenu.shopId) ? t('talk_ui.unpin_message') : t('talk_ui.pin_message')}
           </button>
           <button
             onClick={() => { toggleShopMute(shopContextMenu.shopId); setShopContextMenu(null); }}
@@ -2024,7 +2024,7 @@ export default function TalkChatPage() {
             onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
           >
             <BellOff size={14} />
-            {mutedShops.includes(shopContextMenu.shopId) ? '알림 켜기' : '알림 끄기'}
+            {mutedShops.includes(shopContextMenu.shopId) ? t('talk_ui.notifications_on') : t('talk_ui.notifications_off')}
           </button>
           <button
             onClick={() => { leaveShopRoom(shopContextMenu.shopId); setShopContextMenu(null); }}
@@ -2033,7 +2033,7 @@ export default function TalkChatPage() {
             onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
           >
             <LogOut size={14} />
-            채팅방 나가기
+            {t('talk_ui.leave_chat')}
           </button>
         </div>
       )}

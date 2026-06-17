@@ -2512,5 +2512,49 @@
   "business_page": {
     "desc1": "Kelloが厳選したプレミアム提携サロンです。",
     "desc2": "専門デザイナーによる丁寧なカウンセリングとトレンディなスタイリングをご体験ください。"
+  },
+  "login": {
+    "title": "Kelloを始める",
+    "subtitle": "GoogleまたはEメールで簡単にログインして\n予約を始めましょう",
+    "home_shortcut": "ホームへ",
+    "connecting": "接続中...",
+    "google_cta": "Googleで続ける",
+    "x_cta": "Xで続ける",
+    "email_cta": "Eメールで続ける",
+    "sending": "リンク送信中...",
+    "magic_link_sent": "入力したEメールにログインリンクを送りました。",
+    "magic_link_desc": "メールボックスを確認してリンクをクリックしてください。",
+    "magic_link_retry": "別のEメールで再試行",
+    "error_x_login": "Xログインを開始できませんでした。再度お試しください。",
+    "error_facebook_login": "Facebookログインを開始できませんでした。再度お試しください。"
+  },
+  "referral_page": {
+    "applied_toast": "紹介コードが適用されました！5%クーポンが発行されました 🎉",
+    "error_unknown": "不明なエラーが発生しました。",
+    "error_retry": "一時的なエラーが発生しました。再度お試しください。"
+  },
+  "talk_ui": {
+    "notification_list": "通知一覧",
+    "mark_all_read": "すべて既読",
+    "no_notifications": "通知がありません。",
+    "connect_store": "お店と連携",
+    "leave_chat": "チャットを退出",
+    "notifications_on": "通知オン",
+    "notifications_off": "通知オフ",
+    "pin_message": "ピン留め",
+    "unpin_message": "ピン解除",
+    "new_message": "新着メッセージ！",
+    "go": "移動",
+    "translation_failed": "翻訳失敗",
+    "translation_failed_msg": "翻訳に失敗しました。",
+    "login_required_chat": "ログイン後にKello AIと会話できます。ログインするとすぐに続けられます！",
+    "select_store": "連携するお店を選択してください。",
+    "disconnected": "接続が切れたチャットルームです。"
+  },
+  "help_labels": {
+    "medical": "医療サポート",
+    "police": "警察サポート",
+    "interpreter": "通訳サポート",
+    "lost": "遺失物サポート"
   }
 }

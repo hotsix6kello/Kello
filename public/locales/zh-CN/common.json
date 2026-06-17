@@ -2253,5 +2253,49 @@
   "business_page": {
     "desc1": "这是Kello精心挑选的高端合作门店。",
     "desc2": "体验专业设计师贴心咨询与时尚造型服务。"
+  },
+  "login": {
+    "title": "开始使用Kello",
+    "subtitle": "使用Google或邮箱轻松登录\n开始预约",
+    "home_shortcut": "返回首页",
+    "connecting": "连接中...",
+    "google_cta": "使用Google继续",
+    "x_cta": "使用X继续",
+    "email_cta": "使用邮箱继续",
+    "sending": "发送链接中...",
+    "magic_link_sent": "已将登录链接发送至您的邮箱。",
+    "magic_link_desc": "请查看邮箱并点击链接继续。",
+    "magic_link_retry": "换其他邮箱重试",
+    "error_x_login": "无法启动X登录，请重试。",
+    "error_facebook_login": "无法启动Facebook登录，请重试。"
+  },
+  "referral_page": {
+    "applied_toast": "推荐码已应用！已发放5%优惠券 🎉",
+    "error_unknown": "发生未知错误。",
+    "error_retry": "发生临时错误，请重试。"
+  },
+  "talk_ui": {
+    "notification_list": "通知列表",
+    "mark_all_read": "全部已读",
+    "no_notifications": "暂无通知。",
+    "connect_store": "连接门店",
+    "leave_chat": "退出聊天室",
+    "notifications_on": "开启通知",
+    "notifications_off": "关闭通知",
+    "pin_message": "置顶",
+    "unpin_message": "取消置顶",
+    "new_message": "新消息！",
+    "go": "前往",
+    "translation_failed": "翻译失败",
+    "translation_failed_msg": "翻译失败。",
+    "login_required_chat": "登录后可与Kello AI对话，登录后即可继续！",
+    "select_store": "请选择要连接的门店。",
+    "disconnected": "该聊天室已断开连接。"
+  },
+  "help_labels": {
+    "medical": "医疗帮助",
+    "police": "警察帮助",
+    "interpreter": "翻译帮助",
+    "lost": "失物帮助"
   }
 }
