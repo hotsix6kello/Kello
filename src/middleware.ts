@@ -45,7 +45,8 @@ function getResolvedRequestLocale(request: NextRequest) {
     return { locale: browserResolved, shouldRefreshCookie: true };
   }
 
-  return { locale: DEFAULT_CLIENT_LOCALE, shouldRefreshCookie: true };
+  // 매핑되지 않은 국가/언어는 영어로 fallback (DEFAULT_CLIENT_LOCALE = ko는 한국어 사용자 전용)
+  return { locale: "en", shouldRefreshCookie: true };
 }
 
 export function middleware(request: NextRequest) {
