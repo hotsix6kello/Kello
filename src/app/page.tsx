@@ -266,9 +266,10 @@ export default function HomePage() {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCategorySelect = (categoryId: string) => {
-    router.push('/booking/aesthetic');
+    const nextCategory = categoryId as BeautyCategoryId;
+    setSelectedCategory(nextCategory);
+    setIsBookingOpen(true);
   };
 
 
