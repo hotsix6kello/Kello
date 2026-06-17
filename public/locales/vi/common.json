@@ -2172,5 +2172,35 @@
         }
       }
     }
+  },
+  "stores_page": {
+    "section_title": "Salon đối tác được đề xuất",
+    "page_title": "Salon làm đẹp đối tác Kello",
+    "subtitle": "OK tiếng Anh · Báo giá qua ảnh · Xác nhận đặt lịch K-Beauty",
+    "view_on_map": "🗺️ Xem trên bản đồ",
+    "booking_inquiry": "Hỏi về đặt lịch",
+    "booking_inquiry_short": "Đặt lịch",
+    "view_all": "Xem tất cả →",
+    "fetch_error": "Không thể tải thông tin salon đối tác.",
+    "no_category_stores": "Chưa có salon đối tác trong danh mục này.",
+    "default_store_name": "Cửa hàng đối tác",
+    "empty_hair_title": "Salon tóc đối tác sắp ra mắt",
+    "empty_hair_desc": "Chúng tôi đang tuyển chọn các salon K-Beauty có nhân viên biết tiếng Anh.",
+    "empty_nail_title": "Salon nail đối tác sắp ra mắt",
+    "empty_nail_desc": "Chúng tôi đang chuẩn bị các salon có thể báo giá qua ảnh và xác nhận đặt lịch.",
+    "empty_lash_title": "Mi & trang điểm sắp ra mắt",
+    "empty_lash_desc": "Chúng tôi đang tuyển các salon đối tác cho phép tư vấn trước khi đến."
+  },
+  "explore_map": {
+    "search_placeholder": "Tìm kiếm chỗ ở, khách sạn, khu vực",
+    "search_btn": "Tìm kiếm",
+    "my_location": "Vị trí của tôi",
+    "beauty_shop": "Salon làm đẹp",
+    "restaurant": "Nhà hàng",
+    "accommodation": "Lưu trú"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "Chế độ xem tiếng Hàn",
+    "korean_viewer_hint": "💡 Bật Chế độ xem tiếng Hàn để cho nhân viên xem."
   }
 }

@@ -1889,5 +1889,35 @@
     "translated_status": "번역됨",
     "source_only_status": "원문만",
     "voice_too_short_error": "조금 더 길게 말씀해 주세요."
+  },
+  "stores_page": {
+    "section_title": "추천 제휴샵",
+    "page_title": "Kello 제휴 뷰티샵",
+    "subtitle": "영어 응대 OK · 사진 견적 · 예약 확정 가능한 K-뷰티샵",
+    "view_on_map": "🗺️ 지도에서 보기",
+    "booking_inquiry": "예약 문의하기",
+    "booking_inquiry_short": "예약 문의",
+    "view_all": "전체 보기 →",
+    "fetch_error": "제휴샵 정보를 불러오지 못했어요.",
+    "no_category_stores": "해당 카테고리의 제휴샵이 아직 없어요.",
+    "default_store_name": "제휴 매장",
+    "empty_hair_title": "헤어 제휴샵 준비 중",
+    "empty_hair_desc": "외국인 고객 응대가 가능한 K-뷰티샵을 선별하고 있어요.",
+    "empty_nail_title": "네일 제휴샵 준비 중",
+    "empty_nail_desc": "사진 견적과 예약 확정이 가능한 제휴샵을 준비 중이에요.",
+    "empty_lash_title": "속눈썹·메이크업 준비 중",
+    "empty_lash_desc": "방문 전 상담이 가능한 제휴샵을 모집하고 있어요."
+  },
+  "explore_map": {
+    "search_placeholder": "숙소명, 호텔, 지역을 검색해보세요",
+    "search_btn": "검색",
+    "my_location": "내 위치",
+    "beauty_shop": "뷰티샵",
+    "restaurant": "맛집",
+    "accommodation": "숙소"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "한국어 뷰어 모드",
+    "korean_viewer_hint": "💡 직원에게 보여주려면 한국어 뷰어모드를 켜세요."
   }
 }

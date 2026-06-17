@@ -2171,5 +2171,35 @@
   "common_loading": "載入中...",
   "error_title": "發生錯誤。",
   "error_desc": "如果問題持續，請聯絡客服。",
-  "error_retry": "重試"
+  "error_retry": "重試",
+  "stores_page": {
+    "section_title": "推薦合作門店",
+    "page_title": "Kello合作美容門店",
+    "subtitle": "英語OK · 照片報價 · 可確認預約的K-Beauty門店",
+    "view_on_map": "🗺️ 在地圖上查看",
+    "booking_inquiry": "預約諮詢",
+    "booking_inquiry_short": "預約",
+    "view_all": "查看全部 →",
+    "fetch_error": "無法載入合作門店資訊。",
+    "no_category_stores": "該分類暫無合作門店。",
+    "default_store_name": "合作門店",
+    "empty_hair_title": "美髮合作門店準備中",
+    "empty_hair_desc": "正在篩選可接待外國顧客的K-Beauty門店。",
+    "empty_nail_title": "美甲合作門店準備中",
+    "empty_nail_desc": "正在準備提供照片報價和預約確認的合作門店。",
+    "empty_lash_title": "睫毛·彩妝準備中",
+    "empty_lash_desc": "正在招募可在到店前進行諮詢的合作門店。"
+  },
+  "explore_map": {
+    "search_placeholder": "搜尋住宿、飯店、地區",
+    "search_btn": "搜尋",
+    "my_location": "我的位置",
+    "beauty_shop": "美容店",
+    "restaurant": "餐廳",
+    "accommodation": "住宿"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "韓語查看模式",
+    "korean_viewer_hint": "💡 請開啟韓語查看模式向店員展示。"
+  }
 }

@@ -2171,5 +2171,35 @@
     "staff_language": "员工语言",
     "session": "会话",
     "expires": "到期"
+  },
+  "stores_page": {
+    "section_title": "推荐合作门店",
+    "page_title": "Kello合作美容门店",
+    "subtitle": "英语OK · 照片报价 · 可确认预约的K-Beauty门店",
+    "view_on_map": "🗺️ 在地图上查看",
+    "booking_inquiry": "预约咨询",
+    "booking_inquiry_short": "预约",
+    "view_all": "查看全部 →",
+    "fetch_error": "无法加载合作门店信息。",
+    "no_category_stores": "该分类暂无合作门店。",
+    "default_store_name": "合作门店",
+    "empty_hair_title": "美发合作门店准备中",
+    "empty_hair_desc": "正在筛选可接待外国顾客的K-Beauty门店。",
+    "empty_nail_title": "美甲合作门店准备中",
+    "empty_nail_desc": "正在准备提供照片报价和预约确认的合作门店。",
+    "empty_lash_title": "睫毛·化妆准备中",
+    "empty_lash_desc": "正在招募可在到店前进行咨询的合作门店。"
+  },
+  "explore_map": {
+    "search_placeholder": "搜索住宿、酒店、地区",
+    "search_btn": "搜索",
+    "my_location": "我的位置",
+    "beauty_shop": "美容店",
+    "restaurant": "餐厅",
+    "accommodation": "住宿"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "韩语查看模式",
+    "korean_viewer_hint": "💡 请开启韩语查看模式向店员展示。"
   }
 }

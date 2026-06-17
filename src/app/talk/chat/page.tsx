@@ -3,6 +3,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { ChevronLeft, Mic, Smile, Send, Pencil, Trash2, Settings, X, Link2, Pin, BellOff, LogOut, Bell, Plus, Volume2, Maximize2 } from 'lucide-react';
 import DrawingModal from '@/app/components/DrawingModal';
 import { supabase } from '@/lib/supabaseClient';
@@ -126,6 +127,7 @@ const QUICK_CATEGORIES = [
 
 export default function TalkChatPage() {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const searchParams = useSearchParams();
   const shopIdFromUrl = searchParams.get('shopId') || 'jenny-hair';
   const [shopId, setShopId] = useState('jenny-hair');
@@ -808,7 +810,7 @@ export default function TalkChatPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           {/* Show to Staff Toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fff', padding: '4px 8px', borderRadius: 20, border: `1px solid ${COLORS.border}`, boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.textMain }}>한국어 뷰어 모드</span>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: COLORS.textMain }}>{t('talk_page.korean_viewer_mode')}</span>
             <button
               type="button"
               onClick={() => setIsStaffShowMode(!isStaffShowMode)}
@@ -1114,7 +1116,7 @@ export default function TalkChatPage() {
               whiteSpace: 'nowrap',
             }}
           >
-            💡 직원에게 보여주려면 <b>한국어 뷰어모드</b>를 켜세요.
+            {t('talk_page.korean_viewer_hint')}
           </div>
         </div>
 

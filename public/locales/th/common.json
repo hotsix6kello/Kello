@@ -2057,5 +2057,35 @@
       "booking_ref": "รหัสการจอง: {{ref}}",
       "departure_warning": "⚠️ {{title}} เริ่มใน {{mins}} นาที — กรุณาออกเดินทางตอนนี้!"
     }
+  },
+  "stores_page": {
+    "section_title": "ร้านพาร์ทเนอร์แนะนำ",
+    "page_title": "ร้านความงามพาร์ทเนอร์ Kello",
+    "subtitle": "ตอบภาษาอังกฤษได้ · ใบเสนอราคาผ่านรูปภาพ · ยืนยันการจองได้",
+    "view_on_map": "🗺️ ดูบนแผนที่",
+    "booking_inquiry": "สอบถามการจอง",
+    "booking_inquiry_short": "จอง",
+    "view_all": "ดูทั้งหมด →",
+    "fetch_error": "ไม่สามารถโหลดข้อมูลร้านพาร์ทเนอร์ได้",
+    "no_category_stores": "ยังไม่มีร้านพาร์ทเนอร์ในหมวดหมู่นี้",
+    "default_store_name": "ร้านพาร์ทเนอร์",
+    "empty_hair_title": "ร้านทำผมพาร์ทเนอร์ เร็วๆ นี้",
+    "empty_hair_desc": "กำลังคัดเลือกร้าน K-Beauty ที่มีพนักงานพูดภาษาอังกฤษได้",
+    "empty_nail_title": "ร้านทำเล็บพาร์ทเนอร์ เร็วๆ นี้",
+    "empty_nail_desc": "กำลังเตรียมร้านที่สามารถส่งใบเสนอราคาและยืนยันการจองได้",
+    "empty_lash_title": "ขนตา · เมคอัพ เร็วๆ นี้",
+    "empty_lash_desc": "กำลังรับสมัครร้านพาร์ทเนอร์ที่ปรึกษาก่อนเข้าร้านได้"
+  },
+  "explore_map": {
+    "search_placeholder": "ค้นหาที่พัก โรงแรม พื้นที่",
+    "search_btn": "ค้นหา",
+    "my_location": "ตำแหน่งของฉัน",
+    "beauty_shop": "ร้านความงาม",
+    "restaurant": "ร้านอาหาร",
+    "accommodation": "ที่พัก"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "โหมดดูภาษาเกาหลี",
+    "korean_viewer_hint": "💡 เปิดโหมดดูภาษาเกาหลีเพื่อแสดงให้พนักงานดู"
   }
 }

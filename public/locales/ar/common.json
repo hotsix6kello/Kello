@@ -2420,5 +2420,35 @@
       "seocho": "Seocho",
       "seongsu": "Seongsu"
     }
+  },
+  "stores_page": {
+    "section_title": "صالونات الشراكة الموصى بها",
+    "page_title": "صالونات تجميل شركاء Kello",
+    "subtitle": "الإجابة بالإنجليزية OK · عروض أسعار بالصور · تأكيد حجز K-Beauty",
+    "view_on_map": "🗺️ عرض على الخريطة",
+    "booking_inquiry": "الاستفسار عن الحجز",
+    "booking_inquiry_short": "حجز",
+    "view_all": "عرض الكل →",
+    "fetch_error": "تعذر تحميل معلومات صالونات الشراكة.",
+    "no_category_stores": "لا توجد صالونات شراكة في هذه الفئة بعد.",
+    "default_store_name": "متجر شريك",
+    "empty_hair_title": "صالون الشعر الشريك قادم قريباً",
+    "empty_hair_desc": "نحن نختار صالونات K-Beauty التي لديها موظفون يتحدثون الإنجليزية.",
+    "empty_nail_title": "صالون الأظافر الشريك قادم قريباً",
+    "empty_nail_desc": "نحن نحضر صالونات يمكنها تقديم عروض أسعار بالصور وتأكيد الحجز.",
+    "empty_lash_title": "الرموش والمكياج قادم قريباً",
+    "empty_lash_desc": "نحن نجند صالونات شريكة حيث يمكنك الاستشارة قبل الزيارة."
+  },
+  "explore_map": {
+    "search_placeholder": "ابحث عن الإقامة، الفندق، المنطقة",
+    "search_btn": "بحث",
+    "my_location": "موقعي",
+    "beauty_shop": "صالون التجميل",
+    "restaurant": "مطعم",
+    "accommodation": "إقامة"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "وضع العرض بالكورية",
+    "korean_viewer_hint": "💡 فعّل وضع العرض بالكورية لإظهاره للموظفين."
   }
 }

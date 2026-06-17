@@ -579,12 +579,6 @@
     "open_interpreter": "Open Interpreter",
     "interpreter_visit_context": "Using interpreter during visit to {{storeName}}.",
     "interpreter_visit_service_context": "Using interpreter for {{serviceName}} at {{storeName}}.",
-    "lang_es": "Español",
-    "lang_fr": "Français",
-    "lang_de": "Deutsch",
-    "lang_ar": "العربية",
-    "lang_pt": "Português",
-    "lang_ru": "Русский",
     "cancel_days_until": "{{daysUntil}} days until appointment → {{refundRate}}% refund",
     "cancel_no_refund_warning": "⚠ No refund is available from 1 day before the appointment",
     "cancel_service_fee": "Service fee",
@@ -2464,5 +2458,35 @@
       "interpretation": "The 'Real-time Interpretation' feature is a supplementary tool provided for user convenience. Wekello is not liable for reservation errors or disputes arising from inaccuracies in AI translation or manual interpretation.",
       "community": "Wekello is not responsible for any damages, incidents, or disputes resulting from voluntary offline meetups or personal transactions between users conducted through the community features."
     }
+  },
+  "stores_page": {
+    "section_title": "Recommended Partner Shops",
+    "page_title": "Kello Partner Beauty Shops",
+    "subtitle": "English OK · Photo quotes · Booking confirmed K-Beauty shops",
+    "view_on_map": "🗺️ View on Map",
+    "booking_inquiry": "Inquire About Booking",
+    "booking_inquiry_short": "Book",
+    "view_all": "View All →",
+    "fetch_error": "Could not load partner shop information.",
+    "no_category_stores": "No partner shops in this category yet.",
+    "default_store_name": "Partner Store",
+    "empty_hair_title": "Hair Partner Shops Coming Soon",
+    "empty_hair_desc": "We're selecting K-Beauty shops with English-speaking staff.",
+    "empty_nail_title": "Nail Partner Shops Coming Soon",
+    "empty_nail_desc": "We're preparing shops that offer photo quotes and booking confirmation.",
+    "empty_lash_title": "Lash & Makeup Coming Soon",
+    "empty_lash_desc": "We're recruiting partner shops where you can consult before visiting."
+  },
+  "explore_map": {
+    "search_placeholder": "Search by accommodation, hotel, area",
+    "search_btn": "Search",
+    "my_location": "My Location",
+    "beauty_shop": "Beauty Shop",
+    "restaurant": "Restaurant",
+    "accommodation": "Stay"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "Korean Viewer Mode",
+    "korean_viewer_hint": "💡 Turn on Korean Viewer Mode to show staff."
   }
 }

@@ -2430,5 +2430,35 @@
     "card_sub": "ドライバーに見せる",
     "card_modal_title": "🗺️ このアドレスまでお願いします",
     "cancel": "キャンセル"
+  },
+  "stores_page": {
+    "section_title": "おすすめ提携サロン",
+    "page_title": "Kello提携ビューティーサロン",
+    "subtitle": "英語対応OK · 写真見積もり · 予約確定可能なK-Beautyサロン",
+    "view_on_map": "🗺️ 地図で見る",
+    "booking_inquiry": "予約のお問い合わせ",
+    "booking_inquiry_short": "予約",
+    "view_all": "すべて見る →",
+    "fetch_error": "提携サロン情報を読み込めませんでした。",
+    "no_category_stores": "このカテゴリーの提携サロンはまだありません。",
+    "default_store_name": "提携店舗",
+    "empty_hair_title": "ヘアサロン準備中",
+    "empty_hair_desc": "外国人対応可能なK-Beautyサロンを選定しています。",
+    "empty_nail_title": "ネイルサロン準備中",
+    "empty_nail_desc": "写真見積もりと予約確定ができる提携サロンを準備中です。",
+    "empty_lash_title": "まつ毛・メイク準備中",
+    "empty_lash_desc": "来店前に相談できる提携サロンを募集しています。"
+  },
+  "explore_map": {
+    "search_placeholder": "宿泊施設、ホテル、地域を検索",
+    "search_btn": "検索",
+    "my_location": "現在地",
+    "beauty_shop": "ビューティー",
+    "restaurant": "グルメ",
+    "accommodation": "宿泊"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "韓国語ビューアーモード",
+    "korean_viewer_hint": "💡 スタッフに見せるには韓国語ビューアーモードをオンにしてください。"
   }
 }
