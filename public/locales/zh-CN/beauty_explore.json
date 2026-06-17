@@ -1,21 +1,15 @@
 {
-  "form_name": "姓名",
-  "form_name_placeholder": "请输入姓名",
-  "form_phone": "联系方式（或 SNS ID）",
-  "form_phone_placeholder": "手机号或 SNS ID",
-  "form_request": "需求说明",
-  "form_request_placeholder": "过敏信息或想要的风格",
-  "agreement_confirm": "确认内容",
-  "agreement_confirm_desc": "我已确认所选内容。",
-  "agreement_privacy": "隐私同意",
-  "agreement_privacy_desc": "我同意提供相关信息。",
-  "region_all": "全部地区",
-  "label_today": "今天",
-  "label_tomorrow": "明天",
-  "label_booking_unit": "韩元",
-  "booking_confirmation_title": "预约申请已提交！",
-  "booking_confirmation_desc": "我们会尽快通知您。",
-  "booking_confirmation_cta": "我的预约",
+  "title": "美容探索",
+  "subtitle": "找到最适合您的沙龙和服务。",
+  "search": {
+    "placeholder": "搜索沙龙名称或护理项目...",
+    "all": "搜索美容、餐饮等...",
+    "beauty": "搜索诊所、沙龙...",
+    "event": "搜索演唱会、演出...",
+    "food": "搜索餐厅、菜单...",
+    "festival": "搜索节庆活动...",
+    "attraction": "搜索宫殿、公园..."
+  },
   "hero_eyebrow": "美容预约",
   "category_all": "全部",
   "hero_title": "开始{{category}}预约",
@@ -34,7 +28,21 @@
   "completion_designer_label": "设计师",
   "completion_primary_service_label": "主要服务",
   "completion_addon_label": "附加选项",
+  "completion_lang_label": "传达语言",
+  "completion_intent_label": "传达目的",
   "completion_none": "未选择",
+  "form_name": "姓名",
+  "form_name_placeholder": "请输入您的姓名。",
+  "form_phone": "联系方式（或 SNS ID）",
+  "form_phone_placeholder": "请输入手机号或 SNS ID。",
+  "form_request": "需求说明",
+  "form_request_placeholder": "请填写过敏信息、希望的风格等内容。",
+  "form_request_hint": "可结合您的选择自由填写备注。",
+  "agreement_confirm": "我已确认预约内容",
+  "agreement_confirm_desc": "我已确认所选门店、日期、时间及服务内容。",
+  "agreement_privacy": "同意提供个人信息",
+  "agreement_privacy_desc": "我同意提供预约所需的最少个人信息。",
+  "region_all": "全部地区",
   "region_jongno": "钟路 (종로)",
   "region_gangnam": "江南 (강남)",
   "region_hongdae": "弘大 (홍대)",
@@ -42,6 +50,22 @@
   "region_jamsil": "蚕室 (잠실)",
   "region_konkuk": "建大 (건대)",
   "region_pangyo": "板桥 (판교)",
+  "filter_region_eyebrow": "地区筛选",
+  "filter_region_title": "请选择希望的地区",
+  "filter_store_count_suffix": " 家门店",
+  "label_selected_datetime": "已选日期和时间",
+  "btn_change": "修改",
+  "btn_choose_datetime": "选择日期和时间",
+  "add_to_plan": "+ 添加到行程",
+  "today": "今天",
+  "starts_from": "✨ {{price}}韩元起",
+  "select_this_salon": "选择该门店",
+  "booking_button": "立即预约",
+  "change_date_time": "修改日程",
+  "label_beauty": "美容",
+  "label_today": "今天",
+  "label_tomorrow": "明天",
+  "label_booking_unit": "韩元",
   "label_review": "评价",
   "label_select_prompt": "请选择要预约的门店。",
   "label_service_default": "未选择",
@@ -53,6 +77,566 @@
   "label_addon_limit": "最多选择2个附加选项。",
   "label_price_from": "起",
   "label_rating": "评分",
+  "reviews_title": "认证评价",
+  "reviews_filter_recent": "最新",
+  "reviews_filter_highest": "评分最高",
+  "reviews_helpful": "有帮助",
+  "reviews_view_all": "查看全部1,240条评价",
+  "regions": {
+    "seongsu": "圣水 (성수)",
+    "gangnam": "江南 (강남)",
+    "myeongdong": "明洞 (명동)",
+    "hongdae": "弘大 (홍대)",
+    "cheongdam": "清潭 (청담)",
+    "jongno": "钟路 (종로)",
+    "itaewon": "梨泰院 (이태원)",
+    "jamsil": "蚕室 (잠실)",
+    "garosugil": "林荫道 (가로수길)",
+    "yeouido": "汝矣岛 (여의도)",
+    "konkuk": "建大 (건대)",
+    "pangyo": "板桥 (판교)"
+  },
+  "stores": {
+    "beauty_hair_1": {
+      "name": "Jenny House 清潭",
+      "priceLabel": "150,000韩元起",
+      "shortDescription": "K-pop明星常光顾的高端美发&彩妆沙龙",
+      "tags": ["K-Style", "高端", "清潭"]
+    },
+    "beauty_hair_2": {
+      "name": "PPEUM诊所 江南",
+      "priceLabel": "50,000韩元起",
+      "shortDescription": "深受外国游客喜爱的高性价比美容诊所",
+      "tags": ["诊所", "江南", "高性价比"]
+    },
+    "beauty_nail_1": {
+      "name": "Maison Nail 弘大",
+      "priceLabel": "79,000韩元起",
+      "shortDescription": "以时尚色彩搭配和季节美甲艺术闻名的美甲工作室",
+      "tags": ["月换艺术甲", "凝胶护理", "色彩搭配"]
+    },
+    "beauty_nail_2": {
+      "name": "Beige Nail 钟路",
+      "priceLabel": "45,000韩元起",
+      "shortDescription": "从干净职场美甲到婚礼美甲，提供细致专业服务",
+      "tags": ["职场美甲", "婚礼美甲", "美甲护理"]
+    },
+    "beauty_esthetic_1": {
+      "name": "Serin Skin Lounge 江南",
+      "priceLabel": "95,000韩元起",
+      "shortDescription": "在私密空间享受肌肤舒缓与紧致提升护理",
+      "tags": ["舒缓护理", "紧致提升", "独立包间"]
+    },
+    "beauty_esthetic_2": {
+      "name": "Glow Formula 圣水",
+      "priceLabel": "88,000韩元起",
+      "shortDescription": "专为敏感肌肤定制的舒缓方案与居家护理指导",
+      "tags": ["深层补水", "敏感肌护理", "定制咨询"]
+    },
+    "beauty_waxing_1": {
+      "name": "Bare Atelier脱毛 江南",
+      "priceLabel": "99,000韩元起",
+      "shortDescription": "以严格卫生管理和系统化后续护理赢得高回客率",
+      "tags": ["卫生管理", "后续护理", "巴西脱毛"]
+    },
+    "beauty_waxing_2": {
+      "name": "Soft Strip 弘大",
+      "priceLabel": "55,000韩元起",
+      "shortDescription": "即使行程繁忙也能轻松接受的低刺激脱毛服务",
+      "tags": ["手臂脱毛", "快速施术", "低刺激"]
+    },
+    "beauty_makeup_1": {
+      "name": "Atelier Veil化妆",
+      "priceLabel": "日常妆 85,000韩元起",
+      "shortDescription": "融入日常生活的自然精致妆容",
+      "tags": ["化妆", "圣水", "自然风格"]
+    },
+    "beauty_makeup_2": {
+      "name": "Dear Muse化妆",
+      "priceLabel": "婚礼宾客妆 132,000韩元起",
+      "shortDescription": "专为特殊场合及婚礼打造的专业彩妆造型",
+      "tags": ["婚礼", "钟路", "专业化妆"]
+    },
+    "beauty_lash_1": {
+      "name": "Bloom Lash精品店 江南",
+      "priceLabel": "99,000韩元起",
+      "shortDescription": "以适合眼型的卷翘设计和持久效果口耳相传",
+      "tags": ["卷翘设计", "持久效果", "自然睫毛"]
+    },
+    "beauty_lash_2": {
+      "name": "Feather Lash 圣水",
+      "priceLabel": "69,000韩元起",
+      "shortDescription": "睫毛烫初次体验者也能放心前往的自然风格睫毛沙龙",
+      "tags": ["睫毛烫", "初次欢迎", "自然卷翘"]
+    }
+  },
+  "designers": {
+    "jia": "Jia 设计师",
+    "jia_specialty": "层次剪 · 染发",
+    "jia_experience": "从业9年",
+    "jia_desc": "擅长详细沟通和根据脸型定制剪发方案。",
+    "minseo": "Minseo 总监",
+    "minseo_specialty": "高端烫发 · 护发",
+    "minseo_experience": "从业14年",
+    "minseo_desc": "根据发质损伤程度，制定细致的施术流程。",
+    "harin": "Harin 设计师",
+    "harin_specialty": "蓬松烫 · 中长发层次",
+    "harin_experience": "从业8年",
+    "harin_desc": "打造自然蓬松感与脸部线条感。",
+    "yuna": "Yuna 组长",
+    "yuna_specialty": "变色 · 护发咨询",
+    "yuna_experience": "从业11年",
+    "yuna_desc": "擅长色调搭配建议及漂发咨询。",
+    "seoyun": "Seoyun 艺术师",
+    "seoyun_specialty": "凝胶美甲 · 季节艺术甲",
+    "seoyun_experience": "从业7年",
+    "seoyun_desc": "以时尚色彩搭配和精致收尾而闻名。",
+    "chaerin": "Chaerin 艺术师",
+    "chaerin_specialty": "绘画艺术 · 零件甲",
+    "chaerin_experience": "从业5年",
+    "chaerin_desc": "擅长快速提出活动专属点缀艺术方案。",
+    "nayeon": "Nayeon 主任",
+    "nayeon_specialty": "护理 · 婚礼美甲",
+    "nayeon_experience": "从业10年",
+    "nayeon_desc": "擅长为婚礼和拍摄行程搭配色彩方案。",
+    "dabin": "Dabin 艺术师",
+    "dabin_specialty": "糖浆甲 · 渐变色",
+    "dabin_experience": "从业6年",
+    "dabin_desc": "擅长打造通透而细腻的妆感。",
+    "yujin": "Yoojin 治疗师",
+    "yujin_specialty": "补水 · 紧致提升",
+    "yujin_experience": "从业12年",
+    "yujin_desc": "通过定制化面部技术，带来即时可见的肌肤改善效果。",
+    "sohee": "Sohee 总监",
+    "sohee_specialty": "舒缓护理 · 淋巴循环",
+    "sohee_experience": "从业9年",
+    "sohee_desc": "专注于恢复敏感肌肤的平衡与促进循环。",
+    "gayoung": "Gayoung 艺术师",
+    "gayoung_specialty": "轮廓疗法 · 美白",
+    "gayoung_experience": "从业6年",
+    "gayoung_desc": "打造明亮肤色与紧致脸部轮廓。",
+    "yerin": "Yerin 治疗师",
+    "yerin_specialty": "毛孔护理 · 控油",
+    "yerin_experience": "从业5年",
+    "yerin_desc": "通过细致清洁和毛孔收缩护理，打造光滑肌肤。",
+    "doyeon": "Doyeon 脱毛师",
+    "doyeon_specialty": "巴西脱毛 · 肌肤规划",
+    "doyeon_experience": "从业8年",
+    "doyeon_desc": "以快速精准的技术将疼痛降至最低。",
+    "hyuna": "Hyuna 总监",
+    "hyuna_specialty": "面部 · 设计脱毛",
+    "hyuna_experience": "从业10年",
+    "hyuna_desc": "擅长突出脸部轮廓的精细设计脱毛。",
+    "sia": "Sia 艺术师",
+    "sia_specialty": "身体脱毛 · 角质护理",
+    "sia_experience": "从业4年",
+    "sia_desc": "采用低刺激糖蜡法，打造光滑身体肌肤。",
+    "juhee": "Joohee 总监",
+    "juhee_specialty": "全身脱毛 · 孕期护理",
+    "juhee_experience": "从业15年",
+    "juhee_desc": "即使在敏感时期也能安心接受的专业护理。",
+    "bora": "Bora 艺术师",
+    "bora_specialty": "日常 · 拍摄妆容",
+    "bora_experience": "从业8年",
+    "bora_desc": "擅长打造清透立体的肌肤妆感。",
+    "sua": "Sua 主任",
+    "sua_specialty": "婚礼宾客 · 活动妆",
+    "sua_experience": "从业11年",
+    "sua_desc": "擅长打造上镜感十足的肤色整理妆容。",
+    "jimin": "Jimin 艺术师",
+    "jimin_specialty": "面试 · 上镜妆容",
+    "jimin_experience": "从业7年",
+    "jimin_desc": "快速打造清晰整洁的专业印象。",
+    "hyewon": "Hyewon 总监",
+    "hyewon_specialty": "高端活动妆容",
+    "hyewon_experience": "从业15年",
+    "hyewon_desc": "为重要场合提供完成度极高的造型建议。",
+    "sojung": "Sojung 艺术师",
+    "sojung_specialty": "睫毛烫 · 染色",
+    "sojung_experience": "从业6年",
+    "sojung_desc": "以自然卷翘感和持久效果见长。",
+    "seah": "Seah 主任",
+    "seah_specialty": "嫁接 · 眼型设计",
+    "seah_experience": "从业9年",
+    "seah_desc": "擅长根据眼型推荐合适的卷翘弧度和长度。",
+    "daeun": "Daeun 艺术师",
+    "daeun_specialty": "嫁接 · 补充",
+    "daeun_experience": "从业5年",
+    "daeun_desc": "轻松打造丰盈饱满的设计感。",
+    "sieun": "Sieun 总监",
+    "sieun_specialty": "烫发 · 受损修复",
+    "sieun_experience": "从业10年",
+    "sieun_desc": "根据睫毛状态细心调整施术强度。",
+    "designer_hair_1_a": {
+      "name": "Jia 设计师",
+      "specialty": "层次剪 · 染发",
+      "experienceLabel": "9年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_hair_1_b": {
+      "name": "Minseo 总监",
+      "specialty": "高端烫发 · 护发",
+      "experienceLabel": "14年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_hair_2_a": {
+      "name": "Harin 设计师",
+      "specialty": "蓬松烫 · 中长发",
+      "experienceLabel": "8年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_hair_2_b": {
+      "name": "Yoona 主任",
+      "specialty": "变色 · 护发咨询",
+      "experienceLabel": "11年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_nail_1_a": {
+      "name": "Seoyoon 艺术师",
+      "specialty": "凝胶美甲 · 季节艺术甲",
+      "experienceLabel": "7年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_nail_1_b": {
+      "name": "Chaerin 艺术师",
+      "specialty": "绘画艺术 · 零件甲",
+      "experienceLabel": "5年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_nail_2_a": {
+      "name": "Nayeon 主任",
+      "specialty": "护理 · 婚礼美甲",
+      "experienceLabel": "10年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_nail_2_b": {
+      "name": "Dabin 艺术师",
+      "specialty": "糖浆甲 · 渐变色",
+      "experienceLabel": "6年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_esthetic_1_a": {
+      "name": "Yoojin 治疗师",
+      "specialty": "补水 · 紧致提升",
+      "experienceLabel": "12年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_esthetic_1_b": {
+      "name": "Sohee 总监",
+      "specialty": "舒缓护理 · 淋巴",
+      "experienceLabel": "9年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_esthetic_2_a": {
+      "name": "Gayoung 治疗师",
+      "specialty": "轮廓疗法 · 美白",
+      "experienceLabel": "6年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_esthetic_2_b": {
+      "name": "Yerin 主任",
+      "specialty": "毛孔护理 · 控油",
+      "experienceLabel": "5年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_waxing_1_a": {
+      "name": "Doyeon 主任",
+      "specialty": "巴西脱毛 · 肌肤规划",
+      "experienceLabel": "8年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_waxing_1_b": {
+      "name": "Hyunah 总监",
+      "specialty": "面部 · 设计脱毛",
+      "experienceLabel": "10年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_waxing_2_a": {
+      "name": "Sia 主任",
+      "specialty": "身体脱毛 · 角质护理",
+      "experienceLabel": "4年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_waxing_2_b": {
+      "name": "Joohee 主任",
+      "specialty": "全身 · 孕期护理",
+      "experienceLabel": "15年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_makeup_1_a": {
+      "name": "Bora 艺术师",
+      "specialty": "日常 · 拍摄妆容",
+      "experienceLabel": "8年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_makeup_1_b": {
+      "name": "Sua 主任",
+      "specialty": "婚礼宾客 · 活动妆",
+      "experienceLabel": "11年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_makeup_2_a": {
+      "name": "Jimin 艺术师",
+      "specialty": "面试 · 上镜妆容",
+      "experienceLabel": "7年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_makeup_2_b": {
+      "name": "Hyewon 总监",
+      "specialty": "高端活动妆容",
+      "experienceLabel": "15年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_lash_1_a": {
+      "name": "Sojung 艺术师",
+      "specialty": "睫毛烫 · 染色",
+      "experienceLabel": "6年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_lash_1_b": {
+      "name": "Seah 主任",
+      "specialty": "嫁接 · 眼型设计",
+      "experienceLabel": "9年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_lash_2_a": {
+      "name": "Daeun 艺术师",
+      "specialty": "嫁接 · 补充",
+      "experienceLabel": "5年",
+      "shortNote": "提供贴心咨询服务"
+    },
+    "designer_lash_2_b": {
+      "name": "Sieun 总监",
+      "specialty": "烫发 · 受损修复",
+      "experienceLabel": "10年",
+      "shortNote": "提供贴心咨询服务"
+    }
+  },
+  "services": {
+    "women_cut": "女士剪发",
+    "women_cut_desc": "发长调整与脸型定制剪发。",
+    "men_cut": "男士剪发",
+    "men_cut_desc": "发型修整与造型剪发。",
+    "root_color": "补根染发",
+    "root_color_desc": "针对根部新生发的色调修正。",
+    "hair_clinic": "发质护理",
+    "hair_clinic_desc": "受损发质集中护理项目。",
+    "nail_gel": "凝胶美甲",
+    "nail_gel_desc": "基础凝胶色彩施术。",
+    "nail_care": "美甲护理",
+    "nail_care_desc": "甲缘护理与甲型修整。",
+    "nail_pedi": "凝胶足部护理",
+    "nail_pedi_desc": "含足部护理的凝胶施术。",
+    "esthetic_calming": "舒缓护理",
+    "esthetic_calming_desc": "针对敏感肌肤的舒缓项目。",
+    "esthetic_moisture": "补水护理",
+    "esthetic_moisture_desc": "针对干性肌肤的深层补水项目。",
+    "esthetic_lifting": "紧致提升护理",
+    "esthetic_lifting_desc": "以改善弹力为主的护理项目。",
+    "waxing_brazilian": "巴西脱毛",
+    "waxing_brazilian_desc": "私密部位为主的脱毛。",
+    "waxing_arm": "手臂脱毛",
+    "waxing_arm_desc": "全臂脱毛处理。",
+    "waxing_leg": "腿部脱毛",
+    "waxing_leg_desc": "小腿或半腿为基准。",
+    "makeup_daily": "日常妆容",
+    "makeup_daily_desc": "适合日常约会的轻薄妆容。",
+    "makeup_interview": "面试妆容",
+    "makeup_interview_desc": "适合面试的清洁专业妆容。",
+    "makeup_guest": "婚礼宾客妆容",
+    "makeup_guest_desc": "根据活动日程定制造型。",
+    "lash_perm": "睫毛烫",
+    "lash_perm_desc": "以固定卷翘为主的施术。",
+    "lash_extension": "睫毛嫁接",
+    "lash_extension_desc": "可选长度与卷翘度的嫁接施术。",
+    "lash_retouch": "睫毛补充",
+    "lash_retouch_desc": "对现有嫁接进行补充施术。",
+    "hair_add_scalp": "头皮清洁",
+    "hair_add_scalp_desc": "施术前的头皮清洁护理。",
+    "hair_add_blowdry": "吹发造型",
+    "hair_add_blowdry_desc": "吹发与简单造型。",
+    "hair_add_ampoule": "安瓿护理",
+    "hair_add_ampoule_desc": "针对受损部位的集中营养护理。",
+    "nail_add_removal": "含卸甲",
+    "nail_add_removal_desc": "包含现有凝胶的卸除施术。",
+    "nail_add_art": "点缀艺术",
+    "nail_add_art_desc": "双手点缀艺术追加。",
+    "nail_add_strength": "强化涂层",
+    "nail_add_strength_desc": "持久力强化涂层。",
+    "esthetic_add_modeling": "模塑膜",
+    "esthetic_add_modeling_desc": "舒缓收尾膜追加。",
+    "esthetic_add_neck": "颈部护理",
+    "esthetic_add_neck_desc": "颈部线条集中护理。",
+    "esthetic_add_led": "LED护理",
+    "esthetic_add_led_desc": "舒缓辅助光疗。",
+    "waxing_add_care": "舒缓护理",
+    "waxing_add_care_desc": "施术后的舒缓凝胶护理。",
+    "waxing_add_pack": "补水面膜",
+    "waxing_add_pack_desc": "缓解刺激的面膜追加。",
+    "waxing_add_trim": "含修剪",
+    "waxing_add_trim_desc": "施术前修剪处理。",
+    "makeup_add_hair": "吹发造型",
+    "makeup_add_hair_desc": "简单的吹发造型。",
+    "makeup_add_lash": "假睫毛",
+    "makeup_add_lash_desc": "局部或点缀假睫毛。",
+    "makeup_add_touchup": "补妆套装",
+    "makeup_add_touchup_desc": "提供简易补妆套装。",
+    "lash_add_remove": "含卸睫毛",
+    "lash_add_remove_desc": "包含现有嫁接的卸除。",
+    "lash_add_tinting": "黑色染色",
+    "lash_add_tinting_desc": "鲜明色彩补正。",
+    "lash_add_coating": "营养涂层",
+    "lash_add_coating_desc": "持久力辅助涂层。",
+    "daily_makeup": "日常妆容",
+    "daily_makeup_desc": "适合日常约会的轻薄妆容。",
+    "hair_women_cut": {
+      "name": "女士剪发",
+      "desc": "发长调整与脸型定制剪发。"
+    },
+    "hair_men_cut": {
+      "name": "男士剪发",
+      "desc": "发型修整与造型剪发。"
+    },
+    "hair_root_color": {
+      "name": "补根染发",
+      "desc": "针对根部新生发的色调修正。"
+    },
+    "nail_gel": {
+      "name": "凝胶美甲",
+      "desc": "基础凝胶色彩施术。"
+    },
+    "nail_care": {
+      "name": "美甲护理",
+      "desc": "甲缘护理与甲型修整。"
+    },
+    "nail_pedi": {
+      "name": "凝胶足部护理",
+      "desc": "含足部护理的凝胶施术。"
+    },
+    "esthetic_calming": {
+      "name": "舒缓护理",
+      "desc": "针对敏感肌肤的舒缓项目。"
+    },
+    "esthetic_moisture": {
+      "name": "补水护理",
+      "desc": "针对干性肌肤的深层补水项目。"
+    },
+    "esthetic_lifting": {
+      "name": "紧致提升护理",
+      "desc": "以改善弹力为主的护理项目。"
+    },
+    "waxing_brazilian": {
+      "name": "巴西脱毛",
+      "desc": "私密部位为主的脱毛。"
+    },
+    "waxing_arm": {
+      "name": "手臂脱毛",
+      "desc": "全臂脱毛处理。"
+    },
+    "waxing_leg": {
+      "name": "腿部脱毛",
+      "desc": "小腿或半腿为基准。"
+    },
+    "makeup_daily": {
+      "name": "日常妆容",
+      "desc": "适合日常约会的轻薄妆容。"
+    },
+    "makeup_interview": {
+      "name": "面试妆容",
+      "desc": "清洁专业的面试妆容。"
+    },
+    "makeup_guest": {
+      "name": "婚礼宾客妆容",
+      "desc": "根据活动日程定制造型。"
+    },
+    "lash_perm": {
+      "name": "睫毛烫",
+      "desc": "以固定卷翘为主的施术。"
+    },
+    "lash_extension": {
+      "name": "睫毛嫁接",
+      "desc": "可选长度与卷翘度的嫁接。"
+    },
+    "lash_retouch": {
+      "name": "睫毛补充",
+      "desc": "对现有嫁接进行补充施术。"
+    },
+    "hair_add_scalp": {
+      "name": "头皮清洁",
+      "desc": "施术前的头皮清洁护理。"
+    },
+    "hair_add_blowdry": {
+      "name": "吹发造型",
+      "desc": "吹发与简单造型。"
+    },
+    "hair_add_ampoule": {
+      "name": "安瓿护理",
+      "desc": "针对受损部位的集中营养护理。"
+    },
+    "nail_add_removal": {
+      "name": "卸甲",
+      "desc": "包含现有凝胶的卸除。"
+    },
+    "nail_add_art": {
+      "name": "点缀艺术",
+      "desc": "双手点缀艺术追加。"
+    },
+    "nail_add_strength": {
+      "name": "强化涂层",
+      "desc": "持久力强化涂层。"
+    },
+    "esthetic_add_modeling": {
+      "name": "模塑膜",
+      "desc": "舒缓收尾膜。"
+    },
+    "esthetic_add_neck": {
+      "name": "颈部护理",
+      "desc": "颈部线条集中护理。"
+    },
+    "esthetic_add_led": {
+      "name": "LED护理",
+      "desc": "舒缓辅助光疗。"
+    },
+    "waxing_add_care": {
+      "name": "舒缓护理",
+      "desc": "施术后的舒缓凝胶护理。"
+    },
+    "waxing_add_pack": {
+      "name": "补水面膜",
+      "desc": "缓解刺激的面膜。"
+    },
+    "waxing_add_trim": {
+      "name": "含修剪",
+      "desc": "施术前修剪处理。"
+    },
+    "makeup_add_hair": {
+      "name": "发型造型",
+      "desc": "简单的吹发造型。"
+    },
+    "makeup_add_lash": {
+      "name": "假睫毛",
+      "desc": "局部或点缀假睫毛。"
+    },
+    "makeup_add_touchup": {
+      "name": "补妆套装",
+      "desc": "提供简易补妆套装。"
+    },
+    "lash_add_remove": {
+      "name": "卸睫毛",
+      "desc": "包含现有嫁接的卸除。"
+    },
+    "lash_add_tinting": {
+      "name": "黑色染色",
+      "desc": "鲜明色彩补正。"
+    },
+    "lash_add_coating": {
+      "name": "营养涂层",
+      "desc": "持久力辅助涂层。"
+    }
+  },
+  "price_hair_summary": "剪发 20,000韩元起 | 染发 55,000韩元起 | 烫发 60,000韩元起",
+  "price_nail_summary": "凝胶美甲 35,000韩元起 | 足部护理 45,000韩元起",
+  "price_makeup_summary": "日常妆容 60,000韩元起",
   "booking_panel_title": "请选择预约日期和时间",
   "booking_panel_desc": "确认所选门店的可预约日期，选择您希望的时间。",
   "booking_empty_title": "请先选择门店",
@@ -85,9 +669,9 @@
   "btn_continue": "立即预约",
   "btn_reset": "修改预约信息",
   "btn_close": "关闭",
-  "completion_title": "预约请求已发送！",
+  "completion_title": "预约请求已发送",
   "completion_desc1": "门店确认可用时间后，我们将通知您。",
-  "completion_desc2": "请注意，收到确认通知前预约尚未生效。",
+  "completion_desc2": "通知信息将以您选择的语言和韩语同时发送。",
   "completion_desc3": "可随时在「我的预约」中查看进度。",
   "completion_flow_hint": "您的预约请求已收到，门店审核后即可确认。可通过通知或「我的预约」查看结果。",
   "price_estimate_hint": "所示价格为预估金额，最终费用可能因选项或门店政策而有所变动。",
@@ -98,20 +682,29 @@
   "toast_submit_error": "预约请求发送失败，请稍后重试。",
   "toast_addon_limit": "最多可选择2个附加选项。",
   "toast_copy_hint": "长按 {{label}} 可复制。",
-  "filter_region_eyebrow": "地区筛选",
-  "filter_region_title": "请选择希望的地区",
-  "filter_store_count_suffix": " 家门店",
-  "label_selected_datetime": "已选日期和时间",
-  "btn_change": "修改",
-  "btn_choose_datetime": "选择日期和时间",
-  "price_hair_summary": "剪发 20,000韩元起 | 染发 55,000韩元起 | 烫发 60,000韩元起",
-  "price_nail_summary": "凝胶美甲 35,000韩元起 | 足部护理 45,000韩元起",
-  "price_makeup_summary": "日常妆容 60,000韩元起",
+  "booking_confirmation_title": "预约申请已提交",
+  "booking_confirmation_desc": "门店确认后我们将尽快通知您。",
+  "booking_confirmation_cta": "查看我的预约",
+  "step_1": "选择门店",
+  "step_2": "选择时间",
+  "step_3": "确认",
+  "step_4": "填写信息",
+  "step_5": "完成",
   "select_date": "选择日期",
   "select_time": "选择时间",
+  "loading": "加载中...",
+  "no_available_times": "所选日期暂无可用时段。",
   "btn_complete": "完成预约",
   "selected_confirmation": "✓ 已选择 {{date}}",
-  "weekdays": { "sun": "日", "mon": "一", "tue": "二", "wed": "三", "thu": "四", "fri": "五", "sat": "六" },
+  "weekdays": {
+    "sun": "日",
+    "mon": "一",
+    "tue": "二",
+    "wed": "三",
+    "thu": "四",
+    "fri": "五",
+    "sat": "六"
+  },
   "intent_booking_confirm": "预约确认",
   "intent_service_request": "服务请求",
   "intent_allergy_notice": "过敏/敏感肌说明",
@@ -119,97 +712,5 @@
   "lang_ko": "韩语",
   "lang_en": "英语",
   "lang_ja": "日语",
-  "lang_zh_cn": "中文（简体）",
-  "step_1": "选择门店",
-  "step_2": "选择时间",
-  "step_3": "确认",
-  "step_4": "填写信息",
-  "step_5": "完成",
-  "stores": {
-    "beauty_hair_1": { "name": "La Frappe Hair 江南", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["设计剪发", "个人色彩", "头皮护理"] },
-    "beauty_hair_2": { "name": "Atelier 圣水 Hair Room", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["蓬松烫发", "私密空间", "风格咨询"] },
-    "beauty_nail_1": { "name": "Maison Nail 弘大", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["月换艺术甲", "凝胶护理", "色彩搭配"] },
-    "beauty_nail_2": { "name": "Beige Nail 蚕室", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["职场美甲", "婚礼准备", "美甲护理"] },
-    "beauty_esthetic_1": { "name": "Serin Skin Lounge 板桥", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["舒缓护理", "紧致提升", "独立包间"] },
-    "beauty_esthetic_2": { "name": "Glow Formula 建大", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["深层补水", "敏感肌护理", "定制咨询"] },
-    "beauty_waxing_1": { "name": "Bare Atelier Waxing 江南", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["卫生管理", "后续护理", "敏感部位"] },
-    "beauty_waxing_2": { "name": "Soft Strip 弘大", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["手臂脱毛", "快速施术", "轻松到访"] },
-    "beauty_makeup_1": { "name": "Atelier Veil Makeup 圣水", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["拍摄妆容", "日常妆", "个人风格"] },
-    "beauty_makeup_2": { "name": "Dear Muse Makeup 蚕室", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["婚礼准备", "一对一咨询", "发型造型"] },
-    "beauty_lash_1": { "name": "Bloom Lash Boutique 江南", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["卷翘设计", "持久效果", "自然睫毛"] },
-    "beauty_lash_2": { "name": "Feather Lash 建大", "priceLabel": "55,000韩元起", "shortDescription": "优质美容沙龙。", "tags": ["睫毛烫", "初次欢迎", "自然卷翘"] }
-  },
-  "designers": {
-    "jia": "Jia 设计师", "jia_specialty": "层次剪 · 染发", "jia_desc": "擅长详细沟通和根据脸型定制剪发方案。",
-    "minseo": "Minseo 总监", "minseo_specialty": "高端烫发 · 护发", "minseo_desc": "根据发质损伤程度，制定细致的施术流程。",
-    "harin": "Harin 设计师", "harin_specialty": "蓬松烫 · 中长发", "harin_desc": "打造自然蓬松感与脸部线条感。",
-    "yuna": "Yuna 组长", "yuna_specialty": "变色护理", "yuna_desc": "擅长色调搭配建议及漂发咨询。",
-    "designer_hair_1_a": { "name": "Jia 设计师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_hair_1_b": { "name": "Minseo 总监", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_hair_2_a": { "name": "Harin 设计师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_hair_2_b": { "name": "Yoona 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_nail_1_a": { "name": "Seoyoon 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_nail_1_b": { "name": "Chaerin 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_nail_2_a": { "name": "Nayeon 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_nail_2_b": { "name": "Dabin 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_esthetic_1_a": { "name": "Yoojin 治疗师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_esthetic_1_b": { "name": "Sohee 总监", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_esthetic_2_a": { "name": "Gayoung 治疗师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_esthetic_2_b": { "name": "Yerin 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_waxing_1_a": { "name": "Doyeon 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_waxing_1_b": { "name": "Hyunah 总监", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_waxing_2_a": { "name": "Sia 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_waxing_2_b": { "name": "Joohee 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_makeup_1_a": { "name": "Bora 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_makeup_1_b": { "name": "Sua 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_makeup_2_a": { "name": "Jimin 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_makeup_2_b": { "name": "Hyewon 总监", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_lash_1_a": { "name": "Sojung 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_lash_1_b": { "name": "Seah 主任", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_lash_2_a": { "name": "Daeun 艺术师", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" },
-    "designer_lash_2_b": { "name": "Sieun 总监", "specialty": "专业方向", "experienceLabel": "经验丰富", "shortNote": "提供贴心咨询服务" }
-  },
-  "services": {
-    "women_cut": "女士剪发", "women_cut_desc": "发长调整与定制剪发。",
-    "men_cut": "男士剪发", "men_cut_desc": "发型修整与造型剪发。",
-    "root_color": "补根染发", "root_color_desc": "根部新生发的色调修正。",
-    "hair_clinic": "发质护理", "hair_clinic_desc": "受损发质集中护理项目。",
-    "daily_makeup": "日常妆容", "daily_makeup_desc": "适合日常约会的轻薄妆容。",
-    "hair_women_cut": { "name": "女士剪发", "desc": "服务内容" },
-    "hair_men_cut": { "name": "男士剪发", "desc": "服务内容" },
-    "hair_root_color": { "name": "补根染发", "desc": "服务内容" },
-    "nail_gel": { "name": "凝胶美甲", "desc": "服务内容" },
-    "nail_care": { "name": "美甲护理", "desc": "服务内容" },
-    "nail_pedi": { "name": "凝胶足部护理", "desc": "服务内容" },
-    "esthetic_calming": { "name": "舒缓护理", "desc": "服务内容" },
-    "esthetic_moisture": { "name": "补水护理", "desc": "服务内容" },
-    "esthetic_lifting": { "name": "提升紧致护理", "desc": "服务内容" },
-    "waxing_brazilian": { "name": "巴西脱毛", "desc": "服务内容" },
-    "waxing_arm": { "name": "手臂脱毛", "desc": "服务内容" },
-    "waxing_leg": { "name": "腿部脱毛", "desc": "服务内容" },
-    "makeup_daily": { "name": "日常妆容", "desc": "服务内容" },
-    "makeup_interview": { "name": "面试妆容", "desc": "服务内容" },
-    "makeup_guest": { "name": "婚礼宾客妆容", "desc": "服务内容" },
-    "lash_perm": { "name": "睫毛烫", "desc": "服务内容" },
-    "lash_extension": { "name": "睫毛嫁接", "desc": "服务内容" },
-    "lash_retouch": { "name": "睫毛补充", "desc": "服务内容" },
-    "hair_add_scalp": { "name": "头皮清洁", "desc": "附加选项" },
-    "hair_add_blowdry": { "name": "吹发造型", "desc": "附加选项" },
-    "hair_add_ampoule": { "name": "安瓿护理", "desc": "附加选项" },
-    "nail_add_removal": { "name": "卸甲", "desc": "附加选项" },
-    "nail_add_art": { "name": "点缀艺术", "desc": "附加选项" },
-    "nail_add_strength": { "name": "强化涂层", "desc": "附加选项" },
-    "esthetic_add_modeling": { "name": "模塑膜", "desc": "附加选项" },
-    "esthetic_add_neck": { "name": "颈部护理", "desc": "附加选项" },
-    "esthetic_add_led": { "name": "LED护理", "desc": "附加选项" },
-    "waxing_add_care": { "name": "舒缓护理", "desc": "附加选项" },
-    "waxing_add_pack": { "name": "补水面膜", "desc": "附加选项" },
-    "waxing_add_trim": { "name": "含修剪", "desc": "附加选项" },
-    "makeup_add_hair": { "name": "发型造型", "desc": "附加选项" },
-    "makeup_add_lash": { "name": "假睫毛", "desc": "附加选项" },
-    "makeup_add_touchup": { "name": "补妆套装", "desc": "附加选项" },
-    "lash_add_remove": { "name": "卸睫毛", "desc": "附加选项" },
-    "lash_add_tinting": { "name": "黑色染色", "desc": "附加选项" },
-    "lash_add_coating": { "name": "营养涂层", "desc": "附加选项" }
-  }
+  "lang_zh_cn": "中文（简体）"
 }

@@ -248,7 +248,10 @@
     "route_nav": "路线指南",
     "transit_nav_desc": "大众交通导航",
     "copy_address": "复制地址",
-    "copied": "已复制!"
+    "copied": "已复制!",
+    "greeting_morning": "早上好",
+    "greeting_afternoon": "下午好",
+    "greeting_evening": "晚上好"
   },
   "welcome_popup": {
     "title": "立即注册即可获得\n5%折扣优惠券！",
@@ -2135,5 +2138,38 @@
       "interpretation": "「实时通译」功能为提供用户便利的辅助工具。公司对因翻译不准确而导致的预约错误或纠纷不承担责任。",
       "community": "公司对通过社区功能进行的用户间自发性线下聚会或个人交易中产生的损害、事故或纠纷不承担责任。"
     }
+  },
+  "morning": "早上好",
+  "afternoon": "下午好",
+  "evening": "晚上好",
+  "assurance": {
+    "items": [
+      {
+        "title": "一目了然的分类选择",
+        "desc": "在第一屏选择所需服务，直接进入预约流程。"
+      },
+      {
+        "title": "无忧语言支持",
+        "desc": "随时使用实时翻译助手，与门店顺畅沟通。"
+      },
+      {
+        "title": "移动端优先的预约路径",
+        "desc": "易于单手点击的卡片按钮和大型CTA，提升预约便利性。"
+      }
+    ]
+  },
+  "interpreter": {
+    "eyebrow": "语言支持",
+    "title": "如需外语预约支持，请使用翻译助手",
+    "description": "如果您担心预约前的咨询或访问期间的对话，请直接使用实时翻译服务。",
+    "button": "打开翻译助手"
+  },
+  "interpreter_ui": {
+    "customer_speaks": "顾客发言",
+    "staff_speaks": "员工发言",
+    "customer_language": "顾客语言",
+    "staff_language": "员工语言",
+    "session": "会话",
+    "expires": "到期"
   }
 }

@@ -504,9 +504,9 @@
         "day_time_dash": "Day {{day}} - {{time}}"
       }
     },
-    "morning": "早上好",
-    "afternoon": "下午好",
-    "evening": "晚上好",
+    "morning": "صباح الخير",
+    "afternoon": "مساء الخير",
+    "evening": "مساء النور",
     "help_nav": "Help",
     "view_map": "Lihat Lokasi",
     "view_map_desc": "Lihat lokasi detail di peta",
@@ -515,9 +515,9 @@
     "transit_nav_desc": "Navigasi transportasi umum",
     "copy_address": "Salin Alamat",
     "copied": "Tersalin!",
-    "greeting_morning": "สวัสดีตอนเช้า",
-    "greeting_afternoon": "สวัสดีตอนบ่าย",
-    "greeting_evening": "สวัสดีตอนเย็น",
+    "greeting_morning": "صباح الخير",
+    "greeting_afternoon": "مساء الخير",
+    "greeting_evening": "مساء النور",
     "search_results": "ผลลัพธ์การค้นหา",
     "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
@@ -1827,5 +1827,598 @@
     "translated_status": "تمت الترجمة",
     "source_only_status": "النص الأصلي فقط",
     "voice_too_short_error": "تحدث أطول قليلاً."
+  },
+  "morning": "صباح الخير",
+  "afternoon": "مساء الخير",
+  "evening": "مساء النور",
+  "header": {
+    "view_app": "عرض في التطبيق",
+    "faq": "الأسئلة الشائعة",
+    "recent": "الأنشطة الأخيرة"
+  },
+  "assurance": {
+    "items": [
+      {
+        "title": "اختيار الفئة بنظرة واحدة",
+        "desc": "اختر الخدمة المطلوبة من الشاشة الأولى وانتقل مباشرة إلى مسار الحجز."
+      },
+      {
+        "title": "دعم لغوي بلا قلق",
+        "desc": "استخدم مساعد الترجمة الفوري في أي وقت للتواصل بسلاسة مع المتجر."
+      },
+      {
+        "title": "مسار حجز يُعطي الأولوية للهاتف",
+        "desc": "أزرار بتصميم بطاقة سهلة الضغط بيد واحدة وCTA كبير لتجربة حجز سلسة."
+      }
+    ]
+  },
+  "interpreter": {
+    "eyebrow": "دعم اللغة",
+    "title": "استخدم مساعد الترجمة إذا كنت بحاجة إلى دعم الحجز بلغة أجنبية",
+    "description": "انتقل مباشرة إلى الترجمة الفورية إذا كنت قلقاً بشأن الاستشارات قبل الحجز أو المحادثات خلال زيارتك.",
+    "button": "فتح مساعد الترجمة"
+  },
+  "interpreter_ui": {
+    "customer_speaks": "يتحدث العميل",
+    "staff_speaks": "يتحدث الموظف",
+    "customer_language": "لغة العميل",
+    "staff_language": "لغة الموظف",
+    "session": "جلسة",
+    "expires": "انتهاء الصلاحية"
+  },
+  "fab": {
+    "idle": "تخطيط الرحلة",
+    "pre_trip": "المغادرة قريباً",
+    "on_trip": "المكان التالي؟",
+    "near_deadline": "خطر التأخر!",
+    "to": "إلى {{dest}}",
+    "kride": "استدعاء K.Ride",
+    "kride_sub": "يصل في {{mins}} دقيقة",
+    "transit": "دليل المواصلات",
+    "transit_sub": "أسرع طريق",
+    "copy": "نسخ العنوان",
+    "copy_done": "تم النسخ!",
+    "card": "بطاقة السائق",
+    "card_sub": "أظهر للسائق",
+    "card_modal_title": "🗺️ يرجى التوجه إلى هذا العنوان",
+    "cancel": "إلغاء"
+  },
+  "beauty_explore": {
+    "hero_title": "استكشف حجوزات التجميل",
+    "hero_desc": "اختر فئة لاستكشاف أكثر دقة. يمكنك الآن الاطلاع على جميع صالونات التجميل.",
+    "category_all": "الكل",
+    "region_all": "كل المناطق",
+    "step_1": "اختر المتجر",
+    "step_2": "اختر الوقت",
+    "step_3": "تأكيد",
+    "step_4": "أدخل البيانات",
+    "step_5": "اكتمل",
+    "form_name": "الاسم",
+    "form_name_placeholder": "يرجى إدخال اسمك",
+    "form_phone": "وسيلة التواصل (أو معرف SNS)",
+    "form_phone_placeholder": "رقم الهاتف أو معرف SNS",
+    "form_request": "الطلبات",
+    "form_request_placeholder": "يرجى ترك طلباتك للمتجر",
+    "agreement_confirm": "تأكيد الحجز",
+    "agreement_confirm_desc": "فهمت أن المواعيد قد تُعدَّل حسب توفر المتجر.",
+    "agreement_privacy": "أوافق على استلام اتصالات الدليل للحجز.",
+    "agreement_privacy_desc": "الموافقة على تقديم معلومات الاتصال للتأكيد والتغييرات.",
+    "toast_addon_limit": "يمكن اختيار خيارين إضافيين كحد أقصى.",
+    "toast_copy_hint": "اضغط مطولاً على {{label}} للنسخ.",
+    "toast_select_time": "اختر وقتاً للحجز.",
+    "toast_check_info": "تحقق من معلومات الحجز مجدداً.",
+    "toast_submit_error": "فشل حفظ الحجز. حاول مجدداً.",
+    "label_designer_default": "اختيار المتجر",
+    "label_service_default": "قبل الاختيار",
+    "label_addon_default": "لا يوجد اختيار",
+    "label_select_prompt": "اختر حجزاً لعرض التفاصيل.",
+    "label_price_from": "يبدأ من",
+    "label_today": "اليوم",
+    "label_tomorrow": "غداً",
+    "label_booking_unit": "وون",
+    "btn_continue": "احجز الآن",
+    "btn_submit": "إرسال الطلب",
+    "btn_reset": "تعديل الحجز",
+    "btn_close": "إغلاق",
+    "completion_title": "تم إرسال طلب الحجز!",
+    "completion_desc1": "سنرسل إشعاراً بعد تأكيد المتجر.",
+    "completion_desc2": "لاحظ أنه لا يُعدّ مؤكداً حتى تلقي الإشعار.",
+    "completion_desc3": "تابع التقدم في حجوزاتي في أي وقت.",
+    "completion_flow_hint": "تم استلام طلب الحجز. ستُبلَّغ بالنتيجة بعد مراجعة المتجر.",
+    "price_estimate_hint": "الأسعار تقديرية. قد تتغير التكلفة النهائية.",
+    "label_rating": "التقييم",
+    "label_review": "تقييمات",
+    "btn_select_time": "اختر وقت الحجز",
+    "btn_reselect_time": "إعادة اختيار الوقت",
+    "empty_store_title": "لا توجد متاجر مطابقة.",
+    "empty_store_desc": "جرب منطقة أو فئة أخرى.",
+    "booking_panel_title": "اختر التاريخ والوقت",
+    "booking_panel_desc": "اختر وقتاً للمتجر ثم تابع التأكيد.",
+    "booking_empty_title": "اختر متجراً أولاً.",
+    "booking_empty_desc": "انقر على اختر وقت الحجز في بطاقة المتجر.",
+    "booking_not_found_title": "لم يُعثر على أوقات متاحة.",
+    "booking_not_found_desc": "اختر متجراً آخر أو أعد تحميل الأوقات.",
+    "booking_date_label": "التاريخ",
+    "booking_time_label": "الوقت",
+    "booking_no_date": "لا تواريخ متاحة بعد.",
+    "booking_no_time_wait": "اختر التاريخ أولاً.",
+    "booking_no_slots": "لا أوقات لهذا التاريخ.",
+    "summary_category": "الفئة",
+    "summary_store": "المتجر",
+    "summary_region": "المنطقة",
+    "summary_date": "التاريخ",
+    "summary_time": "الوقت",
+    "summary_hint": "اختر التاريخ والوقت للمتابعة.",
+    "summary_btn": "تحقق من معلومات الحجز",
+    "confirm_title": "تأكيد المعلومات",
+    "confirm_desc": "أدخل التفاصيل لبطاقة الطلب.",
+    "btn_edit": "تعديل",
+    "confirm_empty_title": "الخطوة التالية غير متاحة بعد.",
+    "confirm_empty_desc": "انقر على تحقق من الحجز بعد اختيار التاريخ والوقت.",
+    "confirm_review_error_title": "تحقق من معلومات الحجز مجدداً.",
+    "confirm_review_error_desc": "يجب اختيار المتجر والتاريخ والوقت.",
+    "confirm_price_hint": "الأسعار تقديرية.",
+    "label_no_surcharge": "لا رسوم إضافية",
+    "label_no_designer": "لا معلومات عن المصمم حالياً.",
+    "label_designer_hint": "اختيار المصمم اختياري.",
+    "label_addon_limit": "الحد الأقصى 2"
+  },
+  "home": {
+    "presets": {
+      "beauty_tour": "جولة التجميل",
+      "foodie": "محب الطعام",
+      "heritage": "التراث",
+      "k_pop": "K-pop"
+    },
+    "badge": "Kello",
+    "title": "حجز كونسيرج · جدول تلقائي · ملاحة",
+    "subtitle": "",
+    "create_trip_cta": "ابدأ إنشاء الجدول",
+    "input_label": "أين ستسافر؟",
+    "input_placeholder": "المدينة أو المنطقة أو الإقامة",
+    "days_label": "المدة",
+    "value_props": {
+      "itinerary": {
+        "title": "جدول تلقائي",
+        "desc": "يحسّن الذكاء الاصطناعي مسارك"
+      },
+      "booking": {
+        "title": "حجز كونسيرج",
+        "desc": "عيادات وسبا والمزيد"
+      },
+      "navigation": {
+        "title": "ملاحة آنية",
+        "desc": "صفر حاجز لغوي"
+      }
+    },
+    "recommended_plans": "رحلات Kello المقترحة",
+    "plans": {
+      "2d": {
+        "title": "يومان: أساسيات سيول",
+        "label": "خطة يومين"
+      },
+      "3d": {
+        "title": "3 أيام: K-ثقافة وأسلوب",
+        "label": "خطة 3 أيام"
+      },
+      "5d": {
+        "title": "5 أيام: الجولة الكبرى",
+        "label": "خطة 5 أيام"
+      },
+      "request_custom_label": "مخصص",
+      "request_custom_title": "إنشاء خطة {{days}} أيام خاصة بي",
+      "request_custom_toast": "طلبت خطة مخصصة لـ {{days}} أيام! سيتصل بك الكونسيرج قريباً."
+    }
+  },
+  "explore_page": {
+    "title": "استكشاف",
+    "city_changed": "تم تغيير المدينة إلى {{city}}",
+    "added_to": "أضيف إلى اليوم {{day}}",
+    "no_items": "لا توجد عناصر في {{city}}",
+    "try_changing": "جرب تغيير الفئة أو المدينة.",
+    "select_city": "اختر المدينة",
+    "search_placeholders": {
+      "all": "ابحث عن الجمال، الطعام...",
+      "beauty": "ابحث عن العيادات، الصالونات...",
+      "event": "ابحث عن الحفلات، العروض...",
+      "food": "ابحث عن المطاعم، الأطباق...",
+      "festival": "ابحث عن المهرجانات...",
+      "attraction": "ابحث عن القصور، الحدائق..."
+    },
+    "add_to_plan": "+ أضف إلى الخطة",
+    "today": "اليوم",
+    "tonight": "الليلة",
+    "starts_from": "يبدأ من ₩{{price}}",
+    "indoor": "داخلي",
+    "outdoor": "خارجي",
+    "badges": {
+      "vegan_only": "نباتي فقط",
+      "vegan_option": "خيار نباتي"
+    },
+    "filters_title": "المرشحات",
+    "apply": "تطبيق",
+    "reset": "إعادة تعيين",
+    "adding_item_to": "إضافة <strong>{{title}}</strong> إلى...",
+    "no_specific_filters": "لا توجد مرشحات محددة لهذه الفئة.",
+    "filters": {
+      "show": "عرض",
+      "price": "السعر",
+      "diet": "النظام الغذائي",
+      "ingredients": "المكونات",
+      "date": "التاريخ",
+      "type": "النوع",
+      "options": {
+        "skin_care": "العناية بالبشرة",
+        "hair_makeup": "الشعر والمكياج",
+        "spa": "سبا",
+        "nails": "أظافر",
+        "vegan": "نباتي",
+        "vegetarian": "خضري",
+        "no_pork": "بدون لحم خنزير",
+        "halal": "حلال",
+        "beef": "لحم بقر",
+        "pork": "لحم خنزير",
+        "chicken": "دجاج",
+        "seafood": "مأكولات بحرية",
+        "dairy": "منتجات الألبان",
+        "egg": "بيض",
+        "today": "اليوم",
+        "weekend": "هذه العطلة",
+        "select": "اختر التاريخ",
+        "concert": "حفلة",
+        "show": "عرض",
+        "popup": "بوب أب",
+        "club": "نادي",
+        "exhibition": "معرض"
+      }
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "Incheon Airport Arrival",
+    "hotel_checkin": "Hotel Check-in/Stay",
+    "f1": {
+      "title": "Plant Cafe Seoul",
+      "area": "Itaewon",
+      "desc": "100% vegan cuisine made with fresh vegetables and healthy ingredients",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "Gold Pig BBQ",
+      "area": "Yaksu",
+      "desc": "The best samgyeopsal restaurant in Korea, selected by the Michelin Guide",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "Jagalchi Fish Market",
+      "area": "Nampo",
+      "desc": "A hearty sashimi course where you can feel the freshness of the Busan sea",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "Jenny House Cheongdam",
+      "area": "Cheongdam",
+      "desc": "Premium hair & makeup shop frequented by K-idols",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "PPEUM Clinic Gangnam",
+      "area": "Gangnam",
+      "desc": "The best value-for-money beauty clinic most visited by foreigners",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY Water Show 2024",
+      "area": "Jamsil Stadium",
+      "desc": "PSY's cool and passionate performance to blow away the summer heat",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "Nanta Show Myeongdong",
+      "area": "Myeongdong",
+      "desc": "A non-verbal performance combining traditional Korean rhythms with modern performance",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "Seoul Lantern Festival",
+      "area": "Gwanghwamun",
+      "desc": "A feast of colorful and beautiful lanterns embroidering Gwanghwamun Square",
+      "price": "Free"
+    },
+    "fs2": {
+      "title": "Film Festival",
+      "area": "Centum City",
+      "desc": "Asia's largest film festival, a meeting of film professionals from around the world",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "Gyeongbokgung",
+      "area": "Jongno",
+      "desc": "A place that preserves the history and beauty of Korea as the main palace of the Joseon Dynasty",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "Lotte World Tower",
+      "area": "Jamsil",
+      "desc": "Korea's tallest building where you can see the fantastic night view of Seoul at a glance",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "KTX to Busan",
+      "area": "Seoul Station",
+      "desc": "The fastest and most convenient way to travel from Seoul to Busan",
+      "price": "59,800"
+    },
+    "phrases": {
+      "title": "Travel Phrasebook",
+      "subtitle": "Essential local expressions for seamless communication",
+      "eyebrow": "Prepared Traveler",
+      "hero": {
+        "badge": "Recommended for Today",
+        "count": "useful expressions"
+      },
+      "context": {
+        "title": "Contextual Phrases",
+        "booking": "Useful phrases related to your booking information.",
+        "interpreter": "Phrases to use when you need translation support.",
+        "support": "Useful phrases when you need help."
+      },
+      "category": {
+        "title": "{{category}} Phrases"
+      },
+      "categories": {
+        "transport": {
+          "label": "Transport",
+          "description": "Phrases for moving around",
+          "helper": "Use for taxis or subways"
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "description": "Phrases for ordering food",
+          "helper": "Use for reservations and requests"
+        },
+        "beauty": {
+          "label": "Beauty",
+          "description": "Phrases for salon services",
+          "helper": "Use for consultations and treatment requests"
+        },
+        "emergency": {
+          "label": "Emergency",
+          "description": "Phrases for urgent situations",
+          "helper": "Use for police or ambulance requests"
+        }
+      },
+      "favorites": {
+        "desc": "Save phrases you use frequently",
+        "empty": "No saved phrases yet"
+      },
+      "recent": {
+        "desc": "Phrases you've checked recently"
+      },
+      "empty": {
+        "title": "No phrases found",
+        "desc": "Check other categories"
+      },
+      "items": {
+        "transport_address": "Destination address",
+        "transport_dropoff": "Stop here",
+        "transport_time": "Travel time",
+        "transport_map": "Use the map",
+        "transport_platform": "Platform check",
+        "restaurant_allergy": "Seafood allergy",
+        "restaurant_spicy": "No spicy food",
+        "restaurant_recommend": "Popular menu",
+        "restaurant_less_spicy": "Less spicy request",
+        "restaurant_split": "Split the bill",
+        "beauty_reservation": "Treatment booking",
+        "beauty_natural": "Natural style",
+        "beauty_price": "Price check first",
+        "beauty_slowly": "Explain slowly",
+        "beauty_before_start": "Confirm before start",
+        "emergency_help": "Need help now",
+        "emergency_translation": "Need a translation",
+        "emergency_lost": "Lost",
+        "emergency_1330": "Tourist helpline",
+        "emergency_police": "Police help",
+        "notes": {
+          "transport_map": "Useful when pronunciation or landmarks are difficult.",
+          "emergency_1330": "1330 is the Korea Travel Helpline."
+        }
+      }
+    }
+  },
+  "today_page": {
+    "title": "جدول اليوم",
+    "active_now": "نشط الآن",
+    "navigate": "ملاحة",
+    "booking_ref": "مرجع الحجز: {{ref}}",
+    "next_up": "التالي",
+    "minutes_left": "يبدأ في {{mins}} دقيقة",
+    "depart_early": "غادر الآن",
+    "timeline": "الجدول الزمني",
+    "empty": {
+      "title": "لا يوجد جدول اليوم",
+      "desc": "استكشف الأماكن وأضفها إلى رحلتك!",
+      "cta": "استكشف الأماكن"
+    }
+  },
+  "booking_detail": {
+    "select_date": "اختر التاريخ",
+    "select_time": "اختر الوقت",
+    "total_price": "السعر الإجمالي",
+    "request_booking": "طلب الحجز",
+    "unavailable_title": "تفاصيل هذا المكان غير متاحة حالياً",
+    "unavailable_desc": "هذا الرابط لا يتطابق مع تفاصيل استكشاف مدعومة بعد. عد إلى الاستكشاف لتصفح الأماكن المتاحة."
+  },
+  "navigation_page": {
+    "title": "جدول اليوم",
+    "status": {
+      "on_trip": "في السفر",
+      "pre_trip": "التحضير",
+      "idle": "لا يوجد جدول"
+    },
+    "countdown": {
+      "today": "اليوم",
+      "starts_in": "يبدأ في {{mins}} دقيقة",
+      "traveling_to": "في الطريق إلى {{dest}}"
+    },
+    "empty": {
+      "title": "لا يوجد جدول اليوم",
+      "subtitle": "خطط ليومك في الاستكشاف أو الجدول",
+      "cta": "استكشف الأماكن"
+    },
+    "actions": {
+      "directions": "ملاحة",
+      "booking": "عرض الحجز",
+      "late_risk": "خطر التأخر!",
+      "booking_ref": "مرجع الحجز: {{ref}}",
+      "departure_warning": "⚠️ {{title}} يبدأ في {{mins}} دقيقة — يرجى المغادرة الآن!"
+    }
+  },
+  "planner_page": {
+    "title": "الجدول",
+    "day": "اليوم {{n}}",
+    "focus": {
+      "title": "حجز مركّز",
+      "desc": "استخدم هذه الاختصارات للحجز المميز في خطتك."
+    },
+    "add_from_discover": "🔍 أضف من الاكتشاف",
+    "auto_build": "✨ بناء تلقائي",
+    "add_to": "أضف إلى {{slot}}",
+    "book_all": "🎫 طلب الحجز",
+    "booking_modal": {
+      "title": "طلب الحجز",
+      "date": "التاريخ",
+      "people": "الأشخاص",
+      "people_count": "{{n}} شخص",
+      "notes": "طلبات خاصة (اختياري)",
+      "submit": "إرسال الطلب",
+      "submitting": "جارٍ الإرسال...",
+      "success_title": "تم استلام الطلب!",
+      "success_desc": "سيتصل بك الكونسيرج خلال 24 ساعة.",
+      "unavailable_title": "الفترة الزمنية غير متاحة",
+      "unavailable_desc": "نقترح هذه البدائل:",
+      "view_status": "عرض الحالة"
+    },
+    "status": {
+      "draft": "مسودة",
+      "submitted": "تم الإرسال",
+      "confirmed": "مؤكد",
+      "unavailable": "غير متاح",
+      "completed": "مكتمل"
+    },
+    "support": {
+      "title": "مركز المساعدة",
+      "subtitle": "كيف يمكننا مساعدتك؟",
+      "eyebrow": "مساعدة سريعة",
+      "chat_label": "دردشة فورية",
+      "chat_sub": "متاح 24/7",
+      "chat_action": "بدء الدردشة",
+      "faq_title": "الأسئلة الشائعة",
+      "faq_loading": "جارٍ التحميل...",
+      "ask_anything": "اسألنا أي شيء",
+      "hero_badge": "مساعدة سريعة",
+      "category": {
+        "reservation": "الحجز والتأكيد",
+        "payment": "الدفع والإلغاء",
+        "usage": "كيفية الاستخدام",
+        "other": "أخرى"
+      },
+      "category_desc": {
+        "reservation": "تحقق من سجل الحجوزات وغيّره",
+        "payment": "طرق الدفع وسياسات الاسترداد",
+        "usage": "دليل استخدام الخدمة",
+        "other": "اسألنا أي شيء"
+      },
+      "guides": {
+        "find_booking": {
+          "q": "أين يمكنني التحقق من حجزي؟",
+          "a": "يمكنك التحقق من جميع حالات الحجز في صفحة حجوزاتي."
+        },
+        "staff_talk": {
+          "q": "هل يمكنني الحصول على دعم للترجمة؟",
+          "a": "يمكنك التواصل بسلاسة مع الموظفين المحليين من خلال خدمة الترجمة في Kello."
+        },
+        "change_time": {
+          "q": "أريد تغيير وقت حجزي.",
+          "a": "يرجى النقر على زر طلب تغيير الوقت في صفحة تفاصيل الحجز."
+        },
+        "cancel_refund": {
+          "q": "ما هي سياسات الإلغاء والاسترداد؟",
+          "a": "قبل 4+ أيام: 100٪. قبل 3 أيام: 80٪. قبل يومين: 60٪. قبل يوم أو في نفس اليوم: لا استرداد. رسوم المنصة 10٪ غير قابلة للاسترداد."
+        },
+        "write_review": {
+          "q": "كيف أكتب تقييماً؟",
+          "a": "يمكن كتابة التقييمات في صفحة المجتمع للحجوزات المكتملة فقط."
+        },
+        "community_safety": {
+          "q": "هل توجد إرشادات للمجتمع؟",
+          "a": "يرجى اتباع سياسة التشغيل لثقافة سفر آمنة وممتعة.",
+          "cta": "تحقق من سياسة التشغيل"
+        }
+      },
+      "general": {
+        "title": "الدعم العام",
+        "desc": "مساعدة عامة لاستخدام الخدمة.",
+        "report_notice": "للمشكلات المتعلقة بالحجز، استخدم الإبلاغ عن مشكلة في تفاصيل الحجز.",
+        "booking_cancel": {
+          "label": "دليل إلغاء الحجز",
+          "desc": "معلومات حول إجراءات الإلغاء والاسترداد.",
+          "cta": "عرض الدليل"
+        },
+        "community_safety": {
+          "label": "إرشادات المجتمع",
+          "desc": "معلومات لمجتمع نظيف.",
+          "cta": "تحقق من الإرشادات"
+        },
+        "partner": {
+          "label": "دعم الشريك",
+          "desc": "دليل لتسجيل الشريك واستخدامه.",
+          "cta": "استفسار الشريك"
+        }
+      },
+      "faq": {
+        "title": "الأسئلة الشائعة",
+        "desc": "الأسئلة المطروحة بشكل متكرر."
+      },
+      "booking": {
+        "context_title": "المتعلق بالحجز الحالي",
+        "context_desc": "مساعدة مخصصة لحجزك الجاري.",
+        "banner_report": "الإبلاغ عن مشكلة لـ {{bookingName}}",
+        "banner_interpreter": "دعم الترجمة لـ {{bookingName}}",
+        "banner_default": "مساعدة لـ {{bookingName}}",
+        "banner_fallback": "مساعدة للحجز الجاري",
+        "title": "إدارة حجزي",
+        "desc": "احصل على مساعدة تتعلق بحجوزاتك الأخيرة.",
+        "empty": {
+          "title": "لا توجد حجوزات أخيرة",
+          "desc": "احجز خدمة جديدة وأنشئ أفضل تجربة."
+        }
+      }
+    },
+    "slots": {
+      "am": "ص",
+      "pm": "م",
+      "night": "ليلاً"
+    }
+  },
+  "transport": {
+    "moving_to": "التوجه إلى {{dest}}",
+    "remaining": "المتبقي",
+    "line_2_direction": "الخط 2 · باتجاه City Hall",
+    "departed": "غادر",
+    "passing_now": "يمر الآن...",
+    "current": "الحالي",
+    "get_off_at": "انزل في",
+    "exit_3": "المخرج 3",
+    "getting_off_here": "سأنزل هنا",
+    "stations": {
+      "samseong": "Samseong",
+      "seolleung": "Seolleung",
+      "yeoksam": "Yeoksam",
+      "gangnam": "Gangnam",
+      "gyodae": "Gyodae",
+      "seocho": "Seocho",
+      "seongsu": "Seongsu"
+    }
   }
 }

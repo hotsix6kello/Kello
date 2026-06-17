@@ -465,6 +465,12 @@
     "lang_th": "ไทย",
     "lang_id": "Bahasa Indonesia",
     "lang_ms": "Bahasa Melayu",
+    "lang_es": "Español",
+    "lang_fr": "Français",
+    "lang_de": "Deutsch",
+    "lang_ar": "العربية",
+    "lang_pt": "Português",
+    "lang_ru": "Русский",
     "intent_booking_confirm": "Confirm Booking",
     "intent_service_request": "Delivery of Service Request",
     "intent_allergy_notice": "Delivery of Sensitive Info",
@@ -922,7 +928,22 @@
     "morning": "Good Morning",
     "afternoon": "Good Afternoon",
     "evening": "Good Evening",
-    "help_nav": "Help"
+    "help_nav": "Help",
+    "view_map": "View Location",
+    "view_map_desc": "Check the exact location on the map",
+    "taxi_call": "Call a Taxi",
+    "route_nav": "Route Guide",
+    "transit_nav_desc": "Public transit directions",
+    "copy_address": "Copy Address",
+    "copied": "Copied!",
+    "greeting_morning": "Good Morning",
+    "greeting_afternoon": "Good Afternoon",
+    "greeting_evening": "Good Evening",
+    "search_results": "Search Results",
+    "search_results_for": "{{count}} results for '{{query}}'",
+    "errors": {
+      "processing_failed": "Processing failed."
+    }
   },
   "home": {
     "presets": {
@@ -2148,6 +2169,10 @@
         "rejected_cta": "Apply Again"
       }
     },
+    "help_medical": "Medical",
+    "help_interpreter": "Interpretation",
+    "help_police": "Police",
+    "help_lost": "Lost Item",
     "community": {
       "empty_simple": "You haven't written any community posts yet."
     },
@@ -2158,7 +2183,8 @@
       "matching_desc": "Waiting for salon match",
       "price_pending": "Price pending shop confirmation",
       "error_fetch": "Failed to load bookings.",
-      "browse_beauty_cta": "Browse Beauty Bookings"
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "empty_text": "No booking history yet."
     },
     "profile": {
       "account_hint": "Account & Settings",
