@@ -630,8 +630,8 @@ export default function CommunityPage() {
                             </div>
                             <div className={styles.emptyDesc}>
                                 {searchQuery
-                                    ? `"${searchQuery}"에 해당하는 게시글이 없어요.`
-                                    : '첫 번째 K-뷰티 이야기나 여행 질문을 남겨보세요.'}
+                                    ? t('community_page.states.no_results_desc')
+                                    : t('community_page.states.empty_desc')}
                             </div>
                             <div className={styles.emptyCtaGroup}>
                                 <button

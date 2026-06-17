@@ -3,17 +3,9 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import styles from './HomePartnerStores.module.css';
 import type { PublishedStoreItem } from '@/app/api/stores/published/route';
-
-const BUSINESS_TYPE_LABELS: Record<string, string> = {
-  hair: '헤어',
-  nail: '네일',
-  eyelash: '속눈썹',
-  makeup: '메이크업',
-  esthetic: '에스테틱',
-  waxing: '왁싱',
-};
 
 const TYPE_EMOJIS: Record<string, string> = {
   hair: '✂️',
@@ -26,7 +18,6 @@ const TYPE_EMOJIS: Record<string, string> = {
 
 function getAddressShort(address: string | null): string {
   if (!address) return '';
-  // "서울특별시 강남구 테헤란로 ..." → "강남구"
   const parts = address.split(' ');
   return parts[1] ?? parts[0] ?? '';
 }
@@ -43,29 +34,30 @@ function SkeletonCard() {
   );
 }
 
-const EMPTY_CARDS = [
-  {
-    title: '헤어 제휴샵 준비 중',
-    description: '외국인 고객 응대가 가능한 K-뷰티샵을 선별하고 있어요.',
-    type: 'hair',
-  },
-  {
-    title: '네일 제휴샵 준비 중',
-    description: '사진 견적과 예약 확정이 가능한 제휴샵을 준비 중이에요.',
-    type: 'nail',
-  },
-  {
-    title: '속눈썹·메이크업 준비 중',
-    description: '방문 전 상담이 가능한 제휴샵을 모집하고 있어요.',
-    type: 'makeup',
-  },
-];
-
 export default function HomePartnerStores() {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [stores, setStores] = useState<PublishedStoreItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
+
+  const EMPTY_CARDS = [
+    {
+      title: t('stores_page.empty_hair_title'),
+      description: t('stores_page.empty_hair_desc'),
+      type: 'hair',
+    },
+    {
+      title: t('stores_page.empty_nail_title'),
+      description: t('stores_page.empty_nail_desc'),
+      type: 'nail',
+    },
+    {
+      title: t('stores_page.empty_lash_title'),
+      description: t('stores_page.empty_lash_desc'),
+      type: 'makeup',
+    },
+  ];
 
   useEffect(() => {
     fetch('/api/stores/published', { cache: 'no-store' })
@@ -87,24 +79,23 @@ export default function HomePartnerStores() {
   const handlePartnerBooking = (store: PublishedStoreItem) => {
     const params = new URLSearchParams({
       booking: 'true',
-      business_name: store.name ?? '제휴 매장',
+      business_name: store.name ?? t('stores_page.default_store_name'),
       store_id: store.id,
       store_source: 'partner',
     });
-
     router.push(`/?${params.toString()}`);
   };
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <span className={styles.title}>추천 제휴샵</span>
+        <span className={styles.title}>{t('stores_page.section_title')}</span>
         <button
           type="button"
           className={styles.viewAllBtn}
           onClick={() => router.push('/stores')}
         >
-          전체 보기 →
+          {t('stores_page.view_all')}
         </button>
       </div>
 
@@ -112,69 +103,66 @@ export default function HomePartnerStores() {
         {loading && Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)}
 
         {!loading && fetchError && (
-          <div className={styles.errorCard}>제휴샵 정보를 불러오지 못했어요.</div>
+          <div className={styles.errorCard}>{t('stores_page.fetch_error')}</div>
         )}
 
         {!loading &&
           !fetchError &&
           stores.length > 0 &&
           stores.map((store) => {
-              const type = firstType(store.businessTypes);
-              const emoji = TYPE_EMOJIS[type] ?? '🏪';
+            const type = firstType(store.businessTypes);
+            const emoji = TYPE_EMOJIS[type] ?? '🏪';
 
-              return (
-                <article
-                  key={store.id}
-                  className={styles.card}
-                >
-                  <div className={styles.cardThumb}>
-                    {store.thumbnailUrl ? (
-                      <Image
-                        src={store.thumbnailUrl}
-                        alt={store.name ?? '제휴 매장'}
-                        fill
-                        sizes="160px"
-                        className={styles.cardThumbImg}
-                      />
-                    ) : (
-                      <div className={styles.cardThumbPlaceholder}>{emoji}</div>
-                    )}
-                  </div>
+            return (
+              <article key={store.id} className={styles.card}>
+                <div className={styles.cardThumb}>
+                  {store.thumbnailUrl ? (
+                    <Image
+                      src={store.thumbnailUrl}
+                      alt={store.name ?? t('stores_page.default_store_name')}
+                      fill
+                      sizes="160px"
+                      className={styles.cardThumbImg}
+                    />
+                  ) : (
+                    <div className={styles.cardThumbPlaceholder}>{emoji}</div>
+                  )}
+                </div>
 
-                  <div className={styles.cardBody}>
-                    <div className={styles.cardName}>{store.name ?? '매장'}</div>
-                    <div className={styles.tagRow}>
-                      {store.businessTypes.slice(0, 2).map((t) => (
-                        <span key={t} className={styles.tag}>
-                          {BUSINESS_TYPE_LABELS[t] ?? t}
-                        </span>
-                      ))}
-                    </div>
-                    {store.address && (
-                      <div className={styles.cardAddress}>{getAddressShort(store.address)}</div>
-                    )}
-                    <button
-                      type="button"
-                      className={styles.cardCta}
-                      onClick={() => handlePartnerBooking(store)}
-                    >
-                      예약 문의하기
-                    </button>
+                <div className={styles.cardBody}>
+                  <div className={styles.cardName}>{store.name ?? t('stores_page.default_store_name')}</div>
+                  <div className={styles.tagRow}>
+                    {store.businessTypes.slice(0, 2).map((type) => (
+                      <span key={type} className={styles.tag}>
+                        {t(`categories.${type}.label`, { defaultValue: type })}
+                      </span>
+                    ))}
                   </div>
-                </article>
-              );
-            })}
+                  {store.address && (
+                    <div className={styles.cardAddress}>{getAddressShort(store.address)}</div>
+                  )}
+                  <button
+                    type="button"
+                    className={styles.cardCta}
+                    onClick={() => handlePartnerBooking(store)}
+                  >
+                    {t('stores_page.booking_inquiry')}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
 
         {!loading &&
           !fetchError &&
           stores.length === 0 &&
           EMPTY_CARDS.map((card) => (
-            <article key={card.title} className={styles.emptyCard}>
+            <article key={card.type} className={styles.emptyCard}>
               <div className={styles.emptyIcon}>{TYPE_EMOJIS[card.type] ?? '🏪'}</div>
               <div className={styles.emptyTitle}>{card.title}</div>
               <p className={styles.emptyDesc}>{card.description}</p>
               <button type="button" className={styles.emptyCta} onClick={handleStartBooking}>
-                예약 문의하기
+                {t('stores_page.booking_inquiry')}
               </button>
             </article>
           ))}

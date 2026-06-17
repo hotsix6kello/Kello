@@ -516,7 +516,14 @@ export default function HomeBookingFlowEntry({
         });
       } catch (err: unknown) {
         setActiveSubmitStatus("submit-error");
-        const errorMessage = err instanceof Error ? err.message : t("home_beauty.booking.booking_failed");
+        const rawMsg = err instanceof Error ? err.message : '';
+        const errorMessage = rawMsg === 'BOOKING_LOGIN_REQUIRED'
+          ? t('beauty_booking_errors.login_required')
+          : rawMsg === 'BOOKING_REVIEW_INFO'
+          ? t('beauty_booking_errors.review_info')
+          : rawMsg === 'BOOKING_SAVE_FAILED' || !rawMsg
+          ? t('beauty_booking_errors.save_failed')
+          : rawMsg;
         setSubmitFeedback({
           tone: "error",
           message: errorMessage,

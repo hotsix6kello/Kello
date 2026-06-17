@@ -92,7 +92,9 @@
       "view_again": "View Again",
       "map": "Map",
       "call_120": "Call 120",
-      "back_to_list": "返回列表"
+      "back_to_list": "返回列表",
+      "send": "發送",
+      "logout": "登出"
     },
     "states": {
       "posts": "Posts",
@@ -172,7 +174,9 @@
       "seoul": "首尔",
       "busan": "釜山",
       "jeju": "济州",
-      "gyeongju": "庆州"
+      "gyeongju": "庆州",
+      "daegu": "大邱",
+      "incheon": "仁川"
     },
     "categories": {
       "all": "全部",
@@ -304,7 +308,14 @@
       "agreement_refund_policy_desc": "已閱讀並同意上述取消與退款政策。",
       "submitting": "處理中...",
       "submit_final": "提交最終預約",
-      "go_back_to_main": "返回首頁"
+      "go_back_to_main": "返回首頁",
+      "submit_blocked_store": "未選擇門店。請重新選擇門店後重試。",
+      "submit_blocked_service": "請選擇服務菜單後重試。",
+      "submit_blocked_schedule": "請確認預約日期後重試。",
+      "submit_blocked_customer": "請輸入姓名和聯絡方式後重試。",
+      "submit_blocked_agreements": "請同意必填條款後重試。",
+      "submit_blocked_generic": "無法發送預約請求。請檢查您的資訊後重試。",
+      "section_subtitle": "選擇K-Beauty服務，立即開始預約。"
     }
   },
   "booking_skeleton": {
@@ -1448,7 +1459,12 @@
     },
     "travel_info": {
       "title": "旅遊資訊"
-    }
+    },
+    "title": "我的Kello",
+    "exchange_rate_base": "KRW基準",
+    "no_email": "無郵箱資訊",
+    "referral_code_label": "推薦碼",
+    "price_negotiating": "價格協商中"
   },
   "beauty_bookings": {
     "page_title": "我的美容預約",
@@ -1896,7 +1912,9 @@
       "alternative_title": "接收備用行程通知",
       "alternative_desc": "若您請求的時間已滿且店家建議其他時間，將通知您。"
     },
-    "footer_note": "重要的預約公告可能不受設定限制而發送。"
+    "footer_note": "重要的預約公告可能不受設定限制而發送。",
+    "tab_booking": "預約",
+    "tab_updates": "動態"
   },
   "signup": {
     "subtitle": "像當地人一樣體驗韓國",
@@ -1908,7 +1926,27 @@
     "loading": "建立帳戶中...",
     "success": "帳戶已建立！請查收郵件完成驗證後登入。",
     "login_prompt": "已有帳戶？",
-    "login_link": "登入"
+    "login_link": "登入",
+    "title_new": "註冊Kello",
+    "title_google": "完善個人資料",
+    "subtitle_new": "輸入郵箱和資訊完成註冊",
+    "subtitle_google": "填寫附加資訊，開始使用Kello",
+    "nickname_label": "暱稱",
+    "nickname_placeholder": "您的暱稱",
+    "phone_label": "手機號碼",
+    "instagram_label": "Instagram帳號",
+    "password_for_email": "（郵箱登入用）",
+    "pw_min_length": "8位以上",
+    "pw_special": "包含特殊字符 (!@#$% 等)",
+    "submit": "註冊",
+    "submit_google": "完善個人資料",
+    "processing": "處理中...",
+    "go_to_login": "前往登入 →",
+    "error_terms": "請同意必要條款。",
+    "error_password": "密碼必須至少8位且包含特殊字符(!@#$%等)。",
+    "error_duplicate_email": "該郵箱已註冊。請前往登入頁面。",
+    "error_invalid_email": "無效的電子郵件地址。",
+    "error_generic": "發生錯誤，請重試。"
   },
   "help_page": {
     "title": "緊急支援",
@@ -2171,5 +2209,198 @@
   "common_loading": "載入中...",
   "error_title": "發生錯誤。",
   "error_desc": "如果問題持續，請聯絡客服。",
-  "error_retry": "重試"
+  "error_retry": "重試",
+  "stores_page": {
+    "section_title": "推薦合作門店",
+    "page_title": "Kello合作美容門店",
+    "subtitle": "英語OK · 照片報價 · 可確認預約的K-Beauty門店",
+    "view_on_map": "🗺️ 在地圖上查看",
+    "booking_inquiry": "預約諮詢",
+    "booking_inquiry_short": "預約",
+    "view_all": "查看全部 →",
+    "fetch_error": "無法載入合作門店資訊。",
+    "no_category_stores": "該分類暫無合作門店。",
+    "default_store_name": "合作門店",
+    "empty_hair_title": "美髮合作門店準備中",
+    "empty_hair_desc": "正在篩選可接待外國顧客的K-Beauty門店。",
+    "empty_nail_title": "美甲合作門店準備中",
+    "empty_nail_desc": "正在準備提供照片報價和預約確認的合作門店。",
+    "empty_lash_title": "睫毛·彩妝準備中",
+    "empty_lash_desc": "正在招募可在到店前進行諮詢的合作門店。"
+  },
+  "explore_map": {
+    "search_placeholder": "搜尋住宿、飯店、地區",
+    "search_btn": "搜尋",
+    "my_location": "我的位置",
+    "beauty_shop": "美容店",
+    "restaurant": "餐廳",
+    "accommodation": "住宿"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "韓語查看模式",
+    "korean_viewer_hint": "💡 請開啟韓語查看模式向店員展示。"
+  },
+  "home_hero": {
+    "wave_hair": "波浪捲髮",
+    "bob_hair": "鮑伯短髮",
+    "curly_hair": "捲髮",
+    "dandy_hair": "紳士髮型",
+    "ice_nail": "冰晶美甲",
+    "nude_nail": "裸色美甲",
+    "mint_nail": "薄荷美甲",
+    "black_nail": "黑色美甲",
+    "red_lip": "紅唇妝",
+    "pure_look": "清純妝",
+    "idol_look": "偶像妝",
+    "glow_look": "光澤妝",
+    "natural_lash": "自然款睫毛",
+    "volume_lash": "濃密款睫毛",
+    "curl_lash": "捲翹款睫毛",
+    "clean_lash": "乾淨款睫毛"
+  },
+  "business_page": {
+    "desc1": "這是Kello精心挑選的高端合作門店。",
+    "desc2": "體驗專業設計師貼心諮詢與時尚造型服務。"
+  },
+  "login": {
+    "title": "開始使用Kello",
+    "subtitle": "使用Google或郵箱輕鬆登入\n開始預約",
+    "home_shortcut": "返回首頁",
+    "connecting": "連接中...",
+    "google_cta": "使用Google繼續",
+    "x_cta": "使用X繼續",
+    "email_cta": "使用郵箱繼續",
+    "sending": "發送連結中...",
+    "magic_link_sent": "已將登入連結發送至您的郵箱。",
+    "magic_link_desc": "請查看郵箱並點擊連結繼續。",
+    "magic_link_retry": "換其他郵箱重試",
+    "error_x_login": "無法啟動X登入，請重試。",
+    "error_facebook_login": "無法啟動Facebook登入，請重試。"
+  },
+  "referral_page": {
+    "applied_toast": "推薦碼已應用！已發放5%優惠券 🎉",
+    "error_unknown": "發生未知錯誤。",
+    "error_retry": "發生暫時錯誤，請重試。"
+  },
+  "talk_ui": {
+    "notification_list": "通知列表",
+    "mark_all_read": "全部已讀",
+    "no_notifications": "暫無通知。",
+    "connect_store": "連接門店",
+    "leave_chat": "退出聊天室",
+    "notifications_on": "開啟通知",
+    "notifications_off": "關閉通知",
+    "pin_message": "置頂",
+    "unpin_message": "取消置頂",
+    "new_message": "新訊息！",
+    "go": "前往",
+    "translation_failed": "翻譯失敗",
+    "translation_failed_msg": "翻譯失敗。",
+    "login_required_chat": "登入後可與Kello AI對話，登入後即可繼續！",
+    "select_store": "請選擇要連接的門店。",
+    "disconnected": "該聊天室已斷開連接。",
+    "collapse": "收起",
+    "expand": "展開",
+    "manage_phrases": "管理常用短語",
+    "delete": "刪除",
+    "translating": "翻譯中...",
+    "translation_label": "翻譯",
+    "message_placeholder": "輸入訊息...",
+    "send_aria": "發送",
+    "close_aria": "關閉",
+    "listen_aria": "聽語音",
+    "edit_message": "編輯訊息",
+    "delete_message": "刪除訊息",
+    "edit_confirm": "編輯此訊息？它將移至輸入框。",
+    "delete_confirm": "永久刪除此訊息？",
+    "new_phrase_placeholder": "新增常用短語...",
+    "default_shop_name": "店家員工",
+    "large_view": "放大顯示",
+    "attach_image": "附加圖片",
+    "voice_input": "語音輸入",
+    "emoji": "表情符號",
+    "edit_action": "編輯",
+    "delete_action": "刪除",
+    "beauty_tip": "在韓國，做頭髮前洗頭是基本禮儀。可以對店員說「정말 예뻐요！（真的很好看！）」。"
+  },
+  "help_labels": {
+    "medical": "醫療幫助",
+    "police": "警察幫助",
+    "interpreter": "翻譯幫助",
+    "lost": "失物幫助"
+  },
+  "booking_aesthetic": {
+    "search_placeholder": "搜尋店家名稱、類別或簡介",
+    "empty_title": "未找到門店。",
+    "empty_desc": "請嘗試更改地區篩選或使用其他搜尋詞。",
+    "region_all": "全部",
+    "region_seoul": "首爾",
+    "region_gyeonggi": "京畿道",
+    "region_incheon": "仁川",
+    "region_busan": "釜山",
+    "region_jeju": "濟州",
+    "no_partners_title": "合作美容門店準備中",
+    "no_partners_desc": "精心挑選的K-Beauty合作門店即將上線。"
+  },
+  "beauty_booking_errors": {
+    "login_required": "需要登入。請登入後重試。",
+    "save_failed": "無法儲存預約請求，請稍後重試。",
+    "review_info": "請重新確認您的預約資訊。"
+  },
+  "notification_center": {
+    "title": "通知中心"
+  },
+  "partner_signup": {
+    "badge": "🤝 合作申請",
+    "title": "申請成為合作夥伴",
+    "subtitle": "與Kello合作，讓更多旅行者了解您",
+    "info": "提交申請後，管理員審核通過後將註冊為合作夥伴。審核可能需要1~3個工作天。",
+    "section_basic": "📋 基本資訊",
+    "section_contact": "👤 聯絡人資訊",
+    "section_desc": "📝 商家介紹",
+    "company_name": "商家名稱",
+    "company_placeholder": "例：首爾民宿",
+    "business_type": "業種",
+    "business_type_placeholder": "請選擇業種",
+    "group_beauty": "💅 美容",
+    "opt_hair": "✂️ 美髮",
+    "opt_nail": "💅 美甲",
+    "opt_body": "🛁 身體護理",
+    "opt_makeup": "💄 彩妝",
+    "group_food": "🍽️ 餐飲",
+    "opt_food_general": "🍽️ 一般",
+    "opt_food_vegan": "🥗 純素",
+    "opt_food_halal": "🕌 清真",
+    "opt_landmark": "🗺️ 地標",
+    "opt_other": "📋 其他",
+    "license_label": "營業執照 / 證明文件",
+    "license_uploaded": "✅ 文件上傳成功。",
+    "license_view": "查看文件",
+    "license_hint": "請上傳圖片文件(JPG, PNG)或PDF。",
+    "uploading": "上傳中...",
+    "choose_file": "選擇文件",
+    "address": "地址",
+    "address_placeholder": "例：首爾市鐘路區...",
+    "website": "網站",
+    "contact_name": "聯絡人姓名",
+    "contact_placeholder": "張三",
+    "email": "郵箱",
+    "phone": "電話",
+    "desc_label": "商家介紹",
+    "desc_placeholder": "簡單介紹您的服務和特色...",
+    "success_title": "申請已提交！",
+    "success_body": "的合作申請已收到。管理員審核後將通知{email}。審核可能需要1~3個工作天。",
+    "pending_notice": "⏳ 審核通過前，合作夥伴登入受限。",
+    "go_login": "前往登入頁面",
+    "already_account": "已有審核通過的帳號？",
+    "login_link": "登入",
+    "error_upload": "文件上傳出錯：",
+    "error_no_license": "請上傳營業執照或證明文件。",
+    "error_pending": "該郵箱已有待審核申請，請等待管理員審核。",
+    "error_approved": "該郵箱已審核通過，請使用合作夥伴登入。",
+    "error_exists": "該郵箱已有申請記錄。聯絡：admin@kello.app",
+    "error_submit": "申請提交出錯：",
+    "back": "← 返回",
+    "home": "🏠 首頁"
+  }
 }

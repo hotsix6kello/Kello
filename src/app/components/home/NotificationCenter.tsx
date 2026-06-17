@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { Bell, CalendarCheck, MessageSquare, Gift, Info, CalendarClock, CalendarX } from 'lucide-react';
 import styles from './NotificationCenter.module.css';
 import { supabase } from '@/lib/supabaseClient';
@@ -34,17 +35,20 @@ function getSubType(eventType: string): string {
   return 'remind';
 }
 
-function formatRelativeTime(dateStr: string): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TFunc = (key: string, opts?: any) => string;
+
+function formatRelativeTime(dateStr: string, t: TFunc): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const minutes = Math.floor(diff / 60000);
-  if (minutes < 60) return `${Math.max(1, minutes)}분 전`;
+  if (minutes < 60) return t('common.runtime.relative.minutes_ago', { count: Math.max(1, minutes) });
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}시간 전`;
+  if (hours < 24) return t('common.runtime.relative.hours_ago', { count: hours });
   const days = Math.floor(hours / 24);
-  return `${days}일 전`;
+  return t('common.runtime.relative.days_ago', { count: days });
 }
 
-function recordToItem(record: BeautyBookingNotificationRecord): NotificationItem {
+function recordToItem(record: BeautyBookingNotificationRecord, t: TFunc): NotificationItem {
   return {
     id: record.id,
     bookingId: record.booking_id,
@@ -52,7 +56,7 @@ function recordToItem(record: BeautyBookingNotificationRecord): NotificationItem
     subType: getSubType(record.event_type),
     title: record.title,
     description: record.message,
-    time: formatRelativeTime(record.created_at),
+    time: formatRelativeTime(record.created_at, t),
     status: record.read_at ? 'read' : 'unread',
   };
 }
@@ -71,6 +75,7 @@ function SkeletonItem() {
 
 export default function NotificationCenter() {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'All' | 'Booking' | 'Updates'>('All');
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
@@ -89,7 +94,7 @@ export default function NotificationCenter() {
       if (!res.ok) return;
       const body = await res.json() as { ok: boolean; items?: BeautyBookingNotificationRecord[] };
       if (body.ok && body.items) {
-        setNotifications(body.items.map(recordToItem));
+        setNotifications(body.items.map((r) => recordToItem(r, t)));
       }
     } finally {
       setIsLoading(false);
@@ -192,9 +197,9 @@ export default function NotificationCenter() {
   };
 
   const tabs = [
-    { id: 'All', label: '전체' },
-    { id: 'Booking', label: '예약' },
-    { id: 'Updates', label: '소식' }
+    { id: 'All', label: t('common.categories.all') },
+    { id: 'Booking', label: t('notifications.tab_booking') },
+    { id: 'Updates', label: t('notifications.tab_updates') },
   ] as const;
 
   return (
@@ -214,7 +219,7 @@ export default function NotificationCenter() {
         <div className={styles.panel}>
           <div className={styles.header}>
             <div className={styles.headerRow}>
-              <h3 className={styles.headerTitle}>알림 센터</h3>
+              <h3 className={styles.headerTitle}>{t('notification_center.title')}</h3>
               {unreadCount > 0 && (
                 <button className={styles.markAllButton} onClick={() => void handleMarkAllRead()}>
                   모두 읽음
