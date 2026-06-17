@@ -1,6 +1,17 @@
 {
+  "title": "ビューティー探索",
+  "subtitle": "あなたにぴったりのサロンとサービスを見つけましょう。",
+  "search": {
+    "placeholder": "サロン名やメニューで検索...",
+    "all": "ビューティー、グルメなど検索...",
+    "beauty": "クリニック、サロン検索...",
+    "event": "コンサート、公演検索...",
+    "food": "グルメ、メニュー検索...",
+    "festival": "フェスティバル検索...",
+    "attraction": "宮殿、公園検索..."
+  },
   "hero_eyebrow": "ビューティー予約",
-  "category_all": "ビューティー",
+  "category_all": "すべて",
   "hero_title": "{{category}}の予約を今すぐ始めましょう",
   "hero_subtitle": "エリアを選び、店舗を選択し、時間を決めると次のステップに進めます。",
   "hero_category_guide": "ホームで先にカテゴリーを選ぶと、より合った予約フローにすぐ進めます。今はすべてのビューティー店舗を表示しています。",
@@ -17,6 +28,8 @@
   "completion_designer_label": "デザイナー",
   "completion_primary_service_label": "代表メニュー",
   "completion_addon_label": "追加オプション",
+  "completion_lang_label": "伝達言語",
+  "completion_intent_label": "伝達目的",
   "completion_none": "未選択",
   "form_name": "お名前",
   "form_name_placeholder": "予約者のお名前を入力してください。",
@@ -24,6 +37,7 @@
   "form_phone_placeholder": "電話番号またはSNS IDを入力してください。",
   "form_request": "ご要望",
   "form_request_placeholder": "アレルギー、希望スタイル、参考内容などをご記入ください。",
+  "form_request_hint": "選択内容に合わせて自由にご記入ください。",
   "agreement_confirm": "予約内容を確認しました",
   "agreement_confirm_desc": "選択した店舗、日付、時間、サービス内容を確認しました。",
   "agreement_privacy": "個人情報の提供に同意します",
@@ -33,9 +47,25 @@
   "region_gangnam": "江南 (カンナム)",
   "region_hongdae": "弘大 (ホンデ)",
   "region_seongsu": "聖水 (ソンス)",
+  "region_jamsil": "蚕室 (チャムシル)",
+  "region_konkuk": "建大 (コングク)",
+  "region_pangyo": "板橋 (パンギョ)",
+  "filter_region_eyebrow": "エリアフィルター",
+  "filter_region_title": "ご希望のエリアを選択してください",
+  "filter_store_count_suffix": " 件の店舗",
+  "label_selected_datetime": "選択した日時",
+  "btn_change": "変更する",
+  "btn_choose_datetime": "日時を選択する",
+  "add_to_plan": "+ 日程に追加",
+  "today": "今日",
+  "starts_from": "✨ {{price}}ウォン〜",
+  "select_this_salon": "この店舗を選ぶ",
+  "booking_button": "予約する",
+  "change_date_time": "日程変更",
+  "label_beauty": "ビューティー",
   "label_today": "今日",
   "label_tomorrow": "明日",
-  "label_booking_unit": "KRW",
+  "label_booking_unit": "ウォン",
   "label_review": "レビュー",
   "label_select_prompt": "予約する店舗を選択してください。",
   "label_service_default": "未選択",
@@ -45,6 +75,568 @@
   "label_no_surcharge": "追加料金なし",
   "label_addon_default": "追加オプションなし",
   "label_addon_limit": "追加オプションは最大2つまで選択できます。",
+  "label_price_from": "〜から",
+  "label_rating": "評価",
+  "reviews_title": "認証済みレビュー",
+  "reviews_filter_recent": "新着順",
+  "reviews_filter_highest": "評価順",
+  "reviews_helpful": "参考になった",
+  "reviews_view_all": "レビュー1,240件をすべて見る",
+  "regions": {
+    "seongsu": "聖水 (ソンス)",
+    "gangnam": "江南 (カンナム)",
+    "myeongdong": "明洞 (ミョンドン)",
+    "hongdae": "弘大 (ホンデ)",
+    "cheongdam": "清潭 (チョンダム)",
+    "jongno": "鐘路 (チョンノ)",
+    "itaewon": "梨泰院 (イテウォン)",
+    "jamsil": "蚕室 (チャムシル)",
+    "garosugil": "カロスキル",
+    "yeouido": "汝矣島 (ヨイド)",
+    "konkuk": "建大 (コングク)",
+    "pangyo": "板橋 (パンギョ)"
+  },
+  "stores": {
+    "beauty_hair_1": {
+      "name": "ジェニーハウス 清潭",
+      "priceLabel": "150,000ウォン〜",
+      "shortDescription": "K-POPスターが愛用するプレミアムヘア＆メイクアップサロン",
+      "tags": ["K-Style", "プレミアム", "清潭"]
+    },
+    "beauty_hair_2": {
+      "name": "プムクリニック 江南",
+      "priceLabel": "50,000ウォン〜",
+      "shortDescription": "外国人訪問者に最も人気のあるコスパ抜群のクリニック",
+      "tags": ["クリニック", "江南", "コスパ"]
+    },
+    "beauty_nail_1": {
+      "name": "メゾン ネイル 弘大",
+      "priceLabel": "79,000ウォン〜",
+      "shortDescription": "トレンドカラーとシーズンアートで人気のネイルスタジオ",
+      "tags": ["マンスリーアート", "ジェルケア", "カラーキュレーション"]
+    },
+    "beauty_nail_2": {
+      "name": "ベージュ ネイル 鐘路",
+      "priceLabel": "45,000ウォン〜",
+      "shortDescription": "オフィスネイルからウェディングネイルまで丁寧な施術",
+      "tags": ["オフィスネイル", "ウェディングネイル", "ネイルケア"]
+    },
+    "beauty_esthetic_1": {
+      "name": "セリン スキン ラウンジ 江南",
+      "priceLabel": "95,000ウォン〜",
+      "shortDescription": "プライベートな空間で肌鎮静・引き締めケアを",
+      "tags": ["鎮静ケア", "引き締め", "個室完備"]
+    },
+    "beauty_esthetic_2": {
+      "name": "グロウ フォーミュラ 聖水",
+      "priceLabel": "88,000ウォン〜",
+      "shortDescription": "敏感肌のためのカスタム鎮静プログラムとホームケアガイド",
+      "tags": ["保湿", "敏感肌対応", "カスタム相談"]
+    },
+    "beauty_waxing_1": {
+      "name": "ベア アトリエ ワックス 江南",
+      "priceLabel": "99,000ウォン〜",
+      "shortDescription": "徹底した衛生管理と系統的なアフターケアでリピーター続出",
+      "tags": ["衛生管理", "アフターケア", "ブラジリアン"]
+    },
+    "beauty_waxing_2": {
+      "name": "ソフト ストリップ 弘大",
+      "priceLabel": "55,000ウォン〜",
+      "shortDescription": "忙しいスケジュールでも手軽に受けられる低刺激ワックス",
+      "tags": ["アームワックス", "短時間施術", "低刺激"]
+    },
+    "beauty_makeup_1": {
+      "name": "アトリエ ヴェイル メイクアップ",
+      "priceLabel": "デイリー 85,000ウォン〜",
+      "shortDescription": "日常に溶け込む自然でこなれたメイクアップ",
+      "tags": ["メイクアップ", "聖水", "ナチュラル"]
+    },
+    "beauty_makeup_2": {
+      "name": "ディア ミューズ メイクアップ",
+      "priceLabel": "ウェディングゲスト 132,000ウォン〜",
+      "shortDescription": "特別な日やウェディングのための専門メイクアップアーティスト",
+      "tags": ["ウェディング", "鐘路", "専門家"]
+    },
+    "beauty_lash_1": {
+      "name": "ブルーム ラッシュ ブティック 江南",
+      "priceLabel": "99,000ウォン〜",
+      "shortDescription": "目の形に合わせたカールデザインと長持ち施術で評判",
+      "tags": ["カールデザイン", "長持ち施術", "ナチュラルエクステ"]
+    },
+    "beauty_lash_2": {
+      "name": "フェザー ラッシュ 聖水",
+      "priceLabel": "69,000ウォン〜",
+      "shortDescription": "まつ毛パーマ初心者も安心して来店できるナチュラルラッシュサロン",
+      "tags": ["まつ毛パーマ", "初回歓迎", "ナチュラルカール"]
+    }
+  },
+  "designers": {
+    "jia": "ジア デザイナー",
+    "jia_specialty": "レイヤーカット・カラー",
+    "jia_experience": "経歴9年",
+    "jia_desc": "顔型に合わせた丁寧なカウンセリングとカットが得意です。",
+    "minseo": "ミンソ ディレクター",
+    "minseo_specialty": "プレミアムパーマ・クリニック",
+    "minseo_experience": "経歴14年",
+    "minseo_desc": "ダメージレベルに合わせた丁寧な施術順序が特徴です。",
+    "harin": "ハリン デザイナー",
+    "harin_specialty": "ボリュームパーマ・ミディアムレイヤー",
+    "harin_experience": "経歴8年",
+    "harin_desc": "自然なボリュームと顔のラインを引き出します。",
+    "yuna": "ユナ チームリーダー",
+    "yuna_specialty": "カラーチェンジ・ケア",
+    "yuna_experience": "経歴11年",
+    "yuna_desc": "カラートーン提案やブリーチ相談が得意です。",
+    "seoyun": "ソユン アーティスト",
+    "seoyun_specialty": "ジェルネイル・シーズンアート",
+    "seoyun_experience": "経歴7年",
+    "seoyun_desc": "トレンドカラーの組み合わせときれいな仕上がりで評判です。",
+    "chaerin": "チェリン アーティスト",
+    "chaerin_specialty": "ドローイングアート・パーツ",
+    "chaerin_experience": "経歴5年",
+    "chaerin_desc": "イベント向けポイントアートを素早く提案します。",
+    "nayeon": "ナヨン マネージャー",
+    "nayeon_specialty": "ケア・ウェディングネイル",
+    "nayeon_experience": "経歴10年",
+    "nayeon_desc": "ウェディングや撮影スケジュールに合わせたカラーキュレーションが得意です。",
+    "dabin": "ダビン アーティスト",
+    "dabin_specialty": "シロップネイル・グラデーション",
+    "dabin_experience": "経歴6年",
+    "dabin_desc": "澄んでいて繊細なムードの演出が得意です。",
+    "yujin": "ユジン セラピスト",
+    "yujin_specialty": "保湿・リフティング",
+    "yujin_experience": "経歴12年",
+    "yujin_desc": "カスタムフェイシャルテクニックで即効性のある肌変化を提供します。",
+    "sohee": "ソヒ ディレクター",
+    "sohee_specialty": "鎮静ケア・リンパ循環",
+    "sohee_experience": "経歴9年",
+    "sohee_desc": "敏感肌のバランス回復と循環ケアに集中します。",
+    "gayoung": "ガヨン アーティスト",
+    "gayoung_specialty": "輪郭テラピー・ブライトニング",
+    "gayoung_experience": "経歴6年",
+    "gayoung_desc": "明るい肌トーンとシャープな輪郭を作ります。",
+    "yerin": "イェリン セラピスト",
+    "yerin_specialty": "毛穴ケア・皮脂コントロール",
+    "yerin_experience": "経歴5年",
+    "yerin_desc": "丁寧なクレンジングと毛穴引き締めでなめらかな肌を実現します。",
+    "doyeon": "ドヨン ワクサー",
+    "doyeon_specialty": "ブラジリアン・スキンプランニング",
+    "doyeon_experience": "経歴8年",
+    "doyeon_desc": "素早く正確なテクニックで痛みを最小限に抑えます。",
+    "hyuna": "ヒョナ ディレクター",
+    "hyuna_specialty": "フェイス・デザインワックス",
+    "hyuna_experience": "経歴10年",
+    "hyuna_desc": "顔の輪郭を活かした精巧なデザインワックスが専門です。",
+    "sia": "シア アーティスト",
+    "sia_specialty": "ボディワックス・角質ケア",
+    "sia_experience": "経歴4年",
+    "sia_desc": "低刺激のシュガリング法でなめらかなボディを実現します。",
+    "juhee": "ジュヒ ディレクター",
+    "juhee_specialty": "全身ワックス・マタニティ",
+    "juhee_experience": "経歴15年",
+    "juhee_desc": "デリケートな時期でも安心して受けられる熟練のケアを提供します。",
+    "bora": "ボラ アーティスト",
+    "bora_specialty": "デイリー・撮影メイク",
+    "bora_experience": "経歴8年",
+    "bora_desc": "澄んでくっきりとした肌表現が得意です。",
+    "sua": "スア マネージャー",
+    "sua_specialty": "ウェディングゲスト・イベント",
+    "sua_experience": "経歴11年",
+    "sua_desc": "写真映えするトーン整理が得意です。",
+    "jimin": "ジミン アーティスト",
+    "jimin_specialty": "就活・放送メイク",
+    "jimin_experience": "経歴7年",
+    "jimin_desc": "鮮明で清潔感のある印象を素早く仕上げます。",
+    "hyewon": "ヘウォン ディレクター",
+    "hyewon_specialty": "プレミアムイベントメイク",
+    "hyewon_experience": "経歴15年",
+    "hyewon_desc": "大切な日程前に完成度の高いスタイリングを提案します。",
+    "sojung": "ソジョン アーティスト",
+    "sojung_specialty": "まつ毛パーマ・ティンティング",
+    "sojung_experience": "経歴6年",
+    "sojung_desc": "自然なカール感と長持ちが特徴です。",
+    "seah": "セア マネージャー",
+    "seah_specialty": "エクステ・目元デザイン",
+    "seah_experience": "経歴9年",
+    "seah_desc": "目の形に合わせたカールと長さの提案が丁寧です。",
+    "daeun": "ダウン アーティスト",
+    "daeun_specialty": "エクステ・リタッチ",
+    "daeun_experience": "経歴5年",
+    "daeun_desc": "ボリューミーなデザインも軽やかに仕上げます。",
+    "sieun": "シウン ディレクター",
+    "sieun_specialty": "パーマ・ダメージケア",
+    "sieun_experience": "経歴10年",
+    "sieun_desc": "まつ毛の状態を確認しながら施術強度を細かく調整します。",
+    "designer_hair_1_a": {
+      "name": "ジア デザイナー",
+      "specialty": "レイヤーカット・カラー",
+      "experienceLabel": "9年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_hair_1_b": {
+      "name": "ミンソ ディレクター",
+      "specialty": "プレミアムパーマ・クリニック",
+      "experienceLabel": "14年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_hair_2_a": {
+      "name": "ハリン デザイナー",
+      "specialty": "ボリュームパーマ・ミディアム",
+      "experienceLabel": "8年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_hair_2_b": {
+      "name": "ユナ チームリーダー",
+      "specialty": "カラーチェンジ・ケア",
+      "experienceLabel": "11年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_nail_1_a": {
+      "name": "ソユン アーティスト",
+      "specialty": "ジェルネイル・シーズンアート",
+      "experienceLabel": "7年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_nail_1_b": {
+      "name": "チェリン アーティスト",
+      "specialty": "ドローイングアート・パーツ",
+      "experienceLabel": "5年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_nail_2_a": {
+      "name": "ナヨン マネージャー",
+      "specialty": "ケア・ウェディングネイル",
+      "experienceLabel": "10年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_nail_2_b": {
+      "name": "ダビン アーティスト",
+      "specialty": "シロップネイル・グラデーション",
+      "experienceLabel": "6年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_esthetic_1_a": {
+      "name": "ユジン セラピスト",
+      "specialty": "保湿・リフティング",
+      "experienceLabel": "12年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_esthetic_1_b": {
+      "name": "ソヒ ディレクター",
+      "specialty": "鎮静ケア・リンパ",
+      "experienceLabel": "9年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_esthetic_2_a": {
+      "name": "ガヨン セラピスト",
+      "specialty": "輪郭テラピー・ブライトニング",
+      "experienceLabel": "6年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_esthetic_2_b": {
+      "name": "イェリン マネージャー",
+      "specialty": "毛穴ケア・皮脂コントロール",
+      "experienceLabel": "5年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_waxing_1_a": {
+      "name": "ドヨン マネージャー",
+      "specialty": "ブラジリアン・スキンプランニング",
+      "experienceLabel": "8年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_waxing_1_b": {
+      "name": "ヒョナ ディレクター",
+      "specialty": "フェイス・デザインワックス",
+      "experienceLabel": "10年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_waxing_2_a": {
+      "name": "シア マネージャー",
+      "specialty": "ボディワックス・角質ケア",
+      "experienceLabel": "4年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_waxing_2_b": {
+      "name": "ジュヒ マネージャー",
+      "specialty": "全身・マタニティ",
+      "experienceLabel": "15年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_makeup_1_a": {
+      "name": "ボラ アーティスト",
+      "specialty": "デイリー・撮影メイク",
+      "experienceLabel": "8年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_makeup_1_b": {
+      "name": "スア マネージャー",
+      "specialty": "ウェディングゲスト・イベント",
+      "experienceLabel": "11年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_makeup_2_a": {
+      "name": "ジミン アーティスト",
+      "specialty": "就活・放送メイク",
+      "experienceLabel": "7年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_makeup_2_b": {
+      "name": "ヘウォン ディレクター",
+      "specialty": "プレミアムイベントメイク",
+      "experienceLabel": "15年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_lash_1_a": {
+      "name": "ソジョン アーティスト",
+      "specialty": "まつ毛パーマ・ティンティング",
+      "experienceLabel": "6年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_lash_1_b": {
+      "name": "セア マネージャー",
+      "specialty": "エクステ・目元デザイン",
+      "experienceLabel": "9年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_lash_2_a": {
+      "name": "ダウン アーティスト",
+      "specialty": "エクステ・リタッチ",
+      "experienceLabel": "5年",
+      "shortNote": "丁寧なカウンセリング対応"
+    },
+    "designer_lash_2_b": {
+      "name": "シウン ディレクター",
+      "specialty": "パーマ・ダメージケア",
+      "experienceLabel": "10年",
+      "shortNote": "丁寧なカウンセリング対応"
+    }
+  },
+  "services": {
+    "women_cut": "レディースカット",
+    "women_cut_desc": "長さ調整と顔型に合わせたカット。",
+    "men_cut": "メンズカット",
+    "men_cut_desc": "フォルム整えとスタイリングカット。",
+    "root_color": "リタッチカラー",
+    "root_color_desc": "プリン部分のトーン修正。",
+    "hair_clinic": "ヘアクリニック",
+    "hair_clinic_desc": "ダメージケア集中プログラム。",
+    "nail_gel": "ジェルネイル",
+    "nail_gel_desc": "基本ジェルカラー施術。",
+    "nail_care": "ネイルケア",
+    "nail_care_desc": "甘皮ケアとネイルシェイピング。",
+    "nail_pedi": "ジェルペディキュア",
+    "nail_pedi_desc": "フットケア込みのジェル施術。",
+    "esthetic_calming": "鎮静ケア",
+    "esthetic_calming_desc": "敏感肌向け鎮静プログラム。",
+    "esthetic_moisture": "保湿ケア",
+    "esthetic_moisture_desc": "乾燥肌向け保湿充電プログラム。",
+    "esthetic_lifting": "リフティングケア",
+    "esthetic_lifting_desc": "弾力改善中心ケア。",
+    "waxing_brazilian": "ブラジリアン",
+    "waxing_brazilian_desc": "デリケートゾーン中心ワックス。",
+    "waxing_arm": "アームワックス",
+    "waxing_arm_desc": "両腕全体の処理。",
+    "waxing_leg": "レッグワックス",
+    "waxing_leg_desc": "ふくらはぎまたはハーフレッグ基準。",
+    "makeup_daily": "デイリーメイク",
+    "makeup_daily_desc": "日常のアポイントに合わせた軽めのメイク。",
+    "makeup_interview": "就活メイク",
+    "makeup_interview_desc": "就活向けの清潔感ある印象メイク。",
+    "makeup_guest": "ウェディングゲストメイク",
+    "makeup_guest_desc": "イベントスケジュールに合わせたスタイリング。",
+    "lash_perm": "まつ毛パーマ",
+    "lash_perm_desc": "カール固定中心の施術。",
+    "lash_extension": "まつ毛エクステ",
+    "lash_extension_desc": "長さとカール選択型エクステ施術。",
+    "lash_retouch": "まつ毛リタッチ",
+    "lash_retouch_desc": "既存エクステの補完施術。",
+    "hair_add_scalp": "頭皮スケーリング",
+    "hair_add_scalp_desc": "施術前の頭皮クレンジングケア。",
+    "hair_add_blowdry": "スタイリング仕上げ",
+    "hair_add_blowdry_desc": "ブローと簡単なスタイリング。",
+    "hair_add_ampoule": "アンプルケア",
+    "hair_add_ampoule_desc": "ダメージ部位への集中栄養ケア。",
+    "nail_add_removal": "ジェルオフ込み",
+    "nail_add_removal_desc": "既存ジェルのオフを含む施術。",
+    "nail_add_art": "ポイントアート",
+    "nail_add_art_desc": "両手基準のポイントアート追加。",
+    "nail_add_strength": "強化コーティング",
+    "nail_add_strength_desc": "持続力強化コーティング。",
+    "esthetic_add_modeling": "モデリングパック",
+    "esthetic_add_modeling_desc": "鎮静仕上げパック追加。",
+    "esthetic_add_neck": "ネックケア追加",
+    "esthetic_add_neck_desc": "首ライン集中ケア。",
+    "esthetic_add_led": "LEDケア",
+    "esthetic_add_led_desc": "鎮静補助光ケア。",
+    "waxing_add_care": "鎮静ケア",
+    "waxing_add_care_desc": "施術後の鎮静ジェルケア。",
+    "waxing_add_pack": "保湿パック",
+    "waxing_add_pack_desc": "刺激緩和用パック追加。",
+    "waxing_add_trim": "トリミング込み",
+    "waxing_add_trim_desc": "施術前の整え込み。",
+    "makeup_add_hair": "ヘアブロー",
+    "makeup_add_hair_desc": "簡単なブロースタイリング。",
+    "makeup_add_lash": "つけまつ毛",
+    "makeup_add_lash_desc": "ポイントまたはつけまつ毛。",
+    "makeup_add_touchup": "タッチアップキット",
+    "makeup_add_touchup_desc": "簡単なタッチアップキット提供。",
+    "lash_add_remove": "まつ毛オフ込み",
+    "lash_add_remove_desc": "既存エクステのオフを含む。",
+    "lash_add_tinting": "ブラックティンティング",
+    "lash_add_tinting_desc": "鮮やかなカラー補正。",
+    "lash_add_coating": "栄養コーティング",
+    "lash_add_coating_desc": "持続力補助コーティング。",
+    "daily_makeup": "デイリーメイク",
+    "daily_makeup_desc": "日常のアポイントに合わせた軽めのメイク。",
+    "hair_women_cut": {
+      "name": "レディースカット",
+      "desc": "長さ調整と顔型に合わせたカット。"
+    },
+    "hair_men_cut": {
+      "name": "メンズカット",
+      "desc": "フォルム整えとスタイリングカット。"
+    },
+    "hair_root_color": {
+      "name": "リタッチカラー",
+      "desc": "プリン部分のトーン修正。"
+    },
+    "nail_gel": {
+      "name": "ジェルネイル",
+      "desc": "基本ジェルカラー施術。"
+    },
+    "nail_care": {
+      "name": "ネイルケア",
+      "desc": "甘皮ケアとネイルシェイピング。"
+    },
+    "nail_pedi": {
+      "name": "ジェルペディキュア",
+      "desc": "フットケア込みのジェル施術。"
+    },
+    "esthetic_calming": {
+      "name": "鎮静ケア",
+      "desc": "敏感肌向け鎮静プログラム。"
+    },
+    "esthetic_moisture": {
+      "name": "保湿ケア",
+      "desc": "乾燥肌向け保湿充電プログラム。"
+    },
+    "esthetic_lifting": {
+      "name": "リフティングケア",
+      "desc": "弾力改善中心ケア。"
+    },
+    "waxing_brazilian": {
+      "name": "ブラジリアンワックス",
+      "desc": "デリケートゾーン中心ワックス。"
+    },
+    "waxing_arm": {
+      "name": "アームワックス",
+      "desc": "両腕全体の処理。"
+    },
+    "waxing_leg": {
+      "name": "レッグワックス",
+      "desc": "ふくらはぎまたはハーフレッグ基準。"
+    },
+    "makeup_daily": {
+      "name": "デイリーメイク",
+      "desc": "日常のアポイントに合わせた軽めのメイク。"
+    },
+    "makeup_interview": {
+      "name": "就活メイク",
+      "desc": "清潔感ある印象メイク。"
+    },
+    "makeup_guest": {
+      "name": "ウェディングゲストメイク",
+      "desc": "イベントスケジュールに合わせたスタイリング。"
+    },
+    "lash_perm": {
+      "name": "まつ毛パーマ",
+      "desc": "カール固定中心の施術。"
+    },
+    "lash_extension": {
+      "name": "まつ毛エクステ",
+      "desc": "長さとカール選択型エクステ。"
+    },
+    "lash_retouch": {
+      "name": "まつ毛リタッチ",
+      "desc": "既存エクステの補完施術。"
+    },
+    "hair_add_scalp": {
+      "name": "頭皮スケーリング",
+      "desc": "施術前の頭皮クレンジング。"
+    },
+    "hair_add_blowdry": {
+      "name": "ブロー仕上げ",
+      "desc": "ブローと簡単なスタイリング。"
+    },
+    "hair_add_ampoule": {
+      "name": "アンプルケア",
+      "desc": "ダメージ部位への集中栄養ケア。"
+    },
+    "nail_add_removal": {
+      "name": "ジェルオフ",
+      "desc": "既存ジェルのオフを含む。"
+    },
+    "nail_add_art": {
+      "name": "ポイントアート",
+      "desc": "両手基準のポイントアート。"
+    },
+    "nail_add_strength": {
+      "name": "強化コーティング",
+      "desc": "持続力強化コーティング。"
+    },
+    "esthetic_add_modeling": {
+      "name": "モデリングパック",
+      "desc": "鎮静仕上げパック。"
+    },
+    "esthetic_add_neck": {
+      "name": "ネックケア",
+      "desc": "首ライン集中ケア。"
+    },
+    "esthetic_add_led": {
+      "name": "LEDケア",
+      "desc": "鎮静補助光ケア。"
+    },
+    "waxing_add_care": {
+      "name": "鎮静ケア",
+      "desc": "施術後の鎮静ジェルケア。"
+    },
+    "waxing_add_pack": {
+      "name": "保湿パック",
+      "desc": "刺激緩和用パック。"
+    },
+    "waxing_add_trim": {
+      "name": "トリミング込み",
+      "desc": "施術前の整え込み。"
+    },
+    "makeup_add_hair": {
+      "name": "ヘアスタイリング",
+      "desc": "簡単なブロースタイリング。"
+    },
+    "makeup_add_lash": {
+      "name": "つけまつ毛",
+      "desc": "ポイントまたはつけまつ毛。"
+    },
+    "makeup_add_touchup": {
+      "name": "タッチアップキット",
+      "desc": "簡単なタッチアップキット提供。"
+    },
+    "lash_add_remove": {
+      "name": "まつ毛オフ",
+      "desc": "既存エクステのオフを含む。"
+    },
+    "lash_add_tinting": {
+      "name": "ブラックティンティング",
+      "desc": "鮮やかなカラー補正。"
+    },
+    "lash_add_coating": {
+      "name": "栄養コーティング",
+      "desc": "持続力補助コーティング。"
+    }
+  },
+  "price_hair_summary": "カット 20,000ウォン〜 | カラー 55,000ウォン〜 | パーマ 60,000ウォン〜",
+  "price_nail_summary": "ジェルネイル 35,000ウォン〜 | ペディキュア 45,000ウォン〜",
+  "price_makeup_summary": "デイリーメイク 60,000ウォン〜",
   "booking_panel_title": "予約日時を選択してください",
   "booking_panel_desc": "選択した店舗の予約可能な日程を確認し、ご希望の時間を選んでください。",
   "booking_empty_title": "まず店舗を選択してください",
@@ -78,29 +670,21 @@
   "completion_desc1": "店舗で予約可能か確認後、改めてご案内します。",
   "completion_desc2": "案内メッセージは選択した言語と韓国語で一緒に提供されます。",
   "completion_desc3": "予約状況はマイ予約画面で再度確認できます。",
+  "completion_flow_hint": "予約リクエストを受け付けました。店舗確認後に確定します。通知またはマイ予約からご確認ください。",
   "empty_store_title": "条件に合う店舗が見つかりません",
   "empty_store_desc": "エリアを変更するか、別のカテゴリーを選択してください。",
   "toast_select_time": "予約時間を選択してください。",
   "toast_check_info": "必須情報を先に確認してください。",
   "toast_submit_error": "予約リクエスト中に問題が発生しました。しばらくしてから再度お試しください。",
   "toast_addon_limit": "追加オプションは最大2つまで選択できます。",
+  "toast_copy_hint": "{{label}}を長押しでコピー。",
   "booking_confirmation_title": "予約リクエストを送信しました",
   "booking_confirmation_desc": "店舗確認後にご案内をお送りします。",
   "booking_confirmation_cta": "予約を確認する",
-  "region_jamsil": "蚕室 (チャムシル)",
-  "region_konkuk": "建大 (コングク)",
-  "region_pangyo": "板橋 (パンギョ)",
-  "filter_region_eyebrow": "エリアフィルター",
-  "filter_region_title": "ご希望のエリアを選択してください",
-  "filter_store_count_suffix": " 件の店舗",
-  "label_selected_datetime": "選択した日時",
-  "btn_change": "変更する",
-  "btn_choose_datetime": "日時を選択する",
-  "price_hair_summary": "カット 20,000ウォン〜 | カラー 55,000ウォン〜 | パーマ 60,000ウォン〜",
-  "price_nail_summary": "ジェルネイル 35,000ウォン〜 | ペディキュア 45,000ウォン〜",
-  "price_makeup_summary": "デイリーメイク 60,000ウォン〜",
   "select_date": "日付を選択",
   "select_time": "時間を選択",
+  "loading": "読み込み中...",
+  "no_available_times": "選択した日付に予約可能な時間がありません。",
   "btn_complete": "予約を完了する",
   "selected_confirmation": "✓ {{date}} を選択済み",
   "weekdays": {
@@ -119,105 +703,5 @@
   "lang_ko": "韓国語",
   "lang_en": "英語",
   "lang_ja": "日本語",
-  "lang_zh_cn": "中国語",
-  "stores": {
-    "beauty_hair_1": { "name": "La Frappe Hair 江南", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["デザインカット", "パーソナルカラー", "頭皮ケア"] },
-    "beauty_hair_2": { "name": "Atelier 聖水 Hair Room", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["ボリュームパーマ", "プライベート", "スタイル相談"] },
-    "beauty_nail_1": { "name": "Maison Nail 弘大", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["マンスリーアート", "ジェルケア", "カラーキュレーション"] },
-    "beauty_nail_2": { "name": "Beige Nail 蚕室", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["オフィスネイル", "ウェディング準備", "ネイルケア"] },
-    "beauty_esthetic_1": { "name": "Serin Skin Lounge 板橋", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["鎮静ケア", "引き締め", "個室完備"] },
-    "beauty_esthetic_2": { "name": "Glow Formula 建大", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["保湿", "敏感肌対応", "カスタム相談"] },
-    "beauty_waxing_1": { "name": "Bare Atelier Waxing 江南", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["衛生管理", "アフターケア", "デリケートゾーン"] },
-    "beauty_waxing_2": { "name": "Soft Strip 弘大", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["アームワックス", "短時間施術", "気軽に来店"] },
-    "beauty_makeup_1": { "name": "Atelier Veil Makeup 聖水", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["撮影メイク", "デイリーメイク", "パーソナルムード"] },
-    "beauty_makeup_2": { "name": "Dear Muse Makeup 蚕室", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["ウェディング準備", "1対1相談", "ヘアスタイリング"] },
-    "beauty_lash_1": { "name": "Bloom Lash Boutique 江南", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["カールデザイン", "長持ち施術", "ナチュラルエクステ"] },
-    "beauty_lash_2": { "name": "Feather Lash 建大", "priceLabel": "55,000ウォン〜", "shortDescription": "プレミアムサロン。", "tags": ["まつ毛パーマ", "初回歓迎", "ナチュラルカール"] }
-  },
-  "designers": {
-    "jia": "ジア デザイナー",
-    "jia_specialty": "レイヤーカット・カラー",
-    "jia_desc": "顔型に合わせた丁寧なカウンセリングとカットが得意です。",
-    "minseo": "ミンソ ディレクター",
-    "minseo_specialty": "プレミアムパーマ・クリニック",
-    "minseo_desc": "ダメージレベルに合わせた丁寧な施術順序が特徴です。",
-    "harin": "ハリン デザイナー",
-    "harin_specialty": "ボリュームパーマ・ミディアム",
-    "harin_desc": "自然なボリュームと顔のラインを引き出します。",
-    "yuna": "ユナ チームリーダー",
-    "yuna_specialty": "カラーチェンジ・ケア",
-    "yuna_desc": "カラートーン提案やブリーチ相談が得意です。",
-    "designer_hair_1_a": { "name": "ジア デザイナー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_hair_1_b": { "name": "ミンソ ディレクター", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_hair_2_a": { "name": "ハリン デザイナー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_hair_2_b": { "name": "ユナ チームリーダー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_nail_1_a": { "name": "ソユン アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_nail_1_b": { "name": "チェリン アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_nail_2_a": { "name": "ナヨン マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_nail_2_b": { "name": "ダビン アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_esthetic_1_a": { "name": "ユジン セラピスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_esthetic_1_b": { "name": "ソヒ ディレクター", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_esthetic_2_a": { "name": "ガヨン セラピスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_esthetic_2_b": { "name": "イェリン マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_waxing_1_a": { "name": "ドヨン マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_waxing_1_b": { "name": "ヒョナ ディレクター", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_waxing_2_a": { "name": "シア マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_waxing_2_b": { "name": "ジュヒ マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_makeup_1_a": { "name": "ボラ アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_makeup_1_b": { "name": "スア マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_makeup_2_a": { "name": "ジミン アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_makeup_2_b": { "name": "ヘウォン ディレクター", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_lash_1_a": { "name": "ソジョン アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_lash_1_b": { "name": "セア マネージャー", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_lash_2_a": { "name": "ダウン アーティスト", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" },
-    "designer_lash_2_b": { "name": "シウン ディレクター", "specialty": "専門分野", "experienceLabel": "経験豊富", "shortNote": "丁寧なカウンセリング対応" }
-  },
-  "services": {
-    "women_cut": "レディースカット",
-    "women_cut_desc": "長さ調整とカスタムカット。",
-    "men_cut": "メンズカット",
-    "men_cut_desc": "フォルム整えとスタイリングカット。",
-    "root_color": "リタッチカラー",
-    "root_color_desc": "プリン部分のトーン修正。",
-    "hair_clinic": "ヘアクリニック",
-    "hair_clinic_desc": "ダメージケア集中プログラム。",
-    "daily_makeup": "デイリーメイク",
-    "daily_makeup_desc": "日常のアポイントに合わせた軽めのメイク。",
-    "hair_women_cut": { "name": "レディースカット", "desc": "サービス内容" },
-    "hair_men_cut": { "name": "メンズカット", "desc": "サービス内容" },
-    "hair_root_color": { "name": "リタッチカラー", "desc": "サービス内容" },
-    "nail_gel": { "name": "ジェルネイル", "desc": "サービス内容" },
-    "nail_care": { "name": "ネイルケア", "desc": "サービス内容" },
-    "nail_pedi": { "name": "ジェルペディキュア", "desc": "サービス内容" },
-    "esthetic_calming": { "name": "鎮静ケア", "desc": "サービス内容" },
-    "esthetic_moisture": { "name": "保湿ケア", "desc": "サービス内容" },
-    "esthetic_lifting": { "name": "リフティングケア", "desc": "サービス内容" },
-    "waxing_brazilian": { "name": "ブラジリアンワックス", "desc": "サービス内容" },
-    "waxing_arm": { "name": "アームワックス", "desc": "サービス内容" },
-    "waxing_leg": { "name": "レッグワックス", "desc": "サービス内容" },
-    "makeup_daily": { "name": "デイリーメイク", "desc": "サービス内容" },
-    "makeup_interview": { "name": "就活メイク", "desc": "サービス内容" },
-    "makeup_guest": { "name": "ウェディングゲストメイク", "desc": "サービス内容" },
-    "lash_perm": { "name": "まつ毛パーマ", "desc": "サービス内容" },
-    "lash_extension": { "name": "まつ毛エクステ", "desc": "サービス内容" },
-    "lash_retouch": { "name": "まつ毛リタッチ", "desc": "サービス内容" },
-    "hair_add_scalp": { "name": "頭皮スケーリング", "desc": "オプション内容" },
-    "hair_add_blowdry": { "name": "ブローアウト", "desc": "オプション内容" },
-    "hair_add_ampoule": { "name": "アンプルケア", "desc": "オプション内容" },
-    "nail_add_removal": { "name": "ジェルオフ", "desc": "オプション内容" },
-    "nail_add_art": { "name": "ポイントアート", "desc": "オプション内容" },
-    "nail_add_strength": { "name": "強化コーティング", "desc": "オプション内容" },
-    "esthetic_add_modeling": { "name": "モデリングパック", "desc": "オプション内容" },
-    "esthetic_add_neck": { "name": "ネックケア", "desc": "オプション内容" },
-    "esthetic_add_led": { "name": "LEDケア", "desc": "オプション内容" },
-    "waxing_add_care": { "name": "鎮静ケア", "desc": "オプション内容" },
-    "waxing_add_pack": { "name": "保湿パック", "desc": "オプション内容" },
-    "waxing_add_trim": { "name": "トリミング込み", "desc": "オプション内容" },
-    "makeup_add_hair": { "name": "ヘアスタイリング", "desc": "オプション内容" },
-    "makeup_add_lash": { "name": "つけまつ毛", "desc": "オプション内容" },
-    "makeup_add_touchup": { "name": "タッチアップキット", "desc": "オプション内容" },
-    "lash_add_remove": { "name": "まつ毛オフ", "desc": "オプション内容" },
-    "lash_add_tinting": { "name": "ブラックティンティング", "desc": "オプション内容" },
-    "lash_add_coating": { "name": "栄養コーティング", "desc": "オプション内容" }
-  }
+  "lang_zh_cn": "中国語（簡体字）"
 }
