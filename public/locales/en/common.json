@@ -104,7 +104,8 @@
       "submit_blocked_schedule": "Please check the booking date and try again.",
       "submit_blocked_customer": "Please enter your name and contact info, then try again.",
       "submit_blocked_agreements": "Please agree to the required terms and try again.",
-      "submit_blocked_generic": "Cannot send booking request. Please check your information and try again."
+      "submit_blocked_generic": "Cannot send booking request. Please check your information and try again.",
+      "section_subtitle": "Select a K-Beauty service and start booking right away."
     }
   },
   "booking_skeleton": {
@@ -779,7 +780,8 @@
       "view_in_plan": "View in Plan",
       "view_again": "View Again",
       "call_120": "Call 120",
-      "back_to_list": "Back to List"
+      "back_to_list": "Back to List",
+      "send": "Send"
     },
     "states": {
       "posts": "Posts",
@@ -2367,7 +2369,27 @@
     "loading": "Creating Account...",
     "success": "Account created! Please check your email to verify and then log in.",
     "login_prompt": "Already have an account?",
-    "login_link": "Log in"
+    "login_link": "Log in",
+    "title_new": "Sign up for Kello",
+    "title_google": "Complete Profile",
+    "subtitle_new": "Enter your email and info to register",
+    "subtitle_google": "Enter additional info to get started with Kello",
+    "nickname_label": "Nickname",
+    "nickname_placeholder": "Your nickname",
+    "phone_label": "Phone Number",
+    "instagram_label": "Instagram Account",
+    "password_for_email": "(for email login)",
+    "pw_min_length": "8+ characters",
+    "pw_special": "Includes special characters (!@#$% etc.)",
+    "submit": "Sign Up",
+    "submit_google": "Complete Profile",
+    "processing": "Processing...",
+    "go_to_login": "Go to Login →",
+    "error_terms": "Please agree to the required terms.",
+    "error_password": "Password must be at least 8 characters and include a special character (!@#$% etc.).",
+    "error_duplicate_email": "This email is already registered. Please go to the login page.",
+    "error_invalid_email": "Invalid email address.",
+    "error_generic": "An error occurred. Please try again."
   },
   "webview_banner": {
     "title": "Google login is not available in in-app browsers",
@@ -2514,5 +2536,9 @@
     "volume_lash": "Volume Lash",
     "curl_lash": "Curl Lash",
     "clean_lash": "Clean Lash"
+  },
+  "business_page": {
+    "desc1": "A premium partner shop handpicked by Kello.",
+    "desc2": "Experience personalized consultations and trendy styling from our expert designers."
   }
 }

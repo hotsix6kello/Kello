@@ -92,7 +92,8 @@
       "view_again": "View Again",
       "map": "Map",
       "call_120": "Call 120",
-      "back_to_list": "返回列表"
+      "back_to_list": "返回列表",
+      "send": "发送"
     },
     "states": {
       "posts": "Posts",
@@ -1133,7 +1134,8 @@
       "submit_blocked_schedule": "请确认预约日期后重试。",
       "submit_blocked_customer": "请输入姓名和联系方式后重试。",
       "submit_blocked_agreements": "请同意必填条款后重试。",
-      "submit_blocked_generic": "无法发送预约请求。请检查您的信息后重试。"
+      "submit_blocked_generic": "无法发送预约请求。请检查您的信息后重试。",
+      "section_subtitle": "选择K-Beauty服务，立即开始预约。"
     }
   },
   "interpreter_page": {
@@ -2057,7 +2059,27 @@
     "loading": "创建账户中...",
     "success": "账户已创建！请查收邮件完成验证后登录。",
     "login_prompt": "已有账户？",
-    "login_link": "登录"
+    "login_link": "登录",
+    "title_new": "注册Kello",
+    "title_google": "完善个人资料",
+    "subtitle_new": "输入邮箱和信息完成注册",
+    "subtitle_google": "填写附加信息，开始使用Kello",
+    "nickname_label": "昵称",
+    "nickname_placeholder": "您的昵称",
+    "phone_label": "手机号码",
+    "instagram_label": "Instagram账号",
+    "password_for_email": "（邮箱登录用）",
+    "pw_min_length": "8位以上",
+    "pw_special": "包含特殊字符 (!@#$% 等)",
+    "submit": "注册",
+    "submit_google": "完善个人资料",
+    "processing": "处理中...",
+    "go_to_login": "前往登录 →",
+    "error_terms": "请同意必要条款。",
+    "error_password": "密码必须至少8位且包含特殊字符(!@#$%等)。",
+    "error_duplicate_email": "该邮箱已注册。请前往登录页面。",
+    "error_invalid_email": "无效的电子邮件地址。",
+    "error_generic": "发生错误，请重试。"
   },
   "webview_banner": {
     "title": "应用内浏览器不支持Google登录",
@@ -2227,5 +2249,9 @@
     "volume_lash": "浓密款睫毛",
     "curl_lash": "卷翘款睫毛",
     "clean_lash": "干净款睫毛"
+  },
+  "business_page": {
+    "desc1": "这是Kello精心挑选的高端合作门店。",
+    "desc2": "体验专业设计师贴心咨询与时尚造型服务。"
   }
 }

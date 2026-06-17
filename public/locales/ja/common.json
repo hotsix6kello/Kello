@@ -358,7 +358,8 @@
       "view_in_plan": "プランで表示",
       "view_again": "もう一度見る",
       "call_120": "120に電話",
-      "back_to_list": "一覧に戻る"
+      "back_to_list": "一覧に戻る",
+      "send": "送信"
     },
     "community": {
       "posts": "私の投稿",
@@ -1553,7 +1554,8 @@
       "submit_blocked_schedule": "予約日時を確認してからお試しください。",
       "submit_blocked_customer": "お名前と連絡先を入力してからお試しください。",
       "submit_blocked_agreements": "必須項目に同意してからお試しください。",
-      "submit_blocked_generic": "予約リクエストを送信できません。入力内容を確認してください。"
+      "submit_blocked_generic": "予約リクエストを送信できません。入力内容を確認してください。",
+      "section_subtitle": "K-Beautyサービスを選んですぐ予約を始めましょう。"
     },
     "interpreter": {
       "eyebrow": "通訳サポート",
@@ -2289,7 +2291,27 @@
     "loading": "アカウント作成中...",
     "success": "アカウントが作成されました！メールを確認してログインしてください。",
     "login_prompt": "すでにアカウントをお持ちですか？",
-    "login_link": "ログイン"
+    "login_link": "ログイン",
+    "title_new": "Kelloに登録",
+    "title_google": "プロフィールを完成させる",
+    "subtitle_new": "メールアドレスと情報を入力して登録してください",
+    "subtitle_google": "追加情報を入力してKelloを始めましょう",
+    "nickname_label": "ニックネーム",
+    "nickname_placeholder": "使用するニックネーム",
+    "phone_label": "電話番号",
+    "instagram_label": "Instagramアカウント",
+    "password_for_email": "（メールログイン用）",
+    "pw_min_length": "8文字以上",
+    "pw_special": "特殊文字を含む (!@#$% など)",
+    "submit": "登録する",
+    "submit_google": "プロフィールを完成させる",
+    "processing": "処理中...",
+    "go_to_login": "ログインページへ →",
+    "error_terms": "必須規約に同意してください。",
+    "error_password": "パスワードは8文字以上で特殊文字を含む必要があります。",
+    "error_duplicate_email": "このメールアドレスはすでに登録されています。ログインページへ移動してください。",
+    "error_invalid_email": "無効なメールアドレスです。",
+    "error_generic": "エラーが発生しました。もう一度お試しください。"
   },
   "webview_banner": {
     "title": "アプリ内ブラウザではGoogleログインをご利用いただけません",
@@ -2486,5 +2508,9 @@
     "volume_lash": "ボリュームラッシュ",
     "curl_lash": "カールラッシュ",
     "clean_lash": "クリーンラッシュ"
+  },
+  "business_page": {
+    "desc1": "Kelloが厳選したプレミアム提携サロンです。",
+    "desc2": "専門デザイナーによる丁寧なカウンセリングとトレンディなスタイリングをご体験ください。"
   }
 }

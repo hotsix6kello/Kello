@@ -92,7 +92,8 @@
       "view_again": "View Again",
       "map": "Map",
       "call_120": "Call 120",
-      "back_to_list": "返回列表"
+      "back_to_list": "返回列表",
+      "send": "發送"
     },
     "states": {
       "posts": "Posts",
@@ -310,7 +311,8 @@
       "submit_blocked_schedule": "請確認預約日期後重試。",
       "submit_blocked_customer": "請輸入姓名和聯絡方式後重試。",
       "submit_blocked_agreements": "請同意必填條款後重試。",
-      "submit_blocked_generic": "無法發送預約請求。請檢查您的資訊後重試。"
+      "submit_blocked_generic": "無法發送預約請求。請檢查您的資訊後重試。",
+      "section_subtitle": "選擇K-Beauty服務，立即開始預約。"
     }
   },
   "booking_skeleton": {
@@ -1916,7 +1918,27 @@
     "loading": "建立帳戶中...",
     "success": "帳戶已建立！請查收郵件完成驗證後登入。",
     "login_prompt": "已有帳戶？",
-    "login_link": "登入"
+    "login_link": "登入",
+    "title_new": "註冊Kello",
+    "title_google": "完善個人資料",
+    "subtitle_new": "輸入郵箱和資訊完成註冊",
+    "subtitle_google": "填寫附加資訊，開始使用Kello",
+    "nickname_label": "暱稱",
+    "nickname_placeholder": "您的暱稱",
+    "phone_label": "手機號碼",
+    "instagram_label": "Instagram帳號",
+    "password_for_email": "（郵箱登入用）",
+    "pw_min_length": "8位以上",
+    "pw_special": "包含特殊字符 (!@#$% 等)",
+    "submit": "註冊",
+    "submit_google": "完善個人資料",
+    "processing": "處理中...",
+    "go_to_login": "前往登入 →",
+    "error_terms": "請同意必要條款。",
+    "error_password": "密碼必須至少8位且包含特殊字符(!@#$%等)。",
+    "error_duplicate_email": "該郵箱已註冊。請前往登入頁面。",
+    "error_invalid_email": "無效的電子郵件地址。",
+    "error_generic": "發生錯誤，請重試。"
   },
   "help_page": {
     "title": "緊急支援",
@@ -2227,5 +2249,9 @@
     "volume_lash": "濃密款睫毛",
     "curl_lash": "捲翹款睫毛",
     "clean_lash": "乾淨款睫毛"
+  },
+  "business_page": {
+    "desc1": "這是Kello精心挑選的高端合作門店。",
+    "desc2": "體驗專業設計師貼心諮詢與時尚造型服務。"
   }
 }

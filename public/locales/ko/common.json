@@ -93,7 +93,8 @@
       "view_again": "다시 보기",
       "map": "지도",
       "call_120": "120 전화하기",
-      "back_to_list": "목록으로 돌아가기"
+      "back_to_list": "목록으로 돌아가기",
+      "send": "전송"
     },
     "states": {
       "posts": "포스트",
@@ -313,7 +314,8 @@
       "submit_blocked_schedule": "예약 날짜 정보를 확인한 뒤 다시 시도해 주세요.",
       "submit_blocked_customer": "이름과 연락처를 모두 입력한 뒤 다시 시도해 주세요.",
       "submit_blocked_agreements": "필수 약관 동의 후 다시 시도해 주세요.",
-      "submit_blocked_generic": "예약 요청을 시작할 수 없습니다. 입력한 정보를 다시 확인해 주세요."
+      "submit_blocked_generic": "예약 요청을 시작할 수 없습니다. 입력한 정보를 다시 확인해 주세요.",
+      "section_subtitle": "K-뷰티 서비스를 선택하고 바로 예약을 시작하세요."
     }
   },
   "booking_skeleton": {
@@ -1250,7 +1252,27 @@
     "loading": "계정 생성 중...",
     "success": "계정이 생성됐어요! 이메일을 확인하고 인증 후 로그인해주세요.",
     "login_prompt": "이미 계정이 있으신가요?",
-    "login_link": "로그인"
+    "login_link": "로그인",
+    "title_new": "Kello 가입하기",
+    "title_google": "프로필 완성하기",
+    "subtitle_new": "이메일과 정보를 입력해 가입하세요",
+    "subtitle_google": "추가 정보를 입력하고 Kello를 시작해보세요",
+    "nickname_label": "별명 (닉네임)",
+    "nickname_placeholder": "사용할 별명",
+    "phone_label": "핸드폰번호",
+    "instagram_label": "인스타그램 계정",
+    "password_for_email": "(이메일 로그인용)",
+    "pw_min_length": "8자 이상",
+    "pw_special": "특수문자 포함 (!@#$% 등)",
+    "submit": "가입하기",
+    "submit_google": "프로필 완성하기",
+    "processing": "처리 중...",
+    "go_to_login": "로그인하러 가기 →",
+    "error_terms": "필수 약관에 동의해주세요.",
+    "error_password": "비밀번호는 8자 이상이며 특수문자(!@#$% 등)를 포함해야 합니다.",
+    "error_duplicate_email": "이미 가입된 이메일입니다. 로그인 페이지로 이동해주세요.",
+    "error_invalid_email": "유효하지 않은 이메일 주소입니다.",
+    "error_generic": "오류가 발생했습니다. 다시 시도해주세요."
   },
   "help_page": {
     "title": "긴급 지원",
@@ -1945,5 +1967,9 @@
     "volume_lash": "볼륨 형",
     "curl_lash": "컬링 형",
     "clean_lash": "클린 형"
+  },
+  "business_page": {
+    "desc1": "Kello에서 엄선한 프리미엄 파트너 매장입니다.",
+    "desc2": "전문 디자이너의 세심한 상담과 트렌디한 스타일링을 경험해보세요."
   }
 }

@@ -2,10 +2,12 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function BusinessDetailPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const { t } = useTranslation("common");
 
     // URL에서 전달받은 데이터 추출
     const name = searchParams.get('name') || "Standard Salon";
@@ -61,8 +63,8 @@ export default function BusinessDetailPage() {
                                     ABOUT SERVICE
                                 </h2>
                                 <p className="text-[#4b3a42] text-md leading-relaxed font-medium">
-                                    Kello에서 엄선한 프리미엄 파트너 매장입니다. <br/>
-                                    전문 디자이너의 세심한 상담과 트렌디한 스타일링을 경험해보세요.
+                                    {t('business_page.desc1')} <br/>
+                                    {t('business_page.desc2')}
                                 </p>
                             </section>
 
