@@ -1,28 +1,144 @@
 .floatingBanner {
   position: relative;
   width: 100%;
-  margin: 0;
-  margin-top: 16px;
-  background: transparent;
-  border: none;
+  min-height: 78px;
+  margin: 16px 0 0;
+  padding: 10px 14px 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid #f2a8bb;
   border-radius: 0;
-  padding: 0;
-  display: block;
+  background:
+    radial-gradient(circle at 9% 22%, rgba(255, 255, 255, 0.92) 0 2px, transparent 3px),
+    linear-gradient(105deg, #ffd5df 0%, #fff7f9 55%, #fffdf8 100%);
+  box-shadow: 0 4px 16px rgba(255, 53, 102, 0.08);
+  color: #221f20;
   cursor: pointer;
   box-sizing: border-box;
+  text-align: left;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 10;
-  overflow: hidden;
+}
+
+.floatingBanner::before,
+.floatingBanner::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid rgba(170, 88, 112, 0.38);
+  transform: rotate(45deg);
+}
+
+.floatingBanner::before {
+  top: 12px;
+  left: 10%;
+}
+
+.floatingBanner::after {
+  right: 9%;
+  bottom: 13px;
 }
 
 .floatingBanner:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(255, 53, 102, 0.14);
+  box-shadow: 0 6px 18px rgba(255, 53, 102, 0.15);
 }
 
-.bannerImage {
-  width: calc(100% + 8px);
-  margin: -4px;
-  display: block;
-  height: auto;
+.copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.title {
+  color: #171214;
+  font-size: clamp(0.86rem, 3.1vw, 1.08rem);
+  font-weight: 800;
+  line-height: 1.18;
+  white-space: pre-line;
+}
+
+.description {
+  color: #7d4a59;
+  font-size: clamp(0.68rem, 2.4vw, 0.78rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ticket {
+  position: relative;
+  z-index: 1;
+  width: 76px;
+  min-width: 76px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(141, 67, 88, 0.28);
+  border-radius: 6px;
+  background: linear-gradient(145deg, #ffffff 0%, #ffe7ed 100%);
+  box-shadow: 0 8px 14px rgba(121, 48, 70, 0.14);
+  transform: rotate(8deg);
+}
+
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff7f9;
+  border: 1px solid rgba(141, 67, 88, 0.18);
+  transform: translateY(-50%);
+}
+
+.ticket::before {
+  left: -6px;
+}
+
+.ticket::after {
+  right: -6px;
+}
+
+.discount {
+  color: #db5577;
+  font-size: 1.42rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.off {
+  margin-top: 1px;
+  color: #2f2528;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 380px) {
+  .floatingBanner {
+    min-height: 74px;
+    padding: 9px 11px 9px 13px;
+    gap: 8px;
+  }
+
+  .ticket {
+    width: 62px;
+    min-width: 62px;
+    height: 42px;
+  }
+
+  .discount {
+    font-size: 1.18rem;
+  }
 }
