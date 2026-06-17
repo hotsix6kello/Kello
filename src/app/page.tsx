@@ -266,9 +266,10 @@ export default function HomePage() {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCategorySelect = (categoryId: string) => {
-    router.push('/booking/aesthetic');
+    const nextCategory = categoryId as BeautyCategoryId;
+    setSelectedCategory(nextCategory);
+    setIsBookingOpen(true);
   };
 
 
@@ -350,7 +351,6 @@ export default function HomePage() {
           categories={BEAUTY_CATEGORY_OPTIONS}
           selectedCategory={selectedCategory}
           onSelectCategory={handleCategorySelect}
-          t={t}
         />
       </div>
 
@@ -358,9 +358,7 @@ export default function HomePage() {
       <WelcomeCouponPopup />
 
       {/* ── 슬라이드 갤러리 ── */}
-      <HomeHero
-        t={t}
-      />
+      <HomeHero />
 
       {/* ── 제휴 매장 리스트 (갤러리 아래) ── */}
       <HomePartnerStores />

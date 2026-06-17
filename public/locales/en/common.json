@@ -98,7 +98,14 @@
       "agreement_refund_policy_desc": "I have reviewed and agree to the cancellation and refund policy above.",
       "submitting": "Processing...",
       "submit_final": "Submit Final Booking Request",
-      "go_back_to_main": "Back to Main"
+      "go_back_to_main": "Back to Main",
+      "submit_blocked_store": "No shop selected. Please select a shop and try again.",
+      "submit_blocked_service": "Please select a service menu and try again.",
+      "submit_blocked_schedule": "Please check the booking date and try again.",
+      "submit_blocked_customer": "Please enter your name and contact info, then try again.",
+      "submit_blocked_agreements": "Please agree to the required terms and try again.",
+      "submit_blocked_generic": "Cannot send booking request. Please check your information and try again.",
+      "section_subtitle": "Select a K-Beauty service and start booking right away."
     }
   },
   "booking_skeleton": {
@@ -579,12 +586,6 @@
     "open_interpreter": "Open Interpreter",
     "interpreter_visit_context": "Using interpreter during visit to {{storeName}}.",
     "interpreter_visit_service_context": "Using interpreter for {{serviceName}} at {{storeName}}.",
-    "lang_es": "Español",
-    "lang_fr": "Français",
-    "lang_de": "Deutsch",
-    "lang_ar": "العربية",
-    "lang_pt": "Português",
-    "lang_ru": "Русский",
     "cancel_days_until": "{{daysUntil}} days until appointment → {{refundRate}}% refund",
     "cancel_no_refund_warning": "⚠ No refund is available from 1 day before the appointment",
     "cancel_service_fee": "Service fee",
@@ -779,7 +780,8 @@
       "view_in_plan": "View in Plan",
       "view_again": "View Again",
       "call_120": "Call 120",
-      "back_to_list": "Back to List"
+      "back_to_list": "Back to List",
+      "send": "Send"
     },
     "states": {
       "posts": "Posts",
@@ -2348,7 +2350,9 @@
       "alternative_title": "Get alternative schedule alerts",
       "alternative_desc": "We notify you if the requested time is closed and the store suggests another."
     },
-    "footer_note": "Essential booking notices may be sent regardless of settings."
+    "footer_note": "Essential booking notices may be sent regardless of settings.",
+    "tab_booking": "Bookings",
+    "tab_updates": "Updates"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -2365,7 +2369,27 @@
     "loading": "Creating Account...",
     "success": "Account created! Please check your email to verify and then log in.",
     "login_prompt": "Already have an account?",
-    "login_link": "Log in"
+    "login_link": "Log in",
+    "title_new": "Sign up for Kello",
+    "title_google": "Complete Profile",
+    "subtitle_new": "Enter your email and info to register",
+    "subtitle_google": "Enter additional info to get started with Kello",
+    "nickname_label": "Nickname",
+    "nickname_placeholder": "Your nickname",
+    "phone_label": "Phone Number",
+    "instagram_label": "Instagram Account",
+    "password_for_email": "(for email login)",
+    "pw_min_length": "8+ characters",
+    "pw_special": "Includes special characters (!@#$% etc.)",
+    "submit": "Sign Up",
+    "submit_google": "Complete Profile",
+    "processing": "Processing...",
+    "go_to_login": "Go to Login →",
+    "error_terms": "Please agree to the required terms.",
+    "error_password": "Password must be at least 8 characters and include a special character (!@#$% etc.).",
+    "error_duplicate_email": "This email is already registered. Please go to the login page.",
+    "error_invalid_email": "Invalid email address.",
+    "error_generic": "An error occurred. Please try again."
   },
   "webview_banner": {
     "title": "Google login is not available in in-app browsers",
@@ -2464,5 +2488,57 @@
       "interpretation": "The 'Real-time Interpretation' feature is a supplementary tool provided for user convenience. Wekello is not liable for reservation errors or disputes arising from inaccuracies in AI translation or manual interpretation.",
       "community": "Wekello is not responsible for any damages, incidents, or disputes resulting from voluntary offline meetups or personal transactions between users conducted through the community features."
     }
+  },
+  "stores_page": {
+    "section_title": "Recommended Partner Shops",
+    "page_title": "Kello Partner Beauty Shops",
+    "subtitle": "English OK · Photo quotes · Booking confirmed K-Beauty shops",
+    "view_on_map": "🗺️ View on Map",
+    "booking_inquiry": "Inquire About Booking",
+    "booking_inquiry_short": "Book",
+    "view_all": "View All →",
+    "fetch_error": "Could not load partner shop information.",
+    "no_category_stores": "No partner shops in this category yet.",
+    "default_store_name": "Partner Store",
+    "empty_hair_title": "Hair Partner Shops Coming Soon",
+    "empty_hair_desc": "We're selecting K-Beauty shops with English-speaking staff.",
+    "empty_nail_title": "Nail Partner Shops Coming Soon",
+    "empty_nail_desc": "We're preparing shops that offer photo quotes and booking confirmation.",
+    "empty_lash_title": "Lash & Makeup Coming Soon",
+    "empty_lash_desc": "We're recruiting partner shops where you can consult before visiting."
+  },
+  "explore_map": {
+    "search_placeholder": "Search by accommodation, hotel, area",
+    "search_btn": "Search",
+    "my_location": "My Location",
+    "beauty_shop": "Beauty Shop",
+    "restaurant": "Restaurant",
+    "accommodation": "Stay"
+  },
+  "talk_page": {
+    "korean_viewer_mode": "Korean Viewer Mode",
+    "korean_viewer_hint": "💡 Turn on Korean Viewer Mode to show staff."
+  },
+  "home_hero": {
+    "wave_hair": "Wave Hair",
+    "bob_hair": "Bob Cut",
+    "curly_hair": "Curly Hair",
+    "dandy_hair": "Dandy Hair",
+    "ice_nail": "Ice Nail",
+    "nude_nail": "Nude Nail",
+    "mint_nail": "Mint Nail",
+    "black_nail": "Black Nail",
+    "red_lip": "Red Lip",
+    "pure_look": "Pure Look",
+    "idol_look": "Idol Look",
+    "glow_look": "Glow Look",
+    "natural_lash": "Natural Lash",
+    "volume_lash": "Volume Lash",
+    "curl_lash": "Curl Lash",
+    "clean_lash": "Clean Lash"
+  },
+  "business_page": {
+    "desc1": "A premium partner shop handpicked by Kello.",
+    "desc2": "Experience personalized consultations and trendy styling from our expert designers."
   }
 }

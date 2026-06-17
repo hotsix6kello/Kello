@@ -1089,7 +1089,30 @@ export default function TalkChatPage() {
 
 
 
-        {/* 1. Kello 웰컴 카드 (welcome) */}
+        {/* 1. 한국어 뷰어 힌트 (develop 브랜치 변경점 보존) */}
+        {isStaffShowMode && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
+            <div
+              style={{
+                background: COLORS.primaryLight,
+                color: COLORS.primary,
+                padding: '8px 14px',
+                borderRadius: 12,
+                fontSize: '0.78rem',
+                fontWeight: 500,
+                textAlign: 'center',
+                lineHeight: 1.35,
+                border: `1px solid ${COLORS.border}`,
+                maxWidth: '90%',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {t('talk_page.korean_viewer_hint')}
+            </div>
+          </div>
+        )}
+
+        {/* 2. Kello 웰컴 카드 (welcome) */}
         {shopId === 'kello-center' && (
           <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginBottom: 4, position: 'relative', overflow: 'hidden' }}>
             <div style={{

@@ -25,22 +25,22 @@ export default function GlobalError({
         textAlign: 'center',
         padding: '24px'
       }}>
-        <h2 style={{ marginBottom: '16px' }}>문제가 발생했습니다.</h2>
-        <p style={{ color: '#666', marginBottom: '24px' }}>앱을 실행하는 도중 예기치 못한 오류가 발생했습니다.</p>
-        <button 
-          onClick={() => reset()} 
-          style={{ 
-            padding: '12px 24px', 
-            borderRadius: '12px', 
-            background: '#000', 
-            color: '#fff', 
+        <h2 style={{ marginBottom: '16px' }}>Something went wrong.</h2>
+        <p style={{ color: '#666', marginBottom: '24px' }}>An unexpected error occurred while running the app.</p>
+        <button
+          onClick={() => reset()}
+          style={{
+            padding: '12px 24px',
+            borderRadius: '12px',
+            background: '#000',
+            color: '#fff',
             border: 'none',
             fontSize: '1rem',
             fontWeight: 600,
-            cursor: 'pointer' 
+            cursor: 'pointer'
           }}
         >
-          다시 시도
+          Try Again
         </button>
       </body>
     </html>

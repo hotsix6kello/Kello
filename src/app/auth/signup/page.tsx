@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import styles from "./signup.module.css";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -24,6 +25,7 @@ function validatePassword(pw: string) {
 
 export default function SignupPage() {
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
@@ -57,7 +59,6 @@ export default function SignupPage() {
     });
   }, []);
 
-  // Sync phone code when country changes
   useEffect(() => {
     const lang = LANGUAGES.find((l) => l.code === country);
     if (lang) setPhoneCode(lang.phoneCode);
@@ -75,11 +76,11 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!termsRequired || !privacyRequired) {
-      setError("필수 약관에 동의해주세요.");
+      setError(t("signup.error_terms"));
       return;
     }
     if (!pwValidation.valid) {
-      setError("비밀번호는 8자 이상이며 특수문자(!@#$% 등)를 포함해야 합니다.");
+      setError(t("signup.error_password"));
       return;
     }
 
@@ -127,13 +128,13 @@ export default function SignupPage() {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       if (msg.includes("User already registered") || msg.includes("already registered")) {
-        setError("이미 가입된 이메일입니다. 로그인 페이지로 이동해주세요.");
+        setError(t("signup.error_duplicate_email"));
       } else if (msg.includes("Password should be")) {
-        setError("비밀번호는 8자 이상이며 특수문자(!@#$% 등)를 포함해야 합니다.");
+        setError(t("signup.error_password"));
       } else if (msg.includes("Invalid email")) {
-        setError("유효하지 않은 이메일 주소입니다.");
+        setError(t("signup.error_invalid_email"));
       } else {
-        setError(msg || "오류가 발생했습니다. 다시 시도해주세요.");
+        setError(msg || t("signup.error_generic"));
       }
     } finally {
       setSubmitting(false);
@@ -150,44 +151,39 @@ export default function SignupPage() {
       <div className={styles.formCard}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            {isGoogleFlow ? "프로필 완성하기" : "Kello 가입하기"}
+            {isGoogleFlow ? t("signup.title_google") : t("signup.title_new")}
           </h1>
           <p className={styles.subTitle}>
-            {isGoogleFlow
-              ? "추가 정보를 입력하고 Kello를 시작해보세요"
-              : "이메일과 정보를 입력해 가입하세요"}
+            {isGoogleFlow ? t("signup.subtitle_google") : t("signup.subtitle_new")}
           </p>
         </div>
 
         <form onSubmit={handleSubmit}>
-          {/* 이름 */}
           <div className={styles.inputGroup}>
-            <label className={styles.label}>이름 *</label>
+            <label className={styles.label}>{t("signup.name_label")} *</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className={styles.input}
-              placeholder="홍길동"
+              placeholder={t("signup.name_placeholder")}
               required
             />
           </div>
 
-          {/* 별명 */}
           <div className={styles.inputGroup}>
-            <label className={styles.label}>별명 (닉네임)</label>
+            <label className={styles.label}>{t("signup.nickname_label")}</label>
             <input
               type="text"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
               className={styles.input}
-              placeholder="사용할 별명"
+              placeholder={t("signup.nickname_placeholder")}
             />
           </div>
 
-          {/* 이메일 */}
           <div className={styles.inputGroup}>
-            <label className={styles.label}>이메일 *</label>
+            <label className={styles.label}>{t("signup.email_label")} *</label>
             <input
               type="email"
               value={email}
@@ -200,9 +196,8 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* 국가 */}
           <div className={styles.inputGroup}>
-            <label className={styles.label}>국가 / 언어 *</label>
+            <label className={styles.label}>{t("signup.country_label")} *</label>
             <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
@@ -217,9 +212,8 @@ export default function SignupPage() {
             </select>
           </div>
 
-          {/* 핸드폰번호 (국가번호 + 번호) */}
           <div className={styles.inputGroup}>
-            <label className={styles.label}>핸드폰번호</label>
+            <label className={styles.label}>{t("signup.phone_label")}</label>
             <div className={styles.phoneRow}>
               <select
                 value={phoneCode}
@@ -242,9 +236,8 @@ export default function SignupPage() {
             </div>
           </div>
 
-          {/* 인스타그램 */}
           <div className={styles.inputGroup}>
-            <label className={styles.label}>인스타그램 계정</label>
+            <label className={styles.label}>{t("signup.instagram_label")}</label>
             <input
               type="text"
               value={instagram}
@@ -254,12 +247,13 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* 비밀번호 */}
           <div className={styles.inputGroup}>
             <label className={styles.label}>
-              비밀번호 *{" "}
+              {t("signup.password_label")} *{" "}
               {isGoogleFlow && (
-                <span style={{ color: "var(--gray-400)", fontWeight: 400 }}>(이메일 로그인용)</span>
+                <span style={{ color: "var(--gray-400)", fontWeight: 400 }}>
+                  {t("signup.password_for_email")}
+                </span>
               )}
             </label>
             <input
@@ -271,20 +265,18 @@ export default function SignupPage() {
               placeholder="••••••••"
               required
             />
-            {/* 비밀번호 검증 가이드 */}
             {(passwordTouched || password.length > 0) && (
               <div className={styles.pwGuide}>
                 <span className={pwValidation.hasLength ? styles.pwOk : styles.pwFail}>
-                  {pwValidation.hasLength ? "✓" : "✗"} 8자 이상
+                  {pwValidation.hasLength ? "✓" : "✗"} {t("signup.pw_min_length")}
                 </span>
                 <span className={pwValidation.hasSpecial ? styles.pwOk : styles.pwFail}>
-                  {pwValidation.hasSpecial ? "✓" : "✗"} 특수문자 포함 (!@#$% 등)
+                  {pwValidation.hasSpecial ? "✓" : "✗"} {t("signup.pw_special")}
                 </span>
               </div>
             )}
           </div>
 
-          {/* 약관 동의 */}
           <div className={styles.consentSection}>
             <label className={`${styles.consentItem} ${styles.allAgree}`}>
               <input
@@ -293,7 +285,7 @@ export default function SignupPage() {
                 onChange={(e) => handleAgreeAll(e.target.checked)}
                 className={styles.checkbox}
               />
-              <span className={styles.consentText}>전체 동의</span>
+              <span className={styles.consentText}>{t("signup_consent.all_agree")}</span>
             </label>
 
             <div className={styles.consentItem}>
@@ -303,8 +295,10 @@ export default function SignupPage() {
                 onChange={(e) => setTermsRequired(e.target.checked)}
                 className={styles.checkbox}
               />
-              <span className={styles.consentText}>[필수] 이용약관 동의</span>
-              <span onClick={() => router.push("/terms")} className={styles.link}>보기</span>
+              <span className={styles.consentText}>{t("signup_consent.terms_required")}</span>
+              <span onClick={() => router.push("/terms")} className={styles.link}>
+                {t("signup_consent.view_detail")}
+              </span>
             </div>
 
             <div className={styles.consentItem}>
@@ -314,8 +308,10 @@ export default function SignupPage() {
                 onChange={(e) => setPrivacyRequired(e.target.checked)}
                 className={styles.checkbox}
               />
-              <span className={styles.consentText}>[필수] 개인정보 처리방침 동의</span>
-              <span onClick={() => router.push("/privacy")} className={styles.link}>보기</span>
+              <span className={styles.consentText}>{t("signup_consent.privacy_required")}</span>
+              <span onClick={() => router.push("/privacy")} className={styles.link}>
+                {t("signup_consent.view_detail")}
+              </span>
             </div>
 
             <label className={styles.consentItem}>
@@ -325,20 +321,20 @@ export default function SignupPage() {
                 onChange={(e) => setMarketingOptional(e.target.checked)}
                 className={styles.checkbox}
               />
-              <span className={styles.consentText}>[선택] 마케팅 정보 수신 동의</span>
+              <span className={styles.consentText}>{t("signup_consent.privacy_optional")}</span>
             </label>
           </div>
 
           {error && (
             <div style={{ fontSize: "0.875rem", textAlign: "center", marginBottom: "16px" }}>
               <span style={{ color: "#ef4444", wordBreak: "break-word" }}>{error}</span>
-              {error.includes("이미 가입된") && (
+              {error === t("signup.error_duplicate_email") && (
                 <div style={{ marginTop: "8px" }}>
                   <span
                     onClick={() => router.push("/auth/login")}
                     style={{ color: "var(--primary)", cursor: "pointer", fontWeight: 600, textDecoration: "underline" }}
                   >
-                    로그인하러 가기 →
+                    {t("signup.go_to_login")}
                   </span>
                 </div>
               )}
@@ -350,18 +346,22 @@ export default function SignupPage() {
             disabled={submitting || !termsRequired || !privacyRequired}
             className={styles.submitBtn}
           >
-            {submitting ? "처리 중..." : isGoogleFlow ? "프로필 완성하기" : "가입하기"}
+            {submitting
+              ? t("signup.processing")
+              : isGoogleFlow
+              ? t("signup.submit_google")
+              : t("signup.submit")}
           </button>
         </form>
 
         {!isGoogleFlow && (
           <div style={{ marginTop: "20px", textAlign: "center", fontSize: "0.9rem", color: "var(--gray-500)" }}>
-            이미 계정이 있으신가요?{" "}
+            {t("signup.login_prompt")}{" "}
             <span
               onClick={() => router.push("/auth/login")}
               style={{ color: "var(--primary)", cursor: "pointer", fontWeight: 600 }}
             >
-              로그인
+              {t("signup.login_link")}
             </span>
           </div>
         )}
