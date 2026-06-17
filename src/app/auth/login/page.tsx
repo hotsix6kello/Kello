@@ -112,11 +112,11 @@ export default function LoginPage() {
             });
 
             if (error) throw error;
-            if (!data?.url) throw new Error("X 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            if (!data?.url) throw new Error(t('login.error_x_login'));
 
             window.location.assign(data.url);
         } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : "X 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setError(err instanceof Error ? err.message : t('login.error_x_login'));
             setXLoading(false);
         }
     };
@@ -139,7 +139,7 @@ export default function LoginPage() {
                 throw error;
             }
         } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : "Facebook 로그인을 시작할 수 없습니다. 다시 시도해 주세요.");
+            setError(err instanceof Error ? err.message : t('login.error_facebook_login'));
             setFacebookLoading(false);
         }
     };
@@ -180,15 +180,15 @@ export default function LoginPage() {
                 <div className={styles.homeShortcut}>
                     <Link href="/" className={styles.homeLink}>
                         <span>←</span>
-                        <span>홈 바로가기</span>
+                        <span>{t('login.home_shortcut')}</span>
                     </Link>
                 </div>
 
                 <div className={styles.formCard}>
                     <div className={styles.header}>
-                        <h1 className={styles.title}>Kello 시작하기</h1>
+                        <h1 className={styles.title}>{t('login.title')}</h1>
                         <p className={styles.subTitle}>
-                            Google 또는 이메일로 간편하게 로그인하고<br />예약을 시작해보세요
+                            {t('login.subtitle')}
                         </p>
                     </div>
 
@@ -221,7 +221,7 @@ export default function LoginPage() {
                             <path fill="#4CAF50" d="M24 44c5.2 0 10-1.9 13.7-5l-6.3-5.2C29.6 35.6 26.9 36.5 24 36.5c-5.3 0-9.7-3-11.2-7.3l-6.5 5C9.5 40.3 16.3 44 24 44z" />
                             <path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.5l6.3 5.2C41.3 35.3 44 30.1 44 24c0-1.3-.1-2.7-.4-4z" />
                         </svg>
-                        {googleLoading ? "연결 중..." : "Google로 계속하기"}
+                        {googleLoading ? t('login.connecting') : t('login.google_cta')}
                     </button>
 
                     {/* WebView 감지 시 외부 브라우저 유도 배너 */}
@@ -313,7 +313,7 @@ export default function LoginPage() {
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.736-8.849L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
-                        {xLoading ? "연결 중..." : "X로 계속하기"}
+                        {xLoading ? t('login.connecting') : t('login.x_cta')}
                     </button>
 
                     {/* TODO: Facebook 로그인 - 앱 게시 승인 후 활성화 */}
@@ -362,10 +362,10 @@ export default function LoginPage() {
                         }}>
                             <div style={{ fontSize: '2rem', marginBottom: '12px' }}>📬</div>
                             <p style={{ fontWeight: 700, fontSize: '1rem', color: '#065f46', marginBottom: '8px' }}>
-                                입력한 이메일로 로그인 링크를 보냈어요.
+                                {t('login.magic_link_sent')}
                             </p>
                             <p style={{ fontSize: '0.875rem', color: '#6b7280', lineHeight: 1.6 }}>
-                                메일함을 확인하고 링크를 눌러 계속해주세요.
+                                {t('login.magic_link_desc')}
                             </p>
                             <button
                                 type="button"
@@ -380,14 +380,14 @@ export default function LoginPage() {
                                     textDecoration: 'underline',
                                 }}
                             >
-                                다른 이메일로 재시도
+                                {t('login.magic_link_retry')}
                             </button>
                         </div>
                     ) : (
                         /* 이메일 입력 폼 */
                         <form onSubmit={handleEmailLogin}>
                             <div className={styles.inputGroup}>
-                                <label className={styles.label}>이메일</label>
+                                <label className={styles.label}>{t('signup.email_label')}</label>
                                 <input
                                     type="email"
                                     value={email}
@@ -409,7 +409,7 @@ export default function LoginPage() {
                                 disabled={emailLoading || googleLoading}
                                 className={styles.submitBtn}
                             >
-                                {emailLoading ? "링크 전송 중..." : "이메일로 계속하기"}
+                                {emailLoading ? t('login.sending') : t('login.email_cta')}
                             </button>
                         </form>
                     )}

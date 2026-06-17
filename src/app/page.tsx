@@ -247,13 +247,13 @@ export default function HomePage() {
       const result = await res.json();
       if (result.success) {
         setShowReferralPopup(false);
-        setReferralToast('추천인 코드가 적용되었습니다! 5% 쿠폰이 발급되었어요 🎉');
+        setReferralToast(t('referral_page.applied_toast'));
         setTimeout(() => setReferralToast(null), 3000);
       } else {
-        setReferralError(result.error ?? '알 수 없는 오류가 발생했습니다.');
+        setReferralError(result.error ?? t('referral_page.error_unknown'));
       }
     } catch {
-      setReferralError('일시적인 오류가 발생했습니다. 다시 시도해주세요.');
+      setReferralError(t('referral_page.error_retry'));
     }
   };
 

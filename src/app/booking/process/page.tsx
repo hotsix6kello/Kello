@@ -3,63 +3,80 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import styles from './page.module.css';
-
-interface ServiceOption {
-  id: string;
-  name: string;
-  desc: string;
-}
 
 export default function BookingProcessPage() {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
-  const services: ServiceOption[] = [
-    { id: 'basic', name: '베이직 풀케어', desc: '클렌징과 수분 공급 중심의 기본 스킨 케어입니다.' },
-    { id: 'trouble', name: '트러블 케어', desc: '피부 트러블과 모공 집중 케어입니다.' },
-    { id: 'calming', name: '진정 케어', desc: '민감하고 붉어진 피부를 위한 진정 케어입니다.' },
-    { id: 'lifting', name: '리프팅', desc: '탄력 및 윤곽을 위한 리프팅 케어입니다.' },
-    { id: 'brightening', name: '브라이트닝', desc: '칙칙한 피부 톤을 위한 브라이트닝 케어입니다.' },
+  const services = [
+    {
+      id: 'basic',
+      name: t('booking_skeleton.services.aesthetic.basic_title'),
+      desc: t('booking_skeleton.services.aesthetic.basic_desc'),
+    },
+    {
+      id: 'trouble',
+      name: t('booking_skeleton.services.aesthetic.trouble_title'),
+      desc: t('booking_skeleton.services.aesthetic.trouble_desc'),
+    },
+    {
+      id: 'calming',
+      name: t('booking_skeleton.services.aesthetic.calming_title'),
+      desc: t('booking_skeleton.services.aesthetic.calming_desc'),
+    },
+    {
+      id: 'lifting',
+      name: t('booking_skeleton.services.aesthetic.lifting_title'),
+      desc: t('booking_skeleton.services.aesthetic.lifting_desc'),
+    },
+    {
+      id: 'brightening',
+      name: t('booking_skeleton.services.aesthetic.bright_title'),
+      desc: t('booking_skeleton.services.aesthetic.bright_desc'),
+    },
   ];
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        {/* 헤더 */}
         <header className={styles.header}>
-          <button className={styles.backButton} onClick={() => router.back()} aria-label="뒤로가기">
+          <button
+            className={styles.backButton}
+            onClick={() => router.back()}
+            aria-label={t('common.back')}
+          >
             <ArrowLeft size={24} strokeWidth={2} />
           </button>
-          <h1 className={styles.headerTitle}>서비스 선택</h1>
+          <h1 className={styles.headerTitle}>
+            {t('booking_skeleton.service_selection.title')}
+          </h1>
           <div className={styles.placeholder} />
         </header>
 
-        {/* 메인 스크롤 영역 */}
         <div className={styles.scrollArea}>
-          {/* 프로세스 박스 */}
           <div className={styles.processBox}>
-            {/* 단계 표시 바 */}
             <div className={styles.stepContainer}>
               <div className={`${styles.stepItem} ${styles.active}`}>
-                <span className={styles.stepLabel}>단계 1</span>
-                <span className={styles.stepTitle}>서비스 선택</span>
+                <span className={styles.stepLabel}>{t('booking_skeleton.steps.step')} 1</span>
+                <span className={styles.stepTitle}>{t('booking_skeleton.steps.step1_title')}</span>
               </div>
               <div className={styles.stepItem}>
-                <span className={styles.stepLabel}>단계 2</span>
-                <span className={styles.stepTitle}>날짜 및 정보</span>
+                <span className={styles.stepLabel}>{t('booking_skeleton.steps.step')} 2</span>
+                <span className={styles.stepTitle}>{t('booking_skeleton.steps.step2_title')}</span>
               </div>
               <div className={styles.stepItem}>
-                <span className={styles.stepLabel}>단계 3</span>
-                <span className={styles.stepTitle}>최종 확인</span>
+                <span className={styles.stepLabel}>{t('booking_skeleton.steps.step')} 3</span>
+                <span className={styles.stepTitle}>{t('booking_skeleton.steps.step3_title')}</span>
               </div>
             </div>
 
-            {/* 서비스 목록 */}
             <div className={styles.serviceList}>
               {services.map(svc => (
-                <div 
-                  key={svc.id} 
+                <div
+                  key={svc.id}
                   className={`${styles.serviceCard} ${selectedService === svc.id ? styles.selected : ''}`}
                   onClick={() => setSelectedService(svc.id)}
                 >
@@ -71,19 +88,17 @@ export default function BookingProcessPage() {
           </div>
         </div>
 
-        {/* 하단 고정 버튼 영역 */}
         <div className={styles.bottomArea}>
-          <button 
-            className={styles.nextButton} 
+          <button
+            className={styles.nextButton}
             disabled={!selectedService}
             onClick={() => {
               if (selectedService) {
-                // 다음 단계 처리 라우팅 등
-                alert('다음 단계로 이동합니다.');
+                alert(t('booking_skeleton.next_step'));
               }
             }}
           >
-            다음 단계로
+            {t('booking_skeleton.next_step')}
           </button>
         </div>
       </div>

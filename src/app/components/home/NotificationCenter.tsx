@@ -219,7 +219,7 @@ export default function NotificationCenter() {
         <div className={styles.panel}>
           <div className={styles.header}>
             <div className={styles.headerRow}>
-              <h3 className={styles.headerTitle}>알림 센터</h3>
+              <h3 className={styles.headerTitle}>{t('notification_center.title')}</h3>
               {unreadCount > 0 && (
                 <button className={styles.markAllButton} onClick={() => void handleMarkAllRead()}>
                   모두 읽음

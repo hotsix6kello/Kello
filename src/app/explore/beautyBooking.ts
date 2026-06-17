@@ -355,7 +355,7 @@ export async function submitBeautyBooking(
       body: JSON.stringify(payload),
     });
   } catch {
-    throw new Error('예약 요청을 저장하지 못했어요. 잠시 후 다시 시도해 주세요.');
+    throw new Error('BOOKING_SAVE_FAILED');
   }
 
   const body = (await response.json().catch(() => null)) as
@@ -364,13 +364,13 @@ export async function submitBeautyBooking(
 
   if (!response.ok || body?.ok !== true || !body.bookingId || !body.createdAt) {
     if (response.status === 401) {
-      throw new Error('로그인이 필요해요. 로그인 후 다시 시도해 주세요.');
+      throw new Error('BOOKING_LOGIN_REQUIRED');
     }
 
     throw new Error(
       response.status === 400
-        ? '예약 정보를 다시 확인해 주세요.'
-        : '예약 요청을 저장하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        ? 'BOOKING_REVIEW_INFO'
+        : 'BOOKING_SAVE_FAILED',
     );
   }
 
