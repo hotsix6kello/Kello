@@ -23,10 +23,11 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
         src="/images/home/bottom_coupon_banner.png" 
         alt="10% Coupon Banner" 
         width={480}
-        height={144}
-        className={styles.bannerImage} 
+        height={160}
+        className={styles.bannerImage}
         priority
       />
     </div>
   );
 }
+

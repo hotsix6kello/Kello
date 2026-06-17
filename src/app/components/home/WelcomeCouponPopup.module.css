@@ -2,12 +2,12 @@
   position: relative;
   width: 100%;
   margin: 0;
-  margin-top: 12px;
-  margin-bottom: 0;
-  background: #FDF0F3;
+  margin-top: 16px;
+  background: transparent;
   border: none;
   border-radius: 0;
   padding: 0;
+  display: block;
   cursor: pointer;
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -21,7 +21,8 @@
 }
 
 .bannerImage {
-  width: 100%;
-  height: auto;
+  width: calc(100% + 8px);
+  margin: -4px;
   display: block;
+  height: auto;
 }
