@@ -249,9 +249,9 @@
     "transit_nav_desc": "Navigasi transportasi umum",
     "copy_address": "Salin Alamat",
     "copied": "Tersalin!",
-    "greeting_morning": "สวัสดีตอนเช้า",
-    "greeting_afternoon": "สวัสดีตอนบ่าย",
-    "greeting_evening": "สวัสดีตอนเย็น",
+    "greeting_morning": "早上好",
+    "greeting_afternoon": "下午好",
+    "greeting_evening": "晚上好",
     "search_results": "ผลลัพธ์การค้นหา",
     "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
@@ -2141,5 +2141,35 @@
     "translated_status": "翻譯完成",
     "source_only_status": "僅顯示原文",
     "voice_too_short_error": "請多說一點，語音太短無法識別。"
-  }
+  },
+  "morning": "早上好",
+  "afternoon": "下午好",
+  "evening": "晚上好",
+  "assurance": {
+    "items": [
+      {
+        "title": "一目瞭然的分類選擇",
+        "desc": "在第一屏選擇所需服務，直接進入預約流程。"
+      },
+      {
+        "title": "無憂語言支援",
+        "desc": "隨時使用即時翻譯助手，與門店順暢溝通。"
+      },
+      {
+        "title": "行動端優先的預約路徑",
+        "desc": "易於單手點選的卡片按鈕和大型CTA，提升預約便利性。"
+      }
+    ]
+  },
+  "interpreter": {
+    "eyebrow": "語言支援",
+    "title": "如需外語預約支援，請使用翻譯助手",
+    "description": "如果您擔心預約前的諮詢或訪問期間的對話，請直接使用即時翻譯服務。",
+    "button": "開啟翻譯助手"
+  },
+  "common_actions_view_all": "查看全部",
+  "common_loading": "載入中...",
+  "error_title": "發生錯誤。",
+  "error_desc": "如果問題持續，請聯絡客服。",
+  "error_retry": "重試"
 }

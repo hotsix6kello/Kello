@@ -594,7 +594,10 @@
     "route_nav": "ルート案内",
     "transit_nav_desc": "公共交通機関のナビゲーション",
     "copy_address": "住所をコピー",
-    "copied": "コピーしました!"
+    "copied": "コピーしました!",
+    "greeting_morning": "おはようございます",
+    "greeting_afternoon": "こんにちは",
+    "greeting_evening": "こんばんは"
   },
   "welcome_popup": {
     "title": "会員登録で\n5%割引クーポンプレゼント！",
@@ -2377,5 +2380,55 @@
       "interpretation": "「リアルタイム通訳」機能は、ユーザーの利便性のために提供される付加的なツールです。Wekelloは、AI翻訳または手動通訳の不一致によって発生する予約エラーや紛争について責任を負いません。",
       "community": "ユーザーがコミュニティ機能を通じて自発的に行ったオフラインの集まりや個人間の取引から発生する損害、事故、または紛争について、Wekelloは責任を負いません。"
     }
+  },
+  "morning": "おはようございます",
+  "afternoon": "こんにちは",
+  "evening": "こんばんは",
+  "assurance": {
+    "items": [
+      {
+        "title": "一目でわかるカテゴリー選択",
+        "desc": "最初の画面で希望のサービスを選び、すぐに予約フローへ進めます。"
+      },
+      {
+        "title": "安心の言語サポート",
+        "desc": "必要な時はいつでも、リアルタイム翻訳ヘルパーでお店とスムーズにコミュニケーション。"
+      },
+      {
+        "title": "モバイルファーストの予約経路",
+        "desc": "片手で選びやすいカードボタンと大きなCTAで、スムーズな予約体験を提供。"
+      }
+    ]
+  },
+  "interpreter": {
+    "eyebrow": "言語サポート",
+    "title": "外国語での予約サポートが必要な場合は翻訳ヘルパーをご利用ください",
+    "description": "予約前の相談や訪問時の会話が心配な場合は、リアルタイム通訳に直接アクセスしてください。",
+    "button": "翻訳ヘルパーを開く"
+  },
+  "interpreter_ui": {
+    "customer_speaks": "お客様が話す",
+    "staff_speaks": "スタッフが話す",
+    "customer_language": "お客様の言語",
+    "staff_language": "スタッフの言語",
+    "session": "セッション",
+    "expires": "有効期限"
+  },
+  "fab": {
+    "idle": "旅を計画",
+    "pre_trip": "出発が近い",
+    "on_trip": "次の場所は？",
+    "near_deadline": "遅刻リスク！",
+    "to": "{{dest}}へ",
+    "kride": "K.Rideを呼ぶ",
+    "kride_sub": "{{mins}}分で到着",
+    "transit": "交通ガイド",
+    "transit_sub": "最速ルート",
+    "copy": "住所をコピー",
+    "copy_done": "コピー済み！",
+    "card": "ドライバーカード",
+    "card_sub": "ドライバーに見せる",
+    "card_modal_title": "🗺️ このアドレスまでお願いします",
+    "cancel": "キャンセル"
   }
 }

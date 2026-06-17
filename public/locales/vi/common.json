@@ -233,9 +233,9 @@
         "day_time_dash": "Day {{day}} - {{time}}"
       }
     },
-    "morning": "早上好",
-    "afternoon": "下午好",
-    "evening": "晚上好",
+    "morning": "Chào buổi sáng",
+    "afternoon": "Chào buổi chiều",
+    "evening": "Chào buổi tối",
     "help_nav": "Help",
     "view_map": "Lihat Lokasi",
     "view_map_desc": "Lihat lokasi detail di peta",
@@ -244,9 +244,9 @@
     "transit_nav_desc": "Navigasi transportasi umum",
     "copy_address": "Salin Alamat",
     "copied": "Tersalin!",
-    "greeting_morning": "สวัสดีตอนเช้า",
-    "greeting_afternoon": "สวัสดีตอนบ่าย",
-    "greeting_evening": "สวัสดีตอนเย็น",
+    "greeting_morning": "Chào buổi sáng",
+    "greeting_afternoon": "Chào buổi chiều",
+    "greeting_evening": "Chào buổi tối",
     "search_results": "ผลลัพธ์การค้นหา",
     "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
   },
@@ -1946,6 +1946,231 @@
       "title": "4. Giới thiệu về Trách nhiệm pháp lý",
       "interpretation": "Tính năng 'Thông dịch viên thời gian thực' là một công cụ bổ sung được cung cấp để thuận tiện cho người dùng. Wekello không chịu trách nhiệm về các lỗi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong bản dịch AI hoặc thông dịch thủ công.",
       "community": "Wekello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
+    }
+  },
+  "morning": "Chào buổi sáng",
+  "afternoon": "Chào buổi chiều",
+  "evening": "Chào buổi tối",
+  "assurance": {
+    "items": [
+      {
+        "title": "Chọn danh mục dễ dàng",
+        "desc": "Chọn dịch vụ mong muốn ngay trên màn hình đầu tiên và chuyển ngay vào quy trình đặt lịch."
+      },
+      {
+        "title": "Hỗ trợ ngôn ngữ không lo lắng",
+        "desc": "Sử dụng trợ lý phiên dịch thời gian thực bất cứ khi nào cần để giao tiếp với cửa hàng."
+      },
+      {
+        "title": "Đường dẫn đặt lịch ưu tiên di động",
+        "desc": "Nút kiểu thẻ dễ chọn bằng một tay và CTA lớn giúp tăng tỷ lệ chuyển đổi."
+      }
+    ]
+  },
+  "interpreter": {
+    "eyebrow": "Hỗ trợ ngôn ngữ",
+    "title": "Sử dụng trợ lý phiên dịch nếu bạn cần hỗ trợ đặt lịch bằng tiếng nước ngoài",
+    "description": "Chuyển trực tiếp đến phiên dịch thời gian thực nếu bạn lo lắng về tư vấn trước khi đặt lịch hoặc trò chuyện trong lần thăm.",
+    "button": "Mở trợ lý phiên dịch"
+  },
+  "fab": {
+    "idle": "Lên kế hoạch",
+    "pre_trip": "Sắp khởi hành",
+    "on_trip": "Điểm tiếp theo?",
+    "near_deadline": "Nguy cơ trễ!",
+    "to": "đến {{dest}}",
+    "kride": "Gọi K.Ride",
+    "kride_sub": "Đến trong {{mins}} phút",
+    "transit": "Hướng dẫn đi lại",
+    "transit_sub": "Tuyến nhanh nhất",
+    "copy": "Sao chép địa chỉ",
+    "copy_done": "Đã sao chép!",
+    "card": "Thẻ cho tài xế",
+    "card_sub": "Cho tài xế xem",
+    "card_modal_title": "🗺️ Xin hãy đến địa chỉ này",
+    "cancel": "Hủy"
+  },
+  "header": {
+    "view_app": "Xem trong ứng dụng",
+    "faq": "Câu hỏi thường gặp",
+    "recent": "Hoạt động gần đây"
+  },
+  "navigation_page": {
+    "title": "Lịch trình hôm nay",
+    "status": {
+      "on_trip": "Đang di chuyển",
+      "pre_trip": "Chuẩn bị",
+      "idle": "Không có lịch"
+    },
+    "countdown": {
+      "today": "Hôm nay",
+      "starts_in": "Bắt đầu sau {{mins}} phút",
+      "traveling_to": "Đang đến {{dest}}"
+    },
+    "empty": {
+      "title": "Không có lịch hôm nay",
+      "subtitle": "Lên kế hoạch trong Khám phá hoặc Hành trình",
+      "cta": "Khám phá địa điểm"
+    },
+    "actions": {
+      "directions": "Điều hướng",
+      "booking": "Xem đặt lịch",
+      "late_risk": "Nguy cơ trễ!",
+      "booking_ref": "Mã đặt lịch: {{ref}}",
+      "departure_warning": "⚠️ {{title}} bắt đầu sau {{mins}} phút — Vui lòng xuất phát ngay!"
+    }
+  },
+  "explore_items": {
+    "airport_arrival": "Incheon Airport Arrival",
+    "hotel_checkin": "Hotel Check-in/Stay",
+    "f1": {
+      "title": "Plant Cafe Seoul",
+      "area": "Itaewon",
+      "desc": "100% vegan cuisine made with fresh vegetables and healthy ingredients",
+      "price": "15,000"
+    },
+    "f2": {
+      "title": "Gold Pig BBQ",
+      "area": "Yaksu",
+      "desc": "The best samgyeopsal restaurant in Korea, selected by the Michelin Guide",
+      "price": "20,000"
+    },
+    "f3": {
+      "title": "Jagalchi Fish Market",
+      "area": "Nampo",
+      "desc": "A hearty sashimi course where you can feel the freshness of the Busan sea",
+      "price": "40,000"
+    },
+    "b1": {
+      "title": "Jenny House Cheongdam",
+      "area": "Cheongdam",
+      "desc": "Premium hair & makeup shop frequented by K-idols",
+      "price": "150,000"
+    },
+    "b2": {
+      "title": "PPEUM Clinic Gangnam",
+      "area": "Gangnam",
+      "desc": "The best value-for-money beauty clinic most visited by foreigners",
+      "price": "50,000"
+    },
+    "e1": {
+      "title": "PSY Water Show 2024",
+      "area": "Jamsil Stadium",
+      "desc": "PSY's cool and passionate performance to blow away the summer heat",
+      "price": "140,000"
+    },
+    "e2": {
+      "title": "Nanta Show Myeongdong",
+      "area": "Myeongdong",
+      "desc": "A non-verbal performance combining traditional Korean rhythms with modern performance",
+      "price": "40,000"
+    },
+    "fs1": {
+      "title": "Seoul Lantern Festival",
+      "area": "Gwanghwamun",
+      "desc": "A feast of colorful and beautiful lanterns embroidering Gwanghwamun Square",
+      "price": "Free"
+    },
+    "fs2": {
+      "title": "Film Festival",
+      "area": "Centum City",
+      "desc": "Asia's largest film festival, a meeting of film professionals from around the world",
+      "price": "10,000"
+    },
+    "a1": {
+      "title": "Gyeongbokgung",
+      "area": "Jongno",
+      "desc": "A place that preserves the history and beauty of Korea as the main palace of the Joseon Dynasty",
+      "price": "3,000"
+    },
+    "a2": {
+      "title": "Lotte World Tower",
+      "area": "Jamsil",
+      "desc": "Korea's tallest building where you can see the fantastic night view of Seoul at a glance",
+      "price": "27,000"
+    },
+    "t1": {
+      "title": "KTX to Busan",
+      "area": "Seoul Station",
+      "desc": "The fastest and most convenient way to travel from Seoul to Busan",
+      "price": "59,800"
+    },
+    "phrases": {
+      "title": "Travel Phrasebook",
+      "subtitle": "Essential local expressions for seamless communication",
+      "eyebrow": "Prepared Traveler",
+      "hero": {
+        "badge": "Recommended for Today",
+        "count": "useful expressions"
+      },
+      "context": {
+        "title": "Contextual Phrases",
+        "booking": "Useful phrases related to your booking information.",
+        "interpreter": "Phrases to use when you need translation support.",
+        "support": "Useful phrases when you need help."
+      },
+      "category": {
+        "title": "{{category}} Phrases"
+      },
+      "categories": {
+        "transport": {
+          "label": "Transport",
+          "description": "Phrases for moving around",
+          "helper": "Use for taxis or subways"
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "description": "Phrases for ordering food",
+          "helper": "Use for reservations and requests"
+        },
+        "beauty": {
+          "label": "Beauty",
+          "description": "Phrases for salon services",
+          "helper": "Use for consultations and treatment requests"
+        },
+        "emergency": {
+          "label": "Emergency",
+          "description": "Phrases for urgent situations",
+          "helper": "Use for police or ambulance requests"
+        }
+      },
+      "favorites": {
+        "desc": "Save phrases you use frequently",
+        "empty": "No saved phrases yet"
+      },
+      "recent": {
+        "desc": "Phrases you've checked recently"
+      },
+      "empty": {
+        "title": "No phrases found",
+        "desc": "Check other categories"
+      },
+      "items": {
+        "transport_address": "Destination address",
+        "transport_dropoff": "Stop here",
+        "transport_time": "Travel time",
+        "transport_map": "Use the map",
+        "transport_platform": "Platform check",
+        "restaurant_allergy": "Seafood allergy",
+        "restaurant_spicy": "No spicy food",
+        "restaurant_recommend": "Popular menu",
+        "restaurant_less_spicy": "Less spicy request",
+        "restaurant_split": "Split the bill",
+        "beauty_reservation": "Treatment booking",
+        "beauty_natural": "Natural style",
+        "beauty_price": "Price check first",
+        "beauty_slowly": "Explain slowly",
+        "beauty_before_start": "Confirm before start",
+        "emergency_help": "Need help now",
+        "emergency_translation": "Need a translation",
+        "emergency_lost": "Lost",
+        "emergency_1330": "Tourist helpline",
+        "emergency_police": "Police help",
+        "notes": {
+          "transport_map": "Useful when pronunciation or landmarks are difficult.",
+          "emergency_1330": "1330 is the Korea Travel Helpline."
+        }
+      }
     }
   }
 }
