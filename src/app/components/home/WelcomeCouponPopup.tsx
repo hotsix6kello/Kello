@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
 import styles from './WelcomeCouponPopup.module.css';
 
 interface WelcomeCouponPopupProps {
@@ -11,7 +10,6 @@ interface WelcomeCouponPopupProps {
 
 export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps) {
   const router = useRouter();
-  const { t } = useTranslation('common');
 
   const handleSignUp = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -21,21 +19,15 @@ export default function WelcomeCouponPopup({ onClose }: WelcomeCouponPopupProps)
 
   return (
     <div className={styles.floatingBanner} onClick={handleSignUp}>
-      <div className={styles.textContainer}>
-        <div className={styles.line1}>{t('welcome_popup.title')}</div>
-        <div className={styles.line2}>
-          <span className={styles.highlight}>Kello</span>{t('welcome_popup.description')}
-        </div>
-      </div>
-      <div className={styles.couponContainer}>
-        <Image
-          src="/images/home/coupon_ticket.png"
-          alt="5% Coupon"
-          width={140}
-          height={100}
-          className={styles.couponImage}
-        />
-      </div>
+      <Image 
+        src="/images/home/bottom_coupon_banner.png" 
+        alt="10% Coupon Banner" 
+        width={480}
+        height={160}
+        className={styles.bannerImage}
+        priority
+      />
     </div>
   );
 }
+
