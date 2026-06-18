@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 
@@ -34,28 +34,35 @@ type NearbyPlaceResult = {
   lng: number;
   rating: number | null;
   userRatingCount: number | null;
-  types: string[];
+  googleMapsUri: string | null;
 };
 
-type AutocompleteSuggestion = {
-  place_id: string;
-  label: string;
-  main_text: string;
-  secondary_text: string | null;
-};
-
-type AutocompleteDetail = {
-  id: string;
-  name: string;
-  address: string | null;
-  lat: number;
-  lng: number;
-};
-
-type ActiveList = 'beauty' | 'restaurant' | 'lodging';
+type Category = 'food' | 'beauty' | 'stay';
 
 const DEFAULT_CENTER: Coordinates = { lat: 37.5665, lng: 126.978 };
 const DEFAULT_RADIUS_METERS = 50000;
+
+const CATEGORY_MARKER: Record<Category, { label: string; color: string }> = {
+  food: { label: '맛', color: '#22a06b' },
+  beauty: { label: '뷰', color: '#f24f8d' },
+  stay: { label: '숙', color: '#c58a12' },
+};
+
+function haversineMeters(a: Coordinates, b: Coordinates): number {
+  const R = 6371000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+}
+
+function formatDistance(meters: number): string {
+  if (meters < 1000) return `${Math.round(meters)}m`;
+  return `${(meters / 1000).toFixed(1)}km`;
+}
 
 const chipStyle = {
   border: '1px solid rgba(188, 148, 78, 0.32)',
@@ -67,13 +74,20 @@ const chipStyle = {
   fontWeight: 700,
   whiteSpace: 'nowrap' as const,
   boxShadow: '0 6px 18px rgba(41, 32, 23, 0.08)',
+  cursor: 'pointer',
+};
+
+const chipActiveStyle = {
+  ...chipStyle,
+  background: '#c4942f',
+  color: '#fff',
+  border: '1px solid #c4942f',
 };
 
 function getMarkerIcon(color: string): google.maps.Symbol | undefined {
   if (typeof window === 'undefined' || !window.google?.maps?.SymbolPath) {
     return undefined;
   }
-
   return {
     path: window.google.maps.SymbolPath.CIRCLE,
     fillColor: color,
@@ -102,11 +116,10 @@ function toSharedBusiness(partner: PartnerResult): SharedBusiness {
 }
 
 export default function ExplorePage() {
-  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const { setSharedBusinesses } = useTrip();
   const { t } = useTranslation('common');
 
-  const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '';
+  const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: mapsApiKey,
   });
@@ -114,25 +127,17 @@ export default function ExplorePage() {
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [center, setCenter] = useState<Coordinates>(DEFAULT_CENTER);
   const [currentLocation, setCurrentLocation] = useState<Coordinates | null>(null);
-  const [searchBaseLocation, setSearchBaseLocation] = useState<Coordinates | null>(null);
-  const [searchInput, setSearchInput] = useState('');
-  const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [partners, setPartners] = useState<PartnerResult[]>([]);
   const [places, setPlaces] = useState<NearbyPlaceResult[]>([]);
-  const [activeList, setActiveList] = useState<ActiveList>('beauty');
-
-  const activeBaseLocation = searchBaseLocation ?? currentLocation ?? center;
+  const [activeCategory, setActiveCategory] = useState<Category>('beauty');
+  const [isLoadingPlaces, setIsLoadingPlaces] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-
     supabase.auth.getSession().then(({ data }) => {
       if (cancelled) return;
-
-      const token = data.session?.access_token ?? null;
-      setSessionToken(token);
+      setSessionToken(data.session?.access_token ?? null);
     });
-
     return () => {
       cancelled = true;
     };
@@ -141,7 +146,6 @@ export default function ExplorePage() {
   const fetchPartners = useCallback(
     async (location: Coordinates) => {
       if (!sessionToken) return;
-
       try {
         const params = new URLSearchParams({
           lat: String(location.lat),
@@ -149,18 +153,13 @@ export default function ExplorePage() {
           radius: String(DEFAULT_RADIUS_METERS),
           category: 'beauty',
         });
-
         const res = await fetch(`/api/explore/partners?${params.toString()}`, {
           headers: { Authorization: `Bearer ${sessionToken}` },
         });
-
         if (!res.ok) throw new Error('partners_fetch_failed');
-
         const data = (await res.json()) as { partners?: PartnerResult[] };
         const nextPartners = data.partners ?? [];
         setPartners(nextPartners);
-        setPlaces([]);
-        setActiveList('beauty');
         setSharedBusinesses(nextPartners.map(toSharedBusiness));
       } catch (error) {
         console.error('[explore] partner fetch failed', error);
@@ -169,103 +168,62 @@ export default function ExplorePage() {
     [sessionToken, setSharedBusinesses],
   );
 
+  const fetchNearbyPlaces = useCallback(
+    async (category: Category, location: Coordinates) => {
+      if (!sessionToken) return;
+      setIsLoadingPlaces(true);
+      try {
+        const params = new URLSearchParams({
+          lat: String(location.lat),
+          lng: String(location.lng),
+          category,
+        });
+        const res = await fetch(`/api/places/nearby?${params.toString()}`, {
+          headers: { Authorization: `Bearer ${sessionToken}` },
+        });
+        if (!res.ok) throw new Error('places_fetch_failed');
+        const data = (await res.json()) as { places?: NearbyPlaceResult[] };
+        setPlaces(data.places ?? []);
+        setActiveCategory(category);
+      } catch (error) {
+        console.error('[explore] nearby places failed', error);
+        setPlaces([]);
+      } finally {
+        setIsLoadingPlaces(false);
+      }
+    },
+    [sessionToken],
+  );
+
   const requestCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) return;
-
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const nextLocation = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-
         setCurrentLocation(nextLocation);
-        setSearchBaseLocation(null);
         setCenter(nextLocation);
         void fetchPartners(nextLocation);
+        void fetchNearbyPlaces(activeCategory, nextLocation);
       },
       () => {
         setCenter(DEFAULT_CENTER);
       },
       { enableHighAccuracy: true, timeout: 9000, maximumAge: 60000 },
     );
-  }, [fetchPartners]);
+  // activeCategory intentionally excluded: only re-run when location/session changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchPartners, fetchNearbyPlaces]);
 
   useEffect(() => {
     if (!sessionToken) return;
     requestCurrentLocation();
   }, [requestCurrentLocation, sessionToken]);
 
-  const handleSuggestionSearch = async (event?: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
-
-    const input = searchInput.trim();
-    if (!input || !sessionToken) return;
-
-    try {
-      const params = new URLSearchParams({ input });
-      const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      });
-
-      if (!res.ok) throw new Error('autocomplete_failed');
-
-      const data = (await res.json()) as { suggestions?: AutocompleteSuggestion[] };
-      setSuggestions(data.suggestions ?? []);
-    } catch (error) {
-      console.error('[explore] autocomplete failed', error);
-    }
-  };
-
-  const handleSuggestionSelect = async (suggestion: AutocompleteSuggestion) => {
-    if (!sessionToken) return;
-
-    try {
-      const params = new URLSearchParams({ place_id: suggestion.place_id });
-      const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      });
-
-      if (!res.ok) throw new Error('place_detail_failed');
-
-      const detail = (await res.json()) as { place?: AutocompleteDetail };
-      if (!detail.place) throw new Error('place_detail_missing');
-
-      const nextLocation = { lat: detail.place.lat, lng: detail.place.lng };
-      setCenter(nextLocation);
-      setSearchBaseLocation(nextLocation);
-      setSearchInput(detail.place.name);
-      setSuggestions([]);
-      await fetchPartners(nextLocation);
-    } catch (error) {
-      console.error('[explore] place detail failed', error);
-    }
-  };
-
-  const fetchNearbyPlaces = async (type: 'restaurant' | 'lodging') => {
-    if (!sessionToken) return;
-
-    const location = activeBaseLocation;
-
-    try {
-      const params = new URLSearchParams({
-        lat: String(location.lat),
-        lng: String(location.lng),
-        type,
-      });
-
-      const res = await fetch(`/api/explore/places/nearby?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      });
-
-      if (!res.ok) throw new Error('places_fetch_failed');
-
-      const data = (await res.json()) as { places?: NearbyPlaceResult[] };
-      setPlaces(data.places ?? []);
-      setActiveList(type);
-    } catch (error) {
-      console.error('[explore] nearby places failed', error);
-    }
+  const handleCategoryChange = (category: Category) => {
+    void fetchNearbyPlaces(category, currentLocation ?? center);
   };
 
   const mapOptions = useMemo<google.maps.MapOptions>(
@@ -274,17 +232,12 @@ export default function ExplorePage() {
       clickableIcons: false,
       gestureHandling: 'greedy',
       zoomControl: true,
-      styles: [
-        {
-          featureType: 'poi.business',
-          stylers: [{ visibility: 'off' }],
-        },
-      ],
+      styles: [{ featureType: 'poi.business', stylers: [{ visibility: 'off' }] }],
     }),
     [],
   );
 
-  const visiblePlaces = activeList === 'beauty' ? [] : places;
+  const markerMeta = CATEGORY_MARKER[activeCategory];
 
   return (
     <main
@@ -296,130 +249,7 @@ export default function ExplorePage() {
         background: '#f7f1ea',
       }}
     >
-      <section
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 20,
-          padding: '16px 16px 0',
-          pointerEvents: 'none',
-        }}
-      >
-        <form
-          onSubmit={handleSuggestionSearch}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '8px 10px 8px 14px',
-            borderRadius: 24,
-            background: '#fff',
-            boxShadow: '0 12px 28px rgba(40, 31, 22, 0.16)',
-            border: '1px solid rgba(215, 200, 181, 0.8)',
-            pointerEvents: 'auto',
-          }}
-        >
-          <span aria-hidden="true" style={{ color: '#b89045', fontSize: 16 }}>
-            🔎
-          </span>
-          <input
-            ref={searchInputRef}
-            type="search"
-            value={searchInput}
-            onChange={(event) => setSearchInput(event.target.value)}
-            placeholder={t('explore_map.search_placeholder')}
-            style={{
-              minWidth: 0,
-              flex: 1,
-              border: 'none',
-              outline: 'none',
-              color: '#2d2823',
-              fontSize: 14,
-              fontWeight: 650,
-              background: 'transparent',
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              border: 'none',
-              borderRadius: 999,
-              padding: '9px 14px',
-              background: '#c4942f',
-              color: '#fff',
-              fontSize: 13,
-              fontWeight: 800,
-              cursor: 'pointer',
-            }}
-          >
-            {t('explore_map.search_btn')}
-          </button>
-        </form>
-
-        <div
-          style={{
-            display: 'flex',
-            gap: 8,
-            overflowX: 'auto',
-            padding: '10px 2px 2px',
-            pointerEvents: 'auto',
-            scrollbarWidth: 'none',
-          }}
-        >
-          <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
-            {t('explore_map.my_location')}
-          </button>
-          <button type="button" style={chipStyle} onClick={() => void fetchPartners(activeBaseLocation)}>
-            {t('explore_map.beauty_shop')}
-          </button>
-          <button type="button" style={chipStyle} onClick={() => void fetchNearbyPlaces('restaurant')}>
-            {t('explore_map.restaurant')}
-          </button>
-          <button type="button" style={chipStyle} onClick={() => void fetchNearbyPlaces('lodging')}>
-            {t('explore_map.accommodation')}
-          </button>
-        </div>
-
-        {suggestions.length > 0 && (
-          <div
-            style={{
-              marginTop: 8,
-              borderRadius: 18,
-              overflow: 'hidden',
-              background: '#fff',
-              boxShadow: '0 12px 26px rgba(40, 31, 22, 0.14)',
-              pointerEvents: 'auto',
-            }}
-          >
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion.place_id}
-                type="button"
-                onClick={() => void handleSuggestionSelect(suggestion)}
-                style={{
-                  width: '100%',
-                  border: 'none',
-                  borderBottom: '1px solid #f0e6da',
-                  padding: '12px 14px',
-                  background: '#fff',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                }}
-              >
-                <strong style={{ display: 'block', color: '#2f2923', fontSize: 14 }}>{suggestion.main_text}</strong>
-                {suggestion.secondary_text && (
-                  <span style={{ display: 'block', color: '#8f8274', fontSize: 12, marginTop: 3 }}>
-                    {suggestion.secondary_text}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        )}
-      </section>
-
+      {/* Map */}
       <section style={{ position: 'absolute', inset: 0 }}>
         {mapsApiKey && isLoaded && !loadError ? (
           <GoogleMap
@@ -427,9 +257,6 @@ export default function ExplorePage() {
             zoom={14}
             mapContainerStyle={{ width: '100%', height: '100%' }}
             options={mapOptions}
-            onDragEnd={() => {
-              setSuggestions([]);
-            }}
           >
             {currentLocation && (
               <MarkerF
@@ -447,17 +274,12 @@ export default function ExplorePage() {
                 onClick={() => setCenter({ lat: partner.lat, lng: partner.lng })}
               />
             ))}
-            {visiblePlaces.map((place) => (
+            {places.map((place) => (
               <MarkerF
                 key={place.id}
                 position={{ lat: place.lat, lng: place.lng }}
-                label={{
-                  text: activeList === 'restaurant' ? '맛' : '숙',
-                  color: '#ffffff',
-                  fontWeight: '900',
-                  fontSize: '11px',
-                }}
-                icon={getMarkerIcon(activeList === 'restaurant' ? '#22a06b' : '#c58a12')}
+                label={{ text: markerMeta.label, color: '#ffffff', fontWeight: '900', fontSize: '11px' }}
+                icon={getMarkerIcon(markerMeta.color)}
                 onClick={() => setCenter({ lat: place.lat, lng: place.lng })}
               />
             ))}
@@ -476,11 +298,196 @@ export default function ExplorePage() {
               fontWeight: 700,
             }}
           >
-            지도 표시를 위해 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY가 필요합니다.
+            {loadError
+              ? 'Failed to load Google Maps.'
+              : 'NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY is required.'}
           </div>
         )}
       </section>
 
+      {/* Category chips */}
+      <section
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 20,
+          padding: '16px 16px 0',
+          pointerEvents: 'none',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            gap: 8,
+            overflowX: 'auto',
+            padding: '2px 2px 2px',
+            pointerEvents: 'auto',
+            scrollbarWidth: 'none',
+          }}
+        >
+          <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
+            {t('explore_map.my_location')}
+          </button>
+          <button
+            type="button"
+            style={activeCategory === 'food' ? chipActiveStyle : chipStyle}
+            onClick={() => handleCategoryChange('food')}
+          >
+            {t('explore_map.food')}
+          </button>
+          <button
+            type="button"
+            style={activeCategory === 'beauty' ? chipActiveStyle : chipStyle}
+            onClick={() => handleCategoryChange('beauty')}
+          >
+            {t('explore_map.beauty')}
+          </button>
+          <button
+            type="button"
+            style={activeCategory === 'stay' ? chipActiveStyle : chipStyle}
+            onClick={() => handleCategoryChange('stay')}
+          >
+            {t('explore_map.stay')}
+          </button>
+        </div>
+      </section>
+
+      {/* Place card list */}
+      {(places.length > 0 || isLoadingPlaces) && (
+        <section
+          style={{
+            position: 'absolute',
+            bottom: 'var(--nav-height, 72px)',
+            left: 0,
+            right: 0,
+            zIndex: 20,
+            background: 'linear-gradient(to top, rgba(247,241,234,0.98) 70%, transparent)',
+            paddingTop: 16,
+          }}
+        >
+          {isLoadingPlaces ? (
+            <div style={{ padding: '16px 20px 20px', color: '#8f8274', fontSize: 13, fontWeight: 600 }}>
+              {t('explore_map.loading', { defaultValue: 'Loading...' })}
+            </div>
+          ) : (
+            <div
+              style={{
+                display: 'flex',
+                gap: 12,
+                overflowX: 'auto',
+                padding: '4px 16px 20px',
+                scrollbarWidth: 'none',
+              }}
+            >
+              {places.map((place) => {
+                const dist =
+                  currentLocation != null
+                    ? haversineMeters(currentLocation, { lat: place.lat, lng: place.lng })
+                    : null;
+                const mapsUrl =
+                  place.googleMapsUri ??
+                  `https://www.google.com/maps/search/?api=1&query_place_id=${place.id}`;
+
+                return (
+                  <div
+                    key={place.id}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setCenter({ lat: place.lat, lng: place.lng })}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') setCenter({ lat: place.lat, lng: place.lng });
+                    }}
+                    style={{
+                      flexShrink: 0,
+                      width: 210,
+                      background: '#fff',
+                      borderRadius: 16,
+                      boxShadow: '0 6px 18px rgba(40,31,22,0.12)',
+                      border: '1px solid rgba(215,200,181,0.6)',
+                      padding: '14px 14px 12px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 4,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 700,
+                        fontSize: 14,
+                        color: '#2d2823',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {place.name}
+                    </span>
+
+                    {place.address && (
+                      <span
+                        style={{
+                          fontSize: 11,
+                          color: '#8f8274',
+                          overflow: 'hidden',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {place.address}
+                      </span>
+                    )}
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 4 }}>
+                      {place.rating != null && (
+                        <span style={{ fontSize: 12, color: '#c4942f', fontWeight: 700 }}>
+                          ★ {place.rating.toFixed(1)}
+                        </span>
+                      )}
+                      {place.userRatingCount != null && (
+                        <span style={{ fontSize: 11, color: '#aaa9a6' }}>
+                          ({place.userRatingCount.toLocaleString()})
+                        </span>
+                      )}
+                      {dist != null && (
+                        <span style={{ fontSize: 11, color: '#b89045', marginLeft: 'auto' }}>
+                          {formatDistance(dist)}
+                        </span>
+                      )}
+                    </div>
+
+                    <a
+                      href={mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        display: 'block',
+                        marginTop: 8,
+                        fontSize: 12,
+                        fontWeight: 700,
+                        color: '#4285f4',
+                        textDecoration: 'none',
+                        padding: '5px 0',
+                        borderRadius: 8,
+                        background: '#f0f4ff',
+                        border: '1px solid #d0dcff',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {t('explore_map.open_maps')}
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      )}
     </main>
   );
 }

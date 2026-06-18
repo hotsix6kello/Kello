@@ -2235,7 +2235,12 @@
     "my_location": "Vị trí của tôi",
     "beauty_shop": "Salon làm đẹp",
     "restaurant": "Nhà hàng",
-    "accommodation": "Lưu trú"
+    "accommodation": "Lưu trú",
+    "food": "Ẩm thực",
+    "beauty": "Làm đẹp",
+    "stay": "Lưu trú",
+    "open_maps": "Mở trong Maps",
+    "loading": "Đang tải..."
   },
   "talk_page": {
     "korean_viewer_mode": "Chế độ xem tiếng Hàn",
