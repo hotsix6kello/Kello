@@ -2240,7 +2240,9 @@
     "beauty": "Làm đẹp",
     "stay": "Lưu trú",
     "open_maps": "Mở trong Maps",
-    "loading": "Đang tải..."
+    "loading": "Đang tải...",
+    "login_required": "Đăng nhập để xem các địa điểm gần đây.",
+    "location_denied": "Cho phép truy cập vị trí để xem vị trí hiện tại của bạn."
   },
   "talk_page": {
     "korean_viewer_mode": "Chế độ xem tiếng Hàn",
