@@ -40,6 +40,18 @@ type NearbyPlaceResult = {
 type Category = 'food' | 'beauty' | 'stay';
 type StatusMsg = 'login_required' | 'location_denied' | null;
 
+// --- Places API 결과 클라이언트 캐시 ---
+// 모듈 레벨 Map: 페이지 재방문(클라이언트 라우팅) 간 유지, 새로고침 시 초기화
+type PlacesCacheEntry = { places: NearbyPlaceResult[]; expiresAt: number };
+const placesCache = new Map<string, PlacesCacheEntry>();
+const PLACES_CACHE_TTL_MS = 5 * 60 * 1000; // 5분
+
+// lat/lng를 소수점 3자리(±약 55m)로 반올림해 캐시 키 생성
+function makePlacesCacheKey(lat: number, lng: number, category: Category): string {
+  return `${lat.toFixed(3)}:${lng.toFixed(3)}:${category}`;
+}
+// ------------------------------------
+
 const DEFAULT_CENTER: Coordinates = { lat: 37.5665, lng: 126.978 };
 const DEFAULT_RADIUS_METERS = 50000;
 
@@ -174,6 +186,16 @@ export default function ExplorePage() {
     async (category: Category, location: Coordinates) => {
       if (!sessionToken) return;
       setStatusMsg(null);
+
+      // 캐시 히트 시 API 호출 없이 즉시 반환
+      const cacheKey = makePlacesCacheKey(location.lat, location.lng, category);
+      const cached = placesCache.get(cacheKey);
+      if (cached && Date.now() < cached.expiresAt) {
+        setPlaces(cached.places);
+        setActiveCategory(category);
+        return;
+      }
+
       setIsLoadingPlaces(true);
       try {
         const params = new URLSearchParams({
@@ -186,7 +208,12 @@ export default function ExplorePage() {
         });
         if (!res.ok) throw new Error('places_fetch_failed');
         const data = (await res.json()) as { places?: NearbyPlaceResult[] };
-        setPlaces(data.places ?? []);
+        const nextPlaces = data.places ?? [];
+
+        // 성공 결과를 캐시에 저장
+        placesCache.set(cacheKey, { places: nextPlaces, expiresAt: Date.now() + PLACES_CACHE_TTL_MS });
+
+        setPlaces(nextPlaces);
         setActiveCategory(category);
       } catch (error) {
         console.error('[explore] nearby places failed', error);
