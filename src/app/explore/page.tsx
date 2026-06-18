@@ -433,12 +433,13 @@ export default function ExplorePage() {
         <section
           style={{
             position: 'absolute',
-            bottom: 'var(--nav-height, 72px)',
+            bottom: 0,
             left: 0,
             right: 0,
             zIndex: 20,
             background: 'linear-gradient(to top, rgba(247,241,234,0.98) 70%, transparent)',
             paddingTop: 16,
+            paddingBottom: 'calc(var(--nav-height, 82px) + env(safe-area-inset-bottom, 0px) + 8px)',
           }}
         >
           {isLoadingPlaces ? (
