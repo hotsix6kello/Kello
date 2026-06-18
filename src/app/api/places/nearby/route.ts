@@ -5,9 +5,9 @@ import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from '@/lib/ad
 export const runtime = 'nodejs';
 
 const CATEGORY_TYPE_MAP: Record<string, string[]> = {
-  food: ['restaurant', 'cafe', 'bakery'],
-  beauty: ['beauty_salon', 'hair_care', 'spa'],
-  stay: ['lodging'],
+  food: ['restaurant', 'cafe', 'bakery', 'korean_restaurant', 'japanese_restaurant', 'bar'],
+  beauty: ['beauty_salon', 'hair_care', 'hair_salon', 'nail_salon', 'makeup_artist', 'skin_care_clinic', 'spa'],
+  stay: ['lodging', 'hotel', 'guest_house', 'hostel', 'motel'],
 };
 
 const RADIUS_METERS = 1500;
@@ -29,6 +29,15 @@ function parseNumber(value: string | null): number | null {
   if (!value) return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+// GOOGLE_MAPS_SERVER_KEY has HTTP-referrer restrictions configured in GCP.
+// Server-side calls have no Referer header by default → 403.
+// We inject the app origin so it passes the allowlist.
+function getAppOrigin(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:3000';
 }
 
 export async function GET(request: Request) {
@@ -62,6 +71,22 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'GOOGLE_MAPS_SERVER_KEY is not configured' }, { status: 500 });
   }
 
+  const requestBody = {
+    includedTypes: CATEGORY_TYPE_MAP[category],
+    maxResultCount: MAX_RESULTS,
+    rankPreference: 'DISTANCE',
+    languageCode: 'ko',
+    regionCode: 'KR',
+    locationRestriction: {
+      circle: {
+        center: { latitude: lat, longitude: lng },
+        radius: RADIUS_METERS,
+      },
+    },
+  };
+
+  console.log('[api/places/nearby] request', { lat, lng, category, types: requestBody.includedTypes });
+
   try {
     const response = await fetch('https://places.googleapis.com/v1/places:searchNearby', {
       method: 'POST',
@@ -69,25 +94,24 @@ export async function GET(request: Request) {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': apiKey,
         'X-Goog-FieldMask': FIELD_MASK,
+        'Referer': getAppOrigin(),
       },
-      body: JSON.stringify({
-        includedTypes: CATEGORY_TYPE_MAP[category],
-        maxResultCount: MAX_RESULTS,
-        rankPreference: 'DISTANCE',
-        locationRestriction: {
-          circle: {
-            center: { latitude: lat, longitude: lng },
-            radius: RADIUS_METERS,
-          },
-        },
-      }),
+      body: JSON.stringify(requestBody),
     });
 
-    const data = (await response.json()) as { places?: GooglePlace[]; error?: unknown };
+    const data = (await response.json()) as { places?: GooglePlace[]; error?: { code?: number; message?: string; status?: string } };
 
     if (!response.ok) {
-      console.error('[api/places/nearby] Google Places API error', data.error);
-      return NextResponse.json({ error: 'failed_to_fetch_places' }, { status: 502 });
+      console.error('[api/places/nearby] Google Places API error', {
+        httpStatus: response.status,
+        code: data.error?.code,
+        message: data.error?.message,
+        status: data.error?.status,
+      });
+      return NextResponse.json(
+        { error: 'google_api_error', detail: data.error?.message ?? 'unknown' },
+        { status: 502 },
+      );
     }
 
     const places = ((data.places ?? []) as GooglePlace[])
@@ -104,10 +128,11 @@ export async function GET(request: Request) {
         googleMapsUri: p.googleMapsUri ?? null,
       }));
 
+    console.log(`[api/places/nearby] result count: ${places.length}`);
     return NextResponse.json({ places });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     console.error('[api/places/nearby] Unexpected error:', message);
-    return NextResponse.json({ error: 'failed_to_fetch_places' }, { status: 500 });
+    return NextResponse.json({ error: 'google_api_error', detail: message }, { status: 500 });
   }
 }
