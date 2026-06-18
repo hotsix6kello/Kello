@@ -5,9 +5,12 @@ import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from '@/lib/ad
 export const runtime = 'nodejs';
 
 const CATEGORY_TYPE_MAP: Record<string, string[]> = {
-  food: ['restaurant', 'cafe', 'bakery', 'korean_restaurant', 'japanese_restaurant', 'bar'],
-  beauty: ['beauty_salon', 'hair_care', 'hair_salon', 'nail_salon', 'makeup_artist', 'skin_care_clinic', 'spa'],
-  stay: ['lodging', 'hotel', 'guest_house', 'hostel', 'motel'],
+  hair:      ['hair_salon', 'hair_care'],
+  nail:      ['nail_salon'],
+  makeup:    ['makeup_artist'],
+  lash:      ['beauty_salon'],        // Google에 전용 타입 없음 → beauty_salon 근사치
+  waxing:    ['beauty_salon', 'spa'], // Google에 전용 타입 없음 → beauty_salon/spa 근사치
+  aesthetic: ['skin_care_clinic', 'spa'],
 };
 
 const RADIUS_METERS = 1500;

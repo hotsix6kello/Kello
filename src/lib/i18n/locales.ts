@@ -11,8 +11,8 @@ export const CANONICAL_SUPPORTED_LOCALES = [
 
 export type CanonicalLocaleCode = (typeof CANONICAL_SUPPORTED_LOCALES)[number];
 
-export const DEFAULT_LOCALE: CanonicalLocaleCode = "ko";
-export const DEFAULT_CLIENT_LOCALE: CanonicalLocaleCode = "ko";
+export const DEFAULT_LOCALE: CanonicalLocaleCode = "en";
+export const DEFAULT_CLIENT_LOCALE: CanonicalLocaleCode = "en";
 export const LOCALE_STORAGE_KEY = "kello_lang";
 export const MANUAL_SELECTION_FLAG = "kello_lang_manual";
 export const AUTO_INIT_FLAG = "kello_lang_auto_init";
