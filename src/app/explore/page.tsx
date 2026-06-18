@@ -297,12 +297,11 @@ export default function ExplorePage() {
     [sessionToken],
   );
 
-  // Geolocation runs regardless of login state.
-  // If logged in → fetches nearby places.
-  // If not logged in → moves map + shows marker only, then shows login hint.
+  // 내 위치: 지도 이동 + 마커만. 카테고리 탭을 눌러야 주변 장소 검색.
   const requestCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) return;
     setStatusMsg(null);
+    setPlaces([]);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -313,12 +312,8 @@ export default function ExplorePage() {
         setCurrentLocation(nextLocation);
         setCenter(nextLocation);
         mapRef.current?.setZoom(15);
-
         if (sessionToken) {
           void fetchPartners(nextLocation);
-          void fetchNearbyPlaces(activeCategory, nextLocation);
-        } else {
-          setStatusMsg('login_required');
         }
       },
       () => {
@@ -326,9 +321,7 @@ export default function ExplorePage() {
       },
       { enableHighAccuracy: true, timeout: 9000, maximumAge: 60000 },
     );
-  // activeCategory intentionally excluded: only re-run when session/fetch fns change
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchPartners, fetchNearbyPlaces, sessionToken]);
+  }, [fetchPartners, sessionToken]);
 
   // Auto-trigger when sessionToken becomes available (login).
   useEffect(() => {
@@ -336,23 +329,41 @@ export default function ExplorePage() {
     requestCurrentLocation();
   }, [requestCurrentLocation, sessionToken]);
 
-  // 검색 입력 debounce → 서버사이드 자동완성
-  useEffect(() => {
-    const query = searchInput.trim();
-    if (!query || !sessionToken) { setSearchSuggestions([]); return; }
-    const timer = setTimeout(async () => {
-      try {
-        const params = new URLSearchParams({ input: query });
-        const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
-          headers: { Authorization: `Bearer ${sessionToken}` },
-        });
-        if (!res.ok) return;
-        const data = (await res.json()) as { suggestions?: AutocompleteSuggestion[] };
-        setSearchSuggestions(data.suggestions ?? []);
-      } catch { /* ignore */ }
-    }, 320);
-    return () => clearTimeout(timer);
-  }, [searchInput, sessionToken]);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // 자동완성 실제 요청 (debounce·즉시 양쪽에서 호출)
+  const fetchSuggestions = useCallback(async (query: string): Promise<AutocompleteSuggestion[]> => {
+    if (!query.trim() || !sessionToken) { setSearchSuggestions([]); return []; }
+    try {
+      const params = new URLSearchParams({ input: query.trim() });
+      const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${sessionToken}` },
+      });
+      if (!res.ok) return [];
+      const data = (await res.json()) as { suggestions?: AutocompleteSuggestion[] };
+      const list = data.suggestions ?? [];
+      setSearchSuggestions(list);
+      return list;
+    } catch { return []; }
+  }, [sessionToken]);
+
+  // 타이핑 중 debounce
+  const handleSearchChange = (value: string) => {
+    setSearchInput(value);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (!value.trim()) { setSearchSuggestions([]); return; }
+    debounceRef.current = setTimeout(() => void fetchSuggestions(value), 320);
+  };
+
+  // Enter / 돋보기: debounce 취소 → 즉시 요청 → 첫 결과 선택
+  const handleSearchSubmit = async () => {
+    if (!searchInput.trim()) return;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    const list = searchSuggestions.length > 0
+      ? searchSuggestions
+      : await fetchSuggestions(searchInput);
+    if (list.length > 0) void handleSuggestionSelect(list[0]);
+  };
 
   const closeSearch = () => {
     setIsSearchOpen(false);
@@ -507,13 +518,19 @@ export default function ExplorePage() {
                 border: '1px solid rgba(215,200,181,0.8)',
               }}
             >
-              <span style={{ fontSize: 16, color: '#b89045' }}>🔍</span>
+              <button
+                type="button"
+                onClick={() => void handleSearchSubmit()}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontSize: 16, color: '#b89045', lineHeight: 1 }}
+                aria-label="검색"
+              >🔍</button>
               <input
                 ref={searchInputRef}
                 autoFocus
                 type="text"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') void handleSearchSubmit(); }}
                 placeholder={t('explore_map.search_placeholder')}
                 style={{
                   flex: 1,
