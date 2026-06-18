@@ -2526,7 +2526,9 @@
     "beauty": "Beauty",
     "stay": "Stay",
     "open_maps": "Open in Maps",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "login_required": "Sign in to see nearby places.",
+    "location_denied": "Allow location access to see your current position."
   },
   "talk_page": {
     "korean_viewer_mode": "Korean Viewer Mode",
