@@ -41,6 +41,21 @@ type NearbyPlaceResult = {
 type Category = 'hair' | 'nail' | 'makeup' | 'lash' | 'waxing' | 'aesthetic';
 type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | 'api_error' | null;
 
+type AutocompleteSuggestion = {
+  place_id: string;
+  label: string;
+  main_text: string;
+  secondary_text: string | null;
+};
+
+type AutocompleteDetail = {
+  id: string;
+  name: string;
+  address: string | null;
+  lat: number;
+  lng: number;
+};
+
 // --- Places API 결과 클라이언트 캐시 ---
 // 모듈 레벨 Map: 페이지 재방문(클라이언트 라우팅) 간 유지, 새로고침 시 초기화
 type PlacesCacheEntry = { places: NearbyPlaceResult[]; expiresAt: number };
@@ -167,6 +182,7 @@ export default function ExplorePage() {
   const mapRef = useRef<google.maps.Map | null>(null);
   const cardScrollRef = useRef<HTMLDivElement | null>(null);
   const chipScrollRef = useRef<HTMLDivElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const scrollCards = (dir: 'left' | 'right') => {
     cardScrollRef.current?.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
@@ -186,6 +202,9 @@ export default function ExplorePage() {
   const [activeCategory, setActiveCategory] = useState<Category>('hair');
   const [isLoadingPlaces, setIsLoadingPlaces] = useState(false);
   const [statusMsg, setStatusMsg] = useState<StatusMsg>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchSuggestions, setSearchSuggestions] = useState<AutocompleteSuggestion[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -317,6 +336,48 @@ export default function ExplorePage() {
     requestCurrentLocation();
   }, [requestCurrentLocation, sessionToken]);
 
+  // 검색 입력 debounce → 서버사이드 자동완성
+  useEffect(() => {
+    const query = searchInput.trim();
+    if (!query || !sessionToken) { setSearchSuggestions([]); return; }
+    const timer = setTimeout(async () => {
+      try {
+        const params = new URLSearchParams({ input: query });
+        const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
+          headers: { Authorization: `Bearer ${sessionToken}` },
+        });
+        if (!res.ok) return;
+        const data = (await res.json()) as { suggestions?: AutocompleteSuggestion[] };
+        setSearchSuggestions(data.suggestions ?? []);
+      } catch { /* ignore */ }
+    }, 320);
+    return () => clearTimeout(timer);
+  }, [searchInput, sessionToken]);
+
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+    setSearchInput('');
+    setSearchSuggestions([]);
+  };
+
+  const handleSuggestionSelect = async (suggestion: AutocompleteSuggestion) => {
+    if (!sessionToken) return;
+    try {
+      const params = new URLSearchParams({ place_id: suggestion.place_id });
+      const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${sessionToken}` },
+      });
+      if (!res.ok) return;
+      const data = (await res.json()) as { place?: AutocompleteDetail };
+      if (!data.place) return;
+      const nextLocation = { lat: data.place.lat, lng: data.place.lng };
+      setCenter(nextLocation);
+      mapRef.current?.setZoom(15);
+      closeSearch();
+      void fetchNearbyPlaces(activeCategory, nextLocation);
+    } catch { /* ignore */ }
+  };
+
   // Always updates active tab. Shows login hint instead of fetching when not logged in.
   // Uses the map's actual current center (reflects user panning) via mapRef.
   const handleCategoryChange = (category: Category) => {
@@ -413,48 +474,155 @@ export default function ExplorePage() {
         )}
       </section>
 
-      {/* Category chips — 좌우 슬라이딩 */}
+      {/* 상단 바: 검색 열림 / 칩 바 전환 */}
       <section
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 20,
+          zIndex: 25,
           padding: '16px 16px 0',
           pointerEvents: 'none',
         }}
       >
-        <div
-          ref={chipScrollRef}
-          style={{
-            display: 'flex',
-            gap: 8,
-            overflowX: 'auto',
-            padding: '2px 2px 4px',
-            pointerEvents: 'auto',
-            scrollbarWidth: 'none',
-            WebkitOverflowScrolling: 'touch',
-          }}
-          onWheel={(e) => {
-            e.preventDefault();
-            e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
-          }}
-        >
-          <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
-            {t('explore_map.my_location')}
-          </button>
-          {CATEGORIES.map(({ key, labelKey }) => (
-            <button
-              key={key}
-              type="button"
-              style={activeCategory === key ? chipActiveStyle : chipStyle}
-              onClick={() => handleCategoryChange(key)}
+        {isSearchOpen ? (
+          /* ── 검색 모드 ── */
+          <div style={{ pointerEvents: 'auto' }}>
+            {/* 배경 클릭 시 닫기 */}
+            <div
+              style={{ position: 'fixed', inset: 0, zIndex: -1 }}
+              onClick={closeSearch}
+            />
+            {/* 검색 입력창 */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '8px 12px',
+                borderRadius: 24,
+                background: '#fff',
+                boxShadow: '0 12px 28px rgba(40,31,22,0.18)',
+                border: '1px solid rgba(215,200,181,0.8)',
+              }}
             >
-              {t(labelKey)}
+              <span style={{ fontSize: 16, color: '#b89045' }}>🔍</span>
+              <input
+                ref={searchInputRef}
+                autoFocus
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder={t('explore_map.search_placeholder')}
+                style={{
+                  flex: 1,
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: '#2d2823',
+                  background: 'transparent',
+                  minWidth: 0,
+                }}
+              />
+              <button
+                type="button"
+                onClick={closeSearch}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: 18,
+                  color: '#8f8274',
+                  lineHeight: 1,
+                  padding: '0 2px',
+                }}
+                aria-label="닫기"
+              >✕</button>
+            </div>
+
+            {/* 자동완성 결과 */}
+            {searchSuggestions.length > 0 && (
+              <div
+                style={{
+                  marginTop: 8,
+                  borderRadius: 16,
+                  overflow: 'hidden',
+                  background: '#fff',
+                  boxShadow: '0 12px 26px rgba(40,31,22,0.14)',
+                }}
+              >
+                {searchSuggestions.map((s) => (
+                  <button
+                    key={s.place_id}
+                    type="button"
+                    onClick={() => void handleSuggestionSelect(s)}
+                    style={{
+                      width: '100%',
+                      border: 'none',
+                      borderBottom: '1px solid #f0e6da',
+                      padding: '12px 14px',
+                      background: '#fff',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <strong style={{ display: 'block', color: '#2f2923', fontSize: 14 }}>
+                      {s.main_text}
+                    </strong>
+                    {s.secondary_text && (
+                      <span style={{ display: 'block', color: '#8f8274', fontSize: 12, marginTop: 2 }}>
+                        {s.secondary_text}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          /* ── 칩 바 모드 ── */
+          <div
+            ref={chipScrollRef}
+            style={{
+              display: 'flex',
+              gap: 8,
+              overflowX: 'auto',
+              padding: '2px 2px 4px',
+              pointerEvents: 'auto',
+              scrollbarWidth: 'none',
+              WebkitOverflowScrolling: 'touch',
+            }}
+            onWheel={(e) => {
+              e.preventDefault();
+              e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
+            }}
+          >
+            {/* 검색 아이콘 버튼 */}
+            <button
+              type="button"
+              style={chipStyle}
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="검색"
+            >
+              🔍
             </button>
-          ))}
-        </div>
+            <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
+              {t('explore_map.my_location')}
+            </button>
+            {CATEGORIES.map(({ key, labelKey }) => (
+              <button
+                key={key}
+                type="button"
+                style={activeCategory === key ? chipActiveStyle : chipStyle}
+                onClick={() => handleCategoryChange(key)}
+              >
+                {t(labelKey)}
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Bottom section: 지도 위에 오버레이 — 배경 없이 카드/메시지만 떠 있음 */}
