@@ -442,7 +442,7 @@ export default function ExplorePage() {
         </div>
       </section>
 
-      {/* Bottom section: loading / status message / place cards */}
+      {/* Bottom section: 지도 위에 오버레이 — 배경 없이 카드/메시지만 떠 있음 */}
       {showBottomSection && (
         <section
           style={{
@@ -451,22 +451,29 @@ export default function ExplorePage() {
             left: 0,
             right: 0,
             zIndex: 20,
-            // 카드 목록일 때만 그라데이션 배경 — 메시지/로딩은 투명하게 유지해 지도가 보이도록
-            background: !isLoadingPlaces && places.length > 0
-              ? 'linear-gradient(to top, rgba(247,241,234,0.98) 70%, transparent)'
-              : 'transparent',
-            paddingTop: !isLoadingPlaces && places.length > 0 ? 16 : 0,
             paddingBottom: 'calc(var(--nav-height, 82px) + env(safe-area-inset-bottom, 0px) + 8px)',
           }}
         >
           {isLoadingPlaces ? (
-            <div style={{ padding: '16px 20px 20px', color: '#8f8274', fontSize: 13, fontWeight: 600 }}>
+            <div
+              style={{
+                margin: '0 16px 8px',
+                padding: '12px 16px',
+                borderRadius: 12,
+                background: 'rgba(255,255,255,0.92)',
+                boxShadow: '0 4px 14px rgba(40,31,22,0.10)',
+                color: '#8f8274',
+                fontSize: 13,
+                fontWeight: 600,
+                textAlign: 'center',
+              }}
+            >
               {t('explore_map.loading', { defaultValue: 'Loading...' })}
             </div>
           ) : statusMsg !== null && places.length === 0 ? (
             <div
               style={{
-                margin: '0 16px 20px',
+                margin: '0 16px 8px',
                 padding: '14px 18px',
                 borderRadius: 14,
                 background: 'rgba(255,255,255,0.97)',
@@ -491,10 +498,11 @@ export default function ExplorePage() {
             <div
               style={{
                 display: 'flex',
-                gap: 12,
+                gap: 10,
                 overflowX: 'auto',
-                padding: '4px 16px 20px',
+                padding: '4px 16px 8px',
                 scrollbarWidth: 'none',
+                WebkitOverflowScrolling: 'touch',
               }}
             >
               {places.map((place) => {
@@ -517,16 +525,16 @@ export default function ExplorePage() {
                     }}
                     style={{
                       flexShrink: 0,
-                      width: 210,
-                      background: '#fff',
+                      width: 200,
+                      background: 'rgba(255,255,255,0.97)',
                       borderRadius: 16,
-                      boxShadow: '0 6px 18px rgba(40,31,22,0.12)',
-                      border: '1px solid rgba(215,200,181,0.6)',
-                      padding: '14px 14px 12px',
+                      boxShadow: '0 6px 20px rgba(40,31,22,0.18)',
+                      border: '1px solid rgba(215,200,181,0.5)',
+                      padding: '12px 12px 10px',
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: 4,
+                      gap: 3,
                     }}
                   >
                     <span
