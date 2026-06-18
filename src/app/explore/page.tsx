@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 
@@ -131,6 +131,7 @@ function toSharedBusiness(partner: PartnerResult): SharedBusiness {
 export default function ExplorePage() {
   const { setSharedBusinesses } = useTrip();
   const { t } = useTranslation('common');
+  const mapRef = useRef<google.maps.Map | null>(null);
 
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
@@ -240,6 +241,7 @@ export default function ExplorePage() {
         };
         setCurrentLocation(nextLocation);
         setCenter(nextLocation);
+        mapRef.current?.setZoom(15);
 
         if (sessionToken) {
           void fetchPartners(nextLocation);
@@ -305,6 +307,7 @@ export default function ExplorePage() {
             zoom={14}
             mapContainerStyle={{ width: '100%', height: '100%' }}
             options={mapOptions}
+            onLoad={(map) => { mapRef.current = map; }}
           >
             {currentLocation && (
               <MarkerF
