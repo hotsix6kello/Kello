@@ -1957,7 +1957,9 @@
     "beauty": "뷰티",
     "stay": "숙소",
     "open_maps": "지도에서 열기",
-    "loading": "불러오는 중..."
+    "loading": "불러오는 중...",
+    "login_required": "로그인 후 주변 장소를 볼 수 있어요.",
+    "location_denied": "위치 권한을 허용해야 현재 위치를 볼 수 있어요."
   },
   "talk_page": {
     "korean_viewer_mode": "한국어 뷰어 모드",

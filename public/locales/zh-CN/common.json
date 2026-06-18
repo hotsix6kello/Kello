@@ -2239,7 +2239,9 @@
     "beauty": "美容",
     "stay": "住宿",
     "open_maps": "在地图中打开",
-    "loading": "加载中..."
+    "loading": "加载中...",
+    "login_required": "登录后即可查看附近地点。",
+    "location_denied": "需要开启位置权限才能查看当前位置。"
   },
   "talk_page": {
     "korean_viewer_mode": "韩语查看模式",

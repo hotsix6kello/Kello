@@ -38,6 +38,7 @@ type NearbyPlaceResult = {
 };
 
 type Category = 'food' | 'beauty' | 'stay';
+type StatusMsg = 'login_required' | 'location_denied' | null;
 
 const DEFAULT_CENTER: Coordinates = { lat: 37.5665, lng: 126.978 };
 const DEFAULT_RADIUS_METERS = 50000;
@@ -131,6 +132,7 @@ export default function ExplorePage() {
   const [places, setPlaces] = useState<NearbyPlaceResult[]>([]);
   const [activeCategory, setActiveCategory] = useState<Category>('beauty');
   const [isLoadingPlaces, setIsLoadingPlaces] = useState(false);
+  const [statusMsg, setStatusMsg] = useState<StatusMsg>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -171,6 +173,7 @@ export default function ExplorePage() {
   const fetchNearbyPlaces = useCallback(
     async (category: Category, location: Coordinates) => {
       if (!sessionToken) return;
+      setStatusMsg(null);
       setIsLoadingPlaces(true);
       try {
         const params = new URLSearchParams({
@@ -195,8 +198,13 @@ export default function ExplorePage() {
     [sessionToken],
   );
 
+  // Geolocation runs regardless of login state.
+  // If logged in → fetches nearby places.
+  // If not logged in → moves map + shows marker only, then shows login hint.
   const requestCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) return;
+    setStatusMsg(null);
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const nextLocation = {
@@ -205,24 +213,36 @@ export default function ExplorePage() {
         };
         setCurrentLocation(nextLocation);
         setCenter(nextLocation);
-        void fetchPartners(nextLocation);
-        void fetchNearbyPlaces(activeCategory, nextLocation);
+
+        if (sessionToken) {
+          void fetchPartners(nextLocation);
+          void fetchNearbyPlaces(activeCategory, nextLocation);
+        } else {
+          setStatusMsg('login_required');
+        }
       },
       () => {
-        setCenter(DEFAULT_CENTER);
+        setStatusMsg('location_denied');
       },
       { enableHighAccuracy: true, timeout: 9000, maximumAge: 60000 },
     );
-  // activeCategory intentionally excluded: only re-run when location/session changes
+  // activeCategory intentionally excluded: only re-run when session/fetch fns change
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchPartners, fetchNearbyPlaces]);
+  }, [fetchPartners, fetchNearbyPlaces, sessionToken]);
 
+  // Auto-trigger when sessionToken becomes available (login).
   useEffect(() => {
     if (!sessionToken) return;
     requestCurrentLocation();
   }, [requestCurrentLocation, sessionToken]);
 
+  // Always updates active tab. Shows login hint instead of fetching when not logged in.
   const handleCategoryChange = (category: Category) => {
+    setActiveCategory(category);
+    if (!sessionToken) {
+      setStatusMsg('login_required');
+      return;
+    }
     void fetchNearbyPlaces(category, currentLocation ?? center);
   };
 
@@ -238,6 +258,7 @@ export default function ExplorePage() {
   );
 
   const markerMeta = CATEGORY_MARKER[activeCategory];
+  const showBottomSection = isLoadingPlaces || places.length > 0 || statusMsg !== null;
 
   return (
     <main
@@ -354,8 +375,8 @@ export default function ExplorePage() {
         </div>
       </section>
 
-      {/* Place card list */}
-      {(places.length > 0 || isLoadingPlaces) && (
+      {/* Bottom section: loading / status message / place cards */}
+      {showBottomSection && (
         <section
           style={{
             position: 'absolute',
@@ -370,6 +391,26 @@ export default function ExplorePage() {
           {isLoadingPlaces ? (
             <div style={{ padding: '16px 20px 20px', color: '#8f8274', fontSize: 13, fontWeight: 600 }}>
               {t('explore_map.loading', { defaultValue: 'Loading...' })}
+            </div>
+          ) : statusMsg !== null && places.length === 0 ? (
+            <div
+              style={{
+                margin: '0 16px 20px',
+                padding: '14px 18px',
+                borderRadius: 14,
+                background: 'rgba(255,255,255,0.97)',
+                boxShadow: '0 4px 14px rgba(40,31,22,0.10)',
+                border: '1px solid rgba(215,200,181,0.7)',
+                color: '#5b5146',
+                fontSize: 13,
+                fontWeight: 600,
+                textAlign: 'center',
+                lineHeight: 1.5,
+              }}
+            >
+              {statusMsg === 'login_required'
+                ? t('explore_map.login_required')
+                : t('explore_map.location_denied')}
             </div>
           ) : (
             <div
