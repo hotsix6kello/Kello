@@ -38,7 +38,7 @@ type NearbyPlaceResult = {
   googleMapsUri: string | null;
 };
 
-type Category = 'food' | 'beauty' | 'stay';
+type Category = 'hair' | 'nail' | 'makeup' | 'lash' | 'waxing' | 'aesthetic';
 type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | 'api_error' | null;
 
 // --- Places API 결과 클라이언트 캐시 ---
@@ -57,10 +57,22 @@ const DEFAULT_CENTER: Coordinates = { lat: 37.5665, lng: 126.978 };
 const DEFAULT_RADIUS_METERS = 50000;
 
 const CATEGORY_MARKER: Record<Category, { label: string; color: string }> = {
-  food: { label: '맛', color: '#22a06b' },
-  beauty: { label: '뷰', color: '#f24f8d' },
-  stay: { label: '숙', color: '#c58a12' },
+  hair:      { label: '헤', color: '#f24f8d' },
+  nail:      { label: '네', color: '#a855f7' },
+  makeup:    { label: '메', color: '#e11d48' },
+  lash:      { label: '속', color: '#ec4899' },
+  waxing:    { label: '왁', color: '#f97316' },
+  aesthetic: { label: '에', color: '#0ea5e9' },
 };
+
+const CATEGORIES: { key: Category; labelKey: string }[] = [
+  { key: 'hair',      labelKey: 'explore_map.hair' },
+  { key: 'nail',      labelKey: 'explore_map.nail' },
+  { key: 'makeup',    labelKey: 'explore_map.makeup' },
+  { key: 'lash',      labelKey: 'explore_map.lash' },
+  { key: 'waxing',    labelKey: 'explore_map.waxing' },
+  { key: 'aesthetic', labelKey: 'explore_map.aesthetic' },
+];
 
 function haversineMeters(a: Coordinates, b: Coordinates): number {
   const R = 6371000;
@@ -154,6 +166,7 @@ export default function ExplorePage() {
   const { t, i18n } = useTranslation('common');
   const mapRef = useRef<google.maps.Map | null>(null);
   const cardScrollRef = useRef<HTMLDivElement | null>(null);
+  const chipScrollRef = useRef<HTMLDivElement | null>(null);
 
   const scrollCards = (dir: 'left' | 'right') => {
     cardScrollRef.current?.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
@@ -170,7 +183,7 @@ export default function ExplorePage() {
   const [currentLocation, setCurrentLocation] = useState<Coordinates | null>(null);
   const [partners, setPartners] = useState<PartnerResult[]>([]);
   const [places, setPlaces] = useState<NearbyPlaceResult[]>([]);
-  const [activeCategory, setActiveCategory] = useState<Category>('beauty');
+  const [activeCategory, setActiveCategory] = useState<Category>('hair');
   const [isLoadingPlaces, setIsLoadingPlaces] = useState(false);
   const [statusMsg, setStatusMsg] = useState<StatusMsg>(null);
 
@@ -400,7 +413,7 @@ export default function ExplorePage() {
         )}
       </section>
 
-      {/* Category chips */}
+      {/* Category chips — 좌우 슬라이딩 */}
       <section
         style={{
           position: 'absolute',
@@ -413,39 +426,34 @@ export default function ExplorePage() {
         }}
       >
         <div
+          ref={chipScrollRef}
           style={{
             display: 'flex',
             gap: 8,
             overflowX: 'auto',
-            padding: '2px 2px 2px',
+            padding: '2px 2px 4px',
             pointerEvents: 'auto',
             scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+          }}
+          onWheel={(e) => {
+            e.preventDefault();
+            e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
           }}
         >
           <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
             {t('explore_map.my_location')}
           </button>
-          <button
-            type="button"
-            style={activeCategory === 'food' ? chipActiveStyle : chipStyle}
-            onClick={() => handleCategoryChange('food')}
-          >
-            {t('explore_map.food')}
-          </button>
-          <button
-            type="button"
-            style={activeCategory === 'beauty' ? chipActiveStyle : chipStyle}
-            onClick={() => handleCategoryChange('beauty')}
-          >
-            {t('explore_map.beauty')}
-          </button>
-          <button
-            type="button"
-            style={activeCategory === 'stay' ? chipActiveStyle : chipStyle}
-            onClick={() => handleCategoryChange('stay')}
-          >
-            {t('explore_map.stay')}
-          </button>
+          {CATEGORIES.map(({ key, labelKey }) => (
+            <button
+              key={key}
+              type="button"
+              style={activeCategory === key ? chipActiveStyle : chipStyle}
+              onClick={() => handleCategoryChange(key)}
+            >
+              {t(labelKey)}
+            </button>
+          ))}
         </div>
       </section>
 
