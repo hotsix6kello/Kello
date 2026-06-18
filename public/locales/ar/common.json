@@ -2483,7 +2483,12 @@
     "my_location": "موقعي",
     "beauty_shop": "صالون التجميل",
     "restaurant": "مطعم",
-    "accommodation": "إقامة"
+    "accommodation": "إقامة",
+    "food": "طعام",
+    "beauty": "تجميل",
+    "stay": "إقامة",
+    "open_maps": "فتح في الخرائط",
+    "loading": "جار التحميل..."
   },
   "talk_page": {
     "korean_viewer_mode": "وضع العرض بالكورية",
