@@ -437,8 +437,11 @@ export default function ExplorePage() {
             left: 0,
             right: 0,
             zIndex: 20,
-            background: 'linear-gradient(to top, rgba(247,241,234,0.98) 70%, transparent)',
-            paddingTop: 16,
+            // 카드 목록일 때만 그라데이션 배경 — 메시지/로딩은 투명하게 유지해 지도가 보이도록
+            background: !isLoadingPlaces && places.length > 0
+              ? 'linear-gradient(to top, rgba(247,241,234,0.98) 70%, transparent)'
+              : 'transparent',
+            paddingTop: !isLoadingPlaces && places.length > 0 ? 16 : 0,
             paddingBottom: 'calc(var(--nav-height, 82px) + env(safe-area-inset-bottom, 0px) + 8px)',
           }}
         >
