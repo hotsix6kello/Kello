@@ -5,6 +5,7 @@ import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
+import { toGoogleMapsLanguageCode } from '@/lib/i18n/locales';
 import { supabase } from '@/lib/supabaseClient';
 
 type Coordinates = {
@@ -161,7 +162,7 @@ export default function ExplorePage() {
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: mapsApiKey,
-    language: i18n.language,
+    language: toGoogleMapsLanguageCode(i18n.language),
   });
 
   const [sessionToken, setSessionToken] = useState<string | null>(null);
