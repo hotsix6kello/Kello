@@ -5,6 +5,7 @@ import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
+import { toGoogleMapsLanguageCode } from '@/lib/i18n/locales';
 import { supabase } from '@/lib/supabaseClient';
 
 type Coordinates = {
@@ -37,8 +38,23 @@ type NearbyPlaceResult = {
   googleMapsUri: string | null;
 };
 
-type Category = 'food' | 'beauty' | 'stay';
+type Category = 'hair' | 'nail' | 'makeup' | 'lash' | 'waxing' | 'aesthetic';
 type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | 'api_error' | null;
+
+type AutocompleteSuggestion = {
+  place_id: string;
+  label: string;
+  main_text: string;
+  secondary_text: string | null;
+};
+
+type AutocompleteDetail = {
+  id: string;
+  name: string;
+  address: string | null;
+  lat: number;
+  lng: number;
+};
 
 // --- Places API 결과 클라이언트 캐시 ---
 // 모듈 레벨 Map: 페이지 재방문(클라이언트 라우팅) 간 유지, 새로고침 시 초기화
@@ -56,10 +72,22 @@ const DEFAULT_CENTER: Coordinates = { lat: 37.5665, lng: 126.978 };
 const DEFAULT_RADIUS_METERS = 50000;
 
 const CATEGORY_MARKER: Record<Category, { label: string; color: string }> = {
-  food: { label: '맛', color: '#22a06b' },
-  beauty: { label: '뷰', color: '#f24f8d' },
-  stay: { label: '숙', color: '#c58a12' },
+  hair:      { label: '헤', color: '#f24f8d' },
+  nail:      { label: '네', color: '#a855f7' },
+  makeup:    { label: '메', color: '#e11d48' },
+  lash:      { label: '속', color: '#ec4899' },
+  waxing:    { label: '왁', color: '#f97316' },
+  aesthetic: { label: '에', color: '#0ea5e9' },
 };
+
+const CATEGORIES: { key: Category; labelKey: string }[] = [
+  { key: 'hair',      labelKey: 'explore_map.hair' },
+  { key: 'nail',      labelKey: 'explore_map.nail' },
+  { key: 'makeup',    labelKey: 'explore_map.makeup' },
+  { key: 'lash',      labelKey: 'explore_map.lash' },
+  { key: 'waxing',    labelKey: 'explore_map.waxing' },
+  { key: 'aesthetic', labelKey: 'explore_map.aesthetic' },
+];
 
 function haversineMeters(a: Coordinates, b: Coordinates): number {
   const R = 6371000;
@@ -150,9 +178,11 @@ function toSharedBusiness(partner: PartnerResult): SharedBusiness {
 
 export default function ExplorePage() {
   const { setSharedBusinesses } = useTrip();
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const mapRef = useRef<google.maps.Map | null>(null);
   const cardScrollRef = useRef<HTMLDivElement | null>(null);
+  const chipScrollRef = useRef<HTMLDivElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const scrollCards = (dir: 'left' | 'right') => {
     cardScrollRef.current?.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
@@ -161,6 +191,7 @@ export default function ExplorePage() {
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: mapsApiKey,
+    language: toGoogleMapsLanguageCode(i18n.language),
   });
 
   const [sessionToken, setSessionToken] = useState<string | null>(null);
@@ -168,9 +199,12 @@ export default function ExplorePage() {
   const [currentLocation, setCurrentLocation] = useState<Coordinates | null>(null);
   const [partners, setPartners] = useState<PartnerResult[]>([]);
   const [places, setPlaces] = useState<NearbyPlaceResult[]>([]);
-  const [activeCategory, setActiveCategory] = useState<Category>('beauty');
+  const [activeCategory, setActiveCategory] = useState<Category>('hair');
   const [isLoadingPlaces, setIsLoadingPlaces] = useState(false);
   const [statusMsg, setStatusMsg] = useState<StatusMsg>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchSuggestions, setSearchSuggestions] = useState<AutocompleteSuggestion[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -302,6 +336,48 @@ export default function ExplorePage() {
     requestCurrentLocation();
   }, [requestCurrentLocation, sessionToken]);
 
+  // 검색 입력 debounce → 서버사이드 자동완성
+  useEffect(() => {
+    const query = searchInput.trim();
+    if (!query || !sessionToken) { setSearchSuggestions([]); return; }
+    const timer = setTimeout(async () => {
+      try {
+        const params = new URLSearchParams({ input: query });
+        const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
+          headers: { Authorization: `Bearer ${sessionToken}` },
+        });
+        if (!res.ok) return;
+        const data = (await res.json()) as { suggestions?: AutocompleteSuggestion[] };
+        setSearchSuggestions(data.suggestions ?? []);
+      } catch { /* ignore */ }
+    }, 320);
+    return () => clearTimeout(timer);
+  }, [searchInput, sessionToken]);
+
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+    setSearchInput('');
+    setSearchSuggestions([]);
+  };
+
+  const handleSuggestionSelect = async (suggestion: AutocompleteSuggestion) => {
+    if (!sessionToken) return;
+    try {
+      const params = new URLSearchParams({ place_id: suggestion.place_id });
+      const res = await fetch(`/api/explore/place-autocomplete?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${sessionToken}` },
+      });
+      if (!res.ok) return;
+      const data = (await res.json()) as { place?: AutocompleteDetail };
+      if (!data.place) return;
+      const nextLocation = { lat: data.place.lat, lng: data.place.lng };
+      setCenter(nextLocation);
+      mapRef.current?.setZoom(15);
+      closeSearch();
+      void fetchNearbyPlaces(activeCategory, nextLocation);
+    } catch { /* ignore */ }
+  };
+
   // Always updates active tab. Shows login hint instead of fetching when not logged in.
   // Uses the map's actual current center (reflects user panning) via mapRef.
   const handleCategoryChange = (category: Category) => {
@@ -398,53 +474,155 @@ export default function ExplorePage() {
         )}
       </section>
 
-      {/* Category chips */}
+      {/* 상단 바: 검색 열림 / 칩 바 전환 */}
       <section
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 20,
+          zIndex: 25,
           padding: '16px 16px 0',
           pointerEvents: 'none',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            gap: 8,
-            overflowX: 'auto',
-            padding: '2px 2px 2px',
-            pointerEvents: 'auto',
-            scrollbarWidth: 'none',
-          }}
-        >
-          <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
-            {t('explore_map.my_location')}
-          </button>
-          <button
-            type="button"
-            style={activeCategory === 'food' ? chipActiveStyle : chipStyle}
-            onClick={() => handleCategoryChange('food')}
+        {isSearchOpen ? (
+          /* ── 검색 모드 ── */
+          <div style={{ pointerEvents: 'auto' }}>
+            {/* 배경 클릭 시 닫기 */}
+            <div
+              style={{ position: 'fixed', inset: 0, zIndex: -1 }}
+              onClick={closeSearch}
+            />
+            {/* 검색 입력창 */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '8px 12px',
+                borderRadius: 24,
+                background: '#fff',
+                boxShadow: '0 12px 28px rgba(40,31,22,0.18)',
+                border: '1px solid rgba(215,200,181,0.8)',
+              }}
+            >
+              <span style={{ fontSize: 16, color: '#b89045' }}>🔍</span>
+              <input
+                ref={searchInputRef}
+                autoFocus
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder={t('explore_map.search_placeholder')}
+                style={{
+                  flex: 1,
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: '#2d2823',
+                  background: 'transparent',
+                  minWidth: 0,
+                }}
+              />
+              <button
+                type="button"
+                onClick={closeSearch}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: 18,
+                  color: '#8f8274',
+                  lineHeight: 1,
+                  padding: '0 2px',
+                }}
+                aria-label="닫기"
+              >✕</button>
+            </div>
+
+            {/* 자동완성 결과 */}
+            {searchSuggestions.length > 0 && (
+              <div
+                style={{
+                  marginTop: 8,
+                  borderRadius: 16,
+                  overflow: 'hidden',
+                  background: '#fff',
+                  boxShadow: '0 12px 26px rgba(40,31,22,0.14)',
+                }}
+              >
+                {searchSuggestions.map((s) => (
+                  <button
+                    key={s.place_id}
+                    type="button"
+                    onClick={() => void handleSuggestionSelect(s)}
+                    style={{
+                      width: '100%',
+                      border: 'none',
+                      borderBottom: '1px solid #f0e6da',
+                      padding: '12px 14px',
+                      background: '#fff',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <strong style={{ display: 'block', color: '#2f2923', fontSize: 14 }}>
+                      {s.main_text}
+                    </strong>
+                    {s.secondary_text && (
+                      <span style={{ display: 'block', color: '#8f8274', fontSize: 12, marginTop: 2 }}>
+                        {s.secondary_text}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          /* ── 칩 바 모드 ── */
+          <div
+            ref={chipScrollRef}
+            style={{
+              display: 'flex',
+              gap: 8,
+              overflowX: 'auto',
+              padding: '2px 2px 4px',
+              pointerEvents: 'auto',
+              scrollbarWidth: 'none',
+              WebkitOverflowScrolling: 'touch',
+            }}
+            onWheel={(e) => {
+              e.preventDefault();
+              e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
+            }}
           >
-            {t('explore_map.food')}
-          </button>
-          <button
-            type="button"
-            style={activeCategory === 'beauty' ? chipActiveStyle : chipStyle}
-            onClick={() => handleCategoryChange('beauty')}
-          >
-            {t('explore_map.beauty')}
-          </button>
-          <button
-            type="button"
-            style={activeCategory === 'stay' ? chipActiveStyle : chipStyle}
-            onClick={() => handleCategoryChange('stay')}
-          >
-            {t('explore_map.stay')}
-          </button>
-        </div>
+            {/* 검색 아이콘 버튼 */}
+            <button
+              type="button"
+              style={chipStyle}
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="검색"
+            >
+              🔍
+            </button>
+            <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
+              {t('explore_map.my_location')}
+            </button>
+            {CATEGORIES.map(({ key, labelKey }) => (
+              <button
+                key={key}
+                type="button"
+                style={activeCategory === key ? chipActiveStyle : chipStyle}
+                onClick={() => handleCategoryChange(key)}
+              >
+                {t(labelKey)}
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Bottom section: 지도 위에 오버레이 — 배경 없이 카드/메시지만 떠 있음 */}
