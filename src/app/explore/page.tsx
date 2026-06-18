@@ -150,7 +150,7 @@ function toSharedBusiness(partner: PartnerResult): SharedBusiness {
 
 export default function ExplorePage() {
   const { setSharedBusinesses } = useTrip();
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const mapRef = useRef<google.maps.Map | null>(null);
   const cardScrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -161,6 +161,7 @@ export default function ExplorePage() {
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: mapsApiKey,
+    language: i18n.language,
   });
 
   const [sessionToken, setSessionToken] = useState<string | null>(null);
