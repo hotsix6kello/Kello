@@ -38,7 +38,7 @@ type NearbyPlaceResult = {
 };
 
 type Category = 'food' | 'beauty' | 'stay';
-type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | null;
+type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | 'api_error' | null;
 
 // --- Places API 결과 클라이언트 캐시 ---
 // 모듈 레벨 Map: 페이지 재방문(클라이언트 라우팅) 간 유지, 새로고침 시 초기화
@@ -225,23 +225,32 @@ export default function ExplorePage() {
           lng: String(location.lng),
           category,
         });
-        const res = await fetch(`/api/places/nearby?${params.toString()}`, {
+        const url = `/api/places/nearby?${params.toString()}`;
+        console.log('[explore] fetchNearbyPlaces →', { category, lat: location.lat, lng: location.lng, url });
+
+        const res = await fetch(url, {
           headers: { Authorization: `Bearer ${sessionToken}` },
         });
-        if (!res.ok) throw new Error('places_fetch_failed');
-        const data = (await res.json()) as { places?: NearbyPlaceResult[] };
+
+        const data = (await res.json()) as { places?: NearbyPlaceResult[]; error?: string; detail?: string };
+        console.log('[explore] fetchNearbyPlaces ←', { status: res.status, count: data.places?.length, error: data.error });
+
+        if (!res.ok) {
+          console.error('[explore] API error', { status: res.status, error: data.error, detail: data.detail });
+          setPlaces([]);
+          setStatusMsg('api_error');
+          return;
+        }
+
         const nextPlaces = data.places ?? [];
-
-        // 성공 결과를 캐시에 저장
         placesCache.set(cacheKey, { places: nextPlaces, expiresAt: Date.now() + PLACES_CACHE_TTL_MS });
-
         setPlaces(nextPlaces);
         setActiveCategory(category);
         if (nextPlaces.length === 0) setStatusMsg('no_results');
       } catch (error) {
-        console.error('[explore] nearby places failed', error);
+        console.error('[explore] nearby places fetch exception', error);
         setPlaces([]);
-        setStatusMsg('no_results');
+        setStatusMsg('api_error');
       } finally {
         setIsLoadingPlaces(false);
       }
@@ -474,6 +483,8 @@ export default function ExplorePage() {
                 ? t('explore_map.login_required')
                 : statusMsg === 'no_results'
                 ? t('explore_map.no_results', { defaultValue: '주변 1.5km 내에 장소가 없어요.' })
+                : statusMsg === 'api_error'
+                ? t('explore_map.api_error', { defaultValue: '장소 검색에 실패했습니다.' })
                 : t('explore_map.location_denied')}
             </div>
           ) : (
