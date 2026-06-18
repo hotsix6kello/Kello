@@ -152,6 +152,11 @@ export default function ExplorePage() {
   const { setSharedBusinesses } = useTrip();
   const { t } = useTranslation('common');
   const mapRef = useRef<google.maps.Map | null>(null);
+  const cardScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollCards = (dir: 'left' | 'right') => {
+    cardScrollRef.current?.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
+  };
 
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
@@ -495,16 +500,37 @@ export default function ExplorePage() {
                 : t('explore_map.location_denied')}
             </div>
           ) : (
-            <div
-              style={{
-                display: 'flex',
-                gap: 10,
-                overflowX: 'auto',
-                padding: '4px 16px 8px',
-                scrollbarWidth: 'none',
-                WebkitOverflowScrolling: 'touch',
-              }}
-            >
+            <div style={{ position: 'relative' }}>
+              {/* 좌 화살표 */}
+              <button
+                type="button"
+                aria-label="이전"
+                onClick={() => scrollCards('left')}
+                style={{
+                  position: 'absolute', left: 4, top: '50%', transform: 'translateY(-50%)',
+                  zIndex: 2, background: 'rgba(255,255,255,0.92)', border: 'none',
+                  borderRadius: '50%', width: 30, height: 30, cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.16)', fontSize: 18, lineHeight: 1,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5b5146',
+                }}
+              >‹</button>
+
+              {/* 카드 목록 */}
+              <div
+                ref={cardScrollRef}
+                style={{
+                  display: 'flex',
+                  gap: 10,
+                  overflowX: 'auto',
+                  padding: '4px 40px 8px',
+                  scrollbarWidth: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                }}
+                onWheel={(e) => {
+                  e.preventDefault();
+                  e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
+                }}
+              >
               {places.map((place) => {
                 const dist =
                   currentLocation != null
@@ -608,6 +634,21 @@ export default function ExplorePage() {
                   </div>
                 );
               })}
+              </div>
+
+              {/* 우 화살표 */}
+              <button
+                type="button"
+                aria-label="다음"
+                onClick={() => scrollCards('right')}
+                style={{
+                  position: 'absolute', right: 4, top: '50%', transform: 'translateY(-50%)',
+                  zIndex: 2, background: 'rgba(255,255,255,0.92)', border: 'none',
+                  borderRadius: '50%', width: 30, height: 30, cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.16)', fontSize: 18, lineHeight: 1,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5b5146',
+                }}
+              >›</button>
             </div>
           )}
         </section>
