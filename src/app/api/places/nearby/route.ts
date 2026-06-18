@@ -31,14 +31,6 @@ function parseNumber(value: string | null): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-// GOOGLE_MAPS_SERVER_KEY has HTTP-referrer restrictions configured in GCP.
-// Server-side calls have no Referer header by default → 403.
-// We inject the app origin so it passes the allowlist.
-function getAppOrigin(): string {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return 'http://localhost:3000';
-}
 
 export async function GET(request: Request) {
   try {
@@ -94,7 +86,6 @@ export async function GET(request: Request) {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': apiKey,
         'X-Goog-FieldMask': FIELD_MASK,
-        'Referer': getAppOrigin(),
       },
       body: JSON.stringify(requestBody),
     });
