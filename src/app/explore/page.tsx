@@ -38,7 +38,7 @@ type NearbyPlaceResult = {
 };
 
 type Category = 'food' | 'beauty' | 'stay';
-type StatusMsg = 'login_required' | 'location_denied' | null;
+type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | null;
 
 // --- Places API 결과 클라이언트 캐시 ---
 // 모듈 레벨 Map: 페이지 재방문(클라이언트 라우팅) 간 유지, 새로고침 시 초기화
@@ -97,6 +97,26 @@ const chipActiveStyle = {
   border: '1px solid #c4942f',
 };
 
+// 현재 위치 마커: 파란 핀 + 흰 원 (공원/POI 아이콘과 명확히 구분)
+function getCurrentLocationIcon(): google.maps.Icon | undefined {
+  if (typeof window === 'undefined' || !window.google?.maps?.Size || !window.google?.maps?.Point) {
+    return undefined;
+  }
+  const svg = encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="42" viewBox="0 0 32 42">
+      <path d="M16 0C7.16 0 0 7.16 0 16C0 28 16 42 16 42S32 28 32 16C32 7.16 24.84 0 16 0Z"
+        fill="#1a73e8" stroke="white" stroke-width="2"/>
+      <circle cx="16" cy="16" r="6" fill="white"/>
+    </svg>`,
+  );
+  return {
+    url: `data:image/svg+xml;charset=UTF-8,${svg}`,
+    scaledSize: new window.google.maps.Size(32, 42),
+    anchor: new window.google.maps.Point(16, 42),
+  };
+}
+
+// 장소 카테고리 마커: 컬러 원
 function getMarkerIcon(color: string): google.maps.Symbol | undefined {
   if (typeof window === 'undefined' || !window.google?.maps?.SymbolPath) {
     return undefined;
@@ -105,7 +125,7 @@ function getMarkerIcon(color: string): google.maps.Symbol | undefined {
     path: window.google.maps.SymbolPath.CIRCLE,
     fillColor: color,
     fillOpacity: 1,
-    scale: 8,
+    scale: 9,
     strokeColor: '#ffffff',
     strokeWeight: 3,
   };
@@ -194,6 +214,7 @@ export default function ExplorePage() {
       if (cached && Date.now() < cached.expiresAt) {
         setPlaces(cached.places);
         setActiveCategory(category);
+        if (cached.places.length === 0) setStatusMsg('no_results');
         return;
       }
 
@@ -216,9 +237,11 @@ export default function ExplorePage() {
 
         setPlaces(nextPlaces);
         setActiveCategory(category);
+        if (nextPlaces.length === 0) setStatusMsg('no_results');
       } catch (error) {
         console.error('[explore] nearby places failed', error);
         setPlaces([]);
+        setStatusMsg('no_results');
       } finally {
         setIsLoadingPlaces(false);
       }
@@ -312,8 +335,8 @@ export default function ExplorePage() {
             {currentLocation && (
               <MarkerF
                 position={currentLocation}
-                label={{ text: '나', color: '#ffffff', fontWeight: '800', fontSize: '11px' }}
-                icon={getMarkerIcon('#2f80ed')}
+                icon={getCurrentLocationIcon()}
+                title="현재 위치"
               />
             )}
             {partners.map((partner) => (
@@ -410,12 +433,13 @@ export default function ExplorePage() {
         <section
           style={{
             position: 'absolute',
-            bottom: 'var(--nav-height, 72px)',
+            bottom: 0,
             left: 0,
             right: 0,
             zIndex: 20,
             background: 'linear-gradient(to top, rgba(247,241,234,0.98) 70%, transparent)',
             paddingTop: 16,
+            paddingBottom: 'calc(var(--nav-height, 82px) + env(safe-area-inset-bottom, 0px) + 8px)',
           }}
         >
           {isLoadingPlaces ? (
@@ -440,6 +464,8 @@ export default function ExplorePage() {
             >
               {statusMsg === 'login_required'
                 ? t('explore_map.login_required')
+                : statusMsg === 'no_results'
+                ? t('explore_map.no_results', { defaultValue: '주변 1.5km 내에 장소가 없어요.' })
                 : t('explore_map.location_denied')}
             </div>
           ) : (
