@@ -1952,7 +1952,12 @@
     "my_location": "내 위치",
     "beauty_shop": "뷰티샵",
     "restaurant": "맛집",
-    "accommodation": "숙소"
+    "accommodation": "숙소",
+    "food": "맛집",
+    "beauty": "뷰티",
+    "stay": "숙소",
+    "open_maps": "지도에서 열기",
+    "loading": "불러오는 중..."
   },
   "talk_page": {
     "korean_viewer_mode": "한국어 뷰어 모드",

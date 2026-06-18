@@ -2521,7 +2521,12 @@
     "my_location": "My Location",
     "beauty_shop": "Beauty Shop",
     "restaurant": "Restaurant",
-    "accommodation": "Stay"
+    "accommodation": "Stay",
+    "food": "Food",
+    "beauty": "Beauty",
+    "stay": "Stay",
+    "open_maps": "Open in Maps",
+    "loading": "Loading..."
   },
   "talk_page": {
     "korean_viewer_mode": "Korean Viewer Mode",

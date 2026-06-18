@@ -2120,7 +2120,12 @@
     "my_location": "ตำแหน่งของฉัน",
     "beauty_shop": "ร้านความงาม",
     "restaurant": "ร้านอาหาร",
-    "accommodation": "ที่พัก"
+    "accommodation": "ที่พัก",
+    "food": "อาหาร",
+    "beauty": "ความงาม",
+    "stay": "ที่พัก",
+    "open_maps": "เปิดในแผนที่",
+    "loading": "กำลังโหลด..."
   },
   "talk_page": {
     "korean_viewer_mode": "โหมดดูภาษาเกาหลี",

@@ -2493,7 +2493,12 @@
     "my_location": "現在地",
     "beauty_shop": "ビューティー",
     "restaurant": "グルメ",
-    "accommodation": "宿泊"
+    "accommodation": "宿泊",
+    "food": "グルメ",
+    "beauty": "ビューティー",
+    "stay": "宿泊",
+    "open_maps": "マップで開く",
+    "loading": "読み込み中..."
   },
   "talk_page": {
     "korean_viewer_mode": "韓国語ビューアーモード",
