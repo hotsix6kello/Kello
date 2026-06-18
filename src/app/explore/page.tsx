@@ -289,13 +289,18 @@ export default function ExplorePage() {
   }, [requestCurrentLocation, sessionToken]);
 
   // Always updates active tab. Shows login hint instead of fetching when not logged in.
+  // Uses the map's actual current center (reflects user panning) via mapRef.
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
     if (!sessionToken) {
       setStatusMsg('login_required');
       return;
     }
-    void fetchNearbyPlaces(category, currentLocation ?? center);
+    const mapCenter = mapRef.current?.getCenter();
+    const searchLocation = mapCenter
+      ? { lat: mapCenter.lat(), lng: mapCenter.lng() }
+      : currentLocation ?? center;
+    void fetchNearbyPlaces(category, searchLocation);
   };
 
   const mapOptions = useMemo<google.maps.MapOptions>(
