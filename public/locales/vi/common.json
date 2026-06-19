@@ -158,13 +158,14 @@
     "weather_clear": "晴朗",
     "back": "返回",
     "select_language": "选择语言",
-    "home_nav": "首页",
-    "explore_nav": "探索",
-    "planner_nav": "行程",
-    "today_nav": "今日",
-    "my_nav": "我的",
-    "day_unit": "日",
-    "locale": "zh-CN",
+    "home_nav": "Trang chủ",
+    "explore_nav": "Khám phá",
+    "planner_nav": "Lịch trình",
+    "today_nav": "Hôm nay",
+    "my_nav": "Của tôi",
+    "buddy_nav": "Kello Talk",
+    "day_unit": "ngày",
+    "locale": "vi-VN",
     "cities": {
       "seoul": "首尔",
       "busan": "釜山",
@@ -212,7 +213,7 @@
       "meat_lover": "肉食爱好者",
       "pescatarian": "鱼素"
     },
-    "community_nav": "社区",
+    "community_nav": "Cộng đồng",
     "runtime": {
       "counts": {
         "stops_zero": "{{count}} 个地点",
