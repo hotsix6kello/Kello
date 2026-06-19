@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { resolveCanonicalLocale } from '@/lib/i18n/locales';
 import { Star, ShieldCheck, MessageCircle, Lock } from 'lucide-react';
+import { supabase } from '@/lib/supabaseClient';
 import styles from '../../home.module.css';
 
 /* ────────────────────────────────────────────────────────── */
@@ -15,6 +16,8 @@ interface HeroCopy {
   title: string;
   subtitle: string;
   primaryCta: string;
+  startCta: string;
+  loginCta: string;
   secondaryCta: string;
 }
 
@@ -44,48 +47,64 @@ const HERO_COPY: Record<string, HeroCopy> = {
     title: '한국어 몰라도,<br/><span style="color: #FF3566">K-뷰티 예약은 Kello로</span>',
     subtitle: '헤어·네일·피부관리 예약부터 번역 상담까지 한 번에 도와드려요.',
     primaryCta: '지금 예약하기',
+    startCta: '지금 시작하기',
+    loginCta: '로그인',
     secondaryCta: '번역 요청하기',
   },
   'en-US': {
     title: 'Book <span style="color: #FF3566">K-Beauty</span> in Korea,<br/>even without speaking Korean',
     subtitle: 'From hair and nails to skincare and translation support, Kello helps you book with ease.',
     primaryCta: 'Book Now',
+    startCta: 'Get Started',
+    loginCta: 'Log In',
     secondaryCta: 'Ask for Translation',
   },
   'ja-JP': {
     title: '韓国語がわからなくても、<br/><span style="color: #FF3566">KビューティーはKelloで</span>',
     subtitle: 'ヘア・ネイル・スキンケアの予約から翻訳サポートまで、Kelloがサポートします。',
     primaryCta: '今すぐ予約',
+    startCta: '今すぐ始める',
+    loginCta: 'ログイン',
     secondaryCta: '翻訳を依頼',
   },
   'zh-CN': {
     title: '不懂韩语也可以，<br/>用 <span style="color: #FF3566">Kello</span> 预约韩式美妆',
     subtitle: '从发型、美甲、皮肤管理预约到翻译咨询，Kello 一次帮你完成。',
     primaryCta: '立即预约',
+    startCta: '立即开始',
+    loginCta: '登录',
     secondaryCta: '请求翻译',
   },
   'zh-TW': {
     title: '不懂韓語也可以，<br/>用 <span style="color: #FF3566">Kello</span> 預約韓式美妝',
     subtitle: '從髮型、美甲、皮膚管理預約到翻譯諮詢，Kello 一次幫你完成。',
     primaryCta: '立即預約',
+    startCta: '立即開始',
+    loginCta: '登入',
     secondaryCta: '請求翻譯',
   },
   'vi-VN': {
     title: 'Không biết tiếng Hàn,<br/>vẫn đặt lịch <span style="color: #FF3566">K-Beauty với Kello</span>',
     subtitle: 'Từ tóc, nail, chăm sóc da đến hỗ trợ dịch thuật, Kello giúp bạn đặt lịch dễ dàng.',
     primaryCta: 'Đặt lịch ngay',
+    startCta: 'Bắt đầu ngay',
+    loginCta: 'Đăng nhập',
     secondaryCta: 'Yêu cầu dịch thuật',
   },
   'th-TH': {
     title: 'ไม่รู้ภาษาเกาหลี<br/>ก็จอง <span style="color: #FF3566">K-Beauty ผ่าน Kello</span> ได้',
     subtitle: 'ตั้งแต่ทำผม ทำเล็บ ดูแลผิว ไปจนถึงบริการช่วยแปล Kello ช่วยให้จองได้ง่ายขึ้น',
     primaryCta: 'จองตอนนี้',
+    startCta: 'เริ่มเลย',
+    loginCta: 'เข้าสู่ระบบ',
     secondaryCta: 'ขอความช่วยเหลือด้านการแปล',
   },
   'ar-SA': {
     title: 'احجزي <span style="color: #FF3566">K-Beauty</span> في كوريا<br/>مع Kello حتى بدون الكورية',
     subtitle: 'من الشعر والأظافر والعناية بالبشرة إلى دعم الترجمة، يساعدك Kello على الحجز بسهولة.',
     primaryCta: 'احجزي الآن',
+    startCta: 'ابدأي الآن',
+    loginCta: 'تسجيل الدخول',
     secondaryCta: 'اطلبي الترجمة',
   },
 };
@@ -146,13 +165,24 @@ const DEFAULT_LOCALE = 'en-US';
 /* ────────────────────────────────────────────────────────── */
 /*  Component                                                */
 /* ────────────────────────────────────────────────────────── */
+type HeroAuthState = 'loading' | 'guest' | 'returning' | 'authed';
+
 export default function HomeHeroBanner() {
   const { i18n } = useTranslation('common');
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [authState, setAuthState] = useState<HeroAuthState>('loading');
 
   useEffect(() => {
     setMounted(true);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setAuthState('authed');
+      } else {
+        const hasStoredUser = Boolean(localStorage.getItem('user'));
+        setAuthState(hasStoredUser ? 'returning' : 'guest');
+      }
+    });
   }, []);
 
   if (!mounted) {
@@ -167,6 +197,21 @@ export default function HomeHeroBanner() {
   const copy: HeroCopy = HERO_COPY[heroLocale] ?? HERO_COPY[DEFAULT_LOCALE];
   const trustPoints: TrustPoint[] = TRUST_POINTS[heroLocale] ?? TRUST_POINTS[DEFAULT_LOCALE];
   const isRTL = heroLocale === 'ar-SA';
+
+  const heroPrimaryLabel =
+    authState === 'authed' ? copy.primaryCta :
+    authState === 'returning' ? copy.loginCta :
+    copy.startCta;
+
+  const handleHeroPrimaryClick = () => {
+    if (authState === 'authed') {
+      document.getElementById('beauty-booking')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (authState === 'returning') {
+      router.push('/auth/login');
+    } else {
+      router.push('/auth/signup');
+    }
+  };
 
   function renderTrustIcon(type: string) {
     const size = 20;
@@ -216,12 +261,12 @@ export default function HomeHeroBanner() {
             className={styles.heroBannerCtaRow}
             style={{ justifyContent: isRTL ? 'flex-end' : 'flex-start' }}
           >
-            <button 
-              type="button" 
+            <button
+              type="button"
               className={styles.heroBannerCtaPrimary}
-              onClick={() => router.push('/booking/process')}
+              onClick={handleHeroPrimaryClick}
             >
-              {copy.primaryCta}
+              {heroPrimaryLabel}
             </button>
             <button 
               type="button" 
