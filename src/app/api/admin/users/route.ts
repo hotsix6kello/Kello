@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import {
   AdminRouteAccessError,
   requireAdminRouteAccess,
-} from "@/lib/admin/adminRouteAccess.ts";
-import { getSupabaseServerClient, getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer.ts";
+} from "@/lib/admin/adminRouteAccess";
+import { getSupabaseServerClient, getMissingSupabaseServerEnvVars } from "@/lib/supabaseServer";
 
 export const runtime = "nodejs";
 
