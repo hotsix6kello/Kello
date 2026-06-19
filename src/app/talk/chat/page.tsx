@@ -1,10 +1,10 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, react-hooks/exhaustive-deps, react/no-unescaped-entities, @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, react-hooks/exhaustive-deps, react/no-unescaped-entities, @next/next/no-img-element */
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, Mic, Smile, Send, Pencil, Trash2, Settings, X, Link2, Pin, BellOff, LogOut, Bell, Plus, Volume2, Maximize2, Clock, Car, Heart, Calendar, Hand, Edit3, MapPin } from 'lucide-react';
+import { ChevronLeft, Mic, Smile, Send, Pencil, Trash2, Settings, X, Link2, Pin, BellOff, LogOut, Bell, Plus, Volume2, Maximize2, Clock, Car, Heart, Calendar, Hand, Edit3, MapPin, Sparkles, Info, Scissors, DollarSign } from 'lucide-react';
 import DrawingModal from '@/app/components/DrawingModal';
 import NotificationCenter from '@/app/components/home/NotificationCenter';
 import { supabase } from '@/lib/supabaseClient';
@@ -20,6 +20,7 @@ type Message = {
   read?: boolean;
   imageUrl?: string;
   icon?: string;
+  mapQuery?: string | null;
 };
 
 const KelloTalkIcon = ({ size = 36, color = '#FF3377' }: { size?: number; color?: string }) => (
@@ -50,7 +51,7 @@ const DEFAULT_CHATS = [
     avatarText: "K",
     avatarColor: "#B8913A",
     defaultMessages: [
-      { id: 'welcome', sender: 'system', original: '안녕! 난 뷰티서비스 이용을 도와주는 한국인 친구 Kello야.\n무엇을 도와줄까?', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), read: true }
+      { id: 'welcome', sender: 'system', original: '안녕하세요! 저는 뷰티 서비스 이용을 도와드리는 한국인 친구 Kello입니다.\n무엇을 도와드릴까요?', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), read: true }
     ]
   },
   {
@@ -113,7 +114,15 @@ const LOCAL_DICTIONARY: Record<string, { ko: string; icon: string }> = {
   "조금 아파요.": { ko: "조금 아파요.", icon: "🌡️" },
   "물이 차가워요.": { ko: "물이 차가워요.", icon: "🌡️" },
   "전부 해서 얼마인가요?": { ko: "전부 해서 얼마인가요?", icon: "💳" },
-  "카드 결제 할게요.": { ko: "카드 결제 할게요.", icon: "💳" }
+  "카드 결제 할게요.": { ko: "카드 결제 할게요.", icon: "💳" },
+  "예약 방법은 어떻게 되나요?": { ko: "예약 방법은 어떻게 되나요?", icon: "📅" },
+  "How do I make a booking?": { ko: "예약 방법은 어떻게 되나요?", icon: "📅" },
+  "예약 변경이나 취소는 어떻게 하나요?": { ko: "예약 변경이나 취소는 어떻게 하나요?", icon: "📅" },
+  "How can I change or cancel my booking?": { ko: "예약 변경이나 취소는 어떻게 하나요?", icon: "📅" },
+  "보통 시술 시간은 얼마나 걸리나요?": { ko: "보통 시술 시간은 얼마나 걸리나요?", icon: "⏱️" },
+  "How long does the service usually take?": { ko: "보통 시술 시간은 얼마나 걸리나요?", icon: "⏱️" },
+  "샵 위치와 찾아가는 방법을 알려주세요.": { ko: "샵 위치와 찾아가는 방법을 알려주세요.", icon: "📍" },
+  "Please tell me the shop location and how to get there.": { ko: "샵 위치와 찾아가는 방법을 알려주세요.", icon: "📍" }
 };
 
 const SUGGESTION_ICONS: Record<string, React.ComponentType<any>> = {
@@ -142,12 +151,152 @@ const QUICK_CATEGORIES = [
   { id: 'payment', icon: '💳', label: 'Payment', phrases: ['전부 해서 얼마인가요?', '카드 결제 할게요.'] }
 ];
 
+const StaffPinkTranslationArea = ({
+  originalText,
+  fallbackText,
+  handleTTS,
+}: {
+  originalText: string;
+  fallbackText?: string;
+  handleTTS: (text: string, lang: string) => void;
+}) => {
+  const [translatedText, setTranslatedText] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!originalText) return;
+
+    // 1. 이미 한국어 텍스트인 경우 즉시 할당
+    const isOriginalKo = /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(originalText);
+    if (isOriginalKo) {
+      setTranslatedText(originalText);
+      return;
+    }
+    const isFallbackKo = fallbackText && /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(fallbackText);
+    if (isFallbackKo) {
+      setTranslatedText(fallbackText);
+      return;
+    }
+
+    // 2. 로컬 사전(LOCAL_DICTIONARY)에서 매칭되는 한글 번역 조회
+    let matchedKo = "";
+    if (LOCAL_DICTIONARY[originalText]) {
+      matchedKo = LOCAL_DICTIONARY[originalText].ko;
+    } else {
+      for (const [key, value] of Object.entries(LOCAL_DICTIONARY)) {
+        if (key.toLowerCase() === originalText.toLowerCase() || value.ko.toLowerCase() === originalText.toLowerCase()) {
+          matchedKo = value.ko;
+          break;
+        }
+      }
+    }
+
+    if (matchedKo) {
+      setTranslatedText(matchedKo);
+      return;
+    }
+
+    // v2: 이전 캐시(번역 실패 시 원문 저장된 값) 제거
+    const OLD_CACHE_KEY = `kello_cache_auto_ko_${originalText}`;
+    localStorage.removeItem(OLD_CACHE_KEY);
+
+    const cacheKey = `kello_cache_auto_ko_v2_${originalText}`;
+    const cached = localStorage.getItem(cacheKey);
+    // 캐시 값이 실제 한국어인지 검증 - 아니면 재번역
+    const cachedIsKo = cached && /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(cached);
+    if (cachedIsKo) {
+      setTranslatedText(cached!);
+      return;
+    }
+    if (cached) {
+      // 잘못된 캐시 삭제 후 재번역
+      localStorage.removeItem(cacheKey);
+    }
+
+    const doTranslate = async () => {
+      setLoading(true);
+      try {
+        let session = null;
+        try {
+          if (typeof supabase !== 'undefined' && supabase.auth) {
+            const { data } = await supabase.auth.getSession();
+            session = data?.session;
+          }
+        } catch (authErr) {
+          console.warn("Supabase auth session fetch error, proceeding without token:", authErr);
+        }
+
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+        if (session?.access_token) {
+          headers['Authorization'] = `Bearer ${session.access_token}`;
+        }
+
+        const res = await fetch('/api/talk/chat-translate', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ message: originalText, sourceLocale: 'auto', targetLocale: 'ko', persist: false }),
+        });
+        const data = await res.json();
+        if (data.translatedText) {
+          // 실제 한국어일 때만 캐시 저장
+          const isKoResult = /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(data.translatedText);
+          if (isKoResult) {
+            localStorage.setItem(cacheKey, data.translatedText);
+          }
+          setTranslatedText(data.translatedText);
+        } else {
+          setTranslatedText(fallbackText || originalText);
+        }
+      } catch (err) {
+        console.error(err);
+        setTranslatedText(fallbackText || originalText);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    doTranslate();
+  }, [originalText, fallbackText]);
+
+  const displayPinkText = translatedText || fallbackText || originalText;
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 8, borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+      <div style={{ color: COLORS.primary, fontSize: '0.9rem', fontWeight: 500, flex: 1, marginRight: 8, textAlign: 'left', wordBreak: 'break-word' }}>
+        {loading ? <span style={{ opacity: 0.6 }}>번역 중...</span> : displayPinkText}
+      </div>
+      <button
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          handleTTS(displayPinkText, 'ko');
+        }}
+        style={{
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          padding: 2,
+          display: 'flex',
+          alignItems: 'center',
+          flexShrink: 0,
+          marginBottom: -2
+        }}
+        title="Listen"
+      >
+        <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
+      </button>
+    </div>
+  );
+};
+
 export default function TalkChatPage() {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { t } = useTranslation('common');
-  const shopIdFromUrl = searchParams.get('shopId') || 'jenny-hair';
-  const [shopId, setShopId] = useState('jenny-hair');
+  const shopIdFromUrl = searchParams.get('shopId') || 'kello-center';
+  const [shopId, setShopId] = useState('kello-center');
   const [quickSuggestions, setQuickSuggestions] = useState<string[]>([]);
   const moveSuggestion = (index: number, direction: 'prev' | 'next') => {
     setQuickSuggestions(prev => {
@@ -161,7 +310,43 @@ export default function TalkChatPage() {
     });
   };
   const [isEditingSuggestions, setIsEditingSuggestions] = useState(false);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [draggedOverIndex, setDraggedOverIndex] = useState<number | null>(null);
+
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    if (!isEditingSuggestions) return;
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    if (!isEditingSuggestions) return;
+    e.preventDefault();
+    if (draggedOverIndex !== index) {
+      setDraggedOverIndex(index);
+    }
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDraggedOverIndex(null);
+  };
+
+  const handleDrop = (e: React.DragEvent, targetIndex: number) => {
+    if (!isEditingSuggestions || draggedIndex === null) return;
+    setQuickSuggestions(prev => {
+      const newArr = [...prev];
+      const draggedItem = newArr[draggedIndex];
+      newArr.splice(draggedIndex, 1);
+      newArr.splice(targetIndex, 0, draggedItem);
+      return newArr;
+    });
+    setDraggedIndex(null);
+    setDraggedOverIndex(null);
+  };
+
   const [isAiRecommending, setIsAiRecommending] = useState(false);
+  const [kelloActiveTab, setKelloActiveTab] = useState('예약');
   const [isStaffShowMode, setIsStaffShowMode] = useState(false);
   const [showViewerTip, setShowViewerTip] = useState(true);
   const [selectedQuickCategory, setSelectedQuickCategory] = useState<string | null>(null);
@@ -560,7 +745,27 @@ export default function TalkChatPage() {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
+    
+    // 스마트 언어 판별: 텍스트에 한글이 하나라도 포함되어 있으면 무조건 한국어 발음 지정
+    const hasKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+    const resolvedLang = hasKorean ? 'ko-KR' : (lang.toLowerCase().startsWith('ko') ? 'ko-KR' : 'en-US');
+    
+    utterance.lang = resolvedLang;
+
+    const voices = window.speechSynthesis.getVoices();
+    let voice = voices.find(v => 
+      v.lang.toLowerCase() === resolvedLang.toLowerCase() || 
+      v.lang.toLowerCase().replace('_', '-').startsWith(resolvedLang.toLowerCase())
+    );
+    if (!voice && resolvedLang.startsWith('ko')) {
+      voice = voices.find(v => v.lang.includes('ko'));
+    }
+    if (!voice && resolvedLang.startsWith('en')) {
+      voice = voices.find(v => v.lang.includes('en'));
+    }
+    if (voice) {
+      utterance.voice = voice;
+    }
     window.speechSynthesis.speak(utterance);
   };
 
@@ -572,14 +777,26 @@ export default function TalkChatPage() {
     }
     const timer = setTimeout(async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) return;
+        let session = null;
+        try {
+          if (typeof supabase !== 'undefined' && supabase.auth) {
+            const { data } = await supabase.auth.getSession();
+            session = data?.session;
+          }
+        } catch (authErr) {
+          console.warn("Supabase auth error in live translation:", authErr);
+        }
+
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+        if (session?.access_token) {
+          headers['Authorization'] = `Bearer ${session.access_token}`;
+        }
+
         const res = await fetch('/api/talk/chat-translate', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${session.access_token}`,
-          },
+          headers,
           body: JSON.stringify({ message: inputText, sourceLocale: 'auto', targetLocale: 'ko' }),
         });
         const data = await res.json();
@@ -682,7 +899,7 @@ export default function TalkChatPage() {
             'Content-Type': 'application/json',
             ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
           },
-          body: JSON.stringify({ message: text })
+          body: JSON.stringify({ message: text, category: kelloActiveTab })
         });
         const aiData = await aiRes.json();
 
@@ -693,9 +910,10 @@ export default function TalkChatPage() {
           {
             id: `kello-reply-${Date.now()}`,
             sender: 'system',
-            original: sourceLocale === 'ko' ? aiData.replyKo : aiData.replyEn,
+            original: aiData.reply ?? aiData.replyKo ?? '',
             timestamp: new Date(),
-            read: true
+            read: true,
+            mapQuery: aiData.mapQuery || null,
           }
         ]);
       } catch (err) {
@@ -853,7 +1071,7 @@ export default function TalkChatPage() {
             <div style={{ fontWeight: 600, fontSize: '1rem', color: COLORS.textMain }}>
               {isKello ? (
                 <span>
-                  <span style={{ color: COLORS.primary }}>Kello</span> Talk
+                  <span style={{ color: COLORS.primary }}>Kello</span>톡
                 </span>
               ) : shopName}
             </div>
@@ -916,64 +1134,70 @@ export default function TalkChatPage() {
               }} />
             </button>
 
-            {/* 💡 직원에게 보여주려면 한국어 뷰어모드를 켜세요. 팝업 */}
+            {/* 💡 직원에게 보여주려면 한국어 뷰어모드를 켜세요. 팝업 (연노랑 배경) */}
             {showViewerTip && (
               <div style={{
                 position: 'absolute',
                 top: 'calc(100% + 10px)',
-                right: 0,
-                background: '#FFFFFF',
-                color: '#000000',
-                padding: '8px 12px',
-                borderRadius: '12px',
-                border: `1px solid ${COLORS.border}`,
-                boxShadow: '0 8px 20px rgba(255, 77, 130, 0.12)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                whiteSpace: 'nowrap',
+                right: -10,
                 zIndex: 100,
-                animation: 'tooltipPopBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, tooltipFloat 2s ease-in-out infinite',
-                transformOrigin: 'top right'
+                pointerEvents: 'none',
               }}>
-                {/* 말풍선 꼬리 */}
                 <div style={{
-                  position: 'absolute',
-                  top: -6,
-                  right: 28,
-                  width: 10,
-                  height: 10,
-                  background: '#FFFFFF',
-                  borderLeft: `1px solid ${COLORS.border}`,
-                  borderTop: `1px solid ${COLORS.border}`,
-                  transform: 'rotate(45deg)'
-                }} />
-
-                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                  {t('talk_page.korean_viewer_hint')}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowViewerTip(false);
-                  }}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginLeft: 2
-                  }}
-                  title={t("talk_ui.close_aria")}
-                >
-                  <X size={14} color="#9CA3AF" />
-                </button>
+                  background: '#FFFDF0',
+                  color: '#854D0E',
+                  padding: '6px 18px 6px 8px',
+                  borderRadius: '12px',
+                  border: '1px solid #FEF08A',
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.06)',
+                  fontSize: '0.68rem',
+                  fontWeight: 500,
+                  width: 'fit-content',
+                  whiteSpace: 'nowrap',
+                  pointerEvents: 'auto',
+                  position: 'relative',
+                  animation: 'tooltipPopBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, tooltipFloat 2s ease-in-out infinite',
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    top: -6,
+                    right: 18,
+                    transform: 'rotate(45deg)',
+                    width: 10,
+                    height: 10,
+                    background: '#FFFDF0',
+                    borderLeft: '1px solid #FEF08A',
+                    borderTop: '1px solid #FEF08A',
+                  }} />
+                  <div style={{ whiteSpace: 'nowrap', lineHeight: 1.5 }}>
+                    💡 한국인 직원에게 보여주려면
+                  </div>
+                  <div style={{ whiteSpace: 'nowrap', lineHeight: 1.5 }}>
+                    <span style={{ color: COLORS.primary, fontWeight: 700 }}>한국어 뷰어 모드</span>를 활성화 하세요.
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowViewerTip(false);
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      position: 'absolute',
+                      top: '4px',
+                      right: '4px',
+                      zIndex: 10
+                    }}
+                    title={t("talk_ui.close_aria")}
+                  >
+                    <X size={11} color="#854D0E" />
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -1000,7 +1224,7 @@ export default function TalkChatPage() {
             }}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.7'; }}
             onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
-            title={t('talk_ui.connect_store')}
+            title="뷰티 매장 연결하기"
           >
             <Link2 size={22} strokeWidth={1.5} />
           </button>
@@ -1091,32 +1315,11 @@ export default function TalkChatPage() {
 
 
 
-        {/* 1. 한국어 뷰어 힌트 (develop 브랜치 변경점 보존) */}
-        {isStaffShowMode && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
-            <div
-              style={{
-                background: COLORS.primaryLight,
-                color: COLORS.primary,
-                padding: '8px 14px',
-                borderRadius: 12,
-                fontSize: '0.78rem',
-                fontWeight: 500,
-                textAlign: 'center',
-                lineHeight: 1.35,
-                border: `1px solid ${COLORS.border}`,
-                maxWidth: '90%',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {t('talk_page.korean_viewer_hint')}
-            </div>
-          </div>
-        )}
+
 
         {/* 2. Kello 웰컴 카드 (welcome) */}
         {shopId === 'kello-center' && (
-          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginBottom: 4, position: 'relative', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginBottom: 4, position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
             <div style={{
               background: '#FFFFFF',
               borderRadius: '24px',
@@ -1135,10 +1338,10 @@ export default function TalkChatPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#000000', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    {t('talk_page.kello_greeting_prefix', { defaultValue: 'Hi, I am' })} <span style={{ color: COLORS.primary }}>Kello</span> 👋
+                    안녕하세요! 저는 <span style={{ color: COLORS.primary }}>Kello</span>입니다 👋
                   </span>
                   <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.25 }}>
-                    {t('talk_page.kello_welcome_title', { defaultValue: 'How can I help?' })}
+                    무엇을 도와드릴까요?
                   </h2>
                 </div>
                 {/* K 캐릭터 이미지 (박스 내부 우측 상단, 투명 필터 적용 및 크기 확대) */}
@@ -1151,73 +1354,145 @@ export default function TalkChatPage() {
                 </div>
               </div>
 
-              {/* Kello에게 물어보세요 탭 */}
-              <div style={{
-                background: '#FFF8F9',
-                borderRadius: '16px',
-                padding: '16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 12
-              }}>
+              {/* Kello에게 물어보세요 – 6탭 + 질문카드 + AI 답변 */}
+              <div style={{ background: '#FFF8F9', borderRadius: '16px', padding: '14px 14px 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {/* 헤더 */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1F2937' }}>
-                      {t('talk_page.ask_kello', { defaultValue: 'Ask Kello' })}
-                    </span>
-                  </div>
-                  <span style={{ fontSize: '0.7rem', color: '#9CA3AF', cursor: 'pointer', fontWeight: 600 }}>{t('common.actions.view_all', { defaultValue: 'View All' })} &gt;</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Sparkles size={14} color={COLORS.primary} style={{ flexShrink: 0, animation: 'pulse 2s infinite' }} />
+                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1F2937' }}>
+                    <span style={{ color: COLORS.primary }}>Kello</span>에게 물어보세요
+                  </span>
                 </div>
 
-                {/* 질문 그리드 */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: 8,
-                }}>
+                {/* 6개 탭 */}
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   {[
-                    { icon: <Calendar size={13} color={COLORS.primary} strokeWidth={2.5} />, label: t('talk_page.booking_help', { defaultValue: 'Booking help' }), qKo: '예약 방법은 어떻게 되나요?', qEn: 'How do I make a booking?' },
-                    { icon: <Edit3 size={13} color={COLORS.primary} strokeWidth={2.5} />, label: t('talk_page.change_cancel_help', { defaultValue: 'Change or cancel' }), qKo: '예약 변경이나 취소는 어떻게 하나요?', qEn: 'How can I change or cancel my booking?' },
-                    { icon: <Clock size={13} color={COLORS.primary} strokeWidth={2.5} />, label: t('talk_page.service_time_help', { defaultValue: 'Service time' }), qKo: '보통 시술 시간은 얼마나 걸리나요?', qEn: 'How long does the service usually take?' },
-                    { icon: <MapPin size={13} color={COLORS.primary} strokeWidth={2.5} />, label: t('talk_page.location_help', { defaultValue: 'Location help' }), qKo: '샵 위치와 찾아가는 방법을 알려주세요.', qEn: 'Please tell me the shop location and how to get there.' },
-                  ].map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => sendMessage(sourceLocale === 'ko' ? item.qKo : item.qEn)}
-                      style={{
-                        background: '#FFFFFF',
-                        border: '1px solid #FFE4E6',
-                        borderRadius: '12px',
-                        padding: '10px 8px',
-                        fontSize: '0.72rem',
-                        color: '#374151',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 6,
-                        boxShadow: '0 2px 4px rgba(255, 77, 130, 0.02)',
-                        transition: 'transform 0.15s, border-color 0.15s, box-shadow 0.15s',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.02)';
-                        e.currentTarget.style.borderColor = COLORS.primary;
-                        e.currentTarget.style.boxShadow = '0 4px 8px rgba(255, 77, 130, 0.06)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                        e.currentTarget.style.borderColor = '#FFE4E6';
-                        e.currentTarget.style.boxShadow = '0 2px 4px rgba(255, 77, 130, 0.02)';
-                      }}
-                    >
-                      {item.icon}
-                      <span style={{ whiteSpace: 'nowrap' }}>{item.label}</span>
-                    </button>
-                  ))}
+                    { label: '예약', icon: Calendar },
+                    { label: '뷰티스타일 추천', icon: Sparkles },
+                    { label: '업체 추천', icon: MapPin },
+                    { label: '가격 안내', icon: DollarSign },
+                    { label: '시술 정보', icon: Scissors },
+                    { label: '이용 안내', icon: Info },
+                  ].map(tabItem => {
+                    const IconComponent = tabItem.icon;
+                    return (
+                      <button
+                        key={tabItem.label}
+                        type="button"
+                        onClick={() => { setKelloActiveTab(tabItem.label); setKelloAiAnswer(null); }}
+                        style={{
+                          flexShrink: 0,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 4,
+                          padding: '5px 12px',
+                          borderRadius: 20,
+                          border: `1px solid ${kelloActiveTab === tabItem.label ? COLORS.primary : '#FFE4E6'}`,
+                          background: kelloActiveTab === tabItem.label ? COLORS.primary : '#FFFFFF',
+                          color: kelloActiveTab === tabItem.label ? '#FFF' : '#374151',
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        <IconComponent size={11} strokeWidth={2.5} />
+                        {tabItem.label}
+                      </button>
+                    );
+                  })}
                 </div>
+
+                {/* 탭별 추천 질문 카드 */}
+                {(() => {
+                  const tabQuestions: Record<string, { icon: React.ComponentType<any>; label: string; q: string }[]> = {
+                    '예약': [
+                      { icon: Calendar, label: '예약 문의', q: '예약 가능한 시간 알려줘' },
+                      { icon: Pencil, label: '예약 변경·취소', q: '예약 취소하고 싶어요' },
+                      { icon: Clock, label: '시술 시간 안내', q: '시술 시간은 얼마나 걸리나요?' },
+                      { icon: MapPin, label: '위치 안내', q: '샵 위치 알려줘' },
+                    ],
+                    '뷰티스타일 추천': [
+                      { icon: Sparkles, label: '얼굴형 추천', q: '얼굴형에 맞는 머리 추천해줘' },
+                      { icon: Sparkles, label: '계절별 추천', q: '여름 헤어 추천해줘' },
+                      { icon: Heart, label: '피부 타입별', q: '피부 타입별 관리 추천해줘' },
+                      { icon: Smile, label: '스타일 취향', q: '내추럴한 스타일 추천해줘' },
+                    ],
+                    '업체 추천': [
+                      { icon: MapPin, label: '지역 추천', q: '제주도 피부관리 추천해줘' },
+                      { icon: Scissors, label: '헤어샵 추천', q: '근처 헤어샵 알려줘' },
+                      { icon: Sparkles, label: '네일샵 추천', q: '네일샵 추천해줘' },
+                      { icon: Info, label: '에스테틱 추천', q: '에스테틱 추천해줘' },
+                    ],
+                    '가격 안내': [
+                      { icon: DollarSign, label: '염색 가격', q: '염색 가격 얼마인가요?' },
+                      { icon: DollarSign, label: '필러 가격', q: '필러 가격 알려줘' },
+                      { icon: DollarSign, label: '네일 가격', q: '젤네일 가격 얼마예요?' },
+                      { icon: DollarSign, label: '피부관리 가격', q: '피부관리 가격 범위 알려줘' },
+                    ],
+                    '시술 정보': [
+                      { icon: Scissors, label: '커트 시술 정보', q: '커트 시술 과정 알려줘' },
+                      { icon: Info, label: '염색 주의사항', q: '염색 후 주의사항 알려줘' },
+                      { icon: Sparkles, label: '두피 케어', q: '두피 케어 시술 정보 알려줘' },
+                      { icon: Info, label: '스킨케어', q: '스킨케어 시술 종류 알려줘' },
+                    ],
+                    '이용 안내': [
+                      { icon: Info, label: 'Kello 예약 방법', q: 'Kello 앱 예약 방법 알려줘' },
+                      { icon: Calendar, label: '알림 설정', q: '예약 알림은 어떻게 설정하나요?' },
+                      { icon: DollarSign, label: '결제 방법', q: '결제는 어떻게 하나요?' },
+                      { icon: Sparkles, label: '쿠폰·혜택', q: '쿠폰이나 혜택은 어떻게 받나요?' },
+                    ],
+                  };
+                  const questions = tabQuestions[kelloActiveTab] ?? [];
+                  return (
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
+                      {questions.map(item => (
+                        <button
+                          key={item.label}
+                          type="button"
+                          onClick={() => { sendMessage(item.label); }}
+                          style={{
+                            background: '#FFFFFF',
+                            border: '1px solid #FFE4E6',
+                            borderRadius: '12px',
+                            padding: '10px 8px',
+                            fontSize: '0.72rem',
+                            color: '#374151',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-start',
+                            gap: 8,
+                            textAlign: 'left',
+                            transition: 'all 0.15s',
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.borderColor = COLORS.primary; e.currentTarget.style.background = '#FFF5F7'; }}
+                          onMouseLeave={e => { e.currentTarget.style.borderColor = '#FFE4E6'; e.currentTarget.style.background = '#FFFFFF'; }}
+                        >
+                          <span style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: 24,
+                            height: 24,
+                            borderRadius: '50%',
+                            background: '#FFF5F7',
+                            color: COLORS.primary,
+                            flexShrink: 0
+                          }}>
+                            <item.icon size={13} strokeWidth={2.5} />
+                          </span>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            <span style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{item.label}</span>
+                            <span style={{ fontSize: '0.65rem', color: '#9CA3AF', fontWeight: 400, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>"{item.q}"</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </div>
@@ -1285,7 +1560,7 @@ export default function TalkChatPage() {
                           <div style={{ fontWeight: 700, textAlign: 'left', wordBreak: 'break-word', whiteSpace: 'pre-wrap', flex: 1 }}>
                             {msg.translated || (msg.isTranslating ? <TranslatingDots /> : msg.original)}
                           </div>
-                          {msg.translated && (
+                          {isStaffShowMode && msg.translated && (
                             <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.translated!, sourceLocale); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0 }} title={t("talk_ui.listen_aria")}>
                               <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
                             </button>
@@ -1293,10 +1568,43 @@ export default function TalkChatPage() {
                         </div>
 
                         {isStaffShowMode && (
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 8, borderTop: `1px solid rgba(0,0,0,0.05)` }}>
-                            <div style={{ color: COLORS.primary, fontSize: '0.9rem', fontWeight: 800, flex: 1, marginRight: 8, textAlign: 'left', wordBreak: 'break-word' }}>{msg.original}</div>
-                            <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.original, 'ko'); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0, marginBottom: -2 }} title={t("talk_ui.listen_aria")}>
-                              <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
+                          <StaffPinkTranslationArea
+                            originalText={msg.original || ''}
+                            fallbackText={msg.translated || ''}
+                            handleTTS={handleTextToSpeech}
+                          />
+                        )}
+
+                        {msg.mapQuery && (
+                          <div style={{ marginTop: 8, borderTop: '1px dashed rgba(255, 77, 130, 0.15)', paddingTop: 8, display: 'flex', justifyContent: 'flex-start' }}>
+                            <button
+                              type="button"
+                              onClick={() => router.push(`/explore?q=${encodeURIComponent(msg.mapQuery!)}`)}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 4,
+                                padding: '6px 12px',
+                                borderRadius: '12px',
+                                border: '1px solid #FFE4E6',
+                                background: '#FFFFFF',
+                                color: COLORS.primary,
+                                fontSize: '0.72rem',
+                                fontWeight: 800,
+                                cursor: 'pointer',
+                                transition: 'all 0.15s',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.background = '#FFF5F7';
+                                e.currentTarget.style.borderColor = COLORS.primary;
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.background = '#FFFFFF';
+                                e.currentTarget.style.borderColor = '#FFE4E6';
+                              }}
+                            >
+                              <MapPin size={12} strokeWidth={2.5} />
+                              지도에서 위치 확인하기 &gt;
                             </button>
                           </div>
                         )}
@@ -1359,19 +1667,18 @@ export default function TalkChatPage() {
                                 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#111', flex: 1, wordBreak: 'break-word', lineHeight: 1.4 }}>
                                   {isStaffShowMode ? msg.original : (msg.translated || msg.original)}
                                 </span>
-                                {(!isStaffShowMode || !msg.translated) && (
+                                {isStaffShowMode && (!isStaffShowMode || !msg.translated) && (
                                   <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.translated || msg.original, targetLocale); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0 }} title={t("talk_ui.listen_aria")}>
                                     <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
                                   </button>
                                 )}
                               </div>
-                              {isStaffShowMode && msg.translated && (
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 8, borderTop: `1px solid rgba(0,0,0,0.05)` }}>
-                                  <div style={{ color: COLORS.primary, fontSize: '0.9rem', fontWeight: 500, flex: 1, marginRight: 8, textAlign: 'left', wordBreak: 'break-word' }}>{msg.translated}</div>
-                                  <button type="button" onMouseDown={(e) => { e.preventDefault(); handleTextToSpeech(msg.translated!, 'ko'); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex', alignItems: 'center', flexShrink: 0, marginBottom: -2 }} title={t("talk_ui.listen_aria")}>
-                                    <Volume2 size={16} color={COLORS.textSub} strokeWidth={2.5} />
-                                  </button>
-                                </div>
+                              {isStaffShowMode && (
+                                <StaffPinkTranslationArea
+                                  originalText={msg.original || ''}
+                                  fallbackText={msg.translated || ''}
+                                  handleTTS={handleTextToSpeech}
+                                />
                               )}
                               {!isStaffShowMode && msg.original && msg.original !== msg.translated && (
                                 <div style={{ fontSize: '0.75rem', color: COLORS.textSub, wordBreak: 'break-word', paddingLeft: 2, marginTop: 4 }}>
@@ -1453,58 +1760,37 @@ export default function TalkChatPage() {
         }}
       >
         {/* Toggle Button Overlapping Section Top Line */}
-        <button
-          type="button"
-          onClick={() => setShowSuggestions(!showSuggestions)}
-          style={{
-            position: 'absolute',
-            top: -11,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: COLORS.header,
-            border: `1px solid ${COLORS.border}`,
-            borderRadius: '12px',
-            width: 36,
-            height: 22,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            color: COLORS.textSub,
-            zIndex: 10,
-            boxShadow: '0 -2px 4px rgba(0,0,0,0.02)',
-          }}
-          title={showSuggestions ? t("talk_ui.collapse") : t("talk_ui.expand")}
-        >
-          <ChevronLeft size={14} style={{ transform: showSuggestions ? 'rotate(-90deg)' : 'rotate(90deg)' }} />
-        </button>
+        {isStaffShowMode && (
+          <button
+            type="button"
+            onClick={() => setShowSuggestions(!showSuggestions)}
+            style={{
+              position: 'absolute',
+              top: -11,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: COLORS.header,
+              border: `1px solid ${COLORS.border}`,
+              borderRadius: '12px',
+              width: 36,
+              height: 22,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: COLORS.textSub,
+              zIndex: 10,
+              boxShadow: '0 -2px 4px rgba(0,0,0,0.02)',
+            }}
+            title={showSuggestions ? t("talk_ui.collapse") : t("talk_ui.expand")}
+          >
+            <ChevronLeft size={14} style={{ transform: showSuggestions ? 'rotate(-90deg)' : 'rotate(90deg)' }} />
+          </button>
+        )}
 
-        {showSuggestions && (
+        {isStaffShowMode && showSuggestions && (
           <div ref={suggestionsRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 8, paddingBottom: 4 }}>
             <div style={{ display: 'flex', width: '100%', alignItems: 'center', gap: 8 }}>
-              {/* Settings Button */}
-              <button
-                type="button"
-                onClick={() => setIsEditingSuggestions(!isEditingSuggestions)}
-                style={{
-                  background: isEditingSuggestions ? COLORS.primary : 'none',
-                  color: isEditingSuggestions ? '#FFF' : COLORS.textSub,
-                  border: `1px solid ${isEditingSuggestions ? COLORS.primary : COLORS.border}`,
-                  borderRadius: '50%',
-                  width: 28,
-                  height: 28,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  flexShrink: 0,
-                }}
-                title={t("talk_ui.manage_phrases")}
-              >
-                <Settings size={14} />
-              </button>
-
               {/* Suggestions Container - Kept as horizontal scroll in both modes */}
               <div
                 onMouseEnter={() => setIsHovered(true)}
@@ -1565,11 +1851,63 @@ export default function TalkChatPage() {
                 >
                   {[0, 1].map(rowIndex => (
                     <div key={rowIndex} style={{ display: 'flex', gap: 8, width: 'max-content', alignItems: 'center' }}>
+                      {rowIndex === 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setIsEditingSuggestions(!isEditingSuggestions)}
+                          style={{
+                            background: isEditingSuggestions ? COLORS.primary : '#FFFFFF',
+                            color: isEditingSuggestions ? '#FFF' : COLORS.textSub,
+                            border: `1px solid ${isEditingSuggestions ? COLORS.primary : COLORS.border}`,
+                            borderRadius: '50%',
+                            width: 32,
+                            height: 32,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isEditingSuggestions ? 'default' : 'pointer', // 클릭 후 호버시 흰색 손가락 커서 안 뜨게 default 고정
+                            transition: 'all 0.2s',
+                            flexShrink: 0,
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+                          }}
+                          title={t("talk_ui.manage_phrases")}
+                        >
+                          <Settings size={14} />
+                        </button>
+                      )}
                       {quickSuggestions.filter((_, i) => i % 2 === rowIndex).map((text) => {
                         const IconComponent = SUGGESTION_ICONS[text] || Smile;
                         const originalIndex = quickSuggestions.indexOf(text);
+                        const isOver = draggedOverIndex === originalIndex && draggedIndex !== originalIndex;
                         return (
-                          <div key={text} style={{ position: 'relative', display: 'flex', flexShrink: 0 }}>
+                          <div
+                            key={text}
+                            draggable={isEditingSuggestions}
+                            onDragStart={(e) => handleDragStart(e, originalIndex)}
+                            onDragOver={(e) => handleDragOver(e, originalIndex)}
+                            onDragEnd={handleDragEnd}
+                            onDrop={(e) => handleDrop(e, originalIndex)}
+                            style={{
+                              position: 'relative',
+                              display: 'flex',
+                              alignItems: 'center',
+                              flexShrink: 0,
+                              opacity: draggedIndex === originalIndex ? 0.4 : 1,
+                              cursor: isEditingSuggestions ? 'default' : 'pointer',
+                            }}
+                          >
+                            {/* 드래그 오버 시 삽입 위치 세로막대 미리보기 */}
+                            {isOver && (
+                              <div style={{
+                                width: 4,
+                                height: 32,
+                                backgroundColor: COLORS.primary,
+                                borderRadius: 2,
+                                marginRight: 6,
+                                animation: 'pulse 1s infinite',
+                                flexShrink: 0
+                              }} />
+                            )}
                             <button
                               type="button"
                               onClick={() => {
@@ -1580,12 +1918,12 @@ export default function TalkChatPage() {
                               style={{
                                 background: '#FFFFFF',
                                 color: COLORS.textMain,
-                                border: `1px solid ${COLORS.border}`,
+                                border: `1px solid ${isEditingSuggestions && isOver ? COLORS.primary : COLORS.border}`,
                                 borderRadius: '20px',
                                 padding: '6px 14px',
                                 fontSize: '0.8rem',
                                 fontWeight: 500,
-                                cursor: isEditingSuggestions ? 'default' : 'pointer',
+                                cursor: isEditingSuggestions ? 'default' : 'pointer', // 클릭 후 호버시 흰색 손가락 커서 안 뜨게 default 고정
                                 whiteSpace: 'nowrap',
                                 transition: 'all 0.2s',
                                 display: 'flex',
@@ -1594,52 +1932,10 @@ export default function TalkChatPage() {
                                 boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
                               }}
                             >
-                              {isEditingSuggestions && originalIndex > 0 && (
-                                <span
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    moveSuggestion(originalIndex, 'prev');
-                                  }}
-                                  style={{
-                                    cursor: 'pointer',
-                                    color: COLORS.primary,
-                                    marginRight: 2,
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    padding: '2px 4px',
-                                    background: '#FFF0F3',
-                                    borderRadius: '4px',
-                                    fontSize: '0.65rem'
-                                  }}
-                                >
-                                  ◀
-                                </span>
-                              )}
                               <span style={{ display: 'inline-flex', alignItems: 'center', color: COLORS.primary }}>
                                 <IconComponent size={16} strokeWidth={2} />
                               </span>
                               <span>{text}</span>
-                              {isEditingSuggestions && originalIndex < quickSuggestions.length - 1 && (
-                                <span
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    moveSuggestion(originalIndex, 'next');
-                                  }}
-                                  style={{
-                                    cursor: 'pointer',
-                                    color: COLORS.primary,
-                                    marginLeft: 2,
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    padding: '2px 4px',
-                                    background: '#FFF0F3',
-                                    borderRadius: '4px',
-                                    fontSize: '0.65rem'
-                                  }}
-                                >
-                                  ▶
-                                </span>
-                              )}
                             </button>
                             {isEditingSuggestions && (
                               <button
@@ -1813,7 +2109,52 @@ export default function TalkChatPage() {
               style={{ flex: 1, border: 'none', background: 'transparent', outline: 'none', fontSize: '0.95rem', color: COLORS.textMain, minWidth: 0, resize: 'none', height: 24, padding: '3px 0', fontFamily: 'inherit', lineHeight: '18px', overflowY: 'auto' }}
             />
 
-            <button type="button" onClick={() => setShowEmojiPicker(!showEmojiPicker)} style={{ background: 'none', border: 'none', padding: 2, paddingBottom: 5, cursor: 'pointer', color: COLORS.textSub, display: 'flex' }} aria-label={t("talk_ui.emoji")}><Smile size={20} strokeWidth={1.5} /></button>
+            <div style={{ position: 'relative', display: 'flex' }}>
+              <button
+                type="button"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                style={{ background: 'none', border: 'none', padding: 2, paddingBottom: 5, cursor: 'pointer', color: COLORS.textSub, display: 'flex' }}
+                aria-label={t("talk_ui.emoji")}
+              >
+                <Smile size={20} strokeWidth={1.5} />
+              </button>
+              {showEmojiPicker && (
+                <div style={{
+                  position: 'absolute',
+                  bottom: '32px',
+                  right: '0px',
+                  background: '#FFFFFF',
+                  border: `1px solid ${COLORS.border}`,
+                  borderRadius: '12px',
+                  padding: '8px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                  display: 'flex',
+                  gap: '6px',
+                  zIndex: 1000,
+                  whiteSpace: 'nowrap'
+                }}>
+                  {REACTIONS.map((emoji) => (
+                    <button
+                      key={emoji}
+                      type="button"
+                      onClick={() => handleReaction(emoji)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        fontSize: '1.25rem',
+                        cursor: 'pointer',
+                        padding: '4px',
+                        transition: 'transform 0.1s'
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.25)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <button
               type="submit"
@@ -1856,17 +2197,17 @@ export default function TalkChatPage() {
         }}>
           <div style={{
             background: '#fff',
-            padding: '24px',
+            padding: '16px',
             borderRadius: '16px',
-            width: '85%',
-            maxWidth: '320px',
+            width: '80%',
+            maxWidth: '290px',
             boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
             textAlign: 'center',
           }}>
             <h3 style={{ margin: '0 0 8px 0', fontSize: '1.05rem', fontWeight: 600, color: COLORS.textMain }}>
               {confirmModal.type === 'edit' ? t('talk_ui.edit_message') : t('talk_ui.delete_message')}
             </h3>
-            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: COLORS.textSub, lineHeight: 1.4 }}>
+            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: COLORS.textSub, lineHeight: 1.4, wordBreak: 'keep-all' }}>
               {confirmModal.type === 'edit'
                 ? t('talk_ui.edit_confirm')
                 : t('talk_ui.delete_confirm')}
@@ -1886,7 +2227,7 @@ export default function TalkChatPage() {
                   cursor: 'pointer',
               }}
             >
-                {t('common.actions.cancel', { defaultValue: 'Cancel' })}
+                {t('common.actions.cancel', { defaultValue: '취소' })}
               </button>
               <button
                 onClick={handleConfirmAction}
@@ -1895,14 +2236,14 @@ export default function TalkChatPage() {
                   padding: '10px',
                   borderRadius: '10px',
                   border: 'none',
-                  background: confirmModal.type === 'edit' ? '#3B82F6' : '#EF4444',
+                  background: COLORS.primary,
                   fontSize: '0.85rem',
                   fontWeight: 600,
                   color: '#fff',
                   cursor: 'pointer',
               }}
             >
-                {t('common.actions.confirm', { defaultValue: 'Confirm' })}
+                {t('common.actions.confirm', { defaultValue: '확인' })}
               </button>
             </div>
           </div>
@@ -2053,140 +2394,22 @@ export default function TalkChatPage() {
             maxHeight: '80vh',
           }}>
             <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 700, color: COLORS.textMain, textAlign: 'center' }}>
-              {t('talk_ui.connect_store')}
+              뷰티 매장 연결하기
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: COLORS.textSub, textAlign: 'center', lineHeight: 1.4 }}>
-              {t('talk_ui.select_store')}
+              제휴된 뷰티 매장을 연결하여 대화할 수 있습니다.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'auto', flex: 1, paddingRight: 4 }}>
-              {(() => {
-                const sortedShops = DEFAULT_CHATS
-                  .filter(s => s.id !== 'kello-center')
-                  .sort((a, b) => {
-                    const aHidden = hiddenShops.includes(a.id);
-                    const bHidden = hiddenShops.includes(b.id);
-                    if (aHidden && !bHidden) return 1;
-                    if (!aHidden && bHidden) return -1;
-
-                    const aPinned = pinnedShops.includes(a.id);
-                    const bPinned = pinnedShops.includes(b.id);
-                    if (aPinned && !bPinned) return -1;
-                    if (!aPinned && bPinned) return 1;
-                    return 0;
-                  });
-
-                return sortedShops.map(shop => {
-                  let unread = 0;
-                  let lastMsg = hiddenShops.includes(shop.id) ? t('talk_ui.disconnected') : t('common.states.not_connected_yet');
-                  let lastTime = '';
-                  try {
-                    const stored = localStorage.getItem(`kello_chats_${shop.id}`);
-                    if (stored) {
-                      const msgs = JSON.parse(stored);
-                      unread = msgs.filter((m: any) => m.sender === 'system' && !m.read).length;
-                      if (msgs.length > 0) {
-                        const lastMsgObj = msgs[msgs.length - 1];
-                        lastMsg = lastMsgObj.original;
-                        const date = new Date(lastMsgObj.timestamp);
-                        lastTime = date.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
-                      }
-                    }
-                  } catch { }
-
-                  const handleShopContextMenu = (e: React.MouseEvent) => {
-                    e.preventDefault();
-                    setShopContextMenu({ x: e.clientX, y: e.clientY, shopId: shop.id });
-                  };
-
-                  return (
-                    <div
-                      key={shop.id}
-                      onClick={() => {
-                        if (hiddenShops.includes(shop.id)) {
-                          setHiddenShops(prev => {
-                            const next = prev.filter(h => h !== shop.id);
-                            localStorage.setItem('kello_hidden', JSON.stringify(next));
-                            return next;
-                          });
-                        }
-                        setShowLinkModal(false);
-                        router.push(`/talk/chat?shopId=${shop.id}`);
-                      }}
-                      onContextMenu={handleShopContextMenu}
-                      style={{
-                        padding: '12px',
-                        borderRadius: 12,
-                        border: `1px solid ${COLORS.border}`,
-                        background: hiddenShops.includes(shop.id) ? '#FAF9F6' : '#FFF',
-                        opacity: hiddenShops.includes(shop.id) ? 0.7 : 1,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        gap: 10,
-                        position: 'relative',
-                        transition: 'all 0.2s',
-                        userSelect: 'none',
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.primary; e.currentTarget.style.background = COLORS.primaryLight; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.background = hiddenShops.includes(shop.id) ? '#FAF9F6' : '#FFF'; }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0 }}>
-                        <span style={{ width: 10, height: 10, borderRadius: '50%', background: shop.avatarColor, flexShrink: 0 }} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontWeight: 700, fontSize: '0.85rem', color: COLORS.textMain, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{shop.name}</span>
-                            {pinnedShops.includes(shop.id) && <Pin size={12} color={COLORS.primary} style={{ transform: 'rotate(45deg)', flexShrink: 0 }} />}
-                            {mutedShops.includes(shop.id) && <BellOff size={12} color={COLORS.textSub} style={{ flexShrink: 0 }} />}
-                          </div>
-                          <div style={{ fontSize: '0.75rem', color: COLORS.textSub, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginTop: 2 }}>
-                            {lastMsg}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                        {lastTime && <span style={{ fontSize: '0.65rem', color: COLORS.textSub }}>{lastTime}</span>}
-                        {unread > 0 && !mutedShops.includes(shop.id) && (
-                          <span style={{
-                            background: '#EF4444',
-                            color: '#FFF',
-                            fontSize: '0.7rem',
-                            fontWeight: 700,
-                            borderRadius: '50%',
-                            minWidth: 18,
-                            height: 18,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: '0 4px',
-                          }}>
-                            {unread}
-                          </span>
-                        )}
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const rect = e.currentTarget.getBoundingClientRect();
-                            setShopContextMenu({ x: rect.left, y: rect.bottom, shopId: shop.id });
-                          }}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            color: COLORS.textSub,
-                            padding: 2,
-                            display: 'flex',
-                          }}
-                        >
-                          <Settings size={14} />
-                        </button>
-                      </div>
-                    </div>
-                  );
-                });
-              })()}
+              <div style={{
+                textAlign: 'center',
+                padding: '24px 16px',
+                color: COLORS.textSub,
+                fontSize: '0.8rem',
+                lineHeight: 1.5
+              }}>
+                현재 연결 가능한 뷰티 매장이 없습니다.<br />곧 제휴 매장이 연결될 예정입니다.
+              </div>
             </div>
 
             <button

@@ -97,7 +97,8 @@ export class GeminiTranslationProvider implements TranslationProvider {
 
   constructor(apiKey: string) {
     this.genAI = new GoogleGenerativeAI(apiKey);
-    this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // 이 API Key가 유일하게 허용하는 gemini-2.5-flash 모델 사용
+    this.model = this.genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   }
 
   async translateText(request: TranslationTextRequest): Promise<TranslationProviderResult> {
