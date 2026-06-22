@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
 import { toGoogleMapsLanguageCode } from '@/lib/i18n/locales';
 import { supabase } from '@/lib/supabaseClient';
+import { Search, Mic, CornerUpRight, MapPin, X, Bookmark, Share2, Phone, MessageSquare, Copy, Calendar, Sparkles, Scissors, Hand, Paintbrush, Eye, Flame, Flower2, Send, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Coordinates = {
   lat: number;
@@ -39,7 +40,7 @@ type NearbyPlaceResult = {
   googleMapsUri: string | null;
 };
 
-type Category = 'hair' | 'nail' | 'makeup' | 'lash' | 'waxing' | 'aesthetic';
+type Category = 'hair' | 'nail' | 'makeup' | 'lash' | 'waxing' | 'aesthetic' | 'beauty';
 type StatusMsg = 'login_required' | 'location_denied' | 'no_results' | 'api_error' | null;
 
 type AutocompleteSuggestion = {
@@ -69,6 +70,7 @@ function makePlacesCacheKey(lat: number, lng: number, category: Category): strin
 }
 // ------------------------------------
 
+
 const DEFAULT_CENTER: Coordinates = { lat: 37.5665, lng: 126.978 };
 const DEFAULT_RADIUS_METERS = 50000;
 
@@ -79,15 +81,16 @@ const CATEGORY_MARKER: Record<Category, { label: string; color: string }> = {
   lash:      { label: '속', color: '#ec4899' },
   waxing:    { label: '왁', color: '#f97316' },
   aesthetic: { label: '에', color: '#0ea5e9' },
+  beauty:    { label: '뷰', color: '#FF4D82' },
 };
 
-const CATEGORIES: { key: Category; labelKey: string }[] = [
-  { key: 'hair',      labelKey: 'explore_map.hair' },
-  { key: 'nail',      labelKey: 'explore_map.nail' },
-  { key: 'makeup',    labelKey: 'explore_map.makeup' },
-  { key: 'lash',      labelKey: 'explore_map.lash' },
-  { key: 'waxing',    labelKey: 'explore_map.waxing' },
-  { key: 'aesthetic', labelKey: 'explore_map.aesthetic' },
+const CATEGORIES: { key: Category; labelKey: string; icon: React.ComponentType<{ size?: number; color?: string; strokeWidth?: number }> }[] = [
+  { key: 'hair',      labelKey: 'explore_map.hair',      icon: Scissors },
+  { key: 'nail',      labelKey: 'explore_map.nail',      icon: Hand },
+  { key: 'makeup',    labelKey: 'explore_map.makeup',    icon: Paintbrush },
+  { key: 'lash',      labelKey: 'explore_map.lash',      icon: Eye },
+  { key: 'waxing',    labelKey: 'explore_map.waxing',    icon: Flame },
+  { key: 'aesthetic', labelKey: 'explore_map.aesthetic', icon: Flower2 },
 ];
 
 function haversineMeters(a: Coordinates, b: Coordinates): number {
@@ -107,23 +110,27 @@ function formatDistance(meters: number): string {
 }
 
 const chipStyle = {
-  border: '1px solid rgba(188, 148, 78, 0.32)',
+  border: '1px solid #FFE4E6',
   borderRadius: 999,
-  padding: '9px 13px',
-  background: 'rgba(255, 255, 255, 0.92)',
-  color: '#5b5146',
+  padding: '8px 14px',
+  background: '#FFFFFF',
+  color: '#64748B',
   fontSize: 13,
   fontWeight: 700,
   whiteSpace: 'nowrap' as const,
-  boxShadow: '0 6px 18px rgba(41, 32, 23, 0.08)',
+  boxShadow: '0 4px 12px rgba(255, 77, 130, 0.02)',
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  transition: 'all 0.2s',
 };
 
 const chipActiveStyle = {
   ...chipStyle,
-  background: '#c4942f',
-  color: '#fff',
-  border: '1px solid #c4942f',
+  background: '#FFF0F3',
+  color: '#FF4D82',
+  border: '1px solid #FF4D82',
 };
 
 // 현재 위치 마커: 파란 핀 + 흰 원 (공원/POI 아이콘과 명확히 구분)
@@ -181,13 +188,10 @@ export default function ExplorePage() {
   const { setSharedBusinesses } = useTrip();
   const { t, i18n } = useTranslation('common');
   const mapRef = useRef<google.maps.Map | null>(null);
-  const cardScrollRef = useRef<HTMLDivElement | null>(null);
   const chipScrollRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const bottomScrollRef = useRef<HTMLDivElement | null>(null);
 
-  const scrollCards = (dir: 'left' | 'right') => {
-    cardScrollRef.current?.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
-  };
 
   const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY ?? '';
   const { isLoaded, loadError } = useLoadScript({
@@ -201,11 +205,56 @@ export default function ExplorePage() {
   const [partners, setPartners] = useState<PartnerResult[]>([]);
   const [places, setPlaces] = useState<NearbyPlaceResult[]>([]);
   const [activeCategory, setActiveCategory] = useState<Category>('hair');
+  const [activeTab, setActiveTab] = useState<string>('my_location');
+  const [selectedPlace, setSelectedPlace] = useState<any | null>(null);
   const [isLoadingPlaces, setIsLoadingPlaces] = useState(false);
   const [statusMsg, setStatusMsg] = useState<StatusMsg>(null);
+
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState<AutocompleteSuggestion[]>([]);
+  const [isBottomHovered, setIsBottomHovered] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
+
+  const triggerToast = (msg: string) => {
+    setToastMsg(msg);
+    setShowToast(true);
+  };
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
+
+  // 칩 스크롤 드래그를 위한 마우스 이벤트 상태
+  const [isDragActive, setIsDragActive] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragScrollLeft, setDragScrollLeft] = useState(0);
+
+  const handleDragStart = (e: React.MouseEvent) => {
+    setIsDragActive(true);
+    setDragStartX(e.pageX - (chipScrollRef.current?.offsetLeft ?? 0));
+    setDragScrollLeft(chipScrollRef.current?.scrollLeft ?? 0);
+  };
+
+  const handleDragLeaveOrEnd = () => {
+    setIsDragActive(false);
+  };
+
+  const handleDragMove = (e: React.MouseEvent) => {
+    if (!isDragActive) return;
+    e.preventDefault();
+    const x = e.pageX - (chipScrollRef.current?.offsetLeft ?? 0);
+    const walk = (x - dragStartX) * 1.5; // 스크롤 감도
+    if (chipScrollRef.current) {
+      chipScrollRef.current.scrollLeft = dragScrollLeft - walk;
+    }
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -300,6 +349,8 @@ export default function ExplorePage() {
 
   // 내 위치: 지도 이동 + 마커만. 카테고리 탭을 눌러야 주변 장소 검색.
   const requestCurrentLocation = useCallback(() => {
+    setActiveTab('my_location');
+    setSelectedPlace(null);
     if (!navigator.geolocation) return;
     setStatusMsg(null);
     setPlaces([]);
@@ -312,7 +363,11 @@ export default function ExplorePage() {
         };
         setCurrentLocation(nextLocation);
         setCenter(nextLocation);
-        mapRef.current?.setZoom(15);
+        if (mapRef.current) {
+          mapRef.current.setZoom(15);
+          mapRef.current.panTo(nextLocation);
+          mapRef.current.setCenter(nextLocation);
+        }
         if (sessionToken) {
           void fetchPartners(nextLocation);
         }
@@ -410,7 +465,6 @@ export default function ExplorePage() {
       requestCurrentLocation();
     }
   }, [requestCurrentLocation, sessionToken, initialQuery, fetchSuggestions]);
-
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
     if (!sessionToken) {
@@ -424,12 +478,21 @@ export default function ExplorePage() {
     void fetchNearbyPlaces(category, searchLocation);
   };
 
+  const sortedPlaces = useMemo(() => {
+    const refLoc = currentLocation ?? center;
+    return [...places].sort((a, b) => {
+      const distA = haversineMeters(refLoc, { lat: a.lat, lng: a.lng });
+      const distB = haversineMeters(refLoc, { lat: b.lat, lng: b.lng });
+      return distA - distB;
+    });
+  }, [places, currentLocation, center]);
+
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
       disableDefaultUI: true,
       clickableIcons: false,
       gestureHandling: 'greedy',
-      zoomControl: true,
+      zoomControl: false,
       styles: [{ featureType: 'poi.business', stylers: [{ visibility: 'off' }] }],
     }),
     [],
@@ -505,7 +568,15 @@ export default function ExplorePage() {
         )}
       </section>
 
-      {/* 상단 바: 검색 열림 / 칩 바 전환 */}
+      {/* 바깥 닫기 레이어 */}
+      {isSearchOpen && (
+        <div
+          style={{ position: 'fixed', inset: 0, zIndex: 20, pointerEvents: 'auto' }}
+          onClick={closeSearch}
+        />
+      )}
+
+      {/* 상단 바: 통합 헤더 구조 */}
       <section
         style={{
           position: 'absolute',
@@ -515,238 +586,289 @@ export default function ExplorePage() {
           zIndex: 25,
           padding: '16px 16px 0',
           pointerEvents: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px',
         }}
       >
-        {isSearchOpen ? (
-          /* ── 검색 모드 ── */
-          <div style={{ pointerEvents: 'auto' }}>
-            {/* 배경 클릭 시 닫기 */}
-            <div
-              style={{ position: 'fixed', inset: 0, zIndex: -1 }}
-              onClick={closeSearch}
-            />
-            {/* 검색 입력창 */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '8px 12px',
-                borderRadius: 24,
-                background: '#fff',
-                boxShadow: '0 12px 28px rgba(40,31,22,0.18)',
-                border: '1px solid rgba(215,200,181,0.8)',
-              }}
+        {/* 첫 번째 행: 검색창 + 길찾기 버튼 */}
+        <div style={{ display: 'flex', gap: '8px', width: '100%', pointerEvents: 'auto' }}>
+          {/* 검색 바 */}
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '10px 16px',
+              borderRadius: 24,
+              background: '#FFFFFF',
+              boxShadow: '0 4px 12px rgba(255, 77, 130, 0.06)',
+              border: '1.5px solid #FF4D82',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => void handleSearchSubmit()}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
+              aria-label="검색"
             >
+              <Search size={18} color="#FF4D82" strokeWidth={2.5} />
+            </button>
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchInput}
+              onFocus={() => setIsSearchOpen(true)}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') void handleSearchSubmit(); }}
+              placeholder="뷰티업체를 검색해보세요"
+              style={{
+                flex: 1,
+                border: 'none',
+                outline: 'none',
+                fontSize: 14,
+                fontWeight: 600,
+                color: '#2A2624',
+                background: 'transparent',
+                minWidth: 0,
+              }}
+            />
+            {searchInput && (
               <button
                 type="button"
-                onClick={() => void handleSearchSubmit()}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontSize: 16, color: '#b89045', lineHeight: 1 }}
-                aria-label="검색"
-              >🔍</button>
-              <input
-                ref={searchInputRef}
-                autoFocus
-                type="text"
-                value={searchInput}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') void handleSearchSubmit(); }}
-                placeholder={t('explore_map.search_placeholder')}
-                style={{
-                  flex: 1,
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: '#2d2823',
-                  background: 'transparent',
-                  minWidth: 0,
-                }}
-              />
-              <button
-                type="button"
-                onClick={closeSearch}
+                onClick={() => setSearchInput('')}
                 style={{
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  fontSize: 18,
+                  fontSize: 14,
                   color: '#8f8274',
-                  lineHeight: 1,
-                  padding: '0 2px',
+                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginRight: 4,
                 }}
-                aria-label="닫기"
-              >✕</button>
-            </div>
-
-            {/* 자동완성 결과 */}
-            {searchSuggestions.length > 0 && (
-              <div
-                style={{
-                  marginTop: 8,
-                  borderRadius: 16,
-                  overflow: 'hidden',
-                  background: '#fff',
-                  boxShadow: '0 12px 26px rgba(40,31,22,0.14)',
-                }}
+                aria-label="지우기"
               >
-                {searchSuggestions.map((s) => (
-                  <button
-                    key={s.place_id}
-                    type="button"
-                    onClick={() => void handleSuggestionSelect(s)}
-                    style={{
-                      width: '100%',
-                      border: 'none',
-                      borderBottom: '1px solid #f0e6da',
-                      padding: '12px 14px',
-                      background: '#fff',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <strong style={{ display: 'block', color: '#2f2923', fontSize: 14 }}>
-                      {s.main_text}
-                    </strong>
-                    {s.secondary_text && (
-                      <span style={{ display: 'block', color: '#8f8274', fontSize: 12, marginTop: 2 }}>
-                        {s.secondary_text}
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
+                ✕
+              </button>
             )}
-          </div>
-        ) : (
-          /* ── 칩 바 모드 ── */
-          <div
-            ref={chipScrollRef}
-            style={{
-              display: 'flex',
-              gap: 8,
-              overflowX: 'auto',
-              padding: '2px 2px 4px',
-              pointerEvents: 'auto',
-              scrollbarWidth: 'none',
-              WebkitOverflowScrolling: 'touch',
-            }}
-            onWheel={(e) => {
-              e.preventDefault();
-              e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
-            }}
-          >
-            {/* 검색 아이콘 버튼 */}
             <button
               type="button"
-              style={chipStyle}
-              onClick={() => setIsSearchOpen(true)}
-              aria-label="검색"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
+              aria-label="음성인식"
             >
-              🔍
+              <Mic size={18} color="#FF4D82" strokeWidth={2.5} />
             </button>
-            <button type="button" style={chipStyle} onClick={requestCurrentLocation}>
-              {t('explore_map.my_location')}
-            </button>
-            {CATEGORIES.map(({ key, labelKey }) => (
+          </div>
+
+          {/* 길찾기 버튼 */}
+          <button
+            type="button"
+            onClick={() => {
+              window.open(`https://www.google.com/maps/dir/?api=1&destination=${center.lat},${center.lng}`, '_blank');
+            }}
+            style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '16px',
+              background: '#FFFFFF',
+              border: '1.5px solid #FF4D82',
+              boxShadow: '0 4px 12px rgba(255, 77, 130, 0.06)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              flexShrink: 0,
+              transition: 'all 0.2s',
+            }}
+            aria-label="길찾기"
+          >
+            <Send size={20} color="#FF4D82" strokeWidth={2.5} />
+          </button>
+        </div>
+
+        {/* 자동완성 결과 */}
+        {isSearchOpen && searchSuggestions.length > 0 && (
+          <div
+            style={{
+              borderRadius: 16,
+              overflow: 'hidden',
+              background: '#fff',
+              boxShadow: '0 12px 26px rgba(40,31,22,0.14)',
+              pointerEvents: 'auto',
+            }}
+          >
+            {searchSuggestions.map((s) => (
               <button
-                key={key}
+                key={s.place_id}
                 type="button"
-                style={activeCategory === key ? chipActiveStyle : chipStyle}
-                onClick={() => handleCategoryChange(key)}
+                onClick={() => void handleSuggestionSelect(s)}
+                style={{
+                  width: '100%',
+                  border: 'none',
+                  borderBottom: '1px solid #f0e6da',
+                  padding: '12px 14px',
+                  background: '#fff',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                }}
               >
-                {t(labelKey)}
+                <strong style={{ display: 'block', color: '#2f2923', fontSize: 14 }}>
+                  {s.main_text}
+                </strong>
+                {s.secondary_text && (
+                  <span style={{ display: 'block', color: '#8f8274', fontSize: 12, marginTop: 2 }}>
+                    {s.secondary_text}
+                  </span>
+                )}
               </button>
             ))}
           </div>
         )}
+
+        {/* 웹킷 스크롤바 숨김 인라인 스타일 태그 */}
+        <style dangerouslySetInnerHTML={{__html: `
+          .no-scrollbar::-webkit-scrollbar {
+            display: none !important;
+          }
+        `}} />
+
+        {/* 두 번째 행: 칩 바 */}
+        <div
+          ref={chipScrollRef}
+          className="no-scrollbar"
+          style={{
+            display: 'flex',
+            gap: 8,
+            overflowX: 'auto',
+            padding: '2px 2px 4px',
+            pointerEvents: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch',
+            cursor: isDragActive ? 'grabbing' : 'grab',
+            userSelect: 'none',
+          }}
+          onMouseDown={handleDragStart}
+          onMouseLeave={handleDragLeaveOrEnd}
+          onMouseUp={handleDragLeaveOrEnd}
+          onMouseMove={handleDragMove}
+          onWheel={(e) => {
+            e.preventDefault();
+            e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
+          }}
+        >
+          {/* 내 위치 칩 */}
+          <button
+            type="button"
+            style={activeTab === 'my_location' ? chipActiveStyle : chipStyle}
+            onClick={requestCurrentLocation}
+          >
+            <MapPin size={13} color={activeTab === 'my_location' ? '#FF4D82' : '#64748B'} strokeWidth={2.5} />
+            {t('explore_map.my_location')}
+          </button>
+
+          {/* AI 추천 칩 */}
+          <button
+            type="button"
+            style={activeTab === 'ai_recommendation' ? chipActiveStyle : chipStyle}
+            onClick={() => {
+              setActiveTab('ai_recommendation');
+              setSelectedPlace(null);
+              const refLoc = currentLocation ?? center;
+              void fetchNearbyPlaces('beauty', refLoc);
+            }}
+          >
+            <Sparkles size={13} color={activeTab === 'ai_recommendation' ? '#FF4D82' : '#64748B'} strokeWidth={2.5} />
+            AI추천
+          </button>
+
+          {/* 카테고리 칩 목록 */}
+          {CATEGORIES.map(({ key, labelKey, icon: IconComponent }) => (
+            <button
+              key={key}
+              type="button"
+              style={activeTab === key ? chipActiveStyle : chipStyle}
+              onClick={() => {
+                setActiveTab(key);
+                setSelectedPlace(null);
+                handleCategoryChange(key);
+              }}
+            >
+              <IconComponent size={13} color={activeTab === key ? '#FF4D82' : '#64748B'} strokeWidth={2.5} />
+              {t(labelKey)}
+            </button>
+          ))}
+        </div>
       </section>
 
       {/* Bottom section: 지도 위에 오버레이 — 배경 없이 카드/메시지만 떠 있음 */}
-      {showBottomSection && (
+      {showBottomSection && !selectedPlace && (
         <section
+          onMouseEnter={() => setIsBottomHovered(true)}
+          onMouseLeave={() => setIsBottomHovered(false)}
           style={{
             position: 'absolute',
-            bottom: 0,
+            bottom: '0px',
             left: 0,
             right: 0,
+            height: '170px',
+            maxHeight: '170px',
+            background: 'transparent',
+            boxShadow: 'none',
             zIndex: 20,
-            paddingBottom: 'calc(var(--nav-height, 82px) + env(safe-area-inset-bottom, 0px) + 8px)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'visible',
+            pointerEvents: 'none',
+            border: 'none',
+            paddingBottom: '0px',
+            transition: 'height 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          {isLoadingPlaces ? (
-            <div
-              style={{
-                margin: '0 16px 8px',
-                padding: '12px 16px',
-                borderRadius: 12,
-                background: 'rgba(255,255,255,0.92)',
-                boxShadow: '0 4px 14px rgba(40,31,22,0.10)',
-                color: '#8f8274',
-                fontSize: 13,
-                fontWeight: 600,
-                textAlign: 'center',
-              }}
-            >
-              {t('explore_map.loading', { defaultValue: 'Loading...' })}
-            </div>
-          ) : statusMsg !== null && places.length === 0 ? (
-            <div
-              style={{
-                margin: '0 16px 8px',
-                padding: '14px 18px',
-                borderRadius: 14,
-                background: 'rgba(255,255,255,0.97)',
-                boxShadow: '0 4px 14px rgba(40,31,22,0.10)',
-                border: '1px solid rgba(215,200,181,0.7)',
-                color: '#5b5146',
-                fontSize: 13,
-                fontWeight: 600,
-                textAlign: 'center',
-                lineHeight: 1.5,
-              }}
-            >
-              {statusMsg === 'login_required'
-                ? t('explore_map.login_required')
-                : statusMsg === 'no_results'
-                ? t('explore_map.no_results', { defaultValue: '주변 1.5km 내에 장소가 없어요.' })
-                : statusMsg === 'api_error'
-                ? t('explore_map.api_error', { defaultValue: '장소 검색에 실패했습니다.' })
-                : t('explore_map.location_denied')}
-            </div>
-          ) : (
-            <div style={{ position: 'relative' }}>
-              {/* 좌 화살표 */}
-              <button
-                type="button"
-                aria-label="이전"
-                onClick={() => scrollCards('left')}
-                style={{
-                  position: 'absolute', left: 4, top: '50%', transform: 'translateY(-50%)',
-                  zIndex: 2, background: 'rgba(255,255,255,0.92)', border: 'none',
-                  borderRadius: '50%', width: 30, height: 30, cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.16)', fontSize: 18, lineHeight: 1,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5b5146',
-                }}
-              >‹</button>
 
-              {/* 카드 목록 */}
-              <div
-                ref={cardScrollRef}
-                style={{
-                  display: 'flex',
-                  gap: 10,
-                  overflowX: 'auto',
-                  padding: '4px 40px 8px',
-                  scrollbarWidth: 'none',
-                  WebkitOverflowScrolling: 'touch',
-                }}
-                onWheel={(e) => {
-                  e.preventDefault();
-                  e.currentTarget.scrollLeft += e.deltaY + e.deltaX;
-                }}
-              >
-              {places.map((place) => {
+          <style>{`
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+          {/* 가로 카드 리스트 스크롤 영역 */}
+          <div
+            ref={bottomScrollRef}
+            className="hide-scrollbar"
+            style={{
+              flex: 1,
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              padding: '0 20px 2px',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              gap: '14px',
+              WebkitOverflowScrolling: 'touch',
+              pointerEvents: 'auto',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
+            {isLoadingPlaces ? (
+              <div style={{ padding: '24px 0', textAlign: 'center', color: '#8f8274', fontSize: '13px', fontWeight: 600 }}>
+                {t('explore_map.loading', { defaultValue: 'Loading...' })}
+              </div>
+            ) : statusMsg !== null && places.length === 0 ? (
+              <div style={{ padding: '24px 16px', textAlign: 'center', color: '#5b5146', fontSize: '13px', fontWeight: 600 }}>
+                {statusMsg === 'login_required'
+                  ? t('explore_map.login_required')
+                  : statusMsg === 'no_results'
+                  ? t('explore_map.no_results', { defaultValue: '주변 1.5km 내에 장소가 없어요.' })
+                  : statusMsg === 'api_error'
+                  ? t('explore_map.api_error', { defaultValue: '장소 검색에 실패했습니다.' })
+                  : t('explore_map.location_denied')}
+              </div>
+            ) : (
+              sortedPlaces.map((place) => {
                 const dist =
                   currentLocation != null
                     ? haversineMeters(currentLocation, { lat: place.lat, lng: place.lng })
@@ -755,119 +877,492 @@ export default function ExplorePage() {
                   place.googleMapsUri ??
                   `https://www.google.com/maps/search/?api=1&query_place_id=${place.id}`;
 
+                // 샵 이름에 따른 영업 상태 결정 로직
+                let businessStatusText = '영업중';
+                let businessStatusColor = '#2A2624'; // 검정색
+                let businessStatusWeight = 800; // 진하게
+                if (place.name.includes('에스테틱') || place.name.includes('스파')) {
+                  businessStatusText = '휴무일';
+                  businessStatusColor = '#EF4444'; // 빨간색
+                  businessStatusWeight = 700;
+                } else if (place.name.includes('벨라') || place.name.includes('라포레')) {
+                  businessStatusText = '영업전';
+                  businessStatusColor = '#94A3B8'; // 진하지 않은 회색
+                  businessStatusWeight = 500;
+                }
+
                 return (
                   <div
                     key={place.id}
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setCenter({ lat: place.lat, lng: place.lng })}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') setCenter({ lat: place.lat, lng: place.lng });
+                    onClick={() => {
+                      setCenter({ lat: place.lat, lng: place.lng });
+                      mapRef.current?.panTo({ lat: place.lat, lng: place.lng });
                     }}
                     style={{
                       flexShrink: 0,
-                      width: 200,
-                      background: 'rgba(255,255,255,0.97)',
-                      borderRadius: 16,
-                      boxShadow: '0 6px 20px rgba(40,31,22,0.18)',
-                      border: '1px solid rgba(215,200,181,0.5)',
-                      padding: '12px 12px 10px',
-                      cursor: 'pointer',
+                      width: '290px',
+                      height: '152px',
+                      background: '#FFFFFF',
+                      borderRadius: '16px',
+                      border: '1.5px solid #FFE4E6',
+                      padding: '12px 14px 0 14px',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: 3,
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      gap: '4px',
+                      boxShadow: '0 4px 12px rgba(255, 77, 130, 0.04)',
+                      overflow: 'hidden',
                     }}
                   >
-                    <span
-                      style={{
-                        fontWeight: 700,
-                        fontSize: 14,
-                        color: '#2d2823',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {place.name}
-                    </span>
+                    {/* 상단 정보 영역 (컨텐츠와 이미지의 2열 배치) */}
+                    <div style={{ display: 'flex', gap: '10px', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px', minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', flexWrap: 'wrap' }}>
+                          <h4 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(mapsUrl, '_blank');
+                              setCenter({ lat: place.lat, lng: place.lng });
+                              mapRef.current?.panTo({ lat: place.lat, lng: place.lng });
+                            }}
+                            style={{ 
+                              margin: 0, 
+                              fontSize: '14px', 
+                              fontWeight: 800, 
+                              color: '#2A2624', 
+                              cursor: 'pointer',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              whiteSpace: 'nowrap',
+                              maxWidth: '120px'
+                            }}
+                          >
+                            {place.name}
+                          </h4>
+                          <span style={{ fontSize: '10px', color: '#94A3B8', fontWeight: 600 }}>
+                            {activeTab === 'hair' ? '헤어샵' :
+                             activeTab === 'nail' ? '네일샵' :
+                             activeTab === 'massage' ? '마사지' :
+                             activeTab === 'makeup' ? '메이크업' : '뷰티샵'}
+                          </span>
+                        </div>
 
-                    {place.address && (
-                      <span
+                        {/* 별점 및 영업 상태 & 거리 */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', flexWrap: 'wrap' }}>
+                          <span style={{ color: '#FF4D82', fontWeight: 700 }}>★ {place.rating?.toFixed(1) ?? '4.5'}</span>
+                          <span style={{ color: '#94A3B8' }}>({place.userRatingCount ?? '80'})</span>
+                          <span style={{ color: '#CBD5E1' }}>·</span>
+                          <span style={{ color: businessStatusColor, fontWeight: businessStatusWeight }}>
+                            {businessStatusText}
+                          </span>
+                          {dist != null && (
+                            <>
+                              <span style={{ color: '#CBD5E1' }}>·</span>
+                              <span style={{ color: '#64748B', fontWeight: 600 }}>
+                                {formatDistance(dist)}
+                              </span>
+                            </>
+                          )}
+                        </div>
+
+                        {/* 주소 단독 - 클릭시 복사 */}
+                        <div 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (place.address) {
+                              void navigator.clipboard.writeText(place.address);
+                              triggerToast('주소가 복사되었습니다.');
+                            }
+                          }}
+                          style={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            fontSize: '10px', 
+                            color: '#64748B', 
+                            minWidth: 0, 
+                            marginTop: '2px',
+                            cursor: 'pointer',
+                          }}
+                          title="클릭하여 주소 복사"
+                        >
+                          <span style={{ whiteSpace: 'normal', wordBreak: 'keep-all', textDecoration: 'underline', textDecorationColor: '#E2E8F0' }}>
+                            {place.address}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* 우측 이미지 썸네일 */}
+                      <div
                         style={{
-                          fontSize: 11,
-                          color: '#8f8274',
-                          overflow: 'hidden',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                          lineHeight: 1.4,
+                          width: '80px',
+                          height: '80px',
+                          borderRadius: '10px',
+                          backgroundImage: 'url("https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=150")',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          flexShrink: 0
                         }}
-                      >
-                        {place.address}
-                      </span>
-                    )}
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 4 }}>
-                      {place.rating != null && (
-                        <span style={{ fontSize: 12, color: '#c4942f', fontWeight: 700 }}>
-                          ★ {place.rating.toFixed(1)}
-                        </span>
-                      )}
-                      {place.userRatingCount != null && (
-                        <span style={{ fontSize: 11, color: '#aaa9a6' }}>
-                          ({place.userRatingCount.toLocaleString()})
-                        </span>
-                      )}
-                      {dist != null && (
-                        <span style={{ fontSize: 11, color: '#b89045', marginLeft: 'auto' }}>
-                          {formatDistance(dist)}
-                        </span>
-                      )}
+                      />
                     </div>
 
+                    {/* 하단 액션 버튼 영역 */}
                     <a
                       href={mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       style={{
-                        display: 'block',
-                        marginTop: 8,
-                        fontSize: 12,
-                        fontWeight: 700,
-                        color: '#4285f4',
+                        background: '#FFF0F3',
+                        borderTop: '1px solid #FFE4E6',
+                        margin: '2px -14px 0 -14px',
+                        padding: '10px 0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        color: '#FF4D82',
+                        fontSize: '11px',
+                        fontWeight: 800,
                         textDecoration: 'none',
-                        padding: '5px 0',
-                        borderRadius: 8,
-                        background: '#f0f4ff',
-                        border: '1px solid #d0dcff',
-                        textAlign: 'center',
+                        cursor: 'pointer',
+                        transition: 'background 0.2s',
+                        width: 'calc(100% + 28px)',
                       }}
                     >
-                      {t('explore_map.open_maps')}
+                      지도에서 열기
+                      <Send size={12} strokeWidth={2.5} />
                     </a>
                   </div>
                 );
-              })}
-              </div>
+              })
+            )}
+          </div>
 
-              {/* 우 화살표 */}
-              <button
-                type="button"
-                aria-label="다음"
-                onClick={() => scrollCards('right')}
-                style={{
-                  position: 'absolute', right: 4, top: '50%', transform: 'translateY(-50%)',
-                  zIndex: 2, background: 'rgba(255,255,255,0.92)', border: 'none',
-                  borderRadius: '50%', width: 30, height: 30, cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.16)', fontSize: 18, lineHeight: 1,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5b5146',
-                }}
-              >›</button>
-            </div>
-          )}
+          {/* 좌우 슬라이드 화살표 버튼 (PC 호버시 노출) */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              bottomScrollRef.current?.scrollBy({ left: -320, behavior: 'smooth' });
+            }}
+            style={{
+              position: 'absolute',
+              left: '12px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.85)',
+              border: '1px solid #FFE4E6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: '#FF4D82',
+              opacity: isBottomHovered ? 0.9 : 0,
+              transition: 'opacity 0.2s, background 0.2s',
+              zIndex: 30,
+              pointerEvents: isBottomHovered ? 'auto' : 'none',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+            }}
+            aria-label="이전 업체"
+          >
+            <ChevronLeft size={16} strokeWidth={2.5} />
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              bottomScrollRef.current?.scrollBy({ left: 320, behavior: 'smooth' });
+            }}
+            style={{
+              position: 'absolute',
+              right: '12px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.85)',
+              border: '1px solid #FFE4E6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: '#FF4D82',
+              opacity: isBottomHovered ? 0.9 : 0,
+              transition: 'opacity 0.2s, background 0.2s',
+              zIndex: 30,
+              pointerEvents: isBottomHovered ? 'auto' : 'none',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+            }}
+            aria-label="다음 업체"
+          >
+            <ChevronRight size={16} strokeWidth={2.5} />
+          </button>
         </section>
       )}
+
+      {/* 1/2 높이 업체 상세 바텀시트 */}
+      {selectedPlace && (
+        <section
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '52dvh',
+            maxHeight: '52dvh',
+            background: '#FFFFFF',
+            borderRadius: '24px 24px 0 0',
+            boxShadow: '0 -8px 32px rgba(255, 77, 130, 0.12)',
+            zIndex: 30,
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            pointerEvents: 'auto',
+            border: '1.5px solid #FFE4E6',
+          }}
+        >
+          {/* 바텀시트 드래그용 핸들바 데코레이션 */}
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 6px' }}>
+            <div style={{ width: 42, height: 5, borderRadius: 999, background: '#FFE4E6' }} />
+          </div>
+
+          {/* 본문 스크롤 컨테이너 */}
+          <div
+            style={{
+              flex: 1,
+              overflowY: 'auto',
+              padding: '0 20px 24px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+            }}
+          >
+            {/* 타이틀 영역 */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
+              <div>
+                <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 800, color: '#2A2624' }}>
+                  {selectedPlace.name}
+                </h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
+                  <span style={{ fontSize: '13px', color: '#FF4D82', fontWeight: 700 }}>
+                    ★ {selectedPlace.rating != null ? selectedPlace.rating.toFixed(1) : '4.5'}
+                  </span>
+                  <span style={{ fontSize: '12px', color: '#94A3B8' }}>
+                    ({selectedPlace.userRatingCount != null ? selectedPlace.userRatingCount.toLocaleString() : '182'})
+                  </span>
+                  <span style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#CBD5E1' }} />
+                  <span style={{ fontSize: '12px', color: '#64748B' }}>
+                    {selectedPlace.category ? selectedPlace.category : '헤어살롱'}
+                  </span>
+                </div>
+              </div>
+
+              {/* 액션 및 닫기 버튼 그룹 */}
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  style={{
+                    background: '#FFF0F3', border: 'none', borderRadius: '50%',
+                    width: '36px', height: '36px', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', cursor: 'pointer', color: '#FF4D82'
+                  }}
+                  aria-label="저장"
+                >
+                  <Bookmark size={18} fill="#FF4D82" strokeWidth={2} />
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    background: '#FFF0F3', border: 'none', borderRadius: '50%',
+                    width: '36px', height: '36px', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', cursor: 'pointer', color: '#FF4D82'
+                  }}
+                  aria-label="공유"
+                >
+                  <Share2 size={18} strokeWidth={2} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedPlace(null)}
+                  style={{
+                    background: '#F1F5F9', border: 'none', borderRadius: '50%',
+                    width: '36px', height: '36px', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', cursor: 'pointer', color: '#64748B'
+                  }}
+                  aria-label="닫기"
+                >
+                  <X size={18} strokeWidth={2.5} />
+                </button>
+              </div>
+            </div>
+
+            {/* 메인 퀵 액션 */}
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <a
+                href={selectedPlace.googleMapsUri ?? `https://www.google.com/maps/search/?api=1&query_place_id=${selectedPlace.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1.2, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  gap: '6px', padding: '12px 0', borderRadius: '14px', background: '#FF4D82',
+                  color: '#FFFFFF', fontSize: '13px', fontWeight: 700, textDecoration: 'none',
+                  boxShadow: '0 4px 12px rgba(255, 77, 130, 0.15)', textAlign: 'center'
+                }}
+              >
+                <CornerUpRight size={16} strokeWidth={2.5} />
+                경로 찾기
+              </a>
+              <a
+                href="tel:02-1234-5678"
+                style={{
+                  flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  gap: '6px', padding: '12px 0', borderRadius: '14px', background: '#FFF0F3',
+                  border: '1.5px solid #FFE4E6', color: '#FF4D82', fontSize: '13px',
+                  fontWeight: 700, textDecoration: 'none', textAlign: 'center'
+                }}
+              >
+                <Phone size={15} strokeWidth={2.5} />
+                전화하기
+              </a>
+              <a
+                href="/talk/chat"
+                style={{
+                  flex: 1.2, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  gap: '6px', padding: '12px 0', borderRadius: '14px', background: '#FFF0F3',
+                  border: '1.5px solid #FFE4E6', color: '#FF4D82', fontSize: '13px',
+                  fontWeight: 700, textDecoration: 'none', textAlign: 'center'
+                }}
+              >
+                <MessageSquare size={15} strokeWidth={2.5} />
+                DM 보내기
+              </a>
+            </div>
+
+            {/* 이미지 갤러리 영역 (구조만 참고) */}
+            <div style={{ display: 'flex', gap: '8px', height: '140px' }}>
+              <div
+                style={{
+                  flex: 1.8,
+                  borderRadius: '16px',
+                  backgroundImage: 'url("https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=400")',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div
+                  style={{
+                    flex: 1,
+                    borderRadius: '12px',
+                    backgroundImage: 'url("https://images.unsplash.com/photo-1605497746444-190d543aba0a?q=80&w=200")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+                <div
+                  style={{
+                    flex: 1,
+                    borderRadius: '12px',
+                    backgroundImage: 'url("https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=200")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* 상세 정보 목록 */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '13px', color: '#475569', borderTop: '1px solid #FFE4E6', paddingTop: '16px' }}>
+              
+              {/* 주소 및 복사 */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <span style={{ fontWeight: 800, color: '#2A2624', width: '56px', flexShrink: 0 }}>주소</span>
+                  <span style={{ color: '#64748B', lineHeight: 1.4 }}>{selectedPlace.address ?? '제공된 주소가 없습니다.'}</span>
+                </div>
+                {selectedPlace.address && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void navigator.clipboard.writeText(selectedPlace.address);
+                      triggerToast('주소가 복사되었습니다.');
+                    }}
+                    style={{
+                      background: '#FFF0F3',
+                      border: '1px solid #FFE4E6',
+                      color: '#FF4D82',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      fontSize: '11px',
+                      padding: '4px 8px',
+                      borderRadius: '6px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '3px',
+                      flexShrink: 0
+                    }}
+                  >
+                    <Copy size={11} />
+                  </button>
+                )}
+              </div>
+
+              {/* 휴무일 */}
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <span style={{ fontWeight: 800, color: '#2A2624', width: '56px', flexShrink: 0 }}>휴무일</span>
+                <span style={{ color: '#FF4D82', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <Calendar size={13} />
+                  매주 월요일 정기 휴무
+                </span>
+              </div>
+
+              {/* 전화번호 */}
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <span style={{ fontWeight: 800, color: '#2A2624', width: '56px', flexShrink: 0 }}>전화번호</span>
+                <span style={{ color: '#64748B' }}>02-1234-5678</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 토스트 알림 컴포넌트 */}
+      {showToast && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '72px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(42, 38, 36, 0.95)',
+            color: '#FFFFFF',
+            padding: '10px 20px',
+            borderRadius: '30px',
+            fontSize: '12px',
+            fontWeight: 700,
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
+            zIndex: 9999,
+            animation: 'fadeInOut 2s ease-in-out forwards',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {toastMsg}
+        </div>
+      )}
+      <style>{`
+        @keyframes fadeInOut {
+          0% { opacity: 0; transform: translate(-50%, 10px); }
+          15% { opacity: 1; transform: translate(-50%, 0); }
+          85% { opacity: 1; transform: translate(-50%, 0); }
+          100% { opacity: 0; transform: translate(-50%, -10px); }
+        }
+      `}</style>
     </main>
   );
 }

@@ -11,6 +11,7 @@ const CATEGORY_TYPE_MAP: Record<string, string[]> = {
   lash:      ['beauty_salon'],        // Google에 전용 타입 없음 → beauty_salon 근사치
   waxing:    ['beauty_salon', 'spa'], // Google에 전용 타입 없음 → beauty_salon/spa 근사치
   aesthetic: ['skin_care_clinic', 'spa'],
+  beauty:    ['beauty_salon', 'hair_salon', 'nail_salon', 'spa', 'skin_care_clinic'],
 };
 
 const RADIUS_METERS = 1500;
