@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState, useRef } from "react";
-import { Shield, Languages } from "lucide-react";
+import { Shield, Languages, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
@@ -175,6 +175,8 @@ function ProfileSummaryCard({
     countryCode,
     onHelpShortcutClick,
     style,
+    isLoggedIn,
+    onLoginClick,
 }: {
     userName: string;
     subtitle?: string;
@@ -184,6 +186,8 @@ function ProfileSummaryCard({
     countryCode?: string | null;
     onHelpShortcutClick: (path: string) => void;
     style?: React.CSSProperties;
+    isLoggedIn: boolean;
+    onLoginClick: () => void;
 }) {
     const { t } = useTranslation("common");
     const [uploading, setUploading] = useState(false);
@@ -290,7 +294,7 @@ function ProfileSummaryCard({
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: 16, 
-                background: '#F0EBE1', 
+                background: '#FFF0F3', 
                 padding: '36px 16px', 
                 borderRadius: '16px', 
                 border: '1px solid var(--warm-sand)', 
@@ -298,8 +302,8 @@ function ProfileSummaryCard({
                 ...style 
             }}
         >
-            <div className={styles.profileAvatarWrap} style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setShowMenu(!showMenu)}>
-                <div className={styles.profileAvatar} style={{ width: 72, height: 72, borderRadius: '50%', background: '#F5EDD9', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2.5px solid var(--primary-glow)', overflow: 'hidden', position: 'relative' }}>
+            <div className={styles.profileAvatarWrap} style={{ position: 'relative', cursor: isLoggedIn ? 'pointer' : 'default' }} onClick={() => isLoggedIn && setShowMenu(!showMenu)}>
+                <div className={styles.profileAvatar} style={{ width: 72, height: 72, borderRadius: 50, background: '#FFF0F3', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2.5px solid var(--primary)', overflow: 'hidden', position: 'relative' }}>
                     {avatarUrl ? (
                         <Image 
                             src={avatarUrl} 
@@ -309,7 +313,7 @@ function ProfileSummaryCard({
                             style={{ borderRadius: '50%', objectFit: 'cover' }} 
                         />
                     ) : (
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#B8913A', width: '55%', height: '55%' }}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#FF4D82', width: '55%', height: '55%' }}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     )}
                 </div>
                 {flagUrl && (
@@ -340,46 +344,58 @@ function ProfileSummaryCard({
 
             <div className={styles.profileInfo} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <h1 className={styles.profileName} style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: 'var(--foreground)', position: 'relative' }}>
-                        {userName}
-                    </h1>
+                    {isLoggedIn ? (
+                        <h1 className={styles.profileName} style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: 'var(--foreground)', position: 'relative' }}>
+                            {userName}
+                        </h1>
+                    ) : (
+                        <button
+                            onClick={onLoginClick}
+                            style={{
+                                background: 'var(--primary)',
+                                color: '#FFFFFF',
+                                border: 'none',
+                                padding: '8px 18px',
+                                borderRadius: '24px',
+                                fontSize: '0.85rem',
+                                fontWeight: 800,
+                                cursor: 'pointer',
+                                transition: 'all 0.15s',
+                                boxShadow: '0 3px 8px rgba(255, 77, 130, 0.3)'
+                            }}
+                        >
+                            로그인하기
+                        </button>
+                    )}
                 </div>
                 <div className={styles.profileSubtext} style={{ fontSize: '0.75rem', color: 'var(--gray-500)', wordBreak: 'break-all' }}>
-                    {subtitle || t('my_page.no_email')}
+                    {isLoggedIn ? subtitle : "로그인 후 Kello 서비스를 이용해보세요!"}
                 </div>
-                {referralCode && (
+                {isLoggedIn && referralCode && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
                         <span style={{ fontSize: '0.72rem', color: 'var(--gray-500)', fontWeight: 600 }}>
-                            {t('my_page.referral_code_label')}: <strong style={{ color: 'var(--foreground)' }}>{referralCode}</strong>
-                        </span>
-                        <button
-                            onClick={handleCopy}
-                            title={copied ? t('my_page.referral.copied') : t('my_page.referral.copy')}
-                            style={{
-                                background: copied ? '#D1FAE5' : 'var(--primary-glow)',
-                                border: '1px solid var(--warm-sand)',
-                                borderRadius: '6px',
-                                padding: '3px 6px',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                transition: 'all 0.15s',
-                                color: copied ? '#065F46' : 'var(--primary)',
-                            }}
-                            onMouseDown={e => e.stopPropagation()}
-                        >
-                            {copied ? (
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="20 6 9 17 4 12"/>
-                                </svg>
-                            ) : (
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                                </svg>
+                            {t('my_page.referral_code_label')}:{' '}
+                            <strong 
+                                onClick={handleCopy}
+                                style={{ 
+                                    color: 'var(--foreground)', 
+                                    cursor: 'pointer', 
+                                    textDecoration: 'underline',
+                                    background: copied ? '#D1FAE5' : 'transparent',
+                                    padding: '2px 4px',
+                                    borderRadius: '4px',
+                                    transition: 'background 0.2s',
+                                }}
+                                title="클릭하여 복사"
+                            >
+                                {referralCode}
+                            </strong>
+                            {copied && (
+                                <span style={{ marginLeft: 6, color: '#10B981', fontSize: '0.68rem', fontWeight: 700 }}>
+                                    복사 완료!
+                                </span>
                             )}
-                        </button>
+                        </span>
                     </div>
                 )}
             </div>
@@ -458,7 +474,7 @@ function ProfileSummaryCard({
                             border: 'none',
                             padding: '8px 16px',
                             textAlign: 'left',
-                            fontSize: '0.8rem',
+                            fontSize: '0.85rem',
                             cursor: 'pointer',
                             color: 'var(--gray-500)',
                         }}
@@ -667,12 +683,7 @@ function TravelHelperCard({
     }, [city]);
 
     useEffect(() => {
-        if (currency === 'KRW') {
-            setExchangeKrwAmount(null);
-            setLoadingExchangeRate(false);
-            return;
-        }
-
+        const fetchTarget = currency === 'KRW' ? 'USD' : currency;
         let cancelled = false;
         setLoadingExchangeRate(true);
 
@@ -680,8 +691,8 @@ function TravelHelperCard({
             try {
                 const res = await fetch('https://open.er-api.com/v6/latest/KRW');
                 const data = await res.json() as { result?: string; rates?: Record<string, number> };
-                if (!cancelled && data.result === 'success' && data.rates?.[currency]) {
-                    const krwPerOne = 1 / data.rates[currency];
+                if (!cancelled && data.result === 'success' && data.rates?.[fetchTarget]) {
+                    const krwPerOne = 1 / data.rates[fetchTarget];
                     setExchangeKrwAmount(krwPerOne);
                 } else if (!cancelled) {
                     setExchangeKrwAmount(null);
@@ -698,15 +709,15 @@ function TravelHelperCard({
     }, [currency]);
 
     const exchangeLabel = (() => {
-        if (currency === 'KRW') return `💱 ${t('my_page.exchange_rate_base')}`;
-        if (loadingExchangeRate) return `💱 ${currency} ···`;
+        const displayCurrency = currency === 'KRW' ? 'USD' : currency;
+        if (loadingExchangeRate) return `💱 ${displayCurrency} ···`;
         if (exchangeKrwAmount !== null) {
             const formatted = exchangeKrwAmount >= 1
                 ? Math.round(exchangeKrwAmount).toLocaleString('ko-KR')
                 : exchangeKrwAmount.toFixed(2);
-            return `💱 1 ${currency} ≈ ₩${formatted}`;
+            return `💱 1 ${displayCurrency} ≈ ₩${formatted}`;
         }
-        return `💱 ${currency}`;
+        return `💱 ${displayCurrency}`;
     })();
 
     const cityKo = t(`common.cities.${city.toLowerCase()}`, { defaultValue: city });
@@ -1131,6 +1142,7 @@ function MyPageContent() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const [hasHydrated, setHasHydrated] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [cachedUserName, setCachedUserName] = useState("");
     const [userName, setUserName] = useState("");
     const [profileSubtitle, setProfileSubtitle] = useState("");
@@ -1190,9 +1202,15 @@ function MyPageContent() {
             setPartnerStatus(null);
 
             if (!user) {
-                router.push("/auth/login?redirect=/my");
+                setIsLoggedIn(false);
+                setAccessToken("");
+                setAuthReady(true);
+                setPermissionsResolved(true);
+                setPartnerStatus("none");
                 return;
             }
+
+            setIsLoggedIn(true);
 
             const [{ data: profileData, error: profileError }, { data: couponsData }] = await Promise.all([
                 supabase
@@ -1285,6 +1303,7 @@ function MyPageContent() {
         try {
             await supabase.auth.signOut();
             localStorage.removeItem("user");
+            setIsLoggedIn(false);
             router.push("/auth/login");
         } catch (err) {
             console.error("Logout failed:", err);
@@ -1303,26 +1322,43 @@ function MyPageContent() {
 
     return (
         <div className={styles.container} style={{
-            background: '#FDFBF7',
+            background: '#FAFAFC',
             color: '#2A2624',
             minHeight: '100vh',
             paddingBottom: '160px',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px',
-            '--hanji-ivory': '#FDFBF7',
-            '--warm-sand': '#E8E3D9',
-            '--primary': '#B8913A',
-            '--primary-glow': '#F5EDD9',
+            '--hanji-ivory': '#FAFAFC',
+            '--warm-sand': '#FFE4E6',
+            '--primary': '#FF4D82',
+            '--primary-glow': '#FFF0F3',
             '--foreground': '#2A2624',
-            '--surface': '#FFF8F6',
+            '--surface': '#FFFFFF',
             '--ink-black': '#2A2624',
             '--soft-ink': '#8A847F',
-            '--secondary': '#B8913A',
+            '--secondary': '#FF4D82',
         } as React.CSSProperties}>
             {/* Header with Title and Settings Gear / Logout */}
-            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, padding: '0 4px' }}>
-                <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--foreground)', margin: 0 }}>{t('my_page.title')}</h1>
+            <header style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                padding: '12px 16px',
+                height: '60px',
+                borderBottom: '1px solid #FFE4E6',
+                background: '#FFFFFF',
+                width: 'calc(100% + 32px)',
+                boxSizing: 'border-box',
+                marginLeft: '-16px',
+                marginRight: '-16px',
+                marginTop: '-20px',
+                marginBottom: '12px',
+            }}>
+                <h1 style={{ fontSize: '1.15rem', fontWeight: 600, color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: 8, margin: 0 }}>
+                    <User size={24} strokeWidth={2.5} color="#000000" />
+                    {t('my_page.title', { defaultValue: '나의 Kello' })}
+                </h1>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <button
                         onClick={() => router.push("/my/settings")}
@@ -1331,25 +1367,27 @@ function MyPageContent() {
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
-                    <button
-                        onClick={handleLogout}
-                        style={{
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            color: 'var(--foreground)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: 4
-                        }}
-                        aria-label={t('common.actions.logout')}
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                            <polyline points="16 17 21 12 16 7" />
-                            <line x1="21" y1="12" x2="9" y2="12" />
-                        </svg>
-                    </button>
+                    {isLoggedIn && (
+                        <button
+                            onClick={handleLogout}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: 'var(--foreground)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: 4
+                            }}
+                            aria-label={t('common.actions.logout')}
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                        </button>
+                    )}
                 </div>
             </header>
 
@@ -1365,13 +1403,15 @@ function MyPageContent() {
                 referralCode={referralCode}
                 countryCode={profileCountry}
                 onHelpShortcutClick={(path) => router.push(path)}
+                isLoggedIn={isLoggedIn}
+                onLoginClick={() => router.push("/auth/login?redirect=/my")}
                 style={{
                     borderRadius: '24px',
-                    border: '1px solid var(--warm-sand)',
+                    border: '1.5px solid var(--primary)',
                     boxShadow: 'var(--shadow-sm)',
                     marginTop: 0,
                     marginBottom: 0,
-                    background: '#F0EBE1',
+                    background: '#FFFFFF',
                 }}
             />
 
@@ -1401,7 +1441,7 @@ function MyPageContent() {
 
             {/* Admin Section */}
             {capabilities.canViewAdminConsole && (
-                <section className={styles.section} style={{ marginBottom: 0, paddingBottom: 100 }}>
+                <section className={styles.section} style={{ marginBottom: 0, paddingBottom: 100, background: '#FFFFFF' }}>
                     <div className={styles.adminTitleRow}>
                         <h2 className={styles.sectionTitle} style={{ margin: 0 }}>⚙️ {t('my_page.dashboard.admin_title', { defaultValue: '관리자 대시보드' })}</h2>
                         <span className={styles.adminBadge}>{t('my_page.settings.admin.enabled', { defaultValue: '활성화됨' })}</span>
