@@ -366,13 +366,13 @@ export default function ExplorePage() {
     if (list.length > 0) void handleSuggestionSelect(list[0]);
   };
 
-  const closeSearch = () => {
+  const closeSearch = useCallback(() => {
     setIsSearchOpen(false);
     setSearchInput('');
     setSearchSuggestions([]);
-  };
+  }, []);
 
-  const handleSuggestionSelect = async (suggestion: AutocompleteSuggestion) => {
+  const handleSuggestionSelect = useCallback(async (suggestion: AutocompleteSuggestion) => {
     if (!sessionToken) return;
     try {
       const params = new URLSearchParams({ place_id: suggestion.place_id });
@@ -388,7 +388,7 @@ export default function ExplorePage() {
       closeSearch();
       void fetchNearbyPlaces(activeCategory, nextLocation);
     } catch { /* ignore */ }
-  };
+  }, [activeCategory, closeSearch, fetchNearbyPlaces, sessionToken]);
 
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
@@ -409,7 +409,7 @@ export default function ExplorePage() {
     } else {
       requestCurrentLocation();
     }
-  }, [requestCurrentLocation, sessionToken, initialQuery, fetchSuggestions]);
+  }, [requestCurrentLocation, sessionToken, initialQuery, fetchSuggestions, handleSuggestionSelect]);
 
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);

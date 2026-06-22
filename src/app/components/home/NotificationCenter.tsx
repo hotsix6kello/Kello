@@ -99,7 +99,7 @@ export default function NotificationCenter() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     void fetchNotifications();
