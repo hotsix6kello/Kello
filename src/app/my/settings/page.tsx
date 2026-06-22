@@ -500,8 +500,10 @@ export default function MySettingsPage() {
         buildNotificationSummary(null, false, t)
     );
     const [viewerId, setViewerId] = useState("");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [avatarPath, setAvatarPath] = useState("");
     const [avatarUrl, setAvatarUrl] = useState("");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [avatarUploading, setAvatarUploading] = useState(false);
     const [avatarError, setAvatarError] = useState<string | null>(null);
     const [communityStats, setCommunityStats] = useState<HeroCommunityStats>(EMPTY_COMMUNITY_STATS);
@@ -522,6 +524,7 @@ export default function MySettingsPage() {
         sns: "",
         phone: "",
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const avatarInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
@@ -725,6 +728,7 @@ export default function MySettingsPage() {
         };
     }, [t]);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const initials = useMemo(() => {
         return account.displayName
             .split(" ")
@@ -1005,6 +1009,7 @@ export default function MySettingsPage() {
         return { canUpdate, daysLeft, nextAvailableDate: nextDate };
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         event.target.value = "";
@@ -1641,16 +1646,23 @@ export default function MySettingsPage() {
 
     return (
         <div className={styles.container}>
-            <header className={styles.header}>
-                <button className={styles.navButton} onClick={() => router.push("/my")}>
-                    {t("common.back")}
+            <header className={styles.header} style={{ padding: '12px 0', height: '60px', boxSizing: 'border-box' }}>
+                <button 
+                    className={styles.navButton} 
+                    onClick={() => router.push("/my")}
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 10px', borderRadius: '12px' }}
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 12H5" />
+                        <path d="M12 19l-7-7 7-7" />
+                    </svg>
                 </button>
             </header>
 
             <section className={styles.profileCard}>
                 <div className={styles.heroAvatarArea}>
                     <div className={styles.avatarFrame}>
-                        <div className={styles.avatar}>
+                        <div className={styles.avatar} style={{ background: 'none', border: '2.5px solid var(--primary)', borderRadius: '50%', backgroundColor: '#FFF0F3' }}>
                             {avatarUrl ? (
                                 <Image
                                     src={avatarUrl}
@@ -1660,34 +1672,13 @@ export default function MySettingsPage() {
                                     sizes="96px"
                                 />
                             ) : (
-                                initials || t("settings_page.hero.avatar.placeholder")
+                                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#FF4D82', width: '55%', height: '55%' }}>
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
                             )}
                         </div>
                     </div>
-                    {account.isLoggedIn ? (
-                        <>
-                            <input
-                                ref={avatarInputRef}
-                                type="file"
-                                accept="image/*"
-                                className={styles.avatarInput}
-                                onChange={handleAvatarChange}
-                                disabled={avatarUploading}
-                            />
-                            <button
-                                type="button"
-                                className={styles.avatarButton}
-                                onClick={() => avatarInputRef.current?.click()}
-                                disabled={avatarUploading}
-                            >
-                                {avatarUploading
-                                    ? t("settings_page.messages.uploading")
-                                    : avatarPath
-                                      ? t("settings_page.hero.avatar.change")
-                                      : t("settings_page.hero.avatar.register")}
-                            </button>
-                        </>
-                    ) : null}
                 </div>
                 <div className={styles.profileContent}>
                     <h1 className={styles.pageTitle}>{pageTitle}</h1>

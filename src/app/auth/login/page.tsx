@@ -186,6 +186,25 @@ export default function LoginPage() {
 
                 <div className={styles.formCard}>
                     <div className={styles.header}>
+                        {/* 마이탭 스타일 프로필 아이콘 */}
+                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                            <div style={{
+                                width: 72,
+                                height: 72,
+                                borderRadius: '50%',
+                                background: '#FFF0F3',
+                                border: '2.5px solid var(--primary)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                boxShadow: '0 4px 16px rgba(255, 77, 130, 0.15)',
+                            }}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FF4D82" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '55%', height: '55%' }}>
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                        </div>
                         <h1 className={styles.title}>{t('login.title')}</h1>
                         <p className={styles.subTitle}>
                             {t('login.subtitle')}
