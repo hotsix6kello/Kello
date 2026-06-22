@@ -1380,7 +1380,7 @@ export default function TalkChatPage() {
                       <button
                         key={tabItem.label}
                         type="button"
-                        onClick={() => { setKelloActiveTab(tabItem.label); setKelloAiAnswer(null); }}
+                        onClick={() => { setKelloActiveTab(tabItem.label); }}
                         style={{
                           flexShrink: 0,
                           display: 'flex',
