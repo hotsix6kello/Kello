@@ -33,24 +33,7 @@ type ReceiptRow = {
   value: string;
 };
 
-const TERMS_CONTENT = {
-  service: {
-    title: "서비스 이용약관",
-    content: "제1조 (목적)\n본 약관은 켈로(Kello) 서비스를 이용함에 있어 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.\n\n제2조 (용어의 정의)\n1. '서비스'란 회사가 제공하는 예약 중개 플랫폼을 의미합니다.\n2. '이용자'란 본 약관에 따라 서비스를 이용하는 고객을 의미합니다.\n\n제3조 (약관의 효력 및 변경)\n회사는 관련 법령을 위배하지 않는 범위 내에서 약관을 변경할 수 있으며, 변경된 약관은 서비스 내 공지사항을 통해 고지합니다.\n\n[이하 중략...]\n\n감사합니다."
-  },
-  privacy: {
-    title: "개인정보 수집 및 이용 동의",
-    content: "1. 수집하는 개인정보 항목\n- 필수항목: 이름, 연락처(전화번호 또는 SNS ID), 예약 일시, 서비스 메뉴\n- 선택항목: 추가 요청사항, 참고 이미지\n\n2. 수집 및 이용 목적\n- 서비스 예약 확인 및 가맹점 전달\n- 예약 변경/취소 안내 및 CS 대응\n\n3. 보유 및 이용 기간\n- 서비스 이용 종료 후 1년 또는 법정 의무 보관 기간까지\n\n귀하는 본 동의를 거부할 권리가 있으나, 거부 시 서비스 예약이 불가능할 수 있습니다."
-  },
-  third_party: {
-    title: "개인정보 제3자 제공 및 국외 이전",
-    content: "1. 제공받는 자: 해당 예약 가맹점(숍)\n2. 제공 목적: 예약 서비스 제공 및 방문 확인\n3. 제공 항목: 이름, 연락처, 예약 상세 정보\n4. 보유 및 이용 기간: 서비스 제공 목적 달성 완료 시까지\n\n[국외 이전 안내]\n회사는 글로벌 서비스 품질 향상을 위해 클라우드 서버(AWS 등)를 사용하며, 이 과정에서 데이터의 물리적 위치가 해외일 수 있습니다.\n\n동의를 거부할 권리가 있으며, 거부 시 서비스 이용에 제한이 있을 수 있습니다."
-  },
-  marketing: {
-    title: "마케팅 정보 수집 및 수신",
-    content: "1. 목적: 신규 서비스 안내, 이벤트 정보 전달, 맞춤형 혜택 제공\n2. 수집 항목: 이메일, 휴대전화 번호, 앱 푸시 수신 여부\n3. 보유 기간: 동의 철회 시 또는 회원 탈퇴 시까지\n\n선택 사항으로 동의하지 않아도 서비스 이용은 가능하나, 각종 할인 혜택 등 유용한 정보 수신이 제한될 수 있습니다."
-  }
-};
+type TermsKey = 'service' | 'privacy' | 'third_party' | 'marketing';
 
 function formatFileSize(size: number): string {
   if (!Number.isFinite(size) || size <= 0) {
@@ -86,7 +69,7 @@ export function ConfirmationStepShell({
   const supportsInteractiveReview = capabilities?.interactiveReview === true;
   const imageGroups = getBookingFlowImageGroups(category);
   
-  const [activeTermId, setActiveTermId] = useState<keyof typeof TERMS_CONTENT | null>(null);
+  const [activeTermId, setActiveTermId] = useState<TermsKey | null>(null);
 
   useEffect(() => {
     if (activeTermId) {
@@ -425,7 +408,7 @@ export function ConfirmationStepShell({
           <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-in zoom-in-95 duration-300">
             <header className="p-6 border-b border-neutral-100 flex items-center justify-between bg-white sticky top-0 z-10">
               <h2 className="text-[18px] font-bold text-neutral-900">
-                {TERMS_CONTENT[activeTermId].title}
+                {t(`terms.${activeTermId}.title`)}
               </h2>
               <button 
                 onClick={() => setActiveTermId(null)}
@@ -439,7 +422,7 @@ export function ConfirmationStepShell({
             
             <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
               <div className="text-[14px] leading-relaxed text-neutral-600 whitespace-pre-wrap">
-                {TERMS_CONTENT[activeTermId].content}
+                {t(`terms.${activeTermId}.content`)}
               </div>
             </div>
 

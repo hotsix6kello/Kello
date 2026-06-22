@@ -20,6 +20,7 @@ import {
 } from "@/lib/supabaseServer.ts";
 import {
   createBeautyBookingNotification,
+  getBeautyBookingNotificationTemplate,
   notifyAdminNewBooking,
   type BeautyBookingNotificationEventType
 } from "./beautyNotificationServer.ts";
@@ -584,17 +585,16 @@ export async function createBeautyBookingRequest(
 
   // Dispatch Notification (Async, don't wait for response)
   if (data.customer_user_id) {
+    const locale = payload.communication.language;
+    const notifMeta = { storeName: data.store_name, bookingDate: data.booking_date, bookingTime: data.booking_time, communicationLanguage: locale };
+    const tpl = getBeautyBookingNotificationTemplate("booking_created", notifMeta, data.id, locale);
     void createBeautyBookingNotification({
       user_id: String(data.customer_user_id),
       booking_id: data.id,
       event_type: "booking_created",
-      title: "예약 요청이 접수되었어요",
-      message: `${data.store_name}에서 ${data.booking_date} ${data.booking_time} 예약을 요청하셨습니다.`,
-      metadata_json: { 
-        storeName: data.store_name, 
-        bookingDate: data.booking_date, 
-        bookingTime: data.booking_time 
-      },
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -900,35 +900,26 @@ export async function updateBeautyBookingRequestStatus(
   // Dispatch Notification
   if (updatedRecord.customerUserId) {
     let eventType: BeautyBookingNotificationEventType = "booking_cancel_review_required";
-    let title = "예약 상태가 변경되었습니다";
-    let message = `예약 상태가 ${nextStatus}로 변경되었습니다.`;
+    if (nextStatus === "confirmed") eventType = "booking_confirmed";
+    else if (nextStatus === "completed") eventType = "booking_completed";
+    else if (nextStatus === "canceled") eventType = "booking_canceled_by_customer";
 
-    if (nextStatus === "confirmed") {
-      eventType = "booking_confirmed";
-      title = "예약이 확정되었어요";
-      message = `${updatedRecord.storeName} 예약이 확정되었습니다.`;
-    } else if (nextStatus === "completed") {
-      eventType = "booking_completed";
-      title = "서비스가 완료되었어요";
-      message = `${updatedRecord.storeName} 서비스를 이용해 주셔서 감사합니다.`;
-    } else if (nextStatus === "canceled") {
-      eventType = "booking_canceled_by_customer";
-      title = "예약이 취소되었습니다";
-      message = `${updatedRecord.storeName} 예약이 취소되었습니다.`;
-    }
-
+    const locale = updatedRecord.communicationLanguage;
+    const notifMeta = {
+      storeName: updatedRecord.storeName,
+      bookingDate: updatedRecord.bookingDate,
+      bookingTime: updatedRecord.bookingTime,
+      primaryServiceName: updatedRecord.primaryServiceName ?? "",
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate(eventType, notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: updatedRecord.customerUserId,
       booking_id: bookingId,
       event_type: eventType,
-      title,
-      message,
-      metadata_json: {
-        storeName: updatedRecord.storeName,
-        bookingDate: updatedRecord.bookingDate,
-        bookingTime: updatedRecord.bookingTime,
-        primaryServiceName: updatedRecord.primaryServiceName,
-      },
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -1025,18 +1016,22 @@ export async function cancelBeautyBookingRequestAsCustomer(
 
   // Dispatch Notification to customer
   if (updatedRecord.customerUserId) {
+    const locale = updatedRecord.communicationLanguage;
+    const notifMeta = {
+      storeName: updatedRecord.storeName,
+      bookingDate: updatedRecord.bookingDate,
+      bookingTime: updatedRecord.bookingTime,
+      reason: cancelReason.trim(),
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate("booking_canceled_by_customer", notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: updatedRecord.customerUserId,
       booking_id: bookingId,
       event_type: "booking_canceled_by_customer",
-      title: "예약이 취소되었습니다",
-      message: `${updatedRecord.storeName} 예약이 정상적으로 취소되었습니다.`,
-      metadata_json: {
-        storeName: updatedRecord.storeName,
-        bookingDate: updatedRecord.bookingDate,
-        bookingTime: updatedRecord.bookingTime,
-        reason: cancelReason.trim(),
-      },
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -1134,18 +1129,22 @@ export async function requestChangeBeautyBookingAsCustomer(
 
   // Dispatch Notification to customer (Acknowledgement)
   if (updatedRecord.customerUserId) {
+    const locale = updatedRecord.communicationLanguage;
+    const notifMeta = {
+      storeName: updatedRecord.storeName,
+      bookingDate: updatedRecord.bookingDate,
+      bookingTime: updatedRecord.bookingTime,
+      reason: changeReason.trim(),
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate("booking_change_requested", notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: updatedRecord.customerUserId,
       booking_id: bookingId,
       event_type: "booking_change_requested",
-      title: "변경 요청이 접수되었어요",
-      message: "운영자가 곧 내용을 확인한 뒤 안내해 드릴게요.",
-      metadata_json: {
-        storeName: updatedRecord.storeName,
-        bookingDate: updatedRecord.bookingDate,
-        bookingTime: updatedRecord.bookingTime,
-        reason: changeReason.trim(),
-      },
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -1222,20 +1221,25 @@ export async function reviewBeautyBookingChangeRequest(
 
   // Dispatch Notification
   if (updatedRecord.customerUserId) {
+    const eventType = action === "approved" ? "booking_change_approved" : "booking_change_rejected";
+    const locale = updatedRecord.communicationLanguage;
+    const notifMeta = {
+      action,
+      note,
+      storeName: updatedRecord.storeName,
+      bookingDate: updatedRecord.bookingDate,
+      bookingTime: updatedRecord.bookingTime,
+      reason: note,
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate(eventType, notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: updatedRecord.customerUserId,
       booking_id: bookingId,
-      event_type: action === "approved" ? "booking_change_approved" : "booking_change_rejected",
-      title: action === "approved" ? "변경 요청이 승인되었어요" : "변경 요청이 반려되었어요",
-      message: action === "approved" ? "요청하신 변경 내용이 반영되었습니다." : `변경 요청이 반려되었습니다. 사유: ${note || "불가 내역"}`,
-      metadata_json: { 
-        action, 
-        note,
-        storeName: updatedRecord.storeName,
-        bookingDate: updatedRecord.bookingDate,
-        bookingTime: updatedRecord.bookingTime,
-        reason: note 
-      },
+      event_type: eventType,
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -1332,19 +1336,23 @@ export async function offerAlternativeSchedule(
 
   // Notify customer
   if (record.customerUserId) {
+    const locale = record.communicationLanguage;
+    const notifMeta = {
+      items,
+      note,
+      storeName: record.storeName,
+      bookingDate: record.bookingDate,
+      bookingTime: record.bookingTime,
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate("alternative_offer_sent", notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: record.customerUserId,
       booking_id: bookingId,
       event_type: "alternative_offer_sent",
-      title: "일정 변경 제안이 도착했어요",
-      message: "선택하신 시간이 마감되어 다른 가능한 시간을 안내해 드립니다. 확인 후 선택해 주세요.",
-      metadata_json: { 
-        items, 
-        note,
-        storeName: record.storeName,
-        bookingDate: record.bookingDate,
-        bookingTime: record.bookingTime 
-      },
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -1408,18 +1416,23 @@ export async function respondToAlternativeOffer(
 
   // Notify customer
   if (record.customerUserId) {
+    const eventType = response === "accepted" ? "alternative_offer_accepted" : "alternative_offer_rejected";
+    const locale = record.communicationLanguage;
+    const notifMeta = {
+      storeName: record.storeName,
+      bookingDate: record.bookingDate,
+      bookingTime: record.bookingTime,
+      response,
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate(eventType, notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: record.customerUserId,
       booking_id: bookingId,
-      event_type: response === "accepted" ? "alternative_offer_accepted" : "alternative_offer_rejected",
-      title: response === "accepted" ? "제안을 수락하셨습니다" : "제안을 거절하셨습니다",
-      message: response === "accepted" ? "예약 시간이 변경되었습니다." : "다른 일정을 다시 확인해 드릴게요.",
-      metadata_json: {
-        storeName: record.storeName,
-        bookingDate: record.bookingDate,
-        bookingTime: record.bookingTime,
-        response
-      },
+      event_type: eventType,
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 
@@ -1618,20 +1631,26 @@ export async function respondToQuote(
   );
 
   if (record.customerUserId) {
+    const eventType = response === "accepted" ? "alternative_offer_accepted" : "alternative_offer_rejected";
+    const locale = record.communicationLanguage;
+    const notifMeta = {
+      storeName: record.quoteShopName ?? record.storeName,
+      bookingDate: record.quoteDate ?? record.bookingDate,
+      bookingTime: record.quoteTime ?? record.bookingTime,
+      quoteShopName: record.quoteShopName,
+      quoteDate: record.quoteDate,
+      quoteTime: record.quoteTime,
+      response,
+      communicationLanguage: locale,
+    };
+    const tpl = getBeautyBookingNotificationTemplate(eventType, notifMeta, bookingId, locale);
     void createBeautyBookingNotification({
       user_id: record.customerUserId,
       booking_id: bookingId,
-      event_type: response === "accepted" ? "alternative_offer_accepted" : "alternative_offer_rejected",
-      title: response === "accepted" ? "예약 제안서를 수락하셨습니다" : "예약 제안서를 거절하셨습니다",
-      message: response === "accepted"
-        ? "제안을 수락하셨습니다. 다음 단계에서 결제를 진행해 주세요."
-        : "제안을 거절하셨습니다. Kello가 다시 확인할 예정입니다.",
-      metadata_json: {
-        quoteShopName: record.quoteShopName,
-        quoteDate: record.quoteDate,
-        quoteTime: record.quoteTime,
-        response,
-      },
+      event_type: eventType,
+      title: tpl.title,
+      message: tpl.body,
+      metadata_json: notifMeta,
     }).catch(console.error);
   }
 

@@ -16,7 +16,81 @@
     "label_booking_unit": "KRW",
     "booking_confirmation_title": "Đã gửi yêu cầu đặt lịch!",
     "booking_confirmation_desc": "Chúng tôi sẽ sớm thông báo cho bạn.",
-    "booking_confirmation_cta": "Lịch hẹn của tôi"
+    "booking_confirmation_cta": "Lịch hẹn của tôi",
+    "hero_title": "Explore Beauty Bookings",
+    "hero_desc": "Select a category for more accurate exploration. You can now check all beauty shops.",
+    "category_all": "All",
+    "step_1": "Select Shop",
+    "step_2": "Select Time",
+    "step_3": "Confirm",
+    "step_4": "Enter Info",
+    "step_5": "Done",
+    "toast_addon_limit": "Maximum 2 add-on options can be selected.",
+    "toast_copy_hint": "Long press {{label}} to copy.",
+    "toast_select_time": "Select a time for ",
+    "toast_check_info": "Check booking info again.",
+    "toast_submit_error": "Failed to save booking. Try again.",
+    "label_designer_default": "Shop Choice",
+    "label_service_default": "Before choice",
+    "label_addon_default": "No selection",
+    "label_select_prompt": "Select a booking to see details.",
+    "label_price_from": "from",
+    "btn_continue": "Book Now",
+    "btn_submit": "Send Request",
+    "btn_reset": "Edit Booking",
+    "btn_close": "Close",
+    "completion_title": "Booking request sent!",
+    "completion_desc1": "We will notify you after the shop checks availability.",
+    "completion_desc2": "Please note it's not confirmed until you receive a confirmation notice.",
+    "completion_desc3": "Track progress anytime in My Bookings menu.",
+    "completion_flow_hint": "Your booking request has been received. It will be confirmed after the shop reviews it. Check results via notification or My Bookings.",
+    "price_estimate_hint": "Prices shown are estimates. Final amounts may vary based on options or shop policy.",
+    "label_rating": "Rating",
+    "label_review": "Reviews",
+    "btn_select_time": "Select Booking Time",
+    "btn_reselect_time": "Reselect Booking Time",
+    "empty_store_title": "No shops match criteria.",
+    "empty_store_desc": "Try another area or category.",
+    "booking_panel_title": "Select Date and Time",
+    "booking_panel_desc": "Pick a time for the shop and continue to confirmation.",
+    "booking_empty_title": "Pick a shop first.",
+    "booking_empty_desc": "Tap `Select Booking Time` on a shop card above.",
+    "booking_not_found_title": "No available times found.",
+    "booking_not_found_desc": "Pick another shop or reload times.",
+    "booking_date_label": "Date",
+    "booking_time_label": "Time",
+    "booking_no_date": "No selectable dates yet.",
+    "booking_no_time_wait": "Select a date first.",
+    "booking_no_slots": "No times available for this date.",
+    "summary_category": "Category",
+    "summary_store": "Shop",
+    "summary_region": "Area",
+    "summary_date": "Date",
+    "summary_time": "Time",
+    "summary_hint": "Pick date and time to continue.",
+    "summary_btn": "Check Booking Info",
+    "confirm_title": "Confirm Info and Enter Details",
+    "confirm_desc": "Fill in the details for a ready-to-show request card.",
+    "btn_edit": "Edit Booking Info",
+    "confirm_empty_title": "Next step not open yet.",
+    "confirm_empty_desc": "Tap `Check Booking Info` after picking date/time.",
+    "confirm_review_error_title": "Check booking info again.",
+    "confirm_review_error_desc": "Needs shop, date, and time.",
+    "confirm_price_hint": "Amounts shown are estimates. Final price may vary based on options or shop confirmation.",
+    "label_no_surcharge": "No surcharge",
+    "label_no_designer": "No designer info currently.",
+    "label_designer_hint": "Designer choice is optional. Shop choice is fallback.",
+    "label_addon_limit": "Max 2",
+    "detail_status": "Detail Status",
+    "detail_category_services": "Detail Category Services",
+    "detail_requested_time": "Detail Requested Time",
+    "detail_shop_status": "Detail Shop Status",
+    "detail_request_info": "Detail Request Info",
+    "detail_more_info": "Detail More Info",
+    "reviews_title": "Trusted Reviews",
+    "reviews_sort": "Sort by: Trust Score",
+    "reviews_helpful": "Helpful",
+    "reviews_view_all": "View all 1,240 reviews"
   },
   "common": {
     "error_title": "An error occurred.",
@@ -88,7 +162,13 @@
       "map": "Map",
       "call_120": "Call 120",
       "send": "Gửi",
-      "logout": "Đăng xuất"
+      "logout": "Đăng xuất",
+      "back_to_list": "Back to List",
+      "view_all_new": "View all",
+      "browse_community_new": "Browse community",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "go_back": "Go Back"
     },
     "states": {
       "posts": "Posts",
@@ -133,7 +213,8 @@
       "canceled": "Cancelled",
       "loading": "Loading...",
       "searching": "Searching...",
-      "labels": "Nhãn"
+      "labels": "Nh?n",
+      "back_to_list": "Back to List"
     },
     "loading": "Loading...",
     "retry": "Retry",
@@ -253,7 +334,97 @@
     "greeting_afternoon": "Chào buổi chiều",
     "greeting_evening": "Chào buổi tối",
     "search_results": "ผลลัพธ์การค้นหา",
-    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
+    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'",
+    "login_required_for_feature": "Please log in to use this feature.",
+    "errors": {
+      "processing_failed": "Processing failed."
+    },
+    "community": {
+      "posts": "Posts",
+      "reviews": "Reviews",
+      "likes": "Likes"
+    },
+    "phrases": {
+      "title": "Travel phrases",
+      "subtitle": "Subtitle",
+      "eyebrow": "Eyebrow",
+      "hero": {
+        "badge": "Phrasebook",
+        "count": "{{count}} phrases"
+      },
+      "context": {
+        "title": "Booking context",
+        "booking": "??t l?ch",
+        "interpreter": "Interpreter",
+        "support": "Support"
+      },
+      "category": {
+        "title": "Category"
+      },
+      "categories": {
+        "transport": {
+          "label": "Label",
+          "description": "Useful phrases for taxis, transit, and directions.",
+          "helper": "Helper"
+        },
+        "restaurant": {
+          "label": "Label",
+          "description": "Useful phrases for ordering and restaurant visits.",
+          "helper": "Helper"
+        },
+        "beauty": {
+          "label": "Label",
+          "description": "Useful phrases for beauty shop visits.",
+          "helper": "Helper"
+        },
+        "emergency": {
+          "label": "Label",
+          "description": "Emergency phrases for urgent situations.",
+          "helper": "Helper"
+        }
+      },
+      "favorites": {
+        "desc": "Desc",
+        "empty": "Empty"
+      },
+      "recent": {
+        "desc": "Desc"
+      },
+      "empty": {
+        "title": "No phrases yet",
+        "desc": "Desc"
+      },
+      "items": {
+        "transport_address": "Transport Address",
+        "transport_dropoff": "Transport Dropoff",
+        "transport_time": "Transport Time",
+        "transport_map": "Transport Map",
+        "transport_platform": "Transport Platform",
+        "restaurant_allergy": "Restaurant Allergy",
+        "restaurant_spicy": "Restaurant Spicy",
+        "restaurant_recommend": "Restaurant Recommend",
+        "restaurant_less_spicy": "Restaurant Less Spicy",
+        "restaurant_split": "Restaurant Split",
+        "beauty_reservation": "Beauty Reservation",
+        "beauty_natural": "Beauty Natural",
+        "beauty_price": "Beauty Price",
+        "beauty_slowly": "Beauty Slowly",
+        "beauty_before_start": "Beauty Before Start",
+        "emergency_help": "Emergency Help",
+        "emergency_translation": "Emergency Translation",
+        "emergency_lost": "Emergency Lost",
+        "emergency_1330": "Emergency 1330",
+        "emergency_police": "Emergency Police",
+        "notes": {
+          "transport_map": "Transport Map",
+          "emergency_1330": "Emergency 1330"
+        }
+      }
+    },
+    "time": {
+      "just_now": "Just now"
+    },
+    "reset": "Reset"
   },
   "welcome_popup": {
     "title": "Đăng ký ngay để nhận\ncoupon giảm giá 5%!",
@@ -344,7 +515,17 @@
       "submit_blocked_customer": "Vui lòng nhập tên và liên hệ rồi thử lại.",
       "submit_blocked_agreements": "Vui lòng đồng ý các điều khoản bắt buộc rồi thử lại.",
       "submit_blocked_generic": "Không thể gửi yêu cầu đặt lịch. Vui lòng kiểm tra thông tin và thử lại.",
-      "section_subtitle": "Chọn dịch vụ K-Beauty và đặt lịch ngay."
+      "section_subtitle": "Chọn dịch vụ K-Beauty và đặt lịch ngay.",
+      "submit_in_progress": "Sending booking request..."
+    },
+    "interpreter": {
+      "eyebrow": "Eyebrow",
+      "title": "Real-time interpreter support",
+      "description": "Use simple phrases and translation help during your visit.",
+      "button": "Open interpreter"
+    },
+    "assurance": {
+      "items": "Assurance items"
     }
   },
   "interpreter_ui": {
@@ -381,11 +562,104 @@
       "request_custom_title": "Yêu cầu kế hoạch {{days}} ngày",
       "request_custom_toast": "Đã yêu cầu kế hoạch {{days}} ngày tùy chỉnh! Concierge của chúng tôi sẽ liên hệ với bạn."
     },
-    "badge": "Trải nghiệm vẻ đẹp Hàn Quốc"
+    "badge": "Trải nghiệm vẻ đẹp Hàn Quốc",
+    "presets": {
+      "beauty_tour": "Beauty Tour",
+      "foodie": "Foodie",
+      "heritage": "Heritage",
+      "k_pop": "K-pop"
+    },
+    "value_props": {
+      "itinerary": {
+        "title": "Auto Itinerary",
+        "desc": "AI optimizes your route"
+      },
+      "booking": {
+        "title": "Concierge Booking",
+        "desc": "Clinics, Spas, and more"
+      },
+      "navigation": {
+        "title": "Real-time Nav",
+        "desc": "Zero language barrier"
+      },
+      "focus": {
+        "title": "Why Kello",
+        "desc": "Desc"
+      }
+    },
+    "how_it_works": {
+      "title": "How it works",
+      "step1": "Step1",
+      "step1_desc": "Step1 Desc",
+      "step2": "Step2",
+      "step2_desc": "Step2 Desc",
+      "step3": "Step3",
+      "step3_desc": "Step3 Desc"
+    },
+    "fetching_location": "Fetching location..."
   },
   "explore_page": {
     "title": "Khám phá",
-    "select_city": "Chọn thành phố"
+    "select_city": "Chọn thành phố",
+    "city_changed": "City changed to {{city}}",
+    "added_to": "Added to Day {{day}}",
+    "no_items": "No items found in {{city}}",
+    "try_changing": "Try changing the category or city.",
+    "search_placeholders": {
+      "all": "Search for beauty, food...",
+      "beauty": "Search clinics, salons...",
+      "event": "Search concerts, shows...",
+      "food": "Search restaurants, dishes...",
+      "festival": "Search festivals...",
+      "attraction": "Search palaces, parks..."
+    },
+    "add_to_plan": "+ Add to Plan",
+    "today": "Today",
+    "tonight": "Tonight",
+    "starts_from": "Starts from ₩{{price}}",
+    "indoor": "Indoor",
+    "outdoor": "Outdoor",
+    "badges": {
+      "vegan_only": "Vegan Only",
+      "vegan_option": "Vegan Option"
+    },
+    "filters_title": "Filters",
+    "apply": "Apply",
+    "reset": "Reset",
+    "adding_item_to": "Adding <strong>{{title}}</strong> to...",
+    "no_specific_filters": "No specific filters for this category.",
+    "filters": {
+      "show": "Show",
+      "price": "Price",
+      "diet": "Diet",
+      "ingredients": "Ingredients",
+      "date": "Date",
+      "type": "Type",
+      "options": {
+        "skin_care": "Skin Care",
+        "hair_makeup": "Hair & Makeup",
+        "spa": "Spa",
+        "nails": "Nails",
+        "vegan": "Vegan",
+        "vegetarian": "Vegetarian",
+        "no_pork": "No Pork",
+        "halal": "Halal",
+        "beef": "Beef",
+        "pork": "Pork",
+        "chicken": "Chicken",
+        "seafood": "Seafood",
+        "dairy": "Dairy",
+        "egg": "Egg",
+        "today": "Today",
+        "weekend": "This Weekend",
+        "select": "Select Date",
+        "concert": "Concert",
+        "show": "Show",
+        "popup": "Popup",
+        "club": "Club",
+        "exhibition": "Exhibition"
+      }
+    }
   },
   "planner_page": {
     "title": "Lịch trình",
@@ -395,12 +669,19 @@
     "auto_build": "T?o t? Đóng",
     "book_all": "??t t?t c?",
     "status": {
-      "completed": "Ho?n th?nh"
+      "completed": "Ho?n th?nh",
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "confirmed": "Confirmed",
+      "unavailable": "Unavailable"
     },
     "slots": {
       "morning": "Bu?i s?ng",
       "afternoon": "Bu?i chi?u",
-      "evening": "Bu?i t?i"
+      "evening": "Bu?i t?i",
+      "am": "AM",
+      "pm": "PM",
+      "night": "Night"
     },
     "booking_modal": {
       "title": "Y?u c?u ??t ch?",
@@ -412,11 +693,102 @@
       "submitting": "?ang g?i...",
       "success_title": "?? g?i yêu cầu",
       "success_desc": "Y?u c?u ??t ch? ?? ???c g?i. Vui l?ng ch? x?c nh?n.",
-      "view_status": "Xem booking"
+      "view_status": "Xem booking",
+      "unavailable_title": "Time Slot Unavailable",
+      "unavailable_desc": "We recommend these alternatives:"
     },
     "focus": {
       "title": "Booking ?ang ???c l?m n?i b?t",
       "desc": "D?ng c?c l?i t?t n?y cho booking ?ang ???c nh?n m?nh trong k? ho?ch c?a b?n."
+    },
+    "support": {
+      "title": "Help Center",
+      "subtitle": "How can we help you?",
+      "eyebrow": "Quick Help",
+      "chat_label": "Real-time Chat",
+      "chat_sub": "Available 24/7",
+      "chat_action": "Start Chat",
+      "faq_title": "Frequently Asked Questions",
+      "faq_loading": "Loading...",
+      "ask_anything": "Ask us anything",
+      "hero_badge": "Quick Help",
+      "category": {
+        "reservation": "Booking & Confirmation",
+        "payment": "Payment & Cancellation",
+        "usage": "How to Use",
+        "other": "Others"
+      },
+      "category_desc": {
+        "reservation": "Check and change booking history",
+        "payment": "Payment methods and refund policies",
+        "usage": "Service usage guide",
+        "other": "Ask us anything"
+      },
+      "guides": {
+        "find_booking": {
+          "q": "Where can I check my booking?",
+          "a": "You can check all booking statuses on the My Bookings page."
+        },
+        "staff_talk": {
+          "q": "Can I get interpretation support?",
+          "a": "You can communicate smoothly with local staff through Kello's interpretation service."
+        },
+        "change_time": {
+          "q": "I want to change my booking time.",
+          "a": "Please click the Change Time Request button on the booking details page."
+        },
+        "cancel_refund": {
+          "q": "What are the cancellation and refund policies?",
+          "a": "Wekello applies a unified refund policy to all bookings. 4+ days before: 100% refund on the service fee. 3 days before: 80%. 2 days before: 60%. 1 day before or same day / No-show: no refund. The 10% platform fee is non-refundable in all cases."
+        },
+        "write_review": {
+          "q": "How do I write a review?",
+          "a": "Reviews can be written on the Community page for completed bookings only."
+        },
+        "community_safety": {
+          "q": "Are there community guidelines?",
+          "a": "Please follow the operation policy for a safe and enjoyable travel culture.",
+          "cta": "Check Operation Policy"
+        }
+      },
+      "general": {
+        "title": "General Support",
+        "desc": "General help for using the service.",
+        "report_notice": "For booking-related issues, please use 'Report Issue' in the booking details.",
+        "booking_cancel": {
+          "label": "Booking Cancellation Guide",
+          "desc": "Information on cancellation and refund procedures.",
+          "cta": "View Guide"
+        },
+        "community_safety": {
+          "label": "Community Guidelines",
+          "desc": "Information for a clean community.",
+          "cta": "Check Guidelines"
+        },
+        "partner": {
+          "label": "Partner Support",
+          "desc": "Guide for partner registration and usage.",
+          "cta": "Partner Inquiry"
+        }
+      },
+      "faq": {
+        "title": "FAQ",
+        "desc": "Frequently asked questions."
+      },
+      "booking": {
+        "context_title": "Related to Current Booking",
+        "context_desc": "Customized help for your ongoing booking.",
+        "banner_report": "Report issue for {{bookingName}}",
+        "banner_interpreter": "Interpretation support for {{bookingName}}",
+        "banner_default": "Help for {{bookingName}}",
+        "banner_fallback": "Help for ongoing booking",
+        "title": "My Booking Management",
+        "desc": "Get help related to your recent bookings.",
+        "empty": {
+          "title": "No recent bookings",
+          "desc": "Book a new service and create the best experience."
+        }
+      }
     }
   },
   "today_page": {
@@ -438,7 +810,9 @@
     "select_date": "Chọn ngày",
     "select_time": "Chọn giờ",
     "total_price": "Tổng giá",
-    "request_booking": "Yêu cầu đặt chỗ"
+    "request_booking": "Yêu cầu đặt chỗ",
+    "unavailable_title": "This place detail is not available right now",
+    "unavailable_desc": "This link does not match a supported explore detail yet. Return to Explore to browse available places."
   },
   "interpreter_page": {
     "back": "< Quay lại",
@@ -648,21 +1022,69 @@
     "cancel_platform_fee_note": "Phí dịch vụ nền tảng ({{rate}}%) sẽ không được hoàn lại bất kể thời điểm hủy.",
     "cancel_consent_no_refund": "Hủy trong vòng 1 ngày trước lịch hẹn sẽ không được hoàn tiền. Tôi đồng ý trừ toàn bộ.",
     "cancel_consent_partial": "Hủy ngay bây giờ sẽ trừ phí nền tảng {{platformFee}} và {{penaltyRate}}% phí dịch vụ ({{penaltyAmount}}). Tôi đồng ý.",
-    "cancel_consent_default": "Tôi đồng ý với chính sách hủy và hoàn tiền."
+    "cancel_consent_default": "Tôi đồng ý với chính sách hủy và hoàn tiền.",
+    "payment_consent_hint": "Vui l?ng ??ng ? c? hai m?c tr?n ?? ti?p t?c thanh to?n.",
+    "payment_consent_privacy_label": "T?i ??ng ? v?i Ch?nh s?ch quy?n ri?ng t?",
+    "payment_consent_refund_label": "T?i ??ng ? v?i Ch?nh s?ch h?y v? ho?n ti?n",
+    "payment_consent_title": "Xem l?i v? ??ng ? tr??c khi thanh to?n",
+    "payment_currency_usd_only": "Thanh to?n PayPal hi?n ch? h? tr? b?o gi? USD. Vui l?ng y?u c?u Kello c?p nh?t ??n v? ti?n t? thanh to?n.",
+    "payment_error": "?? x?y ra l?i khi thanh to?n. Vui l?ng th? l?i.",
+    "payment_no_refund_label": "Kh?ng ho?n ti?n",
+    "payment_refund_policy_title": "Ch?nh s?ch h?y v? ho?n ti?n",
+    "payment_refund_rate_label": "Ho?n {{rate}}%",
+    "payment_section_title": "Thanh to?n",
+    "payment_status_paid": "?? thanh to?n",
+    "payment_success": "Thanh to?n ho?n t?t. L?ch h?n c?a b?n ?? ???c x?c nh?n.",
+    "quote_accepted_message": "B?n ?? ch?p nh?n ?? xu?t. Thanh to?n s? ???c x? l? ? b??c ti?p theo.",
+    "quote_action_accept": "Ch?p nh?n ?? xu?t",
+    "quote_action_reject": "T? ch?i ?? xu?t",
+    "quote_date_time": "L?ch ?? xu?t",
+    "quote_error_respond": "X? l? th?t b?i. Vui l?ng th? l?i.",
+    "quote_expired_notice": "?? xu?t n?y c? th? ?? h?t h?n.",
+    "quote_expires_at": "H?n ?? xu?t",
+    "quote_note": "Ghi ch? c?a ?i?u ph?i vi?n",
+    "quote_processing": "?ang x? l?...",
+    "quote_rejected_message": "B?n ?? t? ch?i ?? xu?t. Kello c? th? ki?m tra l?i cho b?n.",
+    "quote_section_title": "?? xu?t ??t l?ch",
+    "quote_service_name": "D?ch v? x?c nh?n",
+    "quote_shop_address": "??a ch? ti?m",
+    "quote_shop_name": "Ti?m ???c ?? xu?t",
+    "quote_status_accepted": "?? ch?p nh?n",
+    "quote_status_expired": "?? h?t h?n",
+    "quote_status_pending": "?ang ch? ph?n h?i",
+    "quote_status_rejected": "?? t? ch?i",
+    "quote_total_price": "T?ng gi?",
+    "quote_refund_policy": "Refund / Cancellation Policy",
+    "quote_sent_at": "Proposal Sent",
+    "quote_status_label": "Proposal Status",
+    "payment_paypal_button_label": "Pay with PayPal",
+    "payment_processing": "Processing payment...",
+    "payment_already_paid": "This booking has already been paid.",
+    "payment_currency_unsupported": "PayPal payment is currently available only for USD quotes.",
+    "payment_status_pending": "Payment Pending"
   },
   "community_page": {
+    "regions": {
+      "seoul": "Seoul", "gyeonggi": "Gyeonggi", "incheon": "Incheon",
+      "busan": "Busan", "daegu": "Daegu", "daejeon": "Daejeon",
+      "gwangju": "Gwangju", "ulsan": "Ulsan", "sejong": "Sejong",
+      "gangwon": "Gangwon", "chungbuk": "Chungbuk", "chungnam": "Chungnam",
+      "jeonbuk": "Jeonbuk", "jeonnam": "Jeonnam", "gyeongbuk": "Gyeongbuk",
+      "gyeongnam": "Gyeongnam", "jeju": "Jeju", "other": "Khác"
+    },
     "hero": {
       "title": "Cộng đồng Kello",
       "search_placeholder": "Tìm kiếm chủ đề quan tâm"
     },
     "categories": {
-      "all": "Tất cả",
-      "beauty_review": "Beauty Reviews",
-      "food_review": "Restaurant Tips",
-      "travel_review": "Travel Tips",
-      "meetup": "Flash Meetups",
+      "all": "T?t c?",
+      "beauty_review": "??nh gi? l?m ??p",
+      "food_review": "G?i ? ?n u?ng",
+      "travel_review": "G?i ? ti?m",
+      "meetup": "G?p g?",
       "meetup_recruitment": "Travel Mates",
-      "help": "Q&A"
+      "help": "C?u h?i",
+      "tips": "M?o ??t l?ch"
     },
     "sub_filters": {
       "all": "Tất cả",
@@ -742,7 +1164,7 @@
       },
       "title_label": {
         "beauty_review": "Dịch vụ/Chủ đề",
-        "default": "Tiêu đề"
+        "default": "Ti?u ??"
       },
       "title_placeholder": {
         "beauty_review": "VD: Đánh giá cắt tóc",
@@ -947,7 +1369,8 @@
       "hide_comment": "Ẩn bình luận này"
     },
     "actions": {
-      "delete_confirm": "Bạn có chắc chắn muốn xóa không?"
+      "delete_confirm": "Bạn có chắc chắn muốn xóa không?",
+      "delete": "Delete"
     },
     "errors": {
       "login_required": "Yêu cầu đăng nhập.",
@@ -1052,6 +1475,12 @@
         "join": "{{count}} người muốn tham gia"
       },
       "more_region": "Xem thêm câu chuyện về {{region}}"
+    },
+    "title": "C?ng ??ng",
+    "login_required": {
+      "title": "Sign in to write a post",
+      "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
+      "cta": "Sign in to write"
     }
   },
   "help_page": {
@@ -1400,7 +1829,8 @@
       }
     },
     "community": {
-      "empty_simple": "You haven't written any community posts yet."
+      "empty_simple": "You haven't written any community posts yet.",
+      "empty_simple_new": "No posts yet."
     },
     "bookings": {
       "title": "My Bookings",
@@ -1409,7 +1839,8 @@
       "matching_desc": "Waiting for salon match",
       "price_pending": "Price pending store confirmation",
       "error_fetch": "Failed to load bookings.",
-      "browse_beauty_cta": "Browse Beauty Bookings"
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "empty_text": "No booking history yet."
     },
     "profile": {
       "account_hint": "Account & Settings",
@@ -1457,11 +1888,14 @@
       "type": {
         "post": "Bài viết",
         "review": "Đánh giá",
-        "meetup": "Gặp gỡ"
+        "meetup": "Gặp gỡ",
+        "travel": "Travel"
       },
       "review_prompts": {
         "shop": "Cơ sở",
-        "rating": "Đánh giá sao"
+        "rating": "Đánh giá sao",
+        "title": "Leave a Review",
+        "desc": "Share your thoughts on the shops you've visited."
       },
       "empty": {
         "all": {
@@ -1474,13 +1908,16 @@
         },
         "reviews": {
           "title": "Chưa có đánh giá nào",
-          "desc": "Hãy để lại đánh giá sau khi trải nghiệm dịch vụ làm đẹp."
+          "desc": "Hãy để lại đánh giá sau khi trải nghiệm dịch vụ làm đẹp.",
+          "no_completed": "No completed bookings.",
+          "cta": "View Booking History"
         },
         "meetups": {
           "title": "Chưa tham gia buổi gặp gỡ nào",
           "desc": "Tham gia các buổi gặp gỡ để kết nối với cộng đồng Kello."
         }
-      }
+      },
+      "title_new": "My community"
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
@@ -1488,7 +1925,29 @@
     },
     "bookings_hub": {
       "meta": {
-        "reference": "Reference"
+        "reference": "Reference",
+        "time": "Time",
+        "area": "Area",
+        "total_price": "Total Price"
+      },
+      "empty": {
+        "upcoming": {
+          "title": "No upcoming bookings",
+          "desc": "Desc"
+        },
+        "completed": {
+          "title": "No completed bookings",
+          "desc": "Desc"
+        },
+        "other": {
+          "title": "No bookings here",
+          "desc": "Desc"
+        }
+      },
+      "title": "Booking hub",
+      "summary": {
+        "upcoming": "Upcoming",
+        "history": "History"
       }
     },
     "referral": {
@@ -1519,7 +1978,158 @@
     "exchange_rate_base": "Cơ sở KRW",
     "no_email": "Không có thông tin email",
     "referral_code_label": "Mã giới thiệu",
-    "price_negotiating": "Đang thương lượng giá"
+    "price_negotiating": "Đang thương lượng giá",
+    "help_medical": "Medical",
+    "help_interpreter": "Interpretation",
+    "help_police": "Police",
+    "help_lost": "Lost Item",
+    "phrases": {
+      "categories": {
+        "transport": {
+          "label": "Label",
+          "description": "Phrases for transportation and directions.",
+          "helper": "Helper"
+        },
+        "restaurant": {
+          "label": "Label",
+          "description": "Phrases for restaurants and cafes.",
+          "helper": "Helper"
+        },
+        "beauty": {
+          "label": "Label",
+          "description": "Phrases for beauty appointments.",
+          "helper": "Helper"
+        },
+        "emergency": {
+          "label": "Label",
+          "description": "Phrases for emergencies.",
+          "helper": "Helper"
+        }
+      },
+      "eyebrow": "Eyebrow",
+      "title": "Saved phrases",
+      "subtitle": "Subtitle",
+      "hero": {
+        "badge": "Phrasebook",
+        "count": "{{count}} phrases"
+      },
+      "context": {
+        "title": "Current context",
+        "booking": "??t l?ch",
+        "interpreter": "Interpreter",
+        "support": "Support"
+      },
+      "favorites": {
+        "desc": "Desc",
+        "empty": "Empty"
+      },
+      "recent": {
+        "desc": "Desc"
+      },
+      "category": {
+        "title": "Category"
+      },
+      "empty": {
+        "title": "No phrases saved",
+        "desc": "Desc"
+      }
+    },
+    "saved": {
+      "places": {
+        "fallback_title": "Fallback Title",
+        "source_plan": "Source Plan",
+        "source_saved": "Source Saved",
+        "source_fallback": "Source Fallback",
+        "source_id_only": "Source Id Only",
+        "added": "Added",
+        "title": "Saved places",
+        "desc": "Desc",
+        "empty": {
+          "title": "No saved places",
+          "desc": "Desc",
+          "cta": "Cta"
+        }
+      },
+      "plans": {
+        "synced": "Synced",
+        "title": "Saved plans",
+        "desc": "Desc",
+        "empty": {
+          "title": "No saved plans",
+          "desc": "Desc"
+        }
+      },
+      "title": "Saved"
+    },
+    "support": {
+      "guides": {
+        "find_booking": {
+          "q": "Q",
+          "a": "A"
+        },
+        "staff_talk": {
+          "q": "Q",
+          "a": "A"
+        },
+        "change_time": {
+          "q": "Q",
+          "a": "A"
+        },
+        "cancel_refund": {
+          "q": "Q",
+          "a": "A"
+        },
+        "write_review": {
+          "q": "Q",
+          "a": "A"
+        },
+        "community_safety": {
+          "q": "Q",
+          "a": "A",
+          "cta": "Cta"
+        }
+      },
+      "general": {
+        "booking_cancel": {
+          "label": "Label",
+          "desc": "Desc",
+          "cta": "Cta"
+        },
+        "community_safety": {
+          "label": "Label",
+          "desc": "Desc",
+          "cta": "Cta"
+        },
+        "partner": {
+          "label": "Label",
+          "desc": "Desc"
+        },
+        "title": "General support",
+        "desc": "Desc",
+        "report_notice": "Report Notice"
+      },
+      "booking": {
+        "banner_report": "Banner Report",
+        "banner_interpreter": "Banner Interpreter",
+        "banner_default": "Banner Default",
+        "banner_fallback": "Banner Fallback",
+        "context_title": "Context Title",
+        "context_desc": "Context Desc",
+        "title": "Booking support",
+        "desc": "Desc",
+        "empty": {
+          "title": "No related bookings",
+          "desc": "Desc"
+        }
+      },
+      "eyebrow": "Eyebrow",
+      "title": "Support",
+      "subtitle": "Subtitle",
+      "faq": {
+        "title": "FAQ",
+        "desc": "Desc"
+      }
+    }
   },
   "notifications": {
     "title": "Notification Settings",
@@ -1585,7 +2195,14 @@
     },
     "footer_note": "Essential booking notices may be sent regardless of settings.",
     "tab_booking": "Đặt lịch",
-    "tab_updates": "Cập nhật"
+    "tab_updates": "Cập nhật",
+    "loading": "Loading",
+    "event_default": "Event Default",
+    "back": "Back",
+    "page_title": "Page Title",
+    "empty": "Empty",
+    "empty_cta": "Empty Cta",
+    "booking_link": "Booking Link"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -1664,7 +2281,8 @@
       "attached_images": "Ảnh đính kèm",
       "image_count_summary": "Tổng cộng {{count}} ảnh",
       "submit_button": "Gửi yêu cầu đặt lịch",
-      "preparing": "Màn hình xác nhận cuối cho danh mục này đang được chuẩn bị."
+      "preparing": "Màn hình xác nhận cuối cho danh mục này đang được chuẩn bị.",
+      "agreement_refund_policy": "[Required] I understand that cancellation and refund conditions may vary depending on the partner shop policy after quote confirmation and payment."
     },
     "next_step": "Bước tiếp theo",
     "check_final": "Xác nhận cuối cùng",
@@ -1800,6 +2418,11 @@
         "body_title": "Body",
         "body_desc": "Waxing lưng, ngực hoặc các bộ phận cơ thể."
       }
+    },
+    "login_required": {
+      "title": "Sign in to send your booking request",
+      "description": "Sign in to track your request and receive your proposal and payment details safely.",
+      "cta": "Sign in to continue"
     }
   },
   "categories": {
@@ -1979,32 +2602,30 @@
       "two_days": "2 ngày trước: Hoàn tiền 70%",
       "one_day": "1 ngày trước: Hoàn tiền 50%",
       "same_day": "Trong ngày hoặc Không đến: Không hoàn tiền",
-      "note": "Quá trình hoàn tiền cuối cùng có thể thay đổi tùy thuộc vào chính sách của từng cửa hàng cụ thể."
+      "note": "Quá trình hoàn tiền cuối cùng có thể thay đổi tùy thuộc vào chính sách của từng cửa hàng cụ thể.",
+      "four_days": "4+ days before appointment: 100% service fee refund"
     },
     "liability": {
       "title": "4. Giới thiệu về Trách nhiệm pháp lý",
       "interpretation": "Tính năng 'Thông dịch viên thời gian thực' là một công cụ bổ sung được cung cấp để thuận tiện cho người dùng. Wekello không chịu trách nhiệm về các lỗi đặt chỗ hoặc tranh chấp phát sinh từ sự thiếu chính xác trong bản dịch AI hoặc thông dịch thủ công.",
       "community": "Wekello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
+    },
+    "platform_fee": {
+      "title": "3. Platform Fee",
+      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
+      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+    },
+    "chargeback": {
+      "title": "5. Payment Cancellation & Disputes",
+      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
+      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
     }
   },
   "morning": "Chào buổi sáng",
   "afternoon": "Chào buổi chiều",
   "evening": "Chào buổi tối",
   "assurance": {
-    "items": [
-      {
-        "title": "Chọn danh mục dễ dàng",
-        "desc": "Chọn dịch vụ mong muốn ngay trên màn hình đầu tiên và chuyển ngay vào quy trình đặt lịch."
-      },
-      {
-        "title": "Hỗ trợ ngôn ngữ không lo lắng",
-        "desc": "Sử dụng trợ lý phiên dịch thời gian thực bất cứ khi nào cần để giao tiếp với cửa hàng."
-      },
-      {
-        "title": "Đường dẫn đặt lịch ưu tiên di động",
-        "desc": "Nút kiểu thẻ dễ chọn bằng một tay và CTA lớn giúp tăng tỷ lệ chuyển đổi."
-      }
-    ]
+    "items": "M?c ??m b?o"
   },
   "interpreter": {
     "eyebrow": "Hỗ trợ ngôn ngữ",
@@ -2249,11 +2870,29 @@
     "open_maps": "Mở trong Maps",
     "loading": "Đang tải...",
     "login_required": "Đăng nhập để xem các địa điểm gần đây.",
-    "location_denied": "Cho phép truy cập vị trí để xem vị trí hiện tại của bạn."
+    "location_denied": "Cho phép truy cập vị trí để xem vị trí hiện tại của bạn.",
+    "no_results": "No places within 1.5 km nearby.",
+    "api_error": "Failed to search places."
   },
   "talk_page": {
     "korean_viewer_mode": "Chế độ xem tiếng Hàn",
-    "korean_viewer_hint": "💡 Bật Chế độ xem tiếng Hàn để cho nhân viên xem."
+    "korean_viewer_hint": "💡 Bật Chế độ xem tiếng Hàn để cho nhân viên xem.",
+    "simulated_notification": "Jenny Hair Salon: Hello! We have sent the design draft you requested. Please check it.",
+    "show_to_staff": "Show to staff",
+    "tab_booking": "Đặt lịch",
+    "tab_style_recommend": "Gợi ý phong cách",
+    "tab_shop_recommend": "Gợi ý tiệm",
+    "tab_pricing": "Giá cả",
+    "tab_service_info": "Thông tin dịch vụ",
+    "tab_guide": "Hướng dẫn",
+    "welcome_greeting": "Xin chào! Tôi là Kello 👋",
+    "welcome_question": "Tôi có thể giúp gì cho bạn?",
+    "ask_kello": "Hỏi Kello",
+    "viewer_tip_line1": "💡 Để hiển thị cho nhân viên Hàn Quốc,",
+    "viewer_tip_line2": "hãy bật chế độ xem tiếng Hàn.",
+    "link_shop_title": "Kết nối tiệm làm đẹp",
+    "map_view_btn": "Xem vị trí trên bản đồ",
+    "kello_talk_suffix": "Talk"
   },
   "home_hero": {
     "wave_hair": "Tóc sóng",
@@ -2336,7 +2975,9 @@
     "emoji": "Biểu tượng",
     "edit_action": "Sửa",
     "delete_action": "Xóa",
-    "beauty_tip": "Gội đầu trước khi làm dịch vụ là phép lịch sự phổ biến ở Hàn Quốc. Hãy nói \"정말 예뻐요！\" với nhân viên nhé!"
+    "beauty_tip": "Gội đầu trước khi làm dịch vụ là phép lịch sự phổ biến ở Hàn Quốc. Hãy nói \"정말 예뻐요！\" với nhân viên nhé!",
+    "speech_not_supported": "This browser does not support speech recognition.",
+    "add_phrase": "Add"
   },
   "help_labels": {
     "medical": "Hỗ trợ y tế",
@@ -2363,7 +3004,8 @@
     "review_info": "Vui lòng kiểm tra lại thông tin đặt lịch."
   },
   "notification_center": {
-    "title": "Trung tâm thông báo"
+    "title": "Trung tâm thông báo",
+    "empty": "Không có thông báo mới."
   },
   "partner_signup": {
     "badge": "🤝 Đăng ký đối tác",
@@ -2417,5 +3059,103 @@
     "error_submit": "Lỗi nộp đơn: ",
     "back": "← Quay lại",
     "home": "🏠 Trang chủ"
+  },
+  "home_new": {
+    "hero_title": "Hero Title",
+    "hero_subtitle": "Hero Subtitle",
+    "features": {
+      "booking": "??t l?ch",
+      "ai_plan": "Ai Plan",
+      "navi": "Navi"
+    },
+    "input": {
+      "where": "Where",
+      "where_placeholder": "Where Placeholder",
+      "when": "When",
+      "days_suffix": "Days Suffix",
+      "who": "Who",
+      "who_options": {
+        "solo": "Solo",
+        "couple": "Couple",
+        "friends": "Friends",
+        "family": "Family"
+      },
+      "interests": "Interests",
+      "interests_options": {
+        "food": "Food",
+        "shopping": "Shopping",
+        "beauty": "Beauty",
+        "sightseeing": "Sightseeing",
+        "night": "Night",
+        "experience": "Experience"
+      }
+    },
+    "cta_helper": "Cta Helper",
+    "cta_btn": "Cta Btn",
+    "trust": {
+      "title": "Trusted support",
+      "items": "Trust items"
+    }
+  },
+  "server_notifications": {
+    "booking_created_title": "[Kello] Đã nhận yêu cầu đặt lịch: {{storeName}}",
+    "booking_created_body": "Yêu cầu đặt lịch tại {{storeName}} vào {{date}} {{time}} đã được nhận. Vui lòng chờ trong giây lát.",
+    "booking_created_cta": "Xem đặt lịch của tôi",
+    "booking_confirmed_title": "[Kello] Đặt lịch đã xác nhận: {{storeName}}",
+    "booking_confirmed_body": "Chúc mừng! Đặt lịch tại {{storeName}} của bạn đã được xác nhận. ({{date}} {{time}}, {{service}})",
+    "booking_confirmed_cta": "Xem chi tiết đặt lịch",
+    "booking_canceled_title": "[Kello] Đã hủy đặt lịch: {{storeName}}",
+    "booking_canceled_body": "Đặt lịch tại {{storeName}} của bạn đã được hủy thành công. Hẹn gặp lại lần sau.",
+    "booking_canceled_cta": "Về trang chủ Kello",
+    "booking_change_requested_title": "[Kello] Đã nhận yêu cầu thay đổi",
+    "booking_change_requested_body": "Yêu cầu thay đổi của bạn đã được nhận. Nhân viên sẽ xem xét và thông báo cho bạn sớm.",
+    "booking_change_requested_cta": "Xem đặt lịch",
+    "booking_change_approved_title": "[Kello] Yêu cầu thay đổi được chấp thuận: {{storeName}}",
+    "booking_change_approved_body": "Yêu cầu thay đổi của bạn đã được chấp thuận. ({{date}} {{time}})",
+    "booking_change_approved_cta": "Xem đặt lịch đã cập nhật",
+    "booking_change_rejected_title": "[Kello] Yêu cầu thay đổi bị từ chối: {{storeName}}",
+    "booking_change_rejected_body": "Rất tiếc, yêu cầu thay đổi của bạn đã bị từ chối. Lý do: {{reason}}",
+    "booking_change_rejected_cta": "Xem đặt lịch",
+    "alternative_offer_sent_title": "[Kello] Đề xuất thời gian thay thế: {{storeName}}",
+    "alternative_offer_sent_body": "Thời gian bạn yêu cầu đã đầy. {{storeName}} đã đề xuất thời gian thay thế. Vui lòng xem và chọn.",
+    "alternative_offer_sent_cta": "Xem thời gian đề xuất",
+    "alternative_offer_accepted_title": "[Kello] Đã chấp nhận đề xuất: {{storeName}}",
+    "alternative_offer_accepted_body": "Bạn đã chấp nhận đề xuất thời gian thay thế từ {{storeName}}. Lịch đặt đã được đổi thành {{date}} {{time}}.",
+    "alternative_offer_accepted_cta": "Xem đặt lịch",
+    "alternative_offer_rejected_title": "[Kello] Đã từ chối đề xuất: {{storeName}}",
+    "alternative_offer_rejected_body": "Bạn đã từ chối đề xuất thời gian thay thế từ {{storeName}}. Chúng tôi sẽ tìm các lựa chọn khác.",
+    "alternative_offer_rejected_cta": "Xem đặt lịch",
+    "default_title": "[Kello] Bạn có thông báo mới",
+    "default_body": "Có cập nhật mới về {{storeName}}.",
+    "default_cta": "Xem thông báo",
+    "refund_policy_title": "Chính sách hủy và hoàn tiền",
+    "refund_no_refund": "Không hoàn tiền",
+    "refund_rate": "Hoàn {{rate}}% phí dịch vụ",
+    "platform_fee_note": "Phí nền tảng ({{rate}}%) không được hoàn lại bất kể thời điểm hủy. Không áp dụng chính sách riêng của từng cửa hàng.",
+    "email_footer": "Đây là email thông báo được gửi tự động. Để được hỗ trợ, vui lòng liên hệ bộ phận chăm sóc khách hàng Kello.",
+    "cta_view_detail": "Xem chi tiết"
+  },
+  "members_page": {
+    "title": "Danh sách thành viên",
+    "count_suffix": " thành viên",
+    "no_nickname": "(không có biệt danh)"
+  },
+  "terms": {
+    "service": {
+      "title": "Điều khoản sử dụng dịch vụ",
+      "content": "Điều 1 (Mục đích)\nCác điều khoản này quy định quyền, nghĩa vụ và trách nhiệm giữa công ty và người dùng khi sử dụng dịch vụ Kello.\n\nĐiều 2 (Định nghĩa)\n1. 'Dịch vụ' là nền tảng trung gian đặt lịch do công ty cung cấp.\n2. 'Người dùng' là khách hàng sử dụng dịch vụ theo các điều khoản này.\n\nĐiều 3 (Hiệu lực và thay đổi)\nCông ty có thể thay đổi điều khoản trong phạm vi pháp luật cho phép, và thay đổi sẽ được thông báo qua mục thông báo trên dịch vụ.\n\n[Tiếp theo...]\n\nCảm ơn bạn."
+    },
+    "privacy": {
+      "title": "Đồng ý thu thập và sử dụng thông tin cá nhân",
+      "content": "1. Thông tin cá nhân được thu thập\n- Bắt buộc: Tên, liên hệ (số điện thoại hoặc SNS ID), ngày giờ đặt lịch, menu dịch vụ\n- Tùy chọn: Yêu cầu thêm, hình ảnh tham khảo\n\n2. Mục đích thu thập và sử dụng\n- Xác nhận đặt lịch và truyền đạt đến cửa hàng đối tác\n- Hướng dẫn thay đổi/hủy đặt lịch và hỗ trợ khách hàng\n\n3. Thời hạn lưu giữ\n- 1 năm sau khi kết thúc sử dụng dịch vụ hoặc thời hạn lưu giữ theo quy định pháp luật\n\nBạn có quyền từ chối sự đồng ý này, nhưng việc từ chối có thể ngăn bạn đặt lịch dịch vụ."
+    },
+    "third_party": {
+      "title": "Cung cấp thông tin cho bên thứ ba và chuyển giao quốc tế",
+      "content": "1. Bên nhận: Cửa hàng đối tác liên quan\n2. Mục đích: Cung cấp dịch vụ đặt lịch và xác nhận đến thăm\n3. Mục thông tin: Tên, thông tin liên hệ, chi tiết đặt lịch\n4. Thời hạn lưu giữ: Cho đến khi hoàn thành mục đích cung cấp dịch vụ\n\n[Thông báo chuyển giao quốc tế]\nCông ty sử dụng máy chủ đám mây (AWS, v.v.) để cải thiện chất lượng dịch vụ toàn cầu. Dữ liệu có thể được lưu trữ ở nước ngoài trong quá trình này.\n\nBạn có quyền từ chối, và việc từ chối có thể hạn chế sử dụng dịch vụ."
+    },
+    "marketing": {
+      "title": "Thu thập và nhận thông tin marketing",
+      "content": "1. Mục đích: Thông báo dịch vụ mới, thông tin sự kiện, cung cấp ưu đãi cá nhân hóa\n2. Mục thu thập: Email, số điện thoại di động, trạng thái nhận thông báo đẩy ứng dụng\n3. Thời hạn lưu giữ: Cho đến khi rút lại sự đồng ý hoặc xóa tài khoản\n\nĐây là tùy chọn và bạn vẫn có thể sử dụng dịch vụ mà không cần đồng ý, nhưng bạn có thể bị hạn chế nhận thông tin hữu ích như ưu đãi giảm giá."
+    }
   }
 }

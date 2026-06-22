@@ -222,7 +222,7 @@ export default function NotificationCenter() {
               <h3 className={styles.headerTitle}>{t('notification_center.title')}</h3>
               {unreadCount > 0 && (
                 <button className={styles.markAllButton} onClick={() => void handleMarkAllRead()}>
-                  모두 읽음
+                  {t('notifications.mark_all_read')}
                 </button>
               )}
             </div>
@@ -268,7 +268,7 @@ export default function NotificationCenter() {
               ))
             ) : (
               <div className={styles.emptyState}>
-                새로운 알림이 없습니다.
+                {t('notification_center.empty')}
               </div>
             )}
           </ul>

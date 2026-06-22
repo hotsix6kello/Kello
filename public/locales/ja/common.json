@@ -83,7 +83,19 @@
     "toast_copy_hint": "{{label}} メッセージをコピーする準備ができました。",
     "booking_confirmation_title": "予約リクエストを送信しました！",
     "booking_confirmation_desc": "まもなくお知らせします。",
-    "booking_confirmation_cta": "予約を確認する"
+    "booking_confirmation_cta": "予約を確認する",
+    "category_all": "All",
+    "label_price_from": "from",
+    "btn_continue": "Book Now",
+    "btn_reset": "Edit Booking",
+    "btn_close": "Close",
+    "completion_flow_hint": "Your booking request has been received. It will be confirmed after the shop reviews it. Check results via notification or My Bookings.",
+    "price_estimate_hint": "Prices shown are estimates. Final amounts may vary based on options or shop policy.",
+    "label_rating": "Rating",
+    "reviews_title": "Trusted Reviews",
+    "reviews_sort": "Sort by: Trust Score",
+    "reviews_helpful": "Helpful",
+    "reviews_view_all": "View all 1,240 reviews"
   },
   "booking_skeleton": {
     "steps": {
@@ -157,7 +169,8 @@
       "attached_images": "添付画像",
       "image_count_summary": "計 {{count}} 枚",
       "submit_button": "予約リクエストを送信",
-      "preparing": "このカテゴリの最終確認画面は現在準備中です。"
+      "preparing": "このカテゴリの最終確認画面は現在準備中です。",
+      "agreement_refund_policy": "[Required] I understand that cancellation and refund conditions may vary depending on the partner shop policy after quote confirmation and payment."
     },
     "next_step": "次のステップへ",
     "check_final": "最終確認へ移行",
@@ -293,6 +306,11 @@
         "body_title": "ボディ",
         "body_desc": "背中、胸、またはその他のボディワクシングです。"
       }
+    },
+    "login_required": {
+      "title": "Sign in to send your booking request",
+      "description": "Sign in to track your request and receive your proposal and payment details safely.",
+      "cta": "Sign in to continue"
     }
   },
   "common": {
@@ -360,7 +378,18 @@
       "call_120": "120に電話",
       "back_to_list": "一覧に戻る",
       "send": "送信",
-      "logout": "ログアウト"
+      "logout": "ログアウト",
+      "view_details": "상세 정보 보기",
+      "emergency_phrases": "긴급 문구",
+      "browse_places": "장소 둘러보기",
+      "browse_explore": "탐색 둘러보기",
+      "explore_more": "더 탐색하기",
+      "open_hub": "허브 열기",
+      "view_all_new": "View all",
+      "browse_community_new": "Browse community",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "go_back": "Go Back"
     },
     "community": {
       "posts": "私の投稿",
@@ -377,7 +406,7 @@
       },
       "context": {
         "title": "状況別フレーズ",
-        "booking": "予約情報に関連する役立ちフレーズです。",
+        "booking": "??",
         "interpreter": "通訳サポートが必要なときに使うフレーズです。",
         "support": "助けが必要なときに役立つフレーズです。"
       },
@@ -486,7 +515,9 @@
       "in_progress": "進行中",
       "canceled": "キャンセル済み",
       "loading": "読み込み中...",
-      "searching": "検索中..."
+      "searching": "検索中...",
+      "back_to_list": "Back to List",
+      "labels": "???"
     },
     "loading": "読み込み中...",
     "retry": "再試行",
@@ -575,7 +606,9 @@
         "days_other": "{{count}} 日",
         "comments": "{{count}} コメント",
         "stops": "{{count}} ヶ所",
-        "days": "{{count}} 日"
+        "days": "{{count}} 日",
+        "stops_zero": "{{count}}개 장소",
+        "days_zero": "{{count}}일"
       },
       "relative": {
         "just_now": "今すぐ",
@@ -602,7 +635,17 @@
     "copied": "コピーしました!",
     "greeting_morning": "おはようございます",
     "greeting_afternoon": "こんにちは",
-    "greeting_evening": "こんばんは"
+    "greeting_evening": "こんばんは",
+    "login_required_for_feature": "Please log in to use this feature.",
+    "search_results": "Search Results",
+    "search_results_for": "{{count}} results for '{{query}}'",
+    "errors": {
+      "processing_failed": "Processing failed."
+    },
+    "time": {
+      "just_now": "Just now"
+    },
+    "reset": "Reset"
   },
   "welcome_popup": {
     "title": "会員登録で\n5%割引クーポンプレゼント！",
@@ -672,6 +715,10 @@
       "navigation": {
         "title": "リアルタイム移動案内",
         "desc": "言語の壁がないルート案内"
+      },
+      "booking": {
+        "title": "Concierge Booking",
+        "desc": "Clinics, Spas, and more"
       }
     },
     "recommended_plans": "おすすめの旅行プラン",
@@ -691,7 +738,9 @@
       "request_custom_label": "カスタム",
       "request_custom_title": "{{days}}日間のプランをリクエスト",
       "request_custom_toast": "{{days}}日間のカスタムプランをリクエストしました！コンシェルジュからご連絡いたします。"
-    }
+    },
+    "title_korea": "Title Korea",
+    "fetching_location": "Fetching location..."
   },
   "explore_page": {
     "title": "探索",
@@ -745,6 +794,15 @@
         "club": "クラブ",
         "exhibition": "展示会"
       }
+    },
+    "select_city": "Select City",
+    "search_placeholders": {
+      "all": "Search for beauty, food...",
+      "beauty": "Search clinics, salons...",
+      "event": "Search concerts, shows...",
+      "food": "Search restaurants, dishes...",
+      "festival": "Search festivals...",
+      "attraction": "Search palaces, parks..."
     }
   },
   "explore_items": {
@@ -821,6 +879,83 @@
       "area": "ソウル駅",
       "desc": "ソウルから釜山まで最も速く快適に移動する方法",
       "price": "59,800"
+    },
+    "phrases": {
+      "title": "Travel Phrasebook",
+      "subtitle": "Essential local expressions for seamless communication",
+      "eyebrow": "Prepared Traveler",
+      "hero": {
+        "badge": "Recommended for Today",
+        "count": "useful expressions"
+      },
+      "context": {
+        "title": "Contextual Phrases",
+        "booking": "Useful phrases related to your booking information.",
+        "interpreter": "Phrases to use when you need translation support.",
+        "support": "Useful phrases when you need help."
+      },
+      "category": {
+        "title": "{{category}} Phrases"
+      },
+      "categories": {
+        "transport": {
+          "label": "Transport",
+          "description": "Phrases for moving around",
+          "helper": "Use for taxis or subways"
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "description": "Phrases for ordering food",
+          "helper": "Use for reservations and requests"
+        },
+        "beauty": {
+          "label": "Beauty",
+          "description": "Phrases for salon services",
+          "helper": "Use for consultations and treatment requests"
+        },
+        "emergency": {
+          "label": "Emergency",
+          "description": "Phrases for urgent situations",
+          "helper": "Use for police or ambulance requests"
+        }
+      },
+      "favorites": {
+        "desc": "Save phrases you use frequently",
+        "empty": "No saved phrases yet"
+      },
+      "recent": {
+        "desc": "Phrases you've checked recently"
+      },
+      "empty": {
+        "title": "No phrases found",
+        "desc": "Check other categories"
+      },
+      "items": {
+        "transport_address": "Destination address",
+        "transport_dropoff": "Stop here",
+        "transport_time": "Travel time",
+        "transport_map": "Use the map",
+        "transport_platform": "Platform check",
+        "restaurant_allergy": "Seafood allergy",
+        "restaurant_spicy": "No spicy food",
+        "restaurant_recommend": "Popular menu",
+        "restaurant_less_spicy": "Less spicy request",
+        "restaurant_split": "Split the bill",
+        "beauty_reservation": "Treatment booking",
+        "beauty_natural": "Natural style",
+        "beauty_price": "Price check first",
+        "beauty_slowly": "Explain slowly",
+        "beauty_before_start": "Confirm before start",
+        "emergency_help": "Need help now",
+        "emergency_translation": "Need a translation",
+        "emergency_lost": "Lost",
+        "emergency_1330": "Tourist helpline",
+        "emergency_police": "Police help",
+        "notes": {
+          "transport_map": "Useful when pronunciation or landmarks are difficult.",
+          "emergency_1330": "1330 is the Korea Travel Helpline."
+        }
+      }
     }
   },
   "today_page": {
@@ -842,7 +977,9 @@
     "select_date": "日付選択",
     "select_time": "時間選択",
     "total_price": "合計金額",
-    "request_booking": "予約をリクエスト"
+    "request_booking": "予約をリクエスト",
+    "unavailable_title": "This place detail is not available right now",
+    "unavailable_desc": "This link does not match a supported explore detail yet. Return to Explore to browse available places."
   },
   "navigation_page": {
     "title": "今日の予定",
@@ -1006,18 +1143,27 @@
     "defaults": {
       "region": "ソウル"
     },
+    "regions": {
+      "seoul": "ソウル", "gyeonggi": "京畿道", "incheon": "仁川",
+      "busan": "釜山", "daegu": "大邱", "daejeon": "大田",
+      "gwangju": "光州", "ulsan": "蔚山", "sejong": "世宗",
+      "gangwon": "江原道", "chungbuk": "忠清北道", "chungnam": "忠清南道",
+      "jeonbuk": "全羅北道", "jeonnam": "全羅南道", "gyeongbuk": "慶尚北道",
+      "gyeongnam": "慶尚南道", "jeju": "済州", "other": "その他"
+    },
     "hero": {
       "title": "Kello コミュニティ",
       "search_placeholder": "興味のあるトピックを検索"
     },
     "categories": {
-      "all": "すべて",
-      "meetup": "交流会/集まり",
-      "beauty_review": "ビューティー",
-      "food_review": "グルメ/お店",
-      "travel_review": "観光/旅行",
+      "all": "???",
+      "meetup": "???",
+      "beauty_review": "??????",
+      "food_review": "?????",
+      "travel_review": "??????",
       "meetup_recruitment": "同行者募集",
-      "help": "お役立ち情報"
+      "help": "??",
+      "tips": "?????"
     },
     "sub_filters": {
       "all": "すべて",
@@ -1097,7 +1243,7 @@
       },
       "title_label": {
         "beauty_review": "メニュー/テーマ",
-        "default": "タイトル"
+        "default": "????"
       },
       "title_placeholder": {
         "beauty_review": "例：江南駅 レイヤードカットのレビュー",
@@ -1379,7 +1525,8 @@
       }
     },
     "actions": {
-      "delete_confirm": "本当に削除しますか？"
+      "delete_confirm": "本当に削除しますか？",
+      "delete": "Delete"
     },
     "errors": {
       "login_required": "ログインが必要です。",
@@ -1401,6 +1548,12 @@
     "comments": "コメント",
     "time": {
       "just_now": "たった今"
+    },
+    "title": "??????",
+    "login_required": {
+      "title": "Sign in to write a post",
+      "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
+      "cta": "Sign in to write"
     }
   },
   "help_page": {
@@ -1511,7 +1664,9 @@
       "title": "韓国の美しさを、\nあなたの旅程に。",
       "subtitle": "ご希望のビューティーサービスを選んで、すぐに予約へ進みましょう。",
       "welcome": "{{name}}様、サービスをお選びください。",
-      "welcome_user": "{{greeting}}、{{name}}様！👋"
+      "welcome_user": "{{greeting}}、{{name}}様！👋",
+      "welcome_header": "{{name}}",
+      "welcome_hero": "Welcome, {{name}}! 👋"
     },
     "lookbook_hero": {
       "slide1_title": "韓国でK-뷰티予約、",
@@ -1559,7 +1714,8 @@
       "submit_blocked_customer": "お名前と連絡先を入力してからお試しください。",
       "submit_blocked_agreements": "必須項目に同意してからお試しください。",
       "submit_blocked_generic": "予約リクエストを送信できません。入力内容を確認してください。",
-      "section_subtitle": "K-Beautyサービスを選んですぐ予約を始めましょう。"
+      "section_subtitle": "K-Beautyサービスを選んですぐ予約を始めましょう。",
+      "submit_in_progress": "Sending booking request..."
     },
     "interpreter": {
       "eyebrow": "通訳サポート",
@@ -1792,7 +1948,46 @@
     "cancel_platform_fee_note": "プラットフォーム利用料（{{rate}}%）はキャンセル時期に関わらず返金されません。",
     "cancel_consent_no_refund": "予約日の1日前以内のキャンセルのため返金できません。全額差し引きに同意します。",
     "cancel_consent_partial": "今キャンセルすると、プラットフォーム利用料 {{platformFee}} と施術費の {{penaltyRate}}%（{{penaltyAmount}}）が差し引かれます。同意します。",
-    "cancel_consent_default": "キャンセル・返金ポリシーに同意します。"
+    "cancel_consent_default": "キャンセル・返金ポリシーに同意します。",
+    "payment_consent_hint": "????????????2????????????",
+    "payment_consent_privacy_label": "????????????????",
+    "payment_consent_refund_label": "??????????????????",
+    "payment_consent_title": "???????????",
+    "payment_currency_usd_only": "PayPal?????USD?????????????????????Kello?????????",
+    "payment_error": "???????????????????????????",
+    "payment_no_refund_label": "????",
+    "payment_refund_policy_title": "????????????",
+    "payment_refund_rate_label": "{{rate}}%??",
+    "payment_section_title": "????",
+    "payment_status_paid": "?????",
+    "payment_success": "??????????????????????",
+    "quote_accepted_message": "?????????????????????????",
+    "quote_action_accept": "?????",
+    "quote_action_reject": "?????",
+    "quote_date_time": "????",
+    "quote_error_respond": "??????????????????????",
+    "quote_expired_notice": "???????????????????",
+    "quote_expires_at": "???????",
+    "quote_note": "?????",
+    "quote_processing": "???...",
+    "quote_rejected_message": "??????????Kello?????????",
+    "quote_section_title": "????",
+    "quote_service_name": "??????",
+    "quote_shop_address": "????",
+    "quote_shop_name": "????",
+    "quote_status_accepted": "????",
+    "quote_status_expired": "????",
+    "quote_status_pending": "????",
+    "quote_status_rejected": "????",
+    "quote_total_price": "????",
+    "quote_refund_policy": "Refund / Cancellation Policy",
+    "quote_sent_at": "Proposal Sent",
+    "quote_status_label": "Proposal Status",
+    "payment_paypal_button_label": "Pay with PayPal",
+    "payment_processing": "Processing payment...",
+    "payment_already_paid": "This booking has already been paid.",
+    "payment_currency_unsupported": "PayPal payment is currently available only for USD quotes.",
+    "payment_status_pending": "Payment Pending"
   },
   "settings_page": {
     "hero": {
@@ -2038,7 +2233,8 @@
       }
     },
     "community": {
-      "empty_simple": "まだ投稿がありません"
+      "empty_simple": "まだ投稿がありません",
+      "empty_simple_new": "No posts yet."
     },
     "bookings": {
       "title": "マイ予約",
@@ -2047,7 +2243,8 @@
       "matching_desc": "店舗マッチング待機中",
       "price_pending": "店舗確認後に案内",
       "error_fetch": "予約の読み込みに失敗しました。",
-      "browse_beauty_cta": "ビューティーサービスを探す"
+      "browse_beauty_cta": "ビューティーサービスを探す",
+      "empty_text": "No booking history yet."
     },
     "profile": {
       "account_hint": "アカウントと設定",
@@ -2083,20 +2280,26 @@
       "summary": {
         "posts": "投稿",
         "reviews": "レビュー",
-        "meetups": "ミートアップ"
+        "meetups": "ミートアップ",
+        "comments": "Comments"
       },
       "tabs": {
         "posts": "投稿",
         "reviews": "レビュー",
-        "meetups": "ミートアップ"
+        "meetups": "ミートアップ",
+        "all": "All"
       },
       "type": {
         "meetup": "ミートアップ",
-        "travel": "旅行"
+        "travel": "旅行",
+        "post": "Post",
+        "review": "Review"
       },
       "review_prompts": {
         "title": "レビューを書いてみませんか",
-        "desc": "訪れた店舗にレビューを残しましょう。"
+        "desc": "訪れた店舗にレビューを残しましょう。",
+        "shop": "Shop",
+        "rating": "Rating"
       },
       "empty": {
         "posts": {
@@ -2112,8 +2315,13 @@
         "meetups": {
           "title": "参加したミートアップなし",
           "desc": "まだ参加したミートアップがありません。"
+        },
+        "all": {
+          "title": "No activity yet",
+          "desc": "Desc"
         }
-      }
+      },
+      "title_new": "My community"
     },
     "messages": {
       "upload_success": "プロフィール写真が更新されました。",
@@ -2121,7 +2329,29 @@
     },
     "bookings_hub": {
       "meta": {
-        "reference": "参照"
+        "reference": "参照",
+        "time": "Time",
+        "area": "Area",
+        "total_price": "Total Price"
+      },
+      "empty": {
+        "upcoming": {
+          "title": "No upcoming bookings",
+          "desc": "Desc"
+        },
+        "completed": {
+          "title": "No completed bookings",
+          "desc": "Desc"
+        },
+        "other": {
+          "title": "No bookings here",
+          "desc": "Desc"
+        }
+      },
+      "title": "Booking hub",
+      "summary": {
+        "upcoming": "Upcoming",
+        "history": "History"
       }
     },
     "referral": {
@@ -2152,7 +2382,158 @@
     "exchange_rate_base": "KRW基準",
     "no_email": "メール情報なし",
     "referral_code_label": "紹介コード",
-    "price_negotiating": "価格調整中"
+    "price_negotiating": "価格調整中",
+    "help_medical": "Medical",
+    "help_interpreter": "Interpretation",
+    "help_police": "Police",
+    "help_lost": "Lost Item",
+    "phrases": {
+      "categories": {
+        "transport": {
+          "label": "Label",
+          "description": "Phrases for transportation and directions.",
+          "helper": "Helper"
+        },
+        "restaurant": {
+          "label": "Label",
+          "description": "Phrases for restaurants and cafes.",
+          "helper": "Helper"
+        },
+        "beauty": {
+          "label": "Label",
+          "description": "Phrases for beauty appointments.",
+          "helper": "Helper"
+        },
+        "emergency": {
+          "label": "Label",
+          "description": "Phrases for emergencies.",
+          "helper": "Helper"
+        }
+      },
+      "eyebrow": "Eyebrow",
+      "title": "Saved phrases",
+      "subtitle": "Subtitle",
+      "hero": {
+        "badge": "Phrasebook",
+        "count": "{{count}} phrases"
+      },
+      "context": {
+        "title": "Current context",
+        "booking": "??",
+        "interpreter": "Interpreter",
+        "support": "Support"
+      },
+      "favorites": {
+        "desc": "Desc",
+        "empty": "Empty"
+      },
+      "recent": {
+        "desc": "Desc"
+      },
+      "category": {
+        "title": "Category"
+      },
+      "empty": {
+        "title": "No phrases saved",
+        "desc": "Desc"
+      }
+    },
+    "saved": {
+      "places": {
+        "fallback_title": "Fallback Title",
+        "source_plan": "Source Plan",
+        "source_saved": "Source Saved",
+        "source_fallback": "Source Fallback",
+        "source_id_only": "Source Id Only",
+        "added": "Added",
+        "title": "Saved places",
+        "desc": "Desc",
+        "empty": {
+          "title": "No saved places",
+          "desc": "Desc",
+          "cta": "Cta"
+        }
+      },
+      "plans": {
+        "synced": "Synced",
+        "title": "Saved plans",
+        "desc": "Desc",
+        "empty": {
+          "title": "No saved plans",
+          "desc": "Desc"
+        }
+      },
+      "title": "Saved"
+    },
+    "support": {
+      "guides": {
+        "find_booking": {
+          "q": "Q",
+          "a": "A"
+        },
+        "staff_talk": {
+          "q": "Q",
+          "a": "A"
+        },
+        "change_time": {
+          "q": "Q",
+          "a": "A"
+        },
+        "cancel_refund": {
+          "q": "Q",
+          "a": "A"
+        },
+        "write_review": {
+          "q": "Q",
+          "a": "A"
+        },
+        "community_safety": {
+          "q": "Q",
+          "a": "A",
+          "cta": "Cta"
+        }
+      },
+      "general": {
+        "booking_cancel": {
+          "label": "Label",
+          "desc": "Desc",
+          "cta": "Cta"
+        },
+        "community_safety": {
+          "label": "Label",
+          "desc": "Desc",
+          "cta": "Cta"
+        },
+        "partner": {
+          "label": "Label",
+          "desc": "Desc"
+        },
+        "title": "General support",
+        "desc": "Desc",
+        "report_notice": "Report Notice"
+      },
+      "booking": {
+        "banner_report": "Banner Report",
+        "banner_interpreter": "Banner Interpreter",
+        "banner_default": "Banner Default",
+        "banner_fallback": "Banner Fallback",
+        "context_title": "Context Title",
+        "context_desc": "Context Desc",
+        "title": "Booking support",
+        "desc": "Desc",
+        "empty": {
+          "title": "No related bookings",
+          "desc": "Desc"
+        }
+      },
+      "eyebrow": "Eyebrow",
+      "title": "Support",
+      "subtitle": "Subtitle",
+      "faq": {
+        "title": "FAQ",
+        "desc": "Desc"
+      }
+    }
   },
   "notifications": {
     "title": "通知設定",
@@ -2218,7 +2599,14 @@
     },
     "footer_note": "重要な予約通知は設定にかかわらず送信される場合があります。",
     "tab_booking": "予約",
-    "tab_updates": "お知らせ"
+    "tab_updates": "お知らせ",
+    "loading": "Loading",
+    "event_default": "Event Default",
+    "back": "Back",
+    "page_title": "Page Title",
+    "empty": "Empty",
+    "empty_cta": "Empty Cta",
+    "booking_link": "Booking Link"
   },
   "error_title": "問題が発生しました。",
   "error_desc": "問題が解決しない場合はサポートにお問い合わせください。",
@@ -2407,7 +2795,8 @@
       "two_days": "予約日の2日前：サービス料金の60%返金",
       "one_day": "予約日の1日前：返金不可",
       "same_day": "当日 / No-show：返金不可",
-      "note": "Wekelloの統一キャンセルポリシーは、プラットフォームを通じて行われたすべての予約に均一に適用されます。店舗独自のキャンセルポリシーは適用されません。"
+      "note": "Wekelloの統一キャンセルポリシーは、プラットフォームを通じて行われたすべての予約に均一に適用されます。店舗独自のキャンセルポリシーは適用されません。",
+      "five_days": "Five Days"
     },
     "chargeback": {
       "title": "5. 決済キャンセルおよび異議申し立て",
@@ -2424,20 +2813,7 @@
   "afternoon": "こんにちは",
   "evening": "こんばんは",
   "assurance": {
-    "items": [
-      {
-        "title": "一目でわかるカテゴリー選択",
-        "desc": "最初の画面で希望のサービスを選び、すぐに予約フローへ進めます。"
-      },
-      {
-        "title": "安心の言語サポート",
-        "desc": "必要な時はいつでも、リアルタイム翻訳ヘルパーでお店とスムーズにコミュニケーション。"
-      },
-      {
-        "title": "モバイルファーストの予約経路",
-        "desc": "片手で選びやすいカードボタンと大きなCTAで、スムーズな予約体験を提供。"
-      }
-    ]
+    "items": "????"
   },
   "interpreter": {
     "eyebrow": "言語サポート",
@@ -2507,11 +2883,29 @@
     "open_maps": "マップで開く",
     "loading": "読み込み中...",
     "login_required": "ログインして周辺のスポットを確認しましょう。",
-    "location_denied": "現在地を表示するには位置情報の許可が必要です。"
+    "location_denied": "現在地を表示するには位置情報の許可が必要です。",
+    "no_results": "No places within 1.5 km nearby.",
+    "api_error": "Failed to search places."
   },
   "talk_page": {
     "korean_viewer_mode": "韓国語ビューアーモード",
-    "korean_viewer_hint": "💡 スタッフに見せるには韓国語ビューアーモードをオンにしてください。"
+    "korean_viewer_hint": "💡 スタッフに見せるには韓国語ビューアーモードをオンにしてください。",
+    "simulated_notification": "Jenny Hair Salon: Hello! We have sent the design draft you requested. Please check it.",
+    "show_to_staff": "Show to staff",
+    "tab_booking": "予約",
+    "tab_style_recommend": "スタイル提案",
+    "tab_shop_recommend": "サロン推薦",
+    "tab_pricing": "料金案内",
+    "tab_service_info": "施術情報",
+    "tab_guide": "ご案内",
+    "welcome_greeting": "こんにちは！私はKelloです 👋",
+    "welcome_question": "何かお手伝いできますか？",
+    "ask_kello": "Kelloに聞いてみる",
+    "viewer_tip_line1": "💡 韓国人スタッフに見せるには",
+    "viewer_tip_line2": "韓国語ビューアーモードを有効にしてください。",
+    "link_shop_title": "ビューティーサロンを連携",
+    "map_view_btn": "地図で位置を確認",
+    "kello_talk_suffix": "トーク"
   },
   "home_hero": {
     "wave_hair": "ウェーブヘア",
@@ -2594,7 +2988,9 @@
     "emoji": "絵文字",
     "edit_action": "編集",
     "delete_action": "削除",
-    "beauty_tip": "施術前のシャンプーは韓国の基本マナーです。スタッフに「정말 예뻐요！」と伝えてみてください。"
+    "beauty_tip": "施術前のシャンプーは韓国の基本マナーです。スタッフに「정말 예뻐요！」と伝えてみてください。",
+    "speech_not_supported": "This browser does not support speech recognition.",
+    "add_phrase": "Add"
   },
   "help_labels": {
     "medical": "医療サポート",
@@ -2621,7 +3017,8 @@
     "review_info": "予約情報を再度確認してください。"
   },
   "notification_center": {
-    "title": "通知センター"
+    "title": "通知センター",
+    "empty": "新しい通知はありません。"
   },
   "partner_signup": {
     "badge": "🤝 提携業者申請",
@@ -2675,5 +3072,103 @@
     "error_submit": "申請中にエラーが発生しました: ",
     "back": "← 戻る",
     "home": "🏠 ホーム"
+  },
+  "home_new": {
+    "hero_title": "Hero Title",
+    "hero_subtitle": "Hero Subtitle",
+    "features": {
+      "booking": "??",
+      "ai_plan": "Ai Plan",
+      "navi": "Navi"
+    },
+    "input": {
+      "where": "Where",
+      "where_placeholder": "Where Placeholder",
+      "when": "When",
+      "days_suffix": "Days Suffix",
+      "who": "Who",
+      "who_options": {
+        "solo": "Solo",
+        "couple": "Couple",
+        "friends": "Friends",
+        "family": "Family"
+      },
+      "interests": "Interests",
+      "interests_options": {
+        "food": "Food",
+        "shopping": "Shopping",
+        "beauty": "Beauty",
+        "sightseeing": "Sightseeing",
+        "night": "Night",
+        "experience": "Experience"
+      }
+    },
+    "cta_helper": "Cta Helper",
+    "cta_btn": "Cta Btn",
+    "trust": {
+      "title": "Trusted support",
+      "items": "Trust items"
+    }
+  },
+  "server_notifications": {
+    "booking_created_title": "[Kello] 予約リクエスト受付: {{storeName}}",
+    "booking_created_body": "{{storeName}}への{{date}} {{time}}の予約リクエストを受け付けました。しばらくお待ちください。",
+    "booking_created_cta": "予約を確認する",
+    "booking_confirmed_title": "[Kello] 予約確定のお知らせ: {{storeName}}",
+    "booking_confirmed_body": "おめでとうございます！{{storeName}}の予約が確定しました。({{date}} {{time}}、{{service}})",
+    "booking_confirmed_cta": "予約詳細を見る",
+    "booking_canceled_title": "[Kello] 予約キャンセル完了: {{storeName}}",
+    "booking_canceled_body": "{{storeName}}の予約が正常にキャンセルされました。またのご利用をお待ちしております。",
+    "booking_canceled_cta": "Kelloホームへ",
+    "booking_change_requested_title": "[Kello] 変更リクエスト受付",
+    "booking_change_requested_body": "変更リクエストを受け付けました。担当者が確認後、ご連絡いたします。",
+    "booking_change_requested_cta": "予約を見る",
+    "booking_change_approved_title": "[Kello] 予約変更承認: {{storeName}}",
+    "booking_change_approved_body": "ご要望の予約変更が承認されました。({{date}} {{time}})",
+    "booking_change_approved_cta": "変更された予約を確認",
+    "booking_change_rejected_title": "[Kello] 予約変更却下: {{storeName}}",
+    "booking_change_rejected_body": "申し訳ございません、予約変更リクエストが却下されました。理由: {{reason}}",
+    "booking_change_rejected_cta": "予約を見る",
+    "alternative_offer_sent_title": "[Kello] 代替日程のご提案: {{storeName}}",
+    "alternative_offer_sent_body": "ご希望の時間が満席のため、{{storeName}}より代替時間をご提案いただきました。ご確認の上、選択してください。",
+    "alternative_offer_sent_cta": "提案日程を確認する",
+    "alternative_offer_accepted_title": "[Kello] 代替提案を承諾: {{storeName}}",
+    "alternative_offer_accepted_body": "{{storeName}}の代替日程提案を承諾されました。予約時間が{{date}} {{time}}に変更されました。",
+    "alternative_offer_accepted_cta": "予約を見る",
+    "alternative_offer_rejected_title": "[Kello] 代替提案を辞退: {{storeName}}",
+    "alternative_offer_rejected_body": "{{storeName}}の代替日程提案を辞退されました。担当者が再度検討いたします。",
+    "alternative_offer_rejected_cta": "予約を見る",
+    "default_title": "[Kello] お知らせが届きました",
+    "default_body": "{{storeName}}に関する新しいお知らせがあります。",
+    "default_cta": "通知を確認する",
+    "refund_policy_title": "キャンセル・返金規定",
+    "refund_no_refund": "返金不可",
+    "refund_rate": "施術料の{{rate}}%返金",
+    "platform_fee_note": "プラットフォーム手数料({{rate}}%)はキャンセルのタイミングに関わらず返金されません。店舗別規定は適用されません。",
+    "email_footer": "このメールは自動送信される通知メールです。お問い合わせはKelloカスタマーサポートまでご連絡ください。",
+    "cta_view_detail": "詳細を見る"
+  },
+  "members_page": {
+    "title": "メンバー一覧",
+    "count_suffix": "名",
+    "no_nickname": "(ニックネームなし)"
+  },
+  "terms": {
+    "service": {
+      "title": "サービス利用規約",
+      "content": "第1条（目的）\n本規約は、Kelloサービスを利用するにあたり、会社と利用者の権利・義務・責任事項を規定することを目的とします。\n\n第2条（用語の定義）\n1.「サービス」とは、会社が提供する予約仲介プラットフォームを意味します。\n2.「利用者」とは、本規約に従いサービスを利用するお客様を意味します。\n\n第3条（規約の効力及び変更）\n会社は関連法令に違反しない範囲で規約を変更でき、変更された規約はサービス内のお知らせを通じて告知します。\n\n[以下省略...]\n\nありがとうございます。"
+    },
+    "privacy": {
+      "title": "個人情報収集・利用同意",
+      "content": "1. 収集する個人情報\n- 必須：氏名、連絡先（電話番号またはSNS ID）、予約日時、サービスメニュー\n- 任意：追加リクエスト、参考画像\n\n2. 収集・利用目的\n- サービス予約確認と加盟店への伝達\n- 予約変更・キャンセル案内とCS対応\n\n3. 保有・利用期間\n- サービス終了後1年または法定保管期間まで\n\n本同意を拒否する権利がありますが、拒否した場合はサービス予約ができない場合があります。"
+    },
+    "third_party": {
+      "title": "個人情報の第三者提供・海外移転",
+      "content": "1. 提供先：該当予約加盟店（ショップ）\n2. 提供目的：予約サービス提供と来店確認\n3. 提供項目：氏名、連絡先、予約詳細情報\n4. 保有・利用期間：サービス提供目的達成まで\n\n【海外移転のご案内】\n会社はグローバルサービス品質向上のためクラウドサーバー（AWSなど）を使用しており、データの物理的な所在地が海外になる場合があります。\n\n拒否する権利があり、拒否した場合はサービス利用に制限が生じる場合があります。"
+    },
+    "marketing": {
+      "title": "マーケティング情報収集・受信",
+      "content": "1. 目的：新サービス案内、イベント情報、カスタマイズされた特典提供\n2. 収集項目：メール、携帯電話番号、アプリプッシュ受信状況\n3. 保有期間：同意撤回または会員退会まで\n\n任意事項のため同意しなくてもサービス利用は可能ですが、各種割引特典などの有益な情報の受信が制限される場合があります。"
+    }
   }
 }

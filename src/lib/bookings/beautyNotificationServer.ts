@@ -1,5 +1,6 @@
 import { getSupabaseServerClient, hasSupabaseServerAccess } from "@/lib/supabaseServer.ts";
 import { REFUND_POLICY, PLATFORM_FEE_RATE } from "@/constants/refundPolicy";
+import { getServerT } from "@/lib/i18n/serverTranslation";
 
 export type BeautyBookingNotificationEventType =
   | "booking_created"
@@ -43,22 +44,26 @@ export const BEAUTY_NOTIFICATION_RESEND_COOLDOWN_MS = 5 * 60 * 1000; // 5 mins
 
 const BEAUTY_NOTIFICATION_TABLE = "beauty_booking_notifications";
 
-function buildRefundPolicyHtml(): string {
+function buildRefundPolicyHtml(locale?: string): string {
+  const t = getServerT(locale);
   const rows = REFUND_POLICY.map((tier) => {
     const noRefund = tier.refundRate === 0;
     const color = noRefund ? "#dc2626" : "#374151";
     const weight = noRefund ? "700" : "400";
-    const valueText = noRefund ? "환불 불가" : `시술비 ${tier.refundRate}% 환불`;
+    const valueText = noRefund
+      ? t("server_notifications.refund_no_refund")
+      : t("server_notifications.refund_rate", { rate: tier.refundRate });
     return `<tr>
       <td style="padding:3px 0;font-size:12px;color:${color};font-weight:${weight};">${tier.label_ko}</td>
       <td style="padding:3px 0;font-size:12px;color:${color};font-weight:${weight};text-align:right;">${valueText}</td>
     </tr>`;
   }).join("");
 
+  const platformRate = Math.round(PLATFORM_FEE_RATE * 100);
   return `<div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;padding:16px;margin:24px 0;">
-    <p style="font-size:13px;font-weight:700;color:#7c3aed;margin:0 0 10px 0;">취소 및 환불 규정</p>
+    <p style="font-size:13px;font-weight:700;color:#7c3aed;margin:0 0 10px 0;">${t("server_notifications.refund_policy_title")}</p>
     <table style="width:100%;border-collapse:collapse;">${rows}</table>
-    <p style="font-size:11px;color:#9ca3af;margin:10px 0 0 0;">플랫폼 이용료(${Math.round(PLATFORM_FEE_RATE * 100)}%)는 취소 시점과 무관하게 환불되지 않습니다. 매장별 별도 규정은 적용되지 않습니다.</p>
+    <p style="font-size:11px;color:#9ca3af;margin:10px 0 0 0;">${t("server_notifications.platform_fee_note", { rate: platformRate })}</p>
   </div>`;
 }
 
@@ -143,19 +148,23 @@ export interface BeautyBookingNotificationContent {
 
 /**
  * Templates for the notification content.
+ * @param locale – canonical locale code (e.g. "en", "ko", "ja"). Falls back to "en".
  */
 export function getBeautyBookingNotificationTemplate(
   eventType: BeautyBookingNotificationEventType,
   metadata: Record<string, unknown>,
-  bookingId?: string
+  bookingId?: string,
+  locale?: string
 ): BeautyBookingNotificationContent {
-  const storeName = (metadata.storeName as string) || "매장";
+  const t = getServerT(locale);
+  const storeName = (metadata.storeName as string) || "";
   const date = (metadata.bookingDate as string) || "";
   const time = (metadata.bookingTime as string) || "";
-  const service = (metadata.primaryServiceName as string) || "시술";
+  const service = (metadata.primaryServiceName as string) || "";
+  const reason = (metadata.reason as string) || "-";
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const myBookingUrl = bookingId 
+  const myBookingUrl = bookingId
     ? `${baseUrl}/my/bookings/beauty?bookingId=${bookingId}`
     : `${baseUrl}/my/bookings/beauty`;
   const notificationUrl = `${baseUrl}/my/notifications`;
@@ -163,65 +172,72 @@ export function getBeautyBookingNotificationTemplate(
   switch (eventType) {
     case "booking_created":
       return {
-        title: `[Kello] 예약 요청 접수: ${storeName}`,
-        body: `${storeName} 매장에 ${date} ${time} 예약을 심사 중입니다. 잠시만 기다려 주세요.`,
-        ctaText: "내 예약 확인하기",
+        title: t("server_notifications.booking_created_title", { storeName }),
+        body: t("server_notifications.booking_created_body", { storeName, date, time }),
+        ctaText: t("server_notifications.booking_created_cta"),
         ctaLink: myBookingUrl,
       };
     case "booking_confirmed":
       return {
-        title: `[Kello] 예약 확정 안내: ${storeName}`,
-        body: `축하드려요! ${storeName} 예약을 확정했습니다. (${date} ${time}, ${service})`,
-        ctaText: "예약 상세 보기",
+        title: t("server_notifications.booking_confirmed_title", { storeName }),
+        body: t("server_notifications.booking_confirmed_body", { storeName, date, time, service }),
+        ctaText: t("server_notifications.booking_confirmed_cta"),
         ctaLink: myBookingUrl,
       };
     case "booking_canceled_by_customer":
       return {
-        title: `[Kello] 예약 취소 완료: ${storeName}`,
-        body: `${storeName} 예약이 정상적으로 취소되었습니다. 다음에 또 이용해 주세요.`,
-        ctaText: "Kello 홈으로",
+        title: t("server_notifications.booking_canceled_title", { storeName }),
+        body: t("server_notifications.booking_canceled_body", { storeName }),
+        ctaText: t("server_notifications.booking_canceled_cta"),
         ctaLink: baseUrl,
+      };
+    case "booking_change_requested":
+      return {
+        title: t("server_notifications.booking_change_requested_title"),
+        body: t("server_notifications.booking_change_requested_body"),
+        ctaText: t("server_notifications.booking_change_requested_cta"),
+        ctaLink: myBookingUrl,
       };
     case "booking_change_approved":
       return {
-        title: `[Kello] 예약 변경 승인: ${storeName}`,
-        body: `요청하신 예약 변경이 승인되었습니다. (${date} ${time})`,
-        ctaText: "변경된 예약 확인",
+        title: t("server_notifications.booking_change_approved_title", { storeName }),
+        body: t("server_notifications.booking_change_approved_body", { date, time }),
+        ctaText: t("server_notifications.booking_change_approved_cta"),
         ctaLink: myBookingUrl,
       };
     case "booking_change_rejected":
       return {
-        title: `[Kello] 예약 변경 반려: ${storeName}`,
-        body: `안타깝게도 예약 변경 요청이 반려되었습니다. 사유: ${metadata.reason || "없음"}`,
-        ctaText: "내 예약 보기",
+        title: t("server_notifications.booking_change_rejected_title", { storeName }),
+        body: t("server_notifications.booking_change_rejected_body", { reason }),
+        ctaText: t("server_notifications.booking_change_rejected_cta"),
         ctaLink: myBookingUrl,
       };
     case "alternative_offer_sent":
       return {
-        title: `[Kello] 대체 일정 제안 도착: ${storeName}`,
-        body: `원하신 시간이 마감되어 ${storeName}에서 대체 시간을 제안하셨습니다. 일정을 확인하고 선택해 주세요.`,
-        ctaText: "제안 일정 확인하기",
+        title: t("server_notifications.alternative_offer_sent_title", { storeName }),
+        body: t("server_notifications.alternative_offer_sent_body", { storeName }),
+        ctaText: t("server_notifications.alternative_offer_sent_cta"),
         ctaLink: myBookingUrl,
       };
     case "alternative_offer_accepted":
       return {
-        title: `[Kello] 제안 일정 수락 완료: ${storeName}`,
-        body: `${storeName}의 대체 일정 제안을 수락하셨습니다. 예약 시간이 ${date} ${time}으로 변경되었습니다.`,
-        ctaText: "내 예약 보기",
+        title: t("server_notifications.alternative_offer_accepted_title", { storeName }),
+        body: t("server_notifications.alternative_offer_accepted_body", { storeName, date, time }),
+        ctaText: t("server_notifications.alternative_offer_accepted_cta"),
         ctaLink: myBookingUrl,
       };
     case "alternative_offer_rejected":
       return {
-        title: `[Kello] 제안 일정 거절: ${storeName}`,
-        body: `${storeName}의 대체 일정 제안을 거절하셨습니다. 운영자가 다른 가능성을 다시 검토할 예정입니다.`,
-        ctaText: "내 예약 보기",
+        title: t("server_notifications.alternative_offer_rejected_title", { storeName }),
+        body: t("server_notifications.alternative_offer_rejected_body", { storeName }),
+        ctaText: t("server_notifications.alternative_offer_rejected_cta"),
         ctaLink: myBookingUrl,
       };
     default:
       return {
-        title: `[Kello] 알림이 도착했습니다`,
-        body: `${storeName} 관련 새로운 소식이 있습니다.`,
-        ctaText: "알림 확인하기",
+        title: t("server_notifications.default_title"),
+        body: t("server_notifications.default_body", { storeName }),
+        ctaText: t("server_notifications.default_cta"),
         ctaLink: notificationUrl,
       };
   }
@@ -341,12 +357,15 @@ async function dispatchBeautyBookingNotification(
     }
 
     // 3. Generate formal template content for Email
+    const emailLocale = (payload.metadata_json?.communicationLanguage as string) ?? undefined;
+    const t = getServerT(emailLocale);
     const template = getBeautyBookingNotificationTemplate(
-      payload.event_type, 
+      payload.event_type,
       payload.metadata_json || {},
-      payload.booking_id
+      payload.booking_id,
+      emailLocale
     );
-    
+
     // 3. Send via Resend API
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -355,23 +374,23 @@ async function dispatchBeautyBookingNotification(
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Kello <no-reply@kello.ai>", // Replace with verified domain in production
+        from: "Kello <no-reply@kello.ai>",
         to: [user.email],
         subject: template.title,
         text: template.body,
         html: `<div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 12px;">
           <h2 style="color: #7c3aed; margin-top: 0;">${template.title}</h2>
           <p style="font-size: 16px; line-height: 1.6; color: #4b5563;">${template.body}</p>
-          ${(payload.event_type === "booking_created" || payload.event_type === "booking_confirmed") ? buildRefundPolicyHtml() : ""}
+          ${(payload.event_type === "booking_created" || payload.event_type === "booking_confirmed") ? buildRefundPolicyHtml(emailLocale) : ""}
           ${template.ctaLink ? `
             <div style="margin: 30px 0;">
               <a href="${template.ctaLink}" style="background-color: #7c3aed; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
-                ${template.ctaText || '상세 보기'}
+                ${template.ctaText || t("server_notifications.cta_view_detail")}
               </a>
             </div>
           ` : ''}
           <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-          <p style="font-size: 12px; color: #9ca3af;">본 메일은 자동 발송되는 알림 메일입니다. 문의사항은 Kello 고객센터를 이용해 주세요.</p>
+          <p style="font-size: 12px; color: #9ca3af;">${t("server_notifications.email_footer")}</p>
         </div>`,
       }),
     });

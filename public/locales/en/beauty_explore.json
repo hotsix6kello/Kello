@@ -101,73 +101,121 @@
       "name": "Jenny House Cheongdam",
       "priceLabel": "From 150,000 KRW",
       "shortDescription": "Premium hair & makeup salon frequented by K-pop stars",
-      "tags": ["K-Style", "Premium", "Cheongdam"]
+      "tags": [
+        "K-Style",
+        "Premium",
+        "Cheongdam"
+      ]
     },
     "beauty_hair_2": {
       "name": "PPEUM Clinic Gangnam",
       "priceLabel": "From 50,000 KRW",
       "shortDescription": "Top value-for-money clinic most visited by foreign visitors",
-      "tags": ["Clinic", "Gangnam", "Value"]
+      "tags": [
+        "Clinic",
+        "Gangnam",
+        "Value"
+      ]
     },
     "beauty_nail_1": {
       "name": "Maison Nail Hongdae",
       "priceLabel": "From 79,000 KRW",
       "shortDescription": "Nail studio known for trendy color combos and seasonal nail art",
-      "tags": ["Monthly Art", "Gel Care", "Color Curation"]
+      "tags": [
+        "Monthly Art",
+        "Gel Care",
+        "Color Curation"
+      ]
     },
     "beauty_nail_2": {
       "name": "Beige Nail Jongno",
       "priceLabel": "From 45,000 KRW",
       "shortDescription": "Careful nail service from clean office looks to wedding nails",
-      "tags": ["Office Nail", "Wedding Nail", "Nail Care"]
+      "tags": [
+        "Office Nail",
+        "Wedding Nail",
+        "Nail Care"
+      ]
     },
     "beauty_esthetic_1": {
       "name": "Serin Skin Lounge Gangnam",
       "priceLabel": "From 95,000 KRW",
       "shortDescription": "Soothing and firming skin care in a private setting",
-      "tags": ["Soothing Care", "Firming", "Private"]
+      "tags": [
+        "Soothing Care",
+        "Firming",
+        "Private"
+      ]
     },
     "beauty_esthetic_2": {
       "name": "Glow Formula Seongsu",
       "priceLabel": "From 88,000 KRW",
       "shortDescription": "Custom soothing program and home care guide for sensitive skin",
-      "tags": ["Hydration", "Sensitive Skin", "Custom Consult"]
+      "tags": [
+        "Hydration",
+        "Sensitive Skin",
+        "Custom Consult"
+      ]
     },
     "beauty_waxing_1": {
       "name": "Bare Atelier Waxing Gangnam",
       "priceLabel": "From 99,000 KRW",
       "shortDescription": "High return-visit rate for thorough hygiene and systematic aftercare",
-      "tags": ["Hygiene", "Aftercare", "Brazilian"]
+      "tags": [
+        "Hygiene",
+        "Aftercare",
+        "Brazilian"
+      ]
     },
     "beauty_waxing_2": {
       "name": "Soft Strip Hongdae",
       "priceLabel": "From 55,000 KRW",
       "shortDescription": "Quick and gentle low-irritation waxing for busy schedules",
-      "tags": ["Arm Waxing", "Quick Session", "Low Irritation"]
+      "tags": [
+        "Arm Waxing",
+        "Quick Session",
+        "Low Irritation"
+      ]
     },
     "beauty_makeup_1": {
       "name": "Atelier Veil Makeup",
       "priceLabel": "Daily from 85,000 KRW",
       "shortDescription": "Natural and refined makeup that blends seamlessly into everyday life",
-      "tags": ["Makeup", "Seongsu", "Natural"]
+      "tags": [
+        "Makeup",
+        "Seongsu",
+        "Natural"
+      ]
     },
     "beauty_makeup_2": {
       "name": "Dear Muse Makeup",
       "priceLabel": "Wedding Guest from 132,000 KRW",
       "shortDescription": "Dedicated makeup expert for special occasions and weddings",
-      "tags": ["Wedding", "Jongno", "Expert"]
+      "tags": [
+        "Wedding",
+        "Jongno",
+        "Expert"
+      ]
     },
     "beauty_lash_1": {
       "name": "Bloom Lash Boutique Gangnam",
       "priceLabel": "From 99,000 KRW",
       "shortDescription": "Known for curl designs tailored to your eye shape and lasting results",
-      "tags": ["Curl Design", "Longevity", "Natural Extension"]
+      "tags": [
+        "Curl Design",
+        "Longevity",
+        "Natural Extension"
+      ]
     },
     "beauty_lash_2": {
       "name": "Feather Lash Seongsu",
       "priceLabel": "From 69,000 KRW",
       "shortDescription": "Natural lash salon welcoming even first-time lash perm visitors",
-      "tags": ["Lash Perm", "First-timer Friendly", "Natural Curl"]
+      "tags": [
+        "Lash Perm",
+        "First-timer Friendly",
+        "Natural Curl"
+      ]
     }
   },
   "designers": {
@@ -421,71 +469,170 @@
     "root_color_desc": "Tone correction for root growth.",
     "hair_clinic": "Hair Clinic",
     "hair_clinic_desc": "Damage care focused program.",
-    "nail_gel": "Gel Nail",
+    "nail_gel": {
+      "name": "Gel Nail",
+      "desc": "Basic gel color treatment."
+    },
     "nail_gel_desc": "Basic gel color treatment.",
-    "nail_care": "Nail Care",
+    "nail_care": {
+      "name": "Nail Care",
+      "desc": "Cuticle care and nail shaping."
+    },
     "nail_care_desc": "Cuticle care and nail shaping.",
-    "nail_pedi": "Gel Pedi",
+    "nail_pedi": {
+      "name": "Gel Pedi",
+      "desc": "Gel treatment with foot care."
+    },
     "nail_pedi_desc": "Gel treatment with foot care.",
-    "esthetic_calming": "Calming Care",
+    "esthetic_calming": {
+      "name": "Calming Care",
+      "desc": "Soothing program for sensitive skin."
+    },
     "esthetic_calming_desc": "Soothing program for sensitive skin.",
-    "esthetic_moisture": "Moisture Care",
+    "esthetic_moisture": {
+      "name": "Moisture Care",
+      "desc": "Hydration program for dry skin."
+    },
     "esthetic_moisture_desc": "Hydration program for dry skin.",
-    "esthetic_lifting": "Lifting Care",
+    "esthetic_lifting": {
+      "name": "Lifting Care",
+      "desc": "Elasticity improvement focused care."
+    },
     "esthetic_lifting_desc": "Elasticity improvement focused care.",
-    "waxing_brazilian": "Brazilian",
+    "waxing_brazilian": {
+      "name": "Brazilian Waxing",
+      "desc": "Sensitive area waxing."
+    },
     "waxing_brazilian_desc": "Sensitive area focused waxing.",
-    "waxing_arm": "Arm Waxing",
+    "waxing_arm": {
+      "name": "Arm Waxing",
+      "desc": "Full arm waxing."
+    },
     "waxing_arm_desc": "Full arm waxing.",
-    "waxing_leg": "Leg Waxing",
+    "waxing_leg": {
+      "name": "Leg Waxing",
+      "desc": "Lower leg or half leg standard."
+    },
     "waxing_leg_desc": "Lower leg or half leg standard.",
-    "makeup_daily": "Daily Makeup",
+    "makeup_daily": {
+      "name": "Daily Makeup",
+      "desc": "Light makeup for daily appointments."
+    },
     "makeup_daily_desc": "Light makeup for daily appointments.",
-    "makeup_interview": "Interview Makeup",
+    "makeup_interview": {
+      "name": "Interview Makeup",
+      "desc": "Neat and defined impression."
+    },
     "makeup_interview_desc": "Neat and defined look for interviews.",
-    "makeup_guest": "Wedding Guest Makeup",
+    "makeup_guest": {
+      "name": "Wedding Guest Makeup",
+      "desc": "Styling for event schedules."
+    },
     "makeup_guest_desc": "Styling tailored to event schedules.",
-    "lash_perm": "Lash Perm",
+    "lash_perm": {
+      "name": "Lash Perm",
+      "desc": "Curl-setting lash treatment."
+    },
     "lash_perm_desc": "Curl-setting lash treatment.",
-    "lash_extension": "Lash Extension",
+    "lash_extension": {
+      "name": "Lash Extension",
+      "desc": "Length and curl extension."
+    },
     "lash_extension_desc": "Length and curl extension treatment.",
-    "lash_retouch": "Lash Retouch",
+    "lash_retouch": {
+      "name": "Lash Retouch",
+      "desc": "Touch-up for existing extensions."
+    },
     "lash_retouch_desc": "Touch-up for existing extensions.",
-    "hair_add_scalp": "Scalp Scaling",
+    "hair_add_scalp": {
+      "name": "Scalp Scaling",
+      "desc": "Scalp cleanse before treatment."
+    },
     "hair_add_scalp_desc": "Scalp cleanse before treatment.",
-    "hair_add_blowdry": "Blow Dry Finish",
+    "hair_add_blowdry": {
+      "name": "Blow Dry",
+      "desc": "Blow dry with simple styling."
+    },
     "hair_add_blowdry_desc": "Blow dry with simple styling.",
-    "hair_add_ampoule": "Ampoule Care",
+    "hair_add_ampoule": {
+      "name": "Ampoule Care",
+      "desc": "Intensive nourishment for damage."
+    },
     "hair_add_ampoule_desc": "Intensive nourishment for damaged areas.",
-    "nail_add_removal": "Gel Removal Included",
+    "nail_add_removal": {
+      "name": "Gel Removal",
+      "desc": "Includes removal of existing gel."
+    },
     "nail_add_removal_desc": "Includes removal of existing gel.",
-    "nail_add_art": "Point Art",
+    "nail_add_art": {
+      "name": "Point Art",
+      "desc": "Point art on both hands."
+    },
     "nail_add_art_desc": "Point art added to both hands.",
-    "nail_add_strength": "Strength Coating",
+    "nail_add_strength": {
+      "name": "Strength Coating",
+      "desc": "Durability enhancement coating."
+    },
     "nail_add_strength_desc": "Durability enhancement coating.",
-    "esthetic_add_modeling": "Modeling Pack",
+    "esthetic_add_modeling": {
+      "name": "Modeling Pack",
+      "desc": "Soothing finish pack."
+    },
     "esthetic_add_modeling_desc": "Soothing finish pack.",
-    "esthetic_add_neck": "Neck Care",
+    "esthetic_add_neck": {
+      "name": "Neck Care",
+      "desc": "Focused neck line care."
+    },
     "esthetic_add_neck_desc": "Focused neck line care.",
-    "esthetic_add_led": "LED Care",
+    "esthetic_add_led": {
+      "name": "LED Care",
+      "desc": "Soothing light therapy."
+    },
     "esthetic_add_led_desc": "Soothing light therapy.",
-    "waxing_add_care": "Soothing Care",
+    "waxing_add_care": {
+      "name": "Soothing Care",
+      "desc": "Soothing gel care after treatment."
+    },
     "waxing_add_care_desc": "Soothing gel care after treatment.",
-    "waxing_add_pack": "Moisture Pack",
+    "waxing_add_pack": {
+      "name": "Moisture Pack",
+      "desc": "Irritation-reducing pack."
+    },
     "waxing_add_pack_desc": "Irritation-reducing pack.",
-    "waxing_add_trim": "Trimming Included",
+    "waxing_add_trim": {
+      "name": "Trimming Included",
+      "desc": "Pre-treatment trim included."
+    },
     "waxing_add_trim_desc": "Pre-treatment trim included.",
-    "makeup_add_hair": "Hair Blow Dry",
+    "makeup_add_hair": {
+      "name": "Hair Styling",
+      "desc": "Simple blow dry styling."
+    },
     "makeup_add_hair_desc": "Simple blow dry styling.",
-    "makeup_add_lash": "Lash Attachment",
+    "makeup_add_lash": {
+      "name": "Lash Attachment",
+      "desc": "Partial strip or point lash."
+    },
     "makeup_add_lash_desc": "Partial strip or point lash.",
-    "makeup_add_touchup": "Touch-up Kit",
+    "makeup_add_touchup": {
+      "name": "Touch-up Kit",
+      "desc": "Simple touch-up kit provided."
+    },
     "makeup_add_touchup_desc": "Simple touch-up kit provided.",
-    "lash_add_remove": "Lash Removal Included",
+    "lash_add_remove": {
+      "name": "Lash Removal",
+      "desc": "Includes removal of existing extensions."
+    },
     "lash_add_remove_desc": "Includes removal of existing extensions.",
-    "lash_add_tinting": "Black Tinting",
+    "lash_add_tinting": {
+      "name": "Black Tinting",
+      "desc": "Deep color enhancement."
+    },
     "lash_add_tinting_desc": "Deep color enhancement.",
-    "lash_add_coating": "Nourishing Coating",
+    "lash_add_coating": {
+      "name": "Nourishing Coating",
+      "desc": "Longevity support coating."
+    },
     "lash_add_coating_desc": "Longevity support coating.",
     "daily_makeup": "Daily Makeup",
     "daily_makeup_desc": "Light makeup for daily appointments.",
@@ -500,138 +647,6 @@
     "hair_root_color": {
       "name": "Root Color",
       "desc": "Tone correction focused on regrowth."
-    },
-    "nail_gel": {
-      "name": "Gel Nail",
-      "desc": "Basic gel color treatment."
-    },
-    "nail_care": {
-      "name": "Nail Care",
-      "desc": "Cuticle care and nail shaping."
-    },
-    "nail_pedi": {
-      "name": "Gel Pedi",
-      "desc": "Gel treatment with foot care."
-    },
-    "esthetic_calming": {
-      "name": "Calming Care",
-      "desc": "Soothing program for sensitive skin."
-    },
-    "esthetic_moisture": {
-      "name": "Moisture Care",
-      "desc": "Hydration program for dry skin."
-    },
-    "esthetic_lifting": {
-      "name": "Lifting Care",
-      "desc": "Elasticity improvement focused care."
-    },
-    "waxing_brazilian": {
-      "name": "Brazilian Waxing",
-      "desc": "Sensitive area waxing."
-    },
-    "waxing_arm": {
-      "name": "Arm Waxing",
-      "desc": "Full arm waxing."
-    },
-    "waxing_leg": {
-      "name": "Leg Waxing",
-      "desc": "Lower leg or half leg standard."
-    },
-    "makeup_daily": {
-      "name": "Daily Makeup",
-      "desc": "Light makeup for daily appointments."
-    },
-    "makeup_interview": {
-      "name": "Interview Makeup",
-      "desc": "Neat and defined impression."
-    },
-    "makeup_guest": {
-      "name": "Wedding Guest Makeup",
-      "desc": "Styling for event schedules."
-    },
-    "lash_perm": {
-      "name": "Lash Perm",
-      "desc": "Curl-setting lash treatment."
-    },
-    "lash_extension": {
-      "name": "Lash Extension",
-      "desc": "Length and curl extension."
-    },
-    "lash_retouch": {
-      "name": "Lash Retouch",
-      "desc": "Touch-up for existing extensions."
-    },
-    "hair_add_scalp": {
-      "name": "Scalp Scaling",
-      "desc": "Scalp cleanse before treatment."
-    },
-    "hair_add_blowdry": {
-      "name": "Blow Dry",
-      "desc": "Blow dry with simple styling."
-    },
-    "hair_add_ampoule": {
-      "name": "Ampoule Care",
-      "desc": "Intensive nourishment for damage."
-    },
-    "nail_add_removal": {
-      "name": "Gel Removal",
-      "desc": "Includes removal of existing gel."
-    },
-    "nail_add_art": {
-      "name": "Point Art",
-      "desc": "Point art on both hands."
-    },
-    "nail_add_strength": {
-      "name": "Strength Coating",
-      "desc": "Durability enhancement coating."
-    },
-    "esthetic_add_modeling": {
-      "name": "Modeling Pack",
-      "desc": "Soothing finish pack."
-    },
-    "esthetic_add_neck": {
-      "name": "Neck Care",
-      "desc": "Focused neck line care."
-    },
-    "esthetic_add_led": {
-      "name": "LED Care",
-      "desc": "Soothing light therapy."
-    },
-    "waxing_add_care": {
-      "name": "Soothing Care",
-      "desc": "Soothing gel care after treatment."
-    },
-    "waxing_add_pack": {
-      "name": "Moisture Pack",
-      "desc": "Irritation-reducing pack."
-    },
-    "waxing_add_trim": {
-      "name": "Trimming Included",
-      "desc": "Pre-treatment trim included."
-    },
-    "makeup_add_hair": {
-      "name": "Hair Styling",
-      "desc": "Simple blow dry styling."
-    },
-    "makeup_add_lash": {
-      "name": "Lash Attachment",
-      "desc": "Partial strip or point lash."
-    },
-    "makeup_add_touchup": {
-      "name": "Touch-up Kit",
-      "desc": "Simple touch-up kit provided."
-    },
-    "lash_add_remove": {
-      "name": "Lash Removal",
-      "desc": "Includes removal of existing extensions."
-    },
-    "lash_add_tinting": {
-      "name": "Black Tinting",
-      "desc": "Deep color enhancement."
-    },
-    "lash_add_coating": {
-      "name": "Nourishing Coating",
-      "desc": "Longevity support coating."
     }
   },
   "price_hair_summary": "Cut from 20,000 KRW | Color from 55,000 KRW | Perm from 60,000 KRW",
@@ -703,5 +718,14 @@
   "lang_ko": "Korean",
   "lang_en": "English",
   "lang_ja": "Japanese",
-  "lang_zh_cn": "Chinese"
+  "lang_zh_cn": "Chinese",
+  "btn_continue": "Btn Continue",
+  "btn_reset": "Btn Reset",
+  "btn_close": "Btn Close",
+  "price_estimate_hint": "Price Estimate Hint",
+  "step_1": "Step 1",
+  "step_2": "Step 2",
+  "step_3": "Step 3",
+  "step_4": "Step 4",
+  "step_5": "Step 5"
 }
