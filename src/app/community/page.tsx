@@ -35,10 +35,8 @@ interface CommunityImageDraft {
 }
 
 type CommunityCategory = 'beauty_review' | 'food_review' | 'travel_review' | 'meetup' | 'meetup_recruitment' | 'help';
-type CommunitySubFilter = 'all' | 'saved' | 'reacted' | 'mine' | 'recruiting' | 'active_reactions' | 'open_meetup' | 'weekend' | 'fresh';
 
 const CATEGORY_OPTIONS: CommunityCategory[] = ['meetup', 'beauty_review', 'food_review', 'travel_review', 'help'];
-const SUB_FILTER_OPTIONS: CommunitySubFilter[] = ['all', 'saved', 'reacted', 'mine', 'recruiting', 'active_reactions', 'open_meetup', 'weekend', 'fresh'];
 const COMMUNITY_IMAGE_META_KEY = 'IMAGE';
 const COMMUNITY_IMAGE_MAX_SIDE = 1280;
 const COMMUNITY_IMAGE_LIMIT = 4;
@@ -205,9 +203,6 @@ const formatMeaningfulFetchError = (error: Record<string, string> | null) => {
 const getCategoryLabel = (t: (key: string, options?: Record<string, unknown>) => string, category: CommunityCategory) =>
     t(`community_page.categories.${category}`);
 
-const getSubFilterLabel = (t: (key: string, options?: Record<string, unknown>) => string, subFilter: CommunitySubFilter) =>
-    t(`community_page.sub_filters.${subFilter}`);
-
 // ─── Group A: Feed Reducer ────────────────────────────────────────────────────
 
 type FeedState = { posts: Post[]; loading: boolean; error: string | null };
@@ -324,8 +319,6 @@ export default function CommunityPage() {
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-    // Group D: subFilter는 setter 없는 상수 → const로 전환 (타입 명시로 리터럴 좁힘 방지)
-    const subFilter: CommunitySubFilter = 'all';
 
     // Group A: feed 상태 (posts + loading + error → feedReducer)
     const [feedState, feedDispatch] = useReducer(feedReducer, undefined, (): FeedState => {
@@ -356,18 +349,6 @@ export default function CommunityPage() {
     }, []);
 
     const communityCategories = CATEGORY_OPTIONS.map((id) => ({ id, label: getCategoryLabel(t, id) }));
-    const communitySubFilters = SUB_FILTER_OPTIONS.map((id) => ({ id, label: getSubFilterLabel(t, id) }));
-    const getCategoryText = (category: CommunityCategory | '') =>
-        category ? getCategoryLabel(t, category) : t('community_page.form.select_category');
-
-    const getNavSummary = () => {
-        const currentTab = filter === 'all' 
-            ? t('community_page.categories.all') 
-            : (filter === 'tips' ? '예약팁' : getCategoryText(filter as CommunityCategory));
-        const currentSub = communitySubFilters.find((sub) => sub.id === subFilter)?.label || '';
-        if (subFilter === 'all') return t('community_page.nav_summary.all', { tab: currentTab });
-        return t('community_page.nav_summary.default', { sub: currentSub, tab: currentTab });
-    };
 
 
 
@@ -565,7 +546,7 @@ export default function CommunityPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <Users size={24} color="#000000" strokeWidth={2.5} />
                             <h1 style={{ fontSize: '1rem', fontWeight: 600, color: '#2A2624', margin: 0 }}>
-                                <span style={{ color: '#FF4D82' }}>Kello</span> 커뮤니티
+                                커뮤니티
                             </h1>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -599,8 +580,8 @@ export default function CommunityPage() {
                                 right: '4px',
                                 top: '50%',
                                 transform: 'translateY(-50%)',
-                                background: '#FF4D82',
-                                border: 'none',
+                                background: '#FFFFFF',
+                                border: '1.5px solid #FF4D82',
                                 borderRadius: '50%',
                                 width: '36px',
                                 height: '36px',
@@ -608,10 +589,10 @@ export default function CommunityPage() {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 cursor: 'pointer',
-                                boxShadow: '0 2px 8px rgba(255, 77, 130, 0.2)'
-                            }}
+                                boxShadow: '0 2px 8px rgba(255, 77, 130, 0.1)'
+                             }}
                         >
-                            <Search size={18} color="#FFFFFF" strokeWidth={2.5} />
+                            <Search size={18} color="#FF4D82" strokeWidth={2.5} />
                         </button>
                     </div>
 
@@ -695,43 +676,6 @@ export default function CommunityPage() {
                 </header>
 
                 <div className={styles.feed} style={{ background: '#FAFAFC', padding: '16px 16px 0' }}>
-                    <div style={{
-                        background: '#FFFFFF',
-                        border: '1px solid #FFE4E6',
-                        borderRadius: '16px',
-                        padding: '12px 16px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        boxShadow: '0 4px 14px rgba(255, 77, 130, 0.02)',
-                        marginBottom: '8px'
-                    }}>
-                        <div style={{ fontSize: '13px', fontWeight: 700, color: '#475569' }}>
-                            {getNavSummary()}
-                        </div>
-                        <button
-                            onClick={() => openComposer()}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                padding: '6px 12px',
-                                borderRadius: '20px',
-                                border: 'none',
-                                background: '#FF4D82',
-                                color: '#FFFFFF',
-                                fontSize: '12px',
-                                fontWeight: 700,
-                                cursor: 'pointer',
-                                transition: 'all 0.2s',
-                                boxShadow: '0 2px 8px rgba(255, 77, 130, 0.15)'
-                            }}
-                        >
-                            <PenSquare size={13} color="#FFFFFF" strokeWidth={2.5} />
-                            {t('community_page.write_post')}
-                        </button>
-                    </div>
-
                     {feedState.error ? (
                         <div className={styles.emptyStateContainer}>{feedState.error}</div>
                     ) : feedState.loading ? (
@@ -740,53 +684,104 @@ export default function CommunityPage() {
                         </div>
                     ) : filteredPosts.length === 0 ? (
                         <div style={{
+                            background: '#FFFFFF',
+                            border: '1.5px solid #FFE4E6',
+                            borderRadius: '24px',
+                            padding: '16px 16px 36px 16px',
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: '60px 20px',
-                            textAlign: 'center',
-                            background: '#FFFFFF',
-                            borderRadius: '24px',
-                            border: '1px dashed #FFE4E6',
-                            marginTop: '16px',
-                            boxShadow: '0 8px 24px rgba(255, 77, 130, 0.02)'
+                            gap: '20px',
+                            boxShadow: '0 8px 24px rgba(255, 77, 130, 0.02)',
+                            marginBottom: '16px'
                         }}>
-                            <div style={{
-                                fontSize: '54px',
-                                marginBottom: '20px',
-                                filter: 'drop-shadow(0 8px 12px rgba(255, 77, 130, 0.15))'
-                            }}>
-                                ✍️
+                            {/* 게시글 작성 버튼 우측 상단 정렬 */}
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+                                <button
+                                    onClick={() => openComposer()}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '6px',
+                                        padding: '6px 12px',
+                                        borderRadius: '20px',
+                                        border: '1.5px solid #FF4D82',
+                                        background: '#FFFFFF',
+                                        color: '#FF4D82',
+                                        fontSize: '12px',
+                                        fontWeight: 700,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s',
+                                        boxShadow: '0 2px 8px rgba(255, 77, 130, 0.05)'
+                                    }}
+                                >
+                                    <PenSquare size={13} color="#FF4D82" strokeWidth={2.5} />
+                                    {t('community_page.write_post')}
+                                </button>
                             </div>
-                            <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#2A2624', margin: '0 0 8px' }}>
-                                {searchQuery ? t('community_page.states.no_results_title') : t('community_page.states.empty_title')}
-                            </h3>
-                            <p style={{ fontSize: '13px', color: '#8A847F', margin: '0 0 24px' }}>
-                                {searchQuery
-                                    ? t('community_page.states.no_results_desc')
-                                    : t('community_page.states.empty_desc')}
-                            </p>
-                            <button
-                                onClick={() => openComposer()}
-                                style={{
-                                    padding: '14px 28px',
-                                    borderRadius: '24px',
-                                    background: '#FF4D82',
-                                    color: '#FFFFFF',
-                                    fontSize: '14px',
-                                    fontWeight: 800,
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    boxShadow: '0 8px 20px rgba(255, 77, 130, 0.3)',
-                                    transition: 'all 0.2s'
-                                }}
-                            >
-                                {t('community_page.states.cta_write')}
-                            </button>
+
+                            {/* 아직 게시글이 없어요 컨텐츠 */}
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                marginTop: '10px'
+                            }}>
+                                <div style={{
+                                    fontSize: '54px',
+                                    marginBottom: '20px',
+                                    filter: 'drop-shadow(0 8px 12px rgba(255, 77, 130, 0.15))'
+                                }}>
+                                    ✍️
+                                </div>
+                                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#2A2624', margin: '0 0 8px' }}>
+                                    {searchQuery ? t('community_page.states.no_results_title') : t('community_page.states.empty_title')}
+                                </h3>
+                                <p style={{ fontSize: '13px', color: '#8A847F', margin: '0' }}>
+                                    {searchQuery
+                                        ? t('community_page.states.no_results_desc')
+                                        : t('community_page.states.empty_desc')}
+                                </p>
+                            </div>
                         </div>
                     ) : (
-                        filteredPosts.map(post => {
+                        <>
+                            {/* 게시글이 존재할 때: 상단 글 작성 단독 바 */}
+                            <div style={{
+                                background: '#FFFFFF',
+                                border: '1.5px solid #FFE4E6',
+                                borderRadius: '16px',
+                                padding: '12px 16px',
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                boxShadow: '0 4px 14px rgba(255, 77, 130, 0.02)',
+                                marginBottom: '8px'
+                            }}>
+                                <button
+                                    onClick={() => openComposer()}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '6px',
+                                        padding: '6px 12px',
+                                        borderRadius: '20px',
+                                        border: '1.5px solid #FF4D82',
+                                        background: '#FFFFFF',
+                                        color: '#FF4D82',
+                                        fontSize: '12px',
+                                        fontWeight: 700,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s',
+                                        boxShadow: '0 2px 8px rgba(255, 77, 130, 0.05)'
+                                    }}
+                                >
+                                    <PenSquare size={13} color="#FF4D82" strokeWidth={2.5} />
+                                    {t('community_page.write_post')}
+                                </button>
+                            </div>
+                            {filteredPosts.map(post => {
                             const postCategory = getPostCategory(post);
                             const cleanDesc = stripCommunityMetadata(post.desc);
                             const imagePreviewSrcList = getMetaValues(post.desc, COMMUNITY_IMAGE_META_KEY).slice(0, 1);
@@ -843,7 +838,8 @@ export default function CommunityPage() {
                                     </div>
                                 </div>
                             );
-                        })
+                        })}
+                        </>
                     )}
                 </div>
             </div>
@@ -880,23 +876,42 @@ export default function CommunityPage() {
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label>{t('community_page.form.region_label')}</label>
-                                <input
-                                    className={styles.formInput}
+                                <label className={styles.formLabel}>{t('community_page.form.region_label')}</label>
+                                <select
+                                    className={styles.formSelect}
                                     value={draft.region}
                                     onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { region: e.target.value } })}
-                                    placeholder={t('community_page.form.region_placeholder')}
-                                />
+                                >
+                                    <option value=""></option>
+                                    <option value="서울">서울</option>
+                                    <option value="경기">경기</option>
+                                    <option value="인천">인천</option>
+                                    <option value="부산">부산</option>
+                                    <option value="대구">대구</option>
+                                    <option value="대전">대전</option>
+                                    <option value="광주">광주</option>
+                                    <option value="울산">울산</option>
+                                    <option value="세종">세종</option>
+                                    <option value="강원">강원</option>
+                                    <option value="충북">충북</option>
+                                    <option value="충남">충남</option>
+                                    <option value="전북">전북</option>
+                                    <option value="전남">전남</option>
+                                    <option value="경북">경북</option>
+                                    <option value="경남">경남</option>
+                                    <option value="제주">제주</option>
+                                    <option value="기타">기타</option>
+                                </select>
                             </div>
 
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.title_label.default')}</label>
-                                <input className={styles.formInput} value={draft.title} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { title: e.target.value } })} placeholder={t('community_page.form.title_placeholder.default')} />
+                                <input className={styles.formInput} value={draft.title} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { title: e.target.value } })} />
                             </div>
 
                             <div className={styles.formGroup}>
                                 <label>{t('community_page.form.desc_label.default')}</label>
-                                <textarea className={styles.formTextarea} value={draft.desc} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { desc: e.target.value } })} placeholder={t('community_page.form.desc_placeholder.default')} />
+                                <textarea className={styles.formTextarea} value={draft.desc} onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { desc: e.target.value } })} />
                             </div>
 
                             {/* Image Upload/Preview Field */}
@@ -982,8 +997,8 @@ export default function CommunityPage() {
                                     }}
                                     style={{
                                         flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
-                                        background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
-                                        boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+                                        background: '#FF4D82', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
+                                        boxShadow: '0 4px 12px rgba(255,77,130,0.2)'
                                     }}
                                 >
                                     {t('community_page.login_required.cta')}
@@ -995,8 +1010,8 @@ export default function CommunityPage() {
                                     disabled={draft.isSubmitting}
                                     style={{
                                         flex: 2, padding: '15px', borderRadius: '14px', border: 'none',
-                                        background: '#2563eb', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
-                                        opacity: draft.isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(37,99,235,0.2)'
+                                        background: '#FF4D82', color: '#fff', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
+                                        opacity: draft.isSubmitting ? 0.7 : 1, boxShadow: '0 4px 12px rgba(255,77,130,0.2)'
                                     }}
                                 >
                                     {draft.isSubmitting ? '...' : t('community_page.form.submit')}
