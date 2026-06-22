@@ -62,10 +62,10 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const input = searchParams.get('input')?.trim() ?? '';
   const placeId = searchParams.get('place_id')?.trim() ?? '';
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const apiKey = process.env.GOOGLE_MAPS_SERVER_KEY ?? process.env.GOOGLE_MAPS_API_KEY;
 
   if (!apiKey) {
-    return NextResponse.json({ error: 'GOOGLE_MAPS_API_KEY is not configured' }, { status: 500 });
+    return NextResponse.json({ error: 'GOOGLE_MAPS_SERVER_KEY is not configured' }, { status: 500 });
   }
 
   if (placeId) {
