@@ -7,6 +7,8 @@ import Link from 'next/link';
 import styles from './community.module.css';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
+import { Users, Search, HelpCircle, Sparkles, Home, Calendar, Utensils, Grid, PenSquare } from 'lucide-react';
+import NotificationCenter from '@/app/components/home/NotificationCenter';
 
 interface Post {
     id: number;
@@ -319,7 +321,6 @@ export default function CommunityPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [savedIds, setSavedIds] = useState<number[]>([]);
     const [loggedInUserName, setLoggedInUserName] = useState("");
-    const [isDragging, setIsDragging] = useState(false);
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
@@ -341,9 +342,6 @@ export default function CommunityPage() {
     const [draft, draftDispatch] = useReducer(draftReducer, DRAFT_INITIAL_STATE);
 
     const imageInputRef = useRef<HTMLInputElement | null>(null);
-    const tabsRef = useRef<HTMLDivElement>(null);
-    // Group C: startX / scrollLeft → useRef (렌더 영향 없음)
-    const dragRef = useRef({ startX: 0, scrollLeft: 0 });
 
     useEffect(() => {
         setMounted(true);
@@ -363,29 +361,15 @@ export default function CommunityPage() {
         category ? getCategoryLabel(t, category) : t('community_page.form.select_category');
 
     const getNavSummary = () => {
-        const currentTab = filter === 'all' ? t('community_page.categories.all') : getCategoryText(filter as CommunityCategory);
+        const currentTab = filter === 'all' 
+            ? t('community_page.categories.all') 
+            : (filter === 'tips' ? '예약팁' : getCategoryText(filter as CommunityCategory));
         const currentSub = communitySubFilters.find((sub) => sub.id === subFilter)?.label || '';
         if (subFilter === 'all') return t('community_page.nav_summary.all', { tab: currentTab });
         return t('community_page.nav_summary.default', { sub: currentSub, tab: currentTab });
     };
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if (!tabsRef.current) return;
-        setIsDragging(true);
-        dragRef.current.startX = e.pageX - tabsRef.current.offsetLeft;
-        dragRef.current.scrollLeft = tabsRef.current.scrollLeft;
-    };
 
-    const handleMouseLeave = () => setIsDragging(false);
-    const handleMouseUp = () => setIsDragging(false);
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!isDragging || !tabsRef.current) return;
-        e.preventDefault();
-        const x = e.pageX - tabsRef.current.offsetLeft;
-        const walk = (x - dragRef.current.startX) * 2;
-        tabsRef.current.scrollLeft = dragRef.current.scrollLeft - walk;
-    };
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -551,7 +535,7 @@ export default function CommunityPage() {
 
     const filteredPosts = feedState.posts.filter(p => {
         const postCategory = getPostCategory(p);
-        const matchesTab = filter === 'all' || postCategory === filter;
+        const matchesTab = filter === 'all' || (filter === 'tips' ? postCategory === 'help' : postCategory === filter);
         const normalizedSearch = searchQuery.toLowerCase();
         const matchesSearch = p.title.toLowerCase().includes(normalizedSearch) || p.desc.toLowerCase().includes(normalizedSearch);
         if (!matchesSearch) return false;
@@ -569,50 +553,182 @@ export default function CommunityPage() {
             )}
 
             <div className={styles.scrollableContent}>
-                <header className={styles.header}>
-                    <h1 className={styles.title}>{t('community_page.hero.title')}</h1>
+                <header style={{
+                    background: '#FFFFFF',
+                    padding: '20px 16px 12px',
+                    borderBottom: '1px solid #FFE4E6',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Users size={24} color="#000000" strokeWidth={2.5} />
+                            <h1 style={{ fontSize: '1rem', fontWeight: 600, color: '#2A2624', margin: 0 }}>
+                                <span style={{ color: '#FF4D82' }}>Kello</span> 커뮤니티
+                            </h1>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <NotificationCenter />
+                        </div>
+                    </div>
 
-                    <div className={styles.searchBar}>
-                        <span className={styles.searchIcon}>🔍</span>
+                    <div style={{ position: 'relative', width: '100%' }}>
                         <input
-                            className={styles.searchInput}
+                            type="text"
                             placeholder={t('community_page.hero.search_placeholder')}
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: '12px 50px 12px 16px',
+                                borderRadius: '24px',
+                                border: '1px solid #FFE4E6',
+                                background: '#FFFFFF',
+                                fontSize: '14px',
+                                outline: 'none',
+                                boxShadow: '0 4px 12px rgba(255, 77, 130, 0.04)',
+                                transition: 'all 0.2s',
+                                color: '#2A2624'
+                            }}
                         />
-                    </div>
-                    <div
-                        className={styles.tabs}
-                        ref={tabsRef}
-                        onMouseDown={handleMouseDown}
-                        onMouseLeave={handleMouseLeave}
-                        onMouseUp={handleMouseUp}
-                        onMouseMove={handleMouseMove}
-                        style={{ cursor: isDragging ? 'grabbing' : 'pointer' }}
-                    >
                         <button
-                            className={`${styles.tab} ${filter === 'all' ? styles.activeTab : ''}`}
-                            onClick={() => { setFilter('all'); feedDispatch({ type: 'FETCH_START' }); setTimeout(() => feedDispatch({ type: 'FETCH_SUCCESS', payload: feedState.posts }), 200); }}
+                            type="button"
+                            style={{
+                                position: 'absolute',
+                                right: '4px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                background: '#FF4D82',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: '36px',
+                                height: '36px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                boxShadow: '0 2px 8px rgba(255, 77, 130, 0.2)'
+                            }}
                         >
-                            {t('community_page.categories.all')}
+                            <Search size={18} color="#FFFFFF" strokeWidth={2.5} />
                         </button>
-                        {communityCategories.map((category) => (
-                            <button
-                                key={category.id}
-                                className={`${styles.tab} ${filter === category.id ? styles.activeTab : ''}`}
-                                onClick={() => { setFilter(category.id); feedDispatch({ type: 'FETCH_START' }); setTimeout(() => feedDispatch({ type: 'FETCH_SUCCESS', payload: feedState.posts }), 200); }}
-                            >
-                                {category.label}
-                            </button>
-                        ))}
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
+                        {/* 1st Row: 전체, 질문, 뷰티후기, 샵추천 */}
+                        <div style={{ display: 'flex', gap: '6px', justifyContent: 'space-between' }}>
+                            {[
+                                { id: 'all', label: '전체', icon: Grid },
+                                { id: 'help', label: '질문', icon: HelpCircle },
+                                { id: 'beauty_review', label: '뷰티후기', icon: Sparkles },
+                                { id: 'travel_review', label: '샵추천', icon: Home }
+                            ].map((tab) => {
+                                const IconComp = tab.icon;
+                                const isActive = filter === tab.id;
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => { setFilter(tab.id); feedDispatch({ type: 'FETCH_START' }); setTimeout(() => feedDispatch({ type: 'FETCH_SUCCESS', payload: feedState.posts }), 200); }}
+                                        style={{
+                                            flex: 1,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '4px',
+                                            padding: '8px 4px',
+                                            borderRadius: '20px',
+                                            border: `1px solid ${isActive ? '#FF4D82' : '#FFE4E6'}`,
+                                            background: isActive ? '#FFF0F3' : '#FFFFFF',
+                                            color: isActive ? '#FF4D82' : '#64748B',
+                                            fontSize: '11px',
+                                            fontWeight: 700,
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s',
+                                            whiteSpace: 'nowrap'
+                                        }}
+                                    >
+                                        <IconComp size={12} color={isActive ? '#FF4D82' : '#94A3B8'} strokeWidth={2.5} />
+                                        {tab.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        {/* 2nd Row: 예약팁, 모임, 맛집추천 */}
+                        <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', width: '100%' }}>
+                            {[
+                                { id: 'tips', label: '예약팁', icon: Calendar },
+                                { id: 'meetup', label: '모임', icon: Users },
+                                { id: 'food_review', label: '맛집추천', icon: Utensils }
+                            ].map((tab) => {
+                                const IconComp = tab.icon;
+                                const isActive = filter === tab.id;
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => { setFilter(tab.id); feedDispatch({ type: 'FETCH_START' }); setTimeout(() => feedDispatch({ type: 'FETCH_SUCCESS', payload: feedState.posts }), 200); }}
+                                        style={{
+                                            width: '31%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '4px',
+                                            padding: '8px 4px',
+                                            borderRadius: '20px',
+                                            border: `1px solid ${isActive ? '#FF4D82' : '#FFE4E6'}`,
+                                            background: isActive ? '#FFF0F3' : '#FFFFFF',
+                                            color: isActive ? '#FF4D82' : '#64748B',
+                                            fontSize: '11px',
+                                            fontWeight: 700,
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s',
+                                            whiteSpace: 'nowrap'
+                                        }}
+                                    >
+                                        <IconComp size={12} color={isActive ? '#FF4D82' : '#94A3B8'} strokeWidth={2.5} />
+                                        {tab.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
                 </header>
 
-                <div className={styles.feed} style={{ background: '#f8fafc', padding: 0 }}>
-                    <div className={styles.navSummaryBox} style={{ background: '#fff', alignItems: 'center' }}>
-                        <div className={styles.summaryText}>{getNavSummary()}</div>
-                        <button className={styles.writeBtn} onClick={() => openComposer()}>
-                            ✍ {t('community_page.write_post')}
+                <div className={styles.feed} style={{ background: '#FAFAFC', padding: '16px 16px 0' }}>
+                    <div style={{
+                        background: '#FFFFFF',
+                        border: '1px solid #FFE4E6',
+                        borderRadius: '16px',
+                        padding: '12px 16px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        boxShadow: '0 4px 14px rgba(255, 77, 130, 0.02)',
+                        marginBottom: '8px'
+                    }}>
+                        <div style={{ fontSize: '13px', fontWeight: 700, color: '#475569' }}>
+                            {getNavSummary()}
+                        </div>
+                        <button
+                            onClick={() => openComposer()}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                padding: '6px 12px',
+                                borderRadius: '20px',
+                                border: 'none',
+                                background: '#FF4D82',
+                                color: '#FFFFFF',
+                                fontSize: '12px',
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                                boxShadow: '0 2px 8px rgba(255, 77, 130, 0.15)'
+                            }}
+                        >
+                            <PenSquare size={13} color="#FFFFFF" strokeWidth={2.5} />
+                            {t('community_page.write_post')}
                         </button>
                     </div>
 
@@ -623,25 +739,51 @@ export default function CommunityPage() {
                             {[1, 2, 3].map(n => <div key={n} className={styles.skeletonCard} />)}
                         </div>
                     ) : filteredPosts.length === 0 ? (
-                        <div className={styles.emptyStateContainer}>
-                            <div className={styles.emptyIcon}>{searchQuery ? '🔍' : '✍'}</div>
-                            <div className={styles.emptyTitle}>
-                                {searchQuery ? t('community_page.states.no_results_title') : t('community_page.states.empty_title')}
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: '60px 20px',
+                            textAlign: 'center',
+                            background: '#FFFFFF',
+                            borderRadius: '24px',
+                            border: '1px dashed #FFE4E6',
+                            marginTop: '16px',
+                            boxShadow: '0 8px 24px rgba(255, 77, 130, 0.02)'
+                        }}>
+                            <div style={{
+                                fontSize: '54px',
+                                marginBottom: '20px',
+                                filter: 'drop-shadow(0 8px 12px rgba(255, 77, 130, 0.15))'
+                            }}>
+                                ✍️
                             </div>
-                            <div className={styles.emptyDesc}>
+                            <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#2A2624', margin: '0 0 8px' }}>
+                                {searchQuery ? t('community_page.states.no_results_title') : t('community_page.states.empty_title')}
+                            </h3>
+                            <p style={{ fontSize: '13px', color: '#8A847F', margin: '0 0 24px' }}>
                                 {searchQuery
                                     ? t('community_page.states.no_results_desc')
                                     : t('community_page.states.empty_desc')}
-                            </div>
-                            <div className={styles.emptyCtaGroup}>
-                                <button
-                                    className={`${styles.emptyCta} ${styles.emptyCtaPrimary}`}
-                                    onClick={() => openComposer()}
-                                    style={{ background: '#9B4D6D' }}
-                                >
-                                    ✍ {t('community_page.states.cta_write')}
-                                </button>
-                            </div>
+                            </p>
+                            <button
+                                onClick={() => openComposer()}
+                                style={{
+                                    padding: '14px 28px',
+                                    borderRadius: '24px',
+                                    background: '#FF4D82',
+                                    color: '#FFFFFF',
+                                    fontSize: '14px',
+                                    fontWeight: 800,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 8px 20px rgba(255, 77, 130, 0.3)',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {t('community_page.states.cta_write')}
+                            </button>
                         </div>
                     ) : (
                         filteredPosts.map(post => {

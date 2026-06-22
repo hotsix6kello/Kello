@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'next/navigation';
 
 import { type SharedBusiness, useTrip } from '@/lib/contexts/TripContext';
 import { toGoogleMapsLanguageCode } from '@/lib/i18n/locales';
@@ -389,8 +390,27 @@ export default function ExplorePage() {
     } catch { /* ignore */ }
   };
 
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get('q') || '';
+
   // Always updates active tab. Shows login hint instead of fetching when not logged in.
   // Uses the map's actual current center (reflects user panning) via mapRef.
+  useEffect(() => {
+    if (!sessionToken) return;
+    if (initialQuery) {
+      setSearchInput(initialQuery);
+      setIsSearchOpen(true);
+      void (async () => {
+        const list = await fetchSuggestions(initialQuery);
+        if (list.length > 0) {
+          void handleSuggestionSelect(list[0]);
+        }
+      })();
+    } else {
+      requestCurrentLocation();
+    }
+  }, [requestCurrentLocation, sessionToken, initialQuery, fetchSuggestions]);
+
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
     if (!sessionToken) {

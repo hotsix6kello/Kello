@@ -347,6 +347,7 @@ export default function TalkChatPage() {
 
   const [isAiRecommending, setIsAiRecommending] = useState(false);
   const [kelloActiveTab, setKelloActiveTab] = useState('예약');
+  const [kelloAiAnswer, setKelloAiAnswer] = useState<string | null>(null);
   const [isStaffShowMode, setIsStaffShowMode] = useState(false);
   const [showViewerTip, setShowViewerTip] = useState(true);
   const [selectedQuickCategory, setSelectedQuickCategory] = useState<string | null>(null);
