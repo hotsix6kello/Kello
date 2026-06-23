@@ -219,7 +219,7 @@
       "loading": "Loading...",
       "searching": "Searching...",
       "back_to_list": "Back to List",
-      "labels": "??"
+      "labels": "標籤"
     },
     "loading": "Loading...",
     "retry": "重试",
@@ -358,10 +358,10 @@
         "count": "{{count}} phrases"
       },
       "context": {
-        "title": "Booking context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "title": "情境選擇",
+        "booking": "預約",
+        "interpreter": "翻譯",
+        "support": "支援"
       },
       "category": {
         "title": "Category"
@@ -1296,6 +1296,7 @@
     }
   },
   "community_page": {
+    "title": "社群",
     "regions": {
       "seoul": "首爾", "gyeonggi": "京畿道", "incheon": "仁川",
       "busan": "釜山", "daegu": "大邱", "daejeon": "大田",
@@ -1309,14 +1310,14 @@
       "search_placeholder": "搜尋您感興趣的話題"
     },
     "categories": {
-      "all": "??",
-      "meetup": "??",
-      "beauty_review": "????",
-      "food_review": "????",
-      "travel_review": "????",
-      "meetup_recruitment": "招募夥伴",
-      "help": "??",
-      "tips": "????"
+      "all": "全部",
+      "meetup": "聚會",
+      "beauty_review": "美妝評價",
+      "food_review": "美食推薦",
+      "travel_review": "旅遊資訊",
+      "meetup_recruitment": "旅伴招募",
+      "help": "問題",
+      "tips": "預約技巧"
     },
     "sub_filters": {
       "all": "全部",
@@ -1399,7 +1400,7 @@
       },
       "title_label": {
         "beauty_review": "服務/主題",
-        "default": "??"
+        "default": "標題"
       },
       "title_placeholder": {
         "beauty_review": "例如：江南站層次剪髮體驗",
@@ -1708,7 +1709,7 @@
     "defaults": {
       "region": "首爾"
     },
-    "title": "??",
+    "title": "社群",
     "login_required": {
       "title": "Sign in to write a post",
       "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
@@ -1928,10 +1929,10 @@
         "count": "{{count}} phrases"
       },
       "context": {
-        "title": "Current context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "title": "目前情境",
+        "booking": "預約",
+        "interpreter": "翻譯",
+        "support": "支援"
       },
       "favorites": {
         "desc": "Desc",
@@ -2212,37 +2213,37 @@
     "cancel_consent_default": "本人同意取消與退款政策。",
     "interpreter_visit_context": "正在 {{storeName}} 使用翻譯器。",
     "interpreter_visit_service_context": "在 {{storeName}} 進行 {{serviceName}} 服務時使用翻譯器。",
-    "payment_consent_hint": "?????????????",
-    "payment_consent_privacy_label": "????????",
-    "payment_consent_refund_label": "??????????",
-    "payment_consent_title": "????????",
-    "payment_currency_usd_only": "PayPal ??????? USD ??????????????? Kello?",
-    "payment_error": "????????????????",
-    "payment_no_refund_label": "????",
-    "payment_refund_policy_title": "???????",
-    "payment_refund_rate_label": "?? {{rate}}%",
-    "payment_section_title": "??",
-    "payment_status_paid": "???",
-    "payment_success": "?????????????",
-    "quote_accepted_message": "????????????????",
-    "quote_action_accept": "????",
-    "quote_action_reject": "????",
-    "quote_date_time": "????",
-    "quote_error_respond": "???????????",
-    "quote_expired_notice": "?????????",
-    "quote_expires_at": "??????",
-    "quote_note": "????",
-    "quote_processing": "???...",
-    "quote_rejected_message": "???????Kello ?????????",
-    "quote_section_title": "????",
-    "quote_service_name": "????",
-    "quote_shop_address": "????",
-    "quote_shop_name": "????",
-    "quote_status_accepted": "???",
-    "quote_status_expired": "???",
-    "quote_status_pending": "????",
-    "quote_status_rejected": "???",
-    "quote_total_price": "??",
+    "payment_consent_hint": "如需繼續付款，請同意以上兩項。",
+    "payment_consent_privacy_label": "同意隱私政策",
+    "payment_consent_refund_label": "同意取消及退款規定",
+    "payment_consent_title": "付款前確認及同意",
+    "payment_currency_usd_only": "目前 PayPal 付款僅支援 USD 報價單。如需更改付款幣別，請聯絡 Kello。",
+    "payment_error": "付款處理中發生錯誤，請重試。",
+    "payment_no_refund_label": "不予退款",
+    "payment_refund_policy_title": "取消及退款規定",
+    "payment_refund_rate_label": "退還 {{rate}}%",
+    "payment_section_title": "付款",
+    "payment_status_paid": "已付款",
+    "payment_success": "付款完成，預約已確認。",
+    "quote_accepted_message": "已承諾提案，接下來將進行付款。",
+    "quote_action_accept": "承諾提案",
+    "quote_action_reject": "拒絕提案",
+    "quote_date_time": "提案日程",
+    "quote_error_respond": "處理失敗，請重試。",
+    "quote_expired_notice": "提案可能已過期",
+    "quote_expires_at": "提案到期時間",
+    "quote_note": "營運者說明",
+    "quote_processing": "處理中...",
+    "quote_rejected_message": "已拒絕提案。Kello 將再次確認。",
+    "quote_section_title": "預約報價單",
+    "quote_service_name": "確定服務名稱",
+    "quote_shop_address": "店家地址",
+    "quote_shop_name": "提案店家名稱",
+    "quote_status_accepted": "已承諾",
+    "quote_status_expired": "已過期",
+    "quote_status_pending": "等待回應",
+    "quote_status_rejected": "已拒絕",
+    "quote_total_price": "總金額",
     "quote_refund_policy": "Refund / Cancellation Policy",
     "quote_sent_at": "Proposal Sent",
     "quote_status_label": "Proposal Status",
@@ -2820,7 +2821,7 @@
   "afternoon": "下午好",
   "evening": "晚上好",
   "assurance": {
-    "items": "????"
+    "items": "值得信賴的服務"
   },
   "interpreter": {
     "eyebrow": "語言支援",
@@ -3064,7 +3065,7 @@
     "hero_title": "Hero Title",
     "hero_subtitle": "Hero Subtitle",
     "features": {
-      "booking": "??",
+      "booking": "預約",
       "ai_plan": "Ai Plan",
       "navi": "Navi"
     },
