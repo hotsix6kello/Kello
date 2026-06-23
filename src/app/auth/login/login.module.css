@@ -1,7 +1,7 @@
 /* Login Page Styles */
 .container {
     min-height: 100vh;
-    background-color: var(--background);
+    background-color: #FFFFFF;
     color: var(--foreground);
     padding: 40px 24px;
     position: relative;
@@ -39,15 +39,12 @@
 .formCard {
     width: 100%;
     max-width: 400px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-top: 1px solid var(--glass-highlight);
+    background: #FFFFFF;
+    border: 1.5px solid var(--primary);
     border-radius: 24px;
     padding: 32px;
     z-index: 10;
-    box-shadow: 0 10px 40px -10px rgba(43, 35, 29, 0.1);
+    box-shadow: 0 4px 32px rgba(255, 77, 130, 0.10);
 }
 
 .header {
@@ -59,6 +56,7 @@
     font-weight: 800;
     margin-bottom: 8px;
     text-align: center;
+    color: var(--primary);
 }
 
 .subTitle {
@@ -87,28 +85,33 @@
     border: 1px solid var(--warm-sand);
     color: var(--foreground);
     font-size: 1rem;
-    transition: border 0.2s;
+    transition: all 0.2s;
 }
 
 .input:focus {
     border-color: var(--primary);
     outline: none;
-    background: rgba(0, 0, 0, 0.06);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(255, 77, 130, 0.15);
 }
 
 .submitBtn {
     width: 100%;
     margin-top: 12px;
-    background: var(--primary);
-    color: var(--hanji-ivory);
-    border: none;
+    background: #FFFFFF;
+    color: var(--primary);
+    border: 2px solid var(--primary);
     padding: 16px;
     border-radius: 16px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 15px var(--primary-glow);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 77, 130, 0.08);
+    transition: all 0.2s;
+}
+
+.submitBtn:hover {
+    background: rgba(255, 77, 130, 0.05);
 }
 
 .submitBtn:active {

@@ -84,9 +84,9 @@ export default function AdminStatsDashboard() {
     }
 
     return (
-        <div className={styles.section} style={{ border: '2px solid var(--secondary)', background: 'var(--surface)' }}>
+        <div className={styles.section} style={{ border: '1px solid var(--warm-sand)', background: '#FFFFFF' }}>
             <div className={styles.sectionHeader}>
-                <h4 className={styles.sectionTitle} style={{ color: 'var(--secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <h4 className={styles.sectionTitle} style={{ color: '#000000', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span style={{ fontSize: '1.2rem' }}>📊</span> 실시간 방문자 대시보드 (Admin)
                 </h4>
             </div>

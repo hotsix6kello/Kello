@@ -1055,6 +1055,8 @@ export default function TalkChatPage() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 16px',
+          height: '60px',
+          boxSizing: 'border-box',
           background: headerBg,
           borderBottom: `1px solid ${COLORS.border}`,
           flexShrink: 0,
@@ -1081,10 +1083,10 @@ export default function TalkChatPage() {
                 {shopName.charAt(0)}
               </div>
             )}
-            <div style={{ fontWeight: 600, fontSize: '1rem', color: COLORS.textMain }}>
+             <div style={{ fontWeight: 600, fontSize: '1.15rem', color: COLORS.textMain }}>
               {isKello ? (
                 <span>
-                  <span style={{ color: COLORS.primary }}>Kello</span>{t('talk_page.kello_talk_suffix')}
+                  <span style={{ color: '#000000' }}>Kello</span>{t('talk_page.kello_talk_suffix')}
                 </span>
               ) : shopName}
             </div>

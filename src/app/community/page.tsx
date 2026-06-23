@@ -534,26 +534,39 @@ export default function CommunityPage() {
             )}
 
             <div className={styles.scrollableContent}>
+                {/* 1. KelloTalk & MyPage Style Header with Title, Notification and Divider Line */}
                 <header style={{
                     background: '#FFFFFF',
-                    padding: '20px 16px 12px',
+                    padding: '12px 16px',
+                    height: '60px',
                     borderBottom: '1px solid #FFE4E6',
                     display: 'flex',
-                    flexDirection: 'column',
-                    gap: '12px'
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    boxSizing: 'border-box',
                 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Users size={24} color="#000000" strokeWidth={2.5} />
-                            <h1 style={{ fontSize: '1rem', fontWeight: 600, color: '#2A2624', margin: 0 }}>
-                                {t('community_page.title')}
-                            </h1>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <NotificationCenter />
-                        </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <Users size={24} color="#000000" strokeWidth={2.5} />
+                        <h1 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#2A2624', margin: 0 }}>
+                            {t('community_page.title')}
+                        </h1>
                     </div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <NotificationCenter />
+                    </div>
+                </header>
 
+                {/* 2. Search Bar and Category Tabs Area placed below the header divider */}
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                    width: '100%',
+                    background: '#FFFFFF',
+                    padding: '12px 16px 20px',
+                    boxSizing: 'border-box',
+                }}>
                     <div style={{ position: 'relative', width: '100%' }}>
                         <input
                             type="text"
@@ -673,7 +686,7 @@ export default function CommunityPage() {
                             })}
                         </div>
                     </div>
-                </header>
+                </div>
 
                 <div className={styles.feed} style={{ background: '#FAFAFC', padding: '16px 16px 0' }}>
                     {feedState.error ? (
