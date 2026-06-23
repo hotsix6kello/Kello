@@ -219,7 +219,7 @@
       "loading": "Loading...",
       "searching": "Searching...",
       "back_to_list": "Back to List",
-      "labels": "??"
+      "labels": "标签"
     },
     "loading": "Loading...",
     "retry": "重试",
@@ -358,10 +358,10 @@
         "count": "{{count}} phrases"
       },
       "context": {
-        "title": "Booking context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "title": "情境选择",
+        "booking": "预约",
+        "interpreter": "翻译",
+        "support": "支持"
       },
       "category": {
         "title": "Category"
@@ -811,41 +811,41 @@
     "title": "行程表",
     "day": "第 {{n}} 天",
     "add_from_discover": "? Discover ??",
-    "auto_build": "????",
-    "add_to": "???",
-    "book_all": "????",
+    "auto_build": "自动生成",
+    "add_to": "添加到",
+    "book_all": "全部预约",
     "booking_modal": {
-      "title": "????",
-      "date": "??",
-      "people": "??",
-      "people_count": "{{count}}?",
-      "notes": "??",
-      "submit": "????",
-      "submitting": "???...",
-      "success_title": "?????",
-      "success_desc": "??????????????",
+      "title": "预约行程",
+      "date": "日期",
+      "people": "人数",
+      "people_count": "{{count}}人",
+      "notes": "备注",
+      "submit": "发送请求",
+      "submitting": "发送中...",
+      "success_title": "已发送请求",
+      "success_desc": "预约请求已发送，请等待确认。",
       "unavailable_title": "该时段不可预约",
       "unavailable_desc": "我们为您推荐以下替代方案：",
-      "view_status": "????"
+      "view_status": "查看状态"
     },
     "status": {
       "draft": "草稿",
       "submitted": "已提交",
       "confirmed": "已确认",
       "unavailable": "不可预约",
-      "completed": "???"
+      "completed": "已完成"
     },
     "slots": {
       "am": "上午",
       "pm": "下午",
       "night": "晚上",
-      "morning": "??",
-      "afternoon": "??",
-      "evening": "??"
+      "morning": "早晨",
+      "afternoon": "下午",
+      "evening": "傍晚"
     },
     "focus": {
-      "title": "????",
-      "desc": "?????????????????????"
+      "title": "今日焦点",
+      "desc": "探索今天为您精心挑选的体验和行程安排"
     },
     "support": {
       "title": "Help Center",
@@ -938,6 +938,7 @@
     }
   },
   "community_page": {
+    "title": "社区",
     "regions": {
       "seoul": "首尔", "gyeonggi": "京畿道", "incheon": "仁川",
       "busan": "釜山", "daegu": "大邱", "daejeon": "大田",
@@ -951,14 +952,14 @@
       "search_placeholder": "搜索您感兴趣的话题"
     },
     "categories": {
-      "all": "??",
-      "meetup": "??",
-      "beauty_review": "????",
-      "food_review": "????",
-      "travel_review": "????",
-      "meetup_recruitment": "招募搭子",
-      "help": "??",
-      "tips": "????"
+      "all": "全部",
+      "meetup": "聚会",
+      "beauty_review": "美妆评价",
+      "food_review": "美食推荐",
+      "travel_review": "旅游信息",
+      "meetup_recruitment": "旅伴招募",
+      "help": "问题",
+      "tips": "预约技巧"
     },
     "sub_filters": {
       "all": "全部",
@@ -1038,7 +1039,7 @@
       },
       "title_label": {
         "beauty_review": "项目/主题",
-        "default": "??"
+        "default": "标题"
       },
       "title_placeholder": {
         "beauty_review": "例如：江南站层次修剪体验",
@@ -1350,7 +1351,7 @@
       },
       "more_region": "查看更多关于{{region}}的故事"
     },
-    "title": "??",
+    "title": "社区",
     "login_required": {
       "title": "Sign in to write a post",
       "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
@@ -1737,37 +1738,37 @@
     "cancel_consent_no_refund": "预约日前1天内取消，不予退款。本人同意全额扣除。",
     "cancel_consent_partial": "现在取消将扣除平台服务费 {{platformFee}} 及服务费的 {{penaltyRate}}%（{{penaltyAmount}}）。本人同意。",
     "cancel_consent_default": "本人同意取消与退款政策。",
-    "payment_consent_hint": "?????????????",
-    "payment_consent_privacy_label": "???????",
-    "payment_consent_refund_label": "??????????",
-    "payment_consent_title": "????????",
+    "payment_consent_hint": "如需继续付款，请同意以上两项。",
+    "payment_consent_privacy_label": "同意隐私政策",
+    "payment_consent_refund_label": "同意取消及退款规定",
+    "payment_consent_title": "付款前确认及同意",
     "payment_currency_usd_only": "PayPal ??????? USD ??????????????? Kello?",
-    "payment_error": "??????????????",
-    "payment_no_refund_label": "????",
-    "payment_refund_policy_title": "???????",
-    "payment_refund_rate_label": "?? {{rate}}%",
-    "payment_section_title": "??",
-    "payment_status_paid": "???",
-    "payment_success": "?????????????",
-    "quote_accepted_message": "????????????????",
-    "quote_action_accept": "????",
-    "quote_action_reject": "????",
-    "quote_date_time": "????",
-    "quote_error_respond": "?????????",
-    "quote_expired_notice": "?????????",
-    "quote_expires_at": "?????",
-    "quote_note": "????",
-    "quote_processing": "???...",
-    "quote_rejected_message": "???????Kello ?????????",
-    "quote_section_title": "????",
-    "quote_service_name": "????",
-    "quote_shop_address": "????",
-    "quote_shop_name": "????",
-    "quote_status_accepted": "???",
-    "quote_status_expired": "???",
-    "quote_status_pending": "????",
-    "quote_status_rejected": "???",
-    "quote_total_price": "??",
+    "payment_error": "付款处理中发生错误，请重试。",
+    "payment_no_refund_label": "不予退款",
+    "payment_refund_policy_title": "取消及退款规定",
+    "payment_refund_rate_label": "退还 {{rate}}%",
+    "payment_section_title": "付款",
+    "payment_status_paid": "已付款",
+    "payment_success": "付款完成，预约已确认。",
+    "quote_accepted_message": "已承诺提案，接下来将进行付款。",
+    "quote_action_accept": "承诺提案",
+    "quote_action_reject": "拒绝提案",
+    "quote_date_time": "提案日程",
+    "quote_error_respond": "处理失败，请重试。",
+    "quote_expired_notice": "提案可能已过期",
+    "quote_expires_at": "提案到期时间",
+    "quote_note": "运营者说明",
+    "quote_processing": "处理中...",
+    "quote_rejected_message": "已拒绝提案。Kello 将再次确认。",
+    "quote_section_title": "预约报价单",
+    "quote_service_name": "确定服务名称",
+    "quote_shop_address": "店家地址",
+    "quote_shop_name": "提案店家名称",
+    "quote_status_accepted": "已承诺",
+    "quote_status_expired": "已过期",
+    "quote_status_pending": "等待回应",
+    "quote_status_rejected": "已拒绝",
+    "quote_total_price": "总金额",
     "quote_refund_policy": "Refund / Cancellation Policy",
     "quote_sent_at": "Proposal Sent",
     "quote_status_label": "Proposal Status",
@@ -2206,10 +2207,10 @@
         "count": "{{count}} phrases"
       },
       "context": {
-        "title": "Current context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "title": "当前情境",
+        "booking": "预约",
+        "interpreter": "翻译",
+        "support": "支持"
       },
       "favorites": {
         "desc": "Desc",
@@ -2817,7 +2818,7 @@
   "afternoon": "下午好",
   "evening": "晚上好",
   "assurance": {
-    "items": "????"
+    "items": "值得信赖的服务"
   },
   "interpreter": {
     "eyebrow": "语言支持",
@@ -3064,7 +3065,7 @@
     "hero_title": "Hero Title",
     "hero_subtitle": "Hero Subtitle",
     "features": {
-      "booking": "??",
+      "booking": "预约",
       "ai_plan": "Ai Plan",
       "navi": "Navi"
     },

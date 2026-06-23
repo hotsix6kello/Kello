@@ -220,7 +220,7 @@
       "loading": "불러오는 중...",
       "searching": "검색 중...",
       "back_to_list": "Back to List",
-      "labels": "??"
+      "labels": "레이블"
     },
     "loading": "불러오는 중...",
     "retry": "재시도",
@@ -359,9 +359,9 @@
       },
       "context": {
         "title": "Booking context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "booking": "예약",
+        "interpreter": "통역",
+        "support": "지원"
       },
       "category": {
         "title": "Category"
@@ -1008,9 +1008,9 @@
       },
       "context": {
         "title": "Current context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "booking": "예약",
+        "interpreter": "통역",
+        "support": "지원"
       },
       "favorites": {
         "desc": "Desc",
@@ -1755,6 +1755,7 @@
     }
   },
   "community_page": {
+    "title": "커뮤니티",
     "write_post": "게시글 작성",
     "edit": "게시글 수정",
     "posting": "게시 중...",
@@ -1779,14 +1780,14 @@
       "search_placeholder": "관심 있는 주제를 검색해보세요"
     },
     "categories": {
-      "all": "??",
-      "meetup": "??",
-      "beauty_review": "????",
-      "food_review": "????",
-      "travel_review": "???",
-      "meetup_recruitment": "모집",
-      "help": "??",
-      "tips": "???"
+      "all": "전체",
+      "meetup": "모임",
+      "beauty_review": "뷰티 후기",
+      "food_review": "맛집 후기",
+      "travel_review": "여행 정보",
+      "meetup_recruitment": "여행 메이트",
+      "help": "질문",
+      "tips": "예약 팁"
     },
     "sub_filters": {
       "all": "전체",
@@ -1869,7 +1870,7 @@
       },
       "title_label": {
         "beauty_review": "서비스/테마",
-        "default": "??"
+        "default": "제목"
       },
       "title_placeholder": {
         "beauty_review": "예: 강남 레이어드컷 후기",
@@ -2552,7 +2553,7 @@
     "button": "Open Translation Helper"
   },
   "assurance": {
-    "items": "?? ??"
+    "items": "신뢰할 수 있는 서비스"
   },
   "interpreter_ui": {
     "customer_speaks": "Customer Speaks",
@@ -3064,7 +3065,7 @@
     "hero_title": "Hero Title",
     "hero_subtitle": "Hero Subtitle",
     "features": {
-      "booking": "??",
+      "booking": "예약",
       "ai_plan": "Ai Plan",
       "navi": "Navi"
     },
