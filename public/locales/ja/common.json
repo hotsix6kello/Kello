@@ -406,7 +406,7 @@
       },
       "context": {
         "title": "状況別フレーズ",
-        "booking": "??",
+        "booking": "予約",
         "interpreter": "通訳サポートが必要なときに使うフレーズです。",
         "support": "助けが必要なときに役立つフレーズです。"
       },
@@ -517,7 +517,7 @@
       "loading": "読み込み中...",
       "searching": "検索中...",
       "back_to_list": "Back to List",
-      "labels": "???"
+      "labels": "ラベル"
     },
     "loading": "読み込み中...",
     "retry": "再試行",
@@ -1137,6 +1137,7 @@
     }
   },
   "community_page": {
+    "title": "コミュニティ",
     "write_post": "作成",
     "edit": "編集",
     "posting": "登録中...",
@@ -1156,14 +1157,14 @@
       "search_placeholder": "興味のあるトピックを検索"
     },
     "categories": {
-      "all": "???",
-      "meetup": "???",
-      "beauty_review": "??????",
-      "food_review": "?????",
-      "travel_review": "??????",
-      "meetup_recruitment": "同行者募集",
-      "help": "??",
-      "tips": "?????"
+      "all": "すべて",
+      "meetup": "集まり",
+      "beauty_review": "ビューティーレビュー",
+      "food_review": "グルメ情報",
+      "travel_review": "旅行情報",
+      "meetup_recruitment": "旅仲間",
+      "help": "質問",
+      "tips": "予約のコツ"
     },
     "sub_filters": {
       "all": "すべて",
@@ -1243,7 +1244,7 @@
       },
       "title_label": {
         "beauty_review": "メニュー/テーマ",
-        "default": "????"
+        "default": "タイトル"
       },
       "title_placeholder": {
         "beauty_review": "例：江南駅 レイヤードカットのレビュー",
@@ -1549,7 +1550,7 @@
     "time": {
       "just_now": "たった今"
     },
-    "title": "??????",
+    "title": "コミュニティ",
     "login_required": {
       "title": "Sign in to write a post",
       "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
@@ -1949,37 +1950,37 @@
     "cancel_consent_no_refund": "予約日の1日前以内のキャンセルのため返金できません。全額差し引きに同意します。",
     "cancel_consent_partial": "今キャンセルすると、プラットフォーム利用料 {{platformFee}} と施術費の {{penaltyRate}}%（{{penaltyAmount}}）が差し引かれます。同意します。",
     "cancel_consent_default": "キャンセル・返金ポリシーに同意します。",
-    "payment_consent_hint": "????????????2????????????",
-    "payment_consent_privacy_label": "????????????????",
-    "payment_consent_refund_label": "??????????????????",
-    "payment_consent_title": "???????????",
-    "payment_currency_usd_only": "PayPal?????USD?????????????????????Kello?????????",
-    "payment_error": "???????????????????????????",
-    "payment_no_refund_label": "????",
-    "payment_refund_policy_title": "????????????",
-    "payment_refund_rate_label": "{{rate}}%??",
-    "payment_section_title": "????",
-    "payment_status_paid": "?????",
-    "payment_success": "??????????????????????",
-    "quote_accepted_message": "?????????????????????????",
-    "quote_action_accept": "?????",
-    "quote_action_reject": "?????",
-    "quote_date_time": "????",
-    "quote_error_respond": "??????????????????????",
-    "quote_expired_notice": "???????????????????",
-    "quote_expires_at": "???????",
-    "quote_note": "?????",
-    "quote_processing": "???...",
-    "quote_rejected_message": "??????????Kello?????????",
-    "quote_section_title": "????",
-    "quote_service_name": "??????",
-    "quote_shop_address": "????",
-    "quote_shop_name": "????",
-    "quote_status_accepted": "????",
-    "quote_status_expired": "????",
-    "quote_status_pending": "????",
-    "quote_status_rejected": "????",
-    "quote_total_price": "????",
+    "payment_consent_hint": "決済を進めるには、上記2項目すべてに同意してください。",
+    "payment_consent_privacy_label": "個人情報処理方針への同意",
+    "payment_consent_refund_label": "キャンセル・返金ポリシーへの同意",
+    "payment_consent_title": "決済前の確認と同意",
+    "payment_currency_usd_only": "現在、PayPal決済はUSD見積書のみ対応しています。Kelloに通貨変更をお申し付けください。",
+    "payment_error": "決済処理中にエラーが発生しました。もう一度お試しください。",
+    "payment_no_refund_label": "返金不可",
+    "payment_refund_policy_title": "キャンセル・返金ポリシー",
+    "payment_refund_rate_label": "{{rate}}% 返金",
+    "payment_section_title": "決済",
+    "payment_status_paid": "決済完了",
+    "payment_success": "決済が完了し、予約が確定されました。",
+    "quote_accepted_message": "提案を承諾しました。次のステップで決済を進めます。",
+    "quote_action_accept": "提案を承諾",
+    "quote_action_reject": "提案を拒否",
+    "quote_date_time": "提案日程",
+    "quote_error_respond": "処理に失敗しました。もう一度お試しください。",
+    "quote_expired_notice": "提案が期限切れの可能性があります",
+    "quote_expires_at": "提案有効期限",
+    "quote_note": "運営者案内",
+    "quote_processing": "処理中...",
+    "quote_rejected_message": "提案を拒否しました。Kelloが再度確認します。",
+    "quote_section_title": "予約見積書",
+    "quote_service_name": "確定施術名",
+    "quote_shop_address": "店舗住所",
+    "quote_shop_name": "提案店舗名",
+    "quote_status_accepted": "承諾済み",
+    "quote_status_expired": "期限切れ",
+    "quote_status_pending": "回答待ち",
+    "quote_status_rejected": "拒否済み",
+    "quote_total_price": "合計金額",
     "quote_refund_policy": "Refund / Cancellation Policy",
     "quote_sent_at": "Proposal Sent",
     "quote_status_label": "Proposal Status",
@@ -2418,10 +2419,10 @@
         "count": "{{count}} phrases"
       },
       "context": {
-        "title": "Current context",
-        "booking": "??",
-        "interpreter": "Interpreter",
-        "support": "Support"
+        "title": "現在の状況",
+        "booking": "予約",
+        "interpreter": "通訳",
+        "support": "サポート"
       },
       "favorites": {
         "desc": "Desc",
@@ -2813,7 +2814,7 @@
   "afternoon": "こんにちは",
   "evening": "こんばんは",
   "assurance": {
-    "items": "????"
+    "items": "信頼できるサービス"
   },
   "interpreter": {
     "eyebrow": "言語サポート",
@@ -3077,7 +3078,7 @@
     "hero_title": "Hero Title",
     "hero_subtitle": "Hero Subtitle",
     "features": {
-      "booking": "??",
+      "booking": "予約",
       "ai_plan": "Ai Plan",
       "navi": "Navi"
     },

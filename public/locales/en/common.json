@@ -1557,6 +1557,7 @@
     }
   },
   "community_page": {
+    "title": "Community",
     "write_post": "Write Post",
     "edit": "Edit Post",
     "posting": "Posting...",
