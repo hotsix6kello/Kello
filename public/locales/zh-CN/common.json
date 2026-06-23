@@ -169,11 +169,11 @@
       "back_to_list": "返回列表",
       "send": "发送",
       "logout": "退出登录",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_all_new": "查看全部",
+      "browse_community_new": "浏览社区",
+      "cancel": "取消",
+      "confirm": "确认",
+      "go_back": "返回"
     },
     "states": {
       "posts": "Posts",
@@ -2036,9 +2036,13 @@
       "empty_text": "No booking history yet."
     },
     "profile": {
-      "account_hint": "Account & Settings",
-      "avatar_placeholder": "我的"
+      "account_hint": "账户与设置",
+      "avatar_placeholder": "我的",
+      "change_image": "📷 更换照片",
+      "remove_image": "🗑️ 删除照片"
     },
+    "login_button": "登录",
+    "login_hint": "登录后开始使用Kello服务！",
     "settings": {
       "short": "Settings",
       "account": {
@@ -2113,8 +2117,10 @@
       "title_new": "My community"
     },
     "messages": {
-      "upload_success": "Profile picture has been updated.",
-      "upload_failed": "Failed to upload. Please try again."
+      "upload_success": "个人头像已更新。",
+      "upload_failed": "上传失败，请重试。",
+      "delete_success": "个人头像已删除。",
+      "delete_failed": "删除失败，请重试。"
     },
     "bookings_hub": {
       "meta": {
@@ -2796,7 +2802,7 @@
       "one_day": "1日前：50% 退款",
       "same_day": "当日或未到场 (No-show)：不予退款",
       "note": "最终退款处理可能因各店铺的政策而有所不同。",
-      "four_days": "4+ days before appointment: 100% service fee refund"
+      "four_days": "预约日4天以上前：服务费100%退款"
     },
     "liability": {
       "title": "4. 免责声明",
@@ -2804,14 +2810,14 @@
       "community": "公司对通过社区功能进行的用户间自发性线下聚会或个人交易中产生的损害、事故或纠纷不承担责任。"
     },
     "platform_fee": {
-      "title": "3. Platform Fee",
-      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
-      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+      "title": "3. 平台服务费",
+      "content": "Wekello 对其预约代行服务收取服务费10%的平台服务费。",
+      "note": "平台服务费在完成预约时与服务费一起收取，并在取消政策下不予退款。"
     },
     "chargeback": {
-      "title": "5. Payment Cancellation & Disputes",
-      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
-      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+      "title": "5. 付款取消与争议",
+      "content": "通过完成预约付款，客户被视为已明确同意本退款政策。",
+      "note": "如果针对本政策规定的合理取消费扣除提出退款争议，Wekello有权使用客户的同意记录和预约历史作为证据提出异议。"
     }
   },
   "morning": "早上好",

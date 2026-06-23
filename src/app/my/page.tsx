@@ -229,10 +229,10 @@ function ProfileSummaryCard({
             // 2. Callback
             if (onAvatarUpdate) onAvatarUpdate(publicUrl);
             
-            alert("프로필 이미지가 변경되었습니다.");
+            alert(t("my_page.messages.upload_success"));
         } catch (error) {
             console.error('Error uploading avatar:', error);
-            alert("이미지 업로드에 실패했습니다.");
+            alert(t("my_page.messages.upload_failed"));
         } finally {
             setUploading(false);
         }
@@ -254,10 +254,10 @@ function ProfileSummaryCard({
             if (updateError) throw updateError;
 
             if (onAvatarUpdate) onAvatarUpdate("");
-            alert("프로필 이미지가 삭제되었습니다.");
+            alert(t("my_page.messages.delete_success"));
         } catch (error) {
             console.error('Error removing avatar:', error);
-            alert("이미지 삭제에 실패했습니다.");
+            alert(t("my_page.messages.delete_failed"));
         } finally {
             setUploading(false);
         }
@@ -364,12 +364,12 @@ function ProfileSummaryCard({
                                 boxShadow: '0 3px 8px rgba(255, 77, 130, 0.3)'
                             }}
                         >
-                            로그인하기
+                            {t("my_page.login_button")}
                         </button>
                     )}
                 </div>
                 <div className={styles.profileSubtext} style={{ fontSize: '0.75rem', color: 'var(--gray-500)', wordBreak: 'break-all' }}>
-                    {isLoggedIn ? subtitle : "로그인 후 Kello 서비스를 이용해보세요!"}
+                    {isLoggedIn ? subtitle : t("my_page.login_hint")}
                 </div>
                 {isLoggedIn && referralCode && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
@@ -386,13 +386,13 @@ function ProfileSummaryCard({
                                     borderRadius: '4px',
                                     transition: 'background 0.2s',
                                 }}
-                                title="클릭하여 복사"
+                                title={t("my_page.referral.copy")}
                             >
                                 {referralCode}
                             </strong>
                             {copied && (
                                 <span style={{ marginLeft: 6, color: '#10B981', fontSize: '0.68rem', fontWeight: 700 }}>
-                                    복사 완료!
+                                    {t("my_page.referral.copied")}
                                 </span>
                             )}
                         </span>
@@ -443,7 +443,7 @@ function ProfileSummaryCard({
                             fontWeight: 600,
                         }}
                     >
-                        📷 이미지 변경
+                        {t("my_page.profile.change_image")}
                     </button>
                     <button
                         onClick={(e) => {
@@ -461,7 +461,7 @@ function ProfileSummaryCard({
                             fontWeight: 600,
                         }}
                     >
-                        🗑️ 이미지 없음
+                        {t("my_page.profile.remove_image")}
                     </button>
                     <div style={{ height: 1, background: 'var(--warm-sand)', margin: '4px 0' }} />
                     <button
@@ -479,7 +479,7 @@ function ProfileSummaryCard({
                             color: 'var(--gray-500)',
                         }}
                     >
-                        취소
+                        {t("common.actions.cancel")}
                     </button>
                 </div>
             )}
@@ -817,7 +817,7 @@ function MyBookingsSection({
                     style={{ margin: 0, padding: 0 }}
                     onClick={() => router.push('/my/bookings/beauty')}
                 >
-                    전체 보기
+                    {t("common.actions.view_all_new")}
                 </button>
             </div>
 
@@ -1483,7 +1483,7 @@ function MyPageContent() {
                         opacity: 0.7
                     }}
                 >
-                    개인정보처리방침
+                    {t("privacy_policy.title")}
                 </div>
                 <div
                     onClick={() => router.push('/terms')}
@@ -1495,7 +1495,7 @@ function MyPageContent() {
                         opacity: 0.7
                     }}
                 >
-                    이용약관
+                    {t("terms_of_service.title")}
                 </div>
             </div>
 

@@ -2342,8 +2342,12 @@
     },
     "profile": {
       "account_hint": "Account & Settings",
-      "avatar_placeholder": "My"
+      "avatar_placeholder": "My",
+      "change_image": "📷 Change Photo",
+      "remove_image": "🗑️ Remove Photo"
     },
+    "login_button": "Log in",
+    "login_hint": "Log in to start using Kello services!",
     "settings": {
       "short": "Settings",
       "account": {
@@ -2419,7 +2423,9 @@
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
-      "upload_failed": "Failed to upload. Please try again."
+      "upload_failed": "Failed to upload. Please try again.",
+      "delete_success": "Profile picture removed.",
+      "delete_failed": "Failed to remove. Please try again."
     },
     "bookings_hub": {
       "meta": {
