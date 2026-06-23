@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-
 import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from '@/lib/admin/adminRouteAccess.ts';
+
 
 type GoogleAutocompleteSuggestion = {
   placePrediction?: {
@@ -93,7 +93,6 @@ export async function GET(request: Request) {
       input,
       languageCode: 'ko',
       regionCode: 'KR',
-      includedPrimaryTypes: ['lodging', 'locality', 'sublocality', 'neighborhood'],
     }),
   });
 
