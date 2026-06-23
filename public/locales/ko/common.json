@@ -170,11 +170,11 @@
       "back_to_list": "목록으로 돌아가기",
       "send": "전송",
       "logout": "로그아웃",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_all_new": "전체 보기",
+      "browse_community_new": "커뮤니티 둘러보기",
+      "cancel": "취소",
+      "confirm": "확인",
+      "go_back": "뒤로 가기"
     },
     "states": {
       "posts": "포스트",
@@ -854,8 +854,12 @@
     },
     "profile": {
       "account_hint": "계정 및 설정",
-      "avatar_placeholder": "마이"
+      "avatar_placeholder": "마이",
+      "change_image": "📷 이미지 변경",
+      "remove_image": "🗑️ 이미지 삭제"
     },
+    "login_button": "로그인하기",
+    "login_hint": "로그인 후 Kello 서비스를 이용해보세요!",
     "settings": {
       "short": "설정",
       "account": {
@@ -931,7 +935,9 @@
     },
     "messages": {
       "upload_success": "프로필 사진이 업데이트되었습니다.",
-      "upload_failed": "업로드에 실패했습니다. 다시 시도해 주세요."
+      "upload_failed": "업로드에 실패했습니다. 다시 시도해 주세요.",
+      "delete_success": "프로필 사진이 삭제되었습니다.",
+      "delete_failed": "삭제에 실패했습니다. 다시 시도해 주세요."
     },
     "bookings_hub": {
       "meta": {

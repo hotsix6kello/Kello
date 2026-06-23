@@ -379,17 +379,17 @@
       "back_to_list": "一覧に戻る",
       "send": "送信",
       "logout": "ログアウト",
-      "view_details": "상세 정보 보기",
-      "emergency_phrases": "긴급 문구",
-      "browse_places": "장소 둘러보기",
-      "browse_explore": "탐색 둘러보기",
-      "explore_more": "더 탐색하기",
-      "open_hub": "허브 열기",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_details": "詳細を見る",
+      "emergency_phrases": "緊急フレーズ",
+      "browse_places": "場所を見る",
+      "browse_explore": "探索を見る",
+      "explore_more": "もっと探索する",
+      "open_hub": "ハブを開く",
+      "view_all_new": "すべて見る",
+      "browse_community_new": "コミュニティを見る",
+      "cancel": "キャンセル",
+      "confirm": "確認",
+      "go_back": "戻る"
     },
     "community": {
       "posts": "私の投稿",
@@ -2249,8 +2249,12 @@
     },
     "profile": {
       "account_hint": "アカウントと設定",
-      "avatar_placeholder": "マイ"
+      "avatar_placeholder": "マイ",
+      "change_image": "📷 写真を変更",
+      "remove_image": "🗑️ 写真を削除"
     },
+    "login_button": "ログイン",
+    "login_hint": "ログインしてKelloのサービスをお楽しみください！",
     "settings": {
       "short": "設定",
       "account": {
@@ -2326,7 +2330,9 @@
     },
     "messages": {
       "upload_success": "プロフィール写真が更新されました。",
-      "upload_failed": "アップロードに失敗しました。もう一度お試しください。"
+      "upload_failed": "アップロードに失敗しました。もう一度お試しください。",
+      "delete_success": "プロフィール写真が削除されました。",
+      "delete_failed": "削除に失敗しました。もう一度お試しください。"
     },
     "bookings_hub": {
       "meta": {

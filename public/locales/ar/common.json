@@ -369,11 +369,11 @@
       "send": "إرسال",
       "logout": "تسجيل الخروج",
       "back_to_list": "Back to List",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_all_new": "عرض الكل",
+      "browse_community_new": "تصفح المجتمع",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "go_back": "رجوع"
     },
     "states": {
       "posts": "Posts",
@@ -686,9 +686,13 @@
       "empty_text": "No booking history yet."
     },
     "profile": {
-      "account_hint": "Account & Settings",
-      "avatar_placeholder": "أنا"
+      "account_hint": "الحساب والإعدادات",
+      "avatar_placeholder": "أنا",
+      "change_image": "📷 تغيير الصورة",
+      "remove_image": "🗑️ حذف الصورة"
     },
+    "login_button": "تسجيل الدخول",
+    "login_hint": "سجّل الدخول للاستمتاع بخدمات Kello!",
     "settings": {
       "short": "Settings",
       "account": {
@@ -763,8 +767,10 @@
       "title_new": "My community"
     },
     "messages": {
-      "upload_success": "Profile picture has been updated.",
-      "upload_failed": "Failed to upload. Please try again."
+      "upload_success": "تم تحديث صورة الملف الشخصي.",
+      "upload_failed": "فشل الرفع. يرجى المحاولة مرة أخرى.",
+      "delete_success": "تم حذف صورة الملف الشخصي.",
+      "delete_failed": "فشل الحذف. يرجى المحاولة مرة أخرى."
     },
     "bookings_hub": {
       "meta": {
@@ -2176,7 +2182,7 @@
       "one_day": "قبل يوم واحد: استرداد 50%",
       "same_day": "في نفس اليوم أو عدم الحضور: لا استرداد",
       "note": "قد تختلف معالجة الاسترداد النهائي اعتمادًا على سياسة المتجر المحددة.",
-      "four_days": "4+ days before appointment: 100% service fee refund"
+      "four_days": "قبل 4 أيام أو أكثر: استرداد 100% من رسوم الخدمة"
     },
     "liability": {
       "title": "4. حدود المسؤولية",
@@ -2184,14 +2190,14 @@
       "community": "Wekello ليست مسؤولة عن أي أضرار أو حوادث أو نزاعات ناتجة عن اللقاءات التطوعية غير المتصلة بالإنترنت أو المعاملات الشخصية بين المستخدمين التي تتم من خلال ميزات المجتمع."
     },
     "platform_fee": {
-      "title": "3. Platform Fee",
-      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
-      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+      "title": "3. رسوم المنصة",
+      "content": "تفرض Wekello رسوم منصة بنسبة 10% من رسوم الخدمة مقابل خدمة الحجز.",
+      "note": "يتم تحصيل رسوم المنصة مع رسوم الخدمة عند اكتمال الحجز، وتُستبعد من أي استرداد بموجب سياسة الإلغاء."
     },
     "chargeback": {
-      "title": "5. Payment Cancellation & Disputes",
-      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
-      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+      "title": "5. إلغاء الدفع والنزاعات",
+      "content": "باكتمال دفع الحجز، يُعدّ العميل موافقًا صراحةً على سياسة الاسترداد هذه.",
+      "note": "إذا تم تقديم طعن ضد خصم رسوم إلغاء مشروع وفقًا لهذه السياسة، يحق لـ Wekello الاعتراض على الطعن باستخدام سجلات موافقة العميل وتاريخ الحجز كدليل."
     }
   },
   "interpreter_page": {

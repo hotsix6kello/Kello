@@ -164,11 +164,11 @@
       "send": "ส่ง",
       "logout": "ออกจากระบบ",
       "back_to_list": "Back to List",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_all_new": "ดูทั้งหมด",
+      "browse_community_new": "ดูชุมชน",
+      "cancel": "ยกเลิก",
+      "confirm": "ยืนยัน",
+      "go_back": "กลับ"
     },
     "states": {
       "posts": "Posts",
@@ -2039,9 +2039,13 @@
       "empty_text": "No booking history yet."
     },
     "profile": {
-      "account_hint": "Account & Settings",
-      "avatar_placeholder": "ฉัน"
+      "account_hint": "บัญชีและการตั้งค่า",
+      "avatar_placeholder": "ฉัน",
+      "change_image": "📷 เปลี่ยนรูป",
+      "remove_image": "🗑️ ลบรูป"
     },
+    "login_button": "เข้าสู่ระบบ",
+    "login_hint": "เข้าสู่ระบบเพื่อใช้บริการ Kello!",
     "settings": {
       "short": "Settings",
       "account": {
@@ -2116,8 +2120,10 @@
       "title_new": "My community"
     },
     "messages": {
-      "upload_success": "Profile picture has been updated.",
-      "upload_failed": "Failed to upload. Please try again."
+      "upload_success": "อัปเดตรูปโปรไฟล์แล้ว",
+      "upload_failed": "อัปโหลดล้มเหลว กรุณาลองใหม่",
+      "delete_success": "ลบรูปโปรไฟล์แล้ว",
+      "delete_failed": "ลบล้มเหลว กรุณาลองใหม่"
     },
     "bookings_hub": {
       "meta": {
@@ -2799,7 +2805,7 @@
       "one_day": "1 วันล่วงหน้า: คืนเงิน 50%",
       "same_day": "วันจองหรือกรณี No-show: ไม่มีการคืนเงิน",
       "note": "การคืนเงินขั้นสุดท้ายอาจแตกต่างกันไปตามนโยบายของแต่ละร้านค้า",
-      "four_days": "4+ days before appointment: 100% service fee refund"
+      "four_days": "4 วันขึ้นไปก่อนวันจอง: คืนเงิน 100% ของค่าบริการ"
     },
     "liability": {
       "title": "4. ข้อจำกัดความรับผิดชอบ",
@@ -2807,14 +2813,14 @@
       "community": "Wekello จะไม่รับผิดชอบต่อความเสียหาย อุบัติเหตุ หรือข้อพิพาทใดๆ ที่เกิดจากการพบปะออฟไลน์หรือการทำธุรกรรมส่วนตัวระหว่างผู้ใช้ผ่านฟีเจอร์ชุมชน"
     },
     "platform_fee": {
-      "title": "3. Platform Fee",
-      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
-      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+      "title": "3. ค่าธรรมเนียมแพลตฟอร์ม",
+      "content": "Wekello คิดค่าธรรมเนียมแพลตฟอร์ม 10% ของค่าบริการสำหรับบริการตัวแทนรับจอง",
+      "note": "ค่าธรรมเนียมแพลตฟอร์มจะถูกเก็บพร้อมกับค่าบริการเมื่อจองสำเร็จ และไม่รวมอยู่ในการคืนเงินตามนโยบายการยกเลิก"
     },
     "chargeback": {
-      "title": "5. Payment Cancellation & Disputes",
-      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
-      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+      "title": "5. การยกเลิกการชำระเงินและข้อพิพาท",
+      "content": "โดยการชำระเงินจองสำเร็จ ลูกค้าถือว่าได้ยอมรับนโยบายคืนเงินนี้อย่างชัดเจน",
+      "note": "หากมีการโต้แย้งการชำระเงิน (Chargeback) ต่อการหักค่าธรรมเนียมการยกเลิกที่ถูกต้องตามนโยบายนี้ Wekello ขอสงวนสิทธิ์ในการโต้แย้งโดยใช้บันทึกความยินยอมและประวัติการจองของลูกค้าเป็นหลักฐาน"
     }
   },
   "morning": "สวัสดีตอนเช้า",
