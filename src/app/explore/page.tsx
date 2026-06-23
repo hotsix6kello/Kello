@@ -670,8 +670,8 @@ export default function ExplorePage() {
               window.open(`https://www.google.com/maps/dir/?api=1&destination=${center.lat},${center.lng}`, '_blank');
             }}
             style={{
-              width: '46px',
               height: '46px',
+              padding: '0 12px',
               borderRadius: '16px',
               background: '#FFFFFF',
               border: '1.5px solid #FF4D82',
@@ -679,13 +679,15 @@ export default function ExplorePage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              gap: '4px',
               cursor: 'pointer',
               flexShrink: 0,
               transition: 'all 0.2s',
             }}
             aria-label="길찾기"
           >
-            <Send size={20} color="#FF4D82" strokeWidth={2.5} />
+            <CornerUpRight size={16} color="#FF4D82" strokeWidth={2.5} />
+            <span style={{ fontSize: '12px', fontWeight: 700, color: '#FF4D82' }}>길찾기</span>
           </button>
         </div>
 

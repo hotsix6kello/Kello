@@ -93,7 +93,6 @@ export async function GET(request: Request) {
       input,
       languageCode: 'ko',
       regionCode: 'KR',
-      includedPrimaryTypes: ['lodging', 'locality', 'sublocality', 'neighborhood'],
     }),
   });
 
