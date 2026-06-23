@@ -549,7 +549,7 @@ export default function CommunityPage() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <Users size={24} color="#000000" strokeWidth={2.5} />
                         <h1 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#2A2624', margin: 0 }}>
-                            커뮤니티
+                            {t('community_page.title')}
                         </h1>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -610,13 +610,13 @@ export default function CommunityPage() {
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
-                        {/* 1st Row: 전체, 질문, 뷰티후기, 샵추천 */}
+                        {/* 1st Row */}
                         <div style={{ display: 'flex', gap: '6px', justifyContent: 'space-between' }}>
                             {[
-                                { id: 'all', label: '전체', icon: Grid },
-                                { id: 'help', label: '질문', icon: HelpCircle },
-                                { id: 'beauty_review', label: '뷰티후기', icon: Sparkles },
-                                { id: 'travel_review', label: '샵추천', icon: Home }
+                                { id: 'all', label: t('community_page.categories.all'), icon: Grid },
+                                { id: 'help', label: t('community_page.categories.help'), icon: HelpCircle },
+                                { id: 'beauty_review', label: t('community_page.categories.beauty_review'), icon: Sparkles },
+                                { id: 'travel_review', label: t('community_page.categories.travel_review'), icon: Home }
                             ].map((tab) => {
                                 const IconComp = tab.icon;
                                 const isActive = filter === tab.id;
@@ -648,12 +648,12 @@ export default function CommunityPage() {
                                 );
                             })}
                         </div>
-                        {/* 2nd Row: 예약팁, 모임, 맛집추천 */}
+                        {/* 2nd Row */}
                         <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', width: '100%' }}>
                             {[
-                                { id: 'tips', label: '예약팁', icon: Calendar },
-                                { id: 'meetup', label: '모임', icon: Users },
-                                { id: 'food_review', label: '맛집추천', icon: Utensils }
+                                { id: 'tips', label: t('community_page.categories.tips'), icon: Calendar },
+                                { id: 'meetup', label: t('community_page.categories.meetup'), icon: Users },
+                                { id: 'food_review', label: t('community_page.categories.food_review'), icon: Utensils }
                             ].map((tab) => {
                                 const IconComp = tab.icon;
                                 const isActive = filter === tab.id;
@@ -896,24 +896,16 @@ export default function CommunityPage() {
                                     onChange={e => draftDispatch({ type: 'SET_FIELD', payload: { region: e.target.value } })}
                                 >
                                     <option value=""></option>
-                                    <option value="서울">서울</option>
-                                    <option value="경기">경기</option>
-                                    <option value="인천">인천</option>
-                                    <option value="부산">부산</option>
-                                    <option value="대구">대구</option>
-                                    <option value="대전">대전</option>
-                                    <option value="광주">광주</option>
-                                    <option value="울산">울산</option>
-                                    <option value="세종">세종</option>
-                                    <option value="강원">강원</option>
-                                    <option value="충북">충북</option>
-                                    <option value="충남">충남</option>
-                                    <option value="전북">전북</option>
-                                    <option value="전남">전남</option>
-                                    <option value="경북">경북</option>
-                                    <option value="경남">경남</option>
-                                    <option value="제주">제주</option>
-                                    <option value="기타">기타</option>
+                                    {([
+                                        ['서울', 'seoul'], ['경기', 'gyeonggi'], ['인천', 'incheon'],
+                                        ['부산', 'busan'], ['대구', 'daegu'], ['대전', 'daejeon'],
+                                        ['광주', 'gwangju'], ['울산', 'ulsan'], ['세종', 'sejong'],
+                                        ['강원', 'gangwon'], ['충북', 'chungbuk'], ['충남', 'chungnam'],
+                                        ['전북', 'jeonbuk'], ['전남', 'jeonnam'], ['경북', 'gyeongbuk'],
+                                        ['경남', 'gyeongnam'], ['제주', 'jeju'], ['기타', 'other'],
+                                    ] as [string, string][]).map(([val, key]) => (
+                                        <option key={val} value={val}>{t(`community_page.regions.${key}`)}</option>
+                                    ))}
                                 </select>
                             </div>
 

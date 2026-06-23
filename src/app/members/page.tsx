@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabaseClient';
 
 interface Profile {
@@ -13,6 +14,7 @@ interface Profile {
 
 export default function MembersPage() {
     const router = useRouter();
+    const { t } = useTranslation('common');
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -56,14 +58,14 @@ export default function MembersPage() {
                 display: 'flex', alignItems: 'center', gap: 12
             }}>
                 <button onClick={() => router.back()} style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: 'var(--ink-black)' }}>←</button>
-                <h1 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--ink-black)' }}>👥 회원 목록</h1>
-                <span style={{ marginLeft: 'auto', fontSize: '0.85rem', color: 'var(--soft-ink)' }}>{profiles.length}명</span>
+                <h1 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--ink-black)' }}>👥 {t('members_page.title')}</h1>
+                <span style={{ marginLeft: 'auto', fontSize: '0.85rem', color: 'var(--soft-ink)' }}>{profiles.length}{t('members_page.count_suffix')}</span>
             </header>
 
             <div style={{ padding: '16px 20px' }}>
                 {loading && (
                     <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--gray-400)' }}>
-                        불러오는 중...
+                        {t('common.states.loading')}
                     </div>
                 )}
 
@@ -113,7 +115,7 @@ export default function MembersPage() {
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--ink-black)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                {profile.nickname || '(닉네임 없음)'}
+                                {profile.nickname || t('members_page.no_nickname')}
                             </div>
                             <div style={{ fontSize: '0.8rem', color: 'var(--soft-ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                 {profile.email}

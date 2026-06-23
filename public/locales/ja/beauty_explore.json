@@ -101,73 +101,121 @@
       "name": "ジェニーハウス 清潭",
       "priceLabel": "150,000ウォン〜",
       "shortDescription": "K-POPスターが愛用するプレミアムヘア＆メイクアップサロン",
-      "tags": ["K-Style", "プレミアム", "清潭"]
+      "tags": [
+        "K-Style",
+        "プレミアム",
+        "清潭"
+      ]
     },
     "beauty_hair_2": {
       "name": "プムクリニック 江南",
       "priceLabel": "50,000ウォン〜",
       "shortDescription": "外国人訪問者に最も人気のあるコスパ抜群のクリニック",
-      "tags": ["クリニック", "江南", "コスパ"]
+      "tags": [
+        "クリニック",
+        "江南",
+        "コスパ"
+      ]
     },
     "beauty_nail_1": {
       "name": "メゾン ネイル 弘大",
       "priceLabel": "79,000ウォン〜",
       "shortDescription": "トレンドカラーとシーズンアートで人気のネイルスタジオ",
-      "tags": ["マンスリーアート", "ジェルケア", "カラーキュレーション"]
+      "tags": [
+        "マンスリーアート",
+        "ジェルケア",
+        "カラーキュレーション"
+      ]
     },
     "beauty_nail_2": {
       "name": "ベージュ ネイル 鐘路",
       "priceLabel": "45,000ウォン〜",
       "shortDescription": "オフィスネイルからウェディングネイルまで丁寧な施術",
-      "tags": ["オフィスネイル", "ウェディングネイル", "ネイルケア"]
+      "tags": [
+        "オフィスネイル",
+        "ウェディングネイル",
+        "ネイルケア"
+      ]
     },
     "beauty_esthetic_1": {
       "name": "セリン スキン ラウンジ 江南",
       "priceLabel": "95,000ウォン〜",
       "shortDescription": "プライベートな空間で肌鎮静・引き締めケアを",
-      "tags": ["鎮静ケア", "引き締め", "個室完備"]
+      "tags": [
+        "鎮静ケア",
+        "引き締め",
+        "個室完備"
+      ]
     },
     "beauty_esthetic_2": {
       "name": "グロウ フォーミュラ 聖水",
       "priceLabel": "88,000ウォン〜",
       "shortDescription": "敏感肌のためのカスタム鎮静プログラムとホームケアガイド",
-      "tags": ["保湿", "敏感肌対応", "カスタム相談"]
+      "tags": [
+        "保湿",
+        "敏感肌対応",
+        "カスタム相談"
+      ]
     },
     "beauty_waxing_1": {
       "name": "ベア アトリエ ワックス 江南",
       "priceLabel": "99,000ウォン〜",
       "shortDescription": "徹底した衛生管理と系統的なアフターケアでリピーター続出",
-      "tags": ["衛生管理", "アフターケア", "ブラジリアン"]
+      "tags": [
+        "衛生管理",
+        "アフターケア",
+        "ブラジリアン"
+      ]
     },
     "beauty_waxing_2": {
       "name": "ソフト ストリップ 弘大",
       "priceLabel": "55,000ウォン〜",
       "shortDescription": "忙しいスケジュールでも手軽に受けられる低刺激ワックス",
-      "tags": ["アームワックス", "短時間施術", "低刺激"]
+      "tags": [
+        "アームワックス",
+        "短時間施術",
+        "低刺激"
+      ]
     },
     "beauty_makeup_1": {
       "name": "アトリエ ヴェイル メイクアップ",
       "priceLabel": "デイリー 85,000ウォン〜",
       "shortDescription": "日常に溶け込む自然でこなれたメイクアップ",
-      "tags": ["メイクアップ", "聖水", "ナチュラル"]
+      "tags": [
+        "メイクアップ",
+        "聖水",
+        "ナチュラル"
+      ]
     },
     "beauty_makeup_2": {
       "name": "ディア ミューズ メイクアップ",
       "priceLabel": "ウェディングゲスト 132,000ウォン〜",
       "shortDescription": "特別な日やウェディングのための専門メイクアップアーティスト",
-      "tags": ["ウェディング", "鐘路", "専門家"]
+      "tags": [
+        "ウェディング",
+        "鐘路",
+        "専門家"
+      ]
     },
     "beauty_lash_1": {
       "name": "ブルーム ラッシュ ブティック 江南",
       "priceLabel": "99,000ウォン〜",
       "shortDescription": "目の形に合わせたカールデザインと長持ち施術で評判",
-      "tags": ["カールデザイン", "長持ち施術", "ナチュラルエクステ"]
+      "tags": [
+        "カールデザイン",
+        "長持ち施術",
+        "ナチュラルエクステ"
+      ]
     },
     "beauty_lash_2": {
       "name": "フェザー ラッシュ 聖水",
       "priceLabel": "69,000ウォン〜",
       "shortDescription": "まつ毛パーマ初心者も安心して来店できるナチュラルラッシュサロン",
-      "tags": ["まつ毛パーマ", "初回歓迎", "ナチュラルカール"]
+      "tags": [
+        "まつ毛パーマ",
+        "初回歓迎",
+        "ナチュラルカール"
+      ]
     }
   },
   "designers": {
@@ -421,71 +469,170 @@
     "root_color_desc": "プリン部分のトーン修正。",
     "hair_clinic": "ヘアクリニック",
     "hair_clinic_desc": "ダメージケア集中プログラム。",
-    "nail_gel": "ジェルネイル",
+    "nail_gel": {
+      "name": "ジェルネイル",
+      "desc": "基本ジェルカラー施術。"
+    },
     "nail_gel_desc": "基本ジェルカラー施術。",
-    "nail_care": "ネイルケア",
+    "nail_care": {
+      "name": "ネイルケア",
+      "desc": "甘皮ケアとネイルシェイピング。"
+    },
     "nail_care_desc": "甘皮ケアとネイルシェイピング。",
-    "nail_pedi": "ジェルペディキュア",
+    "nail_pedi": {
+      "name": "ジェルペディキュア",
+      "desc": "フットケア込みのジェル施術。"
+    },
     "nail_pedi_desc": "フットケア込みのジェル施術。",
-    "esthetic_calming": "鎮静ケア",
+    "esthetic_calming": {
+      "name": "鎮静ケア",
+      "desc": "敏感肌向け鎮静プログラム。"
+    },
     "esthetic_calming_desc": "敏感肌向け鎮静プログラム。",
-    "esthetic_moisture": "保湿ケア",
+    "esthetic_moisture": {
+      "name": "保湿ケア",
+      "desc": "乾燥肌向け保湿充電プログラム。"
+    },
     "esthetic_moisture_desc": "乾燥肌向け保湿充電プログラム。",
-    "esthetic_lifting": "リフティングケア",
+    "esthetic_lifting": {
+      "name": "リフティングケア",
+      "desc": "弾力改善中心ケア。"
+    },
     "esthetic_lifting_desc": "弾力改善中心ケア。",
-    "waxing_brazilian": "ブラジリアン",
+    "waxing_brazilian": {
+      "name": "ブラジリアンワックス",
+      "desc": "デリケートゾーン中心ワックス。"
+    },
     "waxing_brazilian_desc": "デリケートゾーン中心ワックス。",
-    "waxing_arm": "アームワックス",
+    "waxing_arm": {
+      "name": "アームワックス",
+      "desc": "両腕全体の処理。"
+    },
     "waxing_arm_desc": "両腕全体の処理。",
-    "waxing_leg": "レッグワックス",
+    "waxing_leg": {
+      "name": "レッグワックス",
+      "desc": "ふくらはぎまたはハーフレッグ基準。"
+    },
     "waxing_leg_desc": "ふくらはぎまたはハーフレッグ基準。",
-    "makeup_daily": "デイリーメイク",
+    "makeup_daily": {
+      "name": "デイリーメイク",
+      "desc": "日常のアポイントに合わせた軽めのメイク。"
+    },
     "makeup_daily_desc": "日常のアポイントに合わせた軽めのメイク。",
-    "makeup_interview": "就活メイク",
+    "makeup_interview": {
+      "name": "就活メイク",
+      "desc": "清潔感ある印象メイク。"
+    },
     "makeup_interview_desc": "就活向けの清潔感ある印象メイク。",
-    "makeup_guest": "ウェディングゲストメイク",
+    "makeup_guest": {
+      "name": "ウェディングゲストメイク",
+      "desc": "イベントスケジュールに合わせたスタイリング。"
+    },
     "makeup_guest_desc": "イベントスケジュールに合わせたスタイリング。",
-    "lash_perm": "まつ毛パーマ",
+    "lash_perm": {
+      "name": "まつ毛パーマ",
+      "desc": "カール固定中心の施術。"
+    },
     "lash_perm_desc": "カール固定中心の施術。",
-    "lash_extension": "まつ毛エクステ",
+    "lash_extension": {
+      "name": "まつ毛エクステ",
+      "desc": "長さとカール選択型エクステ。"
+    },
     "lash_extension_desc": "長さとカール選択型エクステ施術。",
-    "lash_retouch": "まつ毛リタッチ",
+    "lash_retouch": {
+      "name": "まつ毛リタッチ",
+      "desc": "既存エクステの補完施術。"
+    },
     "lash_retouch_desc": "既存エクステの補完施術。",
-    "hair_add_scalp": "頭皮スケーリング",
+    "hair_add_scalp": {
+      "name": "頭皮スケーリング",
+      "desc": "施術前の頭皮クレンジング。"
+    },
     "hair_add_scalp_desc": "施術前の頭皮クレンジングケア。",
-    "hair_add_blowdry": "スタイリング仕上げ",
+    "hair_add_blowdry": {
+      "name": "ブロー仕上げ",
+      "desc": "ブローと簡単なスタイリング。"
+    },
     "hair_add_blowdry_desc": "ブローと簡単なスタイリング。",
-    "hair_add_ampoule": "アンプルケア",
+    "hair_add_ampoule": {
+      "name": "アンプルケア",
+      "desc": "ダメージ部位への集中栄養ケア。"
+    },
     "hair_add_ampoule_desc": "ダメージ部位への集中栄養ケア。",
-    "nail_add_removal": "ジェルオフ込み",
+    "nail_add_removal": {
+      "name": "ジェルオフ",
+      "desc": "既存ジェルのオフを含む。"
+    },
     "nail_add_removal_desc": "既存ジェルのオフを含む施術。",
-    "nail_add_art": "ポイントアート",
+    "nail_add_art": {
+      "name": "ポイントアート",
+      "desc": "両手基準のポイントアート。"
+    },
     "nail_add_art_desc": "両手基準のポイントアート追加。",
-    "nail_add_strength": "強化コーティング",
+    "nail_add_strength": {
+      "name": "強化コーティング",
+      "desc": "持続力強化コーティング。"
+    },
     "nail_add_strength_desc": "持続力強化コーティング。",
-    "esthetic_add_modeling": "モデリングパック",
+    "esthetic_add_modeling": {
+      "name": "モデリングパック",
+      "desc": "鎮静仕上げパック。"
+    },
     "esthetic_add_modeling_desc": "鎮静仕上げパック追加。",
-    "esthetic_add_neck": "ネックケア追加",
+    "esthetic_add_neck": {
+      "name": "ネックケア",
+      "desc": "首ライン集中ケア。"
+    },
     "esthetic_add_neck_desc": "首ライン集中ケア。",
-    "esthetic_add_led": "LEDケア",
+    "esthetic_add_led": {
+      "name": "LEDケア",
+      "desc": "鎮静補助光ケア。"
+    },
     "esthetic_add_led_desc": "鎮静補助光ケア。",
-    "waxing_add_care": "鎮静ケア",
+    "waxing_add_care": {
+      "name": "鎮静ケア",
+      "desc": "施術後の鎮静ジェルケア。"
+    },
     "waxing_add_care_desc": "施術後の鎮静ジェルケア。",
-    "waxing_add_pack": "保湿パック",
+    "waxing_add_pack": {
+      "name": "保湿パック",
+      "desc": "刺激緩和用パック。"
+    },
     "waxing_add_pack_desc": "刺激緩和用パック追加。",
-    "waxing_add_trim": "トリミング込み",
+    "waxing_add_trim": {
+      "name": "トリミング込み",
+      "desc": "施術前の整え込み。"
+    },
     "waxing_add_trim_desc": "施術前の整え込み。",
-    "makeup_add_hair": "ヘアブロー",
+    "makeup_add_hair": {
+      "name": "ヘアスタイリング",
+      "desc": "簡単なブロースタイリング。"
+    },
     "makeup_add_hair_desc": "簡単なブロースタイリング。",
-    "makeup_add_lash": "つけまつ毛",
+    "makeup_add_lash": {
+      "name": "つけまつ毛",
+      "desc": "ポイントまたはつけまつ毛。"
+    },
     "makeup_add_lash_desc": "ポイントまたはつけまつ毛。",
-    "makeup_add_touchup": "タッチアップキット",
+    "makeup_add_touchup": {
+      "name": "タッチアップキット",
+      "desc": "簡単なタッチアップキット提供。"
+    },
     "makeup_add_touchup_desc": "簡単なタッチアップキット提供。",
-    "lash_add_remove": "まつ毛オフ込み",
+    "lash_add_remove": {
+      "name": "まつ毛オフ",
+      "desc": "既存エクステのオフを含む。"
+    },
     "lash_add_remove_desc": "既存エクステのオフを含む。",
-    "lash_add_tinting": "ブラックティンティング",
+    "lash_add_tinting": {
+      "name": "ブラックティンティング",
+      "desc": "鮮やかなカラー補正。"
+    },
     "lash_add_tinting_desc": "鮮やかなカラー補正。",
-    "lash_add_coating": "栄養コーティング",
+    "lash_add_coating": {
+      "name": "栄養コーティング",
+      "desc": "持続力補助コーティング。"
+    },
     "lash_add_coating_desc": "持続力補助コーティング。",
     "daily_makeup": "デイリーメイク",
     "daily_makeup_desc": "日常のアポイントに合わせた軽めのメイク。",
@@ -500,138 +647,6 @@
     "hair_root_color": {
       "name": "リタッチカラー",
       "desc": "プリン部分のトーン修正。"
-    },
-    "nail_gel": {
-      "name": "ジェルネイル",
-      "desc": "基本ジェルカラー施術。"
-    },
-    "nail_care": {
-      "name": "ネイルケア",
-      "desc": "甘皮ケアとネイルシェイピング。"
-    },
-    "nail_pedi": {
-      "name": "ジェルペディキュア",
-      "desc": "フットケア込みのジェル施術。"
-    },
-    "esthetic_calming": {
-      "name": "鎮静ケア",
-      "desc": "敏感肌向け鎮静プログラム。"
-    },
-    "esthetic_moisture": {
-      "name": "保湿ケア",
-      "desc": "乾燥肌向け保湿充電プログラム。"
-    },
-    "esthetic_lifting": {
-      "name": "リフティングケア",
-      "desc": "弾力改善中心ケア。"
-    },
-    "waxing_brazilian": {
-      "name": "ブラジリアンワックス",
-      "desc": "デリケートゾーン中心ワックス。"
-    },
-    "waxing_arm": {
-      "name": "アームワックス",
-      "desc": "両腕全体の処理。"
-    },
-    "waxing_leg": {
-      "name": "レッグワックス",
-      "desc": "ふくらはぎまたはハーフレッグ基準。"
-    },
-    "makeup_daily": {
-      "name": "デイリーメイク",
-      "desc": "日常のアポイントに合わせた軽めのメイク。"
-    },
-    "makeup_interview": {
-      "name": "就活メイク",
-      "desc": "清潔感ある印象メイク。"
-    },
-    "makeup_guest": {
-      "name": "ウェディングゲストメイク",
-      "desc": "イベントスケジュールに合わせたスタイリング。"
-    },
-    "lash_perm": {
-      "name": "まつ毛パーマ",
-      "desc": "カール固定中心の施術。"
-    },
-    "lash_extension": {
-      "name": "まつ毛エクステ",
-      "desc": "長さとカール選択型エクステ。"
-    },
-    "lash_retouch": {
-      "name": "まつ毛リタッチ",
-      "desc": "既存エクステの補完施術。"
-    },
-    "hair_add_scalp": {
-      "name": "頭皮スケーリング",
-      "desc": "施術前の頭皮クレンジング。"
-    },
-    "hair_add_blowdry": {
-      "name": "ブロー仕上げ",
-      "desc": "ブローと簡単なスタイリング。"
-    },
-    "hair_add_ampoule": {
-      "name": "アンプルケア",
-      "desc": "ダメージ部位への集中栄養ケア。"
-    },
-    "nail_add_removal": {
-      "name": "ジェルオフ",
-      "desc": "既存ジェルのオフを含む。"
-    },
-    "nail_add_art": {
-      "name": "ポイントアート",
-      "desc": "両手基準のポイントアート。"
-    },
-    "nail_add_strength": {
-      "name": "強化コーティング",
-      "desc": "持続力強化コーティング。"
-    },
-    "esthetic_add_modeling": {
-      "name": "モデリングパック",
-      "desc": "鎮静仕上げパック。"
-    },
-    "esthetic_add_neck": {
-      "name": "ネックケア",
-      "desc": "首ライン集中ケア。"
-    },
-    "esthetic_add_led": {
-      "name": "LEDケア",
-      "desc": "鎮静補助光ケア。"
-    },
-    "waxing_add_care": {
-      "name": "鎮静ケア",
-      "desc": "施術後の鎮静ジェルケア。"
-    },
-    "waxing_add_pack": {
-      "name": "保湿パック",
-      "desc": "刺激緩和用パック。"
-    },
-    "waxing_add_trim": {
-      "name": "トリミング込み",
-      "desc": "施術前の整え込み。"
-    },
-    "makeup_add_hair": {
-      "name": "ヘアスタイリング",
-      "desc": "簡単なブロースタイリング。"
-    },
-    "makeup_add_lash": {
-      "name": "つけまつ毛",
-      "desc": "ポイントまたはつけまつ毛。"
-    },
-    "makeup_add_touchup": {
-      "name": "タッチアップキット",
-      "desc": "簡単なタッチアップキット提供。"
-    },
-    "lash_add_remove": {
-      "name": "まつ毛オフ",
-      "desc": "既存エクステのオフを含む。"
-    },
-    "lash_add_tinting": {
-      "name": "ブラックティンティング",
-      "desc": "鮮やかなカラー補正。"
-    },
-    "lash_add_coating": {
-      "name": "栄養コーティング",
-      "desc": "持続力補助コーティング。"
     }
   },
   "price_hair_summary": "カット 20,000ウォン〜 | カラー 55,000ウォン〜 | パーマ 60,000ウォン〜",
@@ -703,5 +718,14 @@
   "lang_ko": "韓国語",
   "lang_en": "英語",
   "lang_ja": "日本語",
-  "lang_zh_cn": "中国語（簡体字）"
+  "lang_zh_cn": "中国語（簡体字）",
+  "btn_continue": "Btn Continue",
+  "btn_reset": "Btn Reset",
+  "btn_close": "Btn Close",
+  "price_estimate_hint": "Price Estimate Hint",
+  "step_1": "Step 1",
+  "step_2": "Step 2",
+  "step_3": "Step 3",
+  "step_4": "Step 4",
+  "step_5": "Step 5"
 }

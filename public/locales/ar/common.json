@@ -55,7 +55,8 @@
       "submit_blocked_customer": "يرجى إدخال الاسم وجهة الاتصال والمحاولة مجدداً.",
       "submit_blocked_agreements": "يرجى الموافقة على الشروط المطلوبة والمحاولة مجدداً.",
       "submit_blocked_generic": "تعذر إرسال طلب الحجز. يرجى مراجعة معلوماتك والمحاولة مجدداً.",
-      "section_subtitle": "اختر خدمة K-Beauty وابدأ الحجز فوراً."
+      "section_subtitle": "اختر خدمة K-Beauty وابدأ الحجز فوراً.",
+      "submit_in_progress": "Sending booking request..."
     },
     "interpreter": {
       "eyebrow": "دعم اللغة",
@@ -366,7 +367,13 @@
       "map": "Map",
       "call_120": "Call 120",
       "send": "إرسال",
-      "logout": "تسجيل الخروج"
+      "logout": "تسجيل الخروج",
+      "back_to_list": "Back to List",
+      "view_all_new": "View all",
+      "browse_community_new": "Browse community",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "go_back": "Go Back"
     },
     "states": {
       "posts": "Posts",
@@ -411,7 +418,8 @@
       "canceled": "Cancelled",
       "loading": "Loading...",
       "searching": "Searching...",
-      "labels": "Nhãn"
+      "labels": "?????????",
+      "back_to_list": "Back to List"
     },
     "loading": "Loading...",
     "retry": "Retry",
@@ -531,7 +539,97 @@
     "greeting_afternoon": "مساء الخير",
     "greeting_evening": "مساء النور",
     "search_results": "ผลลัพธ์การค้นหา",
-    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'"
+    "search_results_for": "{{count}} ผลลัพธ์สำหรับ '{{query}}'",
+    "login_required_for_feature": "Please log in to use this feature.",
+    "errors": {
+      "processing_failed": "Processing failed."
+    },
+    "community": {
+      "posts": "Posts",
+      "reviews": "Reviews",
+      "likes": "Likes"
+    },
+    "phrases": {
+      "title": "Travel phrases",
+      "subtitle": "Subtitle",
+      "eyebrow": "Eyebrow",
+      "hero": {
+        "badge": "Phrasebook",
+        "count": "{{count}} phrases"
+      },
+      "context": {
+        "title": "Booking context",
+        "booking": "?????",
+        "interpreter": "Interpreter",
+        "support": "Support"
+      },
+      "category": {
+        "title": "Category"
+      },
+      "categories": {
+        "transport": {
+          "label": "Label",
+          "description": "Useful phrases for taxis, transit, and directions.",
+          "helper": "Helper"
+        },
+        "restaurant": {
+          "label": "Label",
+          "description": "Useful phrases for ordering and restaurant visits.",
+          "helper": "Helper"
+        },
+        "beauty": {
+          "label": "Label",
+          "description": "Useful phrases for beauty shop visits.",
+          "helper": "Helper"
+        },
+        "emergency": {
+          "label": "Label",
+          "description": "Emergency phrases for urgent situations.",
+          "helper": "Helper"
+        }
+      },
+      "favorites": {
+        "desc": "Desc",
+        "empty": "Empty"
+      },
+      "recent": {
+        "desc": "Desc"
+      },
+      "empty": {
+        "title": "No phrases yet",
+        "desc": "Desc"
+      },
+      "items": {
+        "transport_address": "Transport Address",
+        "transport_dropoff": "Transport Dropoff",
+        "transport_time": "Transport Time",
+        "transport_map": "Transport Map",
+        "transport_platform": "Transport Platform",
+        "restaurant_allergy": "Restaurant Allergy",
+        "restaurant_spicy": "Restaurant Spicy",
+        "restaurant_recommend": "Restaurant Recommend",
+        "restaurant_less_spicy": "Restaurant Less Spicy",
+        "restaurant_split": "Restaurant Split",
+        "beauty_reservation": "Beauty Reservation",
+        "beauty_natural": "Beauty Natural",
+        "beauty_price": "Beauty Price",
+        "beauty_slowly": "Beauty Slowly",
+        "beauty_before_start": "Beauty Before Start",
+        "emergency_help": "Emergency Help",
+        "emergency_translation": "Emergency Translation",
+        "emergency_lost": "Emergency Lost",
+        "emergency_1330": "Emergency 1330",
+        "emergency_police": "Emergency Police",
+        "notes": {
+          "transport_map": "Transport Map",
+          "emergency_1330": "Emergency 1330"
+        }
+      }
+    },
+    "time": {
+      "just_now": "Just now"
+    },
+    "reset": "Reset"
   },
   "welcome_popup": {
     "title": "سجّل الآن واحصل على\nقسيمة خصم بنسبة 5%!",
@@ -574,7 +672,8 @@
       }
     },
     "community": {
-      "empty_simple": "You haven't written any community posts yet."
+      "empty_simple": "You haven't written any community posts yet.",
+      "empty_simple_new": "No posts yet."
     },
     "bookings": {
       "title": "My Bookings",
@@ -583,7 +682,8 @@
       "matching_desc": "Waiting for salon match",
       "price_pending": "Price pending store confirmation",
       "error_fetch": "Failed to load bookings.",
-      "browse_beauty_cta": "Browse Beauty Bookings"
+      "browse_beauty_cta": "Browse Beauty Bookings",
+      "empty_text": "No booking history yet."
     },
     "profile": {
       "account_hint": "Account & Settings",
@@ -619,20 +719,26 @@
       "summary": {
         "posts": "منشورات",
         "reviews": "مراجعات",
-        "meetups": "لقاءات"
+        "meetups": "لقاءات",
+        "comments": "Comments"
       },
       "tabs": {
         "posts": "منشورات",
         "reviews": "مراجعات",
-        "meetups": "لقاءات"
+        "meetups": "لقاءات",
+        "all": "All"
       },
       "type": {
         "meetup": "لقاء",
-        "travel": "سفر"
+        "travel": "سفر",
+        "post": "Post",
+        "review": "Review"
       },
       "review_prompts": {
         "title": "اكتب مراجعة",
-        "desc": "اترك مراجعة للمتجر الذي زرته"
+        "desc": "اترك مراجعة للمتجر الذي زرته",
+        "shop": "Shop",
+        "rating": "Rating"
       },
       "empty": {
         "posts": {
@@ -648,8 +754,13 @@
         "meetups": {
           "title": "لم تنضم إلى أي لقاء بعد",
           "desc": "لم تنضم إلى أي لقاء بعد"
+        },
+        "all": {
+          "title": "No activity yet",
+          "desc": "Desc"
         }
-      }
+      },
+      "title_new": "My community"
     },
     "messages": {
       "upload_success": "Profile picture has been updated.",
@@ -657,7 +768,29 @@
     },
     "bookings_hub": {
       "meta": {
-        "reference": "Reference"
+        "reference": "Reference",
+        "time": "Time",
+        "area": "Area",
+        "total_price": "Total Price"
+      },
+      "empty": {
+        "upcoming": {
+          "title": "No upcoming bookings",
+          "desc": "Desc"
+        },
+        "completed": {
+          "title": "No completed bookings",
+          "desc": "Desc"
+        },
+        "other": {
+          "title": "No bookings here",
+          "desc": "Desc"
+        }
+      },
+      "title": "Booking hub",
+      "summary": {
+        "upcoming": "Upcoming",
+        "history": "History"
       }
     },
     "referral": {
@@ -688,7 +821,158 @@
     "exchange_rate_base": "قاعدة KRW",
     "no_email": "لا توجد معلومات بريد إلكتروني",
     "referral_code_label": "رمز الإحالة",
-    "price_negotiating": "جارٍ التفاوض على السعر"
+    "price_negotiating": "جارٍ التفاوض على السعر",
+    "help_medical": "Medical",
+    "help_interpreter": "Interpretation",
+    "help_police": "Police",
+    "help_lost": "Lost Item",
+    "phrases": {
+      "categories": {
+        "transport": {
+          "label": "Label",
+          "description": "Phrases for transportation and directions.",
+          "helper": "Helper"
+        },
+        "restaurant": {
+          "label": "Label",
+          "description": "Phrases for restaurants and cafes.",
+          "helper": "Helper"
+        },
+        "beauty": {
+          "label": "Label",
+          "description": "Phrases for beauty appointments.",
+          "helper": "Helper"
+        },
+        "emergency": {
+          "label": "Label",
+          "description": "Phrases for emergencies.",
+          "helper": "Helper"
+        }
+      },
+      "eyebrow": "Eyebrow",
+      "title": "Saved phrases",
+      "subtitle": "Subtitle",
+      "hero": {
+        "badge": "Phrasebook",
+        "count": "{{count}} phrases"
+      },
+      "context": {
+        "title": "Current context",
+        "booking": "?????",
+        "interpreter": "Interpreter",
+        "support": "Support"
+      },
+      "favorites": {
+        "desc": "Desc",
+        "empty": "Empty"
+      },
+      "recent": {
+        "desc": "Desc"
+      },
+      "category": {
+        "title": "Category"
+      },
+      "empty": {
+        "title": "No phrases saved",
+        "desc": "Desc"
+      }
+    },
+    "saved": {
+      "places": {
+        "fallback_title": "Fallback Title",
+        "source_plan": "Source Plan",
+        "source_saved": "Source Saved",
+        "source_fallback": "Source Fallback",
+        "source_id_only": "Source Id Only",
+        "added": "Added",
+        "title": "Saved places",
+        "desc": "Desc",
+        "empty": {
+          "title": "No saved places",
+          "desc": "Desc",
+          "cta": "Cta"
+        }
+      },
+      "plans": {
+        "synced": "Synced",
+        "title": "Saved plans",
+        "desc": "Desc",
+        "empty": {
+          "title": "No saved plans",
+          "desc": "Desc"
+        }
+      },
+      "title": "Saved"
+    },
+    "support": {
+      "guides": {
+        "find_booking": {
+          "q": "Q",
+          "a": "A"
+        },
+        "staff_talk": {
+          "q": "Q",
+          "a": "A"
+        },
+        "change_time": {
+          "q": "Q",
+          "a": "A"
+        },
+        "cancel_refund": {
+          "q": "Q",
+          "a": "A"
+        },
+        "write_review": {
+          "q": "Q",
+          "a": "A"
+        },
+        "community_safety": {
+          "q": "Q",
+          "a": "A",
+          "cta": "Cta"
+        }
+      },
+      "general": {
+        "booking_cancel": {
+          "label": "Label",
+          "desc": "Desc",
+          "cta": "Cta"
+        },
+        "community_safety": {
+          "label": "Label",
+          "desc": "Desc",
+          "cta": "Cta"
+        },
+        "partner": {
+          "label": "Label",
+          "desc": "Desc"
+        },
+        "title": "General support",
+        "desc": "Desc",
+        "report_notice": "Report Notice"
+      },
+      "booking": {
+        "banner_report": "Banner Report",
+        "banner_interpreter": "Banner Interpreter",
+        "banner_default": "Banner Default",
+        "banner_fallback": "Banner Fallback",
+        "context_title": "Context Title",
+        "context_desc": "Context Desc",
+        "title": "Booking support",
+        "desc": "Desc",
+        "empty": {
+          "title": "No related bookings",
+          "desc": "Desc"
+        }
+      },
+      "eyebrow": "Eyebrow",
+      "title": "Support",
+      "subtitle": "Subtitle",
+      "faq": {
+        "title": "FAQ",
+        "desc": "Desc"
+      }
+    }
   },
   "beauty_bookings": {
     "page_title": "حجوزات التجميل",
@@ -856,7 +1140,46 @@
     "cancel_consent_partial": "الإلغاء الآن سيخصم رسوم المنصة {{platformFee}} و{{penaltyRate}}% من رسوم الخدمة ({{penaltyAmount}}). أوافق.",
     "cancel_consent_default": "أوافق على سياسة الإلغاء والاسترداد.",
     "interpreter_visit_context": "جاري استخدام المترجم أثناء زيارة {{storeName}}",
-    "interpreter_visit_service_context": "جاري استخدام المترجم لخدمة {{serviceName}} في {{storeName}}"
+    "interpreter_visit_service_context": "جاري استخدام المترجم لخدمة {{serviceName}} في {{storeName}}",
+    "payment_consent_hint": "???? ???????? ??? ??????? ????? ???????? ??? ?????.",
+    "payment_consent_privacy_label": "????? ??? ????? ????????",
+    "payment_consent_refund_label": "????? ??? ????? ??????? ??????????",
+    "payment_consent_title": "???? ????? ??? ?????",
+    "payment_currency_usd_only": "????? ??? PayPal ?????? ????? ??????? ???????? ???????? ???. ???? ??? ????? ???? ????? ?? Kello.",
+    "payment_error": "??? ??? ????? ?????. ???? ???????? ??? ????.",
+    "payment_no_refund_label": "??? ???? ?????????",
+    "payment_refund_policy_title": "????? ??????? ??????????",
+    "payment_refund_rate_label": "??????? {{rate}}%",
+    "payment_section_title": "?????",
+    "payment_status_paid": "?????",
+    "payment_success": "????? ?????. ?? ????? ????.",
+    "quote_accepted_message": "??? ???? ?????. ???? ????? ?? ?????? ???????.",
+    "quote_action_accept": "???? ?????",
+    "quote_action_reject": "??? ?????",
+    "quote_date_time": "?????? ???????",
+    "quote_error_respond": "???? ????????. ???? ???????? ??? ????.",
+    "quote_expired_notice": "?? ???? ??? ????? ???????.",
+    "quote_expires_at": "?????? ?????? ?????",
+    "quote_note": "?????? ??????",
+    "quote_processing": "???? ????????...",
+    "quote_rejected_message": "??? ???? ?????. ???? ?? Kello ??????? ??? ????.",
+    "quote_section_title": "??? ?????",
+    "quote_service_name": "?????? ???????",
+    "quote_shop_address": "????? ??????",
+    "quote_shop_name": "?????? ???????",
+    "quote_status_accepted": "?????",
+    "quote_status_expired": "?????",
+    "quote_status_pending": "??????? ????",
+    "quote_status_rejected": "?????",
+    "quote_total_price": "????? ????????",
+    "quote_refund_policy": "Refund / Cancellation Policy",
+    "quote_sent_at": "Proposal Sent",
+    "quote_status_label": "Proposal Status",
+    "payment_paypal_button_label": "Pay with PayPal",
+    "payment_processing": "Processing payment...",
+    "payment_already_paid": "This booking has already been paid.",
+    "payment_currency_unsupported": "PayPal payment is currently available only for USD quotes.",
+    "payment_status_pending": "Payment Pending"
   },
   "notifications": {
     "title": "Notification Settings",
@@ -922,7 +1245,14 @@
     },
     "footer_note": "Essential booking notices may be sent regardless of settings.",
     "tab_booking": "الحجوزات",
-    "tab_updates": "تحديثات"
+    "tab_updates": "تحديثات",
+    "loading": "Loading",
+    "event_default": "Event Default",
+    "back": "Back",
+    "page_title": "Page Title",
+    "empty": "Empty",
+    "empty_cta": "Empty Cta",
+    "booking_link": "Booking Link"
   },
   "error_title": "Something went wrong.",
   "error_desc": "If the problem persists, please contact support.",
@@ -1001,7 +1331,8 @@
       "attached_images": "الصور المرفقة",
       "image_count_summary": "الإجمالي {{count}} صور",
       "submit_button": "طلب الحجز النهائي",
-      "preparing": "شاشة التأكيد النهائي قيد التحضير لهذه الفئة."
+      "preparing": "شاشة التأكيد النهائي قيد التحضير لهذه الفئة.",
+      "agreement_refund_policy": "[Required] I understand that cancellation and refund conditions may vary depending on the partner shop policy after quote confirmation and payment."
     },
     "next_step": "الخطوة التالية",
     "check_final": "التأكيد النهائي",
@@ -1137,6 +1468,11 @@
         "body_title": "جسم",
         "body_desc": "شمع للظهر، الصدر، أو أجزاء الجسم."
       }
+    },
+    "login_required": {
+      "title": "Sign in to send your booking request",
+      "description": "Sign in to track your request and receive your proposal and payment details safely.",
+      "cta": "Sign in to continue"
     }
   },
   "categories": {
@@ -1345,18 +1681,27 @@
     "defaults": {
       "region": "سيول"
     },
+    "regions": {
+      "seoul": "سيول", "gyeonggi": "كيونجي", "incheon": "إنتشون",
+      "busan": "بوسان", "daegu": "دايغو", "daejeon": "دايجون",
+      "gwangju": "غوانغجو", "ulsan": "أولسان", "sejong": "سيجونج",
+      "gangwon": "كانغوون", "chungbuk": "تشونغبوك", "chungnam": "تشونغنام",
+      "jeonbuk": "جيونبوك", "jeonnam": "جيوننام", "gyeongbuk": "كيونغبوك",
+      "gyeongnam": "كيونغنام", "jeju": "جيجو", "other": "أخرى"
+    },
     "hero": {
       "title": "مجتمع كيلو",
       "search_placeholder": "ابحث عن الموضوعات التي تهمك"
     },
     "categories": {
-      "all": "الكل",
-      "meetup": "لقاءات",
-      "beauty_review": "تجميل",
-      "food_review": "مطاعم",
-      "travel_review": "سفر",
+      "all": "????",
+      "meetup": "??????",
+      "beauty_review": "??????? ??????",
+      "food_review": "??????? ??????",
+      "travel_review": "??????? ???????",
       "meetup_recruitment": "تجنيد",
-      "help": "نصائح"
+      "help": "?????",
+      "tips": "????? ?????"
     },
     "sub_filters": {
       "all": "الكل",
@@ -1439,11 +1784,16 @@
       },
       "title_label": {
         "beauty_review": "الخدمة/الموضوع",
-        "default": "العنوان"
+        "default": "???????"
       },
       "title_placeholder": {
         "beauty_review": "مثال: مراجعة قصة شعر غانغنام",
-        "default": "أدخل العنوان"
+        "default": "أدخل العنوان",
+        "food_review": "Food Review",
+        "travel_review": "Travel Review",
+        "meetup": "Meetup",
+        "meetup_recruitment": "Meetup Recruitment",
+        "help": "Help"
       },
       "desc_label": {
         "beauty_review": "التفاصيل",
@@ -1713,7 +2063,8 @@
       }
     },
     "actions": {
-      "delete_confirm": "هل أنت متأكد من الحذف؟"
+      "delete_confirm": "هل أنت متأكد من الحذف؟",
+      "delete": "Delete"
     },
     "errors": {
       "login_required": "تسجيل الدخول مطلوب.",
@@ -1735,6 +2086,12 @@
     "comments": "التعليقات",
     "time": {
       "just_now": "للتو"
+    },
+    "title": "???????",
+    "login_required": {
+      "title": "Sign in to write a post",
+      "description": "Sign in to share your travel tips and K-Beauty experiences with the Kello community.",
+      "cta": "Sign in to write"
     }
   },
   "webview_banner": {
@@ -1817,12 +2174,23 @@
       "two_days": "قبل يومين: استرداد 70%",
       "one_day": "قبل يوم واحد: استرداد 50%",
       "same_day": "في نفس اليوم أو عدم الحضور: لا استرداد",
-      "note": "قد تختلف معالجة الاسترداد النهائي اعتمادًا على سياسة المتجر المحددة."
+      "note": "قد تختلف معالجة الاسترداد النهائي اعتمادًا على سياسة المتجر المحددة.",
+      "four_days": "4+ days before appointment: 100% service fee refund"
     },
     "liability": {
       "title": "4. حدود المسؤولية",
       "interpretation": "ميزة 'الترجمة الفورية' هي أداة تكميلية مقدمة لراحة المستخدم. Wekello ليست مسؤولة عن أخطاء الحجز أو النزاعات الناشئة عن عدم الدقة في ترجمة الذكاء الاصطناعي أو الترجمة اليدوية.",
       "community": "Wekello ليست مسؤولة عن أي أضرار أو حوادث أو نزاعات ناتجة عن اللقاءات التطوعية غير المتصلة بالإنترنت أو المعاملات الشخصية بين المستخدمين التي تتم من خلال ميزات المجتمع."
+    },
+    "platform_fee": {
+      "title": "3. Platform Fee",
+      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
+      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+    },
+    "chargeback": {
+      "title": "5. Payment Cancellation & Disputes",
+      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
+      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
     }
   },
   "interpreter_page": {
@@ -1876,20 +2244,7 @@
     "recent": "الأنشطة الأخيرة"
   },
   "assurance": {
-    "items": [
-      {
-        "title": "اختيار الفئة بنظرة واحدة",
-        "desc": "اختر الخدمة المطلوبة من الشاشة الأولى وانتقل مباشرة إلى مسار الحجز."
-      },
-      {
-        "title": "دعم لغوي بلا قلق",
-        "desc": "استخدم مساعد الترجمة الفوري في أي وقت للتواصل بسلاسة مع المتجر."
-      },
-      {
-        "title": "مسار حجز يُعطي الأولوية للهاتف",
-        "desc": "أزرار بتصميم بطاقة سهلة الضغط بيد واحدة وCTA كبير لتجربة حجز سلسة."
-      }
-    ]
+    "items": "????? ?????????"
   },
   "interpreter": {
     "eyebrow": "دعم اللغة",
@@ -2000,7 +2355,20 @@
     "label_no_surcharge": "لا رسوم إضافية",
     "label_no_designer": "لا معلومات عن المصمم حالياً.",
     "label_designer_hint": "اختيار المصمم اختياري.",
-    "label_addon_limit": "الحد الأقصى 2"
+    "label_addon_limit": "الحد الأقصى 2",
+    "booking_confirmation_title": "예약 신청이 완료되었습니다!",
+    "booking_confirmation_desc": "곧 안내해 드리겠습니다.",
+    "booking_confirmation_cta": "내 예약 확인",
+    "detail_status": "Detail Status",
+    "detail_category_services": "Detail Category Services",
+    "detail_requested_time": "Detail Requested Time",
+    "detail_shop_status": "Detail Shop Status",
+    "detail_request_info": "Detail Request Info",
+    "detail_more_info": "Detail More Info",
+    "reviews_title": "Trusted Reviews",
+    "reviews_sort": "Sort by: Trust Score",
+    "reviews_helpful": "Helpful",
+    "reviews_view_all": "View all 1,240 reviews"
   },
   "home": {
     "presets": {
@@ -2028,6 +2396,10 @@
       "navigation": {
         "title": "ملاحة آنية",
         "desc": "صفر حاجز لغوي"
+      },
+      "focus": {
+        "title": "Why Kello",
+        "desc": "Desc"
       }
     },
     "recommended_plans": "رحلات Kello المقترحة",
@@ -2047,7 +2419,18 @@
       "request_custom_label": "مخصص",
       "request_custom_title": "إنشاء خطة {{days}} أيام خاصة بي",
       "request_custom_toast": "طلبت خطة مخصصة لـ {{days}} أيام! سيتصل بك الكونسيرج قريباً."
-    }
+    },
+    "how_it_works": {
+      "title": "How it works",
+      "step1": "Step1",
+      "step1_desc": "Step1 Desc",
+      "step2": "Step2",
+      "step2_desc": "Step2 Desc",
+      "step3": "Step3",
+      "step3_desc": "Step3 Desc"
+    },
+    "title_korea": "Title Korea",
+    "fetching_location": "Fetching location..."
   },
   "explore_page": {
     "title": "استكشاف",
@@ -2437,7 +2820,10 @@
     "slots": {
       "am": "ص",
       "pm": "م",
-      "night": "ليلاً"
+      "night": "ليلاً",
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
     }
   },
   "transport": {
@@ -2497,11 +2883,29 @@
     "open_maps": "فتح في الخرائط",
     "loading": "جار التحميل...",
     "login_required": "سجّل دخولك لرؤية الأماكن القريبة.",
-    "location_denied": "يرجى السماح بالوصول إلى الموقع لعرض موقعك الحالي."
+    "location_denied": "يرجى السماح بالوصول إلى الموقع لعرض موقعك الحالي.",
+    "no_results": "No places within 1.5 km nearby.",
+    "api_error": "Failed to search places."
   },
   "talk_page": {
     "korean_viewer_mode": "وضع العرض بالكورية",
-    "korean_viewer_hint": "💡 فعّل وضع العرض بالكورية لإظهاره للموظفين."
+    "korean_viewer_hint": "💡 فعّل وضع العرض بالكورية لإظهاره للموظفين.",
+    "simulated_notification": "Jenny Hair Salon: Hello! We have sent the design draft you requested. Please check it.",
+    "show_to_staff": "Show to staff",
+    "tab_booking": "الحجز",
+    "tab_style_recommend": "اقتراح الأنماط",
+    "tab_shop_recommend": "توصية الصالونات",
+    "tab_pricing": "معلومات الأسعار",
+    "tab_service_info": "معلومات الخدمات",
+    "tab_guide": "الدليل",
+    "welcome_greeting": "مرحباً! أنا Kello 👋",
+    "welcome_question": "كيف يمكنني مساعدتك؟",
+    "ask_kello": "اسأل Kello",
+    "viewer_tip_line1": "💡 لإظهاره للموظف الكوري،",
+    "viewer_tip_line2": "قم بتفعيل وضع العرض الكوري.",
+    "link_shop_title": "ربط صالون التجميل",
+    "map_view_btn": "عرض الموقع على الخريطة",
+    "kello_talk_suffix": "Talk"
   },
   "home_hero": {
     "wave_hair": "شعر موجي",
@@ -2584,7 +2988,9 @@
     "emoji": "رمز تعبيري",
     "edit_action": "تعديل",
     "delete_action": "حذف",
-    "beauty_tip": "غسل الشعر قبل الخدمة أدب شائع في كوريا. جربي قول \"정말 예뻐요！\" للموظف."
+    "beauty_tip": "غسل الشعر قبل الخدمة أدب شائع في كوريا. جربي قول \"정말 예뻐요！\" للموظف.",
+    "speech_not_supported": "This browser does not support speech recognition.",
+    "add_phrase": "Add"
   },
   "help_labels": {
     "medical": "مساعدة طبية",
@@ -2611,7 +3017,8 @@
     "review_info": "يرجى مراجعة معلومات الحجز مجدداً."
   },
   "notification_center": {
-    "title": "مركز الإشعارات"
+    "title": "مركز الإشعارات",
+    "empty": "لا توجد إشعارات جديدة."
   },
   "partner_signup": {
     "badge": "🤝 طلب شراكة",
@@ -2665,5 +3072,103 @@
     "error_submit": "خطأ في تقديم الطلب: ",
     "back": "← رجوع",
     "home": "🏠 الرئيسية"
+  },
+  "home_new": {
+    "hero_title": "Hero Title",
+    "hero_subtitle": "Hero Subtitle",
+    "features": {
+      "booking": "?????",
+      "ai_plan": "Ai Plan",
+      "navi": "Navi"
+    },
+    "input": {
+      "where": "Where",
+      "where_placeholder": "Where Placeholder",
+      "when": "When",
+      "days_suffix": "Days Suffix",
+      "who": "Who",
+      "who_options": {
+        "solo": "Solo",
+        "couple": "Couple",
+        "friends": "Friends",
+        "family": "Family"
+      },
+      "interests": "Interests",
+      "interests_options": {
+        "food": "Food",
+        "shopping": "Shopping",
+        "beauty": "Beauty",
+        "sightseeing": "Sightseeing",
+        "night": "Night",
+        "experience": "Experience"
+      }
+    },
+    "cta_helper": "Cta Helper",
+    "cta_btn": "Cta Btn",
+    "trust": {
+      "title": "Trusted support",
+      "items": "Trust items"
+    }
+  },
+  "server_notifications": {
+    "booking_created_title": "[Kello] تم استلام طلب الحجز: {{storeName}}",
+    "booking_created_body": "تم استلام طلب حجزك في {{storeName}} للتاريخ {{date}} الساعة {{time}}. يرجى الانتظار قليلاً.",
+    "booking_created_cta": "عرض حجزي",
+    "booking_confirmed_title": "[Kello] تأكيد الحجز: {{storeName}}",
+    "booking_confirmed_body": "تهانينا! تم تأكيد حجزك في {{storeName}}. ({{date}} {{time}}، {{service}})",
+    "booking_confirmed_cta": "عرض تفاصيل الحجز",
+    "booking_canceled_title": "[Kello] تم إلغاء الحجز: {{storeName}}",
+    "booking_canceled_body": "تم إلغاء حجزك في {{storeName}} بنجاح. نأمل رؤيتك مرة أخرى.",
+    "booking_canceled_cta": "الذهاب إلى الصفحة الرئيسية",
+    "booking_change_requested_title": "[Kello] تم استلام طلب التعديل",
+    "booking_change_requested_body": "تم استلام طلب التعديل الخاص بك. سيقوم أحد المشرفين بمراجعته وإخطارك قريباً.",
+    "booking_change_requested_cta": "عرض الحجز",
+    "booking_change_approved_title": "[Kello] تمت الموافقة على طلب التعديل: {{storeName}}",
+    "booking_change_approved_body": "تمت الموافقة على طلب التعديل الخاص بك. ({{date}} {{time}})",
+    "booking_change_approved_cta": "عرض الحجز المحدث",
+    "booking_change_rejected_title": "[Kello] تم رفض طلب التعديل: {{storeName}}",
+    "booking_change_rejected_body": "للأسف، تم رفض طلب التعديل الخاص بك. السبب: {{reason}}",
+    "booking_change_rejected_cta": "عرض الحجز",
+    "alternative_offer_sent_title": "[Kello] اقتراح وقت بديل: {{storeName}}",
+    "alternative_offer_sent_body": "الوقت الذي طلبته غير متاح. اقترح {{storeName}} وقتاً بديلاً. يرجى المراجعة والاختيار.",
+    "alternative_offer_sent_cta": "عرض الوقت المقترح",
+    "alternative_offer_accepted_title": "[Kello] تم قبول الاقتراح: {{storeName}}",
+    "alternative_offer_accepted_body": "لقد قبلت اقتراح الوقت البديل من {{storeName}}. تم تغيير موعد حجزك إلى {{date}} {{time}}.",
+    "alternative_offer_accepted_cta": "عرض الحجز",
+    "alternative_offer_rejected_title": "[Kello] تم رفض الاقتراح: {{storeName}}",
+    "alternative_offer_rejected_body": "لقد رفضت اقتراح الوقت البديل من {{storeName}}. سنبحث عن خيارات أخرى.",
+    "alternative_offer_rejected_cta": "عرض الحجز",
+    "default_title": "[Kello] لديك إشعار جديد",
+    "default_body": "يوجد تحديث جديد بخصوص {{storeName}}.",
+    "default_cta": "عرض الإشعارات",
+    "refund_policy_title": "سياسة الإلغاء والاسترداد",
+    "refund_no_refund": "غير قابل للاسترداد",
+    "refund_rate": "استرداد {{rate}}% من رسوم الخدمة",
+    "platform_fee_note": "رسوم المنصة ({{rate}}%) غير قابلة للاسترداد بصرف النظر عن توقيت الإلغاء. لا تنطبق السياسات الخاصة بالمتاجر.",
+    "email_footer": "هذا بريد إلكتروني للإشعارات يتم إرساله تلقائياً. للاستفسارات، يرجى التواصل مع دعم عملاء Kello.",
+    "cta_view_detail": "عرض التفاصيل"
+  },
+  "members_page": {
+    "title": "قائمة الأعضاء",
+    "count_suffix": " عضو",
+    "no_nickname": "(بدون لقب)"
+  },
+  "terms": {
+    "service": {
+      "title": "شروط استخدام الخدمة",
+      "content": "المادة 1 (الغرض)\nتهدف هذه الشروط إلى تنظيم الحقوق والالتزامات والمسؤوليات بين الشركة والمستخدم عند استخدام خدمة Kello.\n\nالمادة 2 (التعريفات)\n1. تعني 'الخدمة' منصة الوساطة في الحجز التي توفرها الشركة.\n2. يعني 'المستخدم' العميل الذي يستخدم الخدمة وفقاً لهذه الشروط.\n\nالمادة 3 (سريان الشروط وتعديلها)\nيجوز للشركة تعديل الشروط في نطاق القانون المعمول به، وسيتم الإشعار بالتغييرات عبر الإعلانات في الخدمة.\n\n[يكمل...]\n\nشكراً لك."
+    },
+    "privacy": {
+      "title": "موافقة جمع واستخدام المعلومات الشخصية",
+      "content": "1. المعلومات الشخصية المجمعة\n- إلزامي: الاسم، جهة الاتصال (رقم الهاتف أو SNS ID)، تاريخ ووقت الحجز، قائمة الخدمات\n- اختياري: طلبات إضافية، صور مرجعية\n\n2. الغرض من الجمع والاستخدام\n- تأكيد الحجز ونقله إلى المتجر الشريك\n- إرشادات تغيير/إلغاء الحجز وخدمة العملاء\n\n3. مدة الاحتفاظ\n- سنة واحدة بعد انتهاء استخدام الخدمة أو مدة الاحتفاظ القانونية\n\nيحق لك رفض هذه الموافقة، لكن قد يمنعك ذلك من إجراء حجز الخدمة."
+    },
+    "third_party": {
+      "title": "مشاركة المعلومات مع طرف ثالث والنقل الدولي",
+      "content": "1. المستلم: المتجر الشريك المعني\n2. الغرض: تقديم خدمة الحجز وتأكيد الزيارة\n3. البنود المشتركة: الاسم، معلومات الاتصال، تفاصيل الحجز\n4. مدة الاحتفاظ: حتى تحقيق الغرض من تقديم الخدمة\n\n[إشعار النقل الدولي]\nتستخدم الشركة خوادم سحابية (AWS وغيرها) لتحسين جودة الخدمة العالمية. قد تكون البيانات موجودة فعلياً في الخارج خلال هذه العملية.\n\nيحق لك الرفض، وقد يؤدي ذلك إلى تقييد استخدام الخدمة."
+    },
+    "marketing": {
+      "title": "جمع واستقبال معلومات التسويق",
+      "content": "1. الغرض: إشعارات الخدمات الجديدة، معلومات الفعاليات، تقديم مزايا مخصصة\n2. البنود المجمعة: البريد الإلكتروني، رقم الهاتف المحمول، حالة استقبال إشعارات التطبيق\n3. مدة الاحتفاظ: حتى سحب الموافقة أو حذف الحساب\n\nهذا اختياري ويمكن استخدام الخدمة دون موافقة، لكن قد تكون محدوداً في استقبال معلومات مفيدة كمزايا الخصم."
+    }
   }
 }
