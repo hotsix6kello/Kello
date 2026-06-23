@@ -101,73 +101,121 @@
       "name": "Jenny House Cheongdam",
       "priceLabel": "Từ 150.000 KRW",
       "shortDescription": "Salon tóc & trang điểm cao cấp được các ngôi sao K-pop yêu thích",
-      "tags": ["K-Style", "Cao cấp", "Cheongdam"]
+      "tags": [
+        "K-Style",
+        "Cao cấp",
+        "Cheongdam"
+      ]
     },
     "beauty_hair_2": {
       "name": "PPEUM Clinic Gangnam",
       "priceLabel": "Từ 50.000 KRW",
       "shortDescription": "Phòng khám làm đẹp được du khách nước ngoài yêu thích với giá cả hợp lý",
-      "tags": ["Phòng khám", "Gangnam", "Giá tốt"]
+      "tags": [
+        "Phòng khám",
+        "Gangnam",
+        "Giá tốt"
+      ]
     },
     "beauty_nail_1": {
       "name": "Maison Nail Hongdae",
       "priceLabel": "Từ 79.000 KRW",
       "shortDescription": "Studio nail nổi tiếng với phối màu thời trang và nghệ thuật móng theo mùa",
-      "tags": ["Nghệ thuật móng theo tháng", "Chăm sóc gel", "Phối màu"]
+      "tags": [
+        "Nghệ thuật móng theo tháng",
+        "Chăm sóc gel",
+        "Phối màu"
+      ]
     },
     "beauty_nail_2": {
       "name": "Beige Nail Jongno",
       "priceLabel": "Từ 45.000 KRW",
       "shortDescription": "Dịch vụ nail tỉ mỉ từ móng văn phòng đến móng cưới",
-      "tags": ["Móng văn phòng", "Móng cưới", "Chăm sóc móng"]
+      "tags": [
+        "Móng văn phòng",
+        "Móng cưới",
+        "Chăm sóc móng"
+      ]
     },
     "beauty_esthetic_1": {
       "name": "Serin Skin Lounge Gangnam",
       "priceLabel": "Từ 95.000 KRW",
       "shortDescription": "Chăm sóc da làm dịu và săn chắc trong không gian riêng tư",
-      "tags": ["Chăm sóc làm dịu", "Nâng cơ", "Phòng riêng"]
+      "tags": [
+        "Chăm sóc làm dịu",
+        "Nâng cơ",
+        "Phòng riêng"
+      ]
     },
     "beauty_esthetic_2": {
       "name": "Glow Formula Seongsu",
       "priceLabel": "Từ 88.000 KRW",
       "shortDescription": "Chương trình làm dịu và hướng dẫn chăm sóc tại nhà cho da nhạy cảm",
-      "tags": ["Cấp ẩm sâu", "Da nhạy cảm", "Tư vấn cá nhân"]
+      "tags": [
+        "Cấp ẩm sâu",
+        "Da nhạy cảm",
+        "Tư vấn cá nhân"
+      ]
     },
     "beauty_waxing_1": {
       "name": "Bare Atelier Waxing Gangnam",
       "priceLabel": "Từ 99.000 KRW",
       "shortDescription": "Tỷ lệ khách quay lại cao nhờ vệ sinh nghiêm ngặt và chăm sóc sau liệu trình",
-      "tags": ["Quản lý vệ sinh", "Chăm sóc sau", "Brazilian"]
+      "tags": [
+        "Quản lý vệ sinh",
+        "Chăm sóc sau",
+        "Brazilian"
+      ]
     },
     "beauty_waxing_2": {
       "name": "Soft Strip Hongdae",
       "priceLabel": "Từ 55.000 KRW",
       "shortDescription": "Dịch vụ tẩy lông ít kích ứng, nhanh chóng dù lịch trình bận rộn",
-      "tags": ["Tẩy lông tay", "Thực hiện nhanh", "Ít kích ứng"]
+      "tags": [
+        "Tẩy lông tay",
+        "Thực hiện nhanh",
+        "Ít kích ứng"
+      ]
     },
     "beauty_makeup_1": {
       "name": "Atelier Veil Makeup",
       "priceLabel": "Hàng ngày từ 85.000 KRW",
       "shortDescription": "Trang điểm tự nhiên tinh tế hòa quyện vào cuộc sống hàng ngày",
-      "tags": ["Trang điểm", "Seongsu", "Tự nhiên"]
+      "tags": [
+        "Trang điểm",
+        "Seongsu",
+        "Tự nhiên"
+      ]
     },
     "beauty_makeup_2": {
       "name": "Dear Muse Makeup",
       "priceLabel": "Khách đám cưới từ 132.000 KRW",
       "shortDescription": "Chuyên gia trang điểm cho dịp đặc biệt và đám cưới",
-      "tags": ["Đám cưới", "Jongno", "Chuyên nghiệp"]
+      "tags": [
+        "Đám cưới",
+        "Jongno",
+        "Chuyên nghiệp"
+      ]
     },
     "beauty_lash_1": {
       "name": "Bloom Lash Boutique Gangnam",
       "priceLabel": "Từ 99.000 KRW",
       "shortDescription": "Nổi tiếng với thiết kế cong vút phù hợp dáng mắt và hiệu quả lâu dài",
-      "tags": ["Thiết kế cong vút", "Bền lâu", "Mi tự nhiên"]
+      "tags": [
+        "Thiết kế cong vút",
+        "Bền lâu",
+        "Mi tự nhiên"
+      ]
     },
     "beauty_lash_2": {
       "name": "Feather Lash Seongsu",
       "priceLabel": "Từ 69.000 KRW",
       "shortDescription": "Salon mi tự nhiên chào đón cả khách lần đầu uốn mi",
-      "tags": ["Uốn mi", "Chào mừng lần đầu", "Cong tự nhiên"]
+      "tags": [
+        "Uốn mi",
+        "Chào mừng lần đầu",
+        "Cong tự nhiên"
+      ]
     }
   },
   "designers": {
@@ -421,110 +469,185 @@
     "root_color_desc": "Điều chỉnh tông màu tóc mới mọc ở gốc.",
     "hair_clinic": "Điều trị tóc",
     "hair_clinic_desc": "Chăm sóc tập trung cho tóc hư tổn.",
-    "nail_gel": "Gel nail",
+    "nail_gel": {
+      "name": "Gel nail",
+      "desc": "Dịch vụ sơn gel màu cơ bản."
+    },
     "nail_gel_desc": "Dịch vụ sơn gel màu cơ bản.",
-    "nail_care": "Chăm sóc móng",
+    "nail_care": {
+      "name": "Chăm sóc móng",
+      "desc": "Chăm sóc khóe và tạo hình móng."
+    },
     "nail_care_desc": "Chăm sóc khóe và tạo hình móng.",
-    "nail_pedi": "Gel pedicure",
+    "nail_pedi": {
+      "name": "Gel pedicure",
+      "desc": "Dịch vụ gel kết hợp chăm sóc chân."
+    },
     "nail_pedi_desc": "Dịch vụ gel kết hợp chăm sóc chân.",
-    "esthetic_calming": "Chăm sóc làm dịu",
+    "esthetic_calming": {
+      "name": "Chăm sóc làm dịu",
+      "desc": "Chương trình làm dịu cho da nhạy cảm."
+    },
     "esthetic_calming_desc": "Chương trình làm dịu cho da nhạy cảm.",
-    "esthetic_moisture": "Chăm sóc cấp ẩm",
+    "esthetic_moisture": {
+      "name": "Chăm sóc cấp ẩm",
+      "desc": "Chương trình cấp ẩm sâu cho da khô."
+    },
     "esthetic_moisture_desc": "Chương trình cấp ẩm sâu cho da khô.",
-    "esthetic_lifting": "Chăm sóc nâng cơ",
+    "esthetic_lifting": {
+      "name": "Chăm sóc nâng cơ",
+      "desc": "Liệu trình cải thiện độ đàn hồi."
+    },
     "esthetic_lifting_desc": "Liệu trình tập trung cải thiện độ đàn hồi.",
-    "waxing_brazilian": "Tẩy lông Brazilian",
+    "waxing_brazilian": {
+      "name": "Tẩy lông Brazilian",
+      "desc": "Tẩy lông vùng nhạy cảm."
+    },
     "waxing_brazilian_desc": "Tẩy lông vùng nhạy cảm.",
-    "waxing_arm": "Tẩy lông tay",
+    "waxing_arm": {
+      "name": "Tẩy lông tay",
+      "desc": "Tẩy lông toàn bộ cánh tay."
+    },
     "waxing_arm_desc": "Tẩy lông toàn bộ cánh tay.",
-    "waxing_leg": "Tẩy lông chân",
+    "waxing_leg": {
+      "name": "Tẩy lông chân",
+      "desc": "Tiêu chuẩn cẳng chân hoặc nửa chân."
+    },
     "waxing_leg_desc": "Tiêu chuẩn cẳng chân hoặc nửa chân.",
-    "makeup_daily": "Trang điểm hàng ngày",
+    "makeup_daily": {
+      "name": "Trang điểm hàng ngày",
+      "desc": "Trang điểm nhẹ nhàng cho cuộc hẹn hàng ngày."
+    },
     "makeup_daily_desc": "Trang điểm nhẹ nhàng cho cuộc hẹn hàng ngày.",
-    "makeup_interview": "Trang điểm phỏng vấn",
+    "makeup_interview": {
+      "name": "Trang điểm phỏng vấn",
+      "desc": "Trang điểm gọn gàng cho phỏng vấn."
+    },
     "makeup_interview_desc": "Trang điểm gọn gàng chuyên nghiệp cho phỏng vấn.",
-    "makeup_guest": "Trang điểm dự đám cưới",
+    "makeup_guest": {
+      "name": "Trang điểm dự đám cưới",
+      "desc": "Tạo kiểu phù hợp lịch trình sự kiện."
+    },
     "makeup_guest_desc": "Tạo kiểu phù hợp với lịch trình sự kiện.",
-    "lash_perm": "Uốn mi",
+    "lash_perm": {
+      "name": "Uốn mi",
+      "desc": "Dịch vụ cố định độ cong."
+    },
     "lash_perm_desc": "Dịch vụ tập trung cố định độ cong.",
-    "lash_extension": "Nối mi",
+    "lash_extension": {
+      "name": "Nối mi",
+      "desc": "Nối mi chọn chiều dài và độ cong."
+    },
     "lash_extension_desc": "Dịch vụ nối mi chọn chiều dài và độ cong.",
-    "lash_retouch": "Bổ sung mi",
+    "lash_retouch": {
+      "name": "Bổ sung mi",
+      "desc": "Bổ sung mi hiện có."
+    },
     "lash_retouch_desc": "Bổ sung mi hiện có.",
-    "hair_add_scalp": "Tẩy tế bào da đầu",
+    "hair_add_scalp": {
+      "name": "Tẩy tế bào da đầu",
+      "desc": "Làm sạch da đầu trước liệu trình."
+    },
     "hair_add_scalp_desc": "Làm sạch da đầu trước liệu trình.",
-    "hair_add_blowdry": "Sấy tạo kiểu",
+    "hair_add_blowdry": {
+      "name": "Sấy tạo kiểu",
+      "desc": "Sấy và tạo kiểu đơn giản."
+    },
     "hair_add_blowdry_desc": "Sấy và tạo kiểu đơn giản.",
-    "hair_add_ampoule": "Điều trị ampoule",
+    "hair_add_ampoule": {
+      "name": "Điều trị ampoule",
+      "desc": "Dưỡng chất tập trung cho vùng hư tổn."
+    },
     "hair_add_ampoule_desc": "Dưỡng chất tập trung cho vùng tóc hư tổn.",
-    "nail_add_removal": "Bao gồm tháo gel",
+    "nail_add_removal": {
+      "name": "Tháo gel",
+      "desc": "Bao gồm tháo gel hiện có."
+    },
     "nail_add_removal_desc": "Bao gồm tháo gel hiện có.",
-    "nail_add_art": "Nghệ thuật điểm nhấn",
+    "nail_add_art": {
+      "name": "Nghệ thuật điểm nhấn",
+      "desc": "Thêm nghệ thuật cho cả hai tay."
+    },
     "nail_add_art_desc": "Thêm nghệ thuật điểm nhấn cho cả hai tay.",
-    "nail_add_strength": "Lớp phủ tăng cường",
+    "nail_add_strength": {
+      "name": "Lớp phủ tăng cường",
+      "desc": "Lớp phủ tăng độ bền."
+    },
     "nail_add_strength_desc": "Lớp phủ tăng độ bền.",
-    "esthetic_add_modeling": "Mặt nạ modeling",
+    "esthetic_add_modeling": {
+      "name": "Mặt nạ modeling",
+      "desc": "Mặt nạ kết thúc làm dịu."
+    },
     "esthetic_add_modeling_desc": "Thêm mặt nạ kết thúc làm dịu.",
-    "esthetic_add_neck": "Chăm sóc cổ",
+    "esthetic_add_neck": {
+      "name": "Chăm sóc cổ",
+      "desc": "Chăm sóc tập trung đường cổ."
+    },
     "esthetic_add_neck_desc": "Chăm sóc tập trung đường cổ.",
-    "esthetic_add_led": "Điều trị LED",
+    "esthetic_add_led": {
+      "name": "Điều trị LED",
+      "desc": "Liệu pháp ánh sáng làm dịu."
+    },
     "esthetic_add_led_desc": "Liệu pháp ánh sáng hỗ trợ làm dịu.",
-    "waxing_add_care": "Chăm sóc làm dịu",
+    "waxing_add_care": {
+      "name": "Chăm sóc làm dịu",
+      "desc": "Chăm sóc gel sau liệu trình."
+    },
     "waxing_add_care_desc": "Chăm sóc gel làm dịu sau liệu trình.",
-    "waxing_add_pack": "Mặt nạ cấp ẩm",
+    "waxing_add_pack": {
+      "name": "Mặt nạ cấp ẩm",
+      "desc": "Mặt nạ giảm kích ứng."
+    },
     "waxing_add_pack_desc": "Mặt nạ giảm kích ứng.",
-    "waxing_add_trim": "Bao gồm cắt tỉa",
+    "waxing_add_trim": {
+      "name": "Bao gồm cắt tỉa",
+      "desc": "Cắt tỉa trước liệu trình."
+    },
     "waxing_add_trim_desc": "Bao gồm cắt tỉa trước liệu trình.",
-    "makeup_add_hair": "Tạo kiểu tóc",
+    "makeup_add_hair": {
+      "name": "Tạo kiểu tóc",
+      "desc": "Tạo kiểu sấy đơn giản."
+    },
     "makeup_add_hair_desc": "Tạo kiểu sấy đơn giản.",
-    "makeup_add_lash": "Mi giả",
+    "makeup_add_lash": {
+      "name": "Mi giả",
+      "desc": "Mi giả từng cọng hoặc điểm nhấn."
+    },
     "makeup_add_lash_desc": "Mi giả từng cọng hoặc điểm nhấn.",
-    "makeup_add_touchup": "Bộ chỉnh trang",
+    "makeup_add_touchup": {
+      "name": "Bộ chỉnh trang",
+      "desc": "Cung cấp bộ chỉnh trang đơn giản."
+    },
     "makeup_add_touchup_desc": "Cung cấp bộ chỉnh trang đơn giản.",
-    "lash_add_remove": "Bao gồm tháo mi",
+    "lash_add_remove": {
+      "name": "Tháo mi",
+      "desc": "Bao gồm tháo mi hiện có."
+    },
     "lash_add_remove_desc": "Bao gồm tháo mi hiện có.",
-    "lash_add_tinting": "Nhuộm mi đen",
+    "lash_add_tinting": {
+      "name": "Nhuộm mi đen",
+      "desc": "Tăng cường màu sắc đậm nét."
+    },
     "lash_add_tinting_desc": "Tăng cường màu sắc đậm nét.",
-    "lash_add_coating": "Lớp phủ dưỡng",
+    "lash_add_coating": {
+      "name": "Lớp phủ dưỡng",
+      "desc": "Lớp phủ hỗ trợ độ bền."
+    },
     "lash_add_coating_desc": "Lớp phủ hỗ trợ độ bền.",
     "daily_makeup": "Trang điểm hàng ngày",
     "daily_makeup_desc": "Trang điểm nhẹ nhàng cho cuộc hẹn hàng ngày.",
-    "hair_women_cut": { "name": "Cắt tóc nữ", "desc": "Điều chỉnh chiều dài và cắt theo khuôn mặt." },
-    "hair_men_cut": { "name": "Cắt tóc nam", "desc": "Tỉa gọn và cắt tạo kiểu." },
-    "hair_root_color": { "name": "Nhuộm chân tóc", "desc": "Điều chỉnh tông màu tóc mới mọc." },
-    "nail_gel": { "name": "Gel nail", "desc": "Dịch vụ sơn gel màu cơ bản." },
-    "nail_care": { "name": "Chăm sóc móng", "desc": "Chăm sóc khóe và tạo hình móng." },
-    "nail_pedi": { "name": "Gel pedicure", "desc": "Dịch vụ gel kết hợp chăm sóc chân." },
-    "esthetic_calming": { "name": "Chăm sóc làm dịu", "desc": "Chương trình làm dịu cho da nhạy cảm." },
-    "esthetic_moisture": { "name": "Chăm sóc cấp ẩm", "desc": "Chương trình cấp ẩm sâu cho da khô." },
-    "esthetic_lifting": { "name": "Chăm sóc nâng cơ", "desc": "Liệu trình cải thiện độ đàn hồi." },
-    "waxing_brazilian": { "name": "Tẩy lông Brazilian", "desc": "Tẩy lông vùng nhạy cảm." },
-    "waxing_arm": { "name": "Tẩy lông tay", "desc": "Tẩy lông toàn bộ cánh tay." },
-    "waxing_leg": { "name": "Tẩy lông chân", "desc": "Tiêu chuẩn cẳng chân hoặc nửa chân." },
-    "makeup_daily": { "name": "Trang điểm hàng ngày", "desc": "Trang điểm nhẹ nhàng cho cuộc hẹn hàng ngày." },
-    "makeup_interview": { "name": "Trang điểm phỏng vấn", "desc": "Trang điểm gọn gàng cho phỏng vấn." },
-    "makeup_guest": { "name": "Trang điểm dự đám cưới", "desc": "Tạo kiểu phù hợp lịch trình sự kiện." },
-    "lash_perm": { "name": "Uốn mi", "desc": "Dịch vụ cố định độ cong." },
-    "lash_extension": { "name": "Nối mi", "desc": "Nối mi chọn chiều dài và độ cong." },
-    "lash_retouch": { "name": "Bổ sung mi", "desc": "Bổ sung mi hiện có." },
-    "hair_add_scalp": { "name": "Tẩy tế bào da đầu", "desc": "Làm sạch da đầu trước liệu trình." },
-    "hair_add_blowdry": { "name": "Sấy tạo kiểu", "desc": "Sấy và tạo kiểu đơn giản." },
-    "hair_add_ampoule": { "name": "Điều trị ampoule", "desc": "Dưỡng chất tập trung cho vùng hư tổn." },
-    "nail_add_removal": { "name": "Tháo gel", "desc": "Bao gồm tháo gel hiện có." },
-    "nail_add_art": { "name": "Nghệ thuật điểm nhấn", "desc": "Thêm nghệ thuật cho cả hai tay." },
-    "nail_add_strength": { "name": "Lớp phủ tăng cường", "desc": "Lớp phủ tăng độ bền." },
-    "esthetic_add_modeling": { "name": "Mặt nạ modeling", "desc": "Mặt nạ kết thúc làm dịu." },
-    "esthetic_add_neck": { "name": "Chăm sóc cổ", "desc": "Chăm sóc tập trung đường cổ." },
-    "esthetic_add_led": { "name": "Điều trị LED", "desc": "Liệu pháp ánh sáng làm dịu." },
-    "waxing_add_care": { "name": "Chăm sóc làm dịu", "desc": "Chăm sóc gel sau liệu trình." },
-    "waxing_add_pack": { "name": "Mặt nạ cấp ẩm", "desc": "Mặt nạ giảm kích ứng." },
-    "waxing_add_trim": { "name": "Bao gồm cắt tỉa", "desc": "Cắt tỉa trước liệu trình." },
-    "makeup_add_hair": { "name": "Tạo kiểu tóc", "desc": "Tạo kiểu sấy đơn giản." },
-    "makeup_add_lash": { "name": "Mi giả", "desc": "Mi giả từng cọng hoặc điểm nhấn." },
-    "makeup_add_touchup": { "name": "Bộ chỉnh trang", "desc": "Cung cấp bộ chỉnh trang đơn giản." },
-    "lash_add_remove": { "name": "Tháo mi", "desc": "Bao gồm tháo mi hiện có." },
-    "lash_add_tinting": { "name": "Nhuộm mi đen", "desc": "Tăng cường màu sắc đậm nét." },
-    "lash_add_coating": { "name": "Lớp phủ dưỡng", "desc": "Lớp phủ hỗ trợ độ bền." }
+    "hair_women_cut": {
+      "name": "Cắt tóc nữ",
+      "desc": "Điều chỉnh chiều dài và cắt theo khuôn mặt."
+    },
+    "hair_men_cut": {
+      "name": "Cắt tóc nam",
+      "desc": "Tỉa gọn và cắt tạo kiểu."
+    },
+    "hair_root_color": {
+      "name": "Nhuộm chân tóc",
+      "desc": "Điều chỉnh tông màu tóc mới mọc."
+    }
   },
   "price_hair_summary": "Cắt tóc từ 20.000 KRW | Nhuộm từ 55.000 KRW | Uốn từ 60.000 KRW",
   "price_nail_summary": "Gel nail từ 35.000 KRW | Chăm sóc móng chân từ 45.000 KRW",

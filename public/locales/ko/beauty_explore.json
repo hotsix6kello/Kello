@@ -463,71 +463,170 @@
     "root_color_desc": "자란 모발 위주 톤 보정",
     "hair_clinic": "클리닉",
     "hair_clinic_desc": "손상도 케어 중심 프로그램",
-    "nail_gel": "젤 네일",
+    "nail_gel": {
+      "name": "Gel Nail",
+      "desc": "Basic gel color treatment."
+    },
     "nail_gel_desc": "기본 젤 컬러 시술",
-    "nail_care": "네일 케어",
+    "nail_care": {
+      "name": "Nail Care",
+      "desc": "Cuticle care and nail shaping."
+    },
     "nail_care_desc": "큐티클 정리와 손톱 케어",
-    "nail_pedi": "젤 페디",
+    "nail_pedi": {
+      "name": "Gel Pedi",
+      "desc": "Gel treatment with foot care."
+    },
     "nail_pedi_desc": "풋 케어 포함 젤 시술",
-    "esthetic_calming": "진정 관리",
+    "esthetic_calming": {
+      "name": "Calming Care",
+      "desc": "Soothing program for sensitive skin."
+    },
     "esthetic_calming_desc": "예민한 피부 진정 중심 프로그램",
-    "esthetic_moisture": "보습 관리",
+    "esthetic_moisture": {
+      "name": "Moisture Care",
+      "desc": "Hydration program for dry skin."
+    },
     "esthetic_moisture_desc": "건조한 피부 보습 충전 프로그램",
-    "esthetic_lifting": "탄력 관리",
+    "esthetic_lifting": {
+      "name": "Lifting Care",
+      "desc": "Elasticity improvement focused care."
+    },
     "esthetic_lifting_desc": "탄력 개선 중심 케어",
-    "waxing_brazilian": "브라질리언",
+    "waxing_brazilian": {
+      "name": "Brazilian Waxing",
+      "desc": "Sensitive area waxing."
+    },
     "waxing_brazilian_desc": "민감부위 중심 왁싱",
-    "waxing_arm": "팔 왁싱",
+    "waxing_arm": {
+      "name": "Arm Waxing",
+      "desc": "Full arm waxing."
+    },
     "waxing_arm_desc": "양팔 전체 정리",
-    "waxing_leg": "다리 왁싱",
+    "waxing_leg": {
+      "name": "Leg Waxing",
+      "desc": "Lower leg or half leg standard."
+    },
     "waxing_leg_desc": "종아리 또는 하프 레그 기준",
-    "makeup_daily": "데일리 메이크업",
+    "makeup_daily": {
+      "name": "Daily Makeup",
+      "desc": "Light makeup for daily appointments."
+    },
     "makeup_daily_desc": "가벼운 일정용 메이크업",
-    "makeup_interview": "면접 메이크업",
+    "makeup_interview": {
+      "name": "Interview Makeup",
+      "desc": "Neat and defined impression."
+    },
     "makeup_interview_desc": "단정하고 선명한 인상 정리",
-    "makeup_guest": "웨딩 하객 메이크업",
+    "makeup_guest": {
+      "name": "Wedding Guest Makeup",
+      "desc": "Styling for event schedules."
+    },
     "makeup_guest_desc": "행사 일정에 맞춘 스타일링",
-    "lash_perm": "속눈썹 펌",
+    "lash_perm": {
+      "name": "Lash Perm",
+      "desc": "Curl-setting lash treatment."
+    },
     "lash_perm_desc": "컬 고정 중심 시술",
-    "lash_extension": "속눈썹 연장",
+    "lash_extension": {
+      "name": "Lash Extension",
+      "desc": "Length and curl extension."
+    },
     "lash_extension_desc": "길이와 컬 선택형 연장 시술",
-    "lash_retouch": "리터치",
+    "lash_retouch": {
+      "name": "Lash Retouch",
+      "desc": "Touch-up for existing extensions."
+    },
     "lash_retouch_desc": "기존 연장 보완 시술",
-    "hair_add_scalp": "두피 스케일링",
+    "hair_add_scalp": {
+      "name": "Scalp Scaling",
+      "desc": "Scalp cleanse before treatment."
+    },
     "hair_add_scalp_desc": "시술 전 두피 정리 케어",
-    "hair_add_blowdry": "스타일링 마무리",
+    "hair_add_blowdry": {
+      "name": "Blow Dry",
+      "desc": "Blow dry with simple styling."
+    },
     "hair_add_blowdry_desc": "드라이와 간단한 스타일링",
-    "hair_add_ampoule": "앰플 케어",
+    "hair_add_ampoule": {
+      "name": "Ampoule Care",
+      "desc": "Intensive nourishment for damage."
+    },
     "hair_add_ampoule_desc": "손상 부위 집중 영양 케어",
-    "nail_add_removal": "제거 포함",
+    "nail_add_removal": {
+      "name": "Gel Removal",
+      "desc": "Includes removal of existing gel."
+    },
     "nail_add_removal_desc": "기존 젤 제거 포함 진행",
-    "nail_add_art": "포인트 아트",
+    "nail_add_art": {
+      "name": "Point Art",
+      "desc": "Point art on both hands."
+    },
     "nail_add_art_desc": "양손 기준 포인트 아트 추가",
-    "nail_add_strength": "강화 코팅",
+    "nail_add_strength": {
+      "name": "Strength Coating",
+      "desc": "Durability enhancement coating."
+    },
     "nail_add_strength_desc": "유지력 보강 코팅",
-    "esthetic_add_modeling": "모델링 팩",
+    "esthetic_add_modeling": {
+      "name": "Modeling Pack",
+      "desc": "Soothing finish pack."
+    },
     "esthetic_add_modeling_desc": "진정 마무리 팩 추가",
-    "esthetic_add_neck": "목 관리 추가",
+    "esthetic_add_neck": {
+      "name": "Neck Care",
+      "desc": "Focused neck line care."
+    },
     "esthetic_add_neck_desc": "목선 집중 케어",
-    "esthetic_add_led": "LED 케어",
+    "esthetic_add_led": {
+      "name": "LED Care",
+      "desc": "Soothing light therapy."
+    },
     "esthetic_add_led_desc": "진정 보조 광 케어",
-    "waxing_add_care": "진정 케어",
+    "waxing_add_care": {
+      "name": "Soothing Care",
+      "desc": "Soothing gel care after treatment."
+    },
     "waxing_add_care_desc": "시술 후 진정 젤 관리",
-    "waxing_add_pack": "수분 팩",
+    "waxing_add_pack": {
+      "name": "Moisture Pack",
+      "desc": "Irritation-reducing pack."
+    },
     "waxing_add_pack_desc": "자극 완화용 팩 추가",
-    "waxing_add_trim": "트리밍 포함",
+    "waxing_add_trim": {
+      "name": "Trimming Included",
+      "desc": "Pre-treatment trim included."
+    },
     "waxing_add_trim_desc": "시술 전 정리 포함",
-    "makeup_add_hair": "헤어 드라이",
+    "makeup_add_hair": {
+      "name": "Hair Styling",
+      "desc": "Simple blow dry styling."
+    },
     "makeup_add_hair_desc": "간단한 블로우 스타일링",
-    "makeup_add_lash": "속눈썹 부착",
+    "makeup_add_lash": {
+      "name": "Lash Attachment",
+      "desc": "Partial strip or point lash."
+    },
     "makeup_add_lash_desc": "부분 가닥 또는 포인트 래쉬",
-    "makeup_add_touchup": "현장 수정 키트",
+    "makeup_add_touchup": {
+      "name": "Touch-up Kit",
+      "desc": "Simple touch-up kit provided."
+    },
     "makeup_add_touchup_desc": "간단한 수정용 키트 제공",
-    "lash_add_remove": "제거 포함",
+    "lash_add_remove": {
+      "name": "Lash Removal",
+      "desc": "Includes removal of existing extensions."
+    },
     "lash_add_remove_desc": "기존 연장 제거 포함",
-    "lash_add_tinting": "블랙 틴팅",
+    "lash_add_tinting": {
+      "name": "Black Tinting",
+      "desc": "Deep color enhancement."
+    },
     "lash_add_tinting_desc": "또렷한 컬러 보정",
-    "lash_add_coating": "영양 코팅",
+    "lash_add_coating": {
+      "name": "Nourishing Coating",
+      "desc": "Longevity support coating."
+    },
     "lash_add_coating_desc": "유지력 보조 코팅",
     "hair_women_cut": {
       "name": "Women's Cut",
@@ -540,7 +639,9 @@
     "hair_root_color": {
       "name": "Root Color",
       "desc": "시술 설명입니다."
-    }
+    },
+    "daily_makeup": "Daily Makeup",
+    "daily_makeup_desc": "Light makeup for daily appointments."
   },
   "booking_panel_title": "예약 날짜와 시간을 선택해주세요",
   "booking_panel_desc": "이 매장의 예약 가능한 일정을 확인하고 원하시는 시간대를 선택해주세요.",
@@ -573,5 +674,58 @@
   "lang_ko": "한국어",
   "lang_en": "영어",
   "lang_ja": "일본어",
-  "lang_zh_cn": "중국어"
+  "lang_zh_cn": "중국어",
+  "category_all": "All",
+  "hero_title": "Start your {{category}} booking now",
+  "hero_subtitle": "Pick an area, choose a salon, and select a time to move to the next step.",
+  "hero_category_guide": "If you choose a category from the home screen first, you can move through a more tailored booking flow. Right now you're viewing all beauty salons first.",
+  "region_filter_eyebrow": "Region Filter",
+  "region_filter_title": "Choose your preferred area",
+  "region_store_count": "{{count}} salons",
+  "designer_eyebrow": "Designer",
+  "completion_none": "None selected",
+  "region_jongno": "Jongno",
+  "region_gangnam": "Gangnam",
+  "region_hongdae": "Hongdae",
+  "region_seongsu": "Seongsu",
+  "region_jamsil": "Jamsil",
+  "region_konkuk": "Konkuk",
+  "region_pangyo": "Pangyo",
+  "filter_region_title": "Choose your preferred area",
+  "label_review": "Reviews",
+  "label_select_prompt": "Please select a salon for your booking.",
+  "label_service_default": "Not selected",
+  "label_designer_default": "No designer selected",
+  "label_designer_hint": "If you do not have a preferred designer, the salon can recommend one for you.",
+  "label_no_designer": "No designers are currently available.",
+  "label_no_surcharge": "No extra charge",
+  "label_addon_default": "No add-ons",
+  "label_addon_limit": "You can choose up to 2 add-ons.",
+  "label_price_from": "from",
+  "label_rating": "Rating",
+  "price_hair_summary": "Cut from 20,000 KRW | Color from 55,000 KRW | Perm from 60,000 KRW",
+  "price_nail_summary": "Gel Nails from 35,000 KRW | Pedi from 45,000 KRW",
+  "price_makeup_summary": "Daily Makeup from 60,000 KRW",
+  "booking_date_label": "Booking Date",
+  "booking_time_label": "Booking Time",
+  "booking_no_date": "No available dates found.",
+  "booking_no_time_wait": "Please choose a date first.",
+  "booking_no_slots": "No available time slots for the selected date.",
+  "confirm_price_hint": "Final pricing may vary depending on selected options and the salon's on-site assessment.",
+  "btn_reselect_time": "Select Time Again",
+  "completion_flow_hint": "Your booking request has been received. It will be confirmed after the salon reviews it. Check results via notification or My Bookings.",
+  "toast_select_time": "Please choose a booking time.",
+  "toast_check_info": "Please check the required information first.",
+  "toast_submit_error": "Something went wrong while submitting your booking. Please try again shortly.",
+  "toast_addon_limit": "You can choose up to 2 add-ons.",
+  "toast_copy_hint": "Long press {{label}} to copy.",
+  "btn_continue": "Btn Continue",
+  "btn_reset": "Btn Reset",
+  "btn_close": "Btn Close",
+  "price_estimate_hint": "Price Estimate Hint",
+  "step_1": "Step 1",
+  "step_2": "Step 2",
+  "step_3": "Step 3",
+  "step_4": "Step 4",
+  "step_5": "Step 5"
 }

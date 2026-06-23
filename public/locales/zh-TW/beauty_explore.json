@@ -101,73 +101,121 @@
       "name": "Jenny House 清潭",
       "priceLabel": "150,000韓元起",
       "shortDescription": "K-pop明星常光顧的高端美髮&彩妝沙龍",
-      "tags": ["K-Style", "高端", "清潭"]
+      "tags": [
+        "K-Style",
+        "高端",
+        "清潭"
+      ]
     },
     "beauty_hair_2": {
       "name": "PPEUM診所 江南",
       "priceLabel": "50,000韓元起",
       "shortDescription": "深受外國旅客喜愛的高CP值美容診所",
-      "tags": ["診所", "江南", "高CP值"]
+      "tags": [
+        "診所",
+        "江南",
+        "高CP值"
+      ]
     },
     "beauty_nail_1": {
       "name": "Maison Nail 弘大",
       "priceLabel": "79,000韓元起",
       "shortDescription": "以時尚色彩搭配和季節美甲藝術聞名的美甲工作室",
-      "tags": ["月換藝術甲", "凝膠護理", "色彩搭配"]
+      "tags": [
+        "月換藝術甲",
+        "凝膠護理",
+        "色彩搭配"
+      ]
     },
     "beauty_nail_2": {
       "name": "Beige Nail 鐘路",
       "priceLabel": "45,000韓元起",
       "shortDescription": "從乾淨職場美甲到婚禮美甲，提供細緻專業服務",
-      "tags": ["職場美甲", "婚禮美甲", "美甲護理"]
+      "tags": [
+        "職場美甲",
+        "婚禮美甲",
+        "美甲護理"
+      ]
     },
     "beauty_esthetic_1": {
       "name": "Serin Skin Lounge 江南",
       "priceLabel": "95,000韓元起",
       "shortDescription": "在私密空間享受肌膚舒緩與緊緻提升護理",
-      "tags": ["舒緩護理", "緊緻提升", "獨立包廂"]
+      "tags": [
+        "舒緩護理",
+        "緊緻提升",
+        "獨立包廂"
+      ]
     },
     "beauty_esthetic_2": {
       "name": "Glow Formula 聖水",
       "priceLabel": "88,000韓元起",
       "shortDescription": "專為敏感肌膚客製的舒緩方案與居家護理指導",
-      "tags": ["深層補水", "敏感肌護理", "客製諮詢"]
+      "tags": [
+        "深層補水",
+        "敏感肌護理",
+        "客製諮詢"
+      ]
     },
     "beauty_waxing_1": {
       "name": "Bare Atelier除毛 江南",
       "priceLabel": "99,000韓元起",
       "shortDescription": "以嚴格衛生管理和系統化後續護理贏得高回客率",
-      "tags": ["衛生管理", "後續護理", "巴西除毛"]
+      "tags": [
+        "衛生管理",
+        "後續護理",
+        "巴西除毛"
+      ]
     },
     "beauty_waxing_2": {
       "name": "Soft Strip 弘大",
       "priceLabel": "55,000韓元起",
       "shortDescription": "即使行程繁忙也能輕鬆接受的低刺激除毛服務",
-      "tags": ["手臂除毛", "快速施術", "低刺激"]
+      "tags": [
+        "手臂除毛",
+        "快速施術",
+        "低刺激"
+      ]
     },
     "beauty_makeup_1": {
       "name": "Atelier Veil彩妝",
       "priceLabel": "日常妝 85,000韓元起",
       "shortDescription": "融入日常生活的自然精緻妝容",
-      "tags": ["彩妝", "聖水", "自然風格"]
+      "tags": [
+        "彩妝",
+        "聖水",
+        "自然風格"
+      ]
     },
     "beauty_makeup_2": {
       "name": "Dear Muse彩妝",
       "priceLabel": "婚禮賓客妝 132,000韓元起",
       "shortDescription": "專為特殊場合及婚禮打造的專業彩妝造型",
-      "tags": ["婚禮", "鐘路", "專業彩妝"]
+      "tags": [
+        "婚禮",
+        "鐘路",
+        "專業彩妝"
+      ]
     },
     "beauty_lash_1": {
       "name": "Bloom Lash精品店 江南",
       "priceLabel": "99,000韓元起",
       "shortDescription": "以適合眼型的捲翹設計和持久效果口耳相傳",
-      "tags": ["捲翹設計", "持久效果", "自然睫毛"]
+      "tags": [
+        "捲翹設計",
+        "持久效果",
+        "自然睫毛"
+      ]
     },
     "beauty_lash_2": {
       "name": "Feather Lash 聖水",
       "priceLabel": "69,000韓元起",
       "shortDescription": "睫毛燙初次體驗者也能放心前往的自然風格沙龍",
-      "tags": ["睫毛燙", "初次歡迎", "自然捲翹"]
+      "tags": [
+        "睫毛燙",
+        "初次歡迎",
+        "自然捲翹"
+      ]
     }
   },
   "designers": {
@@ -421,110 +469,185 @@
     "root_color_desc": "針對根部新生髮的色調修正。",
     "hair_clinic": "髮質護理",
     "hair_clinic_desc": "受損髮質集中護理項目。",
-    "nail_gel": "凝膠美甲",
+    "nail_gel": {
+      "name": "凝膠美甲",
+      "desc": "基礎凝膠色彩施術。"
+    },
     "nail_gel_desc": "基礎凝膠色彩施術。",
-    "nail_care": "美甲護理",
+    "nail_care": {
+      "name": "美甲護理",
+      "desc": "甲緣護理與甲型修整。"
+    },
     "nail_care_desc": "甲緣護理與甲型修整。",
-    "nail_pedi": "凝膠足部護理",
+    "nail_pedi": {
+      "name": "凝膠足部護理",
+      "desc": "含足部護理的凝膠施術。"
+    },
     "nail_pedi_desc": "含足部護理的凝膠施術。",
-    "esthetic_calming": "舒緩護理",
+    "esthetic_calming": {
+      "name": "舒緩護理",
+      "desc": "針對敏感肌膚的舒緩項目。"
+    },
     "esthetic_calming_desc": "針對敏感肌膚的舒緩項目。",
-    "esthetic_moisture": "補水護理",
+    "esthetic_moisture": {
+      "name": "補水護理",
+      "desc": "針對乾性肌膚的深層補水項目。"
+    },
     "esthetic_moisture_desc": "針對乾性肌膚的深層補水項目。",
-    "esthetic_lifting": "緊緻提升護理",
+    "esthetic_lifting": {
+      "name": "緊緻提升護理",
+      "desc": "以改善彈力為主的護理項目。"
+    },
     "esthetic_lifting_desc": "以改善彈力為主的護理項目。",
-    "waxing_brazilian": "巴西除毛",
+    "waxing_brazilian": {
+      "name": "巴西除毛",
+      "desc": "私密部位為主的除毛。"
+    },
     "waxing_brazilian_desc": "私密部位為主的除毛。",
-    "waxing_arm": "手臂除毛",
+    "waxing_arm": {
+      "name": "手臂除毛",
+      "desc": "全臂除毛處理。"
+    },
     "waxing_arm_desc": "全臂除毛處理。",
-    "waxing_leg": "腿部除毛",
+    "waxing_leg": {
+      "name": "腿部除毛",
+      "desc": "小腿或半腿為基準。"
+    },
     "waxing_leg_desc": "小腿或半腿為基準。",
-    "makeup_daily": "日常妝容",
+    "makeup_daily": {
+      "name": "日常妝容",
+      "desc": "適合日常約會的輕薄妝容。"
+    },
     "makeup_daily_desc": "適合日常約會的輕薄妝容。",
-    "makeup_interview": "面試妝容",
+    "makeup_interview": {
+      "name": "面試妝容",
+      "desc": "清潔專業的面試妝容。"
+    },
     "makeup_interview_desc": "適合面試的清潔專業妝容。",
-    "makeup_guest": "婚禮賓客妝容",
+    "makeup_guest": {
+      "name": "婚禮賓客妝容",
+      "desc": "根據活動日程定製造型。"
+    },
     "makeup_guest_desc": "根據活動日程定製造型。",
-    "lash_perm": "睫毛燙",
+    "lash_perm": {
+      "name": "睫毛燙",
+      "desc": "以固定捲翹為主的施術。"
+    },
     "lash_perm_desc": "以固定捲翹為主的施術。",
-    "lash_extension": "睫毛嫁接",
+    "lash_extension": {
+      "name": "睫毛嫁接",
+      "desc": "可選長度與捲翹度的嫁接。"
+    },
     "lash_extension_desc": "可選長度與捲翹度的嫁接施術。",
-    "lash_retouch": "睫毛補充",
+    "lash_retouch": {
+      "name": "睫毛補充",
+      "desc": "對現有嫁接進行補充施術。"
+    },
     "lash_retouch_desc": "對現有嫁接進行補充施術。",
-    "hair_add_scalp": "頭皮清潔",
+    "hair_add_scalp": {
+      "name": "頭皮清潔",
+      "desc": "施術前的頭皮清潔護理。"
+    },
     "hair_add_scalp_desc": "施術前的頭皮清潔護理。",
-    "hair_add_blowdry": "吹髮造型",
+    "hair_add_blowdry": {
+      "name": "吹髮造型",
+      "desc": "吹髮與簡單造型。"
+    },
     "hair_add_blowdry_desc": "吹髮與簡單造型。",
-    "hair_add_ampoule": "安瓿護理",
+    "hair_add_ampoule": {
+      "name": "安瓿護理",
+      "desc": "針對受損部位的集中營養護理。"
+    },
     "hair_add_ampoule_desc": "針對受損部位的集中營養護理。",
-    "nail_add_removal": "含卸甲",
+    "nail_add_removal": {
+      "name": "卸甲",
+      "desc": "包含現有凝膠的卸除。"
+    },
     "nail_add_removal_desc": "包含現有凝膠的卸除施術。",
-    "nail_add_art": "點綴藝術",
+    "nail_add_art": {
+      "name": "點綴藝術",
+      "desc": "雙手點綴藝術追加。"
+    },
     "nail_add_art_desc": "雙手點綴藝術追加。",
-    "nail_add_strength": "強化塗層",
+    "nail_add_strength": {
+      "name": "強化塗層",
+      "desc": "持久力強化塗層。"
+    },
     "nail_add_strength_desc": "持久力強化塗層。",
-    "esthetic_add_modeling": "塑模膜",
+    "esthetic_add_modeling": {
+      "name": "塑模膜",
+      "desc": "舒緩收尾膜。"
+    },
     "esthetic_add_modeling_desc": "舒緩收尾膜追加。",
-    "esthetic_add_neck": "頸部護理",
+    "esthetic_add_neck": {
+      "name": "頸部護理",
+      "desc": "頸部線條集中護理。"
+    },
     "esthetic_add_neck_desc": "頸部線條集中護理。",
-    "esthetic_add_led": "LED護理",
+    "esthetic_add_led": {
+      "name": "LED護理",
+      "desc": "舒緩輔助光療。"
+    },
     "esthetic_add_led_desc": "舒緩輔助光療。",
-    "waxing_add_care": "舒緩護理",
+    "waxing_add_care": {
+      "name": "舒緩護理",
+      "desc": "施術後的舒緩凝膠護理。"
+    },
     "waxing_add_care_desc": "施術後的舒緩凝膠護理。",
-    "waxing_add_pack": "補水面膜",
+    "waxing_add_pack": {
+      "name": "補水面膜",
+      "desc": "緩解刺激的面膜。"
+    },
     "waxing_add_pack_desc": "緩解刺激的面膜追加。",
-    "waxing_add_trim": "含修剪",
+    "waxing_add_trim": {
+      "name": "含修剪",
+      "desc": "施術前修剪處理。"
+    },
     "waxing_add_trim_desc": "施術前修剪處理。",
-    "makeup_add_hair": "吹髮造型",
+    "makeup_add_hair": {
+      "name": "髮型造型",
+      "desc": "簡單的吹髮造型。"
+    },
     "makeup_add_hair_desc": "簡單的吹髮造型。",
-    "makeup_add_lash": "假睫毛",
+    "makeup_add_lash": {
+      "name": "假睫毛",
+      "desc": "局部或點綴假睫毛。"
+    },
     "makeup_add_lash_desc": "局部或點綴假睫毛。",
-    "makeup_add_touchup": "補妝套裝",
+    "makeup_add_touchup": {
+      "name": "補妝套裝",
+      "desc": "提供簡易補妝套裝。"
+    },
     "makeup_add_touchup_desc": "提供簡易補妝套裝。",
-    "lash_add_remove": "含卸睫毛",
+    "lash_add_remove": {
+      "name": "卸睫毛",
+      "desc": "包含現有嫁接的卸除。"
+    },
     "lash_add_remove_desc": "包含現有嫁接的卸除。",
-    "lash_add_tinting": "黑色染色",
+    "lash_add_tinting": {
+      "name": "黑色染色",
+      "desc": "鮮明色彩補正。"
+    },
     "lash_add_tinting_desc": "鮮明色彩補正。",
-    "lash_add_coating": "營養塗層",
+    "lash_add_coating": {
+      "name": "營養塗層",
+      "desc": "持久力輔助塗層。"
+    },
     "lash_add_coating_desc": "持久力輔助塗層。",
     "daily_makeup": "日常妝容",
     "daily_makeup_desc": "適合日常約會的輕薄妝容。",
-    "hair_women_cut": { "name": "女士剪髮", "desc": "髮長調整與臉型定製剪髮。" },
-    "hair_men_cut": { "name": "男士剪髮", "desc": "髮型修整與造型剪髮。" },
-    "hair_root_color": { "name": "補根染髮", "desc": "針對根部新生髮的色調修正。" },
-    "nail_gel": { "name": "凝膠美甲", "desc": "基礎凝膠色彩施術。" },
-    "nail_care": { "name": "美甲護理", "desc": "甲緣護理與甲型修整。" },
-    "nail_pedi": { "name": "凝膠足部護理", "desc": "含足部護理的凝膠施術。" },
-    "esthetic_calming": { "name": "舒緩護理", "desc": "針對敏感肌膚的舒緩項目。" },
-    "esthetic_moisture": { "name": "補水護理", "desc": "針對乾性肌膚的深層補水項目。" },
-    "esthetic_lifting": { "name": "緊緻提升護理", "desc": "以改善彈力為主的護理項目。" },
-    "waxing_brazilian": { "name": "巴西除毛", "desc": "私密部位為主的除毛。" },
-    "waxing_arm": { "name": "手臂除毛", "desc": "全臂除毛處理。" },
-    "waxing_leg": { "name": "腿部除毛", "desc": "小腿或半腿為基準。" },
-    "makeup_daily": { "name": "日常妝容", "desc": "適合日常約會的輕薄妝容。" },
-    "makeup_interview": { "name": "面試妝容", "desc": "清潔專業的面試妝容。" },
-    "makeup_guest": { "name": "婚禮賓客妝容", "desc": "根據活動日程定製造型。" },
-    "lash_perm": { "name": "睫毛燙", "desc": "以固定捲翹為主的施術。" },
-    "lash_extension": { "name": "睫毛嫁接", "desc": "可選長度與捲翹度的嫁接。" },
-    "lash_retouch": { "name": "睫毛補充", "desc": "對現有嫁接進行補充施術。" },
-    "hair_add_scalp": { "name": "頭皮清潔", "desc": "施術前的頭皮清潔護理。" },
-    "hair_add_blowdry": { "name": "吹髮造型", "desc": "吹髮與簡單造型。" },
-    "hair_add_ampoule": { "name": "安瓿護理", "desc": "針對受損部位的集中營養護理。" },
-    "nail_add_removal": { "name": "卸甲", "desc": "包含現有凝膠的卸除。" },
-    "nail_add_art": { "name": "點綴藝術", "desc": "雙手點綴藝術追加。" },
-    "nail_add_strength": { "name": "強化塗層", "desc": "持久力強化塗層。" },
-    "esthetic_add_modeling": { "name": "塑模膜", "desc": "舒緩收尾膜。" },
-    "esthetic_add_neck": { "name": "頸部護理", "desc": "頸部線條集中護理。" },
-    "esthetic_add_led": { "name": "LED護理", "desc": "舒緩輔助光療。" },
-    "waxing_add_care": { "name": "舒緩護理", "desc": "施術後的舒緩凝膠護理。" },
-    "waxing_add_pack": { "name": "補水面膜", "desc": "緩解刺激的面膜。" },
-    "waxing_add_trim": { "name": "含修剪", "desc": "施術前修剪處理。" },
-    "makeup_add_hair": { "name": "髮型造型", "desc": "簡單的吹髮造型。" },
-    "makeup_add_lash": { "name": "假睫毛", "desc": "局部或點綴假睫毛。" },
-    "makeup_add_touchup": { "name": "補妝套裝", "desc": "提供簡易補妝套裝。" },
-    "lash_add_remove": { "name": "卸睫毛", "desc": "包含現有嫁接的卸除。" },
-    "lash_add_tinting": { "name": "黑色染色", "desc": "鮮明色彩補正。" },
-    "lash_add_coating": { "name": "營養塗層", "desc": "持久力輔助塗層。" }
+    "hair_women_cut": {
+      "name": "女士剪髮",
+      "desc": "髮長調整與臉型定製剪髮。"
+    },
+    "hair_men_cut": {
+      "name": "男士剪髮",
+      "desc": "髮型修整與造型剪髮。"
+    },
+    "hair_root_color": {
+      "name": "補根染髮",
+      "desc": "針對根部新生髮的色調修正。"
+    }
   },
   "price_hair_summary": "剪髮 20,000韓元起 | 染髮 55,000韓元起 | 燙髮 60,000韓元起",
   "price_nail_summary": "凝膠美甲 35,000韓元起 | 足部護理 45,000韓元起",

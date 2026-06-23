@@ -135,6 +135,17 @@ const SUGGESTION_ICONS: Record<string, React.ComponentType<any>> = {
   "고맙습니다.": Smile,
 };
 
+type KelloTabId = 'booking' | 'style_recommend' | 'shop_recommend' | 'pricing' | 'service_info' | 'guide';
+
+const KELLO_TABS: Array<{ id: KelloTabId; labelKey: string; icon: React.ComponentType<any> }> = [
+  { id: 'booking',          labelKey: 'talk_page.tab_booking',          icon: Calendar  },
+  { id: 'style_recommend',  labelKey: 'talk_page.tab_style_recommend',  icon: Sparkles  },
+  { id: 'shop_recommend',   labelKey: 'talk_page.tab_shop_recommend',   icon: MapPin    },
+  { id: 'pricing',          labelKey: 'talk_page.tab_pricing',          icon: DollarSign},
+  { id: 'service_info',     labelKey: 'talk_page.tab_service_info',     icon: Scissors  },
+  { id: 'guide',            labelKey: 'talk_page.tab_guide',            icon: Info      },
+];
+
 const LANGUAGES = [
   { code: 'ko', label: '한국어', short: 'KOR' },
   { code: 'en', label: 'English', short: 'ENG' },
@@ -160,6 +171,7 @@ const StaffPinkTranslationArea = ({
   fallbackText?: string;
   handleTTS: (text: string, lang: string) => void;
 }) => {
+  const { t } = useTranslation('common');
   const [translatedText, setTranslatedText] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -265,7 +277,7 @@ const StaffPinkTranslationArea = ({
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 12, paddingTop: 8, borderTop: '1px solid rgba(0,0,0,0.05)' }}>
       <div style={{ color: COLORS.primary, fontSize: '0.9rem', fontWeight: 500, flex: 1, marginRight: 8, textAlign: 'left', wordBreak: 'break-word' }}>
-        {loading ? <span style={{ opacity: 0.6 }}>번역 중...</span> : displayPinkText}
+        {loading ? <span style={{ opacity: 0.6 }}>{t('talk_ui.translating')}</span> : displayPinkText}
       </div>
       <button
         type="button"
@@ -292,7 +304,7 @@ const StaffPinkTranslationArea = ({
 };
 
 export default function TalkChatPage() {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const router = useRouter();
   const searchParams = useSearchParams();
   const shopIdFromUrl = searchParams.get('shopId') || 'kello-center';
@@ -346,7 +358,7 @@ export default function TalkChatPage() {
   };
 
   const [isAiRecommending, setIsAiRecommending] = useState(false);
-  const [kelloActiveTab, setKelloActiveTab] = useState('예약');
+  const [kelloActiveTab, setKelloActiveTab] = useState<KelloTabId>('booking');
   const [kelloAiAnswer, setKelloAiAnswer] = useState<string | null>(null);
   const [isStaffShowMode, setIsStaffShowMode] = useState(false);
   const [showViewerTip, setShowViewerTip] = useState(true);
@@ -1074,7 +1086,7 @@ export default function TalkChatPage() {
              <div style={{ fontWeight: 600, fontSize: '1.15rem', color: COLORS.textMain }}>
               {isKello ? (
                 <span>
-                  <span style={{ color: '#000000' }}>Kello</span>톡
+                  <span style={{ color: '#000000' }}>Kello</span>{t('talk_page.kello_talk_suffix')}
                 </span>
               ) : shopName}
             </div>
@@ -1173,10 +1185,10 @@ export default function TalkChatPage() {
                     borderTop: '1px solid #FEF08A',
                   }} />
                   <div style={{ whiteSpace: 'nowrap', lineHeight: 1.5 }}>
-                    💡 한국인 직원에게 보여주려면
+                    {t('talk_page.viewer_tip_line1')}
                   </div>
                   <div style={{ whiteSpace: 'nowrap', lineHeight: 1.5 }}>
-                    <span style={{ color: COLORS.primary, fontWeight: 700 }}>한국어 뷰어 모드</span>를 활성화 하세요.
+                    <span style={{ color: COLORS.primary, fontWeight: 700 }}>{t('talk_page.korean_viewer_mode')}</span> {t('talk_page.viewer_tip_line2')}
                   </div>
                   <button
                     type="button"
@@ -1227,7 +1239,7 @@ export default function TalkChatPage() {
             }}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.7'; }}
             onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
-            title="뷰티 매장 연결하기"
+            title={t('talk_page.link_shop_title')}
           >
             <Link2 size={22} strokeWidth={1.5} />
           </button>
@@ -1341,10 +1353,10 @@ export default function TalkChatPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ fontSize: '0.88rem', fontWeight: 800, color: '#000000', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    안녕하세요! 저는 <span style={{ color: COLORS.primary }}>Kello</span>입니다 👋
+                    {t('talk_page.welcome_greeting')}
                   </span>
                   <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#111827', margin: 0, lineHeight: 1.25 }}>
-                    무엇을 도와드릴까요?
+                    {t('talk_page.welcome_question')}
                   </h2>
                 </div>
                 {/* K 캐릭터 이미지 (박스 내부 우측 상단, 투명 필터 적용 및 크기 확대) */}
@@ -1363,26 +1375,20 @@ export default function TalkChatPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Sparkles size={14} color={COLORS.primary} style={{ flexShrink: 0, animation: 'pulse 2s infinite' }} />
                   <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1F2937' }}>
-                    <span style={{ color: COLORS.primary }}>Kello</span>에게 물어보세요
+                    {t('talk_page.ask_kello')}
                   </span>
                 </div>
 
                 {/* 6개 탭 */}
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {[
-                    { label: '예약', icon: Calendar },
-                    { label: '뷰티스타일 추천', icon: Sparkles },
-                    { label: '업체 추천', icon: MapPin },
-                    { label: '가격 안내', icon: DollarSign },
-                    { label: '시술 정보', icon: Scissors },
-                    { label: '이용 안내', icon: Info },
-                  ].map(tabItem => {
+                  {KELLO_TABS.map(tabItem => {
                     const IconComponent = tabItem.icon;
+                    const isActive = kelloActiveTab === tabItem.id;
                     return (
                       <button
-                        key={tabItem.label}
+                        key={tabItem.id}
                         type="button"
-                        onClick={() => { setKelloActiveTab(tabItem.label); }}
+                        onClick={() => { setKelloActiveTab(tabItem.id); }}
                         style={{
                           flexShrink: 0,
                           display: 'flex',
@@ -1390,9 +1396,9 @@ export default function TalkChatPage() {
                           gap: 4,
                           padding: '5px 12px',
                           borderRadius: 20,
-                          border: `1px solid ${kelloActiveTab === tabItem.label ? COLORS.primary : '#FFE4E6'}`,
-                          background: kelloActiveTab === tabItem.label ? COLORS.primary : '#FFFFFF',
-                          color: kelloActiveTab === tabItem.label ? '#FFF' : '#374151',
+                          border: `1px solid ${isActive ? COLORS.primary : '#FFE4E6'}`,
+                          background: isActive ? COLORS.primary : '#FFFFFF',
+                          color: isActive ? '#FFF' : '#374151',
                           fontSize: '0.72rem',
                           fontWeight: 700,
                           cursor: 'pointer',
@@ -1401,7 +1407,7 @@ export default function TalkChatPage() {
                         }}
                       >
                         <IconComponent size={11} strokeWidth={2.5} />
-                        {tabItem.label}
+                        {t(tabItem.labelKey)}
                       </button>
                     );
                   })}
@@ -1409,38 +1415,38 @@ export default function TalkChatPage() {
 
                 {/* 탭별 추천 질문 카드 */}
                 {(() => {
-                  const tabQuestions: Record<string, { icon: React.ComponentType<any>; label: string; q: string }[]> = {
-                    '예약': [
+                  const tabQuestions: Record<KelloTabId, { icon: React.ComponentType<any>; label: string; q: string }[]> = {
+                    booking: [
                       { icon: Calendar, label: '예약 문의', q: '예약 가능한 시간 알려줘' },
                       { icon: Pencil, label: '예약 변경·취소', q: '예약 취소하고 싶어요' },
                       { icon: Clock, label: '시술 시간 안내', q: '시술 시간은 얼마나 걸리나요?' },
                       { icon: MapPin, label: '위치 안내', q: '샵 위치 알려줘' },
                     ],
-                    '뷰티스타일 추천': [
+                    style_recommend: [
                       { icon: Sparkles, label: '얼굴형 추천', q: '얼굴형에 맞는 머리 추천해줘' },
                       { icon: Sparkles, label: '계절별 추천', q: '여름 헤어 추천해줘' },
                       { icon: Heart, label: '피부 타입별', q: '피부 타입별 관리 추천해줘' },
                       { icon: Smile, label: '스타일 취향', q: '내추럴한 스타일 추천해줘' },
                     ],
-                    '업체 추천': [
+                    shop_recommend: [
                       { icon: MapPin, label: '지역 추천', q: '제주도 피부관리 추천해줘' },
                       { icon: Scissors, label: '헤어샵 추천', q: '근처 헤어샵 알려줘' },
                       { icon: Sparkles, label: '네일샵 추천', q: '네일샵 추천해줘' },
                       { icon: Info, label: '에스테틱 추천', q: '에스테틱 추천해줘' },
                     ],
-                    '가격 안내': [
+                    pricing: [
                       { icon: DollarSign, label: '염색 가격', q: '염색 가격 얼마인가요?' },
                       { icon: DollarSign, label: '필러 가격', q: '필러 가격 알려줘' },
                       { icon: DollarSign, label: '네일 가격', q: '젤네일 가격 얼마예요?' },
                       { icon: DollarSign, label: '피부관리 가격', q: '피부관리 가격 범위 알려줘' },
                     ],
-                    '시술 정보': [
+                    service_info: [
                       { icon: Scissors, label: '커트 시술 정보', q: '커트 시술 과정 알려줘' },
                       { icon: Info, label: '염색 주의사항', q: '염색 후 주의사항 알려줘' },
                       { icon: Sparkles, label: '두피 케어', q: '두피 케어 시술 정보 알려줘' },
                       { icon: Info, label: '스킨케어', q: '스킨케어 시술 종류 알려줘' },
                     ],
-                    '이용 안내': [
+                    guide: [
                       { icon: Info, label: 'Kello 예약 방법', q: 'Kello 앱 예약 방법 알려줘' },
                       { icon: Calendar, label: '알림 설정', q: '예약 알림은 어떻게 설정하나요?' },
                       { icon: DollarSign, label: '결제 방법', q: '결제는 어떻게 하나요?' },
@@ -1506,7 +1512,7 @@ export default function TalkChatPage() {
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 10, marginTop: 8, marginBottom: 8 }}>
             <div style={{ flex: 1, height: 1, background: COLORS.border }} />
             <span style={{ fontSize: '0.75rem', color: COLORS.textSub, whiteSpace: 'nowrap' }}>
-              {new Date().toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' })}
+              {new Date().toLocaleDateString(i18n.language, { month: 'long', day: 'numeric', weekday: 'long' })}
             </span>
             <div style={{ flex: 1, height: 1, background: COLORS.border }} />
           </div>
@@ -1607,7 +1613,7 @@ export default function TalkChatPage() {
                               }}
                             >
                               <MapPin size={12} strokeWidth={2.5} />
-                              지도에서 위치 확인하기 &gt;
+                              {t('talk_page.map_view_btn')} &gt;
                             </button>
                           </div>
                         )}
@@ -1616,7 +1622,7 @@ export default function TalkChatPage() {
 
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingBottom: 2, marginLeft: 2 }}>
                       <span style={{ fontSize: '0.65rem', color: COLORS.textSub, whiteSpace: 'nowrap' }}>
-                        {msg.timestamp ? msg.timestamp.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' }) : new Date().toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' })}
+                        {msg.timestamp ? msg.timestamp.toLocaleTimeString(i18n.language, { hour: 'numeric', minute: '2-digit' }) : new Date().toLocaleTimeString(i18n.language, { hour: 'numeric', minute: '2-digit' })}
                       </span>
                     </div>
                   </div>
@@ -1630,7 +1636,7 @@ export default function TalkChatPage() {
                   <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', paddingBottom: 2, marginRight: 2, marginBottom: 33 }}>
                       <span style={{ fontSize: '0.65rem', color: COLORS.textSub, whiteSpace: 'nowrap' }}>
-                        {msg.timestamp ? msg.timestamp.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' }) : new Date().toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' })}
+                        {msg.timestamp ? msg.timestamp.toLocaleTimeString(i18n.language, { hour: 'numeric', minute: '2-digit' }) : new Date().toLocaleTimeString(i18n.language, { hour: 'numeric', minute: '2-digit' })}
                       </span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
