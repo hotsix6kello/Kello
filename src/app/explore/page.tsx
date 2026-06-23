@@ -187,6 +187,8 @@ function toSharedBusiness(partner: PartnerResult): SharedBusiness {
 export default function ExplorePage() {
   const { setSharedBusinesses } = useTrip();
   const { t, i18n } = useTranslation('common');
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   const mapRef = useRef<google.maps.Map | null>(null);
   const chipScrollRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -439,6 +441,7 @@ export default function ExplorePage() {
       if (!data.place) return;
       const nextLocation = { lat: data.place.lat, lng: data.place.lng };
       setCenter(nextLocation);
+      mapRef.current?.panTo(nextLocation);
       mapRef.current?.setZoom(15);
       closeSearch();
       void fetchNearbyPlaces(activeCategory, nextLocation);
@@ -500,6 +503,8 @@ export default function ExplorePage() {
 
   const markerMeta = CATEGORY_MARKER[activeCategory];
   const showBottomSection = isLoadingPlaces || places.length > 0 || statusMsg !== null;
+
+  if (!mounted) return null;
 
   return (
     <main
@@ -663,31 +668,27 @@ export default function ExplorePage() {
             </button>
           </div>
 
-          {/* 길찾기 버튼 */}
+          {/* 검색 제출 버튼 */}
           <button
             type="button"
-            onClick={() => {
-              window.open(`https://www.google.com/maps/dir/?api=1&destination=${center.lat},${center.lng}`, '_blank');
-            }}
+            onClick={() => void handleSearchSubmit()}
             style={{
+              width: '46px',
               height: '46px',
-              padding: '0 12px',
               borderRadius: '16px',
-              background: '#FFFFFF',
-              border: '1.5px solid #FF4D82',
-              boxShadow: '0 4px 12px rgba(255, 77, 130, 0.06)',
+              background: '#FF4D82',
+              border: 'none',
+              boxShadow: '0 4px 12px rgba(255, 77, 130, 0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '4px',
               cursor: 'pointer',
               flexShrink: 0,
               transition: 'all 0.2s',
             }}
-            aria-label="길찾기"
+            aria-label="검색"
           >
-            <CornerUpRight size={16} color="#FF4D82" strokeWidth={2.5} />
-            <span style={{ fontSize: '12px', fontWeight: 700, color: '#FF4D82' }}>길찾기</span>
+            <Search size={20} color="#FFFFFF" strokeWidth={2.5} />
           </button>
         </div>
 

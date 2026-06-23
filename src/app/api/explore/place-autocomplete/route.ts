@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-
 import { AdminRouteAccessError, requireAuthenticatedRouteAccess } from '@/lib/admin/adminRouteAccess.ts';
+
 
 type GoogleAutocompleteSuggestion = {
   placePrediction?: {
