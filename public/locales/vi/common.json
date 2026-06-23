@@ -164,11 +164,11 @@
       "send": "Gửi",
       "logout": "Đăng xuất",
       "back_to_list": "Back to List",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_all_new": "Xem tất cả",
+      "browse_community_new": "Khám phá cộng đồng",
+      "cancel": "Hủy",
+      "confirm": "Xác nhận",
+      "go_back": "Quay lại"
     },
     "states": {
       "posts": "Posts",
@@ -1844,9 +1844,13 @@
       "empty_text": "No booking history yet."
     },
     "profile": {
-      "account_hint": "Account & Settings",
-      "avatar_placeholder": "Tôi"
+      "account_hint": "Tài khoản & Cài đặt",
+      "avatar_placeholder": "Tôi",
+      "change_image": "📷 Đổi ảnh",
+      "remove_image": "🗑️ Xóa ảnh"
     },
+    "login_button": "Đăng nhập",
+    "login_hint": "Đăng nhập để sử dụng dịch vụ Kello!",
     "settings": {
       "short": "Settings",
       "account": {
@@ -1921,8 +1925,10 @@
       "title_new": "My community"
     },
     "messages": {
-      "upload_success": "Profile picture has been updated.",
-      "upload_failed": "Failed to upload. Please try again."
+      "upload_success": "Đã cập nhật ảnh đại diện.",
+      "upload_failed": "Tải lên thất bại. Vui lòng thử lại.",
+      "delete_success": "Đã xóa ảnh đại diện.",
+      "delete_failed": "Xóa thất bại. Vui lòng thử lại."
     },
     "bookings_hub": {
       "meta": {
@@ -2604,7 +2610,7 @@
       "one_day": "1 ngày trước: Hoàn tiền 50%",
       "same_day": "Trong ngày hoặc Không đến: Không hoàn tiền",
       "note": "Quá trình hoàn tiền cuối cùng có thể thay đổi tùy thuộc vào chính sách của từng cửa hàng cụ thể.",
-      "four_days": "4+ days before appointment: 100% service fee refund"
+      "four_days": "Trước 4 ngày hoặc hơn: hoàn 100% phí dịch vụ"
     },
     "liability": {
       "title": "4. Giới thiệu về Trách nhiệm pháp lý",
@@ -2612,14 +2618,14 @@
       "community": "Wekello không chịu trách nhiệm cho bất kỳ thiệt hại, sự cố hoặc tranh chấp nào phát sinh từ các cuộc gặp gỡ ngoại tuyến tự nguyện hoặc các giao dịch cá nhân giữa những người dùng được thực hiện thông qua các tính năng cộng đồng."
     },
     "platform_fee": {
-      "title": "3. Platform Fee",
-      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
-      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+      "title": "3. Phí nền tảng",
+      "content": "Wekello tính phí nền tảng 10% phí dịch vụ cho dịch vụ đại lý đặt chỗ.",
+      "note": "Phí nền tảng được thu cùng với phí dịch vụ khi hoàn thành đặt chỗ và không được hoàn tiền theo chính sách hủy bỏ."
     },
     "chargeback": {
-      "title": "5. Payment Cancellation & Disputes",
-      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
-      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+      "title": "5. Hủy Thanh toán & Tranh chấp",
+      "content": "Bằng cách hoàn thành thanh toán đặt chỗ, khách hàng được coi là đã đồng ý rõ ràng với chính sách hoàn tiền này.",
+      "note": "Nếu chargeback được nộp chống lại khoản khấu trừ phí hủy hợp lệ theo chính sách này, Wekello có quyền tranh chấp bằng cách sử dụng hồ sơ đồng ý và lịch sử đặt chỗ của khách hàng làm bằng chứng."
     }
   },
   "morning": "Chào buổi sáng",

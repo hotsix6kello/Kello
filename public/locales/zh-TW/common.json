@@ -169,11 +169,11 @@
       "back_to_list": "返回列表",
       "send": "發送",
       "logout": "登出",
-      "view_all_new": "View all",
-      "browse_community_new": "Browse community",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "go_back": "Go Back"
+      "view_all_new": "查看全部",
+      "browse_community_new": "瀏覽社群",
+      "cancel": "取消",
+      "confirm": "確認",
+      "go_back": "返回"
     },
     "states": {
       "posts": "Posts",
@@ -1772,8 +1772,12 @@
     },
     "profile": {
       "account_hint": "帳號與設定",
-      "avatar_placeholder": "我的"
+      "avatar_placeholder": "我的",
+      "change_image": "📷 更換相片",
+      "remove_image": "🗑️ 刪除相片"
     },
+    "login_button": "登入",
+    "login_hint": "登入後即可使用Kello服務！",
     "settings": {
       "short": "設定",
       "account": {
@@ -1849,7 +1853,9 @@
     },
     "messages": {
       "upload_success": "個人頭像已更新。",
-      "upload_failed": "上傳失敗，請再試一次。"
+      "upload_failed": "上傳失敗，請再試一次。",
+      "delete_success": "個人頭像已刪除。",
+      "delete_failed": "刪除失敗，請再試一次。"
     },
     "bookings_hub": {
       "meta": {
@@ -2757,7 +2763,7 @@
       "one_day": "1日前：50% 退款",
       "same_day": "當日或未到場 (No-show)：不予退款",
       "note": "最終退款處理可能因各店鋪的政策而有所不同。",
-      "four_days": "4+ days before appointment: 100% service fee refund"
+      "four_days": "預約日4天以上前：服務費100%退款"
     },
     "liability": {
       "title": "4. 免責聲明",
@@ -2765,14 +2771,14 @@
       "community": "公司對透過社區功能進行的用户間自發性線下聚會或個人交易中產生的損害、事故或糾紛不承擔責任。"
     },
     "platform_fee": {
-      "title": "3. Platform Fee",
-      "content": "Wekello charges a platform fee of 10% of the service fee for its reservation agency service.",
-      "note": "The platform fee is collected together with the service fee upon booking completion and is excluded from any refund under the cancellation policy."
+      "title": "3. 平台服務費",
+      "content": "Wekello 對其預約代行服務收取服務費10%的平台服務費。",
+      "note": "平台服務費在完成預約時與服務費一起收取，並在取消政策下不予退款。"
     },
     "chargeback": {
-      "title": "5. Payment Cancellation & Disputes",
-      "content": "By completing a booking payment, the customer is deemed to have explicitly agreed to this refund policy.",
-      "note": "If a chargeback is filed against a legitimate cancellation fee deduction made in accordance with this policy, Wekello reserves the right to dispute the chargeback using the customer's consent records and booking history as evidence."
+      "title": "5. 付款取消與爭議",
+      "content": "通過完成預約付款，客戶被視為已明確同意本退款政策。",
+      "note": "如果針對本政策規定的合理取消費扣除提出退款爭議，Wekello有權使用客戶的同意記錄和預約歷史作為證據提出異議。"
     }
   },
   "interpreter_page": {
