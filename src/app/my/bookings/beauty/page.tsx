@@ -258,6 +258,10 @@ function MyBeautyBookingsContent() {
   // Pre-payment consent states
   const [paymentConsent, setPaymentConsent] = useState({ privacy: false, refundPolicy: false });
 
+  // Coupon states
+  const [availableCoupons, setAvailableCoupons] = useState<{ id: string; discount_value: number; discount_type: string }[]>([]);
+  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
+
   useEffect(() => {
     const init = async () => {
       const {
@@ -330,6 +334,19 @@ function MyBeautyBookingsContent() {
     };
 
     void fetchBookings();
+
+    // 미사용 쿠폰 조회
+    const fetchCoupons = async () => {
+      const { data } = await supabase
+        .from('coupons')
+        .select('id, discount_value, discount_type')
+        .eq('is_used', false)
+        .order('created_at', { ascending: false });
+      if (!cancelled && data) {
+        setAvailableCoupons(data as { id: string; discount_value: number; discount_type: string }[]);
+      }
+    };
+    void fetchCoupons();
 
     return () => {
       cancelled = true;
@@ -1143,6 +1160,51 @@ function MyBeautyBookingsContent() {
                                 {t('beauty_bookings.payment_section_title')} · {new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(selectedBooking.quoteTotalPrice)} USD
                               </p>
 
+                              {/* 쿠폰 선택 */}
+                              {availableCoupons.length > 0 && (
+                                <div style={{ marginBottom: 12, padding: '10px 14px', background: '#faf5ff', border: '1px solid #e9d5ff', borderRadius: 10 }}>
+                                  <p style={{ fontSize: '0.8rem', fontWeight: 700, color: '#7c3aed', marginBottom: 8 }}>🎟️ {t('beauty_bookings.coupon_select_title', { defaultValue: '쿠폰 선택' })}</p>
+                                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', cursor: 'pointer' }}>
+                                      <input type="radio" name="coupon" checked={selectedCouponId === null} onChange={() => setSelectedCouponId(null)} />
+                                      <span style={{ color: '#6b7280' }}>{t('beauty_bookings.coupon_none', { defaultValue: '쿠폰 사용 안 함' })}</span>
+                                    </label>
+                                    {availableCoupons.map((c) => (
+                                      <label key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', cursor: 'pointer' }}>
+                                        <input type="radio" name="coupon" checked={selectedCouponId === c.id} onChange={() => setSelectedCouponId(c.id)} />
+                                        <span style={{ color: '#7c3aed', fontWeight: 600 }}>
+                                          {c.discount_value}{c.discount_type === 'percent' ? '% OFF' : ' USD'} {t('beauty_bookings.coupon_label', { defaultValue: '쿠폰' })}
+                                        </span>
+                                      </label>
+                                    ))}
+                                  </div>
+                                  {selectedCouponId && (() => {
+                                    const coupon = availableCoupons.find((c) => c.id === selectedCouponId);
+                                    if (!coupon || !selectedBooking.quoteTotalPrice) return null;
+                                    const discount = coupon.discount_type === 'percent'
+                                      ? Math.round(selectedBooking.quoteTotalPrice * (coupon.discount_value / 100) * 100) / 100
+                                      : Math.min(coupon.discount_value, selectedBooking.quoteTotalPrice);
+                                    const final = Math.max(selectedBooking.quoteTotalPrice - discount, 0);
+                                    return (
+                                      <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid #e9d5ff', fontSize: '0.82rem' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#6b7280' }}>
+                                          <span>{t('beauty_bookings.coupon_original_amount', { defaultValue: '견적 금액' })}</span>
+                                          <span>${selectedBooking.quoteTotalPrice.toFixed(2)}</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#7c3aed' }}>
+                                          <span>{t('beauty_bookings.coupon_discount_amount', { defaultValue: '쿠폰 할인' })}</span>
+                                          <span>-${discount.toFixed(2)}</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#111827', marginTop: 4 }}>
+                                          <span>{t('beauty_bookings.coupon_final_amount', { defaultValue: '최종 결제 금액' })}</span>
+                                          <span>${final.toFixed(2)} USD</span>
+                                        </div>
+                                      </div>
+                                    );
+                                  })()}
+                                </div>
+                              )}
+
                               {!(paymentConsent.privacy && paymentConsent.refundPolicy) ? (
                                 <div className={styles.paymentConsentPanel}>
                                   <p className={styles.paymentConsentTitle}>{t('beauty_bookings.payment_consent_title')}</p>
@@ -1209,7 +1271,7 @@ function MyBeautyBookingsContent() {
                                         'Content-Type': 'application/json',
                                         Authorization: `Bearer ${accessToken ?? ''}`,
                                       },
-                                      body: JSON.stringify({ bookingId: selectedBooking.id }),
+                                      body: JSON.stringify({ bookingId: selectedBooking.id, couponId: selectedCouponId }),
                                     });
                                     const data = (await res.json()) as { ok?: boolean; orderId?: string; error?: string };
                                     if (!res.ok || !data.ok || !data.orderId) {
