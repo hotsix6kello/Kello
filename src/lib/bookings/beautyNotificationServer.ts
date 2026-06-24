@@ -75,15 +75,17 @@ export async function notifyAdminNewBooking(
   bookingId: string,
   metadata: Record<string, unknown>
 ): Promise<void> {
-  const adminEmail = process.env.BEAUTY_BOOKING_ADMIN_EMAIL;
+  const adminEmailRaw = process.env.BEAUTY_BOOKING_ADMIN_EMAIL;
   const apiKey = process.env.RESEND_API_KEY;
   // Use NEXT_PUBLIC_APP_URL as primary, fallback to APP_BASE_URL
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_BASE_URL;
 
-  if (!adminEmail || !apiKey) {
+  if (!adminEmailRaw || !apiKey) {
     // Silently skip if admin email or API key is not configured
     return;
   }
+
+  const adminEmails = adminEmailRaw.split(",").map((e) => e.trim()).filter(Boolean);
 
   const customerName = (metadata.customerName as string) || "Unknown Customer";
   const storeName = (metadata.storeName as string) || "Unknown Store";
@@ -103,8 +105,8 @@ export async function notifyAdminNewBooking(
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Kello <no-reply@kello.ai>",
-        to: [adminEmail],
+        from: "Kello <no-reply@wekello.com>",
+        to: adminEmails,
         subject: `[Kello] New beauty booking request`,
         text: `New beauty booking request.\n- Customer: ${customerName}\n- Store: ${storeName}\n- Schedule: ${bookingDate} ${bookingTime}\n- Booking ID: ${bookingId}${adminLink ? `\n\nOpen admin bookings: ${adminLink}` : ""}`,
         html: `<div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; border: 1px solid #eee; border-radius: 12px;">
@@ -374,7 +376,7 @@ async function dispatchBeautyBookingNotification(
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Kello <no-reply@kello.ai>",
+        from: "Kello <no-reply@wekello.com>",
         to: [user.email],
         subject: template.title,
         text: template.body,
