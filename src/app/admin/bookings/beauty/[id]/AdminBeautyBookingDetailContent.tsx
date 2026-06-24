@@ -126,27 +126,6 @@ function formatPrice(value: number) {
   return new Intl.NumberFormat('ko-KR').format(value);
 }
 
-function formatDateSummary(dateStr: string, timeStr: string): string {
-  try {
-    const date = new Date(dateStr);
-    if (Number.isNaN(date.getTime())) return `${dateStr} ${timeStr}`;
-    const d = date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
-    return timeStr ? `${d} ${timeStr}` : d;
-  } catch {
-    return `${dateStr} ${timeStr}`;
-  }
-}
-
-function formatExpiryDisplay(dtLocal: string): string {
-  if (!dtLocal) return '3일 후 자동';
-  try {
-    const d = new Date(dtLocal);
-    if (Number.isNaN(d.getTime())) return '3일 후 자동';
-    return d.toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-  } catch {
-    return dtLocal;
-  }
-}
 
 function toDateInputValue(value: string | null | undefined): string {
   if (!value) return '';
@@ -276,10 +255,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     isSubmitting: false,
     error: null,
   });
-  const [showMemo, setShowMemo] = useState(false);
-  const [showExpiresEdit, setShowExpiresEdit] = useState(false);
-  const [showAddressEdit, setShowAddressEdit] = useState(false);
-
   useEffect(() => {
     const mobileWrapper = document.querySelector('.mobile-wrapper');
     mobileWrapper?.classList.add('admin-booking-detail-wide');
@@ -397,7 +372,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
       isSubmitting: false,
       error: null,
     });
-    setShowMemo(!!selectedBooking.quoteNote);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBooking?.id]);
 
@@ -900,32 +874,72 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
 
         <div className={styles.adminDetailPage}>
 
-          {/* 상단 요약 바 */}
-          <section className={styles.adminSummaryBar}>
-            <div className={styles.adminSummaryInfo}>
-              <span className={styles.adminSummaryCategoryIcon}>
+          {/* 상단 히어로 카드 */}
+          <section className={styles.detailHeroCard}>
+            <div className={styles.heroLeft}>
+              <span className={styles.heroCategoryIcon}>
                 {BEAUTY_CATEGORY_ICONS[selectedBooking.beautyCategory] ?? '✂'}
               </span>
-              <span className={styles.adminSummaryCategory}>
-                {BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory}
-              </span>
-              <span className={styles.adminSummarySep}>|</span>
-              <span className={styles.adminSummaryName}>{selectedBooking.customerName}</span>
-              <span className={styles.adminSummarySep}>|</span>
-              <span className={styles.adminSummaryMeta}>
-                {formatDateSummary(selectedBooking.bookingDate, selectedBooking.bookingTime)}
-              </span>
-              <span className={styles.adminSummarySep}>|</span>
-              <span className={styles.adminSummaryMeta}>{selectedBooking.region}</span>
-              <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
-                {STATUS_LABELS[selectedBooking.status]}
-              </span>
+              <div>
+                <p className={styles.heroCategoryLabel}>
+                  {BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory}
+                </p>
+                <h2 className={styles.heroCustomerName}>{selectedBooking.customerName}</h2>
+              </div>
             </div>
-            <div className={styles.adminSummaryActions}>
+
+            <div className={styles.heroMetaBoxes}>
+              <div className={styles.heroMetaBox}>
+                <span className={styles.heroMetaIcon}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </span>
+                <div>
+                  <span className={styles.heroMetaLabel}>요청 일시</span>
+                  <span className={styles.heroMetaValue}>
+                    {new Date(selectedBooking.bookingDate).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' })} {selectedBooking.bookingTime}
+                  </span>
+                </div>
+              </div>
+              <div className={styles.heroMetaBox}>
+                <span className={styles.heroMetaIcon}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                <div>
+                  <span className={styles.heroMetaLabel}>지역</span>
+                  <span className={styles.heroMetaValue}>{selectedBooking.region}</span>
+                </div>
+              </div>
+              <div className={styles.heroMetaBox}>
+                <span className={styles.heroMetaLabel}>현재 상태</span>
+                <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
+                  {STATUS_LABELS[selectedBooking.status]}
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.heroActions}>
+              <button
+                type="button"
+                className={`${styles.refreshButton} ${styles.heroActionBtn}`}
+                onClick={() => {
+                  const el = document.getElementById('admin-internal-section');
+                  el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
+                고객 안내 작성
+              </button>
               {allowedTransitions.includes('confirmed') ? (
                 <button
                   type="button"
-                  className={`${styles.actionButton} ${styles.actionPrimary} ${styles.summaryActionBtn}`}
+                  className={`${styles.actionButton} ${styles.actionPrimary} ${styles.heroActionBtn}`}
                   onClick={() => void handleStatusUpdate('confirmed')}
                   disabled={pendingStatus !== null}
                 >
@@ -935,11 +949,11 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
               {allowedTransitions.includes('canceled') ? (
                 <button
                   type="button"
-                  className={`${styles.actionButton} ${styles.actionDanger} ${styles.summaryActionBtn}`}
+                  className={`${styles.actionButton} ${styles.actionDanger} ${styles.heroActionBtn}`}
                   onClick={() => void handleStatusUpdate('canceled')}
                   disabled={pendingStatus !== null}
                 >
-                  {pendingStatus === 'canceled' ? '취소 중...' : '취소'}
+                  {pendingStatus === 'canceled' ? '취소 중...' : '예약 취소'}
                 </button>
               ) : null}
             </div>
@@ -993,70 +1007,41 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
             {/* 왼쪽: 고객 요청 요약 */}
             <div className={styles.adminDetailMainColumn}>
               <section className={styles.detailCard}>
-                <h3 className={styles.blockTitle}>고객 요청 요약</h3>
+                <div className={styles.leftCardHeader}>
+                  <h3 className={styles.blockTitle} style={{ margin: 0 }}>고객 요청 요약</h3>
+                </div>
 
                 <DetailList
                   items={[
+                    { label: '고객명', value: selectedBooking.customerName },
                     { label: '연락처', value: selectedBooking.customerPhone },
+                    { label: '이메일', value: selectedBooking.customerEmail ?? '등록되지 않음' },
                     {
-                      label: '카테고리',
+                      label: '예약 카테고리',
                       value: BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory,
                     },
                     { label: '대표 시술', value: selectedBooking.primaryServiceName ?? '미정' },
                     ...(selectedBooking.addOnNames.length > 0
                       ? [{ label: '추가 옵션', value: selectedBooking.addOnNames.join(', ') }]
                       : []),
+                    {
+                      label: '희망 일정',
+                      value: `${new Date(selectedBooking.bookingDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace('.', '')} ${selectedBooking.bookingTime}`,
+                    },
+                    { label: '지역', value: selectedBooking.region },
+                    { label: '요청사항', value: selectedBooking.customerRequest || '별도 요청 없음' },
                   ]}
                 />
 
-                {selectedBooking.customerRequest ? (
-                  <div className={styles.customerRequestQuote}>
-                    <p>{selectedBooking.customerRequest}</p>
-                  </div>
-                ) : (
-                  <p style={{ fontSize: '0.84rem', color: '#94a3b8', fontStyle: 'italic', margin: 0 }}>
-                    별도 요청 없음
-                  </p>
-                )}
-
-                {selectedBookingHasImages ? (
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {selectedBooking.hasCurrentImage ? (
-                      <button
-                        type="button"
-                        className={styles.imageButton}
-                        onClick={() => void handleViewImage('current')}
-                        disabled={imageModal.isLoading}
-                      >
-                        <span className={styles.imageButtonIcon}>🖼</span>
-                        현재 이미지
-                      </button>
-                    ) : null}
-                    {selectedBooking.hasStyleImage ? (
-                      <button
-                        type="button"
-                        className={styles.imageButton}
-                        onClick={() => void handleViewImage('style')}
-                        disabled={imageModal.isLoading}
-                      >
-                        <span className={styles.imageButtonIcon}>🎨</span>
-                        스타일 이미지
-                      </button>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                {imageModal.error ? (
-                  <p style={{ color: '#dc2626', fontSize: '0.75rem', margin: 0 }}>{imageModal.error}</p>
-                ) : null}
-
                 <details className={styles.summaryAccordion}>
-                  <summary>이메일 / 계정 정보</summary>
+                  <summary>추가 정보</summary>
                   <div>
                     <DetailList
                       items={[
-                        { label: '이메일', value: selectedBooking.customerEmail ?? '등록되지 않음' },
-                        { label: '고객 계정 ID', value: selectedBooking.customerUserId ?? '비회원 또는 미연결' },
+                        { label: '예약 ID', value: selectedBooking.id },
+                        { label: '예약 접수 시각', value: formatDateTimeLabel(selectedBooking.createdAt) },
+                        { label: '최근 수정 시각', value: formatDateTimeLabel(selectedBooking.updatedAt) },
+                        { label: '지역', value: selectedBooking.region },
                       ]}
                     />
                   </div>
@@ -1074,6 +1059,43 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                         { label: '환불 규정 동의', value: selectedBooking.agreements.refundPolicyAgreed ? '동의' : '미동의' },
                       ]}
                     />
+                  </div>
+                </details>
+
+                <details className={styles.summaryAccordion}>
+                  <summary>첨부 이미지</summary>
+                  <div>
+                    {selectedBookingHasImages ? (
+                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                        {selectedBooking.hasCurrentImage ? (
+                          <button
+                            type="button"
+                            className={styles.imageButton}
+                            onClick={() => void handleViewImage('current')}
+                            disabled={imageModal.isLoading}
+                          >
+                            <span className={styles.imageButtonIcon}>🖼</span>
+                            현재 이미지 보기
+                          </button>
+                        ) : null}
+                        {selectedBooking.hasStyleImage ? (
+                          <button
+                            type="button"
+                            className={styles.imageButton}
+                            onClick={() => void handleViewImage('style')}
+                            disabled={imageModal.isLoading}
+                          >
+                            <span className={styles.imageButtonIcon}>🎨</span>
+                            스타일 이미지 보기
+                          </button>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <p style={{ fontSize: '0.84rem', color: '#94a3b8', margin: 0 }}>첨부된 이미지가 없습니다.</p>
+                    )}
+                    {imageModal.error ? (
+                      <p style={{ color: '#dc2626', fontSize: '0.75rem', margin: '8px 0 0' }}>{imageModal.error}</p>
+                    ) : null}
                   </div>
                 </details>
               </section>
@@ -1197,66 +1219,17 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                   </div>
                 </label>
 
-                {/* 만료일 compact row */}
-                <div className={styles.quoteCompactRow}>
-                  <span className={styles.quoteCompactLabel}>만료:</span>
-                  <span className={styles.quoteCompactValue}>{formatExpiryDisplay(quoteForm.expiresAt)}</span>
-                  <button
-                    type="button"
-                    className={styles.quoteCompactBtn}
-                    onClick={() => setShowExpiresEdit((v) => !v)}
-                  >
-                    {showExpiresEdit ? '접기' : '변경 ▾'}
-                  </button>
-                </div>
-                {showExpiresEdit ? (
-                  <input
-                    type="datetime-local"
-                    className={styles.input}
-                    value={quoteForm.expiresAt}
-                    onChange={(e) => setQuoteForm((c) => ({ ...c, expiresAt: e.target.value }))}
-                  />
-                ) : null}
-
-                {/* 주소 compact row */}
-                <div className={styles.quoteCompactRow}>
-                  <span className={styles.quoteCompactLabel}>주소:</span>
-                  <span className={styles.quoteCompactValue}>{quoteForm.shopAddress || '미입력'}</span>
-                  <button
-                    type="button"
-                    className={styles.quoteCompactBtn}
-                    onClick={() => setShowAddressEdit((v) => !v)}
-                  >
-                    {showAddressEdit ? '접기' : '수정'}
-                  </button>
-                </div>
-                {showAddressEdit ? (
-                  <input
-                    type="text"
-                    className={styles.input}
-                    value={quoteForm.shopAddress}
-                    onChange={(e) => setQuoteForm((c) => ({ ...c, shopAddress: e.target.value }))}
-                    placeholder="예: 서울 강남구 ..."
-                  />
-                ) : null}
-
-                {/* 고객 안내 메모 토글 */}
-                <button
-                  type="button"
-                  className={styles.quoteMemoToggle}
-                  onClick={() => setShowMemo((v) => !v)}
-                >
-                  {showMemo ? '− 고객 안내 메모 숨기기' : '+ 고객 안내 메모'}
-                </button>
-                {showMemo ? (
+                {/* 안내 메모 */}
+                <label className={styles.field}>
+                  <span>안내 메모</span>
                   <textarea
                     className={styles.input}
-                    style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
+                    style={{ width: '100%', minHeight: 88, padding: '12px 14px' }}
                     value={quoteForm.note}
                     onChange={(e) => setQuoteForm((c) => ({ ...c, note: e.target.value }))}
                     placeholder="고객에게 전달할 안내 메모를 입력해 주세요."
                   />
-                ) : null}
+                </label>
 
                 {quoteForm.error ? (
                   <p style={{ color: '#dc2626', fontSize: '0.8rem', margin: 0 }}>{quoteForm.error}</p>
