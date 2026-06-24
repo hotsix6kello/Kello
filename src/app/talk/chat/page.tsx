@@ -633,12 +633,12 @@ export default function TalkChatPage() {
     setShopName(namesMap[id] || t("talk_ui.default_shop_name"));
 
     setQuickSuggestions([
-      "얼마나 걸릴까요?",
-      "예약 시간 변경 가능한가요?",
-      "주차 가능한가요?",
-      "안녕하세요!",
-      "감사합니다.",
-      "고맙습니다."
+      t('talk_page.suggest_how_long'),
+      t('talk_page.suggest_change_time'),
+      t('talk_page.suggest_parking'),
+      t('talk_page.suggest_hello'),
+      t('talk_page.suggest_thanks'),
+      t('talk_page.suggest_thanks2'),
     ]);
 
     if (typeof window !== 'undefined' && !localStorage.getItem('kello_chats_reset_v4')) {
@@ -669,7 +669,7 @@ export default function TalkChatPage() {
         defaultMsgs = [{
           id: 'welcome',
           sender: 'system',
-          original: '안녕! 난 뷰티서비스 이용을 도와주는 한국인 친구 Kello야.\n무엇을 도와줄까?',
+          original: t('talk_page.welcome_msg'),
           timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
           read: true
         }];
@@ -1415,42 +1415,42 @@ export default function TalkChatPage() {
 
                 {/* 탭별 추천 질문 카드 */}
                 {(() => {
-                  const tabQuestions: Record<KelloTabId, { icon: React.ComponentType<any>; label: string; q: string }[]> = {
+                  const tabQuestions: Record<KelloTabId, { icon: React.ComponentType<any>; label: string; q: string; sendText: string }[]> = {
                     booking: [
-                      { icon: Calendar, label: '예약 문의', q: '예약 가능한 시간 알려줘' },
-                      { icon: Pencil, label: '예약 변경·취소', q: '예약 취소하고 싶어요' },
-                      { icon: Clock, label: '시술 시간 안내', q: '시술 시간은 얼마나 걸리나요?' },
-                      { icon: MapPin, label: '위치 안내', q: '샵 위치 알려줘' },
+                      { icon: Calendar, label: t('talk_page.card_booking_inquiry'), q: t('talk_page.card_booking_inquiry_q'), sendText: '예약 가능한 시간 알려줘' },
+                      { icon: Pencil, label: t('talk_page.card_change_cancel'), q: t('talk_page.card_change_cancel_q'), sendText: '예약 취소하고 싶어요' },
+                      { icon: Clock, label: t('talk_page.card_duration'), q: t('talk_page.card_duration_q'), sendText: '시술 시간은 얼마나 걸리나요?' },
+                      { icon: MapPin, label: t('talk_page.card_location'), q: t('talk_page.card_location_q'), sendText: '샵 위치 알려줘' },
                     ],
                     style_recommend: [
-                      { icon: Sparkles, label: '얼굴형 추천', q: '얼굴형에 맞는 머리 추천해줘' },
-                      { icon: Sparkles, label: '계절별 추천', q: '여름 헤어 추천해줘' },
-                      { icon: Heart, label: '피부 타입별', q: '피부 타입별 관리 추천해줘' },
-                      { icon: Smile, label: '스타일 취향', q: '내추럴한 스타일 추천해줘' },
+                      { icon: Sparkles, label: t('talk_page.card_face_shape'), q: t('talk_page.card_face_shape_q'), sendText: '얼굴형에 맞는 머리 추천해줘' },
+                      { icon: Sparkles, label: t('talk_page.card_seasonal'), q: t('talk_page.card_seasonal_q'), sendText: '여름 헤어 추천해줘' },
+                      { icon: Heart, label: t('talk_page.card_skin_type'), q: t('talk_page.card_skin_type_q'), sendText: '피부 타입별 관리 추천해줘' },
+                      { icon: Smile, label: t('talk_page.card_style_pref'), q: t('talk_page.card_style_pref_q'), sendText: '내추럴한 스타일 추천해줘' },
                     ],
                     shop_recommend: [
-                      { icon: MapPin, label: '지역 추천', q: '제주도 피부관리 추천해줘' },
-                      { icon: Scissors, label: '헤어샵 추천', q: '근처 헤어샵 알려줘' },
-                      { icon: Sparkles, label: '네일샵 추천', q: '네일샵 추천해줘' },
-                      { icon: Info, label: '에스테틱 추천', q: '에스테틱 추천해줘' },
+                      { icon: MapPin, label: t('talk_page.card_area'), q: t('talk_page.card_area_q'), sendText: '제주도 피부관리 추천해줘' },
+                      { icon: Scissors, label: t('talk_page.card_hair_shop'), q: t('talk_page.card_hair_shop_q'), sendText: '근처 헤어샵 알려줘' },
+                      { icon: Sparkles, label: t('talk_page.card_nail_shop'), q: t('talk_page.card_nail_shop_q'), sendText: '네일샵 추천해줘' },
+                      { icon: Info, label: t('talk_page.card_aesthetic'), q: t('talk_page.card_aesthetic_q'), sendText: '에스테틱 추천해줘' },
                     ],
                     pricing: [
-                      { icon: DollarSign, label: '염색 가격', q: '염색 가격 얼마인가요?' },
-                      { icon: DollarSign, label: '필러 가격', q: '필러 가격 알려줘' },
-                      { icon: DollarSign, label: '네일 가격', q: '젤네일 가격 얼마예요?' },
-                      { icon: DollarSign, label: '피부관리 가격', q: '피부관리 가격 범위 알려줘' },
+                      { icon: DollarSign, label: t('talk_page.card_dye_price'), q: t('talk_page.card_dye_price_q'), sendText: '염색 가격 얼마인가요?' },
+                      { icon: DollarSign, label: t('talk_page.card_filler_price'), q: t('talk_page.card_filler_price_q'), sendText: '필러 가격 알려줘' },
+                      { icon: DollarSign, label: t('talk_page.card_nail_price'), q: t('talk_page.card_nail_price_q'), sendText: '젤네일 가격 얼마예요?' },
+                      { icon: DollarSign, label: t('talk_page.card_skin_price'), q: t('talk_page.card_skin_price_q'), sendText: '피부관리 가격 범위 알려줘' },
                     ],
                     service_info: [
-                      { icon: Scissors, label: '커트 시술 정보', q: '커트 시술 과정 알려줘' },
-                      { icon: Info, label: '염색 주의사항', q: '염색 후 주의사항 알려줘' },
-                      { icon: Sparkles, label: '두피 케어', q: '두피 케어 시술 정보 알려줘' },
-                      { icon: Info, label: '스킨케어', q: '스킨케어 시술 종류 알려줘' },
+                      { icon: Scissors, label: t('talk_page.card_cut_info'), q: t('talk_page.card_cut_info_q'), sendText: '커트 시술 과정 알려줘' },
+                      { icon: Info, label: t('talk_page.card_dye_notes'), q: t('talk_page.card_dye_notes_q'), sendText: '염색 후 주의사항 알려줘' },
+                      { icon: Sparkles, label: t('talk_page.card_scalp_care'), q: t('talk_page.card_scalp_care_q'), sendText: '두피 케어 시술 정보 알려줘' },
+                      { icon: Info, label: t('talk_page.card_skin_care'), q: t('talk_page.card_skin_care_q'), sendText: '스킨케어 시술 종류 알려줘' },
                     ],
                     guide: [
-                      { icon: Info, label: 'Kello 예약 방법', q: 'Kello 앱 예약 방법 알려줘' },
-                      { icon: Calendar, label: '알림 설정', q: '예약 알림은 어떻게 설정하나요?' },
-                      { icon: DollarSign, label: '결제 방법', q: '결제는 어떻게 하나요?' },
-                      { icon: Sparkles, label: '쿠폰·혜택', q: '쿠폰이나 혜택은 어떻게 받나요?' },
+                      { icon: Info, label: t('talk_page.card_how_to_book'), q: t('talk_page.card_how_to_book_q'), sendText: 'Kello 앱 예약 방법 알려줘' },
+                      { icon: Calendar, label: t('talk_page.card_alerts'), q: t('talk_page.card_alerts_q'), sendText: '예약 알림은 어떻게 설정하나요?' },
+                      { icon: DollarSign, label: t('talk_page.card_payment'), q: t('talk_page.card_payment_q'), sendText: '결제는 어떻게 하나요?' },
+                      { icon: Sparkles, label: t('talk_page.card_coupon'), q: t('talk_page.card_coupon_q'), sendText: '쿠폰이나 혜택은 어떻게 받나요?' },
                     ],
                   };
                   const questions = tabQuestions[kelloActiveTab] ?? [];
@@ -1460,7 +1460,7 @@ export default function TalkChatPage() {
                         <button
                           key={item.label}
                           type="button"
-                          onClick={() => { sendMessage(item.label); }}
+                          onClick={() => { sendMessage(item.sendText); }}
                           style={{
                             background: '#FFFFFF',
                             border: '1px solid #FFE4E6',
@@ -2403,10 +2403,10 @@ export default function TalkChatPage() {
             maxHeight: '80vh',
           }}>
             <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 700, color: COLORS.textMain, textAlign: 'center' }}>
-              뷰티 매장 연결하기
+              {t('talk_page.link_shop_title')}
             </h3>
             <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: COLORS.textSub, textAlign: 'center', lineHeight: 1.4 }}>
-              제휴된 뷰티 매장을 연결하여 대화할 수 있습니다.
+              {t('talk_page.link_shop_desc')}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'auto', flex: 1, paddingRight: 4 }}>
@@ -2417,7 +2417,7 @@ export default function TalkChatPage() {
                 fontSize: '0.8rem',
                 lineHeight: 1.5
               }}>
-                현재 연결 가능한 뷰티 매장이 없습니다.<br />곧 제휴 매장이 연결될 예정입니다.
+                {t('talk_page.link_shop_empty')}<br />{t('talk_page.link_shop_soon')}
               </div>
             </div>
 

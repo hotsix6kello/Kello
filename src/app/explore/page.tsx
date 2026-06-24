@@ -627,7 +627,7 @@ export default function ExplorePage() {
               onFocus={() => setIsSearchOpen(true)}
               onChange={(e) => handleSearchChange(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') void handleSearchSubmit(); }}
-              placeholder="뷰티업체를 검색해보세요"
+              placeholder={t('explore_page.partner_search_placeholder')}
               style={{
                 flex: 1,
                 border: 'none',
@@ -881,16 +881,16 @@ export default function ExplorePage() {
                   `https://www.google.com/maps/search/?api=1&query_place_id=${place.id}`;
 
                 // 샵 이름에 따른 영업 상태 결정 로직
-                let businessStatusText = '영업중';
-                let businessStatusColor = '#2A2624'; // 검정색
-                let businessStatusWeight = 800; // 진하게
+                let businessStatusText = t('explore_page.status_open');
+                let businessStatusColor = '#2A2624';
+                let businessStatusWeight = 800;
                 if (place.name.includes('에스테틱') || place.name.includes('스파')) {
-                  businessStatusText = '휴무일';
-                  businessStatusColor = '#EF4444'; // 빨간색
+                  businessStatusText = t('explore_page.status_closed');
+                  businessStatusColor = '#EF4444';
                   businessStatusWeight = 700;
                 } else if (place.name.includes('벨라') || place.name.includes('라포레')) {
-                  businessStatusText = '영업전';
-                  businessStatusColor = '#94A3B8'; // 진하지 않은 회색
+                  businessStatusText = t('explore_page.status_not_open_yet');
+                  businessStatusColor = '#94A3B8';
                   businessStatusWeight = 500;
                 }
 
@@ -975,7 +975,7 @@ export default function ExplorePage() {
                             e.stopPropagation();
                             if (place.address) {
                               void navigator.clipboard.writeText(place.address);
-                              triggerToast('주소가 복사되었습니다.');
+                              triggerToast(t('explore_page.address_copied'));
                             }
                           }}
                           style={{ 
@@ -1219,7 +1219,7 @@ export default function ExplorePage() {
                 }}
               >
                 <CornerUpRight size={16} strokeWidth={2.5} />
-                경로 찾기
+                {t('explore_page.btn_directions')}
               </a>
               <a
                 href="tel:02-1234-5678"
@@ -1231,7 +1231,7 @@ export default function ExplorePage() {
                 }}
               >
                 <Phone size={15} strokeWidth={2.5} />
-                전화하기
+                {t('explore_page.btn_call')}
               </a>
               <a
                 href="/talk/chat"
@@ -1243,7 +1243,7 @@ export default function ExplorePage() {
                 }}
               >
                 <MessageSquare size={15} strokeWidth={2.5} />
-                DM 보내기
+                {t('explore_page.btn_dm')}
               </a>
             </div>
 
@@ -1294,7 +1294,7 @@ export default function ExplorePage() {
                     type="button"
                     onClick={() => {
                       void navigator.clipboard.writeText(selectedPlace.address);
-                      triggerToast('주소가 복사되었습니다.');
+                      triggerToast(t('explore_page.address_copied'));
                     }}
                     style={{
                       background: '#FFF0F3',
@@ -1318,7 +1318,7 @@ export default function ExplorePage() {
 
               {/* 휴무일 */}
               <div style={{ display: 'flex', gap: '8px' }}>
-                <span style={{ fontWeight: 800, color: '#2A2624', width: '56px', flexShrink: 0 }}>휴무일</span>
+                <span style={{ fontWeight: 800, color: '#2A2624', width: '56px', flexShrink: 0 }}>{t('explore_page.status_closed')}</span>
                 <span style={{ color: '#FF4D82', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <Calendar size={13} />
                   매주 월요일 정기 휴무
