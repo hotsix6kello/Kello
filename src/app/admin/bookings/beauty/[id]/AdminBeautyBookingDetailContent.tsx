@@ -255,6 +255,8 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     isSubmitting: false,
     error: null,
   });
+  const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     const mobileWrapper = document.querySelector('.mobile-wrapper');
     mobileWrapper?.classList.add('admin-booking-detail-wide');
@@ -726,6 +728,34 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     }
   };
 
+  const handleDeleteBooking = async () => {
+    if (!selectedBooking) return;
+    if (!window.confirm('취소된 예약을 영구 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.')) return;
+
+    clearFeedback();
+    setIsDeleting(true);
+
+    try {
+      const accessToken = await getAdminAccessToken();
+      if (!accessToken) throw new Error('관리자 세션을 다시 확인해 주세요.');
+
+      const response = await fetch(`/api/bookings/beauty/${selectedBooking.id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const body = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+
+      if (!response.ok || !body?.ok) {
+        throw new Error(body?.error ?? '예약을 삭제하지 못했어요.');
+      }
+
+      router.push('/admin/bookings/beauty');
+    } catch (error) {
+      setActionError(error instanceof Error ? error.message : '예약을 삭제하지 못했어요.');
+      setIsDeleting(false);
+    }
+  };
+
   if (isAdmin === null || (loading && !selectedBooking && !loadError)) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -954,6 +984,16 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                   disabled={pendingStatus !== null}
                 >
                   {pendingStatus === 'canceled' ? '취소 중...' : '예약 취소'}
+                </button>
+              ) : null}
+              {selectedBooking.status === 'canceled' ? (
+                <button
+                  type="button"
+                  className={`${styles.actionButton} ${styles.actionDelete} ${styles.heroActionBtn}`}
+                  onClick={() => void handleDeleteBooking()}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? '삭제 중...' : '내역 삭제'}
                 </button>
               ) : null}
             </div>
