@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -36,24 +36,15 @@ const BEAUTY_CATEGORY_LABELS: Record<string, string> = {
   lash: '속눈썹',
 };
 
-const LANGUAGE_LABELS: Record<string, string> = {
-  ko: '한국어',
-  en: 'English',
-  ja: '日本語',
-  'zh-CN': '简体中文',
-  'zh-HK': '繁體中文',
-  vi: 'Tiếng Việt',
-  th: 'ไทย',
-  id: 'Bahasa Indonesia',
-  ms: 'Bahasa Melayu',
+const BEAUTY_CATEGORY_ICONS: Record<string, string> = {
+  hair: '✂',
+  nail: '💅',
+  esthetic: '✨',
+  waxing: '🪒',
+  makeup: '💄',
+  lash: '👁',
 };
 
-const INTENT_LABELS: Record<string, string> = {
-  booking_confirm: '예약 확인',
-  service_request: '시술 요청 전달',
-  allergy_notice: '주의사항 전달',
-  style_consultation: '스타일 상담',
-};
 
 type DetailResponse =
   | {
@@ -117,19 +108,6 @@ type ImageModalState = {
   activeImage: { url: string; title: string } | null;
 };
 
-function formatDateLabel(value: string) {
-  try {
-    return new Date(value).toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      weekday: 'short',
-    });
-  } catch {
-    return value;
-  }
-}
-
 function formatDateTimeLabel(value: string) {
   try {
     return new Date(value).toLocaleString('ko-KR', {
@@ -146,6 +124,28 @@ function formatDateTimeLabel(value: string) {
 
 function formatPrice(value: number) {
   return new Intl.NumberFormat('ko-KR').format(value);
+}
+
+function formatDateSummary(dateStr: string, timeStr: string): string {
+  try {
+    const date = new Date(dateStr);
+    if (Number.isNaN(date.getTime())) return `${dateStr} ${timeStr}`;
+    const d = date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
+    return timeStr ? `${d} ${timeStr}` : d;
+  } catch {
+    return `${dateStr} ${timeStr}`;
+  }
+}
+
+function formatExpiryDisplay(dtLocal: string): string {
+  if (!dtLocal) return '3일 후 자동';
+  try {
+    const d = new Date(dtLocal);
+    if (Number.isNaN(d.getTime())) return '3일 후 자동';
+    return d.toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  } catch {
+    return dtLocal;
+  }
 }
 
 function toDateInputValue(value: string | null | undefined): string {
@@ -182,37 +182,10 @@ function mapBookingToQuoteFields(booking: BeautyBookingAdminRecord) {
     date: toDateInputValue(booking.quoteDate),
     time: toTimeInputValue(booking.quoteTime),
     totalPrice: booking.quoteTotalPrice !== null ? String(booking.quoteTotalPrice) : '',
-    currency: booking.quoteCurrency ?? 'USD',
+    currency: booking.quoteCurrency ?? 'KRW',
     note: booking.quoteNote ?? '',
     expiresAt: toDateTimeLocalInputValue(booking.quoteExpiresAt),
   };
-}
-
-function buildBookingTitle(
-  categoryLabel: string | null | undefined,
-  serviceName: string | null | undefined,
-  storeName: string,
-) {
-  const parts = [categoryLabel, serviceName].filter((part) => {
-    return part && part !== 'null' && part !== 'undefined' && part.trim() !== '';
-  });
-
-  return parts.length > 0 ? parts.join(' · ') : storeName;
-}
-
-function getStatusActionLabel(status: BeautyBookingAdminStatus) {
-  switch (status) {
-    case 'confirmed':
-      return '예약 확정으로 변경';
-    case 'completed':
-      return '시술 완료로 변경';
-    case 'canceled':
-      return '예약 취소로 변경';
-    case 'change_requested':
-      return '변경 요청 상태로 이동';
-    default:
-      return STATUS_LABELS[status];
-  }
 }
 
 function getStatusToneClass(status: BeautyBookingAdminStatus) {
@@ -257,7 +230,6 @@ function DetailList({ items }: { items: DetailField[] }) {
 
 export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
   const router = useRouter();
-  const processingRef = useRef<HTMLElement | null>(null);
 
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
@@ -298,18 +270,19 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     date: '',
     time: '',
     totalPrice: '',
-    currency: 'USD',
+    currency: 'KRW',
     note: '',
     expiresAt: '',
     isSubmitting: false,
     error: null,
   });
+  const [showMemo, setShowMemo] = useState(false);
+  const [showExpiresEdit, setShowExpiresEdit] = useState(false);
+  const [showAddressEdit, setShowAddressEdit] = useState(false);
 
   useEffect(() => {
     const mobileWrapper = document.querySelector('.mobile-wrapper');
-
     mobileWrapper?.classList.add('admin-booking-detail-wide');
-
     return () => {
       mobileWrapper?.classList.remove('admin-booking-detail-wide');
     };
@@ -424,8 +397,7 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
       isSubmitting: false,
       error: null,
     });
-    // Initialize draft form state only when the viewed booking changes, not on every
-    // refetch/update of the same booking - otherwise in-progress edits get wiped.
+    setShowMemo(!!selectedBooking.quoteNote);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBooking?.id]);
 
@@ -469,15 +441,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     ? BEAUTY_BOOKING_ALLOWED_TRANSITIONS[selectedBooking.status] ?? []
     : [];
 
-  const bookingTitle = useMemo(() => {
-    if (!selectedBooking) {
-      return '';
-    }
-
-    const categoryLabel = BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory;
-    return buildBookingTitle(categoryLabel, selectedBooking.primaryServiceName, selectedBooking.storeName);
-  }, [selectedBooking]);
-
   const clearFeedback = () => {
     setActionError(null);
     setActionSuccess(null);
@@ -495,10 +458,6 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
       resendDisabled: resendingId === notification.id || notification.resend_count >= 3 || cooldownActive,
     };
   });
-
-  const handleJumpToProcessing = () => {
-    processingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   const handleViewImage = async (type: 'current' | 'style') => {
     if (!selectedBooking) {
@@ -725,6 +684,13 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
     setQuoteForm((c) => ({ ...c, isSubmitting: true, error: null }));
 
     try {
+      const autoExpiry = (() => {
+        const d = new Date();
+        d.setDate(d.getDate() + 3);
+        d.setHours(23, 59, 0, 0);
+        return d.toISOString();
+      })();
+
       const item = await sendPatch(
         {
           action: 'send_quote',
@@ -735,9 +701,9 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
             quoteDate: quoteForm.date,
             quoteTime: quoteForm.time,
             quoteTotalPrice: parsedPrice,
-            quoteCurrency: quoteForm.currency.trim() || 'USD',
+            quoteCurrency: quoteForm.currency.trim() || 'KRW',
             quoteNote: quoteForm.note.trim(),
-            quoteExpiresAt: dateTimeLocalInputToIso(quoteForm.expiresAt),
+            quoteExpiresAt: dateTimeLocalInputToIso(quoteForm.expiresAt) ?? autoExpiry,
           },
         },
         '예약 제안서를 저장하지 못했어요.',
@@ -933,240 +899,172 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
         ) : null}
 
         <div className={styles.adminDetailPage}>
-          <section className={styles.detailCard}>
-            <div className={styles.detailHeader}>
-              <div className={styles.detailHeaderCopy}>
-                <p className={styles.eyebrow}>Booking Detail</p>
-                <h2 className={styles.detailTitle}>{bookingTitle}</h2>
-                <p className={styles.detailSub}>
-                  {selectedBooking.storeName} · 희망일 {formatDateLabel(selectedBooking.bookingDate)} {selectedBooking.bookingTime}
-                </p>
-              </div>
+
+          {/* 상단 요약 바 */}
+          <section className={styles.adminSummaryBar}>
+            <div className={styles.adminSummaryInfo}>
+              <span className={styles.adminSummaryCategoryIcon}>
+                {BEAUTY_CATEGORY_ICONS[selectedBooking.beautyCategory] ?? '✂'}
+              </span>
+              <span className={styles.adminSummaryCategory}>
+                {BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory}
+              </span>
+              <span className={styles.adminSummarySep}>|</span>
+              <span className={styles.adminSummaryName}>{selectedBooking.customerName}</span>
+              <span className={styles.adminSummarySep}>|</span>
+              <span className={styles.adminSummaryMeta}>
+                {formatDateSummary(selectedBooking.bookingDate, selectedBooking.bookingTime)}
+              </span>
+              <span className={styles.adminSummarySep}>|</span>
+              <span className={styles.adminSummaryMeta}>{selectedBooking.region}</span>
               <span className={`${styles.statusBadge} ${getStatusToneClass(selectedBooking.status)}`}>
                 {STATUS_LABELS[selectedBooking.status]}
               </span>
             </div>
-
-            <div className={styles.adminHeroActions}>
-              <button type="button" className={`${styles.refreshButton} ${styles.heroActionButton}`} onClick={handleJumpToProcessing}>
-                고객 안내 작성
-              </button>
+            <div className={styles.adminSummaryActions}>
               {allowedTransitions.includes('confirmed') ? (
                 <button
                   type="button"
-                  className={`${styles.actionButton} ${styles.actionPrimary} ${styles.heroActionButton}`}
+                  className={`${styles.actionButton} ${styles.actionPrimary} ${styles.summaryActionBtn}`}
                   onClick={() => void handleStatusUpdate('confirmed')}
                   disabled={pendingStatus !== null}
                 >
-                  {pendingStatus === 'confirmed' ? '변경 중...' : '예약 확정으로 변경'}
+                  {pendingStatus === 'confirmed' ? '변경 중...' : '예약 확정'}
                 </button>
               ) : null}
               {allowedTransitions.includes('canceled') ? (
                 <button
                   type="button"
-                  className={`${styles.actionButton} ${styles.actionDanger} ${styles.heroActionButton}`}
+                  className={`${styles.actionButton} ${styles.actionDanger} ${styles.summaryActionBtn}`}
                   onClick={() => void handleStatusUpdate('canceled')}
                   disabled={pendingStatus !== null}
                 >
-                  {pendingStatus === 'canceled' ? '변경 중...' : '예약 취소로 변경'}
+                  {pendingStatus === 'canceled' ? '취소 중...' : '취소'}
                 </button>
               ) : null}
             </div>
-
-            {actionError ? <p className={styles.actionError}>{actionError}</p> : null}
-            {actionSuccess ? <p className={styles.actionSuccess}>{actionSuccess}</p> : null}
           </section>
 
+          {actionError ? <p className={styles.actionError}>{actionError}</p> : null}
+          {actionSuccess ? <p className={styles.actionSuccess}>{actionSuccess}</p> : null}
+
+          {/* 변경 요청 검토 (해당 상태일 때만) */}
+          {selectedBooking.status === 'change_requested' ? (
+            <section className={styles.detailCard}>
+              <h3 className={styles.blockTitle}>고객 변경 요청 검토</h3>
+              <p style={{ fontSize: '0.84rem', color: '#64748b', margin: '0 0 12px' }}>
+                {selectedBooking.changeReason || '별도 사유 없음'}
+                {selectedBooking.changeRequestedAt
+                  ? ` · 요청 시각: ${formatDateTimeLabel(selectedBooking.changeRequestedAt)}`
+                  : ''}
+              </p>
+              <textarea
+                className={styles.input}
+                style={{ width: '100%', minHeight: 80, padding: '12px 14px' }}
+                placeholder="고객에게 전달할 승인/반려 안내 문구를 입력해 주세요."
+                value={reviewNote}
+                onChange={(event) => setReviewNote(event.target.value)}
+                disabled={isReviewing}
+              />
+              <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                <button
+                  type="button"
+                  className={`${styles.actionButton} ${styles.actionPrimary}`}
+                  onClick={() => void handleReviewChangeRequest('approved')}
+                  disabled={isReviewing}
+                >
+                  {isReviewing ? '처리 중...' : '변경 요청 승인'}
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.actionButton} ${styles.actionDanger}`}
+                  onClick={() => void handleReviewChangeRequest('rejected')}
+                  disabled={isReviewing}
+                >
+                  {isReviewing ? '처리 중...' : '변경 요청 반려'}
+                </button>
+              </div>
+            </section>
+          ) : null}
+
+          {/* 두 컬럼 레이아웃 */}
           <div className={styles.adminDetailColumns}>
+
+            {/* 왼쪽: 고객 요청 요약 */}
             <div className={styles.adminDetailMainColumn}>
               <section className={styles.detailCard}>
-                <div>
-                  <h3 className={styles.blockTitle}>예약 요약</h3>
-                  <p className={styles.sectionText}>고객이 확인하는 기본 예약 정보를 먼저 모아 두었습니다.</p>
-                </div>
+                <h3 className={styles.blockTitle}>고객 요청 요약</h3>
 
-                <div className={styles.summaryGrid}>
-                  <div className={styles.summaryItem}>
-                    <span className={styles.summaryLabel}>희망 일정</span>
-                    <strong>{formatDateLabel(selectedBooking.bookingDate)} {selectedBooking.bookingTime}</strong>
-                  </div>
-                  <div className={styles.summaryItem}>
-                    <span className={styles.summaryLabel}>매장</span>
-                    <strong>{selectedBooking.storeName}</strong>
-                  </div>
-                  <div className={styles.summaryItem}>
-                    <span className={styles.summaryLabel}>디자이너</span>
-                    <strong>{selectedBooking.designerName ?? '매장 추천'}</strong>
-                  </div>
-                  <div className={styles.summaryItem}>
-                    <span className={styles.summaryLabel}>예상 금액</span>
-                    <strong className={styles.priceEmphasis}>₩{formatPrice(selectedBooking.totalPrice)}</strong>
-                  </div>
-                </div>
+                <DetailList
+                  items={[
+                    { label: '연락처', value: selectedBooking.customerPhone },
+                    {
+                      label: '카테고리',
+                      value: BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory,
+                    },
+                    { label: '대표 시술', value: selectedBooking.primaryServiceName ?? '미정' },
+                    ...(selectedBooking.addOnNames.length > 0
+                      ? [{ label: '추가 옵션', value: selectedBooking.addOnNames.join(', ') }]
+                      : []),
+                  ]}
+                />
 
-                <details className={styles.infoBlock}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: '0.86rem' }}>추가 운영 정보 보기</summary>
-                  <div style={{ marginTop: 12 }}>
+                {selectedBooking.customerRequest ? (
+                  <div className={styles.customerRequestQuote}>
+                    <p>{selectedBooking.customerRequest}</p>
+                  </div>
+                ) : (
+                  <p style={{ fontSize: '0.84rem', color: '#94a3b8', fontStyle: 'italic', margin: 0 }}>
+                    별도 요청 없음
+                  </p>
+                )}
+
+                {selectedBookingHasImages ? (
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {selectedBooking.hasCurrentImage ? (
+                      <button
+                        type="button"
+                        className={styles.imageButton}
+                        onClick={() => void handleViewImage('current')}
+                        disabled={imageModal.isLoading}
+                      >
+                        <span className={styles.imageButtonIcon}>🖼</span>
+                        현재 이미지
+                      </button>
+                    ) : null}
+                    {selectedBooking.hasStyleImage ? (
+                      <button
+                        type="button"
+                        className={styles.imageButton}
+                        onClick={() => void handleViewImage('style')}
+                        disabled={imageModal.isLoading}
+                      >
+                        <span className={styles.imageButtonIcon}>🎨</span>
+                        스타일 이미지
+                      </button>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                {imageModal.error ? (
+                  <p style={{ color: '#dc2626', fontSize: '0.75rem', margin: 0 }}>{imageModal.error}</p>
+                ) : null}
+
+                <details className={styles.summaryAccordion}>
+                  <summary>이메일 / 계정 정보</summary>
+                  <div>
                     <DetailList
                       items={[
-                        { label: '예약 ID', value: selectedBooking.id },
-                        { label: '예약 접수 시각', value: formatDateTimeLabel(selectedBooking.createdAt) },
-                        { label: '최근 수정 시각', value: formatDateTimeLabel(selectedBooking.updatedAt) },
-                        { label: '생성 플로우', value: selectedBooking.createdFromFlow },
-                        { label: '지역', value: selectedBooking.region },
-                        { label: '상태', value: STATUS_LABELS[selectedBooking.status] },
-                      ]}
-                    />
-                  </div>
-                </details>
-              </section>
-
-              <section className={styles.detailCard}>
-                <div>
-                  <h3 className={styles.blockTitle}>고객 정보</h3>
-                  <p className={styles.sectionText}>연락 수단과 예약 주체 정보를 분리해서 봅니다.</p>
-                </div>
-
-                <div className={styles.blockGrid}>
-                  <div className={styles.infoBlock}>
-                    <DetailList
-                      items={[
-                        { label: '고객명', value: selectedBooking.customerName },
-                        { label: '연락처', value: selectedBooking.customerPhone },
                         { label: '이메일', value: selectedBooking.customerEmail ?? '등록되지 않음' },
                         { label: '고객 계정 ID', value: selectedBooking.customerUserId ?? '비회원 또는 미연결' },
                       ]}
                     />
                   </div>
+                </details>
 
-                  <div className={styles.infoBlock}>
-                    <DetailList
-                      items={[
-                        {
-                          label: '예약 카테고리',
-                          value: BEAUTY_CATEGORY_LABELS[selectedBooking.beautyCategory] ?? selectedBooking.beautyCategory,
-                        },
-                        { label: '대표 시술', value: selectedBooking.primaryServiceName ?? '미정' },
-                        {
-                          label: '추가 옵션',
-                          value: selectedBooking.addOnNames.length ? selectedBooking.addOnNames.join(', ') : '선택 없음',
-                        },
-                        { label: '지역', value: selectedBooking.region },
-                      ]}
-                    />
-                  </div>
-                </div>
-              </section>
-
-              <section className={styles.detailCard}>
-                <div>
-                  <h3 className={styles.blockTitle}>요청/문구 정보</h3>
-                  <p className={styles.sectionText}>고객 요청과 고객에게 보이는 안내 문구를 같은 맥락 안에서 확인합니다.</p>
-                </div>
-
-                <div className={styles.blockGrid}>
-                  <div className={styles.infoBlock}>
-                    <DetailList
-                      items={[
-                        { label: '고객 요청사항', value: selectedBooking.customerRequest || '별도 요청 없음' },
-                        {
-                          label: '전달 언어',
-                          value: LANGUAGE_LABELS[selectedBooking.communicationLanguage] ?? selectedBooking.communicationLanguage,
-                        },
-                        {
-                          label: '전달 목적',
-                          value: INTENT_LABELS[selectedBooking.communicationIntent] ?? selectedBooking.communicationIntent,
-                        },
-                      ]}
-                    />
-                  </div>
-
-                  <div className={styles.infoBlock}>
-                    <div className={styles.messageSection}>
-                      <div className={styles.messageCard}>
-                        <span className={styles.messageLabel}>고객에게 보이는 한국어 문구</span>
-                        <p className={styles.messageText}>{selectedBooking.koreanMessage}</p>
-                      </div>
-                      <div className={styles.messageCard}>
-                        <span className={styles.messageLabel}>고객에게 보이는 번역 문구</span>
-                        <p className={styles.messageText}>{selectedBooking.localizedMessage}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {selectedBooking.status === 'change_requested' ? (
-                  <div className={styles.infoBlock}>
-                    <h4 className={styles.blockTitle}>고객 변경 요청</h4>
-                    <DetailList
-                      items={[
-                        {
-                          label: '요청 시각',
-                          value: selectedBooking.changeRequestedAt ? formatDateTimeLabel(selectedBooking.changeRequestedAt) : '확인 중',
-                        },
-                        { label: '요청 사유', value: selectedBooking.changeReason || '별도 사유 없음' },
-                        {
-                          label: '변경 전 상태',
-                          value: selectedBooking.statusBeforeChangeRequest
-                            ? STATUS_LABELS[selectedBooking.statusBeforeChangeRequest]
-                            : '기록 없음',
-                        },
-                      ]}
-                    />
-                  </div>
-                ) : null}
-
-                {selectedBooking.changeRequestStatus && selectedBooking.changeRequestStatus !== 'pending' ? (
-                  <div
-                    className={styles.infoBlock}
-                    style={{
-                      borderLeft: `4px solid ${selectedBooking.changeRequestStatus === 'approved' ? '#059669' : '#dc2626'}`,
-                    }}
-                  >
-                    <h4 className={styles.blockTitle}>변경 요청 처리 결과</h4>
-                    <DetailList
-                      items={[
-                        {
-                          label: '검토 결과',
-                          value: selectedBooking.changeRequestStatus === 'approved' ? '승인됨' : '반려됨',
-                        },
-                        {
-                          label: '검토 시각',
-                          value: selectedBooking.changeReviewedAt ? formatDateTimeLabel(selectedBooking.changeReviewedAt) : '기록 없음',
-                        },
-                        { label: '관리자 메모', value: selectedBooking.changeReviewNote || '별도 코멘트 없음' },
-                      ]}
-                    />
-                  </div>
-                ) : null}
-
-                {selectedBooking.status === 'canceled' ? (
-                  <div className={styles.infoBlock}>
-                    <h4 className={styles.blockTitle}>취소 정보</h4>
-                    <DetailList
-                      items={[
-                        {
-                          label: '취소 시각',
-                          value: selectedBooking.canceledAt ? formatDateTimeLabel(selectedBooking.canceledAt) : '확인 중',
-                        },
-                        {
-                          label: '취소 주체',
-                          value:
-                            selectedBooking.canceledBy === 'customer'
-                              ? '고객'
-                              : selectedBooking.canceledBy === 'admin'
-                                ? '관리자'
-                                : '미상',
-                        },
-                        { label: '취소 사유', value: selectedBooking.cancelReason || '별도 사유 없음' },
-                      ]}
-                    />
-                  </div>
-                ) : null}
-
-                <details className={styles.infoBlock}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: '0.86rem' }}>동의/정책 정보 보기</summary>
-                  <div style={{ marginTop: 12 }}>
+                <details className={styles.summaryAccordion}>
+                  <summary>동의 / 정책 정보</summary>
+                  <div>
                     <DetailList
                       items={[
                         { label: '서비스 약관 동의', value: selectedBooking.agreements.serviceTermsAgreed ? '동의' : '미동의' },
@@ -1179,405 +1077,57 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                   </div>
                 </details>
               </section>
-
-              <section className={styles.detailCard}>
-                <div>
-                  <h3 className={styles.blockTitle}>참조 이미지</h3>
-                  <p className={styles.sectionText}>첨부 여부는 고객 입력 기준, 실제 파일명은 아래 확장 정보로 확인할 수 있습니다.</p>
-                </div>
-
-                <div className={styles.blockGrid}>
-                  <div className={styles.infoBlock}>
-                    <DetailList
-                      items={[
-                        { label: '첨부 상태', value: selectedBookingHasImages ? '첨부됨' : '없음' },
-                        { label: '현재 이미지', value: selectedBooking.hasCurrentImage ? '있음' : '없음' },
-                        { label: '스타일 이미지', value: selectedBooking.hasStyleImage ? '있음' : '없음' },
-                      ]}
-                    />
-
-                    <details style={{ marginTop: 12 }}>
-                      <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem' }}>파일 정보 보기</summary>
-                      <div style={{ marginTop: 10 }}>
-                        <DetailList
-                          items={[
-                            {
-                              label: '현재 이미지 파일명',
-                              value: selectedBooking.currentImageName ?? (selectedBooking.hasCurrentImage ? 'Stored image' : 'None'),
-                            },
-                            {
-                              label: '스타일 이미지 파일명',
-                              value: selectedBooking.styleImageName ?? (selectedBooking.hasStyleImage ? 'Stored image' : 'None'),
-                            },
-                            { label: '현재 이미지 경로', value: selectedBooking.currentImagePath ?? '기록 없음' },
-                            { label: '스타일 이미지 경로', value: selectedBooking.styleImagePath ?? '기록 없음' },
-                          ]}
-                        />
-                      </div>
-                    </details>
-                  </div>
-
-                  <div className={styles.infoBlock}>
-                    <div className={styles.imageActions}>
-                      {!selectedBookingHasImages && (
-                        <p className={styles.sectionText} style={{ color: 'var(--gray-400)' }}>
-                          등록된 참조 이미지가 없습니다.
-                        </p>
-                      )}
-
-                      {selectedBooking.hasCurrentImage && (
-                        <button
-                          type="button"
-                          className={styles.imageButton}
-                          onClick={() => void handleViewImage('current')}
-                          disabled={imageModal.isLoading}
-                        >
-                          <span className={styles.imageButtonIcon}>🖼</span>
-                          현재 이미지 보기
-                        </button>
-                      )}
-
-                      {selectedBooking.hasStyleImage && (
-                        <button
-                          type="button"
-                          className={styles.imageButton}
-                          onClick={() => void handleViewImage('style')}
-                          disabled={imageModal.isLoading}
-                        >
-                          <span className={styles.imageButtonIcon}>🎨</span>
-                          스타일 이미지 보기
-                        </button>
-                      )}
-                    </div>
-
-                    {imageModal.isLoading ? (
-                      <p className={styles.sectionText} style={{ marginTop: 8 }}>
-                        불러오는 중...
-                      </p>
-                    ) : null}
-                    {imageModal.error ? (
-                      <p className={styles.errorState} style={{ marginTop: 8, padding: '6px 12px', fontSize: '0.75rem' }}>
-                        {imageModal.error}
-                      </p>
-                    ) : null}
-                  </div>
-                </div>
-              </section>
             </div>
 
+            {/* 오른쪽: 견적 입력 */}
             <div className={styles.adminDetailSideColumn}>
-              <section ref={processingRef} className={styles.detailCard}>
-            <div>
-              <h3 className={styles.blockTitle}>관리자 처리</h3>
-              <p className={styles.sectionText}>아래 내용은 고객에게 바로 노출되지 않는 관리자 전용 처리 영역입니다.</p>
-            </div>
-
-            {selectedBooking.status === 'change_requested' ? (
-              <div className={styles.infoBlock}>
-                <h4 className={styles.blockTitle}>변경 요청 검토</h4>
-                <p className={styles.sectionText} style={{ marginBottom: 12 }}>
-                  고객이 요청한 변경 내용을 승인하거나 반려하고, 필요한 안내 문구를 남길 수 있습니다.
-                </p>
-                <textarea
-                  className={styles.input}
-                  style={{ width: '100%', minHeight: 88, padding: '12px 14px' }}
-                  placeholder="고객에게 전달할 승인/반려 안내 문구를 입력해 주세요."
-                  value={reviewNote}
-                  onChange={(event) => setReviewNote(event.target.value)}
-                  disabled={isReviewing}
-                />
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
-                  <button
-                    type="button"
-                    className={`${styles.actionButton} ${styles.actionPrimary}`}
-                    onClick={() => void handleReviewChangeRequest('approved')}
-                    disabled={isReviewing}
-                  >
-                    {isReviewing ? '처리 중...' : '변경 요청 승인'}
-                  </button>
-                  <button
-                    type="button"
-                    className={`${styles.actionButton} ${styles.actionDanger}`}
-                    onClick={() => void handleReviewChangeRequest('rejected')}
-                    disabled={isReviewing}
-                  >
-                    {isReviewing ? '처리 중...' : '변경 요청 반려'}
-                  </button>
-                </div>
-              </div>
-            ) : null}
-
-            <div className={styles.blockGrid}>
-              <section className={styles.infoBlock}>
-                <h4 className={styles.blockTitle}>내부 처리 상태</h4>
-                <div className={styles.grid2}>
-                  <label className={styles.field}>
-                    <span>운영 상태</span>
-                    <select
-                      className={styles.select}
-                      value={operatorForm.operatorStatus}
-                      onChange={(event) =>
-                        setOperatorForm((current) => ({
-                          ...current,
-                          operatorStatus: event.target.value as BeautyBookingOperatorStatus,
-                        }))
-                      }
-                    >
-                      {(Object.entries(BEAUTY_BOOKING_OPERATOR_STATUS_LABELS) as [BeautyBookingOperatorStatus, string][]).map(
-                        ([value, label]) => (
-                          <option key={value} value={value}>
-                            {label}
-                          </option>
-                        ),
-                      )}
-                    </select>
-                  </label>
-                </div>
-
-                <label className={styles.field} style={{ marginTop: 12 }}>
-                  <span>내부 메모</span>
-                  <textarea
-                    className={styles.input}
-                    style={{ width: '100%', minHeight: 88, padding: '12px 14px' }}
-                    value={operatorForm.internalNote}
-                    onChange={(event) =>
-                      setOperatorForm((current) => ({
-                        ...current,
-                        internalNote: event.target.value,
-                      }))
-                    }
-                    placeholder="매장 협의 상황이나 후속 확인 필요 사항을 기록해 주세요."
-                  />
-                </label>
-
-                <div style={{ margin: '16px 0', display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
-                    <input
-                      type="checkbox"
-                      checked={operatorForm.shopContacted}
-                      onChange={(event) =>
-                        setOperatorForm((current) => ({
-                          ...current,
-                          shopContacted: event.target.checked,
-                        }))
-                      }
-                      style={{ width: 16, height: 16 }}
-                    />
-                    매장 연락 완료
-                  </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
-                    <input
-                      type="checkbox"
-                      checked={operatorForm.customerContacted}
-                      onChange={(event) =>
-                        setOperatorForm((current) => ({
-                          ...current,
-                          customerContacted: event.target.checked,
-                        }))
-                      }
-                      style={{ width: 16, height: 16 }}
-                    />
-                    고객 안내 완료
-                  </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
-                    <input
-                      type="checkbox"
-                      checked={operatorForm.followUpNeeded}
-                      onChange={(event) =>
-                        setOperatorForm((current) => ({
-                          ...current,
-                          followUpNeeded: event.target.checked,
-                        }))
-                      }
-                      style={{ width: 16, height: 16 }}
-                    />
-                    추가 확인 필요
-                  </label>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => void handleUpdateOperatorInfo()}
-                  disabled={operatorForm.isSaving}
-                  className={`${styles.actionButton} ${styles.actionPrimary}`}
-                  style={{ width: '100%' }}
-                >
-                  {operatorForm.isSaving ? '저장 중...' : '내부 처리 상태 저장'}
-                </button>
-              </section>
-
-              <section className={styles.infoBlock}>
-                <h4 className={styles.blockTitle}>대체 일정 제안</h4>
-                <p className={styles.sectionText} style={{ marginBottom: 12 }}>
-                  고객 안내용 문구와 함께 최대 3개의 대체 일정을 보낼 수 있습니다.
-                </p>
-
-                <div style={{ display: 'grid', gap: 12 }}>
-                  {alternative.slots.map((slot, index) => (
-                    <div key={`${slot.date}-${slot.time}-${index}`} className={styles.alternativeSlotRow}>
-                      <input
-                        type="date"
-                        className={styles.input}
-                        style={{ minWidth: 0 }}
-                        value={slot.date}
-                        onChange={(event) => handleAlternativeSlotChange(index, 'date', event.target.value)}
-                      />
-                      <input
-                        type="time"
-                        className={styles.input}
-                        style={{ minWidth: 0 }}
-                        value={slot.time}
-                        onChange={(event) => handleAlternativeSlotChange(index, 'time', event.target.value)}
-                      />
-                      {alternative.slots.length > 1 ? (
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveAlternativeSlot(index)}
-                          className={styles.alternativeRemoveButton}
-                        >
-                          ✕
-                        </button>
-                      ) : null}
-                    </div>
-                  ))}
-
-                  {alternative.slots.length < 3 ? (
-                    <button
-                      type="button"
-                      onClick={handleAddAlternativeSlot}
-                      style={{
-                        background: 'none',
-                        border: '1px dashed #9a3412',
-                        color: '#9a3412',
-                        padding: '8px',
-                        borderRadius: 8,
-                        fontSize: '0.8rem',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      + 제안 일정 추가
-                    </button>
-                  ) : null}
-                </div>
-
-                <label className={styles.field} style={{ marginTop: 12 }}>
-                  <span>고객 안내 문구</span>
-                  <textarea
-                    className={styles.input}
-                    style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
-                    value={alternative.note}
-                    onChange={(event) =>
-                      setAlternative((current) => ({
-                        ...current,
-                        note: event.target.value,
-                        error: null,
-                      }))
-                    }
-                    placeholder="대체 일정 제안 사유나 안내 문구를 입력해 주세요."
-                  />
-                </label>
-
-                {alternative.error ? (
-                  <p style={{ color: '#dc2626', fontSize: '0.8rem', marginTop: 12, marginBottom: 0 }}>{alternative.error}</p>
-                ) : null}
-
-                <button
-                  type="button"
-                  onClick={() => void handleOfferAlternative()}
-                  disabled={alternative.isSubmitting}
-                  className={`${styles.actionButton} ${styles.actionPrimary}`}
-                  style={{ width: '100%', marginTop: 16 }}
-                >
-                  {alternative.isSubmitting ? '전송 중...' : '대체 일정 제안 전송'}
-                </button>
-
-                {selectedBooking.alternativeOfferStatus !== 'none' ? (
-                  <div
-                    style={{
-                      marginTop: 16,
-                      padding: '12px',
-                      background: 'white',
-                      borderRadius: 10,
-                      fontSize: '0.85rem',
-                      border: '1px solid #ffedd5',
-                    }}
-                  >
-                    <p style={{ margin: '0 0 4px 0', fontWeight: 700 }}>
-                      현재 제안 상태:
-                      <span
-                        style={{
-                          color:
-                            selectedBooking.alternativeOfferStatus === 'accepted'
-                              ? '#059669'
-                              : selectedBooking.alternativeOfferStatus === 'rejected'
-                                ? '#dc2626'
-                                : '#9a3412',
-                          marginLeft: 6,
-                        }}
-                      >
-                        {selectedBooking.alternativeOfferStatus === 'offered'
-                          ? '고객 확인 중'
-                          : selectedBooking.alternativeOfferStatus === 'accepted'
-                            ? '고객 수락'
-                            : '고객 거절'}
-                      </span>
-                    </p>
-                    {selectedBooking.alternativeResponseAt ? (
-                      <p style={{ margin: 0, color: 'var(--gray-500)', fontSize: '0.75rem' }}>
-                        응답 시각: {formatDateTimeLabel(selectedBooking.alternativeResponseAt)}
-                      </p>
-                    ) : null}
-                  </div>
-                ) : null}
-              </section>
-            </div>
-              </section>
-
               <section className={styles.detailCard}>
-                <div>
-                  <h3 className={styles.blockTitle}>예약 제안서</h3>
-                  <p className={styles.sectionText}>고객에게 보낼 확정 예약 제안 정보를 입력하세요.</p>
-                </div>
+                <h3 className={styles.blockTitle}>견적 입력</h3>
 
                 {selectedBooking.quoteStatus ? (
                   <div
+                    className={styles.quoteBanner}
                     style={{
-                      marginBottom: 16,
-                      padding: '10px 14px',
-                      background: selectedBooking.quoteStatus === 'pending' ? '#fef9c3' : selectedBooking.quoteStatus === 'accepted' ? '#dcfce7' : '#fee2e2',
-                      borderRadius: 8,
-                      fontSize: '0.82rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 2,
+                      background:
+                        selectedBooking.quoteStatus === 'accepted'
+                          ? '#dcfce7'
+                          : selectedBooking.quoteStatus === 'rejected'
+                            ? '#fee2e2'
+                            : '#fef9c3',
                     }}
                   >
                     <span style={{ fontWeight: 700 }}>
                       제안 상태:{' '}
-                      {selectedBooking.quoteStatus === 'pending' ? '고객 확인 중' :
-                       selectedBooking.quoteStatus === 'accepted' ? '수락됨' :
-                       selectedBooking.quoteStatus === 'rejected' ? '거절됨' : '만료됨'}
+                      {selectedBooking.quoteStatus === 'pending'
+                        ? '고객 확인 중'
+                        : selectedBooking.quoteStatus === 'accepted'
+                          ? '수락됨'
+                          : selectedBooking.quoteStatus === 'rejected'
+                            ? '거절됨'
+                            : '만료됨'}
                     </span>
                     {selectedBooking.quoteSentAt ? (
-                      <span style={{ color: '#64748b' }}>제안 발송일: {formatDateTimeLabel(selectedBooking.quoteSentAt)}</span>
+                      <span style={{ color: '#64748b', fontSize: '0.8rem' }}>
+                        발송일: {formatDateTimeLabel(selectedBooking.quoteSentAt)}
+                      </span>
                     ) : null}
-                    {selectedBooking.paymentStatus === 'paid' && selectedBooking.paidAmount !== null && (
-                      <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid #bbf7d0', fontSize: '0.8rem', display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        <span style={{ fontWeight: 700, color: '#065f46' }}>💳 결제 내역</span>
-                        <span style={{ color: '#374151' }}>견적 금액: ${selectedBooking.quoteTotalPrice?.toFixed(2)} USD</span>
-                        {selectedBooking.couponDiscountAmount !== null && selectedBooking.couponDiscountAmount > 0 && (
-                          <span style={{ color: '#7c3aed' }}>쿠폰 할인: -${selectedBooking.couponDiscountAmount.toFixed(2)} USD</span>
-                        )}
-                        <span style={{ fontWeight: 700, color: '#065f46' }}>실결제 금액: ${selectedBooking.paidAmount.toFixed(2)} USD</span>
-                        {selectedBooking.paidAt && (
-                          <span style={{ color: '#64748b' }}>결제 완료: {formatDateTimeLabel(selectedBooking.paidAt)}</span>
-                        )}
+                    {selectedBooking.paymentStatus === 'paid' && selectedBooking.paidAmount !== null ? (
+                      <div style={{ marginTop: 4, fontSize: '0.8rem' }}>
+                        <span style={{ fontWeight: 700, color: '#065f46' }}>
+                          💳 결제 완료: ₩{formatPrice(selectedBooking.paidAmount)}
+                        </span>
+                        {selectedBooking.couponDiscountAmount !== null && selectedBooking.couponDiscountAmount > 0 ? (
+                          <span style={{ color: '#7c3aed', marginLeft: 8 }}>
+                            쿠폰 할인: -₩{formatPrice(selectedBooking.couponDiscountAmount)}
+                          </span>
+                        ) : null}
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 ) : null}
 
-                <div className={styles.grid2}>
+                {/* 매장명 | 시술명 */}
+                <div className={styles.quoteGrid2}>
                   <label className={styles.field}>
                     <span>매장명 *</span>
                     <input
@@ -1589,17 +1139,7 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                     />
                   </label>
                   <label className={styles.field}>
-                    <span>매장 주소</span>
-                    <input
-                      type="text"
-                      className={styles.input}
-                      value={quoteForm.shopAddress}
-                      onChange={(e) => setQuoteForm((c) => ({ ...c, shopAddress: e.target.value }))}
-                      placeholder="예: 서울 강남구 ..."
-                    />
-                  </label>
-                  <label className={styles.field}>
-                    <span>확정 시술명</span>
+                    <span>시술명</span>
                     <input
                       type="text"
                       className={styles.input}
@@ -1608,8 +1148,12 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                       placeholder={selectedBooking.primaryServiceName ?? ''}
                     />
                   </label>
+                </div>
+
+                {/* 날짜 | 시간 */}
+                <div className={styles.quoteGrid2}>
                   <label className={styles.field}>
-                    <span>제안 날짜 *</span>
+                    <span>날짜 *</span>
                     <input
                       type="date"
                       className={styles.input}
@@ -1618,7 +1162,7 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                     />
                   </label>
                   <label className={styles.field}>
-                    <span>제안 시간 *</span>
+                    <span>시간 *</span>
                     <input
                       type="time"
                       className={styles.input}
@@ -1626,8 +1170,12 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                       onChange={(e) => setQuoteForm((c) => ({ ...c, time: e.target.value }))}
                     />
                   </label>
-                  <label className={styles.field}>
-                    <span>총 금액 *</span>
+                </div>
+
+                {/* 금액 + 통화 인라인 */}
+                <label className={styles.field}>
+                  <span>금액 *</span>
+                  <div className={styles.quotePriceRow}>
                     <input
                       type="number"
                       min="0"
@@ -1636,32 +1184,71 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                       onChange={(e) => setQuoteForm((c) => ({ ...c, totalPrice: e.target.value }))}
                       placeholder="0"
                     />
-                  </label>
-                  <label className={styles.field}>
-                    <span>통화</span>
                     <select
                       className={styles.select}
                       value={quoteForm.currency}
                       onChange={(e) => setQuoteForm((c) => ({ ...c, currency: e.target.value }))}
+                      style={{ width: 90, flexShrink: 0 }}
                     >
                       <option value="KRW">KRW</option>
                       <option value="USD">USD</option>
                       <option value="JPY">JPY</option>
                     </select>
-                  </label>
-                  <label className={styles.field}>
-                    <span>제안 만료 시각</span>
-                    <input
-                      type="datetime-local"
-                      className={styles.input}
-                      value={quoteForm.expiresAt}
-                      onChange={(e) => setQuoteForm((c) => ({ ...c, expiresAt: e.target.value }))}
-                    />
-                  </label>
-                </div>
+                  </div>
+                </label>
 
-                <label className={styles.field} style={{ marginTop: 12 }}>
-                  <span>운영자 안내 메모</span>
+                {/* 만료일 compact row */}
+                <div className={styles.quoteCompactRow}>
+                  <span className={styles.quoteCompactLabel}>만료:</span>
+                  <span className={styles.quoteCompactValue}>{formatExpiryDisplay(quoteForm.expiresAt)}</span>
+                  <button
+                    type="button"
+                    className={styles.quoteCompactBtn}
+                    onClick={() => setShowExpiresEdit((v) => !v)}
+                  >
+                    {showExpiresEdit ? '접기' : '변경 ▾'}
+                  </button>
+                </div>
+                {showExpiresEdit ? (
+                  <input
+                    type="datetime-local"
+                    className={styles.input}
+                    value={quoteForm.expiresAt}
+                    onChange={(e) => setQuoteForm((c) => ({ ...c, expiresAt: e.target.value }))}
+                  />
+                ) : null}
+
+                {/* 주소 compact row */}
+                <div className={styles.quoteCompactRow}>
+                  <span className={styles.quoteCompactLabel}>주소:</span>
+                  <span className={styles.quoteCompactValue}>{quoteForm.shopAddress || '미입력'}</span>
+                  <button
+                    type="button"
+                    className={styles.quoteCompactBtn}
+                    onClick={() => setShowAddressEdit((v) => !v)}
+                  >
+                    {showAddressEdit ? '접기' : '수정'}
+                  </button>
+                </div>
+                {showAddressEdit ? (
+                  <input
+                    type="text"
+                    className={styles.input}
+                    value={quoteForm.shopAddress}
+                    onChange={(e) => setQuoteForm((c) => ({ ...c, shopAddress: e.target.value }))}
+                    placeholder="예: 서울 강남구 ..."
+                  />
+                ) : null}
+
+                {/* 고객 안내 메모 토글 */}
+                <button
+                  type="button"
+                  className={styles.quoteMemoToggle}
+                  onClick={() => setShowMemo((v) => !v)}
+                >
+                  {showMemo ? '− 고객 안내 메모 숨기기' : '+ 고객 안내 메모'}
+                </button>
+                {showMemo ? (
                   <textarea
                     className={styles.input}
                     style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
@@ -1669,10 +1256,10 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                     onChange={(e) => setQuoteForm((c) => ({ ...c, note: e.target.value }))}
                     placeholder="고객에게 전달할 안내 메모를 입력해 주세요."
                   />
-                </label>
+                ) : null}
 
                 {quoteForm.error ? (
-                  <p style={{ color: '#dc2626', fontSize: '0.8rem', marginTop: 12, marginBottom: 0 }}>{quoteForm.error}</p>
+                  <p style={{ color: '#dc2626', fontSize: '0.8rem', margin: 0 }}>{quoteForm.error}</p>
                 ) : null}
 
                 <button
@@ -1680,111 +1267,323 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                   onClick={() => void handleSendQuote()}
                   disabled={quoteForm.isSubmitting}
                   className={`${styles.actionButton} ${styles.actionPrimary}`}
-                  style={{ width: '100%', marginTop: 16 }}
+                  style={{ width: '100%' }}
                 >
-                  {quoteForm.isSubmitting ? '저장 중...' : '예약 제안서 저장/발송'}
+                  {quoteForm.isSubmitting ? '저장 중...' : '견적 저장 후 발송'}
                 </button>
               </section>
+            </div>
+          </div>
 
-              <section className={styles.detailCard}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 12,
-                  }}
+          {/* 하단 아코디언: 내부 처리 */}
+          <details className={styles.bottomAccordion}>
+            <summary className={styles.bottomAccordionSummary}>
+              <span>내부 처리</span>
+              <span className={styles.bottomAccordionMeta}>
+                {BEAUTY_BOOKING_OPERATOR_STATUS_LABELS[operatorForm.operatorStatus]}
+              </span>
+            </summary>
+            <div className={styles.bottomAccordionBody}>
+              <label className={styles.field}>
+                <span>운영 상태</span>
+                <select
+                  className={styles.select}
+                  value={operatorForm.operatorStatus}
+                  onChange={(event) =>
+                    setOperatorForm((current) => ({
+                      ...current,
+                      operatorStatus: event.target.value as BeautyBookingOperatorStatus,
+                    }))
+                  }
                 >
-                  <div>
-                    <h3 className={styles.blockTitle}>고객 알림 발송 이력</h3>
-                    <p className={styles.sectionText}>같은 알림은 최대 3회, 5분 간격으로만 재전송할 수 있습니다.</p>
+                  {(Object.entries(BEAUTY_BOOKING_OPERATOR_STATUS_LABELS) as [BeautyBookingOperatorStatus, string][]).map(
+                    ([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ),
+                  )}
+                </select>
+              </label>
+              <label className={styles.field} style={{ marginTop: 12 }}>
+                <span>내부 메모</span>
+                <textarea
+                  className={styles.input}
+                  style={{ width: '100%', minHeight: 80, padding: '12px 14px' }}
+                  value={operatorForm.internalNote}
+                  onChange={(event) =>
+                    setOperatorForm((current) => ({
+                      ...current,
+                      internalNote: event.target.value,
+                    }))
+                  }
+                  placeholder="매장 협의 상황이나 후속 확인 필요 사항을 기록해 주세요."
+                />
+              </label>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, margin: '12px 0' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+                  <input
+                    type="checkbox"
+                    checked={operatorForm.shopContacted}
+                    onChange={(event) => setOperatorForm((current) => ({ ...current, shopContacted: event.target.checked }))}
+                    style={{ width: 16, height: 16 }}
+                  />
+                  매장 연락 완료
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+                  <input
+                    type="checkbox"
+                    checked={operatorForm.customerContacted}
+                    onChange={(event) => setOperatorForm((current) => ({ ...current, customerContacted: event.target.checked }))}
+                    style={{ width: 16, height: 16 }}
+                  />
+                  고객 안내 완료
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+                  <input
+                    type="checkbox"
+                    checked={operatorForm.followUpNeeded}
+                    onChange={(event) => setOperatorForm((current) => ({ ...current, followUpNeeded: event.target.checked }))}
+                    style={{ width: 16, height: 16 }}
+                  />
+                  추가 확인 필요
+                </label>
+              </div>
+              <button
+                type="button"
+                onClick={() => void handleUpdateOperatorInfo()}
+                disabled={operatorForm.isSaving}
+                className={`${styles.actionButton} ${styles.actionPrimary}`}
+                style={{ width: '100%' }}
+              >
+                {operatorForm.isSaving ? '저장 중...' : '내부 처리 상태 저장'}
+              </button>
+            </div>
+          </details>
+
+          {/* 하단 아코디언: 대체 일정 제안 */}
+          <details className={styles.bottomAccordion}>
+            <summary className={styles.bottomAccordionSummary}>
+              <span>대체 일정 제안</span>
+              <span className={styles.bottomAccordionMeta}>
+                {selectedBooking.alternativeOfferItems.filter((s) => s.date).length > 0
+                  ? `${selectedBooking.alternativeOfferItems.filter((s) => s.date).length}개 제안`
+                  : '0개 제안'}
+              </span>
+            </summary>
+            <div className={styles.bottomAccordionBody}>
+              <div style={{ display: 'grid', gap: 12 }}>
+                {alternative.slots.map((slot, index) => (
+                  <div key={`${slot.date}-${slot.time}-${index}`} className={styles.alternativeSlotRow}>
+                    <input
+                      type="date"
+                      className={styles.input}
+                      style={{ minWidth: 0 }}
+                      value={slot.date}
+                      onChange={(event) => handleAlternativeSlotChange(index, 'date', event.target.value)}
+                    />
+                    <input
+                      type="time"
+                      className={styles.input}
+                      style={{ minWidth: 0 }}
+                      value={slot.time}
+                      onChange={(event) => handleAlternativeSlotChange(index, 'time', event.target.value)}
+                    />
+                    {alternative.slots.length > 1 ? (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveAlternativeSlot(index)}
+                        className={styles.alternativeRemoveButton}
+                      >
+                        ✕
+                      </button>
+                    ) : null}
                   </div>
+                ))}
+                {alternative.slots.length < 3 ? (
                   <button
                     type="button"
-                    className={styles.refreshButton}
-                    onClick={() => void loadBooking(false)}
-                    disabled={refreshing}
+                    onClick={handleAddAlternativeSlot}
+                    style={{
+                      background: 'none',
+                      border: '1px dashed #9a3412',
+                      color: '#9a3412',
+                      padding: '8px',
+                      borderRadius: 8,
+                      fontSize: '0.8rem',
+                      cursor: 'pointer',
+                    }}
                   >
-                    {refreshing ? '불러오는 중...' : '새로고침'}
+                    + 제안 일정 추가
                   </button>
-                </div>
-
-                {notifications.length === 0 ? (
-                  <p style={{ fontSize: '0.85rem', color: '#64748b', textAlign: 'center', padding: '20px 0', margin: 0 }}>
-                    발송된 알림 이력이 없습니다.
+                ) : null}
+              </div>
+              <label className={styles.field} style={{ marginTop: 12 }}>
+                <span>고객 안내 문구</span>
+                <textarea
+                  className={styles.input}
+                  style={{ width: '100%', minHeight: 72, padding: '12px 14px' }}
+                  value={alternative.note}
+                  onChange={(event) =>
+                    setAlternative((current) => ({
+                      ...current,
+                      note: event.target.value,
+                      error: null,
+                    }))
+                  }
+                  placeholder="대체 일정 제안 사유나 안내 문구를 입력해 주세요."
+                />
+              </label>
+              {alternative.error ? (
+                <p style={{ color: '#dc2626', fontSize: '0.8rem', marginTop: 8, marginBottom: 0 }}>{alternative.error}</p>
+              ) : null}
+              <button
+                type="button"
+                onClick={() => void handleOfferAlternative()}
+                disabled={alternative.isSubmitting}
+                className={`${styles.actionButton} ${styles.actionPrimary}`}
+                style={{ width: '100%', marginTop: 12 }}
+              >
+                {alternative.isSubmitting ? '전송 중...' : '대체 일정 제안 전송'}
+              </button>
+              {selectedBooking.alternativeOfferStatus !== 'none' ? (
+                <div
+                  style={{
+                    marginTop: 12,
+                    padding: '12px',
+                    background: 'white',
+                    borderRadius: 10,
+                    fontSize: '0.85rem',
+                    border: '1px solid #ffedd5',
+                  }}
+                >
+                  <p style={{ margin: '0 0 4px 0', fontWeight: 700 }}>
+                    현재 제안 상태:
+                    <span
+                      style={{
+                        color:
+                          selectedBooking.alternativeOfferStatus === 'accepted'
+                            ? '#059669'
+                            : selectedBooking.alternativeOfferStatus === 'rejected'
+                              ? '#dc2626'
+                              : '#9a3412',
+                        marginLeft: 6,
+                      }}
+                    >
+                      {selectedBooking.alternativeOfferStatus === 'offered'
+                        ? '고객 확인 중'
+                        : selectedBooking.alternativeOfferStatus === 'accepted'
+                          ? '고객 수락'
+                          : '고객 거절'}
+                    </span>
                   </p>
-                ) : (
-                  <>
-                    <div className={styles.notificationsMobileList}>
-                      {notificationEntries.map(({ notification, cooldownActive, resendDisabled }) => (
-                        <article key={notification.id} className={styles.notificationsMobileCard}>
-                          <div className={styles.notificationsMobileRow}>
-                            <div>
-                              <div style={{ fontWeight: 700 }}>{formatDateTimeLabel(notification.created_at)}</div>
-                              <div style={{ color: '#94a3b8', fontSize: '0.72rem' }}>{notification.channel}</div>
-                            </div>
-                            <span
-                              style={{
-                                fontSize: '0.7rem',
-                                padding: '2px 8px',
-                                borderRadius: 999,
-                                background:
-                                  notification.dispatch_status === 'sent'
-                                    ? '#dcfce7'
-                                    : notification.dispatch_status === 'failed'
-                                      ? '#fee2e2'
-                                      : '#f1f5f9',
-                                color:
-                                  notification.dispatch_status === 'sent'
-                                    ? '#166534'
-                                    : notification.dispatch_status === 'failed'
-                                      ? '#991b1b'
-                                      : '#475569',
-                              }}
-                            >
-                              {notification.dispatch_status === 'sent'
-                                ? '발송 완료'
-                                : notification.dispatch_status === 'failed'
-                                  ? '실패'
-                                  : '대기 중'}
-                            </span>
+                  {selectedBooking.alternativeResponseAt ? (
+                    <p style={{ margin: 0, color: '#64748b', fontSize: '0.75rem' }}>
+                      응답 시각: {formatDateTimeLabel(selectedBooking.alternativeResponseAt)}
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          </details>
+
+          {/* 하단 아코디언: 고객 알림 발송 이력 */}
+          <details className={styles.bottomAccordion}>
+            <summary className={styles.bottomAccordionSummary}>
+              <span>고객 알림 발송 이력</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                {notifications.length > 0 ? (
+                  <span className={styles.bottomAccordionMeta}>
+                    최근: {formatDateTimeLabel(notifications[0].created_at)}
+                  </span>
+                ) : null}
+                <button
+                  type="button"
+                  className={styles.refreshButton}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    void loadBooking(false);
+                  }}
+                  disabled={refreshing}
+                  style={{ fontSize: '0.78rem', minHeight: 32 }}
+                >
+                  {refreshing ? '...' : '새로고침'}
+                </button>
+              </div>
+            </summary>
+            <div className={styles.bottomAccordionBody}>
+              {notifications.length === 0 ? (
+                <p style={{ fontSize: '0.85rem', color: '#64748b', textAlign: 'center', padding: '16px 0', margin: 0 }}>
+                  발송된 알림 이력이 없습니다.
+                </p>
+              ) : (
+                <>
+                  <div className={styles.notificationsMobileList}>
+                    {notificationEntries.map(({ notification, cooldownActive, resendDisabled }) => (
+                      <article key={notification.id} className={styles.notificationsMobileCard}>
+                        <div className={styles.notificationsMobileRow}>
+                          <div>
+                            <div style={{ fontWeight: 700 }}>{formatDateTimeLabel(notification.created_at)}</div>
+                            <div style={{ color: '#94a3b8', fontSize: '0.72rem' }}>{notification.channel}</div>
                           </div>
-
-                          <div className={styles.notificationsMobileTitle}>{notification.title}</div>
-
-                          {notification.error_log ? (
-                            <p className={styles.notificationsMobileError}>오류 로그: {notification.error_log}</p>
-                          ) : null}
-
-                          <div className={styles.notificationsMobileRow}>
-                            <div style={{ fontSize: '0.74rem', color: '#64748b' }}>
-                              재전송 {notification.resend_count}회
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => void handleResendNotification(notification.id)}
-                              disabled={resendDisabled}
-                              className={styles.notificationsMobileButton}
-                              style={{
-                                background: resendDisabled ? '#e2e8f0' : '#7c3aed',
-                                color: resendDisabled ? '#94a3b8' : 'white',
-                                cursor: resendDisabled ? 'not-allowed' : 'pointer',
-                              }}
-                            >
-                              {resendingId === notification.id
-                                ? '...'
-                                : notification.resend_count >= 3
-                                  ? '한도 초과'
-                                  : cooldownActive
-                                    ? '대기 중'
-                                    : '재전송'}
-                            </button>
+                          <span
+                            style={{
+                              fontSize: '0.7rem',
+                              padding: '2px 8px',
+                              borderRadius: 999,
+                              background:
+                                notification.dispatch_status === 'sent'
+                                  ? '#dcfce7'
+                                  : notification.dispatch_status === 'failed'
+                                    ? '#fee2e2'
+                                    : '#f1f5f9',
+                              color:
+                                notification.dispatch_status === 'sent'
+                                  ? '#166534'
+                                  : notification.dispatch_status === 'failed'
+                                    ? '#991b1b'
+                                    : '#475569',
+                            }}
+                          >
+                            {notification.dispatch_status === 'sent'
+                              ? '발송 완료'
+                              : notification.dispatch_status === 'failed'
+                                ? '실패'
+                                : '대기 중'}
+                          </span>
+                        </div>
+                        <div className={styles.notificationsMobileTitle}>{notification.title}</div>
+                        {notification.error_log ? (
+                          <p className={styles.notificationsMobileError}>오류 로그: {notification.error_log}</p>
+                        ) : null}
+                        <div className={styles.notificationsMobileRow}>
+                          <div style={{ fontSize: '0.74rem', color: '#64748b' }}>
+                            재전송 {notification.resend_count}회
                           </div>
-                        </article>
-                      ))}
-                    </div>
-
-                    <div className={styles.notificationsDesktopTable} style={{ overflowX: 'auto' }}>
+                          <button
+                            type="button"
+                            onClick={() => void handleResendNotification(notification.id)}
+                            disabled={resendDisabled}
+                            className={styles.notificationsMobileButton}
+                            style={{
+                              background: resendDisabled ? '#e2e8f0' : '#7c3aed',
+                              color: resendDisabled ? '#94a3b8' : 'white',
+                              cursor: resendDisabled ? 'not-allowed' : 'pointer',
+                            }}
+                          >
+                            {resendingId === notification.id
+                              ? '...'
+                              : notification.resend_count >= 3
+                                ? '한도 초과'
+                                : cooldownActive
+                                  ? '대기 중'
+                                  : '재전송'}
+                          </button>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                  <div className={styles.notificationsDesktopTable} style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', fontSize: '0.8rem', borderCollapse: 'collapse' }}>
                       <thead>
                         <tr style={{ borderBottom: '1px solid #e2e8f0', textAlign: 'left', color: '#64748b' }}>
@@ -1794,114 +1593,87 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                         </tr>
                       </thead>
                       <tbody>
-                        {notificationEntries.map(({ notification, cooldownActive, resendDisabled }) => {
-                          return (
-                            <tr key={notification.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                              <td style={{ padding: '10px 4px' }}>
-                                <div style={{ fontWeight: 600 }}>{formatDateTimeLabel(notification.created_at)}</div>
-                                <div style={{ color: '#94a3b8', fontSize: '0.7rem' }}>{notification.channel}</div>
-                              </td>
-                              <td style={{ padding: '10px 4px' }}>
-                                <div style={{ fontWeight: 500 }}>{notification.title}</div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                  <span
-                                    style={{
-                                      fontSize: '0.7rem',
-                                      padding: '1px 6px',
-                                      borderRadius: 4,
-                                      background:
-                                        notification.dispatch_status === 'sent'
-                                          ? '#dcfce7'
-                                          : notification.dispatch_status === 'failed'
-                                            ? '#fee2e2'
-                                            : '#f1f5f9',
-                                      color:
-                                        notification.dispatch_status === 'sent'
-                                          ? '#166534'
-                                          : notification.dispatch_status === 'failed'
-                                            ? '#991b1b'
-                                            : '#475569',
-                                    }}
-                                  >
-                                    {notification.dispatch_status === 'sent'
-                                      ? '발송 완료'
-                                      : notification.dispatch_status === 'failed'
-                                        ? '실패'
-                                        : '대기 중'}
-                                  </span>
-                                  {notification.error_log ? (
-                                    <span title={notification.error_log} style={{ fontSize: '0.7rem', color: '#991b1b', cursor: 'help' }}>
-                                      오류 로그
-                                    </span>
-                                  ) : null}
-                                </div>
-                              </td>
-                              <td style={{ padding: '10px 4px', textAlign: 'right' }}>
-                                {notification.resend_count > 0 ? (
-                                  <div style={{ fontSize: '0.65rem', color: '#64748b', marginBottom: 4 }}>
-                                    재전송 {notification.resend_count}회
-                                  </div>
-                                ) : null}
-                                <button
-                                  type="button"
-                                  onClick={() => void handleResendNotification(notification.id)}
-                                  disabled={resendDisabled}
+                        {notificationEntries.map(({ notification, cooldownActive, resendDisabled }) => (
+                          <tr key={notification.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                            <td style={{ padding: '10px 4px' }}>
+                              <div style={{ fontWeight: 600 }}>{formatDateTimeLabel(notification.created_at)}</div>
+                              <div style={{ color: '#94a3b8', fontSize: '0.7rem' }}>{notification.channel}</div>
+                            </td>
+                            <td style={{ padding: '10px 4px' }}>
+                              <div style={{ fontWeight: 500 }}>{notification.title}</div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                <span
                                   style={{
-                                    padding: '4px 8px',
-                                    background: resendDisabled ? '#e2e8f0' : '#7c3aed',
-                                    color: resendDisabled ? '#94a3b8' : 'white',
-                                    border: 'none',
-                                    borderRadius: 6,
-                                    fontSize: '0.75rem',
-                                    fontWeight: 700,
-                                    cursor: resendDisabled ? 'not-allowed' : 'pointer',
+                                    fontSize: '0.7rem',
+                                    padding: '1px 6px',
+                                    borderRadius: 4,
+                                    background:
+                                      notification.dispatch_status === 'sent'
+                                        ? '#dcfce7'
+                                        : notification.dispatch_status === 'failed'
+                                          ? '#fee2e2'
+                                          : '#f1f5f9',
+                                    color:
+                                      notification.dispatch_status === 'sent'
+                                        ? '#166534'
+                                        : notification.dispatch_status === 'failed'
+                                          ? '#991b1b'
+                                          : '#475569',
                                   }}
                                 >
-                                  {resendingId === notification.id
-                                    ? '...'
-                                    : notification.resend_count >= 3
-                                      ? '한도 초과'
-                                      : cooldownActive
-                                        ? '대기 중'
-                                        : '재전송'}
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })}
+                                  {notification.dispatch_status === 'sent'
+                                    ? '발송 완료'
+                                    : notification.dispatch_status === 'failed'
+                                      ? '실패'
+                                      : '대기 중'}
+                                </span>
+                                {notification.error_log ? (
+                                  <span title={notification.error_log} style={{ fontSize: '0.7rem', color: '#991b1b', cursor: 'help' }}>
+                                    오류 로그
+                                  </span>
+                                ) : null}
+                              </div>
+                            </td>
+                            <td style={{ padding: '10px 4px', textAlign: 'right' }}>
+                              {notification.resend_count > 0 ? (
+                                <div style={{ fontSize: '0.65rem', color: '#64748b', marginBottom: 4 }}>
+                                  재전송 {notification.resend_count}회
+                                </div>
+                              ) : null}
+                              <button
+                                type="button"
+                                onClick={() => void handleResendNotification(notification.id)}
+                                disabled={resendDisabled}
+                                style={{
+                                  padding: '4px 8px',
+                                  background: resendDisabled ? '#e2e8f0' : '#7c3aed',
+                                  color: resendDisabled ? '#94a3b8' : 'white',
+                                  border: 'none',
+                                  borderRadius: 6,
+                                  fontSize: '0.75rem',
+                                  fontWeight: 700,
+                                  cursor: resendDisabled ? 'not-allowed' : 'pointer',
+                                }}
+                              >
+                                {resendingId === notification.id
+                                  ? '...'
+                                  : notification.resend_count >= 3
+                                    ? '한도 초과'
+                                    : cooldownActive
+                                      ? '대기 중'
+                                      : '재전송'}
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
-                    </div>
-                  </>
-                )}
-              </section>
-
-              <section className={styles.detailCard}>
-                <div>
-                  <h3 className={styles.blockTitle}>상태 변경</h3>
-                  <p className={styles.sectionText}>최종 상태 변경은 아래에서 한 번 더 확인하면서 진행합니다.</p>
-                </div>
-
-                {allowedTransitions.length === 0 ? (
-                  <div className={styles.panelNote}>현재 상태에서는 추가로 변경할 수 있는 다음 단계가 없습니다.</div>
-                ) : (
-                  <div className={styles.actionRow}>
-                    {allowedTransitions.map((nextStatus) => (
-                      <button
-                        key={nextStatus}
-                        type="button"
-                        className={`${styles.actionButton} ${nextStatus === 'canceled' ? styles.actionDanger : styles.actionPrimary}`}
-                        onClick={() => void handleStatusUpdate(nextStatus)}
-                        disabled={pendingStatus !== null}
-                      >
-                        {pendingStatus === nextStatus ? '변경 중...' : getStatusActionLabel(nextStatus)}
-                      </button>
-                    ))}
                   </div>
-                )}
-              </section>
+                </>
+              )}
             </div>
-          </div>
+          </details>
+
         </div>
       </div>
 
