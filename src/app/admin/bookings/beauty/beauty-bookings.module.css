@@ -504,6 +504,18 @@
   color: #b91c1c;
 }
 
+.actionDelete {
+  background: none;
+  border: 1.5px solid #e2e8f0;
+  color: #64748b;
+}
+
+.actionDelete:hover:not(:disabled) {
+  border-color: #dc2626;
+  color: #dc2626;
+  background: #fef2f2;
+}
+
 .actionSuccess,
 .actionError,
 .panelNote,

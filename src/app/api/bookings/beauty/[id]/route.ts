@@ -12,6 +12,7 @@ import {
   updateBeautyBookingOperatorInfo,
   offerAlternativeSchedule,
   sendBookingQuote,
+  deleteBeautyBookingRequest,
   type SendBookingQuotePayload,
 } from "@/lib/bookings/beautyBookingServer.ts";
 import {
@@ -38,6 +39,10 @@ type BeautyBookingPatchRouteResponse =
       ok: false;
       error: string;
     };
+
+type BeautyBookingDeleteRouteResponse =
+  | { ok: true }
+  | { ok: false; error: string };
 
 type BeautyBookingGetRouteResponse =
   | {
@@ -291,5 +296,41 @@ export async function PATCH(
 
     console.error("[beauty-booking-patch-route] unexpected_failure");
     return jsonFailure("booking status could not be updated", 500);
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    await requireAdminRouteAccess(request);
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json({ ok: false, error: "booking id is required" } satisfies BeautyBookingDeleteRouteResponse, { status: 400 });
+    }
+
+    await deleteBeautyBookingRequest(id);
+
+    return NextResponse.json({ ok: true } satisfies BeautyBookingDeleteRouteResponse, { status: 200 });
+  } catch (error) {
+    const adminFailure = handleAdminRouteError(error);
+    if (adminFailure) return adminFailure;
+
+    if (error instanceof BeautyBookingStorageError && error.code === "not_found") {
+      return NextResponse.json({ ok: false, error: "booking request was not found" } satisfies BeautyBookingDeleteRouteResponse, { status: 404 });
+    }
+
+    if (error instanceof BeautyBookingStorageError && error.code === "delete_not_allowed") {
+      return NextResponse.json({ ok: false, error: "only canceled bookings can be deleted" } satisfies BeautyBookingDeleteRouteResponse, { status: 400 });
+    }
+
+    if (error instanceof BeautyBookingStorageError && error.code === "delete_failed") {
+      return NextResponse.json({ ok: false, error: "failed to delete booking" } satisfies BeautyBookingDeleteRouteResponse, { status: 500 });
+    }
+
+    console.error("[beauty-booking-delete-route] unexpected_failure");
+    return NextResponse.json({ ok: false, error: "failed to delete booking" } satisfies BeautyBookingDeleteRouteResponse, { status: 500 });
   }
 }
