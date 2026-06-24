@@ -2685,7 +2685,7 @@
       "late_risk": "Nguy cơ trễ!",
       "booking_ref": "Mã đặt lịch: {{ref}}",
       "departure_warning": "⚠️ {{title}} bắt đầu sau {{mins}} phút — Vui lòng xuất phát ngay!"
-    }
+    },
     "partner_search_placeholder": "Tìm kiếm cửa hàng làm đẹp",
     "status_open": "Đang mở",
     "status_closed": "Nghỉ",
