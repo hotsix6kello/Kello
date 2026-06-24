@@ -36,7 +36,9 @@ export type BeautyBookingStorageErrorCode =
   | "invalid_status"
   | "transition_not_allowed"
   | "forbidden_owner"
-  | "invalid_cancel_reason";
+  | "invalid_cancel_reason"
+  | "delete_not_allowed"
+  | "delete_failed";
 
 type BeautyBookingInsertRow = {
   id?: string;
@@ -1742,4 +1744,49 @@ export async function sendBookingQuote(
     client,
     mapBeautyBookingRowToAdminRecord(updatedRow as unknown as BeautyBookingAdminSelectRow),
   );
+}
+
+/**
+ * 취소된 예약을 영구 삭제한다. status가 'canceled'인 경우에만 허용.
+ */
+export async function deleteBeautyBookingRequest(bookingId: string): Promise<void> {
+  if (!hasSupabaseServerAccess()) {
+    throw new BeautyBookingStorageError("env_missing", {
+      missingEnvVars: getMissingSupabaseServerEnvVars(),
+    });
+  }
+
+  const client = getSupabaseServerClient();
+
+  const { data: existing, error: readError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .select("id, status")
+    .eq("id", bookingId)
+    .maybeSingle();
+
+  if (readError) {
+    if (isRecord(readError) && readError.code === "42P01") {
+      throw new BeautyBookingStorageError("schema_missing", { table: BEAUTY_BOOKING_TABLE, code: readError.code });
+    }
+    throw new BeautyBookingStorageError("read_failed", { code: isRecord(readError) && typeof readError.code === "string" ? readError.code : undefined });
+  }
+
+  if (!existing) {
+    throw new BeautyBookingStorageError("not_found");
+  }
+
+  if (existing.status !== "canceled") {
+    throw new BeautyBookingStorageError("delete_not_allowed");
+  }
+
+  const { error: deleteError } = await client
+    .from(BEAUTY_BOOKING_TABLE)
+    .delete()
+    .eq("id", bookingId);
+
+  if (deleteError) {
+    throw new BeautyBookingStorageError("delete_failed", {
+      code: isRecord(deleteError) && typeof deleteError.code === "string" ? deleteError.code : undefined,
+    });
+  }
 }
