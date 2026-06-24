@@ -163,6 +163,9 @@ export type BeautyBookingAdminSelectRow = {
   paypal_order_id: string | null;
   paypal_capture_id: string | null;
   paid_at: string | null;
+  coupon_id: string | null;
+  coupon_discount_amount: number | null;
+  paid_amount: number | null;
 };
 
 type BeautyBookingImageSelectRow = {
@@ -319,6 +322,9 @@ export function mapBeautyBookingRowToAdminRecord(row: BeautyBookingAdminSelectRo
     paypalOrderId: row.paypal_order_id ?? null,
     paypalCaptureId: row.paypal_capture_id ?? null,
     paidAt: row.paid_at ?? null,
+    couponId: row.coupon_id ?? null,
+    couponDiscountAmount: row.coupon_discount_amount ?? null,
+    paidAmount: row.paid_amount ?? null,
     alternativeOfferStatus: (row.alternative_offer_status as BeautyBookingAlternativeOfferStatus) ?? "none",
     alternativeOfferItems: Array.isArray(row.alternative_offer_items) ? row.alternative_offer_items : [],
     alternativeOfferNote: row.alternative_offer_note ?? "",
@@ -404,6 +410,9 @@ export const BEAUTY_BOOKING_ADMIN_SELECT = [
   "paypal_order_id",
   "paypal_capture_id",
   "paid_at",
+  "coupon_id",
+  "coupon_discount_amount",
+  "paid_amount",
 ].join(", ");
 
 const BEAUTY_BOOKING_SUMMARY_SELECT = [

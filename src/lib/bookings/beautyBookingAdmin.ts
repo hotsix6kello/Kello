@@ -135,6 +135,10 @@ export type BeautyBookingAdminRecord = {
   paypalOrderId: string | null;
   paypalCaptureId: string | null;
   paidAt: string | null;
+  // Coupon fields
+  couponId: string | null;
+  couponDiscountAmount: number | null;
+  paidAmount: number | null;
 };
 
 export type BeautyBookingAdminListFilters = {

@@ -1561,6 +1561,19 @@ export default function AdminBeautyBookingDetailContent({ bookingId }: Props) {
                     {selectedBooking.quoteSentAt ? (
                       <span style={{ color: '#64748b' }}>제안 발송일: {formatDateTimeLabel(selectedBooking.quoteSentAt)}</span>
                     ) : null}
+                    {selectedBooking.paymentStatus === 'paid' && selectedBooking.paidAmount !== null && (
+                      <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid #bbf7d0', fontSize: '0.8rem', display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <span style={{ fontWeight: 700, color: '#065f46' }}>💳 결제 내역</span>
+                        <span style={{ color: '#374151' }}>견적 금액: ${selectedBooking.quoteTotalPrice?.toFixed(2)} USD</span>
+                        {selectedBooking.couponDiscountAmount !== null && selectedBooking.couponDiscountAmount > 0 && (
+                          <span style={{ color: '#7c3aed' }}>쿠폰 할인: -${selectedBooking.couponDiscountAmount.toFixed(2)} USD</span>
+                        )}
+                        <span style={{ fontWeight: 700, color: '#065f46' }}>실결제 금액: ${selectedBooking.paidAmount.toFixed(2)} USD</span>
+                        {selectedBooking.paidAt && (
+                          <span style={{ color: '#64748b' }}>결제 완료: {formatDateTimeLabel(selectedBooking.paidAt)}</span>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ) : null}
 
