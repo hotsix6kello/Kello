@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
 
 import sharedStyles from '../../admin.module.css';
 import styles from '../partner-stores.module.css';
@@ -68,7 +67,6 @@ function formatTime(value: string | null) {
 }
 
 export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
-  const { t } = useTranslation();
   const router = useRouter();
 
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
@@ -114,7 +112,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
     const accessToken = await getAdminAccessToken();
 
     if (!accessToken) {
-      setLoadError(t('admin.session_required', { defaultValue: '관리자 세션을 다시 확인해 주세요.' }));
+      setLoadError('관리자 세션을 다시 확인해 주세요.');
       return;
     }
 
@@ -136,18 +134,18 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
 
       if (!response.ok || !body || body.ok !== true) {
         const message = body && body.ok === false ? body.error : undefined;
-        throw new Error(message ?? t('admin.partner_store_load_failed', { defaultValue: '매장 정보를 불러오지 못했어요.' }));
+        throw new Error(message ?? '매장 정보를 불러오지 못했어요.');
       }
 
       setDetail(body);
       setMenuOverrides(new Map());
       setPhotoOverrides(new Map());
     } catch (error) {
-      setLoadError(error instanceof Error ? error.message : t('admin.partner_store_load_failed', { defaultValue: '매장 정보를 불러오지 못했어요.' }));
+      setLoadError(error instanceof Error ? error.message : '매장 정보를 불러오지 못했어요.');
     } finally {
       setLoading(false);
     }
-  }, [storeId, t]);
+  }, [storeId]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -170,8 +168,8 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
     for (const item of detail.menuItems) {
       const key = item.categoryId ?? 'uncategorized';
       const name = item.categoryId
-        ? categoryNameById.get(item.categoryId) ?? t('admin.partner_store_uncategorized', { defaultValue: '미분류' })
-        : t('admin.partner_store_uncategorized', { defaultValue: '미분류' });
+        ? categoryNameById.get(item.categoryId) ?? '미분류'
+        : '미분류';
 
       if (!groups.has(key)) {
         groups.set(key, { name, items: [] });
@@ -180,7 +178,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
     }
 
     return Array.from(groups.values());
-  }, [detail, t]);
+  }, [detail]);
 
   const handleMenuToggle = (item: PartnerStoreMenuItem, status: PartnerStoreReviewStatus) => {
     setMenuOverrides((prev) => {
@@ -217,7 +215,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
 
     const accessToken = await getAdminAccessToken();
     if (!accessToken) {
-      setToast({ tone: 'error', message: t('admin.session_required', { defaultValue: '관리자 세션을 다시 확인해 주세요.' }) });
+      setToast({ tone: 'error', message: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
@@ -238,13 +236,13 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
       const body = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
       if (!response.ok || body?.ok !== true) {
-        throw new Error(body?.error ?? t('admin.partner_store_save_failed', { defaultValue: '저장에 실패했어요.' }));
+        throw new Error(body?.error ?? '저장에 실패했어요.');
       }
 
-      setToast({ tone: 'success', message: t('admin.partner_store_menu_saved', { defaultValue: '메뉴 검수 결과를 저장했어요.' }) });
+      setToast({ tone: 'success', message: '메뉴 검수 결과를 저장했어요.' });
       await fetchDetail();
     } catch (error) {
-      setToast({ tone: 'error', message: error instanceof Error ? error.message : t('admin.partner_store_save_failed', { defaultValue: '저장에 실패했어요.' }) });
+      setToast({ tone: 'error', message: error instanceof Error ? error.message : '저장에 실패했어요.' });
     } finally {
       setSavingMenu(false);
     }
@@ -255,7 +253,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
 
     const accessToken = await getAdminAccessToken();
     if (!accessToken) {
-      setToast({ tone: 'error', message: t('admin.session_required', { defaultValue: '관리자 세션을 다시 확인해 주세요.' }) });
+      setToast({ tone: 'error', message: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
@@ -276,13 +274,13 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
       const body = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
       if (!response.ok || body?.ok !== true) {
-        throw new Error(body?.error ?? t('admin.partner_store_save_failed', { defaultValue: '저장에 실패했어요.' }));
+        throw new Error(body?.error ?? '저장에 실패했어요.');
       }
 
-      setToast({ tone: 'success', message: t('admin.partner_store_photos_saved', { defaultValue: '사진 검수 결과를 저장했어요.' }) });
+      setToast({ tone: 'success', message: '사진 검수 결과를 저장했어요.' });
       await fetchDetail();
     } catch (error) {
-      setToast({ tone: 'error', message: error instanceof Error ? error.message : t('admin.partner_store_save_failed', { defaultValue: '저장에 실패했어요.' }) });
+      setToast({ tone: 'error', message: error instanceof Error ? error.message : '저장에 실패했어요.' });
     } finally {
       setSavingPhotos(false);
     }
@@ -291,7 +289,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
   const submitStoreReview = async (review_status: 'approved' | 'rejected', review_reason?: string) => {
     const accessToken = await getAdminAccessToken();
     if (!accessToken) {
-      setToast({ tone: 'error', message: t('admin.session_required', { defaultValue: '관리자 세션을 다시 확인해 주세요.' }) });
+      setToast({ tone: 'error', message: '관리자 세션을 다시 확인해 주세요.' });
       return;
     }
 
@@ -310,20 +308,18 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
       const body = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
       if (!response.ok || body?.ok !== true) {
-        throw new Error(body?.error ?? t('admin.partner_store_save_failed', { defaultValue: '저장에 실패했어요.' }));
+        throw new Error(body?.error ?? '저장에 실패했어요.');
       }
 
       setToast({
         tone: 'success',
-        message: review_status === 'approved'
-          ? t('admin.partner_store_approved', { defaultValue: '매장을 승인했어요.' })
-          : t('admin.partner_store_rejected', { defaultValue: '매장을 반려했어요.' }),
+        message: review_status === 'approved' ? '매장을 승인했어요.' : '매장을 반려했어요.',
       });
       setRejectModalOpen(false);
       setRejectReason('');
       await fetchDetail();
     } catch (error) {
-      setToast({ tone: 'error', message: error instanceof Error ? error.message : t('admin.partner_store_save_failed', { defaultValue: '저장에 실패했어요.' }) });
+      setToast({ tone: 'error', message: error instanceof Error ? error.message : '저장에 실패했어요.' });
     } finally {
       setStoreActionLoading(false);
     }
@@ -342,10 +338,10 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, background: 'var(--background)', padding: 24 }}>
         <div style={{ fontSize: '3rem' }}>🔒</div>
-        <h2 style={{ fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>{t('admin.no_auth_title', { defaultValue: '관리자 전용 페이지' })}</h2>
-        <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', textAlign: 'center' }}>{t('admin.no_auth_desc', { defaultValue: '접근 권한이 없습니다.' })}</p>
+        <h2 style={{ fontWeight: 700, fontSize: '1.2rem', margin: 0 }}>관리자 전용 페이지</h2>
+        <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', textAlign: 'center' }}>접근 권한이 없습니다.</p>
         <button onClick={() => router.push('/admin')} style={{ padding: '12px 28px', background: 'var(--primary)', color: 'white', border: 'none', borderRadius: 14, fontWeight: 700, cursor: 'pointer' }}>
-          {t('admin.go_admin_home', { defaultValue: '관리자 홈으로' })}
+          관리자 홈으로
         </button>
       </div>
     );
@@ -358,28 +354,28 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
           type="button"
           onClick={() => router.back()}
           style={{ background: 'none', border: 'none', padding: '4px 0', color: '#64748b', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          aria-label={t('common.back', { defaultValue: '뒤로가기' })}
+          aria-label="뒤로가기"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
         </button>
-        <h1 className={sharedStyles.headerTitle}>{detail?.store.name ?? t('admin.partner_store_detail_title', { defaultValue: '제휴 매장 검수' })}</h1>
+        <h1 className={sharedStyles.headerTitle}>{detail?.store.name ?? '제휴 매장 검수'}</h1>
         <span className={sharedStyles.adminBadge}>ADMIN</span>
       </header>
 
       <div className={sharedStyles.content}>
         {loadError ? <div className={styles.errorState}>{loadError}</div> : null}
-        {loading && !detail ? <div className={styles.emptyState}>{t('admin.loading', { defaultValue: '불러오는 중...' })}</div> : null}
+        {loading && !detail ? <div className={styles.emptyState}>불러오는 중...</div> : null}
 
         {detail ? (
           <div className={styles.detailPage}>
             <div className={styles.detailCard}>
               <div className={styles.detailHeader}>
                 <div className={styles.detailHeaderCopy}>
-                  <h2 className={styles.detailTitle}>{detail.store.name ?? t('admin.partner_stores_unnamed', { defaultValue: '이름 없는 매장' })}</h2>
-                  <p className={styles.detailSub}>{detail.store.address ?? t('admin.partner_stores_no_address', { defaultValue: '주소 미등록' })}</p>
+                  <h2 className={styles.detailTitle}>{detail.store.name ?? '이름 없는 매장'}</h2>
+                  <p className={styles.detailSub}>{detail.store.address ?? '주소 미등록'}</p>
                 </div>
                 <span className={`${styles.statusBadge} ${
                   detail.store.reviewStatus === 'pending' ? styles.statusPending
@@ -387,44 +383,42 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                       : styles.statusRejected
                 }`}>
                   {detail.store.reviewStatus === 'pending'
-                    ? t('admin.review_status_pending', { defaultValue: '검수대기' })
+                    ? '검수대기'
                     : detail.store.reviewStatus === 'approved'
-                      ? t('admin.review_status_approved', { defaultValue: '승인됨' })
-                      : t('admin.review_status_rejected', { defaultValue: '반려' })}
+                      ? '승인됨'
+                      : '반려'}
                 </span>
               </div>
 
               {detail.store.reviewStatus === 'rejected' && detail.store.reviewReason ? (
                 <div className={styles.reviewReasonNote}>
-                  <strong>{t('admin.partner_store_reject_reason_label', { defaultValue: '반려 사유' })}:</strong> {detail.store.reviewReason}
+                  <strong>반려 사유:</strong> {detail.store.reviewReason}
                 </div>
               ) : null}
 
               <div className={styles.summaryGrid}>
                 <div className={styles.summaryItem}>
-                  <span className={styles.summaryLabel}>{t('admin.partner_store_business_types', { defaultValue: '업종' })}</span>
+                  <span className={styles.summaryLabel}>업종</span>
                   <strong>{detail.store.businessTypes.map((type) => BUSINESS_TYPE_LABELS[type] ?? type).join(', ') || '-'}</strong>
                 </div>
                 <div className={styles.summaryItem}>
-                  <span className={styles.summaryLabel}>{t('admin.partner_store_phone', { defaultValue: '연락처' })}</span>
+                  <span className={styles.summaryLabel}>연락처</span>
                   <strong>{detail.store.phone ?? '-'}</strong>
                 </div>
                 <div className={styles.summaryItem}>
-                  <span className={styles.summaryLabel}>{t('admin.partner_store_published', { defaultValue: '게시 상태' })}</span>
+                  <span className={styles.summaryLabel}>게시 상태</span>
                   <strong>
-                    {detail.store.published
-                      ? t('admin.partner_stores_published', { defaultValue: '게시됨' })
-                      : t('admin.partner_stores_unpublished', { defaultValue: '비공개' })}
+                    {detail.store.published ? '게시됨' : '비공개'}
                     {' '}
                     <span style={{ fontSize: '0.72rem', color: 'var(--gray-400)', fontWeight: 400 }}>
-                      ({t('admin.partner_store_published_owner_note', { defaultValue: '매장 사장님이 직접 전환' })})
+                      (매장 사장님이 직접 전환)
                     </span>
                   </strong>
                 </div>
                 <div className={styles.summaryItem}>
-                  <span className={styles.summaryLabel}>{t('admin.partner_store_capacity', { defaultValue: '동시 처리 인원 / 준비시간 / 슬롯 간격' })}</span>
+                  <span className={styles.summaryLabel}>동시 처리 인원 / 준비시간 / 슬롯 간격</span>
                   <strong>
-                    {detail.store.capacity ?? '-'} / {detail.store.leadTimeHours ?? '-'}{t('admin.hours_unit', { defaultValue: '시간' })} / {detail.store.slotIntervalMinutes ?? '-'}{t('admin.minutes_unit', { defaultValue: '분' })}
+                    {detail.store.capacity ?? '-'} / {detail.store.leadTimeHours ?? '-'}시간 / {detail.store.slotIntervalMinutes ?? '-'}분
                   </strong>
                 </div>
               </div>
@@ -436,7 +430,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                   disabled={storeActionLoading}
                   onClick={() => void submitStoreReview('approved')}
                 >
-                  {t('admin.partner_store_approve', { defaultValue: '매장 승인' })}
+                  매장 승인
                 </button>
                 <button
                   type="button"
@@ -444,15 +438,15 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                   disabled={storeActionLoading}
                   onClick={() => setRejectModalOpen(true)}
                 >
-                  {t('admin.partner_store_reject', { defaultValue: '매장 반려' })}
+                  매장 반려
                 </button>
               </div>
             </div>
 
             <div className={styles.detailCard}>
-              <h3 className={styles.sectionTitle}>{t('admin.partner_store_business_hours', { defaultValue: '영업시간' })}</h3>
+              <h3 className={styles.sectionTitle}>영업시간</h3>
               {detail.businessHours.length === 0 ? (
-                <div className={styles.emptyState}>{t('admin.partner_store_no_business_hours', { defaultValue: '등록된 영업시간이 없습니다.' })}</div>
+                <div className={styles.emptyState}>등록된 영업시간이 없습니다.</div>
               ) : (
                 <div className={styles.hoursGrid}>
                   {detail.businessHours.map((hours) => (
@@ -462,11 +456,11 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                         <span className={styles.hoursTime}>
                           {formatTime(hours.startTime)} - {formatTime(hours.endTime)}
                           {hours.breakStartTime && hours.breakEndTime
-                            ? ` (${t('admin.partner_store_break_time', { defaultValue: '휴게' })} ${formatTime(hours.breakStartTime)}-${formatTime(hours.breakEndTime)})`
+                            ? ` (휴게 ${formatTime(hours.breakStartTime)}-${formatTime(hours.breakEndTime)})`
                             : ''}
                         </span>
                       ) : (
-                        <span className={styles.hoursClosed}>{t('admin.partner_store_closed', { defaultValue: '휴무' })}</span>
+                        <span className={styles.hoursClosed}>휴무</span>
                       )}
                     </div>
                   ))}
@@ -476,10 +470,10 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
 
             <div className={styles.detailCard}>
               <div className={styles.sectionHeaderRow}>
-                <h3 className={styles.sectionTitle}>{t('admin.partner_store_menu_items', { defaultValue: '메뉴 검수' })}</h3>
+                <h3 className={styles.sectionTitle}>메뉴 검수</h3>
               </div>
               {categorizedMenuItems.length === 0 ? (
-                <div className={styles.emptyState}>{t('admin.partner_store_no_menu_items', { defaultValue: '등록된 메뉴가 없습니다.' })}</div>
+                <div className={styles.emptyState}>등록된 메뉴가 없습니다.</div>
               ) : (
                 categorizedMenuItems.map((group) => (
                   <div key={group.name} className={styles.categoryBlock}>
@@ -489,10 +483,10 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                       return (
                         <div key={item.id} className={styles.itemRow}>
                           <div className={styles.itemInfo}>
-                            <div className={styles.itemName}>{item.name ?? '-'}{!item.visible ? ` (${t('admin.partner_store_hidden', { defaultValue: '비공개' })})` : ''}</div>
+                            <div className={styles.itemName}>{item.name ?? '-'}{!item.visible ? ' (비공개)' : ''}</div>
                             <div className={styles.itemMeta}>
-                              {formatMenuItemPrice(item)} · {item.durationMin != null ? `${item.durationMin}${t('admin.minutes_unit', { defaultValue: '분' })}` : '-'}
-                              {item.options.length > 0 ? ` · ${t('admin.partner_store_options_count', { count: item.options.length, defaultValue: `옵션 ${item.options.length}개` })}` : ''}
+                              {formatMenuItemPrice(item)} · {item.durationMin != null ? `${item.durationMin}분` : '-'}
+                              {item.options.length > 0 ? ` · 옵션 ${item.options.length}개` : ''}
                             </div>
                           </div>
                           <div className={styles.toggleGroup}>
@@ -501,14 +495,14 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                               className={`${styles.toggleBtn} ${effectiveStatus === 'approved' ? styles.toggleApproveActive : ''}`}
                               onClick={() => handleMenuToggle(item, 'approved')}
                             >
-                              {t('admin.review_action_approve', { defaultValue: '승인' })}
+                              승인
                             </button>
                             <button
                               type="button"
                               className={`${styles.toggleBtn} ${effectiveStatus === 'rejected' ? styles.toggleRejectActive : ''}`}
                               onClick={() => handleMenuToggle(item, 'rejected')}
                             >
-                              {t('admin.review_action_reject', { defaultValue: '반려' })}
+                              반려
                             </button>
                           </div>
                         </div>
@@ -525,7 +519,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                     disabled={menuOverrides.size === 0 || savingMenu}
                     onClick={() => void handleSaveMenuItems()}
                   >
-                    {savingMenu ? t('admin.saving', { defaultValue: '저장 중...' }) : t('admin.save_changes', { defaultValue: '변경사항 저장' })}
+                    {savingMenu ? '저장 중...' : '변경사항 저장'}
                   </button>
                 </div>
               ) : null}
@@ -533,10 +527,10 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
 
             <div className={styles.detailCard}>
               <div className={styles.sectionHeaderRow}>
-                <h3 className={styles.sectionTitle}>{t('admin.partner_store_photos', { defaultValue: '사진 검수' })}</h3>
+                <h3 className={styles.sectionTitle}>사진 검수</h3>
               </div>
               {detail.photos.length === 0 ? (
-                <div className={styles.emptyState}>{t('admin.partner_store_no_photos', { defaultValue: '등록된 사진이 없습니다.' })}</div>
+                <div className={styles.emptyState}>등록된 사진이 없습니다.</div>
               ) : (
                 <div className={styles.photoGrid}>
                   {detail.photos.map((photo) => {
@@ -565,14 +559,14 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                               className={`${styles.toggleBtn} ${effectiveStatus === 'approved' ? styles.toggleApproveActive : ''}`}
                               onClick={() => handlePhotoToggle(photo, 'approved')}
                             >
-                              {t('admin.review_action_approve', { defaultValue: '승인' })}
+                              승인
                             </button>
                             <button
                               type="button"
                               className={`${styles.toggleBtn} ${effectiveStatus === 'rejected' ? styles.toggleRejectActive : ''}`}
                               onClick={() => handlePhotoToggle(photo, 'rejected')}
                             >
-                              {t('admin.review_action_reject', { defaultValue: '반려' })}
+                              반려
                             </button>
                           </div>
                         </div>
@@ -589,7 +583,7 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
                     disabled={photoOverrides.size === 0 || savingPhotos}
                     onClick={() => void handleSavePhotos()}
                   >
-                    {savingPhotos ? t('admin.saving', { defaultValue: '저장 중...' }) : t('admin.save_changes', { defaultValue: '변경사항 저장' })}
+                    {savingPhotos ? '저장 중...' : '변경사항 저장'}
                   </button>
                 </div>
               ) : null}
@@ -609,15 +603,13 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
       {rejectModalOpen ? (
         <div className={styles.modalOverlay} onClick={() => setRejectModalOpen(false)}>
           <div className={styles.modalSheet} onClick={(event) => event.stopPropagation()}>
-            <h3 className={styles.modalTitle}>{t('admin.partner_store_reject_modal_title', { defaultValue: '매장 반려 사유 입력' })}</h3>
-            <p className={styles.modalDesc}>
-              {t('admin.partner_store_reject_modal_desc', { defaultValue: '반려 사유는 매장 사장님에게 전달됩니다.' })}
-            </p>
+            <h3 className={styles.modalTitle}>매장 반려 사유 입력</h3>
+            <p className={styles.modalDesc}>반려 사유는 매장 사장님에게 전달됩니다.</p>
             <textarea
               className={styles.modalTextarea}
               value={rejectReason}
               onChange={(event) => setRejectReason(event.target.value)}
-              placeholder={t('admin.partner_store_reject_reason_placeholder', { defaultValue: '반려 사유를 입력하세요' })}
+              placeholder="반려 사유를 입력하세요"
             />
             <button
               type="button"
@@ -625,10 +617,10 @@ export default function AdminPartnerStoreDetailContent({ storeId }: Props) {
               disabled={storeActionLoading}
               onClick={() => void submitStoreReview('rejected', rejectReason)}
             >
-              {t('admin.partner_store_reject_confirm', { defaultValue: '반려 확정' })}
+              반려 확정
             </button>
             <button type="button" className={styles.modalCancelButton} onClick={() => setRejectModalOpen(false)}>
-              {t('admin.cancel', { defaultValue: '취소' })}
+              취소
             </button>
           </div>
         </div>
