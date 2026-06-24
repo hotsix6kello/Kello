@@ -500,11 +500,10 @@ export async function createBeautyBookingRequest(
 
   const client = getSupabaseServerClient();
   const insertData = mapBeautyBookingPayloadToRow(payload, customerUserId, customerEmail);
-  console.log("[beauty-booking-server] Attempting insert", {
+  console.warn("[beauty-booking-server] Attempting insert", {
     store_id: insertData.store_id,
     beauty_category: insertData.beauty_category,
     region: insertData.region,
-    customer_name: insertData.customer_name,
   });
 
   const { data, error } = await client
@@ -522,8 +521,6 @@ export async function createBeautyBookingRequest(
     });
     // Continue with existing error handling below
   } else {
-    console.log("[beauty-booking-server] Insert successful", { id: data?.id });
-
     // Insert image records into beauty_booking_request_images
     if (data?.id && data.customer_user_id) {
       const imagesToInsert = [];

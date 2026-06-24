@@ -81,8 +81,6 @@ export async function GET(request: Request) {
     },
   };
 
-  console.log('[api/places/nearby] request', { lat, lng, category, types: requestBody.includedTypes });
-
   try {
     const response = await fetch('https://places.googleapis.com/v1/places:searchNearby', {
       method: 'POST',
@@ -123,7 +121,6 @@ export async function GET(request: Request) {
         googleMapsUri: p.googleMapsUri ?? null,
       }));
 
-    console.log(`[api/places/nearby] result count: ${places.length}`);
     return NextResponse.json({ places });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
