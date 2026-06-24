@@ -1415,7 +1415,7 @@ function MyPageContent() {
                 }}
             />
 
-            {!capabilities.canViewAdminConsole && (
+            {permissionsResolved && !capabilities.canViewAdminConsole && (
                 <ReferralSection coupons={coupons} />
             )}
 

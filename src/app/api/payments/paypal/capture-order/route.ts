@@ -144,6 +144,22 @@ export async function POST(request: NextRequest) {
       return jsonFailure("payment recorded but booking update failed", 500);
     }
 
+    // 쿠폰이 사용된 경우 is_used = true 처리
+    if (booking.couponId) {
+      const { error: couponError } = await client
+        .from("coupons")
+        .update({ is_used: true })
+        .eq("id", booking.couponId)
+        .eq("user_id", userId);
+
+      if (couponError) {
+        console.error("[paypal-capture-order] coupon_mark_used_failed", {
+          code: couponError.code,
+          couponId: booking.couponId,
+        });
+      }
+    }
+
     return NextResponse.json(
       { ok: true, message: "payment completed and booking confirmed" } satisfies CaptureOrderResponse,
       { status: 200 },

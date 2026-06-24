@@ -15,7 +15,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 type CreateOrderResponse =
-  | { ok: true; orderId: string }
+  | { ok: true; orderId: string; originalAmount: number; discountAmount: number; finalAmount: number }
   | { ok: false; error: string };
 
 function jsonFailure(error: string, status: number) {
@@ -26,8 +26,9 @@ export async function POST(request: NextRequest) {
   try {
     const { userId } = await requireAuthenticatedRouteAccess(request);
 
-    const body = (await request.json()) as { bookingId?: unknown };
+    const body = (await request.json()) as { bookingId?: unknown; couponId?: unknown };
     const bookingId = typeof body.bookingId === "string" ? body.bookingId.trim() : "";
+    const couponId = typeof body.couponId === "string" ? body.couponId.trim() : null;
 
     if (!bookingId) {
       return jsonFailure("bookingId is required", 400);
@@ -78,6 +79,33 @@ export async function POST(request: NextRequest) {
       return jsonFailure("only USD payments are supported at this time", 400);
     }
 
+    // 쿠폰 검증 및 할인 계산
+    let discountAmount = 0;
+    if (couponId) {
+      const { data: coupon, error: couponError } = await client
+        .from("coupons")
+        .select("id, user_id, discount_type, discount_value, is_used")
+        .eq("id", couponId)
+        .maybeSingle();
+
+      if (couponError || !coupon) {
+        return jsonFailure("coupon not found", 404);
+      }
+      if (coupon.user_id !== userId) {
+        return jsonFailure("coupon does not belong to this user", 403);
+      }
+      if (coupon.is_used) {
+        return jsonFailure("coupon has already been used", 400);
+      }
+      if (coupon.discount_type === "percent") {
+        discountAmount = Math.round(booking.quoteTotalPrice * (coupon.discount_value / 100) * 100) / 100;
+      } else {
+        discountAmount = Math.min(coupon.discount_value, booking.quoteTotalPrice);
+      }
+    }
+
+    const finalAmount = Math.max(booking.quoteTotalPrice - discountAmount, 0);
+
     const accessToken = await getPayPalAccessToken();
 
     const orderPayload = {
@@ -87,9 +115,12 @@ export async function POST(request: NextRequest) {
           reference_id: booking.id,
           amount: {
             currency_code: "USD",
-            value: booking.quoteTotalPrice.toFixed(2),
+            value: finalAmount.toFixed(2),
           },
-          description: booking.quoteServiceName ?? booking.primaryServiceName ?? "Beauty Service",
+          description: [
+            booking.quoteServiceName ?? booking.primaryServiceName ?? "Beauty Service",
+            discountAmount > 0 ? `(coupon applied -$${discountAmount.toFixed(2)})` : "",
+          ].filter(Boolean).join(" "),
         },
       ],
     };
@@ -126,6 +157,9 @@ export async function POST(request: NextRequest) {
       .update({
         paypal_order_id: paypalOrderId,
         payment_status: "pending",
+        coupon_id: couponId ?? null,
+        coupon_discount_amount: discountAmount > 0 ? discountAmount : null,
+        paid_amount: finalAmount,
         updated_at: now,
       })
       .eq("id", bookingId)
@@ -135,9 +169,13 @@ export async function POST(request: NextRequest) {
       console.error("[paypal-create-order] db_update_failed", { code: updateError.code });
     }
 
-    return NextResponse.json({ ok: true, orderId: paypalOrderId } satisfies CreateOrderResponse, {
-      status: 200,
-    });
+    return NextResponse.json({
+      ok: true,
+      orderId: paypalOrderId,
+      originalAmount: booking.quoteTotalPrice,
+      discountAmount,
+      finalAmount,
+    } satisfies CreateOrderResponse, { status: 200 });
   } catch (error) {
     if (error instanceof Error && error.name === "SyntaxError") {
       return jsonFailure("request body must be valid JSON", 400);
