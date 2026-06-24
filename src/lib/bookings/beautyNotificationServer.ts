@@ -313,7 +313,7 @@ async function dispatchBeautyBookingNotification(
     
     // Policy: External dispatch (Email) only if enabled
     if (!prefs.emailEnabled) {
-      console.log("[beauty-notification] email dispatch skipped by user preference", payload.user_id);
+      console.warn("[beauty-notification] email dispatch skipped by user preference");
       return;
     }
 
@@ -324,19 +324,19 @@ async function dispatchBeautyBookingNotification(
          payload.event_type === "booking_completed" ||
          payload.event_type === "booking_canceled_by_customer" ||
          payload.event_type === "booking_cancel_review_required")) {
-      console.log("[beauty-notification] booking update email skipped by user preference", payload.user_id);
+      console.warn("[beauty-notification] booking update email skipped by user preference");
       return;
     }
 
     if (!prefs.changeRequestUpdatesEnabled && 
         (payload.event_type === "booking_change_requested" || payload.event_type === "booking_change_approved" || payload.event_type === "booking_change_rejected")) {
-      console.log("[beauty-notification] change request email skipped by user preference", payload.user_id);
+      console.warn("[beauty-notification] change request email skipped by user preference");
       return;
     }
 
     if (!prefs.alternativeOfferUpdatesEnabled && 
         (payload.event_type === "alternative_offer_sent" || payload.event_type === "alternative_offer_accepted" || payload.event_type === "alternative_offer_rejected")) {
-      console.log("[beauty-notification] alternative offer email skipped by user preference", payload.user_id);
+      console.warn("[beauty-notification] alternative offer email skipped by user preference");
       return;
     }
 

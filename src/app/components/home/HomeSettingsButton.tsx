@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
@@ -34,25 +34,9 @@ const BTN_STYLE: React.CSSProperties = {
 export default function HomeSettingsButton() {
     const { t, i18n } = useTranslation('common');
     const [isOpen, setIsOpen] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [currency, setCurrency] = useState('USD');
 
     const currentCode = resolveCanonicalLocale(i18n.language, 'ko');
     const currentLang = LANGUAGES.find(lang => lang.code === currentCode) || LANGUAGES[0];
-
-    useEffect(() => {
-        const saved = localStorage.getItem('kello_currency');
-        setCurrency(saved ?? LANG_TO_CURRENCY[currentCode] ?? 'USD');
-
-        const handler = (e: Event) => {
-            const code = (e as CustomEvent<string>).detail;
-            if (code) setCurrency(code);
-        };
-        window.addEventListener('kello_currency_change', handler);
-        return () => window.removeEventListener('kello_currency_change', handler);
-        // currentCode is intentionally excluded: initial read only
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     const handleSelect = (lang: LangOption) => {
         setIsOpen(false);
@@ -60,7 +44,6 @@ export default function HomeSettingsButton() {
         if (related) {
             localStorage.setItem('kello_currency', related);
             window.dispatchEvent(new CustomEvent('kello_currency_change', { detail: related }));
-            setCurrency(related);
         }
         if (lang.code !== currentCode) {
             changeLanguage(lang.code);

@@ -1,7 +1,6 @@
 "use client";
 import { useTranslation } from "react-i18next";
 import styles from "./review.module.css";
-// import Image from "next/image"; // Placeholder image for now
 
 export default function ReviewSection() {
     const { t } = useTranslation();

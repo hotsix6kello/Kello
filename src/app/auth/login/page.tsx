@@ -37,7 +37,6 @@ export default function LoginPage() {
     const [emailLoading, setEmailLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
     const [xLoading, setXLoading] = useState(false);
-    const [facebookLoading, setFacebookLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [magicLinkSent, setMagicLinkSent] = useState(false);
     const [webViewWarning, setWebViewWarning] = useState<"idle" | "android" | "ios">("idle");
@@ -121,28 +120,7 @@ export default function LoginPage() {
         }
     };
 
-    // --- Facebook OAuth (TODO: 앱 게시 승인 후 버튼 활성화) ---
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleFacebookLogin = async () => {
-        setFacebookLoading(true);
-        setError(null);
-
-        try {
-            const { error } = await supabase.auth.signInWithOAuth({
-                provider: "facebook",
-                options: {
-                    redirectTo: `${window.location.origin}/auth/callback`,
-                },
-            });
-
-            if (error) {
-                throw error;
-            }
-        } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : t('login.error_facebook_login'));
-            setFacebookLoading(false);
-        }
-    };
+    // TODO: Facebook 앱 게시 승인 후 로그인 버튼과 로그인 핸들러를 다시 활성화
 
     // --- Email Magic Link ---
     const handleEmailLogin = async (e: React.FormEvent) => {
@@ -196,7 +174,7 @@ export default function LoginPage() {
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        disabled={googleLoading || xLoading || emailLoading}
                         style={{
                             width: '100%',
                             display: 'flex',
@@ -291,7 +269,7 @@ export default function LoginPage() {
                     <button
                         type="button"
                         onClick={handleXLogin}
-                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        disabled={googleLoading || xLoading || emailLoading}
                         style={{
                             width: '100%',
                             display: 'flex',
@@ -320,7 +298,7 @@ export default function LoginPage() {
                     {/* <button
                         type="button"
                         onClick={handleFacebookLogin}
-                        disabled={googleLoading || xLoading || facebookLoading || emailLoading}
+                        disabled={googleLoading || xLoading || emailLoading}
                         style={{
                             width: '100%',
                             display: 'flex',

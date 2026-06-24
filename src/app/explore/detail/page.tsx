@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import styles from "./detail.module.css";
-// import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 
