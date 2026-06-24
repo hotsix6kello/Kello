@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useDeferredValue, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -36,7 +36,7 @@ const LANGUAGE_LABELS: Record<string, string> = {
   ko: '한국어',
   en: 'English',
   ja: '日本語',
-  'zh-CN': '简体中文',
+  'zh-CN': '简체中文',
   'zh-HK': '繁體中文',
   vi: 'Tiếng Việt',
   th: 'ไทย',
@@ -118,12 +118,10 @@ export default function AdminBeautyBookingsContent() {
     normalizeBeautyBookingAdminListStatus(searchParams.get('status')),
   );
   const [beautyCategoryFilter, setBeautyCategoryFilter] = useState(searchParams.get('beautyCategory') ?? 'all');
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') ?? '');
   const [bookings, setBookings] = useState<BeautyBookingAdminRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
-
-  const deferredSearchQuery = useDeferredValue(searchQuery);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     const init = async () => {
@@ -159,16 +157,12 @@ export default function AdminBeautyBookingsContent() {
       params.set('beautyCategory', beautyCategoryFilter);
     }
 
-    if (deferredSearchQuery.trim()) {
-      params.set('q', deferredSearchQuery.trim());
-    }
-
     const nextPath = params.toString()
       ? `/admin/bookings/beauty?${params.toString()}`
       : '/admin/bookings/beauty';
 
     router.replace(nextPath, { scroll: false });
-  }, [beautyCategoryFilter, deferredSearchQuery, router, statusFilter]);
+  }, [beautyCategoryFilter, router, statusFilter]);
 
   const fetchBookings = useCallback(async () => {
     const accessToken = await getAdminAccessToken();
@@ -187,9 +181,6 @@ export default function AdminBeautyBookingsContent() {
     }
     if (beautyCategoryFilter !== 'all') {
       params.set('beautyCategory', beautyCategoryFilter);
-    }
-    if (deferredSearchQuery.trim()) {
-      params.set('query', deferredSearchQuery.trim());
     }
 
     try {
@@ -215,7 +206,7 @@ export default function AdminBeautyBookingsContent() {
     } finally {
       setLoading(false);
     }
-  }, [beautyCategoryFilter, deferredSearchQuery, statusFilter]);
+  }, [beautyCategoryFilter, statusFilter]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -225,6 +216,33 @@ export default function AdminBeautyBookingsContent() {
 
   const handleOpenDetail = (bookingId: string) => {
     router.push(`/admin/bookings/beauty/${bookingId}`);
+  };
+
+  const handleDeleteBooking = async (bookingId: string) => {
+    if (!window.confirm('취소된 예약을 영구 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.')) return;
+
+    const accessToken = await getAdminAccessToken();
+    if (!accessToken) return;
+
+    setDeletingId(bookingId);
+
+    try {
+      const response = await fetch(`/api/bookings/beauty/${bookingId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const body = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+
+      if (!response.ok || !body?.ok) {
+        throw new Error(body?.error ?? '예약을 삭제하지 못했어요.');
+      }
+
+      setBookings((prev) => prev.filter((b) => b.id !== bookingId));
+    } catch (error) {
+      alert(error instanceof Error ? error.message : '예약을 삭제하지 못했어요.');
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   if (isAdmin === null) {
@@ -346,16 +364,6 @@ export default function AdminBeautyBookingsContent() {
                 ))}
               </select>
             </label>
-
-            <label className={`${styles.field} ${styles.searchField}`}>
-              <span>매장명 또는 고객명</span>
-              <input
-                className={styles.input}
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="예: 강남, 민지"
-              />
-            </label>
           </div>
         </section>
 
@@ -421,14 +429,27 @@ export default function AdminBeautyBookingsContent() {
                       <span className={styles.languagePill}>
                         {LANGUAGE_LABELS[booking.communicationLanguage] ?? booking.communicationLanguage}
                       </span>
-                      <button
-                        type="button"
-                        className={styles.refreshButton}
-                        onClick={() => handleOpenDetail(booking.id)}
-                        style={{ minHeight: 38, padding: '0 14px' }}
-                      >
-                        예약 확인
-                      </button>
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        {booking.status === 'canceled' ? (
+                          <button
+                            type="button"
+                            className={styles.refreshButton}
+                            onClick={() => void handleDeleteBooking(booking.id)}
+                            disabled={deletingId === booking.id}
+                            style={{ minHeight: 38, padding: '0 14px', color: '#dc2626', borderColor: '#fecaca' }}
+                          >
+                            {deletingId === booking.id ? '삭제 중...' : '삭제'}
+                          </button>
+                        ) : null}
+                        <button
+                          type="button"
+                          className={styles.refreshButton}
+                          onClick={() => handleOpenDetail(booking.id)}
+                          style={{ minHeight: 38, padding: '0 14px' }}
+                        >
+                          예약 확인
+                        </button>
+                      </div>
                     </div>
                   </article>
                 ))}
