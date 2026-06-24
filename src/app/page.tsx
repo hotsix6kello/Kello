@@ -53,8 +53,6 @@ export default function HomePage() {
     process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userName, setUserName] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
   const [showReferralPopup, setShowReferralPopup] = useState(false);
   const [referralError, setReferralError] = useState<string | null>(null);
@@ -182,24 +180,13 @@ export default function HomePage() {
   }, [setSelectedCategory]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('user');
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          setUserName(parsed.name);
-        } catch { }
-      }
-    }
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         const user = session.user;
         const name = user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split('@')[0] || 'User';
         localStorage.setItem('user', JSON.stringify({ name, email: user.email }));
-        setUserName(name);
       } else {
         localStorage.removeItem('user');
-        setUserName(null);
       }
     });
     return () => subscription.unsubscribe();
@@ -254,15 +241,6 @@ export default function HomePage() {
       }
     } catch {
       setReferralError(t('referral_page.error_retry'));
-    }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleSignOut = async () => {
-    try {
-      await supabase.auth.signOut();
-    } finally {
-      setUserName(null);
     }
   };
 

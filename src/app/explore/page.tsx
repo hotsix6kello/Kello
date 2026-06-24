@@ -317,15 +317,11 @@ export default function ExplorePage() {
           category,
         });
         const url = `/api/places/nearby?${params.toString()}`;
-        console.log('[explore] fetchNearbyPlaces →', { category, lat: location.lat, lng: location.lng, url });
-
         const res = await fetch(url, {
           headers: { Authorization: `Bearer ${sessionToken}` },
         });
 
         const data = (await res.json()) as { places?: NearbyPlaceResult[]; error?: string; detail?: string };
-        console.log('[explore] fetchNearbyPlaces ←', { status: res.status, count: data.places?.length, error: data.error });
-
         if (!res.ok) {
           console.error('[explore] API error', { status: res.status, error: data.error, detail: data.detail });
           setPlaces([]);
